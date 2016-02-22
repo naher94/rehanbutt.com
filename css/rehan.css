@@ -1,0 +1,22 @@
+@import url(https://fonts.googleapis.com/css?family=Maven+Pro:400,500,900,700);
+
+body{
+    font-family: 'Maven Pro', sans-serif;
+}
+
+.nav{
+    color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-weight: 700;
+}
+.nav:hover{
+    color: white;
+    background-color: #680032;
+}
+
+footer{
+    background-color: #ECECEC;
+}
