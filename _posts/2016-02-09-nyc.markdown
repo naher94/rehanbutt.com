@@ -17,7 +17,7 @@ permalink: nyc
 </a>
 </div>
 
-![Slack](../img/nyc/slack.png){: .image-center style="width: 80%;"}
+![Slack](../img/nyc/slack.png){: .image-center style="width: 70%;"}
 
 
 <!--UPDATE TEXT BASED P TAG WITH LEFT RIGHT PADDING-->

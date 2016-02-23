@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Carnegie Mellon NYC"
-thumbnail: "/img/thumbnails/nyc.png"
-date:   2013-05-12 12:10:15 -0500
+thumbnail: "/img/thumbnails/esporre.png"
+date:   2015-12-12 12:00:00 -0500
 categories: jekyll update
 permalink: nyc
 ---
