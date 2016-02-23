@@ -1,0 +1,63 @@
+---
+layout: post
+title:  "Carnegie Mellon NYC"
+thumbnail: "/img/thumbnails/nyc.png"
+date:   2016-02-09 12:00:00 -0500
+categories: webdev, Dzgn.IO
+permalink: nyc
+---
+
+
+![Home Page](../img/nyc/nycDIO.png)
+
+<div>
+<a href="http://nyc.desgn.io">
+    <div class="nycButton contentButton"> Check out the full site
+    </div>
+</a>
+</div>
+
+![Slack](../img/nyc/slack.png){: .image-center style="width: 80%;"}
+
+
+<!--UPDATE TEXT BASED P TAG WITH LEFT RIGHT PADDING-->
+In order to keep track and make sure everyone was up to speed on what each team was doing we decided to use Slack for communications and updates project wide.
+
+## Process
+
+![Other CMU Programs](../img/nyc/cmuEntities.png)
+![Cornell Campuses](../img/nyc/cornell.png)
+![UC Schools Part 1](../img/nyc/uc1.png)
+![UC schools Part 2](../img/nyc/uc2.png)
+
+
+When starting this project we looked into other Carnegie Mellon campuses as well as other universities for how they deal with multiple campuses with different goals in mind. Cornell uses the same main branding across their entities with a secondary brand image representing that particular campus. In comparison the University of California system uses a different brand image for each campus and different visual language.
+
+
+![Branding Inspiration](../img/nyc/brandingInspiration.png)
+
+![NYC Inspiration](../img/nyc/nycInspiration.png){: style="width:100%;"}
+
+
+### Questions to Answer:
+
+#### What are the public (emotional) assocaitions of CMU?
+
+#### What is the NYC campus providing? What is its program structure? What will their students recieve?
+
+#### What kind of people does CMU want to attract to their nyc campus?
+
+#### Should the nyc and pitt campuses have a different audience?
+
+
+![Brand Sketches](../img/nyc/brandSketches.png)
+![Branding Process](../img/nyc/brandingProcess.png)
+![Program Chart](../img/nyc/programChart.png)
+![Original Site Breakdown](../img/nyc/originalSiteBreakdown.png)
+![Site Breakdown Detail](../img/nyc/siteBreakdownDetail.png)
+![Banner Iteration](../img/nyc/bannerIterations.png)
+
+![Color Iteration](../img/nyc/colorIteration.png)
+
+<!--talk about the overal mission of this site-->
+<!--show mockups iternations-->

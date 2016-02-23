@@ -5,7 +5,7 @@ body {
     font-weight: 500;
 }
 
-h1, h2 {
+h1, h2, h3, h4 {
     font-family: 'Maven Pro', sans-serif;
 }
 
@@ -15,7 +15,37 @@ h1, h2 {
     text-align: center;
     padding: 10px;
     margin-bottom: 50px;
+}
 
+p{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.image-center{
+    margin: 0 auto;
+    display: block;
+}
+
+::selection{
+    color: white;
+    background: #12abc4;
+}
+
+::-moz-selection { /* Code for Firefox */
+    color: white;
+    background: #12abc4;
+}
+
+img{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    user-drag: none; 
+    -moz-user-select: none;
+    -webkit-user-drag: none;
 }
 
 .nav {
@@ -32,6 +62,15 @@ h1, h2 {
     background-color: #680032;
 }
 
+a {
+    color: #12abc4;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #108da2;
+}
+
 .thumbnail-tile{
     margin-bottom: 30px;
 }
@@ -44,6 +83,35 @@ h1, h2 {
 
 .social:hover {
     opacity: 0.8;
+}
+
+.contentButton{
+    width: 100%;
+    /*border-radius: 25px;
+    background-color: #6cbe45;*/
+    font-size: 30px;
+    color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.camleonButton{
+    background-color: #6cbe45;
+    color: white;
+}
+
+.camleonButton:hover{
+    background-color: #66b342;
+}
+
+.nycButton{
+    background-color: #EA4D5B;
+    color: white;
+}
+
+.nycButton:hover{
+    background-color: #d74955;
 }
 
 footer {
