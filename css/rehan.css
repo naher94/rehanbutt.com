@@ -32,6 +32,10 @@ h1, h2 {
     background-color: #680032;
 }
 
+.thumbnail-tile{
+    margin-bottom: 30px;
+}
+
 .social {
     width: 60px;
     padding-left: 10px;
