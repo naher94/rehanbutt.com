@@ -1,0 +1,916 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 2254 1148" enable-background="new 0 0 2254 1148" xml:space="preserve">
+<g>
+	<defs>
+		<rect id="SVGID_1_" width="2254" height="1148"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_2_)">
+		<defs>
+			<rect id="SVGID_3_" width="2254.555" height="1148.075"/>
+		</defs>
+		<clipPath id="SVGID_4_">
+			<use xlink:href="#SVGID_3_"  overflow="visible"/>
+		</clipPath>
+		<rect opacity="0" clip-path="url(#SVGID_4_)" width="2254.555" height="1148.075"/>
+		<rect x="625.64" y="22.079" clip-path="url(#SVGID_4_)" fill="#CCCCCC" width="102.307" height="78.047"/>
+		
+			<rect x="625.64" y="22.079" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="102.307" height="78.047"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 632.3896 66.2924)" font-family="'Lato-Regular'" font-size="14">Launch page</text>
+		</g>
+		<rect x="768.447" y="22.079" clip-path="url(#SVGID_4_)" fill="#D9D2E9" width="110.858" height="61.89"/>
+		
+			<rect x="768.447" y="22.079" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 775.1968 58.2139)" font-family="'Lato-Regular'" font-size="14">Sample Project</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="727.935" y1="53.024" x2="768.447" y2="53.024"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="727.935" y1="53.024" x2="763.947" y2="53.024"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="763.947,54.262 767.35,53.024 
+			763.947,51.785 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			763.947,54.262 767.35,53.024 763.947,51.785 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="676.793" y1="100.126" x2="768.447" y2="316.268"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="676.793" y1="100.126" x2="766.69" y2="312.125"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="765.55,312.608 768.019,315.258 
+			767.831,311.641 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			765.55,312.608 768.019,315.258 767.831,311.641 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="676.793" y1="100.126" x2="768.447" y2="184.646"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="676.793" y1="100.126" x2="765.139" y2="181.595"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="764.299,182.506 767.641,183.902 
+			765.979,180.684 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			764.299,182.506 767.641,183.902 765.979,180.684 		"/>
+		<rect x="768.447" y="285.327" clip-path="url(#SVGID_4_)" fill="#D9D2E9" width="110.858" height="61.89"/>
+		
+			<rect x="768.447" y="285.327" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 775.1968 321.4619)" font-family="'Lato-Regular'" font-size="14">Add Project</text>
+		</g>
+		<rect x="768.447" y="153.703" clip-path="url(#SVGID_4_)" fill="#D9D2E9" width="110.858" height="61.89"/>
+		
+			<rect x="768.447" y="153.703" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 775.1968 181.5879)" font-family="'Lato-Regular'" font-size="14">Upload </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 775.1968 198.0879)" font-family="'Lato-Regular'" font-size="14">Content</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="886.191" y1="47.514" x2="926.703" y2="47.514"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="886.191" y1="47.514" x2="922.203" y2="47.514"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="922.203,48.753 925.606,47.514 
+			922.203,46.275 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			922.203,48.753 925.606,47.514 922.203,46.275 		"/>
+		<rect x="926.703" y="22.079" clip-path="url(#SVGID_4_)" fill="#EAD1DC" width="110.858" height="61.89"/>
+		
+			<rect x="926.703" y="22.079" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 933.4526 41.7139)" font-family="'Lato-Regular'" font-size="14">Example Items </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 933.4526 58.2139)" font-family="'Lato-Regular'" font-size="14">Page, including </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 933.4526 74.7139)" font-family="'Lato-Regular'" font-size="14">version control</text>
+		</g>
+		<rect x="1092.169" y="22.079" clip-path="url(#SVGID_4_)" fill="#EAD1DC" width="110.858" height="61.89"/>
+		
+			<rect x="1092.169" y="22.079" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1098.9194 41.7139)" font-family="'Lato-Regular'" font-size="14">Example </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1098.9194 58.2139)" font-family="'Lato-Regular'" font-size="14">milestones </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1098.9194 74.7139)" font-family="'Lato-Regular'" font-size="14">page</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1042.386" y1="47.514" x2="1082.898" y2="47.514"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1042.386" y1="47.514" x2="1078.398" y2="47.514"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1078.398,48.753 1081.801,47.514 
+			1078.398,46.275 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1078.398,48.753 1081.801,47.514 1078.398,46.275 		"/>
+		<rect x="1260.47" y="22.079" clip-path="url(#SVGID_4_)" fill="#EAD1DC" width="110.858" height="61.89"/>
+		
+			<rect x="1260.47" y="22.079" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1267.2207 41.7139)" font-family="'Lato-Regular'" font-size="14">Example </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1267.2207 58.2139)" font-family="'Lato-Regular'" font-size="14">milestones </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1267.2207 74.7139)" font-family="'Lato-Regular'" font-size="14">arrangement</text>
+		</g>
+		<rect x="1037.561" y="102.664" clip-path="url(#SVGID_4_)" fill="#EAD1DC" width="110.858" height="61.89"/>
+		
+			<rect x="1037.561" y="102.664" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1044.311 138.7993)" font-family="'Lato-Regular'" font-size="14">Example Layout</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="965.791" y1="95.638" x2="1021.421" y2="121.055"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="965.791" y1="95.638" x2="1017.328" y2="119.185"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1016.813,120.312 1020.424,120.599 
+			1017.843,118.058 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1016.813,120.312 1020.424,120.599 1017.843,118.058 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="886.888" y1="316.272" x2="927.4" y2="316.272"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="886.888" y1="316.272" x2="922.9" y2="316.272"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="922.9,317.51 926.303,316.272 
+			922.9,315.033 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			922.9,317.51 926.303,316.272 922.9,315.033 		"/>
+		<rect x="934.982" y="285.327" clip-path="url(#SVGID_4_)" fill="#D0E0E3" width="110.858" height="61.89"/>
+		
+			<rect x="934.982" y="285.327" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 941.7324 296.7119)" font-family="'Lato-Regular'" font-size="14">New Project </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 941.7324 313.2119)" font-family="'Lato-Regular'" font-size="14">Modal: name, </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 941.7324 329.7119)" font-family="'Lato-Regular'" font-size="14">description, </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 941.7324 346.2119)" font-family="'Lato-Regular'" font-size="14">tags</text>
+		</g>
+		<rect x="1097.986" y="286.272" clip-path="url(#SVGID_4_)" fill="#D9EAD3" width="110.858" height="61.89"/>
+		
+			<rect x="1097.986" y="286.272" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1104.7363 314.1567)" font-family="'Lato-Regular'" font-size="14">Empty Items </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1104.7363 330.6567)" font-family="'Lato-Regular'" font-size="14">Page</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1051.657" y1="334.451" x2="1092.169" y2="334.451"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1051.657" y1="334.451" x2="1087.669" y2="334.451"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1087.669,335.69 1091.073,334.451 
+			1087.669,333.212 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1087.669,335.69 1091.073,334.451 1087.669,333.212 		"/>
+		<rect x="1271.584" y="287.159" clip-path="url(#SVGID_4_)" fill="#FFF2CC" width="110.858" height="61.89"/>
+		
+			<rect x="1271.584" y="287.159" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1278.334 323.2944)" font-family="'Lato-Regular'" font-size="14">Add to Project</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1219.959" y1="334.451" x2="1260.47" y2="334.451"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1219.959" y1="334.451" x2="1255.97" y2="334.451"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1255.97,335.69 1259.374,334.451 
+			1255.97,333.212 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1255.97,335.69 1259.374,334.451 1255.97,333.212 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1395.6" y1="305.974" x2="1451.183" y2="293.667"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1395.6" y1="305.974" x2="1446.789" y2="294.64"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1447.057,295.85 1450.113,293.904 
+			1446.522,293.431 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1447.057,295.85 1450.113,293.904 1446.522,293.431 		"/>
+		<rect x="1451.183" y="262.722" clip-path="url(#SVGID_4_)" fill="#FCE5CD" width="110.858" height="61.89"/>
+		
+			<rect x="1451.183" y="262.722" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1457.9337 298.8574)" font-family="'Lato-Regular'" font-size="14">Repository</text>
+		</g>
+		<rect x="1449.262" y="347.217" clip-path="url(#SVGID_4_)" fill="#FCE5CD" width="110.858" height="61.89"/>
+		
+			<rect x="1449.262" y="347.217" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1456.0116 383.3516)" font-family="'Lato-Regular'" font-size="14">New Content</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1394.998" y1="341.661" x2="1439.785" y2="365.756"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1394.998" y1="341.661" x2="1435.823" y2="363.624"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1435.236,364.715 1438.82,365.236 
+			1436.409,362.533 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1435.236,364.715 1438.82,365.236 1436.409,362.533 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1215.059" y1="53.024" x2="1255.571" y2="53.024"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1215.059" y1="53.024" x2="1251.071" y2="53.024"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1251.071,54.262 1254.474,53.024 
+			1251.071,51.785 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1251.071,54.262 1254.474,53.024 1251.071,51.785 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1567.717" y1="389.28" x2="1608.228" y2="389.28"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1567.717" y1="389.28" x2="1603.728" y2="389.28"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1603.728,390.518 1607.132,389.28 
+			1603.728,388.041 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1603.728,390.518 1607.132,389.28 1603.728,388.041 		"/>
+		<rect x="1624.077" y="347.217" clip-path="url(#SVGID_4_)" fill="#FCE5CD" width="159.638" height="61.89"/>
+		
+			<rect x="1624.077" y="347.217" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="159.638" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1630.827 358.6016)" font-family="'Lato-Regular'" font-size="14">Click to place or click on </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1630.827 375.1016)" font-family="'Lato-Regular'" font-size="14">queue to add to queue </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1630.827 391.6016)" font-family="'Lato-Regular'" font-size="14">(inDesign arrow </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1630.827 408.1016)" font-family="'Lato-Regular'" font-size="14">interaction)</text>
+		</g>
+		<rect x="768.447" y="443.069" clip-path="url(#SVGID_4_)" fill="#D9D2E9" width="110.858" height="61.89"/>
+		
+			<rect x="768.447" y="443.069" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 775.1968 479.2042)" font-family="'Lato-Regular'" font-size="14">Existing Project</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="676.793" y1="100.126" x2="768.447" y2="474.016"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="676.793" y1="100.126" x2="767.375" y2="469.645"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="766.172,469.94 768.186,472.951 
+			768.579,469.35 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			766.172,469.94 768.186,472.951 768.579,469.35 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1561.858" y1="295.285" x2="1614.087" y2="373.616"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1561.858" y1="295.285" x2="1611.59" y2="369.872"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1610.56,370.559 1613.478,372.704 
+			1612.621,369.185 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1610.56,370.559 1613.478,372.704 1612.621,369.185 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1043.561" y1="480.768" x2="1345.498" y2="361.24"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1043.561" y1="480.768" x2="1341.314" y2="362.896"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1341.77,364.048 1344.479,361.644 
+			1340.858,361.745 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1341.77,364.048 1344.479,361.644 1340.858,361.745 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1072.091" y1="474.014" x2="1268.012" y2="511.313"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1072.091" y1="474.014" x2="1263.591" y2="510.471"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1263.359,511.688 1266.935,511.108 
+			1263.823,509.254 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1263.359,511.688 1266.935,511.108 1263.823,509.254 		"/>
+		<rect x="1268.018" y="480.376" clip-path="url(#SVGID_4_)" fill="#FFF2CC" width="110.858" height="61.89"/>
+		
+			<rect x="1268.018" y="480.376" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1274.7676 500.0107)" font-family="'Lato-Regular'" font-size="14">Click and drag </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1274.7676 516.5107)" font-family="'Lato-Regular'" font-size="14">to rearrange on </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1274.7676 533.0107)" font-family="'Lato-Regular'" font-size="14">items page</text>
+		</g>
+		<rect x="1268.018" y="559.346" clip-path="url(#SVGID_4_)" fill="#FFF2CC" width="110.858" height="61.89"/>
+		
+			<rect x="1268.018" y="559.346" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1274.7676 578.9814)" font-family="'Lato-Regular'" font-size="14">Mark </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1274.7676 595.4814)" font-family="'Lato-Regular'" font-size="14">milestones </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1274.7676 611.9814)" font-family="'Lato-Regular'" font-size="14">button</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1072.091" y1="474.014" x2="1268.012" y2="590.281"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1072.091" y1="474.014" x2="1264.142" y2="587.985"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1263.51,589.05 1267.069,589.722 
+			1264.774,586.92 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1263.51,589.05 1267.069,589.722 1264.774,586.92 		"/>
+		<rect x="1433.057" y="552.24" clip-path="url(#SVGID_4_)" fill="#FCE5CD" width="110.858" height="61.89"/>
+		
+			<rect x="1433.057" y="552.24" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1439.8068 580.1249)" font-family="'Lato-Regular'" font-size="14">Modal explains </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1439.8068 596.6249)" font-family="'Lato-Regular'" font-size="14">milestones</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1385.711" y1="602.291" x2="1426.222" y2="602.291"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1385.711" y1="602.291" x2="1421.722" y2="602.291"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1421.722,603.53 1425.126,602.291 
+			1421.722,601.053 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1421.722,603.53 1425.126,602.291 1421.722,601.053 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1016.661" y1="504.959" x2="1268.024" y2="670.337"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1016.661" y1="504.959" x2="1264.264" y2="667.863"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1263.583,668.898 1267.108,669.734 
+			1264.945,666.828 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1263.583,668.898 1267.108,669.734 1264.945,666.828 		"/>
+		<rect x="1268.018" y="639.388" clip-path="url(#SVGID_4_)" fill="#FFF2CC" width="110.858" height="61.89"/>
+		
+			<rect x="1268.018" y="639.388" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1274.7676 675.5234)" font-family="'Lato-Regular'" font-size="14">Milestone view</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1383.559" y1="682.333" x2="1424.071" y2="682.333"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1383.559" y1="682.333" x2="1419.571" y2="682.333"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1419.571,683.571 1422.974,682.333 
+			1419.571,681.094 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1419.571,683.571 1422.974,682.333 1419.571,681.094 		"/>
+		<rect x="1433.057" y="639.388" clip-path="url(#SVGID_4_)" fill="#FCE5CD" width="152.197" height="61.89"/>
+		
+			<rect x="1433.057" y="639.388" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="152.197" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1439.8068 659.0234)" font-family="'Lato-Regular'" font-size="14">Arrange milestones, </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1439.8068 675.5234)" font-family="'Lato-Regular'" font-size="14">pre-layout, story </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1439.8068 692.0234)" font-family="'Lato-Regular'" font-size="14">crafting</text>
+		</g>
+		<rect x="961.232" y="443.069" clip-path="url(#SVGID_4_)" fill="#D9EAD3" width="110.858" height="61.89"/>
+		
+			<rect x="961.232" y="443.069" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 967.9824 462.7041)" font-family="'Lato-Regular'" font-size="14">Items page with </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 967.9824 479.2042)" font-family="'Lato-Regular'" font-size="14">version control </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 967.9824 495.7042)" font-family="'Lato-Regular'" font-size="14">scrolling</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="886.185" y1="474.014" x2="961.232" y2="474.014"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="886.185" y1="474.014" x2="956.732" y2="474.014"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="956.732,475.253 960.136,474.014 
+			956.732,472.775 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			956.732,475.253 960.136,474.014 956.732,472.775 		"/>
+		<rect x="1268.023" y="756.959" clip-path="url(#SVGID_4_)" fill="#FFF2CC" width="110.858" height="61.89"/>
+		
+			<rect x="1268.023" y="756.959" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1274.7734 793.0937)" font-family="'Lato-Regular'" font-size="14">Layout</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1016.661" y1="504.959" x2="1268.024" y2="787.904"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1016.661" y1="504.959" x2="1265.035" y2="784.539"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1264.109,785.362 1267.295,787.084 
+			1265.961,783.717 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1264.109,785.362 1267.295,787.084 1265.961,783.717 		"/>
+		<rect x="926.703" y="183.252" clip-path="url(#SVGID_4_)" fill="#D0E0E3" width="256.701" height="61.89"/>
+		
+			<rect x="926.703" y="183.252" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="256.701" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 933.4526 202.8867)" font-family="'Lato-Regular'" font-size="14">Tagging /metadata opportunity, </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 933.4526 219.3867)" font-family="'Lato-Regular'" font-size="14">content added to repository or queue </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 933.4526 235.8867)" font-family="'Lato-Regular'" font-size="14">depending on if you tagged a project</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="882.748" y1="208.197" x2="923.26" y2="208.197"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="882.748" y1="208.197" x2="918.76" y2="208.197"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="918.76,209.436 922.163,208.197 
+			918.76,206.958 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			918.76,209.436 922.163,208.197 918.76,206.958 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1072.091" y1="474.014" x2="1267.634" y2="432.911"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1072.091" y1="474.014" x2="1263.23" y2="433.837"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1263.485,435.049 1266.561,433.137 
+			1262.975,432.625 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1263.485,435.049 1266.561,433.137 1262.975,432.625 		"/>
+		<rect x="1268.018" y="400.337" clip-path="url(#SVGID_4_)" fill="#FFF2CC" width="110.858" height="61.89"/>
+		
+			<rect x="1268.018" y="400.337" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1274.7676 428.2217)" font-family="'Lato-Regular'" font-size="14">Queue at </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1274.7676 444.7217)" font-family="'Lato-Regular'" font-size="14">bottom of page</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1385.711" y1="787.904" x2="1426.222" y2="787.904"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1385.711" y1="787.904" x2="1421.722" y2="787.904"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1421.722,789.142 1425.126,787.904 
+			1421.722,786.665 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1421.722,789.142 1425.126,787.904 1421.722,786.665 		"/>
+		<rect x="1433.051" y="756.959" clip-path="url(#SVGID_4_)" fill="#F4CCCC" width="110.858" height="61.89"/>
+		
+			<rect x="1433.051" y="756.959" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1439.8009 776.5937)" font-family="'Lato-Regular'" font-size="14">Modal with </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1439.8009 793.0937)" font-family="'Lato-Regular'" font-size="14">templates for </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1439.8009 809.5937)" font-family="'Lato-Regular'" font-size="14">project layout</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1543.909" y1="787.904" x2="1675.98" y2="706.644"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1543.909" y1="787.904" x2="1672.148" y2="709.002"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1672.797,710.057 1675.047,707.218 
+			1671.499,707.947 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1672.797,710.057 1675.047,707.218 1671.499,707.947 		"/>
+		<rect x="1675.976" y="675.703" clip-path="url(#SVGID_4_)" fill="#F4CCCC" width="171.992" height="61.89"/>
+		
+			<rect x="1675.976" y="675.703" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="171.992" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1682.7267 687.0878)" font-family="'Lato-Regular'" font-size="14">If you choose a template, </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1682.7267 703.5878)" font-family="'Lato-Regular'" font-size="14">grayed out boxes </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1682.7267 720.0878)" font-family="'Lato-Regular'" font-size="14">containing </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1749.7072 720.0878)" font-family="'Lato-Italic'" font-size="14">prelayout </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1682.7267 736.5878)" font-family="'Lato-Regular'" font-size="14">content, you can accept</text>
+		</g>
+		<rect x="1675.976" y="763.87" clip-path="url(#SVGID_4_)" fill="#F4CCCC" width="171.992" height="61.89"/>
+		
+			<rect x="1675.976" y="763.87" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="171.992" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1682.7267 775.2549)" font-family="'Lato-Regular'" font-size="14">No template: blank white </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1682.7267 791.7549)" font-family="'Lato-Regular'" font-size="14">space and you can add </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1682.7267 808.2549)" font-family="'Lato-Regular'" font-size="14">things graphically from a </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1682.7267 824.7549)" font-family="'Lato-Regular'" font-size="14">queue of your </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1769.7306 824.7549)" font-family="'Lato-Italic'" font-size="14">prelayout</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1553.785" y1="793.27" x2="1655.856" y2="800.191"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1553.785" y1="793.27" x2="1651.367" y2="799.886"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1651.283,801.122 1654.762,800.117 
+			1651.45,798.651 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1651.283,801.122 1654.762,800.117 1651.45,798.651 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1847.969" y1="710.963" x2="1909.031" y2="711.033"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1847.969" y1="710.963" x2="1904.531" y2="711.028"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1904.53,712.267 1907.935,711.032 
+			1904.533,709.789 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1904.53,712.267 1907.935,711.032 1904.533,709.789 		"/>
+		<rect x="1911.057" y="675.703" clip-path="url(#SVGID_4_)" fill="#F4CCCC" width="110.858" height="61.89"/>
+		
+			<rect x="1911.057" y="675.703" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1917.8066 695.3378)" font-family="'Lato-Regular'" font-size="14">Make </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1917.8066 711.8378)" font-family="'Lato-Regular'" font-size="14">adjustments to </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1917.8066 728.3378)" font-family="'Lato-Regular'" font-size="14">template, GUI</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1543.909" y1="787.904" x2="1678.012" y2="873.581"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1543.909" y1="787.904" x2="1674.22" y2="871.158"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1673.553,872.202 1677.088,872.99 
+			1674.887,870.114 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1673.553,872.202 1677.088,872.99 1674.887,870.114 		"/>
+		<rect x="2070.695" y="747.831" clip-path="url(#SVGID_4_)" fill="#F4CCCC" width="159.638" height="61.89"/>
+		
+			<rect x="2070.695" y="747.831" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="159.638" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 2077.4453 767.4659)" font-family="'Lato-Regular'" font-size="14">(option to save custom </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 2077.4453 783.9659)" font-family="'Lato-Regular'" font-size="14">template)</text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 2077.4453 800.4659)" font-family="'Lato-Regular'" font-size="14">Publish: pdf,, online, etc</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1847.969" y1="794.815" x2="2070.701" y2="778.776"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1847.969" y1="794.815" x2="2066.212" y2="779.099"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="2066.302,780.334 2069.607,778.854 
+			2066.124,777.863 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			2066.302,780.334 2069.607,778.854 2066.124,777.863 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1966.486" y1="737.593" x2="2070.707" y2="778.766"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1966.486" y1="737.593" x2="2066.521" y2="777.112"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="2066.066,778.264 2069.687,778.363 
+			2066.977,775.96 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			2066.066,778.264 2069.687,778.363 2066.977,775.96 		"/>
+		<rect x="1678.012" y="842.636" clip-path="url(#SVGID_4_)" fill="#F4CCCC" width="171.992" height="61.89"/>
+		
+			<rect x="1678.012" y="842.636" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="171.992" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1684.7616 878.7706)" font-family="'Lato-Regular'" font-size="14">Code it</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1847.963" y1="873.571" x2="2070.695" y2="778.776"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1847.963" y1="873.571" x2="2066.554" y2="780.538"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="2067.039,781.678 2069.686,779.205 
+			2066.069,779.398 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			2067.039,781.678 2069.686,779.205 2066.069,779.398 		"/>
+		<rect x="768.447" y="983.72" clip-path="url(#SVGID_4_)" fill="#D9D2E9" width="110.858" height="61.89"/>
+		
+			<rect x="768.447" y="983.72" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 775.1968 1019.8555)" font-family="'Lato-Regular'" font-size="14">Portfolios</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="676.793" y1="100.126" x2="768.447" y2="1014.677"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="676.793" y1="100.126" x2="767.998" y2="1010.2"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="766.766,1010.323 768.338,1013.586 
+			769.231,1010.076 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			766.766,1010.323 768.338,1013.586 769.231,1010.076 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="886.191" y1="1014.673" x2="926.703" y2="1015.004"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="886.191" y1="1014.673" x2="922.203" y2="1014.967"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="922.193,1016.206 925.606,1014.995 
+			922.213,1013.728 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			922.193,1016.206 925.606,1014.995 922.213,1013.728 		"/>
+		<rect x="1101.08" y="984.059" clip-path="url(#SVGID_4_)" fill="#E6D4A8" width="110.858" height="61.89"/>
+		
+			<rect x="1101.08" y="984.059" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1107.8296 1003.6944)" font-family="'Lato-Regular'" font-size="14">Modal with </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1107.8296 1020.1944)" font-family="'Lato-Regular'" font-size="14">templates for </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1107.8296 1036.6943)" font-family="'Lato-Regular'" font-size="14">portfolio layout</text>
+		</g>
+		<rect x="1275.458" y="983.894" clip-path="url(#SVGID_4_)" fill="#E6D4A8" width="110.858" height="61.89"/>
+		
+			<rect x="1275.458" y="983.894" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1282.207 1003.5284)" font-family="'Lato-Regular'" font-size="14">Populate it with </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1282.207 1020.0284)" font-family="'Lato-Regular'" font-size="14">your finished </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1282.207 1036.5283)" font-family="'Lato-Regular'" font-size="14">projects</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="848.213" y1="1054.738" x2="923.614" y2="1103.612"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="848.213" y1="1054.738" x2="919.838" y2="1101.165"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="919.164,1102.204 922.694,1103.016 
+			920.512,1100.125 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			919.164,1102.204 922.694,1103.016 920.512,1100.125 		"/>
+		<rect x="926.703" y="1065.646" clip-path="url(#SVGID_4_)" fill="#E6D4A8" width="110.858" height="61.89"/>
+		
+			<rect x="926.703" y="1065.646" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 933.4526 1093.5303)" font-family="'Lato-Regular'" font-size="14">Existing </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 933.4526 1110.0303)" font-family="'Lato-Regular'" font-size="14">portfolios</text>
+		</g>
+		<rect x="926.703" y="984.059" clip-path="url(#SVGID_4_)" fill="#E6D4A8" width="110.858" height="61.89"/>
+		
+			<rect x="926.703" y="984.059" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 933.4526 1020.1944)" font-family="'Lato-Regular'" font-size="14">New Portfolio</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1049.065" y1="1011.679" x2="1089.577" y2="1012.01"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1049.065" y1="1011.679" x2="1085.077" y2="1011.973"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1085.067,1013.212 1088.48,1012.001 
+			1085.087,1010.734 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1085.067,1013.212 1088.48,1012.001 1085.087,1010.734 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1229.047" y1="1011.679" x2="1269.559" y2="1012.01"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1229.047" y1="1011.679" x2="1265.059" y2="1011.973"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1265.049,1013.212 1268.463,1012.001 
+			1265.069,1010.734 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1265.049,1013.212 1268.463,1012.001 1265.069,1010.734 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="#999999" points="1304.711,935.02 1407.423,935.02 1415.569,943.166 1415.569,983.894 
+			1304.711,983.894 		"/>
+		
+			<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" points="
+			1304.711,935.02 1407.423,935.02 1415.569,943.166 1415.569,983.894 1304.711,983.894 		"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1311.4609 958.4337)" font-family="'Lato-Regular'" font-size="14">send link for </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1311.4609 974.9337)" font-family="'Lato-Regular'" font-size="14">feedback</text>
+		</g>
+		<polygon clip-path="url(#SVGID_4_)" fill="#999999" points="2129.154,698.957 2231.866,698.957 2240.012,707.103 
+			2240.012,747.831 2129.154,747.831 		"/>
+		
+			<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" points="
+			2129.154,698.957 2231.866,698.957 2240.012,707.103 2240.012,747.831 2129.154,747.831 		"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 2135.9043 722.3701)" font-family="'Lato-Regular'" font-size="14">send link for </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 2135.9043 738.8701)" font-family="'Lato-Regular'" font-size="14">feedback</text>
+		</g>
+		<polygon clip-path="url(#SVGID_4_)" fill="#999999" points="1563.262,590.291 1665.974,590.291 1674.12,598.437 1674.12,639.165 
+			1563.262,639.165 		"/>
+		
+			<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" points="
+			1563.262,590.291 1665.974,590.291 1674.12,598.437 1674.12,639.165 1563.262,639.165 		"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1570.0116 613.7051)" font-family="'Lato-Regular'" font-size="14">send link for </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1570.0116 630.2051)" font-family="'Lato-Regular'" font-size="14">feedback</text>
+		</g>
+		<polygon clip-path="url(#SVGID_4_)" fill="#999999" points="989.803,394.195 1092.516,394.195 1100.661,402.341 1100.661,443.069 
+			989.803,443.069 		"/>
+		
+			<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" points="
+			989.803,394.195 1092.516,394.195 1100.661,402.341 1100.661,443.069 989.803,443.069 		"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 996.5533 417.6084)" font-family="'Lato-Regular'" font-size="14">send link for </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 996.5533 434.1084)" font-family="'Lato-Regular'" font-size="14">feedback</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="1403.136" y1="1014.839" x2="1443.648" y2="1015.169"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="1403.136" y1="1014.839" x2="1439.148" y2="1015.133"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="1439.138,1016.371 1442.551,1015.16 
+			1439.158,1013.894 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			1439.138,1016.371 1442.551,1015.16 1439.158,1013.894 		"/>
+		<rect x="1460.466" y="984.059" clip-path="url(#SVGID_4_)" fill="#E6D4A8" width="110.858" height="61.89"/>
+		
+			<rect x="1460.466" y="984.059" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1467.2157 1011.9444)" font-family="'Lato-Regular'" font-size="14">Publish: online, </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 1467.2157 1028.4443)" font-family="'Lato-Regular'" font-size="14">pdf, etc. </text>
+		</g>
+		<rect x="422.396" y="112.126" clip-path="url(#SVGID_4_)" fill="#AEE9C2" width="110.858" height="61.89"/>
+		
+			<rect x="422.396" y="112.126" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 148.2607)" font-family="'Lato-Regular'" font-size="14">Tutorial</text>
+		</g>
+		<rect x="422.396" y="340.711" clip-path="url(#SVGID_4_)" fill="#AEE9C2" width="110.858" height="81.26"/>
+		
+			<rect x="422.396" y="340.711" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="81.26"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 361.7812)" font-family="'Lato-Regular'" font-size="14">Upload files: </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 378.2812)" font-family="'Lato-Regular'" font-size="14">Sample content </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 394.7812)" font-family="'Lato-Regular'" font-size="14">is provided for </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 411.2812)" font-family="'Lato-Regular'" font-size="14">you to add</text>
+		</g>
+		<rect x="422.396" y="197.104" clip-path="url(#SVGID_4_)" fill="#AEE9C2" width="110.858" height="115.087"/>
+		
+			<rect x="422.396" y="197.104" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="115.087"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 218.5874)" font-family="'Lato-Regular'" font-size="14">Add a project: </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 235.0874)" font-family="'Lato-Regular'" font-size="14">Modal, you </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 251.5874)" font-family="'Lato-Regular'" font-size="14">type a sample </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 268.0874)" font-family="'Lato-Regular'" font-size="14">name and </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 284.5874)" font-family="'Lato-Regular'" font-size="14">sample </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 301.0874)" font-family="'Lato-Regular'" font-size="14">description</text>
+		</g>
+		<rect x="422.396" y="454.152" clip-path="url(#SVGID_4_)" fill="#AEE9C2" width="110.858" height="119.528"/>
+		
+			<rect x="422.396" y="454.152" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="119.528"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 469.6049)" font-family="'Lato-Regular'" font-size="14">Milestones: </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 486.105)" font-family="'Lato-Regular'" font-size="14">Sample content </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 502.605)" font-family="'Lato-Regular'" font-size="14">in your project </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 519.105)" font-family="'Lato-Regular'" font-size="14">page, </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 535.605)" font-family="'Lato-Regular'" font-size="14">instructions for </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 552.105)" font-family="'Lato-Regular'" font-size="14">adding </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 568.605)" font-family="'Lato-Regular'" font-size="14">milestones</text>
+		</g>
+		<rect x="422.396" y="603.486" clip-path="url(#SVGID_4_)" fill="#AEE9C2" width="110.858" height="119.528"/>
+		
+			<rect x="422.396" y="603.486" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="119.528"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 618.9395)" font-family="'Lato-Regular'" font-size="14">Layout: sample </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 635.4395)" font-family="'Lato-Regular'" font-size="14">content for you, </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 651.9395)" font-family="'Lato-Regular'" font-size="14">you can </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 668.4395)" font-family="'Lato-Regular'" font-size="14">practice </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 684.9395)" font-family="'Lato-Regular'" font-size="14">choosing </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 701.4395)" font-family="'Lato-Regular'" font-size="14">template and </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 717.9395)" font-family="'Lato-Regular'" font-size="14">customizing</text>
+		</g>
+		<rect x="422.396" y="749.915" clip-path="url(#SVGID_4_)" fill="#AEE9C2" width="110.858" height="61.89"/>
+		
+			<rect x="422.396" y="749.915" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="110.858" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 429.1455 786.0508)" font-family="'Lato-Regular'" font-size="14">Publish</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="477.825" y1="174.016" x2="477.825" y2="197.094"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="477.825" y1="174.016" x2="477.825" y2="192.594"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="476.586,192.594 477.825,195.998 
+			479.064,192.594 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			476.586,192.594 477.825,195.998 479.064,192.594 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="474.945" y1="423.922" x2="474.945" y2="447.001"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="474.945" y1="423.922" x2="474.945" y2="442.501"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="473.706,442.501 474.945,445.905 
+			476.184,442.501 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			473.706,442.501 474.945,445.905 476.184,442.501 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="474.358" y1="578.701" x2="474.358" y2="601.78"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="474.358" y1="578.701" x2="474.358" y2="597.28"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="473.119,597.28 474.358,600.683 
+			475.597,597.28 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			473.119,597.28 474.358,600.683 475.597,597.28 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="473.77" y1="727.646" x2="473.77" y2="750.724"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="473.77" y1="727.646" x2="473.77" y2="746.224"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="472.531,746.224 473.77,749.628 
+			475.008,746.224 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			472.531,746.224 473.77,749.628 475.008,746.224 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="533.254" y1="736.409" x2="625.64" y2="61.102"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="533.254" y1="736.409" x2="625.03" y2="65.561"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="626.257,65.729 625.491,62.189 
+			623.802,65.393 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			626.257,65.729 625.491,62.189 623.802,65.393 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="325.409" y1="78.459" x2="422.402" y2="143.065"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="325.409" y1="78.459" x2="418.656" y2="140.57"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="417.97,141.601 421.489,142.457 
+			419.343,139.539 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			417.97,141.601 421.489,142.457 419.343,139.539 		"/>
+		<rect x="212.071" y="123.185" clip-path="url(#SVGID_4_)" fill="#CFE2F3" width="113.339" height="61.89"/>
+		
+			<rect x="212.071" y="123.185" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="113.339" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 218.8208 159.3203)" font-family="'Lato-Regular'" font-size="14">Sign Up Page</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="325.409" y1="324.154" x2="422.402" y2="209.067"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="325.409" y1="324.154" x2="419.502" y2="212.508"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="420.449,213.306 421.695,209.905 
+			418.554,211.71 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			420.449,213.306 421.695,209.905 418.554,211.71 		"/>
+		<rect x="212.071" y="47.514" clip-path="url(#SVGID_4_)" fill="#CFE2F3" width="113.339" height="61.89"/>
+		
+			<rect x="212.071" y="47.514" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="113.339" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 218.8208 83.6489)" font-family="'Lato-Regular'" font-size="14">Login Page</text>
+		</g>
+		<rect x="13.49" y="61.295" clip-path="url(#SVGID_4_)" fill="#CFE2F3" width="113.339" height="61.89"/>
+		
+			<rect x="13.49" y="61.295" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="113.339" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 20.2402 80.9302)" font-family="'Lato-Regular'" font-size="14">Welcome Page, </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 20.2402 97.4302)" font-family="'Lato-Regular'" font-size="14">spiral, who we </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 20.2402 113.9302)" font-family="'Lato-Regular'" font-size="14">are</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="476.091" y1="316.722" x2="476.091" y2="345.801"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="476.091" y1="316.722" x2="476.091" y2="341.301"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="474.852,341.301 476.091,344.705 
+			477.329,341.301 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			474.852,341.301 476.091,344.705 477.329,341.301 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="263.156" y1="185.075" x2="263.156" y2="208.154"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="263.156" y1="185.075" x2="263.156" y2="203.654"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="261.917,203.654 263.156,207.057 
+			264.394,203.654 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			261.917,203.654 263.156,207.057 264.394,203.654 		"/>
+		<rect x="212.071" y="208.197" clip-path="url(#SVGID_4_)" fill="#CFE2F3" width="113.339" height="61.89"/>
+		
+			<rect x="212.071" y="208.197" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="113.339" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 218.8208 236.0821)" font-family="'Lato-Regular'" font-size="14">Freemium </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 218.8208 252.5821)" font-family="'Lato-Regular'" font-size="14">Options</text>
+		</g>
+		<rect x="212.071" y="293.209" clip-path="url(#SVGID_4_)" fill="#CFE2F3" width="113.339" height="61.89"/>
+		
+			<rect x="212.071" y="293.209" clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" width="113.339" height="61.89"/>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 218.8208 321.0938)" font-family="'Lato-Regular'" font-size="14">Give </text>
+		</g>
+		<g clip-path="url(#SVGID_4_)">
+			<text transform="matrix(1 0 0 1 218.8208 337.5938)" font-family="'Lato-Regular'" font-size="14">Information</text>
+		</g>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="255.699" y1="270.087" x2="255.699" y2="293.165"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="255.699" y1="270.087" x2="255.699" y2="288.665"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="254.46,288.665 255.699,292.069 
+			256.938,288.665 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			254.46,288.665 255.699,292.069 256.938,288.665 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="133.031" y1="102.657" x2="212.071" y2="154.13"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="133.031" y1="102.657" x2="208.3" y2="151.674"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="207.624,152.712 211.152,153.532 
+			208.976,150.636 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			207.624,152.712 211.152,153.532 208.976,150.636 		"/>
+		<line opacity="0" clip-path="url(#SVGID_4_)" x1="133.031" y1="83.963" x2="212.071" y2="78.459"/>
+		
+			<line clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" stroke-miterlimit="14.3356" x1="133.031" y1="83.963" x2="207.582" y2="78.771"/>
+		<polygon clip-path="url(#SVGID_4_)" fill-rule="evenodd" clip-rule="evenodd" points="207.668,80.007 210.977,78.535 
+			207.496,77.535 		"/>
+		<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="0.75" stroke-miterlimit="11.4737" points="
+			207.668,80.007 210.977,78.535 207.496,77.535 		"/>
+	</g>
+</g>
+</svg>
