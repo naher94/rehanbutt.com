@@ -1,10 +1,24 @@
 @import url(https://fonts.googleapis.com/css?family=Maven+Pro:400,500,900,700);
+body {
+    font-family: 'Maven Pro', sans-serif;
+    color: #666666;
+    font-weight: 500;
+}
 
-body{
+h1, h2 {
     font-family: 'Maven Pro', sans-serif;
 }
 
-.nav{
+.navbar {
+    background-color: #77013a;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 50px;
+
+}
+
+.nav {
     color: white;
     margin-left: 10px;
     margin-right: 10px;
@@ -12,11 +26,26 @@ body{
     padding-right: 5px;
     font-weight: 700;
 }
-.nav:hover{
+
+.nav:hover {
     color: white;
     background-color: #680032;
 }
 
-footer{
+.social {
+    width: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.social:hover {
+    opacity: 0.8;
+}
+
+footer {
+    margin-top: 50px;
     background-color: #ECECEC;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
