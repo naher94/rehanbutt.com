@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<juiceboxgallery 
+
+	useThumbDots="false"
+	useFullscreenExpand="false"
+	showOpenButton="false"
+	backgroundColor="rgba(255,255,255,1)"
+
+>
+  <image imageURL="images/British Museum.jpg"
+	thumbURL="thumbs/British Museum.jpg"
+	linkURL="images/British Museum.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Pictures/Edits/London 2014 Winter Edits/British Museum.jpg">
+    <title><![CDATA[British Museum]]></title>
+    <caption><![CDATA[A photo I took of the atrium space at British Museum]]></caption>
+  </image>
+  <image imageURL="images/DSC_0324.jpg"
+	thumbURL="thumbs/DSC_0324.jpg"
+	linkURL="images/DSC_0324.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/DSC_0324.jpg">
+    <title><![CDATA[A Monk's Shave]]></title>
+    <caption><![CDATA[Took this photo outside of Bagan, Myanmar at one of the largest monasteries in Myanmar.]]></caption>
+  </image>
+  <image imageURL="images/boating (x2).jpg"
+	thumbURL="thumbs/boating (x2).jpg"
+	linkURL="images/boating (x2).jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/boating (x2).jpg">
+    <title><![CDATA[Boating]]></title>
+    <caption><![CDATA[I took this when visiting Inle Lake in the Shan region of Myanmar. Its interesting how the fishermen in the region use there legs to paddle leaving their hands free to pull up and place nets.]]></caption>
+  </image>
+  <image imageURL="images/fishing (x2).jpg"
+	thumbURL="thumbs/fishing (x2).jpg"
+	linkURL="images/fishing (x2).jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/fishing (x2).jpg">
+    <title><![CDATA[Fishing]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/green boat.jpg"
+	thumbURL="thumbs/green boat.jpg"
+	linkURL="images/green boat.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/green boat.jpg">
+    <title><![CDATA[Green Boating]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/Monks.jpg"
+	thumbURL="thumbs/Monks.jpg"
+	linkURL="images/Monks.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/Monks.jpg">
+    <title><![CDATA[Chillin' Monks]]></title>
+    <caption><![CDATA[I took this photo when visiting Bagan, Myanmar of some young monks hanging out in the back of the truck.]]></caption>
+  </image>
+  <image imageURL="images/pa.jpg"
+	thumbURL="thumbs/pa.jpg"
+	linkURL="images/pa.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/pa.jpg">
+    <title><![CDATA[Pagoda Cleaning]]></title>
+    <caption><![CDATA[ took this photo in Bagan, Myanmar at a pagoda where these two men are cleaning a buddha idol.]]></caption>
+  </image>
+  <image imageURL="images/twoBoats.jpg"
+	thumbURL="thumbs/twoBoats.jpg"
+	linkURL="images/twoBoats.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/twoBoats.jpg">
+    <title><![CDATA[Two Boats]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/Burj Al Arab Atrium (Symmetric)(Alignment Correction).jpg"
+	thumbURL="thumbs/Burj Al Arab Atrium (Symmetric)(Alignment Correction).jpg"
+	linkURL="images/Burj Al Arab Atrium (Symmetric)(Alignment Correction).jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/Burj Al Arab Atrium (Symmetric)(Alignment Correction).jpg">
+    <title><![CDATA[Burj Al Arab Atrium]]></title>
+    <caption><![CDATA[A photo of the Burj Al Arab's Atrium with it interesting colors and unique design.]]></caption>
+  </image>
+  <image imageURL="images/Burj Khalifa (Close-up B&amp;W) DEEP COLOR.jpg"
+	thumbURL="thumbs/Burj Khalifa (Close-up B&amp;W) DEEP COLOR.jpg"
+	linkURL="images/Burj Khalifa (Close-up B&amp;W) DEEP COLOR.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/Burj Khalifa (Close-up B&amp;W) DEEP COLOR.jpg">
+    <title><![CDATA[Burj Khalifa]]></title>
+    <caption><![CDATA[I took this in Dubai at the Burj Khalifa, looking right up the side of the building.]]></caption>
+  </image>
+  <image imageURL="images/DSC_0856.jpg"
+	thumbURL="thumbs/DSC_0856.jpg"
+	linkURL="images/DSC_0856.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/DSC_0856.jpg">
+    <title><![CDATA[Koala Climb]]></title>
+    <caption><![CDATA[I took this photo of a Koala, enjoying an afternoon snack, when i was on the Gold Coast of Australia. A rare occasion to see a koala awake and moving about.]]></caption>
+  </image>
+  <image imageURL="images/Jelly.jpg"
+	thumbURL="thumbs/Jelly.jpg"
+	linkURL="images/Jelly.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/Jelly.jpg">
+    <title><![CDATA[Jelly]]></title>
+    <caption><![CDATA[I took this at the Jellyfish exhibit in the Chicago Aquarium.]]></caption>
+  </image>
+  <image imageURL="images/Kid in a Tub.jpg"
+	thumbURL="thumbs/Kid in a Tub.jpg"
+	linkURL="images/Kid in a Tub.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/Kid in a Tub.jpg">
+    <title><![CDATA[Kid in a Tub]]></title>
+    <caption><![CDATA[I took this photo in Cambodia outside of the Siam Reap area in the floating village.]]></caption>
+  </image>
+  <image imageURL="images/Trees.jpg"
+	thumbURL="thumbs/Trees.jpg"
+	linkURL="images/Trees.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/Trees.jpg">
+    <title><![CDATA[Trees]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/Westminster Abbey_Print_logo.jpg"
+	thumbURL="thumbs/Westminster Abbey_Print_logo.jpg"
+	linkURL="images/Westminster Abbey_Print_logo.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/Westminster Abbey_Print_logo.jpg">
+    <title><![CDATA[Westminster Abbey]]></title>
+    <caption><![CDATA[I took this photo at Westminster Abbey in London England. Looking up at the building from the side entrance.]]></caption>
+  </image>
+  <image imageURL="images/Pastels.jpg"
+	thumbURL="thumbs/Pastels.jpg"
+	linkURL="images/Pastels.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Dropbox/My Art/Pastels.jpg">
+    <title><![CDATA[Pastels]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/Cherry Blossoms 1.jpg"
+	thumbURL="thumbs/Cherry Blossoms 1.jpg"
+	linkURL="images/Cherry Blossoms 1.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Dropbox/Friends Art/Cherry Blossoms 1.jpg">
+    <title><![CDATA[Cherry Blossoms]]></title>
+    <caption><![CDATA[A picture I took while walking around Maryland's Kenwood area when the cherry blossom trees were in full bloom.]]></caption>
+  </image>
+  <image imageURL="images/Office Building in France HDR.jpg"
+	thumbURL="thumbs/Office Building in France HDR.jpg"
+	linkURL="images/Office Building in France HDR.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Dropbox/My Art/Office Building in France HDR.jpg">
+    <title><![CDATA[Office Building]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/BigBen.jpg"
+	thumbURL="thumbs/BigBen.jpg"
+	linkURL="images/BigBen.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/BigBen.jpg">
+    <title><![CDATA[Big Ben]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/Burj Al Arab all.jpg"
+	thumbURL="thumbs/Burj Al Arab all.jpg"
+	linkURL="images/Burj Al Arab all.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/Burj Al Arab all.jpg">
+    <title><![CDATA[Burj Al Arab]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/Forbidden City.jpg"
+	thumbURL="thumbs/Forbidden City.jpg"
+	linkURL="images/Forbidden City.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/Forbidden City.jpg">
+    <title><![CDATA[Forbidden City]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/Lifeguard.jpg"
+	thumbURL="thumbs/Lifeguard.jpg"
+	linkURL="images/Lifeguard.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/Lifeguard.jpg">
+    <title><![CDATA[Lifeguard]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/MLK Memorial.jpg"
+	thumbURL="thumbs/MLK Memorial.jpg"
+	linkURL="images/MLK Memorial.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/MLK Memorial.jpg">
+    <title><![CDATA[MLK Memorial]]></title>
+    <caption><![CDATA[A photo taken in Washington D.C. of the side of the Martin Luther King Jr. Memorial with the Lincoln Monument in the background.]]></caption>
+  </image>
+  <image imageURL="images/Seats.jpg"
+	thumbURL="thumbs/Seats.jpg"
+	linkURL="images/Seats.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/Seats.jpg">
+    <title><![CDATA[Seats]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/Shanghai.jpg"
+	thumbURL="thumbs/Shanghai.jpg"
+	linkURL="images/Shanghai.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/Shanghai.jpg">
+    <title><![CDATA[Shanghai]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/Sydney On the rocks.jpg"
+	thumbURL="thumbs/Sydney On the rocks.jpg"
+	linkURL="images/Sydney On the rocks.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/Sydney On the rocks.jpg">
+    <title><![CDATA[Sydney On the Rocks]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/TheTube.jpg"
+	thumbURL="thumbs/TheTube.jpg"
+	linkURL="images/TheTube.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/TheTube.jpg">
+    <title><![CDATA[The Tube]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/The Dock.jpg"
+	thumbURL="thumbs/The Dock.jpg"
+	linkURL="images/The Dock.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Documents/GitHub/mygithubpage/assets/juiceBoxPhotography/images/The Dock.jpg">
+    <title><![CDATA[The Dock]]></title>
+    <caption><![CDATA[A Photo I took after a whale watching trip outside of Perth, Australia in the Margaret River area.]]></caption>
+  </image>
+</juiceboxgallery>

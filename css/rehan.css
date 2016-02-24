@@ -96,6 +96,15 @@ a:hover {
     text-align: center;
 }
 
+.commandBarButton{
+    background-color: #77013a;
+    color: white;
+}
+
+.commandBarButton:hover{
+    background-color: #680032;
+}
+
 .camleonButton{
     background-color: #6cbe45;
     color: white;

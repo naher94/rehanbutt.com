@@ -1,0 +1,26 @@
+---
+layout: post
+title:  "Row House"
+thumbnail: "/img/thumbnails/rowHouse.png"
+date:   2014-09-17 12:00:0 -0500
+categories: architecture
+permalink: rowHouse
+---
+
+![Front Elevation](../img/rowHouse/rowHouseFrontElevation.png)
+![Long Section](../img/rowHouse/rowHouseLongSection.png)
+![Plans](../img/rowHouse/rowHousePlans.png)
+![Hexagon Grid](../img/rowHouse/rowHouseGrid.png)
+
+As part of this project we were asked to create a hexagon tile and incorporate it into the house design.  I used it as a starting place, creating a grid based on it. Giving me the opportunity to create 4 basic shapes.
+
+![Tile Iteration](../img/rowHouse/rowHouseTileIteration.png)
+![Tile](../img/rowHouse/rowHouseTile.png)
+![Tile 3D Printed](../img/rowHouse/rowHouseTile3d.png){: style="width:100%"}
+
+I wanted to incorporate a time-based aspect into the house, so I decided to use the tile in order to create a waterfall wall. The tiles are made out of copper allowing them to rust, changing color and texture, giving a new aspect to your house over the years.
+
+## Process
+
+![Process Sketches](../img/rowHouse/rowHouseProcessSketches.png)
+![Process Sketches](../img/rowHouse/rowHouseProcessMoments.png)

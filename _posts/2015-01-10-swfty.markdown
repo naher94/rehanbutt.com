@@ -1,0 +1,12 @@
+---
+layout: post
+title:  "Swfty Mobile Application"
+thumbnail: "/img/thumbnails/swfty.png"
+date:   2015-01-10 12:00:00 -0500
+categories: iOS, Mobile, App
+permalink: swfty
+---
+
+![Landing Page](../img/swfty/landingPage.jpg){: .image-center style="width:80%"}
+![App Icon](../img/swfty/appIcon.png)
+![xCode](../img/swfty/xCode.png)

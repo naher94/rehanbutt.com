@@ -1,0 +1,78 @@
+---
+layout: post
+title:  "Lustre (Fashion Line)"
+thumbnail: "/img/thumbnails/fashion.png"
+date:   2014-09-27 12:10:15 -0500
+categories: fashion
+permalink: fashion
+---
+
+![Us with the Models](../img/fashion/fashionModelAndMe.png)
+
+Lustre - the way light interacts with the surface of a crystal, rock, or mineral.
+
+Our collection, Lustre, is inspired by geological formations. The line is inspired by the singular moment when a geode is split open, revealing colorful crystals within. With this in mind, the line showcases a natural progression of breaking down, perforating and shattering the rigid, rock-like structure of tessellated Yupo Paper, to reveal from underneath the free flowing fabrics of iridescent silk.
+
+This concept is directly linked to the idea of clothing being a shell of the human form that socially delineates cultures and that only by breaking open this shell, and the prejudicial implications that go with it, can we reveal the true being within.
+
+I worked on this line with two of my friends and colleagues, <a target="_blank" href="http://www.citamayo.com">Carolina Tamayo</a> and <a target="_blank" href="https://ajhamilton.squarespace.com/">Alyssa Hamilton</a>.
+
+![Stage; Photo Credit: Jonathan Leung](../img/fashion/fashionStageJL.png){: style="width:100%"}
+
+<iframe name="target" src="assets/fashionGallery/index.html" width="100%" height="800" frameborder="0" scrolling="auto"></iframe>
+<iframe width="100%" height="600" src="https://www.youtube.com/embed/SeDGiYwXBiM" frameborder="0" allowfullscreen></iframe>
+
+I also want to say thank to <a target="_blank" href="http://yupousa.com">Yupo</a> for being our sponsor for this line. Photo Credit: Jonathan Leung, Yutong Chen, Victor Song
+
+## Process
+
+![Concept Inspiration](../img/fashion/fashionConceptInspiration.png)
+
+These images represent the concept we were trying to convey through our line.
+
+![Clothing Inspiration](../img/fashion/fashionClothingInspiration.png){: style="width:100%"}
+
+These were several of the images we found that we though we could incorporate into our designs.
+
+![Sketches V1](../img/fashion/fashionSketchesv1.png)
+![Sketches V2](../img/fashion/fashionSketchesv2.png)
+![Inital Sketches](../img/fashion/fashionInitalSketches.png)
+
+These sketches were the initial sketches we submitted in order to be a part of the Lunar Gala fashion show.
+
+![Scanning Diagram](../img/fashion/fashionScanningDiagram.png)
+![Model Scanning](../img/fashion/fashionScanning.png)
+
+In order to reduce the number of fitting we had to do with the models and experiment with unconventional ways to create a fashion line we decided to scan the models. Using a ABB robot, which had a camera mounted to it we took several pictures of the models then uploading the images to AutoDesk's 123D Catch, which converted the images into a 3D mesh model, which we could then fit.
+
+![Model Fittings](../img/fashion/fashionFittings.png){: style="width:100%"}
+
+![Clothes Fittings](../img/fashion/fashionFittingsv2.png)
+<!--REVISED SKETCHES-->
+
+![Sketches V1](../img/fashion/fashionRevisedSketches.png){: .image-center style="width:90%"}
+<!--REVISED SKETCHES V2-->
+
+![Fabric Sketches](../img/fashion/fashionFabricSketches.png)
+
+Sketches of our iridescent fabric pieces.
+
+<!--3D print images the ball joints and files vs actual prints earring-->
+
+![3D Prints](../img/fashion/fashion3dprints.png){: .image-center style="width:100%"}
+
+![3D Print Renders](../img/fashion/fashion3dprintsRender.png)
+
+From our first 3D print we came across many problems that we then decided to use in order to improve all the 3D printed pieces. One problem we came across was how we wanted to connect the 3D printed pieces to one another for those that had large 3D print pieces. The initial design had left a lot of space in between the pieces so we could run fishing line through it, but it created to loose of an effect. On the other hand when connecting our 3D printed pieces to the YUPO paper (the white geometric structures) we had to make sure to leave some slack for the models to walk and move around naturally.
+
+<!--gifts to models?-->
+
+![3D Print Sketches](../img/fashion/fashion3dPrintSketches.png)
+            
+Some initial sketches we had done for the piece of the outfits that we wanted 3D printed.
+
+![SketchBook Sketches](../img/fashion/fashionSketchbook.png){: .image-center style="width:70%"}
+
+![Wearing Origami - Instagram](../img/fashion/fashionInstagram.png){: .image-center style="width:30%"}
+
+Something fun I came across on social media that one of our models posted :)

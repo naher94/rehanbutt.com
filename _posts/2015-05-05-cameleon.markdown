@@ -1,0 +1,26 @@
+---
+layout: post
+title:  "Cameleon Web App (Game/Teaching tool)"
+thumbnail: "/img/thumbnails/cameleon.png"
+date:   2015-05-05 12:00:00 -0500
+categories: web, game, color
+permalink: cameleon
+---
+
+<!--branding process-->
+<!--process not already on splash page-->
+![Cameleon Logo](../img/cameleon/logo.svg){: .image-center style="width:50%"}
+
+<br>
+<div>
+<a href="http://naher94.github.io/cameleon">
+    <div class="camleonButton contentButton"> Check out the project at the splash page
+    </div>
+</a>
+</div>
+<br>
+
+## Process
+
+![Inspiration Images](../img/cameleon/inspiration.png)
+![Branding Iterations](../img/cameleon/branding.png)
