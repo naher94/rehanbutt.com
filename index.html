@@ -5,10 +5,13 @@ layout: default
     {% for post in site.posts %}
     <div class="small-12 medium-4 large-3 columns thumbnail-tile">
         <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
-            <!--if statement for the banners?-->
             <div class="thumbnail-container">
             <img class="thumbnail-image" src="{{ post.thumbnail }}">
             <span class="thumbnail-text">{{ post.tile-name }}</span>
+            <!--if statement for the banners?-->
+            {% if post.banner %}
+            <span class="banner">{{ post.banner }}</span>
+            {% endif %}
             </div>
         </a>
     </div>

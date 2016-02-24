@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "CarnegieHere (iOS App)"
+banner: "Updated"
 tile-name: "iOS App"
 thumbnail: "/img/thumbnails/carnegieHere.png"
 date:   2015-12-01 12:00:00 -0500

@@ -47,6 +47,16 @@ h4 {
     text-align: center;
   }
 
+.banner {
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    padding: 5px 20px 5px 20px;
+    font-weight: 700;
+    background-color: #12abc4;
+    color: white;
+}
+
 p {
     margin-top: 25px;
     margin-bottom: 25px;
