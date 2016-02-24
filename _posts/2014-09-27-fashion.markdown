@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Lustre (Fashion Line)"
+tile-name: "Fashion"
 thumbnail: "/img/thumbnails/fashion.png"
 date:   2014-09-27 12:10:15 -0500
 categories: fashion

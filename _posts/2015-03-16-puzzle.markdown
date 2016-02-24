@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Puzzle"
+tile-name: "Puzzle"
 thumbnail: "/img/thumbnails/puzzle.png"
 date:   2015-03-16 12:00:00 -0500
 categories: fabrication, illustration

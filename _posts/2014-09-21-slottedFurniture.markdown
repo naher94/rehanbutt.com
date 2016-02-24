@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Slotted Furniture"
+tile-name: "Slotted Furniture"
 thumbnail: "/img/thumbnails/slottedFurniture.png"
 date:   2014-09-21 12:00:00 -0500
 categories: Fabrication

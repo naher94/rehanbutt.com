@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Row House"
+tile-name: "Row House"
 thumbnail: "/img/thumbnails/rowHouse.png"
 date:   2014-09-17 12:00:0 -0500
 categories: architecture

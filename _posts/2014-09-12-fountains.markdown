@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Fountain"
+tile-name: "Fountains"
 thumbnail: "/img/thumbnails/fountain.png"
 date:   2014-09-12 12:10:15 -0500
 categories: fabrication

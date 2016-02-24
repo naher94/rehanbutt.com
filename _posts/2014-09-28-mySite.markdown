@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Carnegie Mellon NYC"
+title:  "My Site"
+tile-name: "My Site"
 thumbnail: "/img/thumbnails/mySite.png"
 date:   2014-09-28 12:00:00 -0500
 categories: web

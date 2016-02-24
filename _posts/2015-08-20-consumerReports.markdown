@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Carnegie Mellon NYC"
+title:  "My Summer at ConsumerReports"
+tile-name: "Consumer Reports"
 thumbnail: "/img/thumbnails/consumerReports.png"
 date:   2015-08-20 12:00:00 -0500
 categories: summer, UX, Branding, Mobile
