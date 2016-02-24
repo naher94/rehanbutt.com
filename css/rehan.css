@@ -7,9 +7,15 @@ body {
 
 h1,
 h2,
-h3,
-h4 {
+h3 {
     font-family: 'Maven Pro', sans-serif;
+    padding-left: 10px;
+}
+
+h4{
+    font-family: 'Maven Pro', sans-serif;
+    font-weight: 500;
+    margin-top: 50px;
 }
 
 .navbar {
@@ -37,8 +43,10 @@ h4 {
   
   .thumbnail-text {
     position: absolute;
-    bottom: 10px;
-    left: 10px;
+    bottom: 20px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
     color: #FFF;
     opacity: 0;
     text-shadow: 0px 0px 5px rgba(50, 50, 50, 1);
@@ -58,8 +66,19 @@ h4 {
 }
 
 p {
+    /*padding-left: 10px;
+    padding-right: 10px; */
     margin-top: 25px;
     margin-bottom: 25px;
+}
+
+#subTitle{
+    font-size: 20px;
+    padding-top: 10px;
+}
+
+.bio{
+    font-size: 20px;
 }
 
 .image-center {
@@ -162,6 +181,34 @@ a:hover {
 
 .nycButton:hover {
     background-color: #d74955;
+}
+
+#resumeButton {
+    width: 100%;
+    background-color:#77013a; 
+    font-size: 20px;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#resumeButton:hover{
+    background-color: #680032;
+}
+
+.socialButton{
+    width: 100%;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    background-color: #ececec;
+    margin: 5px;
+}
+.socialButton:hover{
+    background-color: #cccccc;
 }
 
 footer {
