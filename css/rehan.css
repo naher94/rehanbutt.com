@@ -58,7 +58,7 @@ h4{
 .banner {
     position: absolute;
     top: 10px;
-    left: 0px;
+    left: -10px;
     padding: 5px 20px 5px 20px;
     font-weight: 700;
     background-color: #12abc4;
