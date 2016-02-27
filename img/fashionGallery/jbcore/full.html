@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Full screen gallery</title>
+	<meta id="sv-meta" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<script type="text/javascript" src="juicebox.js"></script>
+
+	<style type="text/css" media="screen">
+		body
+		{
+			padding: 0;
+			margin: 0;
+		}
+		#juicebox-container
+		{
+			padding: 0;
+			margin: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<!--START Juicebox.-->
+	<script type="text/javascript">
+		var expanded_jb_gallery = true;
+		new juicebox({
+			containerid:'juicebox-container',
+			galleryHeight:'100%',
+			galleryWidth:'100%'
+		});
+	</script>
+	
+	<div id="juicebox-container"></div>
+	<!-- END Juicebox -->
+</body>
+
+</html>

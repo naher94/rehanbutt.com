@@ -1,0 +1,34 @@
+---
+layout: post
+title:  "Scarf Design"
+tile-name: "Scarf"
+thumbnail: "/img/thumbnails/scarf.png"
+date:   2014-09-18 12:00:00 -0500
+categories: textile
+permalink: scarf
+---
+
+![Scarf Design](../img/scarf/scarfFinal.png)
+![Scarf Design Detail](../img/scarf/scarfDetail2.png)
+
+## Process
+
+![Scarf Original Photo](../img/scarf/scarfOriginalPhoto.png){: .image-center style="width:50%"}
+
+
+This project originated from one of my friends losing her favorite scarf, so I wanted to recreate it for her. At the time I was not an Illustrator user and wanted to add this tool to my knowledge base. This project stemmed from this idea, but in no way ended there. I took it further to enhance my knowledge of other tools and bring the design to fruition, from a concept to a final product that I could present to my friend. With such a graphic oriented project I wanted to break it down into smaller elements. Smaller elements help to create a language that was consistent through out the design, but one that was clear that the elements in the pattern had their own place within the background, middle ground and foreground elements. Breaking the project down helped to keep it on task and refined through all the iterations, starting from low-fidelity and eventually getting mockups and a final product.
+
+![Scarf Pattern Shape Iteration](../img/scarf/scarfShapeIteration.png)
+![Scarf Pattern Color Selection](../img/scarf/scarfOriginalPatternColor.png)
+
+Choosing the right colors
+
+![Scarf Original Pattern Final](../img/scarf/scarfOriginalPatternFinal.png)
+
+I decided to use the original reproduction as the starting point and part of the background elements of the final design.
+
+![Scarf Sketches](../img/scarf/scarfSketches.png){: style="width:100%"}
+![Scarf Pattern Variation](../img/scarf/scarfPatternVariation.png){: style="width:100%"}
+![Scarf Pattern Diagrams](../img/scarf/scarfDiagrams.png){: style="width:100%"}
+![Scarf Color Swatches](../img/scarf/scarfColorSwatches.png)
+![Scarf Background Iterations](../img/scarf/scarfBackgroundIteration.png)

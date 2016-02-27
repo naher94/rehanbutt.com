@@ -1,0 +1,220 @@
+@import url(https://fonts.googleapis.com/css?family=Maven+Pro:400,500,900,700);
+body {
+    font-family: 'Maven Pro', sans-serif;
+    color: #666666;
+    font-weight: 500;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Maven Pro', sans-serif;
+    padding-left: 10px;
+}
+
+h4{
+    font-family: 'Maven Pro', sans-serif;
+    font-weight: 500;
+    margin-top: 50px;
+}
+
+.navbar {
+    background-color: #77013a;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
+  .thumbnail-container {
+    position: relative;
+    display: block;
+    background-color: #000;
+    opacity: 1;
+  }
+  
+  .thumbnail-container:hover .thumbnail-text {
+    opacity: 1;
+  }
+  
+  .thumbnail-container:hover .thumbnail-image {
+    opacity: 0.8;
+  }
+  
+  .thumbnail-text {
+    position: absolute;
+    bottom: 20px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    color: #FFF;
+    opacity: 0;
+    text-shadow: 0px 0px 5px rgba(50, 50, 50, 1);
+    font-size: 33px;
+    line-height: 30px;
+    text-align: center;
+  }
+
+.banner {
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    padding: 5px 20px 5px 20px;
+    font-weight: 700;
+    background-color: #12abc4;
+    color: white;
+}
+
+p {
+    /*padding-left: 10px;
+    padding-right: 10px; */
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#subTitle{
+    font-size: 20px;
+    padding-top: 10px;
+}
+
+.bio{
+    font-size: 20px;
+}
+
+.image-center {
+    margin: 0 auto;
+    display: block;
+}
+
+::selection {
+    color: white;
+    background: #12abc4;
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: white;
+    background: #12abc4;
+}
+
+img {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    user-drag: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+}
+
+.nav {
+    color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-weight: 700;
+}
+
+.nav:hover {
+    color: white;
+    background-color: #680032;
+}
+
+a {
+    color: #12abc4;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #108da2;
+}
+
+.thumbnail-tile {
+    margin-bottom: 30px;
+}
+
+.social {
+    width: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.social:hover {
+    opacity: 0.8;
+}
+
+.contentButton {
+    width: 100%;
+    /*border-radius: 25px;
+    background-color: #6cbe45;*/
+    font-size: 30px;
+    color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.commandBarButton {
+    background-color: #77013a;
+    color: white;
+}
+
+.commandBarButton:hover {
+    background-color: #680032;
+}
+
+.camleonButton {
+    background-color: #6cbe45;
+    color: white;
+}
+
+.camleonButton:hover {
+    background-color: #66b342;
+}
+
+.nycButton {
+    background-color: #EA4D5B;
+    color: white;
+}
+
+.nycButton:hover {
+    background-color: #d74955;
+}
+
+#resumeButton {
+    width: 100%;
+    background-color:#77013a; 
+    font-size: 20px;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#resumeButton:hover{
+    background-color: #680032;
+}
+
+.socialButton{
+    width: 100%;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    background-color: #ececec;
+    margin: 5px;
+}
+.socialButton:hover{
+    background-color: #cccccc;
+}
+
+footer {
+    margin-top: 50px;
+    background-color: #ECECEC;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

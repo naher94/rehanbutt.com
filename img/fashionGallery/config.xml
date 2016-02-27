@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<juiceboxgallery 
+
+	resizeOnImport="false"
+	backgroundColor="rgba(255,255,255,1)"
+	showOpenButton="false"
+	showThumbsButton="false"
+	useThumbDots="true"
+
+>
+  <image imageURL="images/1charlotteP.jpg"
+	thumbURL="thumbs/1charlotteP.jpg"
+	linkURL="images/1charlotteP.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Desktop/LG web Gallery/1charlotteP.jpg">
+    <title><![CDATA[]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/2sadeW.jpg"
+	thumbURL="thumbs/2sadeW.jpg"
+	linkURL="images/2sadeW.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Desktop/LG web Gallery/2sadeW.jpg">
+    <title><![CDATA[]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/3amayaW.jpg"
+	thumbURL="thumbs/3amayaW.jpg"
+	linkURL="images/3amayaW.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Desktop/LG web Gallery/3amayaW.jpg">
+    <title><![CDATA[]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/4kendraP.jpg"
+	thumbURL="thumbs/4kendraP.jpg"
+	linkURL="images/4kendraP.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Desktop/LG web Gallery/4kendraP.jpg">
+    <title><![CDATA[]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/5nehaP.jpg"
+	thumbURL="thumbs/5nehaP.jpg"
+	linkURL="images/5nehaP.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Desktop/LG web Gallery/5nehaP.jpg">
+    <title><![CDATA[]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/6shanaP.jpg"
+	thumbURL="thumbs/6shanaP.jpg"
+	linkURL="images/6shanaP.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Desktop/LG web Gallery/6shanaP.jpg">
+    <title><![CDATA[]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/7NikaP.jpg"
+	thumbURL="thumbs/7NikaP.jpg"
+	linkURL="images/7NikaP.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Desktop/LG web Gallery/7NikaP.jpg">
+    <title><![CDATA[]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/8KiraW.jpg"
+	thumbURL="thumbs/8KiraW.jpg"
+	linkURL="images/8KiraW.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Desktop/LG web Gallery/8KiraW.jpg">
+    <title><![CDATA[]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/9annaP.jpg"
+	thumbURL="thumbs/9annaP.jpg"
+	linkURL="images/9annaP.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Desktop/LG web Gallery/9annaP.jpg">
+    <title><![CDATA[]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/10bellaW.jpg"
+	thumbURL="thumbs/10bellaW.jpg"
+	linkURL="images/10bellaW.jpg"
+	linkTarget="_blank"
+	sourcePath="/Users/RAB/Desktop/LG web Gallery/10bellaW.jpg">
+    <title><![CDATA[]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+</juiceboxgallery>
