@@ -103,7 +103,10 @@ img {
 .nav {
     color: white;
     /*margin: 10px;*/
-    padding: 14px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
     font-weight: 700;
     height: inherit;
 }
@@ -117,7 +120,10 @@ img {
     background-color: #77013a;
     color: white;
     text-align: center;
-    padding: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 6px;
+    padding-right: 6px;
     margin-bottom: 50px;
 }
 
