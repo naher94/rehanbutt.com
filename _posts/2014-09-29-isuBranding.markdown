@@ -12,7 +12,7 @@ permalink: isuBrand
 
 ![ISU Website](../img/ISU/ISUwebsite.png)
 
-<iframe width="100%" height="600" src="http://e.issuu.com/embed.html#0/11599873" frameborder="0"allowfullscreen </iframe>
+<iframe src="http://e.issuu.com/embed.html#0/11599873" width="100%" height="600" frameborder="0" allowfullscreen> </iframe>
 
 ## Process
 
