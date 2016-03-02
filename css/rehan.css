@@ -23,6 +23,11 @@ article.post {
     width: 100%
 }
 
+ul{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .image-container {
     margin-top: 25px;
     margin-bottom: 25px;

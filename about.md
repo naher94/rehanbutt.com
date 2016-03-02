@@ -25,7 +25,7 @@ permalink: about
         </div>
         <div style="margin-top:50px">
             <h4>Goal</h4>
-                <div style="padding-left:10px;">To obtain a full-time position that will help me continue to learn and follow my passions in art and technology, while developing innovative products within the organization.</div>
+                <div style="padding-left:10px; padding-right:10px;">To obtain a full-time position that will help me continue to learn and follow my passions in art and technology, while developing innovative products within the organization.</div>
 
                 <h4>Education</h4>
                 <div id="subTitle">Carnegie Mellon University [2012 - Present]</div>

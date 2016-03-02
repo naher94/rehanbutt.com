@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Carnegie Mellon NYC"
-banner: "New"
 tile-name: "CMU NYC"
 thumbnail: "/img/thumbnails/nyc.png"
 date:   2016-02-09 12:00:00 -0500
