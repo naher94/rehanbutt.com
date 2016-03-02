@@ -8,4 +8,5 @@ categories: watch
 permalink: watch
 ---
 
-![Watch Render](../img/watchRender.png)
+<div class="image-container">
+<img src="../img/watchRender.png" alt="Watch Render" /></div>

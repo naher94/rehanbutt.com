@@ -8,23 +8,28 @@ categories: fabrication
 permalink: woodWorking
 ---
 
-![Portal View 1](../img/woodWorking/woodWorkingPortal.png){: style="width:100%"}
-![Portal View 2](../img/woodWorking/woodWorkingPortal2.png){: style="width:100%"}
+<div class="image-container">
+<img src="../img/woodWorking/woodWorkingPortal.png" alt="Portal View 1" style="width:100%" />
+<img src="../img/woodWorking/woodWorkingPortal2.png" alt="Portal View 2" style="width:100%" /></div>
 
 Portal finished piece
 
-![Wood and Stone View 1](../img/woodWorking/woodWorkingStone.png){: style="width:100%"}
+<div class="image-container">
+<img src="../img/woodWorking/woodWorkingStone.png" alt="Wood and Stone View 1" style="width:100%" /></div>
 
-![Wood and Stone Details](../img/woodWorking/woodWorkingStoneDetails.png){: style="width:100%"}
+<div class="image-container">
+<img src="../img/woodWorking/woodWorkingStoneDetails.png" alt="Wood and Stone Details" style="width:100%" /></div>
 
 Wood and Stone finished piece with detail shots
 
 ## Process
 
-![Portal Sketches](../img/woodWorking/woodWorkingPortalSketches.png){: style="width:100%"}
+<div class="image-container">
+<img src="../img/woodWorking/woodWorkingPortalSketches.png" alt="Portal Sketches" style="width:100%" /></div>
 
 Process sketches of the portal wood working piece.
 
-![Portal Sketches](../img/woodWorking/woodWorkingStoneSketches.png){: style="width:100%"}
+<div class="image-container">
+<img src="../img/woodWorking/woodWorkingStoneSketches.png" alt="Portal Sketches" style="width:100%" /></div>
 
 Process sketches of the wood and stone sculpture piece.

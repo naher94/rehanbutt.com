@@ -13,30 +13,37 @@ h4 {
     padding-left: 10px;
 }
 
-h4{
+h4 {
     font-family: 'Maven Pro', sans-serif;
     font-weight: 500;
     margin-top: 50px;
 }
 
-article.post { width: 100% }
+article.post {
+    width: 100%
+}
 
-  .thumbnail-container {
+.image-container {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.thumbnail-container {
     position: relative;
     display: block;
     background-color: #000;
     opacity: 1;
-  }
-  
-  .thumbnail-container:hover .thumbnail-text {
+}
+
+.thumbnail-container:hover .thumbnail-text {
     opacity: 1;
-  }
-  
-  .thumbnail-container:hover .thumbnail-image {
+}
+
+.thumbnail-container:hover .thumbnail-image {
     opacity: 0.8;
-  }
-  
-  .thumbnail-text {
+}
+
+.thumbnail-text {
     position: absolute;
     bottom: 20px;
     margin: 0 auto;
@@ -48,7 +55,7 @@ article.post { width: 100% }
     font-size: 33px;
     line-height: 30px;
     text-align: center;
-  }
+}
 
 .banner {
     position: absolute;
@@ -61,18 +68,18 @@ article.post { width: 100% }
 }
 
 p {
-    /*padding-left: 10px;
-    padding-right: 10px;*/
+    padding-left: 10px;
+    padding-right: 10px;
     margin-top: 25px;
     margin-bottom: 25px;
 }
 
-#subTitle{
+#subTitle {
     font-size: 20px;
     padding-top: 10px;
 }
 
-.bio{
+.bio {
     font-size: 20px;
 }
 
@@ -188,7 +195,7 @@ a:hover {
 
 #resumeButton {
     width: 100%;
-    background-color:#77013a; 
+    background-color: #77013a;
     font-size: 20px;
     color: white;
     padding-top: 10px;
@@ -197,11 +204,11 @@ a:hover {
     margin-top: 10px;
 }
 
-#resumeButton:hover{
+#resumeButton:hover {
     background-color: #680032;
 }
 
-.socialButton{
+.socialButton {
     width: 100%;
     color: white;
     padding-top: 10px;
@@ -210,7 +217,8 @@ a:hover {
     background-color: #ececec;
     margin: 5px;
 }
-.socialButton:hover{
+
+.socialButton:hover {
     background-color: #cccccc;
 }
 

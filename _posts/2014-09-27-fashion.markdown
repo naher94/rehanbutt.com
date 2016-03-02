@@ -8,7 +8,8 @@ categories: fashion
 permalink: fashion
 ---
 
-![Us with the Models](../img/fashion/fashionModelAndMe.png)
+<div class="image-container">
+<img src="../img/fashion/fashionModelAndMe.png" alt="Us with the Models" /></div>
 
 Lustre - the way light interacts with the surface of a crystal, rock, or mineral.
 
@@ -18,7 +19,8 @@ This concept is directly linked to the idea of clothing being a shell of the hum
 
 I worked on this line with two of my friends and colleagues, <a target="_blank" href="http://www.citamayo.com">Carolina Tamayo</a> and <a target="_blank" href="https://ajhamilton.squarespace.com/">Alyssa Hamilton</a>.
 
-![Stage; Photo Credit: Jonathan Leung](../img/fashion/fashionStageJL.png){: style="width:100%"}
+<div class="image-container">
+<img src="../img/fashion/fashionStageJL.png" alt="Stage; Photo Credit: Jonathan Leung" style="width:100%" /></div>
 
 <iframe name="target" src="img/fashionGallery/index.html" width="100%" height="800" frameborder="0" scrolling="auto"></iframe>
 <iframe width="100%" height="600" src="https://www.youtube.com/embed/SeDGiYwXBiM" frameborder="0" allowfullscreen></iframe>
@@ -27,53 +29,68 @@ I also want to say thank to <a target="_blank" href="http://yupousa.com">Yupo</a
 
 ## Process
 
-![Concept Inspiration](../img/fashion/fashionConceptInspiration.png)
+<div class="image-container">
+<img src="../img/fashion/fashionConceptInspiration.png" alt="Concept Inspiration" /></div>
 
 These images represent the concept we were trying to convey through our line.
 
-![Clothing Inspiration](../img/fashion/fashionClothingInspiration.png){: style="width:100%"}
+<div class="image-container">
+<img src="../img/fashion/fashionClothingInspiration.png" alt="Clothing Inspiration" style="width:100%" /></div>
 
 These were several of the images we found that we though we could incorporate into our designs.
 
-![Sketches V1](../img/fashion/fashionSketchesv1.png)
-![Sketches V2](../img/fashion/fashionSketchesv2.png)
-![Inital Sketches](../img/fashion/fashionInitalSketches.png)
+<div class="image-container">
+<img src="../img/fashion/fashionSketchesv1.png" alt="Sketches V1" />
+<img src="../img/fashion/fashionSketchesv2.png" alt="Sketches V2" />
+<img src="../img/fashion/fashionInitalSketches.png" alt="Inital Sketches" /></div>
 
 These sketches were the initial sketches we submitted in order to be a part of the Lunar Gala fashion show.
 
-![Scanning Diagram](../img/fashion/fashionScanningDiagram.png)
-![Model Scanning](../img/fashion/fashionScanning.png)
+<div class="image-container">
+<img src="../img/fashion/fashionScanningDiagram.png" alt="Scanning Diagram" />
+<img src="../img/fashion/fashionScanning.png" alt="Model Scanning" /></div>
 
 In order to reduce the number of fitting we had to do with the models and experiment with unconventional ways to create a fashion line we decided to scan the models. Using a ABB robot, which had a camera mounted to it we took several pictures of the models then uploading the images to AutoDesk's 123D Catch, which converted the images into a 3D mesh model, which we could then fit.
 
-![Model Fittings](../img/fashion/fashionFittings.png){: style="width:100%"}
+<div class="image-container">
+<img src="../img/fashion/fashionFittings.png" alt="Model Fittings" style="width:100%" /></div>
 
-![Clothes Fittings](../img/fashion/fashionFittingsv2.png)
+<div class="image-container">
+<img src="../img/fashion/fashionFittingsv2.png" alt="Clothes Fittings" /></div>
+
 <!--REVISED SKETCHES-->
 
-![Sketches V1](../img/fashion/fashionRevisedSketches.png){: .image-center style="width:90%"}
+<div class="image-container">
+<img src="../img/fashion/fashionRevisedSketches.png" alt="Sketches V1" class="image-center" style="width:90%" /></div>
+
 <!--REVISED SKETCHES V2-->
 
-![Fabric Sketches](../img/fashion/fashionFabricSketches.png)
+<div class="image-container">
+<img src="../img/fashion/fashionFabricSketches.png" alt="Fabric Sketches" /></div>
 
 Sketches of our iridescent fabric pieces.
 
 <!--3D print images the ball joints and files vs actual prints earring-->
 
-![3D Prints](../img/fashion/fashion3dprints.png){: .image-center style="width:100%"}
+<div class="image-container">
+<img src="../img/fashion/fashion3dprints.png" alt="3D Prints" class="image-center" style="width:100%" /></div>
 
-![3D Print Renders](../img/fashion/fashion3dprintsRender.png)
+<div class="image-container">
+<img src="../img/fashion/fashion3dprintsRender.png" alt="3D Print Renders" /></div>
 
 From our first 3D print we came across many problems that we then decided to use in order to improve all the 3D printed pieces. One problem we came across was how we wanted to connect the 3D printed pieces to one another for those that had large 3D print pieces. The initial design had left a lot of space in between the pieces so we could run fishing line through it, but it created to loose of an effect. On the other hand when connecting our 3D printed pieces to the YUPO paper (the white geometric structures) we had to make sure to leave some slack for the models to walk and move around naturally.
 
 <!--gifts to models?-->
 
-![3D Print Sketches](../img/fashion/fashion3dPrintSketches.png)
+<div class="image-container">
+<img src="../img/fashion/fashion3dPrintSketches.png" alt="3D Print Sketches" /></div>
             
 Some initial sketches we had done for the piece of the outfits that we wanted 3D printed.
 
-![SketchBook Sketches](../img/fashion/fashionSketchbook.png){: .image-center style="width:70%"}
+<div class="image-container">
+<img src="../img/fashion/fashionSketchbook.png" alt="SketchBook Sketches" class="image-center" style="width:70%" /></div>
 
-![Wearing Origami - Instagram](../img/fashion/fashionInstagram.png){: .image-center style="width:30%"}
+<div class="image-container">
+<img src="../img/fashion/fashionInstagram.png" alt="Wearing Origami - Instagram" class="image-center" style="width:30%" /></div>
 
 Something fun I came across on social media that one of our models posted :)

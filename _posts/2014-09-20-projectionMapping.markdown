@@ -12,4 +12,5 @@ permalink: projectionMapping
 
 Using a set of boxes and Processing (Processing.org), I created a projection mapped choreography to a snippet of GreyHound.
 
-![Shape Layout](../img/projectionMappingLayout.png)
+<div class="image-container">
+<img src="../img/projectionMappingLayout.png" alt="Shape Layout" /></div>

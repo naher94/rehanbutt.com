@@ -8,15 +8,19 @@ categories: Fabrication
 permalink: slottedFurniture
 ---
 
+<div class="image-container">
+<img src="../img/slottedFurniture/slottedFurnitureAxo.png" alt="Axonometic Drawing" class="image-center" style="width:50%" /></div>
 
-![Axonometic Drawing](../img/slottedFurniture/slottedFurnitureAxo.png){: .image-center style="width:50%"}
-
-![Cut Sheet](../img/slottedFurniture/slottedFurnitureCutSheet.png)
+<div class="image-container">
+<img src="../img/slottedFurniture/slottedFurnitureCutSheet.png" alt="Cut Sheet" /></div>
 
 ## Process
 
-![Process Sketches](../img/slottedFurniture/slottedFurnitureProcess.png){: style="width:100%"}
+<div class="image-container">
+<img src="../img/slottedFurniture/slottedFurnitureProcess.png" alt="Process Sketches" style="width:100%" /></div>
 
-![CNC Router](../img/slottedFurniture/slottedFurnitureCNC.png){: style="width:100%"}
+<div class="image-container">
+<img src="../img/slottedFurniture/slottedFurnitureCNC.png" alt="CNC Router" style="width:100%" /></div>
 
-![Final Furniture](../img/slottedFurniture/slottedFurnitureFinal.png){: style="width:100%"}
+<div class="image-container">
+<img src="../img/slottedFurniture/slottedFurnitureFinal.png" alt="Final Furniture" style="width:100%" /></div>
