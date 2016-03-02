@@ -19,6 +19,8 @@ h4{
     margin-top: 50px;
 }
 
+article.post { width: 100% }
+
   .thumbnail-container {
     position: relative;
     display: block;
