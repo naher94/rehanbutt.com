@@ -16,6 +16,7 @@ My main incentive for this project was to bring GitHub mobile. Reason being in o
 ## Process
 
 ![Sketches](../img/gitApp/gitAppSketches.png){: .image-center style="width:50%"}
+
 ![Origami](../img/gitApp/gitAppOrigami.png)
 
 <iframe class="image-center" width="80%" height="600" src="https://www.youtube.com/embed/9pox7w3nB_s?rel=0" frameborder="0" allowfullscreen></iframe>

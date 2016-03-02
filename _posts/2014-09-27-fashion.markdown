@@ -20,7 +20,7 @@ I worked on this line with two of my friends and colleagues, <a target="_blank" 
 
 ![Stage; Photo Credit: Jonathan Leung](../img/fashion/fashionStageJL.png){: style="width:100%"}
 
-<iframe name="target" src="assets/fashionGallery/index.html" width="100%" height="800" frameborder="0" scrolling="auto"></iframe>
+<iframe name="target" src="img/fashionGallery/index.html" width="100%" height="800" frameborder="0" scrolling="auto"></iframe>
 <iframe width="100%" height="600" src="https://www.youtube.com/embed/SeDGiYwXBiM" frameborder="0" allowfullscreen></iframe>
 
 I also want to say thank to <a target="_blank" href="http://yupousa.com">Yupo</a> for being our sponsor for this line. Photo Credit: Jonathan Leung, Yutong Chen, Victor Song

@@ -9,6 +9,7 @@ permalink: technicalDrawings
 ---
 
 ![Wall Section](../img/technicalDrawings/technicalDrawingsA1P1.png)
+
 ![Egress First Floor Plan](../img/technicalDrawings/technicalDrawingsA2P1.png){: style="width:49.5%"}
 ![Egress Second Floor Plan](../img/technicalDrawings/technicalDrawingsA2P2.png){: style="width:49.5%"}
 ![Egress Third Floor Plan](../img/technicalDrawings/technicalDrawingsA2P3.png){: style="width:49.5%"}

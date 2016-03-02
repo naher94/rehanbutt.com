@@ -7,7 +7,8 @@ body {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
     font-family: 'Maven Pro', sans-serif;
     padding-left: 10px;
 }
@@ -59,7 +60,7 @@ h4{
 
 p {
     /*padding-left: 10px;
-    padding-right: 10px; */
+    padding-right: 10px;*/
     margin-top: 25px;
     margin-bottom: 25px;
 }
@@ -119,6 +120,7 @@ img {
     text-align: center;
     padding: 10px;
     margin-bottom: 50px;
+    overflow-x: scroll;
 }
 
 a {

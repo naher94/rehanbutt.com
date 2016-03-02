@@ -19,10 +19,13 @@ This project is based on a prompt about creating a new weather tool for a specif
 ## Process
 
 ![Initial Sketches](../img/smartWatch/initialSketches.png)
+
 ![Sketches](../img/smartWatch/sketches.png)
+
 ![Icon Iteration](../img/smartWatch/iconIteration.png)
 
 ![Icon Grid](../img/smartWatch/grid.png){: .image-center style="width:60%"}
+
 ![Within Context](../img/smartWatch/processInContext.png){: .image-center style="width:60%"}
 
 ![DashBoard Analysis](../img/smartWatch/dashboardsAnalysis1.png){: style="width:49%"}

@@ -35,5 +35,7 @@ permalink: consumerReports
 ![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-13.png)
 ![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-14.png)
 ![Mobile App Experience Thoughts](../img/cr/CRMthoughts.png)
+
 ![Mobile App Experience Process](../img/cr/CRMprocess.png)
+
 ![Cars Wireframes](../img/cr/CRcarsWireframes.png)
