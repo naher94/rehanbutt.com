@@ -25,7 +25,7 @@ permalink: about
         </div>
         <div style="margin-top:50px">
             <h4>Goal</h4>
-                To obtain a full-time position that will help me continue to learn and follow my passions in art and technology, while developing innovative products within the organization.
+                <div style="padding-left:10px;">To obtain a full-time position that will help me continue to learn and follow my passions in art and technology, while developing innovative products within the organization.</div>
 
                 <h4>Education</h4>
                 <div id="subTitle">Carnegie Mellon University [2012 - Present]</div>
@@ -44,50 +44,76 @@ permalink: about
 
                 <h4>Awards</h4>
                 <div id="subTitle">Expat Living Magazine – Singapore, Singapore [2013]</div>
-                &nbsp;&nbsp;&nbsp;- Photo competition winner – Published in print and online
+                <ul class="square">
+                    <li>Photo competition winner – Published in print and online</li>
+                </ul>
                 <div id="subTitle">St. Andrew’s Episcopal School, Potomac, MD [2009 - 2012]</div>
-                &nbsp;&nbsp;&nbsp;- Awards – 2D, 3D (Fountain/Ceramic and Mixed Media) & 3D (Blown Glass, Metal & Ceramic Fountain)<br>
-                &nbsp;&nbsp;&nbsp;- Significant Achievement in the Visual Arts Award (2012)
-
+                <ul class="square">
+                    <li>Awards – 2D, 3D (Fountain/Ceramic and Mixed Media) & 3D (Blown Glass, Metal & Ceramic Fountain)</li>
+                    <li>Significant Achievement in the Visual Arts Award (2012)</li>
+                </ul>
                 <h4>Activities</h4>
                     <div id="subTitle">Public Relations Chair - International Student Union (ISU) [2014 - Present]</div>
-                    &nbsp;&nbsp;&nbsp;- Branded ISU, developed the website and created displays and posters
+                    <ul class="square">
+                        <li>Branded ISU, developed the website and created displays and posters</li>
+                    </ul>
                     <div id="subTitle">Designer - Lunar Gala (Fashion Show) [2014-2015]</div>
-                    &nbsp;&nbsp;&nbsp;- Designed a fashion line, crafted from synthetic paper, 3D printed plastics and iridescent silk
+                    <ul class="square">
+                        <li>Designed a fashion line, crafted from synthetic paper, 3D printed plastics and iridescent silk</li>
+                    </ul>
                     <div id="subTitle">Designer & Member - ScottyLabs [2014 - Present]</div>
-                    &nbsp;&nbsp;&nbsp;- A student organization with the goal to educate the rest of the CMU community. Run workshops (WebDevWeeks, Portfolio Hackathon), heavily integrating design and coding
+                    <ul class="square">
+                        <li>A student organization with the goal to educate the rest of the CMU community. Run workshops (WebDevWeeks, Portfolio Hackathon), heavily integrating design and coding</li>
+                    </ul>
 
                     <div id="subTitle">Global Conference on Educational Robotics – (Botball - autonomous robotics) [2008-2011]</div>
-                    &nbsp;&nbsp;&nbsp;- Awarded 1st place in Alliance Competition – team leader — designed, built, and programmed<br> 
-                    &nbsp;&nbsp;&nbsp;- 2nd place overall, double elimination finalists & Judges Choice Award
-
+                    <ul class="square">
+                        <li>Awarded 1st place in Alliance Competition – team leader — designed, built, and programmed</li>
+                        <li>2nd place overall, double elimination finalists & Judges Choice Award</li>
+                    </ul>
                     <h4>Work Experience</h4>
                     <div id="subTitle">Mobile UI/UX Intern - YinzCam - [2015 - Present]</div>
-                    &nbsp;&nbsp;&nbsp;- Working to expand and deepen the current app experiences as well as expanding the content to other distribution channels and platforms.
+                    <ul class="square">
+                        <li>Working to expand and deepen the current app experiences as well as expanding the content to other distribution channels and platforms.</li>
+                    </ul>
+                    
                     <div id="subTitle">Co-Founder - Dzgn.IO - [2015 - Present]</div>
-                    &nbsp;&nbsp;&nbsp;- A design consultancy with the goal to deliver design services of holistic value in aesthetics, experience, and communication. We design and create with an approach of playful pragmatism.
+                    <ul class="square">
+                        <li>A design consultancy with the goal to deliver design services of holistic value in aesthetics, experience, and communication. We design and create with an approach of playful pragmatism.</li>
+                    </ul>
                     
                     <div id="subTitle">Head Teaching Assistant – Intro to Digital Media – [2015 - Present]</div>
-                    &nbsp;&nbsp;&nbsp;- Teaching students a variety of software tools for use in their design work and the workflow around them
+                    <ul class="square">
+                        <li>Teaching students a variety of software tools for use in their design work and the workflow around them</li>
+                    </ul>
                     
                     <div id="subTitle">User Experience Design Intern – Consumer Reports – [Summer 2015]</div>
-                    &nbsp;&nbsp;&nbsp;- Worked with the UX team to redesign consumerreports.org especially in terms of data visualization
+                    <ul class="square">
+                        <li>Worked with the UX team to redesign consumerreports.org especially in terms of data visualization</li>
+                    </ul>
                     
                     <div id="subTitle">Monitor – Digital Fabrication Lab – [2015 - Current]</div>
-                    &nbsp;&nbsp;&nbsp;- Teach students digital preparation & machining techniques in lasercutting, 3D printing & CNC milling
-                    
+                    <ul class="square">
+                        <li>Teach students digital preparation & machining techniques in lasercutting, 3D printing & CNC milling</li>
+                    </ul>
                     <div id="subTitle">Designer & Developer – Human Behavior Computing Lab – (HCII at CMU) [2014]</div>
-                    &nbsp;&nbsp;&nbsp;- Designed and created a website for the labs, projects and members
+                    <ul class="square">
+                        <li>Designed and created a website for the labs, projects and members</li>
+                    </ul>
                     
                     <div id="subTitle">Intern – Architrave , Singapore –(Architectural Firm) [Summer 2013]</div>
-                    &nbsp;&nbsp;&nbsp;- Modeled several projects using 3dsMax, Revit and AutoCAD<br>
-                    &nbsp;&nbsp;&nbsp;- Helped expand the in-house materials and standards libraries
+                    <ul class="square">
+                        <li>Modeled several projects using 3dsMax, Revit and AutoCAD</li>
+                        <li>Helped expand the in-house materials and standards libraries</li>
+                    </ul>
 
                     <h4>Skills</h4>
-                    Design Thinking | Photoshop | Illustrator | InDesign | Sketch | FramerJS<br>
-                    Rhinoceros | RhinoCAM | Vrays | AutoCAD | Revit | Photography<br> 
-                    HTML | CSS | JavaScript | C | Python | RAPID Programming | Arduino<br>
-                    CNC Router | Lasercutter | 3D Modeling | Hand & Technical Drawing
+                    <ul class="no-bullet">
+                        <li>Design Thinking | Photoshop | Illustrator | InDesign | Sketch | FramerJS</li>
+                        <li>Rhinoceros | RhinoCAM | Vrays | AutoCAD | Revit | Photography</li>
+                        <li>HTML | CSS | JavaScript | C | Python | RAPID Programming | Arduino</li>
+                        <li>CNC Router | Lasercutter | 3D Modeling | Hand & Technical Drawing</li>
+                    </ul>
         </div>
     </div>
 </div>

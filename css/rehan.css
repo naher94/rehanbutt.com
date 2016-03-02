@@ -77,10 +77,13 @@ p {
 #subTitle {
     font-size: 20px;
     padding-top: 10px;
+    padding-left: 10px;
 }
 
 .bio {
     font-size: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .image-center {
@@ -202,6 +205,7 @@ a:hover {
     padding-bottom: 10px;
     text-align: center;
     margin-top: 10px;
+    margin-bottom: 25px;
 }
 
 #resumeButton:hover {
