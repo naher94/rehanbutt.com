@@ -20,12 +20,23 @@ h4 {
 }
 
 article.post {
-    width: 100%
+    width: 100%;
 }
 
 ul{
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.outerspace{
+    background-color: #26153C;
+    width: 100%;
+    height: 700px;
+    border-radius:100%;
+    padding: 20px;
+    background-image: url(../img/giraffe.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 100px;
 }
 
 .image-container {
