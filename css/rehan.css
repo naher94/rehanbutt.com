@@ -31,12 +31,20 @@ ul{
 .outerspace{
     background-color: #26153C;
     width: 100%;
-    height: 700px;
+    height: 300px;
     border-radius:100%;
     padding: 20px;
     background-image: url(../img/giraffe.svg);
     background-repeat: no-repeat;
-    background-position: 50% 100px;
+    background-position: 50% 50px;
+}
+
+@media screen and (min-width: 480px) {
+    .outerspace{
+        height: 700px;
+        background-position: 50% 100px;
+    }
+
 }
 
 .image-container {
