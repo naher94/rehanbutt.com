@@ -23,16 +23,29 @@ article.post {
     width: 100%;
 }
 
-ul{
+ul {
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.outerspace{
+.title-404 {
+    text-align: center;
+    font-size: 36px;
+}
+
+.words-404 {
+    text-align: center;
+    font-size: 18px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
+}
+
+.outerspace {
     background-color: #26153C;
     width: 100%;
     height: 300px;
-    border-radius:100%;
+    border-radius: 100%;
     background-image: url(../img/giraffe.svg);
     background-repeat: no-repeat;
     background-position: 50% 50px;
@@ -42,11 +55,17 @@ ul{
 }
 
 @media screen and (min-width: 480px) {
-    .outerspace{
+    .outerspace {
         height: 700px;
         background-position: 50% 100px;
     }
-
+    .title-404{
+        font-size: 64px;
+    }
+    .words-404 {
+        font-size: 30px;
+        margin-bottom: 50px;
+    }
 }
 
 .image-container {
