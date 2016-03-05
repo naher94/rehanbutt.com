@@ -192,7 +192,11 @@ img {
 }
 
 .navbar::-webkit-scrollbar { 
-    display: none; 
+    display: none;
+}
+
+.navscroll::-webkit-scrollbar { 
+    display: none;
 }
 
 a {
