@@ -8,32 +8,34 @@ categories: summer, UX, Branding, Mobile
 permalink: consumerReports
 ---
 
-![CR Mobile Experience OnBoarding](../img/cr/CRMexperience1.png)
-![CR Mobile Experience Home](../img/cr/CRMexperience2.png)
-![CR Mobile Experience More than an App](../img/cr/CRMexperience3.png)
-![CR Cars Rating Data Vis](../img/cr/CRdataVis.png)
+<div class="image-container"><img src="../img/cr/CRMexperience1.png" alt="CR Mobile Experience OnBoarding" />
+<img src="../img/cr/CRMexperience2.png" alt="CR Mobile Experience Home" />
+<img src="../img/cr/CRMexperience3.png" alt="CR Mobile Experience More than an App" />
+<img src="../img/cr/CRdataVis.png" alt="CR Cars Rating Data Vis" /></div>
 
 ## Process
 
-![CR Rating Blobs](../img/cr/CRblobs.png)
-![CR Colors](../img/cr/CRcolors.png)
-![Re-brand Inspiration](../img/cr/CRbrandInspiration.png)
-![Re-brand Sketches](../img/cr/CRbrandSketches.png)
-![Mascots](../img/cr/CRmascots.png)
-![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-01.png)
-![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-02.png)
-![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-03.png)
-![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-04.png)
-![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-05.png)
-![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-06.png)
-![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-07.png)
-![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-08.png)
-![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-09.png)
-![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-10.png)
-![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-11.png)
-![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-12.png)
-![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-13.png)
-![Speech Bubbles Iterations](../img/cr/CRbrandBubbles-14.png)
-![Mobile App Experience Thoughts](../img/cr/CRMthoughts.png)
-![Mobile App Experience Process](../img/cr/CRMprocess.png)
-![Cars Wireframes](../img/cr/CRcarsWireframes.png)
+<div class="image-container"><img src="../img/cr/CRblobs.png" alt="CR Rating Blobs" />
+<img src="../img/cr/CRcolors.png" alt="CR Colors" />
+<img src="../img/cr/CRbrandInspiration.png" alt="Re-brand Inspiration" />
+<img src="../img/cr/CRbrandSketches.png" alt="Re-brand Sketches" />
+<img src="../img/cr/CRmascots.png" alt="Mascots" />
+<img src="../img/cr/CRbrandBubbles-01.png" alt="Speech Bubbles Iterations" />
+<img src="../img/cr/CRbrandBubbles-02.png" alt="Speech Bubbles Iterations" />
+<img src="../img/cr/CRbrandBubbles-03.png" alt="Speech Bubbles Iterations" />
+<img src="../img/cr/CRbrandBubbles-04.png" alt="Speech Bubbles Iterations" />
+<img src="../img/cr/CRbrandBubbles-05.png" alt="Speech Bubbles Iterations" />
+<img src="../img/cr/CRbrandBubbles-06.png" alt="Speech Bubbles Iterations" />
+<img src="../img/cr/CRbrandBubbles-07.png" alt="Speech Bubbles Iterations" />
+<img src="../img/cr/CRbrandBubbles-08.png" alt="Speech Bubbles Iterations" />
+<img src="../img/cr/CRbrandBubbles-09.png" alt="Speech Bubbles Iterations" />
+<img src="../img/cr/CRbrandBubbles-10.png" alt="Speech Bubbles Iterations" />
+<img src="../img/cr/CRbrandBubbles-11.png" alt="Speech Bubbles Iterations" />
+<img src="../img/cr/CRbrandBubbles-12.png" alt="Speech Bubbles Iterations" />
+<img src="../img/cr/CRbrandBubbles-13.png" alt="Speech Bubbles Iterations" />
+<img src="../img/cr/CRbrandBubbles-14.png" alt="Speech Bubbles Iterations" />
+<img src="../img/cr/CRMthoughts.png" alt="Mobile App Experience Thoughts" /></div>
+
+<div class="image-container"><img src="../img/cr/CRMprocess.png" alt="Mobile App Experience Process" /></div>
+
+<div class="image-container"><img src="../img/cr/CRcarsWireframes.png" alt="Cars Wireframes" /></div>

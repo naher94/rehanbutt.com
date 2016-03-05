@@ -10,7 +10,7 @@ permalink: cameleon
 
 <!--branding process-->
 <!--process not already on splash page-->
-![Cameleon Logo](../img/cameleon/logo.svg){: .image-center style="width:50%"}
+<div class="image-container"><img src="../img/cameleon/logo.svg" alt="Cameleon Logo" class="image-center" style="width:50%" /></div>
 
 <br>
 <div>
@@ -23,5 +23,5 @@ permalink: cameleon
 
 ## Process
 
-![Inspiration Images](../img/cameleon/inspiration.png)
-![Branding Iterations](../img/cameleon/branding.png)
+<div class="image-container"><img src="../img/cameleon/inspiration.png" alt="Inspiration Images" />
+<img src="../img/cameleon/branding.png" alt="Branding Iterations" /></div>

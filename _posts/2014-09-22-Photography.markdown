@@ -8,4 +8,4 @@ categories: photo
 permalink: photogrpahy
 ---
 
-<iframe name="target" src="assets/juiceBoxPhotography/index.html" width="100%" height="800" frameborder="0" scrolling="auto"></iframe>
+<iframe name="target" src="img/photographyGallery/index.html" width="100%" height="800" frameborder="0" scrolling="auto"></iframe>
