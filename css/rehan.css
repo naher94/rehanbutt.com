@@ -191,6 +191,10 @@ img {
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
+.navbar::-webkit-scrollbar { 
+    display: none; 
+}
+
 a {
     color: #12abc4;
     text-decoration: none;

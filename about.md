@@ -3,6 +3,7 @@ layout: page
 title: About
 permalink: about
 ---
+
 <div class="row">
     <div class="small-12 medium-4 large-3 columns"> 
         <img src="img/rehan.png" style="width:100%">
