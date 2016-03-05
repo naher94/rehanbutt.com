@@ -59,7 +59,7 @@ ul {
         height: 700px;
         background-position: 50% 100px;
     }
-    .title-404{
+    .title-404 {
         font-size: 64px;
     }
     .words-404 {
@@ -179,14 +179,16 @@ img {
     margin-bottom: 50px;
     white-space: nowrap;
     overflow-x: scroll;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
 }
 
 .navscroll {
-  white-space: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 a {
