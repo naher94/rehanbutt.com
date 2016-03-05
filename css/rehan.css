@@ -177,7 +177,16 @@ img {
     text-align: center;
     padding: 10px;
     margin-bottom: 50px;
+    white-space: nowrap;
     overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.navscroll {
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 a {
