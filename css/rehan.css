@@ -175,7 +175,8 @@ img {
     background-color: #77013a;
     color: white;
     text-align: center;
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     margin-bottom: 50px;
     white-space: nowrap;
     overflow-x: scroll;
