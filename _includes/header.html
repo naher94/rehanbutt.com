@@ -4,13 +4,11 @@
                 <img src="img/rehanLogo.svg" style="height:80px;">
             </a>
         </div>
-  <div class="navbar">
+  <div class="navbar navscroll">
         <a class="nav" href="/index.html">Portfolio</a>
-        {% for my_page in site.pages %}
-          {% if my_page.title %}
-          <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
-          {% endif %}
-        {% endfor %}
+        {% for my_page in site.pages %}{% if my_page.title %}
+        <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+        {% endif %}{% endfor %}
         <a class="nav" href="http://blog.rehanbutt.com">Blog</a>
         <a class="nav" href="http://resources.rehanbutt.com">Resources</a>
         <a class="nav" href="https://society6.com/rehanbutt">Store</a>

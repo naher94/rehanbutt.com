@@ -8,56 +8,67 @@ categories: web
 permalink: mySite
 ---
 
-![Old Site Design](../img/mySite/siteFinal.png)
+<div class="image-container">
+<img src="../img/mySite/siteFinal.png" alt="Old Site Design" /></div>
 
 ## Process
 
 I had iterated and played a lot with the design of my site before implementing it and sharing it with the world as you see it now. Going into the design I knew I wanted it to showcase my work and knew that my logo and color palette would remain as they had before this site.
 
-![Rehan Logo - Old](../img/mySite/siteLogo.svg){: .image-center style="width:30%"}
+<div class="image-container">
+<img src="../img/mySite/siteLogo.svg" alt="Rehan Logo - Old" class="image-center" style="width:30%" /></div>
 
-![Color Scheme](../img/mySite/siteColor.png)
+<div class="image-container">
+<img src="../img/mySite/siteColor.png" alt="Color Scheme" /></div>
 
 With this said I starting looking at many sites to see what elements and pieces I enjoyed and wanted to incorporate. From that I took away that I wanted, a clean and simple site that put my work front and center.
 
-![Sketches](../img/mySite/siteSketches.png){: .image-center style="width:80%"}
-![Version 1](../img/mySite/siteV1.png){: .image-center style="width:80%"}
+<div class="image-container">
+<img src="../img/mySite/siteSketches.png" alt="Sketches" class="image-center" style="width:80%" />
+<img src="../img/mySite/siteV1.png" alt="Version 1" class="image-center" style="width:80%" /></div>
 
 This was the first iteration that I made.
 
-![Problems with Version 1](../img/mySite/siteV1Problems.png)
+<div class="image-container"><img src="../img/mySite/siteV1Problems.png" alt="Problems with Version 1" /></div>
 
 This version had many issues for one I took a lot of space for the navigation. There was basically too much chrome on this version versus the content area. Second thing was I was using very light font weights that would not translate well on the web and I was using custom fonts that were not web fonts at the time. Having these custom fonts for the titles especially would mean they would have to be exported as images for each project, creating more work for myself in the long run and reducing discover-ability and hinder applications designed to readout text.
 
-
-![Navigation Iteration](../img/mySite/siteIteration1.png){: .image-center style="width:70%"}
-![Navigation Iteration](../img/mySite/siteIteration2.png){: .image-center style="width:70%"}
-![Navigation Iteration](../img/mySite/siteIteration3.png){: .image-center style="width:70%"}
-![Navigation Iteration](../img/mySite/siteIteration4.png){: .image-center style="width:70%"}
-![Navigation Iteration](../img/mySite/siteIteration5.png){: .image-center style="width:70%"}
-![Navigation Iteration](../img/mySite/siteIteration6.png){: .image-center style="width:70%"}
-![Navigation Iteration](../img/mySite/siteIteration7.png){: .image-center style="width:70%"}
+<div class="image-container">
+<img src="../img/mySite/siteIteration1.png" alt="Navigation Iteration" class="image-center" style="width:70%" />
+<img src="../img/mySite/siteIteration2.png" alt="Navigation Iteration" class="image-center" style="width:70%" />
+<img src="../img/mySite/siteIteration3.png" alt="Navigation Iteration" class="image-center" style="width:70%" />
+<img src="../img/mySite/siteIteration4.png" alt="Navigation Iteration" class="image-center" style="width:70%" />
+<img src="../img/mySite/siteIteration5.png" alt="Navigation Iteration" class="image-center" style="width:70%" />
+<img src="../img/mySite/siteIteration6.png" alt="Navigation Iteration" class="image-center" style="width:70%" />
+<img src="../img/mySite/siteIteration7.png" alt="Navigation Iteration" class="image-center" style="width:70%" /></div>
 
 From these initial navigation iterations, I reduced it into 2 designs and continued onto refining them as well as looked at how much space it takes up on the screen.
 
-![Left Navigation](../img/mySite/siteLeftNav.png){: .image-center style="width:70%"}
+<div class="image-container">
+<img src="../img/mySite/siteLeftNav.png" alt="Left Navigation" class="image-center" style="width:70%" /></div>
 
-![Left Navigation Thin](../img/mySite/siteLeftNavThin.png){: .image-center style="width:70%"}
+<div class="image-container">
+<img src="../img/mySite/siteLeftNavThin.png" alt="Left Navigation Thin" class="image-center" style="width:70%" /></div>
 
-![Left Navigation Ribbon](../img/mySite/siteLeftNavRibbon.png){: .image-center style="width:70%"}
+<div class="image-container">
+<img src="../img/mySite/siteLeftNavRibbon.png" alt="Left Navigation Ribbon" class="image-center" style="width:70%" /></div>
 
 Reducing chrome led me down 2 paths, either having a side navigation or a top navigation.
 
-![Top Navigation](../img/mySite/siteTopNav.png){: .image-center style="width:70%"}
+<div class="image-container">
+<img src="../img/mySite/siteTopNav.png" alt="Top Navigation" class="image-center" style="width:70%" /></div>
 
-![Top Navigation Thin](../img/mySite/siteTopNavThin.png){: .image-center style="width:70%"}
+<div class="image-container">
+<img src="../img/mySite/siteTopNavThin.png" alt="Top Navigation Thin" class="image-center" style="width:70%" /></div>
 
-![Top Navigation Thinnest](../img/mySite/siteTopNavThinnest.png){: .image-center style="width:70%"}
+<div class="image-container">
+<img src="../img/mySite/siteTopNavThinnest.png" alt="Top Navigation Thinnest" class="image-center" style="width:70%" /></div>
 
 On a content level it was ambiguous what the difference between galleries and portfolio was, so galleries was eliminated. I also decided to remove the custom fonts in favor of a web font. From here I decided to go with the second version of the top navigation that was simplified even more by removing the slight color change in the background. Using this design I decided to bring it full circle and make the ribbons a part of a bigger brand image for myself.
 
-![Business Cards](../img/mySite/siteCards.png)
-![404 Page](../img/mySite/site404.png)
+<div class="image-container">
+<img src="../img/mySite/siteCards.png" alt="Business Cards" />
+<img src="../img/mySite/site404.png" alt="404 Page" /></div>
 
 This 404 page is something fun I hope to implement later on for my site.
 
