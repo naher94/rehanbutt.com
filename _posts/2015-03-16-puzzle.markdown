@@ -8,7 +8,7 @@ categories: fabrication, illustration
 permalink: puzzle
 ---
 
-<div class="image-container">img src="../img/puzzle/image.png" alt="Puzzle Image" class="image-center" style="width:80%" /></div>
+<div class="image-container"><img src="../img/puzzle/image.png" alt="Puzzle Image" class="image-center" style="width:80%" /></div>
 
 <div class="image-container"><img src="../img/puzzle/box.png" alt="Puzzle Box" class="image-center" style="width:80%" /></div>
 
