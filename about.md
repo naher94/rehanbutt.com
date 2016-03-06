@@ -14,7 +14,7 @@ permalink: about
 
 <div class="small-12 medium-7 large-8 columns">
     <div class="bio">
-        Rehan is a senior at Carnegie Mellon University studying the Integrative Physical and Digital Media, a degree with the intension to bring together his passions in design <span class="emoji emoji-palette"></span> and technology.<span class="emoji emoji-computer"></span> Rehan loves to travel <span class="emoji emoji-airplane"></span>, and has been fortunate enough to live all over the world <span class="emoji emoji-globe_asia"></span>. Trying everyday to bring the unique aspects of each cultures into is work. In his free time, he enjoys photography <span class="emoji emoji-camera"></span> and creating cute digital illustrations.<span class="emoji emoji-penguin_head"></span>
+        Rehan is a senior at Carnegie Mellon University studying the Integrative Physical and Digital Media, a degree with the intention to bring together his passions in design <span class="emoji emoji-palette"></span> and technology.<span class="emoji emoji-computer"></span> Rehan loves to travel <span class="emoji emoji-airplane"></span>, and has been fortunate enough to live all over the world <span class="emoji emoji-globe_asia"></span>. Trying everyday to bring the unique aspects of each culture into his work. In his free time, he enjoys photography <span class="emoji emoji-camera"></span> and creating cute digital illustrations.<span class="emoji emoji-penguin_head"></span>
     </div>
     <div style="margin-top:50px">
         <h4>Goal</h4>
