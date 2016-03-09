@@ -2,73 +2,40 @@
 layout: post
 title:  "My Site"
 tile-name: "My Site"
+banner: "updated"
 thumbnail: "/img/thumbnails/mySite.png"
 date:   2014-09-28 12:00:00 -0500
 categories: web
 permalink: mySite
 ---
 
+My goal with this new site was to make sure it was fully responsive and make sure it was clean in both design and development, as my site was when I originally published it with only 2 sections (portfolio and about). I used Jekyll and the Foundation CSS framework to develop this site. Jekyll helped to compartmentalize and template pages and the Foundation framework helped to create the responsiveness for all devices. From a development stand point I also decided to remove the javascript from my site in case it is being blocked by the user and to speed up the load time. With the refreshed site I also wanted to streamline my brand, specifically reduce the complexity of the graphic while keeping the reference of the logo to my name. One of the first elements I looked into was reducing the number or horizontal lines in the logo, then crisping up the corners by removing the chamfer.
 <div class="image-container">
-<img src="../img/mySite/siteFinal.png" alt="Old Site Design" /></div>
+    <img src="../img/mySite/newSite.png" alt="Site Design" />
+    <img src="../img/mySite/currentOldSite.png" alt="Current Old Site Design" />
+</div>
+What it looked like before the refresh.
+<div class="image-container">
+    <img src="../img/mySite/originalOldSite.png" alt="Original Old Site Design" />
+</div>
+My site when I first deployed it.
 
 ## Process
 
-I had iterated and played a lot with the design of my site before implementing it and sharing it with the world as you see it now. Going into the design I knew I wanted it to showcase my work and knew that my logo and color palette would remain as they had before this site.
-
 <div class="image-container">
-<img src="../img/mySite/siteLogo.svg" alt="Rehan Logo - Old" class="image-center" style="width:30%" /></div>
-
+    <img src="../img/mySite/siteLogo.svg" alt="Rehan Logo" class="image-center" style="width:40%; margin-bottom:50px;" />
+    <img src="../img/mySite/siteColor.png" alt="Color Scheme" />
+    
+    <img src="../img/mySite/sketches.png" alt="Sketches" style="margin-top:50px;"/>
+    <img src="../img/mySite/iterations.svg" alt="Logo Iterations" style="margin-top:30px;" />
+    <img src="../img/mySite/logoHorizontal.svg" alt="Logo Iteration" />
+    <img src="../img/mySite/iterationDetails.svg" alt="Iteration Detailing" />
+</div>
+In order to reduce the number of horizontal lines I had to either slide the middle segment of the “E” down or move the “R” horizontal up. I decided to slide the “E” segment down so that I did not mess with the curvature of the “R”.
 <div class="image-container">
-<img src="../img/mySite/siteColor.png" alt="Color Scheme" /></div>
-
-With this said I starting looking at many sites to see what elements and pieces I enjoyed and wanted to incorporate. From that I took away that I wanted, a clean and simple site that put my work front and center.
-
+    <img src="../img/mySite/newThumbnails.png" alt="Development" />
+</div>
+During the development process I needed to recreate many of the assets including the thumbnails to match the new specifications and to match the column width on all screen sizes.
 <div class="image-container">
-<img src="../img/mySite/siteSketches.png" alt="Sketches" class="image-center" style="width:80%" />
-<img src="../img/mySite/siteV1.png" alt="Version 1" class="image-center" style="width:80%" /></div>
-
-This was the first iteration that I made.
-
-<div class="image-container"><img src="../img/mySite/siteV1Problems.png" alt="Problems with Version 1" /></div>
-
-This version had many issues for one I took a lot of space for the navigation. There was basically too much chrome on this version versus the content area. Second thing was I was using very light font weights that would not translate well on the web and I was using custom fonts that were not web fonts at the time. Having these custom fonts for the titles especially would mean they would have to be exported as images for each project, creating more work for myself in the long run and reducing discover-ability and hinder applications designed to readout text.
-
-<div class="image-container">
-<img src="../img/mySite/siteIteration1.png" alt="Navigation Iteration" class="image-center" style="width:70%" />
-<img src="../img/mySite/siteIteration2.png" alt="Navigation Iteration" class="image-center" style="width:70%" />
-<img src="../img/mySite/siteIteration3.png" alt="Navigation Iteration" class="image-center" style="width:70%" />
-<img src="../img/mySite/siteIteration4.png" alt="Navigation Iteration" class="image-center" style="width:70%" />
-<img src="../img/mySite/siteIteration5.png" alt="Navigation Iteration" class="image-center" style="width:70%" />
-<img src="../img/mySite/siteIteration6.png" alt="Navigation Iteration" class="image-center" style="width:70%" />
-<img src="../img/mySite/siteIteration7.png" alt="Navigation Iteration" class="image-center" style="width:70%" /></div>
-
-From these initial navigation iterations, I reduced it into 2 designs and continued onto refining them as well as looked at how much space it takes up on the screen.
-
-<div class="image-container">
-<img src="../img/mySite/siteLeftNav.png" alt="Left Navigation" class="image-center" style="width:70%" /></div>
-
-<div class="image-container">
-<img src="../img/mySite/siteLeftNavThin.png" alt="Left Navigation Thin" class="image-center" style="width:70%" /></div>
-
-<div class="image-container">
-<img src="../img/mySite/siteLeftNavRibbon.png" alt="Left Navigation Ribbon" class="image-center" style="width:70%" /></div>
-
-Reducing chrome led me down 2 paths, either having a side navigation or a top navigation.
-
-<div class="image-container">
-<img src="../img/mySite/siteTopNav.png" alt="Top Navigation" class="image-center" style="width:70%" /></div>
-
-<div class="image-container">
-<img src="../img/mySite/siteTopNavThin.png" alt="Top Navigation Thin" class="image-center" style="width:70%" /></div>
-
-<div class="image-container">
-<img src="../img/mySite/siteTopNavThinnest.png" alt="Top Navigation Thinnest" class="image-center" style="width:70%" /></div>
-
-On a content level it was ambiguous what the difference between galleries and portfolio was, so galleries was eliminated. I also decided to remove the custom fonts in favor of a web font. From here I decided to go with the second version of the top navigation that was simplified even more by removing the slight color change in the background. Using this design I decided to bring it full circle and make the ribbons a part of a bigger brand image for myself.
-
-<div class="image-container">
-<img src="../img/mySite/siteCards.png" alt="Business Cards" />
-<img src="../img/mySite/site404.png" alt="404 Page" /></div>
-
-This 404 page is something fun I hope to implement later on for my site.
-
+    <img src="../img/mySite/mobile.png" alt="Mobile Site" style="width:60%;" class="image-center"/>
+</div>
