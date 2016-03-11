@@ -9,8 +9,12 @@
 title: Rehan Butt
 email: me@rehanbutt.com
 description: > # this means to ignore newlines until "baseurl:"
-  A collection of projects showing the world of my many visual based skills, like digital illustrations, digital fabrication, photography, fashion design, product development and branding.
+  A collection of projects showing many of my visual based skills; illustrations, fabrication, photography, fashion design, web development and branding.
+
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://rehanbutt.com" # the base hostname & protocol for your site
 # Build settings
 markdown: kramdown
+
+gems: 
+    - jekyll-sitemap
