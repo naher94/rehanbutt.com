@@ -298,3 +298,14 @@ footer {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+.column:last-child:not(:first-child), .columns:last-child:not(:first-child){
+    float: left;
+}
+
+.quote{
+    font-size: 64px;
+    line-height: 60px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
