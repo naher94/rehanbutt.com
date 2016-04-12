@@ -2,7 +2,6 @@
 layout: post
 title:  "My Site"
 tile-name: "My Site"
-banner: "updated"
 thumbnail: "/img/thumbnails/mySite.png"
 date:   2014-09-28 12:00:00 -0500
 categories: web
