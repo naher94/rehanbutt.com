@@ -48,6 +48,5 @@ permalink: illustration
 <div class="row">
     <div class="small-12 large-6 columns image-container"><img src="../img/illustrations/badBlood.jpg" alt="Bad Blood: Taylor Swift" /></div>
     <div class="small-12 large-6 columns image-container"><img src="../img/illustrations/karat.png" alt="karat" /></div>
-    
-
+    <!--<div class="small-12 large-6 columns image-container"><img src="../img/illustrations/BB8Stylize.png" alt="BB8 Stylize" /></div>-->
 </div>
