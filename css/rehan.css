@@ -125,6 +125,12 @@ p {
     padding-left: 10px;
 }
 
+#subSubTitle {
+    font-size: 18px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
 .bio {
     font-size: 20px;
     padding-left: 10px;
