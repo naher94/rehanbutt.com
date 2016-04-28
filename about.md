@@ -22,8 +22,10 @@ permalink: about
 
         <h4>Education</h4>
         <div id="subTitle">Carnegie Mellon University [2012 - Present]</div>
+        <div id="subSubTitle">Bachlors in the Integrative Physical and Digital Media Studies</div>
+        <div id="subSubTitle">Relevant Coursework</div>
         <ul class="square">
-            <li>Relevant Coursework</li>
+            <li>Mobile Service Innovation | Guest Experience & Theme Park Design</li>
             <li>Human Experience in Design | Learning Media Design | Architectural Design Studios</li>
             <li>Design Communication | Information Design | Architectural Robotics</li>
             <li>Mobile App Design & Development | Physical Computing | Learning Media Design</li>
@@ -46,7 +48,11 @@ permalink: about
             <li>Significant Achievement in the Visual Arts Award (2012)</li>
         </ul>
         <h4>Activities</h4>
-        <div id="subTitle">Public Relations Chair - International Student Union (ISU) [2014 - Present]</div>
+        <div id="subTitle">Designer & Member - Ideate Student Advisory Committee [2016 - Present]</div>
+        <ul class="square">
+            <li>Branded Ideate, serve as a member to better the Ideate program</li>
+        </ul>
+        <div id="subTitle">Public Relations Chair - International Student Union (ISU) [2014 - 2016]</div>
         <ul class="square">
             <li>Branded ISU, developed the website and created displays and posters</li>
         </ul>
