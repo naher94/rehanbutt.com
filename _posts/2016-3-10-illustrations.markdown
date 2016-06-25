@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Illustrations"
-banner: "New"
 tile-name: "Illustrations"
 thumbnail: "/img/thumbnails/illustrations.png"
 date:   2016-03-01 12:00:00 -0500
