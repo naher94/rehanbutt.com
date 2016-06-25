@@ -14,14 +14,21 @@ permalink: about
 
 <div class="small-12 medium-7 large-8 columns">
     <div class="bio">
-        Rehan is a senior at Carnegie Mellon University studying the Integrative Physical and Digital Media Studies, a degree with the intention to bring together his passions in design <span class="emoji emoji-palette"></span> and technology.<span class="emoji emoji-computer"></span> Rehan loves to travel <span class="emoji emoji-airplane"></span>, and has been fortunate enough to live all over the world <span class="emoji emoji-globe_asia"></span>. Trying everyday to bring the unique aspects of each culture into his work. In his free time, he enjoys photography <span class="emoji emoji-camera"></span> and creating cute digital illustrations.<span class="emoji emoji-penguin_head"></span>
+        Rehan is a masters student at Carnegie Mellon University studying the Tangible Interaction Design, a degree with the intention to bring together his passions in design <span class="emoji emoji-palette"></span> and technology.<span class="emoji emoji-computer"></span> Rehan loves to travel <span class="emoji emoji-airplane"></span>, and has been fortunate enough to live all over the world <span class="emoji emoji-globe_asia"></span>. Trying everyday to bring the unique aspects of each culture into his work. In his free time, he enjoys photography <span class="emoji emoji-camera"></span> and creating cute digital illustrations.<span class="emoji emoji-penguin_head"></span>
     </div>
     <div style="margin-top:50px">
         <h4>Goal</h4>
         <div style="padding-left:10px;">To obtain a full-time position that will help me continue to learn and follow my passions in art and technology, while developing innovative products within the organization.</div>
 
         <h4>Education</h4>
-        <div id="subTitle">Carnegie Mellon University [2012 - Present]</div>
+        <div id="subTitle">Carnegie Mellon University [2016 - Present]</div>
+        <div id="subSubTitle">Masters in Tangible Interaction Design</div>
+        <div id="subSubTitle">Relevant Coursework</div>
+        <ul class="square">
+            <li>Connected Classrooms | Themed Entertainment Design Studio</li>
+        </ul>
+        
+        <div id="subTitle">Carnegie Mellon University [2012 - 2016]</div>
         <div id="subSubTitle">Bachlors in the Integrative Physical and Digital Media Studies</div>
         <div id="subSubTitle">Relevant Coursework</div>
         <ul class="square">
@@ -60,7 +67,7 @@ permalink: about
         <ul class="square">
             <li>Designed a fashion line, crafted from synthetic paper, 3D printed plastics and iridescent silk</li>
         </ul>
-        <div id="subTitle">Designer & Member - ScottyLabs [2014 - Present]</div>
+        <div id="subTitle">Designer & Member - ScottyLabs [2014 - 2016]</div>
         <ul class="square">
             <li>A student organization with the goal to educate the rest of the CMU community. Run workshops (WebDevWeeks, Portfolio Hackathon), heavily integrating design and coding</li>
         </ul>
@@ -71,6 +78,11 @@ permalink: about
             <li>2nd place overall, double elimination finalists & Judges Choice Award</li>
         </ul>
         <h4>Work Experience</h4>
+        <!--<div id="subTitle">CodeLab Fellow - CodeLab - [2016 - Present]</div>
+        <ul class="square">
+            <li>Working to expand and deepen the current app experiences as well as expanding the content to other distribution channels and platforms.</li>
+        </ul>-->
+        
         <div id="subTitle">Mobile UI/UX Intern - YinzCam - [2015 - Present]</div>
         <ul class="square">
             <li>Working to expand and deepen the current app experiences as well as expanding the content to other distribution channels and platforms.</li>
@@ -81,7 +93,7 @@ permalink: about
             <li>A design consultancy with the goal to deliver design services of holistic value in aesthetics, experience, and communication. We design and create with an approach of playful pragmatism.</li>
         </ul>
 
-        <div id="subTitle">Head Teaching Assistant – Intro to Digital Media – [2015 - Present]</div>
+        <div id="subTitle">Head Teaching Assistant – Intro to Digital Media – [2015 - 2016]</div>
         <ul class="square">
             <li>Teaching students a variety of software tools for use in their design work and the workflow around them</li>
         </ul>
