@@ -82,8 +82,12 @@ permalink: about
         <ul class="square">
             <li>Working to expand and deepen the current app experiences as well as expanding the content to other distribution channels and platforms.</li>
         </ul>-->
+        <div id="subTitle">Mobile UI/UX Designer - YinzCam - [2016 - Present]</div>
+        <ul class="square">
+            <li>Working to expand and deepen the current app experiences as well as expanding the content to other distribution channels and platforms.</li>
+        </ul>
         
-        <div id="subTitle">Mobile UI/UX Intern - YinzCam - [2015 - Present]</div>
+        <div id="subTitle">Mobile UI/UX Intern - YinzCam - [2015 - 2016]</div>
         <ul class="square">
             <li>Working to expand and deepen the current app experiences as well as expanding the content to other distribution channels and platforms.</li>
         </ul>
