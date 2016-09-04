@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "CoLab (Sketch Plugin)"
-banner: "New"
 tile-name: "Sketch Plugin"
 thumbnail: "/img/thumbnails/coLab.png"
 date:   2016-03-01 12:00:00 -0500
