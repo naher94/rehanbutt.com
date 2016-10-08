@@ -107,7 +107,7 @@ permalink: about
             <li>Worked with the UX team to redesign consumerreports.org especially in terms of data visualization</li>
         </ul>
 
-        <div id="subTitle">Monitor – Digital Fabrication Lab – [2015 - Current]</div>
+        <div id="subTitle">Monitor – Digital Fabrication Lab – [2015 - Present]</div>
         <ul class="square">
             <li>Teach students digital preparation & machining techniques in lasercutting, 3D printing & CNC milling</li>
         </ul>
