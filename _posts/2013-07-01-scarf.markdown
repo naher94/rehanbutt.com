@@ -3,7 +3,7 @@ layout: post
 title:  "Scarf Design"
 tile-name: "Scarf"
 thumbnail: "/img/thumbnails/scarf.png"
-date:   2014-09-18 12:00:00 -0500
+date:   2013-07-01 12:00:00 -0500
 categories: textile
 permalink: scarf
 ---

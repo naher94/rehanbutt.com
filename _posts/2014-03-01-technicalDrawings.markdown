@@ -3,7 +3,7 @@ layout: post
 title:  "Technical Drawings"
 tile-name: "Technical Drawings"
 thumbnail: "/img/thumbnails/technicalDrawings.png"
-date:   2014-09-24 12:00:00 -0500
+date:   2014-03-01 12:00:00 -0500
 categories: CAD
 permalink: technicalDrawings
 ---
