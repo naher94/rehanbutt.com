@@ -315,3 +315,17 @@ footer {
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+.dateStamp{
+    font-size: 22px;
+    margin-top: -15px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 480px) {
+    
+    .dateStamp {
+            font-size: 16px;
+        }
+}

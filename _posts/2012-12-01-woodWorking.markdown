@@ -3,7 +3,7 @@ layout: post
 title:  "Wood Working"
 tile-name: "Wood Working"
 thumbnail: "/img/thumbnails/woodWorking.png"
-date:   2014-09-23 12:00:0 -0500
+date:   2012-12-01 12:00:0 -0500
 categories: fabrication
 permalink: woodWorking
 ---
