@@ -4,7 +4,7 @@ title:  "Carnegie Mellon NYC"
 tile-name: "CMU NYC"
 thumbnail: "/img/thumbnails/nyc.png"
 date:   2016-02-09 12:00:00 -0500
-categories: webdev, Dzgn.IO
+categories: web, Dzgn.IO
 permalink: nyc
 ---
 

@@ -4,7 +4,7 @@ title:  "Branding Package"
 tile-name: "Branding"
 thumbnail: "/img/thumbnails/isuBranding.png"
 date:   2015-02-10 12:00:00 -0500
-categories: Branding
+categories: branding
 permalink: isuBrand
 ---
 
