@@ -267,6 +267,14 @@ a:hover {
     background-color: #d74955;
 }
 
+.processlyButton{
+     background-color: #7C1F5E;
+}
+
+.processlyButton:hover{
+     background-color: #601A4C;
+}
+
 #resumeButton {
     width: 100%;
     background-color: #77013a;
