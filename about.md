@@ -78,10 +78,10 @@ permalink: about
             <li>2nd place overall, double elimination finalists & Judges Choice Award</li>
         </ul>
         <h4>Work Experience</h4>
-        <!--<div id="subTitle">CodeLab Fellow - CodeLab - [2016 - Present]</div>
+        <div id="subTitle">Lab Manager - CodeLab (CMU) - [2016 - Present]</div>
         <ul class="square">
-            <li>Working to expand and deepen the current app experiences as well as expanding the content to other distribution channels and platforms.</li>
-        </ul>-->
+            <li>Working to expand the lab's digital presense inorder to create growth for the lab and its cohort.</li>
+        </ul>
         <div id="subTitle">Mobile UI/UX Designer - YinzCam - [2016 - Present]</div>
         <ul class="square">
             <li>Working to expand and deepen the current app experiences as well as expanding the content to other distribution channels and platforms.</li>
