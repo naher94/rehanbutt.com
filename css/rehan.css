@@ -275,6 +275,14 @@ a:hover {
      background-color: #601A4C;
 }
 
+.colorBotButton{
+  background-color: #E82730;
+}
+
+.colorBotButton:hover{
+  background-color: #C62632;
+}
+
 #resumeButton {
     width: 100%;
     background-color: #77013a;
