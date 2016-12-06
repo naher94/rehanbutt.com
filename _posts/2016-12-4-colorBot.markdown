@@ -9,7 +9,7 @@ categories: bot
 permalink: colorBot
 ---
 
-<div class="image-container"><img src="../img/colorBot/intro.svg" alt="Logo Equation" class="image-center" style="width:30%"/></div>
+<div class="image-container"><img src="../img/colorBot/intro.svg" alt="Logo Equation" class="image-center"/></div>
 
 How did this project come to be? One of my courses had asked us to do a quick project with the idea of using a motion capture system to track a "tool". We struggled for a bit trying to figure out just how to use the capture software and read out the maker points. The first thing was just setting up and calibrating the sensors to make sure the points were accurately captured in the space. After setting it up we were ready to make our tool using a rigid body rig, which is 3 tracking markers that hold position between them at all times during the recording. Once we had our tool we were ready to record our motion path. 
 
