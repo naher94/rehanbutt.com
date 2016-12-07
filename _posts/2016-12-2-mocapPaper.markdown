@@ -9,9 +9,9 @@ categories: digital
 permalink: mocapPaper
 ---
 
-<div class="image-container"><img src="../img/appleNews/appIcon.png" alt="Logo" class="image-center" style="width:30%"/></div>
+<div class="image-container"><img src="../img/mocapPaper/box.png" alt="Logo" class="image-center" style="width:50%"/></div>
 
-<!--Image of wrapping paper on box-->
+<!--Get a better picture of this-->
 
 How did this project come to be? One of my courses had asked us to do a quick project with the idea of using a motion capture system to track a "tool". We struggled for a bit trying to figure out just how to use the capture software and read out the maker points. The first thing was just setting up and calibrating the sensors to make sure the points were accurately captured in the space. After setting it up we were ready to make our tool using a rigid body rig, which is 3 tracking markers that hold position between them at all times during the recording. Once we had our tool we were ready to record our motion path. 
 
@@ -23,6 +23,7 @@ As part of this project we were given a Grasshopper script in order to pull the 
 
 
 ## Process
+
 <!--Image of grasshopper script-->
 <!--picture of the tool-->
 <!--gif of wanding (possibly a couple side by side 2 or 3)-->
