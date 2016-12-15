@@ -66,3 +66,8 @@ I created this workflow diagram as a way to help me compartmentalize the interac
 
 <div class="image-container" style="margin-top:20px;"><img src="../img/colorBot/dataStructure.png" alt="Data Structure"/></div>
 
+### A Couple Other Thoughts
+
+For the next iteration of Jasper I would like to port him to Slack for an entire team to interact and add a couple more features. One of these features would be the ability to pull up images from several different sources in addition to Dribbble and be able to provide images that are more relevant to the project the user is working on. By providing photos for a presentation or UI images to help design a better UI feel in these color tones.Another feature I would like is to be able to pull images from a Slack conversation and create a potential color scheme given a wireframe and thematic words for example.
+Looking back on this process I learned a fair bit about actually developing and deploying a bot, which will come in handy for any future development I do. I also learned about databases and how the best way to set up your tables are. From a creative aspect, I learned a bit more about all the aspects there are to consider when there is a human actor involved, people never do what you expect so you need to make sure to handle it in the best way possible while still having your application or bot staying in character, just as you would a stage production.
+
