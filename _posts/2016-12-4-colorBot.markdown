@@ -47,13 +47,13 @@ As part of the development process I created this matrix in order to prioritize 
 
 <div class="image-container" style="margin-top:50px;"><img src="../img/colorBot/personality.svg" alt="Personality"/></div>
 
-In order to create a better bot experience I wanted to make sure Jasper had some personality. I filled in a couple different traits to help create the right tone of Jasper. I wanted a colloquial voice in order for the user to easily connect with Jasper just like a close friend. Being fun, trendy and relevant. One example of this is using emojis in responses as an added personality tool. 
+In order to create a better bot experience I wanted to make sure Jasper had some personality. I filled in a couple different traits to help create the right tone of Jasper. I wanted a colloquial voice in order for the user to easily connect with Jasper just like a close friend. Being fun, trendy and relevant. One example of this is using emojis in responses as an added personality tool.
 
 <br>
 
 ### Jasper's Fun Phrases
 
-#### "Awesome sauce! Give me one second." "Coming right up!" "Enjoy your Inspiration!" "You there? Wonderful colors await you!"
+#### "Awesome sauce! Give me one second." "Coming right up!" "Enjoy your Inspiration!" "You there? Wonderful colors await you!" "Happy coloring! 🎨🎉" "I'm Jasper your friendly neighborhood color master"
 
 <div class="small-12 medium-6 large-6 columns image-container" style="margin-top:20px;"><img src="../img/colorBot/workflowDiagram.png" alt="Workflow Diagram"/></div>  
 
