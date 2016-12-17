@@ -5,7 +5,6 @@ tile-name: "Watch"
 thumbnail: "/img/thumbnails/watch.png"
 date:   2013-03-01 12:00:00 -0500
 categories: product
-banner: updated
 permalink: watch
 ---
 

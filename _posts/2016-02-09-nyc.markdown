@@ -12,7 +12,7 @@ permalink: nyc
 <div class="image-container"><img src="../img/nyc/nycDIO.png" alt="Home Page" /></div>
 
 <div>
-<a href="http://nyc.dzgn.io">
+<a target="_blank" href="http://nyc.dzgn.io">
     <div class="nycButton contentButton"> Check out the full site
     </div>
 </a>

@@ -3,7 +3,6 @@ layout: post
 title:  "Jasper the Color Bot"
 tile-name: "Color Bot"
 thumbnail: "/img/thumbnails/jasper.png"
-banner: In Process
 date:   2016-12-4 12:00:00 -0500
 categories: bot
 permalink: colorBot
@@ -25,7 +24,7 @@ In this [Version (V1.0)]( https://github.com/naher94/rehanbutt.com/releases/tag/
 <div class="image-container" style="margin-top:50px;"><img src="../img/colorBot/conversation.png" alt="A full Conversation with Jasper"/></div>
 
 <div>
-<a href="https://github.com/naher94/jasper">
+<a target="_blank" href="https://github.com/naher94/jasper">
     <div class="colorBotButton contentButton"> Check out the code
     </div>
 </a>

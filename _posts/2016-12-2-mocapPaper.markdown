@@ -3,7 +3,6 @@ layout: post
 title:  "Motion Capture Wrapping Paper"
 tile-name: "MoCap Paper"
 thumbnail: "/img/thumbnails/mocapPaper.png"
-banner: New
 date:   2016-12-2 12:00:00 -0500
 categories: digital
 permalink: mocapPaper
