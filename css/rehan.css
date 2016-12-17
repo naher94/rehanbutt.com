@@ -283,6 +283,14 @@ a:hover {
   background-color: #C62632;
 }
 
+.thesisButton{
+  background-color: #EA1864;
+}
+
+.thesisButton:hover{
+  background-color: #CC1962;
+}
+
 #resumeButton {
     width: 100%;
     background-color: #77013a;

@@ -3,7 +3,6 @@ layout: post
 title:  "Jasper the Color Bot"
 tile-name: "Color Bot"
 thumbnail: "/img/thumbnails/jasper.png"
-banner: In Process
 date:   2016-12-4 12:00:00 -0500
 categories: bot
 permalink: colorBot
@@ -25,7 +24,7 @@ In this [Version (V1.0)]( https://github.com/naher94/rehanbutt.com/releases/tag/
 <div class="image-container" style="margin-top:50px;"><img src="../img/colorBot/conversation.png" alt="A full Conversation with Jasper"/></div>
 
 <div>
-<a href="https://github.com/naher94/jasper">
+<a target="_blank" href="https://github.com/naher94/jasper">
     <div class="colorBotButton contentButton"> Check out the code
     </div>
 </a>
@@ -47,13 +46,13 @@ As part of the development process I created this matrix in order to prioritize 
 
 <div class="image-container" style="margin-top:50px;"><img src="../img/colorBot/personality.svg" alt="Personality"/></div>
 
-In order to create a better bot experiance I wanted to make sure Jasper had some personailty. I filled in a couple differant traits to help create the right tone of Jasper. I wanted a colloquial voice in order for the user to easily connect with Jasper just like a close friend. Being fun, trendy and relevant. One example of this is using emojis in responses as an added personality tool. 
+In order to create a better bot experience I wanted to make sure Jasper had some personality. I filled in a couple different traits to help create the right tone of Jasper. I wanted a colloquial voice in order for the user to easily connect with Jasper just like a close friend. Being fun, trendy and relevant. One example of this is using emojis in responses as an added personality tool.
 
 <br>
 
 ### Jasper's Fun Phrases
 
-#### "Awesome sauce! Give me one second." "Coming right up!" "Enjoy your Inspiration!" "You there? Wonderful colors await you!"
+#### "Awesome sauce! Give me one second." "Coming right up!" "Enjoy your Inspiration!" "You there? Wonderful colors await you!" "Happy coloring! 🎨🎉" "I'm Jasper your friendly neighborhood color master"
 
 <div class="small-12 medium-6 large-6 columns image-container" style="margin-top:20px;"><img src="../img/colorBot/workflowDiagram.png" alt="Workflow Diagram"/></div>  
 
@@ -65,4 +64,9 @@ In order to create a better bot experiance I wanted to make sure Jasper had some
 I created this workflow diagram as a way to help me compartmentalize the interactions and the functions that needed to be created and as a way to user test before spending any time in development. From my Wizard of Oz testing I found I was missing error cases as well as cases of confirmation that were not explicitly “yes”. The other think I learned was I needed to create a way for the bot to help the user when the interaction is not super clear or the user would like answers outside of the created toolset.
 
 <div class="image-container" style="margin-top:20px;"><img src="../img/colorBot/dataStructure.png" alt="Data Structure"/></div>
+
+### A Couple Other Thoughts
+
+For the next iteration of Jasper I would like to port him to Slack for an entire team to interact and add a couple more features. One of these features would be the ability to pull up images from several different sources in addition to Dribbble and be able to provide images that are more relevant to the project the user is working on. By providing photos for a presentation or UI images to help design a better UI feel in these color tones.Another feature I would like is to be able to pull images from a Slack conversation and create a potential color scheme given a wireframe and thematic words for example.
+Looking back on this process I learned a fair bit about actually developing and deploying a bot, which will come in handy for any future development I do. I also learned about databases and how the best way to set up your tables are. From a creative aspect, I learned a bit more about all the aspects there are to consider when there is a human actor involved, people never do what you expect so you need to make sure to handle it in the best way possible while still having your application or bot staying in character, just as you would a stage production.
 
