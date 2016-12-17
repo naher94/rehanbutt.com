@@ -9,7 +9,7 @@ categories: bot
 permalink: thesis
 ---
 
-As a designer I am very much interested in the design process and the tools used in the design process. One aspect that I find exceptionally interesting about the design process is how we communicate with one other specifically within the realm of verbal communication and conversation. Conversation and verbal communication was one of the first ways stories were passed down and still plays a very important in our daily lives today from a quick chat in the hallway to formal presentations. As such I would like to wrap my thesis around this idea and create a tool to augment the design process from verbal input. Along the way we will explore the role that conversation and vocal communication plays in design. If you would like a more in depth look at my thoughs feel free to read my <a target="_blank" href="../img/conversationalDesign/conversationalDesignPaper.pdf">Paper</a>. 
+As a designer I am very much interested in the design process and the tools used in the design process. One aspect that I find exceptionally interesting about the design process is how we communicate with one other specifically within the realm of verbal communication and conversation. Conversation and verbal communication was one of the first ways stories were passed down and still plays a very important role in our daily lives today from a quick chat in the hallway to formal presentations. As such I would like to wrap my thesis around this idea and create a tool to augment the design process from verbal input. Along the way we will explore the role that conversation and vocal communication plays in design. If you would like a more in depth look at my thoughs feel free to read my <a target="_blank" href="../img/conversationalDesign/conversationalDesignPaper.pdf">paper</a>. 
 
 <div class="image-container"><img src="../img/conversationalDesign/designProcess.svg" alt="Design Process"/></div>
 
@@ -22,7 +22,7 @@ For several years now I have been exploring the design process and tools that ex
 
 <div class="image-container" style="margin-top:50px;"><img src="../img/conversationalDesign/personality.svg" alt="Jasper Personality"/></div>
 
-One aspect of Jasper or any bot interaction that I would like to call out is that of personality and the seamlessness of the interactions with a piece of technology. These interactions are critical as it holds together the product. As I mention in my <a target="_blank" href="../img/conversationalDesign/conversationalDesignPaper.pdf">Paper</a> seamlessness and a huge margin of error is important as we never know how users will interaction. Whether be with an emoji, fragmented sentence or full sentences. And this varies across many areas including cultures, individual personalities and disciplines. 
+One aspect of Jasper or any bot interaction that I would like to call out is that of personality and the seamlessness of the interactions with a piece of technology. These interactions are critical as it holds together the product. As I mention in my <a target="_blank" href="../img/conversationalDesign/conversationalDesignPaper.pdf">paper</a> seamlessness and a huge margin of error is important as we never know how users will interaction. Whether be with an emoji, fragmented sentence or full sentences. And this varies across many areas including cultures, individual personalities and disciplines. 
 <br><br>
 
 ## Process
