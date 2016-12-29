@@ -347,9 +347,40 @@ footer {
     margin-bottom: 20px;
 }
 
+iframe{
+  height: 600px;
+}
+
 @media screen and (max-width: 480px) {
     
     .dateStamp {
             font-size: 16px;
         }
+    iframe{
+    height: 220px;
+  }
 }
+
+/*measurments pulled from foundation css file*/
+
+/*for mobile friendly styling*/
+/*
+@media screen and (max-width: 40em) {
+  
+  iframe{
+    height: 220px;
+  }
+  
+}
+*/
+
+/*for tablet friendly styling*/
+/*
+@media screen and (max-width: 64em) {
+
+  iframe{
+    height: 360px;
+  }
+}
+*/
+/* ************************************** */

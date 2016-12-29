@@ -20,4 +20,4 @@ My main incentive for this project was to bring GitHub mobile. Reason being in o
 
 <div class="image-container"><img src="../img/gitApp/gitAppOrigami.png" alt="Origami" /></div>
 
-<iframe class="image-center" width="80%" height="600" src="https://www.youtube.com/embed/9pox7w3nB_s?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe class="image-center" width="80%" src="https://www.youtube.com/embed/9pox7w3nB_s?rel=0" frameborder="0" allowfullscreen></iframe>
