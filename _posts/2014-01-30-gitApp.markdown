@@ -4,7 +4,7 @@ title:  "gitApp"
 tile-name: "gitApp"
 thumbnail: "/img/thumbnails/gitApp.png"
 date:   2014-01-30 12:00:00 -0500
-categories: iOS, App
+tags: iOS, App
 permalink: gitApp
 ---
 

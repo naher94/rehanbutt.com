@@ -5,7 +5,7 @@ tile-name: "Apple News"
 thumbnail: "/img/thumbnails/appleNews.png"
 banner:
 date:   2016-10-9 12:00:00 -0500
-categories: digital, UI/UX
+tags: digital, UI/UX
 permalink: appleNews
 ---
 

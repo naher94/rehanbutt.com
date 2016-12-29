@@ -4,7 +4,7 @@ title:  "CommandBar (Photoshop Extension)"
 tile-name: "Photoshop Extension"
 thumbnail: "/img/thumbnails/commandBar.png"
 date:   2014-09-26 12:00:00 -0500
-categories: photoshop
+tags: photoshop
 permalink: commandBar
 ---
 

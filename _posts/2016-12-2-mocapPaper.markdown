@@ -4,7 +4,7 @@ title:  "Motion Capture Wrapping Paper"
 tile-name: "MoCap Paper"
 thumbnail: "/img/thumbnails/mocapPaper.png"
 date:   2016-12-2 12:00:00 -0500
-categories: digital
+tags: digital
 permalink: mocapPaper
 ---
 

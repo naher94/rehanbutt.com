@@ -4,7 +4,7 @@ title:  "Cameleon Web App (Game/Teaching tool)"
 tile-name: "Color App"
 thumbnail: "/img/thumbnails/cameleon.png"
 date:   2015-05-05 12:00:00 -0500
-categories: web, game, color
+tags: web, game, color
 permalink: cameleon
 ---
 
