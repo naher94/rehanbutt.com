@@ -48,12 +48,12 @@ permalink: about
         <h4>Awards</h4>
         <div id="subTitle">Expat Living Magazine – Singapore, Singapore [2013]</div>
         <ul class="square">
-            <li>Photo competition winner – Published in print and online</li>
+            <li>Photo competition winner – Featured in the magazine and on the website</li>
         </ul>
         <div id="subTitle">St. Andrew’s Episcopal School, Potomac, MD [2009 - 2012]</div>
         <ul class="square">
-            <li>Awards – 2D, 3D (Fountain/Ceramic and Mixed Media) & 3D (Blown Glass, Metal & Ceramic Fountain)</li>
-            <li>Significant Achievement in the Visual Arts Award (2012)</li>
+            <li>2D (Photography & Computer Graphics), 3D (Fountain/Ceramic & Mixed Media) & 3D (Blown Glass, Metal & Ceramic Fountain)</li>
+            <li>Significant Achievement in the Visual Arts (2012)</li>
         </ul>
         <h4>Activities</h4>
         <div id="subTitle">Designer & Member - Ideate Student Advisory Committee (CMU) - [2016 - Present]</div>
@@ -73,10 +73,10 @@ permalink: about
             <li>A student organization with the goal to educate the CMU community. Ran workshops (WebDevWeeks, Portfolio Hackathon), heavily integrating design and coding</li>
         </ul>
 
-        <div id="subTitle">Global Conference on Educational Robotics – (Botball - autonomous robotics) [2008-2011]</div>
+        <div id="subTitle">Global Conference on Educational Robotics – (Botball) [2008-2011]</div>
         <ul class="square">
-            <li>Awarded 1st place in Alliance Competition – team leader — designed, built, and programmed</li>
-            <li>2nd place overall, double elimination finalists & Judges Choice Award</li>
+            <li>Designed, built and programmed autonomous robots</li>
+            <li>Awarded 1st place in Alliance Competition (Team Lead), 2nd place overall, double elimination finalists & Judges Choice Award</li>
         </ul>
         <h4>Work Experience</h4>
         <div id="subTitle">Lab Manager - CodeLab (CMU) - [2016 - Present]</div>
@@ -110,16 +110,16 @@ permalink: about
             <li>Worked with the UX team to redesign consumerreports.org especially in terms of data visualization</li>
         </ul>
 
-        <div id="subTitle">Monitor – Digital Fabrication Lab – [2015 - Present]</div>
+        <div id="subTitle">Monitor – Digital Fabrication Lab – [2015 - 2016]</div>
         <ul class="square">
-            <li>Teach students digital preparation & machining techniques in lasercutting, 3D printing & CNC milling</li>
+            <li>Taught students digital preparation & machining techniques in lasercutting, 3D printing & CNC milling</li>
         </ul>
         <div id="subTitle">Designer & Developer – Human Behavior Computing Lab (HCII at CMU) - [2014]</div>
         <ul class="square">
-            <li>Designed and created a website for the labs, projects and members</li>
+            <li>Designed and created a website for the lab, projects and its members</li>
         </ul>
 
-        <div id="subTitle">Intern – Architrave , Singapore –(Architectural Firm) [Summer 2013]</div>
+        <div id="subTitle">Intern – Architrave (Architectural Firm) Singapore – [Summer 2013]</div>
         <ul class="square">
             <li>Modeled several projects using 3dsMax, Revit and AutoCAD</li>
             <li>Helped expand the in-house materials and standards libraries</li>
