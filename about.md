@@ -18,7 +18,7 @@ permalink: about
     </div>
     <div style="margin-top:50px">
         <h4>Goal</h4>
-        <div style="padding-left:10px;">To obtain a full-time position that will help me continue to learn and follow my passions in art and technology, while developing innovative products within the organization.</div>
+        <div style="padding-left:10px;">To obtain a position that will help me continue to learn and follow my passions in art and technology, while developing innovative products within the organization.</div>
 
         <h4>Education</h4>
         <div id="subTitle">Carnegie Mellon University [2016 - Present]</div>
@@ -26,6 +26,7 @@ permalink: about
         <div id="subSubTitle">Relevant Coursework</div>
         <ul class="square">
             <li>Connected Classrooms | Themed Entertainment Design Studio</li>
+            <li>Programming for Online Prototypes</li>
         </ul>
         
         <div id="subTitle">Carnegie Mellon University [2012 - 2016]</div>
@@ -55,9 +56,9 @@ permalink: about
             <li>Significant Achievement in the Visual Arts Award (2012)</li>
         </ul>
         <h4>Activities</h4>
-        <div id="subTitle">Designer & Member - Ideate Student Advisory Committee [2016 - Present]</div>
+        <div id="subTitle">Designer & Member - Ideate Student Advisory Committee (CMU) - [2016 - Present]</div>
         <ul class="square">
-            <li>Branded Ideate, serve as a member to better the Ideate program</li>
+            <li>Branded Ideate, Involved in the improvements of the Ideate program</li>
         </ul>
         <div id="subTitle">Public Relations Chair - International Student Union (ISU) [2014 - 2016]</div>
         <ul class="square">
@@ -67,9 +68,9 @@ permalink: about
         <ul class="square">
             <li>Designed a fashion line, crafted from synthetic paper, 3D printed plastics and iridescent silk</li>
         </ul>
-        <div id="subTitle">Designer & Member - ScottyLabs [2014 - 2016]</div>
+        <div id="subTitle">Designer & Member - ScottyLabs (CMU) - [2014 - 2016]</div>
         <ul class="square">
-            <li>A student organization with the goal to educate the rest of the CMU community. Run workshops (WebDevWeeks, Portfolio Hackathon), heavily integrating design and coding</li>
+            <li>A student organization with the goal to educate the CMU community. Ran workshops (WebDevWeeks, Portfolio Hackathon), heavily integrating design and coding</li>
         </ul>
 
         <div id="subTitle">Global Conference on Educational Robotics – (Botball - autonomous robotics) [2008-2011]</div>
@@ -80,26 +81,28 @@ permalink: about
         <h4>Work Experience</h4>
         <div id="subTitle">Lab Manager - CodeLab (CMU) - [2016 - Present]</div>
         <ul class="square">
-            <li>Working to expand the lab's digital presense inorder to create growth for the lab and its cohort.</li>
+            <li>Expand the lab’s digital presence in order to enhance awareness of the lab and its cohort</li>
         </ul>
         <div id="subTitle">Mobile UI/UX Designer - YinzCam - [2016 - Present]</div>
         <ul class="square">
-            <li>Working to expand and deepen the current app experiences as well as expanding the content to other distribution channels and platforms.</li>
+            <li>Lead efforts to enhance our current app experiences & expand to other platforms</li>
+            <li>Involved in recruitment efforts for the design team</li>
         </ul>
         
         <div id="subTitle">Mobile UI/UX Intern - YinzCam - [2015 - 2016]</div>
         <ul class="square">
-            <li>Working to expand and deepen the current app experiences as well as expanding the content to other distribution channels and platforms.</li>
+            <li>Participated in evaluating the current app experiences & proposed enhancements</li>
         </ul>
 
         <div id="subTitle">Co-Founder - Dzgn.IO - [2015 - Present]</div>
         <ul class="square">
-            <li>A design consultancy with the goal to deliver design services of holistic value in aesthetics, experience, and communication. We design and create with an approach of playful pragmatism.</li>
+            <li>We design and create with an approach of playful pragmatism. A group with the goal to deliver 
+	  design services incorporating holistic values of aesthetics, experience, and communication</li>
         </ul>
 
-        <div id="subTitle">Head Teaching Assistant – Intro to Digital Media – [2015 - 2016]</div>
+        <div id="subTitle">Head Teaching Assistant – Intro to Digital Media (CMU) – [2015 - 2016]</div>
         <ul class="square">
-            <li>Teaching students a variety of software tools for use in their design work and the workflow around them</li>
+            <li>Taught students a variety of software tools for use in their design efforts and their work flows</li>
         </ul>
 
         <div id="subTitle">User Experience Design Intern – Consumer Reports – [Summer 2015]</div>
@@ -111,7 +114,7 @@ permalink: about
         <ul class="square">
             <li>Teach students digital preparation & machining techniques in lasercutting, 3D printing & CNC milling</li>
         </ul>
-        <div id="subTitle">Designer & Developer – Human Behavior Computing Lab – (HCII at CMU) [2014]</div>
+        <div id="subTitle">Designer & Developer – Human Behavior Computing Lab (HCII at CMU) - [2014]</div>
         <ul class="square">
             <li>Designed and created a website for the labs, projects and members</li>
         </ul>
@@ -126,7 +129,7 @@ permalink: about
         <ul class="no-bullet">
             <li>Design Thinking | Photoshop | Illustrator | InDesign | Sketch | FramerJS</li>
             <li>Rhinoceros | RhinoCAM | Vrays | AutoCAD | Revit | Photography</li>
-            <li>HTML | CSS | JavaScript | C | Python | RAPID Programming | Arduino</li>
+            <li>HTML | CSS | JavaScript | C | Ruby | RAPID Programming | Arduino</li>
             <li>CNC Router | Lasercutter | 3D Modeling | Hand & Technical Drawing</li>
         </ul>
     </div>
