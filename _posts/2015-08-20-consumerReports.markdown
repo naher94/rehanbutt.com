@@ -4,7 +4,7 @@ title:  "My Summer at ConsumerReports"
 tile-name: "Consumer Reports"
 thumbnail: "/img/thumbnails/consumerReports.png"
 date:   2015-08-20 12:00:00 -0500
-categories: UI/UX, branding, mobile
+tags: UI/UX, branding, mobile
 permalink: consumerReports
 ---
 

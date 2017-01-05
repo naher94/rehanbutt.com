@@ -4,7 +4,7 @@ title:  "Esporre (Web Portfolio Tool)"
 tile-name: "Portfolio Tool"
 thumbnail: "/img/thumbnails/esporre.png"
 date:   2015-12-12 12:00:00 -0500
-categories: web, portfolio, learning
+tags: web, portfolio, learning
 permalink: esporre
 ---
 

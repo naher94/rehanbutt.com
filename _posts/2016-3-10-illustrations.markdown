@@ -4,7 +4,7 @@ title:  "Illustrations"
 tile-name: "Illustrations"
 thumbnail: "/img/thumbnails/illustrations.png"
 date:   2016-03-01 12:00:00 -0500
-categories: digital, illustration
+tags: digital, illustration
 permalink: illustration
 ---
 

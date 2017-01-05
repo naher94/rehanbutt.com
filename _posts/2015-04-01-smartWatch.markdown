@@ -4,7 +4,7 @@ title:  "Weoto (Apple Watch App)"
 tile-name: "SmartWatch App"
 thumbnail: "/img/thumbnails/smartWatch.png"
 date:   2015-04-01 12:00:00 -0500
-categories: UI/UX
+tags: UI/UX
 permalink: smartWatch
 ---
 

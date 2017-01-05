@@ -1,0 +1,41 @@
+---
+layout: post
+title:  "Interchange"
+tile-name: "Interchange"
+thumbnail: "/img/thumbnails/interchange.png"
+banner: New
+date:   2016-12-30
+tags: branding webdev
+permalink: interchange
+---
+
+<div class="image-container"><img src="../img/interchange/logo.svg" alt="Logo"/></div>
+
+Interchange was created as a way to help the graduate students of Carnegie Mellon’s School of Architecture to help them connect with the creative industry. As part of this new initiative I branded and developed a website for students to showcase they work ahead of the event. As a way for the organizations to learn about the students involved and their work as we have many different types of work, from architectural sustainable design to computational design, among the various degree programs.
+
+<div class="image-container"><img src="../img/interchange/screenshots.png" alt="Website Screenshots"/></div>
+<div class="image-container"><img src="../img/interchange/mobileFriendly.png" alt="Mobile Site Screenshots"/></div>
+
+As this site would be used by many students I templated and created a style guide throughout the side for a uniform look and feel. Building for a variety of content types and optional information such as personal websites and resumes on the profile pages. I build the site using Jekyll to template each page and to automate the connection of pages such as people and their projects and tagging people with their degree program.
+
+<div>
+<a target="_blank" href="https://naher94.github.io/interchange">
+    <div class="interchangeButton contentButton"> Check out the development site
+    </div>
+</a>
+</div>
+<br><br>
+
+## Process
+
+<div class="image-container"><img src="../img/interchange/sketches.png" alt="Sketches"/></div>
+<div class="image-container"><img src="../img/interchange/brandInspiration.png" alt="Brand Inspiration"/></div>
+<div class="image-container" style="margin-top:50px;"><img src="../img/interchange/logoIterations.svg" alt="Logo Iterations"/></div>
+<div class="image-container"><img src="../img/interchange/postcardIterations.png" alt="Postcard Iterations"/></div>
+
+<div>
+<a target="_blank" href="https://github.com/naher94/interchange">
+    <div class="interchangeButton contentButton"> Check out the code
+    </div>
+</a>
+</div>

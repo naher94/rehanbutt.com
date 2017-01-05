@@ -291,6 +291,14 @@ a:hover {
   background-color: #CC1962;
 }
 
+.interchangeButton{
+  background-color: #313131;
+}
+
+.interchangeButton:hover{
+  background-color: #000000;
+}
+
 #resumeButton {
     width: 100%;
     background-color: #77013a;

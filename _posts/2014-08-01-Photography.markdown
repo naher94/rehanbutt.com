@@ -4,7 +4,7 @@ title:  "Photography"
 tile-name: "Photography"
 thumbnail: "/img/thumbnails/photography.png"
 date:   2014-08-01 12:00:0 -0500
-categories: photo
+tags: photo
 permalink: photography
 ---
 

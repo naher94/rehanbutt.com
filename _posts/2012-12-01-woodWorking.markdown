@@ -4,7 +4,7 @@ title:  "Wood Working"
 tile-name: "Wood Working"
 thumbnail: "/img/thumbnails/woodWorking.png"
 date:   2012-12-01 12:00:0 -0500
-categories: fabrication
+tags: fabrication
 permalink: woodWorking
 ---
 

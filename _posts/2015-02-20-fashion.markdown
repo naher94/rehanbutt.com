@@ -4,7 +4,7 @@ title:  "Lustre (Fashion Line)"
 tile-name: "Fashion"
 thumbnail: "/img/thumbnails/fashion.png"
 date:   2015-02-20 12:00:00 -0500
-categories: fashion
+tags: fashion
 permalink: fashion
 ---
 

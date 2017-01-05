@@ -4,7 +4,7 @@ title:  "Slotted Furniture"
 tile-name: "Slotted Furniture"
 thumbnail: "/img/thumbnails/slottedFurniture.png"
 date:   2013-11-01 12:00:00 -0500
-categories: Fabrication
+tags: Fabrication
 permalink: slottedFurniture
 ---
 

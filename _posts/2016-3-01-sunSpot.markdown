@@ -4,7 +4,7 @@ title:  "Sun Spot: Portable UV Detection"
 tile-name: "Sun Spot"
 thumbnail: "/img/thumbnails/sunSpot.png"
 date:   2016-03-01 12:00:00 -0500
-categories: fabrication, physical computing
+tags: fabrication, physical computing
 permalink: sunSpot
 ---
 

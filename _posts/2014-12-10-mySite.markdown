@@ -4,7 +4,7 @@ title:  "My Site"
 tile-name: "My Site"
 thumbnail: "/img/thumbnails/mySite.png"
 date:   2014-12-10 12:00:00 -0500
-categories: web
+tags: web
 permalink: mySite
 ---
 

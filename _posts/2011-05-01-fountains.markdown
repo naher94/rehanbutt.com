@@ -4,7 +4,7 @@ title:  "Fountain"
 tile-name: "Fountains"
 thumbnail: "/img/thumbnails/fountain.png"
 date:   2011-05-01 12:10:15 -0500
-categories: fabrication
+tags: fabrication
 permalink: fountain
 ---
 

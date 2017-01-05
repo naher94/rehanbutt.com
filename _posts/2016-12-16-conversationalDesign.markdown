@@ -5,7 +5,7 @@ tile-name: "Conversational Design"
 thumbnail: "/img/thumbnails/conversationalDesign.png"
 banner: In Process
 date:   2016-12-16 12:00:00 -0500
-categories: bot
+tags: bot
 permalink: thesis
 ---
 

@@ -4,7 +4,7 @@ title:  "LogoMarks"
 tile-name: "LogoMarks"
 thumbnail: "/img/thumbnails/logoMarks.png"
 date:   2014-09-25 12:00:00 -0500
-categories: logos
+tags: logos
 permalink: logoMarks
 ---
 
