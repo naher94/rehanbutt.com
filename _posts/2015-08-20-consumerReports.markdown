@@ -5,7 +5,7 @@ tile-name: "Consumer Reports"
 thumbnail: "/img/thumbnails/consumerReports.png"
 date:   2015-08-20 12:00:00 -0500
 tags: UI/UX, branding, mobile
-permalink: consumerReports
+permalink: consumerreports
 ---
 
 <div class="image-container"><img src="../img/cr/CRMexperience1.png" alt="CR Mobile Experience OnBoarding" />

@@ -5,7 +5,7 @@ tile-name: "MoCap Paper"
 thumbnail: "/img/thumbnails/mocapPaper.png"
 date:   2016-12-2 12:00:00 -0500
 tags: digital
-permalink: mocapPaper
+permalink: mocappaper
 ---
 
 <div class="image-container"><img src="../img/mocapPaper/box.png" alt="Logo" class="image-center" style="width:50%"/></div>

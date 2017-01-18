@@ -5,7 +5,7 @@ tile-name: "Sketch Plugin"
 thumbnail: "/img/thumbnails/coLab.png"
 date:   2016-03-01 12:00:00 -0500
 tags: digital
-permalink: coLab
+permalink: colab
 ---
 
 <div class="image-container"><img src="../img/colab/logo.svg" alt="Logo" class="image-center" style="width:25%"/></div>

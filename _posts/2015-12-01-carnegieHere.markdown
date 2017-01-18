@@ -5,7 +5,7 @@ tile-name: "iOS App"
 thumbnail: "/img/thumbnails/carnegieHere.png"
 date:   2015-12-01 12:00:00 -0500
 tags: iOS, App
-permalink: carnegieHere
+permalink: carnegiehere
 ---
 
 <div class="image-container"><img src="../img/carnegieHere/screens1.png" alt="Screens 1" /></div>
