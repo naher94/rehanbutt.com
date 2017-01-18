@@ -5,7 +5,7 @@ tile-name: "SmartWatch App"
 thumbnail: "/img/thumbnails/smartWatch.png"
 date:   2015-04-01 12:00:00 -0500
 tags: UI/UX
-permalink: smartWatch
+permalink: smartwatch
 ---
 
 <div class="image-container"><img src="../img/smartWatch/appIcon.svg" alt="Icon" class="image-center" style="width:30%" /></div>

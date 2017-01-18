@@ -5,7 +5,7 @@ tile-name: "Branding"
 thumbnail: "/img/thumbnails/isuBranding.png"
 date:   2015-02-10 12:00:00 -0500
 tags: branding
-permalink: isuBrand
+permalink: isubrand
 ---
 
 <div class="image-container"><img src="../img/ISU/ISUlogo.svg" alt="ISU Logo" class="image-center" style="width:60%" /></div>

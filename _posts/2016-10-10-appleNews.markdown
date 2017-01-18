@@ -6,7 +6,7 @@ thumbnail: "/img/thumbnails/appleNews.png"
 banner:
 date:   2016-10-9 12:00:00 -0500
 tags: digital, UI/UX
-permalink: appleNews
+permalink: applenews
 ---
 
 <div class="image-container"><img src="../img/appleNews/appIcon.png" alt="Logo" class="image-center" style="width:30%"/></div>

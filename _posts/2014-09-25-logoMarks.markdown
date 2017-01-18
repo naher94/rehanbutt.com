@@ -5,7 +5,7 @@ tile-name: "LogoMarks"
 thumbnail: "/img/thumbnails/logoMarks.png"
 date:   2014-09-25 12:00:00 -0500
 tags: logos
-permalink: logoMarks
+permalink: logomarks
 ---
 
 I created a set of LogoMarks using information about the people the LogoMarks are for, mostly their personality and some input like favorite color. Their personality helped influenced my decision on shape, color, style and the overall feel of the mark.

@@ -5,7 +5,7 @@ tile-name: "gitApp"
 thumbnail: "/img/thumbnails/gitApp.png"
 date:   2014-01-30 12:00:00 -0500
 tags: iOS, App
-permalink: gitApp
+permalink: gitapp
 ---
 
 <div class="image-container">

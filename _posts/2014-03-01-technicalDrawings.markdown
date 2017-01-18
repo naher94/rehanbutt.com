@@ -5,7 +5,7 @@ tile-name: "Technical Drawings"
 thumbnail: "/img/thumbnails/technicalDrawings.png"
 date:   2014-03-01 12:00:00 -0500
 tags: CAD
-permalink: technicalDrawings
+permalink: technicaldrawings
 ---
 
 <div class="image-container">

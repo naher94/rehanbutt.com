@@ -5,7 +5,7 @@ tile-name: "Color Bot"
 thumbnail: "/img/thumbnails/jasper.png"
 date:   2016-12-4 12:00:00 -0500
 tags: bot
-permalink: colorBot
+permalink: colorbot
 ---
 
 <div class="image-container"><img src="../img/colorBot/intro.svg" alt="Logo Equation" class="image-center"/></div>
