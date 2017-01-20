@@ -11,6 +11,13 @@ permalink: thesis
 
 As a designer I am very much interested in the design process and the tools used in the design process. One aspect that I find exceptionally interesting about the design process is how we communicate with one other specifically within the realm of verbal communication and conversation. Conversation and verbal communication was one of the first ways stories were passed down and still plays a very important role in our daily lives today from a quick chat in the hallway to formal presentations. As such I would like to wrap my thesis around this idea and create a tool to augment the design process from verbal input. Along the way we will explore the role that conversation and vocal communication plays in design. If you would like a more in depth look at my thoughs feel free to read my <a target="_blank" href="../img/conversationalDesign/conversationalDesignPaper.pdf">paper</a>. 
 
+<div>
+<a target="_blank" href="http://thesis.rehanbutt.com">
+    <div class="thesisButton contentButton"> Check out the thesis journey
+    </div>
+</a>
+</div>
+
 <div class="image-container"><img src="../img/conversationalDesign/designProcess.svg" alt="Design Process"/></div>
 
 I started by looking at what a design process could look like and came up what is shown above. The idea that designers either receive a prompt with the problem or find a problem to solve then jump into understanding the problem. Below I have created a storyboard that could be one injection of my design assistant into the “understanding the problem” phase of the design process. Throughout this project I would like to continue expanding what a design process is as well as create more scenario storyboards for each place where I see a useful injection of the design assistant.
