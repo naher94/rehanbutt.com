@@ -3,7 +3,7 @@ layout: post
 title:  "Interchange"
 tile-name: "Interchange"
 thumbnail: "/img/thumbnails/interchange.png"
-banner: New
+banner:
 date:   2016-12-30
 tags: branding webdev
 permalink: interchange
