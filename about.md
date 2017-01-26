@@ -128,7 +128,7 @@ permalink: about
         <h4>Skills</h4>
         <ul class="no-bullet">
             <li>Design Thinking | Photoshop | Illustrator | InDesign | Sketch | FramerJS</li>
-            <li>Rhinoceros | RhinoCAM | Vrays | AutoCAD | Revit | Photography</li>
+            <li>Rhinoceros | RhinoCAM | Vray | AutoCAD | Revit | Photography</li>
             <li>HTML | CSS | JavaScript | C | Ruby | RAPID Programming | Arduino</li>
             <li>CNC Router | Lasercutter | 3D Modeling | Hand & Technical Drawing</li>
         </ul>
