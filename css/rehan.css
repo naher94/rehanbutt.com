@@ -359,6 +359,10 @@ iframe{
   height: 600px;
 }
 
+.bullet-square{
+  list-style-type: square;
+}
+
 @media screen and (max-width: 480px) {
     
     .dateStamp {

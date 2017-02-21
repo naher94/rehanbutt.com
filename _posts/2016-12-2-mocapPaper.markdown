@@ -24,7 +24,10 @@ As part of this project we were given a Grasshopper script in order to pull the 
 
 <!--Image of grasshopper script-->
 <!--picture of the tool-->
-<!--gif of wanding (possibly a couple side by side 2 or 3)-->
+<div class="row" style="padding:0px; margin:0px;">
+  <div class="image-container small-6 column" style="padding:0px; margin:0px;"><img src="../img/mocapPaper/wanding.gif" alt="Wanding"/></div>
+  <div class="image-container small-6 column" style="padding:0px; margin:0px;"><img src="../img/mocapPaper/wanding2.gif" alt="Wanding Output"/></div>
+</div>
 <!--gif of the motion-->
 
 <div class="image-container" style="margin-top:50px;"><img src="../img/mocapPaper/rhino.png" alt="Rhino Screenshot"/></div>
