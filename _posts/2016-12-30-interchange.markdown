@@ -20,7 +20,7 @@ As this site will be used by many students, I templated and created a style guid
 
 <div>
 <a target="_blank" href="https://naher94.github.io/interchange">
-    <div class="interchangeButton contentButton"> Check out the development site
+    <div class="interchangeButton contentButton"> Check out the site
     </div>
 </a>
 </div>
@@ -32,6 +32,8 @@ As this site will be used by many students, I templated and created a style guid
 <div class="image-container"><img src="../img/interchange/brandInspiration.png" alt="Brand Inspiration"/></div>
 <div class="image-container" style="margin-top:50px;"><img src="../img/interchange/logoIterations.svg" alt="Logo Iterations"/></div>
 <div class="image-container"><img src="../img/interchange/postcardIterations.png" alt="Postcard Iterations"/></div>
+<div class="image-container"><img src="../img/interchange/posterSeries.png" alt="Poster Series"/></div>
+<div class="image-container"><img src="../img/interchange/stickerTest.png" alt="Floor Sticker Test"/></div>
 
 <div>
 <a target="_blank" href="https://github.com/naher94/interchange">
