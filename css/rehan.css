@@ -299,6 +299,14 @@ a:hover {
   background-color: #000000;
 }
 
+.stickerPackButton{
+  background-color: #55B7CC;
+}
+
+.stickerPackButton:hover{
+  background-color: #4fa5b7;
+}
+
 #resumeButton {
     width: 100%;
     background-color: #77013a;
