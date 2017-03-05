@@ -2,7 +2,7 @@
 layout: post
 title:  "Ideate Branding"
 tile-name: "Ideate Branding"
-thumbnail: "/img/thumbnails/ideate.png"
+thumbnail: "ideate.png"
 date:   2016-03-01
 tags: digital, branding
 ---

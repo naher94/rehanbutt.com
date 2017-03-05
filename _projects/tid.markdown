@@ -2,7 +2,7 @@
 layout: post
 title:  "Tangible Interaction Design Branding"
 tile-name: "TiD Branding"
-thumbnail: "/img/thumbnails/tid.png"
+thumbnail: "tid.png"
 banner:
 date:   2017-01-25
 tags: Branding

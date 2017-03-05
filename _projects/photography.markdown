@@ -2,7 +2,7 @@
 layout: post
 title:  "Photography"
 tile-name: "Photography"
-thumbnail: "/img/thumbnails/photography.png"
+thumbnail: "photography.png"
 date:   2014-08-01
 tags: photo
 ---

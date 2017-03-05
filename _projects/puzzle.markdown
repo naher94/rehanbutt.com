@@ -2,7 +2,7 @@
 layout: post
 title:  "Puzzle"
 tile-name: "Puzzle"
-thumbnail: "/img/thumbnails/puzzle.png"
+thumbnail: "puzzle.png"
 date:   2015-03-16
 tags: fabrication, illustration
 ---

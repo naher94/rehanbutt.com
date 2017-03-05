@@ -2,7 +2,7 @@
 layout: post
 title:  "Interchange"
 tile-name: "Interchange"
-thumbnail: "/img/thumbnails/interchange.png"
+thumbnail: "interchange.png"
 banner:
 date:   2016-12-30
 tags: branding webdev

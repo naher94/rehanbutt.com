@@ -2,7 +2,7 @@
 layout: post
 title:  "CoLab (Sketch Plugin)"
 tile-name: "Sketch Plugin"
-thumbnail: "/img/thumbnails/coLab.png"
+thumbnail: "coLab.png"
 date:   2016-03-01
 tags: digital
 ---

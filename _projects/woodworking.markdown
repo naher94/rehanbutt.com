@@ -2,7 +2,7 @@
 layout: post
 title:  "Wood Working"
 tile-name: "Wood Working"
-thumbnail: "/img/thumbnails/woodWorking.png"
+thumbnail: "woodWorking.png"
 date:   2012-12-01
 tags: fabrication
 ---

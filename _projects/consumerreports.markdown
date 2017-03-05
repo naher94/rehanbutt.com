@@ -2,7 +2,7 @@
 layout: post
 title:  "My Summer at ConsumerReports"
 tile-name: "Consumer Reports"
-thumbnail: "/img/thumbnails/consumerReports.png"
+thumbnail: "consumerReports.png"
 date:   2015-08-20
 tags: UI/UX, branding, mobile
 ---

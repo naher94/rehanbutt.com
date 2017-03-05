@@ -2,7 +2,7 @@
 layout: post
 title:  "Esporre (Web Portfolio Tool)"
 tile-name: "Portfolio Tool"
-thumbnail: "/img/thumbnails/esporre.png"
+thumbnail: "esporre.png"
 date:   2015-12-12
 tags: web, portfolio, learning
 ---

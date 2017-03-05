@@ -2,7 +2,7 @@
 layout: post
 title:  "My Site"
 tile-name: "My Site"
-thumbnail: "/img/thumbnails/mySite.png"
+thumbnail: "mySite.png"
 date:   2014-12-10
 tags: web
 ---

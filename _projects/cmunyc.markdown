@@ -2,7 +2,7 @@
 layout: post
 title:  "Carnegie Mellon NYC"
 tile-name: "CMU NYC"
-thumbnail: "/img/thumbnails/nyc.png"
+thumbnail: "nyc.png"
 date:   2016-02-09
 tags: web, Dzgn.IO
 ---

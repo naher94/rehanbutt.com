@@ -2,7 +2,7 @@
 layout: post
 title:  "Watch"
 tile-name: "Watch"
-thumbnail: "/img/thumbnails/watch.png"
+thumbnail: "watch.png"
 date:   2013-03-01
 tags: product
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  "Conversational Design (Thesis)"
 tile-name: "Conversational Design"
-thumbnail: "/img/thumbnails/conversationalDesign.png"
+thumbnail: "conversationalDesign.png"
 banner: In Process
 date:   2016-12-16
 tags: bot

@@ -2,7 +2,7 @@
 layout: post
 title:  "LogoMarks"
 tile-name: "LogoMarks"
-thumbnail: "/img/thumbnails/logoMarks.png"
+thumbnail: "logoMarks.png"
 date:   2014-09-25
 tags: logos
 ---

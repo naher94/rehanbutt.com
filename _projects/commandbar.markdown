@@ -2,7 +2,7 @@
 layout: post
 title:  "CommandBar (Photoshop Extension)"
 tile-name: "Photoshop Extension"
-thumbnail: "/img/thumbnails/commandBar.png"
+thumbnail: "commandBar.png"
 date:   2014-09-26
 tags: photoshop
 ---

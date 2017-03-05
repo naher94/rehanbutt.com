@@ -2,7 +2,7 @@
 layout: post
 title:  "Motion Capture Wrapping Paper"
 tile-name: "MoCap Paper"
-thumbnail: "/img/thumbnails/mocapPaper.png"
+thumbnail: "mocapPaper.png"
 date:   2016-12-2
 tags: digital
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  "Illustrations"
 tile-name: "Illustrations"
-thumbnail: "/img/thumbnails/illustrations.png"
+thumbnail: "illustrations.png"
 date:   2016-03-01
 tags: digital, illustration
 ---

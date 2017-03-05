@@ -2,7 +2,7 @@
 layout: post
 title:  "Lustre (Fashion Line)"
 tile-name: "Fashion"
-thumbnail: "/img/thumbnails/fashion.png"
+thumbnail: "fashion.png"
 date:   2015-02-20
 tags: fashion
 ---

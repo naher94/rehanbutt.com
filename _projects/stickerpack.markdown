@@ -2,7 +2,7 @@
 layout: post
 title:  "Penguin Sticker Pack"
 tile-name: "Sticker Pack"
-thumbnail: "/img/thumbnails/stickerPack.png"
+thumbnail: "stickerPack.png"
 banner: New
 date:   2017-03-03
 tags: 

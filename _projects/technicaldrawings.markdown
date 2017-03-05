@@ -2,7 +2,7 @@
 layout: post
 title:  "Technical Drawings"
 tile-name: "Technical Drawings"
-thumbnail: "/img/thumbnails/technicalDrawings.png"
+thumbnail: "technicalDrawings.png"
 date:   2014-03-01
 tags: CAD
 ---

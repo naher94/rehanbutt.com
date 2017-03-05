@@ -2,7 +2,7 @@
 layout: post
 title:  "Apple News for MacOS"
 tile-name: "Apple News"
-thumbnail: "/img/thumbnails/appleNews.png"
+thumbnail: "appleNews.png"
 banner:
 date:   2016-10-9
 tags: digital, UI/UX

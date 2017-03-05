@@ -2,7 +2,7 @@
 layout: post
 title:  "Augmented Reality Glasses"
 tile-name: "AR Glasses"
-thumbnail: "/img/thumbnails/arGlasses.png"
+thumbnail: "arGlasses.png"
 banner: New
 date:   2017-01-27
 tags: 

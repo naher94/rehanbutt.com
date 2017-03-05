@@ -2,7 +2,7 @@
 layout: post
 title:  "Jasper the Color Bot"
 tile-name: "Color Bot"
-thumbnail: "/img/thumbnails/jasper.png"
+thumbnail: "jasper.png"
 date:   2016-12-4
 tags: bot
 ---

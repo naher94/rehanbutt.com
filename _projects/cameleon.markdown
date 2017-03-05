@@ -2,7 +2,7 @@
 layout: post
 title:  "Cameleon Web App (Game/Teaching tool)"
 tile-name: "Color App"
-thumbnail: "/img/thumbnails/cameleon.png"
+thumbnail: "cameleon.png"
 date:   2015-05-05
 tags: web, game, color
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  "Branding Package"
 tile-name: "Branding"
-thumbnail: "/img/thumbnails/isuBranding.png"
+thumbnail: "isuBranding.png"
 date:   2015-02-10
 tags: branding
 ---
