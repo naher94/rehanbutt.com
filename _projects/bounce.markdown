@@ -12,7 +12,7 @@ tags: UI/UX Branding
 
 <!--Explain how this project came to be-->
 <div class="image-container"><img src="../img/bounce/conversationCollections.png" alt="Conversation Collections"/></div>
-
+<!--Give Example chats that this solves (ScreenShots)-->
 
 ## Process
 
