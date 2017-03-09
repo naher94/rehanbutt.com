@@ -111,7 +111,7 @@ ul{
     color: white;
 }
 .commandBarButton:hover {
-    background-color: #680032;
+    background-color: darken(#77013a, $color-percentage);//#680032;
 }
 
 .camleonButton {
@@ -120,7 +120,7 @@ ul{
 }
 
 .camleonButton:hover {
-    background-color: #66b342;
+    background-color: darken(#6cbe45, $color-percentage);//#66b342;
 }
 
 .nycButton {
@@ -129,7 +129,7 @@ ul{
 }
 
 .nycButton:hover {
-    background-color: #d74955;
+    background-color: darken(#EA4D5B, $color-percentage);//#d74955;
 }
 
 .processlyButton{
@@ -137,7 +137,7 @@ ul{
 }
 
 .processlyButton:hover{
-     background-color: #601A4C;
+     background-color: darken(#7C1F5E, $color-percentage);//#601A4C;
 }
 
 .colorBotButton{
@@ -145,7 +145,7 @@ ul{
 }
 
 .colorBotButton:hover{
-  background-color: #C62632;
+  background-color: darken(#E82730, $color-percentage);//#C62632;
 }
 
 .thesisButton{
@@ -153,7 +153,7 @@ ul{
 }
 
 .thesisButton:hover{
-  background-color: #CC1962;
+  background-color: darken(#EA1864, $color-percentage);//#CC1962;
 }
 
 .interchangeButton{
@@ -161,7 +161,7 @@ ul{
 }
 
 .interchangeButton:hover{
-  background-color: #000000;
+  background-color: darken(#313131, $color-percentage);//#000000;
 }
 
 .stickerPackButton{
@@ -169,7 +169,7 @@ ul{
 }
 
 .stickerPackButton:hover{
-  background-color: #4fa5b7;
+  background-color: darken(#55B7CC, $color-percentage);//#4fa5b7;
 }
 
 //******* End of Button Styling
