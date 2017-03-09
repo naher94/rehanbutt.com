@@ -1,6 +1,6 @@
----
-# Front matter comment to ensure Jekyll properly reads file.
----
+--- 
+  # Front matter comment to ensure Jekyll properly reads file. 
+--- 
 
 //******* Variables
 
@@ -11,411 +11,418 @@ $color-percentage: 5%;
 $signature-teal: #12abc4;
 $royal-raspberry: #77013a;
 $dio-grey: #666666;
-
 $signature-teal-hover: #108da2;
 $royal-raspberry-hover: #680032;
 
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Maven+Pro:400,500,900,700);
-
-$maven: 'Maven Pro', sans-serif;
+@import url(https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900);
+$maven: 'Maven Pro',
+sans-serif;
+$regular: 400;
+$medium: 500;
+$bold: 700;
+$black: 900;
 //******* End of Variables
 
-body{
+body {
   font-family: $maven;
   color: $dio-grey;
-  font-weight: 500;
+  font-weight: $medium;
 }
 
-h1, h2, h3, h4{
+h1,
+h2,
+h3,
+h4 {
   font-family: $maven;
   padding-left: 10px;
 }
 
-h4{
-  font-weight: 500;
+h4 {
+  font-weight: $medium;
   margin-top: 50px;
 }
 
-article.post{
+article.post {
   width: 100%;
 }
 
-ul{
+ul {
   padding-left: 10px;
   padding-right: 10px;
 }
 
 .image-container {
-    margin-top: 25px;
-    margin-bottom: 25px;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .thumbnail-container {
-    position: relative;
-    display: block;
-    background-color: black;
-    opacity: 1;
+  position: relative;
+  display: block;
+  background-color: black;
+  opacity: 1;
 }
 
 .thumbnail-container:hover .thumbnail-text {
-    opacity: 1;
+  opacity: 1;
 }
 
 .thumbnail-container:hover .thumbnail-image {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 .thumbnail-text {
-    position: absolute;
-    bottom: 20px;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-    color: white;
-    opacity: 0;
-    text-shadow: 0px 0px 5px rgba(50, 50, 50, 1);
-    font-size: 33px;
-    line-height: 30px;
-    text-align: center;
+  position: absolute;
+  bottom: 20px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  color: white;
+  opacity: 0;
+  text-shadow: 0px 0px 5px rgba(50, 50, 50, 1);
+  font-size: 33px;
+  line-height: 30px;
+  text-align: center;
 }
 
 .thumbnail-tile {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .banner {
-    position: absolute;
-    top: 10px;
-    left: -10px;
-    padding: 5px 20px 5px 20px;
-    font-weight: 700;
-    background-color: $signature-teal;
-    color: white;
+  position: absolute;
+  top: 10px;
+  left: -10px;
+  padding: 5px 20px 5px 20px;
+  font-weight: 700;
+  background-color: $signature-teal;
+  color: white;
 }
 
 p {
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-top: 25px;
-    margin-bottom: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .image-center {
-    margin: 0 auto;
-    display: block;
+  margin: 0 auto;
+  display: block;
 }
 
 ::selection {
-    color: white;
-    background: $signature-teal;
+  color: white;
+  background: $signature-teal;
 }
 
 /* Code for Firefox */
 ::-moz-selection {
-    color: white;
-    background: $signature-teal;
+  color: white;
+  background: $signature-teal;
 }
 
 img {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    user-drag: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  user-drag: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
 }
 
 a {
-    color: $signature-teal;
-    text-decoration: none;
+  color: $signature-teal;
+  text-decoration: none;
 }
 
 a:hover {
-    color: $signature-teal-hover;
+  color: $signature-teal-hover;
 }
 
-.quote{
-    font-size: 64px;
-    line-height: 60px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+.quote {
+  font-size: 64px;
+  line-height: 60px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
-.dateStamp{
-    font-size: 22px;
-    margin-top: -15px;
-    font-weight: 400;
-    margin-bottom: 20px;
+.dateStamp {
+  font-size: 22px;
+  margin-top: -15px;
+  font-weight: 400;
+  margin-bottom: 20px;
 }
 
-iframe{
+iframe {
   height: 600px;
 }
 
 //******* Header Styling
 .nav {
-    color: white;
-    /*margin: 10px;*/
-    padding: 14px;
-    font-weight: 700;
-    height: inherit;
+  color: white;
+  /*margin: 10px;*/
+  padding: 14px;
+  font-weight: 700;
+  height: inherit;
 }
 
 .nav:hover {
-    color: white;
-    background-color: $royal-raspberry-hover;
+  color: white;
+  background-color: $royal-raspberry-hover;
 }
 
 .navbar {
-    background-color: $royal-raspberry;
-    color: white;
-    text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 50px;
-    white-space: nowrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
+  background-color: $royal-raspberry;
+  color: white;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 50px;
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .navscroll {
-    white-space: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
-.navbar::-webkit-scrollbar { 
-    display: none;
+.navbar::-webkit-scrollbar {
+  display: none;
 }
 
-.navscroll::-webkit-scrollbar { 
-    display: none;
+.navscroll::-webkit-scrollbar {
+  display: none;
 }
+
 //******* End of Header Styling
-
-
 //******* Button Styling
 .contentButton {
-    width: 100%;
-    font-size: 30px;
-    color: white;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    text-align: center;
+  width: 100%;
+  font-size: 30px;
+  color: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
 }
 
 .commandBarButton {
-    background-color: #77013a;
-    color: white;
+  background-color: #77013a;
+  color: white;
 }
+
 .commandBarButton:hover {
-    background-color: darken(#77013a, $color-percentage);//#680032;
+  background-color: darken(#77013a, $color-percentage); //#680032;
 }
 
 .camleonButton {
-    background-color: #6cbe45;
-    color: white;
+  background-color: #6cbe45;
+  color: white;
 }
 
 .camleonButton:hover {
-    background-color: darken(#6cbe45, $color-percentage);//#66b342;
+  background-color: darken(#6cbe45, $color-percentage); //#66b342;
 }
 
 .nycButton {
-    background-color: #EA4D5B;
-    color: white;
+  background-color: #EA4D5B;
+  color: white;
 }
 
 .nycButton:hover {
-    background-color: darken(#EA4D5B, $color-percentage);//#d74955;
+  background-color: darken(#EA4D5B, $color-percentage); //#d74955;
 }
 
-.processlyButton{
-     background-color: #7C1F5E;
+.processlyButton {
+  background-color: #7C1F5E;
 }
 
-.processlyButton:hover{
-     background-color: darken(#7C1F5E, $color-percentage);//#601A4C;
+.processlyButton:hover {
+  background-color: darken(#7C1F5E, $color-percentage); //#601A4C;
 }
 
-.colorBotButton{
+.colorBotButton {
   background-color: #E82730;
 }
 
-.colorBotButton:hover{
-  background-color: darken(#E82730, $color-percentage);//#C62632;
+.colorBotButton:hover {
+  background-color: darken(#E82730, $color-percentage); //#C62632;
 }
 
-.thesisButton{
+.thesisButton {
   background-color: #EA1864;
 }
 
-.thesisButton:hover{
-  background-color: darken(#EA1864, $color-percentage);//#CC1962;
+.thesisButton:hover {
+  background-color: darken(#EA1864, $color-percentage); //#CC1962;
 }
 
-.interchangeButton{
+.interchangeButton {
   background-color: #313131;
 }
 
-.interchangeButton:hover{
-  background-color: darken(#313131, $color-percentage);//#000000;
+.interchangeButton:hover {
+  background-color: darken(#313131, $color-percentage); //#000000;
 }
 
-.stickerPackButton{
+.stickerPackButton {
   background-color: #55B7CC;
 }
 
-.stickerPackButton:hover{
-  background-color: darken(#55B7CC, $color-percentage);//#4fa5b7;
+.stickerPackButton:hover {
+  background-color: darken(#55B7CC, $color-percentage); //#4fa5b7;
 }
+
 //******* End of Button Styling
-
-
 //******* 404 Styling
 .title-404 {
-    text-align: center;
-    font-size: 36px;
+  text-align: center;
+  font-size: 36px;
 }
 
 .words-404 {
-    text-align: center;
-    font-size: 18px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-bottom: 20px;
+  text-align: center;
+  font-size: 18px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 20px;
 }
 
 .outerspace {
-    background-color: #26153C;
-    width: 100%;
-    height: 300px;
-    border-radius: 100%;
-    background-image: url(../img/giraffe.svg);
-    background-repeat: no-repeat;
-    background-position: 50% 50px;
-    border-style: solid;
-    border-color: white;
-    border-width: 10px;
+  background-color: #26153C;
+  width: 100%;
+  height: 300px;
+  border-radius: 100%;
+  background-image: url(../img/giraffe.svg);
+  background-repeat: no-repeat;
+  background-position: 50% 50px;
+  border-style: solid;
+  border-color: white;
+  border-width: 10px;
 }
 //******* End of 404 Styling
 
 
 //******* About Page Styling
 .bio {
-    font-size: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #subTitle {
-    font-size: 20px;
-    padding-top: 10px;
-    padding-left: 10px;
+  font-size: 20px;
+  padding-top: 10px;
+  padding-left: 10px;
 }
 
 #subSubTitle {
-    font-size: 18px;
-    padding-top: 10px;
-    padding-left: 10px;
+  font-size: 18px;
+  padding-top: 10px;
+  padding-left: 10px;
 }
 
 #resumeButton {
-    width: 100%;
-    background-color: $royal-raspberry;
-    font-size: 20px;
-    color: white;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 25px;
+  width: 100%;
+  background-color: $royal-raspberry;
+  font-size: 20px;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 25px;
 }
 
 #resumeButton:hover {
-    background-color: $royal-raspberry-hover;
+  background-color: $royal-raspberry-hover;
 }
 
-.bullet-square{
+.bullet-square {
   list-style-type: square;
 }
 //******* End of About Page Styling
 
-
 //******* Footer Styling
 .socialButton {
-    width: 100%;
-    color: white;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: center;
-    background-color: #ececec;
-    margin: 5px;
+  width: 100%;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  background-color: #ececec;
+  margin: 5px;
 }
 
 .socialButton:hover {
-    background-color: #cccccc;
+  background-color: #cccccc;
 }
 
 .social {
-    width: 60px;
-    padding-left: 10px;
-    padding-right: 10px;
+  width: 60px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .social:hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 footer {
-    margin-top: 50px;
-    background-color: #ececec;
-    text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
+  margin-top: 50px;
+  background-color: #ececec;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
+
 //******* End of Footer Styling
 
 
 //******* Foundation Overrides
-.column:last-child:not(:first-child), .columns:last-child:not(:first-child){
-    float: left;
+.column:last-child:not(:first-child),
+.columns:last-child:not(:first-child) {
+  float: left;
 }
+
 //******* End of Foundation Overrides
 
 
 //******* Mobile Styling
-// Measurments pulled from foundation css file
 
+// Measurments pulled from foundation css file
 // Mobile Styling
 @media screen and (min-width: 40em) {
-    .outerspace {
-      height: 700px;
-      background-position: 50% 100px;
-    }
-    .title-404 {
-      font-size: 64px;
-    }
-    .words-404 {
-      font-size: 30px;
-      margin-bottom: 50px;
-    }
-    .dateStamp {
-      font-size: 16px;
-    }
-    iframe{
-      height: 220px;
+  .outerspace {
+    height: 700px;
+    background-position: 50% 100px;
+  }
+  .title-404 {
+    font-size: 64px;
+  }
+  .words-404 {
+    font-size: 30px;
+    margin-bottom: 50px;
+  }
+  .dateStamp {
+    font-size: 16px;
+  }
+  iframe {
+    height: 220px;
   }
 }
 
 // Tablet Styling
 @media screen and (max-width: 64em) {
-
+  
 }
 //******* End of Mobile Styling
