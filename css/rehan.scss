@@ -401,7 +401,7 @@ footer {
 
 // Measurments pulled from foundation css file
 // Mobile Styling
-@media screen and (min-width: 40em) {
+@media screen and (max-width: 40em) {
   .outerspace {
     height: 700px;
     background-position: 50% 100px;
