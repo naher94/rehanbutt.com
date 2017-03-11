@@ -101,8 +101,8 @@ ul {
 }
 
 p {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 100px;
+  padding-right: 100px;
   margin-top: 25px;
   margin-bottom: 25px;
 }
@@ -442,6 +442,10 @@ footer {
   }
   iframe {
     height: 220px;
+  }
+  p{
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
