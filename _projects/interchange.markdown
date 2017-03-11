@@ -23,7 +23,14 @@ As this site will be used by many students, I templated and created a style guid
     </div>
 </a>
 </div>
-<br><br>
+
+<div class="image-container">
+  <img src="../img/interchange/codelab.png" alt="The CodeLab" style="width:100%;"/>
+</div>
+
+<div class="image-container">
+  <img src="../img/interchange/wayfinding.png" alt="Wayfinding Stickers"/>
+</div>
 
 ## Process
 
