@@ -17,3 +17,8 @@ url: "http://rehanbutt.com" # the base hostname & protocol for your site
 markdown: kramdown
 
 gems: [jekyll-sitemap]
+
+collections:
+  projects:
+    output: true
+    permalink: /:path

@@ -1,16 +1,16 @@
 ---
 layout: default
 ---
-
-    {% for post in site.posts %}
+    {% assign project_order = (site.projects | sort: 'date' | reverse) %}
+    {% for project in project_order %}
     <div class="small-12 medium-4 large-3 columns thumbnail-tile">
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+        <a class="post-link" href="{{ project.url | prepend: site.baseurl }}">
             <div class="thumbnail-container">
-            <img class="thumbnail-image" src="{{ post.thumbnail }}">
-            <span class="thumbnail-text">{{ post.tile-name }}</span>
-            {% if post.banner %}
-            <span class="banner">{{ post.banner }}</span>
-            {% endif %}
+              <img class="thumbnail-image" src="img/thumbnails/{{ project.thumbnail }}">
+              <span class="thumbnail-text">{{ project.tile-name }}</span>
+              {% if project.banner %}
+              <span class="banner">{{ project.banner }}</span>
+              {% endif %}
             </div>
         </a>
     </div>
