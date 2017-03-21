@@ -11,7 +11,13 @@ tags: UI/UX Branding
 <div class="image-container"><img src="../img/bounce/logo.svg" alt="Final Logo" class="image-center" style="width:60%"/></div>
 
 <!--Explain how this project came to be-->
+
 <div class="image-container"><img src="../img/bounce/conversationCollections.png" alt="Conversation Collections"/></div>
+<div class="image-container"><img src="../img/bounce/mainScreensFinal.png" alt="Final Screens"/></div>
+<div class="image-container"><img src="../img/bounce/secondaryScreensFinal.png" alt="Final Screens"/></div>
+<div class="image-container"><img src="../img/bounce/darkMainScreensFinal.png" alt="Final Screens"/></div>
+<div class="image-container"><img src="../img/bounce/darkSecondaryScreensFinal.png" alt="Final Screens"/></div>
+
 <!--Give Example chats that this solves (ScreenShots)-->
 
 ## Process
@@ -34,3 +40,16 @@ tags: UI/UX Branding
 <div class="image-container"><img src="../img/bounce/chatInspiration2.png" alt="Chat Inspiration"/></div>
 <div class="image-container"><img src="../img/bounce/colorIterations.png" alt="Color Iterations"/></div>
 <div class="image-container"><img src="../img/bounce/collectionColors.png" alt="Collection Colors"/></div>
+
+<div class="image-container"><img src="../img/bounce/notificationIterations.png" alt="Notification Iterations"/>
+</div>
+
+<div class="image-container"><img src="../img/bounce/addContainerIterations.png" alt="Add Container Iterations"/>
+</div>
+
+<div class="image-container"><img src="../img/bounce/peoplePageIerations.png" alt="People Page Iterations"/>
+</div>
+<div class="image-container"><img src="../img/bounce/bubbleOptionIterations.png" alt="Bubble Option Iterations"/>
+</div>
+<div class="image-container"><img src="../img/bounce/collectionIndicator.png" alt="Collection Indicator Iterations"/>
+</div>
