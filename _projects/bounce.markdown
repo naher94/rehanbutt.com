@@ -4,7 +4,7 @@ title:  "Bounce (Chat App)"
 tile-name: "Chat App"
 thumbnail: "bounce.png"
 banner: New
-date:   2017-02-01
+date:   2017-03-20
 tags: UI/UX Branding
 ---
 
