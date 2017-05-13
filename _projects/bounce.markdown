@@ -3,7 +3,7 @@ layout: post
 title:  "Bounce (Chat App)"
 tile-name: "Chat App"
 thumbnail: "bounce.png"
-banner: New
+banner:
 date:   2017-03-20
 tags: UI/UX Branding
 ---
