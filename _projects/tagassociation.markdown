@@ -3,7 +3,7 @@ layout: post
 title:  "Tag Association Inspiration Game"
 tile-name: "Inspiration Game"
 thumbnail: "tagAssociation.png"
-banner: New
+banner:
 date:   2017-05-12
 tags: 
 ---
