@@ -9,7 +9,7 @@ tags: digital, branding
 
 <div class="image-container"><img src="../img/ideate/logo.svg" alt="Final Logo" class="image-center" style="width:60%; margin-top: 50px; margin-bottom: 100px;"/></div>
 
-<div class="slideshow-container">
+<div class="slideshow-container" style="margin-bottom:50px">
   <div class="gallery-asset fade"> <img src="../img/ideate/slide1.png" alt="The Idea" style="width:100%"> </div>
   <div class="gallery-asset fade"> <img src="../img/ideate/slide2.png" alt="The Icon" style="width:100%"> </div>
   <div class="gallery-asset fade"> <img src="../img/ideate/slide3.png" alt="The System" style="width:100%"> </div>
@@ -30,4 +30,4 @@ tags: digital, branding
 
 ## Process
 
-<div class="image-container"><img src="../img/ideate/ideateSketches.png" alt="Sketches"/></div>
+<div class="image-container"><img src="../img/ideate/ideateSketches.png" class="image-center" alt="Sketches"/></div>
