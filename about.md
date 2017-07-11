@@ -30,7 +30,7 @@ permalink: about
         </ul>
         
         <div id="subTitle">Carnegie Mellon University [2012 - 2016]</div>
-        <div id="subSubTitle">Bachlors in the Integrative Physical and Digital Media Studies</div>
+        <div id="subSubTitle">Bachelors in the Integrative Physical and Digital Media Studies</div>
         <div id="subSubTitle">Relevant Coursework</div>
         <ul class="bullet-square">
             <li>Mobile Service Innovation | Guest Experience & Theme Park Design</li>
