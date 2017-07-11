@@ -51,3 +51,5 @@ Given some of this feedback and thinking bigger towards a brand system over a st
 Playing with colors here! <span class="emoji emoji-thumbs_up"></span>
 
 <div class="image-container"><img src="../img/ideate/usage.png" alt="Brand Usage"/></div>
+
+We made some t-shirts and stickers to celebrate! <span class="emoji emoji-party"></span>
