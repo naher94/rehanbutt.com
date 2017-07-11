@@ -46,7 +46,7 @@ Given some of this feedback and thinking bigger towards a brand system over a st
 
 <div class="image-container"><img src="../img/ideate/iterations4.svg" alt="Logo Iterations"/></div>
 <div class="image-container"><img src="../img/ideate/iterations5.svg" alt="Logo Iterations"/></div>
-<div class="image-container"><img src="../img/ideate/iterations6.svg" alt="Logo Iterations"/></div>
+<div class="image-container"><img src="../img/ideate/iterations6.png" alt="Logo Iterations: Colro Exploration"/></div>
 
 Playing with colors here! <span class="emoji emoji-thumbs_up"></span>
 
