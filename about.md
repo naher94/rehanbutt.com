@@ -55,7 +55,16 @@ permalink: about
             <li>2D (Photography & Computer Graphics), 3D (Fountain/Ceramic & Mixed Media) & 3D (Blown Glass, Metal & Ceramic Fountain)</li>
             <li>Significant Achievement in the Visual Arts (2012)</li>
         </ul>
+        
         <h4>Activities</h4>
+        <div id="subTitle">Co-Presenter - AIA Build Pittsburgh - [Spring 2017]</div>
+        <ul class="bullet-square">
+            <li>Presented ‘<a href="https://dzgn.io/works/uxarchitecture.html">UI/UX Design and Architecture</a>: Leveraging Web Technologies for and by Architects’ sharing common interests and workflows between these industries and some opportunities for both industries to adopt from the other</li>
+        </ul>
+        <div id="subTitle">Guest Lecturer - Digital Media (CMU) - [Spring 2017]</div>
+        <ul class="bullet-square">
+            <li>Ran a workshop series, <a href="https://dzgn.io/works/httparty.html">HTTParty</a>, looking at the basics of UI / UX design and web development, with the Dzgn.IO team</li>
+        </ul>
         <div id="subTitle">Designer & Member - Ideate Student Advisory Committee (CMU) - [2016 - Present]</div>
         <ul class="bullet-square">
             <li>Branded Ideate, Involved in the improvements of the Ideate program</li>
@@ -78,6 +87,7 @@ permalink: about
             <li>Designed, built and programmed autonomous robots</li>
             <li>Awarded 1st place in Alliance Competition (Team Lead), 2nd place overall, double elimination finalists & Judges Choice Award</li>
         </ul>
+        
         <h4>Work Experience</h4>
         <div id="subTitle">Lab Manager - CodeLab (CMU) - [2016 - Present]</div>
         <ul class="bullet-square">
@@ -110,7 +120,7 @@ permalink: about
             <li>Worked with the UX team to redesign consumerreports.org especially in terms of data visualization</li>
         </ul>
 
-        <div id="subTitle">Monitor – Digital Fabrication Lab – [2015 - 2016]</div>
+        <div id="subTitle">Monitor – Digital Fabrication Lab (CMU) – [2015 - 2016]</div>
         <ul class="bullet-square">
             <li>Taught students digital preparation & machining techniques in lasercutting, 3D printing & CNC milling</li>
         </ul>
