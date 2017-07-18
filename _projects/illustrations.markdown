@@ -8,7 +8,6 @@ tags: digital, illustration
 ---
 
 <!--the process of the illustration sketch to rhino to illustrator-->
-
 <div class="row">
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/mango.jpg" alt="Penguin + Mango" /></div>
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/lollipop.jpg" alt="Penguin + Lollipop" /></div>
@@ -18,8 +17,10 @@ tags: digital, illustration
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/newYear2016.png" alt="Penguin + New Year" /></div>
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/bb8.png" alt="Penguin + BB-8" /></div>
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/amazon.jpg" alt="Penguin + Amazon" /></div>
+<!--
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/dio.png" alt="Penguin + Dzgn.IO" /></div>
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/fish.jpg" alt="Penguin + Fish" /></div>
+-->
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/licorice.jpg" alt="Penguin + Licorice" /></div>
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/plant.jpg" alt="Penguin + Plant" /></div>
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/soccer.jpg" alt="Penguin + Soccer" /></div>
@@ -48,3 +49,5 @@ tags: digital, illustration
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/karat.png" alt="karat" /></div>
     <!--<div class="small-12 large-6 columns image-container"><img src="../img/illustrations/BB8Stylize.png" alt="BB8 Stylize" /></div>-->
 </div>
+
+### Check out my <a target="_blank" href="https://dribbble.com/rehanbutt">Dribbble</a> page for even more illustrations!
