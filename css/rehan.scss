@@ -16,8 +16,7 @@ $royal-raspberry-hover: #680032;
 
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900);
-$maven: 'Maven Pro',
-sans-serif;
+$maven: 'Maven Pro', sans-serif;
 $regular: 400;
 $medium: 500;
 $bold: 700;
@@ -303,6 +302,14 @@ p, li, h3{
 
 .stickerPackButton:hover {
   background-color: darken(#55B7CC, $color-percentage); //#4fa5b7;
+}
+
+.stickerPackButtonNaara {
+  background-color: #acdeea;
+}
+
+.stickerPackButtonNaara:hover{
+  background-color: darken(#acdeea, $color-percentage);
 }
 
 //******* End of Button Styling

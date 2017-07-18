@@ -1,22 +1,33 @@
 ---
 layout: post
-title:  "Penguin Sticker Pack"
-tile-name: "Sticker Pack"
+title: "Sticker Packs"
+tile-name: "Sticker Packs"
 thumbnail: "stickerPack.png"
-banner:
-date:   2017-03-03
-tags: 
+banner: Updated
+date: 2017-03-03
+tags:
 ---
 
-<div class="image-container"><img src="../img/stickerPack/appIcon.png" alt="App Icon" class="image-center" style="width:30%"/></div>
+<div class="image-container">
+<img src="../img/stickerPack/stickerpackHero.png" alt="App Icon" class="image-center"/>
+</div>
 
-A couple years ago I started creating a bunch of penguin illustrations, just because and ever since I have been creating illustrations and posting them to Instagram and my <a href="http://blog.rehanbutt.com">blog</a> such as the ones featured below. After creating this penguin identity one of my good friends suggested I create “penguin emoji” so people can use them since many people find them quite cute. Months pasted and I had some time to look into it leading me to iMessage Sticker Packs. And that’s how this happened, creating more and more penguins now joining you in your conversation. Enjoy!
+A couple years ago I started creating a bunch of penguin illustrations, just because and ever since I have been creating illustrations and posting them to <a href="https://www.instagram.com/naher94/">Instagram</a> and my <a href="http://blog.rehanbutt.com">blog</a> such as the ones featured below. After creating this penguin identity one of my good friends suggested I create “penguin emoji” so people can use them since many people find them quite cute. Months pasted and I had some time to look into it leading me to iMessage Sticker Packs. And that’s how this happened, creating more and more penguins now joining you in your conversation. Enjoy!
+
+After creating the penguin sticker pack, I decided to expand the stickers of my friend's dog, Naara, who has a huge following on Instagram. Follow her <a target="_blank" href="https://www.instagram.com/naara.thehusky/">here.</a> Enjoy!
 
 <div>
-<a target="_blank" href="http://penguin.rehanbutt.com">
-    <div class="stickerPackButton contentButton"> Check out the product page
-    </div>
-</a>
+  <a target="_blank" href="http://penguin.rehanbutt.com">
+      <div class="stickerPackButton contentButton"> Check out the Penguin Stickers
+      </div>
+  </a>
+</div>
+
+<div style="margin-top: 20px;">
+  <a target="_blank" href="http://naara.rehanbutt.com">
+      <div class="stickerPackButtonNaara contentButton"> Check out the Naara Stickers
+      </div>
+  </a>
 </div>
 
 <div class="row" style="padding:0px; margin:30px 0px 0px 0px;">
@@ -28,8 +39,13 @@ A couple years ago I started creating a bunch of penguin illustrations, just bec
 
 ## Process
 
+### Penguin Pack
 <div class="image-container"><img src="../img/stickerPack/stickersInspiration.png" alt="Sticker Inspiration" class="image-center"/></div>
 <div class="image-container"><img src="../img/stickerPack/buildTest.png" alt="Sticker Testing"/></div>
 <div class="image-container"><img src="../img/stickerPack/splashDesign.png" alt="Splash Design"/></div>
 
+### Naara Pack
+<div class="image-container"><img src="../img/stickerPack/naaraResearch.png" alt="Naara Referance Images"/></div>
+<div class="image-container"><img src="../img/stickerPack/naaraRhino.png" alt="Naara Rhino"/></div>
+<div class="image-container"><img src="../img/stickerPack/naaraStickers.png" alt="Naara Stickers"/></div>
 
