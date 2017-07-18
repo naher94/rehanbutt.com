@@ -11,7 +11,8 @@ tags: branding
 
 <div class="image-container"><img src="../img/ISU/ISUwebsite.png" alt="ISU Website" /></div>
 
-<iframe src="http://e.issuu.com/embed.html#0/11599873" width="100%" height="600" frameborder="0" allowfullscreen> </iframe>
+<div data-configid="15751362/51271555" style="width:100%; height:700px;" class="issuuembed"></div>
+<script type="text/javascript" src="//e.issuu.com/embed.js" async="true"></script>
 
 ## Process
 
