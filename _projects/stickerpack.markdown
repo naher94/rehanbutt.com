@@ -12,7 +12,7 @@ tags:
 <img src="../img/stickerPack/stickerpackHero.png" alt="App Icon" class="image-center"/>
 </div>
 
-A couple years ago I started creating a bunch of penguin illustrations, just because and ever since I have been creating illustrations and posting them to <a href="https://www.instagram.com/naher94/">Instagram</a> and my <a href="http://blog.rehanbutt.com">blog</a> such as the ones featured below. After creating this penguin identity one of my good friends suggested I create “penguin emoji” so people can use them since many people find them quite cute. Months pasted and I had some time to look into it leading me to iMessage Sticker Packs. And that’s how this happened, creating more and more penguins now joining you in your conversation. Enjoy!
+A couple years ago I started creating a bunch of penguin illustrations, just because and ever since I have been creating illustrations and posting them to <a href="https://www.instagram.com/naher94/">Instagram</a> and my <a href="http://blog.rehanbutt.com">blog</a> such as the ones featured below. After creating this penguin identity one of my good friends suggested I create “penguin emoji” so people can use them since many people find them quite cute. Months past and I had some time to look into it leading me to iMessage Sticker Packs. And that’s how this happened, creating more and more penguins now joining you in your conversation. Enjoy!
 
 After creating the penguin sticker pack, I decided to expand the stickers of my friend's dog, Naara, who has a huge following on Instagram. Follow her <a target="_blank" href="https://www.instagram.com/naara.thehusky/">here.</a> Enjoy!
 
