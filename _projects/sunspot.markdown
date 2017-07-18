@@ -9,6 +9,8 @@ tags: fabrication, physical computing
 
 <div class="image-container"><img src="../img/sunSpot/hero.jpeg" alt="Sun Spot in Use" /></div>
 
+<iframe src="https://player.vimeo.com/video/148396535" width="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 We constructed a wearable device that can attach to a backpack or bag and notifies the user when they have been exposed to too much UV radiation. The audience for this project includes people who spend a significant amount of time outdoors and are concerned about preventing skin cancer and other UV radiation exposure related diseases. For example, as a product it could be marketed toward more active users, such as surfers or beach goers, and specifically users in Australia or South Africa, as both have a large problem with skin caner. SunSpot would be embedded in the arm of a swim shirt or as could be used as beacons or node for the whole family while on the beach.
 
 The notification system has two responses: it quickly buzzes once every hour except the fourth hour where it would continue to buzz until the user cuts off their UV exposure by going inside or sitting in a shaded area. Once the threshold drops, the buzz will end and the loop will start over again. This timing was chosen because after an hour of UV exposure erythema, or sunburn, of the skin begins, and after four hours the damage to skin cells peaks to dangerous levels. 
@@ -20,6 +22,4 @@ The project was extremely successful in the end. The sensor consistently and cor
 I worked on this project with two colleagues of mine, Katelyn Smith & Alex Palatucci.
 
 <div class="image-container"><img src="../img/sunSpot/tech.jpeg" alt="The Hardware" /></div>
-
-<iframe src="https://player.vimeo.com/video/148396535" width="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
