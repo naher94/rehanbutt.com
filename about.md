@@ -59,13 +59,13 @@ permalink: about
         <h4>Activities</h4>
         <div id="subTitle">Co-Presenter - AIA Build Pittsburgh - [Spring 2017]</div>
         <ul class="bullet-square">
-            <li>Presented ‘<a href="https://dzgn.io/works/uxarchitecture.html">UI/UX Design and Architecture</a>: Leveraging Web Technologies for and by Architects’ sharing common interests and workflows between these industries and some opportunities for both industries to adopt from the other</li>
+            <li>Presented ‘<a target="_blank" href="https://dzgn.io/works/uxarchitecture.html">UI/UX Design and Architecture</a>: Leveraging Web Technologies for and by Architects’ sharing common interests and workflows between these industries and some opportunities for both industries to adopt from the other</li>
         </ul>
         <div id="subTitle">Guest Lecturer - Digital Media (CMU) - [Spring 2017]</div>
         <ul class="bullet-square">
-            <li>Ran a workshop series, <a href="https://dzgn.io/works/httparty.html">HTTParty</a>, looking at the basics of UI / UX design and web development, with the Dzgn.IO team</li>
+            <li>Ran a workshop series, <a target="_blank" href="https://dzgn.io/works/httparty.html">HTTParty</a>, looking at the basics of UI / UX design and web development, with the Dzgn.IO team</li>
         </ul>
-        <div id="subTitle">Designer & Member - Ideate Student Advisory Committee (CMU) - [2016 - Present]</div>
+        <div id="subTitle">Designer & Member - Ideate Student Advisory Committee (CMU) - [2015 - 2017]</div>
         <ul class="bullet-square">
             <li>Branded Ideate, Involved in the improvements of the Ideate program</li>
         </ul>
@@ -89,11 +89,15 @@ permalink: about
         </ul>
         
         <h4>Work Experience</h4>
+        <div id="subTitle">Co-Founder - <a target="_blank" href="https://processly.io">Processly</a> - [2016 - Present]</div>
+        <ul class="bullet-square">
+            <li>Processly is a freeform infinite digital whiteboard designed for the modern classroom. Processly makes it easy for students to document, discuss, and reflect upon their work, and for teachers to work alongside them as they foster a collaborative blended learning environment.</li>
+        </ul>
         <div id="subTitle">Lab Manager - CodeLab (CMU) - [2016 - Present]</div>
         <ul class="bullet-square">
             <li>Expand the lab’s digital presence in order to enhance awareness of the lab and its cohort</li>
         </ul>
-        <div id="subTitle">Mobile UI/UX Designer - YinzCam - [2016 - Present]</div>
+        <div id="subTitle">Mobile UI/UX Designer - YinzCam - [2016 - 2017]</div>
         <ul class="bullet-square">
             <li>Lead efforts to enhance our current app experiences & expand to other platforms</li>
             <li>Involved in recruitment efforts for the design team</li>
