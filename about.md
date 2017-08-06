@@ -108,7 +108,7 @@ permalink: about
             <li>Participated in evaluating the current app experiences & proposed enhancements</li>
         </ul>
 
-        <div id="subTitle">Co-Founder - Dzgn.IO - [2015 - Present]</div>
+        <div id="subTitle">Co-Founder - <a target="_blank" href="https://dzgn.io">Dzgn.IO</a> - [2015 - Present]</div>
         <ul class="bullet-square">
             <li>We design and create with an approach of playful pragmatism. A group with the goal to deliver 
 	  design services incorporating holistic values of aesthetics, experience, and communication</li>
