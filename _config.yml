@@ -16,7 +16,7 @@ url: "http://rehanbutt.com" # the base hostname & protocol for your site
 # Build settings
 markdown: kramdown
 
-gems: [jekyll-sitemap]
+plugins: [jekyll-sitemap]
 
 collections:
   projects:
