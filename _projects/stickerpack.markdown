@@ -3,7 +3,7 @@ layout: post
 title: "Sticker Packs"
 tile-name: "Sticker Packs"
 thumbnail: "stickerPack.png"
-banner: Updated
+banner:
 date: 2017-03-03
 tags:
 ---

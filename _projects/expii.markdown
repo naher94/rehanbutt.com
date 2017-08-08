@@ -3,7 +3,7 @@ layout: post
 title:  "Expii Exploration"
 tile-name: "Expii"
 thumbnail: "expii.png"
-banner: New
+banner:
 date:   2017-06-12
 tags: UI, UX, Research
 ---
