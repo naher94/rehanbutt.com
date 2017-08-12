@@ -298,18 +298,23 @@ p, li, h3, #subTitle{
 
 .stickerPackButton {
   background-color: #55B7CC;
-}
-
-.stickerPackButton:hover {
-  background-color: darken(#55B7CC, $color-percentage); //#4fa5b7;
+  &:hover {
+    background-color: darken(#55B7CC, $color-percentage); //#4fa5b7;
+  }
 }
 
 .stickerPackButtonNaara {
   background-color: #acdeea;
+  &:hover{
+    background-color: darken(#acdeea, $color-percentage);
+  }
 }
 
-.stickerPackButtonNaara:hover{
-  background-color: darken(#acdeea, $color-percentage);
+.qulrButton{
+  background-color: #d4d4d4;
+  &:hover{
+    background-color: darken(#d4d4d4, $color-percentage);
+  }
 }
 
 //******* End of Button Styling
