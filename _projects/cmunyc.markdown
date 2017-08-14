@@ -10,18 +10,15 @@ tags: web, Dzgn.IO
 
 <div class="image-container"><img src="../img/nyc/nycDIO.png" alt="Home Page" /></div>
 
-<!--
 <div>
 <a target="_blank" href="http://nyc.dzgn.io">
     <div class="nycButton contentButton"> Check out the full site
     </div>
 </a>
 </div>
--->
 
-<div class="image-container"><img src="../img/nyc/slack.png" alt="Slack" class="image-center" style="width: 70%;" /></div>
+<div class="image-container"><img src="../img/nyc/screenshots.png" alt="Page Screens" /></div>
 
-In order to keep track and make sure everyone was up to speed on what each team was doing we decided to use Slack for communications and updates project wide.
 
 ## Process
 
@@ -60,6 +57,8 @@ When starting this project we looked into other Carnegie Mellon campuses as well
 <img src="../img/nyc/iterations.png" alt="Page Iterations" />
 </div>
 
+<div class="image-container"><img src="../img/nyc/slack.png" alt="Slack" class="image-center" style="width: 70%;" /></div>
+
+In order to keep track and make sure everyone was up to speed on what each team was doing we decided to use Slack for communications and updates project wide.
 
 <!--talk about the overal mission of this site-->
-<!--show mockups iternations-->
