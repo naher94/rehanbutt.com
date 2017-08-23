@@ -317,6 +317,13 @@ p, li, h3, #subTitle{
   }
 }
 
+.techsoaButton{
+  background-color: #00e59f;
+  &:hover{
+    background-color: darken(#00e59f, $color-percentage);
+  }
+}
+
 //******* End of Button Styling
 
 
