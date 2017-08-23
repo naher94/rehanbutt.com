@@ -3,7 +3,7 @@ layout: post
 title: "QULR.Life"
 tile-name: "QULR.Life"
 thumbnail: "qulr.png"
-banner: New
+banner:
 date: 2017-08-12
 tags: web color
 ---
