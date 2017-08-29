@@ -4,6 +4,7 @@ title:  "Illustrations"
 tile-name: "Illustrations"
 thumbnail: "illustrations.png"
 date:   2016-03-01
+banner: Updated
 tags: digital, illustration
 ---
 
@@ -13,6 +14,10 @@ tags: digital, illustration
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/lollipop.jpg" alt="Penguin + Lollipop" /></div>
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/bus.png" alt="Penguin + London Bus" /></div>
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/tube.png" alt="Penguin + London Tube" /></div>
+    <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/nycity.gif" alt="nycity Lettering" /></div>
+    <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/laugh.gif" alt="Laugh Lettering" /></div>
+    <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/stingray.gif" alt="Stingray Drawing" /></div>
+    <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/giraffe.png" alt="Giraffe Drawing" /></div>
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/movieTime.jpg" alt="Penguin + Movie Time" /></div>
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/coffee.png" alt="Penguin + Coffee" /></div>
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/tennis.jpg" alt="Penguin + Tennis" /></div>
