@@ -29,7 +29,7 @@ As part of this concept, I was looking at what a relationship between Apple and 
 <div class="image-container"><img src="../img/arGlasses/appleFashion.png" alt="Apple & the Fashion Industry"/></div>
 
 <div class="image-container"><img src="../img/arGlasses/modelProcess.png" alt="Digital Model"/></div>
-<div class="image-container"><img src="../img/arGlasses/RenderProcess.png" alt="Render Process"/></div>
+<div class="image-container"><img src="../img/arGlasses/renderProcess.png" alt="Render Process"/></div>
 
 <div class="image-container"><img src="../img/arGlasses/packageInspiration.png" alt="Package Inspiration"/></div>
 
