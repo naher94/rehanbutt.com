@@ -25,6 +25,7 @@ permalink: about
         <div id="subSubTitle">Masters in Tangible Interaction Design</div>
         <div id="subSubTitle">Relevant Coursework</div>
         <ul class="bullet-square">
+            <li>Experimenting with Design: Methods for Research Innovation</li>
             <li>Connected Classrooms | Themed Entertainment Design Studio</li>
             <li>Programming for Online Prototypes</li>
         </ul>
@@ -44,16 +45,60 @@ permalink: about
             <li>Design Program - Designing for Active Aging (Certificate Program)</li>
             <li>Concept to prototype, enhanced team building and leadership skills</li>
         </ul>
-
-        <h4>Awards</h4>
-        <div id="subTitle">Expat Living Magazine – Singapore, Singapore [2013]</div>
+        
+        <h4>Work Experience</h4>
+        <div id="subTitle">Teaching Assistant - Spactial Narratives via Web Graphics - [Fall 2017]</div>
         <ul class="bullet-square">
-            <li>Photo competition winner – Featured in the magazine and on the website</li>
+            <li>Taught students web technologies in relation to creating great web experiences</li>
         </ul>
-        <div id="subTitle">St. Andrew’s Episcopal School, Potomac, MD [2009 - 2012]</div>
+        
+        <div id="subTitle">Co-Founder - <a target="_blank" href="https://processly.io">Processly</a> - [2016 - Present]</div>
         <ul class="bullet-square">
-            <li>2D (Photography & Computer Graphics), 3D (Fountain/Ceramic & Mixed Media) & 3D (Blown Glass, Metal & Ceramic Fountain)</li>
-            <li>Significant Achievement in the Visual Arts (2012)</li>
+            <li>A web application making it easy for students to document, discuss, and reflect upon their work. It allows teachers to work alongside students as they foster a collaborative learning environment.</li>
+        </ul>
+        <div id="subTitle">Lab Manager - CodeLab (CMU) - [2016 - 2017]</div>
+        <ul class="bullet-square">
+            <li>Expand the lab’s digital presence in order to enhance awareness</li>
+        </ul>
+        <div id="subTitle">Mobile UI/UX Designer - YinzCam - [2016 - 2017]</div>
+        <ul class="bullet-square">
+            <li>Lead efforts to enhance app experiences across different platforms</li>
+            <li>Involved in recruitment of the design team</li>
+        </ul>
+        
+        <div id="subTitle">Mobile UI/UX Intern - YinzCam - [2015 - 2016]</div>
+        <ul class="bullet-square">
+            <li>Participated in evaluating the current app experiences and proposed enhancements</li>
+        </ul>
+
+        <div id="subTitle">Co-Founder - <a target="_blank" href="https://dzgn.io">Dzgn.IO</a> - [2015 - Present]</div>
+        <ul class="bullet-square">
+            <li>We design and create with an approach of playful pragmatism. A group with the goal to deliver design services incorporating holistic values of aesthetics, experience, and communication</li>
+        </ul>
+
+        <div id="subTitle">Head Teaching Assistant – Intro to Digital Media (CMU) – [2015 - 2016]</div>
+        <ul class="bullet-square">
+            <li>Taught students a variety of software tools for use in their design efforts and their work flows</li>
+        </ul>
+
+        <div id="subTitle">User Experience Design Intern – Consumer Reports – [Summer 2015]</div>
+        <ul class="bullet-square">
+            <li>Worked with the UX team to redesign consumerreports.org with emphasis on data visualization</li>
+        </ul>
+
+        <div id="subTitle">Monitor – Digital Fabrication Lab (CMU) – [2015 - 2016]</div>
+        <ul class="bullet-square">
+            <li>Taught students digital preparation & machining techniques in lasercutting, 3D printing & CNC milling</li>
+        </ul>
+        <div id="subTitle">Designer & Developer – Human Behavior Computing Lab (HCII at CMU) - [2014]</div>
+        <ul class="bullet-square">
+            <li>Designed and created a website for the lab, projects and its members</li>
+        </ul>
+
+        <div id="subTitle">Intern – Architrave (Architectural Firm) Singapore – [Summer 2013]</div>
+        <ul class="bullet-square">
+            <li>Modeled several projects using 3dsMax, Revit and AutoCAD</li>
+            <li>Helped expand the in-house materials and standards libraries</li>
         </ul>
         
         <h4>Activities</h4>
@@ -67,7 +112,7 @@ permalink: about
         </ul>
         <div id="subTitle">Designer & Member - Ideate Student Advisory Committee (CMU) - [2015 - 2017]</div>
         <ul class="bullet-square">
-            <li>Branded Ideate, Involved in the improvements of the Ideate program</li>
+            <li>Branded Ideate, Involved in improving the Ideate program</li>
         </ul>
         <div id="subTitle">Public Relations Chair - International Student Union (ISU) [2014 - 2016]</div>
         <ul class="bullet-square">
@@ -88,55 +133,15 @@ permalink: about
             <li>Awarded 1st place in Alliance Competition (Team Lead), 2nd place overall, double elimination finalists & Judges Choice Award</li>
         </ul>
         
-        <h4>Work Experience</h4>
-        <div id="subTitle">Co-Founder - <a target="_blank" href="https://processly.io">Processly</a> - [2016 - Present]</div>
+        <h4>Awards</h4>
+        <div id="subTitle">Expat Living Magazine – Singapore, Singapore [2013]</div>
         <ul class="bullet-square">
-            <li>Processly is a freeform infinite digital whiteboard designed for the modern classroom. Processly makes it easy for students to document, discuss, and reflect upon their work, and for teachers to work alongside them as they foster a collaborative blended learning environment.</li>
+            <li>Photo competition winner – Featured in the magazine and on the website</li>
         </ul>
-        <div id="subTitle">Lab Manager - CodeLab (CMU) - [2016 - Present]</div>
+        <div id="subTitle">St. Andrew’s Episcopal School, Potomac, MD [2009 - 2012]</div>
         <ul class="bullet-square">
-            <li>Expand the lab’s digital presence in order to enhance awareness of the lab and its cohort</li>
-        </ul>
-        <div id="subTitle">Mobile UI/UX Designer - YinzCam - [2016 - 2017]</div>
-        <ul class="bullet-square">
-            <li>Lead efforts to enhance our current app experiences & expand to other platforms</li>
-            <li>Involved in recruitment efforts for the design team</li>
-        </ul>
-        
-        <div id="subTitle">Mobile UI/UX Intern - YinzCam - [2015 - 2016]</div>
-        <ul class="bullet-square">
-            <li>Participated in evaluating the current app experiences & proposed enhancements</li>
-        </ul>
-
-        <div id="subTitle">Co-Founder - <a target="_blank" href="https://dzgn.io">Dzgn.IO</a> - [2015 - Present]</div>
-        <ul class="bullet-square">
-            <li>We design and create with an approach of playful pragmatism. A group with the goal to deliver 
-	  design services incorporating holistic values of aesthetics, experience, and communication</li>
-        </ul>
-
-        <div id="subTitle">Head Teaching Assistant – Intro to Digital Media (CMU) – [2015 - 2016]</div>
-        <ul class="bullet-square">
-            <li>Taught students a variety of software tools for use in their design efforts and their work flows</li>
-        </ul>
-
-        <div id="subTitle">User Experience Design Intern – Consumer Reports – [Summer 2015]</div>
-        <ul class="bullet-square">
-            <li>Worked with the UX team to redesign consumerreports.org especially in terms of data visualization</li>
-        </ul>
-
-        <div id="subTitle">Monitor – Digital Fabrication Lab (CMU) – [2015 - 2016]</div>
-        <ul class="bullet-square">
-            <li>Taught students digital preparation & machining techniques in lasercutting, 3D printing & CNC milling</li>
-        </ul>
-        <div id="subTitle">Designer & Developer – Human Behavior Computing Lab (HCII at CMU) - [2014]</div>
-        <ul class="bullet-square">
-            <li>Designed and created a website for the lab, projects and its members</li>
-        </ul>
-
-        <div id="subTitle">Intern – Architrave (Architectural Firm) Singapore – [Summer 2013]</div>
-        <ul class="bullet-square">
-            <li>Modeled several projects using 3dsMax, Revit and AutoCAD</li>
-            <li>Helped expand the in-house materials and standards libraries</li>
+            <li>2D (Photography & Computer Graphics), 3D (Fountain/Ceramic & Mixed Media) & 3D (Blown Glass, Metal & Ceramic Fountain)</li>
+            <li>Significant Achievement in the Visual Arts (2012)</li>
         </ul>
 
         <h4>Skills</h4>
