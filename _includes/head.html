@@ -17,7 +17,7 @@
   
     <meta property="og:title" content="{% if page.title %}{{ site.title | escape }} | {{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}" />
 <!--    <meta property="og:image" content="../img/favicon.png" />-->
-  <meta property="og:image" content="{{ page.thumbnail }}" />
+  <meta property="og:image" content="{{ page.thumbnail | prepend: '/' | prepend: site.baseurl | prepend: site.url }}" />
     
     <link rel="stylesheet" href="{{" /css/foundation.css" | prepend: site.baseurl }}"/>
     <link rel="stylesheet" href="{{" /css/gallery.css" | prepend: site.baseurl }}"/>
