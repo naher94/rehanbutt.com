@@ -4,7 +4,7 @@ title:  "Illustrations"
 tile-name: "Illustrations"
 thumbnail: "illustrations.png"
 date:   2016-03-01
-banner: Updated
+banner:
 tags: digital, illustration
 ---
 
