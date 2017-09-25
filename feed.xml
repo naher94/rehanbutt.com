@@ -14,7 +14,7 @@ layout: null
     {% for project in site.projects %}
       <item>
         <title>{{ project.title | xml_escape }}</title>
-        <description>{{ project.content | xml_escape }}</description>
+<!--        <description>{{ project.content | xml_escape }}</description>-->
         <pubDate>{{ project.date | date_to_rfc822 }}</pubDate>
         <link>{{ project.url | prepend: site.baseurl | prepend: site.url }}</link>
         <guid isPermaLink="true">{{ project.url | prepend: site.baseurl | prepend: site.url }}</guid>
