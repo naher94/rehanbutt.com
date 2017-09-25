@@ -240,60 +240,53 @@ p, li, h3, #subTitle{
 .commandBarButton {
   background-color: #77013a;
   color: white;
-}
-
-.commandBarButton:hover {
-  background-color: darken(#77013a, $color-percentage); //#680032;
+  &:hover {
+    background-color: darken(#77013a, $color-percentage); //#680032;
+  }
 }
 
 .camleonButton {
   background-color: #6cbe45;
   color: white;
-}
-
-.camleonButton:hover {
-  background-color: darken(#6cbe45, $color-percentage); //#66b342;
+  &:hover {
+    background-color: darken(#6cbe45, $color-percentage); //#66b342;
+  }
 }
 
 .nycButton {
   background-color: #EA4D5B;
   color: white;
-}
-
-.nycButton:hover {
-  background-color: darken(#EA4D5B, $color-percentage); //#d74955;
+  &:hover {
+    background-color: darken(#EA4D5B, $color-percentage); //#d74955;
+  }
 }
 
 .processlyButton {
   background-color: #7C1F5E;
-}
-
-.processlyButton:hover {
-  background-color: darken(#7C1F5E, $color-percentage); //#601A4C;
+  &:hover {
+    background-color: darken(#7C1F5E, $color-percentage); //#601A4C;
+  }
 }
 
 .colorBotButton {
   background-color: #E82730;
-}
-
-.colorBotButton:hover {
-  background-color: darken(#E82730, $color-percentage); //#C62632;
+  &:hover {
+    background-color: darken(#E82730, $color-percentage); //#C62632;
+  }
 }
 
 .thesisButton {
   background-color: #EA1864;
-}
-
-.thesisButton:hover {
-  background-color: darken(#EA1864, $color-percentage); //#CC1962;
+  &:hover {
+    background-color: darken(#EA1864, $color-percentage); //#CC1962;
+  }
 }
 
 .interchangeButton {
   background-color: #313131;
-}
-
-.interchangeButton:hover {
-  background-color: darken(#313131, $color-percentage); //#000000;
+  &:hover {
+    background-color: darken(#313131, $color-percentage); //#000000;
+  }
 }
 
 .stickerPackButton {
