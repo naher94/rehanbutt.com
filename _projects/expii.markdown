@@ -5,7 +5,7 @@ tile-name: "Expii"
 thumbnail: "expii.png"
 banner:
 date:   2017-06-12
-tags: UI, UX, Research
+tags: UI UX Research edtech
 ---
 
 <div class="image-container"><img src="../img/expii/hero.png" alt="Hero Image"/></div>

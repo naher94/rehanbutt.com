@@ -5,7 +5,7 @@ tile-name: "Chat App"
 thumbnail: "bounce.png"
 banner:
 date:   2017-03-20
-tags: UI/UX Branding
+tags: UI UX Branding
 ---
 
 <div class="image-container"><img src="../img/bounce/logo.svg" alt="Final Logo" class="image-center" style="width:60%"/></div>

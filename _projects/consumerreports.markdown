@@ -4,7 +4,7 @@ title:  "My Summer at ConsumerReports"
 tile-name: "Consumer Reports"
 thumbnail: "consumerReports.png"
 date:   2015-08-20
-tags: UI/UX, branding, mobile
+tags: UI UX branding mobile
 ---
 
 <div class="image-container"><img src="../img/cr/CRMexperience1.png" alt="CR Mobile Experience OnBoarding" />

@@ -4,7 +4,7 @@ title:  "Technical Drawings"
 tile-name: "Technical Drawings"
 thumbnail: "technicalDrawings.png"
 date:   2014-03-01
-tags: CAD
+tags: CAD drawings
 ---
 
 <div class="image-container">

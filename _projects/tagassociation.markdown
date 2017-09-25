@@ -5,7 +5,7 @@ tile-name: "Inspiration Game"
 thumbnail: "tagAssociation.png"
 banner:
 date:   2017-05-12
-tags: 
+tags: web game word association
 ---
 
 <div class="image-container"><img src="../img/tagAssociation/hero.png" alt="Hero Image"/></div>

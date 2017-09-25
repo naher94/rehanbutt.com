@@ -5,7 +5,7 @@ tile-name: "Sticker Packs"
 thumbnail: "stickerPack.png"
 banner:
 date: 2017-03-03
-tags:
+tags: stickers iOS illustrations
 ---
 
 <div class="image-container">

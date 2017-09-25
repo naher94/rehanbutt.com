@@ -5,7 +5,7 @@ tile-name: "Apple News"
 thumbnail: "appleNews.png"
 banner:
 date:   2016-10-9
-tags: digital, UI/UX
+tags: digital UI UX
 ---
 
 <div class="image-container"><img src="../img/appleNews/appIcon.png" alt="Logo" class="image-center" style="width:30%"/></div>

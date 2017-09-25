@@ -4,7 +4,7 @@ title:  "gitApp"
 tile-name: "gitApp"
 thumbnail: "gitApp.png"
 date:   2014-01-30
-tags: iOS, App
+tags: iOS App
 ---
 
 <div class="image-container">
