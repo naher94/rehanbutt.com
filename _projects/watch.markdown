@@ -4,7 +4,7 @@ title:  "Watch"
 tile-name: "Watch"
 thumbnail: "watch.png"
 date:   2013-03-01
-tags: product
+tags: product watch industrial
 ---
 
 <div class="image-container"><img src="../img/watch/watchRender.png" alt="Watch Render" /></div>

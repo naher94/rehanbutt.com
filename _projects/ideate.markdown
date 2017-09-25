@@ -4,7 +4,7 @@ title:  "Ideate Branding"
 tile-name: "Ideate Branding"
 thumbnail: "ideate.png"
 date:   2016-03-01
-tags: digital, branding
+tags: digital branding
 ---
 
 <div class="image-container"><img src="../img/ideate/logo.svg" alt="Final Logo" class="image-center" style="width:60%; margin-top: 50px; margin-bottom: 100px;"/></div>

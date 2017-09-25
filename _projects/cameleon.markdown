@@ -4,7 +4,7 @@ title:  "Cameleon Web App (Game/Teaching tool)"
 tile-name: "Color App"
 thumbnail: "cameleon.png"
 date:   2015-05-05
-tags: web, game, color
+tags: web game color
 ---
 
 <!--branding process-->

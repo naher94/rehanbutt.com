@@ -4,7 +4,7 @@ title:  "Jasper the Color Bot"
 tile-name: "Color Bot"
 thumbnail: "jasper.png"
 date:   2016-12-4
-tags: bot
+tags: bot color
 ---
 
 <div class="image-container"><img src="../img/colorBot/intro.svg" alt="Logo Equation" class="image-center"/></div>

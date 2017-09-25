@@ -4,7 +4,7 @@ title:  "CarnegieHere (iOS App)"
 tile-name: "iOS App"
 thumbnail: "carnegieHere.png"
 date:   2015-12-01
-tags: iOS, App
+tags: iOS App
 ---
 
 <div class="image-container"><img src="../img/carnegieHere/screens1.png" alt="Screens 1" /></div>

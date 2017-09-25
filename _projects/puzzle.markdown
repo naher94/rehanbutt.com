@@ -4,7 +4,7 @@ title:  "Puzzle"
 tile-name: "Puzzle"
 thumbnail: "puzzle.png"
 date:   2015-03-16
-tags: fabrication, illustration
+tags: fabrication illustration
 ---
 
 <div class="image-container"><img src="../img/puzzle/image.png" alt="Puzzle Image" class="image-center" style="width:80%" /></div>

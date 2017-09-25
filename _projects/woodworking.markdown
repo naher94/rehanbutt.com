@@ -4,7 +4,7 @@ title:  "Wood Working"
 tile-name: "Wood Working"
 thumbnail: "woodWorking.png"
 date:   2012-12-01
-tags: fabrication
+tags: fabrication wood
 ---
 
 <div class="image-container">

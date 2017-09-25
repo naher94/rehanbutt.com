@@ -4,7 +4,7 @@ title:  "Esporre (Web Portfolio Tool)"
 tile-name: "Portfolio Tool"
 thumbnail: "esporre.png"
 date:   2015-12-12
-tags: web, portfolio, learning
+tags: web portfolio learning edtech
 ---
 
 <div class="image-container"><img src="../img/esporre/esporreLogo.svg" alt="Esporre Logo" class="image-center" style="width: 40%" /></div>

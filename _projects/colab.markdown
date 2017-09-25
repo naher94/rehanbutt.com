@@ -4,7 +4,7 @@ title:  "CoLab (Sketch Plugin)"
 tile-name: "Sketch Plugin"
 thumbnail: "coLab.png"
 date:   2016-03-01
-tags: digital
+tags: digital app
 ---
 
 <div class="image-container"><img src="../img/colab/logo.svg" alt="Logo" class="image-center" style="width:25%"/></div>

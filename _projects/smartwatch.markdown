@@ -4,7 +4,7 @@ title:  "Weoto (Apple Watch App)"
 tile-name: "SmartWatch App"
 thumbnail: "smartWatch.png"
 date:   2015-04-01
-tags: UI/UX
+tags: UI UX
 ---
 
 <div class="image-container"><img src="../img/smartWatch/appIcon.svg" alt="Icon" class="image-center" style="width:30%" /></div>
