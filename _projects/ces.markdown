@@ -10,7 +10,7 @@ tags: mobile app
 
 <div class="image-container"><img src="../img/ces/ui1.png" alt="Refreshed UIs Series 1"/></div>
 
-My first visit to CES (Consumer Electronics Show) was a blast, so many interesting companies showing of their coolest tech. With over 4000 exhibitors and over 2 million square feet of exhibition space the CES mobile app was helpful in getting around and knowing when and where events were happening. That being said I saw several places where the CES app could be improved and this proposal aids to improve the app experience for the years to come.
+My first visit to CES (Consumer Electronics Show) was a blast, so many interesting companies showing off their coolest tech. With over 4,000 exhibitors and over 2 million square feet of exhibition space, the CES mobile app was helpful in getting around and knowing when and where events were happening. That being said, I saw several places where the CES app could be improved and this proposal aids to improve the app experience for the years to come.
 
 <div class="image-container"><img src="../img/ces/ui2.png" alt="Refreshed UIs Series 2"/></div>
 <div class="image-container"><img src="../img/ces/ui3.png" alt="Refreshed UIs Series 3"/></div>
@@ -18,7 +18,7 @@ My first visit to CES (Consumer Electronics Show) was a blast, so many interesti
 
 <div class="image-container"><img src="../img/ces/colorsystem.png" alt="Color Categories"/></div>
 
-I wanted to take full advantage of the topic categories created for CES. As such a created a color system that maps each category to a color for identifying events, booths and several other things across the app experience.
+I wanted to take full advantage of the topic categories created for CES. As such I created a color system that maps each category to a color for identifying events, booths and several other things across the app experience.
 
 <div class="image-container"><img src="../img/ces/userflowmap.png" alt="User Flow Map"/></div>
 
@@ -27,7 +27,7 @@ I wanted to take full advantage of the topic categories created for CES. As such
 <div class="image-container"><img src="../img/ces/site1.png" alt="CES website"/></div>
 <div class="image-container"><img src="../img/ces/site2.png" alt="CES website"/></div>
 
-The web experience and mobile app experience are quite distinct. I found the web experience to offer cleaner interactions and a cleaner interface and wanted to capture some of it for my redesign, while maintaining the full featured nature of the mobile app.
+The web experience and mobile app experience are quite disconnected. I found the web experience to offer cleaner interactions and a cleaner interface and wanted to capture some of it for my redesign, while maintaining the full featured nature of the mobile app.
 
 <div class="image-container"><img src="../img/ces/appscreens.png" alt="CES iOS Screens"/></div>
 <div class="image-container"><img src="../img/ces/appscreens2.png" alt="CES iOS Screens"/></div>
