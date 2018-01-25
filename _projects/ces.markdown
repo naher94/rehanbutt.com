@@ -12,11 +12,11 @@ tags: mobile app
 
 My first visit to CES (Consumer Electronics Show) was a blast, so many interesting companies showing off their coolest tech. With over 4,000 exhibitors and over 2 million square feet of exhibition space, the CES mobile app was helpful in getting around and knowing when and where events were happening. That being said, I saw several places where the CES app could be improved and this proposal aids to improve the app experience for the years to come.
 
-Starting with the image above presented is a refreshed icon, a refreshed splash page using this year's marketing materials and an onboarding process gaining user preferences in order to suggest sessions, booths and other events for each attendant.
+Starting with the images above presented is a refreshed icon, a refreshed splash page using this year's marketing materials and an onboarding process gaining user preferences in order to suggest sessions, booths and other events for each attendant.
 
 <div class="image-container"><img src="../img/ces/ui2.png" alt="Refreshed UIs Series 2"/></div>
 
-First I wanted to create a true home page, the 'For You' page, for the application utilizing the topic preferences collected during the on boarding process. Showcasing both sessions and booth in one place along with the notifications. This second screen shows what a notification would look like in an expanded view. The third screen showcases your profile page with bookmarked events, booths and people you have networked with. I wanted to streamline the contact sharing aspect of the app as most people just seemed to use LinkedIn. The last screen is this row is the updated search page providing recent and trending searches as well as a cleaner integration of the CES chatbot.
+First I wanted to create a true home page, the 'For You' page, for the application utilizing the topic preferences collected during the onboarding process. Showcasing both sessions and booth in one place along with the notifications. This second screen shows what a notification would look like in an expanded view. The third screen showcases your profile page with bookmarked events, booths and people you have networked with. I wanted to streamline the contact sharing aspect of the app as most people just seemed to use LinkedIn. The last screen is this row is the updated search page providing recent and trending searches as well as a cleaner integration of the CES chatbot.
 
 <div class="image-container"><img src="../img/ces/ui3.png" alt="Refreshed UIs Series 3"/></div>
 
