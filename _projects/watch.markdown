@@ -21,5 +21,3 @@ tags: product watch industrial
 <div class="image-container"><img src="../img/watch/lightPrototype.gif" alt="Light Prototype" class="image-center" style="width:50%"/></div>
 
 In order to get to the small form factor of a watch I started with developing a clock in order to work on the interactions and the lighting effects rather than efficiency. This was one of my first prototypes using a NeoPixel LED array, and Ardunio and a 3D printed shell, using the Form 1 printers.
-
-<!--using arduino and neopixel data vis in the fixture-->
