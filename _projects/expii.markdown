@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Expii Exploration"
-tile-name: "Expii"
+tile-name: "Expii Audit"
 thumbnail: "expii.png"
 banner:
 date:   2017-06-12
