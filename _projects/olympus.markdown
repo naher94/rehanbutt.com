@@ -10,7 +10,7 @@ tags: Branding
 
 <div class="image-container"><img src="../img/olympus/logo.svg" alt="Olympus Logo"/></div>
 
-Over 300 million in funding, 80 awards and 11 acquisitions for all of its companies. With such success of Project Olympus should it have an image to match? As a member of the Project Olympus community I wanted to help refresh the image of Carnegie Mellon University's terrific incubator program. And it happened to be the 10th anniversary of Project Olympus, which would be a great time to unveil a new image for the next ten years and beyond! I wanted to make sure to incorporate many of the same ideas behind the original image including talent, network and community.
+Over $300 million in funding, 80 awards won and 11 acquisitions for all of its companies. With such success of Project Olympus should it have an image to match? As a member of the Project Olympus community I wanted to help refresh the image of Carnegie Mellon University's terrific incubator program. And it happened to be the 10th anniversary of Project Olympus, which would be a great time to unveil a new image for the next ten years and beyond! I wanted to make sure to incorporate many of the same ideas behind the original image including talent, network and community.
 
 <div class="image-container"><img src="../img/olympus/envolope.png" alt="Olympus 10th Anniversary Party Invite"/></div>
 

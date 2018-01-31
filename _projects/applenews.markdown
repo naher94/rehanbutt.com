@@ -10,7 +10,7 @@ tags: digital UI UX
 
 <div class="image-container"><img src="../img/appleNews/appIcon.png" alt="Logo" class="image-center" style="width:30%"/></div>
 
-Apple News is a wonderful part of iOS. A clean place to following all the news you want. But why hasn't it made its way over to MacOS? Wouldn't it be nice to have the same curated news experience on your Mac, rather than opening several browser tabs to get a similar experience? I thought so and decided to mockup what Apple News on MacOS could look like.
+Apple News is a wonderful part of iOS. A clean place to follow all the news you want. But why hasn't it made its way over to MacOS? Wouldn't it be nice to have the same curated news experience on your Mac, rather than opening several browser tabs to get a similar experience? I thought so and decided to mockup what Apple News on MacOS could look like.
 
 <div class="image-container" style="margin-top:100px;"><img src="../img/appleNews/macApp.png" alt="Mac App Interface"/></div>
 
@@ -23,7 +23,7 @@ I wanted to review the design language changes and the evolution of the news eco
 
 <div class="image-container" style="margin-top:100px; margin-bottom:100px;"><img src="../img/appleNews/macAppIconGrid.png" alt="Mac App Icon Grid"/></div>
 
-My first step in designing the icon for Apple News was looking at the 3 icon types and their grids that were introduced with Mac OS X Yosemite. I decided to use the rotated rectangle as it maps closest to a newspaper and because it resembles an analog paper stack as is the case with icons for Notes and Reminders.
+My first step in designing the icon for Apple News was looking at the three icon types and their grids that were introduced with Mac OS X Yosemite. I decided to use the rotated rectangle as it maps closest to a newspaper and because it resembles an analog paper stack as is the case with icons for Notes and Reminders.
 
 <div class="image-container" style="margin-top:100px;"><img src="../img/appleNews/iconIterations.png" alt="Icon Iteration"/></div>
 
