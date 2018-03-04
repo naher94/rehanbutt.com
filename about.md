@@ -104,7 +104,7 @@ permalink: about
         <h4>Activities</h4>
         <div id="subTitle">Co-Presenter - AIA Build Pittsburgh - [Spring 2017]</div>
         <ul class="bullet-square">
-            <li>Presented ‘<a target="_blank" href="https://dzgn.io/works/uxarchitecture.html">UI/UX Design and Architecture</a>: Leveraging Web Technologies for and by Architects’ sharing common interests and workflows between these industries and some opportunities for both industries to adopt from the other</li>
+            <li>Presented ‘<a target="_blank" href="https://dzgn.io/works/ux-architecture.html">UI/UX Design and Architecture</a>: Leveraging Web Technologies for and by Architects’ sharing common interests and workflows between these industries and some opportunities for both industries to adopt from the other</li>
         </ul>
         <div id="subTitle">Guest Lecturer - Digital Media (CMU) - [Spring 2017]</div>
         <ul class="bullet-square">
