@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "WatsON Website Refresh"
+title: "Wats:ON? Website Refresh"
 tile-name: "Web Refresh"
 thumbnail: "watson.png"
 banner: New
