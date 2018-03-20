@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Interactions"
-tile-name: "Interactions"
+title: "UI Interactions"
+tile-name: "UI Interactions"
 thumbnail: "interactions.png"
 banner: New
 date: 2018-03-20
