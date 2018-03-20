@@ -3,7 +3,7 @@ layout: post
 title: "Wats:ON? Website Refresh"
 tile-name: "Web Refresh"
 thumbnail: "watson.png"
-banner: New
+banner:
 date: 2016-11-15
 tags: web
 ---
