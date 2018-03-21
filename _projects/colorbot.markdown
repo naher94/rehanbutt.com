@@ -17,7 +17,7 @@ For this iteration, I decided to build Jasper as an SMS bot using Twilio, to kee
 
 Sadnote: Pantone does not store a public list of all their daily colors :(
 
-In [Version (V1.0)]( https://github.com/naher94/rehanbutt.com/releases/tag/V1.0) Jasper can pull up today’s color of the day and provide up to 4 images using that color. Jasper can also pull up yesterday’s color with images and have a bit of fun with the responses. The color data is scraped from Pantone's [Colorstrology](https://www.pantone.com/colorstrology) site and stored in the Swatch Table of the database. After the color data is collected a secondary function runs that scrapes 4 images from Dribbble given the hex value of the color, and stores it in the Image Table.
+In [Version (V1.0)](https://github.com/naher94/jasper/releases/tag/V1.0) Jasper can pull up today’s color of the day and provide up to 4 images using that color. Jasper can also pull up yesterday’s color with images and have a bit of fun with the responses. The color data is scraped from Pantone's [Colorstrology](https://www.pantone.com/colorstrology) site and stored in the Swatch Table of the database. After the color data is collected a secondary function runs that scrapes 4 images from Dribbble given the hex value of the color, and stores it in the Image Table.
 
 
 <div class="image-container" style="margin-top:50px;"><img src="../img/colorBot/conversation.png" alt="A full Conversation with Jasper"/></div>
