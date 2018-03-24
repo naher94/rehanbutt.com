@@ -19,4 +19,6 @@ tags: interactions animations
   <div class="small-12 medium-6 columns image-container"><img src="../img/interactions/underlineexpand.gif" alt="Expanded Underline Hover Interaction" /></div>
   <div class="small-12 medium-6 columns image-container"><img src="../img/interactions/checkoutbutton.gif" alt="Checkout Button Interaction" /></div>
   <div class="small-12 medium-6 columns image-container"><img src="../img/interactions/socialbutton.gif" alt="Social Action Button Interaction" /></div>
+  <div class="small-12 medium-6 columns image-container"><img src="../img/interactions/letitsnow.gif" alt="Let It Snow Button Interaction" /></div>
+  <div class="small-12 medium-6 columns image-container"><img src="../img/interactions/hoverspread.gif" alt="Icon Spread Hover Interaction" /></div>
 </div>
