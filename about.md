@@ -6,7 +6,6 @@ permalink: about
 
 <div class="small-12 medium-4 large-3 columns">
     <img src="img/rehan.png" style="width:100%">
-
     <a target="_blank" href="img/resume.pdf">
         <div id="resumeButton">Resume</div>
     </a>
@@ -62,7 +61,7 @@ permalink: about
         </ul>
         <div id="subTitle">Mobile UI/UX Designer - YinzCam - [2016 - 2017]</div>
         <ul class="bullet-square">
-            <li>Lead efforts to enhance app experiences across different platforms</li>
+            <li>Lead efforts to enhance app experiences across different platforms, working with clients such as the NBA and NFL pushing their missions forward</li>
             <li>Involved in recruitment of the design team</li>
         </ul>
         
@@ -102,6 +101,22 @@ permalink: about
         </ul>
         
         <h4>Activities</h4>
+        <div id="subTitle">Speaker - Processly, From an Idea to a Product (Young Entrepreneur Society) - [Spring 2018]</div>
+        <ul class="bullet-square">
+            <li>Spoke to the class about what it means to be a young entrepreneur. Finding a problem you are passionate about solving and how you turn that passion into a business. Building a product and putting in the hands of your customer.</li>
+        </ul>
+        <div id="subTitle">Speaker - Careers in UX (UCLA) - [Spring 2018]</div>
+        <ul class="bullet-square">
+            <li>Spoke about the current landscape of user experience design, what it means and where I see the field going as well as how to get into the field coming from a non-design background.</li>
+        </ul>
+        <div id="subTitle">Speaker - Getting into Entrepreneurship (CMU) - [Spring 2018]</div>
+        <ul class="bullet-square">
+            <li>Spoke to the class about what it means to be a young entrepreneur. Finding a problem you are passionate about solving and how you turn that passion into a business.</li>
+        </ul>
+        <div id="subTitle">Speaker - Architecture Seminar (CMU) - [Spring 2018]</div>
+        <ul class="bullet-square">
+            <li>Spoke to the group about what it means to create a personal brand identity. Talking about visual identity as well as the bigger brand system that can be portrayed throughout all of their work. As well as having a design critique around existing student brands.</li>
+        </ul>
         <div id="subTitle">Co-Presenter - AIA Build Pittsburgh - [Spring 2017]</div>
         <ul class="bullet-square">
             <li>Presented ‘<a target="_blank" href="https://dzgn.io/works/ux-architecture.html">UI/UX Design and Architecture</a>: Leveraging Web Technologies for and by Architects’ sharing common interests and workflows between these industries and some opportunities for both industries to adopt from the other</li>
@@ -109,6 +124,10 @@ permalink: about
         <div id="subTitle">Guest Lecturer - Digital Media (CMU) - [Spring 2017]</div>
         <ul class="bullet-square">
             <li>Ran a workshop series, <a target="_blank" href="https://dzgn.io/works/httparty.html">HTTParty</a>, looking at the basics of UI / UX design and web development, with the Dzgn.IO team</li>
+        </ul>
+        <div id="subTitle">Speaker - Architecture Seminar (CMU) - [Fall 2016]</div>
+        <ul class="bullet-square">
+            <li>Spoke to the group about what it means to create a personal brand identity. Talking about visual identity as well as the bigger brand system that can be portrayed throughout all of their work.</li>
         </ul>
         <div id="subTitle">Designer & Member - Ideate Student Advisory Committee (CMU) - [2015 - 2017]</div>
         <ul class="bullet-square">
@@ -146,9 +165,9 @@ permalink: about
 
         <h4>Skills</h4>
         <ul class="no-bullet">
-            <li>Design Thinking | Photoshop | Illustrator | InDesign | Sketch | FramerJS</li>
-            <li>Rhinoceros | RhinoCAM | Vray | AutoCAD | Revit | Photography</li>
+            <li>Design Thinking | Sketch | Framer | Photoshop | Illustrator | InDesign</li>
             <li>HTML | CSS | JavaScript | C | Ruby | RAPID Programming | Arduino</li>
+            <li>Rhinoceros | RhinoCAM | Vray | AutoCAD | Revit | Photography</li>
             <li>CNC Router | Lasercutter | 3D Modeling | Hand & Technical Drawing</li>
         </ul>
     </div>
