@@ -20,7 +20,7 @@ permalink: about
         <div style="padding-left:10px;">To obtain a position that will help me continue to learn and follow my passions in art and technology, while developing innovative products within the organization.</div>
 
         <h4>Education</h4>
-        <div id="subTitle">Carnegie Mellon University [2016 - Present]</div>
+        <div id="subTitle">Carnegie Mellon University [2016 - 2018]</div>
         <div id="subSubTitle">Masters in Tangible Interaction Design</div>
         <div id="subSubTitle">Relevant Coursework</div>
         <ul class="bullet-square">

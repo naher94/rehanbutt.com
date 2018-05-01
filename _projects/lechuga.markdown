@@ -3,7 +3,7 @@ layout: post
 title: "Lechuga Resturant Concept"
 tile-name: "Food Ordering"
 thumbnail: "lechuga.png"
-banner: New
+banner:
 date: 2018-03-11
 tags: web
 ---
