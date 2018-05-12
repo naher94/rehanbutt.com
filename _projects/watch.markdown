@@ -14,7 +14,7 @@ tags: product watch industrial
 <div class="image-container"><img src="../img/watch/clockSketches.png" alt="Clock Sketches" class="image-center" /></div>
 <div class="image-container"><img src="../img/watch/clockSketches2.png" alt="Clock Sketches" class="image-center" /></div>
 
-<div class="image-container"><img src="../img/watch/Inspiration.png" alt="Inspiration Images" class="image-center"/></div>
+<div class="image-container"><img src="../img/watch/inspiration.png" alt="Inspiration Images" class="image-center"/></div>
 
 <div class="image-container"><img src="../img/watch/iterations.png" alt="Digtial Models" class="image-center"/></div>
 <div class="image-container"><img src="../img/watch/prototypes.png" alt="Physical Prototypes" class="image-center"/></div>
