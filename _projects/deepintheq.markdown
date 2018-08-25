@@ -3,7 +3,7 @@ layout: post
 title:  "Deep in The Q (AR)"
 tile-name: "Deep in The Q"
 thumbnail: "deepInTheQ.png"
-banner: New
+banner:
 date:   2017-05-23
 tags: UI UX AR
 ---
