@@ -2,6 +2,7 @@
   # Front matter comment to ensure Jekyll properly reads file. 
 --- 
 
+
 //******* Variables
 
 // Numbers
@@ -394,6 +395,27 @@ p, li, h3, #subTitle{
 .bullet-square {
   list-style-type: square;
 }
+
+
+
+.wave{
+  &:hover{
+    transform-origin: 70% 70%; /* Pivot around the bottom-left palm */
+    -webkit-animation:wave-animation 2.5s alternate 2;
+    -moz-animation:wave-animation 2.5s alternate 2;
+    animation:wave-animation 2.5s alternate 2;
+  }
+}
+@keyframes wave-animation {
+    0% { transform: rotate(  0.0deg) }
+   10% { transform: rotate(-10.0deg) }/* The following four values can be played with to make the waving more or less extreme */
+   20% { transform: rotate( 12.0deg) }
+   30% { transform: rotate(-10.0deg) }
+   40% { transform: rotate(  9.0deg) }
+   50% { transform: rotate(  0.0deg) }/* Reset for the last half to pause */
+  100% { transform: rotate(  0.0deg) }
+}
+
 //******* End of About Page Styling
 
 //******* Footer Styling
