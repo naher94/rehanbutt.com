@@ -1,17 +1,66 @@
 <header>
-        <div style="background-color:#12abc4; text-align:center; padding: 20px;">
-            <a href="{{ site.baseurl }}/">
-                <img src="{{'/img/rehanLogo.svg'| prepend: site.baseurl }}" style="height:80px;" alt="Rehan Logo">
-            </a>
-        </div>
-  <div class="navbar navscroll">
-        <a class="nav" href="/index.html">Portfolio</a>
+  
+  <nav class=" nav-container">
+  <div class="site-nav row column large-12">
+    <div class="menu-container">
+      <a href="#" class="menu">
+        <svg width="16px" height="9px" viewBox="0 0 16 9">
+          <g fill-rule="evenodd">
+            <g transform="translate(-30.000000, -44.000000)" fill="#FFFFFF">
+              <path d="M30,44 L46,44 L46,47 L30,47 L30,44 Z M30,50 L46,50 L46,53 L30,53 L30,50 Z"></path>
+            </g>
+          </g>
+        </svg>
+      </a>
+    
+    <div class="mobile-navbar">
+      <a class="nav" href="/index.html">Portfolio</a>
+      {% for my_page in site.pages %}{% if my_page.title == "About" %}
+        <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+        {% endif %}{% endfor %}
+    </div>
+
+    <div class="navbar">
+      <a class="nav" href="/index.html">Portfolio</a>
         {% for my_page in site.pages %}{% if my_page.title %}
         <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
         {% endif %}{% endfor %}
         <a class="nav" href="http://blog.rehanbutt.com">Blog</a>
         <a class="nav" href="http://resources.rehanbutt.com">Resources</a>
         <a class="nav" target="_blank" href="https://society6.com/rehanbutt">Store</a>
+    </div>
+    <div class="logo">
+      <a href="{{ site.baseurl }}/">
+        <img src="{{'/img/rehanLogo.svg'| prepend: site.baseurl }}" alt="Rehan's Logo">
+      </a>
+    </div>
+    <div class="mobile-navbar-full">
+      <div class="nav-item-container"><a class="nav" href="/index.html">Portfolio</a></div>
+      {% for my_page in site.pages %}{% if my_page.title %}
+        <div class="nav-item-container"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></div>
+      {% endif %}{% endfor %}
+      <div class="nav-item-container"><a class="nav" href="http://blog.rehanbutt.com">Blog</a></div>
+      <div class="nav-item-container"><a class="nav" href="http://resources.rehanbutt.com">Resources</a></div>
+      <div class="nav-item-container"><a class="nav" target="_blank" href="https://society6.com/rehanbutt">Store</a></div>
+    </div>
+    </div>
   </div>
-
+</nav>
+  
+<!--
+  <div class="nav-container">
+    <div class="navbar navscroll">
+      <a class="nav" href="/index.html">Portfolio</a>
+      {% for my_page in site.pages %}{% if my_page.title %}
+      <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+      {% endif %}{% endfor %}
+      <a class="nav" href="http://blog.rehanbutt.com">Blog</a>
+      <a class="nav" href="http://resources.rehanbutt.com">Resources</a>
+      <a class="nav" target="_blank" href="https://society6.com/rehanbutt">Store</a>
+    </div>
+    <a href="{{ site.baseurl }}/">
+      <img src="{{'/img/rehanLogo.svg'| prepend: site.baseurl }}" style="height:50px;" alt="Rehan's Logo">
+    </a>
+  </div>
+-->
 </header>

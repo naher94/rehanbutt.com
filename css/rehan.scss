@@ -14,6 +14,7 @@ $royal-raspberry: #77013a;
 $dio-grey: #666666;
 $signature-teal-hover: #108da2;
 $royal-raspberry-hover: #680032;
+$navy-black: #1f2937;
 
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900);
@@ -22,6 +23,16 @@ $regular: 400;
 $medium: 500;
 $bold: 700;
 $black: 900;
+
+@import url('https://fonts.googleapis.com/css?family=Zilla+Slab:400,700&display=swap');
+$zilla: 'Zilla Slab', serif;
+$regular: 400;
+$bold: 700;
+
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+$lato: 'Lato', sans-serif;
+$regular: 400;
+$bold: 700;
 //******* End of Variables
 
 body {
@@ -153,47 +164,89 @@ iframe {
 }
 
 //******* Header Styling
+.nav-container{
+  background-color:$signature-teal; 
+//  text-align:center;
+//  padding: 40px 200px 40px 200px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-bottom: 60px;
+  float: left;
+  width: 100%;
+}
+
+.menu{
+  display: none;
+}
+
+.mobile-navbar-full{
+  display: none;
+}
+
+.logo{
+  float: right;
+  img{
+    height: 50px;
+  }
+}
+
+.menu-hide{
+  display: none;
+}
+
 .nav {
   color: white;
   /*margin: 10px;*/
   padding: 14px;
   font-weight: 700;
   height: inherit;
+  font-family: $zilla;
+  font-size: 20px;
 }
 
 .nav:hover {
   color: white;
-  background-color: $royal-raspberry-hover;
+  background-color: $signature-teal-hover;
+  border-radius: 500px;
+}
+
+.mobile-navbar{
+  display: none;
+  float: left;
+  line-height: 50px;
 }
 
 .navbar {
-  background-color: $royal-raspberry;
+//  background-color: $royal-raspberry;
   color: white;
-  text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-bottom: 50px;
-  white-space: nowrap;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
+  float: left;
+  line-height: 50px;
+//  text-align: center;
+//  padding-top: 10px;
+//  padding-bottom: 10px;
+//  margin-bottom: 50px;
+//  white-space: nowrap;
+//  overflow-x: scroll;
+//  overflow-y: hidden;
+//  -webkit-overflow-scrolling: touch;
 }
 
-.navscroll {
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-}
+//.navscroll {
+//  white-space: nowrap;
+//  overflow-x: auto;
+//  overflow-y: hidden;
+//  -webkit-overflow-scrolling: touch;
+//  -ms-overflow-style: -ms-autohiding-scrollbar;
+//}
+//
+//.navbar::-webkit-scrollbar {
+//  display: none;
+//}
+//
+//.navscroll::-webkit-scrollbar {
+//  display: none;
+//}
 
-.navbar::-webkit-scrollbar {
-  display: none;
-}
-
-.navscroll::-webkit-scrollbar {
-  display: none;
-}
 //******* End of Header Styling
 
 p, li, h3, #subTitle{
@@ -362,6 +415,53 @@ p, li, h3, #subTitle{
   font-size: 20px;
   padding-left: 10px;
   padding-right: 10px;
+  h1{
+    padding-left: 0;
+    color: $navy-black;
+    font-family: $zilla;
+    font-weight: $bold;
+    font-size: 60px;
+    margin-bottom: 0;
+    span{
+      font-size: 50px;
+    }
+  }
+  p{
+    color: $navy-black;
+    font-family: $lato;
+    line-height: 34px;
+    font-size: 26px;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.background-shapes{
+  position: absolute;
+  .circle{
+    position: absolute;
+    z-index: -10;
+    border-radius: 50%;
+    animation-name: bubbles-animation;/* Refers to the name of your @keyframes element below */
+    animation-duration: 5s;/* Change to speed up or slow down */
+    animation-iteration-count: infinite;/* Never stop waving :) */
+    transform-origin: bottom left;/* Pivot around the bottom-left palm */
+    display: inline-block;
+  }
+
+  .circle1{
+    width: 150px;
+    height: 150px;
+    background: #9c5ab7;
+    left: calc(100% - 50px);
+  }
+  .circle2{
+    width: 100px;
+    height: 100px;
+    background: #f2c50f;
+    left: calc(100% / 2);
+    top: 200px;
+  }
 }
 
 #subTitle {
@@ -396,24 +496,32 @@ p, li, h3, #subTitle{
   list-style-type: square;
 }
 
-
-
-.wave{
-  &:hover{
-    transform-origin: 70% 70%; /* Pivot around the bottom-left palm */
-    -webkit-animation:wave-animation 2.5s alternate 2;
-    -moz-animation:wave-animation 2.5s alternate 2;
-    animation:wave-animation 2.5s alternate 2;
-  }
+span.wave {
+  animation-name: wave-animation;    /* Refers to the name of your @keyframes element below */
+  animation-duration: 2.5s;          /* Change to speed up or slow down */
+  animation-iteration-count: infinite;    /* Never stop waving :) */
+  transform-origin: 70% 70%;         /* Pivot around the bottom-left palm */
+  display: inline-block;
 }
+
 @keyframes wave-animation {
     0% { transform: rotate(  0.0deg) }
-   10% { transform: rotate(-10.0deg) }/* The following four values can be played with to make the waving more or less extreme */
+   10% { transform: rotate(-10.0deg) }    /* The following four values can be played with to make the waving more or less extreme */
    20% { transform: rotate( 12.0deg) }
    30% { transform: rotate(-10.0deg) }
    40% { transform: rotate(  9.0deg) }
-   50% { transform: rotate(  0.0deg) }/* Reset for the last half to pause */
+   50% { transform: rotate(  0.0deg) }    /* Reset for the last half to pause */
   100% { transform: rotate(  0.0deg) }
+}
+
+@keyframes bubbles-animation {
+    0% { transform: scale(  1) }
+//   10% { transform: scale(0.8) }
+//   20% { transform: scale(0.6) }
+//   30% { transform: scale(1.5) }
+//   40% { transform: scale(  1) }
+   70% { transform: scale(0.9) }
+  100% { transform: scale(  1) }
 }
 
 //******* End of About Page Styling
@@ -487,6 +595,69 @@ footer {
   p{
     padding-left: 10px;
     padding-right: 10px;
+  }
+  
+  
+  .menu {
+    display: block;
+    float: left;
+    width: 36px;
+    height: 26px;
+    line-height: 0;
+    padding-top: 13px;
+    text-align: center;
+
+    > svg {
+      width: 18px;
+      height: 15px;
+
+      path {
+        fill: white;
+      }
+    }
+  
+}
+  .mobile-navbar{
+    display: block;
+    line-height: 40px;
+  }
+  
+  .nav{
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .logo{
+    img{
+      height: 40px;
+    }
+  }
+  
+  .navbar {
+      clear: both;
+      display: none;
+  }
+  //Displays site nav on hover on mobile widths
+  .menu-container{
+    &:hover .mobile-navbar-full {
+      margin-top: 20px;
+      display: inline-block;
+      width: 100%;
+      left: 0;
+      top: 0;
+//      background-color: rebeccapurple;
+      .nav-item-container{
+        width: 100%;
+        display: inline-block;
+        margin-bottom: 10px;
+        a{
+          font-size: 24px;
+        }
+      }
+    }
+    &:hover .mobile-navbar{
+      display: none;
+    }
   }
 }
 
