@@ -1,19 +1,26 @@
 ---
-layout: post
+layout: default
 title: "About"
 permalink: about
 ---
 
-<div class="small-12 medium-4 large-3 columns">
-    <img src="img/rehan.png" style="width:100%">
+<div class="background-shapes">
+  <div class="circle circle1"></div>
+  <div class="circle circle2"></div>
+  
+</div>
+
+<div class="small-12 medium-4 columns">
+    <img src="img/rehan-full.png" style="width:100%">
     <a target="_blank" href="img/resume.pdf">
         <div id="resumeButton">Resume</div>
     </a>
 </div>
 
-<div class="small-12 medium-7 large-8 columns">
+<div class="small-12 medium-7 columns">
     <div class="bio">
-        I’m a Carnegie Mellon University graduate with integrated degrees that bring together my passions in design <span class="emoji emoji-palette"></span> and technology.<span class="emoji emoji-computer"></span>  I have had the privilege to work with some amazing organizations like the NBA and NFL helping them design awesome project. I love to travel <span class="emoji emoji-airplane"></span>, and have been fortunate enough to live all over the world. <span class="emoji emoji-globe_asia"></span> Trying every day to bring the unique aspects of each culture into my work. In my free time, I enjoy photography <span class="emoji emoji-camera"></span> and creating cute digital illustrations. <span class="emoji emoji-penguin_head"></span>
+        <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
+        <p>I am a devzgner (designer + developer) currently working for UPMC Enterprises in Pittsburgh on Healthcare Technology. with several years of experience working on both consumer and enterprise solutions for clients such as the NBA and NFL. I love to travel ✈️ and have been fortunate enough to live all over the world.🌏</p>
     </div>
     <div style="margin-top:50px">
         <h4>Goal</h4>
