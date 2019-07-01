@@ -29,10 +29,12 @@ $zilla: 'Zilla Slab', serif;
 $regular: 400;
 $bold: 700;
 
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,700,900&display=swap');
 $lato: 'Lato', sans-serif;
+$light-italic: 300i;
 $regular: 400;
 $bold: 700;
+$black: 900;
 //******* End of Variables
 
 body {
@@ -436,6 +438,61 @@ p, li, h3, #subTitle{
   }
 }
 
+.work-experience{
+  h2{
+    font-size: 70px;
+    color: rgba(31, 41, 55, 0.15);
+    font-weight: $black;
+    font-family: $lato;
+  }
+  .work-item{
+    &:first-of-type{
+      margin-top: -50px;
+    }
+    margin-top: 20px;
+    padding-left: 10px;
+    h3{
+      font-family: $lato;
+      color: $navy-black;
+      font-size: 20px;
+      font-weight: $black;
+      padding: 0;
+      margin-bottom: 0;
+    }
+    p{
+      padding: 0;
+      margin: 0;
+      margin-top: -5px;
+    }
+    .date{
+      font-family: $lato;
+      color: $navy-black;
+      font-size: 20px;
+      font-weight: 300;
+      font-style: italic;
+    }
+    .description{
+      font-family: $lato;
+      color: $navy-black;
+      font-size: 20px;
+      font-weight: $regular;
+      line-height: 24px;
+    }
+    .brand-logo{
+      position: absolute;
+//      opacity: 0.2;
+      margin-left: -80px;
+      animation-name: brand-logo-animation-back;
+      animation-duration: .3s;
+    }
+    &:hover .brand-logo{
+      opacity: 1;
+      animation-name: brand-logo-animation;
+      animation-duration: .3s;
+    }
+  }
+}
+
 .background-shapes{
   position: absolute;
   .circle{
@@ -522,6 +579,16 @@ span.wave {
 //   40% { transform: scale(  1) }
    70% { transform: scale(0.9) }
   100% { transform: scale(  1) }
+}
+
+@keyframes brand-logo-animation {
+  0%   {opacity: 0.2;}
+  100% {opacity: 1;}
+}
+
+@keyframes brand-logo-animation-back {
+  0%   {opacity: 1;}
+  100% {opacity: 0.2;}
 }
 
 //******* End of About Page Styling

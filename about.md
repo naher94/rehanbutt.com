@@ -18,10 +18,30 @@ permalink: about
 </div>
 
 <div class="small-12 medium-7 columns">
-    <div class="bio">
+    <section class="bio">
         <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
-        <p>I am a devzgner (designer + developer) currently working for UPMC Enterprises in Pittsburgh on Healthcare Technology. with several years of experience working on both consumer and enterprise solutions for clients such as the NBA and NFL. I love to travel ✈️ and have been fortunate enough to live all over the world.🌏</p>
-    </div>
+        <p>I am a devzgner (designer + developer) currently working for <a href="#" target="_blank">UPMC Enterprises</a> in Pittsburgh on Healthcare Technology. with several years of experience working on both consumer and enterprise solutions for clients such as the NBA and NFL. I love to travel ✈️ and have been fortunate enough to live all over the world.🌏</p>
+    </section>
+    <section class="work-experience">
+      <h2>Work Experience</h2>
+      <div class="work-item">
+        <h3>Product Designer・UPMC Enterprises</h3>
+        <p class="date">July 2018・Present</p>
+        <p class="description">Working with GE Healthcare on their enterpirse imaging products</p>
+      </div>
+      <div class="work-item">
+        <h3>Product Designer・UPMC Enterprises</h3>
+        <p class="date">July 2018・Present</p>
+        <p class="description">Working with GE Healthcare on their enterpirse imaging products</p>
+      </div>
+      <div class="work-item">
+        <img class="brand-logo" src="img/processly-logo.svg" alt="Processly Logo">
+        <h3>Co-Founder & CXO・Processly</h3>
+        <p class="date">Month 2016・Present</p>
+        <p class="description">A web application making it easy for students to document, discuss, and reflect upon their work. It allows teachers to work alongside students as they foster a collaborative learning environment.</p>
+      </div>
+    </section>
+    
     <div style="margin-top:50px">
         <h4>Goal</h4>
         <div style="padding-left:10px;">To obtain a position that will help me continue to learn and follow my passions in design and technology, while developing innovative products within the organization.</div>
