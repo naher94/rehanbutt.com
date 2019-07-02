@@ -75,6 +75,10 @@ ul {
   display: block;
   background-color: black;
   opacity: 1;
+  border-radius: 10px;
+  .thumbnail-image{
+    border-radius: 10px;
+  }
 }
 
 .thumbnail-container:hover .thumbnail-text {
@@ -480,7 +484,7 @@ p, li, h3, #subTitle{
     }
     .brand-logo{
       position: absolute;
-//      opacity: 0.2;
+      opacity: 0.2;
       margin-left: -80px;
       animation-name: brand-logo-animation-back;
       animation-duration: .3s;
@@ -700,6 +704,10 @@ footer {
     }
   }
   
+  .thumbnail-tile {
+    margin-bottom: 20px;
+  }
+  
   .navbar {
       clear: both;
       display: none;
@@ -712,7 +720,6 @@ footer {
       width: 100%;
       left: 0;
       top: 0;
-//      background-color: rebeccapurple;
       .nav-item-container{
         width: 100%;
         display: inline-block;
@@ -722,9 +729,9 @@ footer {
         }
       }
     }
-    &:hover .mobile-navbar{
-      display: none;
-    }
+      &:hover .mobile-navbar{
+        display: none;
+      }
   }
 }
 
