@@ -314,6 +314,8 @@ p, li, h3, #subTitle{
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: center;
+  border-radius: 200px;
+  transition: all 0.20s ease-in-out;
 }
 
 .commandBarButton {
@@ -566,6 +568,7 @@ p, li, h3, #subTitle{
   text-align: center;
   margin-top: 10px;
   margin-bottom: 25px;
+  border-radius: 200px;
 }
 
 #resumeButton:hover {
