@@ -38,16 +38,17 @@ $black: 900;
 //******* End of Variables
 
 body {
-  font-family: $maven;
-  color: $dio-grey;
+  font-family: $lato;
+  color: $navy-black;
   font-weight: $medium;
+  font-size: 16px;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: $maven;
+  font-family: $zilla;
   padding-left: 10px;
 }
 
@@ -76,7 +77,7 @@ ul {
   background-color: black;
   opacity: 1;
   border-radius: 10px;
-  transition: all 0.15s ease-in-out;
+  transition: all 0.20s ease-in-out;
   &:hover{
     -webkit-transform: scale(1.05);
     -ms-transform: scale(1.05);
@@ -92,13 +93,13 @@ ul {
 
 .thumbnail-container:hover .thumbnail-text {
   opacity: 1;
-    transition: all 0.15s ease-in-out;
+  transition: all 0.30s ease-in-out;
 
 }
 
 .thumbnail-container:hover .thumbnail-image {
   opacity: 0.8;
-    transition: all 0.15s ease-in-out;
+  transition: all 0.30s ease-in-out;
 
 }
 
@@ -114,6 +115,8 @@ ul {
   font-size: 33px;
   line-height: 30px;
   text-align: center;
+  font-weight: $bold;
+  font-family: $zilla;
 }
 
 .thumbnail-tile {
@@ -122,12 +125,15 @@ ul {
 
 .banner {
   position: absolute;
-  top: 10px;
-  left: -10px;
+//  top: 10px;
+//  right: 10px;
+  top: -20px;
+  right: -20px;
   padding: 5px 20px 5px 20px;
   font-weight: 700;
   background-color: $signature-teal;
   color: white;
+  border-radius: 500px;
 }
 
 p {
