@@ -7,41 +7,51 @@
 
 // Numbers
 $color-percentage: 5%;
+$tile-radius: 10px;
+$pill-radius: 500px;
+$recessed-shadow: 0px 10px 33px -10px;
 
 // Colors
 $signature-teal: #12abc4;
 $royal-raspberry: #77013a;
 $dio-grey: #666666;
+$navy-black: #1f2937;
+$pure-white: #ffffff;
+
 $signature-teal-hover: #108da2;
 $royal-raspberry-hover: #680032;
-$navy-black: #1f2937;
+
+// Animations
+$sprint: all 0.20s ease-in-out;
+$run: all 0.30s ease-in-out;
+$jog: all 0.50s ease-in-out;
 
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900);
 $maven: 'Maven Pro', sans-serif;
-$regular: 400;
-$medium: 500;
-$bold: 700;
-$black: 900;
+$maven-regular: 400;
+$maven-medium: 500;
+$maven-bold: 700;
+$maven-black: 900;
 
 @import url('https://fonts.googleapis.com/css?family=Zilla+Slab:400,700&display=swap');
 $zilla: 'Zilla Slab', serif;
-$regular: 400;
-$bold: 700;
+$zilla-regular: 400;
+$zilla-bold: 700;
 
 @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,700,900&display=swap');
 $lato: 'Lato', sans-serif;
-$light-italic: 300i;
-$regular: 400;
-$bold: 700;
-$black: 900;
+$lato-light-italic: 300i;
+$lato-regular: 400;
+$lato-bold: 700;
+$lato-black: 900;
 //******* End of Variables
 
 body {
   font-family: $lato;
-  color: $navy-black;
-  font-weight: $medium;
+  font-weight: $lato-regular;
   font-size: 16px;
+  color: $navy-black;
 }
 
 h1,
@@ -53,7 +63,7 @@ h4 {
 }
 
 h4 {
-  font-weight: $medium;
+  font-weight: $zilla-regular;
   margin-top: 50px;
 }
 
@@ -72,35 +82,30 @@ ul {
 }
 
 .thumbnail-container {
-  position: relative;
-  display: block;
-  background-color: black;
-  opacity: 1;
-  border-radius: 10px;
-  transition: all 0.20s ease-in-out;
+  position: relative; //For banner to show correctly
+  display: block; //For banner to show correctly
+  background-color: $navy-black;
+  border-radius: $tile-radius;
+  transition: $sprint;
   &:hover{
     -webkit-transform: scale(1.05);
     -ms-transform: scale(1.05);
     transform: scale(1.05);
-    -webkit-box-shadow: 0px 10px 33px -10px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 10px 33px -10px rgba(0,0,0,0.75);
-    box-shadow: 0px 10px 33px -10px rgba(0,0,0,0.75);
+    -webkit-box-shadow: $recessed-shadow rgba($navy-black,0.75);
+    -moz-box-shadow: $recessed-shadow rgba($navy-black,0.75);
+    box-shadow: $recessed-shadow rgba($navy-black,0.75);
+  }
+  &:hover .thumbnail-text{
+    opacity: 1;
+    transition: $run;
+  }
+  &:hover .thumbnail-image{
+    opacity: 0.8;
+    transition: $run;
   }
   .thumbnail-image{
-    border-radius: 10px;
+    border-radius: $tile-radius;
   }
-}
-
-.thumbnail-container:hover .thumbnail-text {
-  opacity: 1;
-  transition: all 0.30s ease-in-out;
-
-}
-
-.thumbnail-container:hover .thumbnail-image {
-  opacity: 0.8;
-  transition: all 0.30s ease-in-out;
-
 }
 
 .thumbnail-text {
@@ -109,13 +114,13 @@ ul {
   margin: 0 auto;
   left: 0;
   right: 0;
-  color: white;
+  color: $pure-white;
   opacity: 0;
-  text-shadow: 0px 0px 5px rgba(50, 50, 50, 1);
+  text-shadow: 0px 0px 5px $navy-black;
   font-size: 33px;
   line-height: 30px;
   text-align: center;
-  font-weight: $bold;
+  font-weight: $zilla-bold;
   font-family: $zilla;
 }
 
@@ -125,14 +130,12 @@ ul {
 
 .banner {
   position: absolute;
-//  top: 10px;
-//  right: 10px;
   top: -20px;
   right: -20px;
   padding: 5px 20px 5px 20px;
-  font-weight: 700;
+  font-weight: $lato-bold;
   background-color: $signature-teal;
-  color: white;
+  color: $pure-white;
   border-radius: 500px;
 }
 
@@ -149,13 +152,7 @@ p {
 }
 
 ::selection {
-  color: white;
-  background: $signature-teal;
-}
-
-/* Code for Firefox */
-::-moz-selection {
-  color: white;
+  color: $pure-white;
   background: $signature-teal;
 }
 
@@ -191,12 +188,10 @@ iframe {
 //******* Header Styling
 .nav-container{
   background-color:$signature-teal; 
-//  text-align:center;
-//  padding: 40px 200px 40px 200px;
   padding-top: 40px;
   padding-bottom: 40px;
   margin-bottom: 60px;
-  float: left;
+//  float: left;
   width: 100%;
 }
 
@@ -220,19 +215,18 @@ iframe {
 }
 
 .nav {
-  color: white;
-  /*margin: 10px;*/
+  color: $pure-white;
   padding: 14px;
-  font-weight: 700;
   height: inherit;
   font-family: $zilla;
+  font-weight: $zilla-bold;
   font-size: 20px;
 }
 
 .nav:hover {
-  color: white;
+  color: $pure-white;
   background-color: $signature-teal-hover;
-  border-radius: 500px;
+  border-radius: $pill-radius;
 }
 
 .mobile-navbar{
@@ -242,38 +236,14 @@ iframe {
 }
 
 .navbar {
-//  background-color: $royal-raspberry;
-  color: white;
+  color: $pure-white;
   float: left;
   line-height: 50px;
-//  text-align: center;
-//  padding-top: 10px;
-//  padding-bottom: 10px;
-//  margin-bottom: 50px;
-//  white-space: nowrap;
-//  overflow-x: scroll;
-//  overflow-y: hidden;
-//  -webkit-overflow-scrolling: touch;
 }
-
-//.navscroll {
-//  white-space: nowrap;
-//  overflow-x: auto;
-//  overflow-y: hidden;
-//  -webkit-overflow-scrolling: touch;
-//  -ms-overflow-style: -ms-autohiding-scrollbar;
-//}
-//
-//.navbar::-webkit-scrollbar {
-//  display: none;
-//}
-//
-//.navscroll::-webkit-scrollbar {
-//  display: none;
-//}
 
 //******* End of Header Styling
 
+//******* A Tag Underline Expand Styling
 p, li, h3, #subTitle{
   a {
     position: relative;
@@ -281,7 +251,7 @@ p, li, h3, #subTitle{
     display: inline-block;
     color: $signature-teal;
     padding: 0 1px;
-    transition: color ease 0.3s;
+    transition: $run;
   }
   
   a::after{
@@ -293,24 +263,25 @@ p, li, h3, #subTitle{
     left: 0;
     bottom: 0;
     background-color: $signature-teal;
-    transition: all ease 0.3s;
+    transition: $run;
   }
 
   a:hover {
-    color: white;
+    color: $pure-white;
   }
   
   a:hover::after {
     height: 100%;
   }
 }
+//******* A Tag Underline Expand Styling
 
 
 //******* Button Styling
 .contentButton {
   width: 100%;
   font-size: 30px;
-  color: white;
+  color: $pure-white;
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: center;
@@ -320,7 +291,6 @@ p, li, h3, #subTitle{
 
 .commandBarButton {
   background-color: #77013a;
-  color: white;
   &:hover {
     background-color: darken(#77013a, $color-percentage); //#680032;
   }
@@ -328,7 +298,6 @@ p, li, h3, #subTitle{
 
 .camleonButton {
   background-color: #6cbe45;
-  color: white;
   &:hover {
     background-color: darken(#6cbe45, $color-percentage); //#66b342;
   }
@@ -336,7 +305,6 @@ p, li, h3, #subTitle{
 
 .nycButton {
   background-color: #EA4D5B;
-  color: white;
   &:hover {
     background-color: darken(#EA4D5B, $color-percentage); //#d74955;
   }
@@ -404,35 +372,35 @@ p, li, h3, #subTitle{
     background-color: darken(#870039, $color-percentage);
   }
 }
-
 //******* End of Button Styling
 
 
 //******* 404 Styling
 .title-404 {
-  text-align: center;
-  font-size: 36px;
+//  text-align: right;
+  font-size: 60px;
+  font-weight: $zilla-bold;
 }
 
 .words-404 {
-  text-align: center;
-  font-size: 18px;
-  padding-left: 20px;
-  padding-right: 20px;
+//  text-align: right;
+  font-size: 36px;
+//  padding-left: 20px;
+//  padding-right: 20px;
   margin-bottom: 20px;
 }
 
 .outerspace {
-  background-color: #26153C;
+  background-color: $navy-black;//#26153C;
   width: 100%;
   height: 300px;
-  border-radius: 100%;
+  border-radius: $pill-radius;
   background-image: url(../img/giraffe.svg);
   background-repeat: no-repeat;
   background-position: 50% 50px;
   border-style: solid;
-  border-color: white;
-  border-width: 10px;
+  border-color: $pure-white;
+//  border-width: 10px;
 }
 //******* End of 404 Styling
 
@@ -446,7 +414,7 @@ p, li, h3, #subTitle{
     padding-left: 0;
     color: $navy-black;
     font-family: $zilla;
-    font-weight: $bold;
+    font-weight: $zilla-bold;
     font-size: 60px;
     margin-bottom: 0;
     span{
@@ -467,7 +435,7 @@ p, li, h3, #subTitle{
   h2{
     font-size: 70px;
     color: rgba(31, 41, 55, 0.15);
-    font-weight: $black;
+    font-weight: $lato-black;
     font-family: $lato;
   }
   .work-item{
@@ -480,7 +448,7 @@ p, li, h3, #subTitle{
       font-family: $lato;
       color: $navy-black;
       font-size: 20px;
-      font-weight: $black;
+      font-weight: $lato-black;
       padding: 0;
       margin-bottom: 0;
     }
@@ -500,7 +468,7 @@ p, li, h3, #subTitle{
       font-family: $lato;
       color: $navy-black;
       font-size: 20px;
-      font-weight: $regular;
+      font-weight: $lato-regular;
       line-height: 24px;
     }
     .brand-logo{
@@ -754,6 +722,10 @@ footer {
       &:hover .mobile-navbar{
         display: none;
       }
+  }
+  .outerspace{
+    height: 200px;
+    background-position: 50% 20px;
   }
 }
 
