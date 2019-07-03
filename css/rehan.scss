@@ -50,7 +50,7 @@ $lato-black: 900;
 body {
   font-family: $lato;
   font-weight: $lato-regular;
-  font-size: 16px;
+  font-size: 20px; //1em
   color: $navy-black;
 }
 
@@ -59,12 +59,11 @@ h2,
 h3,
 h4 {
   font-family: $zilla;
-  padding-left: 10px;
 }
 
 h4 {
   font-weight: $zilla-regular;
-  margin-top: 50px;
+  margin-top: 2.5em;
 }
 
 article.post {
@@ -72,13 +71,13 @@ article.post {
 }
 
 ul {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .image-container {
-  margin-top: 25px;
-  margin-bottom: 25px;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
 }
 
 .thumbnail-container {
@@ -110,40 +109,40 @@ ul {
 
 .thumbnail-text {
   position: absolute;
-  bottom: 20px;
+  bottom: 1em;
   margin: 0 auto;
   left: 0;
   right: 0;
   color: $pure-white;
   opacity: 0;
   text-shadow: 0px 0px 5px $navy-black;
-  font-size: 33px;
-  line-height: 30px;
+  font-size: 1.65em;
+  line-height: 1.5em;
   text-align: center;
   font-weight: $zilla-bold;
   font-family: $zilla;
 }
 
 .thumbnail-tile {
-  margin-bottom: 30px;
+  margin-bottom: 1.5em;
 }
 
 .banner {
   position: absolute;
-  top: -20px;
-  right: -20px;
+  top: -1em;
+  right: -1em;
   padding: 5px 20px 5px 20px;
   font-weight: $lato-bold;
   background-color: $signature-teal;
   color: $pure-white;
-  border-radius: 500px;
+  border-radius: $pill-radius;
 }
 
 p {
-  padding-left: 100px;
-  padding-right: 100px;
-  margin-top: 25px;
-  margin-bottom: 25px;
+  padding-left: 5em;
+  padding-right: 5em;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
 }
 
 .image-center {
@@ -168,17 +167,17 @@ img {
 }
 
 .quote {
-  font-size: 64px;
-  line-height: 60px;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  font-size: 3.2em;
+  line-height: 3em;
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
 }
 
 .dateStamp {
-  font-size: 22px;
-  margin-top: -15px;
-  font-weight: 400;
-  margin-bottom: 20px;
+  font-size: 1.1em;
+  margin-top: -0.75em;
+  font-weight: $zilla-regular;
+  margin-bottom: 1em;
 }
 
 iframe {
@@ -188,9 +187,9 @@ iframe {
 //******* Header Styling
 .nav-container{
   background-color:$signature-teal; 
-  padding-top: 40px;
-  padding-bottom: 40px;
-  margin-bottom: 60px;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  margin-bottom: 3em;
 //  float: left;
   width: 100%;
 }
@@ -216,11 +215,11 @@ iframe {
 
 .nav {
   color: $pure-white;
-  padding: 14px;
+  padding: 0.7em;
   height: inherit;
   font-family: $zilla;
   font-weight: $zilla-bold;
-  font-size: 20px;
+  font-size: 1em;
 }
 
 .nav:hover {
@@ -232,13 +231,13 @@ iframe {
 .mobile-navbar{
   display: none;
   float: left;
-  line-height: 50px;
+  line-height: 2.5em;
 }
 
 .navbar {
   color: $pure-white;
   float: left;
-  line-height: 50px;
+  line-height: 2.5em;
 }
 
 //******* End of Header Styling
@@ -280,13 +279,13 @@ p, li, h3, #subTitle{
 //******* Button Styling
 .contentButton {
   width: 100%;
-  font-size: 30px;
+  font-size: 1.5em;
   color: $pure-white;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 1em;
+  padding-bottom: 1em;
   text-align: center;
-  border-radius: 200px;
-  transition: all 0.20s ease-in-out;
+  border-radius: $pill-radius;
+  transition: $run;
 }
 
 .commandBarButton {
@@ -377,21 +376,17 @@ p, li, h3, #subTitle{
 
 //******* 404 Styling
 .title-404 {
-//  text-align: right;
-  font-size: 60px;
+  font-size: 3em;
   font-weight: $zilla-bold;
 }
 
 .words-404 {
-//  text-align: right;
-  font-size: 36px;
-//  padding-left: 20px;
-//  padding-right: 20px;
-  margin-bottom: 20px;
+  font-size: 1.8em;
+  margin-bottom: 1em;
 }
 
 .outerspace {
-  background-color: $navy-black;//#26153C;
+  background-color: $navy-black;
   width: 100%;
   height: 300px;
   border-radius: $pill-radius;
@@ -400,32 +395,31 @@ p, li, h3, #subTitle{
   background-position: 50% 50px;
   border-style: solid;
   border-color: $pure-white;
-//  border-width: 10px;
 }
 //******* End of 404 Styling
 
 
 //******* About Page Styling
 .bio {
-  font-size: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+  font-size: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   h1{
     padding-left: 0;
     color: $navy-black;
     font-family: $zilla;
     font-weight: $zilla-bold;
-    font-size: 60px;
+    font-size: 3rem;
     margin-bottom: 0;
     span{
-      font-size: 50px;
+      font-size: 2.5rem;
     }
   }
   p{
     color: $navy-black;
     font-family: $lato;
-    line-height: 34px;
-    font-size: 26px;
+    line-height: 36px; ///////////why EM NOT RESPONDING
+    font-size: 26px; ///////////why EM NOT RESPONDING
     padding: 0;
     margin: 0;
   }
@@ -433,21 +427,21 @@ p, li, h3, #subTitle{
 
 .work-experience{
   h2{
-    font-size: 70px;
-    color: rgba(31, 41, 55, 0.15);
+    font-size: 3.5em;
+    color: rgba($navy-black, 0.15);
     font-weight: $lato-black;
     font-family: $lato;
   }
   .work-item{
     &:first-of-type{
-      margin-top: -50px;
+      margin-top: -2.5em;
     }
-    margin-top: 20px;
-    padding-left: 10px;
+    margin-top: 1rem;
+    padding-left: 0.5rem;
     h3{
       font-family: $lato;
       color: $navy-black;
-      font-size: 20px;
+      font-size: 1em;
       font-weight: $lato-black;
       padding: 0;
       margin-bottom: 0;
@@ -455,33 +449,30 @@ p, li, h3, #subTitle{
     p{
       padding: 0;
       margin: 0;
-      margin-top: -5px;
+      margin-top: -0.25em;
     }
     .date{
       font-family: $lato;
       color: $navy-black;
-      font-size: 20px;
+      font-size: 1em;
       font-weight: 300;
       font-style: italic;
     }
     .description{
       font-family: $lato;
       color: $navy-black;
-      font-size: 20px;
+      font-size: 1em;
       font-weight: $lato-regular;
-      line-height: 24px;
+      line-height: 1.2em;
     }
     .brand-logo{
       position: absolute;
       opacity: 0.2;
-      margin-left: -80px;
-      animation-name: brand-logo-animation-back;
-      animation-duration: .3s;
+      margin-left: -4rem;
+      transition: $run;
     }
     &:hover .brand-logo{
       opacity: 1;
-      animation-name: brand-logo-animation;
-      animation-duration: .3s;
     }
   }
 }
@@ -514,33 +505,33 @@ p, li, h3, #subTitle{
   }
 }
 
-#subTitle {
-  font-size: 20px;
-  padding-top: 10px;
-  padding-left: 10px;
-}
-
-#subSubTitle {
-  font-size: 18px;
-  padding-top: 10px;
-  padding-left: 10px;
-}
+//#subTitle {
+//  font-size: 20px;
+//  padding-top: 10px;
+//  padding-left: 10px;
+//}
+//
+//#subSubTitle {
+//  font-size: 18px;
+//  padding-top: 10px;
+//  padding-left: 10px;
+//}
 
 #resumeButton {
   width: 100%;
   background-color: $royal-raspberry;
-  font-size: 20px;
+  font-size: 1em;
   color: white;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
   text-align: center;
-  margin-top: 10px;
-  margin-bottom: 25px;
-  border-radius: 200px;
-}
-
-#resumeButton:hover {
-  background-color: $royal-raspberry-hover;
+  margin-top: 0.5em;
+  margin-bottom: 1.25em;
+  border-radius: $pill-radius;
+  
+  &:hover {
+    background-color: $royal-raspberry-hover;
+  }
 }
 
 .bullet-square {
@@ -574,17 +565,6 @@ span.wave {
    70% { transform: scale(0.9) }
   100% { transform: scale(  1) }
 }
-
-@keyframes brand-logo-animation {
-  0%   {opacity: 0.2;}
-  100% {opacity: 1;}
-}
-
-@keyframes brand-logo-animation-back {
-  0%   {opacity: 1;}
-  100% {opacity: 0.2;}
-}
-
 //******* End of About Page Styling
 
 //******* Footer Styling
@@ -726,6 +706,9 @@ footer {
   .outerspace{
     height: 200px;
     background-position: 50% 20px;
+  }
+  .post-header{
+    padding-left: 0.5em;
   }
 }
 
