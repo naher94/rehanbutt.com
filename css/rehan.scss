@@ -129,8 +129,9 @@ ul {
 
 .banner {
   position: absolute;
-  top: -1em;
-  right: -1em;
+  font-size: 0.8em;
+  top: -1rem;
+  right: -1rem;
   padding: 5px 20px 5px 20px;
   font-weight: $lato-bold;
   background-color: $signature-teal;
