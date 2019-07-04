@@ -121,6 +121,9 @@ ul {
   text-align: center;
   font-weight: $zilla-bold;
   font-family: $zilla;
+  @media screen and (max-width: 40em) {
+    font-size: 1.4em;
+  }
 }
 
 .thumbnail-tile {
@@ -132,7 +135,7 @@ ul {
   font-size: 0.8em;
   top: -1rem;
   right: -1rem;
-  padding: 5px 20px 5px 20px;
+  padding: 0.25em 1em 0.25em 1em;
   font-weight: $lato-bold;
   background-color: $signature-teal;
   color: $pure-white;
@@ -174,11 +177,16 @@ img {
   margin-bottom: 2.5em;
 }
 
-.dateStamp {
-  font-size: 1.1em;
-  margin-top: -0.75em;
-  font-weight: $zilla-regular;
-  margin-bottom: 1em;
+.post-header{
+  h1{
+    font-weight: $zilla-bold;
+  }
+  .dateStamp {
+    font-size: 1.1em;
+    margin-top: -0.75em;
+    font-weight: $zilla-regular;
+    margin-bottom: 1em;
+  }
 }
 
 iframe {
@@ -571,7 +579,7 @@ span.wave {
 //******* Footer Styling
 .socialButton {
   width: 100%;
-  color: white;
+  color: $pure-white;
   padding-top: 10px;
   padding-bottom: 10px;
   text-align: center;
@@ -584,9 +592,9 @@ span.wave {
 }
 
 .social {
-  width: 60px;
-  padding-left: 10px;
-  padding-right: 10px;
+  width: 3em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .social:hover {
@@ -617,6 +625,9 @@ footer {
 // Measurments pulled from foundation css file
 // Mobile Styling
 @media screen and (max-width: 40em) {
+  body{
+    font-size: 16px;
+  }
   .outerspace {
     height: 700px;
     background-position: 50% 100px;
@@ -638,8 +649,6 @@ footer {
     padding-left: 10px;
     padding-right: 10px;
   }
-  
-  
   .menu {
     display: block;
     float: left;
@@ -654,11 +663,17 @@ footer {
       height: 15px;
 
       path {
-        fill: white;
+        fill: $pure-white;
       }
     }
-  
 }
+  .post-content{
+    h2{
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      font-weight: $zilla-bold;
+    }
+  }
   .mobile-navbar{
     display: block;
     line-height: 40px;
@@ -715,6 +730,17 @@ footer {
 
 // Tablet Styling
 @media screen and (max-width: 64em) {
+  .post-header{
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+  .post-content{
+    h2{
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      font-weight: $zilla-bold;
+    }
+  }
   
 }
 //******* End of Mobile Styling
