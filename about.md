@@ -26,7 +26,7 @@ permalink: about
   <section class="work-experience">
     <h2>Work Experience</h2>
     <div class="work-item">
-      <div class="brand-logo-container">
+      <div class="brand-logo-container" id="upmc">
         <img class="brand-logo" src="/img/upmc-logo.svg" alt="GE Logo">
         <img class="brand-logo" src="/img/ge-logo.svg" alt="GE Logo">
       </div>
@@ -35,7 +35,7 @@ permalink: about
       <p class="description">Working with GE Healthcare on their enterpirse imaging products</p>
     </div>
     <div class="work-item">
-      <div class="brand-logo-container">
+      <div class="brand-logo-container" id="processly">
         <img class="brand-logo" src="/img/processly-logo.svg" alt="Processly Logo">
       </div>
       <h3>Co-Founder & CXO・Processly</h3>
@@ -43,7 +43,7 @@ permalink: about
       <p class="description">A web application making it easy for students to document, discuss, and reflect upon their work. It allows teachers to work alongside students as they foster a collaborative learning environment.</p>
     </div>
     <div class="work-item">
-      <div class="brand-logo-container">
+      <div class="brand-logo-container" id="dio">
         <img class="brand-logo" src="/img/dio-logo.svg" alt="DzgnIO Logo">
       </div>
       <h3>Co-Founder・DzgnIO</h3>
@@ -81,6 +81,9 @@ permalink: about
       <p class="description">Taught students digital preparation & machining techniques in lasercutting, 3D printing & CNC milling</p>
     </div>
     <div class="work-item">
+      <div class="brand-logo-container" id="cr">
+        <img class="brand-logo" src="/img/cr-logo.svg" alt="Consumer Reports Logo">
+      </div>
       <h3>User Experience Design Intern・Consumer Reports</h3>
       <p class="date">May 2015・August 2015</p>
       <p class="description">Worked with the UX team to redesign consumerreports.org with emphasis on data visualization</p>
@@ -105,7 +108,7 @@ permalink: about
       <p class="description">Spoke to the class about what it means to be a young entrepreneur. Finding a problem you are passionate about solving and how you turn that passion into a business. Building a product and putting in the hands of your customer.</p>
     </div>
     <div class="speaking-item">
-      <div class="brand-logo-container">
+      <div class="brand-logo-container" id="ucla">
         <img class="brand-logo" src="/img/ucla-logo.svg" alt="UCLA Logo">
       </div>
       <h3>Careers in UX @ UCLA</h3>
@@ -123,6 +126,9 @@ permalink: about
       <p class="description">Spoke to the group about what it means to create a personal brand identity. Talking about visual identity as well as the bigger brand system that can be portrayed throughout all of their work. As well as having a design critique around existing student brands.</p>
     </div>
     <div class="speaking-item">
+      <div class="brand-logo-container" id="aia">
+        <img class="brand-logo" src="/img/aia-logo.svg" alt="American Institute of Architects Logo">
+      </div>
       <h3>AIA Build Pittsburgh</h3>
       <p class="date">April 2017</p>
       <p class="description">Presented ‘<a target="_blank" href="https://dzgn.io/works/ux-architecture.html">UI/UX Design and Architecture</a>: Leveraging Web Technologies for and by Architects’ sharing common interests and workflows between these industries and some opportunities for both industries to adopt from the other</p>
@@ -141,6 +147,9 @@ permalink: about
   <section class="education">
     <h2>Education</h2>
     <div class="education-item">
+      <div class="brand-logo-container" id="cmu">
+        <img class="brand-logo" src="/img/cmu-logo.svg" alt="Carnegie Mellon University Logo">
+      </div>
       <h3>Carnegie Mellon University</h3>
       <p class="date">2016・2018</p>
       <p class="description">Masters in Tangible Interaction Design</p>
@@ -151,6 +160,9 @@ permalink: about
       <p class="description">Bachelors in the Integrative Physical and Digital Media Studies</p>
     </div>
     <div class="education-item">
+      <div class="brand-logo-container" id="nus">
+        <img class="brand-logo" src="/img/nus-logo.svg" alt="National University of Singapore Logo">
+      </div>
       <h3>National University of Singapore</h3>
       <p class="date">June 2013・August 2013</p>
       <p class="description">Design Program - Designing for Active Aging (Certificate Program)</p>
