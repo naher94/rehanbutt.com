@@ -26,6 +26,10 @@ permalink: about
   <section class="work-experience">
     <h2>Work Experience</h2>
     <div class="work-item">
+      <div class="brand-logo-container">
+        <img class="brand-logo" src="/img/upmc-logo.svg" alt="GE Logo">
+        <img class="brand-logo" src="/img/ge-logo.svg" alt="GE Logo">
+      </div>
       <h3>Product Designer・UPMC Enterprises</h3>
       <p class="date">July 2018・Present</p>
       <p class="description">Working with GE Healthcare on their enterpirse imaging products</p>
@@ -78,7 +82,7 @@ permalink: about
     <div class="speaking-item">
       <h3>Digital Media</h3>
       <p class="date">March 2017</p>
-      <p class="description">Ran a workshop series, HTTParty, looking at the basics of UI / UX design and web development, with the Dzgn.IO team</p>
+      <p class="description">Ran a workshop series, <a target="_blank" href="https://dzgn.io/works/httparty.html">HTTParty</a>, looking at the basics of UI / UX design and web development, with the Dzgn.IO team</p>
     </div>
     <div class="speaking-item">
       <h3>Architecture Seminar</h3>
