@@ -435,6 +435,10 @@ p, li, h3, #subTitle{
     font-size: 26px; ///////////why EM NOT RESPONDING
     padding: 0;
     margin: 0;
+    @media screen and (max-width: 40em) {
+      font-size: 20px;
+      line-height: 28px;
+    }
   }
 }
 
@@ -447,10 +451,16 @@ p, li, h3, #subTitle{
     color: rgba($navy-black, 0.15);
     font-weight: $lato-black;
     font-family: $lato;
+    @media screen and (max-width: 40em) {
+      line-height: 1em;
+    }
   }
   .work-item, .speaking-item, .education-item{
     &:first-of-type{
       margin-top: -2.5em;
+      @media screen and (max-width: 40em) {
+      margin-top: -1.5em;
+      }
     }
     margin-top: 1rem;
     padding-left: 0.5rem;
@@ -486,6 +496,9 @@ p, li, h3, #subTitle{
       opacity: 0.2;
       margin-left: -4em;
       transition: $run;
+      @media screen and (max-width: 40em) {
+      display: none;
+      }
     }
     .brand-logo{
       float: right;
@@ -505,6 +518,9 @@ p, li, h3, #subTitle{
     margin-bottom: 0;
     &:first-of-type{
       margin-top: -2.5em;
+      @media screen and (max-width: 40em) {
+        margin-top: -1.5em;
+      }
     }
   }
   .skills-item{
