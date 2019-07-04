@@ -35,17 +35,65 @@ permalink: about
       <p class="description">Working with GE Healthcare on their enterpirse imaging products</p>
     </div>
     <div class="work-item">
-      <h3>Product Designer・UPMC Enterprises</h3>
-      <p class="date">July 2018・Present</p>
-      <p class="description">Working with GE Healthcare on their enterpirse imaging products</p>
-    </div>
-    <div class="work-item">
       <div class="brand-logo-container">
         <img class="brand-logo" src="/img/processly-logo.svg" alt="Processly Logo">
       </div>
       <h3>Co-Founder & CXO・Processly</h3>
       <p class="date">Month 2016・Present</p>
       <p class="description">A web application making it easy for students to document, discuss, and reflect upon their work. It allows teachers to work alongside students as they foster a collaborative learning environment.</p>
+    </div>
+    <div class="work-item">
+      <div class="brand-logo-container">
+        <img class="brand-logo" src="/img/dio-logo.svg" alt="DzgnIO Logo">
+      </div>
+      <h3>Co-Founder・DzgnIO</h3>
+      <p class="date">April 2015・Present</p>
+      <p class="description">We design and create with an approach of playful pragmatism. A group with the goal to deliver design services incorporating holistic values of aesthetics, experience, and communication</p>
+    </div>
+    <div class="work-item">
+      <h3>Teaching Assistant・Spactial Narratives via Web Graphics</h3>
+      <p class="date">August 2017・December 2017</p>
+      <p class="description">Taught students web technologies in relation to creating great web experiences</p>
+    </div>
+    <div class="work-item">
+      <h3>Lab Manager・CodeLab</h3>
+      <p class="date">August 2016・August 2017</p>
+      <p class="description">Working to expand the lab's digital presense inorder to create growth for the lab</p>
+    </div>
+    <div class="work-item">
+      <h3>Experience Designer・YinzCam</h3>
+      <p class="date">May 2016・May 2017</p>
+      <p class="description">Lead efforts to enhance app experiences across different platforms, working with clients such as the NBA and NFL pushing their missions forward</p>
+    </div>
+    <div class="work-item">
+      <h3>UI/UX Design Intern・YinzCam</h3>
+      <p class="date">November 2015・May 2016</p>
+      <p class="description">Participated in evaluating the current app experiences and proposed enhancements</p>
+    </div>
+    <div class="work-item">
+      <h3>Head Teaching Assistant・Intro to Digital Media</h3>
+      <p class="date">September 2015・April 2016</p>
+      <p class="description">Teach students a variety of software tools for use in their design work and the workflow around them</p>
+    </div>
+    <div class="work-item">
+      <h3>Lab Manager・IDeATe Digital Fabrication Lab</h3>
+      <p class="date">September 2015・September 2016</p>
+      <p class="description">Taught students digital preparation & machining techniques in lasercutting, 3D printing & CNC milling</p>
+    </div>
+    <div class="work-item">
+      <h3>User Experience Design Intern・Consumer Reports</h3>
+      <p class="date">May 2015・August 2015</p>
+      <p class="description">Worked with the UX team to redesign consumerreports.org with emphasis on data visualization</p>
+    </div>
+    <div class="work-item">
+      <h3>Designer & Developer・Human Behavior Computing Lab</h3>
+      <p class="date">June 2014・November 2014</p>
+      <p class="description">Designed and created a website for the lab's, projects and members</p>
+    </div>
+    <div class="work-item">
+      <h3>Design Intern・Architrave</h3>
+      <p class="date">May 2013・July 2013</p>
+      <p class="description">Modeled several projects using 3dsMax, Revit and AutoCAD, Helped to expand the in-house materials and standards libraries</p>
     </div>
   </section>
 
