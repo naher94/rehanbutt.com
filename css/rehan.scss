@@ -438,14 +438,17 @@ p, li, h3, #subTitle{
   }
 }
 
-.work-experience{
+.work-experience, .speaking-events, .education, .skills{
+  &:not(first-of-type){
+    margin-top: 2em;
+  }
   h2{
     font-size: 3.5em;
     color: rgba($navy-black, 0.15);
     font-weight: $lato-black;
     font-family: $lato;
   }
-  .work-item{
+  .work-item, .speaking-item, .education-item{
     &:first-of-type{
       margin-top: -2.5em;
     }
@@ -478,15 +481,40 @@ p, li, h3, #subTitle{
       font-weight: $lato-regular;
       line-height: 1.2em;
     }
-    .brand-logo{
+    .brand-logo-container{
       position: absolute;
       opacity: 0.2;
-      margin-left: -4rem;
+      margin-left: -4em;
       transition: $run;
     }
-    &:hover .brand-logo{
+    .brand-logo{
+      float: right;
+    }
+    &:hover .brand-logo-container{
       opacity: 1;
     }
+  }
+}
+.skills{
+  h3{
+    font-family: $lato;
+    color: $navy-black;
+    font-size: 1em;
+    font-weight: $lato-black;
+    padding: 0;
+    margin-bottom: 0;
+    &:first-of-type{
+      margin-top: -2.5em;
+    }
+  }
+  .skills-item{
+    display: inline-block;
+    background-color: $navy-black;
+    border-radius: $pill-radius;
+    color: $pure-white;
+    padding: 0.25em 0.8em 0.25em 0.8em;
+    margin-right: 0.3em;
+    margin-bottom: 0.5em;
   }
 }
 
