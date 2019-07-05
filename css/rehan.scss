@@ -504,7 +504,7 @@ p, li, h3, #subTitle{
         display: none;
       }
       &#upmc{
-        margin-left: -11.5em;
+        margin-left: -15.5em;
       }
       &#processly{
         height: 3em;
@@ -526,6 +526,9 @@ p, li, h3, #subTitle{
       }
       &#nus{
         margin-left: -8em;
+      }
+      &#yinzcam{
+        margin-left: -12em;
       }
     }
     .brand-logo{
@@ -623,12 +626,28 @@ p, li, h3, #subTitle{
   list-style-type: square;
 }
 
+.rainbow{
+  background-image: linear-gradient(90deg,#00a2e2 0%,#1bad6b 20%,#fec609 40%,#e92687 60%,#6d358d 80%,#00a2e2 100%);
+  background-size: 200% auto;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow 3s linear infinite;
+}
+
 span.wave {
   animation-name: wave-animation;    /* Refers to the name of your @keyframes element below */
   animation-duration: 2.5s;          /* Change to speed up or slow down */
   animation-iteration-count: infinite;    /* Never stop waving :) */
   transform-origin: 70% 70%;         /* Pivot around the bottom-left palm */
   display: inline-block;
+}
+
+@keyframes rainbow {
+  to {
+    background-position: 200% center
+  }
 }
 
 @keyframes wave-animation {
@@ -653,19 +672,20 @@ span.wave {
 //******* End of About Page Styling
 
 //******* Footer Styling
-.socialButton {
-  width: 100%;
-  color: $pure-white;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  text-align: center;
-  background-color: #ececec;
-  margin: 5px;
-}
 
-.socialButton:hover {
-  background-color: #cccccc;
-}
+//.socialButton {
+//  width: 100%;
+//  color: $pure-white;
+//  padding-top: 10px;
+//  padding-bottom: 10px;
+//  text-align: center;
+//  background-color: rgba($navy-black, 0.15);
+//  margin: 5px;
+//}
+//
+//.socialButton:hover {
+////  background-color: #cccccc;
+//}
 
 .social {
   width: 3em;
@@ -679,7 +699,7 @@ span.wave {
 
 footer {
   margin-top: 50px;
-  background-color: #ececec;
+  background-color: rgba($navy-black, 0.15);
   text-align: center;
   padding-top: 10px;
   padding-bottom: 10px;

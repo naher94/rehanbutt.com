@@ -20,15 +20,14 @@ permalink: about
 <div class="small-12 medium-7 columns">
   <section class="bio">
     <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
-    <p>I am a devzgner (designer + developer) currently working for <a href="#" target="_blank">UPMC Enterprises</a> in Pittsburgh on Healthcare Technology. with several years of experience working on both consumer and enterprise solutions for clients such as the NBA and NFL. I love to travel ✈️ and have been fortunate enough to live all over the world.🌏</p>
+    <p>I am a <span class="rainbow">devzgner</span> (/dəvzīnər/), designer + developer, currently working for <a href="#" target="_blank">UPMC Enterprises</a> in Pittsburgh on Healthcare Technology. with several years of experience working on both consumer and enterprise solutions for clients such as the NBA and NFL. I love to travel ✈️ and have been fortunate enough to live all over the world.🌏</p>
   </section>
   
   <section class="work-experience">
     <h2>Work Experience</h2>
     <div class="work-item">
       <div class="brand-logo-container" id="upmc">
-        <img class="brand-logo" src="/img/upmc-logo.svg" alt="GE Logo">
-        <img class="brand-logo" src="/img/ge-logo.svg" alt="GE Logo">
+        <img class="brand-logo" src="/img/upmc-logo.svg" alt="GE & UPMC Logo">
       </div>
       <h3>Product Designer・UPMC Enterprises</h3>
       <p class="date">July 2018・Present</p>
@@ -48,37 +47,40 @@ permalink: about
       </div>
       <h3>Co-Founder・DzgnIO</h3>
       <p class="date">April 2015・Present</p>
-      <p class="description">We design and create with an approach of playful pragmatism. A group with the goal to deliver design services incorporating holistic values of aesthetics, experience, and communication</p>
+      <p class="description">We design and create with an approach of playful pragmatism. A group with the goal to deliver design services incorporating holistic values of aesthetics, experience, and communication.</p>
     </div>
     <div class="work-item">
       <h3>Teaching Assistant・Spactial Narratives via Web Graphics</h3>
       <p class="date">August 2017・December 2017</p>
-      <p class="description">Taught students web technologies in relation to creating great web experiences</p>
+      <p class="description">Taught students web technologies in relation to creating great web experiences. Creating and maintaining good code practices and how to design great experiences with entry level software development skills.</p>
     </div>
     <div class="work-item">
       <h3>Lab Manager・CodeLab</h3>
       <p class="date">August 2016・August 2017</p>
-      <p class="description">Working to expand the lab's digital presense inorder to create growth for the lab</p>
+      <p class="description">Working to expand the lab's digital presence in order to create growth for the lab, in addition to launching a student showcase in partnership with the career development office as a way to expand the broad range of skills presented by the students of the school of architecture.</p>
     </div>
     <div class="work-item">
+      <div class="brand-logo-container" id="yinzcam">
+        <img class="brand-logo" src="/img/yinzcam-logo.svg" alt="AFL, NBA, NFL, NRL, Telstra and Apple Logo">
+      </div>
       <h3>Experience Designer・YinzCam</h3>
       <p class="date">May 2016・May 2017</p>
-      <p class="description">Lead efforts to enhance app experiences across different platforms, working with clients such as the NBA and NFL pushing their missions forward</p>
+      <p class="description">Lead new product efforts for better fan engagement, working with clients such as the NBA and NFL pushing their missions forward. Lead both consumer and enterprise applications for use by the NBA, NFL & AFL including project with an AR and VR focus and in-stadium wayfinding.</p>
     </div>
     <div class="work-item">
       <h3>UI/UX Design Intern・YinzCam</h3>
       <p class="date">November 2015・May 2016</p>
-      <p class="description">Participated in evaluating the current app experiences and proposed enhancements</p>
+      <p class="description">Evaluated the current app experiences and designed enhancements across products consumer facing and enterprise applications.</p>
     </div>
     <div class="work-item">
       <h3>Head Teaching Assistant・Intro to Digital Media</h3>
       <p class="date">September 2015・April 2016</p>
-      <p class="description">Teach students a variety of software tools for use in their design work and the workflow around them</p>
+      <p class="description">Taught students a variety of software tools for use in their design work and the workflows around them.</p>
     </div>
     <div class="work-item">
       <h3>Lab Manager・IDeATe Digital Fabrication Lab</h3>
       <p class="date">September 2015・September 2016</p>
-      <p class="description">Taught students digital preparation & machining techniques in lasercutting, 3D printing & CNC milling</p>
+      <p class="description">Taught students digital preparation & machining techniques in lasercutting, 3D printing & CNC milling. Best practices for production and sustainable material use.</p>
     </div>
     <div class="work-item">
       <div class="brand-logo-container" id="cr">
@@ -86,26 +88,26 @@ permalink: about
       </div>
       <h3>User Experience Design Intern・Consumer Reports</h3>
       <p class="date">May 2015・August 2015</p>
-      <p class="description">Worked with the UX team to redesign consumerreports.org with emphasis on data visualization</p>
+      <p class="description">Worked with the UX team to redesign consumerreports.org with an emphasis on data visualization, better conveying complex data to the large user base.</p>
     </div>
     <div class="work-item">
       <h3>Designer & Developer・Human Behavior Computing Lab</h3>
       <p class="date">June 2014・November 2014</p>
-      <p class="description">Designed and created a website for the lab's, projects and members</p>
+      <p class="description">Designed and created a web presence for the lab to showcase its projects and members.</p>
     </div>
     <div class="work-item">
       <h3>Design Intern・Architrave</h3>
       <p class="date">May 2013・July 2013</p>
-      <p class="description">Modeled several projects using 3dsMax, Revit and AutoCAD, Helped to expand the in-house materials and standards libraries</p>
+      <p class="description">Helped to expand the in-house materials and standards libraries while gaining familiarity with industry standard tools such as 3dsMax, Revit and AutoCAD.</p>
     </div>
   </section>
 
   <section class="speaking-events">
     <h2>Speaking Events</h2>
     <div class="speaking-item">
-      <h3>Processly, From an Idea to a Product (Young Entrepreneur Society)</h3>
+      <h3>Processly, From an Idea to a Product</h3>
       <p class="date">April 2018</p>
-      <p class="description">Spoke to the class about what it means to be a young entrepreneur. Finding a problem you are passionate about solving and how you turn that passion into a business. Building a product and putting in the hands of your customer.</p>
+      <p class="description">Spoke to the group about what it means to be a young entrepreneur. Finding a problem you are passionate about solving and how you turn that passion into a business. Building a product and putting in the hands of your customer.</p>
     </div>
     <div class="speaking-item">
       <div class="brand-logo-container" id="ucla">
@@ -116,14 +118,14 @@ permalink: about
       <p class="description">Spoke about the current landscape of user experience design, what it means and where I see the field going as well as how to get into the field coming from a non-design background.</p>
     </div>
     <div class="speaking-item">
-      <h3>Getting into Entrepreneurship</h3>
+      <h3>Starting a Company as a Student</h3>
       <p class="date">March 2018</p>
-      <p class="description">Spoke to the class about what it means to be a young entrepreneur. Finding a problem you are passionate about solving and how you turn that passion into a business.</p>
+      <p class="description">Spoke to the entrepreneurship class about what it means to be a young entrepreneur. Finding a problem you are passionate about solving and how you turn that passion into a business.</p>
     </div>
     <div class="speaking-item">
-      <h3>Architecture Seminar</h3>
+      <h3>Personal Branding: Sharing a Story Through Your Work</h3>
       <p class="date">Feburary 2018</p>
-      <p class="description">Spoke to the group about what it means to create a personal brand identity. Talking about visual identity as well as the bigger brand system that can be portrayed throughout all of their work. As well as having a design critique around existing student brands.</p>
+      <p class="description">Spoke to the group about what it means to create a personal brand identity. Talking about visual identity and creating a brand systems that can be portrayed throughout their work. As well as having a design critique around existing student brands.</p>
     </div>
     <div class="speaking-item">
       <div class="brand-logo-container" id="aia">
@@ -131,17 +133,17 @@ permalink: about
       </div>
       <h3>AIA Build Pittsburgh</h3>
       <p class="date">April 2017</p>
-      <p class="description">Presented ‘<a target="_blank" href="https://dzgn.io/works/ux-architecture.html">UI/UX Design and Architecture</a>: Leveraging Web Technologies for and by Architects’ sharing common interests and workflows between these industries and some opportunities for both industries to adopt from the other</p>
+      <p class="description">Presented ‘<a target="_blank" href="https://dzgn.io/works/ux-architecture.html">UI/UX Design and Architecture</a>: Leveraging Web Technologies for and by Architects’ sharing common interests and workflows between these industries and some opportunities for both industries to adopt from one another.</p>
     </div>
     <div class="speaking-item">
-      <h3>Digital Media</h3>
+      <h3>HTTParty: A Workshop Series</h3>
       <p class="date">March 2017</p>
-      <p class="description">Ran a workshop series, <a target="_blank" href="https://dzgn.io/works/httparty.html">HTTParty</a>, looking at the basics of UI / UX design and web development, with the Dzgn.IO team</p>
+      <p class="description">Explored the basics of <a target="_blank" href="https://dzgn.io/works/httparty.html">UI/UX design and web development</a>, with the Dzgn.IO team. Looking at the origins of the web and have to leverage constraint for your designs.</p>
     </div>
     <div class="speaking-item">
-      <h3>Architecture Seminar</h3>
+      <h3>Personal Branding: Sharing a Story Through Your Work</h3>
       <p class="date">October 2016</p>
-      <p class="description">Spoke to the group about what it means to create a personal brand identity. Talking about visual identity as well as the bigger brand system that can be portrayed throughout all of their work.</p>
+      <p class="description">Spoke to the group about what it means to create a personal brand identity. Talking about visual identity as well as the bigger brand system that can be portrayed throughout all of their work and what it means to convey a project narrative.</p>
     </div>
   </section>
   <section class="education">
