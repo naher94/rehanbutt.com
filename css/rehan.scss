@@ -420,6 +420,7 @@ p, li, h3, #subTitle{
   font-size: 1rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+  font-weight: $lato-bold;
   h1{
     padding-left: 0;
     color: $navy-black;
@@ -438,6 +439,16 @@ p, li, h3, #subTitle{
     font-size: 26px; ///////////why EM NOT RESPONDING
     padding: 0;
     margin: 0;
+    code{
+      border-radius: $pill-radius;
+      padding-left: 0.35em;
+      padding-right: 0.35em;
+      padding-bottom: 0.15em;
+      background-color: rgba($navy-black,0.15);
+      border-color: $navy-black;
+      border-width: 0;
+//      border-width: 0.1em;
+    }
     @media screen and (max-width: 40em) {
       font-size: 20px;
       line-height: 28px;

@@ -20,7 +20,7 @@ permalink: about
 <div class="small-12 medium-7 columns">
   <section class="bio">
     <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
-    <p>I am a <span class="rainbow">devzgner</span> (/devzīnər/), designer + developer, currently working for <a href="#" target="_blank">UPMC Enterprises</a> in Pittsburgh on Healthcare Technology. with several years of experience working on both consumer and enterprise solutions for clients such as the NBA and NFL. I love to travel ✈️ and have been fortunate enough to live all over the world.🌏</p>
+    <p>I am a <span class="rainbow">devzgner</span> <code>/devzīnər/</code>, designer + developer, currently based in Pittsburgh, PA, USA working on healthcare technology. With several years working on both consumer and enterprise solutions for organizations like the NBA & NFL. I love to travel ✈️, and have been fortunate enough to live all over the world.🌏 Trying every day to bring the unique aspects of each culture into my work. In my free time, I enjoy photography and creating cute digital illustrations. Want to hear more about what I’m up to? ✉️</p>
   </section>
   
   <section class="work-experience">
