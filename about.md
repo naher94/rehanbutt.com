@@ -38,7 +38,7 @@ permalink: about
         <img class="brand-logo" src="/img/processly-logo.svg" alt="Processly Logo">
       </div>
       <h3>Co-Founder & CXO・Processly</h3>
-      <p class="date">Month 2016・Present</p>
+      <p class="date">May 2016・Present</p>
       <p class="description">A web application making it easy for students to document, discuss, and reflect upon their work. It allows teachers to work alongside students as they foster a collaborative learning environment.</p>
     </div>
     <div class="work-item">
@@ -174,16 +174,27 @@ permalink: about
     <h2>Skills</h2>
     <h3>Hard & soft skills words and words</h3>
     <div class="skills-item">Design Thinking</div>
+    <div class="skills-item">Project Management</div>
     <div class="skills-item">Sketch</div>
     <div class="skills-item">Framer</div>
     <div class="skills-item">Photoshop</div>
     <div class="skills-item">Illustrator</div>
+    <div class="skills-item">InDesign</div>
     <div class="skills-item">HTML</div>
     <div class="skills-item">CSS</div>
     <div class="skills-item">Javascript</div> 
     <div class="skills-item">Ruby</div> 
     <div class="skills-item">RAPID</div> 
     <div class="skills-item">Arduino</div>
+    <div class="skills-item">Rhino</div>
+    <div class="skills-item">RhinoCAM</div>
+    <div class="skills-item">Vray</div>
+    <div class="skills-item">AutoCAD</div>
+    <div class="skills-item">Photography</div>
+    <div class="skills-item">CNC Router</div>
+    <div class="skills-item">Lasercutter</div>
+    <div class="skills-item">3D Modeling</div>
+    <div class="skills-item">Hand & Technical Drawing</div>
   </section>
 </div>
 
