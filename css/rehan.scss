@@ -205,6 +205,9 @@ iframe {
   margin-bottom: 3em;
 //  float: left;
   width: 100%;
+  @media screen and (max-width: 40em) {
+    margin-bottom: 1em;
+  }
 }
 
 .menu{
@@ -496,8 +499,9 @@ p, li, h3, #subTitle{
       opacity: 0.2;
       margin-left: -4em;
       transition: $run;
+      padding-top: 0.5em;
       @media screen and (max-width: 40em) {
-      display: none;
+        display: none;
       }
       &#upmc{
         margin-left: -11.5em;
@@ -679,6 +683,9 @@ footer {
   text-align: center;
   padding-top: 10px;
   padding-bottom: 10px;
+  @media screen and (max-width: 40em) {
+    margin-top: 1em;
+  }
 }
 
 //******* End of Footer Styling
