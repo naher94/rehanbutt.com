@@ -5,16 +5,20 @@ permalink: about
 
 ---
 
+<!--
 <div class="background-shapes">
   <div class="circle circle1"></div>
   <div class="circle circle2"></div>
 </div>
+-->
 
 <div class="small-12 medium-4 columns">
   <img src="/img/rehan-full.png" style="width:100%">
+<!--
   <a target="_blank" href="{{site.baseurl}}/img/resume.pdf">
     <div id="resumeButton">Resume</div>
   </a>
+-->
 </div>
 
 <div class="small-12 medium-7 columns">
