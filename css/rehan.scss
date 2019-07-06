@@ -257,6 +257,94 @@ iframe {
 }
 
 
+
+
+
+
+
+/* header */
+/* ul {
+  overflow: hidden;
+} */
+.menu-container{
+  .burger-icon{
+    display: none;
+    float: left
+    @media screen and (max-width: 40em) {
+      display: block;
+    }
+  }
+}
+
+/* menu-links */
+.menu-links {
+  overflow: hidden;
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+/* menu-links icon */
+.nav-burger-icon {
+  background: $signature-teal;
+  display: block;
+  height: 5px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+.nav-burger-icon:before,
+.nav-burger-icon:after {
+  background: red;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.nav-burger-icon:before {
+  top: 4px;
+}
+
+.nav-burger-icon:after {
+  top: -4px;
+}
+
+/* menu-links btn */
+
+.burger-btn {
+  display: none;
+}
+
+.burger-btn:checked ~ .menu-links {
+  max-height: 240px;
+}
+
+.burger-btn:checked ~ .burger-icon .nav-burger-icon {
+  background: transparent;
+}
+
+.burger-btn:checked ~ .burger-icon .nav-burger-icon:before {
+  transform: rotate(-45deg);
+}
+
+.burger-btn:checked ~ .burger-icon .nav-burger-icon:after {
+  transform: rotate(45deg);
+}
+
+.burger-btn:checked ~ .burger-icon:not(.steps) .nav-burger-icon:before,
+.burger-btn:checked ~ .burger-icon:not(.steps) .nav-burger-icon:after {
+  top: 0;
+}
+
+
+
+
+
+
 //******* End of Header Styling
 
 //******* A Tag Underline Expand Styling
@@ -825,24 +913,24 @@ footer {
   }
   //Displays site nav on hover on mobile widths
   .menu-container{
-    &:hover .mobile-navbar-full {
-      margin-top: 20px;
-      display: inline-block;
-      width: 100%;
-      left: 0;
-      top: 0;
-      .nav-item-container{
-        width: 100%;
-        display: inline-block;
-        margin-bottom: 10px;
-        a{
-          font-size: 24px;
-        }
-      }
-    }
-      &:hover .mobile-navbar{
-        display: none;
-      }
+//    &:hover .mobile-navbar-full {
+//      margin-top: 20px;
+//      display: inline-block;
+//      width: 100%;
+//      left: 0;
+//      top: 0;
+//      .nav-item-container{
+//        width: 100%;
+//        display: inline-block;
+//        margin-bottom: 10px;
+//        a{
+//          font-size: 24px;
+//        }
+//      }
+//    }
+//      &:hover .mobile-navbar{
+//        display: none;
+//      }
   }
   .outerspace{
     height: 200px;
