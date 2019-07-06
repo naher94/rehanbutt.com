@@ -468,12 +468,18 @@ p, li, h3, #subTitle{
     @media screen and (max-width: 40em) {
       line-height: 1em;
     }
+    @media screen and (max-width: 64em) {
+      line-height: 1em;
+    }
   }
   .work-item, .speaking-item, .education-item{
     &:first-of-type{
       margin-top: -2.5em;
       @media screen and (max-width: 40em) {
-      margin-top: -1.5em;
+        margin-top: -1.5em;
+      }
+      @media screen and (max-width: 64em) {
+        margin-top: -1.5em;
       }
     }
     margin-top: 1rem;
