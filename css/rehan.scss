@@ -553,6 +553,11 @@ p, li, h3, #subTitle{
     }
   }
 }
+
+.skills-container{
+  margin-bottom: 1em;
+}
+
 .skills{
   h3{
     font-family: $lato;
@@ -573,9 +578,9 @@ p, li, h3, #subTitle{
     background-color: $navy-black;
     border-radius: $pill-radius;
     color: $pure-white;
-    padding: 0.25em 0.8em 0.25em 0.8em;
-    margin-right: 0.3em;
-    margin-bottom: 0.5em;
+    padding: 0.2em 0.6em 0.2em 0.6em;
+    margin-right: 0.1em;
+    margin-bottom: 0.4em;
   }
 }
 

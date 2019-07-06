@@ -20,7 +20,7 @@ permalink: about
 <div class="small-12 medium-7 columns">
   <section class="bio">
     <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
-    <p>I am a <span class="rainbow">devzgner</span> <code>/devzīnər/</code>, designer + developer, currently based in Pittsburgh, PA, USA working on healthcare technology. With several years working on both consumer and enterprise solutions for organizations like the NBA & NFL. I love to travel ✈️, and have been fortunate enough to live all over the world.🌏 Trying every day to bring the unique aspects of each culture into my work. In my free time, I enjoy photography and creating cute digital illustrations. Want to hear more about what I’m up to? ✉️</p>
+  <p>I am a <span class="rainbow">devzgner</span> <code>/devzīnər/</code>, designer + developer, currently based in Pittsburgh, PA, USA working on healthcare technology. With several years working on both consumer and enterprise solutions for organizations like the NBA & NFL. I love to travel ✈️, and have been fortunate enough to live all over the world. 🌏 Trying every day to bring the unique aspects of each culture into my work. In my free time, I enjoy photography 📷 and creating cute digital illustrations 🐧. Want to hear more about what I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com">email</a> to connect. ✉️</p>
   </section>
   
   <section class="work-experience">
@@ -173,28 +173,34 @@ permalink: about
   <section class="skills">
     <h2>Skills</h2>
     <h3>Hard & soft skills words and words</h3>
-    <div class="skills-item">Design Thinking</div>
-    <div class="skills-item">Project Management</div>
-    <div class="skills-item">Sketch</div>
-    <div class="skills-item">Framer</div>
-    <div class="skills-item">Photoshop</div>
-    <div class="skills-item">Illustrator</div>
-    <div class="skills-item">InDesign</div>
-    <div class="skills-item">HTML</div>
-    <div class="skills-item">CSS</div>
-    <div class="skills-item">Javascript</div> 
-    <div class="skills-item">Ruby</div> 
-    <div class="skills-item">RAPID</div> 
-    <div class="skills-item">Arduino</div>
-    <div class="skills-item">Rhino</div>
-    <div class="skills-item">RhinoCAM</div>
-    <div class="skills-item">Vray</div>
-    <div class="skills-item">AutoCAD</div>
-    <div class="skills-item">Photography</div>
-    <div class="skills-item">CNC Router</div>
-    <div class="skills-item">Lasercutter</div>
-    <div class="skills-item">3D Modeling</div>
-    <div class="skills-item">Hand & Technical Drawing</div>
+    <div class="skills-container">
+      <div class="skills-item">Design Thinking</div>
+      <div class="skills-item">Project Management</div>
+      <div class="skills-item">Problem Solving</div>
+      <div class="skills-item">Team Management</div>
+    </div>
+    <div class="skills-container">
+      <div class="skills-item">Sketch</div>
+      <div class="skills-item">Framer</div>
+      <div class="skills-item">Photoshop</div>
+      <div class="skills-item">Illustrator</div>
+      <div class="skills-item">InDesign</div>
+      <div class="skills-item">HTML</div>
+      <div class="skills-item">CSS</div>
+      <div class="skills-item">Javascript</div> 
+      <div class="skills-item">Ruby</div> 
+      <div class="skills-item">RAPID</div> 
+      <div class="skills-item">Arduino</div>
+      <div class="skills-item">Rhino</div>
+      <div class="skills-item">RhinoCAM</div>
+      <div class="skills-item">Vray</div>
+      <div class="skills-item">AutoCAD</div>
+      <div class="skills-item">Photography</div>
+      <div class="skills-item">CNC Router</div>
+      <div class="skills-item">Lasercutter</div>
+      <div class="skills-item">3D Modeling</div>
+      <div class="skills-item">Hand & Technical Drawing</div>
+    </div>
   </section>
 </div>
 
