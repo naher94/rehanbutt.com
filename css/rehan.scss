@@ -256,16 +256,6 @@ iframe {
   line-height: 2.5em;
 }
 
-
-
-
-
-
-
-/* header */
-/* ul {
-  overflow: hidden;
-} */
 .menu-container{
   .burger-icon{
     display: none;
@@ -299,12 +289,6 @@ iframe {
   margin-left: 0;
   user-select: none;
   display: none;
-  li{
-//    margin-top: 0.5em;
-//    &:first-of-type{
-//      margin-top: 2em;
-//    }
-  }
   a{
     color: $pure-white;
     font-family: $zilla;
@@ -328,7 +312,6 @@ iframe {
     }
 }
 
-/* menu-links icon */
 .nav-burger-icon {
   background: $signature-teal;
   display: block;
@@ -358,8 +341,6 @@ iframe {
     top: -4px;
   }
 }
-
-/* menu-links btn */
 
 .burger-btn {
   display: none;
@@ -393,13 +374,8 @@ iframe {
 .burger-btn:checked ~ .burger-icon:not(.steps) .nav-burger-icon:after {
   top: 0;
 }
-
-
-
-
-
-
 //******* End of Header Styling
+
 
 //******* A Tag Underline Expand Styling
 p, li, h3, #subTitle{
@@ -761,18 +737,6 @@ p, li, h3, #subTitle{
   }
 }
 
-//#subTitle {
-//  font-size: 20px;
-//  padding-top: 10px;
-//  padding-left: 10px;
-//}
-//
-//#subSubTitle {
-//  font-size: 18px;
-//  padding-top: 10px;
-//  padding-left: 10px;
-//}
-
 #resumeButton {
   width: 100%;
   background-color: $royal-raspberry;
@@ -790,10 +754,6 @@ p, li, h3, #subTitle{
   }
 }
 
-.bullet-square {
-  list-style-type: square;
-}
-
 .rainbow{
   background-image: linear-gradient(90deg,#00a2e2 0%,#1bad6b 20%,#fec609 40%,#e92687 60%,#6d358d 80%,#00a2e2 100%);
   background-size: 200% auto;
@@ -805,10 +765,10 @@ p, li, h3, #subTitle{
 }
 
 span.wave {
-  animation-name: wave-animation;    /* Refers to the name of your @keyframes element below */
-  animation-duration: 2.5s;          /* Change to speed up or slow down */
-  animation-iteration-count: infinite;    /* Never stop waving :) */
-  transform-origin: 70% 70%;         /* Pivot around the bottom-left palm */
+  animation-name: wave-animation;/* Refers to the name of your @keyframes element below */
+  animation-duration: 2.5s;/* Change to speed up or slow down */
+  animation-iteration-count: infinite;/* Never stop waving :) */
+  transform-origin: 70% 70%;/* Pivot around the bottom-left palm */
   display: inline-block;
 }
 
@@ -820,11 +780,11 @@ span.wave {
 
 @keyframes wave-animation {
     0% { transform: rotate(  0.0deg) }
-   10% { transform: rotate(-10.0deg) }    /* The following four values can be played with to make the waving more or less extreme */
+   10% { transform: rotate(-10.0deg) }/* The following four values can be played with to make the waving more or less extreme */
    20% { transform: rotate( 12.0deg) }
    30% { transform: rotate(-10.0deg) }
    40% { transform: rotate(  9.0deg) }
-   50% { transform: rotate(  0.0deg) }    /* Reset for the last half to pause */
+   50% { transform: rotate(  0.0deg) }/* Reset for the last half to pause */
   100% { transform: rotate(  0.0deg) }
 }
 
@@ -840,20 +800,6 @@ span.wave {
 //******* End of About Page Styling
 
 //******* Footer Styling
-
-//.socialButton {
-//  width: 100%;
-//  color: $pure-white;
-//  padding-top: 10px;
-//  padding-bottom: 10px;
-//  text-align: center;
-//  background-color: rgba($navy-black, 0.15);
-//  margin: 5px;
-//}
-//
-//.socialButton:hover {
-////  background-color: #cccccc;
-//}
 
 .social {
   width: 3em;
@@ -964,27 +910,6 @@ footer {
   .navbar {
       clear: both;
       display: none;
-  }
-  //Displays site nav on hover on mobile widths
-  .menu-container{
-//    &:hover .mobile-navbar-full {
-//      margin-top: 20px;
-//      display: inline-block;
-//      width: 100%;
-//      left: 0;
-//      top: 0;
-//      .nav-item-container{
-//        width: 100%;
-//        display: inline-block;
-//        margin-bottom: 10px;
-//        a{
-//          font-size: 24px;
-//        }
-//      }
-//    }
-//      &:hover .mobile-navbar{
-//        display: none;
-//      }
   }
   .outerspace{
     height: 200px;
