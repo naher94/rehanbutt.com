@@ -24,7 +24,7 @@ permalink: about
 <div class="small-12 medium-7 columns">
   <section class="bio">
     <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
-  <p>I am a <span class="rainbow">devzgner</span> <code>/devzīnər/</code>, designer + developer, currently based in Pittsburgh, PA, USA working on healthcare technology. With several years working on both consumer and enterprise solutions for organizations like the NBA & NFL. I love to travel ✈️, and have been fortunate enough to live all over the world. 🌏 Trying every day to bring the unique aspects of each culture into my work. In my free time, I enjoy photography 📷 and creating cute digital illustrations 🐧. Want to hear more about what I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com">email</a> to connect. ✉️</p>
+  <p>I am a <span class="rainbow">devzgner</span> <code>/devzīnər/</code>, designer + developer, currently based in Pittsburgh, PA, USA working on healthcare technology. I also have several years experience working on both consumer and enterprise solutions for organizations like the NBA & NFL. I love to travel ✈️, and have been fortunate enough to live all over the world. 🌏 Every day trying to bring the unique aspects of each culture into my work. In my free time, I enjoy photography 📷 and creating cute digital illustrations 🐧. Want to hear more about what I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com">email</a> to connect. ✉️</p>
   </section>
   
   <section class="work-experience">
@@ -56,12 +56,12 @@ permalink: about
     <div class="work-item">
       <h3>Teaching Assistant・Spactial Narratives via Web Graphics</h3>
       <p class="date">August 2017・December 2017</p>
-      <p class="description">Taught students web technologies in relation to creating great web experiences. Creating and maintaining good code practices and how to design great experiences with entry level software development skills.</p>
+      <p class="description">Taught students web technologies in relation to creating great web experiences. Creating and maintaining good code practices and how to design delightful experiences with entry level software development skills.</p>
     </div>
     <div class="work-item">
       <h3>Lab Manager・CodeLab</h3>
       <p class="date">August 2016・August 2017</p>
-      <p class="description">Working to expand the lab's digital presence in order to create growth for the lab, in addition to launching a student showcase in partnership with the career development office as a way to expand the broad range of skills presented by the students of the school of architecture.</p>
+      <p class="description">Worked to expand the lab's digital presence in order to create growth for the lab.  I also launched a student showcase in partnership with the career development office to share the broad range of skills presented by the students of the school of architecture with industry professionals.</p>
     </div>
     <div class="work-item">
       <div class="brand-logo-container" id="yinzcam">
@@ -69,12 +69,12 @@ permalink: about
       </div>
       <h3>Experience Designer・YinzCam</h3>
       <p class="date">May 2016・May 2017</p>
-      <p class="description">Lead new product efforts for better fan engagement, working with clients such as the NBA and NFL pushing their missions forward. Lead both consumer and enterprise applications for use by the NBA, NFL & AFL including project with an AR and VR focus and in-stadium wayfinding.</p>
+      <p class="description">Lead new product efforts for better fan engagement, worked with clients such as the NBA and NFL pushing their missions forward. Lead both consumer and enterprise applications for use by the NBA, NFL & AFL including project with an AR and VR focus and in-stadium wayfinding.</p>
     </div>
     <div class="work-item">
       <h3>UI/UX Design Intern・YinzCam</h3>
       <p class="date">November 2015・May 2016</p>
-      <p class="description">Evaluated the current app experiences and designed enhancements across products consumer facing and enterprise applications.</p>
+      <p class="description">Evaluated the current app experiences and designed enhancements across consumer facing products and enterprise applications.</p>
     </div>
     <div class="work-item">
       <h3>Head Teaching Assistant・Intro to Digital Media</h3>
@@ -84,7 +84,7 @@ permalink: about
     <div class="work-item">
       <h3>Lab Manager・IDeATe Digital Fabrication Lab</h3>
       <p class="date">September 2015・September 2016</p>
-      <p class="description">Taught students digital preparation & machining techniques in lasercutting, 3D printing & CNC milling. Best practices for production and sustainable material use.</p>
+      <p class="description">Taught students digital preparation & machining techniques in laser cutting, 3D printing & CNC milling. Best practices for production and sustainable material use.</p>
     </div>
     <div class="work-item">
       <div class="brand-logo-container" id="cr">
@@ -129,7 +129,7 @@ permalink: about
     <div class="speaking-item">
       <h3>Personal Branding: Sharing a Story Through Your Work</h3>
       <p class="date">Feburary 2018</p>
-      <p class="description">Spoke to the group about what it means to create a personal brand identity. Talking about visual identity and creating a brand systems that can be portrayed throughout their work. As well as having a design critique around existing student brands.</p>
+      <p class="description">Spoke to the group about what it means to create a personal brand identity. Talking about visual identity and creating a brand system that can be portrayed throughout their work. As well as having a design critique around existing student brands.</p>
     </div>
     <div class="speaking-item">
       <div class="brand-logo-container" id="aia">
@@ -171,7 +171,7 @@ permalink: about
       </div>
       <h3>National University of Singapore</h3>
       <p class="date">June 2013・August 2013</p>
-      <p class="description">Design Program - Designing for Active Aging (Certificate Program)</p>
+      <p class="description">Design Certificate Program - Designing for Active Aging</p>
     </div>
   </section>
   <section class="skills">
@@ -203,8 +203,8 @@ permalink: about
       <div class="skills-item">Vray</div>
       <div class="skills-item">AutoCAD</div>
       <div class="skills-item">Photography</div>
-      <div class="skills-item">CNC Router</div>
-      <div class="skills-item">Lasercutter</div>
+      <div class="skills-item">CNC Routong</div>
+      <div class="skills-item">Laser cutting</div>
       <div class="skills-item">3D Modeling</div>
       <div class="skills-item">Hand & Technical Drawing</div>
       <div class="skills-item">Animation</div>
