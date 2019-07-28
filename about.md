@@ -29,14 +29,16 @@ permalink: about
   
   <section class="work-experience">
     <h2>Work Experience</h2>
+<!--
     <div class="work-item">
       <div class="brand-logo-container" id="upmc">
         <img class="brand-logo" src="/img/upmc-logo.svg" alt="GE & UPMC Logo">
       </div>
-      <h3>Product Designer・UPMC Enterprises</h3>
+      <h3>Senior Product Designer・UPMC Enterprises</h3>
       <p class="date">July 2018・Present</p>
       <p class="description">Working with GE Healthcare on their enterpirse imaging products</p>
     </div>
+-->
     <div class="work-item">
       <div class="brand-logo-container" id="processly">
         <img class="brand-logo" src="/img/processly-logo.svg" alt="Processly Logo">
@@ -109,6 +111,16 @@ permalink: about
   <section class="speaking-events">
     <h2>Speaking Events</h2>
     <div class="speaking-item">
+      <h3>Processly @ CES</h3>
+      <p class="date">January 2019</p>
+      <p class="description">Spoke about the value of Processly in both an educational and corporate setting bringing distributed teams together through the use of Processly’s online whiteboard, Sandbox.</p>
+    </div>
+    <div class="speaking-item">
+      <h3>Processly in the Classroom</h3>
+      <p class="date">October 2018</p>
+      <p class="description">Presented the value of Processly to educators and other education stakeholders, explaining how it would work for a variety of teaching styles and grade levels, middle school high school and higher education.</p>
+    </div>
+    <div class="speaking-item">
       <h3>Processly, From an Idea to a Product</h3>
       <p class="date">April 2018</p>
       <p class="description">Spoke to the group about what it means to be a young entrepreneur. Finding a problem you are passionate about solving and how you turn that passion into a business. Building a product and putting in the hands of your customer.</p>
@@ -149,6 +161,11 @@ permalink: about
       <p class="date">October 2016</p>
       <p class="description">Spoke to the group about what it means to create a personal brand identity. Talking about visual identity as well as the bigger brand system that can be portrayed throughout all of their work and what it means to convey a project narrative.</p>
     </div>
+    <div class="speaking-item">
+      <h3>Design @ YinzCam</h3>
+      <p class="date">September 2016</p>
+      <p class="description">Shared what it was like working on cutting edge technology project within the sports industry. The risk, challenges and rewards of having hundreds of thousands of people using your product.</p>
+    </div>
   </section>
   <section class="education">
     <h2>Education</h2>
@@ -176,7 +193,7 @@ permalink: about
   </section>
   <section class="skills">
     <h2>Skills</h2>
-    <h3>Hard & soft skills words and words</h3>
+    <h3>Some of the things I do well</h3>
     <div class="skills-container">
       <div class="skills-item">Design Thinking</div>
       <div class="skills-item">Project Management</div>
@@ -184,7 +201,16 @@ permalink: about
       <div class="skills-item">Team Management</div>
       <div class="skills-item">Systems Design</div>
       <div class="skills-item">Interaction Design</div>
+      <div class="skills-item">Information Architecture</div>
+      <div class="skills-item">3D Modeling</div>
+      <div class="skills-item">Animation</div>
+      <div class="skills-item">Hand & Technical Drawing</div>
+      <div class="skills-item">Photography</div>
     </div>
+  </section>
+  <section class="tools">
+    <h2>Tools</h2>
+    <h3>Some of the toolsets I am quite familiar with</h3>
     <div class="skills-container">
       <div class="skills-item">Sketch</div>
       <div class="skills-item">Framer</div>
@@ -202,13 +228,8 @@ permalink: about
       <div class="skills-item">RhinoCAM</div>
       <div class="skills-item">Vray</div>
       <div class="skills-item">AutoCAD</div>
-      <div class="skills-item">Photography</div>
-      <div class="skills-item">CNC Routong</div>
-      <div class="skills-item">Laser cutting</div>
-      <div class="skills-item">3D Modeling</div>
-      <div class="skills-item">Hand & Technical Drawing</div>
-      <div class="skills-item">Animation</div>
-      <div class="skills-item">Information Architecture</div>
+      <div class="skills-item">CNC Routing</div>
+      <div class="skills-item">Laser Cutting</div>
     </div>
   </section>
 </div>
