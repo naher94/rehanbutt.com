@@ -575,7 +575,7 @@ p, li, h3, #subTitle{
   }
 }
 
-.work-experience, .speaking-events, .education, .skills{
+.work-experience, .speaking-events, .education, .skills, .tools{
   &:not(first-of-type){
     margin-top: 2em;
   }
@@ -683,7 +683,7 @@ p, li, h3, #subTitle{
   margin-bottom: 1em;
 }
 
-.skills{
+.skills, .tools{
   h3{
     font-family: $lato;
     color: $navy-black;
