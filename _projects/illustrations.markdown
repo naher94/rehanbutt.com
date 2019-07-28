@@ -45,7 +45,7 @@ tags: digital, illustration
 </div>
 <div class="row">
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/followingFollowing.jpg" alt="Map that Leads to You" /></div>
-    <div class="small-12 medium-6 large-6 columns quote">"The map that leads to you <br><br> Following, following, following to you"</div>
+    <div class="small-12 medium-6 large-6 columns quote">"The map that leads to you... Following, following, following to you"</div>
 </div>
 <div class="row">
     <div class="small-12 medium-6 large-6 columns image-container"><img src="../img/illustrations/badBlood.jpg" alt="Bad Blood: Taylor Swift" /></div>

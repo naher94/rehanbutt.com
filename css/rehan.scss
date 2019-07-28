@@ -7,40 +7,63 @@
 
 // Numbers
 $color-percentage: 5%;
+$tile-radius: 10px;
+$pill-radius: 500px;
+$recessed-shadow: 0px 10px 33px -10px;
 
 // Colors
 $signature-teal: #12abc4;
 $royal-raspberry: #77013a;
 $dio-grey: #666666;
+$navy-black: #1f2937;
+$pure-white: #ffffff;
+
 $signature-teal-hover: #108da2;
 $royal-raspberry-hover: #680032;
+
+// Animations
+$sprint: all 0.20s ease-in-out;
+$run: all 0.30s ease-in-out;
+$jog: all 0.50s ease-in-out;
 
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900);
 $maven: 'Maven Pro', sans-serif;
-$regular: 400;
-$medium: 500;
-$bold: 700;
-$black: 900;
+$maven-regular: 400;
+$maven-medium: 500;
+$maven-bold: 700;
+$maven-black: 900;
+
+@import url('https://fonts.googleapis.com/css?family=Zilla+Slab:400,700&display=swap');
+$zilla: 'Zilla Slab', serif;
+$zilla-regular: 400;
+$zilla-bold: 700;
+
+@import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,700,900&display=swap');
+$lato: 'Lato', sans-serif;
+$lato-light-italic: 300i;
+$lato-regular: 400;
+$lato-bold: 700;
+$lato-black: 900;
 //******* End of Variables
 
 body {
-  font-family: $maven;
-  color: $dio-grey;
-  font-weight: $medium;
+  font-family: $lato;
+  font-weight: $lato-regular;
+  font-size: 20px; //1em
+  color: $navy-black;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: $maven;
-  padding-left: 10px;
+  font-family: $zilla;
 }
 
 h4 {
-  font-weight: $medium;
-  margin-top: 50px;
+  font-weight: $zilla-regular;
+  margin-top: 2.5em;
 }
 
 article.post {
@@ -48,63 +71,86 @@ article.post {
 }
 
 ul {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .image-container {
-  margin-top: 25px;
-  margin-bottom: 25px;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
 }
 
 .thumbnail-container {
-  position: relative;
-  display: block;
-  background-color: black;
-  opacity: 1;
-}
-
-.thumbnail-container:hover .thumbnail-text {
-  opacity: 1;
-}
-
-.thumbnail-container:hover .thumbnail-image {
-  opacity: 0.8;
+  position: relative; //For banner to show correctly
+  display: block; //For banner to show correctly
+  background-color: $navy-black;
+  border-radius: $tile-radius;
+  transition: $sprint;
+  &:hover{
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+    -webkit-box-shadow: $recessed-shadow rgba($navy-black,0.75);
+    -moz-box-shadow: $recessed-shadow rgba($navy-black,0.75);
+    box-shadow: $recessed-shadow rgba($navy-black,0.75);
+  }
+  &:hover .thumbnail-text{
+    opacity: 1;
+    transition: $run;
+  }
+  &:hover .thumbnail-image{
+    opacity: 0.8;
+    transition: $run;
+  }
+  .thumbnail-image{
+    border-radius: $tile-radius;
+  }
 }
 
 .thumbnail-text {
   position: absolute;
-  bottom: 20px;
+  bottom: 1rem;
   margin: 0 auto;
   left: 0;
   right: 0;
-  color: white;
+  color: $pure-white;
   opacity: 0;
-  text-shadow: 0px 0px 5px rgba(50, 50, 50, 1);
-  font-size: 33px;
-  line-height: 30px;
+  text-shadow: 0px 0px 5px $navy-black;
+  font-size: 1.65em;
+  line-height: 1em;
   text-align: center;
+  font-weight: $zilla-bold;
+  font-family: $zilla;
+  @media screen and (max-width: 40em) {
+    font-size: 1.4em;
+  }
 }
 
 .thumbnail-tile {
-  margin-bottom: 30px;
+  margin-bottom: 1.5em;
 }
 
 .banner {
   position: absolute;
-  top: 10px;
-  left: -10px;
-  padding: 5px 20px 5px 20px;
-  font-weight: 700;
+  font-size: 0.8em;
+  top: -1rem;
+  right: -1rem;
+  padding: 0.25em 1em 0.25em 1em;
+  font-weight: $lato-bold;
   background-color: $signature-teal;
-  color: white;
+  color: $pure-white;
+  border-radius: $pill-radius;
 }
 
 p {
-  padding-left: 100px;
-  padding-right: 100px;
-  margin-top: 25px;
-  margin-bottom: 25px;
+  padding-left: 5em;
+  padding-right: 5em;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.slideshow-container{
+  box-shadow: $recessed-shadow;
 }
 
 .image-center {
@@ -113,13 +159,7 @@ p {
 }
 
 ::selection {
-  color: white;
-  background: $signature-teal;
-}
-
-/* Code for Firefox */
-::-moz-selection {
-  color: white;
+  color: $pure-white;
   background: $signature-teal;
 }
 
@@ -135,17 +175,22 @@ img {
 }
 
 .quote {
-  font-size: 64px;
-  line-height: 60px;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  font-size: 3.2em;
+  line-height: 1.5em;
+  margin-top: 2.5em;
+  margin-bottom: 1em;
 }
 
-.dateStamp {
-  font-size: 22px;
-  margin-top: -15px;
-  font-weight: 400;
-  margin-bottom: 20px;
+.post-header{
+  h1{
+    font-weight: $zilla-bold;
+  }
+  .dateStamp {
+    font-size: 1.1em;
+    margin-top: -0.75em;
+    font-weight: $zilla-regular;
+    margin-bottom: 1em;
+  }
 }
 
 iframe {
@@ -153,49 +198,186 @@ iframe {
 }
 
 //******* Header Styling
+.nav-container{
+  background-color:$signature-teal; 
+  padding-top: 2em;
+  padding-bottom: 2em;
+  margin-bottom: 3em;
+//  float: left;
+  width: 100%;
+  @media screen and (max-width: 40em) {
+    margin-bottom: 1em;
+  }
+}
+
+.menu{
+  display: none;
+}
+
+.mobile-navbar-full{
+  display: none;
+}
+
+.logo{
+  float: right;
+  img{
+    height: 50px;
+  }
+}
+
+.menu-hide{
+  display: none;
+}
+
 .nav {
-  color: white;
-  /*margin: 10px;*/
-  padding: 14px;
-  font-weight: 700;
+  color: $pure-white;
+  padding: 0.7em;
   height: inherit;
+  font-family: $zilla;
+  font-weight: $zilla-bold;
+  font-size: 1em;
 }
 
 .nav:hover {
-  color: white;
-  background-color: $royal-raspberry-hover;
+  color: $pure-white;
+  background-color: $signature-teal-hover;
+  border-radius: $pill-radius;
+}
+
+.mobile-navbar{
+  display: none;
+  float: left;
+  line-height: 2.5em;
 }
 
 .navbar {
-  background-color: $royal-raspberry;
-  color: white;
-  text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-bottom: 50px;
-  white-space: nowrap;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
+  color: $pure-white;
+  float: left;
+  line-height: 2.5em;
 }
 
-.navscroll {
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
+.menu-container{
+  .burger-icon{
+    display: none;
+    float: left;
+    user-select: none;
+    @media screen and (max-width: 40em) {
+      display: block;
+    }
+  }
 }
 
-.navbar::-webkit-scrollbar {
+.burger-container{
+  float: left;
+  display: none;
+  @media screen and (max-width: 40em) {
+    display: block;
+  }
+  
+}
+
+.burger-icon, .burger-btn, .nav-burger-icon{
+  user-select: none;
+}
+
+/* menu-links */
+.menu-links {
+  overflow: hidden;
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+  margin-left: 0;
+  user-select: none;
+  display: none;
+  a{
+    color: $pure-white;
+    font-family: $zilla;
+    font-weight: $zilla-bold;
+    font-size: 1.25em;
+    border-radius: $pill-radius;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+    &:hover{
+      background-color: $signature-teal-hover;
+    }
+  }
+}
+
+.nav-item-container{
+  font-size: 1.5em;
+  &:first-of-type{
+      margin-top: 1em;
+    }
+}
+
+.nav-burger-icon {
+  background: $signature-teal;
+  display: block;
+  height: 5px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+  margin-top: 1.3em;
+}
+
+.nav-burger-icon:before,
+.nav-burger-icon:after {
+  background: $pure-white;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.nav-burger-icon{
+  &:before{
+    top: 4px;
+  }
+  &:after{
+    top: -4px;
+  }
+}
+
+.burger-btn {
   display: none;
 }
 
-.navscroll::-webkit-scrollbar {
-  display: none;
+.burger-btn:checked ~ .menu-links {
+  max-height: 340px;
+  display: block;
+  transition: $run;
+}
+
+.burger-btn:checked ~ .mobile-navbar{
+  @media screen and (max-width: 40em) {
+    display: none;
+  }
+}
+
+.burger-btn:checked ~ .burger-icon .nav-burger-icon {
+  background: transparent;
+}
+
+.burger-btn:checked ~ .burger-icon .nav-burger-icon:before {
+  transform: rotate(-45deg);
+}
+
+.burger-btn:checked ~ .burger-icon .nav-burger-icon:after {
+  transform: rotate(45deg);
+}
+
+.burger-btn:checked ~ .burger-icon:not(.steps) .nav-burger-icon:before,
+.burger-btn:checked ~ .burger-icon:not(.steps) .nav-burger-icon:after {
+  top: 0;
 }
 //******* End of Header Styling
 
+
+//******* A Tag Underline Expand Styling
 p, li, h3, #subTitle{
   a {
     position: relative;
@@ -203,7 +385,7 @@ p, li, h3, #subTitle{
     display: inline-block;
     color: $signature-teal;
     padding: 0 1px;
-    transition: color ease 0.3s;
+    transition: $run;
   }
   
   a::after{
@@ -215,32 +397,34 @@ p, li, h3, #subTitle{
     left: 0;
     bottom: 0;
     background-color: $signature-teal;
-    transition: all ease 0.3s;
+    transition: $run;
   }
 
   a:hover {
-    color: white;
+    color: $pure-white;
   }
   
   a:hover::after {
     height: 100%;
   }
 }
+//******* A Tag Underline Expand Styling
 
 
 //******* Button Styling
 .contentButton {
   width: 100%;
-  font-size: 30px;
-  color: white;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  font-size: 1.5em;
+  color: $pure-white;
+  padding-top: 1em;
+  padding-bottom: 1em;
   text-align: center;
+  border-radius: $pill-radius;
+  transition: $run;
 }
 
 .commandBarButton {
   background-color: #77013a;
-  color: white;
   &:hover {
     background-color: darken(#77013a, $color-percentage); //#680032;
   }
@@ -248,7 +432,6 @@ p, li, h3, #subTitle{
 
 .camleonButton {
   background-color: #6cbe45;
-  color: white;
   &:hover {
     background-color: darken(#6cbe45, $color-percentage); //#66b342;
   }
@@ -256,7 +439,6 @@ p, li, h3, #subTitle{
 
 .nycButton {
   background-color: #EA4D5B;
-  color: white;
   &:hover {
     background-color: darken(#EA4D5B, $color-percentage); //#d74955;
   }
@@ -324,88 +506,278 @@ p, li, h3, #subTitle{
     background-color: darken(#870039, $color-percentage);
   }
 }
-
 //******* End of Button Styling
 
 
 //******* 404 Styling
 .title-404 {
-  text-align: center;
-  font-size: 36px;
+  font-size: 3em;
+  font-weight: $zilla-bold;
 }
 
 .words-404 {
-  text-align: center;
-  font-size: 18px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-bottom: 20px;
+  font-size: 1.8em;
+  margin-bottom: 1em;
 }
 
 .outerspace {
-  background-color: #26153C;
+  background-color: $navy-black;
   width: 100%;
   height: 300px;
-  border-radius: 100%;
+  border-radius: $pill-radius;
   background-image: url(../img/giraffe.svg);
   background-repeat: no-repeat;
   background-position: 50% 50px;
   border-style: solid;
-  border-color: white;
-  border-width: 10px;
+  border-color: $pure-white;
 }
 //******* End of 404 Styling
 
 
 //******* About Page Styling
 .bio {
-  font-size: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+  font-size: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-weight: $lato-bold;
+  h1{
+    padding-left: 0;
+    color: $navy-black;
+    font-family: $zilla;
+    font-weight: $zilla-bold;
+    font-size: 3rem;
+    margin-bottom: 0;
+    span{
+      font-size: 2.5rem;
+    }
+  }
+  p{
+    color: $navy-black;
+    font-family: $lato;
+    line-height: 36px; ///////////why EM NOT RESPONDING
+    font-size: 26px; ///////////why EM NOT RESPONDING
+    padding: 0;
+    margin: 0;
+    code{
+      border-radius: $pill-radius;
+      padding-left: 0.35em;
+      padding-right: 0.35em;
+      padding-bottom: 0.15em;
+      background-color: rgba($navy-black,0.15);
+      border-color: $navy-black;
+      border-width: 0;
+//      border-width: 0.1em;
+    }
+    @media screen and (max-width: 40em) {
+      font-size: 20px;
+      line-height: 28px;
+    }
+  }
 }
 
-#subTitle {
-  font-size: 20px;
-  padding-top: 10px;
-  padding-left: 10px;
+.work-experience, .speaking-events, .education, .skills, .tools{
+  &:not(first-of-type){
+    margin-top: 2em;
+  }
+  h2{
+    font-size: 3.5em;
+    color: rgba($navy-black, 0.15);
+    font-weight: $lato-black;
+    font-family: $lato;
+    @media screen and (max-width: 40em) {
+      line-height: 1em;
+    }
+    @media screen and (max-width: 64em) {
+      line-height: 1em;
+    }
+  }
+  .work-item, .speaking-item, .education-item{
+    &:first-of-type{
+      margin-top: -2.5em;
+      @media screen and (max-width: 40em) {
+        margin-top: -1.5em;
+      }
+      @media screen and (max-width: 64em) {
+        margin-top: -1.5em;
+      }
+    }
+    margin-top: 1rem;
+    padding-left: 0.5rem;
+    h3{
+      font-family: $lato;
+      color: $navy-black;
+      font-size: 1em;
+      font-weight: $lato-black;
+      padding: 0;
+      margin-bottom: 0;
+    }
+    p{
+      padding: 0;
+      margin: 0;
+      margin-top: -0.25em;
+    }
+    .date{
+      font-family: $lato;
+      color: $navy-black;
+      font-size: 1em;
+      font-weight: 300;
+      font-style: italic;
+    }
+    .description{
+      font-family: $lato;
+      color: $navy-black;
+      font-size: 1em;
+      font-weight: $lato-regular;
+      line-height: 1.2em;
+    }
+    .brand-logo-container{
+      position: absolute;
+      opacity: 0.2;
+      margin-left: -4em;
+      transition: $run;
+      padding-top: 0.5em;
+      @media screen and (max-width: 40em) {
+        display: none;
+      }
+      &#upmc{
+        margin-left: -15.5em;
+      }
+      &#processly{
+        margin-left: -4.2em;
+        img{
+          height: 3.3em;
+        }
+      }
+      &#dio{
+        margin-left: -5.6em;
+      }
+      &#cr{
+        margin-left: -6em;
+      }
+      &#ucla{
+        margin-left: -10.5em;
+      }
+      &#aia{
+        margin-left: -4em;
+      }
+      &#cmu{
+        margin-left: -6em;
+      }
+      &#nus{
+        margin-left: -8em;
+      }
+      &#yinzcam{
+        margin-left: -12em;
+      }
+    }
+    .brand-logo{
+      float: right;
+    }
+    &:hover .brand-logo-container{
+      opacity: 1;
+    }
+  }
 }
 
-#subSubTitle {
-  font-size: 18px;
-  padding-top: 10px;
-  padding-left: 10px;
+.skills-container{
+  margin-bottom: 1em;
+}
+
+.skills, .tools{
+  h3{
+    font-family: $lato;
+    color: $navy-black;
+    font-size: 1em;
+    font-weight: $lato-black;
+    padding: 0;
+    margin-bottom: 0;
+    &:first-of-type{
+      margin-top: -2.5em;
+      @media screen and (max-width: 40em) {
+        margin-top: -1.5em;
+      }
+    }
+  }
+  .skills-item{
+    display: inline-block;
+    background-color: $navy-black;
+    border-radius: $pill-radius;
+    color: $pure-white;
+    padding: 0.2em 0.6em 0.2em 0.6em;
+    margin-right: 0.1em;
+    margin-bottom: 0.4em;
+  }
+}
+
+.background-shapes{
+  position: absolute;
+  .circle{
+    position: absolute;
+    z-index: -10;
+    border-radius: 50%;
+    animation-name: bubbles-animation;/* Refers to the name of your @keyframes element below */
+    animation-duration: 5s;/* Change to speed up or slow down */
+    animation-iteration-count: infinite;/* Never stop waving :) */
+    transform-origin: bottom left;/* Pivot around the bottom-left palm */
+    display: inline-block;
+  }
+
+  .circle1{
+    width: 150px;
+    height: 150px;
+    background: #9c5ab7;
+    left: calc(100% - 50px);
+  }
+  .circle2{
+    width: 100px;
+    height: 100px;
+    background: #f2c50f;
+    left: calc(100% / 2);
+    top: 200px;
+  }
 }
 
 #resumeButton {
   width: 100%;
   background-color: $royal-raspberry;
-  font-size: 20px;
+  font-size: 1em;
   color: white;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
   text-align: center;
-  margin-top: 10px;
-  margin-bottom: 25px;
-}
-
-#resumeButton:hover {
-  background-color: $royal-raspberry-hover;
-}
-
-.bullet-square {
-  list-style-type: square;
-}
-
-
-
-.wave{
-  &:hover{
-    transform-origin: 70% 70%; /* Pivot around the bottom-left palm */
-    -webkit-animation:wave-animation 2.5s alternate 2;
-    -moz-animation:wave-animation 2.5s alternate 2;
-    animation:wave-animation 2.5s alternate 2;
+  margin-top: 0.5em;
+  margin-bottom: 1.25em;
+  border-radius: $pill-radius;
+  
+  &:hover {
+    background-color: $royal-raspberry-hover;
   }
 }
+
+.rainbow{
+  background-image: linear-gradient(90deg,#00a2e2 0%,#1bad6b 20%,#fec609 40%,#e92687 60%,#6d358d 80%,#00a2e2 100%);
+  background-size: 200% auto;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow 3s linear infinite;
+}
+
+span.wave {
+  animation-name: wave-animation;/* Refers to the name of your @keyframes element below */
+  animation-duration: 2.5s;/* Change to speed up or slow down */
+  animation-iteration-count: infinite;/* Never stop waving :) */
+  transform-origin: 70% 70%;/* Pivot around the bottom-left palm */
+  display: inline-block;
+}
+
+@keyframes rainbow {
+  to {
+    background-position: 200% center
+  }
+}
+
 @keyframes wave-animation {
     0% { transform: rotate(  0.0deg) }
    10% { transform: rotate(-10.0deg) }/* The following four values can be played with to make the waving more or less extreme */
@@ -416,27 +788,23 @@ p, li, h3, #subTitle{
   100% { transform: rotate(  0.0deg) }
 }
 
+@keyframes bubbles-animation {
+    0% { transform: scale(  1) }
+//   10% { transform: scale(0.8) }
+//   20% { transform: scale(0.6) }
+//   30% { transform: scale(1.5) }
+//   40% { transform: scale(  1) }
+   70% { transform: scale(0.9) }
+  100% { transform: scale(  1) }
+}
 //******* End of About Page Styling
 
 //******* Footer Styling
-.socialButton {
-  width: 100%;
-  color: white;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  text-align: center;
-  background-color: #ececec;
-  margin: 5px;
-}
-
-.socialButton:hover {
-  background-color: #cccccc;
-}
 
 .social {
-  width: 60px;
-  padding-left: 10px;
-  padding-right: 10px;
+  width: 3em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .social:hover {
@@ -445,10 +813,13 @@ p, li, h3, #subTitle{
 
 footer {
   margin-top: 50px;
-  background-color: #ececec;
+  background-color: rgba($navy-black, 0.15);
   text-align: center;
   padding-top: 10px;
   padding-bottom: 10px;
+  @media screen and (max-width: 40em) {
+    margin-top: 1em;
+  }
 }
 
 //******* End of Footer Styling
@@ -467,6 +838,9 @@ footer {
 // Measurments pulled from foundation css file
 // Mobile Styling
 @media screen and (max-width: 40em) {
+  body{
+    font-size: 16px;
+  }
   .outerspace {
     height: 700px;
     background-position: 50% 100px;
@@ -488,10 +862,77 @@ footer {
     padding-left: 10px;
     padding-right: 10px;
   }
+  .menu {
+    display: block;
+    float: left;
+    width: 36px;
+    height: 26px;
+    line-height: 0;
+    padding-top: 13px;
+    text-align: center;
+
+    > svg {
+      width: 18px;
+      height: 15px;
+
+      path {
+        fill: $pure-white;
+      }
+    }
+}
+  .post-content{
+    h2{
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      font-weight: $zilla-bold;
+    }
+  }
+  .mobile-navbar{
+    display: block;
+    line-height: 40px;
+  }
+  
+  .nav{
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .logo{
+    img{
+      height: 40px;
+    }
+  }
+  
+  .thumbnail-tile {
+    margin-bottom: 20px;
+  }
+  
+  .navbar {
+      clear: both;
+      display: none;
+  }
+  .outerspace{
+    height: 200px;
+    background-position: 50% 20px;
+  }
+  .post-header{
+    padding-left: 0.5em;
+  }
 }
 
 // Tablet Styling
 @media screen and (max-width: 64em) {
+  .post-header{
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+  .post-content{
+    h2{
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      font-weight: $zilla-bold;
+    }
+  }
   
 }
 //******* End of Mobile Styling
