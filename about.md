@@ -26,7 +26,7 @@ permalink: about
     <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
   <p>I am a <span class="rainbow">devzgner</span> <code>/devzīnər/</code>, designer + developer, currently based in Pittsburgh, PA, USA working on healthcare technology. I also have several years experience working on both consumer and enterprise solutions for organizations like the NBA & NFL. I love to travel ✈️, and have been fortunate enough to live all over the world. 🌏 Every day trying to bring the unique aspects of each culture into my work. In my free time, I enjoy photography 📷 and creating cute digital illustrations 🐧. Want to hear more about what I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com">email</a> to connect. ✉️</p>
   </section>
-  
+
   <section class="work-experience">
     <h2>Work Experience</h2>
 <!--
@@ -111,6 +111,9 @@ permalink: about
   <section class="speaking-events">
     <h2>Speaking Events</h2>
     <div class="speaking-item">
+      <div class="brand-logo-container" id="ces">
+        <img class="brand-logo" src="/img/ces-logo.svg" alt="CES Logo">
+      </div>
       <h3>Processly @ CES</h3>
       <p class="date">January 2019</p>
       <p class="description">Spoke about the value of Processly in both an educational and corporate setting bringing distributed teams together through the use of Processly’s online whiteboard, Sandbox.</p>
@@ -220,9 +223,9 @@ permalink: about
       <div class="skills-item">Adobe XD</div>
       <div class="skills-item">HTML</div>
       <div class="skills-item">CSS</div>
-      <div class="skills-item">Javascript</div> 
-      <div class="skills-item">Ruby</div> 
-      <div class="skills-item">RAPID</div> 
+      <div class="skills-item">Javascript</div>
+      <div class="skills-item">Ruby</div>
+      <div class="skills-item">RAPID</div>
       <div class="skills-item">Arduino</div>
       <div class="skills-item">Rhino</div>
       <div class="skills-item">RhinoCAM</div>
@@ -233,4 +236,3 @@ permalink: about
     </div>
   </section>
 </div>
-
