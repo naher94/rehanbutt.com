@@ -147,6 +147,11 @@ permalink: about
       <p class="description">Spoke to the group about what it means to create a personal brand identity. Talking about visual identity and creating a brand system that can be portrayed throughout their work. As well as having a design critique around existing student brands.</p>
     </div>
     <div class="speaking-item">
+      <h3>Processly @ Three Rivers Educational Technology Conference</h3>
+      <p class="date">November 2017</p>
+      <p class="description">Presented the value of Processly to educators and other education stakeholders, explaining how it would work for a variety of teaching styles and grade levels, middle school high school and higher education.</p>
+    </div>
+    <div class="speaking-item">
       <div class="brand-logo-container" id="aia">
         <img class="brand-logo" src="/img/aia-logo.svg" alt="American Institute of Architects Logo">
       </div>
@@ -168,6 +173,16 @@ permalink: about
       <h3>Design @ YinzCam</h3>
       <p class="date">September 2016</p>
       <p class="description">Shared what it was like working on cutting edge technology project within the sports industry. The risk, challenges and rewards of having hundreds of thousands of people using your product.</p>
+    </div>
+    <div class="speaking-item">
+      <h3>Portfolio Hack-a-thon</h3>
+      <p class="date">April 2015</p>
+      <p class="description">A workshop helping students learn to design and build their own portfolios, a digital showcase of their work. Defining the narrative and the structure of their work then diving into the development of the details.</p>
+    </div>
+    <div class="speaking-item">
+      <h3>WebDevWeekend: Intro to HTML & CSS</h3>
+      <p class="date">April 2015</p>
+      <p class="description">Introduced the basics of web development to the group. Showcased the foundations of a website, HTML and CSS the role they play in building and design a web presence.</p>
     </div>
   </section>
   <section class="education">
