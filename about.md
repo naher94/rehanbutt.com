@@ -12,7 +12,7 @@ permalink: about
 </div>
 -->
 
-<div class="small-12 medium-4 columns">
+<div class="small-8 small-centered medium-4 columns">
   <img src="/img/rehan-full.png" style="width:100%">
 <!--
   <a target="_blank" href="{{site.baseurl}}/img/resume.pdf">
@@ -143,7 +143,7 @@ permalink: about
     </div>
     <div class="speaking-item">
       <h3>Personal Branding: Sharing a Story Through Your Work</h3>
-      <p class="date">Feburary 2018</p>
+      <p class="date">February 2018</p>
       <p class="description">Spoke to the group about what it means to create a personal brand identity. Talking about visual identity and creating a brand system that can be portrayed throughout their work. As well as having a design critique around existing student brands.</p>
     </div>
     <div class="speaking-item">
