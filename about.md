@@ -12,7 +12,7 @@ permalink: about
 </div>
 -->
 
-<div class="small-12 medium-4 columns">
+<div class="small-8 small-centered medium-4 columns">
   <img src="/img/rehan-full.png" style="width:100%">
 <!--
   <a target="_blank" href="{{site.baseurl}}/img/resume.pdf">
