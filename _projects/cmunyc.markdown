@@ -10,12 +10,12 @@ tags: web Dzgn.IO
 
 <div class="image-container"><img src="../img/nyc/nycDIO.png" alt="Home Page" /></div>
 
-<div>
+<!-- <div>
 <a target="_blank" href="http://nyc.dzgn.io">
     <div class="nycButton contentButton"> Check out the full site
     </div>
 </a>
-</div>
+</div> -->
 
 <div class="image-container"><img src="../img/nyc/screenshots.png" alt="Page Screens" /></div>
 
@@ -50,6 +50,8 @@ When starting this project we looked into other Carnegie Mellon campuses as well
 <img src="../img/nyc/brandSketches.png" alt="Brand Sketches" />
 <img src="../img/nyc/brandingProcess.png" alt="Branding Process" />
 <img src="../img/nyc/colorIteration.png" alt="Color Iteration" class="image-center" style="width:70%"/>
+<img src="../img/nyc/persona.jpg" alt="Persona" />
+<img src="../img/nyc/persona2.jpg" alt="Persona" />
 <img src="../img/nyc/programChart.png" alt="Program Chart" />
 <img src="../img/nyc/originalSiteBreakdown.png" alt="Original Site Breakdown" />
 <img src="../img/nyc/siteBreakdownDetail.png" alt="Site Breakdown Detail" />
