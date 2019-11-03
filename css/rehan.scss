@@ -202,9 +202,10 @@ iframe {
   background-color:$signature-teal;
   padding-top: 2em;
   padding-bottom: 2em;
-  margin-bottom: 3em;
-//  float: left;
   width: 100%;
+}
+header{
+  margin-bottom: 3em;
   @media screen and (max-width: 40em) {
     margin-bottom: 1em;
   }
@@ -532,6 +533,55 @@ p, li, h3, #subTitle{
   border-color: $pure-white;
 }
 //******* End of 404 Styling
+
+//******* Banner Styling
+.site-banner-container{
+  a:hover span{
+    background-color: $pure-white;
+    color: $navy-black;
+    // transition: all 0.3s ease-in-out;
+  }
+  .site-banner{
+    background-color: $navy-black;
+    color: $pure-white;
+    p{
+      margin: 0;
+      padding: 0;
+      padding-top: 0.7em;
+      padding-bottom: 0.7em;
+      text-align: center;
+      span{
+        border-radius: 500px;
+        border: 1px solid $pure-white;
+        margin-left: 0.5em;
+        padding: 0.25em 0.7em;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+  }
+}
+//******* End of Banner Styling
+
+
+
+//******* Year in Review 2019 Styling
+.nineteen{
+  font-family: $zilla;
+  font-size: 20em;
+  -webkit-text-stroke: 4px red;
+  background: -webkit-linear-gradient(rgba(255,0,0,1) 38%, rgba(255,0,0,0) 72%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  // background-image: linear-gradient(180deg,#00a2e2 0%,rgba(46, 200, 100, 0); 100%);
+  // background-size: 200% auto;
+  // background-clip: text;
+  // text-fill-color: transparent;
+  // -webkit-background-clip: text;
+  // -webkit-text-fill-color: transparent;
+  animation: nineteen 10s linear infinite;
+  // line-height: 10rem;
+}
+//******* End of Year in Review 2019 Styling
 
 
 //******* About Page Styling
