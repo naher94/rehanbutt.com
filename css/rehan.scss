@@ -565,21 +565,44 @@ p, li, h3, #subTitle{
 
 
 //******* Year in Review 2019 Styling
-.nineteen{
-  font-family: $zilla;
-  font-size: 20em;
-  -webkit-text-stroke: 4px red;
-  background: -webkit-linear-gradient(rgba(255,0,0,1) 38%, rgba(255,0,0,0) 72%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  // background-image: linear-gradient(180deg,#00a2e2 0%,rgba(46, 200, 100, 0); 100%);
-  // background-size: 200% auto;
-  // background-clip: text;
-  // text-fill-color: transparent;
-  // -webkit-background-clip: text;
-  // -webkit-text-fill-color: transparent;
-  animation: nineteen 10s linear infinite;
-  // line-height: 10rem;
+.year-2019{
+  .year-in-review{
+    .nav-container{
+      background-color: $navy-black;
+      padding-bottom: 4em;
+    }
+    .nineteen{
+      font-family: $zilla;
+      font-size: 12em;
+      font-weight: bold;
+      background-image: linear-gradient(90deg,#B4EC51 0%,#53A0FD 25%,#3023AE 50%,#53A0FD 75%,#B4EC51 100%);
+      background-size: 200% auto;
+      background-clip: text;
+      text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow 6s linear infinite;
+      line-height: 15rem;
+    }
+    h1{
+      display: inline-block;
+    }
+    h2{
+      display: inline-block;
+      color: $pure-white;
+      font-size: 2.6em;
+      line-height: 2.8rem;
+      margin-left: 0.25em;
+    }
+  }
+  .hero-text{
+    font-family: $zilla;
+    font-size: 2.5em;
+    line-height: 1.2em;
+    text-align: justify;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 //******* End of Year in Review 2019 Styling
 
@@ -794,7 +817,7 @@ p, li, h3, #subTitle{
   width: 100%;
   background-color: $royal-raspberry;
   font-size: 1em;
-  color: white;
+  color: $pure-white;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   text-align: center;
