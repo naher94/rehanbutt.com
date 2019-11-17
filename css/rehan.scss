@@ -45,6 +45,10 @@ $lato-light-italic: 300i;
 $lato-regular: 400;
 $lato-bold: 700;
 $lato-black: 900;
+
+@import url('https://fonts.googleapis.com/css?family=Inconsolata&display=swap');
+$inconsolata: 'Inconsolata', monospace;
+$inconsolata-regular: 400;
 //******* End of Variables
 
 body {
@@ -574,7 +578,7 @@ p, li, h3, #subTitle{
     .nineteen{
       font-family: $zilla;
       font-size: 12em;
-      font-weight: bold;
+      font-weight: $zilla-bold;
       background-image: linear-gradient(90deg,#B4EC51 0%,#53A0FD 25%,#3023AE 50%,#53A0FD 75%,#B4EC51 100%);
       background-size: 200% auto;
       background-clip: text;
@@ -603,6 +607,37 @@ p, li, h3, #subTitle{
     padding-left: 0;
     padding-right: 0;
   }
+  .code{
+    background-color: #272822;
+    font-family: $inconsolata;
+    font-weight: $inconsolata-regular;
+    padding-top: 5em;
+    padding-bottom: 5em;
+    p{
+      color: #F9F9F5;
+    }
+    .comment{
+      color: #888471;
+      font-size: 2.5em;
+      line-height: 1em;
+      padding: 0;
+      margin: 0;
+    }
+    .line{
+      font-size: 6em;
+      line-height: 1em;
+      padding: 0;
+      margin: 0;
+      .yellow{
+        color: #EBE087;
+      }
+      .purple{
+        color: #BD99FF;
+      }
+    }
+  }
+
+
 }
 //******* End of Year in Review 2019 Styling
 
