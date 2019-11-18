@@ -34,8 +34,9 @@ $maven-medium: 500;
 $maven-bold: 700;
 $maven-black: 900;
 
-@import url('https://fonts.googleapis.com/css?family=Zilla+Slab:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Zilla+Slab:300,400,700&display=swap');
 $zilla: 'Zilla Slab', serif;
+$zilla-light: 300;
 $zilla-regular: 400;
 $zilla-bold: 700;
 
@@ -606,6 +607,64 @@ p, li, h3, #subTitle{
     text-align: justify;
     padding-left: 0;
     padding-right: 0;
+    span{
+      position: relative;
+      span{
+        display: none;
+        position: absolute;
+      }
+    }
+    .wow:hover{
+      .wow-react{
+        display: block;
+        width: 100%;
+        opacity: 0.5;
+        z-index: -1;
+        font-size: 2em;
+        text-align: center;
+        margin-top: -25%;
+      }
+    }
+    .cap:hover{
+      .cap-react{
+        display: block;
+        width: 100%;
+        opacity: 0.5;
+        z-index: -1;
+        font-size: 2em;
+        text-align: center;
+        margin-top: -40%;
+      }
+    }
+    .enjoy:hover{
+      .enjoy-react{
+        display: block;
+        width: 100%;
+        opacity: 0.5;
+        z-index: -1;
+        font-size: 2em;
+        text-align: center;
+        margin-top: -40%;
+      }
+    }
+    .brain:hover{
+      .brain-react{
+        display: block;
+        width: 100%;
+        opacity: 0.5;
+        z-index: -1;
+        font-size: 2em;
+        text-align: center;
+        margin-top: -20%;
+      }
+    }
+  }
+  .chicago{
+    .map{
+      overflow: hidden;
+      width: 1000vw; // Can't scale up the MAP SVG :(
+      margin-left: -40%;
+    }
   }
   .code{
     background-color: #272822;
@@ -636,7 +695,82 @@ p, li, h3, #subTitle{
       }
     }
   }
-
+  .laughs{
+    .full-bleed{
+      font-family: $zilla;
+      font-weight: $zilla-light;
+      color: rgba($navy-black, 0.15);
+      font-size: 32vw;
+      padding: 0;
+      margin: 0;
+      margin-left: -3vw;
+      overflow: hidden; // THIS IS NOT WORKING WITH font-size of units VW
+      white-space: nowrap;
+      line-height: 1.5em;
+      text-align: center;
+      position: absolute;
+      z-index: -2;
+    }
+    .row{
+      padding-top: 28vw;
+      padding-bottom: 15vw;
+      text-align: center;
+    }
+    p{
+      font-family: $zilla;
+      font-weight: $zilla-bold;
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+      z-index: 1;
+    }
+    .number{
+      font-size: 10em;
+      line-height: 1em;
+    }
+    .description{
+      font-size: 2em;
+      line-height: 1em;
+      margin-left: .25em;
+      text-align: left;
+      vertical-align: top;
+      padding-top: 1.8em;
+    }
+    .emojis-container{
+      position: absolute;
+      z-index: -1;
+      margin-top: -8em;
+      margin-left: 2em;
+    }
+    .emojis{
+      // position: relative;
+    }
+    .emojis-large{
+      font-size: 10em;
+      // position: absolute;
+      transform: rotate(15deg);
+      // left: 22vw;
+      // margin-top: -0.70em;
+    }
+    .emojis-medium{
+      font-size: 5em;
+      // position: absolute;
+      margin-left: -3em;
+      // margin-top: 3em;
+      // top: 2em;
+      transform: rotate(-23deg);
+      // left: 18vw;
+      // margin-top: 0.5em;
+    }
+    .emojis-small{
+      font-size: 3em;
+      // position: absolute;
+      transform: rotate(-7deg);
+      margin-left: 3em;
+      // left: 34vw;
+      // margin-top: -0.70em;
+    }
+  }
 
 }
 //******* End of Year in Review 2019 Styling
