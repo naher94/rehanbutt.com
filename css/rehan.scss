@@ -696,6 +696,7 @@ p, li, h3, #subTitle{
     }
   }
   .laughs{
+    overflow: hidden;
     .full-bleed{
       font-family: $zilla;
       font-weight: $zilla-light;
@@ -704,7 +705,8 @@ p, li, h3, #subTitle{
       padding: 0;
       margin: 0;
       margin-left: -3vw;
-      overflow: hidden; // THIS IS NOT WORKING WITH font-size of units VW
+      width: calc(100% + 3vw);
+      overflow: hidden;
       white-space: nowrap;
       line-height: 1.5em;
       text-align: center;
