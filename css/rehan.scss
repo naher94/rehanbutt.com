@@ -662,8 +662,33 @@ p, li, h3, #subTitle{
   .chicago{
     .map{
       overflow: hidden;
-      width: 1000vw; // Can't scale up the MAP SVG :(
-      margin-left: -40%;
+      width: 150vw;
+      margin-left: -60%;
+    }
+    .phrase{
+      text-align: center;
+      margin-top: -50vw;
+    }
+    p{
+      font-family: $zilla;
+      font-weight: $zilla-bold;
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+      z-index: 1;
+    }
+    .number{
+      font-size: 10em;
+      line-height: 1em;
+    }
+    .description{
+      font-size: 2em;
+      line-height: 1em;
+      margin-left: .25em;
+      text-align: left;
+      vertical-align: top;
+      padding-top: 1.8em;
+      max-width: 25vw;
     }
   }
   .code{
