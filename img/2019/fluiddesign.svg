@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="192px" height="197px" viewBox="0 0 192 197" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>fluiddesign</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="0%" y1="2.03496198%" x2="101.999998%" y2="98.9243379%" id="linearGradient-1">
+            <stop stop-color="#F79868" offset="0%"></stop>
+            <stop stop-color="#F15F63" offset="100%"></stop>
+        </linearGradient>
+        <path d="M23.101991,48.6799897 C23.1097963,38.6543402 31.2405319,30.7880835 41.2615876,31.1101843 L144.178796,34.4181904 C154.200258,34.7403042 162.703168,43.1099756 163.171859,53.1398496 L167.878225,153.854836 C168.346342,163.872409 160.605225,172.057389 150.583183,172.136538 L41.1477338,173.000805 C31.1278291,173.079937 23.0114194,165.016011 23.0192242,154.991042 L23.101991,48.6799897 Z" id="path-2"></path>
+        <filter x="-0.7%" y="-0.7%" width="101.4%" height="101.4%" filterUnits="objectBoundingBox" id="filter-3">
+            <feGaussianBlur stdDeviation="0.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="1" dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.47826087 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="48.9733865%"></stop>
+            <stop stop-color="#FFEBE2" offset="100%"></stop>
+        </linearGradient>
+        <path d="M40.0004222,26.8736346 C39.9919309,17.8557303 47.2931483,10.5426464 56.3169742,10.5394012 L165.122349,10.5002724 C174.142223,10.4970286 181.456921,17.8057245 181.460185,26.8304144 L181.499171,134.606188 C181.502556,143.964423 173.928683,151.526066 164.555985,151.495505 L55.8566422,151.141073 C47.1640905,151.112729 40.1107544,144.047947 40.1025735,135.359651 L40.0004222,26.8736346 Z" id="path-5"></path>
+        <filter x="-1.4%" y="-1.4%" width="102.8%" height="102.8%" filterUnits="objectBoundingBox" id="filter-6">
+            <feGaussianBlur stdDeviation="1" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="2" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.260869565 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="0%" y1="2.1050249%" x2="101.999998%" y2="98.8528737%" id="linearGradient-7">
+            <stop stop-color="#F79868" offset="0%"></stop>
+            <stop stop-color="#F15F63" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="fluiddesign" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Logo-Copy">
+            <g id="Blue" transform="translate(95.458990, 102.050973) rotate(-24.000000) translate(-95.458990, -102.050973) ">
+                <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+            </g>
+            <g id="White" transform="translate(110.749797, 80.997948) rotate(-9.000000) translate(-110.749797, -80.997948) ">
+                <use fill="url(#linearGradient-4)" fill-rule="evenodd" xlink:href="#path-5"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-6)" xlink:href="#path-5"></use>
+            </g>
+            <path d="M125.732185,44.5 C119.670331,44.5 113.609281,46.5934035 107.700984,50.7794035 L107.700984,50.7794035 C99.5407967,56.5608772 91.9964421,56.5608772 83.8370585,50.7794035 L83.8370585,50.7794035 L75.5,44.8720351 L75.5,113.5 L146,113.5 L146,52.365193 L143.762581,50.7794035 C137.855088,46.5934035 131.793234,44.5 125.732185,44.5 Z M113.306862,62.6121399 C119.517562,58.2112414 125.303655,57.8066699 131.436847,61.3963959 L131.436847,61.3963959 L131.436847,99.0228941 L90.0647604,99.0228941 L90.0647604,66.3730307 C92.760669,67.3749877 95.475449,67.8763045 98.1915769,67.8763045 L98.1915769,67.8763045 C103.272017,67.875628 108.354478,66.1213575 113.306862,62.6121399 L113.306862,62.6121399 Z" id="Fill-1" fill="url(#linearGradient-7)" transform="translate(110.750000, 79.000000) rotate(-9.000000) translate(-110.750000, -79.000000) "></path>
+        </g>
+    </g>
+</svg>
