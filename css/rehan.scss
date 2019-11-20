@@ -723,6 +723,7 @@ p, li, h3, #subTitle{
     .workshop{
       width: 20vw;
       top: 3vw;
+      right: 15vw;
       transform: rotate(9deg);
     }
     .workshop2{
@@ -731,6 +732,109 @@ p, li, h3, #subTitle{
       top: 5vw;
       transform: rotate(-12deg);
       z-index: -1;
+    }
+  }
+
+  .stickers{
+    margin-top: 20vw;
+    margin-bottom: 10vw;
+    .label-container{
+      text-align: center;
+      z-index: -1;
+    }
+    .label-sticker{
+      display: inline-block;
+      background-color: #BFD747;
+      border-radius: 25px;
+      padding-left: 2em;
+      padding-right: 2em;
+      padding-bottom: 1em;
+      -webkit-box-shadow: 0px 0px 5px 0px rgba($navy-black,0.75);
+      -moz-box-shadow: 0px 0px 5px 0px rgba($navy-black,0.75);
+      box-shadow: 0px 0px 5px 0px rgba($navy-black,0.75);
+      transform: rotate(-6deg);
+    }
+    p{
+      font-family: $zilla;
+      font-weight: $zilla-bold;
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+    }
+    .number{
+      font-size: 10em;
+      line-height: 1em;
+    }
+    .description{
+      font-size: 2em;
+      line-height: 1em;
+      margin-left: .25em;
+      text-align: left;
+      vertical-align: top;
+      padding-top: 1.8em;
+    }
+    .sticker-group{
+      position: relative;
+      margin-top: -20vw;
+      height: 600px;
+      img{
+        width: 15vw;
+        position: absolute;
+        -webkit-filter: drop-shadow( 0px 0px 5px rgba($navy-black, 0.75));
+        filter: drop-shadow( 0px 0px 5px rgba($navy-black, 0.75));
+      }
+      .mysterymachine{
+        transform: rotate(-14deg);
+        top: 10vw;
+        left: -4vw;
+        z-index: 2;
+      }
+      .tube{
+        width: 13vw;
+        transform: rotate(7deg);
+        left: 5vw;
+        z-index: 1;
+      }
+      .fluiddesign{
+        width: 12vw;
+        transform: rotate(4deg);
+        top: 17vw;
+        left: 7vw;
+        z-index: 3;
+      }
+      .shipit{
+        width: 12vw;
+        transform: rotate(-6deg);
+        right: 14vw;
+        top: -2vw;
+        z-index: 1;
+      }
+      .pepper{
+        width: 14vw;
+        transform: rotate(12deg);
+        right: 2vw;
+        top: -10vw;
+        z-index: 2;
+      }
+      .paddington{
+        transform: rotate(9deg);
+        right: -2vw;
+        top: 8vw;
+        z-index: 3;
+      }
+      .upmc{
+        transform: rotate(9deg);
+        right: 11vw;
+        top: 16vw;
+        z-index: 2;
+      }
+      .hai{
+        width: 12vw;
+        transform: rotate(-10deg);
+        right: -3vw;
+        top: 18vw;
+        z-index: 4;
+      }
     }
   }
 
