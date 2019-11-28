@@ -873,6 +873,10 @@ p, li, h3, #subTitle{
   }
 
   .mywebsite{
+    margin-top: 5em;
+    .coconut-container{
+      // padding-top: 2em;
+    }
     p{
       font-size: 2em;
       padding: 0;
@@ -1071,6 +1075,9 @@ p, li, h3, #subTitle{
       padding-bottom: 0.3em;
     }
     .codename{
+      font-size: 2.5em;
+      padding-top: 0.5em;
+      line-height: 2em;
       font-family: $specialelite;
       font-weight: $specialelite-regular;
       text-transform: uppercase;
