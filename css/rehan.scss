@@ -899,17 +899,14 @@ p, li, h3, #subTitle{
       }
     }
     .typography{
-      // opacity: 0;
       span{
         font-family: serif;
         display: inline-block;
         position: absolute;
         &:nth-of-type(1n){
           animation-name: font-animation-parent;
-          // animation-name: font-animation;
           animation-duration: 5s;
           animation-iteration-count: infinite;
-          // position: absolute;
         }
         &:nth-of-type(2n){
           font-family: $zilla;
