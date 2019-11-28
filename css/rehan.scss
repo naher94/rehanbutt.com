@@ -50,6 +50,10 @@ $lato-black: 900;
 @import url('https://fonts.googleapis.com/css?family=Inconsolata&display=swap');
 $inconsolata: 'Inconsolata', monospace;
 $inconsolata-regular: 400;
+
+@import url('https://fonts.googleapis.com/css?family=Special+Elite&display=swap');
+$specialelite: 'Special Elite', cursive;
+$specialelite-regular: 400;
 //******* End of Variables
 
 body {
@@ -867,6 +871,215 @@ p, li, h3, #subTitle{
       }
     }
   }
+
+  .mywebsite{
+    p{
+      font-size: 2em;
+      padding: 0;
+      margin: 0;
+      a{ //To remove the underline hover effect
+        color: $navy-black;
+        padding: 0;
+        transition: none;
+        height: 0;
+        &:hover{
+          &::after{
+            height: 0;
+          }
+        }
+        &::after{
+          background-color: none;
+          transition: none;
+        }
+      }
+      .coconut{
+        font-size: 2em;
+        vertical-align:-webkit-baseline-middle;
+        vertical-align: middle;
+      }
+    }
+    .typography{
+      // opacity: 0;
+      span{
+        font-family: serif;
+        display: inline-block;
+        position: absolute;
+        &:nth-of-type(1n){
+          animation-name: font-animation-parent;
+          // animation-name: font-animation;
+          animation-duration: 5s;
+          animation-iteration-count: infinite;
+          // position: absolute;
+        }
+        &:nth-of-type(2n){
+          font-family: $zilla;
+          opacity: 0;
+          animation-name: font-animation-child-1;
+          animation-duration: 5s;
+          animation-iteration-count: infinite;
+        }
+        &:nth-of-type(3n){
+          font-family: $specialelite;
+          opacity: 0;
+          animation-name: font-animation-child-2;
+          animation-duration: 5s;
+          animation-iteration-count: infinite;
+        }
+        &:nth-of-type(4n){
+          font-family: $inconsolata;
+          opacity: 0;
+          animation-name: font-animation-child-3;
+          animation-duration: 5s;
+          animation-iteration-count: infinite;
+        }
+        &:nth-of-type(5n){
+          font-family: $maven;
+          opacity: 0;
+          animation-name: font-animation-child-4;
+          animation-duration: 5s;
+          animation-iteration-count: infinite;
+        }
+      }
+    }
+    @keyframes font-animation-parent {
+      0% {opacity: 1;}
+      20% {opacity: 0;}
+      40% {opacity: 0;}
+      60% {opacity: 0;}
+      80% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+    @keyframes font-animation-child-1 {
+      0% {opacity: 0;}
+      20% {opacity: 1;}
+      40% {opacity: 0;}
+      60% {opacity: 0;}
+      80% {opacity: 0;}
+      100% {opacity: 0;}
+    }
+    @keyframes font-animation-child-2 {
+      0% {opacity: 0;}
+      20%{opacity: 0;}
+      40% {opacity: 1;}
+      60% {opacity: 0;}
+      80% {opacity: 0;}
+      100% {opacity: 0;}
+    }
+    @keyframes font-animation-child-3 {
+      0% {opacity: 0;}
+      20%{opacity: 0;}
+      40% {opacity: 0;}
+      60% {opacity: 1;}
+      80% {opacity: 0;}
+      100% {opacity: 0;}
+    }
+    @keyframes font-animation-child-4 {
+      0% {opacity: 0;}
+      20%{opacity: 0;}
+      40% {opacity: 0;}
+      60% {opacity: 0;}
+      80% {opacity: 1;}
+      100% {opacity: 0;}
+    }
+
+    @keyframes font-animation {
+      0% { font: 1em $lato }
+      20% { font: 1em $zilla }
+      40% { font: 1em $maven }
+      60% { font: 1em $specialelite }
+      80% { font: 1em $inconsolata }
+      100% {}
+    }
+
+    .mobilemenu{
+      span.icon-container{
+        display: inline-block;
+        position: absolute;
+        margin-left: -1.5em;
+      }
+      .burger-emoji{
+        position: absolute;
+        animation-name: burger-animation;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        &:hover{
+          &~.nom{
+            display: block;
+          }
+          &~.nomnom{
+            display: block;
+          }
+        }
+      }
+      @keyframes burger-animation{
+        0% {transform: rotate(-15deg);}
+        50% {transform: rotate(15deg);}
+        100% {transform: rotate(-15deg);}
+      }
+      .nom{
+        font-family: $zilla;
+        font-weight: $zilla-bold;
+        font-size: .75em;
+        bottom: -2.0em;
+        right: -0.5em;
+        transform: rotate(-15deg);
+        position: absolute;
+        display: none;
+      }
+      .nomnom{
+        font-family: $zilla;
+        font-weight: $zilla-bold;
+        font-size: .5em;
+        bottom: -1.5em;
+        right: 0.75em;
+        transform: rotate(10deg);
+        position: absolute;
+        display: none;
+      }
+    }
+
+    .responsiveness{
+      animation-name: kerning-animation;
+      animation-duration: 20s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes kerning-animation{
+      0% {letter-spacing: -0.2em}
+      50% {letter-spacing: 0.3em}
+      100% {letter-spacing: -0.2em}
+    }
+
+    .cleaning{
+      span{
+        animation-name: sweep-animation;
+        animation-duration: 10s;
+        animation-iteration-count: infinite;
+        transform-origin: 0% 100%;/* Pivot around the bottom-left palm */
+        display: inline-block;
+        z-index: -1;
+        // font-size: 1.5em;
+      }
+      @keyframes sweep-animation {
+        0%, 100% {
+          transform: translate(0em);
+        }
+        50% {
+          transform: translate(-7em) rotate(-75deg);
+        }
+      }
+    }
+
+    .rehanlogo{
+      padding-bottom: 0.3em;
+    }
+    .codename{
+      font-family: $specialelite;
+      font-weight: $specialelite-regular;
+      text-transform: uppercase;
+    }
+  }
+
   .laughs{
     overflow: hidden;
     .full-bleed{
@@ -917,32 +1130,30 @@ p, li, h3, #subTitle{
       margin-left: 2em;
     }
     .emojis{
-      // position: relative;
+      animation: 2s ease-in-out infinite animation-laugh;
     }
     .emojis-large{
       font-size: 10em;
-      // position: absolute;
       transform: rotate(15deg);
-      // left: 22vw;
-      // margin-top: -0.70em;
     }
     .emojis-medium{
       font-size: 5em;
-      // position: absolute;
       margin-left: -3em;
-      // margin-top: 3em;
-      // top: 2em;
       transform: rotate(-23deg);
-      // left: 18vw;
-      // margin-top: 0.5em;
+
     }
     .emojis-small{
       font-size: 3em;
-      // position: absolute;
       transform: rotate(-7deg);
       margin-left: 3em;
-      // left: 34vw;
-      // margin-top: -0.70em;
+    }
+    @mixin laugh( $scale, $rotate ) {
+    	transform: scale( $scale ) rotate( $rotate );
+    }
+    @keyframes animation-laugh {
+    	0%, 82%, 100% { @include laugh( 1, 0deg ); }
+    	88%, 94% { @include laugh(1.1, -4deg); }
+    	85%, 91%, 97% { @include laugh(1.15, -3deg); }
     }
   }
 
