@@ -1104,6 +1104,16 @@ p, li, h3, #subTitle{
       text-align: right;
       vertical-align: bottom;
     }
+
+    .description{
+      font-size: 2.5em;
+      text-align: center;
+      font-family: $zilla;
+      font-weight: $zilla-bold;
+      padding: 0;
+      margin: 0;
+    }
+
     @media screen and (max-width: 40em) {
       .left-skills{
         text-align: left;
