@@ -1084,6 +1084,33 @@ p, li, h3, #subTitle{
     }
   }
 
+  .levelup{
+    margin-top: 7em;
+    .skills-item{
+      display: inline-block;
+      background-color: $navy-black;
+      border-radius: $pill-radius;
+      color: $pure-white;
+      padding: 0.2em 0.6em 0.2em 0.6em;
+      margin-right: 0.1em;
+      margin-bottom: 0.4em;
+      font-size: 1.2em;
+    }
+    .left-skills, .right-skills{
+      margin-top: 2em;
+    }
+
+    .left-skills{
+      text-align: right;
+      vertical-align: bottom;
+    }
+    @media screen and (max-width: 40em) {
+      .left-skills{
+        text-align: left;
+      }
+    }
+  }
+
   .laughs{
     overflow: hidden;
     .full-bleed{
