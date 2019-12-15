@@ -872,6 +872,76 @@ p, li, h3, #subTitle{
     }
   }
 
+  .coffee{
+    margin-top: 10em;
+    margin-bottom: 10em;
+    .phrase{
+      text-align: center;
+      position: relative;
+      .emojis{
+        font-size: 12em;
+        padding: 0;
+        margin: 0;
+        line-height: 0.8em;
+        display: inline-block;
+        margin-right: 0.1em;
+      }
+      .word-container{
+        display: inline-block;
+        .number{
+          font-family: $zilla;
+          font-weight: $zilla-bold;
+          font-size: 10em;
+          padding: 0;
+          margin: 0;
+          line-height: 0.6em;
+          text-align: left;
+        }
+        .description{
+          font-family: $zilla;
+          font-weight: $zilla-bold;
+          font-size: 2em;
+          padding: 0;
+          margin: 0;
+          text-align: left;
+        }
+      }
+    }
+    .chat-bubble {
+    	position: absolute;
+    	background: #047CFE;
+    	border-radius: 1em;
+      display: inline-block;
+      transform: rotate(12deg);
+      top: -3em;
+      right: -2em;
+      p{
+        font-family: #lato;
+        color: $pure-white;
+        font-size: 1.6em;
+        padding: 0.6em;
+        margin: 0;
+        font-weight: $lato-bold;
+        line-height: 1.2em;
+      }
+    }
+
+    .chat-bubble:after {
+    	content: '';
+    	position: absolute;
+    	bottom: 0;
+    	right: 0;
+    	width: 0;
+    	height: 0;
+    	border: 32px solid transparent;
+    	border-top-color: #047CFE;
+    	border-bottom: 0;
+    	border-right: 0;
+    	margin-left: -16px;
+    	margin-bottom: -14px;
+    }
+  }
+
   .mywebsite{
     margin-top: 5em;
     .coconut-container{
