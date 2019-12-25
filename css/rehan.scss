@@ -575,6 +575,16 @@ p, li, h3, #subTitle{
 
 //******* Year in Review 2019 Styling
 .year-2019{
+  .no-select{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    user-drag: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+  }
   .year-in-review{
     .nav-container{
       background-color: $navy-black;
