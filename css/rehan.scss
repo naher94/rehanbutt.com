@@ -604,6 +604,33 @@ p, li, h3, #subTitle{
       margin-left: 0.25em;
     }
   }
+  footer{
+    background-image: url("../img/2019/2020shapes.svg");
+    background-color: $navy-black;
+    background-size: 50%;
+    height: 100vh;
+    .logo{
+      float: none;
+      margin-top: 20vh;
+    }
+    h1,h2{
+      color: $pure-white;
+    }
+    h1{
+      font-size: 3em;
+      font-weight: $zilla-light;
+      line-height: 1em;
+      margin-bottom: -1em;
+    }
+    h2{
+      font-size: 10em;
+      font-weight: $zilla-bold;
+      line-height: 1em;
+    }
+    .text-section{
+      margin-top: 35vh;
+    }
+  }
   .hero-text{
     font-family: $zilla;
     font-size: 2.5em;
