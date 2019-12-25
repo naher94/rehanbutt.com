@@ -575,6 +575,9 @@ p, li, h3, #subTitle{
 
 //******* Year in Review 2019 Styling
 .year-2019{
+  @media screen and (max-width: 40em) {
+    font-size: 10px;
+  }
   .no-select{
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -612,6 +615,9 @@ p, li, h3, #subTitle{
       font-size: 2.6em;
       line-height: 2.8rem;
       margin-left: 0.25em;
+      @media screen and (max-width: 40em) {
+        line-height: 1em;
+      }
     }
   }
   footer{
@@ -619,9 +625,15 @@ p, li, h3, #subTitle{
     background-color: $navy-black;
     background-size: 50%;
     height: 100vh;
+    @media screen and (max-width: 40em) {
+      height: 50vh;
+    }
     .logo{
       float: none;
       margin-top: 20vh;
+      @media screen and (max-width: 40em) {
+        margin-top: 10vh;
+      }
     }
     h1,h2{
       color: $pure-white;
@@ -639,6 +651,9 @@ p, li, h3, #subTitle{
     }
     .text-section{
       margin-top: 35vh;
+      @media screen and (max-width: 40em) {
+        margin-top: 10vh;
+      }
     }
   }
   .hero-text{
@@ -648,6 +663,10 @@ p, li, h3, #subTitle{
     text-align: justify;
     padding-left: 0;
     padding-right: 0;
+    @media screen and (max-width: 40em) {
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
     span{
       position: relative;
       span{
@@ -708,7 +727,7 @@ p, li, h3, #subTitle{
     }
     .phrase{
       text-align: center;
-      margin-top: -50vw;
+      margin-top: -60vw;
     }
     p{
       font-family: $zilla;
@@ -730,11 +749,19 @@ p, li, h3, #subTitle{
       vertical-align: top;
       padding-top: 1.8em;
       max-width: 25vw;
+      @media screen and (max-width: 40em) {
+        font-size: 1.5em;
+        padding-top: 1.2em;
+      }
     }
     .polaroid-container{
       position: relative;
       height: 600px;
       margin-top: 50px;
+      @media screen and (max-width: 40em) {
+        height: 100px;
+        margin-top: 0;
+      }
     }
     .polaroid{
       border: 10px solid $pure-white;
@@ -742,6 +769,9 @@ p, li, h3, #subTitle{
       -moz-box-shadow: 0px 0px 30px 0px rgba($navy-black,0.75);
       box-shadow: 0px 0px 30px 0px rgba($navy-black,0.75);
       position: absolute;
+      @media screen and (max-width: 40em) {
+        border-width: 3px;
+      }
     }
     .hancock{
       width: 14vw;
@@ -794,6 +824,9 @@ p, li, h3, #subTitle{
       -moz-box-shadow: 0px 0px 5px 0px rgba($navy-black,0.75);
       box-shadow: 0px 0px 5px 0px rgba($navy-black,0.75);
       transform: rotate(-6deg);
+      @media screen and (max-width: 40em) {
+        border-radius: 15px;
+      }
     }
     p{
       font-family: $zilla;
@@ -805,6 +838,9 @@ p, li, h3, #subTitle{
     .number{
       font-size: 10em;
       line-height: 1em;
+      @media screen and (max-width: 40em) {
+        font-size: 6em;
+      }
     }
     .description{
       font-size: 2em;
@@ -813,11 +849,18 @@ p, li, h3, #subTitle{
       text-align: left;
       vertical-align: top;
       padding-top: 1.8em;
+      @media screen and (max-width: 40em) {
+        padding-top: 0.7em;
+      }
     }
     .sticker-group{
       position: relative;
       margin-top: -20vw;
       height: 600px;
+      @media screen and (max-width: 40em) {
+        height: 100px;
+        margin-top: -25vw;
+      }
       img{
         width: 15vw;
         position: absolute;
@@ -885,6 +928,13 @@ p, li, h3, #subTitle{
     font-weight: $inconsolata-regular;
     padding-top: 5em;
     padding-bottom: 5em;
+    @media screen and (max-width: 40em) {
+      padding-left: 1em;
+      padding-right: 1em;
+      padding-top: 4em;
+      padding-bottom: 4em;
+
+    }
     p{
       color: #F9F9F5;
     }
@@ -894,6 +944,9 @@ p, li, h3, #subTitle{
       line-height: 1em;
       padding: 0;
       margin: 0;
+      @media screen and (max-width: 40em) {
+        font-size: 2em;
+      }
     }
     .line{
       font-size: 6em;
@@ -905,6 +958,9 @@ p, li, h3, #subTitle{
       }
       .purple{
         color: #BD99FF;
+      }
+      @media screen and (max-width: 40em) {
+        font-size: 4em;
       }
     }
   }
@@ -976,6 +1032,10 @@ p, li, h3, #subTitle{
     	border-right: 0;
     	margin-left: -16px;
     	margin-bottom: -14px;
+      @media screen and (max-width: 40em) {
+        border-width: 20px;
+        margin-bottom: -15px;
+      }
     }
   }
 
@@ -1202,23 +1262,50 @@ p, li, h3, #subTitle{
       margin-right: 0.1em;
       margin-bottom: 0.4em;
       font-size: 1.2em;
+      @media screen and (max-width: 40em) {
+        font-size: 1.5em;
+      }
     }
     .left-skills, .right-skills{
       margin-top: 2em;
     }
-
+    .right-skills{
+      @media screen and (max-width: 40em) {
+        margin-top: 0;
+      }
+    }
     .left-skills{
       text-align: right;
       vertical-align: bottom;
     }
-
-    .description{
-      font-size: 2.5em;
-      text-align: center;
-      font-family: $zilla;
-      font-weight: $zilla-bold;
-      padding: 0;
-      margin: 0;
+    .description-container-mobile{
+      display: none;
+      margin-top: 6em;
+      .description{
+        font-size: 2.5em;
+        text-align: left;
+        font-family: $zilla;
+        font-weight: $zilla-bold;
+        line-height: 1.2em;
+        padding: 0;
+        margin: 0;
+      }
+      @media screen and (max-width: 40em) {
+        display: inline-block;
+      }
+    }
+    .description-container-desktop{
+      @media screen and (max-width: 40em) {
+        display: none;
+      }
+      .description{
+        font-size: 2.5em;
+        text-align: center;
+        font-family: $zilla;
+        font-weight: $zilla-bold;
+        padding: 0;
+        margin: 0;
+      }
     }
 
     @media screen and (max-width: 40em) {
@@ -1276,6 +1363,10 @@ p, li, h3, #subTitle{
       z-index: -1;
       margin-top: -8em;
       margin-left: 2em;
+      @media screen and (max-width: 40em) {
+        margin-top: -3em;
+        margin-left: 4em;
+      }
     }
     .emojis{
       // animation: 2s ease-in-out infinite animation-laugh;
@@ -1283,17 +1374,28 @@ p, li, h3, #subTitle{
     .emojis-large{
       font-size: 10em;
       transform: rotate(15deg);
+      @media screen and (max-width: 40em) {
+        font-size: 5em;
+      }
     }
     .emojis-medium{
       font-size: 5em;
       margin-left: -3em;
       transform: rotate(-23deg);
+      @media screen and (max-width: 40em) {
+        font-size: 3em;
+        margin-left: -2.6em;
+      }
 
     }
     .emojis-small{
       font-size: 3em;
       transform: rotate(-7deg);
       margin-left: 3em;
+      @media screen and (max-width: 40em) {
+        font-size: 2em;
+        margin-left: 2em;
+      }
     }
     @mixin laugh( $scale, $rotate ) {
     	transform: scale( $scale ) rotate( $rotate );
