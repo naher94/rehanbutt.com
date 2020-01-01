@@ -749,6 +749,44 @@ p, li, h3, #subTitle{
       vertical-align: top;
       padding-top: 1.8em;
       max-width: 25vw;
+      span{
+        position: relative;
+        span{
+          display: none;
+          position: absolute;
+        }
+      }
+      .meow:hover{
+        .meow-react{
+          display: block;
+          font-size: 1em;
+          margin-top: -25%;
+          margin-left: -27%;
+          transform: rotate(-16deg);
+        }
+        .meow-react-1{
+          display: block;
+          font-size: 0.8em;
+          margin-top: -40%;
+          margin-left: -5%;
+          transform: rotate(14deg);
+        }
+        .meow-react-2{
+          display: block;
+
+          // font-size: 0.5em;
+          font-size: 5em;
+          z-index: -1;
+          margin-top: -30%;
+          opacity: 0.2;
+          // margin-left: -1%;
+          margin-left: -80%;
+
+          transform: rotate(-16deg);
+          font-family: $zilla;
+          font-weight: $zilla-bold;
+        }
+      }
       @media screen and (max-width: 40em) {
         font-size: 1.5em;
         padding-top: 1.2em;
