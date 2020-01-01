@@ -965,6 +965,15 @@ p, li, h3, #subTitle{
     }
   }
 
+  .radiology{
+    margin-top: 10em;
+    .workstation{
+      background-color: $navy-black;
+      padding-top: 6em;
+      padding-bottom: 6em;
+    }
+  }
+
   .coffee{
     margin-top: 10em;
     margin-bottom: 10em;
@@ -1316,7 +1325,7 @@ p, li, h3, #subTitle{
   }
 
   .conferences{
-    margin-top: 15em;
+    margin-top: 10em;
     .event-title{
       padding: 0;
       font-family: $zilla;
