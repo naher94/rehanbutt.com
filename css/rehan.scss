@@ -27,7 +27,7 @@ $run: all 0.30s ease-in-out;
 $jog: all 0.50s ease-in-out;
 
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900);
+@import url('https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900');
 $maven: 'Maven Pro', sans-serif;
 $maven-regular: 400;
 $maven-medium: 500;
@@ -1311,6 +1311,36 @@ p, li, h3, #subTitle{
     @media screen and (max-width: 40em) {
       .left-skills{
         text-align: left;
+      }
+    }
+  }
+
+  .conferences{
+    margin-top: 15em;
+    .event-title{
+      padding: 0;
+      font-family: $zilla;
+      font-weight: $zilla-bold;
+      font-size: 1.2em;
+      line-height: 1.2em;
+    }
+    .header-label{
+      font-family: $lato;
+      font-weight: $lato-regular;
+      font-size: 1.2em;
+      padding-left: 10em;
+      padding-right: 10em;
+    }
+    .image-wrapper{
+      margin-bottom: 1em;
+      img{
+        margin-bottom: 0.3em;
+      }
+      p{
+        padding: 0;
+        margin: 0;
+        line-height: 1.2em;
+        font-style: italic;
       }
     }
   }
