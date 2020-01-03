@@ -1005,10 +1005,52 @@ p, li, h3, #subTitle{
 
   .radiology{
     margin-top: 10em;
+    background-color: $navy-black;
     .workstation{
-      background-color: $navy-black;
       padding-top: 6em;
       padding-bottom: 6em;
+      .phrase{
+        text-align: center;
+        margin-bottom: 6vw;
+        p{
+          font-family: $zilla;
+          font-weight: $zilla-bold;
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+        }
+        .number{
+          font-size: 10em;
+          line-height: 1em;
+        }
+        .description{
+          font-size: 2em;
+          line-height: 1em;
+          margin-left: .25em;
+          text-align: left;
+          vertical-align: top;
+          padding-top: 1.5em;
+          max-width: 25vw;
+        }
+      }
+      .rad{
+        margin-top: 4em;
+        p{
+          font-size: 1.3em;
+          text-align: justify;
+          line-height: 1.2em;
+        }
+        .feature{
+          padding: 0;
+          text-align: center;
+          font-family: $zilla;
+          font-weight: $zilla-regular;
+          font-size: 2.5em;
+        }
+      }
+    }
+    p{
+      color: $pure-white;
     }
   }
 
