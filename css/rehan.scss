@@ -578,6 +578,7 @@ p, li, h3, #subTitle{
 .year-2019{
   @media screen and (max-width: 40em) {
     font-size: 10px;
+    // overflow-x: hidden;
   }
   .no-select{
     -webkit-touch-callout: none;
@@ -593,6 +594,7 @@ p, li, h3, #subTitle{
     .nav-container{
       background-color: $navy-black;
       padding-bottom: 4em;
+      padding-top: 3em;
     }
     .nineteen{
       font-family: $zilla;
@@ -848,6 +850,10 @@ p, li, h3, #subTitle{
   .stickers{
     margin-top: 20vw;
     margin-bottom: 10vw;
+    @media screen and (max-width: 40em) {
+      margin-top: 40vw;
+      margin-bottom: 30vw;
+    }
     .label-container{
       text-align: center;
       z-index: -1;
@@ -1010,6 +1016,10 @@ p, li, h3, #subTitle{
     .workstation{
       padding-top: 6em;
       padding-bottom: 6em;
+      @media screen and (max-width: 40em) {
+        padding-top: 3em;
+        padding-bottom: 3em;
+      }
       .phrase{
         text-align: center;
         margin-bottom: 6vw;
@@ -1023,6 +1033,11 @@ p, li, h3, #subTitle{
         .number{
           font-size: 10em;
           line-height: 1em;
+          @media screen and (max-width: 40em) {
+            font-size: 8em;
+            // display: block;
+            // width: 100%;
+          }
         }
         .description{
           font-size: 2em;
@@ -1032,6 +1047,13 @@ p, li, h3, #subTitle{
           vertical-align: top;
           padding-top: 1.5em;
           max-width: 25vw;
+          @media screen and (max-width: 40em) {
+            padding-top: 0;
+            // width: 100%;
+            // display: inline;
+            // padding-left: 2em;
+            // padding-right: 2em;
+          }
         }
       }
       .rad{
@@ -1047,6 +1069,10 @@ p, li, h3, #subTitle{
           font-family: $zilla;
           font-weight: $zilla-medium;
           font-size: 2.5em;
+          @media screen and (max-width: 40em) {
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+          }
         }
       }
     }
@@ -1058,6 +1084,10 @@ p, li, h3, #subTitle{
   .coffee{
     margin-top: 10em;
     margin-bottom: 10em;
+    @media screen and (max-width: 40em) {
+      margin-top: 10em;
+      margin-bottom: 0em;
+    }
     .phrase{
       text-align: center;
       position: relative;
@@ -1132,7 +1162,9 @@ p, li, h3, #subTitle{
   .mywebsite{
     margin-top: 5em;
     .coconut-container{
-      // padding-top: 2em;
+      @media screen and (max-width: 40em) {
+        margin-bottom: 3em;
+      }
     }
     p{
       font-size: 2em;
@@ -1300,12 +1332,21 @@ p, li, h3, #subTitle{
       animation-name: kerning-animation;
       animation-duration: 20s;
       animation-iteration-count: infinite;
+      @media screen and (max-width: 40em) {
+        animation-name: kerning-animation-2;
+      }
     }
 
     @keyframes kerning-animation{
       0% {letter-spacing: -0.2em}
       50% {letter-spacing: 0.3em}
       100% {letter-spacing: -0.2em}
+    }
+
+    @keyframes kerning-animation-2{
+      0% {letter-spacing: -0.1em}
+      50% {letter-spacing: 0.1em}
+      100% {letter-spacing: -0.1em}
     }
 
     .cleaning{
@@ -1315,6 +1356,7 @@ p, li, h3, #subTitle{
         animation-iteration-count: infinite;
         transform-origin: 0% 100%;/* Pivot around the bottom-left palm */
         display: inline-block;
+        position: absolute;
         z-index: -1;
         // font-size: 1.5em;
       }
@@ -1330,6 +1372,9 @@ p, li, h3, #subTitle{
 
     .rehanlogo{
       padding-bottom: 0.3em;
+      @media screen and (max-width: 40em) {
+        height: 1.5em;
+      }
     }
     .codename{
       font-size: 2.5em;
@@ -1338,6 +1383,9 @@ p, li, h3, #subTitle{
       font-family: $specialelite;
       font-weight: $specialelite-regular;
       text-transform: uppercase;
+      @media screen and (max-width: 40em) {
+        padding-top: 1em;
+      }
     }
   }
 
@@ -1420,6 +1468,10 @@ p, li, h3, #subTitle{
       font-size: 1.2em;
       padding-left: 10em;
       padding-right: 10em;
+      @media screen and (max-width: 40em) {
+        padding-left: 1em;
+        padding-right: 1em;
+      }
     }
     .image-wrapper{
       margin-bottom: 1em;
