@@ -29,16 +29,21 @@ permalink: about
 
   <section class="work-experience">
     <h2>Work Experience</h2>
-<!--
+
     <div class="work-item">
       <div class="brand-logo-container" id="upmc">
         <img class="brand-logo" src="/img/upmc-logo.svg" alt="GE & UPMC Logo">
       </div>
       <h3>Senior Product Designer・UPMC Enterprises</h3>
-      <p class="date">July 2018・Present</p>
-      <p class="description">Working with GE Healthcare on their enterpirse imaging products</p>
+      <p class="date">December 2019・Present</p>
+      <p class="description">Leading the hcOS (Healthcare Operating System) design efforts to identify and build applications that take advantage of an integrated healthcare data platform. Also, continuing to lead the design efforts for Vincent Payment Solutions and supporting design efforts for our Pharmacy team.</p>
     </div>
--->
+    <div class="work-item">
+      <h3>Product Designer・UPMC Enterprises</h3>
+      <p class="date">July 2018・December 2019</p>
+      <p class="description">Worked with GE Healthcare on creating next generation enterprise imaging products for radiology field, including work prioritization, image viewers, and reporting applications. Led native PACs reporting project while building out a design system for use across GE Healthcare. I also led the design efforts for Vincent Payment Solutions, a payment application addressing the difficulty of institutional payments for short term engagements such as research studies and class projects.</p>
+    </div>
+
     <div class="work-item">
       <div class="brand-logo-container" id="processly">
         <img class="brand-logo" src="/img/processly-logo.svg" alt="Processly Logo">
