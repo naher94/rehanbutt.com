@@ -119,6 +119,10 @@ permalink: about
       <div class="brand-logo-container" id="ces">
         <img class="brand-logo" src="/img/ces-logo.svg" alt="CES Logo">
       </div>
+      <h3>Real World AI @ UPMC</h3>
+      <p class="date">May 2019</p>
+      <p class="description">Spoke about the value of AI in the real world and some of the challenges that come with implementing them in a seemingly straightforward environment during our internal artificial intelligence talk series.</p>
+
       <h3>Processly @ CES</h3>
       <p class="date">January 2019</p>
       <p class="description">Spoke about the value of Processly in both an educational and corporate setting bringing distributed teams together through the use of Processly’s online whiteboard, Sandbox.</p>
