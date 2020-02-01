@@ -46,13 +46,16 @@ As this project was started before the Apple Watch came out there were not any r
 <div class="image-container">
 <img src="../img/smartWatch/prototypesV1.png" alt="Interface Prototypes" />
 <img src="../img/smartWatch/initialScreens.png" alt="Initial Screens" />
-<img src="../img/smartWatch/dashIteration.png" alt="Dash Iteration" /></div>
+<img src="../img/smartWatch/dashIteration.png" alt="Dash Iteration" />
+</div>
 
 This was one of the final interfaces I designed trying out what I had newly learned from the Apple Watch application research. I tried to create a consolidated dashboard using a circular pattern, while still keeping with the existing language I created through the previous interfaces.
 
-With this project I also decided to explore and learn a new Prototyping tool, <a target="_blank" href="http://framerjs.com">FramerJS</a>, bringing my coding background into the foreground. In the couple of hours I used the tool I came up with what you see below. The first is an animation demo of what one of the screens would look like and the second is a interactive use of the applications sliding functionality between the different interfaces as well as the launch of the application.
+With this project I also decided to explore and learn a new Prototyping tool, FramerJS, bringing my coding background into the foreground. In the couple of hours I used the tool I came up with what you see below. The first is an animation demo of what one of the screens would look like ~~and the second is a interactive use of the applications sliding functionality between the different interfaces as well as the launch of the application.~~ (Framer Online Share has been deprecated so you will just have to take my word that it was pretty neato! 😛)
 
+<div class="image-container">
+<img class="image-center" src="../img/smartWatch/animation.gif" alt="Day Light Animation" />
+</div>
 
-<iframe src="http://share.framerjs.com/2yscl0jpkesl/" style="width:100%; height:700px;"></iframe>
-<iframe src="http://share.framerjs.com/9vjqia996y8k/" style="width:100%; height:700px;"></iframe>
-
+<!-- <iframe src="http://share.framerjs.com/2yscl0jpkesl/" style="width:100%; height:700px;"></iframe>
+<iframe src="http://share.framerjs.com/9vjqia996y8k/" style="width:100%; height:700px;"></iframe> -->
