@@ -236,6 +236,8 @@ permalink: about
       <div class="skills-item">Animation</div>
       <div class="skills-item">Hand & Technical Drawing</div>
       <div class="skills-item">Photography</div>
+      <div class="skills-item">Gif Curation 😝</div>
+
     </div>
   </section>
   <section class="tools">
