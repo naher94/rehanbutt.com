@@ -230,6 +230,8 @@ permalink: about
       <div class="skills-item">Systems Design</div>
       <div class="skills-item">Interaction Design</div>
       <div class="skills-item">Information Architecture</div>
+      <div class="skills-item">UX Writing</div>
+      <div class="skills-item">Design Ops</div>
       <div class="skills-item">3D Modeling</div>
       <div class="skills-item">Animation</div>
       <div class="skills-item">Hand & Technical Drawing</div>
