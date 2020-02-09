@@ -85,6 +85,17 @@ ul {
   padding-right: 0.5em;
 }
 
+.no-select{
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  user-drag: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+}
+
 .image-container {
   margin-top: 1.25em;
   margin-bottom: 1.25em;
@@ -1875,20 +1886,67 @@ span.wave {
   width: 3em;
   padding-left: 0.5em;
   padding-right: 0.5em;
+  @media screen and (max-width: 40em){
+    font-size: 0.7em;
+    // text-align: right;
+  }
 }
 
 .social:hover {
-  opacity: 0.8;
+  opacity: 0.5;
 }
 
 footer {
   margin-top: 50px;
   background-color: rgba($navy-black, 0.15);
-  text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  color: rgba($navy-black, 0.80);
+  padding-top: 50px;
+  padding-bottom: 40px;
+  .site-pages{
+    margin-bottom: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    .nav{
+      font-family: $lato;
+      font-weight: $lato-bold;
+      color: rgba($navy-black, 0.80);
+      &:hover{
+        background-color: rgba($navy-black, 0.80);
+        color: $pure-white;
+      }
+      @media screen and (max-width: 40em) {
+        display: block;
+      }
+    }
+  }
+  .social-container{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .left-section{
+    @media screen and (max-width: 40em) {
+      text-align: right;
+    }
+  }
+  .right-section{
+    text-align: right;
+    .copyright{
+      padding: 0;
+      font-family: $lato;
+      font-weight: $lato-bold;
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+    @media screen and (max-width: 40em) {
+      margin-top: 2em;
+      padding-right: 1.2em;
+    }
+  }
   @media screen and (max-width: 40em) {
-    margin-top: 1em;
+    margin-top: .5em;
+    padding-top: 25px;
+    padding-bottom: 20px;
+    // font-size: 1.8em;
   }
 }
 

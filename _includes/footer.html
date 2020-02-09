@@ -1,34 +1,51 @@
 <footer class="site-footer">
-    
+
     <div class="row">
-        <div class="small-8 small-centered large-6 large-centered">
-            <a target="_blank" href="http://dribbble.com/rehanbutt">
-                <img class="social" src="{{'/img/social/dribbble.svg'| prepend: site.baseurl }}" alt="Dribbble Icon"></a>
+        <div class="small-12 large-6 column left-section">
+          <div class="site-pages small-12 large-12 column">
+            <a class="nav" href="/index.html">Portfolio</a>
+            {% for my_page in site.pages %}
+              {% if my_page.title == "About" %}
+                <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+              {% endif %}
+            {% endfor %}
+            <a class="nav" href="http://blog.rehanbutt.com">Blog</a>
+            <a class="nav" href="http://resources.rehanbutt.com">Resources</a>
+            <a class="nav" target="_blank" href="https://society6.com/rehanbutt">Store</a>
+          </div>
+          <div class="social-container small-12 large-12 column">
+            <a target="_blank" href="https://www.twitter.com/naher94/">
+              <img class="social" style="width:3em;" src="{{'/img/social/twitter.svg'| prepend: site.baseurl }}" alt="Twitter Icon"></a>
 
             <a target="_blank" href="https://www.linkedin.com/in/rehan-butt/">
-                <img class="social" style="width:2.75em" src="{{'/img/social/linkedin.svg'| prepend: site.baseurl }}" alt="Linkedin Icon"></a>            
-        
+              <img class="social" style="width:2.75em" src="{{'/img/social/linkedin.svg'| prepend: site.baseurl }}" alt="Linkedin Icon"></a>
+
             <a target="_blank" href="http://github.com/naher94">
-                <img class="social" src="{{'/img/social/github.svg'| prepend: site.baseurl }}" alt="Github Icon"></a>          
+              <img class="social" src="{{'/img/social/github.svg'| prepend: site.baseurl }}" alt="Github Icon"></a>
 
             <a href="mailto:me@rehanbutt.com">
-                <img class="social" src="{{'/img/social/mail.svg'| prepend: site.baseurl }}" alt="Email Icon"></a>
-            
-            <a target="_blank" href="https://www.twitter.com/naher94/">
-                <img class="social" style="width:3em; margin-right:-5px;" src="{{'/img/social/twitter.svg'| prepend: site.baseurl }}" alt="Twitter Icon"></a>
-            
-          <a target="_blank" href="https://instagram.com/naher94">
-                <img class="social" style="width:3em; margin-right:-15px;" src="{{'/img/social/instagram.svg'| prepend: site.baseurl }}" alt="Instagram Icon"></a>
-          
+              <img class="social" src="{{'/img/social/mail.svg'| prepend: site.baseurl }}" alt="Email Icon"></a>
+
+            <a target="_blank" href="http://dribbble.com/rehanbutt">
+              <img class="social" src="{{'/img/social/dribbble.svg'| prepend: site.baseurl }}" alt="Dribbble Icon"></a>
+
+            <a target="_blank" href="https://instagram.com/naher94">
+              <img class="social" style="width:3em; margin-right:-8px;" src="{{'/img/social/instagram.svg'| prepend: site.baseurl }}" alt="Instagram Icon"></a>
+
             <a target="_blank" href="https://500px.com/naher94">
-                <img class="social" style="width:3.75em; margin-right:-15px;" src="{{'/img/social/500px.svg'| prepend: site.baseurl }}" alt="500px Icon"></a>            
+              <img class="social" style="width:3.75em; margin-right:-8px;" src="{{'/img/social/500px.svg'| prepend: site.baseurl }}" alt="500px Icon"></a>
 
             <a target="_blank" href="https://www.pinterest.com/naher94/">
-                <img class="social" src="{{'/img/social/pinterest.svg'| prepend: site.baseurl }}" alt="Pinterest Icon"></a>
-            
+              <img class="social" src="{{'/img/social/pinterest.svg'| prepend: site.baseurl }}" alt="Pinterest Icon"></a>
+          </div>
+
+        </div>
+        <div class="small-12 large-6 column right-section">
+          <a href="#"><img src="/img/rehanLogoFooter.svg" alt="Rehan's Logo" style="height: 55px; margin-top:10px;"></a>
+          <p class="copyright no-select">copyright © {{ 'now' | date: "%Y" }} Rehan Butt</p>
         </div>
     </div>
-    
+
 </footer>
 
 <script>
