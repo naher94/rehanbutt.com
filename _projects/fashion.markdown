@@ -24,7 +24,7 @@ I worked on this line with two of my friends and colleagues, <a target="_blank" 
 <iframe name="target" src="img/fashionGallery/index.html" width="100%" height="800" frameborder="0" scrolling="auto"></iframe>
 <iframe width="100%" src="https://www.youtube.com/embed/SeDGiYwXBiM" frameborder="0" allowfullscreen></iframe>
 
-I also want to say thank to <a target="_blank" href="http://yupousa.com">Yupo</a> for being our sponsor for this line. Photo Credit: Jonathan Leung, Yutong Chen, Victor Song
+I also want to say thanks to <a target="_blank" href="http://yupousa.com">Yupo</a> for being our sponsor for this line. Photo Credit: Jonathan Leung, Yutong Chen, Victor Song
 
 ## Process
 
@@ -83,7 +83,7 @@ From our first 3D print we came across many problems that we then decided to use
 
 <div class="image-container">
 <img src="../img/fashion/fashion3dPrintSketches.png" alt="3D Print Sketches" /></div>
-            
+
 Some initial sketches we had done for the piece of the outfits that we wanted 3D printed.
 
 <div class="image-container">
