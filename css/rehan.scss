@@ -669,6 +669,7 @@ p, li, h3, #subTitle{
     }
     .text-section{
       margin-top: 35vh;
+      text-align: center;
       @media screen and (max-width: 40em) {
         margin-top: 10vh;
       }
@@ -1900,7 +1901,7 @@ span.wave {
   opacity: 0.5;
 }
 
-footer {
+footer{
   margin-top: 50px;
   background-color: rgba($navy-black, 0.15);
   color: rgba($navy-black, 0.80);
