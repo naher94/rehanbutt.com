@@ -10,6 +10,14 @@
         <label class="burger-icon" for="burger-btn">
           <span class="nav-burger-icon"></span>
         </label>
+        <div class="mobile-navbar">
+          <a class="nav" href="/index.html">Portfolio</a>
+          {% for my_page in site.pages %}
+            {% if my_page.title == "About" %}
+              <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
         <ul class="menu-links">
           <div class="nav-item-container"><a class="nav" href="/index.html">Portfolio</a></div>
         {% for my_page in site.pages %}
@@ -23,15 +31,6 @@
         <div class="nav-item-container"><a class="nav" href="http://resources.rehanbutt.com">Resources</a></div>
         <div class="nav-item-container"><a class="nav" target="_blank" href="https://society6.com/rehanbutt">Store</a></div>
         </ul>
-
-        <div class="mobile-navbar">
-          <a class="nav" href="/index.html">Portfolio</a>
-          {% for my_page in site.pages %}
-            {% if my_page.title == "About" %}
-              <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
-            {% endif %}
-          {% endfor %}
-        </div>
       </div>
 
       <div class="navbar">

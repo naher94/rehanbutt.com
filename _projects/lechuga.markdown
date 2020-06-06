@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Lechuga Resturant Concept"
+title: "Lechuga Restaurant Concept"
 tile-name: "Food Ordering"
 thumbnail: "lechuga.png"
 banner:
