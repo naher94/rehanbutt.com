@@ -311,10 +311,10 @@ header{
   overflow: hidden;
   clear: both;
   max-height: 0;
-  transition: max-height .2s ease-out;
+  transition: max-height .3s ease-out;
   margin-left: 0;
   user-select: none;
-  display: none;
+  margin-bottom: 0;
   a{
     color: $pure-white;
     font-family: $zilla;
