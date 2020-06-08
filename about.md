@@ -5,26 +5,16 @@ permalink: about
 
 ---
 
-<!--
-<div class="background-shapes">
-  <div class="circle circle1"></div>
-  <div class="circle circle2"></div>
-</div>
--->
-
 <div class="small-8 medium-4 columns small-centered medium-uncentered">
   <img src="/img/rehan-full.png" style="width:100%">
-<!--
-  <a target="_blank" href="{{site.baseurl}}/img/resume.pdf">
-    <div id="resumeButton">Resume</div>
-  </a>
--->
 </div>
 
 <div class="small-12 medium-7 columns">
   <section class="bio">
     <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
-  <p>I am a <span class="rainbow">devzgner</span> <code>/devzīnər/</code>, designer + developer, currently based in Pittsburgh, PA, USA working on healthcare technology. I also have several years experience working on both consumer and enterprise solutions for organizations like the NBA & NFL. I love to travel ✈️, and have been fortunate enough to live all over the world. 🌏 Every day trying to bring the unique aspects of each culture into my work. In my free time, I enjoy photography 📷 and creating cute digital illustrations 🐧. Want to hear more about what I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com">email</a> to connect. ✉️</p>
+  <p>I am a <span class="rainbow">devzgner</span> <code>/devzīnər/</code>, designer + developer, currently based in Pittsburgh, PA, USA working on healthcare technologypreviously working with organizations like GE Healthcare & the NBA on consumer and enterprise applications.
+  </p>
+  <p>I love to travel ✈️, and have been fortunate enough to live all over the world. 🌏 Every day trying to bring the unique aspects of each culture into my work. In my free time, I enjoy photography 📷 and creating cute digital illustrations 🐧. Want to hear more about what I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com">email</a> to connect. ✉️</p>
   </section>
 
   <section class="work-experience">

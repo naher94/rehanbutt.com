@@ -1641,6 +1641,9 @@ p, li, h3, #subTitle{
     font-size: 26px; ///////////why EM NOT RESPONDING
     padding: 0;
     margin: 0;
+    &:last-of-type{
+      margin-top: 0.5em;
+    }
     code{
       border-radius: $pill-radius;
       padding-left: 0.35em;
