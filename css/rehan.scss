@@ -261,7 +261,9 @@ header{
   height: inherit;
   font-family: $zilla;
   font-weight: $zilla-bold;
+  border-radius: $pill-radius;
   font-size: 1em;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .nav:hover {
