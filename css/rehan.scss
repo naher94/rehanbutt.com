@@ -841,7 +841,8 @@ footer{
       color: rgba($navy-black, 0.80);
       &:hover{
         background-color: rgba($navy-black, 0.80);
-        color: $pure-white;
+        color: mix($navy-black, $pure-white, 15%);
+        transition: color 0.2s ease-in-out;
       }
       @media screen and (max-width: 40em) {
         display: block;
