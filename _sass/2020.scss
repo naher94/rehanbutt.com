@@ -1,0 +1,102 @@
+.year-twenty{
+  .year-in-review{
+    .nav-container{
+      background: linear-gradient(120deg, rgba(247,152,104,1) 0%, rgba(241,95,99,1) 100%);
+      padding-bottom: 4em;
+      padding-top: 3em;
+    }
+    .twenty-container{
+      margin-top: 2em;
+      margin-bottom: 2em;
+    }
+    .twenty{
+      font-family: $zilla;
+      font-size: 12em;
+      font-weight: $zilla-bold;
+      color: $pure-white;
+    }
+    h1{
+      display: inline-block;
+      line-height: 9rem;
+    }
+    h2{
+      display: inline-block;
+      color: $pure-white;
+      font-size: 5.5em;
+      line-height: 6rem;
+      font-weight: $zilla-light;
+      margin-bottom: 0;
+      margin-top: -2em;
+      @media screen and (max-width: 40em) {
+        // line-height: 1em;
+      }
+    }
+  }
+
+  .hero-text{
+    font-family: $zilla;
+    font-size: 2.5em;
+    line-height: 1.2em;
+    text-align: justify;
+    padding-left: 0;
+    padding-right: 0;
+    @media screen and (max-width: 40em) {
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
+    span{
+      position: relative;
+      span{
+        display: none;
+        position: absolute;
+      }
+    }
+    .wow{
+      .wow-react{
+        display: block;
+        width: 100%;
+        opacity: 0.5;
+        z-index: -1;
+        font-size: 2em;
+        text-align: center;
+        margin-top: -25%;
+      }
+    }
+
+  }
+
+  footer{
+    background-image: url("../img/2020/footergradient.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: $navy-black;
+    // @media screen and (max-width: 40em) {
+    //   height: 50vh;
+    // }
+    .logo{
+      margin-top: -3.1em;
+      float: right;
+      @media screen and (max-width: 40em) {
+        margin-top: 10vh;
+      }
+    }
+    h1{
+      font-family: $lato;
+      color: $pure-white;
+      font-size: 18em;
+      font-weight: $lato-thin;
+      font-style: italic;
+      line-height: 0.8em;
+    }
+    .text-section{
+      margin-top: 10em;
+      margin-bottom: 10em;
+      @media screen and (max-width: 40em) {
+        // margin-top: 10vh;
+      }
+    }
+  }
+
+
+
+}
