@@ -11,6 +11,10 @@ body {
   font-weight: $lato-regular;
   font-size: 20px; //1em
   color: $navy-black;
+  @media (prefers-color-scheme: dark) {
+    background-color: #06080C;
+    color: $pure-white-dark;
+  }
 }
 
 h1,
@@ -75,6 +79,11 @@ ul {
   .thumbnail-image{
     border-radius: $tile-radius;
   }
+  @media (prefers-color-scheme: dark) {
+    -webkit-box-shadow: $recessed-shadow rgba($pure-black,0.75);
+    -moz-box-shadow: $recessed-shadow rgba($pure-black,0.75);
+    box-shadow: $recessed-shadow rgba($pure-black,0.75);
+  }
 }
 
 .thumbnail-text {
@@ -93,6 +102,9 @@ ul {
   font-family: $zilla;
   @media screen and (max-width: 40em) {
     font-size: 1.4em;
+  }
+  @media (prefers-color-scheme: dark) {
+    color: $pure-white-dark;
   }
 }
 
@@ -114,6 +126,10 @@ ul {
     right: -0.5rem;
     top: -0.5rem;
   }
+  @media (prefers-color-scheme: dark) {
+    background-color: $signature-teal-dark;
+    color: $pure-white-dark;
+  }
 }
 
 p {
@@ -133,8 +149,12 @@ p {
 }
 
 ::selection {
-  color: $pure-white;
   background: $signature-teal;
+  color: $pure-white;
+  @media (prefers-color-scheme: dark) {
+    background: $signature-teal-dark;
+    color: $pure-white-dark;
+  }
 }
 
 img {
@@ -146,6 +166,9 @@ img {
   user-drag: none;
   -moz-user-select: none;
   -webkit-user-drag: none;
+  @media (prefers-color-scheme: dark) {
+    filter: brightness(0.8);
+  }
 }
 
 .quote {
@@ -177,6 +200,9 @@ iframe {
   padding-top: 2em;
   padding-bottom: 2em;
   width: 100%;
+  @media (prefers-color-scheme: dark) {
+    background-color: $signature-teal-dark;
+  }
 }
 header{
   margin-bottom: 3em;
@@ -213,12 +239,18 @@ header{
   border-radius: $pill-radius;
   font-size: 1em;
   transition: background-color 0.2s ease-in-out;
+  @media (prefers-color-scheme: dark) {
+    color: $pure-white-dark;
+  }
 }
 
 .nav:hover {
   color: $pure-white;
   background-color: $signature-teal-hover;
   border-radius: $pill-radius;
+  @media (prefers-color-scheme: dark) {
+    background-color: $signature-teal-hover-dark;
+  }
 }
 
 .mobile-navbar{
@@ -231,6 +263,9 @@ header{
   color: $pure-white;
   float: left;
   line-height: 2.5em;
+  @media (prefers-color-scheme: dark) {
+    color: $pure-white-dark;
+  }
 }
 
 .menu-container{
@@ -278,7 +313,13 @@ header{
     padding-right: 0.6em;
     &:hover{
       background-color: $signature-teal-hover;
+      @media (prefers-color-scheme: dark) {
+        background-color: $signature-teal-hover-dark;
+      }
     }
+    @media (prefers-color-scheme: dark) {
+    color: $pure-white-dark;
+  }
   }
 }
 
@@ -297,6 +338,9 @@ header{
   transition: background .2s ease-out;
   width: 18px;
   margin-top: 1.3em;
+  @media (prefers-color-scheme: dark) {
+    background: $signature-teal-dark;
+  }
 }
 
 .nav-burger-icon:before,
@@ -308,6 +352,9 @@ header{
   position: absolute;
   transition: all .2s ease-out;
   width: 100%;
+  @media (prefers-color-scheme: dark) {
+    background: $pure-white-dark;
+  }
 }
 
 .nav-burger-icon{
@@ -363,6 +410,9 @@ p, li, h3, #subTitle{
     color: $signature-teal;
     padding: 0 1px;
     transition: $run;
+    @media (prefers-color-scheme: dark) {
+      color: $signature-teal-dark;
+    }
   }
 
   a::after{
@@ -375,10 +425,16 @@ p, li, h3, #subTitle{
     bottom: 0;
     background-color: $signature-teal;
     transition: $run;
+    @media (prefers-color-scheme: dark) {
+      background-color: $signature-teal-dark;
+    }
   }
 
   a:hover {
     color: $pure-white;
+    @media (prefers-color-scheme: dark) {
+      color: $pure-white-dark;
+    }
   }
 
   a:hover::after {
@@ -398,6 +454,9 @@ p, li, h3, #subTitle{
   text-align: center;
   border-radius: $pill-radius;
   transition: $run;
+  @media (prefers-color-scheme: dark) {
+    color: $pure-white-dark;
+  }
 }
 
 .commandBarButton {
@@ -507,6 +566,9 @@ p, li, h3, #subTitle{
   background-position: 50% 50px;
   border-style: solid;
   border-color: $pure-white;
+  @media (prefers-color-scheme: dark) {
+    border-color: $pure-white-dark;
+  }
 }
 //******* End of 404 Styling
 
@@ -515,11 +577,18 @@ p, li, h3, #subTitle{
   a:hover span{
     background-color: $pure-white;
     color: $navy-black;
+    @media (prefers-color-scheme: dark) {
+      background-color: $pure-white-dark;
+    }
     // transition: all 0.3s ease-in-out;
   }
   .site-banner{
     background-color: $navy-black;
     color: $pure-white;
+    @media (prefers-color-scheme: dark) {
+      background-color: $navy-black-dark;
+      color: $pure-white-dark;
+    }
     p{
       margin: 0;
       padding: 0;
@@ -532,6 +601,9 @@ p, li, h3, #subTitle{
         margin-left: 0.5em;
         padding: 0.25em 0.7em;
         transition: all 0.3s ease-in-out;
+        @media (prefers-color-scheme: dark) {
+          border: 1px solid $pure-white-dark;
+        }
       }
     }
   }
@@ -551,6 +623,9 @@ p, li, h3, #subTitle{
     font-weight: $zilla-bold;
     font-size: 3rem;
     margin-bottom: 0;
+    @media (prefers-color-scheme: dark) {
+      color: $pure-white-dark;
+    }
     span{
       font-size: 2.5rem;
     }
@@ -562,6 +637,9 @@ p, li, h3, #subTitle{
     font-size: 26px; ///////////why EM NOT RESPONDING
     padding: 0;
     margin: 0;
+    @media (prefers-color-scheme: dark) {
+      color: $pure-white-dark;
+    }
     &:last-of-type{
       margin-top: 0.5em;
     }
@@ -573,7 +651,11 @@ p, li, h3, #subTitle{
       background-color: rgba($navy-black,0.15);
       border-color: $navy-black;
       border-width: 0;
-//      border-width: 0.1em;
+      @media (prefers-color-scheme: dark) {
+        color: $pure-white-dark;
+        background-color: rgba($pure-white-dark,0.15);
+        border-color: $pure-white-dark;
+      }
     }
     @media screen and (max-width: 40em) {
       font-size: 20px;
@@ -591,6 +673,9 @@ p, li, h3, #subTitle{
     color: rgba($navy-black, 0.15);
     font-weight: $lato-black;
     font-family: $lato;
+    @media (prefers-color-scheme: dark) {
+      color: rgba($pure-white-dark,0.15);
+    }
     @media screen and (max-width: 40em) {
       line-height: 1em;
     }
@@ -617,6 +702,9 @@ p, li, h3, #subTitle{
       font-weight: $lato-black;
       padding: 0;
       margin-bottom: 0;
+      @media (prefers-color-scheme: dark) {
+        color: $pure-white-dark;
+      }
     }
     p{
       padding: 0;
@@ -629,6 +717,9 @@ p, li, h3, #subTitle{
       font-size: 1em;
       font-weight: 300;
       font-style: italic;
+      @media (prefers-color-scheme: dark) {
+        color: $pure-white-dark;
+      }
     }
     .description{
       font-family: $lato;
@@ -636,6 +727,9 @@ p, li, h3, #subTitle{
       font-size: 1em;
       font-weight: $lato-regular;
       line-height: 1.2em;
+      @media (prefers-color-scheme: dark) {
+        color: $pure-white-dark;
+      }
     }
     .brand-logo-container{
       position: absolute;
@@ -682,6 +776,9 @@ p, li, h3, #subTitle{
     }
     .brand-logo{
       float: right;
+      @media (prefers-color-scheme: dark) {
+        filter: contrast(20%);
+      }
     }
     &:hover .brand-logo-container{
       opacity: 1;
@@ -701,6 +798,9 @@ p, li, h3, #subTitle{
     font-weight: $lato-black;
     padding: 0;
     margin-bottom: 0;
+    @media (prefers-color-scheme: dark) {
+      color: $pure-white-dark;
+    }
     &:first-of-type{
       margin-top: -2.5em;
       @media screen and (max-width: 40em) {
@@ -716,6 +816,10 @@ p, li, h3, #subTitle{
     padding: 0.2em 0.6em 0.2em 0.6em;
     margin-right: 0.1em;
     margin-bottom: 0.4em;
+    @media (prefers-color-scheme: dark) {
+      background-color: $navy-black-dark;
+      color: $pure-white-dark;
+    }
   }
 }
 
@@ -817,20 +921,25 @@ span.wave {
   padding-right: 0.5em;
   @media screen and (max-width: 40em){
     font-size: 0.7em;
-    // text-align: right;
+  }
+  @media (prefers-color-scheme: dark) {
+    filter: contrast(20%);
   }
 }
 
 .social:hover {
   opacity: 0.5;
 }
-
 footer{
   margin-top: 50px;
   background-color: rgba($navy-black, 0.15);
   color: rgba($navy-black, 0.80);
   padding-top: 50px;
   padding-bottom: 40px;
+  @media (prefers-color-scheme: dark) {
+      background-color: $navy-black-dark;
+      color: $pure-white-dark;
+    }
   .site-pages{
     margin-bottom: 20px;
     padding-left: 0;
@@ -839,6 +948,9 @@ footer{
       font-family: $lato;
       font-weight: $lato-bold;
       color: rgba($navy-black, 0.80);
+      @media (prefers-color-scheme: dark) {
+        color: $pure-white-dark;
+      }
       &:hover{
         background-color: rgba($navy-black, 0.80);
         color: mix($navy-black, $pure-white, 15%);
@@ -860,6 +972,9 @@ footer{
   }
   .right-section{
     text-align: right;
+    @media (prefers-color-scheme: dark) {
+      filter: contrast(20%);
+    }
     .copyright{
       padding: 0;
       font-family: $lato;
@@ -935,6 +1050,9 @@ footer{
 
       path {
         fill: $pure-white;
+        @media (prefers-color-scheme: dark) {
+          fill: $pure-white-dark;
+        }
       }
     }
 }

@@ -12,9 +12,17 @@ $royal-raspberry: #77013a;
 $dio-grey: #666666;
 $navy-black: #1f2937;
 $pure-white: #ffffff;
+$pure-black: #000000;
 
 $signature-teal-hover: #108da2;
 $royal-raspberry-hover: #680032;
+
+$navy-black-dark: #131922;
+$signature-teal-dark: #084954;
+$pure-white-dark: #cccccc;
+
+$signature-teal-hover-dark: #083F48;
+
 
 // Animations
 $sprint: all 0.20s ease-in-out;
@@ -51,4 +59,14 @@ $inconsolata-regular: 400;
 @import url('https://fonts.googleapis.com/css?family=Special+Elite&display=swap');
 $specialelite: 'Special Elite', cursive;
 $specialelite-regular: 400;
+
+// $themes:(
+//   light:(
+//
+//   ),
+//   dark:(
+//
+//   );
+// );
+
 //******* End of Variables
