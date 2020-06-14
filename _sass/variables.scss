@@ -1,0 +1,72 @@
+//******* Variables
+
+// Numbers
+$color-percentage: 5%;
+$tile-radius: 10px;
+$pill-radius: 500px;
+$recessed-shadow: 0px 10px 33px -10px;
+
+// Colors
+$signature-teal: #12abc4;
+$royal-raspberry: #77013a;
+$dio-grey: #666666;
+$navy-black: #1f2937;
+$pure-white: #ffffff;
+$pure-black: #000000;
+
+$signature-teal-hover: #108da2;
+$royal-raspberry-hover: #680032;
+
+$navy-black-dark: #131922;
+$signature-teal-dark: #084954;
+$pure-white-dark: #cccccc;
+
+$signature-teal-hover-dark: #083F48;
+
+
+// Animations
+$sprint: all 0.20s ease-in-out;
+$run: all 0.30s ease-in-out;
+$jog: all 0.50s ease-in-out;
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900');
+$maven: 'Maven Pro', sans-serif;
+$maven-regular: 400;
+$maven-medium: 500;
+$maven-bold: 700;
+$maven-black: 900;
+
+@import url('https://fonts.googleapis.com/css?family=Zilla+Slab:300,400,500,700&display=swap');
+$zilla: 'Zilla Slab', serif;
+$zilla-light: 300;
+$zilla-regular: 400;
+$zilla-medium: 500;
+$zilla-bold: 700;
+
+@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,700,900&display=swap');
+$lato: 'Lato', sans-serif;
+$lato-thin: 100;
+$lato-light-italic: 300i;
+$lato-regular: 400;
+$lato-bold: 700;
+$lato-black: 900;
+
+@import url('https://fonts.googleapis.com/css?family=Inconsolata&display=swap');
+$inconsolata: 'Inconsolata', monospace;
+$inconsolata-regular: 400;
+
+@import url('https://fonts.googleapis.com/css?family=Special+Elite&display=swap');
+$specialelite: 'Special Elite', cursive;
+$specialelite-regular: 400;
+
+// $themes:(
+//   light:(
+//
+//   ),
+//   dark:(
+//
+//   );
+// );
+
+//******* End of Variables

@@ -1,0 +1,1026 @@
+//******* Year in Review 2019 Styling
+.year-nineteen{
+  @media screen and (max-width: 40em) {
+    font-size: 10px;
+    // overflow-x: hidden;
+  }
+  .no-select{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    user-drag: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+  }
+  .year-in-review{
+    .nav-container{
+      background-color: $navy-black;
+      padding-bottom: 4em;
+      padding-top: 3em;
+    }
+    .nineteen{
+      font-family: $zilla;
+      font-size: 12em;
+      font-weight: $zilla-bold;
+      background-image: linear-gradient(90deg,#B4EC51 0%,#53A0FD 25%,#3023AE 50%,#53A0FD 75%,#B4EC51 100%);
+      background-size: 200% auto;
+      background-clip: text;
+      text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow 6s linear infinite;
+      line-height: 15rem;
+    }
+    h1{
+      display: inline-block;
+    }
+    h2{
+      display: inline-block;
+      color: $pure-white;
+      font-size: 2.6em;
+      line-height: 2.8rem;
+      margin-left: 0.25em;
+      @media screen and (max-width: 40em) {
+        line-height: 1em;
+      }
+    }
+  }
+  footer{
+    background-image: url("../img/2019/2020shapes.svg");
+    background-color: $navy-black;
+    background-size: 50%;
+    height: 100vh;
+    @media screen and (max-width: 40em) {
+      height: 50vh;
+    }
+    .logo{
+      float: none;
+      margin-top: 20vh;
+      @media screen and (max-width: 40em) {
+        margin-top: 10vh;
+      }
+    }
+    h1,h2{
+      color: $pure-white;
+    }
+    h1{
+      font-size: 3em;
+      font-weight: $zilla-light;
+      line-height: 1em;
+      margin-bottom: -1em;
+    }
+    h2{
+      font-size: 10em;
+      font-weight: $zilla-bold;
+      line-height: 1em;
+    }
+    .text-section{
+      margin-top: 35vh;
+      text-align: center;
+      @media screen and (max-width: 40em) {
+        margin-top: 10vh;
+      }
+    }
+  }
+  .hero-text{
+    font-family: $zilla;
+    font-size: 2.5em;
+    line-height: 1.2em;
+    text-align: justify;
+    padding-left: 0;
+    padding-right: 0;
+    @media screen and (max-width: 40em) {
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
+    span{
+      position: relative;
+      span{
+        display: none;
+        position: absolute;
+      }
+    }
+    .wow:hover{
+      .wow-react{
+        display: block;
+        width: 100%;
+        opacity: 0.5;
+        z-index: -1;
+        font-size: 2em;
+        text-align: center;
+        margin-top: -25%;
+      }
+    }
+    .cap:hover{
+      .cap-react{
+        display: block;
+        width: 100%;
+        opacity: 0.5;
+        z-index: -1;
+        font-size: 2em;
+        text-align: center;
+        margin-top: -40%;
+      }
+    }
+    .enjoy:hover{
+      .enjoy-react{
+        display: block;
+        width: 100%;
+        opacity: 0.5;
+        z-index: -1;
+        font-size: 2em;
+        text-align: center;
+        margin-top: -40%;
+      }
+    }
+    .brain:hover{
+      .brain-react{
+        display: block;
+        width: 100%;
+        opacity: 0.5;
+        z-index: -1;
+        font-size: 2em;
+        text-align: center;
+        margin-top: -20%;
+      }
+    }
+  }
+  .chicago{
+    .map{
+      overflow: hidden;
+      width: 150vw;
+      margin-left: -60%;
+    }
+    .phrase{
+      text-align: center;
+      margin-top: -60vw;
+    }
+    p{
+      font-family: $zilla;
+      font-weight: $zilla-bold;
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+      z-index: 1;
+    }
+    .number{
+      font-size: 10em;
+      line-height: 1em;
+    }
+    .description{
+      font-size: 2em;
+      line-height: 1em;
+      margin-left: .25em;
+      text-align: left;
+      vertical-align: top;
+      padding-top: 1.8em;
+      max-width: 25vw;
+      span{
+        position: relative;
+        span{
+          display: none;
+          position: absolute;
+        }
+      }
+      .meow:hover{
+        .meow-react{
+          display: block;
+          font-size: 1em;
+          margin-top: -25%;
+          margin-left: -27%;
+          transform: rotate(-16deg);
+        }
+        .meow-react-1{
+          display: block;
+          font-size: 0.8em;
+          margin-top: -40%;
+          margin-left: -5%;
+          transform: rotate(14deg);
+        }
+        .meow-react-2{
+          display: block;
+
+          // font-size: 0.5em;
+          font-size: 5em;
+          z-index: -1;
+          margin-top: -30%;
+          opacity: 0.2;
+          // margin-left: -1%;
+          margin-left: -80%;
+
+          transform: rotate(-16deg);
+          font-family: $zilla;
+          font-weight: $zilla-bold;
+        }
+      }
+      @media screen and (max-width: 40em) {
+        font-size: 1.5em;
+        padding-top: 1.2em;
+      }
+    }
+    .polaroid-container{
+      position: relative;
+      height: 600px;
+      margin-top: 50px;
+      @media screen and (max-width: 40em) {
+        height: 100px;
+        margin-top: 2em;
+      }
+    }
+    .polaroid{
+      border: 10px solid $pure-white;
+      -webkit-box-shadow: 0px 0px 30px 0px rgba($navy-black,0.75);
+      -moz-box-shadow: 0px 0px 30px 0px rgba($navy-black,0.75);
+      box-shadow: 0px 0px 30px 0px rgba($navy-black,0.75);
+      position: absolute;
+      @media screen and (max-width: 40em) {
+        border-width: 3px;
+      }
+    }
+    .hancock{
+      width: 14vw;
+      transform: rotate(4deg);
+      @media screen and (max-width: 40em) {
+        width: 20vw;
+      }
+    }
+    .ltrain{
+      width: 14vw;
+      transform: rotate(-6deg);
+      left: 10vw;
+      top: 5vw;
+      z-index: -1;
+      @media screen and (max-width: 40em) {
+        width: 20vw;
+        left: 20vw;
+      }
+    }
+    .luggage{
+      border: none;
+      width: 12vw;
+      right: -5vw;
+      top: -10vw;
+      transform: rotate(17deg);
+      @media screen and (max-width: 40em) {
+        width: 18vw;
+      }
+    }
+    .workshop{
+      width: 20vw;
+      top: 3vw;
+      right: 15vw;
+      transform: rotate(9deg);
+      @media screen and (max-width: 40em) {
+        width: 28vw;
+        right: 24vw;
+      }
+    }
+    .workshop2{
+      width: 16vw;
+      right: -2vw;
+      top: 5vw;
+      transform: rotate(-12deg);
+      z-index: -1;
+      @media screen and (max-width: 40em) {
+        width: 20vw;
+        right: 10vw;
+      }
+    }
+  }
+
+  .stickers{
+    margin-top: 20vw;
+    margin-bottom: 10vw;
+    @media screen and (max-width: 40em) {
+      margin-top: 40vw;
+      margin-bottom: 30vw;
+    }
+    .label-container{
+      text-align: center;
+      z-index: -1;
+    }
+    .label-sticker{
+      display: inline-block;
+      background-color: #BFD747;
+      border-radius: 25px;
+      padding-left: 2em;
+      padding-right: 2em;
+      padding-bottom: 1em;
+      -webkit-box-shadow: 0px 0px 5px 0px rgba($navy-black,0.75);
+      -moz-box-shadow: 0px 0px 5px 0px rgba($navy-black,0.75);
+      box-shadow: 0px 0px 5px 0px rgba($navy-black,0.75);
+      transform: rotate(-6deg);
+      @media screen and (max-width: 40em) {
+        border-radius: 15px;
+      }
+    }
+    p{
+      font-family: $zilla;
+      font-weight: $zilla-bold;
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+    }
+    .number{
+      font-size: 10em;
+      line-height: 1em;
+      @media screen and (max-width: 40em) {
+        font-size: 6em;
+      }
+    }
+    .description{
+      font-size: 2em;
+      line-height: 1em;
+      margin-left: .25em;
+      text-align: left;
+      vertical-align: top;
+      padding-top: 1.8em;
+      @media screen and (max-width: 40em) {
+        padding-top: 0.7em;
+      }
+    }
+    .sticker-group{
+      position: relative;
+      margin-top: -20vw;
+      height: 600px;
+      @media screen and (max-width: 40em) {
+        height: 100px;
+        margin-top: -25vw;
+      }
+      img{
+        width: 15vw;
+        position: absolute;
+        -webkit-filter: drop-shadow( 0px 0px 5px rgba($navy-black, 0.75));
+        filter: drop-shadow( 0px 0px 5px rgba($navy-black, 0.75));
+      }
+      .mysterymachine{
+        transform: rotate(-14deg);
+        top: 10vw;
+        left: -4vw;
+        z-index: 2;
+      }
+      .tube{
+        width: 13vw;
+        transform: rotate(7deg);
+        left: 5vw;
+        z-index: 1;
+      }
+      .fluiddesign{
+        width: 12vw;
+        transform: rotate(4deg);
+        top: 17vw;
+        left: 7vw;
+        z-index: 3;
+      }
+      .shipit{
+        width: 12vw;
+        transform: rotate(-6deg);
+        right: 14vw;
+        top: -2vw;
+        z-index: 1;
+      }
+      .pepper{
+        width: 14vw;
+        transform: rotate(12deg);
+        right: 2vw;
+        top: -10vw;
+        z-index: 2;
+      }
+      .paddington{
+        transform: rotate(9deg);
+        right: -4vw;
+        top: 8vw;
+        z-index: 3;
+      }
+      .upmc{
+        transform: rotate(9deg);
+        right: 11vw;
+        top: 16vw;
+        z-index: 2;
+      }
+      .hai{
+        width: 12vw;
+        transform: rotate(-10deg);
+        right: 1vw;
+        top: 18vw;
+        z-index: 4;
+      }
+    }
+  }
+
+  .code{
+    background-color: #272822;
+    font-family: $inconsolata;
+    font-weight: $inconsolata-regular;
+    padding-top: 5em;
+    padding-bottom: 5em;
+    @media screen and (max-width: 40em) {
+      padding-left: 1em;
+      padding-right: 1em;
+      padding-top: 4em;
+      padding-bottom: 4em;
+
+    }
+    p{
+      color: #F9F9F5;
+    }
+    .comment{
+      color: #888471;
+      font-size: 2.5em;
+      line-height: 1em;
+      padding: 0;
+      margin: 0;
+      @media screen and (max-width: 40em) {
+        font-size: 2em;
+      }
+    }
+    .line{
+      font-size: 6em;
+      line-height: 1em;
+      padding: 0;
+      margin: 0;
+      .yellow{
+        color: #EBE087;
+      }
+      .purple{
+        color: #BD99FF;
+      }
+      @media screen and (max-width: 40em) {
+        font-size: 4em;
+      }
+    }
+  }
+
+  .radiology{
+    margin-top: 10em;
+    background-color: $navy-black;
+    .workstation{
+      padding-top: 6em;
+      padding-bottom: 6em;
+      @media screen and (max-width: 40em) {
+        padding-top: 3em;
+        padding-bottom: 3em;
+      }
+      .phrase{
+        text-align: center;
+        margin-bottom: 6vw;
+        p{
+          font-family: $zilla;
+          font-weight: $zilla-bold;
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+        }
+        .number{
+          font-size: 10em;
+          line-height: 1em;
+          @media screen and (max-width: 40em) {
+            font-size: 8em;
+            // display: block;
+            // width: 100%;
+          }
+        }
+        .description{
+          font-size: 2em;
+          line-height: 1em;
+          margin-left: .25em;
+          text-align: left;
+          vertical-align: top;
+          padding-top: 1.5em;
+          max-width: 25vw;
+          @media screen and (max-width: 40em) {
+            padding-top: 0;
+            // width: 100%;
+            // display: inline;
+            // padding-left: 2em;
+            // padding-right: 2em;
+          }
+        }
+      }
+      .rad{
+        margin-top: 4em;
+        p{
+          font-size: 1.3em;
+          text-align: justify;
+          line-height: 1.2em;
+        }
+        .feature{
+          padding: 0;
+          text-align: center;
+          font-family: $zilla;
+          font-weight: $zilla-medium;
+          font-size: 2.5em;
+          @media screen and (max-width: 40em) {
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+          }
+        }
+      }
+    }
+    p{
+      color: $pure-white;
+    }
+  }
+
+  .coffee{
+    margin-top: 10em;
+    margin-bottom: 10em;
+    @media screen and (max-width: 40em) {
+      margin-top: 10em;
+      margin-bottom: 0em;
+    }
+    .phrase{
+      text-align: center;
+      position: relative;
+      .emojis{
+        font-size: 12em;
+        padding: 0;
+        margin: 0;
+        line-height: 0.8em;
+        display: inline-block;
+        margin-right: 0.1em;
+      }
+      .word-container{
+        display: inline-block;
+        .number{
+          font-family: $zilla;
+          font-weight: $zilla-bold;
+          font-size: 10em;
+          padding: 0;
+          margin: 0;
+          line-height: 0.6em;
+          text-align: left;
+        }
+        .description{
+          font-family: $zilla;
+          font-weight: $zilla-bold;
+          font-size: 2em;
+          padding: 0;
+          margin: 0;
+          text-align: left;
+        }
+      }
+    }
+    .chat-bubble {
+    	position: absolute;
+    	background: #047CFE;
+    	border-radius: 1em;
+      display: inline-block;
+      transform: rotate(12deg);
+      top: -3em;
+      right: -2em;
+      p{
+        font-family: #lato;
+        color: $pure-white;
+        font-size: 1.6em;
+        padding: 0.6em;
+        margin: 0;
+        font-weight: $lato-bold;
+        line-height: 1.2em;
+      }
+    }
+
+    .chat-bubble:after {
+    	content: '';
+    	position: absolute;
+    	bottom: 0;
+    	right: 0;
+    	width: 0;
+    	height: 0;
+    	border: 32px solid transparent;
+    	border-top-color: #047CFE;
+    	border-bottom: 0;
+    	border-right: 0;
+    	margin-left: -16px;
+    	margin-bottom: -14px;
+      @media screen and (max-width: 40em) {
+        border-width: 20px;
+        margin-bottom: -15px;
+      }
+    }
+  }
+
+  .mywebsite{
+    margin-top: 5em;
+    .coconut-container{
+      @media screen and (max-width: 40em) {
+        margin-bottom: 3em;
+      }
+    }
+    p{
+      font-size: 2em;
+      padding: 0;
+      margin: 0;
+      a{ //To remove the underline hover effect
+        color: $navy-black;
+        padding: 0;
+        transition: none;
+        height: 0;
+        &:hover{
+          &::after{
+            height: 0;
+          }
+        }
+        &::after{
+          background-color: none;
+          transition: none;
+        }
+      }
+      .coconut{
+        font-size: 2em;
+        vertical-align:-webkit-baseline-middle;
+        vertical-align: middle;
+      }
+    }
+    .typography{
+      span{
+        font-family: serif;
+        display: inline-block;
+        position: absolute;
+        &:nth-of-type(1n){
+          animation-name: font-animation-parent;
+          animation-duration: 5s;
+          animation-iteration-count: infinite;
+        }
+        &:nth-of-type(2n){
+          font-family: $zilla;
+          opacity: 0;
+          animation-name: font-animation-child-1;
+          animation-duration: 5s;
+          animation-iteration-count: infinite;
+        }
+        &:nth-of-type(3n){
+          font-family: $specialelite;
+          opacity: 0;
+          animation-name: font-animation-child-2;
+          animation-duration: 5s;
+          animation-iteration-count: infinite;
+        }
+        &:nth-of-type(4n){
+          font-family: $inconsolata;
+          opacity: 0;
+          animation-name: font-animation-child-3;
+          animation-duration: 5s;
+          animation-iteration-count: infinite;
+        }
+        &:nth-of-type(5n){
+          font-family: $maven;
+          opacity: 0;
+          animation-name: font-animation-child-4;
+          animation-duration: 5s;
+          animation-iteration-count: infinite;
+        }
+      }
+    }
+    @keyframes font-animation-parent {
+      0% {opacity: 1;}
+      20% {opacity: 0;}
+      40% {opacity: 0;}
+      60% {opacity: 0;}
+      80% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+    @keyframes font-animation-child-1 {
+      0% {opacity: 0;}
+      20% {opacity: 1;}
+      40% {opacity: 0;}
+      60% {opacity: 0;}
+      80% {opacity: 0;}
+      100% {opacity: 0;}
+    }
+    @keyframes font-animation-child-2 {
+      0% {opacity: 0;}
+      20%{opacity: 0;}
+      40% {opacity: 1;}
+      60% {opacity: 0;}
+      80% {opacity: 0;}
+      100% {opacity: 0;}
+    }
+    @keyframes font-animation-child-3 {
+      0% {opacity: 0;}
+      20%{opacity: 0;}
+      40% {opacity: 0;}
+      60% {opacity: 1;}
+      80% {opacity: 0;}
+      100% {opacity: 0;}
+    }
+    @keyframes font-animation-child-4 {
+      0% {opacity: 0;}
+      20%{opacity: 0;}
+      40% {opacity: 0;}
+      60% {opacity: 0;}
+      80% {opacity: 1;}
+      100% {opacity: 0;}
+    }
+
+    @keyframes font-animation {
+      0% { font: 1em $lato }
+      20% { font: 1em $zilla }
+      40% { font: 1em $maven }
+      60% { font: 1em $specialelite }
+      80% { font: 1em $inconsolata }
+      100% {}
+    }
+
+    .mobilemenu{
+      span.icon-container{
+        display: inline-block;
+        position: absolute;
+        margin-left: -1.5em;
+      }
+      .burger-emoji{
+        position: absolute;
+        animation-name: burger-animation;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        &:hover{
+          &~.nom{
+            display: block;
+          }
+          &~.nomnom{
+            display: block;
+          }
+        }
+      }
+      @keyframes burger-animation{
+        0% {transform: rotate(-15deg);}
+        50% {transform: rotate(15deg);}
+        100% {transform: rotate(-15deg);}
+      }
+      .nom{
+        font-family: $zilla;
+        font-weight: $zilla-bold;
+        font-size: .75em;
+        bottom: -2.0em;
+        right: -0.5em;
+        transform: rotate(-15deg);
+        position: absolute;
+        display: none;
+      }
+      .nomnom{
+        font-family: $zilla;
+        font-weight: $zilla-bold;
+        font-size: .5em;
+        bottom: -1.5em;
+        right: 0.75em;
+        transform: rotate(10deg);
+        position: absolute;
+        display: none;
+      }
+    }
+
+    .responsiveness{
+      animation-name: kerning-animation;
+      animation-duration: 20s;
+      animation-iteration-count: infinite;
+      @media screen and (max-width: 40em) {
+        animation-name: kerning-animation-2;
+      }
+    }
+
+    @keyframes kerning-animation{
+      0% {letter-spacing: -0.2em}
+      50% {letter-spacing: 0.3em}
+      100% {letter-spacing: -0.2em}
+    }
+
+    @keyframes kerning-animation-2{
+      0% {letter-spacing: -0.1em}
+      50% {letter-spacing: 0.1em}
+      100% {letter-spacing: -0.1em}
+    }
+
+    .cleaning{
+      span{
+        animation-name: sweep-animation;
+        animation-duration: 10s;
+        animation-iteration-count: infinite;
+        transform-origin: 0% 100%;/* Pivot around the bottom-left palm */
+        display: inline-block;
+        position: absolute;
+        z-index: -1;
+        // font-size: 1.5em;
+      }
+      @keyframes sweep-animation {
+        0%, 100% {
+          transform: translate(0em);
+        }
+        50% {
+          transform: translate(-7em) rotate(-75deg);
+        }
+      }
+    }
+
+    .rehanlogo{
+      padding-bottom: 0.3em;
+      @media screen and (max-width: 40em) {
+        height: 1.5em;
+      }
+    }
+    .codename{
+      font-size: 2.5em;
+      padding-top: 0.5em;
+      line-height: 2em;
+      font-family: $specialelite;
+      font-weight: $specialelite-regular;
+      text-transform: uppercase;
+      @media screen and (max-width: 40em) {
+        padding-top: 1em;
+      }
+    }
+  }
+
+  .levelup{
+    margin-top: 7em;
+    .skills-item{
+      display: inline-block;
+      background-color: $navy-black;
+      border-radius: $pill-radius;
+      color: $pure-white;
+      padding: 0.2em 0.6em 0.2em 0.6em;
+      margin-right: 0.1em;
+      margin-bottom: 0.4em;
+      font-size: 1.2em;
+      @media screen and (max-width: 40em) {
+        font-size: 1.5em;
+      }
+    }
+    .left-skills, .right-skills{
+      margin-top: 2em;
+    }
+    .right-skills{
+      @media screen and (max-width: 40em) {
+        margin-top: 0;
+      }
+    }
+    .left-skills{
+      text-align: right;
+      vertical-align: bottom;
+    }
+    .description-container-mobile{
+      display: none;
+      margin-top: 6em;
+      .description{
+        font-size: 2.5em;
+        text-align: left;
+        font-family: $zilla;
+        font-weight: $zilla-bold;
+        line-height: 1.2em;
+        padding: 0;
+        margin: 0;
+      }
+      @media screen and (max-width: 40em) {
+        display: inline-block;
+      }
+    }
+    .description-container-desktop{
+      @media screen and (max-width: 40em) {
+        display: none;
+      }
+      .description{
+        font-size: 2.5em;
+        text-align: center;
+        font-family: $zilla;
+        font-weight: $zilla-bold;
+        padding: 0;
+        margin: 0;
+      }
+    }
+
+    @media screen and (max-width: 40em) {
+      .left-skills{
+        text-align: left;
+      }
+    }
+  }
+
+  .conferences{
+    margin-top: 10em;
+    .event-title{
+      padding: 0;
+      font-family: $zilla;
+      font-weight: $zilla-bold;
+      font-size: 1.2em;
+      line-height: 1.2em;
+    }
+    .header-label{
+      font-family: $lato;
+      font-weight: $lato-regular;
+      font-size: 1.2em;
+      padding-left: 10em;
+      padding-right: 10em;
+      @media screen and (max-width: 40em) {
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+    }
+    .image-wrapper{
+      margin-bottom: 1em;
+      img{
+        margin-bottom: 0.3em;
+      }
+      p{
+        padding: 0;
+        margin: 0;
+        line-height: 1.2em;
+        font-style: italic;
+      }
+    }
+  }
+
+  .laughs{
+    overflow: hidden;
+    .full-bleed{
+      font-family: $zilla;
+      font-weight: $zilla-light;
+      color: rgba($navy-black, 0.15);
+      font-size: 32vw;
+      padding: 0;
+      margin: 0;
+      margin-left: -3vw;
+      width: calc(100% + 3vw);
+      overflow: hidden;
+      white-space: nowrap;
+      line-height: 1.5em;
+      text-align: center;
+      position: absolute;
+      z-index: -2;
+    }
+    .row{
+      padding-top: 28vw;
+      padding-bottom: 15vw;
+      text-align: center;
+    }
+    p{
+      font-family: $zilla;
+      font-weight: $zilla-bold;
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+      z-index: 1;
+    }
+    .number{
+      font-size: 10em;
+      line-height: 1em;
+    }
+    .description{
+      font-size: 2em;
+      line-height: 1em;
+      margin-left: .25em;
+      text-align: left;
+      vertical-align: top;
+      padding-top: 1.8em;
+    }
+    .emojis-container{
+      position: absolute;
+      z-index: -1;
+      margin-top: -8em;
+      margin-left: 2em;
+      @media screen and (max-width: 40em) {
+        margin-top: -3em;
+        margin-left: 4em;
+      }
+    }
+    .emojis{
+      // animation: 2s ease-in-out infinite animation-laugh;
+    }
+    .emojis-large{
+      font-size: 10em;
+      transform: rotate(15deg);
+      @media screen and (max-width: 40em) {
+        font-size: 5em;
+      }
+    }
+    .emojis-medium{
+      font-size: 5em;
+      margin-left: -3em;
+      transform: rotate(-23deg);
+      @media screen and (max-width: 40em) {
+        font-size: 3em;
+        margin-left: -2.6em;
+      }
+
+    }
+    .emojis-small{
+      font-size: 3em;
+      transform: rotate(-7deg);
+      margin-left: 3em;
+      @media screen and (max-width: 40em) {
+        font-size: 2em;
+        margin-left: 2em;
+      }
+    }
+    @mixin laugh( $scale, $rotate ) {
+    	transform: scale( $scale ) rotate( $rotate );
+    }
+    @keyframes animation-laugh {
+    	0%, 82%, 100% { @include laugh( 1, 0deg ); }
+    	88%, 94% { @include laugh(1.1, -4deg); }
+    	85%, 91%, 97% { @include laugh(1.15, -3deg); }
+    }
+  }
+
+}
+//******* End of Year in Review 2019 Styling
