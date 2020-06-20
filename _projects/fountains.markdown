@@ -7,4 +7,43 @@ date:   2011-05-01
 tags: fabrication
 ---
 
-<iframe name="target" src="img/fountainsGallery/index.html" width="100%" height="800" frameborder="0" scrolling="auto"></iframe>
+<div class="row">
+  <div class="columns small-12 medium-5">
+    <img src="../img/fountains/orange1.jpg" alt="Orange glass fountain">
+  </div>
+  <div class="columns small-12 medium-7">
+    <img src="../img/fountains/orange2.jpg" alt="Orange glass fountain seen from above">
+  </div>
+</div>
+<div class="row" style="margin-top: 2em;">
+  <div class="columns small-12 medium-7">
+    <img src="../img/fountains/blue1.jpg" alt="Blue ceramic fountain detail shot">
+  </div>
+  <div class="columns small-12 medium-5">
+    <img src="../img/fountains/blue2.jpg" alt="Blue ceramic fountain">
+  </div>
+</div>
+<div class="row" style="margin-top: 2em;">
+  <div class="columns small-12 image-container">
+    <img style="width:100%" class="image-center" src="../img/fountains/tech1.jpg" alt="Flow of Tech fountain made of computer keyboards">
+  </div>
+  <div class="columns small-12 image-container">
+    <img style="width:100%" class="image-center" src="../img/fountains/tech2.jpg" alt="Flow of Tech fountain made of computer keyboards Detail shot">
+  </div>
+</div>
+<div class="row" style="margin-top: 2em;">
+  <div class="columns small-12 medium-6">
+    <img style="width:100%" class="image-center" src="../img/fountains/green1.jpg" alt="Green ceramic and foam fountain">
+  </div>
+  <div class="columns small-12 medium-6">
+    <img style="width:100%" class="image-center" src="../img/fountains/green2.jpg" alt="Green ceramic and foam fountain detail shot">
+  </div>
+</div>
+<div class="row" style="margin-top: 2em;">
+  <div class="columns small-12 medium-6">
+    <img style="width:100%" class="image-center" src="../img/fountains/purple1.jpg" alt="Orange and purple canvas fountain">
+  </div>
+  <div class="columns small-12 medium-6">
+    <img style="width:100%" class="image-center" src="../img/fountains/purple2.jpg" alt="Orange and purple canvas fountain detail shot">
+  </div>
+</div>
