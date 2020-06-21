@@ -4,10 +4,12 @@ title: "About"
 permalink: about
 
 ---
-
-<div class="small-8 medium-4 columns small-centered medium-uncentered">
+<div class="cell auto"></div>
+<div class="small-8 medium-4 cell small-centered medium-uncentered">
   <img src="/img/rehan-full.png" style="width:100%">
 </div>
+<div class="cell auto"></div>
+
 
 <div class="small-12 medium-7 columns">
   <section class="bio">

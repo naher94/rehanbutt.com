@@ -1,8 +1,8 @@
 <footer class="site-footer">
 
-    <div class="row">
-        <div class="small-12 medium-9 large-6 column left-section">
-          <div class="site-pages small-12 large-12 column">
+    <div class="grid-x grid-container">
+        <div class="cell small-12 medium-9 large-6 left-section">
+          <div class="site-pages small-12 large-12 cell">
             <a class="nav" href="/index.html">Portfolio</a>
             {% for my_page in site.pages %}
               {% if my_page.title == "About" %}
@@ -13,7 +13,7 @@
             <a class="nav" href="http://resources.rehanbutt.com">Resources</a>
             <a class="nav" target="_blank" href="https://society6.com/rehanbutt">Store</a>
           </div>
-          <div class="social-container small-12 large-12 column">
+          <div class="social-container small-12 large-12 cell">
             <a target="_blank" href="https://www.twitter.com/naher94/">
               <img class="social" style="width:3em;" src="{{'/img/social/twitter.svg'| prepend: site.baseurl }}" alt="Twitter Icon"></a>
 
@@ -40,7 +40,7 @@
           </div>
 
         </div>
-        <div class="small-12 medium-3 large-6 column right-section">
+        <div class="small-12 medium-3 large-6 cell right-section">
           <a href="#"><img src="/img/rehanLogoFooter.svg" alt="Rehan's Logo" style="height: 55px; margin-top:10px;"></a>
           <p class="copyright no-select">copyright © {{ 'now' | date: "%Y" }} Rehan Butt</p>
         </div>

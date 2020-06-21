@@ -29,6 +29,13 @@ h4 {
   margin-top: 2.5em;
 }
 
+.post-content{
+  h2{
+    font-weight: $zilla-bold;
+    font-size: 2em;
+  }
+}
+
 article.post {
   width: 100%;
 }
