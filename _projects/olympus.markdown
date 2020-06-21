@@ -3,7 +3,7 @@ layout: post
 title: "Project Olympus Branding"
 tile-name: "Olympus Branding"
 thumbnail: "olympus.png"
-banner: 
+banner:
 date: 2017-09-22
 tags: Branding
 ---
@@ -25,13 +25,13 @@ The first step in rebranding was to audit the existing brand. Looking at colors,
 <div class="image-container"><img src="../img/olympus/brandInspiration.png" alt="Inspiration"/></div>
 
 
-<div class="row" style="padding:0px; margin:0px;">
-  <div class="image-container small-6 medium-2 column" style="padding:0px; margin:0px;"><img src="../img/olympus/inspo1.gif" alt="Animation Inspiration"/></div>
-  <div class="image-container small-6 medium-2 column" style="padding:0px; margin:0px;"><img src="../img/olympus/inspo2.gif" alt="Animation Inspiration"/></div>
-  <div class="image-container small-6 medium-2 column" style="padding:0px; margin:0px;"><img src="../img/olympus/inspo3.gif" alt="Animation Inspiration"/></div>
-  <div class="image-container small-6 medium-2 column" style="padding:0px; margin:0px;"><img src="../img/olympus/inspo4.gif" alt="Animation Inspiration"/></div>
-  <div class="image-container small-6 medium-2 column" style="padding:0px; margin:0px;"><img src="../img/olympus/inspo5.gif" alt="Animation Inspiration"/></div>
-  <div class="image-container small-6 medium-2 column" style="padding:0px; margin:0px;"><img src="../img/olympus/inspo6.gif" alt="Animation Inspiration"/></div>
+<div class="grid-x">
+  <div class="small-6 medium-2 cell"><img src="../img/olympus/inspo1.gif" alt="Animation Inspiration"/></div>
+  <div class="small-6 medium-2 cell"><img src="../img/olympus/inspo2.gif" alt="Animation Inspiration"/></div>
+  <div class="small-6 medium-2 cell"><img src="../img/olympus/inspo3.gif" alt="Animation Inspiration"/></div>
+  <div class="small-6 medium-2 cell"><img src="../img/olympus/inspo4.gif" alt="Animation Inspiration"/></div>
+  <div class="small-6 medium-2 cell"><img src="../img/olympus/inspo5.gif" alt="Animation Inspiration"/></div>
+  <div class="small-6 medium-2 cell"><img src="../img/olympus/inspo6.gif" alt="Animation Inspiration"/></div>
 </div>
 <div class="image-container"><img src="../img/olympus/rhino.png" alt="CAD Process"/></div>
 

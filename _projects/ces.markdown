@@ -24,7 +24,7 @@ Continuing with the CES chatbot I streamlined the interface and created richer r
 
 <div class="image-container"><img src="../img/ces/ui4.png" alt="Refreshed UIs Series 4"/></div>
 
-The last set of interfaces that I would like to highlight include the schedule page. I gave the schedule page improved hierarchy for each of the event entries, as well as, making clear which topic category each entry belongs. Next, I reworked the filters page keeping the event types toggles and the time slider, but adding the density of events at each time interval through the vertical bars above the slider, as well as, adding topic category toggles. One of my favorite features of the CES app was the indoor location feature, but it was tricky to use with a numbered map. As such, I wanted to again bring in the topic category color system and replace the booth numbers with company names. The fourth interface in this row shows an updated booth page highlighting the brand at the top, a link to their site and a quick function to navigate to the booth. Unless I had heard through word of mouth about a booth's event more than likely I would not have known it was happening, as such I wanted to give booths the option to add their own events to the official calendar. 
+The last set of interfaces that I would like to highlight include the schedule page. I gave the schedule page improved hierarchy for each of the event entries, as well as, making clear which topic category each entry belongs. Next, I reworked the filters page keeping the event types toggles and the time slider, but adding the density of events at each time interval through the vertical bars above the slider, as well as, adding topic category toggles. One of my favorite features of the CES app was the indoor location feature, but it was tricky to use with a numbered map. As such, I wanted to again bring in the topic category color system and replace the booth numbers with company names. The fourth interface in this row shows an updated booth page highlighting the brand at the top, a link to their site and a quick function to navigate to the booth. Unless I had heard through word of mouth about a booth's event more than likely I would not have known it was happening, as such I wanted to give booths the option to add their own events to the official calendar.
 
 <div class="image-container"><img src="../img/ces/colorsystem.png" alt="Color Categories"/></div>
 
@@ -48,15 +48,15 @@ Several screens from the current app.
 
 <div class="image-container"><img src="../img/ces/inspiration.png" alt="App Inspirations"/></div>
 
-<div class="row" style="padding:0px; margin:0px;">
-  <div class="image-container small-6 medium-3 column" style="padding:0px; margin:0px;"><img src="../img/ces/inspo1.gif" alt="Animation Inspiration"/></div>
-  <div class="image-container small-6 medium-3 column" style="padding:0px; margin:0px;"><img src="../img/ces/inspo2.gif" alt="Animation Inspiration"/></div>
-  <div class="image-container small-6 medium-3 column" style="padding:0px; margin:0px;"><img src="../img/ces/inspo3.gif" alt="Animation Inspiration"/></div>
-  <div class="image-container small-6 medium-3 column" style="padding:0px; margin:0px;"><img src="../img/ces/inspo4.gif" alt="Animation Inspiration"/></div>
+<div class="grid-x">
+  <div class="small-6 medium-3 cell"><img src="../img/ces/inspo1.gif" alt="Animation Inspiration"/></div>
+  <div class="small-6 medium-3 cell"><img src="../img/ces/inspo2.gif" alt="Animation Inspiration"/></div>
+  <div class="small-6 medium-3 cell"><img src="../img/ces/inspo3.gif" alt="Animation Inspiration"/></div>
+  <div class="small-6 medium-3 cell"><img src="../img/ces/inspo4.gif" alt="Animation Inspiration"/></div>
 </div>
 
 Some interaction and static interfaces, that I used as inspiration. Looking at things like ease of use, hierarchy and legibility to name a few.
 
-<div class="image-container small-12 medium-10 column medium-centered"><img src="../img/ces/topics.png" alt="Topic Groups"/></div>
+<div class="image-container small-12 medium-10 cell medium-centered"><img src="../img/ces/topics.png" alt="Topic Groups"/></div>
 
 <div class="image-container"><img src="../img/ces/eventtiles.png" alt="Event Tile Iterations"/></div>

@@ -22,8 +22,8 @@ tags: digital branding
   <div class="gallery-asset fade"> <img src="../img/ideate/slide10.png" alt="T-Shirt" style="width:100%"> </div>
   <div class="gallery-asset fade"> <img src="../img/ideate/slide11.png" alt="Business Cards" style="width:100%"> </div>
   <div class="gallery-asset fade"> <img src="../img/ideate/slide12.png" alt="Wall Sign" style="width:100%"> </div>
-  
-  
+
+
   <a class="prev" onclick="plusSlides(-1)"><div class="arrow">&#10094;</div></a>
   <a class="next" onclick="plusSlides(1)"><div class="arrow">&#10095;</div></a>
 </div>
@@ -48,8 +48,8 @@ Given some of this feedback and thinking bigger towards a brand system over a st
 <div class="image-container"><img src="../img/ideate/iterations5.svg" alt="Logo Iterations"/></div>
 <div class="image-container"><img src="../img/ideate/iterations6.png" alt="Logo Iterations: Color Exploration"/></div>
 
-Playing with colors here! <span class="emoji emoji-thumbs_up"></span>
+Playing with colors here! 👍
 
 <div class="image-container"><img src="../img/ideate/usage.png" alt="Brand Usage"/></div>
 
-We made some t-shirts and stickers to celebrate! <span class="emoji emoji-party"></span>
+We made some t-shirts and stickers to celebrate! 🎉

@@ -28,11 +28,11 @@ With these I was seeing where all Expii engaged their users and if the brand ima
 
 Across all the public facing platforms I came across four distinct brand images and several tones when speaking or writing about the product. I started by exploring the color schemes that users are presented with and then progressing on to typeface, type style, and brand usage. Noticing that several different typefaces, weights, and combinations of upper and lowercase lettering was being used. As such, I created one potential brand iteration solving many of the problems with the current implementation.
 
-<div class="row" style="padding:0px; margin:0px;">
-  <div class="image-container small-6 medium-3 column" style="padding:0px; margin:0px;"><img src="../img/expii/actionButton.gif" alt="Animation Inspiration"/></div>
-  <div class="image-container small-6 medium-3 column" style="padding:0px; margin:0px;"><img src="../img/expii/funColors.gif" alt="Animation Inspiration"/></div>
-  <div class="image-container small-6 medium-3 column" style="padding:0px; margin:0px;"><img src="../img/expii/liquidButton.gif" alt="Animation Inspiration"/></div>
-  <div class="image-container small-6 medium-3 column" style="padding:0px; margin:0px;"><img src="../img/expii/iconAnimation.gif" alt="Animation Inspiration"/></div>
+<div class="grid-x">
+  <div class="small-6 medium-3 cell"><img src="../img/expii/actionButton.gif" alt="Animation Inspiration"/></div>
+  <div class="small-6 medium-3 cell"><img src="../img/expii/funColors.gif" alt="Animation Inspiration"/></div>
+  <div class="small-6 medium-3 cell"><img src="../img/expii/liquidButton.gif" alt="Animation Inspiration"/></div>
+  <div class="small-6 medium-3 cell"><img src="../img/expii/iconAnimation.gif" alt="Animation Inspiration"/></div>
 </div>
 <div class="image-container"><img src="../img/expii/inspiration.png" alt="Inspiration"/></div>
 
@@ -46,7 +46,7 @@ When designing this brand image, I looked at it as the starting point for a bigg
 
 <div class="image-container"><img src="../img/expii/platforms.png" alt="Platforms Expii Exists On" style="margin-bottom:70px;"/></div>
 Extending from the brand audit, I looked at whether the product differed based on platform and if each platform was being capitalized on to the fullest extent. iOS only provided one of the two Expii products--Solve. Upon opening the app, the experience was immediately gated by a user login, which can be a big deterrent for users to try out a product or service. The Expii Android app was a webview leaving the interactions to be identical to the site. One of the benefits of a native app, however, is that resources can be stored on the device for easy retrieval and offline usage in many cases--something especially important in developing countries where infrastructure may not be as reliable but the added value of a learning tool like Expii would be far bigger. Lastly, I explored the desktop web experience as it is the most prominent and fully featured.
- 
+
 <div class="image-container"><img src="../img/expii/products.png" alt="Products"/></div>
 
 Two design languages, both in terms of visual UI styles and interaction depth and type, existed across the two products--Grandmaster and Solve. Thinking about pulling a design language out to be used across both products I delved deeper into Grandmaster, a network of math and science topics to be explored by the learner at many different skill levels. I chose to look at Grandmaster over Solve as it was a far more complex experience and wanted my design proposals to succeed at all levels of complexity.
