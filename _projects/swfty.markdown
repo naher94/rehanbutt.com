@@ -2,7 +2,7 @@
 layout: post
 title:  "Swfty Mobile Application"
 tile-name: "Mobile App"
-thumbnail: "swfty.png"
+thumbnail: "swfty"
 date:   2014-10-13
 tags: iOS mobile
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  "Row House"
 tile-name: "Row House"
-thumbnail: "rowHouse.png"
+thumbnail: "rowHouse"
 date:   2012-12-15
 tags: architecture
 ---

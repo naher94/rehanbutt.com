@@ -2,7 +2,7 @@
 layout: post
 title:  "Tag Association Inspiration Game"
 tile-name: "Inspiration Game"
-thumbnail: "tagAssociation.png"
+thumbnail: "tagAssociation"
 banner:
 date:   2017-05-12
 tags: web game word association
@@ -36,5 +36,3 @@ I decided to build 2 game modes sandbox and relation. Sandbox is a rapid-fire mo
 <div class="image-container"><img src="../img/stickerPack/buildTest.png" alt="Sticker Testing"/></div>
 <div class="image-container"><img src="../img/stickerPack/splashDesign.png" alt="Splash Design"/></div>
 -->
-
-

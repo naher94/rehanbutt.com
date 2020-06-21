@@ -2,7 +2,7 @@
 layout: post
 title:  "Weoto (Apple Watch App)"
 tile-name: "SmartWatch App"
-thumbnail: "smartWatch.png"
+thumbnail: "smartWatch"
 date:   2015-04-01
 tags: UI UX
 ---

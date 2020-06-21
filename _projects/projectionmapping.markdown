@@ -2,7 +2,7 @@
 layout: post
 title:  "Projection Mapping"
 tile-name: "Projection Mapping"
-thumbnail: "projection.png"
+thumbnail: "projection"
 date:   2012-11-01
 tags: programming
 ---

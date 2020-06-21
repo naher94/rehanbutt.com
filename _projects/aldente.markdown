@@ -2,7 +2,7 @@
 layout: post
 title: "Al Dente Recipe Builder Concept"
 tile-name: "Recipe Builder"
-thumbnail: "aldente.png"
+thumbnail: "aldente"
 banner: New
 date: 2020-03-28
 tags: mobile voice

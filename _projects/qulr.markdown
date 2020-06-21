@@ -2,7 +2,7 @@
 layout: post
 title: "QULR.Life"
 tile-name: "QULR.Life"
-thumbnail: "qulr.png"
+thumbnail: "qulr"
 banner:
 date: 2017-08-12
 tags: web color

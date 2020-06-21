@@ -2,7 +2,7 @@
 layout: post
 title:  "Lucid NYC"
 tile-name: "Lucid NYC"
-thumbnail: "lucid.png"
+thumbnail: "lucid"
 banner:
 date:   2016-02-15
 tags: digital UI UX

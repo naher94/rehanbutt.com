@@ -2,7 +2,7 @@
 layout: post
 title:  "CarnegieHere (iOS App)"
 tile-name: "iOS App"
-thumbnail: "carnegieHere.png"
+thumbnail: "carnegieHere"
 date:   2015-12-01
 tags: iOS App
 ---

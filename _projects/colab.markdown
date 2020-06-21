@@ -2,7 +2,7 @@
 layout: post
 title:  "CoLab (Sketch Plugin)"
 tile-name: "Sketch Plugin"
-thumbnail: "coLab.png"
+thumbnail: "coLab"
 date:   2016-03-01
 tags: digital app
 ---
@@ -58,7 +58,7 @@ As part of this project I worked with Alex Du, Aparna Sridhar Murthy, Chris Bark
   <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation26.png" style="width:100%"> </div>
   <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation27.png" style="width:100%"> </div>
   <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation28.png" style="width:100%"> </div>
-  
+
   <a class="prev" onclick="plusSlides(-1)"><div class="arrow">&#10094;</div></a>
   <a class="next" onclick="plusSlides(1)"><div class="arrow">&#10095;</div></a>
 </div>

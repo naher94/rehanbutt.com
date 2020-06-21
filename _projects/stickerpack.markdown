@@ -2,7 +2,7 @@
 layout: post
 title: "Sticker Packs"
 tile-name: "Sticker Packs"
-thumbnail: "stickerPack.png"
+thumbnail: "stickerPack"
 banner:
 date: 2017-03-03
 tags: stickers iOS illustrations

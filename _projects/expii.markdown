@@ -2,7 +2,7 @@
 layout: post
 title:  "Expii Exploration"
 tile-name: "Expii Audit"
-thumbnail: "expii.png"
+thumbnail: "expii"
 banner:
 date:   2017-06-12
 tags: UI UX Research edtech

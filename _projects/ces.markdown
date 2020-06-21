@@ -2,7 +2,7 @@
 layout: post
 title: "CES Mobile App Redesign"
 tile-name: "Mobile App"
-thumbnail: "ces.png"
+thumbnail: "ces"
 banner:
 date: 2018-01-21
 tags: mobile app
