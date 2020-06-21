@@ -566,11 +566,17 @@ p, li, h3, #subTitle{
 .title-404 {
   font-size: 3em;
   font-weight: $zilla-bold;
+  @media screen and (max-width: 40em) {
+    text-align: center;
+  }
 }
 
 .words-404 {
   font-size: 1.8em;
   margin-bottom: 1em;
+  @media screen and (max-width: 40em) {
+    text-align: center;
+  }
 }
 
 .outerspace {
