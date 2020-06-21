@@ -5,6 +5,7 @@ tile-name: "Fashion"
 thumbnail: "fashion.png"
 date:   2015-02-20
 tags: fashion
+featured: true
 ---
 
 <div class="image-container">

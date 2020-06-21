@@ -1,21 +1,48 @@
 ---
 layout: default
 ---
-    {% assign project_order = site.projects | sort: 'date' | reverse %}
-    {% for project in project_order %}
-    <div class="small-6 medium-4 large-3 cell thumbnail-tile">
-        {% if project.external-link %}
-          <a class="post-link" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank">
-        {% else %}
-          <a class="post-link" href="{{ project.url | prepend: site.baseurl }}">
-        {% endif %}
-            <div class="thumbnail-container">
-              <img class="thumbnail-image" src="img/thumbnails/{{ project.thumbnail }}" alt="{{ project.tile-name }} Tile Image">
-              <span class="thumbnail-text">{{ project.tile-name }}</span>
-              {% if project.banner %}
-              <span class="banner">{{ project.banner }}</span>
-              {% endif %}
-            </div>
-        </a>
-    </div>
-    {% endfor %}
+
+{% assign project_order = site.projects | sort: 'date' | reverse %}
+<!-- throw in another four loop here dumping the featured projects to the top -->
+
+{% for project in project_order %}
+  {% if project.featured == true %}
+  <div class="medium-6 cell thumbnail-tile">
+    {% if project.external-link %}
+      <a class="post-link" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank">
+    {% else %}
+      <a class="post-link" href="{{ project.url | prepend: site.baseurl }}">
+    {% endif %}
+        <div class="thumbnail-container">
+          <img class="thumbnail-image" src="img/thumbnails/{{ project.thumbnail }}" alt="{{ project.tile-name }} Tile Image">
+          <span class="thumbnail-text">{{ project.tile-name }}</span>
+          {% if project.banner %}
+          <span class="banner">{{ project.banner }}</span>
+          {% endif %}
+        </div>
+    </a>
+  </div>
+  {% endif %}
+{% endfor %}
+
+
+
+{% for project in project_order %}
+  {% if project.featured != true %}
+  <div class="small-6 medium-4 large-3 cell thumbnail-tile">
+    {% if project.external-link %}
+      <a class="post-link" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank">
+    {% else %}
+      <a class="post-link" href="{{ project.url | prepend: site.baseurl }}">
+    {% endif %}
+        <div class="thumbnail-container">
+          <img class="thumbnail-image" src="img/thumbnails/{{ project.thumbnail }}" alt="{{ project.tile-name }} Tile Image">
+          <span class="thumbnail-text">{{ project.tile-name }}</span>
+          {% if project.banner %}
+          <span class="banner">{{ project.banner }}</span>
+          {% endif %}
+        </div>
+    </a>
+  </div>
+  {% endif %}
+{% endfor %}
