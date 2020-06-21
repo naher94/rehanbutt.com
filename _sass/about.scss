@@ -1,0 +1,302 @@
+//******* About Page Styling
+.bio {
+  font-size: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-weight: $lato-bold;
+  h1{
+    padding-left: 0;
+    color: $navy-black;
+    font-family: $zilla;
+    font-weight: $zilla-bold;
+    font-size: 3rem;
+    margin-bottom: 0;
+    @media (prefers-color-scheme: dark) {
+      color: $pure-white-dark;
+    }
+    span{
+      font-size: 2.5rem;
+    }
+  }
+  p{
+    color: $navy-black;
+    font-family: $lato;
+    line-height: 36px; ///////////why EM NOT RESPONDING
+    font-size: 26px; ///////////why EM NOT RESPONDING
+    padding: 0;
+    margin: 0;
+    @media (prefers-color-scheme: dark) {
+      color: $pure-white-dark;
+    }
+    &:last-of-type{
+      margin-top: 0.5em;
+    }
+    code{
+      border-radius: $pill-radius;
+      padding-left: 0.35em;
+      padding-right: 0.35em;
+      padding-bottom: 0.15em;
+      background-color: rgba($navy-black,0.15);
+      border-color: $navy-black;
+      border-width: 0;
+      @media (prefers-color-scheme: dark) {
+        color: $pure-white-dark;
+        background-color: rgba($pure-white-dark,0.15);
+        border-color: $pure-white-dark;
+      }
+    }
+    @media screen and (max-width: 40em) {
+      font-size: 20px;
+      line-height: 28px;
+    }
+  }
+}
+
+.work-experience, .speaking-events, .education, .skills, .tools{
+  &:not(first-of-type){
+    margin-top: 2em;
+  }
+  h2{
+    font-size: 3.5em;
+    color: rgba($navy-black, 0.15);
+    font-weight: $lato-black;
+    font-family: $lato;
+    @media (prefers-color-scheme: dark) {
+      color: rgba($pure-white-dark,0.15);
+    }
+    @media screen and (max-width: 40em) {
+      line-height: 1em;
+    }
+    @media screen and (max-width: 64em) {
+      line-height: 1em;
+    }
+  }
+  .work-item, .speaking-item, .education-item{
+    &:first-of-type{
+      margin-top: -2.5em;
+      @media screen and (max-width: 40em) {
+        margin-top: -1.5em;
+      }
+      @media screen and (max-width: 64em) {
+        margin-top: -1.5em;
+      }
+    }
+    margin-top: 1rem;
+    padding-left: 0.5rem;
+    h3{
+      font-family: $lato;
+      color: $navy-black;
+      font-size: 1em;
+      font-weight: $lato-black;
+      padding: 0;
+      margin-bottom: 0;
+      @media (prefers-color-scheme: dark) {
+        color: $pure-white-dark;
+      }
+    }
+    p{
+      padding: 0;
+      margin: 0;
+      margin-top: -0.25em;
+    }
+    .date{
+      font-family: $lato;
+      color: $navy-black;
+      font-size: 1em;
+      font-weight: 300;
+      font-style: italic;
+      @media (prefers-color-scheme: dark) {
+        color: $pure-white-dark;
+      }
+    }
+    .description{
+      font-family: $lato;
+      color: $navy-black;
+      font-size: 1em;
+      font-weight: $lato-regular;
+      line-height: 1.2em;
+      @media (prefers-color-scheme: dark) {
+        color: $pure-white-dark;
+      }
+    }
+    .brand-logo-container{
+      position: absolute;
+      opacity: 0.2;
+      margin-left: -4em;
+      transition: $run;
+      padding-top: 0.5em;
+      @media screen and (max-width: 40em) {
+        display: none;
+      }
+      &#upmc{
+        margin-left: -15.5em;
+      }
+      &#processly{
+        margin-left: -4.2em;
+        img{
+          height: 3.3em;
+        }
+      }
+      &#dio{
+        margin-left: -5.6em;
+      }
+      &#cr{
+        margin-left: -6em;
+      }
+      &#ucla{
+        margin-left: -10.5em;
+      }
+      &#ces{
+        margin-left: -6.5em;
+      }
+      &#aia{
+        margin-left: -4em;
+      }
+      &#cmu{
+        margin-left: -6em;
+      }
+      &#nus{
+        margin-left: -8em;
+      }
+      &#yinzcam{
+        margin-left: -12em;
+      }
+    }
+    .brand-logo{
+      float: right;
+      @media (prefers-color-scheme: dark) {
+        filter: contrast(20%);
+      }
+    }
+    &:hover .brand-logo-container{
+      opacity: 1;
+    }
+  }
+}
+
+.skills-container{
+  margin-bottom: 1em;
+}
+
+.skills, .tools{
+  h3{
+    font-family: $lato;
+    color: $navy-black;
+    font-size: 1em;
+    font-weight: $lato-black;
+    padding: 0;
+    margin-bottom: 0;
+    @media (prefers-color-scheme: dark) {
+      color: $pure-white-dark;
+    }
+    &:first-of-type{
+      margin-top: -2.5em;
+      @media screen and (max-width: 40em) {
+        margin-top: -1.5em;
+      }
+    }
+  }
+  .skills-item{
+    display: inline-block;
+    background-color: $navy-black;
+    border-radius: $pill-radius;
+    color: $pure-white;
+    padding: 0.2em 0.6em 0.2em 0.6em;
+    margin-right: 0.1em;
+    margin-bottom: 0.4em;
+    @media (prefers-color-scheme: dark) {
+      background-color: $navy-black-dark;
+      color: $pure-white-dark;
+    }
+  }
+}
+
+.background-shapes{
+  position: absolute;
+  .circle{
+    position: absolute;
+    z-index: -10;
+    border-radius: 50%;
+    animation-name: bubbles-animation;/* Refers to the name of your @keyframes element below */
+    animation-duration: 5s;/* Change to speed up or slow down */
+    animation-iteration-count: infinite;/* Never stop waving :) */
+    transform-origin: bottom left;/* Pivot around the bottom-left palm */
+    display: inline-block;
+  }
+
+  .circle1{
+    width: 150px;
+    height: 150px;
+    background: #9c5ab7;
+    left: calc(100% - 50px);
+  }
+  .circle2{
+    width: 100px;
+    height: 100px;
+    background: #f2c50f;
+    left: calc(100% / 2);
+    top: 200px;
+  }
+}
+
+#resumeButton {
+  width: 100%;
+  background-color: $royal-raspberry;
+  font-size: 1em;
+  color: $pure-white;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  text-align: center;
+  margin-top: 0.5em;
+  margin-bottom: 1.25em;
+  border-radius: $pill-radius;
+
+  &:hover {
+    background-color: $royal-raspberry-hover;
+  }
+}
+
+.rainbow{
+  background-image: linear-gradient(90deg,#00a2e2 0%,#1bad6b 20%,#fec609 40%,#e92687 60%,#6d358d 80%,#00a2e2 100%);
+  background-size: 200% auto;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow 3s linear infinite;
+}
+
+span.wave {
+  animation-name: wave-animation;/* Refers to the name of your @keyframes element below */
+  animation-duration: 2.5s;/* Change to speed up or slow down */
+  animation-iteration-count: infinite;/* Never stop waving :) */
+  transform-origin: 70% 70%;/* Pivot around the bottom-left palm */
+  display: inline-block;
+}
+
+@keyframes rainbow {
+  to {
+    background-position: 200% center
+  }
+}
+
+@keyframes wave-animation {
+    0% { transform: rotate(  0.0deg) }
+   10% { transform: rotate(-10.0deg) }/* The following four values can be played with to make the waving more or less extreme */
+   20% { transform: rotate( 12.0deg) }
+   30% { transform: rotate(-10.0deg) }
+   40% { transform: rotate(  9.0deg) }
+   50% { transform: rotate(  0.0deg) }/* Reset for the last half to pause */
+  100% { transform: rotate(  0.0deg) }
+}
+
+@keyframes bubbles-animation {
+    0% { transform: scale(  1) }
+//   10% { transform: scale(0.8) }
+//   20% { transform: scale(0.6) }
+//   30% { transform: scale(1.5) }
+//   40% { transform: scale(  1) }
+   70% { transform: scale(0.9) }
+  100% { transform: scale(  1) }
+}
+//******* End of About Page Styling
