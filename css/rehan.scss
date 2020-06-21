@@ -199,6 +199,17 @@ iframe {
   height: 600px;
 }
 
+.nyc-questions{
+  margin-top: 2em;
+  margin-bottom: 2em;
+  h3{
+    font-weight: $zilla-bold;
+  }
+  h4{
+    margin-top: 0.5em;
+  }
+}
+
 //******* Header Styling
 .nav-container{
   background-color:$signature-teal;
