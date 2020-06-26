@@ -3,7 +3,6 @@ layout: default
 ---
 
 {% assign project_order = site.projects | sort: 'date' | reverse %}
-<!-- throw in another four loop here dumping the featured projects to the top -->
 
 {% for project in project_order %}
   {% if project.featured == true %}
@@ -24,8 +23,6 @@ layout: default
   </div>
   {% endif %}
 {% endfor %}
-
-
 
 {% for project in project_order %}
   {% if project.featured != true %}
