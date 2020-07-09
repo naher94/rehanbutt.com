@@ -1,8 +1,8 @@
-# rehanbutt.com
+# [rehanbutt.com](https://rehanbutt.com)
 
 ## Dev Notes
 
-Frontmatter tags
+### Frontmatter tags
 
 * layout: post
 * title: freeform text
