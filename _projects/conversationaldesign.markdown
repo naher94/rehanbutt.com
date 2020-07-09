@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Conversational Design (Thesis)"
+title:  "Conversational Design"
 tile-name: "Conversational Design"
 thumbnail: "conversationalDesign"
-banner: In Process
+banner:
 date:   2016-12-16
 tags: bot
 ---
