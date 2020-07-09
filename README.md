@@ -7,7 +7,7 @@ Frontmatter tags
 * layout: post
 * title: freeform text
 * tile-name: freeform text
-* thumbnail: file name later post-pended `.png`
+* thumbnail: file name later appended by `.png`
 * banner: freeform text
 * date: `YYYY-MM-DD`
 * tags: freeform text
