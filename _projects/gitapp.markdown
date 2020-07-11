@@ -2,7 +2,7 @@
 layout: post
 title:  "gitApp"
 tile-name: "gitApp"
-thumbnail: "gitApp.png"
+thumbnail: "gitApp"
 date:   2014-01-30
 tags: iOS App
 ---

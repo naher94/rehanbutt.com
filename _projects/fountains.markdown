@@ -2,7 +2,7 @@
 layout: post
 title:  "Fountains"
 tile-name: "Fountains"
-thumbnail: "fountain.png"
+thumbnail: "fountain"
 date:   2011-05-01
 tags: fabrication
 ---

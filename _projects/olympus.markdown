@@ -2,7 +2,7 @@
 layout: post
 title: "Project Olympus Branding"
 tile-name: "Olympus Branding"
-thumbnail: "olympus.png"
+thumbnail: "olympus"
 banner:
 date: 2017-09-22
 tags: Branding

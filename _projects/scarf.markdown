@@ -2,7 +2,7 @@
 layout: post
 title:  "Scarf Design"
 tile-name: "Scarf"
-thumbnail: "scarf.png"
+thumbnail: "scarf"
 date:   2013-07-01
 tags: textile
 ---
