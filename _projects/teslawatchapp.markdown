@@ -7,6 +7,7 @@ banner:
 date: 2018-11-11
 tags: UI UX
 featured: true
+tile-description: Bringing the Tesla experience to your wrist with Apple Watch
 ---
 
 <div class="image-container small-12 medium-8 medium-centered"><img src="../img/teslaWatchApp/complicationshero.png" alt="Complications Hero"/></div>

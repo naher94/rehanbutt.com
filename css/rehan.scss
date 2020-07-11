@@ -78,11 +78,19 @@ ul {
     opacity: 1;
     transition: $run;
   }
+  &:hover .featured-text{
+    opacity: 1;
+    transition: $run;
+  }
   &:hover .thumbnail-image{
     opacity: 0.8;
     transition: $run;
   }
-  .thumbnail-image{
+  &:hover .thumbnail-image-featured{
+    opacity: 1;
+    transition: $run;
+  }
+  .thumbnail-image, .thumbnail-image-featured{
     border-radius: $tile-radius;
   }
   @media (prefers-color-scheme: dark) {
@@ -106,6 +114,56 @@ ul {
   text-align: center;
   font-weight: $zilla-bold;
   font-family: $zilla;
+  @media screen and (max-width: 40em) {
+    font-size: 1.4em;
+  }
+  @media (prefers-color-scheme: dark) {
+    color: $pure-white-dark;
+  }
+}
+
+.featured-text{
+  position: absolute;
+  opacity: 0;
+  bottom: 0;
+  padding-bottom: 2rem;
+  padding-top: 4rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  color: $pure-white;
+  background: linear-gradient(0deg, rgba($navy-black,1) 0%, rgba($navy-black,0) 100%);
+  width: 100%;
+  border-radius: 0 0 $tile-radius $tile-radius;
+  @media screen and (max-width: 40em) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-top: 2rem;
+    bottom: 0;
+  }
+}
+
+.thumbnail-text-featured {
+  text-shadow: 0px 0px 5px $navy-black;
+  font-size: 2.4em;
+  line-height: 1em;
+  font-weight: $zilla-bold;
+  font-family: $zilla;
+  @media screen and (max-width: 40em) {
+    font-size: 1.4em;
+  }
+  @media (prefers-color-scheme: dark) {
+    color: $pure-white-dark;
+  }
+}
+
+.thumbnail-description-featured {
+  display: block;
+  text-shadow: 0px 0px 5px $navy-black;
+  font-size: 1.4em;
+  line-height: 1.2em;
+  font-weight: $lato-regular;
+  font-family: $lato;
   @media screen and (max-width: 40em) {
     font-size: 1.4em;
   }

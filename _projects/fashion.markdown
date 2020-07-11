@@ -1,11 +1,12 @@
 ---
 layout: post
 title:  "Lustre (Fashion Line)"
-tile-name: "Fashion"
+tile-name: "Lustre"
 thumbnail: "fashion"
 date:   2015-02-20
 tags: fashion
 featured: true
+tile-description: "A fashion line"
 ---
 
 <div class="image-container">
