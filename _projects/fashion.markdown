@@ -6,7 +6,7 @@ thumbnail: "fashion"
 date:   2015-02-20
 tags: fashion
 featured: true
-tile-description: "A fashion line"
+tile-description: "A fashion line with a new take on the production of clothes"
 ---
 
 <div class="image-container">
