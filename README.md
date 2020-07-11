@@ -1,5 +1,10 @@
 # [rehanbutt.com](https://rehanbutt.com)
 
+## Content Notes
+* Tile Titles should be _____________
+* Tile Descriptions should say something along the lines of ___________
+* Page Titles should be very similar to Tile Titles with _________ as an exception
+
 ## Dev Notes
 
 ### Frontmatter tags
