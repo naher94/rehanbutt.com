@@ -1,6 +1,9 @@
 # [rehanbutt.com](https://rehanbutt.com)
 
 ## Content Notes
+
+* When a project is featured an additional tile image is needed
+
 * Tile Titles should be _____________
 * Tile Descriptions should say something along the lines of ___________
 * Page Titles should be very similar to Tile Titles with _________ as an exception
