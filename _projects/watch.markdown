@@ -2,7 +2,7 @@
 layout: post
 title:  "Watch"
 tile-name: "Watch"
-thumbnail: "watch.png"
+thumbnail: "watch"
 date:   2013-03-01
 tags: product watch industrial
 ---

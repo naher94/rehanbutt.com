@@ -2,7 +2,7 @@
 layout: post
 title:  "My Site"
 tile-name: "My Site"
-thumbnail: "mySite.png"
+thumbnail: "mySite"
 date:   2014-12-10
 tags: web branding
 ---
@@ -23,7 +23,7 @@ My site when I first deployed it.
 <div class="image-container">
     <img src="../img/mySite/siteLogo.svg" alt="Rehan Logo" class="image-center" style="width:40%; margin-bottom:50px;" />
     <img src="../img/mySite/siteColor.png" alt="Color Scheme" />
-    
+
     <img src="../img/mySite/sketches.png" alt="Sketches" style="margin-top:50px;"/>
     <img src="../img/mySite/iterations.svg" alt="Logo Iterations" style="margin-top:30px;" />
     <img src="../img/mySite/logoHorizontal.svg" alt="Logo Iteration" />

@@ -2,7 +2,7 @@
 layout: post
 title:  "Slotted Furniture"
 tile-name: "Slotted Furniture"
-thumbnail: "slottedFurniture.png"
+thumbnail: "slottedFurniture"
 date:   2013-11-01
 tags: Fabrication
 ---

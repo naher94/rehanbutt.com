@@ -2,7 +2,7 @@
 layout: post
 title:  "Esporre (Web Portfolio Tool)"
 tile-name: "Portfolio Tool"
-thumbnail: "esporre.png"
+thumbnail: "esporre"
 date:   2015-12-12
 tags: web portfolio learning edtech
 ---
@@ -66,8 +66,3 @@ A couple pictures showing our process of user testing at the Maker Faire in Pitt
 This is our system diagram showing off the interactions and the use cases to get around our tool with and without our wireframes or designs.
 
 <div class="image-container"><img src="../img/esporre/wireframes.png" alt="Esporre Wireframes" /></div>
-
-
-
-
-

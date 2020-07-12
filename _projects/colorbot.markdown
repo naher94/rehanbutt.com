@@ -2,7 +2,7 @@
 layout: post
 title:  "Jasper the Color Bot"
 tile-name: "Color Bot"
-thumbnail: "jasper.png"
+thumbnail: "jasper"
 date:   2016-12-4
 tags: bot color
 ---
@@ -69,4 +69,3 @@ I created this workflow diagram as a way to help me compartmentalize the interac
 For the next iteration of Jasper, I would like to port him to Slack for an entire team to interact and add additional features. One of these features will be the ability to pull up images from several different sources in addition to Dribbble and be able to provide images that are more relevant to the project the user is working on. It will provide photos for a presentation or UI images to help design a better UI feel using these color tones. Another feature I would like to incorporate is the ability to pull images from a Slack conversation and create a potential color scheme given a wireframe and thematic words.
 
 Looking back on this process I learnt a fair bit about developing and deploying a bot, which will come in handy for any future developments. I also learnt about databases and the best way to set up the tables. From a creative aspect, I further learnt about various aspects involving human interaction.  People never do what’s expected of them, requiring development of simple and seamless interactions, while maintaining character of your application or bot, much like a stage production.
-
