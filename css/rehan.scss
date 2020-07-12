@@ -253,29 +253,31 @@ img {
     margin-bottom: 1em;
   }
 }
-
-.behind-the-scenes{
-  border-radius: $tile-radius;
-  background-color: $pure-white;
-  padding: 1rem;
-  box-shadow: $recessed-shadow;
-  margin-top: -6rem;
-  z-index: 1;
-  h1{
-    font-weight: $zilla-bold;
-    font-size: 1.6rem;
-    margin: 0;
-  }
-  p{
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    line-height: 1.5rem;
-    font-size: 1rem;
-  }
-  @media screen and (max-width: 40em) {
-    margin-top: -3rem;
+.behind-the-scenes-container{
+  display: none; //Show on Konami Code Entry
+  .behind-the-scenes{
+    border-radius: $tile-radius;
+    background-color: $pure-white;
+    padding: 1rem;
+    box-shadow: $recessed-shadow;
+    margin-top: -6rem;
+    z-index: 1;
+    h1{
+      font-weight: $zilla-bold;
+      font-size: 1.6rem;
+      margin: 0;
+    }
+    p{
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-left: 0;
+      padding-right: 0;
+      line-height: 1.5rem;
+      font-size: 1rem;
+    }
+    @media screen and (max-width: 40em) {
+      margin-top: -3rem;
+    }
   }
 }
 
