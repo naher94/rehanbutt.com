@@ -14,14 +14,9 @@ tile-description: "Building a dining table out of a retired bowling alley lane"
   <img src="../img/bowlingtable/hero.jpg" alt="Hero shot of the table" />
 </div>
 
-<div class="grid-x behind-the-scenes-container">
-  <div class="cell auto"></div>
-  <div class="behind-the-scenes easter-egg cell small-11 medium-10 large-8">
-    <h1>Behind the Scenes</h1>
-    <p>This photo took many hours to shot and even longer to edit due to all the perspective distortion coming out of the camera.</p>
-  </div>
-  <div class="cell auto"></div>
-</div>
+{% capture bts-title %}Behind the Scenes{% endcapture %}
+{% capture bts-description %}This photo took many hours to shot and even longer to edit due to all the perspective distortion coming out of the camera.{% endcapture %}
+{% include behind-the-scenes.html %}
 
 This project started as a need for a dining table, but quickly turned into almost a yearlong  project from prepping the table top to designing the legs. Shortly after starting to look for a dining table I came across a section of a bowling alley lane from a recently closed alley and decided to design and fabricate a dining table from it.
 
