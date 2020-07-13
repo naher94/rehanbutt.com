@@ -21,8 +21,6 @@ var keyHandler = function (event) {
 	// If complete, alert and reset
 	if (pattern.length === current) {
 		current = 0;
-    console.log("Konami Happened");
-
     isEggVisable = true;
     localStorage.setItem("eggKey", isEggVisable);
     setBTS();
@@ -42,11 +40,17 @@ function setBTS(){
   style.innerHTML =
     '.behind-the-scenes-container {' +
       'display:flex;' +
-    '}';
+    '}' +
+    '.easter-egg-banner-container{ display: flex; }';
   // Get the first script tag
   var ref = document.querySelector('script');
   // Insert our new styles before the first script tag
   ref.parentNode.insertBefore(style, ref);
+}
+
+function unsetBTS(){
+  //This function should remove or update the above CSS of display to NONE
+  console.log("in unsetBTS");
 }
 
 isEgg();
@@ -55,4 +59,4 @@ isEgg();
 document.addEventListener('keydown', keyHandler, false);
 
 
-// Need to be able to unset the the eggKey value
+// Need to be able to unset the the eggKey value and remove the injected style tag
