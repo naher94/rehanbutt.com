@@ -4,7 +4,8 @@
 var pattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 var current = 0;
 
-
+// var isEggVisable = false;
+// localStorage.setItem("eggKey", isEggVisable);
 
 var keyHandler = function (event) {
 
@@ -18,25 +19,40 @@ var keyHandler = function (event) {
 	current++;
 
 	// If complete, alert and reset
-	if (pattern.length === current || window.isEggVisable == true) {
+	if (pattern.length === current) {
 		current = 0;
-		// window.alert('You found it!');
-    window.isEggVisable = true;
-    // Create our stylesheet
-    var style = document.createElement('style');
-    style.innerHTML =
-    	'.behind-the-scenes-container {' +
-    		'display:flex;' +
-    	'}';
+    console.log("Konami Happened");
 
-    // Get the first script tag
-    var ref = document.querySelector('script');
-
-    // Insert our new styles before the first script tag
-    ref.parentNode.insertBefore(style, ref);
+    isEggVisable = true;
+    localStorage.setItem("eggKey", isEggVisable);
+    setBTS();
 	}
 
 };
 
+function isEgg (){
+  if (localStorage.getItem("eggKey") == "true") {
+    setBTS();
+  }
+}
+
+function setBTS(){
+  // Create our stylesheet
+  var style = document.createElement('style');
+  style.innerHTML =
+    '.behind-the-scenes-container {' +
+      'display:flex;' +
+    '}';
+  // Get the first script tag
+  var ref = document.querySelector('script');
+  // Insert our new styles before the first script tag
+  ref.parentNode.insertBefore(style, ref);
+}
+
+isEgg();
+
 // Listen for keydown events
 document.addEventListener('keydown', keyHandler, false);
+
+
+// Need to be able to unset the the eggKey value
