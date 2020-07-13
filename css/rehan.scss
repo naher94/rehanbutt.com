@@ -284,6 +284,10 @@ img {
   }
 }
 
+.force-flex{
+  display: flex !important;
+}
+
 .easter-egg-banner-container{
   display: none; // Do be handled with JS on Konami Entry
   position: sticky;
