@@ -295,8 +295,6 @@ img {
   .easter-egg-banner{
     border-radius: 20px;
     background-color: rgba($pure-white, 1);
-    // -webkit-backdrop-filter: blur(20px); // Something wacky happening here in Safari
-    // backdrop-filter: blur(20px);
     padding: 1rem;
     box-shadow: $recessed-shadow;
     align-items: center;
