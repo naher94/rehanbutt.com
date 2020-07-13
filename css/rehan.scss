@@ -258,6 +258,9 @@ img {
   .behind-the-scenes{
     border-radius: $tile-radius;
     background-color: $pure-white;
+    // background-color: rgba($pure-white, 0.7);
+    // -webkit-backdrop-filter: blur(10px);
+    // backdrop-filter: blur(10px);
     padding: 1rem;
     box-shadow: $recessed-shadow;
     margin-top: -6rem;
@@ -277,6 +280,56 @@ img {
     }
     @media screen and (max-width: 40em) {
       margin-top: -3rem;
+    }
+  }
+}
+
+.force-flex{
+  display: flex !important;
+}
+
+.easter-egg-banner-container{
+  display: none; // Do be handled with JS on Konami Entry
+  position: sticky;
+  bottom: 2rem;
+  .easter-egg-banner{
+    border-radius: 20px;
+    background-color: rgba($pure-white, 1);
+    // -webkit-backdrop-filter: blur(20px); // Something wacky happening here in Safari
+    // backdrop-filter: blur(20px);
+    padding: 1rem;
+    box-shadow: $recessed-shadow;
+    align-items: center;
+    p{
+      padding: 0;
+      margin: 0;
+      font-weight: $lato-bold;
+      font-size: 1.5rem;
+      line-height: 1.3rem;
+      @media screen and (max-width: 40em) {
+        font-size: 1rem;
+      }
+      @media screen and (max-width: 64em) {
+        font-size: 1rem;
+      }
+    }
+    .icon{
+      align-items: center;
+      p{
+        font-size: 2rem;
+        margin-right: 1rem;
+      }
+    }
+    button{
+      border-radius: $tile-radius;
+      background-color: $signature-teal;
+      font-weight: $lato-bold;
+      font-size: 1rem;
+      margin: 0;
+      margin-left: 0.2rem;
+      &:hover{
+        background-color: $signature-teal-hover;
+      }
     }
   }
 }
