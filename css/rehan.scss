@@ -303,7 +303,7 @@ img {
       padding: 0;
       margin: 0;
       font-weight: $lato-bold;
-      font-size: 1.5rem;
+      font-size: 1rem;
       line-height: 1.3rem;
       @media screen and (max-width: 40em) {
         font-size: 1rem;
@@ -325,7 +325,7 @@ img {
       font-weight: $lato-bold;
       font-size: 1rem;
       margin: 0;
-      margin-left: 0.2rem;
+      margin-left: 0.5rem;
       &:hover{
         background-color: $signature-teal-hover;
       }
