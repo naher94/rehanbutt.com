@@ -107,6 +107,11 @@ permalink: about
   <section class="speaking-events">
     <h2>Speaking Events</h2>
     <div class="speaking-item">
+      <h3>Why Does Everything Need n App?</h3>
+      <p class="date">May 2020</p>
+      <p class="description">Why is it that everything need an app from toasters to skateboards? During this <a href="https://www.youtube.com/watch?v=6nraNVPih9M&t=17s" target="_blank">talk</a> we will discuss the ramifications of product organizations relying on companion apps and how that effects the user experience of their hardware product. How can we build companion apps that build on top of the already great experience of the product and the struggle that imposing between privacy great experience and business.</p>
+    </div>
+    <div class="speaking-item">
       <h3>Real World AI @ UPMC</h3>
       <p class="date">May 2019</p>
       <p class="description">Spoke about the value of AI in the real world and some of the challenges that come with implementing them in a seemingly straightforward environment during our internal artificial intelligence talk series.</p>
