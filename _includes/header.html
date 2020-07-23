@@ -19,17 +19,17 @@
           {% endfor %}
         </div>
         <ul class="menu-links">
-          <div class="nav-item-container"><a class="nav" href="/index.html">Portfolio</a></div>
+          <li class="nav-item-container"><a class="nav" href="/index.html">Portfolio</a></li>
         {% for my_page in site.pages %}
           {% if my_page.exclude != "true" %}
             {% if my_page.title %}
-              <div class="nav-item-container"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></div>
+              <li class="nav-item-container"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></li>
             {% endif %}
           {% endif %}
         {% endfor %}
-        <div class="nav-item-container"><a class="nav" href="http://blog.rehanbutt.com">Blog</a></div>
-        <div class="nav-item-container"><a class="nav" href="http://resources.rehanbutt.com">Resources</a></div>
-        <div class="nav-item-container"><a class="nav" target="_blank" href="https://society6.com/rehanbutt">Store</a></div>
+        <li class="nav-item-container"><a class="nav" href="http://blog.rehanbutt.com">Blog</a></li>
+        <li class="nav-item-container"><a class="nav" href="http://resources.rehanbutt.com">Resources</a></li>
+        <li class="nav-item-container"><a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store</a></li>
         </ul>
       </div>
 
@@ -44,7 +44,7 @@
           {% endfor %}
           <a class="nav" href="http://blog.rehanbutt.com">Blog</a>
           <a class="nav" href="http://resources.rehanbutt.com">Resources</a>
-          <a class="nav" target="_blank" href="https://society6.com/rehanbutt">Store</a>
+          <a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store</a>
       </div>
       <div class="logo">
         <a href="{{ site.baseurl }}/">
