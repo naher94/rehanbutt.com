@@ -1,8 +1,14 @@
 //******* About Page Styling
+
+//Large only styling
+@media screen and (min-width: 64em) {
+  .profile-photo-container{
+    padding-right: 5rem;
+  }
+}
+
 .bio {
   font-size: 1rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
   font-weight: $lato-bold;
   h1{
     padding-left: 0;
