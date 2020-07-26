@@ -7,9 +7,11 @@ banner:
 date:   2017-01-25
 tags: Branding
 ---
-
-<div class="image-container"><img src="../img/tid/logo.png" alt="Final Logo" class="image-center" style="width:60%"/></div>
-
+<div class="grid-x align-center">
+  <div class="image-container cell medium-8">
+    <img src="../img/tid/logo.png" alt="Final Logo" class="image-center"/>
+  </div>
+</div>
 This past year the Masters of Tangible Interaction Design (MTID) program came back to Carnegie Mellon University. I was accepted into the Masters program with its reintroduction and I took it upon myself to brand the program and give it a platform to speak from. My goal was to showcase the different types of projects that the MTID students are working on, from installation pieces to virtual reality pieces and many projects in between. I also wanted to create a brand system that could be adapted for all types of media: print (static), web (static or animated), and interactive. I chose to express the diversity of projects through imagery of the work along with several shapes exploring different moods while maintaining the overall image through the consistent use of the ‘TiD’ logo.
 
 <div class="image-container"><img src="../img/tid/logo2.png" alt="Final Logo + Context"/></div>

@@ -7,8 +7,9 @@ banner:
 date:   2016-10-9
 tags: digital UI UX
 ---
-
-<div class="image-container"><img src="../img/appleNews/appIcon.png" alt="Logo" class="image-center" style="width:30%"/></div>
+<div class="grid-x align-center">
+<div class="image-container cell small-8 medium-6 large-4"><img src="../img/appleNews/appIcon.png" alt="Logo"/></div>
+</div>
 
 Apple News is a wonderful part of iOS. A clean place to follow all the news you want. But why hasn't it made its way over to MacOS? Wouldn't it be nice to have the same curated news experience on your Mac, rather than opening several browser tabs to get a similar experience? I thought so and decided to mockup what Apple News on MacOS could look like.
 

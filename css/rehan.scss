@@ -242,6 +242,10 @@ img {
   margin-bottom: 1em;
 }
 
+.illustration-callout{
+  margin: 2rem 0;
+}
+
 .post-header{
   h1{
     font-weight: $zilla-bold;
@@ -603,8 +607,7 @@ p, li, h3, #subTitle{
   width: 100%;
   font-size: 1.5em;
   color: $pure-white;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding: 1em;
   text-align: center;
   border-radius: $pill-radius;
   transition: $run;
@@ -915,8 +918,8 @@ footer{
 }
   .post-content{
     h2{
-      padding-left: 0.5em;
-      padding-right: 0.5em;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
       font-weight: $zilla-bold;
     }
   }
@@ -961,9 +964,16 @@ footer{
   }
   .post-content{
     h2{
-      padding-left: 0.5em;
-      padding-right: 0.5em;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
       font-weight: $zilla-bold;
+    }
+    h3, h4{
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+    h4{
+      margin-top: 0;
     }
   }
 

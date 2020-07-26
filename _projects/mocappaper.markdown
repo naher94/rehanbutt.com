@@ -23,9 +23,9 @@ As part of this project we were given a Grasshopper script in order to pull the 
 
 <!--Image of grasshopper script-->
 <!--picture of the tool-->
-<div class="grid-x">
-  <div class="small-6 cell"><img src="../img/mocapPaper/wanding.gif" alt="Wanding"/></div>
-  <div class="small-6 cell"><img src="../img/mocapPaper/wanding2.gif" alt="Wanding Output"/></div>
+<div class="grid-x grid-padding-y">
+  <div class="medium-6 cell"><img src="../img/mocapPaper/wanding.gif" alt="Wanding"/></div>
+  <div class="medium-6 cell"><img src="../img/mocapPaper/wanding2.gif" alt="Wanding Output"/></div>
 </div>
 <!--gif of the motion-->
 

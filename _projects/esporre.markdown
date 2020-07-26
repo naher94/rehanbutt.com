@@ -9,11 +9,13 @@ tags: web portfolio learning edtech
 
 <div class="image-container"><img src="../img/esporre/esporreLogo.svg" alt="Esporre Logo" class="image-center" style="width: 40%" /></div>
 
-<div style="margin-top: 60px">
-<a target="_blank" href="http://processly.io">
-    <div class="processlyButton contentButton"> Check out further development here
-    </div>
-</a>
+<div class="grid-x grid-padding-x" style="margin-top: 60px">
+  <div class="cell">
+    <a target="_blank" href="http://processly.io">
+        <div class="processlyButton contentButton"> Check out further development here
+        </div>
+    </a>
+</div>
 </div>
 
 Our challenge was to create an digital portfolio tool or system that some problem within the K-12 education system for project based learning. Esporre is our answer to this. We decided to tackle this by thinking of the transition from personal to promotional for high school students. An example of this transition could come in the form of working on a class project then continuing to develop it outside of the classroom and from there it lead to a great learning experince and something that the student would want to share with the world.

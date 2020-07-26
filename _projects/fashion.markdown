@@ -88,10 +88,13 @@ From our first 3D print we came across many problems that we then decided to use
 
 Some initial sketches we had done for the piece of the outfits that we wanted 3D printed.
 
-<div class="image-container">
-<img src="../img/fashion/fashionSketchbook.png" alt="SketchBook Sketches" class="image-center" style="width:70%" /></div>
+<div class="grid-x align-center">
+  <div class="cell image-container">
+  <img src="../img/fashion/fashionSketchbook.png" alt="SketchBook Sketches" class="image-center" /></div>
 
-<div class="image-container">
-<img src="../img/fashion/fashionInstagram.png" alt="Wearing Origami - Instagram" class="image-center" style="width:30%" /></div>
+  <div class="cell medium-6 image-container">
+  <img src="../img/fashion/fashionInstagram.png" alt="Wearing Origami - Instagram" class="image-center" /></div>
+</div>
+
 
 Something fun I came across on social media that one of our models posted :)

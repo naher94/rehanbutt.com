@@ -17,11 +17,13 @@ Interchange, a career event, was created as a way to help the graduate students 
 
 As this site will be used by many students, I templated and created a style guide throughout the site for a uniform look and feel. Keeping in mind the need for a variety of content types and optional information fields such as personal websites and resumes on the profile pages. I built the site using Jekyll to template each page and to automate the connection of pages such as people and their projects and tagging people with their degree program.
 
-<div>
-<a target="_blank" href="https://naher94.github.io/interchange">
-    <div class="interchangeButton contentButton"> Check out the site
-    </div>
-</a>
+<div class="grid-x grid-padding-x">
+  <div class="cell">
+    <a target="_blank" href="https://naher94.github.io/interchange">
+        <div class="interchangeButton contentButton"> Check out the site
+        </div>
+    </a>
+  </div>
 </div>
 
 <div class="image-container">
@@ -41,9 +43,11 @@ As this site will be used by many students, I templated and created a style guid
 <div class="image-container"><img src="../img/interchange/posterSeries.png" alt="Poster Series"/></div>
 <div class="image-container"><img src="../img/interchange/stickerTest.png" alt="Floor Sticker Test"/></div>
 
-<div>
+<div class="grid-x grid-padding-x">
+  <div class="cell">
 <a target="_blank" href="https://github.com/naher94/interchange">
     <div class="interchangeButton contentButton"> Check out the code
     </div>
 </a>
+</div>
 </div>
