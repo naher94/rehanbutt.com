@@ -10,7 +10,11 @@ featured: true
 tile-description: Bringing the Tesla experience to your wrist with Apple Watch
 ---
 
-<div class="image-container small-12 medium-8 medium-centered"><img src="../img/teslaWatchApp/complicationshero.png" alt="Complications Hero"/></div>
+<div class="grid-x align-center">
+  <div class="image-container cell small-11 medium-10">
+    <img src="../img/teslaWatchApp/complicationshero.png" alt="Complications Hero"/>
+  </div>
+</div>
 
 For one of the most tech-centric companies out there, especially within the automotive industry, you would hope Tesla would have an Apple Watch app in addition to the iOS application, but sadly they don’t. I wanted to do something about that and decided to design this experience for our wrists; all the essentials at a glance! Let’s make this a reality Elon!
 

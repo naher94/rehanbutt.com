@@ -7,7 +7,9 @@ date:   2016-03-01
 tags: digital app
 ---
 
-<div class="image-container"><img src="../img/colab/logo.svg" alt="Logo" class="image-center" style="width:25%"/></div>
+<div class="grid-x">
+  <div class="image-container cell"><img src="../img/colab/colabhero.png" alt="CoLab Logo and Hero Shot" class="image-center"/></div>
+</div>
 
 ## Problem
 

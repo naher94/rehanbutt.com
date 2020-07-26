@@ -6,8 +6,9 @@ thumbnail: "ideate"
 date:   2016-03-01
 tags: digital branding
 ---
-
-<div class="image-container"><img src="../img/ideate/logo.svg" alt="Final Logo" class="image-center" style="width:60%; margin-top: 50px; margin-bottom: 100px;"/></div>
+<div class="grid-x align-center">
+  <div class="image-container cell small-8 large-6"><img src="../img/ideate/logo.svg" alt="Final Logo" class="image-center" style="margin-bottom: 4rem;"/></div>
+</div>
 
 <div class="slideshow-container" style="margin-bottom:50px">
   <div class="gallery-asset fade"> <img src="../img/ideate/slide1.png" alt="The Idea" style="width:100%"> </div>

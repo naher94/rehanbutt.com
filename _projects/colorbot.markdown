@@ -22,18 +22,16 @@ In [Version (V1.0)](https://github.com/naher94/jasper/releases/tag/V1.0) Jasper 
 
 <div class="image-container" style="margin-top:50px;"><img src="../img/colorBot/conversation.png" alt="A full Conversation with Jasper"/></div>
 
-<div>
-<a target="_blank" href="https://github.com/naher94/jasper">
-    <div class="colorBotButton contentButton"> Check out the code
-    </div>
-</a>
+<div class="grid-x grid-padding-x grid-padding-y">
+  <div class="cell">
+    <a target="_blank" href="https://github.com/naher94/jasper">
+        <div class="colorBotButton contentButton"> Check out the code
+        </div>
+    </a>
+  </div>
 </div>
 
-<br><br>
-
 ## Process
-
-<br>
 
 | Effort/Priority | High   | Medium    | Low |
 | --------------- | ------ | -------   | --- |
@@ -53,7 +51,7 @@ In order to create a better bot experience, I wanted to make sure Jasper had som
 
 #### "Awesome sauce! Give me one second." "Coming right up!" "Enjoy your Inspiration!" "You there? Wonderful colors await you!" "Happy coloring! 🎨🎉" "I'm Jasper your friendly neighborhood color master"
 
-<div class="small-12 medium-6 large-6 columns image-container" style="margin-top:20px;"><img src="../img/colorBot/workflowDiagram.png" alt="Workflow Diagram"/></div>  
+<div class="small-12 medium-6 large-6 columns image-container" style="margin-top:20px;"><img src="../img/colorBot/workflowDiagram.png" alt="Workflow Diagram"/></div>
 
 <div class="small-12 medium-6 large-6 columns image-container" style="margin-top:20px; margin-bottom:50px;"><img src="../img/colorBot/workflowDiagramUpdated.png" alt="Workflow Diagram Updated"/></div>
 

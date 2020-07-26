@@ -16,15 +16,15 @@ A couple years ago I started creating a bunch of penguin illustrations, just bec
 
 After creating the penguin sticker pack, I decided to expand the stickers of my friend's dog, Naara, who has a huge following on Instagram. Follow her <a target="_blank" href="https://www.instagram.com/naara.thehusky/">here.</a> Enjoy!
 
-<div class="grid-x grid-margin-x">
-  <div class="cell small-6">
+<div class="grid-x grid-margin-x grid-margin-y">
+  <div class="cell medium-6">
     <a target="_blank" href="http://penguin.rehanbutt.com">
         <div class="stickerPackButton contentButton"> Check out the Penguin Stickers
         </div>
     </a>
   </div>
 
-  <div class="cell small-6">
+  <div class="cell medium-6">
     <a target="_blank" href="http://naara.rehanbutt.com">
         <div class="stickerPackButtonNaara contentButton"> Check out the Naara Stickers
         </div>

@@ -4,14 +4,13 @@ title: "About"
 permalink: about
 
 ---
-<div class="cell auto"></div>
-<div class="small-8 medium-4 cell small-centered medium-uncentered">
-  <img src="/img/rehan-full.png" style="width:100%">
-</div>
-<div class="cell auto"></div>
+<div class="grid-x align-center cell">
+  <div class="small-8 medium-4 cell profile-photo-container">
+    <img src="/img/rehan-full.png" alt="Photo of Rehan Butt">
+  </div>
 
 
-<div class="small-12 medium-7 columns">
+<div class="small-12 medium-12 large-8 cell">
   <section class="bio">
     <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
     <p>I am a <span class="rainbow">devzgner</span> <code>/devzīnər/</code>, designer + developer, currently based in Pittsburgh, PA, USA working on healthcare technology previously working with organizations like GE Healthcare & the NBA on consumer and enterprise applications.</p>
@@ -260,4 +259,6 @@ permalink: about
       <div class="skills-item">Laser Cutting</div>
     </div>
   </section>
+</div>
+
 </div>
