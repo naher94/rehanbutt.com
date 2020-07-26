@@ -141,6 +141,13 @@ ul {
     padding-top: 2rem;
     bottom: 0;
   }
+  @media screen and (max-width: 64em) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-top: 2rem;
+    bottom: 0;
+  }
 }
 
 .thumbnail-text-featured {
@@ -150,6 +157,9 @@ ul {
   font-weight: $zilla-bold;
   font-family: $zilla;
   @media screen and (max-width: 40em) {
+    font-size: 2em;
+  }
+  @media screen and (max-width: 64em) {
     font-size: 2em;
   }
   @media (prefers-color-scheme: dark) {
@@ -166,6 +176,9 @@ ul {
   font-family: $lato;
   @media screen and (max-width: 40em) {
     font-size: 1.4em;
+  }
+  @media screen and (max-width: 64em) {
+    font-size: 1.4rem;
   }
   @media (prefers-color-scheme: dark) {
     color: $pure-white-dark;
