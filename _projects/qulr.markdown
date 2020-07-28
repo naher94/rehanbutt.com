@@ -33,6 +33,13 @@ I wanted a better way to hold my colors. Collecting Post-its, swatch books and j
   <div class="small-6 medium-3 cell"><img src="../img/qulr/inspo4.gif" alt="Animation Inspiration"/></div>
 </div>
 
-<div class="image-container"><img src="../img/qulr/tileVariations.png" alt="Tile Variations"/></div>
+<div class="grid-x">
+  <div class="cell medium-6">
+    <img src="../img/qulr/tilevariationsmarmalade.png" alt="Tile Iterations Series">
+  </div>
+  <div class="cell medium-6">
+    <img src="../img/qulr/tilevariationsgrape.png" alt="Tile Iterations Series">
+  </div>
+</div>
 
 Several iterations of the cards I designed.
