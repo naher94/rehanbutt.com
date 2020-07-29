@@ -26,7 +26,7 @@ I’m a big fan of color and creating fun names for them. As such I started QULR
 
 I wanted a better way to hold my colors. Collecting Post-its, swatch books and just writing down color values was not a great solution.
 
-<div class="grid-x">
+<div class="grid-x grid-margin-y">
   <div class="small-6 medium-3 cell"><img src="../img/qulr/inspo1.gif" alt="Animation Inspiration"/></div>
   <div class="small-6 medium-3 cell"><img src="../img/qulr/inspo2.gif" alt="Animation Inspiration"/></div>
   <div class="small-6 medium-3 cell"><img src="../img/qulr/inspo3.gif" alt="Animation Inspiration"/></div>
@@ -41,5 +41,4 @@ I wanted a better way to hold my colors. Collecting Post-its, swatch books and j
     <img src="../img/qulr/tilevariationsgrape.png" alt="Tile Iterations Series">
   </div>
 </div>
-
 Several iterations of the cards I designed.
