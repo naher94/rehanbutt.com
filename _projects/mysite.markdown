@@ -2,7 +2,7 @@
 layout: post
 title:  "My Site"
 tile-name: "My Site"
-thumbnail: "mySite"
+thumbnail: "mysite"
 date:   2014-12-10
 tags: web branding
 ---
@@ -12,9 +12,11 @@ tags: web branding
     <img src="../img/mySite/mysitehero.png" alt="My site hero image: juxtaposition of the old and new">
   </div>
 </div>
-The goal with this new site was to make sure it was fully responsive and make sure it was clean in both design and development, as my site was when I originally published it with only 2 sections (portfolio and about). I used Jekyll and the Foundation CSS framework to develop this site. Jekyll helped to compartmentalize and template pages and the Foundation framework helped to create the responsiveness for all devices. From a development stand point I also decided to remove the javascript from my site in case it is being blocked by the user and to speed up the load time.
+{% capture bts-title %} Behind the Scenes {% endcapture %}
+{% capture bts-description %} If you are interested in looking at the old site its archived on the web at <a href="https://old.rehanbutt.com" target="_blank" rel="noopener">old.rehanbutt.com</a> feel free to explore the past and see how fair we have come! {% endcapture %}
+{% include behind-the-scenes.html %}
 
-With the refresh I also wanted to streamline my brand, specifically reduce the complexity of the graphic while keeping the reference of the logo to my name. One of the first elements I looked into was reducing the number or horizontal lines in the logo, then crisping up the corners by removing the chamfers.
+The goal with this new site was to make sure it was fully responsive and make sure it was clean in both design and development, as my site has grown quite a bit since it was first launched. There were many technical improvements as well that were made and of course it continues to evolve, check out the transformation over on <a target="_blank" href="https://github.com/naher94/rehanbutt.com" rel="noreferrer">github</a>. With the refresh I also wanted to streamline <a href="/mybrand">my brand</a> explore that project after this one to see the full picture.
 
 <div class="grid-x">
   <div class="cell">
@@ -31,28 +33,6 @@ With the refresh I also wanted to streamline my brand, specifically reduce the c
 </div>
 
 ## Process
-
-<div class="grid-x">
-  <div class="cell medium-6">
-    <img src="../img/mySite/sitesketches1.jpg" alt="Sketches of Page Layout and Logo Iterations">
-  </div>
-  <div class="cell medium-6">
-    <img src="../img/mySite/sitesketches2.jpg" alt="Sketches of Logo Iternations">
-  </div>
-</div>
-
-<div class="grid-x">
-  <div class="cell">
-    <img src="../img/mySite/iterations.svg" alt="High Fidelity Logo Iterations"/>
-  </div>
-  <div class="cell">
-    <img src="../img/mySite/logoHorizontal.svg" alt="High Fidelity Logo Iteration Exploring horizontal alignment" />
-  </div>
-  <div class="cell">
-    <img src="../img/mySite/iterationDetails.svg" alt="High Fidelity Logo Detailing" />
-  </div>
-</div>
-In order to reduce the number of horizontal lines I had to either slide the middle segment of the “E” down or move the “R” horizontal up. I decided to slide the “E” segment down so that I did not mess with the curvature of the “R”.
 
 <div class="grid-x align-center grid-padding-x grid-padding-y">
   <div class="cell medium-8">
