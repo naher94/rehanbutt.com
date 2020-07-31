@@ -12,6 +12,10 @@ tags: web branding
     <img src="../img/mySite/mysitehero.png" alt="My site hero image: juxtaposition of the old and new">
   </div>
 </div>
+{% capture bts-title %} Behind the Scenes {% endcapture %}
+{% capture bts-description %} If you are interested in looking at the old site its archived on the web at <a href="https://old.rehanbutt.com" target="_blank">old.rehanbutt.com</a> feel free to explore the past and see how fair we have come! {% endcapture %}
+{% include behind-the-scenes.html %}
+
 The goal with this new site was to make sure it was fully responsive and make sure it was clean in both design and development, as my site was when I originally published it with only 2 sections (portfolio and about). I used Jekyll and the Foundation CSS framework to develop this site. Jekyll helped to compartmentalize and template pages and the Foundation framework helped to create the responsiveness for all devices. From a development stand point I also decided to remove the javascript from my site in case it is being blocked by the user and to speed up the load time.
 
 With the refresh I also wanted to streamline my brand, specifically reduce the complexity of the graphic while keeping the reference of the logo to my name. One of the first elements I looked into was reducing the number or horizontal lines in the logo, then crisping up the corners by removing the chamfers.
