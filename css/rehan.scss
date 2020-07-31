@@ -305,6 +305,11 @@ img {
   display: flex !important;
 }
 
+.teal-container{
+  background-color: $signature-teal;
+  padding: 10rem 0;
+}
+
 .easter-egg-banner-container{
   display: none; // Do be handled with JS on Konami Entry
   position: sticky;
@@ -347,8 +352,38 @@ img {
         background-color: $signature-teal-hover;
       }
     }
+    .easter-egg-number{
+      font-size: 2rem;
+      font-weight: $lato-black;
+    }
+    .button-close{
+      font-size: 2rem;
+      line-height: 1rem;
+      padding: 1rem;
+    }
   }
 }
+
+.paddington{
+  position: absolute;
+  width: 10rem;
+  transition: $run;
+  &.bear-1{
+    left: -5rem;
+    transform: rotate(-5deg);
+    &:hover{
+      transform: rotate(-5deg) scale(1.1);
+    }
+    @media screen and (max-width: 40em) {
+      left: 1rem;
+    }
+  }
+  @media screen and (max-width: 40em) {
+    width: 6rem;
+  }
+}
+
+
 
 iframe {
   height: 600px;
@@ -394,6 +429,12 @@ header{
   float: right;
   img{
     height: 50px;
+    transition: $sprint;
+    &:hover{
+      transform: rotate(3deg) scale(1.1);
+      // transform: translateY(-5px);
+      // transform: scale(1.05);
+    }
   }
 }
 
@@ -825,8 +866,7 @@ footer{
         color: $pure-white-dark;
       }
       &:hover{
-        background-color: rgba($navy-black, 0.80);
-        color: mix($navy-black, $pure-white, 15%);
+        background-color: rgba($navy-black, 0.20);
         transition: color 0.2s ease-in-out;
       }
       @media screen and (max-width: 40em) {
