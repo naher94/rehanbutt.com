@@ -2,7 +2,7 @@
 layout: post
 title:  "My Site"
 tile-name: "My Site"
-thumbnail: "mysiteIMAGE"
+thumbnail: "mysite"
 date:   2014-12-10
 tags: web branding
 ---
