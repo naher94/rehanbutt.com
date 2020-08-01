@@ -12,9 +12,13 @@ tile-description: Bringing the Tesla experience to your wrist with Apple Watch
 
 <div class="grid-x align-center">
   <div class="image-container cell small-11 medium-10">
-    <img src="../img/teslaWatchApp/complicationshero.png" alt="Complications Hero"/>
+    <img onclick="carHorn()" src="../img/teslaWatchApp/complicationshero.png" alt="Complications Hero" usemap="#image-map"/>
+    <map name="image-map">
+      <area class="car-horn" coords="1137,526,1199,618" shape="rect">
+    </map>
   </div>
 </div>
+
 
 For one of the most tech-centric companies out there, especially within the automotive industry, you would hope Tesla would have an Apple Watch app in addition to the iOS application, but sadly they don’t. I wanted to do something about that and decided to design this experience for our wrists; all the essentials at a glance! Let’s make this a reality Elon!
 

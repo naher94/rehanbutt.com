@@ -23,6 +23,7 @@ var keyHandler = function (event) {
 		current = 0;
     isEggVisable = true;
     localStorage.setItem("eggKey", isEggVisable);
+		localStorage.setItem("behindTheScenesEasterEgg", true);
     setBTS();
 	}
 
@@ -60,7 +61,18 @@ function unsetBTS(){
 
 }
 
+function carHorn(){
+	var audio = new Audio('carhorn.mp3');
+	audio.play();
+	localStorage.setItem("carHornEasterEgg", true);
+}
+
+function isBadge() {
+	//If the local storage value for each badge is true show the badge in the footer tray
+}
+
 isEgg();
+isBadge();
 
 // Listen for keydown events
 document.addEventListener('keydown', keyHandler, false);
