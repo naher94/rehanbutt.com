@@ -846,6 +846,22 @@ p, li, h3, #subTitle{
   opacity: 0.5;
 }
 
+.logo-footer-container{
+  .ship-it{
+    height: 3.3rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    visibility: hidden;
+    order: -1;
+  }
+  .logo-footer{
+    &:hover{
+      ~ .ship-it{
+          visibility: visible;
+      }
+    }
+  }
+}
 
 @keyframes ufo-animation {
     0% { transform: translatey(0) rotate(12.0deg)}
