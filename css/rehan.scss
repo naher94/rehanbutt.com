@@ -431,7 +431,8 @@ header{
     height: 50px;
     transition: $sprint;
     &:hover{
-      transform: rotate(3deg) scale(1.1);
+      // transform: rotate(3deg) scale(1.1);
+      transform: scale(1.1);
       // transform: translateY(-5px);
       // transform: scale(1.05);
     }
@@ -844,12 +845,69 @@ p, li, h3, #subTitle{
 .social:hover {
   opacity: 0.5;
 }
+
+
+@keyframes ufo-animation {
+    0% { transform: translatey(0) rotate(12.0deg)}
+   60% { transform: translatey(-4px) rotate(12.0deg)}
+  100% { transform: translatey(0) rotate(12.0deg)}
+}
+
 footer{
   margin-top: 50px;
   background-color: rgba($navy-black, 0.15);
   color: rgba($navy-black, 0.80);
-  padding-top: 50px;
   padding-bottom: 40px;
+  position: relative;
+  .footer-content{
+    padding-top: 50px;
+  }
+  .spaceship{
+    position: absolute;
+    top: -2.2rem;
+    font-size: 3rem;
+    animation-name: ufo-animation;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+  .vault-wrapper{
+    background-color: $navy-black;
+    color: $pure-white;
+    .vault{
+      display: none;
+      h2{
+        font-weight: $zilla-bold;
+      }
+      p{
+        padding: 0;
+        margin: 0;
+      }
+      input[type=text]{
+        border-radius: 2rem;
+        margin-top: 2rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        &::placeholder{
+          font-style: italic;
+          font-weight: $lato-bold;
+        }
+      }
+      label{
+        display: none;
+      }
+    }
+  }
+  .spaceship-btn{
+    display: none;
+    &:checked{
+      &~.vault{
+        display: block;
+        margin: 3rem 0;
+      }
+    }
+  }
+
   @media (prefers-color-scheme: dark) {
       background-color: $navy-black-dark;
       color: $pure-white-dark;
@@ -902,7 +960,7 @@ footer{
   }
   @media screen and (max-width: 40em) {
     margin-top: .5em;
-    padding-top: 25px;
+    // padding-top: 25px;
     padding-bottom: 20px;
     // font-size: 1.8em;
   }
