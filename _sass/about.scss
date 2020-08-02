@@ -58,6 +58,24 @@
   }
 }
 
+.future-event{
+  h3{
+    display: inline;
+  }
+  span{
+    color: $pure-white;
+    background-color: $signature-teal;
+    border-radius: $pill-radius;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7em;
+    font-weight: $lato-black;
+    margin-left: 0.5rem;
+    &:hover{
+      background-color: $signature-teal-hover;
+    }
+  }
+}
+
 .work-experience, .speaking-events, .education, .skills, .tools{
   &:not(first-of-type){
     margin-top: 2em;
