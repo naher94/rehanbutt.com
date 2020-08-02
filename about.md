@@ -105,10 +105,15 @@ permalink: about
 
   <section class="speaking-events">
     <h2>Speaking Events</h2>
+    <div class="speaking-item future-event">
+      <a target="_blank" rel="noopener" href="https://uxhealthcare.co/video-conference-live-usa-2020/"><h3>From Form Fields to Ship It: How Not to Design System</h3><span>Upcoming</span></a>
+      <p class="date">August 26th 2020</p>
+      <p class="description">Building a design system is very trendy, but when is it the right time to conceptualize, design and execute on a system for use across a product and an organization. Given the context of both new products and legacy products in the same ecosystem, this talk will explore the lessons learned and some best strategies for building a design system.</p>
+    </div>
     <div class="speaking-item">
-      <h3>Why Does Everything Need n App?</h3>
+      <h3>Why Does Everything Need an App?</h3>
       <p class="date">May 2020</p>
-      <p class="description">Why is it that everything need an app from toasters to skateboards? During this <a href="https://www.youtube.com/watch?v=6nraNVPih9M&t=17s" target="_blank">talk</a> we will discuss the ramifications of product organizations relying on companion apps and how that effects the user experience of their hardware product. How can we build companion apps that build on top of the already great experience of the product and the struggle that imposing between privacy great experience and business.</p>
+      <p class="description">Why is it that everything need an app from toasters to skateboards? During this <a href="https://www.youtube.com/watch?v=6nraNVPih9M&t=17s" target="_blank" rel="noopener">talk</a> we will discuss the ramifications of product organizations relying on companion apps and how that effects the user experience of their hardware product. How can we build companion apps that build on top of the already great experience of the product and the struggle that imposing between privacy great experience and business.</p>
     </div>
     <div class="speaking-item">
       <h3>Real World AI @ UPMC</h3>
@@ -162,12 +167,12 @@ permalink: about
       </div>
       <h3>AIA Build Pittsburgh</h3>
       <p class="date">April 2017</p>
-      <p class="description">Presented ‘<a target="_blank" href="https://dzgn.io/works/ux-architecture.html">UI/UX Design and Architecture</a>: Leveraging Web Technologies for and by Architects’ sharing common interests and workflows between these industries and some opportunities for both industries to adopt from one another.</p>
+      <p class="description">Presented ‘<a target="_blank" rel="noopener" href="https://dzgn.io/works/ux-architecture.html">UI/UX Design and Architecture</a>: Leveraging Web Technologies for and by Architects’ sharing common interests and workflows between these industries and some opportunities for both industries to adopt from one another.</p>
     </div>
     <div class="speaking-item">
       <h3>HTTParty: A Workshop Series</h3>
       <p class="date">March 2017</p>
-      <p class="description">Explored the basics of <a target="_blank" href="https://dzgn.io/works/httparty.html">UI/UX design and web development</a>, with the Dzgn.IO team. Looking at the origins of the web and have to leverage constraint for your designs.</p>
+      <p class="description">Explored the basics of <a target="_blank" rel="noopener" href="https://dzgn.io/works/httparty.html">UI/UX design and web development</a>, with the Dzgn.IO team. Looking at the origins of the web and have to leverage constraint for your designs.</p>
     </div>
     <div class="speaking-item">
       <h3>Personal Branding: Sharing a Story Through Your Work</h3>
