@@ -431,10 +431,8 @@ header{
     height: 50px;
     transition: $sprint;
     &:hover{
-      // transform: rotate(3deg) scale(1.1);
       transform: scale(1.1);
-      // transform: translateY(-5px);
-      // transform: scale(1.05);
+      // animation: boing 300ms ease-out;
     }
   }
 }
@@ -845,7 +843,8 @@ p, li, h3, #subTitle{
 }
 
 .social:hover {
-  opacity: 0.5;
+  color: rgba($navy-black, 0.40);
+  animation: boing 300ms ease-out;
 }
 
 .logo-footer-container{
@@ -858,8 +857,10 @@ p, li, h3, #subTitle{
   }
   .logo-footer{
     &:hover{
+      animation: boing 300ms ease-out;
       ~ .ship-it{
-          visibility: visible;
+        visibility: visible;
+        animation: boing 300ms ease-out;
       }
     }
   }
