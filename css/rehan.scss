@@ -831,11 +831,13 @@ p, li, h3, #subTitle{
 //******* Footer Styling
 
 .social {
-  width: 3em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  // width: 3em;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  font-size: 2em;
+  color: rgba($navy-black, 0.80);
   @media screen and (max-width: 40em){
-    font-size: 0.7em;
+    font-size: 1.5em;
   }
   @media (prefers-color-scheme: dark) {
     filter: contrast(20%);
