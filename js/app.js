@@ -1,11 +1,14 @@
 // $(document).foundation();
 
+// I see you snooping in the code 😉, trying to bypass the hunt of finding all the easter eggs? That's no fun, on the flip side you found another easter egg.. SO YAY!
+
+// Create and set a localStorage variable "codeSnoopingEasterEgg" to true to claim your badge
+
+
+
 // Easter egg code
 var pattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 var current = 0;
-
-// var isEggVisable = false;
-// localStorage.setItem("eggKey", isEggVisable);
 
 var keyHandler = function (event) {
 
@@ -67,8 +70,65 @@ function carHorn(){
 	localStorage.setItem("carHornEasterEgg", true);
 }
 
+function paddington(){
+	paddingtonAdd()
+	//reveal all paddington bears
+
+	//Set this when all Paddingtons are clicked
+	if (localStorage.getItem("paddingtonCounter") >= 6) {
+		localStorage.setItem("paddingtonEasterEgg", true);
+	}
+}
+
+function paddingtonAdd(){
+	console.log("in the add paddington function");
+	var count = localStorage.getItem("paddingtonCounter")
+	var newCount = parseInt(count) + 1;
+	console.log(newCount);
+	localStorage.setItem("paddingtonCounter", newCount);
+}
+
+function showPaddingtons(){
+	//this will show all the paddington bears across the site
+}
+
 function isBadge() {
+	var badgeContainerElement = document.getElementById("badge-container");
 	//If the local storage value for each badge is true show the badge in the footer tray
+	if (localStorage.getItem("behindTheScenesEasterEgg") == "true") {
+		let string_of_html = `
+			<div class="cell small-3 large-2">
+				<img src="../img/badges/behindthescenes.png" alt="Behind the Scenes Badge">
+				<p>Behind the Scenes Easter Egg</p>
+			</div>
+		`;
+		badgeContainerElement.innerHTML += string_of_html;
+  }
+	if (localStorage.getItem("carHornEasterEgg") == "true") {
+		let string_of_html = `
+			<div class="cell small-3 large-2">
+				<img src="../img/badges/carhorn.png" alt="Car Horn Badge">
+				<p>Car Horn Easter Egg</p>
+			</div>
+		`;
+		badgeContainerElement.innerHTML += string_of_html;
+  }
+	if (localStorage.getItem("paddingtonEasterEgg") == "true") {
+		let string_of_html = `
+			<div class="cell small-3 large-2">
+				<img src="../img/badges/paddington.png" alt="Paddington Badge">
+			</div>
+		`;
+		badgeContainerElement.innerHTML += string_of_html;
+  }
+	if (localStorage.getItem("codeSnoopingEasterEgg") == "true") {
+		let string_of_html = `
+			<div class="cell small-3 large-2">
+				<img src="../img/badges/code.png" alt="Code Snooping Badge">
+			</div>
+		`;
+		badgeContainerElement.innerHTML += string_of_html;
+  }
 }
 
 isEgg();
@@ -76,6 +136,3 @@ isBadge();
 
 // Listen for keydown events
 document.addEventListener('keydown', keyHandler, false);
-
-
-// Need to be able to unset the the eggKey value and remove the injected style tag
