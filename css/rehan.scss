@@ -431,10 +431,8 @@ header{
     height: 50px;
     transition: $sprint;
     &:hover{
-      // transform: rotate(3deg) scale(1.1);
       transform: scale(1.1);
-      // transform: translateY(-5px);
-      // transform: scale(1.05);
+      // animation: boing 300ms ease-out;
     }
   }
 }
@@ -831,19 +829,62 @@ p, li, h3, #subTitle{
 //******* Footer Styling
 
 .social {
-  width: 3em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  // width: 3em;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  font-size: 2em;
+  color: rgba($navy-black, 0.80);
   @media screen and (max-width: 40em){
-    font-size: 0.7em;
+    font-size: 1.5em;
   }
   @media (prefers-color-scheme: dark) {
     filter: contrast(20%);
   }
+  &:hover {
+    color: rgba($navy-black, 0.40);
+    animation: boing 300ms ease-out;
+  }
 }
 
-.social:hover {
-  opacity: 0.5;
+.fa-envelope{
+  &:hover{
+    color: $signature-teal;
+  }
+}
+.fa-dribbble{
+  &:hover{
+    color: #ea4c89;
+  }
+}
+.fa-pinterest{
+  &:hover{
+    color: #e60023;
+  }
+}
+.fa-linkedin-in{
+  &:hover{
+    color: #2867B2;
+  }
+}
+.fa-instagram{
+  &:hover{
+    color: #C13584;
+  }
+}
+.fa-twitter{
+  &:hover{
+    color: #1DA1F2;
+  }
+}
+.fa-github{
+  &:hover{
+    color: #6f42c1;
+  }
+}
+.fa-500px{
+  &:hover{
+    color: #34bf49;
+  }
 }
 
 .logo-footer-container{
@@ -856,8 +897,10 @@ p, li, h3, #subTitle{
   }
   .logo-footer{
     &:hover{
+      animation: boing 300ms ease-out;
       ~ .ship-it{
-          visibility: visible;
+        visibility: visible;
+        animation: boing 300ms ease-out;
       }
     }
   }
@@ -929,7 +972,7 @@ footer{
       color: $pure-white-dark;
     }
   .site-pages{
-    margin-bottom: 20px;
+    margin-bottom: 36px;
     padding-left: 0;
     padding-right: 0;
     .nav{
