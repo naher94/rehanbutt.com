@@ -840,11 +840,51 @@ p, li, h3, #subTitle{
   @media (prefers-color-scheme: dark) {
     filter: contrast(20%);
   }
+  &:hover {
+    color: rgba($navy-black, 0.40);
+    animation: boing 300ms ease-out;
+  }
 }
 
-.social:hover {
-  color: rgba($navy-black, 0.40);
-  animation: boing 300ms ease-out;
+.fa-envelope{
+  &:hover{
+    color: $signature-teal;
+  }
+}
+.fa-dribbble{
+  &:hover{
+    color: #ea4c89;
+  }
+}
+.fa-pinterest{
+  &:hover{
+    color: #e60023;
+  }
+}
+.fa-linkedin-in{
+  &:hover{
+    color: #2867B2;
+  }
+}
+.fa-instagram{
+  &:hover{
+    color: #C13584;
+  }
+}
+.fa-twitter{
+  &:hover{
+    color: #1DA1F2;
+  }
+}
+.fa-github{
+  &:hover{
+    color: #6f42c1;
+  }
+}
+.fa-500px{
+  &:hover{
+    color: #34bf49;
+  }
 }
 
 .logo-footer-container{
