@@ -22,12 +22,14 @@
     <meta property="og:image" content="
     {% if page.thumbnail %}{{ page.thumbnail | append: '.png' | prepend: '/img/thumbnails/' | prepend: site.baseurl | prepend: site.url }}{% else %}{{ "/img/favicon.png" | prepend: site.baseurl | prepend: site.url }}{% endif %}" />
 
+
     <link rel="stylesheet" href="{{" /css/foundation.css" | prepend: site.baseurl }}"/>
     <link rel="stylesheet" href="{{" /css/gallery.css" | prepend: site.baseurl }}"/>
     <link rel="stylesheet" href="{{" /css/emoji.css" | prepend: site.baseurl }}"/>
     <link rel="stylesheet" href="{{" /css/rehan.css" | prepend: site.baseurl }}"/>
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
+  <script src="https://kit.fontawesome.com/02150f0422.js" crossorigin="anonymous"></script>
   <script type="application/ld+json">
   {
     "@context": "http://schema.org",
