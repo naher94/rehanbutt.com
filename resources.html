@@ -1,0 +1,46 @@
+---
+layout: default
+title: "Resources"
+permalink: resources
+
+---
+<header class="resource-header">
+  <h1>Resources</h1>
+  <p>A bunch of resources and references curated by me, with the goal to help others learn something new. For more frequent bursts of resources and other related content join me over on <a target="_blank" rel="noopener" href="https://twitter.com/naher94/">twitter</a>.</p>
+</header>
+
+<!-- collect all the unique tags from the resources -->
+{% assign alltags = site.resources | map: "tags" | uniq | sort %}
+<section class="cell tag-section">
+
+<h2>Categories</h2>
+<div class="tags-container cell">
+  {% for tag in alltags %}
+    <a href="#{{tag}}">
+      <div class="tag">
+        {{ tag }}
+      </div>
+    </a>
+  {% endfor %}
+</div>
+
+</section>
+
+<!-- bundle based on tag -->
+<!-- have a pinned section at the top -->
+
+{% for tag in alltags %}
+  <section class="tag-group grid-x grid-padding-x grid-padding-y cell medium-12" id="{{tag}}">
+  <h3 class="cell">#{{tag}}</h3>
+  {% for resource in site.resources %}
+    {% if resource.tags contains tag %}
+    <a href="{{resource.link}}" target="_blank" rel="noreferrer" class="cell medium-6 large-4 resource-link">
+      <div class="resource">
+        <p class="title">{{resource.title}}<i class="fas fa-link"></i></p>
+        <p class="description">{{resource.description}}</p>
+      </div>
+    </a>
+    {% endif %}
+  {% endfor %}
+  </section>
+{% endfor %}
