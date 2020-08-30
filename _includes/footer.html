@@ -26,12 +26,12 @@
           <div class="site-pages auto cell">
             <a class="nav" href="/index.html">Portfolio</a>
             {% for my_page in site.pages %}
-              {% if my_page.title == "About" %}
-                <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+              {% if my_page.exclude != "true" %}
+                {% if my_page.title %}
+                  <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+                {% endif %}
               {% endif %}
             {% endfor %}
-            <a class="nav" href="http://blog.rehanbutt.com">Blog</a>
-            <a class="nav" href="http://resources.rehanbutt.com">Resources</a>
             <a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store</a>
           </div>
           <div class="social-container auto cell">
