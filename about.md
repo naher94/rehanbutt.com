@@ -106,8 +106,8 @@ permalink: about
   <section class="speaking-events">
     <h2>Speaking Events</h2>
     <div class="speaking-item future-event">
-      <a target="_blank" rel="noopener" href="https://uxhealthcare.co/video-conference-live-usa-2020/"><h3>From Form Fields to Ship It: How Not to Design System</h3><span>Upcoming</span></a>
-      <p class="date">August 26th 2020</p>
+      <a target="_blank" rel="noopener" href="https://uxhealthcare.co/video-conference-live-usa-2020/"><h3>From Form Fields to Ship It: How Not to Design System</h3></a>
+      <p class="date">August 2020</p>
       <p class="description">Building a design system is very trendy, but when is it the right time to conceptualize, design and execute on a system for use across a product and an organization. Given the context of both new products and legacy products in the same ecosystem, this talk will explore the lessons learned and some best strategies for building a design system.</p>
     </div>
     <div class="speaking-item">
