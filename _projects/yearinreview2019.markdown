@@ -9,5 +9,4 @@ date: 2019-12-31
 tags: digital UI UX
 featured:
 tile-description: "2019 through my eyes"
-
 ---

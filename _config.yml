@@ -23,5 +23,5 @@ collections:
     output: true
     permalink: /:path
   resources:
-    output: true
+    output: false
     permalink: /resources/:path

@@ -46,13 +46,13 @@ With the refresh I also wanted to streamline my brand, specifically reduce the c
     <img src="../img/mybrand/iterations.svg" alt="High Fidelity Logo Iterations"/>
   </div>
   <div class="cell">
-    <img src="../img/mybrand/logoHorizontal.svg" alt="High Fidelity Logo Iteration Exploring horizontal alignment" />
+    <img src="../img/mybrand/logohorizontal.svg" alt="High Fidelity Logo Iteration Exploring horizontal alignment" />
   </div>
 </div>
 In order to reduce the number of horizontal lines I had to either slide the middle segment of the “E” down or move the “R” horizontal up. I decided to slide the “E” segment down so that I did not mess with the curvature of the “R”.
 
 <div class="grid-x">
   <div class="cell">
-    <img src="../img/mybrand/iterationDetails.svg" alt="High Fidelity Logo Detailing" />
+    <img src="../img/mybrand/iterationdetails.svg" alt="High Fidelity Logo Detailing" />
   </div>
 </div>
