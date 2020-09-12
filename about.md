@@ -105,96 +105,46 @@ permalink: about
 
   <section class="speaking-events">
     <h2>Speaking Events</h2>
-    <div class="speaking-item future-event">
-      <a target="_blank" rel="noopener" href="https://uxhealthcare.co/video-conference-live-usa-2020/"><h3>From Form Fields to Ship It: How Not to Design System</h3></a>
-      <p class="date">August 2020</p>
-      <p class="description">Building a design system is very trendy, but when is it the right time to conceptualize, design and execute on a system for use across a product and an organization. Given the context of both new products and legacy products in the same ecosystem, this talk will explore the lessons learned and some best strategies for building a design system.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Why Does Everything Need an App?</h3>
-      <p class="date">May 2020</p>
-      <p class="description">Why is it that everything need an app from toasters to skateboards? During this <a href="https://www.youtube.com/watch?v=6nraNVPih9M&t=17s" target="_blank" rel="noopener">talk</a> we will discuss the ramifications of product organizations relying on companion apps and how that effects the user experience of their hardware product. How can we build companion apps that build on top of the already great experience of the product and the struggle that imposing between privacy great experience and business.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Real World AI @ UPMC</h3>
-      <p class="date">May 2019</p>
-      <p class="description">Spoke about the value of AI in the real world and some of the challenges that come with implementing them in a seemingly straightforward environment during our internal artificial intelligence talk series.</p>
-    </div>
-    <div class="speaking-item">
-      <div class="brand-logo-container" id="ces">
-        <img class="brand-logo" src="/img/ces-logo.svg" alt="CES Logo">
+
+    {% assign event_order = site.speaking | sort: 'date' | reverse %}
+    {% for event in event_order %}
+
+    {% assign current_date = 'now' | date: "%s" %}
+    {% assign event_date = event.date | date: "%s" %}
+    <div class="speaking-item
+    {% if event_date > current_date %}
+    future-event
+    {% endif %}
+    "> <!-- adding future-event class here -->
+      {% if event.logo %}
+      <div class="brand-logo-container" id="{{event.logo}}">
+        <img class="brand-logo" src="/img/{{event.logo}}-logo.svg" alt="{{event.logo}} Logo">
       </div>
-      <h3>Processly @ CES</h3>
-      <p class="date">January 2019</p>
-      <p class="description">Spoke about the value of Processly in both an educational and corporate setting bringing distributed teams together through the use of Processly’s online whiteboard, Sandbox.</p>
+      {% endif %}
+
+
+      <h3>
+        {{event.title}}
+
+        <!-- Add a if for future event -->
+        {% if event_date > current_date %}
+        <span>Upcoming</span>
+        {% endif %}
+
+        {% if event.link %}
+          <a href="{{event.link}}"><i class="fas fa-link"></i></a>
+        {% endif %}
+      </h3>
+      <p class="date">{{event.date| date: "%B %Y" }}
+        {% if event.location %}
+        ・ {{event.location}}
+        {% endif %}
+      </p>
+      <p class="description">{{event.description}}</p>
     </div>
-    <div class="speaking-item">
-      <h3>Processly in the Classroom</h3>
-      <p class="date">October 2018</p>
-      <p class="description">Presented the value of Processly to educators and other education stakeholders, explaining how it would work for a variety of teaching styles and grade levels, middle school high school and higher education.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Processly, From an Idea to a Product</h3>
-      <p class="date">April 2018</p>
-      <p class="description">Spoke to the group about what it means to be a young entrepreneur. Finding a problem you are passionate about solving and how you turn that passion into a business. Building a product and putting in the hands of your customer.</p>
-    </div>
-    <div class="speaking-item">
-      <div class="brand-logo-container" id="ucla">
-        <img class="brand-logo" src="/img/ucla-logo.svg" alt="UCLA Logo">
-      </div>
-      <h3>Careers in UX @ UCLA</h3>
-      <p class="date">April 2018</p>
-      <p class="description">Spoke about the current landscape of user experience design, what it means and where I see the field going as well as how to get into the field coming from a non-design background.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Starting a Company as a Student</h3>
-      <p class="date">March 2018</p>
-      <p class="description">Spoke to the entrepreneurship class about what it means to be a young entrepreneur. Finding a problem you are passionate about solving and how you turn that passion into a business.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Personal Branding: Sharing a Story Through Your Work</h3>
-      <p class="date">February 2018</p>
-      <p class="description">Spoke to the group about what it means to create a personal brand identity. Talking about visual identity and creating a brand system that can be portrayed throughout their work. As well as having a design critique around existing student brands.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Processly @ Three Rivers Educational Technology Conference</h3>
-      <p class="date">November 2017</p>
-      <p class="description">Presented the value of Processly to educators and other education stakeholders, explaining how it would work for a variety of teaching styles and grade levels, middle school high school and higher education.</p>
-    </div>
-    <div class="speaking-item">
-      <div class="brand-logo-container" id="aia">
-        <img class="brand-logo" src="/img/aia-logo.svg" alt="American Institute of Architects Logo">
-      </div>
-      <h3>AIA Build Pittsburgh</h3>
-      <p class="date">April 2017</p>
-      <p class="description">Presented ‘<a target="_blank" rel="noopener" href="https://dzgn.io/works/ux-architecture.html">UI/UX Design and Architecture</a>: Leveraging Web Technologies for and by Architects’ sharing common interests and workflows between these industries and some opportunities for both industries to adopt from one another.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>HTTParty: A Workshop Series</h3>
-      <p class="date">March 2017</p>
-      <p class="description">Explored the basics of <a target="_blank" rel="noopener" href="https://dzgn.io/works/httparty.html">UI/UX design and web development</a>, with the Dzgn.IO team. Looking at the origins of the web and have to leverage constraint for your designs.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Personal Branding: Sharing a Story Through Your Work</h3>
-      <p class="date">October 2016</p>
-      <p class="description">Spoke to the group about what it means to create a personal brand identity. Talking about visual identity as well as the bigger brand system that can be portrayed throughout all of their work and what it means to convey a project narrative.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Design @ YinzCam</h3>
-      <p class="date">September 2016</p>
-      <p class="description">Shared what it was like working on cutting edge technology project within the sports industry. The risk, challenges and rewards of having hundreds of thousands of people using your product.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Portfolio Hack-a-thon</h3>
-      <p class="date">April 2015</p>
-      <p class="description">A workshop helping students learn to design and build their own portfolios, a digital showcase of their work. Defining the narrative and the structure of their work then diving into the development of the details.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>WebDevWeekend: Intro to HTML & CSS</h3>
-      <p class="date">April 2015</p>
-      <p class="description">Introduced the basics of web development to the group. Showcased the foundations of a website, HTML and CSS the role they play in building and design a web presence.</p>
-    </div>
+    {% endfor %}
   </section>
+
   <section class="education">
     <h2>Education</h2>
     <div class="education-item">
@@ -202,12 +152,12 @@ permalink: about
         <img class="brand-logo" src="/img/cmu-logo.svg" alt="Carnegie Mellon University Logo">
       </div>
       <h3>Carnegie Mellon University</h3>
-      <p class="date">2016・2018</p>
+      <!-- <p class="date">2016・2018</p> -->
       <p class="description">Masters in Tangible Interaction Design</p>
     </div>
     <div class="education-item">
       <h3>Carnegie Mellon University</h3>
-      <p class="date">2012・2016</p>
+      <!-- <p class="date">2012・2016</p> -->
       <p class="description">Bachelors in the Integrative Physical and Digital Media Studies</p>
     </div>
     <div class="education-item">
@@ -215,7 +165,7 @@ permalink: about
         <img class="brand-logo" src="/img/nus-logo.svg" alt="National University of Singapore Logo">
       </div>
       <h3>National University of Singapore</h3>
-      <p class="date">June 2013・August 2013</p>
+      <!-- <p class="date">June 2013・August 2013</p> -->
       <p class="description">Design Certificate Program - Designing for Active Aging</p>
     </div>
   </section>
