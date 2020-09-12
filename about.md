@@ -112,29 +112,34 @@ permalink: about
     {% assign current_date = 'now' | date: "%s" %}
     {% assign event_date = event.date | date: "%s" %}
     <div class="speaking-item
-    {% if event_date > current_date %}
-    future-event
-    {% endif %}
-    "> <!-- adding future-event class here -->
+      {% if event_date > current_date %}
+        future-event
+      {% endif %}
+    "> <!-- adding future-event class -->
       {% if event.logo %}
       <div class="brand-logo-container" id="{{event.logo}}">
         <img class="brand-logo" src="/img/{{event.logo}}-logo.svg" alt="{{event.logo}} Logo">
       </div>
       {% endif %}
 
-
+      {% if event.link %}
+        <a href="{{event.link}}">
+      {% endif %}
       <h3>
         {{event.title}}
-
         <!-- Add a if for future event -->
         {% if event_date > current_date %}
         <span>Upcoming</span>
         {% endif %}
 
         {% if event.link %}
-          <a href="{{event.link}}"><i class="fas fa-link"></i></a>
+          <i class="fas fa-link"></i>
         {% endif %}
       </h3>
+      {% if event.link %}
+        </a>
+      {% endif %}
+
       <p class="date">{{event.date| date: "%B %Y" }}
         {% if event.location %}
         ・ {{event.location}}
