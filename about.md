@@ -123,7 +123,7 @@ permalink: about
       {% endif %}
 
       {% if event.link %}
-        <a href="{{event.link}}">
+        <a href="{{event.link}}" target="_blank" rel="noopener">
       {% endif %}
       <h3>
         {{event.title}}
