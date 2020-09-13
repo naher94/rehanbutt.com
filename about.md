@@ -171,6 +171,7 @@ permalink: about
       <p class="description">Design Certificate Program - Designing for Active Aging</p>
     </div>
   </section>
+
   <section class="skills">
     <h2>Skills</h2>
     <h3>Some of the things I do well</h3>
@@ -189,13 +190,14 @@ permalink: about
       <div class="skills-item">Hand & Technical Drawing</div>
       <div class="skills-item">Photography</div>
       <div class="skills-item">Gif Curation 😝</div>
-
     </div>
   </section>
+
   <section class="tools">
     <h2>Tools</h2>
     <h3>Some of the toolsets I am quite familiar with</h3>
     <div class="skills-container">
+      <div class="skills-item">Figma</div>
       <div class="skills-item">Sketch</div>
       <div class="skills-item">Framer</div>
       <div class="skills-item">Photoshop</div>
@@ -205,10 +207,10 @@ permalink: about
       <div class="skills-item">HTML</div>
       <div class="skills-item">CSS</div>
       <div class="skills-item">Javascript</div>
+      <div class="skills-item">Rhino</div>
+      <div class="skills-item">Arduino</div>
       <div class="skills-item">Ruby</div>
       <div class="skills-item">RAPID</div>
-      <div class="skills-item">Arduino</div>
-      <div class="skills-item">Rhino</div>
       <div class="skills-item">RhinoCAM</div>
       <div class="skills-item">Vray</div>
       <div class="skills-item">AutoCAD</div>
