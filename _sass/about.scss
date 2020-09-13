@@ -62,6 +62,14 @@
   i{
     color: $signature-teal;
   }
+  a{
+    &:hover{
+      .date, .description, h3{
+        color: $signature-teal;
+        transition: $run;
+      }
+    }
+  }
 }
 
 .future-event{

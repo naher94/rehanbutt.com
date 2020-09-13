@@ -136,9 +136,6 @@ permalink: about
           <i class="fas fa-link"></i>
         {% endif %}
       </h3>
-      {% if event.link %}
-        </a>
-      {% endif %}
 
       <p class="date">{{event.date| date: "%B %Y" }}
         {% if event.location %}
@@ -146,6 +143,9 @@ permalink: about
         {% endif %}
       </p>
       <p class="description">{{event.description}}</p>
+      {% if event.link %}
+        </a>
+      {% endif %}
     </div>
     {% endfor %}
   </section>
