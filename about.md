@@ -157,12 +157,10 @@ permalink: about
         <img class="brand-logo" src="/img/cmu-logo.svg" alt="Carnegie Mellon University Logo">
       </div>
       <h3>Carnegie Mellon University</h3>
-      <!-- <p class="date">2016・2018</p> -->
       <p class="description">Masters in Tangible Interaction Design</p>
     </div>
     <div class="education-item">
       <h3>Carnegie Mellon University</h3>
-      <!-- <p class="date">2012・2016</p> -->
       <p class="description">Bachelors in the Integrative Physical and Digital Media Studies</p>
     </div>
     <div class="education-item">
@@ -170,7 +168,6 @@ permalink: about
         <img class="brand-logo" src="/img/nus-logo.svg" alt="National University of Singapore Logo">
       </div>
       <h3>National University of Singapore</h3>
-      <!-- <p class="date">June 2013・August 2013</p> -->
       <p class="description">Design Certificate Program - Designing for Active Aging</p>
     </div>
   </section>
