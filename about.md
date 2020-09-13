@@ -111,6 +111,9 @@ permalink: about
 
     {% assign current_date = 'now' | date: "%s" %}
     {% assign event_date = event.date | date: "%s" %}
+
+    {% assign current_year = 'now' | date: "%Y" %}
+    {% assign event_year = event.date | date: "%Y" | times: 1 %}
     <div class="speaking-item
       {% if event_date > current_date %}
         future-event
@@ -145,7 +148,17 @@ permalink: about
         ・ {{event.location}}
         {% endif %}
       </p>
+
+      {% assign prev_year = current_year | times: 1 | minus: 1 %}
+
+      <!-- <h3 style="color:red">event={{event_year}}; current={{current_year}}; prev={{prev_year}}</h3> -->
+
+      {% if event_year >= prev_year %}
       <p class="description">{{event.description}}</p>
+      {% endif %}
+
+
+
     </div>
     {% endfor %}
   </section>
