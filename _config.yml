@@ -27,3 +27,5 @@ collections:
     permalink: /resources/:path
   speaking:
     output: false
+  work-experience:
+    output: false

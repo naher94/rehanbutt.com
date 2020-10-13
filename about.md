@@ -20,87 +20,30 @@ permalink: about
   <section class="work-experience">
     <h2>Work Experience</h2>
 
-    <div class="work-item">
-      <div class="brand-logo-container" id="upmc">
-        <img class="brand-logo" src="/img/upmc-logo.svg" alt="GE & UPMC Logo">
-      </div>
-      <h3>Senior Product Designer・UPMC Enterprises</h3>
-      <p class="date">December 2019・Present</p>
-      <p class="description">Leading the hcOS (Healthcare Operating System) design efforts to identify and build applications that take advantage of an integrated healthcare data platform. Also, continuing to lead the design efforts for Vincent Payment Solutions and supporting design efforts for our Pharmacy team.</p>
-    </div>
-    <div class="work-item">
-      <h3>Product Designer・UPMC Enterprises</h3>
-      <p class="date">July 2018・December 2019</p>
-      <p class="description">Worked with GE Healthcare on creating next generation enterprise imaging products for radiology field, including work prioritization, image viewers, and reporting applications. Led native PACs reporting project while building out a design system for use across GE Healthcare. I also led the design efforts for Vincent Payment Solutions, a payment application addressing the difficulty of institutional payments for short term engagements such as research studies and class projects.</p>
-    </div>
+    {% assign work_order = site.work-experience | sort: 'sort-order' %}
+    {% assign work_prev = "hello" %}
 
-    <div class="work-item">
-      <div class="brand-logo-container" id="processly">
-        <img class="brand-logo" src="/img/processly-logo.svg" alt="Processly Logo">
+    {% for work in work_order %}
+      <div class="work-item">
+        <!-- Logo thing here -->
+        {% if work.logo %}
+        <div class="brand-logo-container" id="{{work.logo}}">
+          <img class="brand-logo" src="/img/{{work.logo}}-logo.svg" alt="{{work.logo}} Logo">
+        </div>
+        {% endif %}
+        <!-- how to handle the grouping thing many roles in 1 company?? -->
+        {% if work_prev.company != work.company%}
+          <h3>{{work.company}}</h3>
+        {% endif %}
+        <h4>{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
+
+        <!-- what happens when the date is present? -->
+        <p class="date">{{work.date-start | date: "%B %Y"}}・{{work.date-end | date: "%B %Y"}}</p>
+        <p class="description">{{work.description}}</p>
       </div>
-      <h3>Co-Founder & CXO・Processly</h3>
-      <p class="date">May 2016・Present</p>
-      <p class="description">A web application making it easy for students to document, discuss, and reflect upon their work. It allows teachers to work alongside students as they foster a collaborative learning environment.</p>
-    </div>
-    <div class="work-item">
-      <div class="brand-logo-container" id="dio">
-        <img class="brand-logo" src="/img/dio-logo.svg" alt="DzgnIO Logo">
-      </div>
-      <h3>Co-Founder・DzgnIO</h3>
-      <p class="date">April 2015・Present</p>
-      <p class="description">We design and create with an approach of playful pragmatism. A group with the goal to deliver design services incorporating holistic values of aesthetics, experience, and communication.</p>
-    </div>
-    <div class="work-item">
-      <h3>Teaching Assistant・Spactial Narratives via Web Graphics</h3>
-      <p class="date">August 2017・December 2017</p>
-      <p class="description">Taught students web technologies in relation to creating great web experiences. Creating and maintaining good code practices and how to design delightful experiences with entry level software development skills.</p>
-    </div>
-    <div class="work-item">
-      <h3>Lab Manager・CodeLab</h3>
-      <p class="date">August 2016・August 2017</p>
-      <p class="description">Worked to expand the lab's digital presence in order to create growth for the lab.  I also launched a student showcase in partnership with the career development office to share the broad range of skills presented by the students of the school of architecture with industry professionals.</p>
-    </div>
-    <div class="work-item">
-      <div class="brand-logo-container" id="yinzcam">
-        <img class="brand-logo" src="/img/yinzcam-logo.svg" alt="AFL, NBA, NFL, NRL, Telstra and Apple Logo">
-      </div>
-      <h3>Experience Designer・YinzCam</h3>
-      <p class="date">May 2016・May 2017</p>
-      <p class="description">Lead new product efforts for better fan engagement, worked with clients such as the NBA and NFL pushing their missions forward. Lead both consumer and enterprise applications for use by the NBA, NFL & AFL including project with an AR and VR focus and in-stadium wayfinding.</p>
-    </div>
-    <div class="work-item">
-      <h3>UI/UX Design Intern・YinzCam</h3>
-      <p class="date">November 2015・May 2016</p>
-      <p class="description">Evaluated the current app experiences and designed enhancements across consumer facing products and enterprise applications.</p>
-    </div>
-    <div class="work-item">
-      <h3>Head Teaching Assistant・Intro to Digital Media</h3>
-      <p class="date">September 2015・April 2016</p>
-      <p class="description">Taught students a variety of software tools for use in their design work and the workflows around them.</p>
-    </div>
-    <div class="work-item">
-      <h3>Lab Manager・IDeATe Digital Fabrication Lab</h3>
-      <p class="date">September 2015・September 2016</p>
-      <p class="description">Taught students digital preparation & machining techniques in laser cutting, 3D printing & CNC milling. Best practices for production and sustainable material use.</p>
-    </div>
-    <div class="work-item">
-      <div class="brand-logo-container" id="cr">
-        <img class="brand-logo" src="/img/cr-logo.svg" alt="Consumer Reports Logo">
-      </div>
-      <h3>User Experience Design Intern・Consumer Reports</h3>
-      <p class="date">May 2015・August 2015</p>
-      <p class="description">Worked with the UX team to redesign consumerreports.org with an emphasis on data visualization, better conveying complex data to the large user base.</p>
-    </div>
-    <div class="work-item">
-      <h3>Designer & Developer・Human Behavior Computing Lab</h3>
-      <p class="date">June 2014・November 2014</p>
-      <p class="description">Designed and created a web presence for the lab to showcase its projects and members.</p>
-    </div>
-    <div class="work-item">
-      <h3>Design Intern・Architrave</h3>
-      <p class="date">May 2013・July 2013</p>
-      <p class="description">Helped to expand the in-house materials and standards libraries while gaining familiarity with industry standard tools such as 3dsMax, Revit and AutoCAD.</p>
-    </div>
+
+      {% assign work_prev = work %}
+    {% endfor %}
   </section>
 
   <section class="speaking-events">
