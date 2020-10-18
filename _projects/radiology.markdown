@@ -19,7 +19,7 @@ tile-description: "Enhancing patient diagnostic imaging for clinical teams"
 
 As part of my time at UPMC Enterprises, I worked on a project called Next Generation Imaging, NGI for short. NGI explored the world of radiology tools with our partner GE Healthcare. Specifically focusing on tools for viewing and analyzing medical imaging. This project consisted of both exploratory and tactical initiatives with the goal to not only capture quick wins for the products by also create a more mature UX culture to aid in future growth.
 
-<div class="grid-x grid-padding-x">
+<div class="grid-x grid-padding-x grid-margin-y">
 <div class=" medium-6 cell "><img src="../img/radiology/radiology-house-md.jpg" alt="Lightbox room from House MD" /></div>
 <div class=" medium-6 cell "><img src="../img/radiology/radiology-greys-anatomy.jpg" alt="X-Ray Image review from Grey's Anatomy" /></div>
 </div>
