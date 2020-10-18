@@ -132,7 +132,7 @@ function isBadge() {
 }
 
 isEgg();
-isBadge();
+// isBadge();
 
 // Listen for keydown events
 document.addEventListener('keydown', keyHandler, false);

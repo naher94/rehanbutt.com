@@ -20,181 +20,79 @@ permalink: about
   <section class="work-experience">
     <h2>Work Experience</h2>
 
-    <div class="work-item">
-      <div class="brand-logo-container" id="upmc">
-        <img class="brand-logo" src="/img/upmc-logo.svg" alt="GE & UPMC Logo">
-      </div>
-      <h3>Senior Product Designer・UPMC Enterprises</h3>
-      <p class="date">December 2019・Present</p>
-      <p class="description">Leading the hcOS (Healthcare Operating System) design efforts to identify and build applications that take advantage of an integrated healthcare data platform. Also, continuing to lead the design efforts for Vincent Payment Solutions and supporting design efforts for our Pharmacy team.</p>
-    </div>
-    <div class="work-item">
-      <h3>Product Designer・UPMC Enterprises</h3>
-      <p class="date">July 2018・December 2019</p>
-      <p class="description">Worked with GE Healthcare on creating next generation enterprise imaging products for radiology field, including work prioritization, image viewers, and reporting applications. Led native PACs reporting project while building out a design system for use across GE Healthcare. I also led the design efforts for Vincent Payment Solutions, a payment application addressing the difficulty of institutional payments for short term engagements such as research studies and class projects.</p>
-    </div>
+    {% assign work_order = site.work-experience | sort: 'sort-order' %}
+    {% assign work_prev = "hello" %}
 
-    <div class="work-item">
-      <div class="brand-logo-container" id="processly">
-        <img class="brand-logo" src="/img/processly-logo.svg" alt="Processly Logo">
+    {% for work in work_order %}
+      <div class="work-item">
+        <!-- Logo thing here -->
+        {% if work.logo %}
+        <div class="brand-logo-container" id="{{work.logo}}">
+          <img class="brand-logo" src="/img/{{work.logo}}-logo.svg" alt="{{work.logo}} Logo">
+        </div>
+        {% endif %}
+        <!-- how to handle the grouping thing many roles in 1 company?? -->
+        {% if work_prev.company != work.company%}
+          <h3>{{work.company}}</h3>
+        {% endif %}
+        <h4>{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
+
+        <!-- what happens when the date is present? -->
+        <p class="date">{{work.date-start | date: "%B %Y"}}・{{work.date-end | date: "%B %Y"}}</p>
+        <p class="description">{{work.description}}</p>
       </div>
-      <h3>Co-Founder & CXO・Processly</h3>
-      <p class="date">May 2016・Present</p>
-      <p class="description">A web application making it easy for students to document, discuss, and reflect upon their work. It allows teachers to work alongside students as they foster a collaborative learning environment.</p>
-    </div>
-    <div class="work-item">
-      <div class="brand-logo-container" id="dio">
-        <img class="brand-logo" src="/img/dio-logo.svg" alt="DzgnIO Logo">
-      </div>
-      <h3>Co-Founder・DzgnIO</h3>
-      <p class="date">April 2015・Present</p>
-      <p class="description">We design and create with an approach of playful pragmatism. A group with the goal to deliver design services incorporating holistic values of aesthetics, experience, and communication.</p>
-    </div>
-    <div class="work-item">
-      <h3>Teaching Assistant・Spactial Narratives via Web Graphics</h3>
-      <p class="date">August 2017・December 2017</p>
-      <p class="description">Taught students web technologies in relation to creating great web experiences. Creating and maintaining good code practices and how to design delightful experiences with entry level software development skills.</p>
-    </div>
-    <div class="work-item">
-      <h3>Lab Manager・CodeLab</h3>
-      <p class="date">August 2016・August 2017</p>
-      <p class="description">Worked to expand the lab's digital presence in order to create growth for the lab.  I also launched a student showcase in partnership with the career development office to share the broad range of skills presented by the students of the school of architecture with industry professionals.</p>
-    </div>
-    <div class="work-item">
-      <div class="brand-logo-container" id="yinzcam">
-        <img class="brand-logo" src="/img/yinzcam-logo.svg" alt="AFL, NBA, NFL, NRL, Telstra and Apple Logo">
-      </div>
-      <h3>Experience Designer・YinzCam</h3>
-      <p class="date">May 2016・May 2017</p>
-      <p class="description">Lead new product efforts for better fan engagement, worked with clients such as the NBA and NFL pushing their missions forward. Lead both consumer and enterprise applications for use by the NBA, NFL & AFL including project with an AR and VR focus and in-stadium wayfinding.</p>
-    </div>
-    <div class="work-item">
-      <h3>UI/UX Design Intern・YinzCam</h3>
-      <p class="date">November 2015・May 2016</p>
-      <p class="description">Evaluated the current app experiences and designed enhancements across consumer facing products and enterprise applications.</p>
-    </div>
-    <div class="work-item">
-      <h3>Head Teaching Assistant・Intro to Digital Media</h3>
-      <p class="date">September 2015・April 2016</p>
-      <p class="description">Taught students a variety of software tools for use in their design work and the workflows around them.</p>
-    </div>
-    <div class="work-item">
-      <h3>Lab Manager・IDeATe Digital Fabrication Lab</h3>
-      <p class="date">September 2015・September 2016</p>
-      <p class="description">Taught students digital preparation & machining techniques in laser cutting, 3D printing & CNC milling. Best practices for production and sustainable material use.</p>
-    </div>
-    <div class="work-item">
-      <div class="brand-logo-container" id="cr">
-        <img class="brand-logo" src="/img/cr-logo.svg" alt="Consumer Reports Logo">
-      </div>
-      <h3>User Experience Design Intern・Consumer Reports</h3>
-      <p class="date">May 2015・August 2015</p>
-      <p class="description">Worked with the UX team to redesign consumerreports.org with an emphasis on data visualization, better conveying complex data to the large user base.</p>
-    </div>
-    <div class="work-item">
-      <h3>Designer & Developer・Human Behavior Computing Lab</h3>
-      <p class="date">June 2014・November 2014</p>
-      <p class="description">Designed and created a web presence for the lab to showcase its projects and members.</p>
-    </div>
-    <div class="work-item">
-      <h3>Design Intern・Architrave</h3>
-      <p class="date">May 2013・July 2013</p>
-      <p class="description">Helped to expand the in-house materials and standards libraries while gaining familiarity with industry standard tools such as 3dsMax, Revit and AutoCAD.</p>
-    </div>
+
+      {% assign work_prev = work %}
+    {% endfor %}
   </section>
 
   <section class="speaking-events">
     <h2>Speaking Events</h2>
-    <div class="speaking-item future-event">
-      <a target="_blank" rel="noopener" href="https://uxhealthcare.co/video-conference-live-usa-2020/"><h3>From Form Fields to Ship It: How Not to Design System</h3></a>
-      <p class="date">August 2020</p>
-      <p class="description">Building a design system is very trendy, but when is it the right time to conceptualize, design and execute on a system for use across a product and an organization. Given the context of both new products and legacy products in the same ecosystem, this talk will explore the lessons learned and some best strategies for building a design system.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Why Does Everything Need an App?</h3>
-      <p class="date">May 2020</p>
-      <p class="description">Why is it that everything need an app from toasters to skateboards? During this <a href="https://www.youtube.com/watch?v=6nraNVPih9M&t=17s" target="_blank" rel="noopener">talk</a> we will discuss the ramifications of product organizations relying on companion apps and how that effects the user experience of their hardware product. How can we build companion apps that build on top of the already great experience of the product and the struggle that imposing between privacy great experience and business.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Real World AI @ UPMC</h3>
-      <p class="date">May 2019</p>
-      <p class="description">Spoke about the value of AI in the real world and some of the challenges that come with implementing them in a seemingly straightforward environment during our internal artificial intelligence talk series.</p>
-    </div>
-    <div class="speaking-item">
-      <div class="brand-logo-container" id="ces">
-        <img class="brand-logo" src="/img/ces-logo.svg" alt="CES Logo">
+
+    {% assign event_order = site.speaking | sort: 'date' | reverse %}
+    {% for event in event_order %}
+
+    {% assign current_date = 'now' | date: "%s" %}
+    {% assign event_date = event.date | date: "%s" %}
+    <div class="speaking-item
+      {% if event_date > current_date %}
+        future-event
+      {% endif %}
+    "> <!-- adding future-event class -->
+      {% if event.logo %}
+      <div class="brand-logo-container" id="{{event.logo}}">
+        <img class="brand-logo" src="/img/{{event.logo}}-logo.svg" alt="{{event.logo}} Logo">
       </div>
-      <h3>Processly @ CES</h3>
-      <p class="date">January 2019</p>
-      <p class="description">Spoke about the value of Processly in both an educational and corporate setting bringing distributed teams together through the use of Processly’s online whiteboard, Sandbox.</p>
+      {% endif %}
+
+      {% if event.link %}
+        <a href="{{event.link}}" target="_blank" rel="noopener">
+      {% endif %}
+      <h3>
+        {{event.title}}
+        <!-- Add a if for future event -->
+        {% if event_date > current_date %}
+        <span>Upcoming</span>
+        {% endif %}
+
+        {% if event.link %}
+          <i class="fas fa-link"></i>
+        {% endif %}
+      </h3>
+
+      <p class="date">{{event.date| date: "%B %Y" }}
+        {% if event.location %}
+        ・ {{event.location}}
+        {% endif %}
+      </p>
+      <p class="description">{{event.description}}</p>
+      {% if event.link %}
+        </a>
+      {% endif %}
     </div>
-    <div class="speaking-item">
-      <h3>Processly in the Classroom</h3>
-      <p class="date">October 2018</p>
-      <p class="description">Presented the value of Processly to educators and other education stakeholders, explaining how it would work for a variety of teaching styles and grade levels, middle school high school and higher education.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Processly, From an Idea to a Product</h3>
-      <p class="date">April 2018</p>
-      <p class="description">Spoke to the group about what it means to be a young entrepreneur. Finding a problem you are passionate about solving and how you turn that passion into a business. Building a product and putting in the hands of your customer.</p>
-    </div>
-    <div class="speaking-item">
-      <div class="brand-logo-container" id="ucla">
-        <img class="brand-logo" src="/img/ucla-logo.svg" alt="UCLA Logo">
-      </div>
-      <h3>Careers in UX @ UCLA</h3>
-      <p class="date">April 2018</p>
-      <p class="description">Spoke about the current landscape of user experience design, what it means and where I see the field going as well as how to get into the field coming from a non-design background.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Starting a Company as a Student</h3>
-      <p class="date">March 2018</p>
-      <p class="description">Spoke to the entrepreneurship class about what it means to be a young entrepreneur. Finding a problem you are passionate about solving and how you turn that passion into a business.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Personal Branding: Sharing a Story Through Your Work</h3>
-      <p class="date">February 2018</p>
-      <p class="description">Spoke to the group about what it means to create a personal brand identity. Talking about visual identity and creating a brand system that can be portrayed throughout their work. As well as having a design critique around existing student brands.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Processly @ Three Rivers Educational Technology Conference</h3>
-      <p class="date">November 2017</p>
-      <p class="description">Presented the value of Processly to educators and other education stakeholders, explaining how it would work for a variety of teaching styles and grade levels, middle school high school and higher education.</p>
-    </div>
-    <div class="speaking-item">
-      <div class="brand-logo-container" id="aia">
-        <img class="brand-logo" src="/img/aia-logo.svg" alt="American Institute of Architects Logo">
-      </div>
-      <h3>AIA Build Pittsburgh</h3>
-      <p class="date">April 2017</p>
-      <p class="description">Presented ‘<a target="_blank" rel="noopener" href="https://dzgn.io/works/ux-architecture.html">UI/UX Design and Architecture</a>: Leveraging Web Technologies for and by Architects’ sharing common interests and workflows between these industries and some opportunities for both industries to adopt from one another.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>HTTParty: A Workshop Series</h3>
-      <p class="date">March 2017</p>
-      <p class="description">Explored the basics of <a target="_blank" rel="noopener" href="https://dzgn.io/works/httparty.html">UI/UX design and web development</a>, with the Dzgn.IO team. Looking at the origins of the web and have to leverage constraint for your designs.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Personal Branding: Sharing a Story Through Your Work</h3>
-      <p class="date">October 2016</p>
-      <p class="description">Spoke to the group about what it means to create a personal brand identity. Talking about visual identity as well as the bigger brand system that can be portrayed throughout all of their work and what it means to convey a project narrative.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Design @ YinzCam</h3>
-      <p class="date">September 2016</p>
-      <p class="description">Shared what it was like working on cutting edge technology project within the sports industry. The risk, challenges and rewards of having hundreds of thousands of people using your product.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>Portfolio Hack-a-thon</h3>
-      <p class="date">April 2015</p>
-      <p class="description">A workshop helping students learn to design and build their own portfolios, a digital showcase of their work. Defining the narrative and the structure of their work then diving into the development of the details.</p>
-    </div>
-    <div class="speaking-item">
-      <h3>WebDevWeekend: Intro to HTML & CSS</h3>
-      <p class="date">April 2015</p>
-      <p class="description">Introduced the basics of web development to the group. Showcased the foundations of a website, HTML and CSS the role they play in building and design a web presence.</p>
-    </div>
+    {% endfor %}
   </section>
+
   <section class="education">
     <h2>Education</h2>
     <div class="education-item">
@@ -216,6 +114,7 @@ permalink: about
       <p class="description">Design Certificate Program - Designing for Active Aging</p>
     </div>
   </section>
+
   <section class="skills">
     <h2>Skills</h2>
     <h3>Some of the things I do well</h3>
@@ -234,13 +133,14 @@ permalink: about
       <div class="skills-item">Hand & Technical Drawing</div>
       <div class="skills-item">Photography</div>
       <div class="skills-item">Gif Curation 😝</div>
-
     </div>
   </section>
+
   <section class="tools">
     <h2>Tools</h2>
     <h3>Some of the toolsets I am quite familiar with</h3>
     <div class="skills-container">
+      <div class="skills-item">Figma</div>
       <div class="skills-item">Sketch</div>
       <div class="skills-item">Framer</div>
       <div class="skills-item">Photoshop</div>
@@ -250,10 +150,10 @@ permalink: about
       <div class="skills-item">HTML</div>
       <div class="skills-item">CSS</div>
       <div class="skills-item">Javascript</div>
+      <div class="skills-item">Rhino</div>
+      <div class="skills-item">Arduino</div>
       <div class="skills-item">Ruby</div>
       <div class="skills-item">RAPID</div>
-      <div class="skills-item">Arduino</div>
-      <div class="skills-item">Rhino</div>
       <div class="skills-item">RhinoCAM</div>
       <div class="skills-item">Vray</div>
       <div class="skills-item">AutoCAD</div>

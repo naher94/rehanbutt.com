@@ -58,6 +58,20 @@
   }
 }
 
+.speaking-item{
+  i{
+    color: $signature-teal;
+  }
+  a{
+    &:hover{
+      .date, .description, h3{
+        color: $signature-teal;
+        transition: $run;
+      }
+    }
+  }
+}
+
 .future-event{
   h3{
     display: inline;
@@ -95,6 +109,21 @@
       line-height: 1em;
     }
   }
+
+  .speaking-item, .education-item{
+    h3{
+      font-family: $lato;
+      color: $navy-black;
+      font-size: 1em;
+      font-weight: $lato-black;
+      padding: 0;
+      margin-bottom: 0;
+      @media (prefers-color-scheme: dark) {
+        color: $pure-white-dark;
+      }
+    }
+  }
+
   .work-item, .speaking-item, .education-item{
     &:first-of-type{
       margin-top: -2.5em;
@@ -107,17 +136,6 @@
     }
     margin-top: 1rem;
     padding-left: 0.5rem;
-    h3{
-      font-family: $lato;
-      color: $navy-black;
-      font-size: 1em;
-      font-weight: $lato-black;
-      padding: 0;
-      margin-bottom: 0;
-      @media (prefers-color-scheme: dark) {
-        color: $pure-white-dark;
-      }
-    }
     p{
       padding: 0;
       margin: 0;
@@ -194,6 +212,33 @@
     }
     &:hover .brand-logo-container{
       opacity: 1;
+    }
+  }
+}
+
+.work-item{
+  h3{
+    font-family: $lato;
+    color: $navy-black;
+    font-size: 1.4em;
+    font-weight: $lato-black;
+    font-style: italic;
+    padding: 0;
+    margin-bottom: 0;
+    // &:not(:first-of-type){
+    //   margin-top: 1.5em;
+    // }
+  }
+  h4{
+    font-family: $lato;
+    color: $navy-black;
+    font-size: 1em;
+    font-weight: $lato-black;
+    padding: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    @media (prefers-color-scheme: dark) {
+      color: $pure-white-dark;
     }
   }
 }
