@@ -5,6 +5,7 @@ tile-name: "Mobile App"
 thumbnail: "swfty"
 date:   2014-10-13
 tags: iOS mobile
+published: false
 ---
 
 <div class="image-container"><img src="../img/swfty/landingPage.jpg" alt="Landing Page" class="image-center" style="width:80%" />
