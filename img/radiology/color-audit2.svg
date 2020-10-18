@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="786px" height="602px" viewBox="0 0 786 602" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>color-audit2</title>
+    <defs>
+        <linearGradient x1="50%" y1="1.38888889%" x2="49.9999958%" y2="97.3127578%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#D6E3EA" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="1.38888889%" x2="49.9999958%" y2="97.3127578%" id="linearGradient-2">
+            <stop stop-color="#D5E2EA" offset="0%"></stop>
+            <stop stop-color="#B4C9E3" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="49.9999958%" y1="97.3127578%" x2="50%" y2="1.38888889%" id="linearGradient-3">
+            <stop stop-color="#D5DDEB" offset="0%"></stop>
+            <stop stop-color="#FCFCFD" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="49.9999958%" y1="97.3127578%" x2="50%" y2="1.38888889%" id="linearGradient-4">
+            <stop stop-color="#799CBA" offset="0%"></stop>
+            <stop stop-color="#FCFCFD" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="color-audit2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#606060" x="0" y="0" width="786" height="602"></rect>
+        <rect id="Rectangle-Copy-40" fill="#303030" x="30" y="30" width="174" height="174"></rect>
+        <rect id="Rectangle-Copy-34" fill="#E4E4E4" x="214" y="214" width="174" height="174"></rect>
+        <rect id="Rectangle-Copy-37" fill="#F1F5F9" x="582" y="30" width="174" height="174"></rect>
+        <rect id="Rectangle-Copy-48" stroke="#8E97A5" fill="#E6E7EC" x="29.5" y="213.5" width="175" height="175"></rect>
+        <rect id="Rectangle-Copy-52" fill="#F9F9F9" x="398" y="30" width="174" height="174"></rect>
+        <rect id="Rectangle-Copy-53" fill="#B4BABF" x="582" y="214" width="174" height="174"></rect>
+        <rect id="Rectangle-Copy-59" fill="#FFFFFF" x="214" y="30" width="174" height="174"></rect>
+        <rect id="Rectangle-Copy-60" stroke="#567F9E" fill="#D8D8D8" x="398.5" y="214.5" width="173" height="173"></rect>
+        <rect id="Rectangle-Copy-42" stroke="#394351" fill="url(#linearGradient-1)" x="581.5" y="397.5" width="175" height="175"></rect>
+        <rect id="Rectangle-Copy-45" fill="url(#linearGradient-2)" x="214" y="398" width="174" height="174"></rect>
+        <rect id="Rectangle-Copy-57" fill="url(#linearGradient-3)" x="398" y="398" width="174" height="174"></rect>
+        <rect id="Rectangle-Copy-61" fill="url(#linearGradient-4)" x="30" y="398" width="174" height="174"></rect>
+    </g>
+</svg>
