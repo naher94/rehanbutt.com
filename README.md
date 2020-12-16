@@ -1,4 +1,6 @@
-# [rehanbutt.com](https://rehanbutt.com)
+# Hello & Welcome! 👋
+
+You have found the `readme` for the [rehanbutt.com](https://rehanbutt.com) codebase.
 
 ## Content Notes
 
