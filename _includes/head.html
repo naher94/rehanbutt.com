@@ -1,41 +1,42 @@
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% if page.title %}{{ site.title | escape }} | {{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
-    <meta name="description" content="{% if page.excerpt %}{{ page.content | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <title>{% if page.title %}{{ site.title | escape }} | {{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.content | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
-    <meta name="keywords" content="Design,UX,UI,Web,Development,branding,Illustration,photography,3D,2D,Art,making,building,apps,portfolio,personal,site,product,fashion">
-    <meta name="author" content="Rehan Butt">
-    <link rel="icon" type="image/png" href="../img/favicon.png"/>
-    <link rel="shortcut icon" type="image/png" href="../img/favicon.png"/>
-    <link rel="apple-touch-icon" type="image/png" href="../img/favicon.png"/>
-    <link rel="apple-touch-icon" type="image/png" href="../img/favicon.png" sizes="76x76"/>
-    <link rel="apple-touch-icon" type="image/png" href="../img/favicon.png" sizes="120x120"/>
-    <link rel="apple-touch-icon" type="image/png" href="../img/favicon.png" sizes="152x152"/>
+  <meta name="keywords" content="Design,UX,UI,Web,Development,branding,Illustration,photography,3D,2D,Art,making,building,apps,portfolio,personal,site,product,fashion">
+  <meta name="author" content="Rehan Butt">
+  <link rel="icon" type="image/png" href="../img/favicon.png"/>
+  <link rel="shortcut icon" type="image/png" href="../img/favicon.png"/>
+  <link rel="apple-touch-icon" type="image/png" href="../img/favicon.png"/>
+  <link rel="apple-touch-icon" type="image/png" href="../img/favicon.png" sizes="76x76"/>
+  <link rel="apple-touch-icon" type="image/png" href="../img/favicon.png" sizes="120x120"/>
+  <link rel="apple-touch-icon" type="image/png" href="../img/favicon.png" sizes="152x152"/>
 
-    <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}" />
-    <meta property="og:title" content="{% if page.title %}{{ site.title | escape }} | {{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}" />
-    <meta property="og:description" content="{% if page.excerpt %}{{ page.content | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-    <meta property="og:type" content="image.png" />
-    <meta property="og:image" content="
+  <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}" />
+  <meta property="og:title" content="{% if page.title %}{{ site.title | escape }} | {{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}" />
+  <meta property="og:description" content="{% if page.excerpt %}{{ page.content | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <meta property="og:type" content="image.png" />
+  <meta property="og:image" content="
     {% if page.thumbnail %}{{ page.thumbnail | append: '.png' | prepend: '/img/thumbnails/' | prepend: site.baseurl | prepend: site.url }}{% else %}{{ "/img/favicon.png" | prepend: site.baseurl | prepend: site.url }}{% endif %}" />
 
 
-    <link rel="stylesheet" href="{{" /css/foundation.css" | prepend: site.baseurl }}"/>
-    <link rel="stylesheet" href="{{" /css/gallery.css" | prepend: site.baseurl }}"/>
-    <link rel="stylesheet" href="{{" /css/emoji.css" | prepend: site.baseurl }}"/>
-    <link rel="stylesheet" href="{{" /css/rehan.css" | prepend: site.baseurl }}"/>
-    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="stylesheet" href="{{" /css/foundation.css" | prepend: site.baseurl }}"/>
+  <link rel="stylesheet" href="{{" /css/gallery.css" | prepend: site.baseurl }}"/>
+  <link rel="stylesheet" href="{{" /css/emoji.css" | prepend: site.baseurl }}"/>
+  <link rel="stylesheet" href="{{" /css/rehan.css" | prepend: site.baseurl }}"/>
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
   <script src="https://kit.fontawesome.com/02150f0422.js" crossorigin="anonymous"></script>
+
   <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "Person",
-    "url": "http://www.rehanbutt.com",
-    "image": "http://www.rehanbutt.com/img/rehan.png",
+    "url": "https://www.rehanbutt.com",
+    "image": "https://www.rehanbutt.com/img/rehan.png",
     "alumniOf": "Carnegie Mellon University",
     "sameAs": [
       "https://twitter.com/naher94",
