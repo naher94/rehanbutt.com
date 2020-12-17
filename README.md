@@ -10,12 +10,24 @@ Curious how the site has evolved over time? Check out the [releases](https://git
 
 ### Content Notes
 
+#### Projects
+
 * When a project is featured an additional tile image is needed
 * Tile Titles should be _____________
 * Tile Descriptions should say something along the lines of ___________
 * Page Titles should be very similar to Tile Titles with _________ as an exception
 
+#### Dribbble Share Links
+
+```
+<a href="https://rehanbutt.com">My Website</a> | <a href="https://twitter.com/naher94/">Twitter</a> | <a href="https://instagram.com/naher94">Instagram</a> | <a href="https://500px.com/naher94">500px</a> | <a href="https://www.pinterest.com/naher94/">Pinterest</a> | <a href="https://github.com/naher94">Github</a>
+```
+
 ### Development Notes
+
+#### General
+
+* Foundation Grid XY reference for centering and other special properties: https://zurb.com/university/lessons/176
 
 #### `_projects` Frontmatter Tags
 
@@ -63,3 +75,37 @@ location | The conference where the speaking event took place | `string`
 description | A short explaination of the speaking event | `string`
 link | `url` to the event's recording or related materials | `string`
 logo | A logo representing the event for visual context | `.svg`
+
+
+### Reference
+
+#### Places that Link to Me
+
+Links | Logo Used | Notes
+:------------ | :------------- | :-------------
+https://scottylabs.org/portfolio/ | yes
+~https://soa.cmu.edu/design/~ | ~no~ | ~showing fashion work~
+~https://soa.cmu.edu/alumni/~ |~yes~ | ~SHOULD BE UPDATED~
+https://dzgn.io/team/rehan.html | no
+http://interchange.soa.cmu.edu | yes | person page & footer logo
+https://twitter.com/naher94 | yes | header image
+https://dribbble.com/rehanbutt | no
+https://society6.com/rehanbutt/about | yes | header image
+https://www.youtube.com/c/RehanButt1994 | yes | header image
+https://www.linkedin.com/in/rehan-butt/ | yes | header image
+https://www.pinterest.com/naher94/ | no
+~http://dianaconnolly.me~ | ~yes~ | ~footer~
+http://tech.soa.cmu.edu | yes | footer
+~http://soa.cmu.edu/students/~ | ~yes~ | ~Graduate Student Section~
+https://www.stickermule.com/user/1070655211/stickers | no | link to twitter & site
+http://BRND.life | yes | footer
+http://QULR.life | yes | footer
+http://snwg.eddyman.kim | yes | footer
+http://ideate.xsead.cmu.edu/profiles/profiles/naher94 | no |
+http://naher94.github.io/esporre/ | no |
+https://angel.co/rehan-butt | no |
+https://medium.com/@Naher94 | no |
+https://yasmeenalmuhanna.com | no | 
+https://stackoverflow.com/users/12394272/rehan-butt | |
+https://community.cmu.edu/s/ | |
+alumnifire | |
