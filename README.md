@@ -4,6 +4,8 @@ You have found the `readme` for the [rehanbutt.com](https://rehanbutt.com) codeb
 
 I use [Jekyll](https://jekyllrb.com) as my static site templating engine and [Foundation for Site](https://get.foundation/sites.html) as my CSS and JS framework.
 
+Curious how the site has evolved over time? Check out the [releases](https://github.com/naher94/rehanbutt.com/releases) over the years. Pretty fun to time travel! Like my own personal [waybackmachine](http://web.archive.org) 😉
+
 ## Production Notes
 
 ### Content Notes
