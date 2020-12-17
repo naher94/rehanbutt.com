@@ -17,7 +17,7 @@ Curious how the site has evolved over time? Check out the [releases](https://git
 
 ### Development Notes
 
-#### Project Frontmatter Tags
+#### `_projects` Frontmatter Tags
 
 Tag | Use | Data Type
 :--- | :--- | :---
@@ -31,7 +31,7 @@ tag | For reference at a later date possibly for filtering | `string`
 published | whether it renders in the portfolio  | `bool`
 featured | whether it renders in as featured (bigger tiles)  | `bool`
 
-#### Resources Frontmatter Tags
+#### `_resources` Frontmatter Tags
 
 Tag | Use | Data Type
 :--- | :--- | :---
@@ -40,3 +40,26 @@ title | The main name that references the resource in each tile | `string`
 link | The external `url` to the resource | `string`
 description | A short explaination of the resource | `string`
 tags | an array of related topics for the resource `[film,games,tools]` | comma seperated `string`
+
+#### `_work-experience` Frontmatter Tags
+
+Tag | Use | Data Type
+:--- | :--- | :---
+role | The job title | `string`
+date-start | `YYYY-MM-DD` | `date`
+date-end | `YYYY-MM-DD` or "Present" if current experience | `date` or `string` of "Present"
+company | Name of the orgnaization | `string`
+description | Explanation of the role | `string`
+logo | A logo representing the job for visual context | `.svg`
+sort-order | Order in which the experiences are sorted and grouped `1` being the top | `int`
+
+#### `_speaking` Frontmatter Tags
+
+Tag | Use | Data Type
+:--- | :--- | :---
+title | The name of the event | `string`
+date | `YYYY-MM-DD` If the date is a future date an "Upcoming" badge will be shown | `date`
+location | The conference where the speaking event took place | `string`
+description | A short explaination of the speaking event | `string`
+link | `url` to the event's recording or related materials | `string`
+logo | A logo representing the event for visual context | `.svg`
