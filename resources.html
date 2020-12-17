@@ -11,12 +11,13 @@ permalink: resources
 
 <!-- collect all the unique tags from the resources -->
 {% assign alltags = site.resources | map: "tags" | uniq | sort %}
+
 <section class="cell tag-section">
 
 <h2>Categories</h2>
 <div class="tags-container cell">
   {% for tag in alltags %}
-    <a href="#{{tag}}">
+    <a href="#{{tag | replace: " ", "-"}}">
       <div class="tag">
         {{ tag }}
       </div>
@@ -30,7 +31,7 @@ permalink: resources
 <!-- have a pinned section at the top -->
 
 {% for tag in alltags %}
-  <section class="tag-group grid-x grid-padding-x grid-padding-y cell medium-12" id="{{tag}}">
+  <section class="tag-group grid-x grid-padding-x grid-padding-y cell medium-12" id="{{tag | replace: " ", "-"}}">
   <h3 class="cell">#{{tag}}</h3>
   {% for resource in site.resources %}
     {% if resource.tags contains tag %}
