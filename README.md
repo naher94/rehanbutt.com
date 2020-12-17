@@ -1,24 +1,28 @@
 # Hello & Welcome! 👋
 
-You have found the `readme` for the [rehanbutt.com](https://rehanbutt.com) codebase.
+You have found the `readme` for the [rehanbutt.com](https://rehanbutt.com) codebase. Feel free to explore the code and see how my site is built.
 
-## Content Notes
+I use [Jekyll](https://jekyllrb.com) as my static site templating engine and [Foundation for Site](https://get.foundation/sites.html) as my CSS and JS framework.
+
+## Production Notes
+
+### Content Notes
 
 * When a project is featured an additional tile image is needed
 * Tile Titles should be _____________
 * Tile Descriptions should say something along the lines of ___________
 * Page Titles should be very similar to Tile Titles with _________ as an exception
 
-## Dev Notes
+### Development Notes
 
-### Frontmatter tags
+#### Project Frontmatter Tags
 
 Tag | Use | Data Type
 --- | --- | ---
-layout |  | 
+layout | The template for structural reference | `.html`
 title | The `h1` that shows at the top of the project page | `string`
 tile-name | The project name that shows on `index` on hover | `string`
-thumbnail | thumbnail file name | `image` `.png`
+thumbnail | thumbnail file name | `image` `.png` or `.jpg` when featured project
 banner | Notification style tag generally reads `New` and `In Progress` | `string`
 date | `YYYY-MM-DD` | `date`
 tag | For reference at a later date possibly for filtering | `string`
