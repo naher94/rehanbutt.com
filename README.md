@@ -10,10 +10,18 @@ Curious how the site has evolved over time? Check out the [releases](https://git
 
 ### Content Notes
 
+#### Projects
+
 * When a project is featured an additional tile image is needed
 * Tile Titles should be _____________
 * Tile Descriptions should say something along the lines of ___________
 * Page Titles should be very similar to Tile Titles with _________ as an exception
+
+#### Dribbble Share Links
+
+```
+<a href="https://rehanbutt.com">My Website</a> | <a href="https://twitter.com/naher94/">Twitter</a> | <a href="https://instagram.com/naher94">Instagram</a> | <a href="https://500px.com/naher94">500px</a> | <a href="https://www.pinterest.com/naher94/">Pinterest</a> | <a href="https://github.com/naher94">Github</a>
+```
 
 ### Development Notes
 
