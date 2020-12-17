@@ -61,12 +61,18 @@
 .speaking-item{
   i{
     color: $signature-teal;
+    @media (prefers-color-scheme: dark) {
+      color: $signature-teal-dark;
+    }
   }
   a{
     &:hover{
       .date, .description, h3{
         color: $signature-teal;
         transition: $run;
+        @media (prefers-color-scheme: dark) {
+          color: $signature-teal-hover-dark;
+        }
       }
     }
   }
@@ -225,6 +231,9 @@
     font-style: italic;
     padding: 0;
     margin-bottom: 0;
+    @media (prefers-color-scheme: dark) {
+      color: $pure-white-dark;
+    }
     // &:not(:first-of-type){
     //   margin-top: 1.5em;
     // }
