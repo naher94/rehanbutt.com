@@ -7,7 +7,9 @@ date:   2015-04-01
 tags: UI UX
 ---
 
-<div class="image-container"><img src="../img/smartWatch/appIcon.svg" alt="Icon" class="image-center" style="width:30%" /></div>
+<div class="image-container">
+<img src="../img/smartWatch/weoto-hero.jpg" alt="Hero Image" class="image-center" />
+</div>
 
 This project is based on a prompt about creating a new weather tool for a specific demographic. I decided to work with photographers as my demographic. And decided to design for a smart watch as when shooting you would not be able to easily pull out a tablet or even a phone, but having a watch application that you can glance at would keep your hands "free" for your camera gear.
 
