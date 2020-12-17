@@ -25,6 +25,10 @@ Curious how the site has evolved over time? Check out the [releases](https://git
 
 ### Development Notes
 
+#### General
+
+Foundation Grid XY reference for centering and other special properties: https://zurb.com/university/lessons/176
+
 #### `_projects` Frontmatter Tags
 
 Tag | Use | Data Type
