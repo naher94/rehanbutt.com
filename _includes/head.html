@@ -18,7 +18,7 @@
   <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}" />
   <meta property="og:title" content="{% if page.title %}{{ site.title | escape }} | {{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}" />
   <meta property="og:description" content="{% if page.excerpt %}{{ page.content | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-  <meta property="og:type" content="image.png" />
+  <meta property="og:type" content="website" />
   <meta property="og:image" content="
     {% if page.thumbnail %}{{ page.thumbnail | append: '.png' | prepend: '/img/thumbnails/' | prepend: site.baseurl | prepend: site.url }}{% else %}{{ "/img/favicon.png" | prepend: site.baseurl | prepend: site.url }}{% endif %}" />
 
