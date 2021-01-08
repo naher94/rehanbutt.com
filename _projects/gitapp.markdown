@@ -5,6 +5,7 @@ tile-name: "gitApp"
 thumbnail: "gitApp"
 date:   2014-01-30
 tags: iOS App
+published: false
 ---
 
 <div class="grid-x">
