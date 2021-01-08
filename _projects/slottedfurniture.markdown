@@ -5,6 +5,7 @@ tile-name: "Slotted Furniture"
 thumbnail: "slottedFurniture"
 date:   2013-11-01
 tags: Fabrication
+published: false
 ---
 
 <div class="image-container">
