@@ -2,33 +2,34 @@
 layout: post
 title:  "Wood Working"
 tile-name: "Wood Working"
-thumbnail: "woodWorking"
-date:   2012-12-01
+thumbnail: "woodworking"
+date:   2021-01-15
 tags: fabrication wood
 ---
 
-<div class="image-container">
-<img src="../img/woodWorking/woodWorkingPortal.png" alt="Portal View 1" style="width:100%" />
-<img src="../img/woodWorking/woodWorkingPortal2.png" alt="Portal View 2" style="width:100%" /></div>
+<!-- adding the sofa back table here as well -->
 
-Portal finished piece
+Once you explore through these pieces, check out the <a href="/bowlingtable">reclaimed bowling table</a> for even more wood working adventures!
 
-<div class="image-container">
-<img src="../img/woodWorking/woodWorkingStone.png" alt="Wood and Stone View 1" style="width:100%" /></div>
+<div class="grid-x grid-padding-x grid-margin-y">
+  <div class="cell">
+    <img src="../img/woodworking/bluelight.jpg" alt="Blue triangular table top light">
+  </div>
+</div>
+Blue light 2021
 
-<div class="image-container">
-<img src="../img/woodWorking/woodWorkingStoneDetails.png" alt="Wood and Stone Details" style="width:100%" /></div>
+<div class="grid-x grid-padding-x grid-margin-y">
+  <div class="cell">
+    <img src="../img/woodworking/stonehero.jpg" alt="Wood & Stone hero shot">
+  </div>
+</div>
 
-Wood and Stone finished piece with detail shots
-
-## Process
-
-<div class="image-container">
-<img src="../img/woodWorking/woodWorkingPortalSketches.png" alt="Portal Sketches" style="width:100%" /></div>
-
-Process sketches of the portal wood working piece.
-
-<div class="image-container">
-<img src="../img/woodWorking/woodWorkingStoneSketches.png" alt="Portal Sketches" style="width:100%" /></div>
-
-Process sketches of the wood and stone sculpture piece.
+<div class="grid-x grid-padding-x grid-margin-y">
+  <div class="medium-6 cell">
+    <img src="../img/woodworking/stonedetail1.jpg" alt="Wood & Stone: stone and texture detail shot">
+  </div>
+  <div class="medium-6 cell">
+    <img src="../img/woodworking/stonedetail2.jpg" alt="Wood & Stone: top down, scale shot">
+  </div>
+</div>
+Wood & Stone 2012
