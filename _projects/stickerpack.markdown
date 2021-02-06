@@ -5,6 +5,7 @@ tile-name: "Sticker Packs"
 thumbnail: "stickerPack"
 date: 2017-03-03
 tags: stickers iOS illustrations
+published: false
 ---
 
 <div class="image-container">
