@@ -531,12 +531,14 @@ header{
 
 .logo{
   float: right;
-  img{
+  #rehan-logo{
     height: 50px;
     transition: $sprint;
     &:hover{
       transform: scale(1.1);
-      // animation: boing 300ms ease-out;
+    }
+    g{
+      fill:red; //Changes the color of my logo inline
     }
   }
 }

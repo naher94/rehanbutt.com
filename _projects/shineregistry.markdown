@@ -6,7 +6,6 @@ thumbnail: "shine"
 banner: New
 date: 2020-10-31
 tags: digital UI UX branding
-published: false
 ---
 
 <div class="grid-x">
