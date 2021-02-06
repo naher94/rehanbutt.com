@@ -3,7 +3,7 @@ layout: post
 title:  "Shine Registry"
 tile-name: "Shine Registry"
 thumbnail: "shine"
-banner: New
+flag: New
 date: 2020-10-31
 tags: digital UI UX branding
 ---

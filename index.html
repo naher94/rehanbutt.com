@@ -18,8 +18,8 @@ layout: default
             <span class="thumbnail-text-featured">{{ project.tile-name }}</span>
             <span class="thumbnail-description-featured">{{ project.tile-description }}</span>
           </div>
-          {% if project.banner %}
-          <span class="banner">{{ project.banner }}</span>
+          {% if project.flag %}
+          <span class="flag">{{ project.flag }}</span>
           {% endif %}
         </div>
     </a>
@@ -38,8 +38,8 @@ layout: default
         <div class="thumbnail-container">
           <img class="thumbnail-image" src="img/thumbnails/{{ project.thumbnail | append: '.png' }}" alt="{{ project.tile-name }} Tile Image">
           <span class="thumbnail-text">{{ project.tile-name }}</span>
-          {% if project.banner %}
-          <span class="banner">{{ project.banner }}</span>
+          {% if project.flag %}
+          <span class="flag">{{ project.flag }}</span>
           {% endif %}
         </div>
     </a>

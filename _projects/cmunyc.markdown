@@ -3,7 +3,7 @@ layout: post
 title:  "Carnegie Mellon NYC"
 tile-name: "CMU NYC"
 thumbnail: "nyc"
-date:   2016-02-09
+date: 2016-02-09
 tags: web Dzgn.IO
 ---
 

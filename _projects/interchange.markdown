@@ -3,7 +3,6 @@ layout: post
 title:  "Interchange"
 tile-name: "Interchange"
 thumbnail: "interchange"
-banner:
 date:   2016-12-30
 tags: branding webdev
 ---

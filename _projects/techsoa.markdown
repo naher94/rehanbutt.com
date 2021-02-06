@@ -3,7 +3,6 @@ layout: post
 title: "tech.soa"
 tile-name: "tech.soa Site"
 thumbnail: "techsoa"
-banner:
 date: 2017-08-23
 tags: web
 ---
