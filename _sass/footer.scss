@@ -153,9 +153,8 @@ footer{
     margin-bottom: 36px;
     padding-left: 0;
     padding-right: 0;
-    .test-test{
-      display: block;
-      margin-bottom: 1.2em;
+    .nav-wrap{
+      display: inline;
     }
     .nav{
       font-family: $lato;
@@ -167,9 +166,6 @@ footer{
       &:hover{
         background-color: rgba($navy-black, 0.20);
         transition: color 0.2s ease-in-out;
-      }
-      @media screen and (max-width: 40em) {
-        // display: block;
       }
     }
   }

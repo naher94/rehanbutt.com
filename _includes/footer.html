@@ -24,20 +24,20 @@
     <div class="grid-x grid-container footer-content">
         <div class="cell small-12 medium-auto left-section">
           <div class="site-pages auto cell">
-            <div class="test-test">
+            <div class="nav-wrap">
               <a class="nav" href="/">Portfolio</a>
             </div>
             {% for my_page in site.pages %}
               {% if my_page.exclude != "true" %}
                 {% if my_page.title %}
-                <div class="test-test">
+                <div class="nav-wrap">
                   <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
                 </div>
 
                 {% endif %}
               {% endif %}
             {% endfor %}
-            <div class="test-test">
+            <div class="nav-wrap">
               <a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store</a>
             </div>
           </div>
