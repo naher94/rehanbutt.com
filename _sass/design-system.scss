@@ -7,12 +7,17 @@ h1, h2, h3, h4 {
 
 h1{
   font-size: 3em;
+  line-height: 0.9em;
   font-weight: $zilla-bold;
 }
 
 h2{
   font-size: 3.5em;
   font-weight: $zilla-medium;
+  @media screen and (max-width: 40em) {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }
 
 h3{
@@ -22,28 +27,33 @@ h4{
   font-size: 1.5em;
 }
 
-p {
+p{
   padding-left: 5em;
   padding-right: 5em;
   margin-top: 1.25em;
   margin-bottom: 1.25em;
   @media screen and (max-width: 40em) {
-    p{
-      padding-left: 10px;
-      padding-right: 10px;
-    }
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+}
+
+ul {
+  padding-left: 5em;
+  padding-right: 5em;
+  @media screen and (max-width: 40em) {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
   }
 }
 
 body {
   font-family: $lato;
   font-weight: $lato-regular;
-  font-size: 20px; //1em
+  font-size: 20px; // = 1em
   color: $navy-black;
   @media screen and (max-width: 40em) {
-    body{
-      font-size: 16px;
-    }
+    font-size: 16px;
   }
   @media (prefers-color-scheme: dark) { //is there a way to pull this out all together for a color theme file
     background-color: #06080C;
@@ -53,10 +63,10 @@ body {
 
 .date-stamp{
   font-size: 1.6em;
-  margin-top: -0.75em;
+  margin-top: 0;
   font-weight: $zilla-regular;
   font-family: $zilla;
-  margin-bottom: 1em;
+  margin-bottom: 0;
   padding: 0;
 }
 
@@ -80,6 +90,22 @@ body {
   @media (prefers-color-scheme: dark) {
     color: $pure-white-dark;
   }
+}
+
+.post-callout{
+  margin: 2rem 0;
+  font-size: 2.5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  line-height: 1.3em;
+}
+
+.post-callout-small{
+  margin: 2rem 0;
+  font-size: 1.5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  line-height: 1.3em;
 }
 
 
@@ -124,20 +150,3 @@ p, li, h3{
   }
 }
 //******* A Tag Underline Expand Styling
-
-// Where is this used?
-// ul {
-//   padding-left: 0.5em;
-//   padding-right: 0.5em;
-// }
-
-// .post-content{
-//   ul{
-//     padding-left: 5em;
-//     padding-right: 5em;
-//     @media screen and (max-width: 40em) {
-//       padding-left: 10px;
-//       padding-right: 10px;
-//     }
-//   }
-// }

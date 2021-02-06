@@ -316,26 +316,15 @@ iframe { //this should probs be aspect ratio
   }
 }
 
-
+.post-header{
+  @media screen and (max-width: 64em) {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+}
 
 
 //******* Project Specific Styling
-
-.illustration-callout{
-  margin: 2rem 0;
-}
-
-.quote {
-  font-size: 3.2em;
-  line-height: 1.1em;
-  margin-top: 2.5em;
-  margin-bottom: 1em;
-  @media screen and (max-width: 40em) {
-    padding: 0 0.5em;
-    font-size: 2em;
-    padding-bottom: 2em;
-  }
-}
 
 .teal-container{ //used in My Brand project
   background-color: $signature-teal;
@@ -465,19 +454,15 @@ iframe { //this should probs be aspect ratio
 
 
 
-//******* Foundation Overrides
-.column:last-child:not(:first-child),
-.columns:last-child:not(:first-child) {
-  float: left;
-}
-//******* End of Foundation Overrides
-
-
 //******* Mobile Styling
 
 // Measurments pulled from foundation css file
-// Mobile Styling
+
+// Mobile Styling 40em
+// Tablet Styling 64em
+
 @media screen and (max-width: 40em) {
+
   .menu {
     display: block;
     float: left;
@@ -498,13 +483,6 @@ iframe { //this should probs be aspect ratio
         }
       }
     }
-}
-  .post-content{
-    h2{
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      font-weight: $zilla-bold;
-    }
   }
   .mobile-navbar{
     display: block;
@@ -516,46 +494,14 @@ iframe { //this should probs be aspect ratio
     font-size: 16px;
   }
 
-  .logo{
-    img{
-      height: 40px;
-    }
-  }
-
   .thumbnail-tile {
     margin-bottom: 20px;
   }
 
   .navbar {
-      clear: both;
-      display: none;
-  }
-
-  .post-header{
-    padding-left: 0.5em;
+    clear: both;
+    display: none;
   }
 }
 
-// Tablet Styling
-@media screen and (max-width: 64em) {
-  .post-header{
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-  .post-content{
-    h2{
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      font-weight: $zilla-bold;
-    }
-    h3, h4{
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-    }
-    h4{
-      margin-top: 0;
-    }
-  }
-
-}
 //******* End of Mobile Styling
