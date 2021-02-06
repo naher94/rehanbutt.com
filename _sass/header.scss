@@ -1,0 +1,212 @@
+//******* Header Styling
+.nav-container{
+  background-color:$signature-teal;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  width: 100%;
+  @media (prefers-color-scheme: dark) {
+    background-color: $signature-teal-dark;
+  }
+}
+header{
+  margin-bottom: 3em;
+  @media screen and (max-width: 40em) {
+    margin-bottom: 1.5em;
+  }
+}
+
+.menu{
+  display: none;
+}
+
+.mobile-navbar-full{
+  display: none;
+}
+
+.logo{
+  float: right;
+  #rehan-logo{
+    height: 50px;
+    transition: $sprint;
+    &:hover{
+      transform: scale(1.1);
+    }
+    g{
+      fill:$pure-white; //Changes the color of my logo inline
+    }
+  }
+}
+
+.menu-hide{
+  display: none;
+}
+
+.nav {
+  color: $pure-white;
+  padding: 0.7em;
+  height: inherit;
+  font-family: $zilla;
+  font-weight: $zilla-bold;
+  border-radius: $pill-radius;
+  font-size: 1em;
+  transition: background-color 0.2s ease-in-out;
+  @media (prefers-color-scheme: dark) {
+    color: $pure-white-dark;
+  }
+}
+
+.nav:hover {
+  color: $pure-white;
+  background-color: $signature-teal-hover;
+  border-radius: $pill-radius;
+  @media (prefers-color-scheme: dark) {
+    background-color: $signature-teal-hover-dark;
+  }
+}
+
+.mobile-navbar{
+  display: none;
+  float: left;
+  line-height: 2.5em;
+}
+
+.navbar {
+  color: $pure-white;
+  float: left;
+  line-height: 2.5em;
+  @media (prefers-color-scheme: dark) {
+    color: $pure-white-dark;
+  }
+}
+
+.menu-container{
+  .burger-icon{
+    display: none;
+    float: left;
+    user-select: none;
+    @media screen and (max-width: 40em) {
+      display: block;
+    }
+  }
+}
+
+.burger-container{
+  float: left;
+  display: none;
+  @media screen and (max-width: 40em) {
+    display: block;
+  }
+
+}
+
+.burger-icon, .burger-btn, .nav-burger-icon{
+  user-select: none;
+}
+
+/* menu-links */
+.menu-links {
+  overflow: hidden;
+  clear: both;
+  max-height: 0;
+  transition: max-height .3s ease-out;
+  margin-left: 0;
+  user-select: none;
+  margin-bottom: 0;
+  a{
+    color: $pure-white;
+    font-family: $zilla;
+    font-weight: $zilla-bold;
+    font-size: 1.25em;
+    border-radius: $pill-radius;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+    &:hover{
+      background-color: $signature-teal-hover;
+      @media (prefers-color-scheme: dark) {
+        background-color: $signature-teal-hover-dark;
+      }
+    }
+    @media (prefers-color-scheme: dark) {
+    color: $pure-white-dark;
+  }
+  }
+}
+
+.nav-item-container{
+  font-size: 1.5em;
+  &:first-of-type{
+      margin-top: 1em;
+    }
+}
+
+.nav-burger-icon {
+  background: $signature-teal;
+  display: block;
+  height: 5px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+  margin-top: 1.3em;
+  @media (prefers-color-scheme: dark) {
+    background: $signature-teal-dark;
+  }
+}
+
+.nav-burger-icon:before,
+.nav-burger-icon:after {
+  background: $pure-white;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+  @media (prefers-color-scheme: dark) {
+    background: $pure-white-dark;
+  }
+}
+
+.nav-burger-icon{
+  &:before{
+    top: 4px;
+  }
+  &:after{
+    top: -4px;
+  }
+}
+
+.burger-btn {
+  display: none;
+}
+
+.burger-btn:checked ~ .menu-links {
+  max-height: 340px;
+  display: block;
+  transition: $run;
+}
+
+.burger-btn:checked ~ .mobile-navbar{
+  @media screen and (max-width: 40em) {
+    display: none;
+  }
+}
+
+.burger-btn:checked ~ .burger-icon .nav-burger-icon {
+  background: transparent;
+}
+
+.burger-btn:checked ~ .burger-icon .nav-burger-icon:before {
+  transform: rotate(-45deg);
+}
+
+.burger-btn:checked ~ .burger-icon .nav-burger-icon:after {
+  transform: rotate(45deg);
+}
+
+.burger-btn:checked ~ .burger-icon:not(.steps) .nav-burger-icon:before,
+.burger-btn:checked ~ .burger-icon:not(.steps) .nav-burger-icon:after {
+  top: 0;
+}
+//******* End of Header Styling

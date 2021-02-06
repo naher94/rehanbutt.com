@@ -62,7 +62,7 @@ In order to reduce the number of fitting we had to do with the models and experi
 <!--REVISED SKETCHES-->
 
 <div class="image-container">
-<img src="../img/fashion/fashionRevisedSketches.png" alt="Sketches V1" class="image-center" style="width:90%" /></div>
+<img src="../img/fashion/fashionRevisedSketches.png" alt="Sketches V1" style="width:100%" /></div>
 
 <!--REVISED SKETCHES V2-->
 
@@ -74,7 +74,7 @@ Sketches of our iridescent fabric pieces.
 <!--3D print images the ball joints and files vs actual prints earring-->
 
 <div class="image-container">
-<img src="../img/fashion/fashion3dprints.png" alt="3D Prints" class="image-center" style="width:100%" /></div>
+<img src="../img/fashion/fashion3dprints.png" alt="3D Prints" style="width:100%" /></div>
 
 <div class="image-container">
 <img src="../img/fashion/fashion3dprintsRender.png" alt="3D Print Renders" /></div>
@@ -90,10 +90,10 @@ Some initial sketches we had done for the piece of the outfits that we wanted 3D
 
 <div class="grid-x align-center">
   <div class="cell image-container">
-  <img src="../img/fashion/fashionSketchbook.png" alt="SketchBook Sketches" class="image-center" /></div>
+  <img src="../img/fashion/fashionSketchbook.png" alt="SketchBook Sketches" style="width:100%" /></div>
 
   <div class="cell medium-6 image-container">
-  <img src="../img/fashion/fashionInstagram.png" alt="Wearing Origami - Instagram" class="image-center" /></div>
+  <img src="../img/fashion/fashionInstagram.png" alt="Wearing Origami - Instagram"/></div>
 </div>
 
 

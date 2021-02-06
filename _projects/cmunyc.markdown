@@ -48,7 +48,7 @@ When starting this project we looked into other Carnegie Mellon campuses as well
 <div class="image-container">
 <img src="../img/nyc/brandSketches.png" alt="Brand Sketches" />
 <img src="../img/nyc/brandingProcess.png" alt="Branding Process" />
-<img src="../img/nyc/colorIteration.png" alt="Color Iteration" class="image-center" style="width:70%"/>
+<img src="../img/nyc/colorIteration.png" alt="Color Iteration"/>
 <img src="../img/nyc/persona.jpg" alt="Persona" />
 <img src="../img/nyc/persona2.jpg" alt="Persona" />
 <img src="../img/nyc/programChart.png" alt="Program Chart" />
@@ -58,7 +58,7 @@ When starting this project we looked into other Carnegie Mellon campuses as well
 <img src="../img/nyc/iterations.png" alt="Page Iterations" />
 </div>
 
-<div class="image-container"><img src="../img/nyc/slack.png" alt="Slack" class="image-center" style="width: 70%;" /></div>
+<div class="image-container"><img src="../img/nyc/slack.png" alt="Slack" /></div>
 
 In order to keep track and make sure everyone was up to speed on what each team was doing we decided to use Slack for communications and updates project wide.
 

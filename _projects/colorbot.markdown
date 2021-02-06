@@ -7,7 +7,7 @@ date:   2016-12-4
 tags: bot color
 ---
 
-<div class="image-container"><img src="../img/colorBot/intro.svg" alt="Logo Equation" class="image-center"/></div>
+<div class="image-container"><img src="../img/colorBot/intro.svg" alt="Logo Equation"/></div>
 
 Jasper is a color tool to expand your color vocabulary and provide a new form of inspiration.
 

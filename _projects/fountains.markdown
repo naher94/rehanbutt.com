@@ -25,25 +25,25 @@ tags: fabrication
 </div>
 <div class="grid-x" style="margin-top: 2em;">
   <div class="cell image-container">
-    <img style="width:100%" class="image-center" src="../img/fountains/tech1.jpg" alt="Flow of Tech fountain made of computer keyboards">
+    <img style="width:100%" src="../img/fountains/tech1.jpg" alt="Flow of Tech fountain made of computer keyboards">
   </div>
   <div class="cell image-container">
-    <img style="width:100%" class="image-center" src="../img/fountains/tech2.jpg" alt="Flow of Tech fountain made of computer keyboards Detail shot">
+    <img style="width:100%" src="../img/fountains/tech2.jpg" alt="Flow of Tech fountain made of computer keyboards Detail shot">
   </div>
 </div>
 <div class="grid-x grid-margin-x" style="margin-top: 2em;">
   <div class="cell medium-6">
-    <img style="width:100%" class="image-center" src="../img/fountains/green1.jpg" alt="Green ceramic and foam fountain">
+    <img style="width:100%" src="../img/fountains/green1.jpg" alt="Green ceramic and foam fountain">
   </div>
   <div class="cell medium-6">
-    <img style="width:100%" class="image-center" src="../img/fountains/green2.jpg" alt="Green ceramic and foam fountain detail shot">
+    <img style="width:100%" src="../img/fountains/green2.jpg" alt="Green ceramic and foam fountain detail shot">
   </div>
 </div>
 <div class="grid-x grid-margin-x" style="margin-top: 2em;">
   <div class="cell medium-6">
-    <img style="width:100%" class="image-center" src="../img/fountains/purple1.jpg" alt="Orange and purple canvas fountain">
+    <img style="width:100%" src="../img/fountains/purple1.jpg" alt="Orange and purple canvas fountain">
   </div>
   <div class="cell medium-6">
-    <img style="width:100%" class="image-center" src="../img/fountains/purple2.jpg" alt="Orange and purple canvas fountain detail shot">
+    <img style="width:100%" src="../img/fountains/purple2.jpg" alt="Orange and purple canvas fountain detail shot">
   </div>
 </div>

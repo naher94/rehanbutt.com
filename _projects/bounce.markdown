@@ -8,7 +8,11 @@ date:   2017-03-20
 tags: UI UX Branding
 ---
 
-<div class="image-container"><img src="../img/bounce/logo.svg" alt="Final Logo" class="image-center" style="width:60%"/></div>
+<div class="grid-x align-center">
+  <div class="cell medium-8">
+    <div class="image-container"><img src="../img/bounce/logo.svg" alt="Final Logo"/></div>
+  </div>
+</div>
 
 Have you ever been in a chat conversation with someone talking about several different things simultaneously and find it hard to keep track of which responses are connected? This is what Bounce tries to solve. Bounce allows users to split conversations into specific topics 'collections' to reduce this confusion. Flipping the idea of only having one chat conversation with someone.
 
