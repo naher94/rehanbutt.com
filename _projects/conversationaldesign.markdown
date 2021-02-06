@@ -3,8 +3,7 @@ layout: post
 title:  "Conversational Design"
 tile-name: "Conversational Design"
 thumbnail: "conversationalDesign"
-banner:
-date:   2016-12-16
+date: 2016-12-16
 tags: bot
 ---
 

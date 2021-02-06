@@ -17,7 +17,7 @@ My main incentive for this project was to bring GitHub mobile. Reason being in o
 
 Update from the future (2020 to be exact 😃) GitHub has released their <a rel="noopener" target="_blank" href="https://github.com/mobile/">own application</a> go check it out!
 
-<iframe class="image-center" width="100%" src="https://www.youtube.com/embed/9pox7w3nB_s?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" src="https://www.youtube.com/embed/9pox7w3nB_s?rel=0" frameborder="0" allowfullscreen></iframe>
 
 ## Process
 

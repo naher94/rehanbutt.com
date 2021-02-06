@@ -4,7 +4,6 @@ title:  "Illustrations"
 tile-name: "Illustrations"
 thumbnail: "illustrations"
 date:   2016-03-01
-banner:
 tags: digital, illustration
 ---
 
@@ -16,7 +15,7 @@ tags: digital, illustration
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/tube.png" alt="Penguin + London Tube" /></div>
 </div>
 
-<h3 class="illustration-callout">Check out my <a target="_blank" href="https://instagram.com/naher94">Instagram</a> page for even more illustrations!</h3>
+<p class="post-callout">Check out my <a target="_blank" href="https://instagram.com/naher94">Instagram</a> page for even more illustrations!</p>
 
 <div class="grid-x grid-margin-x grid-margin-y">
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/nycity.gif" alt="nycity Lettering" /></div>
@@ -45,15 +44,23 @@ tags: digital, illustration
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/grilledCheese.jpg" alt="Grilled Cheese" /></div>
 </div>
 <div class="grid-x grid-margin-x grid-margin-y">
-    <div class=" medium-6 large-6 cell"><img src="../img/illustrations/kiteMrBond.png" alt="Kite Dancing in a Hurricane Mr. Bond" /></div>
-    <div class=" medium-6 large-6 cell quote">"You're a kite dancing in a hurricane Mr. Bond"</div>
+    <div class=" medium-6 large-6 cell">
+      <img src="../img/illustrations/kiteMrBond.png" alt="Kite Dancing in a Hurricane Mr. Bond" />
+    </div>
+    <div class=" medium-6 large-6 cell">
+      <p class="post-callout">"You're a kite dancing in a hurricane Mr. Bond"</p>
+    </div>
 </div>
 <div class="grid-x grid-margin-x grid-margin-y">
-    <div class="medium-6 large-6 cell image-container"><img src="../img/illustrations/followingFollowing.jpg" alt="Map that Leads to You" /></div>
-    <div class="medium-6 large-6 cell quote">"The map that leads to you... Following, following, following to you"</div>
+    <div class="medium-6 large-6 cell image-container">
+      <img src="../img/illustrations/followingFollowing.jpg" alt="Map that Leads to You" />
+    </div>
+    <div class="medium-6 large-6 cell">
+      <p class="post-callout">"The map that leads to you... Following, following, following to you"</p>
+    </div>
 </div>
 <div class="grid-x grid-margin-x grid-margin-y">
     <div class="medium-6 large-6 cell"><img src="../img/illustrations/badBlood.jpg" alt="Bad Blood: Taylor Swift" /></div>
     <div class="medium-6 large-6 cell"><img src="../img/illustrations/karat.png" alt="karat" /></div>
-    <!--<div class=" large-6 cell "><img src="../img/illustrations/BB8Stylize.png" alt="BB8 Stylize" /></div>-->
+    <!-- <div class=" large-6 cell "><img src="../img/illustrations/BB8Stylize.png" alt="BB8 Stylize" /></div> -->
 </div>

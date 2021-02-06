@@ -1,0 +1,152 @@
+// Design System
+
+
+h1, h2, h3, h4 {
+  font-family: $zilla;
+}
+
+h1{
+  font-size: 3em;
+  line-height: 0.9em;
+  font-weight: $zilla-bold;
+}
+
+h2{
+  font-size: 3.5em;
+  font-weight: $zilla-medium;
+  @media screen and (max-width: 40em) {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+h3{
+  font-size: 2.5em;
+}
+h4{
+  font-size: 1.5em;
+}
+
+p{
+  padding-left: 5em;
+  padding-right: 5em;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  @media screen and (max-width: 40em) {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+}
+
+ul {
+  padding-left: 5em;
+  padding-right: 5em;
+  @media screen and (max-width: 40em) {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+}
+
+body {
+  font-family: $lato;
+  font-weight: $lato-regular;
+  font-size: 20px; // = 1em
+  color: $navy-black;
+  @media screen and (max-width: 40em) {
+    font-size: 16px;
+  }
+  @media (prefers-color-scheme: dark) { //is there a way to pull this out all together for a color theme file
+    background-color: #06080C;
+    color: $pure-white-dark;
+  }
+}
+
+.date-stamp{
+  font-size: 1.6em;
+  margin-top: 0;
+  font-weight: $zilla-regular;
+  font-family: $zilla;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+::selection {
+  background: $signature-teal;
+  color: $pure-white;
+  @media (prefers-color-scheme: dark) {
+    background: $signature-teal-dark;
+    color: $pure-white-dark;
+  }
+}
+
+.content-button {
+  width: 100%;
+  font-size: 1.5em;
+  color: $pure-white;
+  padding: 1em;
+  text-align: center;
+  border-radius: $pill-radius;
+  transition: $run;
+  @media (prefers-color-scheme: dark) {
+    color: $pure-white-dark;
+  }
+}
+
+.post-callout{
+  margin: 2rem 0;
+  font-size: 2.5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  line-height: 1.3em;
+}
+
+.post-callout-small{
+  margin: 2rem 0;
+  font-size: 1.5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  line-height: 1.3em;
+}
+
+
+//******* A Tag Underline Expand Styling
+p, li, h3{
+  a {
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+    color: $signature-teal;
+    padding: 0 1px;
+    transition: $run;
+    @media (prefers-color-scheme: dark) {
+      color: $signature-teal-dark;
+    }
+  }
+
+  a::after{
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 11%;
+    left: 0;
+    bottom: 0;
+    background-color: $signature-teal;
+    transition: $run;
+    @media (prefers-color-scheme: dark) {
+      background-color: $signature-teal-dark;
+    }
+  }
+
+  a:hover {
+    color: $pure-white;
+    @media (prefers-color-scheme: dark) {
+      color: $pure-white-dark;
+    }
+  }
+
+  a:hover::after {
+    height: 100%;
+  }
+}
+//******* A Tag Underline Expand Styling

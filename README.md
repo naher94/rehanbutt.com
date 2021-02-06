@@ -37,7 +37,7 @@ layout | The template for structural reference | `.html`
 title | The `h1` that shows at the top of the project page | `string`
 tile-name | The project name that shows on `index` on hover | `string`
 thumbnail | thumbnail file name | `image` `.png` or `.jpg` when featured project
-banner | Notification style tag generally reads `New` and `In Progress` | `string`
+flag | Notification style tag generally reads `New` and `In Progress` | `string`
 date | `YYYY-MM-DD` | `date`
 tag | For reference at a later date possibly for filtering | `string`
 published | whether it renders in the portfolio  | `bool`
@@ -105,7 +105,7 @@ http://ideate.xsead.cmu.edu/profiles/profiles/naher94 | no |
 http://naher94.github.io/esporre/ | no |
 https://angel.co/rehan-butt | no |
 https://medium.com/@Naher94 | no |
-https://yasmeenalmuhanna.com | no | 
+https://yasmeenalmuhanna.com | no |
 https://stackoverflow.com/users/12394272/rehan-butt | |
 https://community.cmu.edu/s/ | |
 alumnifire | |

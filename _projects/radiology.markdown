@@ -3,7 +3,6 @@ layout: post
 title:  "The World of Radiology"
 tile-name: "The World of Radiology"
 thumbnail: "ngi"
-banner:
 date: 2020-02-31
 tags: digital UI UX
 published: true

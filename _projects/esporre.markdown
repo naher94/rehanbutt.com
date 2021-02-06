@@ -12,7 +12,7 @@ tags: web portfolio learning edtech
 <div class="grid-x grid-padding-x" style="margin-top: 60px">
   <div class="cell">
     <a target="_blank" href="http://processly.io">
-        <div class="processlyButton contentButton"> Check out further development here
+        <div class="processly-button content-button"> Check out further development here
         </div>
     </a>
 </div>
@@ -22,7 +22,7 @@ Our challenge was to create an digital portfolio tool or system that some proble
 
 I worked on this project with 2 of my colleagues and friends, Lauren Zito and Lucy Pei. For further information on our project also check out our <a target="_blank" href="http://naher94.github.io/esporre/">splash page.</a>
 
-<div class="image-container"><img src="../img/esporre/launchPageRendered.png" alt="Launch Page" class="image-center" style="width: 70%" /></div>
+<div class="image-container"><img src="../img/esporre/launchPageRendered.png" alt="Launch Page"/></div>
 
 ## Process
 

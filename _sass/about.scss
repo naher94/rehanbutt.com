@@ -292,51 +292,6 @@
   }
 }
 
-.background-shapes{
-  position: absolute;
-  .circle{
-    position: absolute;
-    z-index: -10;
-    border-radius: 50%;
-    animation-name: bubbles-animation;/* Refers to the name of your @keyframes element below */
-    animation-duration: 5s;/* Change to speed up or slow down */
-    animation-iteration-count: infinite;/* Never stop waving :) */
-    transform-origin: bottom left;/* Pivot around the bottom-left palm */
-    display: inline-block;
-  }
-
-  .circle1{
-    width: 150px;
-    height: 150px;
-    background: #9c5ab7;
-    left: calc(100% - 50px);
-  }
-  .circle2{
-    width: 100px;
-    height: 100px;
-    background: #f2c50f;
-    left: calc(100% / 2);
-    top: 200px;
-  }
-}
-
-#resumeButton {
-  width: 100%;
-  background-color: $royal-raspberry;
-  font-size: 1em;
-  color: $pure-white;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  text-align: center;
-  margin-top: 0.5em;
-  margin-bottom: 1.25em;
-  border-radius: $pill-radius;
-
-  &:hover {
-    background-color: $royal-raspberry-hover;
-  }
-}
-
 .rainbow{
   background-image: linear-gradient(90deg,#00a2e2 0%,#1bad6b 20%,#fec609 40%,#e92687 60%,#6d358d 80%,#00a2e2 100%);
   background-size: 200% auto;
@@ -369,15 +324,5 @@ span.wave {
    40% { transform: rotate(  9.0deg) }
    50% { transform: rotate(  0.0deg) }/* Reset for the last half to pause */
   100% { transform: rotate(  0.0deg) }
-}
-
-@keyframes bubbles-animation {
-    0% { transform: scale(  1) }
-//   10% { transform: scale(0.8) }
-//   20% { transform: scale(0.6) }
-//   30% { transform: scale(1.5) }
-//   40% { transform: scale(  1) }
-   70% { transform: scale(0.9) }
-  100% { transform: scale(  1) }
 }
 //******* End of About Page Styling
