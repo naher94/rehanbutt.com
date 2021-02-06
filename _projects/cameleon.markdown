@@ -16,7 +16,7 @@ tags: web game color
 <div class="grid-x grid-padding-x" style="margin-top:4rem;">
   <div class="cell">
     <a target="_blank" href="http://naher94.github.io/cameleon">
-      <div class="camleonButton contentButton"> Check out the project at the splash page</div>
+      <div class="camleon-button content-button"> Check out the project at the splash page</div>
     </a>
   </div>
 </div>

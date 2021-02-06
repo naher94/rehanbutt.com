@@ -25,7 +25,7 @@ In [Version (V1.0)](https://github.com/naher94/jasper/releases/tag/V1.0) Jasper 
 <div class="grid-x grid-padding-x grid-padding-y">
   <div class="cell">
     <a target="_blank" href="https://github.com/naher94/jasper">
-        <div class="colorBotButton contentButton"> Check out the code
+        <div class="colorbot-button content-button"> Check out the code
         </div>
     </a>
   </div>

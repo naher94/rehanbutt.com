@@ -12,7 +12,7 @@ tags: web Dzgn.IO
 
 <!-- <div>
 <a target="_blank" href="http://nyc.dzgn.io">
-    <div class="nycButton contentButton"> Check out the full site
+    <div class="nyc-button content-button"> Check out the full site
     </div>
 </a>
 </div> -->

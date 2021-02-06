@@ -24,14 +24,14 @@ A couple of the many interactions and animations that were designed. Point incre
 <div class="grid-x grid-margin-x grid-padding-y" style="margin-bottom: 2em;">
   <div class="cell medium-6">
   <a target="_blank" href="https://itunes.apple.com/us/app/deep-in-the-q/id1225687551?mt=8">
-      <div class="deepintheqButton contentButton"> Download on iOS
+      <div class="deepintheq-button content-button"> Download on iOS
       </div>
   </a>
   </div>
 
   <div class="cell medium-6">
   <a target="_blank" href="https://play.google.com/store/apps/details?id=com.yinzcam.deepintheq&hl=en">
-      <div class="deepintheqButton contentButton"> Download on Android
+      <div class="deepintheq-button content-button"> Download on Android
       </div>
   </a>
   </div>

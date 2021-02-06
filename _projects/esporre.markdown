@@ -12,7 +12,7 @@ tags: web portfolio learning edtech
 <div class="grid-x grid-padding-x" style="margin-top: 60px">
   <div class="cell">
     <a target="_blank" href="http://processly.io">
-        <div class="processlyButton contentButton"> Check out further development here
+        <div class="processly-button content-button"> Check out further development here
         </div>
     </a>
 </div>

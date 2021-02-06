@@ -20,7 +20,7 @@ As this site will be used by many students, I templated and created a style guid
 <div class="grid-x grid-padding-x">
   <div class="cell">
     <a target="_blank" href="https://naher94.github.io/interchange">
-        <div class="interchangeButton contentButton"> Check out the site
+        <div class="interchange-button content-button"> Check out the site
         </div>
     </a>
   </div>
@@ -46,7 +46,7 @@ As this site will be used by many students, I templated and created a style guid
 <div class="grid-x grid-padding-x">
   <div class="cell">
 <a target="_blank" href="https://github.com/naher94/interchange">
-    <div class="interchangeButton contentButton"> Check out the code
+    <div class="interchange-button content-button"> Check out the code
     </div>
 </a>
 </div>
