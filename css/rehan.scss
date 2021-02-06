@@ -37,8 +37,8 @@ img {
 }
 
 .thumbnail-container {
-  position: relative; //For banner to show correctly
-  display: block; //For banner to show correctly
+  position: relative; //For flag to show correctly
+  display: block; //For flag to show correctly
   background-color: $navy-black;
   border-radius: $tile-radius;
   transition: $sprint;
@@ -110,13 +110,6 @@ img {
   background: linear-gradient(0deg, rgba($navy-black,1) 0%, rgba($navy-black,0) 100%);
   width: 100%;
   border-radius: 0 0 $tile-radius $tile-radius;
-  @media screen and (max-width: 40em) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    padding-bottom: 1.5rem;
-    padding-top: 2rem;
-    bottom: 0;
-  }
   @media screen and (max-width: 64em) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -132,9 +125,6 @@ img {
   line-height: 1em;
   font-weight: $zilla-bold;
   font-family: $zilla;
-  @media screen and (max-width: 40em) {
-    font-size: 2em;
-  }
   @media screen and (max-width: 64em) {
     font-size: 2em;
   }
@@ -150,12 +140,6 @@ img {
   line-height: 1.2em;
   font-weight: $lato-regular;
   font-family: $lato;
-  @media screen and (max-width: 40em) {
-    font-size: 1.4em;
-  }
-  @media screen and (max-width: 64em) {
-    font-size: 1.4rem;
-  }
   @media (prefers-color-scheme: dark) {
     color: $pure-white-dark;
   }
