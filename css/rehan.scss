@@ -36,6 +36,29 @@ img {
   margin-bottom: 1.25em;
 }
 
+.slideshow-container{
+  box-shadow: $recessed-shadow;
+}
+
+.image-center {
+  margin: 0 auto;
+  display: block;
+}
+
+iframe { //this should probs be aspect ratio
+  height: 600px;
+  @media screen and (max-width: 40em) {
+    height: 220px;
+  }
+}
+
+.post-header{
+  @media screen and (max-width: 64em) {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+}
+
 .thumbnail-container {
   position: relative; //For flag to show correctly
   display: block; //For flag to show correctly
@@ -170,8 +193,7 @@ img {
 }
 
 
-/////////////////////////// Easter Egg
-
+//******* Easter Egg Styling
 .behind-the-scenes-container{
   display: none; //Show on Konami Code Entry
   .behind-the-scenes{
@@ -279,37 +301,10 @@ img {
 .force-flex{
   display: flex !important;
 }
-/////////////////////////// End of Easter Egg
-
-
-
-
-.slideshow-container{
-  box-shadow: $recessed-shadow;
-}
-
-.image-center {
-  margin: 0 auto;
-  display: block;
-}
-
-iframe { //this should probs be aspect ratio
-  height: 600px;
-  @media screen and (max-width: 40em) {
-    height: 220px;
-  }
-}
-
-.post-header{
-  @media screen and (max-width: 64em) {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-}
+//******* End of Easter Egg Styling
 
 
 //******* Project Specific Styling
-
 .teal-container{ //used in My Brand project
   background-color: $signature-teal;
   padding: 10rem 0;
@@ -395,7 +390,7 @@ iframe { //this should probs be aspect ratio
     background-color: darken(#870039, $color-percentage);
   }
 }
-//******* Project Specific Styling
+//******* End of Project Specific Styling
 
 
 //******* Banner Styling
