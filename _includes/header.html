@@ -1,73 +1,52 @@
 <header>
 
   <nav class="nav-container">
-  <div class="site-nav grid-x grid-y grid-container large-12">
+    <div class="site-nav grid-x grid-y grid-container">
 
-    <div class="menu-container">
-
-      <div class="burger-container">
-        <input class="burger-btn" type="checkbox" id="burger-btn"/>
-        <label class="burger-icon" for="burger-btn">
-          <span class="nav-burger-icon"></span>
-        </label>
-        <div class="mobile-navbar">
-          <a class="nav" href="/index.html">Portfolio</a>
-          {% for my_page in site.pages %}
-            {% if my_page.title == "About" %}
-              <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
-            {% endif %}
-          {% endfor %}
+      <div class="menu-container">
+        <div class="burger-container">
+          <input class="burger-btn" type="checkbox" id="burger-btn"/>
+          <label class="burger-icon" for="burger-btn">
+            <span class="nav-burger-icon"></span>
+          </label>
+          <div class="mobile-navbar">
+            <a class="nav" href="/">Portfolio</a>
+            <a class="nav" href="/about">About</a>
+          </div>
+          <ul class="menu-links">
+            <li class="nav-item-container"><a class="nav" href="/index.html">Portfolio</a></li>
+              {% for my_page in site.pages %}
+                {% if my_page.exclude != "true" %}
+                  {% if my_page.title %}
+                    <li class="nav-item-container"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></li>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            <li class="nav-item-container"><a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store</a></li>
+          </ul>
         </div>
-        <ul class="menu-links">
-          <li class="nav-item-container"><a class="nav" href="/index.html">Portfolio</a></li>
-        {% for my_page in site.pages %}
-          {% if my_page.exclude != "true" %}
-            {% if my_page.title %}
-              <li class="nav-item-container"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></li>
-            {% endif %}
-          {% endif %}
-        {% endfor %}
-        <li class="nav-item-container"><a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store</a></li>
-        </ul>
-      </div>
 
-      <div class="navbar">
-        <a class="nav" href="/index.html">Portfolio</a>
-          {% for my_page in site.pages %}
-            {% if my_page.exclude != "true" %}
-            {% if my_page.title %}
-              <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
-            {% endif %}
-            {% endif %}
-          {% endfor %}
-          <!-- <a class="nav" href="http://blog.rehanbutt.com">Blog</a>
-          <a class="nav" href="http://resources.rehanbutt.com">Resources</a> -->
-          <!-- <a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store</a> -->
-      </div>
-      <div class="logo">
-        <a href="{{ site.baseurl }}/">
-          {% include rehan-logo.svg %}
-        </a>
-      </div>
+        <div class="navbar">
+          <a class="nav" href="/index.html">Portfolio</a>
+            {% for my_page in site.pages %}
+              {% if my_page.exclude != "true" %}
+                {% if my_page.title %}
+                  <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+        </div>
 
-      <!-- Is this used? -->
-      <div class="mobile-navbar-full">
-        <div class="nav-item-container"><a class="nav" href="/index.html">Portfolio</a></div>
-        {% for my_page in site.pages %}
-          {% if my_page.exclude != "true" %}
-            {% if my_page.title %}
-              <div class="nav-item-container"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></div>
-            {% endif %}
-          {% endif %}
-        {% endfor %}
-        <!-- <div class="nav-item-container"><a class="nav" href="http://blog.rehanbutt.com">Blog</a></div>
-        <div class="nav-item-container"><a class="nav" href="http://resources.rehanbutt.com">Resources</a></div> -->
-        <div class="nav-item-container"><a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store</a></div>
+        <div class="logo">
+          <a href="{{ site.baseurl }}/">
+            {% include rehan-logo.svg %}
+          </a>
+        </div>
+
       </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-{% include banner.html %}
+  {% include banner.html %}
 
 </header>
