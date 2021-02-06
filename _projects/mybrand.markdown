@@ -13,7 +13,7 @@ tags: branding
   </div>
 </div>
 
-With the refresh I also wanted to streamline my brand, specifically reduce the complexity of the graphic while keeping the reference of the logo to my name. One of the first elements I looked into was reducing the number or horizontal lines in the logo, then crisping up the corners by removing the chamfers.
+With the refresh of my site I also wanted to refresh my visual brand identity, specifically reduce the complexity of the graphic while keeping the reference to my name. One of the first elements I looked into was reducing the number or horizontal lines in the logo, then crisping up the corners by removing the chamfers.
 
 <div class="grid-x align-center">
   <div class="cell">
