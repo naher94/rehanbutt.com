@@ -9,6 +9,12 @@ tags: digital UI UX branding
 published: false
 ---
 
+<div class="grid-x">
+  <div class="cell">
+    <img src="../img/shineregistry/shine-hero.png" alt="Shine Registry's home page and a sample registry page">
+  </div>
+</div>
+
 <!-- New site hero -->
 <!-- old side info arch -->
 
