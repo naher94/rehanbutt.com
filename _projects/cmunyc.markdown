@@ -36,12 +36,11 @@ When starting this project we looked into other Carnegie Mellon campuses as well
 <div class="image-container"><img src="../img/nyc/nycInspiration.png" alt="NYC Inspiration" style="width:100%;" /></div>
 
 <div class="nyc-questions">
-
-<h3>Questions to Answer:</h3>
-<h4>What are the public (emotional) associations of CMU?</h4>
-<h4> What is the NYC campus providing? What is its program structure? What will their students receive?</h4>
-<h4>What kind of people does CMU want to attract to their NYC campus?</h4>
-<h4>Should the NYC and PIT campuses have a different audience?</h4>
+  <p class="post-callout">Questions to Answer:</p>
+  <p class="post-callout-small">What are the public (emotional) associations of CMU?</p>
+  <p class="post-callout-small"> What is the NYC campus providing? What is its program structure? What will their students receive?</p>
+  <p class="post-callout-small">What kind of people does CMU want to attract to their NYC campus?</p>
+  <p class="post-callout-small">Should the NYC and PIT campuses have a different audience?</p>
 
 </div>
 
