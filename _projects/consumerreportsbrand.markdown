@@ -9,13 +9,13 @@ tags: UI UX branding
 
 <div class="grid-x grid-margin-x">
   <div class="cell">
-    <img src="../img/cr/logo-color.svg" alt="">
+    <img src="../img/cr/logo-color.svg" alt="Consumer Report's new logo full color">
   </div>
   <div class="cell medium-6">
-    <img src="../img/cr/logo-red.svg" alt="">
+    <img src="../img/cr/logo-red.svg" alt="Consumer Report's new logo on red">
   </div>
   <div class="cell medium-6">
-    <img src="../img/cr/logo-black.svg" alt="">
+    <img src="../img/cr/logo-black.svg" alt="Consumer Report's new black and white">
   </div>
 </div>
 
