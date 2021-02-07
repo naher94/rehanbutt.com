@@ -2,7 +2,7 @@
 layout: post
 title:  "Consumer Reports Rebrand"
 tile-name: "Consumer Reports Rebrand"
-thumbnail: "consumerreports"
+thumbnail: "consumerreports-brand"
 date:   2015-08-20
 tags: UI UX branding
 ---
@@ -95,4 +95,4 @@ Typeface and lockup exploration
 
 As previously mentioned the Consumer Reports rating system is a major part of their brand, which also required exploration. My exploration led to more questions than answers. Should it remain a 5 point system? Does it convert to a percentage scale? Is there another scale that works better for the audience? How granular of a scale needs to be represented? How granular is the data collected during the testing process? As such I left the rating system question unanswered for the larger team to explore.
 
-Above you see a couple different scales I explored, with shape and color independent of the testing context. If you are curious of what a deeper exploration of their rating looks like, check out my data visualization work I did with the cars team.
+Above you see a couple different scales I explored, with shape and color independent of the testing context. If you are curious of what a deeper exploration of their rating looks like, check out my <a href="{% link _projects/consumerreports.markdown %}">data visualization work</a> I did with the cars team.
