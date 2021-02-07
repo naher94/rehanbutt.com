@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Consumer Reports Branding"
-tile-name: "Consumer Reports Branding"
+title:  "Consumer Reports Rebrand"
+tile-name: "Consumer Reports Rebrand"
 thumbnail: "consumerreports"
 date:   2015-08-20
 tags: UI UX branding
@@ -19,9 +19,9 @@ tags: UI UX branding
   </div>
 </div>
 
-Consumer Reports has a long history dating back to _______ as a organization advocating for consumer needs. Loosing tracking with the younger populations and show that CR is still here to represent etc........
+Consumer Reports has a long history dating back to 1936 as an organization dedicated to unbiased product testing, investigative journalism, consumer-oriented research, public education and consumer advocacy.
 
-As part of my summer working with Consumer Reports. I explored a rebrand that better fit the new direction the comapny was making by doing _________ while still making sure to _________ the history.
+As part of my summer working with Consumer Reports. I explored a rebrand that better fit the refreshed direction of the company with the goal to stay relevant with the younger generations in a world of YouTube and blog reviews.
 
 <div class="grid-x grid-margin-x grid-padding-y">
   <div class="cell">
@@ -32,14 +32,18 @@ As part of my summer working with Consumer Reports. I explored a rebrand that be
   </div>
 </div>
 
-<div class="grid-x grid-margin-x">
+In addition to the logo a major part of the Consumer Reports brand is their iconic rating system. A mortified versions of <a href="https://en.wikipedia.org/wiki/Harvey_balls" target="_blank" rel="noopener">Harvey balls</a>. The red circle indicated the highest rating, the half red and white circle being the second highest rating, the white circle being neutral, the half black circle being the second-lowest rating, and the entirely black circle representing the lowest rating possible.
+
+<div class="grid-x grid-margin-x grid-padding-y">
   <div class="cell">
     <img src="../img/cr/cr-colors.jpg" alt="color system">
   </div>
+  <div class="cell">
+    <img src="../img/cr/mascots.jpg" alt="Mascots" />
+  </div>
 </div>
-<img src="../img/cr/CRmascots.png" alt="Mascots" />
 
-bringing together a color and shape langauge for each of the content focus areas.
+Bringing together a color language for each of the content focus areas, with a mascot to help guide you through the experience.
 
 <div class="grid-x grid-margin-x">
   <div class="cell">
@@ -47,11 +51,7 @@ bringing together a color and shape langauge for each of the content focus areas
   </div>
 </div>
 
-explroed the hisotry of their magazine..
-
-in addition ot the logo another major part of consumer reports branding is their iconic rating system. a motified verions of Harvey balls. the red circle indicated the highest rating, the half red and white circle was the second highest rating, the white circle was neutral, the half black circle was the second-lowest rating, and the entirely black circle was the lowest rating possible.
-
-https://en.wikipedia.org/wiki/Harvey_balls
+Exploring the history of their magazine
 
 
 <div class="grid-x grid-margin-x grid-padding-y">
@@ -66,15 +66,33 @@ https://en.wikipedia.org/wiki/Harvey_balls
   </div>
 </div>
 
-<img src="../img/cr/CRbrandSketches.png" alt="Re-brand Sketches" />
-<img src="../img/cr/shape-exploration.svg" alt="Shape exploration" />
+Exploring a shape language to pair with the color language for each of the content focus areas: cars, electronics, babies & kids, health, appliances, money and home & garden.
 
-shape exploration.. went deeper into the idea of a speech bubble as Consumer Reports is activating conversation around consumer issues
+<div class="grid-x grid-margin-x grid-padding-y">
+  <div class="cell">
+    <img src="../img/cr/logomark-sketches.jpg" alt="Logomark sketches" />
+  </div>
+  <div class="cell">
+    <img src="../img/cr/shape-exploration.svg" alt="Shape exploration" />
+  </div>
+</div>
 
-<img src="../img/cr/type-exploration.svg" alt="Typeface and lockup exploration" />
+Shape exploration, going deep on the idea of a speech bubble as Consumer Reports is activating conversation around consumer issues.
 
+<div class="grid-x grid-margin-x grid-padding-y">
+  <div class="cell">
+    <img src="../img/cr/type-exploration.svg" alt="Typeface and lockup exploration" />
+  </div>
+</div>
 
-typeface and lockup exploration
+Typeface and lockup exploration
 
-<img src="../img/cr/CRblobs.png" alt="CR Rating Blobs" />
-furthur exploration beyond my time at Consumer Reports was needed to look into a rating system. should it remain a 5point system or does it change to a percentage or another scale. these questions led to a need to discuss the ganularity of the data that could and should be exposed from the tests run interally to the users. Check out 1 of these explorations on the data viz work I did with Consumer Reports.
+<div class="grid-x grid-margin-x grid-padding-y">
+  <div class="cell">
+    <img src="../img/cr/CRblobs.png" alt="CR Rating Blobs" />
+  </div>
+</div>
+
+As previously mentioned the Consumer Reports rating system is a major part of their brand, which also required exploration. My exploration led to more questions than answers. Should it remain a 5 point system? Does it convert to a percentage scale? Is there another scale that works better for the audience? How granular of a scale needs to be represented? How granular is the data collected during the testing process? As such I left the rating system question unanswered for the larger team to explore.
+
+Above you see a couple different scales I explored, with shape and color independent of the testing context. If you are curious of what a deeper exploration of their rating looks like, check out my data visualization work I did with the cars team.
