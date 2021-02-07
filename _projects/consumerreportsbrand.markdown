@@ -23,7 +23,10 @@ Consumer Reports has a long history dating back to _______ as a organization adv
 
 As part of my summer working with Consumer Reports. I explored a rebrand that better fit the new direction the comapny was making by doing _________ while still making sure to _________ the history.
 
-<div class="grid-x grid-margin-x">
+<div class="grid-x grid-margin-x grid-padding-y">
+  <div class="cell">
+    <img src="../img/cr/old-logo.jpg" alt="Former logo">
+  </div>
   <div class="cell">
     <img src="../img/cr/ratingsystem.jpg" alt="Former rating system">
   </div>
