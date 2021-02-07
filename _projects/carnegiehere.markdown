@@ -28,7 +28,7 @@ Our interaction map helps to give us a click through of our application, with ou
 
 A couple images of sketches of our mobile interfaces.
 
-<div class="image-container"><img src="../img/carnegieHere/slack.png" alt="Slack" class="image-center" style="width: 70%;" /></div>
+<div class="image-container"><img src="../img/carnegieHere/slack.png" alt="Slack" /></div>
 
 In order to keep track and make sure everyone was up to speed on what each team was doing we decided to use Slack for communications and updates project wide.
 

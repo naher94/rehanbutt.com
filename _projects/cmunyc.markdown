@@ -3,7 +3,7 @@ layout: post
 title:  "Carnegie Mellon NYC"
 tile-name: "CMU NYC"
 thumbnail: "nyc"
-date:   2016-02-09
+date: 2016-02-09
 tags: web Dzgn.IO
 ---
 
@@ -12,7 +12,7 @@ tags: web Dzgn.IO
 
 <!-- <div>
 <a target="_blank" href="http://nyc.dzgn.io">
-    <div class="nycButton contentButton"> Check out the full site
+    <div class="nyc-button content-button"> Check out the full site
     </div>
 </a>
 </div> -->
@@ -36,19 +36,18 @@ When starting this project we looked into other Carnegie Mellon campuses as well
 <div class="image-container"><img src="../img/nyc/nycInspiration.png" alt="NYC Inspiration" style="width:100%;" /></div>
 
 <div class="nyc-questions">
-
-<h3>Questions to Answer:</h3>
-<h4>What are the public (emotional) associations of CMU?</h4>
-<h4> What is the NYC campus providing? What is its program structure? What will their students receive?</h4>
-<h4>What kind of people does CMU want to attract to their NYC campus?</h4>
-<h4>Should the NYC and PIT campuses have a different audience?</h4>
+  <p class="post-callout">Questions to Answer:</p>
+  <p class="post-callout-small">What are the public (emotional) associations of CMU?</p>
+  <p class="post-callout-small"> What is the NYC campus providing? What is its program structure? What will their students receive?</p>
+  <p class="post-callout-small">What kind of people does CMU want to attract to their NYC campus?</p>
+  <p class="post-callout-small">Should the NYC and PIT campuses have a different audience?</p>
 
 </div>
 
 <div class="image-container">
 <img src="../img/nyc/brandSketches.png" alt="Brand Sketches" />
 <img src="../img/nyc/brandingProcess.png" alt="Branding Process" />
-<img src="../img/nyc/colorIteration.png" alt="Color Iteration" class="image-center" style="width:70%"/>
+<img src="../img/nyc/colorIteration.png" alt="Color Iteration"/>
 <img src="../img/nyc/persona.jpg" alt="Persona" />
 <img src="../img/nyc/persona2.jpg" alt="Persona" />
 <img src="../img/nyc/programChart.png" alt="Program Chart" />
@@ -58,7 +57,7 @@ When starting this project we looked into other Carnegie Mellon campuses as well
 <img src="../img/nyc/iterations.png" alt="Page Iterations" />
 </div>
 
-<div class="image-container"><img src="../img/nyc/slack.png" alt="Slack" class="image-center" style="width: 70%;" /></div>
+<div class="image-container"><img src="../img/nyc/slack.png" alt="Slack" /></div>
 
 In order to keep track and make sure everyone was up to speed on what each team was doing we decided to use Slack for communications and updates project wide.
 

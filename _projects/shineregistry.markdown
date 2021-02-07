@@ -3,11 +3,16 @@ layout: post
 title:  "Shine Registry"
 tile-name: "Shine Registry"
 thumbnail: "shine"
-banner: New
+flag: New
 date: 2020-10-31
 tags: digital UI UX branding
-published: false
 ---
+
+<div class="grid-x">
+  <div class="cell">
+    <img src="../img/shineregistry/shine-hero.png" alt="Shine Registry's home page and a sample registry page">
+  </div>
+</div>
 
 <!-- New site hero -->
 <!-- old side info arch -->

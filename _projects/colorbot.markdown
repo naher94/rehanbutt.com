@@ -7,7 +7,7 @@ date:   2016-12-4
 tags: bot color
 ---
 
-<div class="image-container"><img src="../img/colorBot/intro.svg" alt="Logo Equation" class="image-center"/></div>
+<div class="image-container"><img src="../img/colorBot/intro.svg" alt="Logo Equation"/></div>
 
 Jasper is a color tool to expand your color vocabulary and provide a new form of inspiration.
 
@@ -25,7 +25,7 @@ In [Version (V1.0)](https://github.com/naher94/jasper/releases/tag/V1.0) Jasper 
 <div class="grid-x grid-padding-x grid-padding-y">
   <div class="cell">
     <a target="_blank" href="https://github.com/naher94/jasper">
-        <div class="colorBotButton contentButton"> Check out the code
+        <div class="colorbot-button content-button"> Check out the code
         </div>
     </a>
   </div>

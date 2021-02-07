@@ -3,9 +3,9 @@ layout: post
 title: "Sticker Packs"
 tile-name: "Sticker Packs"
 thumbnail: "stickerPack"
-banner:
 date: 2017-03-03
 tags: stickers iOS illustrations
+published: false
 ---
 
 <div class="image-container">
@@ -19,14 +19,14 @@ After creating the penguin sticker pack, I decided to expand the stickers of my 
 <div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell medium-6">
     <a target="_blank" href="http://penguin.rehanbutt.com">
-        <div class="stickerPackButton contentButton"> Check out the Penguin Stickers
+        <div class="stickerpack-button content-button"> Check out the Penguin Stickers
         </div>
     </a>
   </div>
 
   <div class="cell medium-6">
     <a target="_blank" href="http://naara.rehanbutt.com">
-        <div class="stickerPackButtonNaara contentButton"> Check out the Naara Stickers
+        <div class="stickerpacknaara-button content-button"> Check out the Naara Stickers
         </div>
     </a>
   </div>

@@ -3,7 +3,6 @@ layout: post
 title: "tech.soa"
 tile-name: "tech.soa Site"
 thumbnail: "techsoa"
-banner:
 date: 2017-08-23
 tags: web
 ---
@@ -15,14 +14,14 @@ The goal with tech.soa was to pull all the resources from around the department 
 <div class="grid-x grid-margin-x grid-padding-y">
   <div class="cell medium-6">
     <a target="_blank" href="https://tech.soa.cmu.edu">
-      <div class="techsoaButton contentButton"> Check out the site
+      <div class="techsoa-button content-button"> Check out the site
       </div>
     </a>
   </div>
 
   <div class="cell medium-6">
     <a target="_blank" href="https://github.com/c0deLab/tech.soa.cmu.edu">
-      <div class="techsoaButton contentButton"> Check out the code / contribute
+      <div class="techsoa-button content-button"> Check out the code / contribute
       </div>
     </a>
   </div>

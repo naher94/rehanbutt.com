@@ -5,7 +5,7 @@ tile-name: "Bowling Table"
 thumbnail: "bowlingtable"
 date:   2020-07-10
 tags: woodworking
-banner:
+flag:
 featured:
 tile-description: "Building a dining table out of a retired bowling alley lane"
 ---

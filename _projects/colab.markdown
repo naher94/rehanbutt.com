@@ -8,7 +8,7 @@ tags: digital app
 ---
 
 <div class="grid-x">
-  <div class="image-container cell"><img src="../img/colab/colabhero.png" alt="CoLab Logo and Hero Shot" class="image-center"/></div>
+  <div class="image-container cell"><img src="../img/colab/colabhero.png" alt="CoLab Logo and Hero Shot"/></div>
 </div>
 
 ## Problem

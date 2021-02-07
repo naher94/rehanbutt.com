@@ -3,64 +3,32 @@
 ---
 
 @import 'variables';
+@import 'design-system';
+@import 'header';
+@import 'footer';
 @import 'about';
-
-body {
-  font-family: $lato;
-  font-weight: $lato-regular;
-  font-size: 20px; //1em
-  color: $navy-black;
-  @media (prefers-color-scheme: dark) {
-    background-color: #06080C;
-    color: $pure-white-dark;
-  }
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-family: $zilla;
-}
-
-h4 {
-  font-weight: $zilla-regular;
-  margin-top: 2.5em;
-}
-
-.post-content{
-  h2{
-    font-weight: $zilla-bold;
-    font-size: 2em;
-  }
-  ul{
-    padding-left: 5em;
-    padding-right: 5em;
-    @media screen and (max-width: 40em) {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-  }
-}
-
-article.post {
-  width: 100%;
-}
-
-ul {
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-}
+@import 'resources';
+@import '404';
 
 .no-select{
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   user-drag: none;
-  -moz-user-select: none;
   -webkit-user-drag: none;
+}
+
+img {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  user-drag: none;
+  -webkit-user-drag: none;
+  @media (prefers-color-scheme: dark) {
+    filter: brightness(0.8);
+  }
 }
 
 .image-container {
@@ -68,9 +36,32 @@ ul {
   margin-bottom: 1.25em;
 }
 
+.slideshow-container{
+  box-shadow: $recessed-shadow;
+}
+
+.image-center {
+  margin: 0 auto;
+  display: block;
+}
+
+iframe { //this should probs be aspect ratio
+  height: 600px;
+  @media screen and (max-width: 40em) {
+    height: 220px;
+  }
+}
+
+.post-header{
+  @media screen and (max-width: 64em) {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+}
+
 .thumbnail-container {
-  position: relative; //For banner to show correctly
-  display: block; //For banner to show correctly
+  position: relative; //For flag to show correctly
+  display: block; //For flag to show correctly
   background-color: $navy-black;
   border-radius: $tile-radius;
   transition: $sprint;
@@ -142,13 +133,6 @@ ul {
   background: linear-gradient(0deg, rgba($navy-black,1) 0%, rgba($navy-black,0) 100%);
   width: 100%;
   border-radius: 0 0 $tile-radius $tile-radius;
-  @media screen and (max-width: 40em) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    padding-bottom: 1.5rem;
-    padding-top: 2rem;
-    bottom: 0;
-  }
   @media screen and (max-width: 64em) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -164,9 +148,6 @@ ul {
   line-height: 1em;
   font-weight: $zilla-bold;
   font-family: $zilla;
-  @media screen and (max-width: 40em) {
-    font-size: 2em;
-  }
   @media screen and (max-width: 64em) {
     font-size: 2em;
   }
@@ -182,12 +163,6 @@ ul {
   line-height: 1.2em;
   font-weight: $lato-regular;
   font-family: $lato;
-  @media screen and (max-width: 40em) {
-    font-size: 1.4em;
-  }
-  @media screen and (max-width: 64em) {
-    font-size: 1.4rem;
-  }
   @media (prefers-color-scheme: dark) {
     color: $pure-white-dark;
   }
@@ -197,7 +172,7 @@ ul {
   margin-bottom: 1.5em;
 }
 
-.banner {
+.flag {
   position: absolute;
   font-size: 0.8em;
   top: -1rem;
@@ -217,163 +192,8 @@ ul {
   }
 }
 
-p {
-  padding-left: 5em;
-  padding-right: 5em;
-  margin-top: 1.25em;
-  margin-bottom: 1.25em;
-}
 
-.slideshow-container{
-  box-shadow: $recessed-shadow;
-}
-
-.image-center {
-  margin: 0 auto;
-  display: block;
-}
-
-::selection {
-  background: $signature-teal;
-  color: $pure-white;
-  @media (prefers-color-scheme: dark) {
-    background: $signature-teal-dark;
-    color: $pure-white-dark;
-  }
-}
-
-img {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  user-drag: none;
-  -moz-user-select: none;
-  -webkit-user-drag: none;
-  @media (prefers-color-scheme: dark) {
-    filter: brightness(0.8);
-  }
-}
-
-.quote {
-  font-size: 3.2em;
-  line-height: 1.1em;
-  margin-top: 2.5em;
-  margin-bottom: 1em;
-  @media screen and (max-width: 40em) {
-    padding: 0 0.5em;
-    font-size: 2em;
-    padding-bottom: 2em;
-  }
-}
-
-.illustration-callout{
-  margin: 2rem 0;
-}
-
-.resource-header{
-  h1{
-    font-weight: $zilla-bold;
-    @media screen and (max-width: 40em) {
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
-    }
-    @media screen and (max-width: 64em) {
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
-    }
-  }
-  p{
-    font-size: 1.5em;
-    line-height: 1.2em;
-    padding: 0;
-    margin: 0.5em;
-    @media screen and (max-width: 40em) {
-      font-size: 1em;
-    }
-  }
-}
-.tag-section{
-  margin-bottom: 5rem;
-  .tags-container{
-    .tag{
-      padding: 0.5rem 1rem;
-      margin-bottom: 0.5rem;
-      font-weight: $lato-bold;
-      background-color: $signature-teal;
-      color: $pure-white;
-      border-radius: $pill-radius;
-      display: inline-block;
-    }
-    a{
-      &:hover{
-        >.tag{
-          background-color: $signature-teal-hover;
-        }
-        >.description{
-          background-color: $signature-teal-hover;
-        }
-      }
-    }
-  }
-}
-
-.tag-group{
-  margin-bottom: 6rem;
-  h3{
-    font-size: 3.5em;
-    color: rgba($navy-black, 0.15);
-    font-weight: $lato-black;
-    font-family: $lato;
-    flex-wrap: wrap;
-    margin-bottom: -4.6rem;
-    @media screen and (max-width: 40em) {
-      margin-bottom: -2.8rem;
-      line-height: 3.6rem;
-    }
-  }
-}
-
-.resource-link{
-  margin-bottom: 1em;
-  color: $navy-black;
-  &:hover{
-    color: $signature-teal;
-  }
-  .resource{
-    .title{
-      font-family: $zilla;
-      font-weight: $zilla-bold;
-      // color: $navy-black;
-      font-size: 2rem;
-      padding: 0;
-      margin: 0;
-      line-height: 1em;
-    }
-    .fa-link{
-      margin-left: 0.5rem;
-      font-size: .7em;
-    }
-    .description{
-      padding: 0;
-      margin: 0;
-      // color: $navy-black;
-    }
-  }
-}
-
-.post-header{
-  h1{
-    font-weight: $zilla-bold;
-  }
-  .dateStamp {
-    font-size: 1.1em;
-    margin-top: -0.75em;
-    font-weight: $zilla-regular;
-    margin-bottom: 1em;
-  }
-}
+//******* Easter Egg Styling
 .behind-the-scenes-container{
   display: none; //Show on Konami Code Entry
   .behind-the-scenes{
@@ -403,15 +223,6 @@ img {
       margin-top: -3rem;
     }
   }
-}
-
-.force-flex{
-  display: flex !important;
-}
-
-.teal-container{
-  background-color: $signature-teal;
-  padding: 10rem 0;
 }
 
 .easter-egg-banner-container{
@@ -487,10 +298,16 @@ img {
   }
 }
 
+.force-flex{
+  display: flex !important;
+}
+//******* End of Easter Egg Styling
 
 
-iframe {
-  height: 600px;
+//******* Project Specific Styling
+.teal-container{ //used in My Brand project
+  background-color: $signature-teal;
+  padding: 10rem 0;
 }
 
 .nyc-questions{
@@ -504,393 +321,77 @@ iframe {
   }
 }
 
-//******* Header Styling
-.nav-container{
-  background-color:$signature-teal;
-  padding-top: 2em;
-  padding-bottom: 2em;
-  width: 100%;
-  @media (prefers-color-scheme: dark) {
-    background-color: $signature-teal-dark;
-  }
-}
-header{
-  margin-bottom: 3em;
-  @media screen and (max-width: 40em) {
-    margin-bottom: 1.5em;
-  }
-}
-
-.menu{
-  display: none;
-}
-
-.mobile-navbar-full{
-  display: none;
-}
-
-.logo{
-  float: right;
-  img{
-    height: 50px;
-    transition: $sprint;
-    &:hover{
-      transform: scale(1.1);
-      // animation: boing 300ms ease-out;
-    }
-  }
-}
-
-.menu-hide{
-  display: none;
-}
-
-.nav {
-  color: $pure-white;
-  padding: 0.7em;
-  height: inherit;
-  font-family: $zilla;
-  font-weight: $zilla-bold;
-  border-radius: $pill-radius;
-  font-size: 1em;
-  transition: background-color 0.2s ease-in-out;
-  @media (prefers-color-scheme: dark) {
-    color: $pure-white-dark;
-  }
-}
-
-.nav:hover {
-  color: $pure-white;
-  background-color: $signature-teal-hover;
-  border-radius: $pill-radius;
-  @media (prefers-color-scheme: dark) {
-    background-color: $signature-teal-hover-dark;
-  }
-}
-
-.mobile-navbar{
-  display: none;
-  float: left;
-  line-height: 2.5em;
-}
-
-.navbar {
-  color: $pure-white;
-  float: left;
-  line-height: 2.5em;
-  @media (prefers-color-scheme: dark) {
-    color: $pure-white-dark;
-  }
-}
-
-.menu-container{
-  .burger-icon{
-    display: none;
-    float: left;
-    user-select: none;
-    @media screen and (max-width: 40em) {
-      display: block;
-    }
-  }
-}
-
-.burger-container{
-  float: left;
-  display: none;
-  @media screen and (max-width: 40em) {
-    display: block;
-  }
-
-}
-
-.burger-icon, .burger-btn, .nav-burger-icon{
-  user-select: none;
-}
-
-/* menu-links */
-.menu-links {
-  overflow: hidden;
-  clear: both;
-  max-height: 0;
-  transition: max-height .3s ease-out;
-  margin-left: 0;
-  user-select: none;
-  margin-bottom: 0;
-  a{
-    color: $pure-white;
-    font-family: $zilla;
-    font-weight: $zilla-bold;
-    font-size: 1.25em;
-    border-radius: $pill-radius;
-    padding-top: 0.25em;
-    padding-bottom: 0.25em;
-    padding-left: 0.6em;
-    padding-right: 0.6em;
-    &:hover{
-      background-color: $signature-teal-hover;
-      @media (prefers-color-scheme: dark) {
-        background-color: $signature-teal-hover-dark;
-      }
-    }
-    @media (prefers-color-scheme: dark) {
-    color: $pure-white-dark;
-  }
-  }
-}
-
-.nav-item-container{
-  font-size: 1.5em;
-  &:first-of-type{
-      margin-top: 1em;
-    }
-}
-
-.nav-burger-icon {
-  background: $signature-teal;
-  display: block;
-  height: 5px;
-  position: relative;
-  transition: background .2s ease-out;
-  width: 18px;
-  margin-top: 1.3em;
-  @media (prefers-color-scheme: dark) {
-    background: $signature-teal-dark;
-  }
-}
-
-.nav-burger-icon:before,
-.nav-burger-icon:after {
-  background: $pure-white;
-  content: '';
-  display: block;
-  height: 100%;
-  position: absolute;
-  transition: all .2s ease-out;
-  width: 100%;
-  @media (prefers-color-scheme: dark) {
-    background: $pure-white-dark;
-  }
-}
-
-.nav-burger-icon{
-  &:before{
-    top: 4px;
-  }
-  &:after{
-    top: -4px;
-  }
-}
-
-.burger-btn {
-  display: none;
-}
-
-.burger-btn:checked ~ .menu-links {
-  max-height: 340px;
-  display: block;
-  transition: $run;
-}
-
-.burger-btn:checked ~ .mobile-navbar{
-  @media screen and (max-width: 40em) {
-    display: none;
-  }
-}
-
-.burger-btn:checked ~ .burger-icon .nav-burger-icon {
-  background: transparent;
-}
-
-.burger-btn:checked ~ .burger-icon .nav-burger-icon:before {
-  transform: rotate(-45deg);
-}
-
-.burger-btn:checked ~ .burger-icon .nav-burger-icon:after {
-  transform: rotate(45deg);
-}
-
-.burger-btn:checked ~ .burger-icon:not(.steps) .nav-burger-icon:before,
-.burger-btn:checked ~ .burger-icon:not(.steps) .nav-burger-icon:after {
-  top: 0;
-}
-//******* End of Header Styling
-
-
-//******* A Tag Underline Expand Styling
-p, li, h3, #subTitle{
-  a {
-    position: relative;
-    text-decoration: none;
-    display: inline-block;
-    color: $signature-teal;
-    padding: 0 1px;
-    transition: $run;
-    @media (prefers-color-scheme: dark) {
-      color: $signature-teal-dark;
-    }
-  }
-
-  a::after{
-    content: '';
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    height: 11%;
-    left: 0;
-    bottom: 0;
-    background-color: $signature-teal;
-    transition: $run;
-    @media (prefers-color-scheme: dark) {
-      background-color: $signature-teal-dark;
-    }
-  }
-
-  a:hover {
-    color: $pure-white;
-    @media (prefers-color-scheme: dark) {
-      color: $pure-white-dark;
-    }
-  }
-
-  a:hover::after {
-    height: 100%;
-  }
-}
-//******* A Tag Underline Expand Styling
-
-
-//******* Button Styling
-.contentButton {
-  width: 100%;
-  font-size: 1.5em;
-  color: $pure-white;
-  padding: 1em;
-  text-align: center;
-  border-radius: $pill-radius;
-  transition: $run;
-  @media (prefers-color-scheme: dark) {
-    color: $pure-white-dark;
-  }
-}
-
-.commandBarButton {
-  background-color: #77013a;
-  &:hover {
-    background-color: darken(#77013a, $color-percentage); //#680032;
-  }
-}
-
-.camleonButton {
+.camleon-button {
   background-color: #6cbe45;
   &:hover {
-    background-color: darken(#6cbe45, $color-percentage); //#66b342;
+    background-color: darken(#6cbe45, $color-percentage);
   }
 }
 
-.nycButton {
+.nyc-button {
   background-color: #EA4D5B;
   &:hover {
-    background-color: darken(#EA4D5B, $color-percentage); //#d74955;
+    background-color: darken(#EA4D5B, $color-percentage);
   }
 }
 
-.processlyButton {
+.processly-button {
   background-color: #7C1F5E;
   &:hover {
-    background-color: darken(#7C1F5E, $color-percentage); //#601A4C;
+    background-color: darken(#7C1F5E, $color-percentage);
   }
 }
 
-.colorBotButton {
+.colorbot-button {
   background-color: #E82730;
   &:hover {
-    background-color: darken(#E82730, $color-percentage); //#C62632;
+    background-color: darken(#E82730, $color-percentage);
   }
 }
 
-.thesisButton {
-  background-color: #EA1864;
-  &:hover {
-    background-color: darken(#EA1864, $color-percentage); //#CC1962;
-  }
-}
-
-.interchangeButton {
+.interchange-button {
   background-color: #313131;
   &:hover {
-    background-color: darken(#313131, $color-percentage); //#000000;
+    background-color: darken(#313131, $color-percentage);
   }
 }
 
-.stickerPackButton {
+.stickerpack-button {
   background-color: #55B7CC;
   &:hover {
-    background-color: darken(#55B7CC, $color-percentage); //#4fa5b7;
+    background-color: darken(#55B7CC, $color-percentage);
   }
 }
 
-.stickerPackButtonNaara {
+.stickerpacknaara-button {
   background-color: #acdeea;
   &:hover{
     background-color: darken(#acdeea, $color-percentage);
   }
 }
 
-.qulrButton{
+.qulr-button{
   background-color: #d4d4d4;
   &:hover{
     background-color: darken(#d4d4d4, $color-percentage);
   }
 }
 
-.techsoaButton{
+.techsoa-button{
   background-color: #00e59f;
   &:hover{
     background-color: darken(#00e59f, $color-percentage);
   }
 }
 
-.deepintheqButton{
+.deepintheq-button{
   background-color: #870039;
   &:hover{
     background-color: darken(#870039, $color-percentage);
   }
 }
-//******* End of Button Styling
+//******* End of Project Specific Styling
 
-
-//******* 404 Styling
-.title-404 {
-  font-size: 3em;
-  font-weight: $zilla-bold;
-  @media screen and (max-width: 40em) {
-    text-align: center;
-  }
-}
-
-.words-404 {
-  font-size: 1.8em;
-  margin-bottom: 1em;
-  @media screen and (max-width: 40em) {
-    text-align: center;
-  }
-}
-
-.outerspace {
-  background-color: $navy-black;
-  width: 100%;
-  height: 300px;
-  border-radius: $pill-radius;
-  background-image: url(../img/giraffe.svg);
-  background-repeat: no-repeat;
-  background-position: 50% 50px;
-  border-style: solid;
-  border-color: $pure-white;
-  @media (prefers-color-scheme: dark) {
-    border-color: $pure-white-dark;
-  }
-}
-//******* End of 404 Styling
 
 //******* Banner Styling
 .site-banner-container{
@@ -930,245 +431,17 @@ p, li, h3, #subTitle{
 }
 //******* End of Banner Styling
 
-//******* Footer Styling
-
-.social {
-  // width: 3em;
-  padding-left: 0.25em;
-  padding-right: 0.25em;
-  font-size: 2em;
-  color: rgba($navy-black, 0.80);
-  @media screen and (max-width: 40em){
-    font-size: 1.5em;
-  }
-  @media (prefers-color-scheme: dark) {
-    filter: contrast(20%);
-  }
-  &:hover {
-    color: rgba($navy-black, 0.40);
-    animation: boing 300ms ease-out;
-  }
-}
-
-.fa-envelope{
-  &:hover{
-    color: $signature-teal;
-  }
-}
-.fa-dribbble{
-  &:hover{
-    color: #ea4c89;
-  }
-}
-.fa-pinterest{
-  &:hover{
-    color: #e60023;
-  }
-}
-.fa-linkedin-in{
-  &:hover{
-    color: #2867B2;
-  }
-}
-.fa-instagram{
-  &:hover{
-    color: #C13584;
-  }
-}
-.fa-twitter{
-  &:hover{
-    color: #1DA1F2;
-  }
-}
-.fa-github{
-  &:hover{
-    color: #6f42c1;
-  }
-}
-.fa-500px{
-  &:hover{
-    color: #34bf49;
-  }
-}
-
-.logo-footer-container{
-  .ship-it{
-    height: 3.3rem;
-    margin-right: 0.5rem;
-    margin-top: 0.5rem;
-    visibility: hidden;
-    order: -1;
-  }
-  .logo-footer{
-    &:hover{
-      animation: boing 300ms ease-out;
-      ~ .ship-it{
-        visibility: visible;
-        animation: boing 300ms ease-out;
-      }
-    }
-  }
-}
-
-@keyframes ufo-animation {
-    0% { transform: translatey(0) rotate(12.0deg)}
-   60% { transform: translatey(-4px) rotate(12.0deg)}
-  100% { transform: translatey(0) rotate(12.0deg)}
-}
-
-footer{
-  margin-top: 50px;
-  background-color: rgba($navy-black, 0.15);
-  color: rgba($navy-black, 0.80);
-  padding-bottom: 40px;
-  position: relative;
-  .footer-content{
-    padding-top: 50px;
-  }
-  .spaceship{
-    position: absolute;
-    top: -2.2rem;
-    font-size: 3rem;
-    animation-name: ufo-animation;
-    animation-duration: 2.5s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-  }
-  .vault-wrapper{
-    background-color: $navy-black;
-    color: $pure-white;
-    .vault{
-      display: none;
-      h2{
-        font-weight: $zilla-bold;
-      }
-      p{
-        padding: 0;
-        margin: 0;
-      }
-      input[type=text]{
-        border-radius: 2rem;
-        margin-top: 2rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        &::placeholder{
-          font-style: italic;
-          font-weight: $lato-bold;
-        }
-      }
-      label{
-        display: none;
-      }
-    }
-  }
-  .spaceship-btn{
-    display: none;
-    &:checked{
-      &~.vault{
-        display: block;
-        margin: 3rem 0;
-      }
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-      background-color: $navy-black-dark;
-      color: $pure-white-dark;
-    }
-  .site-pages{
-    margin-bottom: 36px;
-    padding-left: 0;
-    padding-right: 0;
-    .nav{
-      font-family: $lato;
-      font-weight: $lato-bold;
-      color: rgba($navy-black, 0.80);
-      @media (prefers-color-scheme: dark) {
-        color: $pure-white-dark;
-      }
-      &:hover{
-        background-color: rgba($navy-black, 0.20);
-        transition: color 0.2s ease-in-out;
-      }
-      @media screen and (max-width: 40em) {
-        display: block;
-      }
-    }
-  }
-  .social-container{
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .left-section{
-    @media screen and (max-width: 40em) {
-      text-align: right;
-    }
-  }
-  .right-section{
-    text-align: right;
-    @media (prefers-color-scheme: dark) {
-      filter: contrast(20%);
-    }
-    .copyright{
-      padding: 0;
-      font-family: $lato;
-      font-weight: $lato-bold;
-      font-size: 16px;
-      margin-bottom: 0;
-    }
-    @media screen and (max-width: 40em) {
-      margin-top: 2em;
-      padding-right: 1.2em;
-    }
-  }
-  @media screen and (max-width: 40em) {
-    margin-top: .5em;
-    // padding-top: 25px;
-    padding-bottom: 20px;
-    // font-size: 1.8em;
-  }
-}
-
-//******* End of Footer Styling
-
-
-//******* Foundation Overrides
-.column:last-child:not(:first-child),
-.columns:last-child:not(:first-child) {
-  float: left;
-}
-//******* End of Foundation Overrides
 
 
 //******* Mobile Styling
 
 // Measurments pulled from foundation css file
-// Mobile Styling
+
+// Mobile Styling 40em
+// Tablet Styling 64em
+
 @media screen and (max-width: 40em) {
-  body{
-    font-size: 16px;
-  }
-  .outerspace {
-    height: 700px;
-    background-position: 50% 100px;
-  }
-  .title-404 {
-    font-size: 64px;
-  }
-  .words-404 {
-    font-size: 30px;
-    margin-bottom: 50px;
-  }
-  .dateStamp {
-    font-size: 16px;
-  }
-  iframe {
-    height: 220px;
-  }
-  p{
-    padding-left: 10px;
-    padding-right: 10px;
-  }
+
   .menu {
     display: block;
     float: left;
@@ -1189,13 +462,6 @@ footer{
         }
       }
     }
-}
-  .post-content{
-    h2{
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      font-weight: $zilla-bold;
-    }
   }
   .mobile-navbar{
     display: block;
@@ -1207,49 +473,14 @@ footer{
     font-size: 16px;
   }
 
-  .logo{
-    img{
-      height: 40px;
-    }
-  }
-
   .thumbnail-tile {
     margin-bottom: 20px;
   }
 
   .navbar {
-      clear: both;
-      display: none;
-  }
-  .outerspace{
-    height: 200px;
-    background-position: 50% 20px;
-  }
-  .post-header{
-    padding-left: 0.5em;
+    clear: both;
+    display: none;
   }
 }
 
-// Tablet Styling
-@media screen and (max-width: 64em) {
-  .post-header{
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-  .post-content{
-    h2{
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      font-weight: $zilla-bold;
-    }
-    h3, h4{
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-    }
-    h4{
-      margin-top: 0;
-    }
-  }
-
-}
 //******* End of Mobile Styling

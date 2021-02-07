@@ -3,7 +3,6 @@ layout: post
 title:  "Tag Association Inspiration Game"
 tile-name: "Inspiration Game"
 thumbnail: "tagAssociation"
-banner:
 date:   2017-05-12
 tags: web game word association
 ---
@@ -19,20 +18,3 @@ I decided to build 2 game modes sandbox and relation. Sandbox is a rapid-fire mo
 <div class="image-container"><img src="../img/tagAssociation/gameModes.png" alt="GameModes"/></div>
 <div class="image-container"><img src="../img/tagAssociation/sandboxMode.png" alt="Sandbox Mode"/></div>
 <div class="image-container"><img src="../img/tagAssociation/sandboxAnimated.gif" alt="Sandbox Mode Animation" class="image-center"/></div>
-
-<!--
-<div>
-<a target="_blank" href="http://penguin.rehanbutt.com">
-    <div class="stickerPackButton contentButton"> Check out the product page
-    </div>
-</a>
-</div>
--->
-
-<!--
-## Process
-
-<div class="image-container"><img src="../img/stickerPack/stickersInspiration.png" alt="Sticker Inspiration" class="image-center"/></div>
-<div class="image-container"><img src="../img/stickerPack/buildTest.png" alt="Sticker Testing"/></div>
-<div class="image-container"><img src="../img/stickerPack/splashDesign.png" alt="Splash Design"/></div>
--->

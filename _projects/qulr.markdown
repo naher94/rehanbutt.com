@@ -3,7 +3,6 @@ layout: post
 title: "QULR.Life"
 tile-name: "QULR.Life"
 thumbnail: "qulr"
-banner:
 date: 2017-08-12
 tags: web color
 ---
@@ -14,7 +13,7 @@ I’m a big fan of color and creating fun names for them. As such I started QULR
 
 <div>
   <a target="_blank" href="http://QULR.Life">
-      <div class="qulrButton contentButton"> Check out QULR.Life
+      <div class="qulr-button content-button"> Check out QULR.Life
       </div>
   </a>
 </div>
