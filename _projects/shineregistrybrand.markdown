@@ -16,9 +16,7 @@ tags: digital UI UX branding
 
 <!-- cast shadow animation -->
 
-Shine Registry a platform that _________________ as part of the branding we wanted to explore the idea of light and see if there was a way the users could be the light of the brand in the same way to they do on the platform.
-
-A start-up.. helping to formailze its design language.. for ease of the users.....
+Shine Registry is a platform that gives founders a platform to ask for support as they are starting their businesses. One of the goals of this rebrand was to help formalize a growing start-up’s visual identity with its existing community while also introducing a more scalable and cohesive brand system as it continues to expands.
 
 <div class="grid-x grid-margin-x grid-padding-y">
   <div class="cell medium-6">
@@ -63,3 +61,20 @@ Similarly with the shape language, it was important to give greater contrasts be
 </div>
 
 Bringing together the color and shape languages to create this really sharp, natural and inviting tone. See how the new brand language was used across the platform as part of the <a href="{% link _projects/shineregistry.markdown %}">redesign</a>.
+
+<div class="grid-x grid-margin-x grid-padding-y">
+  <div class="cell medium-6">
+    <img src="../img/shineregistry/social.jpg" alt="Social media tile">
+  </div>
+  <div class="cell medium-6">
+    <img src="../img/shineregistry/social-quote.jpg" alt="Social media tile with quote">
+  </div>
+  <div class="cell">
+    <img src="../img/shineregistry/shine-shirt.jpg" alt="Branded shirt">
+  </div>
+  <div class="cell">
+    <img src="../img/shineregistry/shine-cap.jpg" alt="Branded cap">
+  </div>
+</div>
+
+The brand in action on social media and some concept merch!
