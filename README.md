@@ -29,6 +29,8 @@ Curious how the site has evolved over time? Check out the [releases](https://git
 
 * Foundation Grid XY reference for centering and other special properties: https://zurb.com/university/lessons/176
 
+* Internal links using custom collections `<a href="{% link _projects/file.markdown %}">click here</a>`
+
 #### `_projects` Frontmatter Tags
 
 Tag | Use | Data Type
