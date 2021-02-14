@@ -1,18 +1,19 @@
 ---
-layout: post
+layout: post-hero
 title:  "Shine Registry"
 tile-name: "Shine Registry"
 thumbnail: "shine"
 flag: New
 date: 2020-10-31
+hero-background-color: "#FFE6BA"
+hero-background-color-dark: "#B8A686"
+hero-accent-color: "#8E2727"
+hero-accent-color-dark: "#661C1C"
+hero-image: "shineregistry/shine-hero.png"
+hero-image-alt: "Shine Registry's home page and a sample registry page"
+hero-background: "shineregistry/shine-hero-background.svg"
 tags: digital UI UX branding
 ---
-
-<div class="grid-x grid-margin-x grid-padding-y">
-  <div class="cell">
-    <img src="../img/shineregistry/shine-hero.png" alt="Shine Registry's home page and a sample registry page">
-  </div>
-</div>
 
 Shine Registry is a platform that gives founders a platform to ask for support as they are starting their businesses. One of the goals of this redesign was to __________________...
 
@@ -23,7 +24,7 @@ Extend the rebrand to the entire site
  help formalize a growing start-up’s visual identity with its existing community while also introducing a more scalable and cohesive brand system as it continues to expands.
 
 
- <div class="grid-x grid-margin-x grid-padding-y">
+ <div class="grid-x grid-padding-x grid-margin-y">
    <div class="cell">
      <img src="../img/shineregistry/tag-callout.jpg" alt="Tag callout page recognizing SustainableApparel">
    </div>
@@ -36,7 +37,7 @@ If a lot of content search and discovery becomes and issue and that was somethin
 
 Which also leads to a natural progression of helping bring new folks to the table through partnerships.
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
     <img src="../img/shineregistry/info-arch-former.jpg" alt="Former information architecture">
   </div>
@@ -48,7 +49,10 @@ Which also leads to a natural progression of helping bring new folks to the tabl
 The biggest architecural change we made was seperating the idea of a registry or bussiness and the owner of that registry, previously they were one in the same, so if you supported someone else on the platform it was as your bussiness. You also noticed that overtime it became conceptually merky based on some of the content that better represented individuals and not their businesses.
 
 Giving folks to seperate themselves from their businesses and allow for a business to have more collbrators on the platform as they grow.
-
-<img src="../img/shineregistry/former-site.jpg" alt="Shine Registry's former home page">
+<div class="grid-x grid-padding-x grid-margin-y">
+  <div class="cell">
+    <img src="../img/shineregistry/former-site.jpg" alt="Shine Registry's former home page">
+  </div>
+</div>
 
 <!-- simple design system -->

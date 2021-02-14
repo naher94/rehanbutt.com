@@ -61,6 +61,35 @@ body {
   }
 }
 
+.content-wrapper{
+  padding-top: 3em;
+  @media screen and (max-width: 40em) {
+    padding-top: 1em;
+  }
+}
+
+.hero{
+  overflow: hidden;
+  position: relative;
+  .hero-image{
+    img{
+      position: relative;
+    }
+  }
+}
+
+.hero-background-image{
+    img{
+    position: absolute;
+    padding-left: 2em;
+    padding-right: 2em;
+    @media screen and (max-width: 40em) {
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
+  }
+}
+
 .date-stamp{
   font-size: 1.6em;
   margin-top: 0;

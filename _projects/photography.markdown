@@ -7,7 +7,7 @@ date: 2014-08-01
 tags: photography
 ---
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img style="width:100%" src="../img/photography/burjalarabatrium.jpg" alt="The atrium of the Burj Al Arab in Dubai">
   </div>
@@ -16,7 +16,7 @@ tags: photography
   </div>
 </div>
 <p class="post-callout">Check out my <a target="_blank" href="https://instagram.com/naher94">Instagram</a> page for more of my photography</p>
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
     <img style="width:100%" src="../img/photography/twoboats.jpg" alt="2 long river boats in Myanmar">
   </div>

@@ -1,0 +1,53 @@
+---
+layout: default-hero
+hero-background-color: {{hero-background-color}}
+hero-background-color-dark: {{hero-background-color-dark}}
+hero-accent-color: {{hero-accent-color}}
+hero-accent-color-dark: {{hero-accent-color-dark}}
+
+---
+    <style>
+      .hero{
+        background: {{ page.hero-background-color}};
+      }
+      @media (prefers-color-scheme: dark) {
+        .hero{
+          background: {{ page.hero-background-color-dark}};
+        }
+      }
+    </style>
+
+    <div class="hero">
+
+    {% if page.hero-background %}
+    <div class="hero-background-image">
+      <img src="../img/{{ page.hero-background }}" alt="">
+    </div>
+    {% endif %}
+
+    <div class="grid-container grid-x hero-image">
+      <div class="cell">
+        <img src="../img/{{ page.hero-image }}" alt="{{ page.hero-image-alt }}">
+      </div>
+    </div>
+  </div>
+
+<div class="grid-container">
+  <div class="grid-x grid-margin-x">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+      <header class="post-header post-header-hero">
+        <p class="date-stamp">{{ page.date| date: "%B %Y" }}</p>
+        <h1 itemprop="name headline">{{ page.title }}</h1>
+        <p class="post-meta">{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
+      </header>
+
+      <div class="post-content" itemprop="articleBody">
+        {{ content }}
+      </div>
+
+    </article>
+    <!-- include marmalde banner here -->
+    {% include easter-egg-banner.html %}
+  </div>
+</div>
