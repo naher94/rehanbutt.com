@@ -18,7 +18,7 @@ Our collection, Lustre, is inspired by geological formations. The line is inspir
 
 This concept is directly linked to the idea of clothing being a shell of the human form that socially delineates cultures and that only by breaking open this shell, and the prejudicial implications that go with it, can we reveal the true being within.
 
-I worked on this line with two of my friends and colleagues, <a target="_blank" href="http://www.citamayo.com">Carolina Tamayo</a> and <a target="_blank" href="https://ajhamilton.squarespace.com/">Alyssa Hamilton</a>.
+I worked on this line with two of my friends and colleagues, Carolina Tamayo and <a target="_blank" href="https://ajhamilton.squarespace.com/">Alyssa Hamilton</a>.
 
 <div class="image-container">
 <img src="../img/fashion/fashionStageJL.png" alt="Stage; Photo Credit: Jonathan Leung" style="width:100%" /></div>
