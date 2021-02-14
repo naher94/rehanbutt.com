@@ -6,7 +6,9 @@ thumbnail: "shine"
 flag: New
 date: 2020-10-31
 hero-background-color: "#FFE6BA"
+hero-background-color-dark: "#B8A686"
 hero-accent-color: "#8E2727"
+hero-accent-color-dark: "#661C1C"
 hero-image: "shineregistry/shine-hero.png"
 hero-background: "shineregistry/shine-hero-background.svg"
 tags: digital UI UX branding

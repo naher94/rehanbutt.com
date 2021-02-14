@@ -23,6 +23,32 @@
   .menu-links a:hover{
     background-color: {{accent-color-override | strip | append: "33"}};
   }
+  @media (prefers-color-scheme: dark) {
+    .nav-container{
+      background-color: {{background-color-override-dark}};
+    }
+    .nav, .nav:hover{
+      color: {{accent-color-override-dark}};
+    }
+    .nav:hover{
+      background-color: {{accent-color-override-dark | strip | append: "33"}};
+    }
+    .logo #rehan-logo g{
+      fill: {{accent-color-override-dark}};
+    }
+
+    .nav-burger-icon:before,.nav-burger-icon:after{
+      background: {{accent-color-override-dark}};
+    }
+
+    .menu-links a{
+      color: {{accent-color-override-dark}};
+    }
+    .menu-links a:hover{
+      background-color: {{accent-color-override-dark | strip | append: "33"}};
+    }
+
+  }
 
 </style>
 

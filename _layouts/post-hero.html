@@ -1,13 +1,23 @@
 ---
 layout: default-hero
 hero-background-color: {{hero-background-color}}
+hero-background-color-dark: {{hero-background-color-dark}}
 hero-accent-color: {{hero-accent-color}}
----
+hero-accent-color-dark: {{hero-accent-color-dark}}
 
-    <!-- <div class="hero" style="background: url('../img/{{ page.hero-background }}'), {{ page.hero-background-color}}; background-size: 80%;
-    background-position: top center;
-    background-repeat: no-repeat;"> -->
-    <div class="hero" style="background: {{ page.hero-background-color}};">
+---
+    <style>
+      .hero{
+        background: {{ page.hero-background-color}};
+      }
+      @media (prefers-color-scheme: dark) {
+        .hero{
+          background: {{ page.hero-background-color-dark}};
+        }
+      }
+    </style>
+
+    <div class="hero">
 
     {% if page.hero-background %}
     <div class="hero-background-image">
