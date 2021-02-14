@@ -12,12 +12,6 @@ hero-background: "shineregistry/shine-hero-background.svg"
 tags: digital UI UX branding
 ---
 
-<!-- <div class="grid-x grid-padding-x grid-margin-y">
-  <div class="cell">
-    <img src="../img/shineregistry/shine-hero.png" alt="Shine Registry's home page and a sample registry page">
-  </div>
-</div> -->
-
 Shine Registry is a platform that gives founders a platform to ask for support as they are starting their businesses. One of the goals of this redesign was to __________________...
 
 goal to sort out a more robust infomation architecture and implement the rebrand across the site. Check out the <a href="{% link _projects/shineregistrybrand.markdown %}">rebrand</a> that we also did for Shine Registry.

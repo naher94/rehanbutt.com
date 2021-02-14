@@ -4,11 +4,18 @@ hero-background-color: {{hero-background-color}}
 hero-accent-color: {{hero-accent-color}}
 ---
 
-    <div class="hero" style="background: url('../img/{{ page.hero-background }}'), {{ page.hero-background-color}}; background-size: 80%;
+    <!-- <div class="hero" style="background: url('../img/{{ page.hero-background }}'), {{ page.hero-background-color}}; background-size: 80%;
     background-position: top center;
-    background-repeat: no-repeat;">
+    background-repeat: no-repeat;"> -->
+    <div class="hero" style="background: {{ page.hero-background-color}};">
 
-    <div class="grid-container grid-x">
+    {% if page.hero-background %}
+    <div class="hero-background-image">
+      <img src="../img/{{ page.hero-background }}" alt="">
+    </div>
+    {% endif %}
+
+    <div class="grid-container grid-x hero-image">
       <div class="cell">
         <img src="../img/{{ page.hero-image }}" alt="Shine Registry's home page and a sample registry page">
       </div>
