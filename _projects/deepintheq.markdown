@@ -20,7 +20,7 @@ As part of my time at YinzCam, I worked with the Cleveland Cavaliers to design a
 
 A couple of the many interactions and animations that were designed. Point increase counter, target recognition interface, fire ball for long streaks and an achievement animation.
 
-<div class="grid-x grid-margin-x grid-padding-y" style="margin-bottom: 2em;">
+<div class="grid-x grid-padding-x grid-margin-y" style="margin-bottom: 2em;">
   <div class="cell medium-6">
   <a target="_blank" href="https://itunes.apple.com/us/app/deep-in-the-q/id1225687551?mt=8">
       <div class="deepintheq-button content-button"> Download on iOS

@@ -7,7 +7,7 @@ date:   2016-12-2
 tags: digital
 ---
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/mocapPaper/present.jpg" alt="Present wrapped in branded wrapping paper">
   </div>
@@ -20,7 +20,7 @@ How did this project come to be? One of my courses had asked us to do a quick pr
 
 As part of this project we were given a Grasshopper script in order to pull the motion tracking data into Rhino 3D. Both of us not being familiar with Grasshopper just started to play around with the given script. Quickly we found that the capture stream was coming in bite sized pieces which provided us shape segments; single arcs or segments rather than the whole drawing. You could say this was a happy accident of not knowing exactly what we were doing. I wanted to create something unique given these micro motions and decided to take the movement and create a 2D drawing.  This pattern was created using a particular view of the path and several different sizes of the motion. Once I had created the image I noticed it could be neat tessellated and then thought wouldn’t it be interesting printed at several different scales and used as a fun unique gestural wrapping paper!
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/mocapPaper/patternZoomed.png" alt="The Pattern Zommed In"/>
   </div>

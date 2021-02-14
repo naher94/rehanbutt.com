@@ -16,7 +16,7 @@ A couple years ago I started creating a bunch of penguin illustrations, just bec
 
 After creating the penguin sticker pack, I decided to expand the stickers of my friend's dog, Naara, who has a huge following on Instagram. Follow her <a target="_blank" href="https://www.instagram.com/naara.thehusky/">here.</a> Enjoy!
 
-<div class="grid-x grid-margin-x grid-margin-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
     <a target="_blank" href="http://penguin.rehanbutt.com">
         <div class="stickerpack-button content-button"> Check out the Penguin Stickers
