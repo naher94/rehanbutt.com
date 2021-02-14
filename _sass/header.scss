@@ -47,6 +47,7 @@ header{
     color: $pure-white;
     background-color: $signature-teal-hover;
     @media (prefers-color-scheme: dark){
+      color: $pure-white-dark;
       background-color: $signature-teal-hover-dark;
     }
   }
