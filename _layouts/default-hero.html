@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include head.html %}
+
+<body>
+  {% capture background-color-override %}
+    {{ page.hero-background-color }}
+  {% endcapture %}
+  {% capture accent-color-override %}
+    {{ page.hero-accent-color }}
+  {% endcapture %}
+    {% include header.html %}
+
+    <main class="page-content">
+      {{ content }}
+    </main>
+    {% include footer-buffer.html %}
+    {% include footer.html %}
+    {% include foot.html %}
+</body>
+
+</html>

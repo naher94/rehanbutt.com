@@ -1,4 +1,31 @@
 <header>
+  <style>
+  .nav-container{
+    background-color: {{background-color-override}};
+  }
+  .nav, .nav:hover{
+    color: {{accent-color-override}};
+  }
+  .nav:hover{
+    background-color: {{accent-color-override | strip | append: "33"}};
+  }
+  .logo #rehan-logo g{
+    fill: {{accent-color-override}};
+  }
+
+  .nav-burger-icon:before,.nav-burger-icon:after{
+    background: {{accent-color-override}};
+  }
+
+  .menu-links a{
+    color: {{accent-color-override}};
+  }
+  .menu-links a:hover{
+    background-color: {{accent-color-override | strip | append: "33"}};
+  }
+
+</style>
+
 {% include banner.html %}
   <nav class="nav-container">
     <div class="site-nav grid-x grid-y grid-container">

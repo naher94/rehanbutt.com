@@ -1,0 +1,33 @@
+---
+layout: default-hero
+hero-background-color: {{hero-background-color}}
+hero-accent-color: {{hero-accent-color}}
+---
+
+  <div class="hero" style="background-color:{{ page.hero-background-color}};">
+    <div class="grid-container grid-x">
+      <div class="cell">
+        <img src="../img/{{ page.hero-image }}" alt="Shine Registry's home page and a sample registry page">
+      </div>
+    </div>
+  </div>
+
+<div class="grid-container">
+  <div class="grid-x grid-margin-x">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+      <header class="post-header">
+        <p class="date-stamp">{{ page.date| date: "%B %Y" }}</p>
+        <h1 itemprop="name headline">{{ page.title }}</h1>
+        <p class="post-meta">{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
+      </header>
+
+      <div class="post-content" itemprop="articleBody">
+        {{ content }}
+      </div>
+
+    </article>
+    <!-- include marmalde banner here -->
+    {% include easter-egg-banner.html %}
+  </div>
+</div>

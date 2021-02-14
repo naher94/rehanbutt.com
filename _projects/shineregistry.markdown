@@ -1,18 +1,21 @@
 ---
-layout: post
+layout: post-hero
 title:  "Shine Registry"
 tile-name: "Shine Registry"
 thumbnail: "shine"
 flag: New
 date: 2020-10-31
+hero-background-color: "#FFE6BA"
+hero-accent-color: "#8E2727"
+hero-image: shineregistry/shine-hero.png
 tags: digital UI UX branding
 ---
 
-<div class="grid-x grid-padding-x grid-margin-y">
+<!-- <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/shineregistry/shine-hero.png" alt="Shine Registry's home page and a sample registry page">
   </div>
-</div>
+</div> -->
 
 Shine Registry is a platform that gives founders a platform to ask for support as they are starting their businesses. One of the goals of this redesign was to __________________...
 
