@@ -33,6 +33,8 @@ Curious how the site has evolved over time? Check out the [releases](https://git
 
 #### `_projects` Frontmatter Tags
 
+##### Type `post`
+
 Tag | Use | Data Type
 :--- | :--- | :---
 layout | The template for structural reference | `.html`
@@ -42,8 +44,22 @@ thumbnail | thumbnail file name | `image` `.png` or `.jpg` when featured project
 flag | Notification style tag generally reads `New` and `In Progress` | `string`
 date | `YYYY-MM-DD` | `date`
 tag | For reference at a later date possibly for filtering | `string`
-published | whether it renders in the portfolio  | `bool`
-featured | whether it renders in as featured (bigger tiles)  | `bool`
+published | Whether it renders in the portfolio  | `bool`
+featured | Whether it renders in as featured (bigger tiles)  | `bool`
+tile-description | Description of the project that shows on a featured tile | `string`
+
+##### Type `post-hero`
+
+Some additionals Frontmatter Tags when using the `post-hero` template
+
+Tag | Use | Data Type
+:--- | :--- | :---
+hero-background-color | The background color of the hero section and branded header/nav | `string` eg. `#FFFFFF`
+hero-background-color-dark | The background color of the hero section and branded header/nav when in dark mode | `string` eg. `#CCCCCC`
+hero-accent-color | Used to update the nav items and logo in the header | `string` eg. `#1f2937`
+hero-accent-color-dark | Used to update the nav items and logo in the header in dark mode | `string` eg. `#1f2937`
+hero-image | The image that loads into the hero section | `path` as a `string` eg. `fashion/lustre-hero.jpg`
+hero-image-alt | The `alt` text for the hero image | `string` eg. `2 outfits in studio lighting`
 
 #### `_resources` Frontmatter Tags
 
