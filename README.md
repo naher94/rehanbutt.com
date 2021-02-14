@@ -8,6 +8,10 @@ Curious how the site has evolved over time? Check out the [releases](https://git
 
 ## Production Notes
 
+Jekyll uses the `Kramdown` markdown parser allowing for extended functionality, such as adding classes to elements.
+- [Styling Jekyll Markdown](https://digitaldrummerj.me/styling-jekyll-markdown/)
+- [Kramdown - Quick Reference](https://kramdown.gettalong.org/quickref.html)
+
 ### Content Notes
 
 #### Projects
