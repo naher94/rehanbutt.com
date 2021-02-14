@@ -15,7 +15,7 @@ This past year the Masters of Tangible Interaction Design (MTID) program came ba
 
 <div class="image-container"><img src="../img/tid/logo2.png" alt="Final Logo + Context"/></div>
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/tid/tid-notebook.jpg" alt="TiD branded notebook">
   </div>
@@ -24,7 +24,7 @@ This past year the Masters of Tangible Interaction Design (MTID) program came ba
   </div>
 </div>
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/tid/logomark-sketches.jpg" alt="Logomark Sketches">
   </div>

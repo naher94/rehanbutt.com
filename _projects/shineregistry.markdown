@@ -8,7 +8,7 @@ date: 2020-10-31
 tags: digital UI UX branding
 ---
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/shineregistry/shine-hero.png" alt="Shine Registry's home page and a sample registry page">
   </div>
@@ -23,7 +23,7 @@ Extend the rebrand to the entire site
  help formalize a growing start-up’s visual identity with its existing community while also introducing a more scalable and cohesive brand system as it continues to expands.
 
 
- <div class="grid-x grid-margin-x grid-padding-y">
+ <div class="grid-x grid-padding-x grid-margin-y">
    <div class="cell">
      <img src="../img/shineregistry/tag-callout.jpg" alt="Tag callout page recognizing SustainableApparel">
    </div>
@@ -36,7 +36,7 @@ If a lot of content search and discovery becomes and issue and that was somethin
 
 Which also leads to a natural progression of helping bring new folks to the table through partnerships.
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
     <img src="../img/shineregistry/info-arch-former.jpg" alt="Former information architecture">
   </div>
@@ -48,7 +48,10 @@ Which also leads to a natural progression of helping bring new folks to the tabl
 The biggest architecural change we made was seperating the idea of a registry or bussiness and the owner of that registry, previously they were one in the same, so if you supported someone else on the platform it was as your bussiness. You also noticed that overtime it became conceptually merky based on some of the content that better represented individuals and not their businesses.
 
 Giving folks to seperate themselves from their businesses and allow for a business to have more collbrators on the platform as they grow.
-
-<img src="../img/shineregistry/former-site.jpg" alt="Shine Registry's former home page">
+<div class="grid-x grid-padding-x grid-margin-y">
+  <div class="cell">
+    <img src="../img/shineregistry/former-site.jpg" alt="Shine Registry's former home page">
+  </div>
+</div>
 
 <!-- simple design system -->
