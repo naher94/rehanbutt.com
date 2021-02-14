@@ -10,6 +10,7 @@ hero-background-color-dark: "#B8A686"
 hero-accent-color: "#8E2727"
 hero-accent-color-dark: "#661C1C"
 hero-image: "shineregistry/shine-hero.png"
+hero-image-alt: "Shine Registry's home page and a sample registry page"
 hero-background: "shineregistry/shine-hero-background.svg"
 tags: digital UI UX branding
 ---
