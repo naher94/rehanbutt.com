@@ -1,9 +1,15 @@
 ---
-layout: post
+layout: post-hero
 title:  "Lustre (Fashion Line)"
 tile-name: "Lustre"
 thumbnail: "fashion"
-date:   2015-02-20
+date: 2015-02-20
+hero-background-color: "#FFFFFF"
+hero-background-color-dark: "#CCCCCC"
+hero-accent-color: "#1f2937"
+hero-accent-color-dark: "#1f2937"
+hero-image: "fashion/lustre-hero.jpg"
+hero-image-alt: "2 outfits in studio lighting"
 tags: fashion
 featured: true
 tile-description: "A fashion line with a new take on the production of clothes"
