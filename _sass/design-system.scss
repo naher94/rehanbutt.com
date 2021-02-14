@@ -129,6 +129,20 @@ body {
   line-height: 1.3em;
 }
 
+.post-callout-medium{
+  margin: 2rem 0;
+  font-size: 2em;
+  padding-left: 2.5em;
+  padding-right: 2.5em;
+  line-height: 1.3em;
+  font-weight: $lato-bold;
+  font-style: italic;
+  @media screen and (max-width: 40em) {
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+  }
+}
+
 .post-callout-small{
   margin: 2rem 0;
   font-size: 1.5em;
