@@ -4,7 +4,10 @@ hero-background-color: {{hero-background-color}}
 hero-accent-color: {{hero-accent-color}}
 ---
 
-  <div class="hero" style="background-color:{{ page.hero-background-color}};">
+    <div class="hero" style="background: url('../img/{{ page.hero-background }}'), {{ page.hero-background-color}}; background-size: 80%;
+    background-position: top center;
+    background-repeat: no-repeat;">
+
     <div class="grid-container grid-x">
       <div class="cell">
         <img src="../img/{{ page.hero-image }}" alt="Shine Registry's home page and a sample registry page">
