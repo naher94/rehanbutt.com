@@ -29,7 +29,7 @@ I created this project for a friend who loves puzzles. As such I wanted to creat
 
 <div class="image-container"><img src="../img/puzzle/colorize2.png" alt="Colorizing" /></div>
 
-<div class="grid-x grid-margin-x grid-margin-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="medium-6 cell"><img src="../img/puzzle/lasercut-test.jpg" alt="Lasercut test piece for accuracy"></div>
   <div class="medium-6 cell"><img src="../img/puzzle/lasercut-detail.jpg" alt="Lasercut puzzle removal"></div>
   <div class="medium-6 cell"><img src="../img/puzzle/lasercut-process.jpg" alt="Laser in process"></div>

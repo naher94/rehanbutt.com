@@ -1,9 +1,7 @@
 //******* Header Styling
 
 header{
-  margin-bottom: 3em;
   @media screen and (max-width: 40em){
-    margin-bottom: 1.5em;
   }
 }
 
@@ -49,6 +47,7 @@ header{
     color: $pure-white;
     background-color: $signature-teal-hover;
     @media (prefers-color-scheme: dark){
+      color: $pure-white-dark;
       background-color: $signature-teal-hover-dark;
     }
   }
@@ -127,16 +126,12 @@ header{
 }
 
 .nav-burger-icon {
-  background: $signature-teal;
   display: block;
   height: 5px;
   position: relative;
   transition: background .2s ease-out;
   width: 18px;
   margin-top: 1.3em;
-  @media (prefers-color-scheme: dark) {
-    background: $signature-teal-dark;
-  }
   &:before{
     top: 4px;
   }

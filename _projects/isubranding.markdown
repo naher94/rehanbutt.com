@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Branding Package"
-tile-name: "Branding"
+title:  "ISU Branding"
+tile-name: "ISU Branding"
 thumbnail: "isuBranding"
 date:   2015-02-10
 tags: branding
@@ -55,3 +55,5 @@ This led me to the final logo. Where I then looked into a color palette for each
 <img src="../img/ISU/ISUposter.png" alt="Poster Design" class="image-center" style="width:40%" /></div>
 
 Using this new brand image I created a poster for one of our events.
+
+<img src="../img/ISU/isu-cap.jpg" alt="Branded Cap">

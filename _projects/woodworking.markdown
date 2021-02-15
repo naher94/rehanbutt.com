@@ -5,7 +5,7 @@ tile-name: "Wood Working"
 thumbnail: "woodworking"
 date:   2021-01-15
 tags: fabrication wood
-flag: New
+flag:
 ---
 
 <!-- Sofa back table hero shot and sort description -->

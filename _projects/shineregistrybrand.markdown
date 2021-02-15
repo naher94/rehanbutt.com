@@ -9,7 +9,7 @@ tags: digital UI UX branding
 published: false
 ---
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell large-12">
     <img src="../img/shineregistry/logo-color.svg" alt="Shine Registry's new san serif workmark">
   </div>
@@ -19,7 +19,7 @@ published: false
 
 Shine Registry is a platform that gives founders a platform to ask for support as they are starting their businesses. One of the goals of this rebrand was to help formalize a growing start-up’s visual identity with its existing community while also introducing a more scalable and cohesive brand system as it continues to expands.
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
     <img src="../img/shineregistry/logo-former.svg" alt="Shine Registry's former wordmark">
   </div>
@@ -35,7 +35,7 @@ Explored the existing world of Shine Registry to get a sense for the brand and i
 
 Once you are done exploring this rebrand of Shine Registry checkout the <a href="{% link _projects/shineregistry.markdown %}">full redesign project</a> as well, see where the home page is now.
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
     <img src="../img/shineregistry/colors-former.svg" alt="Former color palette">
   </div>
@@ -54,7 +54,7 @@ Audited the existing color and shape languages. Starting with the colors I wante
 
 Similarly with the shape language, it was important to give greater contrasts between different elements on the platform. It was also important to add a more natural feel to the site, better reflecting the entrepreneurs and their business that are on Shine Registry.
 
-<div class="grid-x grid-margin-x">
+<div class="grid-x grid-padding-x">
   <div class="cell">
     <img src="../img/shineregistry/colors-shapes.svg" alt="Color and shape language">
   </div>
@@ -62,7 +62,7 @@ Similarly with the shape language, it was important to give greater contrasts be
 
 <p class="post-callout">Bringing together the color and shape languages to create this really <strong>sharp</strong>, <strong>natural</strong> and <strong>inviting</strong> tone.</p>
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
     <img src="../img/shineregistry/social.jpg" alt="Social media tile">
   </div>

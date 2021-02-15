@@ -22,6 +22,11 @@ $pure-white-dark: #cccccc;
 
 $signature-teal-hover-dark: #083F48;
 
+// :root{
+//   @media (prefers-color-scheme: dark) {
+//     $signature-teal: blue;
+//   }
+// }
 
 // Animations
 $sprint: all 0.20s ease-in-out;
@@ -58,12 +63,13 @@ $zilla-regular: 400;
 $zilla-medium: 500;
 $zilla-bold: 700;
 
-@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,700,900i,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,700,700i,900i,900&display=swap');
 $lato: 'Lato', sans-serif;
 $lato-thin: 100;
 $lato-light-italic: 300i;
 $lato-regular: 400;
 $lato-bold: 700;
+$lato-bold-italic: 700i;
 $lato-black: 900;
 
 // $themes:(

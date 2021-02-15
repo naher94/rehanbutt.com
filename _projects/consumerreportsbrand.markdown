@@ -7,7 +7,7 @@ date:   2015-08-20
 tags: UI UX branding
 ---
 
-<div class="grid-x grid-margin-x">
+<div class="grid-x grid-padding-x">
   <div class="cell">
     <img src="../img/cr/logo-color.svg" alt="Consumer Report's new logo full color">
   </div>
@@ -23,7 +23,7 @@ Consumer Reports has a long history dating back to 1936 as an organization dedic
 
 As part of my summer working with Consumer Reports. I explored a rebrand that better fit the refreshed direction of the company with the goal to stay relevant with the younger generations in a world of YouTube and blog reviews.
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/cr/old-logo.jpg" alt="Former logo">
   </div>
@@ -34,7 +34,7 @@ As part of my summer working with Consumer Reports. I explored a rebrand that be
 
 In addition to the logo a major part of the Consumer Reports brand is their iconic rating system. A mortified versions of <a href="https://en.wikipedia.org/wiki/Harvey_balls" target="_blank" rel="noopener">Harvey balls</a>. The red circle indicated the highest rating, the half red and white circle being the second highest rating, the white circle being neutral, the half black circle being the second-lowest rating, and the entirely black circle representing the lowest rating possible.
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/cr/cr-colors.jpg" alt="color system">
   </div>
@@ -45,7 +45,7 @@ In addition to the logo a major part of the Consumer Reports brand is their icon
 
 Bringing together a color language for each of the content focus areas, with a mascot to help guide you through the experience.
 
-<div class="grid-x grid-margin-x">
+<div class="grid-x grid-padding-x">
   <div class="cell">
     <img src="../img/cr/oldmagazinecovers.jpg" alt="Former magazine covers">
   </div>
@@ -54,7 +54,7 @@ Bringing together a color language for each of the content focus areas, with a m
 Exploring the history of their magazine
 
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/cr/cr-cars-hero.jpg" alt="Cars branded callout hero">
   </div>
@@ -68,7 +68,7 @@ Exploring the history of their magazine
 
 Exploring a shape language to pair with the color language for each of the content focus areas: cars, electronics, babies & kids, health, appliances, money and home & garden.
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/cr/logomark-sketches.jpg" alt="Logomark sketches" />
   </div>
@@ -79,7 +79,7 @@ Exploring a shape language to pair with the color language for each of the conte
 
 Shape exploration, going deep on the idea of a speech bubble as Consumer Reports is activating conversation around consumer issues.
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/cr/type-exploration.svg" alt="Typeface and lockup exploration" />
   </div>
@@ -87,7 +87,7 @@ Shape exploration, going deep on the idea of a speech bubble as Consumer Reports
 
 Typeface and lockup exploration
 
-<div class="grid-x grid-margin-x grid-padding-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/cr/CRblobs.png" alt="CR Rating Blobs" />
   </div>

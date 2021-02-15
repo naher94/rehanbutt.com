@@ -59,6 +59,13 @@ iframe { //this should probs be aspect ratio
   }
 }
 
+.post-header-hero{
+  margin-top: 1em;
+  @media screen and (max-width: 40em) {
+    margin-top: 0.5em;
+  }
+}
+
 .thumbnail-container {
   position: relative; //For flag to show correctly
   display: block; //For flag to show correctly

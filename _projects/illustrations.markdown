@@ -8,7 +8,7 @@ tags: digital, illustration
 ---
 
 <!--the process of the illustration sketch to rhino to illustrator-->
-<div class="grid-x grid-margin-x grid-margin-y">
+<div class="grid-x grid-padding-x grid-margin-y">
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/mango.jpg" alt="Penguin + Mango" /></div>
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/catworld.jpg" alt="Catto + World" /></div>
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/bus.png" alt="Penguin + London Bus" /></div>
@@ -17,7 +17,7 @@ tags: digital, illustration
 
 <p class="post-callout">Check out my <a target="_blank" href="https://instagram.com/naher94">Instagram</a> page for even more illustrations!</p>
 
-<div class="grid-x grid-margin-x grid-margin-y">
+<div class="grid-x grid-padding-x grid-margin-y">
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/nycity.gif" alt="nycity Lettering" /></div>
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/laugh.gif" alt="Laugh Lettering" /></div>
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/stingray.gif" alt="Stingray Drawing" /></div>
@@ -48,7 +48,7 @@ tags: digital, illustration
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/basilKisses.png" alt="St. Basil Kisses" /></div>
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/grilledCheese.jpg" alt="Grilled Cheese" /></div>
 </div>
-<div class="grid-x grid-margin-x grid-margin-y">
+<div class="grid-x grid-padding-x grid-margin-y">
     <div class=" medium-6 large-6 cell">
       <img src="../img/illustrations/kiteMrBond.png" alt="Kite Dancing in a Hurricane Mr. Bond" />
     </div>
@@ -56,7 +56,7 @@ tags: digital, illustration
       <p class="post-callout">"You're a kite dancing in a hurricane Mr. Bond"</p>
     </div>
 </div>
-<div class="grid-x grid-margin-x grid-margin-y">
+<div class="grid-x grid-padding-x grid-margin-y">
     <div class="medium-6 large-6 cell image-container">
       <img src="../img/illustrations/followingFollowing.jpg" alt="Map that Leads to You" />
     </div>
@@ -64,7 +64,7 @@ tags: digital, illustration
       <p class="post-callout">"The map that leads to you... Following, following, following to you"</p>
     </div>
 </div>
-<div class="grid-x grid-margin-x grid-margin-y">
+<div class="grid-x grid-padding-x grid-margin-y">
     <div class="medium-6 large-6 cell"><img src="../img/illustrations/badBlood.jpg" alt="Bad Blood: Taylor Swift" /></div>
     <div class="medium-6 large-6 cell"><img src="../img/illustrations/karat.png" alt="karat" /></div>
     <!-- <div class=" large-6 cell "><img src="../img/illustrations/BB8Stylize.png" alt="BB8 Stylize" /></div> -->
