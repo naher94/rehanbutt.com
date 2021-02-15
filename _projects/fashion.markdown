@@ -18,7 +18,7 @@ tile-description: "A fashion line with a new take on the production of clothes"
 {:.post-callout-medium}
 A fashion line with a new take on the production of clothes
 
-We developed this collection with 2 goals in mind, create something beautiful and explore non-traditional approaches to get there.
+We developed this collection with 2 goals in mind, create something beautiful and explore non-traditional approaches to get there. I'd like to think we accomplished both, though maybe not the way we first imagined.
 
 We threw out the traditional production process of measure, cut, sew, fit and repeat in favor of more modern and adaptable processes. Leveraging digital design and fabrication techniques, primarily laser cutting and 3D printing and methods such as photogrammetry and computational design. The contrast of hand sewn silk garments versus digitally fabricated stark white tessellated garments leads us to Lustre’s concept. But first a huge shout out to 2 of my good friends Carolina Tamayo and <a target="_blank" href="https://ajhamilton.squarespace.com/">Alyssa Hamilton</a>, who I got the chance to work with on this collection.
 
@@ -175,8 +175,12 @@ We did this by using a ABB robot (those big robotic arms you generally see assem
     <img src="../img/fashion/3d-print-model.jpg" alt="3D print digital model pieces">
   </div>
 </div>
+{% capture bts-title %} Behind the Scenes {% endcapture %}
+{% capture bts-description %} This project took quite a bit of computing power often times more them we had available. We regularly crashed several of our design tools as we tried to created higher resolutions pieces and while increasing the number of automated steps. {% endcapture %}
+{% include behind-the-scenes.html %}
 
-From our first 3D print we came across many problems that we then decided to use in order to improve all the 3D printed pieces. One problem we came across was how we wanted to connect the 3D printed pieces to one another for those that had large 3D print pieces. The initial design had left a lot of space in between the pieces so we could run fishing line through it, but it created to loose of an effect. On the other hand when connecting our 3D printed pieces to the YUPO paper (the white geometric structures) we had to make sure to leave some slack for the models to walk and move around naturally.
+
+Lots of iteration as we pushed the tolerances of our tools, from the fidelity of our 3D mesh models to the resolution of our 3D prints.
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
