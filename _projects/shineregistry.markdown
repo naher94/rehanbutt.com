@@ -13,6 +13,7 @@ hero-image: "shineregistry/shine-hero.png"
 hero-image-alt: "Shine Registry's home page and a sample registry page"
 hero-background: "shineregistry/shine-hero-background.svg"
 tags: digital UI UX branding
+published: false
 ---
 
 Shine Registry is a platform that gives founders a platform to ask for support as they are starting their businesses. One of the goals of this redesign was to __________________...
