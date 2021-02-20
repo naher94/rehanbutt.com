@@ -79,7 +79,10 @@ body {
 }
 
 .hero-background-image{
-    img{
+  position: relative;
+  max-width: 1800px;
+  margin: 0 auto;
+  img{
     position: absolute;
     padding-left: 2em;
     padding-right: 2em;
