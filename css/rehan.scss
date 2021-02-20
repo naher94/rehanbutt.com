@@ -1,7 +1,7 @@
 ---
   # Front matter comment to ensure Jekyll properly reads file.
 ---
-
+@import 'monokai.css';
 @import 'variables';
 @import 'design-system';
 @import 'header';
@@ -438,7 +438,17 @@ iframe { //this should probs be aspect ratio
 }
 //******* End of Banner Styling
 
-
+.highlight{
+  pre{
+    padding: 2rem;
+    border-radius: 20px;
+    code{
+      border: none;
+      color: white;
+      background-color: transparent;
+    }
+  }
+}
 
 //******* Mobile Styling
 
