@@ -270,6 +270,10 @@ iframe { //this should probs be aspect ratio
       font-size: 1rem;
       margin: 0;
       margin-left: 0.5rem;
+      @media screen and (max-width: 40em) {
+        margin-left: 0;
+        margin-top: 0.5rem;
+      }
       &:hover{
         background-color: $signature-teal-hover;
       }
@@ -302,6 +306,25 @@ iframe { //this should probs be aspect ratio
   }
   @media screen and (max-width: 40em) {
     width: 6rem;
+  }
+}
+
+.vault{
+  h2{
+    line-height: 1em;
+    padding: 0;
+  }
+  .subheader{
+    margin-bottom: 2em;
+    color: $pure-white;
+  }
+}
+
+#badge-container{
+  p{
+    text-align: center;
+    margin-top: 0.5em;
+    line-height: 1.3em;
   }
 }
 
