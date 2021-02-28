@@ -97,7 +97,7 @@ function isBadge() {
 	//If the local storage value for each badge is true show the badge in the footer tray
 	if (localStorage.getItem("behindTheScenesEasterEgg") == "true") {
 		let string_of_html = `
-			<div class="cell small-3 large-2">
+			<div class="cell small-4 large-2">
 				<img src="../img/badges/behindthescenes.png" alt="Behind the Scenes Badge">
 				<p>Behind the Scenes Easter Egg</p>
 			</div>
@@ -106,7 +106,7 @@ function isBadge() {
   }
 	if (localStorage.getItem("carHornEasterEgg") == "true") {
 		let string_of_html = `
-			<div class="cell small-3 large-2">
+			<div class="cell small-4 large-2">
 				<img src="../img/badges/carhorn.png" alt="Car Horn Badge">
 				<p>Car Horn Easter Egg</p>
 			</div>
@@ -115,16 +115,18 @@ function isBadge() {
   }
 	if (localStorage.getItem("paddingtonEasterEgg") == "true") {
 		let string_of_html = `
-			<div class="cell small-3 large-2">
+			<div class="cell small-4 large-2">
 				<img src="../img/badges/paddington.png" alt="Paddington Badge">
+				<p>Paddington Bear Easter Egg</p>
 			</div>
 		`;
 		badgeContainerElement.innerHTML += string_of_html;
   }
 	if (localStorage.getItem("codeSnoopingEasterEgg") == "true") {
 		let string_of_html = `
-			<div class="cell small-3 large-2">
+			<div class="cell small-4 large-2">
 				<img src="../img/badges/code.png" alt="Code Snooping Badge">
+				<p>Code Snooping Easter Egg</p>
 			</div>
 		`;
 		badgeContainerElement.innerHTML += string_of_html;
@@ -132,7 +134,7 @@ function isBadge() {
 }
 
 isEgg();
-// isBadge();
+isBadge();
 
 // Listen for keydown events
 document.addEventListener('keydown', keyHandler, false);

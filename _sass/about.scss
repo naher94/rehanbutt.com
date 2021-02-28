@@ -66,13 +66,26 @@
     }
   }
   a{
+    h3{
+      display: inline;
+      background: linear-gradient(rgba($signature-teal,0.2), rgba($signature-teal,0.2));
+      background-position: 0% 100%;
+      background-repeat: no-repeat;
+      background-size: 0% 10px;
+      transition: background-size .3s;
+    }
+    .fa-link{
+      transition: transform .3s;
+    }
     &:hover{
       .date, .description, h3{
-        color: $signature-teal;
         transition: $run;
-        @media (prefers-color-scheme: dark) {
-          color: $signature-teal-hover-dark;
-        }
+      }
+      h3{
+        background-size: 100% 10px;
+      }
+      .fa-link{
+        transform: rotate(360deg);
       }
     }
   }

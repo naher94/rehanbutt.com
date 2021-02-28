@@ -50,9 +50,9 @@ Once you are done exploring this rebrand of Shine Registry checkout the <a href=
   </div>
 </div>
 
-Audited the existing color and shape languages. Starting with the colors I wanted to expand the palette for a greater diversity of use cases both on and off the web and wanted to ground the primary color a bit allowing each business to out shine the platform’s brand. Resulting in a wider range of colors and a more earthen palette.
+Audited the existing color and shape languages. Starting with the colors, I wanted to expand the palette for a greater diversity of use cases both on and off the web and wanted to ground the primary color a bit allowing each business to out shine the platform’s brand. Resulting in a wider range of colors and a more earthen palette.
 
-Similarly with the shape language, it was important to give greater contrasts between different elements on the platform. It was also important to add a more natural feel to the site, better reflecting the entrepreneurs and their business that are on Shine Registry.
+Similarly with the shape language, it was important to give greater contrasts between different elements on the platform. It was also important to add a more natural feel to the site, better reflecting the entrepreneurs and their businesses that are on Shine Registry.
 
 <div class="grid-x grid-padding-x">
   <div class="cell">
