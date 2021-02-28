@@ -9,10 +9,9 @@
     font-size: 1.5em;
   }
   @media (prefers-color-scheme: dark) {
-    filter: contrast(20%);
+    color: $pure-white-dark;
   }
   &:hover {
-    color: rgba($navy-black, 0.40);
     animation: boing 300ms ease-out;
   }
 }
@@ -79,6 +78,9 @@
       margin-top: 10px;
       g{
         fill: #454D59;
+        @media (prefers-color-scheme: dark) {
+          fill: $pure-white-dark;
+        }
       }
     }
   }
@@ -180,9 +182,6 @@ footer{
   }
   .right-section{
     text-align: right;
-    @media (prefers-color-scheme: dark) {
-      filter: contrast(20%);
-    }
     .copyright{
       padding: 0;
       font-family: $lato;
