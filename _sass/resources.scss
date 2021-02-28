@@ -35,14 +35,17 @@
       color: $pure-white;
       border-radius: $pill-radius;
       display: inline-block;
+      @media (prefers-color-scheme: dark) {
+        background-color: $signature-teal-d1;
+      }
     }
     a{
       &:hover{
-        >.tag{
+        .tag{
           background-color: $signature-teal-hover;
-        }
-        >.description{
-          background-color: $signature-teal-hover;
+          @media (prefers-color-scheme: dark) {
+            background-color: $signature-teal-d2;
+          }
         }
       }
     }
@@ -62,6 +65,9 @@
       margin-bottom: -2.8rem;
       line-height: 3.6rem;
     }
+    @media (prefers-color-scheme: dark) {
+      color: rgba($pure-white,0.15); 
+    }
   }
 }
 
@@ -69,11 +75,13 @@
   margin-bottom: 1em;
   color: $navy-black;
   @media (prefers-color-scheme: dark) {
-    color: $pure-white-dark;
+    color: $pure-white;
   }
-
   &:hover{
-    color: $pure-white-dark;
+    color: $navy-black;
+    @media (prefers-color-scheme: dark) {
+      color: $pure-white;
+    }
     .resource{
       .title{
         background-size: 100% 10px;
@@ -87,18 +95,15 @@
     .title{
       font-family: $zilla;
       font-weight: $zilla-bold;
-      // color: $navy-black;
       font-size: 2rem;
       padding: 0;
       margin: 0;
       line-height: 1em;
+      @include swipe-underline($signature-teal-l6);
 
-      display: inline;
-      background: linear-gradient(rgba($signature-teal,0.2), rgba($signature-teal,0.2));
-      background-position: 0% 100%;
-      background-repeat: no-repeat;
-      background-size: 0% 10px;
-      transition: background-size .3s;
+      @media (prefers-color-scheme: dark) {
+        @include swipe-underline($signature-teal-d6);
+      }
     }
     .fa-link{
       margin-left: 0.5rem;
@@ -109,7 +114,6 @@
     .description{
       padding: 0;
       margin: 0;
-      // color: $navy-black;
     }
   }
 }

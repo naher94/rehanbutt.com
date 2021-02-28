@@ -76,9 +76,10 @@ iframe { //this should probs be aspect ratio
     -webkit-transform: scale(1.05);
     -ms-transform: scale(1.05);
     transform: scale(1.05);
-    -webkit-box-shadow: $recessed-shadow rgba($navy-black,0.75);
-    -moz-box-shadow: $recessed-shadow rgba($navy-black,0.75);
     box-shadow: $recessed-shadow rgba($navy-black,0.75);
+    @media (prefers-color-scheme: dark) {
+      box-shadow: $recessed-shadow rgba($pure-black,0.75);
+    }
   }
   &:hover .thumbnail-text{
     opacity: 1;
@@ -99,11 +100,6 @@ iframe { //this should probs be aspect ratio
   .thumbnail-image, .thumbnail-image-featured{
     border-radius: $tile-radius;
   }
-  @media (prefers-color-scheme: dark) {
-    -webkit-box-shadow: $recessed-shadow rgba($pure-black,0.75);
-    -moz-box-shadow: $recessed-shadow rgba($pure-black,0.75);
-    box-shadow: $recessed-shadow rgba($pure-black,0.75);
-  }
 }
 
 .thumbnail-text {
@@ -122,9 +118,6 @@ iframe { //this should probs be aspect ratio
   font-family: $zilla;
   @media screen and (max-width: 40em) {
     font-size: 1.4em;
-  }
-  @media (prefers-color-scheme: dark) {
-    color: $pure-white-dark;
   }
 }
 
@@ -158,9 +151,6 @@ iframe { //this should probs be aspect ratio
   @media screen and (max-width: 64em) {
     font-size: 2em;
   }
-  @media (prefers-color-scheme: dark) {
-    color: $pure-white-dark;
-  }
 }
 
 .thumbnail-description-featured {
@@ -170,9 +160,6 @@ iframe { //this should probs be aspect ratio
   line-height: 1.2em;
   font-weight: $lato-regular;
   font-family: $lato;
-  @media (prefers-color-scheme: dark) {
-    color: $pure-white-dark;
-  }
 }
 
 .thumbnail-tile {
@@ -192,10 +179,6 @@ iframe { //this should probs be aspect ratio
   @media screen and (max-width: 40em) {
     right: -0.5rem;
     top: -0.5rem;
-  }
-  @media (prefers-color-scheme: dark) {
-    background-color: $signature-teal-dark;
-    color: $pure-white-dark;
   }
 }
 
@@ -239,10 +222,14 @@ iframe { //this should probs be aspect ratio
   z-index: 2;
   .easter-egg-banner{
     border-radius: 20px;
-    background-color: rgba($pure-white, 1);
+    background-color: $pure-white;
     padding: 1rem;
-    box-shadow: $recessed-shadow;
+    box-shadow: $recessed-shadow $navy-black;
     align-items: center;
+    @media (prefers-color-scheme: dark) {
+      background-color: $navy-black;
+      box-shadow: $recessed-shadow $navy-black-dark;
+    }
     p{
       padding: 0;
       margin: 0;
@@ -428,18 +415,10 @@ iframe { //this should probs be aspect ratio
   a:hover span{
     background-color: $pure-white;
     color: $navy-black;
-    @media (prefers-color-scheme: dark) {
-      background-color: $pure-white-dark;
-    }
-    // transition: all 0.3s ease-in-out;
   }
   .site-banner{
     background-color: $navy-black;
     color: $pure-white;
-    @media (prefers-color-scheme: dark) {
-      background-color: $navy-black-dark;
-      color: $pure-white-dark;
-    }
     p{
       margin: 0;
       padding: 0;
@@ -452,9 +431,6 @@ iframe { //this should probs be aspect ratio
         margin-left: 0.5em;
         padding: 0.25em 0.7em;
         transition: all 0.3s ease-in-out;
-        @media (prefers-color-scheme: dark) {
-          border: 1px solid $pure-white-dark;
-        }
       }
     }
   }
@@ -467,7 +443,7 @@ iframe { //this should probs be aspect ratio
     border-radius: 20px;
     code{
       border: none;
-      color: white;
+      color: $pure-white;
       background-color: transparent;
     }
   }
@@ -482,27 +458,24 @@ iframe { //this should probs be aspect ratio
 
 @media screen and (max-width: 40em) {
 
-  .menu {
-    display: block;
-    float: left;
-    width: 36px;
-    height: 26px;
-    line-height: 0;
-    padding-top: 13px;
-    text-align: center;
-
-    > svg {
-      width: 18px;
-      height: 15px;
-
-      path {
-        fill: $pure-white;
-        @media (prefers-color-scheme: dark) {
-          fill: $pure-white-dark;
-        }
-      }
-    }
-  }
+  // .menu {
+  //   display: block;
+  //   float: left;
+  //   width: 36px;
+  //   height: 26px;
+  //   line-height: 0;
+  //   padding-top: 13px;
+  //   text-align: center;
+  //
+  //   > svg {
+  //     width: 18px;
+  //     height: 15px;
+  //
+  //     path {
+  //       fill: $pure-white;
+  //     }
+  //   }
+  // }
   .mobile-navbar{
     display: block;
     line-height: 40px;

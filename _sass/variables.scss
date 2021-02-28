@@ -8,25 +8,53 @@ $recessed-shadow: 0px 10px 33px -10px;
 
 // Colors
 $signature-teal: #12abc4;
+
+//// Dark Set
+//// [number indicates number of step removed from main]
+$signature-teal-d1: #109AB4;
+$signature-teal-d2: #0E89A5;
+$signature-teal-d3: #0C7895;
+$signature-teal-d4: #0A6985;
+$signature-teal-d5: #085975;
+$signature-teal-d6: #074B64;
+
+//// Light Set
+$signature-teal-l1: #25B6CA;
+$signature-teal-l2: #38C1CF;
+$signature-teal-l3: #4CCAD4;
+$signature-teal-l4: #5FD3DA;
+$signature-teal-l5: #73DCDF;
+$signature-teal-l6: #86E3E4;
+
+
 $navy-black: #1f2937;
-$dio-grey: #666666;
 
 $pure-white: #ffffff;
 $pure-black: #000000;
 
-$signature-teal-hover: #108da2;
+$signature-teal-hover: $signature-teal-d1;
 
 $navy-black-dark: #131922;
-$signature-teal-dark: #084954;
 $pure-white-dark: #cccccc;
 
-$signature-teal-hover-dark: #083F48;
+:root{
+  --pure-white-raw: 255, 255, 255;
+  --pure-white: rgb(var(--pure-white-raw));
+  --navy-black-raw: 31, 41, 55;
+  --navy-black: rgb(var(--navy-black-raw));
+  --signature-teal-raw: 18, 171, 196;
+  --signature-teal: rgb(var(--signature-teal-raw));
 
-// :root{
-//   @media (prefers-color-scheme: dark) {
-//     $signature-teal: blue;
-//   }
-// }
+
+  --text-color: var(--navy-black);
+  --link-color: var(--signature-teal);
+
+
+  @media (prefers-color-scheme: dark) {
+    --text-color: var(--pure-white);
+  }
+
+}
 
 // Animations
 $sprint: all 0.20s ease-in-out;
