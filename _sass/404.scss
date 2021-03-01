@@ -27,13 +27,8 @@
   background-image: url(../img/giraffe.svg);
   background-repeat: no-repeat;
   background-position: 50% 50px;
-  border-style: solid;
-  border-color: $pure-white;
   @media screen and (max-width: 40em) {
     height: 200px;
     background-position: 50% 20px;
-  }
-  @media (prefers-color-scheme: dark) {
-    border-color: $pure-white-dark;
   }
 }

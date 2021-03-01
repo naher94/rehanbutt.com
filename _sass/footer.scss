@@ -1,15 +1,125 @@
 //******* Footer Styling
+footer{
+  margin-top: 50px;
+  background-color: $navy-black-l6;
+  color: $navy-black-l1;
+  padding-bottom: 40px;
+  position: relative;
+  @media (prefers-color-scheme: dark) {
+    background-color: $navy-black-d5;
+    color: $pure-white;
+  }
+  .footer-content{
+    padding-top: 50px;
+  }
+  .spaceship{
+    position: absolute;
+    top: -2.2rem;
+    font-size: 3rem;
+    animation-name: ufo-animation;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+  .vault-wrapper{
+    background-color: $navy-black;
+    color: $pure-white;
+    .vault{
+      display: none;
+      h2{
+        font-weight: $zilla-bold;
+      }
+      p{
+        padding: 0;
+        margin: 0;
+      }
+      input[type=text]{
+        border-radius: 2rem;
+        margin-top: 2rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        &::placeholder{
+          font-style: italic;
+          font-weight: $lato-bold;
+        }
+      }
+      label{
+        display: none;
+      }
+    }
+  }
+
+  .spaceship-btn{
+    display: none;
+    &:checked{
+      &~.vault{
+        display: block;
+        margin: 3rem 0;
+      }
+    }
+  }
+  .site-pages{
+    margin-bottom: 36px;
+    padding-left: 0;
+    padding-right: 0;
+    .nav-wrap{
+      display: inline;
+    }
+    .nav{
+      font-family: $lato;
+      font-weight: $lato-bold;
+      color: $navy-black-l1;
+      @media (prefers-color-scheme: dark) {
+        color: $pure-white;
+      }
+      &:hover{
+        background-color: $navy-black-l5;
+        transition: color 0.2s ease-in-out;
+        @media (prefers-color-scheme: dark) {
+          background-color: $navy-black-d3;
+        }
+      }
+    }
+  }
+  .social-container{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .left-section{
+    @media screen and (max-width: 40em) {
+      text-align: right;
+    }
+  }
+  .right-section{
+    text-align: right;
+    .copyright{
+      padding: 0;
+      font-family: $lato;
+      font-weight: $lato-bold;
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+    @media screen and (max-width: 40em) {
+      margin-top: 2em;
+      padding-right: 0.5em;
+    }
+  }
+  @media screen and (max-width: 40em) {
+    margin-top: .5em;
+    padding-bottom: 20px;
+  }
+}
 
 .social {
   padding-left: 0.25em;
   padding-right: 0.25em;
   font-size: 2em;
-  color: rgba($navy-black, 0.80);
+  color: $navy-black-l1;
   @media screen and (max-width: 40em){
     font-size: 1.5em;
   }
   @media (prefers-color-scheme: dark) {
-    color: $pure-white-dark;
+    color: $pure-white;
   }
   &:hover {
     animation: boing 300ms ease-out;
@@ -77,9 +187,9 @@
       height: 55px;
       margin-top: 10px;
       g{
-        fill: #454D59;
+        fill: $navy-black-l1;
         @media (prefers-color-scheme: dark) {
-          fill: $pure-white-dark;
+          fill: $pure-white;
         }
       }
     }
@@ -90,112 +200,4 @@
     0% { transform: translatey(0) rotate(12.0deg)}
    60% { transform: translatey(-4px) rotate(12.0deg)}
   100% { transform: translatey(0) rotate(12.0deg)}
-}
-
-footer{
-  margin-top: 50px;
-  background-color: rgba($navy-black, 0.15);
-  color: rgba($navy-black, 0.80);
-  padding-bottom: 40px;
-  position: relative;
-  .footer-content{
-    padding-top: 50px;
-  }
-  .spaceship{
-    position: absolute;
-    top: -2.2rem;
-    font-size: 3rem;
-    animation-name: ufo-animation;
-    animation-duration: 2.5s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-  }
-  .vault-wrapper{
-    background-color: $navy-black;
-    color: $pure-white;
-    .vault{
-      display: none;
-      h2{
-        font-weight: $zilla-bold;
-      }
-      p{
-        padding: 0;
-        margin: 0;
-      }
-      input[type=text]{
-        border-radius: 2rem;
-        margin-top: 2rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        &::placeholder{
-          font-style: italic;
-          font-weight: $lato-bold;
-        }
-      }
-      label{
-        display: none;
-      }
-    }
-  }
-  .spaceship-btn{
-    display: none;
-    &:checked{
-      &~.vault{
-        display: block;
-        margin: 3rem 0;
-      }
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-      background-color: $navy-black-dark;
-      color: $pure-white-dark;
-    }
-  .site-pages{
-    margin-bottom: 36px;
-    padding-left: 0;
-    padding-right: 0;
-    .nav-wrap{
-      display: inline;
-    }
-    .nav{
-      font-family: $lato;
-      font-weight: $lato-bold;
-      color: rgba($navy-black, 0.80);
-      @media (prefers-color-scheme: dark) {
-        color: $pure-white-dark;
-      }
-      &:hover{
-        background-color: rgba($navy-black, 0.20);
-        transition: color 0.2s ease-in-out;
-      }
-    }
-  }
-  .social-container{
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .left-section{
-    @media screen and (max-width: 40em) {
-      text-align: right;
-    }
-  }
-  .right-section{
-    text-align: right;
-    .copyright{
-      padding: 0;
-      font-family: $lato;
-      font-weight: $lato-bold;
-      font-size: 16px;
-      margin-bottom: 0;
-    }
-    @media screen and (max-width: 40em) {
-      margin-top: 2em;
-      padding-right: 0.5em;
-    }
-  }
-  @media screen and (max-width: 40em) {
-    margin-top: .5em;
-    padding-bottom: 20px;
-  }
 }

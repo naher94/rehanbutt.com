@@ -8,8 +8,7 @@ body {
     font-size: 16px;
   }
   @media (prefers-color-scheme: dark) {
-    // background-color: #151F2B;
-    background-color: $navy-black-d4;
+    background-color: $navy-black-d3;
   }
 }
 
@@ -113,9 +112,6 @@ ul {
   text-align: center;
   border-radius: $pill-radius;
   transition: $run;
-  @media (prefers-color-scheme: dark) {
-    color: $pure-white-dark;
-  }
 }
 
 .post-callout{ //should be renamed post call out large

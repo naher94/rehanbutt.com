@@ -30,12 +30,12 @@ $signature-teal-l6: #86E3E4;
 $navy-black: #1f2937;
 
 //// Dark Set
-$navy-black-d1: #0B0E15;
-$navy-black-d2: #0F131C;
-$navy-black-d3: #131923;
-$navy-black-d4: #171E29;
-$navy-black-d5: #1B2330;
-$navy-black-d6: #1f2937;
+$navy-black-d6: #0B0E15;
+$navy-black-d5: #0F131C;
+$navy-black-d4: #131923;
+$navy-black-d3: #171E29;
+$navy-black-d2: #1B2330;
+$navy-black-d1: #1f2937;
 
 //// Light Set
 $navy-black-l1: #3B4450;
@@ -50,9 +50,6 @@ $pure-white: #ffffff;
 $pure-black: #000000;
 
 $signature-teal-hover: $signature-teal-d1;
-
-$navy-black-dark: #131922;
-$pure-white-dark: #cccccc;
 
 :root{
   --pure-white-raw: 255, 255, 255;

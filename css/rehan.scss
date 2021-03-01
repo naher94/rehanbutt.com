@@ -228,7 +228,7 @@ iframe { //this should probs be aspect ratio
     align-items: center;
     @media (prefers-color-scheme: dark) {
       background-color: $navy-black;
-      box-shadow: $recessed-shadow $navy-black-dark;
+      box-shadow: $recessed-shadow $navy-black-d4;
     }
     p{
       padding: 0;

@@ -29,17 +29,15 @@
       margin-top: 0.5em;
     }
     code{
+      color: var(--text-color);
       border-radius: $pill-radius;
       padding-left: 0.35em;
       padding-right: 0.35em;
       padding-bottom: 0.15em;
-      background-color: rgba($navy-black,0.15);
-      border-color: $navy-black;
+      background-color: $navy-black-l6;
       border-width: 0;
       @media (prefers-color-scheme: dark) {
-        color: $pure-white-dark;
-        background-color: rgba($pure-white-dark,0.15);
-        border-color: $pure-white-dark;
+        background-color: $navy-black-d6;
       }
     }
     @media screen and (max-width: 40em) {
@@ -265,7 +263,7 @@
     margin-right: 0.1em;
     margin-bottom: 0.4em;
     @media (prefers-color-scheme: dark) {
-      background-color: $navy-black-dark;
+      background-color: $navy-black-d6;
     }
   }
 }
