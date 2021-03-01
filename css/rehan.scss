@@ -216,7 +216,7 @@ iframe { //this should probs be aspect ratio
 }
 
 .easter-egg-banner-container{
-  display: none; // Do be handled with JS on Konami Entry
+  display: none; // Handled with JS on Konami Entry
   position: sticky;
   bottom: 2rem;
   z-index: 2;
@@ -262,7 +262,7 @@ iframe { //this should probs be aspect ratio
         margin-top: 0.5rem;
       }
       &:hover{
-        background-color: $signature-teal-hover;
+        background-color: $signature-teal-d1;
       }
     }
     .easter-egg-number{

@@ -42,7 +42,7 @@
     a{
       &:hover{
         .tag{
-          background-color: $signature-teal-hover;
+          background-color: $signature-teal-d1;
           @media (prefers-color-scheme: dark) {
             background-color: $signature-teal-d2;
           }
