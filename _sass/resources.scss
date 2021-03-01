@@ -73,15 +73,9 @@
 
 .resource-link{
   margin-bottom: 1em;
-  color: $navy-black;
-  @media (prefers-color-scheme: dark) {
-    color: $pure-white;
-  }
+  color: var(--text-color);
   &:hover{
-    color: $navy-black;
-    @media (prefers-color-scheme: dark) {
-      color: $pure-white;
-    }
+    color: var(--text-color);
     .resource{
       .title{
         background-size: 100% 10px;
