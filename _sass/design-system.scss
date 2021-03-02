@@ -1,5 +1,16 @@
 // Design System
-
+body {
+  font-family: $lato;
+  font-weight: $lato-regular;
+  font-size: 20px; // = 1em
+  color: var(--text-color);
+  @media screen and (max-width: 40em) {
+    font-size: 16px;
+  }
+  @media (prefers-color-scheme: dark) {
+    background-color: $navy-black-d3;
+  }
+}
 
 h1, h2, h3, h4 {
   font-family: $zilla;
@@ -47,20 +58,6 @@ ul {
   }
 }
 
-body {
-  font-family: $lato;
-  font-weight: $lato-regular;
-  font-size: 20px; // = 1em
-  color: $navy-black;
-  @media screen and (max-width: 40em) {
-    font-size: 16px;
-  }
-  @media (prefers-color-scheme: dark) { //is there a way to pull this out all together for a color theme file
-    background-color: #06080C;
-    color: $pure-white-dark;
-  }
-}
-
 .content-wrapper{
   padding-top: 3em;
   @media screen and (max-width: 40em) {
@@ -103,12 +100,8 @@ body {
 }
 
 ::selection {
-  background: $signature-teal;
+  background: var(--signature-teal);
   color: $pure-white;
-  @media (prefers-color-scheme: dark) {
-    background: $signature-teal-dark;
-    color: $pure-white-dark;
-  }
 }
 
 .content-button {
@@ -119,9 +112,6 @@ body {
   text-align: center;
   border-radius: $pill-radius;
   transition: $run;
-  @media (prefers-color-scheme: dark) {
-    color: $pure-white-dark;
-  }
 }
 
 .post-callout{ //should be renamed post call out large
@@ -161,12 +151,9 @@ p, li, h3{
     position: relative;
     text-decoration: none;
     display: inline-block;
-    color: $signature-teal;
+    color: var(--link-color);
     padding: 0 1px;
     transition: $run;
-    @media (prefers-color-scheme: dark) {
-      color: $signature-teal-dark;
-    }
   }
 
   a::after{
@@ -177,18 +164,12 @@ p, li, h3{
     height: 11%;
     left: 0;
     bottom: 0;
-    background-color: $signature-teal;
+    background-color: var(--link-color);
     transition: $run;
-    @media (prefers-color-scheme: dark) {
-      background-color: $signature-teal-dark;
-    }
   }
 
   a:hover {
     color: $pure-white;
-    @media (prefers-color-scheme: dark) {
-      color: $pure-white-dark;
-    }
   }
 
   a:hover::after {
@@ -196,3 +177,12 @@ p, li, h3{
   }
 }
 //******* A Tag Underline Expand Styling
+
+@mixin swipe-underline($color) {
+  display: inline;
+  background: linear-gradient(rgba($color,1), rgba($color,1));
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 10px;
+  transition: background-size .3s;
+}

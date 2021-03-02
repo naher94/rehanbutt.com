@@ -11,7 +11,7 @@ tags: Industrial Design
 
 Am I surprised Apple is in the AR (augmented reality) space? No, not at all. Am I surprised they are making another wearable? Nope. They have been pushing into the fashion world with the Apple Watch in part to gain traction for wearable tech. Working with brand partners to design bands for the Apple Watch as well as sponsoring the Met Gala for the last couple of years helping grow into the fashion industry. Tim Cook has been talking about AR for some time now as the next big thing over VR (virtual reality) which I totally agree with. Augmenting the human experience rather than removing you from it. So, the real question is what are these AR glasses going to look like when they come out? And what will be the fashion industry tie in be? These are some of the questions I try to answer with this project.
 
-<iframe width="100%" src="https://www.youtube.com/embed/eoKWqfbHd-s" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" src="https://www.youtube.com/embed/eoKWqfbHd-s" frameborder="0" allowfullscreen title="AR Glasses Promo Video"></iframe>
 
 ## Process
 

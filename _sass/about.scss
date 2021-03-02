@@ -8,47 +8,36 @@
 }
 
 .bio {
-  font-size: 1rem;
   font-weight: $lato-bold;
   h1{
     padding-left: 0;
-    color: $navy-black;
     font-family: $zilla;
     font-weight: $zilla-bold;
     font-size: 3rem;
     margin-bottom: 0;
-    @media (prefers-color-scheme: dark) {
-      color: $pure-white-dark;
-    }
     span{
       font-size: 2.5rem;
     }
   }
   p{
-    color: $navy-black;
     font-family: $lato;
     line-height: 36px; ///////////why EM NOT RESPONDING
     font-size: 26px; ///////////why EM NOT RESPONDING
     padding: 0;
     margin: 0;
-    @media (prefers-color-scheme: dark) {
-      color: $pure-white-dark;
-    }
     &:last-of-type{
       margin-top: 0.5em;
     }
     code{
+      color: var(--text-color);
       border-radius: $pill-radius;
       padding-left: 0.35em;
       padding-right: 0.35em;
       padding-bottom: 0.15em;
-      background-color: rgba($navy-black,0.15);
-      border-color: $navy-black;
+      background-color: $navy-black-l6;
       border-width: 0;
       @media (prefers-color-scheme: dark) {
-        color: $pure-white-dark;
-        background-color: rgba($pure-white-dark,0.15);
-        border-color: $pure-white-dark;
+        background-color: $navy-black-d6;
       }
     }
     @media screen and (max-width: 40em) {
@@ -61,18 +50,13 @@
 .speaking-item{
   i{
     color: $signature-teal;
-    @media (prefers-color-scheme: dark) {
-      color: $signature-teal-dark;
-    }
   }
   a{
     h3{
-      display: inline;
-      background: linear-gradient(rgba($signature-teal,0.2), rgba($signature-teal,0.2));
-      background-position: 0% 100%;
-      background-repeat: no-repeat;
-      background-size: 0% 10px;
-      transition: background-size .3s;
+      @include swipe-underline($signature-teal-l6);
+      @media (prefers-color-scheme: dark) {
+        @include swipe-underline($signature-teal-d6);
+      }
     }
     .fa-link{
       transition: transform .3s;
@@ -104,8 +88,14 @@
     font-weight: $lato-black;
     margin-left: 0.5rem;
     &:hover{
-      background-color: $signature-teal-hover;
+      background-color: $signature-teal-d1;
     }
+  }
+}
+
+.speaking-item{
+  a{
+    color: var(--text-color);
   }
 }
 
@@ -119,7 +109,7 @@
     font-weight: $lato-black;
     font-family: $lato;
     @media (prefers-color-scheme: dark) {
-      color: rgba($pure-white-dark,0.15);
+      color: rgba($pure-white,0.15);
     }
     @media screen and (max-width: 40em) {
       line-height: 1em;
@@ -132,14 +122,10 @@
   .speaking-item, .education-item{
     h3{
       font-family: $lato;
-      color: $navy-black;
       font-size: 1em;
       font-weight: $lato-black;
       padding: 0;
       margin-bottom: 0;
-      @media (prefers-color-scheme: dark) {
-        color: $pure-white-dark;
-      }
     }
   }
 
@@ -162,23 +148,15 @@
     }
     .date{
       font-family: $lato;
-      color: $navy-black;
       font-size: 1em;
       font-weight: 300;
       font-style: italic;
-      @media (prefers-color-scheme: dark) {
-        color: $pure-white-dark;
-      }
     }
     .description{
       font-family: $lato;
-      color: $navy-black;
       font-size: 1em;
       font-weight: $lato-regular;
       line-height: 1.2em;
-      @media (prefers-color-scheme: dark) {
-        color: $pure-white-dark;
-      }
     }
     .brand-logo-container{
       position: absolute;
@@ -229,7 +207,7 @@
     .brand-logo{
       float: right;
       @media (prefers-color-scheme: dark) {
-        filter: contrast(20%);
+        filter: contrast(800%) invert(100%);
       }
     }
     &:hover .brand-logo-container{
@@ -241,30 +219,19 @@
 .work-item{
   h3{
     font-family: $lato;
-    color: $navy-black;
     font-size: 1.4em;
     font-weight: $lato-black;
     font-style: italic;
     padding: 0;
     margin-bottom: 0;
-    @media (prefers-color-scheme: dark) {
-      color: $pure-white-dark;
-    }
-    // &:not(:first-of-type){
-    //   margin-top: 1.5em;
-    // }
   }
   h4{
     font-family: $lato;
-    color: $navy-black;
     font-size: 1em;
     font-weight: $lato-black;
     padding: 0;
     margin-bottom: 0;
     margin-top: 0;
-    @media (prefers-color-scheme: dark) {
-      color: $pure-white-dark;
-    }
   }
 }
 
@@ -275,14 +242,11 @@
 .skills, .tools{
   h3{
     font-family: $lato;
-    color: $navy-black;
     font-size: 1em;
     font-weight: $lato-black;
     padding: 0;
     margin-bottom: 0;
-    @media (prefers-color-scheme: dark) {
-      color: $pure-white-dark;
-    }
+
     &:first-of-type{
       margin-top: -2.5em;
       @media screen and (max-width: 40em) {
@@ -299,8 +263,7 @@
     margin-right: 0.1em;
     margin-bottom: 0.4em;
     @media (prefers-color-scheme: dark) {
-      background-color: $navy-black-dark;
-      color: $pure-white-dark;
+      background-color: $navy-black-d6;
     }
   }
 }

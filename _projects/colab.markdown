@@ -18,7 +18,7 @@ Design is inherently collaborative. Existing tools such as Photoshop and Sketch 
 ## Our Solution
 CoLab is a plugin that enables real-time collaboration and version control in Sketch, a popular tool among designers, and makes it convenient for them to design with their teams any me, anywhere.
 
-<iframe width="100%" src="https://www.youtube.com/embed/w0ZcpQ547Gg?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" src="https://www.youtube.com/embed/w0ZcpQ547Gg?rel=0" frameborder="0" allowfullscreen title="Product Introduction"></iframe>
 
 As part of this project I worked with Alex Du, Aparna Sridhar Murthy, Chris Barker, Rishikesh Yardi.
 

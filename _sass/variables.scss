@@ -8,25 +8,64 @@ $recessed-shadow: 0px 10px 33px -10px;
 
 // Colors
 $signature-teal: #12abc4;
+
+//// Dark Set
+//// [number indicates number of step removed from main]
+$signature-teal-d1: #109AB4;
+$signature-teal-d2: #0E89A5;
+$signature-teal-d3: #0C7895;
+$signature-teal-d4: #0A6985;
+$signature-teal-d5: #085975;
+$signature-teal-d6: #074B64;
+
+//// Light Set
+$signature-teal-l1: #25B6CA;
+$signature-teal-l2: #38C1CF;
+$signature-teal-l3: #4CCAD4;
+$signature-teal-l4: #5FD3DA;
+$signature-teal-l5: #73DCDF;
+$signature-teal-l6: #86E3E4;
+
+
 $navy-black: #1f2937;
-$dio-grey: #666666;
+
+//// Dark Set
+$navy-black-d6: #0B0E15;
+$navy-black-d5: #0F131C;
+$navy-black-d4: #131923;
+$navy-black-d3: #171E29;
+$navy-black-d2: #1B2330;
+$navy-black-d1: #1f2937;
+
+//// Light Set
+$navy-black-l1: #3B4450;
+$navy-black-l2: #575F69;
+$navy-black-l3: #737A82;
+$navy-black-l4: #8F959B;
+$navy-black-l5: #ABB0B4;
+$navy-black-l6: #C7CACD;
 
 $pure-white: #ffffff;
 $pure-black: #000000;
 
-$signature-teal-hover: #108da2;
+:root{
+  --pure-white-raw: 255, 255, 255;
+  --pure-white: rgb(var(--pure-white-raw));
+  --navy-black-raw: 31, 41, 55;
+  --navy-black: rgb(var(--navy-black-raw));
+  --signature-teal-raw: 18, 171, 196;
+  --signature-teal: rgb(var(--signature-teal-raw));
 
-$navy-black-dark: #131922;
-$signature-teal-dark: #084954;
-$pure-white-dark: #cccccc;
 
-$signature-teal-hover-dark: #083F48;
+  --text-color: var(--navy-black);
+  --link-color: var(--signature-teal);
 
-// :root{
-//   @media (prefers-color-scheme: dark) {
-//     $signature-teal: blue;
-//   }
-// }
+
+  @media (prefers-color-scheme: dark) {
+    --text-color: var(--pure-white);
+  }
+
+}
 
 // Animations
 $sprint: all 0.20s ease-in-out;
@@ -71,17 +110,5 @@ $lato-regular: 400;
 $lato-bold: 700;
 $lato-bold-italic: 700i;
 $lato-black: 900;
-
-// $themes:(
-//   light:(
-//
-//   ),
-//   dark:(
-//
-//   );
-// );
-
-
-
 
 //******* End of Variables
