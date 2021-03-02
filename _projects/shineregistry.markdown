@@ -13,6 +13,7 @@ hero-image: "shineregistry/shine-hero.png"
 hero-image-alt: "Shine Registry's home page and a sample registry page"
 hero-background: "shineregistry/shine-hero-background.svg"
 tags: digital UI UX branding
+published: false
 ---
 
 {:.post-callout-medium}
