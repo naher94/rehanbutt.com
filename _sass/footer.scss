@@ -72,7 +72,7 @@ footer{
       @media (prefers-color-scheme: dark) {
         color: $pure-white;
       }
-      &:hover{
+      &:hover, &:focus{
         background-color: $navy-black-l5;
         transition: color 0.2s ease-in-out;
         @media (prefers-color-scheme: dark) {
@@ -121,51 +121,77 @@ footer{
   @media (prefers-color-scheme: dark) {
     color: $pure-white;
   }
-  &:hover {
-    animation: boing 300ms ease-out;
+  &:hover, &:focus{
+    .fab, .fas{
+      animation: boing 300ms ease-out;
+    }
+    .fa-envelope{
+      color: $signature-teal;
+    }
+    .fa-dribbble{
+      color: #ea4c89;
+    }
+    .fa-pinterest{
+      color: #e60023;
+    }
+    .fa-linkedin-in{
+      color: #2867B2;
+    }
+    .fa-instagram{
+      color: #C13584;
+    }
+    .fa-twitter{
+      color: #1DA1F2;
+    }
+    .fa-github{
+      color: #6f42c1;
+    }
+    .fa-500px{
+      color: #34bf49;
+    }
   }
 }
 
-.fa-envelope{
-  &:hover{
-    color: $signature-teal;
-  }
-}
-.fa-dribbble{
-  &:hover{
-    color: #ea4c89;
-  }
-}
-.fa-pinterest{
-  &:hover{
-    color: #e60023;
-  }
-}
-.fa-linkedin-in{
-  &:hover{
-    color: #2867B2;
-  }
-}
-.fa-instagram{
-  &:hover{
-    color: #C13584;
-  }
-}
-.fa-twitter{
-  &:hover{
-    color: #1DA1F2;
-  }
-}
-.fa-github{
-  &:hover{
-    color: #6f42c1;
-  }
-}
-.fa-500px{
-  &:hover{
-    color: #34bf49;
-  }
-}
+// .fa-envelope{
+//   &:hover, &:focus{
+//     color: $signature-teal;
+//   }
+// }
+// .fa-dribbble{
+//   &:hover, &:focus{
+//     color: #ea4c89;
+//   }
+// }
+// .fa-pinterest{
+//   &:hover, &:focus{
+//     color: #e60023;
+//   }
+// }
+// .fa-linkedin-in{
+//   &:hover, &:focus{
+//     color: #2867B2;
+//   }
+// }
+// .fa-instagram{
+//   &:hover, &:focus{
+//     color: #C13584;
+//   }
+// }
+// .fa-twitter{
+//   &:hover, &:focus{
+//     color: #1DA1F2;
+//   }
+// }
+// .fa-github{
+//   &:hover, &:focus{
+//     color: #6f42c1;
+//   }
+// }
+// .fa-500px{
+//   &:hover, &:focus{
+//     color: #34bf49;
+//   }
+// }
 
 .logo-footer-container{
   .ship-it{
@@ -176,7 +202,7 @@ footer{
     order: -1;
   }
   .logo-footer{
-    &:hover{
+    &:hover, &:focus{
       animation: boing 300ms ease-out;
       ~ .ship-it{
         visibility: visible;

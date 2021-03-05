@@ -32,7 +32,7 @@
   border-radius: $pill-radius;
   font-size: 1em;
   transition: background-color 0.2s ease-in-out;
-  &:hover{
+  &:hover, &:focus{
     color: $pure-white;
     background-color: $signature-teal-d1;
     @media (prefers-color-scheme: dark){
