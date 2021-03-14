@@ -35,6 +35,8 @@ Jekyll uses the `Kramdown` markdown parser allowing for extended functionality, 
 
 * Internal links using custom collections `<a href="{% link _projects/file.markdown %}">click here</a>`
 
+* External links should include a non-visual tag noting it goes external for enhanced acessability `<a target="_blank" href="https://rehanbutt.com/">Rehan Butt<span class="visually-hidden">Opens a new window</span></a>`
+
 #### `_projects` Frontmatter Tags
 
 ##### Type `post`

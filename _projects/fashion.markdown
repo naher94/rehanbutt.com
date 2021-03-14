@@ -20,7 +20,7 @@ A fashion line with a new take on the production of clothes
 
 We developed this collection with 2 goals in mind, create something beautiful and explore non-traditional approaches to get there. I'd like to think we accomplished both, though maybe not the way we first imagined.
 
-We threw out the traditional production process of measure, cut, sew, fit and repeat in favor of more modern and adaptable processes. Leveraging digital design and fabrication techniques, primarily laser cutting and 3D printing and methods such as photogrammetry and computational design. The contrast of hand sewn silk garments versus digitally fabricated stark white tessellated garments leads us to Lustre’s concept. But first a huge shout out to 2 of my good friends Carolina Tamayo and <a target="_blank" href="https://ajhamilton.squarespace.com/">Alyssa Hamilton</a>, who I got the chance to work with on this collection.
+We threw out the traditional production process of measure, cut, sew, fit and repeat in favor of more modern and adaptable processes. Leveraging digital design and fabrication techniques, primarily laser cutting and 3D printing and methods such as photogrammetry and computational design. The contrast of hand sewn silk garments versus digitally fabricated stark white tessellated garments leads us to Lustre’s concept. But first a huge shout out to 2 of my good friends Carolina Tamayo and <a target="_blank" href="https://ajhamilton.squarespace.com/">Alyssa Hamilton <span class="visually-hidden">Opens a new window</span></a>, who I got the chance to work with on this collection.
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
@@ -116,7 +116,7 @@ This concept is directly linked to the idea of clothing being a shell of the hum
   </div>
 </div>
 
-I also want to thank <a target="_blank" href="http://yupousa.com">Yupo</a> for being our sponsor for this collection and Jonathan Leung, Yutong Chen and Victor Song for many of the wonderful photos you see.
+I also want to thank <a target="_blank" href="http://yupousa.com">Yupo<span class="visually-hidden">Opens a new window</span></a> for being our sponsor for this collection and Jonathan Leung, Yutong Chen and Victor Song for many of the wonderful photos you see.
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-4">
