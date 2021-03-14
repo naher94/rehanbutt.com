@@ -38,40 +38,48 @@
               {% endif %}
             {% endfor %}
             <div class="nav-wrap">
-              <a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store</a>
+              <a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store<span class="visually-hidden">Opens a new window</span></a>
             </div>
           </div>
           <div class="social-container auto cell">
             <a target="_blank" rel="noopener" class="social" href="https://www.twitter.com/naher94/">
               <i class="fab fa-twitter" title="Twitter"></i>
+              <span class="visually-hidden">Opens a new window</span>
             </a>
 
             <a target="_blank" rel="noopener" class="social" href="https://www.linkedin.com/in/rehan-butt/">
               <i class="fab fa-linkedin-in" title="Linkedin"></i>
+              <span class="visually-hidden">Opens a new window</span>
             </a>
 
             <a target="_blank" rel="noopener" class="social" href="https://github.com/naher94">
               <i class="fab fa-github" title="Github"></i>
+              <span class="visually-hidden">Opens a new window</span>
             </a>
 
             <a href="mailto:me@rehanbutt.com" class="social">
               <i class="fas fa-envelope" title="Email"></i>
+              <span class="visually-hidden">Opens a new window</span>
             </a>
 
             <a target="_blank" rel="noopener" class="social" href="https://dribbble.com/rehanbutt">
               <i class="fab fa-dribbble" title="Dribbble"></i>
+              <span class="visually-hidden">Opens a new window</span>
             </a>
 
             <a target="_blank" rel="noopener" class="social" href="https://instagram.com/naher94">
               <i class="fab fa-instagram" title="Instagram"></i>
+              <span class="visually-hidden">Opens a new window</span>
             </a>
 
             <a target="_blank" rel="noopener" class="social" href="https://500px.com/naher94">
               <i class="fab fa-500px" title="500px"></i>
+              <span class="visually-hidden">Opens a new window</span>
             </a>
 
             <a target="_blank" rel="noopener" class="social" href="https://www.pinterest.com/naher94/">
               <i class="fab fa-pinterest" title="Pinterest"></i>
+              <span class="visually-hidden">Opens a new window</span>
             </a>
           </div>
 
@@ -79,6 +87,7 @@
         <div class="small-12 medium-shrink cell right-section">
           <div class="logo-footer-container grid-x align-right">
             <a href="#" class="logo-footer">
+              {% capture location %}footer{% endcapture %}
               {% include rehan-logo.svg %}
             </a>
             <img class="ship-it" src="/img/shipit.svg" alt="Ship It Sticker">

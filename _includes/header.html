@@ -9,7 +9,7 @@
   .nav:hover{
     background-color: {{accent-color-override | strip | append: "33"}};
   }
-  .logo #rehan-logo g{
+  .logo #rehan-logo-header g{
     fill: {{accent-color-override}};
   }
 
@@ -33,7 +33,7 @@
     .nav:hover{
       background-color: {{accent-color-override-dark | strip | append: "33"}};
     }
-    .logo #rehan-logo g{
+    .logo #rehan-logo-header g{
       fill: {{accent-color-override-dark}};
     }
 
@@ -92,6 +92,7 @@
 
         <div class="logo">
           <a href="{{ site.baseurl }}/">
+            {% capture location %}header{% endcapture %}
             {% include rehan-logo.svg %}
           </a>
         </div>
