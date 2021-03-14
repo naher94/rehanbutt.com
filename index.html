@@ -10,7 +10,7 @@ layout: default
   {% if project.featured == true %}
   <div class="medium-6 cell thumbnail-tile">
     {% if project.external-link %}
-      <a class="post-link" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank">
+      <a class="post-link" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank"><span class="visually-hidden">Opens a new window</span>
     {% else %}
       <a class="post-link" href="{{ project.url | prepend: site.baseurl }}">
     {% endif %}
@@ -33,7 +33,7 @@ layout: default
   {% if project.featured != true %}
   <div class="small-6 medium-4 large-3 cell thumbnail-tile">
     {% if project.external-link %}
-      <a class="post-link" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank">
+      <a class="post-link" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank"><span class="visually-hidden">Opens a new window</span>
     {% else %}
       <a class="post-link" href="{{ project.url | prepend: site.baseurl }}">
     {% endif %}
