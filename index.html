@@ -2,6 +2,8 @@
 layout: default
 ---
 
+<h1 class="visually-hidden">Projects</h1>
+
 {% assign project_order = site.projects | sort: 'date' | reverse %}
 
 {% for project in project_order %}
