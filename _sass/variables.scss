@@ -56,9 +56,12 @@ $pure-black: #000000;
   --signature-teal-raw: 18, 171, 196;
   --signature-teal: rgb(var(--signature-teal-raw));
 
+  // --signature-teal-d3: #0C7895;
 
   --text-color: var(--navy-black);
+  // --link-color: var(--signature-teal-d3);
   --link-color: var(--signature-teal);
+
 
 
   @media (prefers-color-scheme: dark) {
