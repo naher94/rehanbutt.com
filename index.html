@@ -15,7 +15,7 @@ layout: default
       <a class="post-link" href="{{ project.url | prepend: site.baseurl }}">
     {% endif %}
         <div class="thumbnail-container">
-          <img class="thumbnail-image-featured" src="img/thumbnails/{{ project.thumbnail | append: '-featured.jpg' }}" alt="{{ project.tile-name }} Tile Image">
+          <img class="thumbnail-image-featured" src="img/thumbnails/{{ project.thumbnail | append: '-featured.jpg' }}" alt="{{ project.tile-name }} Tile">
           <div class="featured-text">
             <span class="thumbnail-text-featured">{{ project.tile-name }}</span>
             <span class="thumbnail-description-featured">{{ project.tile-description }}</span>
@@ -38,7 +38,7 @@ layout: default
       <a class="post-link" href="{{ project.url | prepend: site.baseurl }}">
     {% endif %}
         <div class="thumbnail-container">
-          <img class="thumbnail-image" src="img/thumbnails/{{ project.thumbnail | append: '.png' }}" alt="{{ project.tile-name }} Tile Image">
+          <img class="thumbnail-image" src="img/thumbnails/{{ project.thumbnail | append: '.png' }}" alt="{{ project.tile-name }} Tile">
           <span class="thumbnail-text">{{ project.tile-name }}</span>
           {% if project.flag %}
           <span class="flag">{{ project.flag }}</span>
