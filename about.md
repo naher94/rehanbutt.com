@@ -17,7 +17,7 @@ permalink: about
     <p>I love to travel ✈️, and have been fortunate enough to live all over the world. 🌏 Every day trying to bring the unique aspects of each culture into my work. In my free time, I enjoy photography 📷 and creating cute digital illustrations 🐧. Want to hear more about what I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com">email</a> to connect. ✉️</p>
   </section>
 
-  <section class="work-experience">
+  <section class="work-experience" id="work-experience">
     <h2>Work Experience</h2>
 
     {% assign work_order = site.work-experience | sort: 'sort-order' %}
@@ -46,7 +46,7 @@ permalink: about
     {% endfor %}
   </section>
 
-  <section class="speaking-events">
+  <section class="speaking-events" id="speaking-events">
     <h2>Speaking Events</h2>
 
     {% assign event_order = site.speaking | sort: 'date' | reverse %}
@@ -93,7 +93,7 @@ permalink: about
     {% endfor %}
   </section>
 
-  <section class="education">
+  <section class="education" id="education">
     <h2>Education</h2>
     <div class="education-item">
       <div class="brand-logo-container" id="cmu">
@@ -115,7 +115,7 @@ permalink: about
     </div>
   </section>
 
-  <section class="skills">
+  <section class="skills" id="skills">
     <h2>Skills</h2>
     <h3>Some of the things I do well</h3>
     <div class="skills-container">
@@ -136,7 +136,7 @@ permalink: about
     </div>
   </section>
 
-  <section class="tools">
+  <section class="tools" id="tools">
     <h2>Tools</h2>
     <h3>Some of the toolsets I am quite familiar with</h3>
     <div class="skills-container">

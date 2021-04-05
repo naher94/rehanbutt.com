@@ -54,19 +54,41 @@
 
 .tag-group{
   margin-bottom: 6rem;
+  .section-header{
+    &:hover{
+      .hashtag{
+        color: $signature-teal;
+        @media (prefers-color-scheme: dark) {
+          color: $signature-teal-d2;
+        }
+      }
+    }
+  }
   h3{
     font-size: 3.5em;
-    color: rgba($navy-black, 0.15);
+    color: $navy-black;
+    display: inline;
     font-weight: $lato-black;
     font-family: $lato;
     flex-wrap: wrap;
-    margin-bottom: -4.6rem;
     @media screen and (max-width: 40em) {
-      margin-bottom: -2.8rem;
       line-height: 3.6rem;
     }
     @media (prefers-color-scheme: dark) {
-      color: rgba($pure-white,0.15);
+      color: $pure-white;
+    }
+  }
+  .divider{
+    background-color: $signature-teal;
+    border-radius: $pill-radius;
+    content: '';
+    height: 0.5rem;
+    margin-left: 1rem;
+    @media (prefers-color-scheme: dark) {
+      background-color: $signature-teal-d2;
+    }
+    @media screen and (max-width: 40em) {
+      margin-left: 0;
     }
   }
 }
