@@ -133,3 +133,4 @@ https://yasmeenalmuhanna.com | no |
 https://stackoverflow.com/users/12394272/rehan-butt | |
 https://community.cmu.edu/s/ | |
 alumnifire | |
+https://jekyllrb.com/showcase/ | yes | Full screen shot of the home page
