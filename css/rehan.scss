@@ -193,6 +193,52 @@ iframe { //this should probs be aspect ratio
   }
 }
 
+// TODO mobileify the Year in Review Styling
+.year-container{
+  background-color: $pure-white;
+  border-radius: $tile-radius;
+  box-shadow: $recessed-shadow;
+  padding: 2rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  .year-square{
+    background-color: $navy-black;
+    color: $pure-white;
+    font-family: $zilla;
+    font-weight: $zilla-bold;
+    font-size: 10.6rem;
+    position: relative;
+    overflow: hidden;
+    span{
+      position: absolute;
+      top: 7%;
+      margin: auto;
+      left: -7%;
+    }
+    @supports(aspect-ratio:1/1){
+      aspect-ratio: 1/1;
+    }
+    @supports not(aspect-ratio:1/1){
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }  
+  }
+  .yir-label{
+    font-size: 2.5rem;
+    text-align: center;
+    font-family: $caveat;
+    font-weight: $caveat-regular;
+    line-height: 2.2rem;
+    padding: rem 0;
+  }
+  &:hover{
+    .year-square{
+      background-color: $signature-teal;
+    }
+  }
+}
+
 
 //******* Easter Egg Styling
 .behind-the-scenes-container{
