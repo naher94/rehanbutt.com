@@ -58,7 +58,7 @@ Search browse scroll!
 
 With a lot of content search and discovery becomes an issue for any platform. This was something that we focused on with this redesign____________. How could we offer a better way to showcase and bubble up groups of businesses.
 
-Esspially with the 'Featured Tag' pages as we like to call them. Giving a community or group the opportunity to bubble up a little about themselves and all the folks that are a part of it if on the platform.
+Especially with the 'Featured Tag' pages as we like to call them. Giving a community or group the opportunity to bubble up a little about themselves and all the folks that are a part of it if on the platform.
 
 Which also leads to a natural progression of helping bring new folks to the table through partnerships.
 
@@ -74,9 +74,9 @@ Which also leads to a natural progression of helping bring new folks to the tabl
 {:.post-callout-medium}
 Every redesign starts with solid architecture
 
-The biggest architecural change we made was seperating the idea of a registry or bussiness and the owner of that registry, previously they were one in the same, so if you supported someone else on the platform it was as your bussiness. You also noticed that overtime it became conceptually merky based on some of the content that better represented individuals and not their businesses.
+The biggest architectural change we made was separating the idea of a registry or business and the owner of that registry, previously they were one in the same, so if you supported someone else on the platform it was as your business. You also noticed that overtime it became conceptually murky based on some of the content that better represented individuals and not their businesses.
 
-Giving folks to seperate themselves from their businesses and allow for a business to have more collbrators on the platform as they grow.
+Giving folks to separate themselves from their businesses and allow for a business to have more collaborators on the platform as they grow.
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
     <img src="../img/shineregistry/former-site.jpg" alt="Shine Registry's former home page">
