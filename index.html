@@ -47,34 +47,42 @@ layout: default
   {% endif %}
 {% endfor %}
 
+<!-- TODO decide on copy "2020 year in review" or "2020 in review" -->
+{% assign yir_order = site.year-in-review | sort: 'year' | reverse %}
+
 <section class="year-in-review grid-x grid-margin-x">
   <div class="cell">
     <h2>Year in Review</h2>
   </div>
-  <div class="year-container cell medium-4">
-    <div class="year-square">
-      <span>2021</span>
-    </div>
-    <div class="yir-label">
-      2021 year in progress
-    </div>
-  </div>
 
-  <div class="year-container cell medium-4">
-    <div class="year-square">
-      <span>2020</span>
-    </div>
-    <div class="yir-label">
-      2020 year in review
-    </div>
+  {%- for year in yir_order -%}
+  {% if year.current == true %}
+  <div class="cell medium-4">
+      <div class="year-container">
+        <div class="year-square current-year">
+          <span>{{year.year}}</span>
+        </div>
+        <div class="yir-label">
+          {{year.year}} in progress
+        </div>
+      </div>
   </div>
-
-  <div class="year-container cell medium-4">
-    <div class="year-square">
-      <span>2019</span>
-    </div>
-    <div class="yir-label">
-      2019 year in review
-    </div>
+  {% else %}
+  <div class="cell medium-4">
+    <a href="https://{{ year.year | append: ".rehanbutt.com" }}" target="_blank" rel="noopener">
+      <div class="year-container">
+        <div class="year-square" style="background: {{year.color}};">
+          <div class="overlay">
+          </div>
+          <span>{{year.year}}</span>
+        </div>
+        <div class="yir-label">
+          {{year.year}} in review
+        </div>
+      </div>
+      <span class="visually-hidden">Opens a new window</span>
+    </a>
   </div>
+  {% endif %}
+  {%- endfor -%}
 </section>

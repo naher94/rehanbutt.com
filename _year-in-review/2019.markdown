@@ -1,0 +1,4 @@
+---
+year: 2019
+color: "linear-gradient(90deg, #B4EC51 0%, #53A0FD 50%, #3023AE 100%)"
+---

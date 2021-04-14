@@ -202,6 +202,9 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     font-weight: $zilla-bold;
     margin-bottom: 3rem;
   }
+  a{
+    color: $navy-black;
+  }
   .year-container{
     background-color: $pure-white;
     border-radius: $tile-radius;
@@ -209,6 +212,18 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     padding: 2rem;
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
+    transition: $sprint;
+    &:hover{
+      transform: rotate(4deg) scale(1.05);
+      .year-square{
+        .overlay{
+          opacity: 0;
+        }
+      }
+    }
+    .current-year{
+      background-color: $navy-black-l6 !important;
+    }
     .year-square{
       background-color: $navy-black;
       color: $pure-white;
@@ -217,6 +232,22 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       font-size: 10.6rem;
       position: relative;
       overflow: hidden;
+      .overlay{
+        transition: $sprint;
+        background-color: $navy-black;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        @supports(aspect-ratio:1/1){
+          aspect-ratio: 1/1;
+        }
+        @supports not(aspect-ratio:1/1){
+          content: '';
+          display: block;
+          padding-top: 100%;
+        }
+      }
       span{
         position: absolute;
         top: 7%;
