@@ -581,7 +581,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     div{
       margin-bottom: 0.5rem;
       &:hover{
-        animation: boing 300ms ease-out; // TODO this is the wrong animation if it is going to highlight adjacent text objects, it should stay large until unhover
+        animation: boing 300ms ease-out;
       }
     }
     .plane{
