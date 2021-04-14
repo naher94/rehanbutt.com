@@ -2,21 +2,21 @@
 layout: default
 ---
 
-<section class="site-intro grid-x grid-margin-x cell align-center">
-  <div class="cell grid-x medium-9">
+<section class="site-intro grid-x cell align-center">
+  <div class="cell grid-x medium-9 grid-padding-x">
     <div>
       <span class="watermark">Hello</span>
     </div>
-    <div class="cell grid-x small-12 medium-shrink emoji-wrapper text-center">
-      <div class="cell shrink medium-12">✈️</div>
-      <div class="cell shrink medium-12">🌏 </div>
-      <div class="cell shrink medium-12">📷 </div>
-      <div class="cell shrink medium-12">🐧</div>
+    <div class="cell grid-y small-12 medium-shrink emoji-wrapper text-center">
+      <div class="cell shrink plane">✈️</div>
+      <div class="cell shrink">🌏 </div>
+      <div class="cell shrink">📷 </div>
+      <div class="cell shrink">🐧</div>
     </div>
     <div class="cell medium-auto">
       <h1>Hi there! I'm Rehan<span class="wave">👋</span></h1>
       <p>I am a devzgner, designer + developer, currently working on healthcare technology in Pittsburgh, PA, USA previously working with organizations like GE Healthcare & the NBA on consumer and enterprise applications.</p>
-      <p>I love to travel️, and have been fortunate enough to live all over the world. Every day trying to bring the unique aspects of each culture into my work. In my free time, I enjoy photography and creating cute digital illustrations.</p>
+      <p><span class="plane-effect">I love to travel️</span>, and have been fortunate enough to live all over the world. Every day trying to bring the unique aspects of each culture into my work. In my free time, I enjoy photography and creating cute digital illustrations.</p>
       <a href="/about">Learn more about me</a>
     </div>
   </div>
@@ -46,3 +46,35 @@ layout: default
   </div>
   {% endif %}
 {% endfor %}
+
+<section class="year-in-review grid-x grid-margin-x">
+  <div class="cell">
+    <h2>Year in Review</h2>
+  </div>
+  <div class="year-container cell medium-4">
+    <div class="year-square">
+      <span>2021</span>
+    </div>
+    <div class="yir-label">
+      2021 year in progress
+    </div>
+  </div>
+
+  <div class="year-container cell medium-4">
+    <div class="year-square">
+      <span>2020</span>
+    </div>
+    <div class="yir-label">
+      2020 year in review
+    </div>
+  </div>
+
+  <div class="year-container cell medium-4">
+    <div class="year-square">
+      <span>2019</span>
+    </div>
+    <div class="yir-label">
+      2019 year in review
+    </div>
+  </div>
+</section>
