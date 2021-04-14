@@ -2,7 +2,25 @@
 layout: default
 ---
 
-<h1>HOME</h1>
+<section class="site-intro grid-x grid-margin-x cell align-center">
+  <div class="cell grid-x medium-9">
+    <div>
+      <span class="watermark">Hello</span>
+    </div>
+    <div class="cell grid-x small-12 medium-shrink emoji-wrapper text-center">
+      <div class="cell shrink medium-12">✈️</div>
+      <div class="cell shrink medium-12">🌏 </div>
+      <div class="cell shrink medium-12">📷 </div>
+      <div class="cell shrink medium-12">🐧</div>
+    </div>
+    <div class="cell medium-auto">
+      <h1>Hi there! I'm Rehan<span class="wave">👋</span></h1>
+      <p>I am a devzgner, designer + developer, currently working on healthcare technology in Pittsburgh, PA, USA previously working with organizations like GE Healthcare & the NBA on consumer and enterprise applications.</p>
+      <p>I love to travel️, and have been fortunate enough to live all over the world. Every day trying to bring the unique aspects of each culture into my work. In my free time, I enjoy photography and creating cute digital illustrations.</p>
+      <a href="/about">Learn more about me</a>
+    </div>
+  </div>
+</section>
 
 {% assign project_order = site.projects | sort: 'date' | reverse %}
 
@@ -20,26 +38,6 @@ layout: default
             <span class="thumbnail-text-featured">{{ project.tile-name }}</span>
             <span class="thumbnail-description-featured">{{ project.tile-description }}</span>
           </div>
-          {% if project.flag %}
-          <span class="flag">{{ project.flag }}</span>
-          {% endif %}
-        </div>
-    </a>
-  </div>
-  {% endif %}
-{% endfor %}
-
-{% for project in project_order %}
-  {% if project.featured != true %}
-  <div class="small-6 medium-4 large-3 cell thumbnail-tile">
-    {% if project.external-link %}
-      <a class="post-link" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank"><span class="visually-hidden">Opens a new window</span>
-    {% else %}
-      <a class="post-link" href="{{ project.url | prepend: site.baseurl }}">
-    {% endif %}
-        <div class="thumbnail-container">
-          <img class="thumbnail-image" src="img/thumbnails/{{ project.thumbnail | append: '.png' }}" alt="{{ project.tile-name }} Tile">
-          <span class="thumbnail-text">{{ project.tile-name }}</span>
           {% if project.flag %}
           <span class="flag">{{ project.flag }}</span>
           {% endif %}

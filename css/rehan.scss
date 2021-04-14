@@ -505,6 +505,55 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
 }
 
+//******* Intro
+.site-intro{
+  margin-bottom: 8rem;
+  margin-top: 3rem;
+  .emoji-wrapper{
+    font-size: 2rem;
+    div{
+      &:hover{
+        animation: boing 300ms ease-out;
+      }
+    }
+    @include breakpoint(small only){
+      margin-bottom: 1rem;
+      div{
+        margin-right: 1rem;
+      }
+    }
+  }
+  span.watermark{ //TODO figure out how to center this
+    font-family: $zilla;
+    font-weight: $zilla-bold;
+    font-size: 25vw;
+    margin-left: -5vw;
+    margin-top: -2vw;
+    position: absolute;
+    color: rgba($signature-teal, 0.1);
+    line-height: 20vw;
+    z-index: -1;
+    @include breakpoint(small only){
+      font-size: 40vw;
+      margin-top: 4rem;
+    }
+  }
+  span.wave{
+    font-size: 0.8em;
+    margin-left: 0.5em;
+  }
+  p{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  a{
+    @include link-expand;
+  }
+}
+//******* End of Intro
+
+
+
 //******* Mobile Styling
 
 @include breakpoint(small only) {
