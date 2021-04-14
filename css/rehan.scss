@@ -195,7 +195,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
 }
 
-// TODO mobileify the Year in Review Styling
+// TODO mobileify the Year in Review Styling Not as responsive as it should be
 .year-in-review{
   margin-bottom: 10rem;
   @include breakpoint(small only){
@@ -207,9 +207,27 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     text-align: center;
     font-weight: $zilla-bold;
     margin-bottom: 3rem;
+    @include breakpoint(small only){
+      line-height: 2.8rem;
+    }
   }
   a{
     color: $navy-black;
+  }
+  .time-travel{
+    font-size: 2rem;
+    font-family: $caveat;
+    font-weight: $caveat-regular;
+    position: absolute;
+    transform: rotate(10deg);
+    max-width: 10rem;
+    line-height: 2rem;
+    margin-left: -3rem;
+    margin-top: -2rem;
+    @include breakpoint(small only){
+      margin-left: -5rem;
+      margin-top: -6rem;
+    }
   }
   .year-container{
     background-color: $pure-white;
