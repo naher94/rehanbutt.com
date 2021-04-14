@@ -25,7 +25,7 @@
         <div class="cell small-12 medium-auto left-section">
           <div class="site-pages auto cell">
             <div class="nav-wrap">
-              <a class="nav" href="/">Portfolio</a>
+              <a class="nav" href="/portfolio">Portfolio</a>
             </div>
             {% for my_page in site.pages %}
               {% if my_page.exclude != "true" %}
@@ -86,7 +86,7 @@
         </div>
         <div class="small-12 medium-shrink cell right-section">
           <div class="logo-footer-container grid-x align-right">
-            <a href="#" class="logo-footer">
+            <a href="/" class="logo-footer">
               {% capture location %}footer{% endcapture %}
               {% include rehan-logo.svg %}
             </a>

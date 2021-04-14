@@ -63,11 +63,11 @@
             <span class="nav-burger-icon"></span>
           </label>
           <div class="mobile-navbar">
-            <a class="nav" href="/">Portfolio</a>
+            <a class="nav" href="/portfolio">Portfolio</a>
             <a class="nav" href="/about">About</a>
           </div>
           <ul class="menu-links">
-            <li class="nav-item-container"><a class="nav" href="/index.html">Portfolio</a></li>
+            <li class="nav-item-container"><a class="nav" href="/portfolio">Portfolio</a></li>
               {% for my_page in site.pages %}
                 {% if my_page.exclude != "true" %}
                   {% if my_page.title %}
@@ -80,7 +80,7 @@
         </div>
 
         <div class="navbar">
-          <a class="nav" href="/index.html">Portfolio</a>
+          <a class="nav" href="/portfolio">Portfolio</a>
             {% for my_page in site.pages %}
               {% if my_page.exclude != "true" %}
                 {% if my_page.title %}
