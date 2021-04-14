@@ -197,6 +197,12 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 
 // TODO mobileify the Year in Review Styling
 .year-in-review{
+  margin-bottom: 10rem;
+  @include breakpoint(small only){
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
   h2{
     text-align: center;
     font-weight: $zilla-bold;
@@ -253,6 +259,11 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         top: 7%;
         margin: auto;
         left: -7%;
+        @include breakpoint(small only){
+          font-size: 9.5rem;
+          top: 3%;
+          left: -7%;
+        }
       }
       @supports(aspect-ratio:1/1){
         aspect-ratio: 1/1;
