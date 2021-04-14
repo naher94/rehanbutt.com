@@ -4,7 +4,7 @@ body {
   font-weight: $lato-regular;
   font-size: 20px; // = 1em
   color: var(--text-color);
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     font-size: 16px;
   }
   @media (prefers-color-scheme: dark) {
@@ -25,7 +25,7 @@ h1{
 h2{
   font-size: 3.5em;
   font-weight: $zilla-medium;
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
@@ -43,7 +43,7 @@ p{
   padding-right: 5em;
   margin-top: 1.25em;
   margin-bottom: 1.25em;
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     padding-left: 0.5em;
     padding-right: 0.5em;
   }
@@ -52,7 +52,7 @@ p{
 ul {
   padding-left: 5em;
   padding-right: 5em;
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     padding-left: 0.5em;
     padding-right: 0.5em;
   }
@@ -60,7 +60,7 @@ ul {
 
 .content-wrapper{
   padding-top: 3em;
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     padding-top: 1em;
   }
 }
@@ -83,7 +83,7 @@ ul {
     position: absolute;
     padding-left: 2em;
     padding-right: 2em;
-    @media screen and (max-width: 40em) {
+    @include breakpoint(small only) {
       padding-left: 0.5em;
       padding-right: 0.5em;
     }
@@ -130,7 +130,7 @@ ul {
   line-height: 1.3em;
   font-weight: $lato-bold;
   font-style: italic;
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     padding-left: 0.25em;
     padding-right: 0.25em;
   }

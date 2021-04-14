@@ -58,7 +58,7 @@
     display: none;
     float: left;
     user-select: none;
-    @media screen and (max-width: 40em){
+    @include breakpoint(small only) {
       display: block;
     }
   }
@@ -67,7 +67,7 @@
 .burger-container{
   float: left;
   display: none;
-  @media screen and (max-width: 40em){
+  @include breakpoint(small only) {
     display: block;
   }
 }
@@ -142,7 +142,7 @@
     transition: $run;
   }
   ~ .mobile-navbar{
-    @media screen and (max-width: 40em) {
+    @include breakpoint(small only) {
       display: none;
     }
   }

@@ -58,15 +58,15 @@ img {
   display: block;
 }
 
-iframe { //this should probs be aspect ratio
+iframe { //this should probs be aspect ratio // TODO Gissue #385
   height: 600px;
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     height: 220px;
   }
 }
 
 .post-header{
-  @media screen and (max-width: 64em) {
+  @include breakpoint(medium down) {
     padding-left: 0.5em;
     padding-right: 0.5em;
   }
@@ -74,7 +74,7 @@ iframe { //this should probs be aspect ratio
 
 .post-header-hero{
   margin-top: 1em;
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     margin-top: 0.5em;
   }
 }
@@ -129,7 +129,7 @@ iframe { //this should probs be aspect ratio
   text-align: center;
   font-weight: $zilla-bold;
   font-family: $zilla;
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     font-size: 1.4em;
   }
 }
@@ -146,7 +146,7 @@ iframe { //this should probs be aspect ratio
   background: linear-gradient(0deg, rgba($navy-black,1) 0%, rgba($navy-black,0) 100%);
   width: 100%;
   border-radius: 0 0 $tile-radius $tile-radius;
-  @media screen and (max-width: 64em) {
+  @include breakpoint(medium down) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     padding-bottom: 1.5rem;
@@ -161,7 +161,7 @@ iframe { //this should probs be aspect ratio
   line-height: 1em;
   font-weight: $zilla-bold;
   font-family: $zilla;
-  @media screen and (max-width: 64em) {
+  @include breakpoint(medium down) {
     font-size: 2em;
   }
 }
@@ -189,7 +189,7 @@ iframe { //this should probs be aspect ratio
   background-color: $signature-teal;
   color: $pure-white;
   border-radius: $pill-radius;
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     right: -0.5rem;
     top: -0.5rem;
   }
@@ -265,7 +265,7 @@ iframe { //this should probs be aspect ratio
       line-height: 1.5rem;
       font-size: 1rem;
     }
-    @media screen and (max-width: 40em) {
+    @include breakpoint(small only) {
       margin-top: -3rem;
     }
   }
@@ -292,10 +292,10 @@ iframe { //this should probs be aspect ratio
       font-weight: $lato-bold;
       font-size: 1rem;
       line-height: 1.3rem;
-      @media screen and (max-width: 40em) {
+      @include breakpoint(small only) {
         font-size: 1rem;
       }
-      @media screen and (max-width: 64em) {
+      @include breakpoint(medium down) {
         font-size: 1rem;
       }
     }
@@ -313,7 +313,7 @@ iframe { //this should probs be aspect ratio
       font-size: 1rem;
       margin: 0;
       margin-left: 0.5rem;
-      @media screen and (max-width: 40em) {
+      @include breakpoint(small only) {
         margin-left: 0;
         margin-top: 0.5rem;
       }
@@ -343,11 +343,11 @@ iframe { //this should probs be aspect ratio
     &:hover{
       transform: rotate(-5deg) scale(1.1);
     }
-    @media screen and (max-width: 40em) {
+    @include breakpoint(small only) {
       left: 1rem;
     }
   }
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     width: 6rem;
   }
 }
@@ -507,12 +507,7 @@ iframe { //this should probs be aspect ratio
 
 //******* Mobile Styling
 
-// Measurments pulled from foundation css file
-
-// Mobile Styling 40em
-// Tablet Styling 64em
-
-@media screen and (max-width: 40em) {
+@include breakpoint(small only) {
 
   .mobile-navbar{
     display: block;

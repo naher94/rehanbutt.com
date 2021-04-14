@@ -1,7 +1,6 @@
 //******* About Page Styling
 
-//Large only styling
-@media screen and (min-width: 64em) {
+@include breakpoint(large up) {
   .profile-photo-container{
     padding-right: 5rem;
   }
@@ -40,7 +39,7 @@
         background-color: $navy-black-d6;
       }
     }
-    @media screen and (max-width: 40em) {
+    @include breakpoint(small only) {
       font-size: 20px;
       line-height: 28px;
     }
@@ -111,10 +110,10 @@
     @media (prefers-color-scheme: dark) {
       color: rgba($pure-white,0.15);
     }
-    @media screen and (max-width: 40em) {
+    @include breakpoint(small only) {
       line-height: 1em;
     }
-    @media screen and (max-width: 64em) {
+    @include breakpoint(medium down) {
       line-height: 1em;
     }
   }
@@ -132,10 +131,10 @@
   .work-item, .speaking-item, .education-item{
     &:first-of-type{
       margin-top: -2.5em;
-      @media screen and (max-width: 40em) {
+      @include breakpoint(small only) {
         margin-top: -1.5em;
       }
-      @media screen and (max-width: 64em) {
+      @include breakpoint(medium down) {
         margin-top: -1.5em;
       }
     }
@@ -164,7 +163,7 @@
       margin-left: -4em;
       transition: $run;
       padding-top: 0.5em;
-      @media screen and (max-width: 40em) {
+      @include breakpoint(small only) {
         display: none;
       }
       &#upmc{
@@ -249,7 +248,7 @@
 
     &:first-of-type{
       margin-top: -2.5em;
-      @media screen and (max-width: 40em) {
+      @include breakpoint(small only) {
         margin-top: -1.5em;
       }
     }
