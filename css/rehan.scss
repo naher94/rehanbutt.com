@@ -124,70 +124,73 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
 }
 
-.feature-row{
-  margin-bottom: 4rem;
-  &:nth-child(even){
-    .text-wrapper{
-      order: 2;
-    }
-    .image-wrapper{
-      order: 1;
-      .thumbnail-container-featured{
-        &:hover{
-          transform: scale(1.02) rotate(-2deg);
+.featured-projects{
+  margin-bottom: 8rem;
+  .feature-row{
+    margin-bottom: 4rem;
+    &:nth-child(even){
+      .text-wrapper{
+        order: 2;
+      }
+      .image-wrapper{
+        order: 1;
+        .thumbnail-container-featured{
+          &:hover{
+            transform: scale(1.02) rotate(-2deg);
+          }
         }
       }
     }
-  }
-  .text-wrapper{
-    @include breakpoint(small only) {
-      order: 2;
-    }
-  }
-  .image-wrapper{
-    @include breakpoint(small only) {
-      order: 1;
-    }
-  }
-  .thumbnail-container-featured{
-    background-color: $navy-black;
-    border-radius: $tile-radius-big;
-    transition: $sprint;
-    &:hover{
-      transform: scale(1.02) rotate(2deg);
-      box-shadow: $recessed-shadow rgba($navy-black,0.75);
-      @media (prefers-color-scheme: dark) {
-        box-shadow: $recessed-shadow rgba($pure-black,0.75);
+    .text-wrapper{
+      @include breakpoint(small only) {
+        order: 2;
       }
     }
-     .thumbnail-image-featured{
+    .image-wrapper{
+      @include breakpoint(small only) {
+        order: 1;
+      }
+    }
+    .thumbnail-container-featured{
+      background-color: $navy-black;
       border-radius: $tile-radius-big;
-    }
-  }
-  
-  .featured-text{
-    h2{
-      font-size: 2.5rem;
-      font-weight: $zilla-bold;
-    }
-    p{
-      font-size: 1.5rem;
-      padding: 0;
-      margin: 0;
-    }
-    .explore-wrapper{
-      margin-top: 2rem;
-    }
-    .explore-button{
-      padding: 0.7rem 1rem;
-      color: $navy-black;
-      border-radius: 14px;
-      border: solid 0.2rem $navy-black;
-      font-weight: $lato-bold;
       transition: $sprint;
       &:hover{
-        color: $pure-white;
-        background-color: $navy-black;
+        transform: scale(1.02) rotate(2deg);
+        box-shadow: $recessed-shadow rgba($navy-black,0.75);
+        @media (prefers-color-scheme: dark) {
+          box-shadow: $recessed-shadow rgba($pure-black,0.75);
+        }
+      }
+       .thumbnail-image-featured{
+        border-radius: $tile-radius-big;
+      }
+    }
+    
+    .featured-text{
+      h2{
+        font-size: 2.5rem;
+        font-weight: $zilla-bold;
+      }
+      p{
+        font-size: 1.5rem;
+        padding: 0;
+        margin: 0;
+      }
+      .explore-wrapper{
+        margin-top: 2rem;
+      }
+      .explore-button{
+        padding: 0.7rem 1rem;
+        color: $navy-black;
+        border-radius: 14px;
+        border: solid 0.2rem $navy-black;
+        font-weight: $lato-bold;
+        transition: $sprint;
+        &:hover{
+          color: $pure-white;
+          background-color: $navy-black;
+        }
       }
     }
   }

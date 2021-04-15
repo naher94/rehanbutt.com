@@ -27,7 +27,7 @@ layout: default
 <section class="featured-projects">
 {% for project in project_order %}
   {% if project.featured == true %}
-  <div class="cell grid-x grid-padding-x feature-row">
+  <div class="cell grid-x grid-padding-x feature-row align-center">
     <div class="cell medium-4 grid-x align-middle align-center text-wrapper">
       <div class="featured-text cell">
         <h2 class="">{{ project.tile-name }}</h2>
@@ -42,7 +42,7 @@ layout: default
         </div>
       </div>
     </div>
-    <div class="medium-8 cell image-wrapper">
+    <div class="medium-7 cell image-wrapper">
       {% if project.external-link %}
         <a class="" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank"><span class="visually-hidden">Opens a new window</span>
       {% else %}
