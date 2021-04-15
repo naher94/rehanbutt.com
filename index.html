@@ -24,28 +24,39 @@ layout: default
 
 {% assign project_order = site.projects | sort: 'date' | reverse %}
 
+<section class="featured-projects">
 {% for project in project_order %}
   {% if project.featured == true %}
-  <div class="medium-6 cell thumbnail-tile">
-    {% if project.external-link %}
-      <a class="post-link" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank"><span class="visually-hidden">Opens a new window</span>
-    {% else %}
-      <a class="post-link" href="{{ project.url | prepend: site.baseurl }}">
-    {% endif %}
-        <div class="thumbnail-container">
-          <img class="thumbnail-image-featured" src="img/thumbnails/{{ project.thumbnail | append: '-featured.jpg' }}" alt="{{ project.tile-name }} Tile">
-          <div class="featured-text">
-            <span class="thumbnail-text-featured">{{ project.tile-name }}</span>
-            <span class="thumbnail-description-featured">{{ project.tile-description }}</span>
-          </div>
-          {% if project.flag %}
-          <span class="flag">{{ project.flag }}</span>
+  <div class="cell grid-x grid-padding-x feature-row">
+    <div class="cell medium-4 grid-x align-middle align-center text-wrapper">
+      <div class="featured-text cell">
+        <h2 class="">{{ project.tile-name }}</h2>
+        <p class="">{{ project.tile-description }}</p>
+
+        <div class="explore-wrapper">
+          {% if project.external-link %}
+          <a class="explore-button" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank">Explore<span class="visually-hidden">Opens a new window</span></a>
+          {% else %}
+          <a class="explore-button" href="{{ project.url | prepend: site.baseurl }}">Explore</a>
           {% endif %}
         </div>
-    </a>
+      </div>
+    </div>
+    <div class="medium-8 cell image-wrapper">
+      {% if project.external-link %}
+        <a class="" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank"><span class="visually-hidden">Opens a new window</span>
+      {% else %}
+        <a class="" href="{{ project.url | prepend: site.baseurl }}">
+      {% endif %}
+          <div class="thumbnail-container-featured">
+            <img class="thumbnail-image-featured" src="img/thumbnails/{{ project.thumbnail | append: '-featured.jpg' }}" alt="{{ project.tile-name }} Tile">
+          </div>
+      </a>
+    </div>
   </div>
   {% endif %}
 {% endfor %}
+</section>
 
 <!-- TODO decide on copy "2020 year in review" or "2020 in review" -->
 {% assign yir_order = site.year-in-review | sort: 'year' | reverse %}
