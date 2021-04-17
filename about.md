@@ -2,8 +2,9 @@
 layout: default
 title: "About"
 permalink: about
-
+footer-main: true
 ---
+
 <div class="grid-x align-center cell">
   <div class="small-8 medium-4 cell profile-photo-container">
     <img src="/img/rehan-full.png" alt="Photo of Rehan Butt">

@@ -21,79 +21,107 @@
     </div>
   </div>
 
-    <div class="grid-x grid-container footer-content">
-        <div class="cell small-12 medium-auto left-section">
-          <div class="site-pages auto cell">
-            <div class="nav-wrap">
-              <a class="nav" href="/portfolio">Portfolio</a>
-            </div>
-            {% for my_page in site.pages %}
-              {% if my_page.exclude != "true" %}
-                {% if my_page.title %}
-                <div class="nav-wrap">
-                  <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
-                </div>
+    <div class="grid-x grid-container footer-content align-justify">
+          <div class="site-pages small-12 medium-shrink cell grid-x">
 
+            <div class="cell shrink nav-section">
+              <p class="section-title">The Main Stuff</p>
+              <div class="nav-wrap"><a class="nav" href="/">Home</a></div>
+              {% for my_page in site.pages %}
+                {% if my_page.exclude != "true" and my_page.footer-main == true %}
+                  {% if my_page.title %}
+                  <div class="nav-wrap">
+                    <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+                  </div>
+                  {% endif %} 
                 {% endif %}
-              {% endif %}
-            {% endfor %}
-            <div class="nav-wrap">
-              <a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store<span class="visually-hidden">Opens a new window</span></a>
+              {% endfor %}
+            </div>
+
+            <!-- footer-other -->
+            <div class="cell shrink nav-section">
+              <p class="section-title">Other Things</p>
+              {% for my_page in site.pages %}
+                {% if my_page.exclude != "true" and my_page.footer-other == true %}
+                  {% if my_page.title %}
+                  <div class="nav-wrap">
+                    <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+                  </div>
+                  {% endif %} 
+                {% endif %}
+              {% endfor %}
+              <div class="nav-wrap">
+                <a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store<span class="visually-hidden">Opens a new window</span></a>
+              </div>
+            </div>
+
+            <div class="cell shrink nav-section">
+              <p class="section-title">Year in Review</p>
+              {% assign yir_order = site.year-in-review | sort: 'year' | reverse %}
+              {%- for year in yir_order -%}
+                {% if year.current != true %}
+                <div class="nav-wrap">
+                  <a class="nav" href="https://{{ year.year | append: ".rehanbutt.com" }}" target="_blank" rel="noopener">{{year.year}}</a>
+                </div>
+                {% endif %}
+              {%- endfor -%}
             </div>
           </div>
-          <div class="social-container auto cell">
+
+        <div class="grid-x cell small-12 medium-auto">
+          <div class="logo-footer-container cell small-12 medium-12">
+            <a href="/" class="logo-footer">
+            {% capture location %}footer{% endcapture %}
+            {% include rehan-logo.svg %}
+            </a>
+          </div>
+          <div class="social-container cell small-shrink medium-12 align-self-bottom">
             <a target="_blank" rel="noopener" class="social" href="https://www.twitter.com/naher94/">
-              <i class="fab fa-twitter" title="Twitter"></i>
+              <i class="fab fa-twitter fa-xs" title="Twitter"></i>
               <span class="visually-hidden">Opens a new window</span>
             </a>
 
             <a target="_blank" rel="noopener" class="social" href="https://www.linkedin.com/in/rehan-butt/">
-              <i class="fab fa-linkedin-in" title="Linkedin"></i>
+              <i class="fab fa-linkedin-in fa-xs" title="Linkedin"></i>
               <span class="visually-hidden">Opens a new window</span>
             </a>
 
             <a target="_blank" rel="noopener" class="social" href="https://github.com/naher94">
-              <i class="fab fa-github" title="Github"></i>
+              <i class="fab fa-github fa-xs" title="Github"></i>
               <span class="visually-hidden">Opens a new window</span>
             </a>
 
             <a href="mailto:me@rehanbutt.com" class="social">
-              <i class="fas fa-envelope" title="Email"></i>
+              <i class="fas fa-envelope fa-xs" title="Email"></i>
               <span class="visually-hidden">Opens a new window</span>
             </a>
 
             <a target="_blank" rel="noopener" class="social" href="https://dribbble.com/rehanbutt">
-              <i class="fab fa-dribbble" title="Dribbble"></i>
+              <i class="fab fa-dribbble fa-xs" title="Dribbble"></i>
               <span class="visually-hidden">Opens a new window</span>
             </a>
 
             <a target="_blank" rel="noopener" class="social" href="https://instagram.com/naher94">
-              <i class="fab fa-instagram" title="Instagram"></i>
+              <i class="fab fa-instagram fa-xs" title="Instagram"></i>
               <span class="visually-hidden">Opens a new window</span>
             </a>
 
             <a target="_blank" rel="noopener" class="social" href="https://500px.com/naher94">
-              <i class="fab fa-500px" title="500px"></i>
+              <i class="fab fa-500px fa-xs" title="500px"></i>
               <span class="visually-hidden">Opens a new window</span>
             </a>
 
             <a target="_blank" rel="noopener" class="social" href="https://www.pinterest.com/naher94/">
-              <i class="fab fa-pinterest" title="Pinterest"></i>
+              <i class="fab fa-pinterest fa-xs" title="Pinterest"></i>
               <span class="visually-hidden">Opens a new window</span>
             </a>
           </div>
-
         </div>
-        <div class="small-12 medium-shrink cell right-section">
-          <div class="logo-footer-container grid-x align-right">
-            <a href="/" class="logo-footer">
-              {% capture location %}footer{% endcapture %}
-              {% include rehan-logo.svg %}
-            </a>
-            <img class="ship-it" src="/img/shipit.svg" alt="Ship It Sticker">
-          </div>
-          <p class="copyright no-select">copyright © {{ 'now' | date: "%Y" }} Rehan Butt</p>
-        </div>
+      <div class="cell grid-x align-justify metadata">
+        <p class="small-12 medium-shrink">Dragonfruit v4.0.0</p>
+        <!-- <img class="ship-it" src="/img/shipit.svg" alt="Ship It Sticker"> -->
+        <p class="small-12 medium-shrink no-select">copyright © {{ 'now' | date: "%Y" }} Rehan Butt</p>
+      </div>
     </div>
 
 </footer>
