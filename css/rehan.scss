@@ -604,8 +604,11 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     font-size: 2rem;
     div{
       margin-bottom: 0.5rem;
+      transition: $run;
       &:hover{
-        animation: boing 300ms ease-out; // TODO this is the wrong animation if it is going to highlight adjacent text objects, it should stay large until unhover
+        transform: scale(1.4);
+        text-shadow: 0 0 10px rbga($navy-black, 0.2);
+        // animation: boing 300ms ease-out; // TODO this is the wrong animation if it is going to highlight adjacent text objects, it should stay large until unhover
       }
     }
     .plane{
