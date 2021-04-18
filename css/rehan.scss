@@ -194,6 +194,20 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       }
     }
   }
+  .more-button{
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    color: $signature-teal;
+    border-radius: 14px;
+    border: solid 0.2rem $signature-teal;
+    text-align: center;
+    font-weight: $lato-bold;
+    transition: $sprint;
+    &:hover{
+      color: $pure-white;
+      background-color: $signature-teal;
+    }
+  }
 }
 
 .thumbnail-tile {
