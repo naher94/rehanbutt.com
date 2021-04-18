@@ -1,17 +1,21 @@
 //******* Footer Styling
 footer{
-  margin-top: 50px;
+  margin-top: 2rem;
   // background-color: rgba($navy-black-l6, 0.5);
   background-color: $navy-black-l6; //TODO sort this color out
   color: $navy-black;
-  padding-bottom: 40px;
-  position: relative;
+  padding-bottom: 2rem;
+  position: relative; // Needed for the UFO positioning
   @media (prefers-color-scheme: dark) {
     background-color: $navy-black-d5;
     color: $pure-white;
   }
   .footer-content{
-    padding-top: 50px;
+    padding-top: 2rem;
+    @include breakpoint(small only){
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
     .nav-section{
       margin-inline-end: 3rem;
       .section-title{
@@ -23,6 +27,9 @@ footer{
     }
     .metadata{
       margin-top: 2rem;
+      @include breakpoint(small only){
+        text-align: right;
+      }
       p{
         padding: 0;
         margin: 0;
@@ -81,6 +88,33 @@ footer{
   .site-pages{
     padding-left: 0;
     padding-right: 0;
+    @include breakpoint(medium down){
+      text-align: right;
+      justify-content: flex-end;
+      margin-bottom: 3rem;
+      .nav-section{
+        margin-inline-start: 3rem;
+        margin-inline-end: 0rem;
+      }
+      .nav-wrap{
+        margin-right: -1rem;
+      }
+    }
+    @include breakpoint(small only){
+      font-size: 1.5em;
+      .nav{
+        font-size: 1.1em;
+      }
+      .nav-section{
+        margin-block-end: 2rem;
+        .section-title{
+          font-weight: $lato-black;
+        }
+        .nav-wrap{
+          margin-bottom: 0;
+        }
+      }
+    }
     .nav-wrap{
       margin-bottom: 0.5rem;
       margin-left: -1rem;
@@ -106,27 +140,28 @@ footer{
     padding-left: 0;
     padding-right: 0;
     text-align: right;
-    a{
-      &:last-child{
-        padding-right: 0;
+    .social-sub-2{
+      a{
+        &:last-child{
+          padding-right: 0;
+        }
+      }
+    }
+    @include breakpoint(small only){
+      .social-sub-1{
+        margin-top: 1rem;
+        margin-bottom: -1rem;
+        a{
+          &:last-child{
+            padding-right: 0;
+          }
+        }
       }
     }
   }
-  .left-section{ //TODO remove this class
-    @include breakpoint(small only) {
-      text-align: right;
-    }
-  }
-  .right-section{ //TODO remove this class
-    text-align: right;
-    @include breakpoint(small only) {
-      margin-top: 2em;
-      padding-right: 0.5em;
-    }
-  }
   @include breakpoint(small only) {
-    margin-top: .5em;
-    padding-bottom: 20px;
+    margin-top: 0.5em;
+    padding-bottom: 4rem;
   }
 }
 
@@ -136,7 +171,9 @@ footer{
   font-size: 2em;
   color: inherit;
   @include breakpoint(small only) {
-    font-size: 1.5em;
+    font-size: 3em;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
   }
   @media (prefers-color-scheme: dark) {
     color: $pure-white;
@@ -174,21 +211,21 @@ footer{
 
 .logo-footer-container{
   text-align: right;
-  .ship-it{ //TODO can remove??
-    height: 3.3rem;
-    margin-right: 0.5rem;
-    margin-top: 0.5rem;
-    visibility: hidden;
-    order: -1;
-  }
+  // .ship-it{ //TODO can remove??
+  //   height: 3.3rem;
+  //   margin-right: 0.5rem;
+  //   margin-top: 0.5rem;
+  //   visibility: hidden;
+  //   order: -1;
+  // }
   .logo-footer{
-    &:hover, &:focus{
-      animation: boing 300ms ease-out;
-      ~ .ship-it{
-        visibility: visible;
-        animation: boing 300ms ease-out;
-      }
-    }
+    // &:hover, &:focus{
+    //   animation: boing 300ms ease-out;
+    //   ~ .ship-it{
+    //     visibility: visible;
+    //     animation: boing 300ms ease-out;
+    //   }
+    // }
     #rehan-logo-footer{
       height: 3rem;
       margin-top: 0.5rem;
