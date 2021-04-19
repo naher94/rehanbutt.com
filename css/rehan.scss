@@ -198,9 +198,11 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
     color: $signature-teal;
-    border-radius: 14px;
+    border-radius: $pill-radius;
+    font-size: 1.5rem;
     border: solid 0.2rem $signature-teal;
     text-align: center;
+    display: block;
     font-weight: $lato-bold;
     transition: $sprint;
     &:hover{
