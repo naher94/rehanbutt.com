@@ -64,6 +64,25 @@ footer-main: true
   </div>
 </section>
 
+
+<section class="cell grid-x featured-resources-speaking grid-padding-x grid-margin-x">
+  <div class="cell small-12 medium-6 grid-x resources-container">
+    <h2 class="cell">Resources</h2>
+    {%- for resource in site.resources -%}
+      <div class="cell">resource</div>
+      <!-- loop for last 3 resources -->
+    {%- endfor -%}
+    <a class="more-button cell align-self-bottom" href="/resources">More resources</a>
+
+  </div>
+
+  <div class="cell small-12 medium-6 grid-x speaking-container">
+    <h2 class="cell">Speaking</h2>
+    <a class="more-button cell align-self-bottom" href="/about#speaking">More speaking</a>
+  </div>
+</section>
+
+
 <!-- TODO decide on copy "2020 year in review" or "2020 in review" -->
 {% assign yir_order = site.year-in-review | sort: 'year' | reverse %}
 
