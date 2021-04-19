@@ -30,6 +30,23 @@ footer{
       @include breakpoint(small only){
         text-align: right;
       }
+      a{
+        color: $navy-black;
+        &:hover{
+          font-weight: $lato-black;
+          ~.ship-it{
+            visibility: visible;
+          }        
+        }
+        p{
+          display: inline;
+        }
+      }
+      .ship-it{
+        margin-left: 0.5rem;
+        visibility: hidden;
+        display: inline;
+      }
       p{
         padding: 0;
         margin: 0;
