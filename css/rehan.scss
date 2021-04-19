@@ -241,6 +241,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     background-color: $pure-white;
     padding: 1rem;
     border-radius: $tile-radius-medium;
+    margin-bottom: 0.5rem;
     .title{
       font-size: 1.5rem;
     }
