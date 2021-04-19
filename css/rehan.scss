@@ -221,12 +221,29 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     padding: 2rem;
     padding-top: 1rem;
   }
+  .resources-container{
+    background-color: $signature-teal;
+  }
+  .section-description{
+    padding: 0;
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    margin-bottom: 2rem;
+  }
+  .resource-link{
+    background-color: $pure-white;
+    padding: 1rem;
+    border-radius: $tile-radius-medium;
+    .description{
+      line-height: 1.5rem;
+    }
+  }
   .more-button{
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
     color: $pure-white;
     border-radius: 14px;
-    // font-size: 1.5rem;
     border: solid 0.2rem $pure-white;
     text-align: center;
     display: block;

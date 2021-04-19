@@ -68,8 +68,15 @@ footer-main: true
 <section class="cell grid-x featured-resources-speaking grid-padding-x grid-margin-x">
   <div class="cell small-12 medium-6 grid-x resources-container">
     <h2 class="cell">Resources</h2>
-    {%- for resource in site.resources -%}
-      <div class="cell">resource</div>
+    <p class="cell section-description">A bunch references you may find useful. Here are a few of my most recent finds.</p>
+    {% assign resources_sorted = site.resources | sort: 'date' | reverse %}
+    {%- for resource in resources_sorted limit:3 -%}
+      <a href="{{resource.link}}" target="_blank" rel="noreferrer" class="cell resource-link">
+        <div class="resource">
+          <p class="title">{{resource.title}}<i class="fas fa-link"></i></p>
+          <p class="description">{{resource.description}}</p>
+        </div>
+      </a>
       <!-- loop for last 3 resources -->
     {%- endfor -%}
     <a class="more-button cell align-self-bottom" href="/resources">More resources</a>
