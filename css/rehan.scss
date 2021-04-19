@@ -220,6 +220,12 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     border-radius: $tile-radius-big;
     padding: 2rem;
     padding-top: 1rem;
+    h2{
+      padding: 0;
+    }
+    @include breakpoint(small only){
+      padding: 1rem;
+    }
   }
   .resources-container{
     background-color: $signature-teal;
