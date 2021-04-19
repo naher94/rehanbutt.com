@@ -222,6 +222,8 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     padding-top: 1rem;
     h2{
       padding: 0;
+      font-size: 2.5em;
+      font-weight: $zilla-bold;
     }
     @include breakpoint(small only){
       padding: 1rem;
