@@ -21,10 +21,13 @@ layout: default
     </div>
   </div>
 
+  {%- assign release-ordered = site.changelog | sort:'release-version' | reverse -%}
+  {%- for release in release-ordered -%}
   <div class="cell medium-8 version-container">
-    <h2>v4 Dragonfruit</h2>
-    <p class="release-date">August 2020</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis perspiciatis veniam harum, quaerat omnis ipsum tempore quia quidem vitae? Beatae eveniet enim officia voluptate iste, nihil suscipit possimus odio fugit?</p>
+    <h2>v{{release.version-number}} {{release.version-name}}</h2>
+    <p class="release-date">{{ release.date | date: "%B %Y" }}</p>
+    <p>{{release.description}}</p>
   </div>
+  {%- endfor -%}
 
 </div>
