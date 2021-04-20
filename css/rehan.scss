@@ -276,6 +276,15 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   @include breakpoint(small only){
     margin-bottom: 20px;
   }
+  // &:hover ~ & { // TODO hover change dim all other tiles
+  //   &::after{
+  //     opacity: 0.5;
+  //     content: 'AFTER';
+  //     ~ a{
+  //       opacity: 0.5;
+  //     }
+  //   }
+  // }
 }
 
 .flag {
