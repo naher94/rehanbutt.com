@@ -711,19 +711,19 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       }
     }
   }
-  span.watermark{ //TODO figure out how to center this
-    font-family: $zilla;
-    font-weight: $zilla-bold;
-    font-size: 25vw;
-    margin-left: -5vw;
-    margin-top: -2vw;
+  .watermark{
+    width: 110%;
+    margin-left: -5%;
     position: absolute;
-    color: rgba($signature-teal, 0.1);
-    line-height: 20vw;
+    fill: rgba($signature-teal, 0.1);
     z-index: -1;
     @include breakpoint(small only){
-      font-size: 40vw;
-      margin-top: 4rem;
+      margin-left: 0;
+      margin-top: 5%;
+    }
+    text{
+      font-family: $zilla;
+      font-weight: $zilla-bold;
     }
   }
   span.wave{
