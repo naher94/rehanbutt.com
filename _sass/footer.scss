@@ -30,8 +30,14 @@ footer{
       @include breakpoint(small only){
         text-align: right;
       }
+      div{
+        justify-content: flex-end;
+      }
       a{
         color: $navy-black;
+        @include breakpoint (small only){
+          order: 2;
+        }
         &:hover{
           font-weight: $lato-black;
           ~.ship-it{
@@ -46,6 +52,10 @@ footer{
         margin-left: 0.5rem;
         visibility: hidden;
         display: inline;
+        @include breakpoint (small only){
+          order: 1;
+          margin-right: 0.5rem;
+        }
       }
       p{
         padding: 0;

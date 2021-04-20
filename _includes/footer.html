@@ -123,11 +123,11 @@
       <div class="cell grid-x align-justify metadata">
         {% assign version-seperate = site.version | split: '.' %}
         {% assign ver-number = version-seperate[0] | minus: 1 %}
-        <div class="small-12 medium-shrink">
-          <a href="/changelog.html">
+        <div class="small-12 medium-shrink grid-x">
+          <a class="cell shrink" href="/changelog.html">
             <p class="version-name">{{ site.version-naming[ver-number]}} v{{ site.version }}</p>
           </a>
-          <p class="ship-it">⛵ Ship It!</p>
+          <p class="ship-it cell shrink">⛵ Ship It!</p>
         </div>
         <!-- <img class="ship-it" src="/img/shipit.svg" alt="Ship It Sticker"> -->
         <p class="small-12 medium-shrink no-select">copyright © {{ 'now' | date: "%Y" }} Rehan Butt</p>
