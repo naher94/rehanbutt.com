@@ -25,7 +25,6 @@
   .gif-container{
     border-radius: $tile-radius-medium;
     overflow: hidden;
-    // margin-top: 0;
   }
   .git{
     border-radius: $tile-radius-medium;
@@ -40,6 +39,18 @@
       line-height: 1.2;
       font-weight: $lato-bold;
       margin-bottom: 0.5em;
+    }
+  }
+  .version-container{
+    h2{
+      font-weight: $zilla-bold;
+      margin-bottom: 0;
+    }
+    .release-date{
+      font-size: 2em;
+      font-family: $zilla;
+      font-weight: $zilla-regular;
+      margin-top: -0.5em;
     }
   }
 }
