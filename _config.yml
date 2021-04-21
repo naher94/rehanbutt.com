@@ -18,6 +18,9 @@ version-naming: [Apricot, Blackcurrent, Coconut, Dragonfruit, Elderberry]
 # Build settings
 markdown: kramdown
 
+sass:
+  style: compressed
+
 plugins: [jekyll-sitemap]
 
 collections:
