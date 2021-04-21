@@ -138,3 +138,64 @@ isBadge();
 
 // Listen for keydown events
 document.addEventListener('keydown', keyHandler, false);
+
+
+
+const planeEmoji = document.getElementById("plane-emoji");
+
+planeEmoji.addEventListener("mouseover", event => {
+  console.log("Mouse in");
+	var element = document.getElementById("plane-effect");
+  element.classList.add("intro-swipe-effect");
+});
+
+planeEmoji.addEventListener("mouseout", event => {
+  console.log("Mouse out");
+	var element = document.getElementById("plane-effect");
+  element.classList.remove("intro-swipe-effect");
+});
+
+
+const worldEmoji = document.getElementById("world-emoji");
+
+worldEmoji.addEventListener("mouseover", event => {
+  console.log("Mouse in");
+	var element = document.getElementById("world-effect");
+  element.classList.add("intro-swipe-effect");
+});
+
+worldEmoji.addEventListener("mouseout", event => {
+  console.log("Mouse out");
+	var element = document.getElementById("world-effect");
+  element.classList.remove("intro-swipe-effect");
+});
+
+
+const cameraEmoji = document.getElementById("camera-emoji");
+
+cameraEmoji.addEventListener("mouseover", event => {
+  console.log("Mouse in");
+	var element = document.getElementById("camera-effect");
+  element.classList.add("intro-swipe-effect");
+});
+
+cameraEmoji.addEventListener("mouseout", event => {
+  console.log("Mouse out");
+	var element = document.getElementById("camera-effect");
+  element.classList.remove("intro-swipe-effect");
+});
+
+
+const penguinEmoji = document.getElementById("penguin-emoji");
+
+penguinEmoji.addEventListener("mouseover", event => {
+  console.log("Mouse in");
+	var element = document.getElementById("penguin-effect");
+  element.classList.add("intro-swipe-effect");
+});
+
+penguinEmoji.addEventListener("mouseout", event => {
+  console.log("Mouse out");
+	var element = document.getElementById("penguin-effect");
+  element.classList.remove("intro-swipe-effect");
+});

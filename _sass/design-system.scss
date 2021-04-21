@@ -214,7 +214,7 @@ p, li, h3{
   background: linear-gradient(rgba($color,1), rgba($color,1));
   background-position: 0% 100%;
   background-repeat: no-repeat;
-  background-size: 0% 10px;
+  background-size: 0% 10px; // ON HOVER NEED TO ADD background-size: 100% 10px; 
   transition: background-size .3s;
 }
 

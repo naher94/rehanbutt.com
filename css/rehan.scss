@@ -313,7 +313,6 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
 }
 
-// TODO mobileify the Year in Review Styling Not as responsive as it should be
 .year-in-review{
   margin-bottom: 10rem;
   @include breakpoint(small only){
@@ -707,6 +706,14 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
 }
 
+#plane-effect, #world-effect, #camera-effect, #penguin-effect{
+  @include swipe-underline($signature-teal-l6);
+}
+
+.intro-swipe-effect{
+  background-size: 100% 10px !important;// For the swipe underline to work
+}
+
 //******* Intro
 .site-intro{
   margin-bottom: 8rem;
@@ -718,7 +725,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     font-size: 2rem;
     div{
       margin-bottom: 0.5rem;
-      transition: $run;
+      transition: $sprint;
       &:hover{
         transform: scale(1.4);
         text-shadow: 0 0 10px rbga($navy-black, 0.2);
