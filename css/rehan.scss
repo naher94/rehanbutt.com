@@ -146,6 +146,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     .text-wrapper{
       @include breakpoint(small only) {
         order: 2;
+        margin-top: 1rem;
       }
     }
     .image-wrapper{
@@ -170,9 +171,18 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     }
     
     .featured-text{
+      @include breakpoint(small only){
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
       h2{
         font-size: 2.5rem;
         font-weight: $zilla-bold;
+        @include breakpoint(small only){
+          line-height: 1.1;
+          padding-left: 0;
+          padding-right: 0;
+        }
       }
       p{
         font-size: 1.5rem;
@@ -345,6 +355,9 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
     transition: $sprint;
+    @include breakpoint(small only){
+      padding: 1rem;
+    }
     &:hover{
       transform: rotate(4deg) scale(1.05);
       .year-square{
@@ -385,9 +398,19 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         top: 7%;
         margin: auto;
         left: -7%;
-        @include breakpoint(small only){
-          font-size: 9.5rem;
-          top: 3%;
+        @include breakpoint(medium only){
+          font-size: 8.4rem;
+          top: 7%;
+          left: -7%;
+        }
+        // @include breakpoint(small only){ // IF small-12
+        //   font-size: 9.5rem;
+        //   top: 3%;
+        //   left: -7%;
+        // }
+        @include breakpoint(small only){ // IF small-6
+          font-size: 4.5rem;
+          top: 8%;
           left: -7%;
         }
       }
@@ -405,8 +428,12 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       text-align: center;
       font-family: $caveat;
       font-weight: $caveat-regular;
-      line-height: 2.2rem;
+      line-height: 1;
       padding: 1rem 0;
+      @include breakpoint(small only){ //IF small-6
+        font-size: 1.5rem;
+        padding: 0.5rem 0;
+      }
     }
     &:hover{
       .year-square{

@@ -108,7 +108,7 @@ footer-main: true
 
   {%- for year in yir_order -%}
   {% if year.current == true %}
-  <div class="cell medium-4">
+  <div class="cell small-6 medium-4">
       <div class="year-container">
         <div class="year-square current-year">
           <span>{{year.year}}</span>
@@ -119,7 +119,7 @@ footer-main: true
       </div>
   </div>
   {% else %}
-  <div class="cell medium-4">
+  <div class="cell small-6 medium-4">
     <a href="https://{{ year.year | append: ".rehanbutt.com" }}" target="_blank" rel="noopener">
       <div class="year-container">
         <div class="year-square" style="background: {{year.color}};">
