@@ -684,6 +684,9 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 .site-intro{
   margin-bottom: 8rem;
   margin-top: 3rem;
+  @include breakpoint(small only){
+    overflow: hidden; //resolves an issue with the watermark container overflow TODO
+  }
   .emoji-wrapper{
     font-size: 2rem;
     div{
@@ -734,8 +737,21 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     padding-left: 0;
     padding-right: 0;
   }
+
   a{
-    @include link-expand;
+    padding: 0.5rem 0;
+    font-weight: $lato-bold;
+    color: $signature-teal;
+    @include squiggly-underline($signature-teal);
+    i{
+      margin-left: 0.25rem;
+      transition: $sprint;
+    }
+    &:hover{
+      i{
+        margin-left: 0.5rem;
+      }
+    }
   }
 }
 //******* End of Intro
