@@ -851,25 +851,12 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 //******* End of Intro
 
 
-
 //******* Mobile Styling
-
 @include breakpoint(small only) {
-
-  .mobile-navbar{
-    display: block;
-    line-height: 40px;
-  }
 
   .nav{
     padding: 10px;
     font-size: 16px;
   }
-
-  .navbar {
-    clear: both;
-    display: none;
-  }
 }
-
 //******* End of Mobile Styling

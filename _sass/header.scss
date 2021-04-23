@@ -49,12 +49,20 @@
   display: none;
   float: left;
   line-height: 2.5em;
+  @include breakpoint(small only) {
+    display: block;
+    line-height: 40px;
+  }
 }
 
 .navbar{
   color: $pure-white;
   float: left;
   line-height: 2.5em;
+  @include breakpoint(small only) {
+    clear: both;
+    display: none;
+  }
 }
 
 .menu-container{
