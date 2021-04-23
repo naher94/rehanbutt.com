@@ -7,7 +7,7 @@ footer{
   padding-bottom: 2rem;
   position: relative; // Needed for the UFO positioning
   @media (prefers-color-scheme: dark) {
-    background-color: $navy-black-d5;
+    background-color: $navy-black-d4; //TODO sort out this color
     color: $pure-white;
   }
   .footer-content{
