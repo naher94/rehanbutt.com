@@ -38,6 +38,9 @@ footer{
         @include breakpoint (small only){
           order: 2;
         }
+        @media (prefers-color-scheme: dark) {
+          color: $pure-white;
+        }
         &:hover{
           font-weight: $lato-black;
           ~.ship-it{

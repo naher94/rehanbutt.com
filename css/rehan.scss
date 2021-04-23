@@ -203,6 +203,15 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
           color: $pure-white;
           background-color: $navy-black;
         }
+        @media (prefers-color-scheme: dark) {
+          color: $pure-white;
+          border: solid 0.2rem $pure-white;
+          &:hover{
+            color: $navy-black;
+            background-color: $pure-white;
+          }
+
+        }
       }
     }
   }
@@ -246,6 +255,9 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
   .resources-container{
     background-color: $signature-teal;
+    @media (prefers-color-scheme: dark) {
+      background-color: $signature-teal-d4;
+    }
   }
   .section-description{
     padding: 0;
@@ -305,10 +317,16 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     margin-bottom: 0.5rem;
     .title{
       font-size: 1.5rem;
+      @media (prefers-color-scheme: dark){
+        @include swipe-underline($signature-teal-l6);
+      }
     }
     .description{
       font-size: 1rem;
       line-height: 1.3rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      color: $navy-black;
     }
   }
   .more-button{
@@ -479,6 +497,9 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       @include breakpoint(small only){ //IF small-6
         font-size: 1.5rem;
         padding: 0.5rem 0;
+      }
+      @media (prefers-color-scheme: dark) {
+        color: $navy-black;
       }
     }
     &:hover{
