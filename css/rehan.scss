@@ -250,6 +250,45 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     font-size: 1.5rem;
     line-height: 1.8rem;
     margin-bottom: 2rem;
+    a{
+      color: $pure-white;
+      background-color: rgba($pure-white, 0.1);
+      border-radius: 8px;
+      padding: 0 0.2em;
+      font-weight: $lato-bold;
+      // border: 1px rgba($pure-white, 0.5) solid;
+      font-style: italic;
+      &:hover{
+        background-color: $pure-white;
+        color: $navy-black;
+      }
+    }
+  }
+  .section-description-special{
+    font-weight: $lato-bold;
+    font-style: italic;
+    margin-bottom: 0;
+  }
+  .speaking-socials{
+    a{
+      padding-right: 0.8em;
+      font-size: 2em;
+      color: inherit;
+      &:hover, &:focus{
+        .fab, .fas{
+          animation: boing 300ms ease-out;
+        }
+        .fa-envelope{
+          color: $signature-teal;
+        }
+        .fa-linkedin-in{
+          color: #2867B2;
+        }
+        .fa-twitter{
+          color: #1DA1F2;
+        }
+      }
+    }
   }
   .resource-link{
     background-color: $pure-white;
