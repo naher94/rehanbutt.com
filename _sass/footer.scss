@@ -1,13 +1,12 @@
 //******* Footer Styling
 footer{
   margin-top: 2rem;
-  // background-color: rgba($navy-black-l6, 0.5);
-  background-color: $navy-black-l6; //TODO sort this color out
+  background-color: $navy-black-l9;
   color: $navy-black;
   padding-bottom: 2rem;
   position: relative; // Needed for the UFO positioning
-  @media (prefers-color-scheme: dark) {
-    background-color: $navy-black-d4; //TODO sort out this color
+  @media (prefers-color-scheme: dark){
+    background-color: $navy-black-d2;
     color: $pure-white;
   }
   .footer-content{
@@ -34,12 +33,9 @@ footer{
         justify-content: flex-end;
       }
       a{
-        color: $navy-black;
+        color: inherit;
         @include breakpoint (small only){
           order: 2;
-        }
-        @media (prefers-color-scheme: dark) {
-          color: $pure-white;
         }
         &:hover{
           font-weight: $lato-black;
@@ -154,14 +150,11 @@ footer{
       font-weight: $lato-regular;
       color: inherit;
       padding: 0.5rem 1rem;
-      @media (prefers-color-scheme: dark) {
-        color: $pure-white;
-      }
       &:hover, &:focus{
-        background-color: $navy-black-l5;
+        background-color: $navy-black-l8;
         transition: color 0.2s ease-in-out;
-        @media (prefers-color-scheme: dark) {
-          background-color: $navy-black-d3;
+        @media (prefers-color-scheme: dark){
+          background-color: $navy-black-d4;
         }
       }
     }
@@ -204,9 +197,6 @@ footer{
     font-size: 3em;
     padding-left: 0.25rem;
     padding-right: 0.25rem;
-  }
-  @media (prefers-color-scheme: dark) {
-    color: $pure-white;
   }
   &:hover, &:focus{
     .fab, .fas{
@@ -251,7 +241,7 @@ footer{
       }
       g{
         fill: $navy-black;
-        @media (prefers-color-scheme: dark) {
+        @media (prefers-color-scheme: dark){
           fill: $pure-white;
         }
       }
