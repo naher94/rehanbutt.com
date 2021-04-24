@@ -91,7 +91,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     transform: scale(1.05);
     box-shadow: $recessed-shadow rgba($navy-black,0.75);
     @media (prefers-color-scheme: dark) {
-      box-shadow: $recessed-shadow rgba($pure-black,0.75);
+      box-shadow: $recessed-shadow rgba($navy-black-d9,0.75);
     }
   }
   &:hover .thumbnail-text{
@@ -162,7 +162,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         transform: scale(1.02) rotate(2deg);
         box-shadow: $recessed-shadow rgba($navy-black,0.75);
         @media (prefers-color-scheme: dark) {
-          box-shadow: $recessed-shadow rgba($pure-black,0.75);
+          box-shadow: $recessed-shadow rgba($navy-black-d9,0.75);
         }
       }
        .thumbnail-image-featured{
@@ -194,7 +194,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       }
       .explore-button{
         padding: 0.7rem 1rem;
-        color: $navy-black;
+        color: inherit;
         border-radius: 14px;
         border: solid 0.2rem $navy-black;
         font-weight: $lato-bold;
@@ -204,13 +204,11 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
           background-color: $navy-black;
         }
         @media (prefers-color-scheme: dark) {
-          color: $pure-white;
           border: solid 0.2rem $pure-white;
           &:hover{
             color: $navy-black;
             background-color: $pure-white;
           }
-
         }
       }
     }
@@ -256,7 +254,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   .resources-container{
     background-color: $signature-teal;
     @media (prefers-color-scheme: dark) {
-      background-color: $signature-teal-d4;
+      background-color: $signature-teal-d2;
     }
   }
   .section-description{
@@ -275,7 +273,6 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       border-radius: 8px;
       padding: 0 0.2em;
       font-weight: $lato-bold;
-      // border: 1px rgba($pure-white, 0.5) solid;
       font-style: italic;
       &:hover{
         background-color: $pure-white;
@@ -326,6 +323,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       line-height: 1.3rem;
     }
     @media (prefers-color-scheme: dark) {
+      background-color: $navy-black-l9;
       color: $navy-black;
     }
   }
@@ -424,7 +422,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     .current-year{
       background-color: $navy-black-l6 !important;
     }
-    .year-square{
+    .year-square{  //TODO weird shadow thing here in darkmode
       background-color: $navy-black;
       color: $pure-white;
       font-family: $zilla;
@@ -458,12 +456,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
           top: 7%;
           left: -7%;
         }
-        // @include breakpoint(small only){ // IF small-12
-        //   font-size: 9.5rem;
-        //   top: 3%;
-        //   left: -7%;
-        // }
-        @include breakpoint(small only){ // IF small-6
+        @include breakpoint(small only){
           font-size: 4.5rem;
           top: 8%;
           left: -7%;
@@ -485,7 +478,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       font-weight: $caveat-regular;
       line-height: 1;
       padding: 1rem 0;
-      @include breakpoint(small only){ //IF small-6
+      @include breakpoint(small only){
         font-size: 1.5rem;
         padding: 0.5rem 0;
       }
@@ -542,9 +535,9 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     padding: 1rem;
     box-shadow: $recessed-shadow $navy-black;
     align-items: center;
-    @media (prefers-color-scheme: dark) {
+    @media(prefers-color-scheme: dark){
       background-color: $navy-black;
-      box-shadow: $recessed-shadow $navy-black-d4;
+      color: $pure-white;
     }
     p{
       padding: 0;
