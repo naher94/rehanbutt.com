@@ -13,18 +13,16 @@ footer-other: true
 {% assign alltags = site.resources | map: "tags" | uniq | sort %}
 
 <section class="cell tag-section">
-
-<h2>Categories</h2>
-<div class="tags-container cell">
-  {% for tag in alltags %}
-    <a href="#{{tag | replace: " ", "-"}}">
-      <div class="tag">
-        {{ tag }}
-      </div>
-    </a>
-  {% endfor %}
-</div>
-
+  <h2 class="visually-hidden">Categories</h2>
+  <div class="tags-container cell">
+    {% for tag in alltags %}
+      <a href="#{{tag | replace: " ", "-"}}">
+        <div class="tag">
+          {{ tag }}
+        </div>
+      </a>
+    {% endfor %}
+  </div>
 </section>
 
 <!-- bundle based on tag -->
