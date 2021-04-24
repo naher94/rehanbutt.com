@@ -19,7 +19,10 @@ footer-main: true
   </section>
 
   <section class="work-experience" id="work-experience">
-    <h2>Work Experience</h2>
+    <div class="cell grid-x align-middle">
+      <h2 class="cell small-12 medium-shrink">Work Experience</h2>
+      <div class="cell small-12 medium-auto divider"></div>
+    </div>
 
     {% assign work_order = site.work-experience | sort: 'sort-order' %}
     {% assign work_prev = "hello" %}
@@ -48,7 +51,10 @@ footer-main: true
   </section>
 
   <section class="speaking-events" id="speaking-events">
-    <h2>Speaking Events</h2>
+    <div class="cell grid-x align-middle">
+      <h2 class="cell small-12 medium-shrink">Speaking Events</h2>
+      <div class="cell small-12 medium-auto divider"></div>
+    </div>
 
     {% assign event_order = site.speaking | sort: 'date' | reverse %}
     {% for event in event_order %}
@@ -95,7 +101,10 @@ footer-main: true
   </section>
 
   <section class="education" id="education">
-    <h2>Education</h2>
+    <div class="cell grid-x align-middle">
+      <h2 class="cell small-12 medium-shrink">Education</h2>
+      <div class="cell small-12 medium-auto divider"></div>
+    </div>
     <div class="education-item">
       <div class="brand-logo-container" id="cmu">
         <img class="brand-logo" src="/img/cmu-logo.svg" alt="Carnegie Mellon University Logo">
@@ -117,7 +126,10 @@ footer-main: true
   </section>
 
   <section class="skills" id="skills">
-    <h2>Skills</h2>
+    <div class="cell grid-x align-middle">
+      <h2 class="cell small-12 medium-shrink">Skills</h2>
+      <div class="cell small-12 medium-auto divider"></div>
+    </div>
     <h3>Some of the things I do well</h3>
     <div class="skills-container">
       <div class="skills-item">Design Thinking</div>
@@ -138,7 +150,10 @@ footer-main: true
   </section>
 
   <section class="tools" id="tools">
-    <h2>Tools</h2>
+    <div class="cell grid-x align-middle">
+      <h2 class="cell small-12 medium-shrink">Tools</h2>
+      <div class="cell small-12 medium-auto divider"></div>
+    </div>
     <h3>Some of the toolsets I am quite familiar with</h3>
     <div class="skills-container">
       <div class="skills-item">Figma</div>

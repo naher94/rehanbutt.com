@@ -20,8 +20,8 @@
   }
   p{
     font-family: $lato;
-    line-height: 36px; ///////////why EM NOT RESPONDING //TODO
-    font-size: 26px; ///////////why EM NOT RESPONDING
+    font-size: 1.5rem;
+    line-height: 1.5;
     padding: 0;
     margin: 0;
     &:last-of-type{
@@ -40,8 +40,7 @@
       }
     }
     @include breakpoint(small only) {
-      font-size: 20px;
-      line-height: 28px;
+      font-size: 1.2rem;
     }
   }
 }
@@ -99,22 +98,32 @@
 }
 
 .work-experience, .speaking-events, .education, .skills, .tools{
-  &:not(first-of-type){
-    margin-top: 2em;
-  }
+  margin-top: 4em;
   h2{
     font-size: 3.5em;
-    color: rgba($navy-black, 0.15);
     font-weight: $lato-black;
     font-family: $lato;
     @media (prefers-color-scheme: dark) {
-      color: rgba($pure-white,0.15);
+      color: $pure-white;
     }
     @include breakpoint(small only) {
       line-height: 1em;
     }
     @include breakpoint(medium down) {
       line-height: 1em;
+    }
+  }
+  .divider{
+    background-color: $signature-teal;
+    border-radius: $pill-radius;
+    content: '';
+    height: 0.5rem;
+    margin-left: 1rem;
+    @media (prefers-color-scheme: dark) {
+      background-color: $signature-teal-d2;
+    }
+    @include breakpoint(small only) {
+      margin-left: 0;
     }
   }
 
@@ -129,15 +138,15 @@
   }
 
   .work-item, .speaking-item, .education-item{
-    &:first-of-type{
-      margin-top: -2.5em;
-      @include breakpoint(small only) {
-        margin-top: -1.5em;
-      }
-      @include breakpoint(medium down) {
-        margin-top: -1.5em;
-      }
-    }
+    // &:first-of-type{
+    //   margin-top: -2.5em;
+    //   @include breakpoint(small only) {
+    //     margin-top: -1.5em;
+    //   }
+    //   @include breakpoint(medium down) {
+    //     margin-top: -1.5em;
+    //   }
+    // }
     margin-top: 1rem;
     padding-left: 0.5rem;
     p{
@@ -244,13 +253,15 @@
     font-size: 1em;
     font-weight: $lato-black;
     padding: 0;
-    margin-bottom: 0;
-
-    &:first-of-type{
-      margin-top: -2.5em;
-      @include breakpoint(small only) {
-        margin-top: -1.5em;
-      }
+    margin-top: -1.5rem;
+    margin-bottom: 1rem;
+    @include breakpoint(small only){
+      margin-top: -2rem;
+    }
+  }
+  .divider{
+    @include breakpoint(small only){
+      margin-top: 1rem;
     }
   }
   .skills-item{
