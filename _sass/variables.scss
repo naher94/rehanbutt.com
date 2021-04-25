@@ -91,6 +91,8 @@ $semantic-colors:(
     footer-logo: $navy-black,
     inline-code: $navy-black-l9,
     recent-resources-bg: $signature-teal,
+    button-outline: $navy-black,
+    button-fill: $navy-black,
   ),
   dark:(
     text: $pure-white,
@@ -108,6 +110,8 @@ $semantic-colors:(
     footer-logo: $pure-white,
     inline-code: $navy-black-d8,
     recent-resources-bg: $signature-teal-d2,
+    button-outline: $pure-white,
+    button-fill: $pure-white,
   ),
 );
 

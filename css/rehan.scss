@@ -190,12 +190,12 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         padding: 0.7rem 1rem;
         color: inherit;
         border-radius: 14px;
-        border: solid 0.2rem semantic-color(text); //TODO rename the colors here to reference button names
+        border: solid 0.2rem semantic-color(button-outline);
         font-weight: $lato-bold;
         transition: $sprint;
         &:hover{
           color: semantic-color(text-inverted);
-          background-color: semantic-color(text);
+          background-color: semantic-color(button-fill);
         }
       }
     }
