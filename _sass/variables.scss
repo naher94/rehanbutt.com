@@ -12,6 +12,15 @@ $recessed-shadow: 0px 10px 33px -10px;
 $pure-white: #ffffff;
 $pure-black: #000000;
 
+////Brand Colors
+$twitter-blue: #1DA1F2;
+$linkedin-blue: #2867B2;
+$pinterest-red: #e60023;
+$dribbble-pink: #ea4c89;
+$instagram-purple: #C13584;
+$github-purple: #6f42c1;
+$F500px-green: #34bf49;
+
 $signature-teal: #12abc4;
 $navy-black: #1f2937;
 //// [number indicates number of step removed from main]
@@ -62,21 +71,65 @@ $navy-black-l7: mix($pure-white, $navy-black, 70%);
 $navy-black-l8: mix($pure-white, $navy-black, 80%);
 $navy-black-l9: mix($pure-white, $navy-black, 90%);
 
+
+//Semantic colors maps the color palette above to their use across the application
+//// This method allows for several flavors of a color to be added such as a dark mode or a high contrast for example
+$semantic-colors:(
+  light:(
+    text: $navy-black,
+    text-inverted: $pure-white,
+    text-on-light-bg-always: $navy-black,
+    link: $signature-teal,
+    text-bg: $signature-teal-l6,
+    informational-pill: $navy-black,
+    actionable-pill: $signature-teal,
+    actionable-pill-hover: $signature-teal-d1,
+    shadow: rgba($navy-black,0.75),
+    floating-card-bg: $pure-white,
+    footer-bg: $navy-black-l9,
+    footer-nav-hover: $navy-black-l8,
+    footer-logo: $navy-black,
+    inline-code: $navy-black-l9,
+    recent-resources-bg: $signature-teal,
+  ),
+  dark:(
+    text: $pure-white,
+    text-inverted: $navy-black,
+    text-on-light-bg-always: $navy-black,
+    link: $signature-teal,
+    text-bg: $signature-teal-d4,
+    informational-pill: $navy-black-d6,
+    actionable-pill: $signature-teal-d1,
+    actionable-pill-hover: $signature-teal-d2,
+    shadow: rgba($navy-black-d9,0.75),
+    floating-card-bg: $navy-black,
+    footer-bg: $navy-black-d2,
+    footer-nav-hover: $navy-black-d4,
+    footer-logo: $pure-white,
+    inline-code: $navy-black-d8,
+    recent-resources-bg: $signature-teal-d2,
+  ),
+);
+
+//Helper function to build CSS colors
+@function compose-color($color-key) {
+  @return '--color-#{$color-key}';
+}
+
+//Function to be called inline for color mapping
+@function semantic-color($color-key) {
+  @return (var(--color-#{$color-key}));
+}
+
 :root{
-  --pure-white-raw: 255, 255, 255;
-  --pure-white: rgb(var(--pure-white-raw));
-  --navy-black-raw: 31, 41, 55;
-  --navy-black: rgb(var(--navy-black-raw));
-  --signature-teal-raw: 18, 171, 196;
-  --signature-teal: rgb(var(--signature-teal-raw));
-
-  --text-color: var(--navy-black);
-  --link-color: var(--signature-teal);
-
-  @media (prefers-color-scheme: dark) {
-    --text-color: var(--pure-white);
+  @each $key, $value in map-get($semantic-colors, 'light') {
+    #{compose-color($key)}: #{$value};
   }
-
+  @media (prefers-color-scheme: dark) {
+    @each $key, $value in map-get($semantic-colors, 'dark') {
+      #{compose-color($key)}: #{$value};
+    }
+  }
 }
 
 // Animations
@@ -126,5 +179,3 @@ $lato-black: 900;
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 $caveat: 'Caveat', cursive;
 $caveat-regular: 400;
-
-//******* End of Variables

@@ -31,11 +31,8 @@
       color: inherit;
       border-radius: 5px;
       padding-bottom: 0.15em;
-      background-color: $navy-black-l9;
+      background-color: semantic-color(inline-code);
       border: 0;
-      @media (prefers-color-scheme: dark) {
-        background-color: $navy-black-d8;
-      }
     }
     @include breakpoint(small only) {
       font-size: 1.2rem;
@@ -49,10 +46,7 @@
   }
   a{
     h3{
-      @include swipe-underline($signature-teal-l6);
-      @media (prefers-color-scheme: dark) {
-        @include swipe-underline($signature-teal-d4);
-      }
+      @include swipe-underline(semantic-color(text-bg),false);
     }
     .fa-link{
       transition: transform .3s;
@@ -62,7 +56,7 @@
         transition: $run;
       }
       h3{
-        background-size: 100% 10px;
+        @include swipe-underline-hover(false);
       }
       .fa-link{
         transform: rotate(360deg);
@@ -249,15 +243,12 @@
   }
   .skills-item{
     display: inline-block;
-    background-color: $navy-black;
+    background-color: semantic-color(informational-pill);
     border-radius: $pill-radius;
     color: $pure-white;
     padding: 0.2em 0.6em 0.2em 0.6em;
     margin-right: 0.1em;
     margin-bottom: 0.4em;
-    @media (prefers-color-scheme: dark) {
-      background-color: $navy-black-d6;
-    }
   }
 }
 
