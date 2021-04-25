@@ -789,6 +789,8 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   p{
     padding-left: 0;
     padding-right: 0;
+    font-weight: $lato-bold;
+    line-height: 1.5;
   }
 
   a{
