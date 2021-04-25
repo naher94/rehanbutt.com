@@ -23,7 +23,6 @@
     {% if page.thumbnail %}{{ page.thumbnail | append: '.png' | prepend: '/img/thumbnails/' | prepend: site.baseurl | prepend: site.url }}{% else %}{{ "/img/favicon.png" | prepend: site.baseurl | prepend: site.url }}{% endif %}" />
 
 
-  <link rel="stylesheet" href="{{" /css/foundation.css" | prepend: site.baseurl }}"/>
   <link rel="stylesheet" href="{{" /css/gallery.css" | prepend: site.baseurl }}"/>
   <link rel="stylesheet" href="{{" /css/rehan.css" | prepend: site.baseurl }}"/>
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">

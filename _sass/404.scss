@@ -2,7 +2,7 @@
 .title-404 {
   font-size: 3em;
   font-weight: $zilla-bold;
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     text-align: center;
     font-size: 3.5em;
 
@@ -12,7 +12,7 @@
 .words-404 {
   font-size: 1.8em;
   margin-bottom: 1em;
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     text-align: center;
     font-size: 2em;
     margin-bottom: 2em;
@@ -27,7 +27,7 @@
   background-image: url(../img/giraffe.svg);
   background-repeat: no-repeat;
   background-position: 50% 50px;
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     height: 200px;
     background-position: 50% 20px;
   }

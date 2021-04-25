@@ -86,7 +86,7 @@ footer{
     padding-right: 0;
   }
   .left-section{
-    @media screen and (max-width: 40em) {
+    @include breakpoint(small only) {
       text-align: right;
     }
   }
@@ -99,12 +99,12 @@ footer{
       font-size: 16px;
       margin-bottom: 0;
     }
-    @media screen and (max-width: 40em) {
+    @include breakpoint(small only) {
       margin-top: 2em;
       padding-right: 0.5em;
     }
   }
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     margin-top: .5em;
     padding-bottom: 20px;
   }
@@ -115,7 +115,7 @@ footer{
   padding-right: 0.25em;
   font-size: 2em;
   color: $navy-black-l1;
-  @media screen and (max-width: 40em){
+  @include breakpoint(small only) {
     font-size: 1.5em;
   }
   @media (prefers-color-scheme: dark) {
@@ -151,47 +151,6 @@ footer{
     }
   }
 }
-
-// .fa-envelope{
-//   &:hover, &:focus{
-//     color: $signature-teal;
-//   }
-// }
-// .fa-dribbble{
-//   &:hover, &:focus{
-//     color: #ea4c89;
-//   }
-// }
-// .fa-pinterest{
-//   &:hover, &:focus{
-//     color: #e60023;
-//   }
-// }
-// .fa-linkedin-in{
-//   &:hover, &:focus{
-//     color: #2867B2;
-//   }
-// }
-// .fa-instagram{
-//   &:hover, &:focus{
-//     color: #C13584;
-//   }
-// }
-// .fa-twitter{
-//   &:hover, &:focus{
-//     color: #1DA1F2;
-//   }
-// }
-// .fa-github{
-//   &:hover, &:focus{
-//     color: #6f42c1;
-//   }
-// }
-// .fa-500px{
-//   &:hover, &:focus{
-//     color: #34bf49;
-//   }
-// }
 
 .logo-footer-container{
   .ship-it{
