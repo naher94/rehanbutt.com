@@ -6,6 +6,12 @@
   }
 }
 
+.profile-photo-container{
+  img{
+    filter: drop-shadow(10px 0 0 $signature-teal);
+  }
+}
+
 .bio {
   font-weight: $lato-bold;
   h1{
