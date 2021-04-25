@@ -244,15 +244,18 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     &:hover{
       .black-cat{
         transform: rotate(-5deg) translateY(-9rem);
-      transition: $run;
-
+        transition: $run;
       }
       // .black-cat-2{
       //   transform: rotate(-5deg) translateY(-9rem);
       //   z-index: 1;
+      //   transition: $run;
       //   .paws{
       //     transform: translateY(7.5rem) rotate(7deg);
       //     opacity: 1;
+      //     // animation-name:paws;
+      //     // animation-duration: 2.5s;
+      //     transition: $run;
       //   }
       // }
     }
@@ -267,15 +270,24 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     }
     // .black-cat-2{
     //   position: absolute;
-    //   z-index: -1;
+    //   // z-index: -1;
     //   transition: $jog;
-    //   transition-delay: 1s;
+    //   transition-delay: 2s;
+    //   // animation-name:paws;
+    //   // animation-duration: 2.5s;
     //   .paws{
     //     width: 10rem;
     //     transform: translateY(4rem);
     //     opacity: 0;
     //   }
     // }
+
+    // @keyframes paws {
+    //     0% { transform: translateY(7.5rem) rotate(0deg); opacity:0; }
+    //    50% { transform: translateY(3rem) rotate(5deg); opacity:1; }
+    //   100% { transform: translateY(7.5rem) rotate(7deg); opacity:1; }
+    // }
+
   }
   .section-description{
     padding: 0;
