@@ -1,15 +1,10 @@
 //******* Footer Styling
 footer{
   margin-top: 2rem;
-  // background-color: rgba($navy-black-l6, 0.5);
-  background-color: $navy-black-l6; //TODO sort this color out
-  color: $navy-black;
+  background-color: semantic-color(footer-bg);
+  color: semantic-color(text);
   padding-bottom: 2rem;
   position: relative; // Needed for the UFO positioning
-  @media (prefers-color-scheme: dark) {
-    background-color: $navy-black-d4; //TODO sort out this color
-    color: $pure-white;
-  }
   .footer-content{
     padding-top: 2rem;
     @include breakpoint(small only){
@@ -34,12 +29,9 @@ footer{
         justify-content: flex-end;
       }
       a{
-        color: $navy-black;
+        color: inherit;
         @include breakpoint (small only){
           order: 2;
-        }
-        @media (prefers-color-scheme: dark) {
-          color: $pure-white;
         }
         &:hover{
           font-weight: $lato-black;
@@ -154,15 +146,9 @@ footer{
       font-weight: $lato-regular;
       color: inherit;
       padding: 0.5rem 1rem;
-      @media (prefers-color-scheme: dark) {
-        color: $pure-white;
-      }
       &:hover, &:focus{
-        background-color: $navy-black-l5;
+        background: semantic-color(footer-nav-hover);
         transition: color 0.2s ease-in-out;
-        @media (prefers-color-scheme: dark) {
-          background-color: $navy-black-d3;
-        }
       }
     }
   }
@@ -205,9 +191,6 @@ footer{
     padding-left: 0.25rem;
     padding-right: 0.25rem;
   }
-  @media (prefers-color-scheme: dark) {
-    color: $pure-white;
-  }
   &:hover, &:focus{
     .fab, .fas{
       animation: boing 300ms ease-out;
@@ -216,25 +199,25 @@ footer{
       color: $signature-teal;
     }
     .fa-dribbble{
-      color: #ea4c89;
+      color: $dribbble-pink;
     }
     .fa-pinterest{
-      color: #e60023;
+      color: $pinterest-red;
     }
     .fa-linkedin-in{
-      color: #2867B2;
+      color: $linkedin-blue;
     }
     .fa-instagram{
-      color: #C13584;
+      color: $instagram-purple;
     }
     .fa-twitter{
-      color: #1DA1F2;
+      color: $twitter-blue;
     }
     .fa-github{
-      color: #6f42c1;
+      color: $github-purple;
     }
     .fa-500px{
-      color: #34bf49;
+      color: $F500px-green;
     }
   }
 }
@@ -250,10 +233,7 @@ footer{
         transform: scale(1.1);
       }
       g{
-        fill: $navy-black;
-        @media (prefers-color-scheme: dark) {
-          fill: $pure-white;
-        }
+        fill: semantic-color(footer-logo);
       }
     }
   }

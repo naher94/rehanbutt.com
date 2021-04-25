@@ -3,13 +3,17 @@ body {
   font-family: $lato;
   font-weight: $lato-regular;
   font-size: 20px; // = 1em
-  color: var(--text-color);
+  color: semantic-color(text);
   @include breakpoint(small only) {
     font-size: 16px;
   }
   @media (prefers-color-scheme: dark) {
     background-color: $navy-black-d3;
   }
+}
+
+::selection {
+  background: $signature-teal;
 }
 
 h1, h2, h3, h4 {
@@ -99,11 +103,6 @@ ul {
   padding: 0;
 }
 
-::selection {
-  background: var(--signature-teal);
-  color: $pure-white;
-}
-
 .content-button {
   width: 100%;
   font-size: 1.5em;
@@ -146,43 +145,11 @@ ul {
 
 
 //******* A Tag Underline Expand Styling
-p, li, h3{
-  a {
-    position: relative;
-    text-decoration: none;
-    display: inline-block;
-    color: var(--link-color);
-    padding: 0 1px;
-    transition: $run;
-  }
-
-  a::after{
-    content: '';
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    height: 11%;
-    left: 0;
-    bottom: 0;
-    background-color: var(--link-color);
-    transition: $run;
-  }
-
-  a:hover {
-    color: $pure-white;
-  }
-
-  a:hover::after {
-    height: 100%;
-  }
-}
-
-
 @mixin link-expand {
   position: relative;
   text-decoration: none;
   display: inline-block;
-  color: var(--link-color);
+  color: semantic-color(link);
   padding: 0 1px;
   transition: $run;
 
@@ -194,7 +161,7 @@ p, li, h3{
     height: 11%;
     left: 0;
     bottom: 0;
-    background-color: var(--link-color);
+    background-color: semantic-color(link);
     transition: $run;
   }
 
@@ -207,15 +174,40 @@ p, li, h3{
   }
 }
 
-//******* End of A Tag Underline Expand Styling
 
-@mixin swipe-underline($color) {
+
+
+
+p, li, h3{
+  a {
+    @include link-expand();
+  }
+}
+
+
+//******* End of A Tag Underline Expand Styling
+@mixin swipe-underline($color,$inline-hover) {
   display: inline;
-  background: linear-gradient(rgba($color,1), rgba($color,1));
+  background: linear-gradient($color, $color);
   background-position: 0% 100%;
   background-repeat: no-repeat;
-  background-size: 0% 10px; // ON HOVER NEED TO ADD background-size: 100% 10px; 
+  background-size: 0% 10px; 
   transition: background-size .3s;
+  @if $inline-hover {
+    &:hover{
+      background-size: 100% 10px;
+    }
+  }
+}
+
+//// Use when you want to trigger the over from a different element
+@mixin swipe-underline-hover($is-important) {
+  @if $is-important {
+    background-size: 100% 10px !important;
+  }
+  @else{
+    background-size: 100% 10px;
+  }
 }
 
 @mixin squiggly-underline($underline-color) {
@@ -232,3 +224,5 @@ p, li, h3{
     text-decoration: none;
   }
 }
+
+

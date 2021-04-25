@@ -89,10 +89,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   transition: $sprint;
   &:hover{
     transform: scale(1.05);
-    box-shadow: $recessed-shadow rgba($navy-black,0.75);
-    @media (prefers-color-scheme: dark) {
-      box-shadow: $recessed-shadow rgba($pure-black,0.75);
-    }
+    box-shadow: $recessed-shadow semantic-color(shadow);
   }
   &:hover .thumbnail-text{
     opacity: 1;
@@ -160,10 +157,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       transition: $sprint;
       &:hover{
         transform: scale(1.02) rotate(2deg);
-        box-shadow: $recessed-shadow rgba($navy-black,0.75);
-        @media (prefers-color-scheme: dark) {
-          box-shadow: $recessed-shadow rgba($pure-black,0.75);
-        }
+        box-shadow: $recessed-shadow semantic-color(shadow);
       }
        .thumbnail-image-featured{
         border-radius: $tile-radius-big;
@@ -194,23 +188,14 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       }
       .explore-button{
         padding: 0.7rem 1rem;
-        color: $navy-black;
+        color: inherit;
         border-radius: 14px;
-        border: solid 0.2rem $navy-black;
+        border: solid 0.2rem semantic-color(button-outline);
         font-weight: $lato-bold;
         transition: $sprint;
         &:hover{
-          color: $pure-white;
-          background-color: $navy-black;
-        }
-        @media (prefers-color-scheme: dark) {
-          color: $pure-white;
-          border: solid 0.2rem $pure-white;
-          &:hover{
-            color: $navy-black;
-            background-color: $pure-white;
-          }
-
+          color: semantic-color(text-inverted);
+          background-color: semantic-color(button-fill);
         }
       }
     }
@@ -254,10 +239,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     }
   }
   .resources-container{
-    background-color: $signature-teal;
-    @media (prefers-color-scheme: dark) {
-      background-color: $signature-teal-d4;
-    }
+    background-color: semantic-color(recent-resources-bg);
   }
   .section-description{
     padding: 0;
@@ -275,7 +257,6 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       border-radius: 8px;
       padding: 0 0.2em;
       font-weight: $lato-bold;
-      // border: 1px rgba($pure-white, 0.5) solid;
       font-style: italic;
       &:hover{
         background-color: $pure-white;
@@ -302,31 +283,29 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
           color: $signature-teal;
         }
         .fa-linkedin-in{
-          color: #2867B2;
+          color: $linkedin-blue;
         }
         .fa-twitter{
-          color: #1DA1F2;
+          color: $twitter-blue;
         }
       }
     }
   }
   .resource-link{
     background-color: $pure-white;
+    color: semantic-color(text-on-light-bg-always);
     padding: 1rem;
     border-radius: $tile-radius-medium;
     margin-bottom: 0.5rem;
     .title{
       font-size: 1.5rem;
       @media (prefers-color-scheme: dark){
-        @include swipe-underline($signature-teal-l6);
+        @include swipe-underline($signature-teal-l6,false);
       }
     }
     .description{
       font-size: 1rem;
       line-height: 1.3rem;
-    }
-    @media (prefers-color-scheme: dark) {
-      color: $navy-black;
     }
   }
   .more-button{
@@ -405,7 +384,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   .year-container{
     background-color: $pure-white;
     border-radius: $tile-radius-medium;
-    box-shadow: $recessed-shadow;
+    box-shadow: $recessed-shadow semantic-color(shadow);
     padding: 2rem;
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
@@ -424,7 +403,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     .current-year{
       background-color: $navy-black-l6 !important;
     }
-    .year-square{
+    .year-square{ 
       background-color: $navy-black;
       color: $pure-white;
       font-family: $zilla;
@@ -458,12 +437,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
           top: 7%;
           left: -7%;
         }
-        // @include breakpoint(small only){ // IF small-12
-        //   font-size: 9.5rem;
-        //   top: 3%;
-        //   left: -7%;
-        // }
-        @include breakpoint(small only){ // IF small-6
+        @include breakpoint(small only){
           font-size: 4.5rem;
           top: 8%;
           left: -7%;
@@ -485,12 +459,10 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       font-weight: $caveat-regular;
       line-height: 1;
       padding: 1rem 0;
-      @include breakpoint(small only){ //IF small-6
+      color: semantic-color(text-on-light-bg-always);
+      @include breakpoint(small only){
         font-size: 1.5rem;
         padding: 0.5rem 0;
-      }
-      @media (prefers-color-scheme: dark) {
-        color: $navy-black;
       }
     }
     &:hover{
@@ -506,10 +478,10 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 .behind-the-scenes-container{
   display: none; //Show on Konami Code Entry
   .behind-the-scenes{
-    border-radius: $tile-radius;
-    background-color: $pure-white;
+    border-radius: $tile-radius-medium;
+    background-color: semantic-color(floating-card-bg);
     padding: 1rem;
-    box-shadow: $recessed-shadow;
+    box-shadow: $recessed-shadow semantic-color(shadow);
     margin-top: -6rem;
     z-index: 1;
     h1{
@@ -537,15 +509,11 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   bottom: 2rem;
   z-index: 2;
   .easter-egg-banner{
-    border-radius: 20px;
-    background-color: $pure-white;
+    border-radius: $tile-radius-medium;
+    background-color: semantic-color(floating-card-bg);
     padding: 1rem;
-    box-shadow: $recessed-shadow $navy-black;
+    box-shadow: $recessed-shadow semantic-color(shadow);
     align-items: center;
-    @media (prefers-color-scheme: dark) {
-      background-color: $navy-black;
-      box-shadow: $recessed-shadow $navy-black-d4;
-    }
     p{
       padding: 0;
       margin: 0;
@@ -766,11 +734,11 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 }
 
 #plane-effect, #world-effect, #camera-effect, #penguin-effect{
-  @include swipe-underline($signature-teal-l6);
+  @include swipe-underline(semantic-color(text-bg),false);
 }
 
 .intro-swipe-effect{
-  background-size: 100% 10px !important;// For the swipe underline to work
+  @include swipe-underline-hover(true);
 }
 
 //******* Intro

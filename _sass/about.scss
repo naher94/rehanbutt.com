@@ -28,16 +28,11 @@
       margin-top: 0.5em;
     }
     code{
-      color: var(--text-color);
-      border-radius: $pill-radius;
-      padding-left: 0.35em;
-      padding-right: 0.35em;
+      color: inherit;
+      border-radius: 5px;
       padding-bottom: 0.15em;
-      background-color: $navy-black-l6;
-      border-width: 0;
-      @media (prefers-color-scheme: dark) {
-        background-color: $navy-black-d6;
-      }
+      background-color: semantic-color(inline-code);
+      border: 0;
     }
     @include breakpoint(small only) {
       font-size: 1.2rem;
@@ -51,10 +46,7 @@
   }
   a{
     h3{
-      @include swipe-underline($signature-teal-l6);
-      @media (prefers-color-scheme: dark) {
-        @include swipe-underline($signature-teal-d6);
-      }
+      @include swipe-underline(semantic-color(text-bg),false);
     }
     .fa-link{
       transition: transform .3s;
@@ -64,7 +56,7 @@
         transition: $run;
       }
       h3{
-        background-size: 100% 10px;
+        @include swipe-underline-hover(false);
       }
       .fa-link{
         transform: rotate(360deg);
@@ -93,7 +85,7 @@
 
 .speaking-item{
   a{
-    color: var(--text-color);
+    color: inherit;
   }
 }
 
@@ -103,9 +95,6 @@
     font-size: 3.5em;
     font-weight: $lato-black;
     font-family: $lato;
-    @media (prefers-color-scheme: dark) {
-      color: $pure-white;
-    }
     @include breakpoint(small only) {
       line-height: 1em;
     }
@@ -119,9 +108,6 @@
     content: '';
     height: 0.5rem;
     margin-left: 1rem;
-    @media (prefers-color-scheme: dark) {
-      background-color: $signature-teal-d2;
-    }
     @include breakpoint(small only) {
       margin-left: 0;
     }
@@ -138,15 +124,6 @@
   }
 
   .work-item, .speaking-item, .education-item{
-    // &:first-of-type{
-    //   margin-top: -2.5em;
-    //   @include breakpoint(small only) {
-    //     margin-top: -1.5em;
-    //   }
-    //   @include breakpoint(medium down) {
-    //     margin-top: -1.5em;
-    //   }
-    // }
     margin-top: 1rem;
     padding-left: 0.5rem;
     p{
@@ -266,15 +243,12 @@
   }
   .skills-item{
     display: inline-block;
-    background-color: $navy-black;
+    background-color: semantic-color(informational-pill);
     border-radius: $pill-radius;
     color: $pure-white;
     padding: 0.2em 0.6em 0.2em 0.6em;
     margin-right: 0.1em;
     margin-bottom: 0.4em;
-    @media (prefers-color-scheme: dark) {
-      background-color: $navy-black-d6;
-    }
   }
 }
 
