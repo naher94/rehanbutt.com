@@ -123,13 +123,16 @@
       <div class="cell grid-x align-justify metadata">
         {% assign version-seperate = site.version | split: '.' %}
         {% assign ver-number = version-seperate[0] | minus: 1 %}
-        <div class="small-12 medium-shrink grid-x">
+        <div class="cell small-12 medium-shrink grid-x">
           <a class="cell shrink" href="https://github.com/naher94/rehanbutt.com/releases" target="_blank" rel="noopener">
             <p class="version-name">{{ site.version-naming[ver-number]}} v{{ site.version }}</p>
           </a>
           <p class="ship-it cell shrink">⛵ Ship It!</p>
         </div>
-        <p class="small-12 medium-shrink no-select">copyright © {{ 'now' | date: "%Y" }} Rehan Butt</p>
+        <div class="cell small-12 medium-shrink happy-copyright">
+          <p class="day" id="day-sentance">Have a nice <span id="data-day">day</span>!</p> <span class="middle-dot">●</span>
+          <p class="no-select">copyright © {{ 'now' | date: "%Y" }} Rehan Butt</p>
+        </div>
       </div>
     </div>
 

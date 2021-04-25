@@ -59,6 +59,21 @@ footer{
       font-family: $lato;
       font-weight: $lato-bold;
       font-size: 1rem;
+      .happy-copyright{
+        p{
+          display: inline;
+          @include breakpoint(small only){
+            display: block;
+          }
+        }
+        .middle-dot{
+          margin-left: 0.5em;
+          margin-right: 0.5em;
+          @include breakpoint(small only){
+            display: none;
+          }
+        }
+      }
     }
   }
   .spaceship{

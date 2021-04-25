@@ -140,7 +140,7 @@ isBadge();
 document.addEventListener('keydown', keyHandler, false);
 
 
-
+//Intro Section Emoji Hover Effect
 const planeEmoji = document.getElementById("plane-emoji");
 
 planeEmoji.addEventListener("mouseover", event => {
@@ -199,3 +199,78 @@ penguinEmoji.addEventListener("mouseout", event => {
 	var element = document.getElementById("penguin-effect");
   element.classList.remove("intro-swipe-effect");
 });
+//End of Intro Section Emoji Hover Effect
+
+
+
+///////////////////////////////////////////// Happy Day Label
+
+// Returns date name array which works with getDay() function
+function dayNames() {
+  return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+}
+
+// TODO: Very simple and needs to be reworked
+// Doesn't handle holidays that are the "third Thursday of every November" type
+function holidays() {
+  return {
+    "1:1": "Happy New Year!",
+    "2:23": "Happy 'Day I Wrote This Code' Day!'",
+    "2:29": "Happy Leap Day!",
+    "12:25": "Merry Christmas!"
+  }
+}
+
+// Returns current date object
+function currentDate() {
+  return new Date();
+}
+
+function getMonth() {
+  return currentDate().getMonth() + 1;
+}
+
+function getDate() {
+  return currentDate().getDate();
+}
+
+function getDayNumber() {
+  return currentDate().getDay();
+}
+
+// Returns current day of the week name
+function getDayName() {
+  return dayNames()[getDayNumber()];
+}
+
+// Calculates the number of milliseconds until the next day
+function millisecondsToNextDay() {
+  let hoursToNextDayInMillis = (23 - currentDate().getHours()) * 60 * 60 * 1000;
+  let minutesToNextHourInMillis = ((59 - currentDate().getMinutes()) * 60) * 1000;
+  let secondsToNextMinuteInMillis = (59 - currentDate().getSeconds()) * 1000;
+  let millisecondsToNextSecond = (1000 - currentDate().getMilliseconds());
+  
+  return hoursToNextDayInMillis + minutesToNextHourInMillis + secondsToNextMinuteInMillis + millisecondsToNextSecond;
+}
+
+// Returns the holiday (if any) exists for today's date
+function getHolidayString() {
+  return holidays()[`${getMonth()}:${getDate()}`];
+}
+
+// Updates happy day string based on a variety of parameters
+function getHappyDayString() {
+  let holidayString = getHolidayString();
+  
+  if (holidayString != undefined) {
+    document.getElementById("day-sentance").innerHTML = holidayString;
+  } else {
+    document.getElementById("data-day").innerHTML = getDayName();
+  }
+  
+  // Resubmit timeout for live date change
+  setTimeout(getHappyDayString, millisecondsToNextDay());
+}
+
+getHappyDayString();
+///////////////////////////////////////////// End of Happy Day Label
