@@ -381,10 +381,10 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       margin-top: -6rem;
     }
   }
-  .year-container{ //TODO weird shadow thing here in darkmode
+  .year-container{
     background-color: $pure-white;
     border-radius: $tile-radius-medium;
-    box-shadow: $recessed-shadow;
+    box-shadow: $recessed-shadow semantic-color(shadow);
     padding: 2rem;
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
