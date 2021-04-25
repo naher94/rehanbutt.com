@@ -240,6 +240,40 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
   .resources-container{
     background-color: semantic-color(recent-resources-bg);
+    position: relative;
+    &:hover{
+      .black-cat{
+        transform: rotate(-5deg) translateY(-9rem);
+      }
+      .black-cat-2{
+        transform: rotate(-5deg) translateY(-9rem);
+        z-index: 1;
+        .paws{
+          transform: translateY(7.5rem) rotate(7deg);
+          opacity: 1;
+        }
+      }
+    }
+    .black-cat{
+      position: absolute;
+      z-index: -1;
+      transition: $jog;
+      transition-delay: 1s;
+      .head{
+        width: 10rem;
+      }
+    }
+    .black-cat-2{
+      position: absolute;
+      z-index: -1;
+      transition: $jog;
+      transition-delay: 1s;
+      .paws{
+        width: 10rem;
+        transform: translateY(4rem);
+        opacity: 0;
+      }
+    }
   }
   .section-description{
     padding: 0;
