@@ -245,6 +245,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       .black-cat{
         transform: rotate(-5deg) translateY(-9rem);
         transition: $run;
+        transition-delay: 1s;
       }
       // .black-cat-2{
       //   transform: rotate(-5deg) translateY(-9rem);
