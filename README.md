@@ -35,7 +35,9 @@ Jekyll also uses the `Liquid` language as its templating language. Here are a co
 
 #### General
 
-* Foundation Grid XY reference for centering and other special properties: https://get.foundation/sites/docs/flexbox-utilities.html https://zurb.com/university/lessons/176
+* Foundation Grid XY reference for centering and other special properties: 
+  - https://get.foundation/sites/docs/flexbox-utilities.html
+  - https://zurb.com/university/lessons/176
 
 * Internal links using custom collections `<a href="{% link _projects/file.markdown %}">click here</a>`
 
