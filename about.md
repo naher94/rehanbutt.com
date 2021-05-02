@@ -9,24 +9,23 @@ footer-main: true
   <div class="small-8 medium-4 cell profile-photo-container">
     <img src="/img/rehan-full.png" alt="Photo of Rehan Butt">
   </div>
+  <div class="small-12 large-8 cell">
+    <section class="bio">
+      <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
+      <p>I am a <span class="rainbow">devzgner</span> <code>/devzīnər/</code>, designer + developer, currently based in Pittsburgh, PA, USA working on healthcare technology previously working with organizations like GE Healthcare & the NBA on consumer and enterprise applications.</p>
+      <p>I love to travel ✈️, and have been fortunate enough to live all over the world. 🌏 Every day trying to bring the unique aspects of each culture into my work. In my free time, I enjoy photography 📷 and creating cute digital illustrations 🐧. Want to hear more about what I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com">email</a> to connect. ✉️</p>
+    </section>
+  </div>
+</div>
 
-
-<div class="small-12 medium-12 large-8 cell">
-  <section class="bio">
-    <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
-    <p>I am a <span class="rainbow">devzgner</span> <code>/devzīnər/</code>, designer + developer, currently based in Pittsburgh, PA, USA working on healthcare technology previously working with organizations like GE Healthcare & the NBA on consumer and enterprise applications.</p>
-    <p>I love to travel ✈️, and have been fortunate enough to live all over the world. 🌏 Every day trying to bring the unique aspects of each culture into my work. In my free time, I enjoy photography 📷 and creating cute digital illustrations 🐧. Want to hear more about what I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com">email</a> to connect. ✉️</p>
-  </section>
-
+<div class="small-12 large-8 large-offset-4 cell">
   <section class="work-experience" id="work-experience">
     <div class="cell grid-x align-middle">
       <h2 class="cell small-12 medium-shrink">Work Experience</h2>
       <div class="cell small-12 medium-auto divider"></div>
     </div>
-
     {% assign work_order = site.work-experience | sort: 'sort-order' %}
     {% assign work_prev = "hello" %}
-
     {% for work in work_order %}
       <div class="work-item">
         <!-- Logo thing here -->
@@ -40,25 +39,20 @@ footer-main: true
           <h3>{{work.company}}</h3>
         {% endif %}
         <h4>{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
-
         <!-- what happens when the date is present? -->
         <p class="date">{{work.date-start | date: "%B %Y"}}・{{work.date-end | date: "%B %Y"}}</p>
         <p class="description">{{work.description}}</p>
       </div>
-
       {% assign work_prev = work %}
     {% endfor %}
   </section>
-
   <section class="speaking-events" id="speaking-events">
     <div class="cell grid-x align-middle">
       <h2 class="cell small-12 medium-shrink">Speaking Events</h2>
       <div class="cell small-12 medium-auto divider"></div>
     </div>
-
     {% assign event_order = site.speaking | sort: 'date' | reverse %}
     {% for event in event_order %}
-
     {% assign current_date = 'now' | date: "%s" %}
     {% assign event_date = event.date | date: "%s" %}
     <div class="speaking-item
@@ -71,7 +65,6 @@ footer-main: true
         <img class="brand-logo" src="/img/{{event.logo}}-logo.svg" alt="{{event.logo}} Logo">
       </div>
       {% endif %}
-
       {% if event.link %}
         <a href="{{event.link}}" target="_blank" rel="noopener">
       {% endif %}
@@ -81,12 +74,10 @@ footer-main: true
         {% if event_date > current_date %}
         <span>Upcoming</span>
         {% endif %}
-
         {% if event.link %}
           <i class="fas fa-link"></i>
         {% endif %}
       </h3>
-
       <p class="date">{{event.date| date: "%B %Y" }}
         {% if event.location %}
         ・ {{event.location}}
@@ -99,7 +90,6 @@ footer-main: true
     </div>
     {% endfor %}
   </section>
-
   <section class="education" id="education">
     <div class="cell grid-x align-middle">
       <h2 class="cell small-12 medium-shrink">Education</h2>
@@ -124,7 +114,6 @@ footer-main: true
       <p class="description">Design Certificate Program - Designing for Active Aging</p>
     </div>
   </section>
-
   <section class="skills" id="skills">
     <div class="cell grid-x align-middle">
       <h2 class="cell small-12 medium-shrink">Skills</h2>
@@ -148,7 +137,6 @@ footer-main: true
       <div class="skills-item">Gif Curation 😝</div>
     </div>
   </section>
-
   <section class="tools" id="tools">
     <div class="cell grid-x align-middle">
       <h2 class="cell small-12 medium-shrink">Tools</h2>
@@ -177,6 +165,4 @@ footer-main: true
       <div class="skills-item">Laser Cutting</div>
     </div>
   </section>
-</div>
-
 </div>
