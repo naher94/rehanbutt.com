@@ -4,11 +4,22 @@
   position: relative;
   overflow-x: hidden;
   margin-top: 2rem;
+  .about-bio{
+    @include breakpoint(medium down){
+      display: flex;
+      flex-flow: row wrap;
+    }
+  }
   .bio-wrapper{
+    @include breakpoint(medium down){
+      order: 2;
+    }
     .bio {
-      // font-weight: $lato-bold;
       margin-top: 6rem;
       margin-bottom: 3rem;
+      @include breakpoint(medium down){
+        order: 3;
+      }
       h1{
         padding-left: 0;
         font-family: $zilla;
@@ -41,14 +52,45 @@
         }
       }
     }
+    .profile-2{
+      @include breakpoint(medium down){
+        margin-top: -20rem;
+        z-index: 4;
+        order: 1;
+      }
+      @include breakpoint(small only){
+        margin-top: -10rem;
+        z-index: 4;
+      }
+    }
   }
   .profile-container{
     position: absolute;
-    right: -5rem;
-    top: 0;
-    z-index: -1;
+    @include breakpoint(large){
+      right: -5rem;
+      top: 0;
+      z-index: -1;
+    }
     img{
       height: 700px;
+    }
+    @include breakpoint(medium down){
+      position: relative;
+      flex: 0 0 auto;
+      min-height: 0px;
+      min-width: 0px;
+      width: 100%;
+      z-index: 1;
+      order: 1;
+      img{
+        height: auto;
+      }
+    }
+    @include breakpoint(small only){
+      margin-left: 5rem;
+    }
+    @include breakpoint(medium only){
+      margin-left: 8rem;
     }
   }
 }

@@ -5,9 +5,9 @@ permalink: about
 footer-main: true
 ---
 <div class="about-intro">
-  <div class="grid-container">
+  <div class="grid-container about-bio">
     <div class="grid-x cell bio-wrapper">
-      <div class="small-12 large-8 cell grid-x grid-padding-x">
+      <div class="small-12 large-8 cell grid-x">
         <section class="bio cell">
           <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
           <p>I am a <span class="rainbow">devzgner</span> 
@@ -18,11 +18,13 @@ footer-main: true
           <p>When I’m not devzgning healthcare solutions, you can also find me playing with code, drawing cute illustrations 🐧, pushing buttons and sometimes doing a bit of wood working. One day I’d like to publish a photo book, design and ship a hardware product and work in the animation industry.</p>
           <p>Curious what else I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com">email</a>. ✉️</p>
         </section>
-        <div class="cell medium-6">
-          <img src="/img/rehan-profile2.jpg" alt="">
-        </div>
-        <div class="cell medium-6">
-          <img src="/img/rehan-profile3.jpg" alt="">
+        <div class="cell grid-x small-5 medium-6 large-12 profile-2 grid-padding-x grid-padding-y">
+          <div class="cell large-6">
+            <img src="/img/rehan-profile2.jpg" alt="">
+          </div>
+          <div class="cell large-6">
+            <img src="/img/rehan-profile3.jpg" alt="">
+          </div>
         </div>
       </div>
     </div>
