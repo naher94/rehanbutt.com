@@ -13,7 +13,7 @@ body {
 }
 
 ::selection {
-  background: $signature-teal;
+  background: semantic-color(selection-background);
 }
 
 h1, h2, h3, h4 {
