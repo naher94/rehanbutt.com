@@ -1,24 +1,39 @@
 ---
-layout: default
+layout: blank
 title: "About"
 permalink: about
 footer-main: true
 ---
-
-<div class="grid-x align-center cell">
-  <div class="small-8 medium-4 cell profile-photo-container">
-    <img src="/img/rehan-full.png" alt="Photo of Rehan Butt">
-  </div>
-  <div class="small-12 large-8 cell">
-    <section class="bio">
-      <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
-      <p>I am a <span class="rainbow">devzgner</span> <code>/devzīnər/</code>, designer + developer, currently based in Pittsburgh, PA, USA working on healthcare technology previously working with organizations like GE Healthcare & the NBA on consumer and enterprise applications.</p>
-      <p>I love to travel ✈️, and have been fortunate enough to live all over the world. 🌏 Every day trying to bring the unique aspects of each culture into my work. In my free time, I enjoy photography 📷 and creating cute digital illustrations 🐧. Want to hear more about what I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com">email</a> to connect. ✉️</p>
-    </section>
+<div class="about-intro">
+  <div class="grid-container">
+    <div class="grid-x cell bio-wrapper">
+      <div class="small-12 large-8 cell grid-x grid-padding-x">
+        <section class="bio cell">
+          <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
+          <p>I am a <span class="rainbow">devzgner</span> 
+          <!-- <code>/devzīnər/</code> -->
+          currently based in Pittsburgh, PA, USA working on healthcare technology at UPMC Enterprises. Currently I lead design for our technology solutions group exploring telemedicine tools. During my time at UPMC I have led design across many products ranging from care delivery to research study tools and worked with GE Healthcare on advancing a suite of imaging tools for the radiology field. Prior to joining the healthcare world, I worked in the sports industry, collaborating with organizations like the NBA and NFL on consumer and enterprise applications, such as in-door wayfinding, an ads platform, and AR experiences! I have also spent time in the consumer advocacy space building tools that help to prioritize the interests of the consumer in order to shape a truly consumer-driven marketplace.</p>
+          <p>I have been very fortunate to live all over the world and continue my love for travel. 🌏 Bringing my observations and experiences from unique aspects of each culture and geography into my design philosophy. During my travels I have had the opportunity to grow my love of photography 📷 and have captured some amazing images along the way.</p>
+          <p>I attended Carnegie Mellon University where I received a Masters in Tangible Interaction Design and a Bachelors (BA) in Integrative Physical and Digital Media Studies. I’m always looking for opportunities to learn something new and share what I know with others. Sentence about learning something new. Check out some of my fun finds over here. And sometimes I get a chance to share what I know on stage.</p>
+          <p>When I’m not devzgning healthcare solutions, you can also find me playing with code, drawing cute illustrations 🐧, pushing buttons and sometimes doing a bit of wood working. One day I’d like to publish a photo book, design and ship a hardware product and work in the animation industry.</p>
+          <p>Curious what else I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com">email</a>. ✉️</p>
+        </section>
+        <div class="cell medium-6">
+          <img src="/img/rehan-profile2.jpg" alt="">
+        </div>
+        <div class="cell medium-6">
+          <img src="/img/rehan-profile3.jpg" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="profile-container">
+      <img src="/img/rehan-profile1.jpg" alt="Photo of Rehan Butt">
+    </div>
   </div>
 </div>
 
-<div class="small-12 large-8 large-offset-4 cell">
+<div class="grid-container grid-x">
+  <div class="small-12 large-8 large-offset-4 cell">
   <section class="work-experience" id="work-experience">
     <div class="cell grid-x align-middle">
       <h2 class="cell small-12 medium-shrink">Work Experience</h2>
@@ -165,4 +180,5 @@ footer-main: true
       <div class="skills-item">Laser Cutting</div>
     </div>
   </section>
+</div>
 </div>

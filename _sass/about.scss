@@ -1,44 +1,59 @@
 //******* About Page Styling
 
-@include breakpoint(large up) {
-  .profile-photo-container{
-    padding-right: 5rem;
+.about-intro{
+  position: relative;
+  overflow-x: hidden;
+  margin-top: 2rem;
+  .bio-wrapper{
+    .bio {
+      // font-weight: $lato-bold;
+      margin-top: 6rem;
+      margin-bottom: 3rem;
+      h1{
+        padding-left: 0;
+        font-family: $zilla;
+        font-weight: $zilla-bold;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        span{
+          font-size: 2.5rem;
+        }
+      }
+      p{
+        font-family: $lato;
+        // font-size: 1.5rem;
+        // line-height: 1.5;
+        padding: 0;
+        margin: 0;
+        margin-top: 1em;
+        .rainbow{
+          font-weight: $zilla-bold;
+        }
+        code{
+          color: inherit;
+          border-radius: 5px;
+          padding-bottom: 0.15em;
+          background-color: semantic-color(inline-code);
+          border: 0;
+        }
+        @include breakpoint(small only) {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+  .profile-container{
+    position: absolute;
+    right: -5rem;
+    top: 0;
+    z-index: -1;
+    img{
+      height: 700px;
+    }
   }
 }
 
-.bio {
-  font-weight: $lato-bold;
-  h1{
-    padding-left: 0;
-    font-family: $zilla;
-    font-weight: $zilla-bold;
-    font-size: 3rem;
-    margin-bottom: 0;
-    span{
-      font-size: 2.5rem;
-    }
-  }
-  p{
-    font-family: $lato;
-    font-size: 1.5rem;
-    line-height: 1.5;
-    padding: 0;
-    margin: 0;
-    &:last-of-type{
-      margin-top: 0.5em;
-    }
-    code{
-      color: inherit;
-      border-radius: 5px;
-      padding-bottom: 0.15em;
-      background-color: semantic-color(inline-code);
-      border: 0;
-    }
-    @include breakpoint(small only) {
-      font-size: 1.2rem;
-    }
-  }
-}
+
 
 .speaking-item{
   i{
