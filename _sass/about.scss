@@ -69,9 +69,12 @@
       right: -5rem;
       top: 0;
       z-index: -1;
+      img{
+        max-height: 700px;
+      }
     }
-    img{
-      height: 700px;
+    @media screen and (min-width: 100em){
+      left: 50vw;
     }
     @include breakpoint(medium down){
       position: relative;
@@ -81,9 +84,9 @@
       width: 100%;
       z-index: 1;
       order: 1;
-      img{
-        height: auto;
-      }
+      // img{
+      //   height: 700px;
+      // }
     }
     @include breakpoint(small only){
       margin-left: 5rem;
