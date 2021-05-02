@@ -19,6 +19,7 @@
       margin-bottom: 3rem;
       @include breakpoint(medium down){
         order: 3;
+        margin-top: 2rem;
       }
       h1{
         padding-left: 0;
@@ -32,8 +33,6 @@
       }
       p{
         font-family: $lato;
-        // font-size: 1.5rem;
-        // line-height: 1.5;
         padding: 0;
         margin: 0;
         margin-top: 1em;

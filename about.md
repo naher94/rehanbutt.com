@@ -18,7 +18,7 @@ footer-main: true
           <p>When I’m not devzgning healthcare solutions, you can also find me playing with code, drawing cute illustrations 🐧, pushing buttons and sometimes doing a bit of wood working. One day I’d like to publish a photo book, design and ship a hardware product and work in the animation industry.</p>
           <p>Curious what else I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com">email</a>. ✉️</p>
         </section>
-        <div class="cell grid-x small-5 medium-6 large-12 profile-2 grid-padding-x grid-padding-y">
+        <div class="cell grid-x small-5 large-12 profile-2 grid-padding-x grid-padding-y">
           <div class="cell large-6">
             <img src="/img/rehan-profile2.jpg" alt="">
           </div>
