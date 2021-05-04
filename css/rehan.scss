@@ -438,7 +438,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
     transition: $sprint;
-    @include breakpoint(small only){
+    @include breakpoint(medium down){
       padding: 1rem;
     }
     &:hover{
@@ -482,9 +482,9 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         margin: auto;
         left: -7%;
         @include breakpoint(medium only){
-          font-size: 8.4rem;
-          top: 7%;
-          left: -7%;
+          font-size: 7rem;
+          top: 4%;
+          left: -12%;
         }
         @include breakpoint(small only){
           font-size: 4.5rem;
@@ -511,6 +511,10 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       color: semantic-color(text-on-light-bg-always);
       @include breakpoint(small only){
         font-size: 1.5rem;
+        padding: 0.5rem 0;
+      }
+      @include breakpoint(medium only){
+        font-size: 2rem;
         padding: 0.5rem 0;
       }
     }
