@@ -1,16 +1,80 @@
 //******* Footer Styling
 footer{
-  margin-top: 50px;
-  background-color: $navy-black-l6;
-  color: $navy-black-l1;
-  padding-bottom: 40px;
-  position: relative;
-  @media (prefers-color-scheme: dark) {
-    background-color: $navy-black-d5;
-    color: $pure-white;
-  }
+  margin-top: 2rem;
+  background-color: semantic-color(footer-bg);
+  color: semantic-color(text);
+  padding-bottom: 2rem;
+  position: relative; // Needed for the UFO positioning
   .footer-content{
-    padding-top: 50px;
+    padding-top: 2rem;
+    @include breakpoint(small only){
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+    .nav-section{
+      margin-inline-end: 3rem;
+      .section-title{
+        padding: 0;
+        margin: 0;
+        font-weight: $lato-bold;
+        margin-bottom: 1rem;
+      }
+    }
+    .metadata{
+      margin-top: 2rem;
+      @include breakpoint(small only){
+        text-align: right;
+      }
+      div{
+        justify-content: flex-end;
+      }
+      a{
+        color: inherit;
+        @include breakpoint (small only){
+          order: 2;
+        }
+        &:hover{
+          font-weight: $lato-black;
+          ~.ship-it{
+            visibility: visible;
+          }        
+        }
+        p{
+          display: inline;
+        }
+      }
+      .ship-it{
+        margin-left: 0.5rem;
+        visibility: hidden;
+        display: inline;
+        @include breakpoint (small only){
+          order: 1;
+          margin-right: 0.5rem;
+        }
+      }
+      p{
+        padding: 0;
+        margin: 0;
+      }
+      font-family: $lato;
+      font-weight: $lato-bold;
+      font-size: 1rem;
+      .happy-copyright{
+        p{
+          display: inline;
+          @include breakpoint(small only){
+            display: block;
+          }
+        }
+        .middle-dot{
+          margin-left: 0.5em;
+          margin-right: 0.5em;
+          @include breakpoint(small only){
+            display: none;
+          }
+        }
+      }
+    }
   }
   .spaceship{
     position: absolute;
@@ -59,67 +123,88 @@ footer{
     }
   }
   .site-pages{
-    margin-bottom: 36px;
     padding-left: 0;
     padding-right: 0;
+    @include breakpoint(medium down){
+      text-align: right;
+      justify-content: flex-end;
+      margin-bottom: 3rem;
+      .nav-section{
+        margin-inline-start: 3rem;
+        margin-inline-end: 0rem;
+      }
+      .nav-wrap{
+        margin-right: -1rem;
+      }
+    }
+    @include breakpoint(small only){
+      font-size: 1.5em;
+      .nav{
+        font-size: 1.1em;
+      }
+      .nav-section{
+        margin-block-end: 2rem;
+        .section-title{
+          font-weight: $lato-black;
+        }
+        .nav-wrap{
+          margin-bottom: 0;
+        }
+      }
+    }
     .nav-wrap{
-      display: inline;
+      margin-bottom: 0.5rem;
+      margin-left: -1rem;
     }
     .nav{
       font-family: $lato;
-      font-weight: $lato-bold;
-      color: $navy-black-l1;
-      @media (prefers-color-scheme: dark) {
-        color: $pure-white;
-      }
+      font-weight: $lato-regular;
+      color: inherit;
+      padding: 0.5rem 1rem;
       &:hover, &:focus{
-        background-color: $navy-black-l5;
+        background: semantic-color(footer-nav-hover);
         transition: color 0.2s ease-in-out;
-        @media (prefers-color-scheme: dark) {
-          background-color: $navy-black-d3;
-        }
       }
     }
   }
   .social-container{
     padding-left: 0;
     padding-right: 0;
-  }
-  .left-section{
-    @include breakpoint(small only) {
-      text-align: right;
-    }
-  }
-  .right-section{
     text-align: right;
-    .copyright{
-      padding: 0;
-      font-family: $lato;
-      font-weight: $lato-bold;
-      font-size: 16px;
-      margin-bottom: 0;
+    .social-sub-2{
+      a{
+        &:last-child{
+          padding-right: 0;
+        }
+      }
     }
-    @include breakpoint(small only) {
-      margin-top: 2em;
-      padding-right: 0.5em;
+    @include breakpoint(small only){
+      .social-sub-1{
+        margin-top: 1rem;
+        margin-bottom: -1rem;
+        a{
+          &:last-child{
+            padding-right: 0;
+          }
+        }
+      }
     }
   }
   @include breakpoint(small only) {
-    margin-top: .5em;
-    padding-bottom: 20px;
+    margin-top: 0.5em;
+    padding-bottom: 4rem;
   }
 }
 
 .social {
-  padding-left: 0.25em;
-  padding-right: 0.25em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
   font-size: 2em;
-  color: $navy-black-l1;
+  color: inherit;
   @include breakpoint(small only) {
-    font-size: 1.5em;
-  }
-  @media (prefers-color-scheme: dark) {
-    color: $pure-white;
+    font-size: 3em;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
   }
   &:hover, &:focus{
     .fab, .fas{
@@ -129,53 +214,41 @@ footer{
       color: $signature-teal;
     }
     .fa-dribbble{
-      color: #ea4c89;
+      color: $dribbble-pink;
     }
     .fa-pinterest{
-      color: #e60023;
+      color: $pinterest-red;
     }
     .fa-linkedin-in{
-      color: #2867B2;
+      color: $linkedin-blue;
     }
     .fa-instagram{
-      color: #C13584;
+      color: $instagram-purple;
     }
     .fa-twitter{
-      color: #1DA1F2;
+      color: $twitter-blue;
     }
     .fa-github{
-      color: #6f42c1;
+      color: $github-purple;
     }
     .fa-500px{
-      color: #34bf49;
+      color: $F500px-green;
     }
   }
 }
 
 .logo-footer-container{
-  .ship-it{
-    height: 3.3rem;
-    margin-right: 0.5rem;
-    margin-top: 0.5rem;
-    visibility: hidden;
-    order: -1;
-  }
+  text-align: right;
   .logo-footer{
-    &:hover, &:focus{
-      animation: boing 300ms ease-out;
-      ~ .ship-it{
-        visibility: visible;
-        animation: boing 300ms ease-out;
-      }
-    }
     #rehan-logo-footer{
-      height: 55px;
-      margin-top: 10px;
+      height: 3rem;
+      margin-top: 0.5rem;
+      transition: $sprint;
+      &:hover{
+        transform: scale(1.1);
+      }
       g{
-        fill: $navy-black-l1;
-        @media (prefers-color-scheme: dark) {
-          fill: $pure-white;
-        }
+        fill: semantic-color(footer-logo);
       }
     }
   }

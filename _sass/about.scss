@@ -1,50 +1,124 @@
 //******* About Page Styling
 
-@include breakpoint(large up) {
-  .profile-photo-container{
-    padding-right: 5rem;
+.about-intro{
+  position: relative;
+  overflow-x: hidden;
+  margin-top: 2rem;
+  .about-bio{
+    @include breakpoint(medium down){
+      display: flex;
+      flex-flow: row wrap;
+    }
+  }
+  .bio-wrapper{
+    @include breakpoint(medium down){
+      order: 2;
+    }
+    .bio {
+      margin-top: 6rem;
+      margin-bottom: 3rem;
+      @include breakpoint(medium down){
+        order: 3;
+        margin-top: 2rem;
+      }
+      h1{
+        padding-left: 0;
+        font-family: $zilla;
+        font-weight: $zilla-bold;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        span{
+          font-size: 2.5rem;
+        }
+      }
+      p{
+        font-family: $lato;
+        padding: 0;
+        margin: 0;
+        margin-top: 1em;
+        .rainbow{
+          font-weight: $zilla-bold;
+        }
+        code{
+          color: inherit;
+          border-radius: 5px;
+          padding-bottom: 0.15em;
+          background-color: semantic-color(inline-code);
+          border: 0;
+        }
+        @include breakpoint(small only) {
+          font-size: 1.2rem;
+        }
+      }
+      .basketball{
+        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='50' height='60' viewport='0 0 100 100' style='fill:black;font-size:30px;'><text y='50%'>🏀</text></svg>") 16 0, auto;
+      }
+      .football{
+        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='50' height='60' viewport='0 0 100 100' style='fill:black;font-size:30px;'><text y='50%'>🏈</text></svg>") 16 0, auto;
+      }
+      .world{
+        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='50' height='60' viewport='0 0 100 100' style='fill:black;font-size:30px;'><text y='50%'>🌏</text></svg>") 16 0, auto;
+      }
+      .photography{
+        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='50' height='60' viewport='0 0 100 100' style='fill:black;font-size:30px;'><text y='50%'>📷</text></svg>") 16 0, auto;
+      }
+      .penguin{
+        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='50' height='60' viewport='0 0 100 100' style='fill:black;font-size:30px;'><text y='50%'>🐧</text></svg>") 16 0, auto;
+      }
+      .woodworking{
+        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='50' height='60' viewport='0 0 100 100' style='fill:black;font-size:30px;'><text y='50%'>🪚</text></svg>") 16 0, auto;
+      }
+      .email{
+        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='50' height='60' viewport='0 0 100 100' style='fill:black;font-size:30px;'><text y='50%'>✉️</text></svg>") 16 0, auto;
+      }
+    }
+    .profile-2{
+      @include breakpoint(medium down){
+        margin-top: -20rem;
+        z-index: 4;
+        order: 1;
+      }
+      @include breakpoint(small only){
+        margin-top: -10rem;
+        z-index: 4;
+      }
+    }
+  }
+  .profile-container{
+    position: absolute;
+    @include breakpoint(large){
+      right: -5rem;
+      top: 0;
+      z-index: -1;
+      img{
+        max-height: 700px;
+      }
+    }
+    @media screen and (min-width: 100em){
+      left: 50vw;
+    }
+    @include breakpoint(medium down){
+      position: relative;
+      flex: 0 0 auto;
+      min-height: 0px;
+      min-width: 0px;
+      width: 100%;
+      z-index: 1;
+      order: 1;
+      // img{
+      //   height: 700px;
+      // }
+    }
+    @include breakpoint(small only){
+      margin-left: 5rem;
+    }
+    @include breakpoint(medium only){
+      margin-left: 8rem;
+    }
   }
 }
 
-.bio {
-  font-weight: $lato-bold;
-  h1{
-    padding-left: 0;
-    font-family: $zilla;
-    font-weight: $zilla-bold;
-    font-size: 3rem;
-    margin-bottom: 0;
-    span{
-      font-size: 2.5rem;
-    }
-  }
-  p{
-    font-family: $lato;
-    line-height: 36px; ///////////why EM NOT RESPONDING //TODO
-    font-size: 26px; ///////////why EM NOT RESPONDING
-    padding: 0;
-    margin: 0;
-    &:last-of-type{
-      margin-top: 0.5em;
-    }
-    code{
-      color: var(--text-color);
-      border-radius: $pill-radius;
-      padding-left: 0.35em;
-      padding-right: 0.35em;
-      padding-bottom: 0.15em;
-      background-color: $navy-black-l6;
-      border-width: 0;
-      @media (prefers-color-scheme: dark) {
-        background-color: $navy-black-d6;
-      }
-    }
-    @include breakpoint(small only) {
-      font-size: 20px;
-      line-height: 28px;
-    }
-  }
-}
+
 
 .speaking-item{
   i{
@@ -52,10 +126,7 @@
   }
   a{
     h3{
-      @include swipe-underline($signature-teal-l6);
-      @media (prefers-color-scheme: dark) {
-        @include swipe-underline($signature-teal-d6);
-      }
+      @include swipe-underline(semantic-color(text-bg),false);
     }
     .fa-link{
       transition: transform .3s;
@@ -65,7 +136,7 @@
         transition: $run;
       }
       h3{
-        background-size: 100% 10px;
+        @include swipe-underline-hover(false);
       }
       .fa-link{
         transform: rotate(360deg);
@@ -94,27 +165,31 @@
 
 .speaking-item{
   a{
-    color: var(--text-color);
+    color: inherit;
   }
 }
 
 .work-experience, .speaking-events, .education, .skills, .tools{
-  &:not(first-of-type){
-    margin-top: 2em;
-  }
+  margin-top: 4em;
   h2{
     font-size: 3.5em;
-    color: rgba($navy-black, 0.15);
     font-weight: $lato-black;
     font-family: $lato;
-    @media (prefers-color-scheme: dark) {
-      color: rgba($pure-white,0.15);
-    }
     @include breakpoint(small only) {
       line-height: 1em;
     }
     @include breakpoint(medium down) {
       line-height: 1em;
+    }
+  }
+  .divider{
+    background-color: $signature-teal;
+    border-radius: $pill-radius;
+    content: '';
+    height: 0.5rem;
+    margin-left: 1rem;
+    @include breakpoint(small only) {
+      margin-left: 0;
     }
   }
 
@@ -129,15 +204,6 @@
   }
 
   .work-item, .speaking-item, .education-item{
-    &:first-of-type{
-      margin-top: -2.5em;
-      @include breakpoint(small only) {
-        margin-top: -1.5em;
-      }
-      @include breakpoint(medium down) {
-        margin-top: -1.5em;
-      }
-    }
     margin-top: 1rem;
     padding-left: 0.5rem;
     p{
@@ -244,26 +310,25 @@
     font-size: 1em;
     font-weight: $lato-black;
     padding: 0;
-    margin-bottom: 0;
-
-    &:first-of-type{
-      margin-top: -2.5em;
-      @include breakpoint(small only) {
-        margin-top: -1.5em;
-      }
+    margin-top: -1.5rem;
+    margin-bottom: 1rem;
+    @include breakpoint(small only){
+      margin-top: -2rem;
+    }
+  }
+  .divider{
+    @include breakpoint(small only){
+      margin-top: 1rem;
     }
   }
   .skills-item{
     display: inline-block;
-    background-color: $navy-black;
+    background-color: semantic-color(informational-pill);
     border-radius: $pill-radius;
     color: $pure-white;
     padding: 0.2em 0.6em 0.2em 0.6em;
     margin-right: 0.1em;
     margin-bottom: 0.4em;
-    @media (prefers-color-scheme: dark) {
-      background-color: $navy-black-d6;
-    }
   }
 }
 

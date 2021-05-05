@@ -23,6 +23,7 @@
 
 .tag-section{
   margin-bottom: 5rem;
+  margin-top: 2rem;
   h2{
     font-size: 2.5em;
   }
@@ -31,22 +32,12 @@
       padding: 0.5rem 1rem;
       margin-bottom: 0.5rem;
       font-weight: $lato-bold;
-      background-color: $signature-teal;
+      background-color: semantic-color(actionable-pill);
       color: $pure-white;
       border-radius: $pill-radius;
       display: inline-block;
-      @media (prefers-color-scheme: dark) {
-        background-color: $signature-teal-d1;
-      }
-    }
-    a{
       &:hover{
-        .tag{
-          background-color: $signature-teal-d1;
-          @media (prefers-color-scheme: dark) {
-            background-color: $signature-teal-d2;
-          }
-        }
+        background-color: semantic-color(actionable-pill-hover);
       }
     }
   }
@@ -58,24 +49,18 @@
     &:hover{
       .hashtag{
         color: $signature-teal;
-        @media (prefers-color-scheme: dark) {
-          color: $signature-teal-d2;
-        }
       }
     }
   }
-  h3{
+  h2{
     font-size: 3.5em;
-    color: $navy-black;
+    color: semantic-color(text);
     display: inline;
     font-weight: $lato-black;
     font-family: $lato;
     flex-wrap: wrap;
     @media screen and (max-width: 40em) {
       line-height: 3.6rem;
-    }
-    @media (prefers-color-scheme: dark) {
-      color: $pure-white;
     }
   }
   .divider{
@@ -84,9 +69,6 @@
     content: '';
     height: 0.5rem;
     margin-left: 1rem;
-    @media (prefers-color-scheme: dark) {
-      background-color: $signature-teal-d2;
-    }
     @include breakpoint(small only) {
       margin-left: 0;
     }
@@ -95,12 +77,12 @@
 
 .resource-link{
   margin-bottom: 1em;
-  color: var(--text-color);
+  color: inherit;
   &:hover{
-    color: var(--text-color);
+    color: inherit;
     .resource{
       .title{
-        background-size: 100% 10px;
+        @include swipe-underline-hover(false);
       }
       .fa-link{
         transform: rotate(360deg);
@@ -115,11 +97,7 @@
       padding: 0;
       margin: 0;
       line-height: 1em;
-      @include swipe-underline($signature-teal-l6);
-
-      @media (prefers-color-scheme: dark) {
-        @include swipe-underline($signature-teal-d6);
-      }
+      @include swipe-underline(semantic-color(text-bg),false);
     }
     .fa-link{
       margin-left: 0.5rem;

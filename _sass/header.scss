@@ -1,12 +1,10 @@
 //******* Header Styling
 
 .nav-container{
-  background-color: var(--signature-teal);
+  background-color: $signature-teal;
+  color: $pure-white;
   padding-top: 2em;
   padding-bottom: 2em;
-  @media (prefers-color-scheme: dark){
-    background-color: $signature-teal-d1;
-  }
 }
 
 .logo{
@@ -24,7 +22,7 @@
 }
 
 .nav{
-  color: $pure-white;
+  color: inherit;
   padding: 0.7em;
   height: inherit;
   font-family: $zilla;
@@ -33,24 +31,33 @@
   font-size: 1em;
   transition: background-color 0.2s ease-in-out;
   &:hover, &:focus{
-    color: $pure-white;
+    color: inherit;
     background-color: $signature-teal-d1;
-    @media (prefers-color-scheme: dark){
-      background-color: $signature-teal-d2;
-    }
   }
+}
+
+.nav-home{
+  padding: 0.7em 0.75em;
 }
 
 .mobile-navbar{
   display: none;
   float: left;
   line-height: 2.5em;
+  @include breakpoint(small only) {
+    display: block;
+    line-height: 40px;
+  }
 }
 
 .navbar{
-  color: $pure-white;
+  color: inherit;
   float: left;
   line-height: 2.5em;
+  @include breakpoint(small only) {
+    clear: both;
+    display: none;
+  }
 }
 
 .menu-container{
@@ -85,7 +92,7 @@
   user-select: none;
   margin-bottom: 0;
   a {
-    color: $pure-white;
+    color: inherit;
     font-family: $zilla;
     font-weight: $zilla-bold;
     font-size: 1.25em;
@@ -93,9 +100,6 @@
     padding: 0.25em 0.6em;
     &:hover{
       background-color: $signature-teal-d1;
-      @media (prefers-color-scheme: dark){
-        background-color: $signature-teal-d2;
-      }
     }
   }
 }

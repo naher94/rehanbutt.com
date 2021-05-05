@@ -6,10 +6,15 @@ thumbnail: "interactions"
 date: 2018-03-20
 tags: interactions animations
 ---
-
 <div class="grid-x">
   <div class="small-12 medium-6 cell image-container">
+    <img src="../img/interactions/tag-expand.gif" alt="Tag expanding out hover effect" />
+  </div>
+  <div class="small-12 medium-6 cell image-container">
     <img src="../img/interactions/basketballrefresh.gif" alt="Basketball Pull to Refresh Animation" />
+  </div>
+  <div class="small-12 medium-6 cell image-container">
+    <img src="../img/interactions/card-pulse.gif" alt="Attention grabbing pulse animation" />
   </div>
   <div class="small-12 medium-6 cell image-container">
     <img src="../img/interactions/cloverbutton.gif" alt="4 Leaf Clover Button" />

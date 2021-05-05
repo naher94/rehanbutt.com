@@ -11,6 +11,8 @@
 @import 'about';
 @import 'resources';
 @import '404';
+@import 'changelog';
+
 
 .no-select{
   -webkit-touch-callout: none;
@@ -83,22 +85,13 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   position: relative; //For flag to show correctly
   display: block; //For flag to show correctly
   background-color: $navy-black;
-  border-radius: $tile-radius;
+  border-radius: $tile-radius-medium;
   transition: $sprint;
   &:hover{
-    -webkit-transform: scale(1.05);
-    -ms-transform: scale(1.05);
     transform: scale(1.05);
-    box-shadow: $recessed-shadow rgba($navy-black,0.75);
-    @media (prefers-color-scheme: dark) {
-      box-shadow: $recessed-shadow rgba($pure-black,0.75);
-    }
+    box-shadow: $recessed-shadow semantic-color(shadow);
   }
   &:hover .thumbnail-text{
-    opacity: 1;
-    transition: $run;
-  }
-  &:hover .featured-text{
     opacity: 1;
     transition: $run;
   }
@@ -106,12 +99,8 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     opacity: 0.8;
     transition: $run;
   }
-  &:hover .thumbnail-image-featured{
-    opacity: 1;
-    transition: $run;
-  }
-  .thumbnail-image, .thumbnail-image-featured{
-    border-radius: $tile-radius;
+  .thumbnail-image{
+    border-radius: $tile-radius-medium;
   }
 }
 
@@ -134,49 +123,262 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
 }
 
-.featured-text{
-  position: absolute;
-  opacity: 0;
-  bottom: 0;
-  padding-bottom: 2rem;
-  padding-top: 4rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+.featured-projects{
+  margin-bottom: 8rem;
+  .feature-row{
+    margin-bottom: 4rem;
+    &:nth-child(even){
+      .text-wrapper{
+        order: 2;
+      }
+      .image-wrapper{
+        order: 1;
+        .thumbnail-container-featured{
+          &:hover{
+            transform: scale(1.02) rotate(-2deg);
+          }
+        }
+      }
+    }
+    .text-wrapper{
+      @include breakpoint(small only) {
+        order: 2;
+        margin-top: 1rem;
+      }
+    }
+    .image-wrapper{
+      @include breakpoint(small only) {
+        order: 1;
+      }
+    }
+    .thumbnail-container-featured{
+      background-color: $navy-black;
+      border-radius: $tile-radius-big;
+      transition: $sprint;
+      &:hover{
+        transform: scale(1.02) rotate(2deg);
+        box-shadow: $recessed-shadow semantic-color(shadow);
+      }
+       .thumbnail-image-featured{
+        border-radius: $tile-radius-big;
+      }
+    }
+    
+    .featured-text{
+      @include breakpoint(small only){
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      h2{
+        font-size: 2.5rem;
+        font-weight: $zilla-bold;
+        @include breakpoint(small only){
+          line-height: 1.1;
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
+      p{
+        font-size: 1.5rem;
+        padding: 0;
+        margin: 0;
+      }
+      .explore-wrapper{
+        margin-top: 2rem;
+      }
+      .explore-button{
+        padding: 0.7rem 1rem;
+        color: inherit;
+        border-radius: 14px;
+        border: solid 0.2rem semantic-color(button-outline);
+        font-weight: $lato-bold;
+        transition: $sprint;
+        &:hover{
+          color: semantic-color(text-inverted);
+          background-color: semantic-color(button-fill);
+        }
+      }
+    }
+  }
+  .more-button{
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    color: $signature-teal;
+    border-radius: $pill-radius;
+    font-size: 1.5rem;
+    border: solid 0.2rem $signature-teal;
+    text-align: center;
+    display: block;
+    font-weight: $lato-bold;
+    transition: $sprint;
+    &:hover{
+      color: $pure-white;
+      background-color: $signature-teal;
+    }
+  }
+}
+
+.featured-resources-speaking{
+  margin-bottom: 12rem;
   color: $pure-white;
-  background: linear-gradient(0deg, rgba($navy-black,1) 0%, rgba($navy-black,0) 100%);
-  width: 100%;
-  border-radius: 0 0 $tile-radius $tile-radius;
-  @include breakpoint(medium down) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    padding-bottom: 1.5rem;
-    padding-top: 2rem;
-    bottom: 0;
+  .resources-container, .speaking-container{
+    background-color: $navy-black;
+    border-radius: $tile-radius-big;
+    padding: 2rem;
+    padding-top: 1rem;
+    h2{
+      padding: 0;
+      font-size: 2.5em;
+      font-weight: $zilla-bold;
+      @include breakpoint(small only){
+        font-size: 2em;
+      }
+    }
+    @include breakpoint(small only){
+      padding: 1rem;
+    }
   }
-}
+  .resources-container{
+    background-color: semantic-color(recent-resources-bg);
+    position: relative;
+    &:hover{
+      .black-cat{
+        transform: rotate(-5deg) translateY(-9rem);
+        transition: $run;
+        transition-delay: 1s;
+      }
+      // .black-cat-2{
+      //   transform: rotate(-5deg) translateY(-9rem);
+      //   z-index: 1;
+      //   transition: $run;
+      //   .paws{
+      //     transform: translateY(7.5rem) rotate(7deg);
+      //     opacity: 1;
+      //     // animation-name:paws;
+      //     // animation-duration: 2.5s;
+      //     transition: $run;
+      //   }
+      // }
+    }
+    .black-cat{
+      position: absolute;
+      z-index: -1;
+      transition: $jog;
+      transition-delay: 1s;
+      .head{
+        width: 10rem;
+      }
+    }
+    // .black-cat-2{
+    //   position: absolute;
+    //   // z-index: -1;
+    //   transition: $jog;
+    //   transition-delay: 2s;
+    //   // animation-name:paws;
+    //   // animation-duration: 2.5s;
+    //   .paws{
+    //     width: 10rem;
+    //     transform: translateY(4rem);
+    //     opacity: 0;
+    //   }
+    // }
 
-.thumbnail-text-featured {
-  text-shadow: 0px 0px 5px $navy-black;
-  font-size: 2.4em;
-  line-height: 1em;
-  font-weight: $zilla-bold;
-  font-family: $zilla;
-  @include breakpoint(medium down) {
-    font-size: 2em;
+    // @keyframes paws {
+    //     0% { transform: translateY(7.5rem) rotate(0deg); opacity:0; }
+    //    50% { transform: translateY(3rem) rotate(5deg); opacity:1; }
+    //   100% { transform: translateY(7.5rem) rotate(7deg); opacity:1; }
+    // }
+
   }
-}
-
-.thumbnail-description-featured {
-  display: block;
-  text-shadow: 0px 0px 5px $navy-black;
-  font-size: 1.4em;
-  line-height: 1.2em;
-  font-weight: $lato-regular;
-  font-family: $lato;
+  .section-description{
+    padding: 0;
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    margin-bottom: 2rem;
+    @include breakpoint(small only){
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+    a{
+      color: $pure-white;
+      background-color: rgba($pure-white, 0.1);
+      border-radius: 8px;
+      padding: 0 0.2em;
+      font-weight: $lato-bold;
+      font-style: italic;
+      &:hover{
+        background-color: $pure-white;
+        color: $navy-black;
+      }
+    }
+  }
+  .section-description-special{
+    font-weight: $lato-bold;
+    font-style: italic;
+    margin-bottom: 0;
+  }
+  .speaking-socials{
+    margin-bottom: 1em;
+    a{
+      padding-right: 0.8em;
+      font-size: 2em;
+      color: inherit;
+      &:hover, &:focus{
+        .fab, .fas{
+          animation: boing 300ms ease-out;
+        }
+        .fa-envelope{
+          color: $signature-teal;
+        }
+        .fa-linkedin-in{
+          color: $linkedin-blue;
+        }
+        .fa-twitter{
+          color: $twitter-blue;
+        }
+      }
+    }
+  }
+  .resource-link{
+    background-color: $pure-white;
+    color: semantic-color(text-on-light-bg-always);
+    padding: 1rem;
+    border-radius: $tile-radius-medium;
+    margin-bottom: 0.5rem;
+    .title{
+      font-size: 1.5rem;
+      @media (prefers-color-scheme: dark){
+        @include swipe-underline($signature-teal-l6,false);
+      }
+    }
+    .description{
+      font-size: 1rem;
+      line-height: 1.3rem;
+    }
+  }
+  .more-button{
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    color: $pure-white;
+    border-radius: 14px;
+    border: solid 0.2rem $pure-white;
+    text-align: center;
+    display: block;
+    font-weight: $lato-bold;
+    transition: $sprint;
+    &:hover{
+      color: $navy-black;
+      background-color: $pure-white;
+    }
+  }
 }
 
 .thumbnail-tile {
   margin-bottom: 1.5em;
+  @include breakpoint(small only){
+    margin-bottom: 1em;
+  }
 }
 
 .flag {
@@ -195,48 +397,131 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
 }
 
-// TODO mobileify the Year in Review Styling
-.year-container{
-  background-color: $pure-white;
-  border-radius: $tile-radius;
-  box-shadow: $recessed-shadow;
-  padding: 2rem;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
-  .year-square{
-    background-color: $navy-black;
-    color: $pure-white;
-    font-family: $zilla;
-    font-weight: $zilla-bold;
-    font-size: 10.6rem;
-    position: relative;
+.year-in-review{
+  margin-bottom: 10rem;
+  @include breakpoint(small only){
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
     overflow: hidden;
-    span{
-      position: absolute;
-      top: 7%;
-      margin: auto;
-      left: -7%;
-    }
-    @supports(aspect-ratio:1/1){
-      aspect-ratio: 1/1;
-    }
-    @supports not(aspect-ratio:1/1){
-      content: '';
-      display: block;
-      padding-top: 100%;
-    }  
   }
-  .yir-label{
-    font-size: 2.5rem;
+  h2{
     text-align: center;
+    font-weight: $zilla-bold;
+    margin-bottom: 3rem;
+    @include breakpoint(small only){
+      line-height: 2.8rem;
+    }
+  }
+  a{
+    color: $navy-black;
+  }
+  .time-travel{
+    font-size: 2rem;
     font-family: $caveat;
     font-weight: $caveat-regular;
-    line-height: 2.2rem;
-    padding: rem 0;
+    position: absolute;
+    transform: rotate(10deg);
+    max-width: 10rem;
+    line-height: 2rem;
+    margin-left: -3rem;
+    margin-top: -2rem;
+    @include breakpoint(small only){
+      margin-left: -5rem;
+      margin-top: -6rem;
+    }
   }
-  &:hover{
-    .year-square{
-      background-color: $signature-teal;
+  .year-container{
+    background-color: $pure-white;
+    border-radius: $tile-radius-medium;
+    box-shadow: $recessed-shadow semantic-color(shadow);
+    padding: 2rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    transition: $sprint;
+    @include breakpoint(medium down){
+      padding: 1rem;
+    }
+    &:hover{
+      transform: rotate(4deg) scale(1.05);
+      .year-square{
+        .overlay{
+          opacity: 0;
+        }
+      }
+    }
+    .current-year{
+      background-color: $navy-black-l6 !important;
+    }
+    .year-square{ 
+      background-color: $navy-black;
+      color: $pure-white;
+      font-family: $zilla;
+      font-weight: $zilla-bold;
+      font-size: 10.6rem;
+      position: relative;
+      overflow: hidden;
+      .overlay{
+        transition: $sprint;
+        background-color: $navy-black;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        @supports(aspect-ratio:1/1){
+          aspect-ratio: 1/1;
+        }
+        @supports not(aspect-ratio:1/1){
+          content: '';
+          display: block;
+          padding-top: 100%;
+        }
+      }
+      span{
+        position: absolute;
+        top: 7%;
+        margin: auto;
+        left: -7%;
+        @include breakpoint(medium only){
+          font-size: 7rem;
+          top: 4%;
+          left: -12%;
+        }
+        @include breakpoint(small only){
+          font-size: 4.5rem;
+          top: 8%;
+          left: -7%;
+        }
+      }
+      @supports(aspect-ratio:1/1){
+        aspect-ratio: 1/1;
+      }
+      @supports not(aspect-ratio:1/1){
+        content: '';
+        display: block;
+        padding-top: 100%;
+      }  
+    }
+    .yir-label{
+      font-size: 2.5rem;
+      text-align: center;
+      font-family: $caveat;
+      font-weight: $caveat-regular;
+      line-height: 1;
+      padding: 1rem 0;
+      color: semantic-color(text-on-light-bg-always);
+      @include breakpoint(small only){
+        font-size: 1.5rem;
+        padding: 0.5rem 0;
+      }
+      @include breakpoint(medium only){
+        font-size: 2rem;
+        padding: 0.5rem 0;
+      }
+    }
+    &:hover{
+      .year-square{
+        background-color: $signature-teal;
+      }
     }
   }
 }
@@ -246,10 +531,10 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 .behind-the-scenes-container{
   display: none; //Show on Konami Code Entry
   .behind-the-scenes{
-    border-radius: $tile-radius;
-    background-color: $pure-white;
+    border-radius: $tile-radius-medium;
+    background-color: semantic-color(floating-card-bg);
     padding: 1rem;
-    box-shadow: $recessed-shadow;
+    box-shadow: $recessed-shadow semantic-color(shadow);
     margin-top: -6rem;
     z-index: 1;
     h1{
@@ -277,15 +562,11 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   bottom: 2rem;
   z-index: 2;
   .easter-egg-banner{
-    border-radius: 20px;
-    background-color: $pure-white;
+    border-radius: $tile-radius-medium;
+    background-color: semantic-color(floating-card-bg);
     padding: 1rem;
-    box-shadow: $recessed-shadow $navy-black;
+    box-shadow: $recessed-shadow semantic-color(shadow);
     align-items: center;
-    @media (prefers-color-scheme: dark) {
-      background-color: $navy-black;
-      box-shadow: $recessed-shadow $navy-black-d4;
-    }
     p{
       padding: 0;
       margin: 0;
@@ -505,28 +786,91 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
 }
 
-//******* Mobile Styling
+#plane-effect, #world-effect, #camera-effect, #penguin-effect{
+  @include swipe-underline(semantic-color(text-bg),false);
+}
 
-@include breakpoint(small only) {
+.intro-swipe-effect{
+  @include swipe-underline-hover(true);
+}
 
-  .mobile-navbar{
-    display: block;
-    line-height: 40px;
+//******* Intro
+.site-intro{
+  margin-bottom: 8rem;
+  margin-top: 3rem;
+  @include breakpoint(small only){
+    overflow: hidden; //resolves an issue with the watermark container overflow TODO
   }
+  .emoji-wrapper{
+    font-size: 2rem;
+    div{
+      margin-bottom: 0.5rem;
+      transition: $sprint;
+      &:hover{
+        transform: scale(1.4);
+        text-shadow: 0 0 10px rbga($navy-black, 0.2);
+      }
+    }
+    @include breakpoint(small only){
+      @include flex-direction(row); // Does a Flips Grid-y to Grid-x On Mobile
+      margin-bottom: 1rem;
+      div{
+        width: auto; // Does a Flips Grid-y to Grid-x On Mobile (Needed for the cells)
+        margin-right: 1rem;
+      }
+    }
+  }
+  .watermark{
+    width: 110%;
+    margin-left: -5%;
+    position: absolute;
+    fill: rgba($signature-teal, 0.1);
+    z-index: -1;
+    @include breakpoint(small only){
+      margin-left: 0;
+      margin-top: 5%;
+    }
+    text{
+      font-family: $zilla;
+      font-weight: $zilla-bold;
+    }
+  }
+  span.wave{
+    font-size: 0.8em;
+    margin-left: 0.5em;
+  }
+  p{
+    padding-left: 0;
+    padding-right: 0;
+    font-weight: $lato-bold;
+    line-height: 1.5;
+  }
+
+  a{
+    padding: 0.5rem 0;
+    font-weight: $lato-bold;
+    color: $signature-teal;
+    @include squiggly-underline($signature-teal);
+    i{
+      margin-left: 0.25rem;
+      transition: $sprint;
+    }
+    &:hover{
+      i{
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}
+//******* End of Intro
+
+
+//******* Mobile Styling
+@include breakpoint(small only) {
 
   .nav{
     padding: 10px;
     font-size: 16px;
   }
-
-  .thumbnail-tile {
-    margin-bottom: 20px;
-  }
-
-  .navbar {
-    clear: both;
-    display: none;
-  }
 }
-
 //******* End of Mobile Styling

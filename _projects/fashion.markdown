@@ -43,7 +43,9 @@ This concept is directly linked to the idea of clothing being a shell of the hum
     <img src="../img/fashion/full-catwalk.jpg" alt="Lustre catwalk">
   </div>
   <div class="cell">
-    <iframe width="100%" src="https://www.youtube.com/embed/SeDGiYwXBiM" frameborder="0" allowfullscreen title="Fashion Show"></iframe>
+    <div class="responsive-embed widescreen">
+      <iframe width="100%" src="https://www.youtube.com/embed/SeDGiYwXBiM" frameborder="0" allowfullscreen title="Fashion Show"></iframe>
+    </div>
   </div>
 </div>
 

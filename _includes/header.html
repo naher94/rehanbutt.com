@@ -63,11 +63,11 @@
             <span class="nav-burger-icon"></span>
           </label>
           <div class="mobile-navbar">
-            <a class="nav" href="/">Portfolio</a>
+            <a class="nav" href="/portfolio">Portfolio</a>
             <a class="nav" href="/about">About</a>
           </div>
           <ul class="menu-links">
-            <li class="nav-item-container"><a class="nav" href="/index.html">Portfolio</a></li>
+            <li class="nav-item-container"><a class="nav" href="/">Home</a></li>
               {% for my_page in site.pages %}
                 {% if my_page.exclude != "true" %}
                   {% if my_page.title %}
@@ -75,12 +75,11 @@
                   {% endif %}
                 {% endif %}
               {% endfor %}
-            <li class="nav-item-container"><a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store</a></li>
           </ul>
         </div>
 
         <div class="navbar">
-          <a class="nav" href="/index.html">Portfolio</a>
+          <a class="nav nav-home" href="/" title="home"><i class="fas fa-home"></i></a>
             {% for my_page in site.pages %}
               {% if my_page.exclude != "true" %}
                 {% if my_page.title %}

@@ -3,14 +3,14 @@
 
 {% include head.html %}
 
-<body class="year-{{ page.file-suffix }}">
+<body>
 
-    {% include header-{{ page.file-suffix }}.html %}
+    {% include header.html %}
 
     <main class="page-content">
       {{ content }}
     </main>
-    {% include footer-{{ page.file-suffix }}.html %}
+    {% include footer.html %}
     {% include foot.html %}
 </body>
 

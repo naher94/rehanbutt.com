@@ -28,6 +28,9 @@
 
 a.next, a.prev{
   color: white;
+  &:hover{
+    color: white;
+  }
 }
 
 /* The dots/bullets/indicators */
