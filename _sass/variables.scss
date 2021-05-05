@@ -3,71 +3,139 @@
 // Numbers
 $color-percentage: 5%;
 $tile-radius: 10px;
+$tile-radius-medium: 20px;
+$tile-radius-big: 30px;
 $pill-radius: 500px;
 $recessed-shadow: 0px 10px 33px -10px;
 
 // Colors
-$signature-teal: #12abc4;
-
-//// Dark Set
-//// [number indicates number of step removed from main]
-$signature-teal-d1: #109AB4;
-$signature-teal-d2: #0E89A5;
-$signature-teal-d3: #0C7895;
-$signature-teal-d4: #0A6985;
-$signature-teal-d5: #085975;
-$signature-teal-d6: #074B64;
-
-//// Light Set
-$signature-teal-l1: #25B6CA;
-$signature-teal-l2: #38C1CF;
-$signature-teal-l3: #4CCAD4;
-$signature-teal-l4: #5FD3DA;
-$signature-teal-l5: #73DCDF;
-$signature-teal-l6: #86E3E4;
-
-
-$navy-black: #1f2937;
-
-//// Dark Set
-$navy-black-d6: #0B0E15;
-$navy-black-d5: #0F131C;
-$navy-black-d4: #131923;
-$navy-black-d3: #171E29;
-$navy-black-d2: #1B2330;
-$navy-black-d1: #1f2937;
-
-//// Light Set
-$navy-black-l1: #3B4450;
-$navy-black-l2: #575F69;
-$navy-black-l3: #737A82;
-$navy-black-l4: #8F959B;
-$navy-black-l5: #ABB0B4;
-$navy-black-l6: #C7CACD;
-
 $pure-white: #ffffff;
 $pure-black: #000000;
 
+////Brand Colors
+$twitter-blue: #1DA1F2;
+$linkedin-blue: #2867B2;
+$pinterest-red: #e60023;
+$dribbble-pink: #ea4c89;
+$instagram-purple: #C13584;
+$github-purple: #6f42c1;
+$F500px-green: #34bf49;
+
+$signature-teal: #12abc4;
+$navy-black: #1f2937;
+//// [number indicates number of step removed from main]
+
+////Signature Teal
+////// Dark Set
+$signature-teal-d1: mix($pure-black, $signature-teal, 10%);
+$signature-teal-d2: mix($pure-black, $signature-teal, 20%);
+$signature-teal-d3: mix($pure-black, $signature-teal, 30%);
+$signature-teal-d4: mix($pure-black, $signature-teal, 40%);
+$signature-teal-d5: mix($pure-black, $signature-teal, 50%);
+$signature-teal-d6: mix($pure-black, $signature-teal, 60%);
+$signature-teal-d7: mix($pure-black, $signature-teal, 70%);
+$signature-teal-d8: mix($pure-black, $signature-teal, 80%);
+$signature-teal-d9: mix($pure-black, $signature-teal, 90%);
+
+////// Light Set
+$signature-teal-l1: mix($pure-white, $signature-teal, 10%);
+$signature-teal-l2: mix($pure-white, $signature-teal, 20%);
+$signature-teal-l3: mix($pure-white, $signature-teal, 30%);
+$signature-teal-l4: mix($pure-white, $signature-teal, 40%);
+$signature-teal-l5: mix($pure-white, $signature-teal, 50%);
+$signature-teal-l6: mix($pure-white, $signature-teal, 60%);
+$signature-teal-l7: mix($pure-white, $signature-teal, 70%);
+$signature-teal-l8: mix($pure-white, $signature-teal, 80%);
+$signature-teal-l9: mix($pure-white, $signature-teal, 90%);
+
+
+//// Dark Set
+$navy-black-d1: mix($pure-black, $navy-black, 10%);
+$navy-black-d2: mix($pure-black, $navy-black, 20%);
+$navy-black-d3: mix($pure-black, $navy-black, 30%);
+$navy-black-d4: mix($pure-black, $navy-black, 40%);
+$navy-black-d5: mix($pure-black, $navy-black, 50%);
+$navy-black-d6: mix($pure-black, $navy-black, 60%);
+$navy-black-d7: mix($pure-black, $navy-black, 70%);
+$navy-black-d8: mix($pure-black, $navy-black, 80%);
+$navy-black-d9: mix($pure-black, $navy-black, 90%);
+
+//// Light Set
+$navy-black-l1: mix($pure-white, $navy-black, 10%);
+$navy-black-l2: mix($pure-white, $navy-black, 20%);
+$navy-black-l3: mix($pure-white, $navy-black, 30%);
+$navy-black-l4: mix($pure-white, $navy-black, 40%);
+$navy-black-l5: mix($pure-white, $navy-black, 50%);
+$navy-black-l6: mix($pure-white, $navy-black, 60%);
+$navy-black-l7: mix($pure-white, $navy-black, 70%);
+$navy-black-l8: mix($pure-white, $navy-black, 80%);
+$navy-black-l9: mix($pure-white, $navy-black, 90%);
+
+
+//Semantic colors maps the color palette above to their use across the application
+//// This method allows for several flavors of a color to be added such as a dark mode or a high contrast for example
+$semantic-colors:(
+  light:(
+    text: $navy-black,
+    text-inverted: $pure-white,
+    text-on-light-bg-always: $navy-black,
+    link: $signature-teal,
+    text-bg: $signature-teal-l6,
+    informational-pill: $navy-black,
+    actionable-pill: $signature-teal,
+    actionable-pill-hover: $signature-teal-d1,
+    shadow: rgba($navy-black,0.75),
+    floating-card-bg: $pure-white,
+    footer-bg: $navy-black-l9,
+    footer-nav-hover: $navy-black-l8,
+    footer-logo: $navy-black,
+    inline-code: $navy-black-l9,
+    recent-resources-bg: $signature-teal,
+    button-outline: $navy-black,
+    button-fill: $navy-black,
+    selection-background: $signature-teal-l6,
+  ),
+  dark:(
+    text: $pure-white,
+    text-inverted: $navy-black,
+    text-on-light-bg-always: $navy-black,
+    link: $signature-teal,
+    text-bg: $signature-teal-d4,
+    informational-pill: $navy-black-d6,
+    actionable-pill: $signature-teal-d1,
+    actionable-pill-hover: $signature-teal-d2,
+    shadow: rgba($navy-black-d9,0.75),
+    floating-card-bg: $navy-black,
+    footer-bg: $navy-black-d2,
+    footer-nav-hover: $navy-black-d4,
+    footer-logo: $pure-white,
+    inline-code: $navy-black-d8,
+    recent-resources-bg: $signature-teal-d2,
+    button-outline: $pure-white,
+    button-fill: $pure-white,
+    selection-background: $signature-teal-d3,
+  ),
+);
+
+//Helper function to build CSS colors
+@function compose-color($color-key) {
+  @return '--color-#{$color-key}';
+}
+
+//Function to be called inline for color mapping
+@function semantic-color($color-key) {
+  @return (var(--color-#{$color-key}));
+}
+
 :root{
-  --pure-white-raw: 255, 255, 255;
-  --pure-white: rgb(var(--pure-white-raw));
-  --navy-black-raw: 31, 41, 55;
-  --navy-black: rgb(var(--navy-black-raw));
-  --signature-teal-raw: 18, 171, 196;
-  --signature-teal: rgb(var(--signature-teal-raw));
-
-  // --signature-teal-d3: #0C7895;
-
-  --text-color: var(--navy-black);
-  // --link-color: var(--signature-teal-d3);
-  --link-color: var(--signature-teal);
-
-
-
-  @media (prefers-color-scheme: dark) {
-    --text-color: var(--pure-white);
+  @each $key, $value in map-get($semantic-colors, 'light') {
+    #{compose-color($key)}: #{$value};
   }
-
+  @media (prefers-color-scheme: dark) {
+    @each $key, $value in map-get($semantic-colors, 'dark') {
+      #{compose-color($key)}: #{$value};
+    }
+  }
 }
 
 // Animations
@@ -105,7 +173,7 @@ $zilla-regular: 400;
 $zilla-medium: 500;
 $zilla-bold: 700;
 
-@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,700,700i,900i,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900i,900&display=swap');
 $lato: 'Lato', sans-serif;
 $lato-thin: 100;
 $lato-light-italic: 300i;
@@ -117,5 +185,3 @@ $lato-black: 900;
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 $caveat: 'Caveat', cursive;
 $caveat-regular: 400;
-
-//******* End of Variables

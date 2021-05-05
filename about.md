@@ -1,28 +1,46 @@
 ---
-layout: default
+layout: blank
 title: "About"
 permalink: about
-
+footer-main: true
 ---
-<div class="grid-x align-center cell">
-  <div class="small-8 medium-4 cell profile-photo-container">
-    <img src="/img/rehan-full.png" alt="Photo of Rehan Butt">
+<div class="about-intro">
+  <div class="grid-container about-bio">
+    <div class="grid-x cell bio-wrapper">
+      <div class="small-12 large-8 cell grid-x">
+        <section class="bio cell">
+          <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
+          <p>I am a <span class="rainbow">devzgner</span> currently based in Pittsburgh, PA, USA working on healthcare technology at the University of Pittsburgh Medical Center (UPMC) Enterprises. Currently, I lead design for our technology solutions group developing telemedicine tools. During my time at UPMC I have led design across several products, from care delivery to research study tools and designed a suite of imaging tools for the radiology field with GE Healthcare. Prior to joining the healthcare world, I worked in the sports industry, collaborating with organizations like the <span class="basketball">NBA</span> and <span class="football">NFL</span> on consumer and enterprise applications, such as in-door wayfinding, an ads platform, and <a href="{% link _projects/deepintheq.markdown %}">AR experiences!</a> I have also spent time in the consumer advocacy space building tools that help to prioritize the interests of the consumer to shape a truly consumer-driven marketplace.</p>
+          <p>I have been very fortunate to have lived all over the <span class="world">world</span> and continue my love for travel. Bringing my observations and experiences from unique aspects of each culture and geography into my design philosophy. During my travels, I have had the opportunity to grow my love of <span class="photography">photography</span> and have captured some amazing images along the way.</p>
+          <p>I attended Carnegie Mellon University where I received a Master in Tangible Interaction Design and a Bachelor (BA) in Integrative Physical and Digital Media Studies. I’m always looking for opportunities to learn something new and share my knowledge with others. There are lot of great resources online, check out some of my recent finds <a href="{% link resources.html %}">here.</a> And sometimes I get a chance to share what I know on <a href="#speaking-events">stage.</a></p>
+          <p>When I’m not devzgning healthcare solutions, you can find me playing with code, drawing <span class="penguin">cute illustrations</span>, pushing buttons and sometimes doing a bit of <span class="woodworking">woodworking</span>. One day I’d like to publish a photo book, design and ship a hardware product and work in the animation industry.</p>
+          <p>Curious what else I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com" class="email">email.</a></p>
+        </section>
+        <div class="cell grid-x small-5 large-12 profile-2 grid-padding-x grid-padding-y">
+          <div class="cell large-6">
+            <img src="/img/rehan-profile2.jpg" alt="">
+          </div>
+          <div class="cell large-6">
+            <img src="/img/rehan-profile3.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="profile-container">
+      <img src="/img/rehan-profile1.jpg" alt="Photo of Rehan Butt">
+    </div>
   </div>
+</div>
 
-
-<div class="small-12 medium-12 large-8 cell">
-  <section class="bio">
-    <h1>Hi! I'm Rehan <span class="wave">👋</span></h1>
-    <p>I am a <span class="rainbow">devzgner</span> <code>/devzīnər/</code>, designer + developer, currently based in Pittsburgh, PA, USA working on healthcare technology previously working with organizations like GE Healthcare & the NBA on consumer and enterprise applications.</p>
-    <p>I love to travel ✈️, and have been fortunate enough to live all over the world. 🌏 Every day trying to bring the unique aspects of each culture into my work. In my free time, I enjoy photography 📷 and creating cute digital illustrations 🐧. Want to hear more about what I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com">email</a> to connect. ✉️</p>
-  </section>
-
+<div class="grid-container grid-x">
+  <div class="small-12 large-8 large-offset-4 cell">
   <section class="work-experience" id="work-experience">
-    <h2>Work Experience</h2>
-
+    <div class="cell grid-x align-middle">
+      <h2 class="cell small-12 medium-shrink">Work Experience</h2>
+      <div class="cell small-12 medium-auto divider"></div>
+    </div>
     {% assign work_order = site.work-experience | sort: 'sort-order' %}
     {% assign work_prev = "hello" %}
-
     {% for work in work_order %}
       <div class="work-item">
         <!-- Logo thing here -->
@@ -36,22 +54,20 @@ permalink: about
           <h3>{{work.company}}</h3>
         {% endif %}
         <h4>{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
-
         <!-- what happens when the date is present? -->
         <p class="date">{{work.date-start | date: "%B %Y"}}・{{work.date-end | date: "%B %Y"}}</p>
         <p class="description">{{work.description}}</p>
       </div>
-
       {% assign work_prev = work %}
     {% endfor %}
   </section>
-
   <section class="speaking-events" id="speaking-events">
-    <h2>Speaking Events</h2>
-
+    <div class="cell grid-x align-middle">
+      <h2 class="cell small-12 medium-shrink">Speaking Events</h2>
+      <div class="cell small-12 medium-auto divider"></div>
+    </div>
     {% assign event_order = site.speaking | sort: 'date' | reverse %}
     {% for event in event_order %}
-
     {% assign current_date = 'now' | date: "%s" %}
     {% assign event_date = event.date | date: "%s" %}
     <div class="speaking-item
@@ -64,7 +80,6 @@ permalink: about
         <img class="brand-logo" src="/img/{{event.logo}}-logo.svg" alt="{{event.logo}} Logo">
       </div>
       {% endif %}
-
       {% if event.link %}
         <a href="{{event.link}}" target="_blank" rel="noopener">
       {% endif %}
@@ -74,12 +89,10 @@ permalink: about
         {% if event_date > current_date %}
         <span>Upcoming</span>
         {% endif %}
-
         {% if event.link %}
           <i class="fas fa-link"></i>
         {% endif %}
       </h3>
-
       <p class="date">{{event.date| date: "%B %Y" }}
         {% if event.location %}
         ・ {{event.location}}
@@ -92,9 +105,11 @@ permalink: about
     </div>
     {% endfor %}
   </section>
-
   <section class="education" id="education">
-    <h2>Education</h2>
+    <div class="cell grid-x align-middle">
+      <h2 class="cell small-12 medium-shrink">Education</h2>
+      <div class="cell small-12 medium-auto divider"></div>
+    </div>
     <div class="education-item">
       <div class="brand-logo-container" id="cmu">
         <img class="brand-logo" src="/img/cmu-logo.svg" alt="Carnegie Mellon University Logo">
@@ -114,9 +129,11 @@ permalink: about
       <p class="description">Design Certificate Program - Designing for Active Aging</p>
     </div>
   </section>
-
   <section class="skills" id="skills">
-    <h2>Skills</h2>
+    <div class="cell grid-x align-middle">
+      <h2 class="cell small-12 medium-shrink">Skills</h2>
+      <div class="cell small-12 medium-auto divider"></div>
+    </div>
     <h3>Some of the things I do well</h3>
     <div class="skills-container">
       <div class="skills-item">Design Thinking</div>
@@ -135,9 +152,11 @@ permalink: about
       <div class="skills-item">Gif Curation 😝</div>
     </div>
   </section>
-
   <section class="tools" id="tools">
-    <h2>Tools</h2>
+    <div class="cell grid-x align-middle">
+      <h2 class="cell small-12 medium-shrink">Tools</h2>
+      <div class="cell small-12 medium-auto divider"></div>
+    </div>
     <h3>Some of the toolsets I am quite familiar with</h3>
     <div class="skills-container">
       <div class="skills-item">Figma</div>
@@ -162,5 +181,4 @@ permalink: about
     </div>
   </section>
 </div>
-
 </div>

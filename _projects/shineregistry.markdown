@@ -4,7 +4,7 @@ title:  "Shine Registry"
 tile-name: "Shine Registry"
 thumbnail: "shine"
 flag: New
-date: 2020-10-31
+date: 2021-02-01
 hero-background-color: "#FFE6BA"
 hero-background-color-dark: "#B8A686"
 hero-accent-color: "#8E2727"
@@ -58,9 +58,9 @@ Search browse scroll!
 
 With a lot of content search and discovery becomes an issue for any platform. This was something that we focused on with this redesign____________. How could we offer a better way to showcase and bubble up groups of businesses.
 
-Especially with the 'Featured Tag' pages as we like to call them. Giving a community or group the opportunity to bubble up a little about themselves and all the folks that are a part of it if on the platform.
+Especially with the 'Featured Tag' pages as we like to call them. Giving a community or group the opportunity to bubble up a little about themselves and all the folks that are a part of it on the platform.
 
-Which also leads to a natural progression of helping bring new folks to the table through partnerships.
+Which also leads to a natural progression of helping bring new folks to the table through community partnerships.
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
@@ -74,9 +74,7 @@ Which also leads to a natural progression of helping bring new folks to the tabl
 {:.post-callout-medium}
 Every redesign starts with solid architecture
 
-The biggest architectural change we made was separating the idea of a registry or business and the owner of that registry, previously they were one in the same, so if you supported someone else on the platform it was as your business. You also noticed that overtime it became conceptually murky based on some of the content that better represented individuals and not their businesses.
-
-Giving folks to separate themselves from their businesses and allow for a business to have more collaborators on the platform as they grow.
+The biggest architectural change we made was separating the idea of a registry or business from the owner of that registry, previously they were one in the same. So if you supported someone else on the platform it was as your business. We noticed that overtime it became conceptually difficult to separate what the business represented and what the founders were supporting outside of their businesses. Our change to separate owners from their businesses on Shine Registry also gives businesses an opportunity to have co-owners on the platform as they grow.
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
     <img src="../img/shineregistry/former-site.jpg" alt="Shine Registry's former home page">

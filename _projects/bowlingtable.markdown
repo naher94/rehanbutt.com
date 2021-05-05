@@ -68,6 +68,8 @@ A quick render I did to make sure the proportions all looked good and worked wel
   <p>Some in-process photos, the first a photo taken towards the very beginning of the project sanding down the surface and filling any cracks or holes. The second, an almost complete look at the underside of the table top with added supports to due to the construction of bowling lanes and a little signature! 😃</p>
 </div>
 
-<iframe width="100%" src="https://www.youtube.com/embed/D0G75E4OKOo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Construction Timelapse"></iframe>
+<div class="responsive-embed widescreen">
+  <iframe width="100%" src="https://www.youtube.com/embed/D0G75E4OKOo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Construction Timelapse"></iframe>
+</div>
 
 Enjoy this Timelapse video of the construction of the table.

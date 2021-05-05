@@ -1,0 +1,58 @@
+.changelog{
+  h1{
+    span{
+      font-family: $caveat;
+      // background-color: $signature-teal-l6;
+      background-color: rgba($signature-teal, 0.1);
+      border-radius: $pill-radius;
+      font-size: 1.5rem;
+      padding: 0.25rem 1rem;
+    }
+  }
+  p{
+    padding: 0;
+    margin: 0;
+  }
+  .description{
+    p{
+      font-size: 1.2em;
+      margin: 0.9375rem 0;
+    }
+    .build{
+      font-style: italic;
+      margin-top: 3rem;
+    }
+  }
+  .gif-container{
+    border-radius: $tile-radius-medium;
+    overflow: hidden;
+  }
+  .git{
+    border-radius: $tile-radius-medium;
+    // background-color: $signature-teal-l6;
+    background-color: rgba($signature-teal, 0.1);
+    padding: 2rem;
+    p{
+      line-height: 1.2;
+    }
+    .sub-header{
+      font-size: 1.5em;
+      line-height: 1.2;
+      font-weight: $lato-bold;
+      margin-bottom: 0.5em;
+    }
+  }
+  .version-container{
+    margin-bottom: 4rem;
+    h2{
+      font-weight: $zilla-bold;
+      margin-bottom: 0;
+    }
+    .release-date{
+      font-size: 2em;
+      font-family: $zilla;
+      font-weight: $zilla-regular;
+      margin-top: -0.5em;
+    }
+  }
+}

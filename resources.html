@@ -2,7 +2,7 @@
 layout: default
 title: "Resources"
 permalink: resources
-
+footer-other: true
 ---
 <header class="resource-header">
   <h1>Resources</h1>
@@ -13,18 +13,16 @@ permalink: resources
 {% assign alltags = site.resources | map: "tags" | uniq | sort %}
 
 <section class="cell tag-section">
-
-<h2>Categories</h2>
-<div class="tags-container cell">
-  {% for tag in alltags %}
-    <a href="#{{tag | replace: " ", "-"}}">
-      <div class="tag">
-        {{ tag }}
-      </div>
-    </a>
-  {% endfor %}
-</div>
-
+  <h2 class="visually-hidden">Categories</h2>
+  <div class="tags-container cell">
+    {% for tag in alltags %}
+      <a href="#{{tag | replace: " ", "-"}}">
+        <div class="tag">
+          {{ tag }}
+        </div>
+      </a>
+    {% endfor %}
+  </div>
 </section>
 
 <!-- bundle based on tag -->
@@ -34,7 +32,7 @@ permalink: resources
   <section class="tag-group grid-x grid-padding-x grid-padding-y cell medium-12" id="{{tag | replace: " ", "-"}}">
     <div class="cell grid-x align-middle">
       <a href="#{{tag | replace: " ", "-"}}" class="section-header">
-        <h3 class="cell small-12 medium-shrink"><span class="hashtag">#</span>{{tag}}</h3>
+        <h2 class="cell small-12 medium-shrink"><span class="hashtag">#</span>{{tag}}</h2>
       </a>
       <div class="cell small-12 medium-auto divider"></div>
     </div>

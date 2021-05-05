@@ -1,0 +1,30 @@
+---
+layout: default
+title: "Portfolio"
+permalink: portfolio
+footer-main: true
+---
+
+<h1 class="visually-hidden">Projects</h1>
+
+<!-- TODO upgrade some of the thumbnails -->
+
+{% assign project_order = site.projects | sort: 'date' | reverse %}
+
+{% for project in project_order %}
+  <div class="small-6 medium-4 cell thumbnail-tile">
+    {% if project.external-link %}
+      <a class="post-link" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank"><span class="visually-hidden">Opens a new window</span>
+    {% else %}
+      <a class="post-link" href="{{ project.url | prepend: site.baseurl }}">
+    {% endif %}
+        <div class="thumbnail-container">
+          <img class="thumbnail-image" src="img/thumbnails/{{ project.thumbnail | append: '.png' }}" alt="{{ project.tile-name }} Tile">
+          <span class="thumbnail-text">{{ project.tile-name }}</span>
+          {% if project.flag %}
+          <span class="flag">{{ project.flag }}</span>
+          {% endif %}
+        </div>
+    </a>
+  </div>
+{% endfor %}

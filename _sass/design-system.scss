@@ -3,13 +3,17 @@ body {
   font-family: $lato;
   font-weight: $lato-regular;
   font-size: 20px; // = 1em
-  color: var(--text-color);
+  color: semantic-color(text);
   @include breakpoint(small only) {
     font-size: 16px;
   }
   @media (prefers-color-scheme: dark) {
     background-color: $navy-black-d3;
   }
+}
+
+::selection {
+  background: semantic-color(selection-background);
 }
 
 h1, h2, h3, h4 {
@@ -99,11 +103,6 @@ ul {
   padding: 0;
 }
 
-::selection {
-  background: var(--signature-teal);
-  color: $pure-white;
-}
-
 .content-button {
   width: 100%;
   font-size: 1.5em;
@@ -146,17 +145,15 @@ ul {
 
 
 //******* A Tag Underline Expand Styling
-p, li, h3{
-  a {
-    position: relative;
-    text-decoration: none;
-    display: inline-block;
-    color: var(--link-color);
-    padding: 0 1px;
-    transition: $run;
-  }
+@mixin link-expand {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+  color: semantic-color(link);
+  padding: 0 1px;
+  transition: $run;
 
-  a::after{
+  &::after{
     content: '';
     position: absolute;
     z-index: -1;
@@ -164,25 +161,68 @@ p, li, h3{
     height: 11%;
     left: 0;
     bottom: 0;
-    background-color: var(--link-color);
+    background-color: semantic-color(link);
     transition: $run;
   }
 
-  a:hover {
+  &:hover {
     color: $pure-white;
   }
 
-  a:hover::after {
+  &:hover::after {
     height: 100%;
   }
 }
-//******* A Tag Underline Expand Styling
 
-@mixin swipe-underline($color) {
+
+
+
+
+p, li, h3{
+  a {
+    @include link-expand();
+  }
+}
+
+
+//******* End of A Tag Underline Expand Styling
+@mixin swipe-underline($color,$inline-hover) {
   display: inline;
-  background: linear-gradient(rgba($color,1), rgba($color,1));
+  background: linear-gradient($color, $color);
   background-position: 0% 100%;
   background-repeat: no-repeat;
-  background-size: 0% 10px;
+  background-size: 0% 10px; 
   transition: background-size .3s;
+  @if $inline-hover {
+    &:hover{
+      background-size: 100% 10px;
+    }
+  }
 }
+
+//// Use when you want to trigger the over from a different element
+@mixin swipe-underline-hover($is-important) {
+  @if $is-important {
+    background-size: 100% 10px !important;
+  }
+  @else{
+    background-size: 100% 10px;
+  }
+}
+
+@mixin squiggly-underline($underline-color) {
+  background: linear-gradient(to bottom, $underline-color 0%, $underline-color 100%);
+	background-position: 0 100%;
+	background-repeat: repeat-x;
+	background-size: 3px 3px;
+  text-decoration: none;
+  &:hover{
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%2312abc4' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
+    background-position: 0 100%;
+    background-size: auto 6px;
+    background-repeat: repeat-x;
+    text-decoration: none;
+  }
+}
+
+

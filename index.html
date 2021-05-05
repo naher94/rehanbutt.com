@@ -1,50 +1,162 @@
 ---
 layout: default
+footer-main: true
 ---
 
-<h1 class="visually-hidden">Projects</h1>
+<section class="site-intro grid-x cell align-center">
+  <div class="cell grid-x medium-9 grid-padding-x">
+    <div class="cell" style="position: relative;">
+      <svg class="watermark" viewBox="0 0 45 16">
+        <text x="-1" y="15">Hello</text>
+      </svg>
+    </div>
+    <div class="cell grid-y small-12 medium-shrink emoji-wrapper text-center">
+      <div class="cell shrink" id="plane-emoji">✈️</div>
+      <div class="cell shrink" id="world-emoji">🌏 </div>
+      <div class="cell shrink" id="camera-emoji">📷 </div>
+      <div class="cell shrink" id="penguin-emoji">🐧</div>
+    </div>
+    <div class="cell medium-auto">
+      <h1>Hi there! I'm Rehan<span class="wave">👋</span></h1>
+      <p>I am a <span class="rainbow">devzgner</span>, designer + developer, currently working on healthcare technology in Pittsburgh, PA, USA previously working with organizations like GE Healthcare & the NBA on consumer and enterprise applications.</p>
+      <p><span id="plane-effect">I love to travel️</span>, and have <span id="world-effect">been fortunate enough to live all over the world.</span> Every day trying to bring the unique aspects of each culture into my work. In my free time, <span id="camera-effect">I enjoy photography</span> and <span id="penguin-effect">creating cute digital illustrations.</span></p>
+      <a href="/about">Learn more about me <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
 
 {% assign project_order = site.projects | sort: 'date' | reverse %}
 
+<section class="featured-projects">
 {% for project in project_order %}
   {% if project.featured == true %}
-  <div class="medium-6 cell thumbnail-tile">
-    {% if project.external-link %}
-      <a class="post-link" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank"><span class="visually-hidden">Opens a new window</span>
-    {% else %}
-      <a class="post-link" href="{{ project.url | prepend: site.baseurl }}">
-    {% endif %}
-        <div class="thumbnail-container">
-          <img class="thumbnail-image-featured" src="img/thumbnails/{{ project.thumbnail | append: '-featured.jpg' }}" alt="{{ project.tile-name }} Tile">
-          <div class="featured-text">
-            <span class="thumbnail-text-featured">{{ project.tile-name }}</span>
-            <span class="thumbnail-description-featured">{{ project.tile-description }}</span>
-          </div>
-          {% if project.flag %}
-          <span class="flag">{{ project.flag }}</span>
-          {% endif %}
-        </div>
-    </a>
-  </div>
-  {% endif %}
-{% endfor %}
+  <div class="cell grid-x grid-padding-x feature-row align-center">
+    <div class="cell medium-4 grid-x align-middle align-center text-wrapper">
+      <div class="featured-text cell">
+        <h2 class="">{{ project.tile-name }}</h2>
+        <p class="">{{ project.tile-description }}</p>
 
-{% for project in project_order %}
-  {% if project.featured != true %}
-  <div class="small-6 medium-4 large-3 cell thumbnail-tile">
-    {% if project.external-link %}
-      <a class="post-link" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank"><span class="visually-hidden">Opens a new window</span>
-    {% else %}
-      <a class="post-link" href="{{ project.url | prepend: site.baseurl }}">
-    {% endif %}
-        <div class="thumbnail-container">
-          <img class="thumbnail-image" src="img/thumbnails/{{ project.thumbnail | append: '.png' }}" alt="{{ project.tile-name }} Tile">
-          <span class="thumbnail-text">{{ project.tile-name }}</span>
-          {% if project.flag %}
-          <span class="flag">{{ project.flag }}</span>
+        <div class="explore-wrapper">
+          {% if project.external-link %}
+          <a class="explore-button" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank">Explore<span class="visually-hidden">Opens a new window</span></a>
+          {% else %}
+          <a class="explore-button" href="{{ project.url | prepend: site.baseurl }}">Explore</a>
           {% endif %}
         </div>
-    </a>
+      </div>
+    </div>
+    <div class="medium-7 cell image-wrapper">
+      {% if project.external-link %}
+        <a class="" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank"><span class="visually-hidden">Opens a new window</span>
+      {% else %}
+        <a class="" href="{{ project.url | prepend: site.baseurl }}">
+      {% endif %}
+          <div class="thumbnail-container-featured">
+            <img class="thumbnail-image-featured" src="img/thumbnails/{{ project.thumbnail | append: '-featured.jpg' }}" alt="{{ project.tile-name }} Tile">
+          </div>
+      </a>
+    </div>
   </div>
   {% endif %}
 {% endfor %}
+  <div class="cell grid-x align-center grid-padding-x">
+    <div class="cell small-12 medium-6 large-4">
+      <a class="more-button" href="/portfolio">Explore more projects</a>
+    </div>
+  </div>
+</section>
+
+
+<section class="cell grid-x featured-resources-speaking grid-padding-x grid-margin-x grid-margin-y">
+  <div class="cell small-12 medium-6 grid-x resources-container">
+    <div class="cell">
+      <h2>Resources</h2>
+      <p class="section-description">A bunch references you may find useful. Here are a few of my most recent finds.</p>
+    </div>
+    {% assign resources_sorted = site.resources | sort: 'date' | reverse %}
+    {%- for resource in resources_sorted limit:3 -%}
+      <a href="{{resource.link}}" target="_blank" rel="noreferrer" class="cell resource-link">
+        <div class="resource">
+          <p class="title">{{resource.title}}<i class="fas fa-link"></i></p>
+          <p class="description">{{resource.description}}</p>
+        </div>
+      </a>
+    {%- endfor -%}
+    <a class="more-button cell align-self-bottom" href="/resources">More resources</a>
+    <div class="black-cat">
+      <img class="head" src="/img/black-cat.svg" alt="Black Cat Illustration">
+    </div>
+    <!-- <div class="black-cat-2">
+      <img class="paws" src="/img/paws.svg" alt="Black Cat Paws">
+    </div> -->
+  </div>
+
+  <div class="cell small-12 medium-6 grid-x speaking-container">
+    <div class="cell">
+      <h2>Speaking</h2>
+      <p class="section-description">I’ve been fortunate to speak at many events on design, development and start-ups. I love to share what I know with others and speaking is 1 of the ways I get to do that.</p>
+      <p class="section-description">Check out one of my recent favorites about working with design systems in a world of new and legacy products. <a href="https://www.youtube.com/watch?v=q5R9hmpvGUo&t=13s" target="_blank" rel="noopener">Watch the talk.</a></p>
+
+      <p class="section-description section-description-special">Looking for a speaker for your next event? Let’s connect!</p>
+      <div class="speaking-socials">
+        <a href="mailto:me@rehanbutt.com">
+          <i class="fas fa-envelope fa-xs" title="Email"></i>
+          <span class="visually-hidden">Opens a new window</span>
+        </a>
+
+        <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/rehan-butt/">
+          <i class="fab fa-linkedin-in fa-xs" title="Linkedin"></i>
+          <span class="visually-hidden">Opens a new window</span>
+        </a>
+
+        <a target="_blank" rel="noopener" href="https://www.twitter.com/naher94/">
+          <i class="fab fa-twitter fa-xs" title="Twitter"></i>
+          <span class="visually-hidden">Opens a new window</span>
+        </a>
+      </div>
+
+    </div>
+    <!-- upcoming speaking events -->
+
+    <a class="more-button cell align-self-bottom" href="/about#speaking-events">Where I’ve spoken</a>
+  </div>
+</section>
+
+{% assign yir_order = site.year-in-review | sort: 'year' | reverse %}
+
+<section class="year-in-review grid-x grid-padding-x">
+  <div class="cell">
+    <h2>Year in Review <span class="time-travel">a little bit of time travel</span></h2>
+  </div>
+
+  {%- for year in yir_order -%}
+  {% if year.current == true %}
+  <div class="cell small-6 medium-4">
+      <div class="year-container">
+        <div class="year-square current-year">
+          <span>{{year.year}}</span>
+        </div>
+        <div class="yir-label">
+          {{year.year}} in progress
+        </div>
+      </div>
+  </div>
+  {% else %}
+  <div class="cell small-6 medium-4">
+    <a href="https://{{ year.year | append: ".rehanbutt.com" }}" target="_blank" rel="noopener">
+      <div class="year-container">
+        <div class="year-square" style="background: {{year.color}};">
+          <div class="overlay">
+          </div>
+          <span>{{year.year}}</span>
+        </div>
+        <div class="yir-label">
+          {{year.year}} in review
+        </div>
+      </div>
+      <span class="visually-hidden">Opens a new window</span>
+    </a>
+  </div>
+  {% endif %}
+  {%- endfor -%}
+</section>
