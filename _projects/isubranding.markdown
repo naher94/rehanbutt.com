@@ -7,53 +7,51 @@ date:   2015-02-10
 tags: branding
 ---
 
-<div class="image-container"><img src="../img/ISU/ISUlogo.svg" alt="ISU Logo" class="image-center" style="width:60%" /></div>
+<img src="../img/isu/ISUlogo.svg" alt="ISU Logo" class="image-center" style="width:60%; margin-bottom:4rem;" />
 
-<div class="image-container"><img src="../img/ISU/ISUwebsite.png" alt="ISU Website" /></div>
+<div class="grid-x grid-margin-y">
+  <div class="cell">
+    <img src="../img/isu/logo.jpg" alt="Logomarks excerpt from brand book">
+  </div>
+  <div class="cell">
+    <img src="../img/isu/typeface.jpg" alt="Typeface excerpt from brand book">
+  </div>
+  <div class="cell">
+    <img src="../img/isu/color.jpg" alt="Colors excerpt from brand book">
+  </div>
+  <div class="cell">
+    <img src="../img/isu/placement.jpg" alt="Use and placement excerpt from brand book">
+  </div>
+</div>
 
-<div data-configid="15751362/51271555" style="width:100%; height:700px;" class="issuuembed"></div>
-<script type="text/javascript" src="//e.issuu.com/embed.js" async="true"></script>
+{:.post-callout-medium}
+Diverse, global, social and fun
 
-## Process
+When starting this project I looked at what words described the International Student Union and what we do as an organization. I came up with the following: diverse, global, social and fun. And wanted to make sure these terms could be expressed throught the visual identity.
 
-When starting this project I looked at what words described the International Student Union and what we do as an organization. I came up with the following: diverse, connected, global, community, social and fun.
+<div class="grid-x grid-margin-y">
+<div class="cell">
+    <img src="../img/isu/grid-variants.jpg" alt="Grid exploration">
+  </div>
+  <div class="cell">
+    <img src="../img/isu/overlap-variants.jpg" alt="Grid exploration">
+  </div>
+  <div class="cell">
+    <img src="../img/isu/shape-variants.jpg" alt="Shape exploration">
+  </div>
+  <div class="cell">
+    <img src="../img/isu/color-variants.jpg" alt="Color exploration">
+  </div>
+</div>
 
-<div class="image-container">
-<img src="../img/ISU/ISUinspiration.png" alt="Inspiration / Research" />
-<img src="../img/ISU/ISUiteration1.png" alt="Iteration 1" />
-<img src="../img/ISU/ISUiteration2.png" alt="Iteration 2" />
-<img src="../img/ISU/ISUiteration3.png" alt="Iteration 3" />
-<img src="../img/ISU/ISUiteration4.png" alt="Iteration 4" />
-<img src="../img/ISU/ISUiteration5.png" alt="Iteration 5" />
-<img src="../img/ISU/ISUiteration5.png" alt="Iteration 6" /></div>
+Several logo iterations using different shapes and segments containing five components as a symbol for the five inhabited continents. Also looking at flag patterns as one structure generating the logo.
 
-These are the iterations I created for the brand image. Using different shapes and segments using five components as a symbol for the five inhabited continents. Looking at flag patterns and golden rectangles as one structure generating the logo.
-
-<div class="image-container"><img src="../img/ISU/ISUcolorText1.png" alt="Text Iteration" />
-<img src="../img/ISU/ISUcolorText2.png" alt="Color Iteration" /></div>
-
-This was the first high fidelity logo I came up with. Looking at text positioning relative to the logo and color as the next step in the process.
-
-
-<div class="image-container"><img src="../img/ISU/ISUlogoV1.png" alt="Logo V1" class="image-center" style="width:60%" /></div>
-
-After this logo I realized that the color worked as it was bright and as orange is a secondary color it incorporated several components, while the logo itself had no relation to any of the terms I had compiled, diverse, connected, global, community, social and fun.
-
-<div class="image-container">
-<img src="../img/ISU/ISUiteration7.png" alt="Iteration 7" />
-<img src="../img/ISU/ISUiteration8.png" alt="Iteration 8" /></div>
-
-I used the idea of interlocked circles similar to that of the olympic rings as a new direction or pattern for a more conceptually centered logo.
-
-<div class="image-container">
-<img src="../img/ISU/ISUweaveColor.png" alt="Color Iteration" />
-<img src="../img/ISU/ISUweavePattern.png" alt="Overlay Iteration" /></div>
-
-This led me to the final logo. Where I then looked into a color palette for each of the four segments. After I decided on the colors I looked into how the segments would tie in to one another. At the end I went with this color pattern and the half overlapped segments.
-
-<div class="image-container">
-<img src="../img/ISU/ISUposter.png" alt="Poster Design" class="image-center" style="width:40%" /></div>
-
-Using this new brand image I created a poster for one of our events.
-
-<img src="../img/ISU/isu-cap.jpg" alt="Branded Cap">
+<div class="grid-x grid-margin-y">
+  <div class="cell">
+    <img src="../img/isu/usage.jpg" alt="Brand usage">
+  </div>
+  <div class="cell">
+    <img src="../img/isu/isu-cap.jpg" alt="Branded cap">
+  </div>
+</div>
+Using the new brand image on an event poster, website and a cap.
