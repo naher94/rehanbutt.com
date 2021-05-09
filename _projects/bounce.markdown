@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Bounce (Chat App)"
-tile-name: "Chat App"
+tile-name: "Bounce Chat App"
 thumbnail: "bounce"
 date: 2017-03-20
 tags: UI UX Branding
