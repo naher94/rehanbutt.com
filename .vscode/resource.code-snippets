@@ -1,0 +1,16 @@
+{
+	"resource frontmatter": {
+		"scope": "markdown",
+		"prefix": "resource frontmatter",
+		"body": [
+			"---"
+			"title: '$1'"
+			"link: $2"
+			"description: $3"
+			"tags: [$4]"
+			"date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
+			"---"
+		],
+		"description" : "Frontmatter for a Resource"
+	}
+}
