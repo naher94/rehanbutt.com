@@ -81,6 +81,16 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
 }
 
+.content-wrapper{
+  &:hover .thumbnail-tile:not(:hover) {
+    .thumbnail-container{
+      img{
+        filter: grayscale(100%);
+      }
+    }
+  }
+}
+
 .thumbnail-container {
   position: relative; //For flag to show correctly
   display: block; //For flag to show correctly
