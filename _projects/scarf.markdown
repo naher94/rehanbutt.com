@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Scarf Design"
-tile-name: "Scarf"
+title:  "Scarf Pattern Design"
+tile-name: "Scarf Pattern Design"
 thumbnail: "scarf"
-date:   2013-07-01
+date: 2013-07-01
 tags: textile
 ---
 

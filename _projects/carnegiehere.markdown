@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "CarnegieHere (iOS App)"
-tile-name: "iOS App"
+tile-name: "CarnegieHere Events App"
 thumbnail: "carnegieHere"
 date:   2015-12-01
 tags: iOS App
