@@ -134,7 +134,9 @@ footer-main: true
   <div class="cell small-6 medium-4">
       <div class="year-container">
         <div class="year-square current-year">
-          <span>{{year.year}}</span>
+          <svg class="" viewBox="0 0 83 50">
+            <text  x='-10%' y="75%" textLength="100" lengthAdjust="spacing">{{year.year}}</text>
+          </svg>
         </div>
         <div class="yir-label">
           {{year.year}} in progress
@@ -148,7 +150,9 @@ footer-main: true
         <div class="year-square" style="background: {{year.color}};">
           <div class="overlay">
           </div>
-          <span>{{year.year}}</span>
+          <svg class="" viewBox="0 0 83 50">
+            <text  x='-10%' y="75%" textLength="100" lengthAdjust="spacing">{{year.year}}</text>
+          </svg>
         </div>
         <div class="yir-label">
           {{year.year}} in review

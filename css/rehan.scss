@@ -460,6 +460,15 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       font-size: 10.6rem;
       position: relative;
       overflow: hidden;
+      svg{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        font-size: 2.8rem;
+        top: 0;
+        left: 0;
+        fill: $pure-white;
+      }
       .overlay{
         transition: $sprint;
         background-color: $navy-black;
