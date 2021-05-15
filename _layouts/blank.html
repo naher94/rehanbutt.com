@@ -4,14 +4,14 @@
 {% include head.html %}
 
 <body>
+  {% include tag-manager.html %}
+  {% include header.html %}
 
-    {% include header.html %}
-
-    <main class="page-content">
-      {{ content }}
-    </main>
-    {% include footer.html %}
-    {% include foot.html %}
+  <main class="page-content">
+    {{ content }}
+  </main>
+  {% include footer.html %}
+  {% include foot.html %}
 </body>
 
 </html>
