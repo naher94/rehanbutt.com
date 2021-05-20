@@ -8,6 +8,8 @@ Curious how the site has evolved over time? Check out the [releases](https://git
 
 ## Production Notes
 
+Run Jekyll with `--livereload` automatically refresh the page with each change you make to the source files `jekyll s --livereload` or `--port 4500` to run a couple Jekyll sites in parallel
+
 Jekyll uses the `Kramdown` markdown parser allowing for extended functionality, such as adding classes to elements.
 - [Styling Jekyll Markdown](https://digitaldrummerj.me/styling-jekyll-markdown/)
 - [Kramdown - Quick Reference](https://kramdown.gettalong.org/quickref.html)
