@@ -13,7 +13,7 @@ hero-image: "shineregistry/shine-hero.png"
 hero-image-alt: "Shine Registry's home page and a sample registry page"
 hero-background: "shineregistry/shine-hero-background.svg"
 tags: digital UI UX branding
-published: true
+published: false
 ---
 
 {:.post-callout-medium}
@@ -77,6 +77,8 @@ Every redesign starts with solid architecture
 The biggest architectural change we made was separating the idea of a registry or business from the owner of that registry, previously they were one in the same. So if you supported someone else on the platform it was as your business. We noticed that overtime it became conceptually difficult to separate what the business represented and what the founders were supporting outside of their businesses. Our change to separate owners from their businesses on Shine Registry also gives businesses an opportunity to have co-owners on the platform as they grow.
 
 <!-- registry screenshot, owner/advocate profile page -->
+
+
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
