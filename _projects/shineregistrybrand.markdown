@@ -3,7 +3,7 @@ layout: post
 title:  "Shine Registry Rebrand"
 tile-name: "Shine Registry Rebrand"
 thumbnail: "shine-brand"
-flag: New
+flag:
 date: 2021-01-31
 tags: digital UI UX branding
 published: true
