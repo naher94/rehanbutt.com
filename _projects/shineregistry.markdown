@@ -13,13 +13,13 @@ hero-image: "shineregistry/shine-hero.png"
 hero-image-alt: "Shine Registry's home page and a sample registry page"
 hero-background: "shineregistry/shine-hero-background.svg"
 tags: digital UI UX branding
-published: false
+published: true
 ---
 
 {:.post-callout-medium}
 Elevating and extending the platform through a redesign
 
-Shine Registry is a platform that gives founders a platform to ask for support as they are starting their businesses. This redesign aims formalize a growing start-up’s visual identity with its existing community while also introducing a more scalable and cohesive platform and brand system as it continues to grow.
+Shine Registry is a platform that gives founders a place to ask for support as they are starting their businesses. This redesign aids in formalizing a growing start-up’s visual identity with its existing community while also introducing a more scalable and cohesive platform and brand system as it continues to grow.
 
 Don't forget to check out the <a href="{% link _projects/shineregistrybrand.markdown %}">rebrand</a> as well.
 
@@ -75,6 +75,9 @@ Which also leads to a natural progression of helping bring new folks to the tabl
 Every redesign starts with solid architecture
 
 The biggest architectural change we made was separating the idea of a registry or business from the owner of that registry, previously they were one in the same. So if you supported someone else on the platform it was as your business. We noticed that overtime it became conceptually difficult to separate what the business represented and what the founders were supporting outside of their businesses. Our change to separate owners from their businesses on Shine Registry also gives businesses an opportunity to have co-owners on the platform as they grow.
+
+<!-- registry screenshot, owner/advocate profile page -->
+
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
     <img src="../img/shineregistry/former-site.jpg" alt="Shine Registry's former home page">
