@@ -3,7 +3,7 @@ layout: post-hero
 title:  "Shine Registry"
 tile-name: "Shine Registry"
 thumbnail: "shine"
-flag: New
+flag:
 date: 2021-02-01
 hero-background-color: "#FFE6BA"
 hero-background-color-dark: "#B8A686"
