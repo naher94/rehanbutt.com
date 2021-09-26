@@ -13,7 +13,7 @@ hero-image: "shineregistry/shine-hero.png"
 hero-image-alt: "Shine Registry's home page and a sample registry page"
 hero-background: "shineregistry/shine-hero-background.svg"
 tags: digital UI UX branding
-published: false
+published: true
 ---
 
 {:.post-callout-medium}
@@ -50,13 +50,10 @@ Have a small business? Head over to <a href="https://shineregistry.com" target="
    </div>
  </div>
 
-<!-- Featured tag with brand remarks -->
-<!-- Design Feature Tag -->
-
 {:.post-callout-medium}
 Search browse scroll!
 
-With a lot of content search and discovery becomes an issue for any platform. This was something that we focused on with this redesign____________. How could we offer a better way to showcase and bubble up groups of businesses.
+With a lot of content search and discovery becomes an issue for any platform. This was something that we focused on with this redesign. How could we offer a better way to showcase and bubble up groups of businesses.
 
 Especially with the 'Featured Tag' pages as we like to call them. Giving a community or group the opportunity to bubble up a little about themselves and all the folks that are a part of it on the platform.
 
@@ -74,21 +71,22 @@ Which also leads to a natural progression of helping bring new folks to the tabl
 {:.post-callout-medium}
 Every redesign starts with solid architecture
 
-The biggest architectural change we made was separating the idea of a registry or business from the owner of that registry, previously they were one in the same. So if you supported someone else on the platform it was as your business. We noticed that overtime it became conceptually difficult to separate what the business represented and what the founders were supporting outside of their businesses. Our change to separate owners from their businesses on Shine Registry also gives businesses an opportunity to have co-owners on the platform as they grow.
-
-<!-- registry screenshot, owner/advocate profile page -->
-
-
+The biggest architectural change we made was separating the idea of a registry or business from the owner of that registry, previously they were one in the same. So if you supported someone else on the platform it was as your business. We noticed that overtime it became conceptually difficult to separate what the business represented and what the founders were supporting outside of their businesses. Our change to separate owners from their businesses on Shine Registry also gives businesses an opportunity to associate team members as they grow.
 
 <div class="grid-x grid-padding-x grid-margin-y">
-  <div class="cell medium-6">
-    <img src="../img/shineregistry/former-site.jpg" alt="Shine Registry's former home page">
-  </div>
-  <div class="cell medium-6">
-    <img src="../img/shineregistry/home.jpg" alt="Shine Registry's new home page">
+  <div class="cell medium-12">
+    <img src="../img/shineregistry/registry-user-profile.jpg" alt="Shine Registry's Business & User Profile Pages">
   </div>
 </div>
 
-We've come a long way, but we can't forget where we came from, the journey is ____________.
+
+<div class="grid-x grid-padding-x grid-margin-y">
+  <div class="cell medium-12">
+    <img src="../img/shineregistry/review-history.jpg" alt="Shine Registry's Design Evolution">
+  </div>
+</div>
+
+{:.post-callout-medium}
+We've come a long way, but we can't forget where we've came from!
 
 <!-- simple design system -->

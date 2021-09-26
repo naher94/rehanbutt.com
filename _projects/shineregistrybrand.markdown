@@ -33,9 +33,8 @@ Shine Registry is a platform that gives founders a platform to ask for support a
 
 Explored the existing world of Shine Registry to get a sense for the brand and its visual identity.
 
-{% comment %}
-  Once you are done exploring this rebrand of Shine Registry checkout the <a href="{% link _projects/shineregistry.markdown %}">full redesign project</a> as well, see where the home page is now.
-{% endcomment %}
+Once you are done exploring this rebrand of Shine Registry checkout the <a href="{% link _projects/shineregistry.markdown %}">full redesign project</a> as well, see where the home page is now.
+
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
@@ -80,6 +79,6 @@ Similarly with the shape language, it was important to give greater contrasts be
 </div>
 
 The brand in action on social media and some concept merch! 
-{% comment %}
-  See how the new brand language was used across the platform as part of the <a href="{% link _projects/shineregistry.markdown %}">redesign</a>.
-{% endcomment %}
+
+See how the new brand language was used across the platform as part of the <a href="{% link _projects/shineregistry.markdown %}">redesign</a>.
+
