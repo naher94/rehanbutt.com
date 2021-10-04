@@ -7,7 +7,7 @@ date:   2015-02-10
 tags: branding
 ---
 
-<img src="../img/isu/ISUlogo.svg" alt="ISU Logo" class="image-center" style="width:60%; margin-bottom:4rem;" />
+<img src="../img/isu/isu-logo.svg" alt="ISU Logo" class="image-center" style="width:60%; margin-bottom:4rem;" />
 
 <div class="grid-x grid-margin-y">
   <div class="cell">
