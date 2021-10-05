@@ -8,7 +8,7 @@ Curious how the site has evolved over time? Check out the [releases](https://git
 
 ## Production Notes
 
-Run Jekyll with `--livereload` automatically refresh the page with each change you make to the source files `jekyll s --livereload` or `--port 4500` to run a couple Jekyll sites in parallel
+Run Jekyll with `--livereload` automatically refresh the page with each change you make to the source files `jekyll s --livereload` or `--port 4500` to run a couple Jekyll sites in parallel. When using `--livereload` for concurrent sites make sure to set a port for `--livereload` like `jekyll s --livereload --livereload-port 8080 --port 4001`
 
 Jekyll uses the `Kramdown` markdown parser allowing for extended functionality, such as adding classes to elements.
 - [Styling Jekyll Markdown](https://digitaldrummerj.me/styling-jekyll-markdown/)
