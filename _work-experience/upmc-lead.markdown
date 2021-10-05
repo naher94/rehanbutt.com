@@ -3,7 +3,7 @@ role: "Lead Product Designer"
 date-start: 2021-06-15
 date-end: Present
 company: UPMC Enterprises
-description: "Leading our internal telehealth and enterprise solution design efforts. Building and formalizing processes for use across the department while also mentoring and aiding in evolving our UX maturity. Continuing to lead the design efforts for Vincent Payment Solutions and supporting design efforts for our Pharmacy team."
+description: "Leading our technology solution’s design efforts including discovery, concept development and bridging the user needs with the technical underpinnings. Establishing design services in support of our extended internal teams and portfolio companies alike. And spearheading activities to accelerate the UX maturity of the organization."
 logo: upmc
 sort-order: 1
 ---
