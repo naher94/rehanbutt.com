@@ -120,9 +120,10 @@ https://scottylabs.org/portfolio/ | yes
 ~https://soa.cmu.edu/design/~ | ~no~ | ~showing fashion work~
 ~https://soa.cmu.edu/alumni/~ |~yes~ | ~SHOULD BE UPDATED~
 https://dzgn.io/team/rehan.html | no
-http://interchange.soa.cmu.edu | yes | person page & footer logo
+http://interchange.soa.cmu.edu | yes | ~person page &~ footer logo
 https://twitter.com/naher94 | yes | header image
-https://dribbble.com/rehanbutt | no
+https://dribbble.com/rehanbutt | no |
+https://adplist.org/mentors/rehan-butt | yes | header image
 https://society6.com/rehanbutt/about | yes | header image
 https://www.youtube.com/c/RehanButt1994 | yes | header image
 https://www.linkedin.com/in/rehan-butt/ | yes | header image
