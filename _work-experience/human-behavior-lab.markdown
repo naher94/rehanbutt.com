@@ -6,5 +6,5 @@ company: Carnegie Mellon University
 group: Human Behavior Computing Lab
 description: "Designed and created a web presence for the lab to showcase its projects and members."
 logo:
-sort-order: 12
+sort-order: 13
 ---
