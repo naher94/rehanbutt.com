@@ -44,7 +44,7 @@ Jekyll also uses the `Liquid` language as its templating language. Here are a co
 
 * Internal links using custom collections `<a href="{% link _projects/file.markdown %}">click here</a>`
 
-* External links should include a non-visual tag noting it goes external for enhanced acessability `<a target="_blank" href="https://rehanbutt.com/">Rehan Butt<span class="visually-hidden">Opens a new window</span></a>`
+* External links should include a non-visual tag noting it goes external for enhanced accessibility `<a target="_blank" href="https://rehanbutt.com/">Rehan Butt<span class="visually-hidden">Opens a new window</span></a>`
 
 #### `_projects` Frontmatter Tags
 
@@ -65,7 +65,7 @@ tile-description | Description of the project that shows on a featured tile | `s
 
 ##### Type `post-hero`
 
-Some additionals Frontmatter Tags when using the `post-hero` template
+Some additional Frontmatter Tags when using the `post-hero` template
 
 Tag | Use | Data Type
 :--- | :--- | :---
@@ -73,8 +73,9 @@ hero-background-color | The background color of the hero section and branded hea
 hero-background-color-dark | The background color of the hero section and branded header/nav when in dark mode | `string` eg. `#CCCCCC`
 hero-accent-color | Used to update the nav items and logo in the header | `string` eg. `#1f2937`
 hero-accent-color-dark | Used to update the nav items and logo in the header in dark mode | `string` eg. `#1f2937`
-hero-image | The image that loads into the hero section | `path` as a `string` eg. `fashion/lustre-hero.jpg`
+hero-image | The image that loads into the hero section | `path` as a `string` eg. `fashion/lustre-hero.jpg`; File should be an `.png` 1600 x 861
 hero-image-alt | The `alt` text for the hero image | `string` eg. `2 outfits in studio lighting`
+hero-background | The image that acts as a brand or vibe element in the hero section | `path` as a `string` eg. `shineregistry/shine-hero-background.svg`; File should be an `.svg` 780 x 448
 
 #### `_resources` Frontmatter Tags
 
@@ -83,8 +84,8 @@ Tag | Use | Data Type
 layout | The template for structural reference | `.html`
 title | The main name that references the resource in each tile | `string`
 link | The external `url` to the resource | `string`
-description | A short explaination of the resource | `string`
-tags | an array of related topics for the resource `[film,games,tools]` | comma seperated `string`
+description | A short explanation of the resource | `string`
+tags | an array of related topics for the resource `[film,games,tools]` | comma separated `string`
 
 #### `_work-experience` Frontmatter Tags
 
@@ -93,7 +94,7 @@ Tag | Use | Data Type
 role | The job title | `string`
 date-start | `YYYY-MM-DD` | `date`
 date-end | `YYYY-MM-DD` or "Present" if current experience | `date` or `string` of "Present"
-company | Name of the orgnaization | `string`
+company | Name of the organization | `string`
 description | Explanation of the role | `string`
 logo | A logo representing the job for visual context | `.svg`
 sort-order | Order in which the experiences are sorted and grouped `1` being the top | `int`
@@ -105,7 +106,7 @@ Tag | Use | Data Type
 title | The name of the event | `string`
 date | `YYYY-MM-DD` If the date is a future date an "Upcoming" badge will be shown | `date`
 location | The conference where the speaking event took place | `string`
-description | A short explaination of the speaking event | `string`
+description | A short explanation of the speaking event | `string`
 link | `url` to the event's recording or related materials | `string`
 logo | A logo representing the event for visual context | `.svg`
 
@@ -126,7 +127,7 @@ https://dribbble.com/rehanbutt | no |
 https://adplist.org/mentors/rehan-butt | yes | header image
 https://society6.com/rehanbutt/about | yes | header image
 https://www.youtube.com/c/RehanButt1994 | yes | header image
-https://www.linkedin.com/in/rehan-butt/ | yes | header image
+https://www.linkedin.com/in/rehan-butt/ | yes | header image and full bio in about section
 https://www.pinterest.com/naher94/ | no
 ~http://dianaconnolly.me~ | ~yes~ | ~footer~
 http://tech.soa.cmu.edu | yes | footer
