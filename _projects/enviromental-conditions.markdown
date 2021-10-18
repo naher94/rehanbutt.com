@@ -135,7 +135,8 @@ Through out this process a bunch of questions came to mind from here. All explor
   </div>
 </div> -->
 
-<div class="grid-x grid-margin-x grid-margin-y">
+<!-- TODO issue with grid-margin-x here with the parent 1 and mobile display -->
+<div class="grid-x grid-margin-x grid-margin-y"> 
   <div class="cell medium-6 quote-color-block">
     <p class="post-callout-small">“Team up with your dev during, not after design” <span class="byline">- Developer</span></p>
   </div>
@@ -163,14 +164,15 @@ The research helped solidify a focus area around the idea of bringing real world
   </div>
 </div>
 
-Creating a workflow diagram illustration part of the process I was looking to explore and improve to evaluate the end product and ...... 
+Created a workflow diagram illustrating the design I currently follow on my team. Looking at what parts of this process would be modified and improved with this solution.
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/environmental-conditions/design-process-broken.jpg" alt="Design process workflow diagram calling out broken steps">
   </div>
 </div>
-The situation being improved is shown in the design process diagram above
+
+This workflow diagram highlights the situation I wanted to improve with this project. Looking at where in the process missed or overlooked considerations ended up being caught and what would happen when those item needed to be resolved in short order. These items tend to get caught when a larger number of folks thing through the problem and get missed when they are not considered from the beginning.
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
@@ -181,12 +183,11 @@ The situation being improved is shown in the design process diagram above
   </div>
 </div>
 
-2 ideas came to mind the idea of a "Fidelity Switcher" where the user flow is abstracted out of the interface layer. Think about a multi-modal experience, 1 here you might start the experience through voice and then handoff to a screen based interface. Abstracting that interaction flow from the voice or screen interface in this case. The second idea explores a way to bring user context and environment conditions into the design tools, things like network speeds, lighting and driving as examples.
+2 ideas came to mind the idea of a "Fidelity Switcher" where the user flow is abstracted out from the interface layer and the idea of "Context layering" layering in user context and environmental conditions. 
 
-The "Fidelity Switcher" idea lead me back to Fluid Design, ...... , as such as decided to explore the other route for this exercise. But you should definitely check out that work!
+For the "Fidelity Switcher" concept think about a multi-modal experience, one where you might start the experience through voice and then handoff to a screen based interface. Abstracting that interaction flow from the voice or screen interface would lead to clearer articulation of the user flow regardless of the interface. This idea also lead to back to by work on <a target="_blank" rel="noopener" href="https://fluiddesign.rehanbutt.com">Fluid Design<span class="visually-hidden">Opens a new window</span></a>, as such as decided to explore the other route for this exercise. But you should definitely check out that work!
 
-
-The "Context Layering" idea explores layering in context such as a taking into consideration dark environments, slow network speeds, internationalization or a dedicated interface when used in a car. This new dimension more closely mimics the real world.
+The "Context Layering" idea explores layering in context such as a taking into consideration dark environments, slow network speeds, internationalization or a dedicated interface when used in a car. This new dimension more closely mimics the real world scenarios that may otherwise be missed in a typical design process.
 
 
 ### Ideation
