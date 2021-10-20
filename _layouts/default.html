@@ -7,7 +7,7 @@
   {% include tag-manager.html %}
   {% include header.html %}
   <main class="page-content grid-container">
-    <div class="grid-x grid-margin-x content-wrapper">
+    <div class="grid-x grid-margin-x content-wrapper"> <!-- TODO does this grid margin x need to be here? messing with child use of grid-margin-x -->
       {{ content }}
       {%- comment -%} include marmalde banner here {%- endcomment -%}
       {% include easter-egg-banner.html %}

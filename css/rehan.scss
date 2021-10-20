@@ -535,6 +535,48 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
 }
 
+article{
+  &.post{
+    h2{
+      font-size: 2.5em;
+      font-weight: $zilla-bold;
+    }
+    .post-callout-small{
+      span{
+        &.byline{
+          font-style: italic;
+          display: block;
+        }
+      }
+    }
+    code{
+      border: none;
+      border-radius: 5px;
+      color: semantic-color(text);
+      background: semantic-color(code-bg);
+    }
+  }
+}
+.quote-color-block{
+  background-color: #EAF8EC;
+  @media (prefers-color-scheme: dark) {
+    background-color: rgba(#EAF8EC,0.2);
+  }
+  p{
+    font-weight: $lato-bold;
+    padding-left: 1em;
+    padding-right: 1em;
+    span{
+      &.byline{
+        font-weight: $lato-regular;
+        // font-size: 0.8em;
+      }
+    }
+  }
+  &.square-block{
+    aspect-ratio: 1/1;
+  }
+}
 
 //******* Easter Egg Styling
 .behind-the-scenes-container{
