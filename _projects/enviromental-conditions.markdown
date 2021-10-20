@@ -187,28 +187,29 @@ This workflow diagram highlights the situation I wanted to improve with this pro
 
 For the "Fidelity Switcher" concept think about a multi-modal experience, one where you might start the experience through voice and then handoff to a screen based interface. Abstracting that interaction flow from the voice or screen interface would lead to clearer articulation of the user flow regardless of the interface. This idea also lead to back to by work on <a target="_blank" rel="noopener" href="https://fluiddesign.rehanbutt.com">Fluid Design<span class="visually-hidden">Opens a new window</span></a>, as such as decided to explore the other route for this exercise. But you should definitely check out that work!
 
-The "Context Layering" idea explores layering in context such as a taking into consideration dark environments, slow network speeds, internationalization or a dedicated interface when used in a car. This new dimension more closely mimics the real world scenarios that may otherwise be missed in a typical design process.
+The "Context Layering" idea explores layering in context such as a taking into consideration dark environments, slow network speeds, internationalization or a dedicated interface when used in a car. This new dimension more closely mimics the real world scenarios that may otherwise be missed in a typical design process. And aids in the collaboration between the design and the implementation. Throughout the rest of this project I explore the idea of bringing forward user environmental considerations.
+
+<!-- Temporal dimension is already handled in design tools, through a sequence of steps or through interactive prototypes.
+Why not add another dimension around the users environmental context. -->
 
 
-### Ideation
-
-Layering in context such as a taking into consideration dark environments, slow network speeds, internationalization or a dedicated interface when used in a car. This new dimension more closely mimics the real world.
-Temporal dimension is already handled in design tools, through a sequence of steps or through interactive prototypes.
-Why not add another dimension around the users environmental context.
-
-Aiding in the collaboration between the design and the implementation
+<!-- ### Ideation -->
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/environmental-conditions/sketches.jpg" alt="">
   </div>
+</div>
+These were some of my initial sketches. Exploring what this feature might look like within Figma.
+Where it might live in the application's hierarchy and how it plays with the existing toolset.
+
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/environmental-conditions/figma-ui.jpg" alt="">
   </div>
 </div>
 
-
-#### Analogous Research
+Figma happens to publicly share the design system for Figma and I referenced it to see if I could gain insights in how they go about tackling this feature with the rules they have set up in the app today. Looking at where it might fit naturally into the product. I knew it had to be a global tool and wanted to make sure it followed existing conventions and information architecture where it made sense, another benefit to having access to the Figma design system.
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
@@ -221,20 +222,28 @@ Aiding in the collaboration between the design and the implementation
     <img src="../img/environmental-conditions/analogous-inspo-webdev.jpg" alt="">
   </div>
 </div>
+Analogous inspiration is one of my favorite research methods, looking at other contexts and industries to see how they may have solved a similar problem or even the same one. And that's no exception for this project either! I looked at a couple architectural tools to start one that focused on weather conditions, another that explores physics based environments and lastly a more traditional rendering scenario.
 
-<!-- summary -->
-The Environmental Conditions feature solves the problem of bringing more real world conditions into the design tool and earlier into the design process by helping you and your team remember to consider the user’s environmental context that may otherwise be missed
+And of course look at software development tools, exploring browser  overrides like "Force dark appearance" and networking throttling and even what environment conventions are used in CSS today.
+
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/environmental-conditions/design-process.jpg" alt="Current design process workflow diagram">
   </div>
 </div>
+Lets revisit the initial design process workflow without the proposed solution.
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/environmental-conditions/design-process-enviro.jpg" alt="Design process workflow diagram with Environmental Conditions feature">
   </div>
 </div>
+And now looking at a design process adding in the Environmental Conditions feature can help front load these, sometimes forgotten, conditions and reduce gaps in the final experience!
 
-<!-- next steps -->
+<div class="grid-x grid-padding-x grid-margin-y">
+  <div class="cell">
+    <img src="../img/environmental-conditions/hero.jpg" alt="">
+  </div>
+</div>
+To recap the Environmental Conditions feature solves the problem of bringing more real world conditions into the design tool and earlier into the design process by helping you and your team remember to consider the user’s environmental context that may otherwise be missed.
