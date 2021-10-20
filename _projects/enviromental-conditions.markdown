@@ -12,7 +12,7 @@ hero-accent-color-dark: "#448D3D"
 hero-image: "environmental-conditions/enviro-hero.png"
 hero-image-alt: ""
 hero-background: "environmental-conditions/enviro-hero-background.svg"
-tags: digital UI UX
+tags: digital UI UX tools
 published: true
 ---
 
@@ -114,27 +114,6 @@ Through out this process a bunch of questions came to mind from here. All explor
 - Is it about fidelity or things forgotten?
 - Abstracting out a user flow from the interface?
 
-<!-- <div class="grid-x grid-margin-x grid-margin-y">
-  <div class="cell small-6 medium-4 quote-color-block square-block">
-    <p class="post-callout-small">How do you make the design tool act more like the real world without jumping to implementation details?</p>
-  </div>
-  <div class="cell small-6 medium-4 quote-color-block square-block">
-    <p class="post-callout-small">What parts of the real world are important to translate?</p>
-  </div>
-  <div class="cell small-6 medium-4 quote-color-block square-block">
-    <p class="post-callout-small">Is it about fidelity or things forgotten?</p>
-  </div>
-  <div class="cell small-6 medium-4 quote-color-block square-block">
-    <p class="post-callout-small">Abstracting out a user flow from the interface?</p>
-  </div>
-  <div class="cell small-6 medium-4 quote-color-block square-block">
-    <p class="post-callout-small">Referencing real data?</p>
-  </div>
-  <div class="cell small-6 medium-4 quote-color-block square-block">
-    <p class="post-callout-small">Creating responsive interfaces?</p>
-  </div>
-</div> -->
-
 <!-- TODO issue with grid-margin-x here with the parent 1 and mobile display -->
 <div class="grid-x grid-margin-x grid-margin-y"> 
   <div class="cell medium-6 quote-color-block">
@@ -191,9 +170,6 @@ The "Context Layering" idea explores layering in context such as a taking into c
 
 <!-- Temporal dimension is already handled in design tools, through a sequence of steps or through interactive prototypes.
 Why not add another dimension around the users environmental context. -->
-
-
-<!-- ### Ideation -->
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
