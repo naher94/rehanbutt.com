@@ -559,6 +559,17 @@ article{
 }
 .quote-color-block{
   background-color: #EAF8EC;
+  height: 100%;
+  margin-left: .9375rem;
+  margin-right: .9375rem;
+  @include breakpoint(small only) {
+    margin-left: .625rem;
+    margin-right: .625rem;
+  }
+  .post-callout-small{
+    margin: 0;
+    padding: 2rem;
+  }
   @media (prefers-color-scheme: dark) {
     background-color: rgba(#EAF8EC,0.2);
   }

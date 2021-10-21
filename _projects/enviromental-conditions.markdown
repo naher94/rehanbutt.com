@@ -10,10 +10,10 @@ hero-background-color-dark: "#124626"
 hero-accent-color: "#28B53D"
 hero-accent-color-dark: "#448D3D"
 hero-image: "environmental-conditions/enviro-hero.png"
-hero-image-alt: ""
+hero-image-alt: "Environmental Conditions selector in the Figma UI"
 hero-background: "environmental-conditions/enviro-hero-background.svg"
 tags: digital UI UX tools
-published: false
+published: true
 ---
 
 {:.post-callout-medium}
@@ -25,7 +25,7 @@ The environmental conditions feature explores what one possible solution to this
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
-    <img src="../img/environmental-conditions/hero.jpg" alt="">
+    <img src="../img/environmental-conditions/hero.jpg" alt="Design with added layers of context considering your user's enviroment">
   </div>
 </div>
 {% capture bts-title %} Behind the Scenes {% endcapture %}
@@ -36,7 +36,7 @@ One Possible solution could be the Environmental Conditions feature. Where you d
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
-    <img src="../img/environmental-conditions/overall-default.jpg" alt="">
+    <img src="../img/environmental-conditions/overall-default.jpg" alt="Figma's overall UI with the Enviromental Conditions control">
   </div>
 </div>
 
@@ -44,7 +44,7 @@ At the top of the Design Sidebar on the right you notice the new Environmental C
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
-    <img src="../img/environmental-conditions/internationalization-detailed.jpg" alt="">
+    <img src="../img/environmental-conditions/internationalization-detailed.jpg" alt="Designing for international conditions">
   </div>
 </div>
 
@@ -52,7 +52,7 @@ Exploring the internationalization case, you will noticed in the above image tha
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
-    <img src="../img/environmental-conditions/darkmode-detailed.jpg" alt="">
+    <img src="../img/environmental-conditions/darkmode-detailed.jpg" alt="Designing for dark enviroment conditions">
   </div>
 </div>
 
@@ -60,10 +60,10 @@ Similarly in the case of a dark environment the Environmental Conditions control
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
-    <img src="../img/environmental-conditions/styles-panel.jpg" alt="">
+    <img src="../img/environmental-conditions/styles-panel.jpg" alt="Global Figma styles panel with Enviromental properties">
   </div>
   <div class="cell medium-6">
-    <img src="../img/environmental-conditions/inspect-code.jpg" alt="">
+    <img src="../img/environmental-conditions/inspect-code.jpg" alt="Figma's inspect panel code with Enviroment Conditions update">
   </div>
 </div>
 Our styles have updated to reflect these global changes! Shown above the `primary-red` color style now also has an added 'Dark Environment' property that will reflect everywhere the `primary-red` style is applied when the Dark Environment is set.
@@ -114,21 +114,30 @@ Through out this process a bunch of questions came to mind from here. All explor
 - Is it about fidelity or things forgotten?
 - Abstracting out a user flow from the interface?
 
-<!-- TODO issue with grid-margin-x here with the parent 1 and mobile display -->
-<div class="grid-x grid-margin-x grid-margin-y"> 
-  <div class="cell medium-6 quote-color-block">
-    <p class="post-callout-small">“Team up with your dev during, not after design” <span class="byline">- Developer</span></p>
+<!-- TODO issue with grid-margin-x here with the parent 1 and mobile display; Unnecessary nesting here and styling on quote color block as well-->
+<div class="grid-x grid-margin-y"> 
+  <div class="cell medium-6">
+    <div class="quote-color-block">
+      <p class="post-callout-small">“Team up with your dev during, not after design” <span class="byline">- Developer</span></p>
+    </div>
   </div>
-  <div class="cell medium-6 quote-color-block">
-    <p class="post-callout-small">“Consider error cases and non-standard flows” <span class="byline">- Developer</span></p>
+  <div class="cell medium-6">
+    <div class=" quote-color-block">
+      <p class="post-callout-small">“Consider error cases and non-standard flows” <span class="byline">- Developer</span></p>
+    </div>
   </div>
-  <div class="cell medium-6 quote-color-block">
-    <p class="post-callout-small">“Work to build a shared language” <span class="byline">- Developer</span></p>
+  <div class="cell medium-6">
+    <div class="quote-color-block">
+      <p class="post-callout-small">“Work to build a shared language” <span class="byline">- Developer</span></p>
+    </div>
   </div>
-  <div class="cell medium-6 quote-color-block">
-    <p class="post-callout-small">“Think about things like performance and auditing” <span class="byline">- Developer</span></p>
+<div class="cell medium-6">
+  <div class="quote-color-block">
+      <p class="post-callout-small">“Think about things like performance and auditing” <span class="byline">- Developer</span></p>
+    </div>
   </div>
 </div>
+
 
 I also chatted with several of my engineering partners as they play a key role in my design process and any software product. Here are a couple of the things they said in relation to working with designers and the design processes they have been a part of.
 
@@ -173,7 +182,7 @@ Why not add another dimension around the users environmental context. -->
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
-    <img src="../img/environmental-conditions/sketches.jpg" alt="">
+    <img src="../img/environmental-conditions/sketches.jpg" alt="Digital sketches of Enviromental Conditions feature">
   </div>
 </div>
 These were some of my initial sketches. Exploring what this feature might look like within Figma.
@@ -181,7 +190,7 @@ Where it might live in the application's hierarchy and how it plays with the exi
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
-    <img src="../img/environmental-conditions/figma-ui.jpg" alt="">
+    <img src="../img/environmental-conditions/figma-ui.jpg" alt="Figma UI & Documentation">
   </div>
 </div>
 
@@ -189,13 +198,13 @@ Figma happens to publicly share the design system for Figma and I referenced it 
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
-    <img src="../img/environmental-conditions/analogous-inspo-ecotech.jpg" alt="">
+    <img src="../img/environmental-conditions/analogous-inspo-ecotech.jpg" alt="Analogous inspiration architecture weather tools">
   </div>
   <div class="cell medium-6">
-    <img src="../img/environmental-conditions/analogous-inspo-render.jpg" alt="">
+    <img src="../img/environmental-conditions/analogous-inspo-render.jpg" alt="Analogous inspiration 3D rendering tools">
   </div>
   <div class="cell">
-    <img src="../img/environmental-conditions/analogous-inspo-webdev.jpg" alt="">
+    <img src="../img/environmental-conditions/analogous-inspo-webdev.jpg" alt="Analogous inspiration web development tools">
   </div>
 </div>
 Analogous inspiration is one of my favorite research methods, looking at other contexts and industries to see how they may have solved a similar problem or even the same one. And that's no exception for this project either! I looked at a couple architectural tools to start one that focused on weather conditions, another that explores physics based environments and lastly a more traditional rendering scenario.
@@ -219,7 +228,7 @@ And now looking at a design process adding in the Environmental Conditions featu
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
-    <img src="../img/environmental-conditions/hero.jpg" alt="">
+    <img src="../img/environmental-conditions/hero.jpg" alt="Design with added layers of context considering your user's enviroment">
   </div>
 </div>
 To recap the Environmental Conditions feature solves the problem of bringing more real world conditions into the design tool and earlier into the design process by helping you and your team remember to consider the user’s environmental context that may otherwise be missed.
