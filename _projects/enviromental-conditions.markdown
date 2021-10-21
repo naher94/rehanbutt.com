@@ -13,7 +13,7 @@ hero-image: "environmental-conditions/enviro-hero.png"
 hero-image-alt: ""
 hero-background: "environmental-conditions/enviro-hero-background.svg"
 tags: digital UI UX tools
-published: false
+published: true
 ---
 
 {:.post-callout-medium}
@@ -114,21 +114,30 @@ Through out this process a bunch of questions came to mind from here. All explor
 - Is it about fidelity or things forgotten?
 - Abstracting out a user flow from the interface?
 
-<!-- TODO issue with grid-margin-x here with the parent 1 and mobile display -->
-<div class="grid-x grid-margin-x grid-margin-y"> 
-  <div class="cell medium-6 quote-color-block">
-    <p class="post-callout-small">“Team up with your dev during, not after design” <span class="byline">- Developer</span></p>
+<!-- TODO issue with grid-margin-x here with the parent 1 and mobile display; Unnecessary nesting here and styling on quote color block as well-->
+<div class="grid-x grid-margin-y"> 
+  <div class="cell medium-6">
+    <div class="quote-color-block">
+      <p class="post-callout-small">“Team up with your dev during, not after design” <span class="byline">- Developer</span></p>
+    </div>
   </div>
-  <div class="cell medium-6 quote-color-block">
-    <p class="post-callout-small">“Consider error cases and non-standard flows” <span class="byline">- Developer</span></p>
+  <div class="cell medium-6">
+    <div class=" quote-color-block">
+      <p class="post-callout-small">“Consider error cases and non-standard flows” <span class="byline">- Developer</span></p>
+    </div>
   </div>
-  <div class="cell medium-6 quote-color-block">
-    <p class="post-callout-small">“Work to build a shared language” <span class="byline">- Developer</span></p>
+  <div class="cell medium-6">
+    <div class="quote-color-block">
+      <p class="post-callout-small">“Work to build a shared language” <span class="byline">- Developer</span></p>
+    </div>
   </div>
-  <div class="cell medium-6 quote-color-block">
-    <p class="post-callout-small">“Think about things like performance and auditing” <span class="byline">- Developer</span></p>
+<div class="cell medium-6">
+  <div class="quote-color-block">
+      <p class="post-callout-small">“Think about things like performance and auditing” <span class="byline">- Developer</span></p>
+    </div>
   </div>
 </div>
+
 
 I also chatted with several of my engineering partners as they play a key role in my design process and any software product. Here are a couple of the things they said in relation to working with designers and the design processes they have been a part of.
 
