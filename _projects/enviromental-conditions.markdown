@@ -23,16 +23,15 @@ What if design tools helped reflect some of the common scenarios that exist in t
 
 The Environmental Conditions feature explores what one possible solution to this problem. What about better accounting for user conditions, such as internationalization, dark environments and reduced network speeds for starters!
 
-One key aspect of this project was to build on to an existing design tool rather than exploring what an entirely new tool might look like. As much of the design projects we all work on are around improving existing products. This approach may also help design tool teams more easily bring some of these ideas to life! If you are curious about my thoughts on a ground up design tool, check out <a target="_blank" rel="noopener" href="https://fluiddesign.rehanbutt.com">Fluid Design<span class="visually-hidden">Opens a new window</span></a>.
+One key aspect of this project was to build on to an existing design tool rather than exploring what an entirely new tool might look like. As much of the design projects we all work on are around improving existing products. This approach may also help design tool teams more easily bring some of these ideas to life! If you are curious about my thoughts on a ground up design tool, check out {% include external-link.html link="https://fluiddesign.rehanbutt.com" content="Fluid Design" %}.
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/environmental-conditions/hero.jpg" alt="Design with added layers of context considering your user's enviroment">
   </div>
 </div>
-{% capture bts-title %} Behind the Scenes {% endcapture %}
-{% capture bts-description %} To the keen eye you may recognize the leaf icon that I am using for the branding of this project, its from Wall-E! You may also see a couple A113 references through out this project as well, another classic Pixar easter egg! {% endcapture %}
-{% include behind-the-scenes.html %}
+{% include behind-the-scenes.html title="Behind the Scenes" description="To the keen eye you may recognize the leaf icon that I am using for the branding of this project, its from Wall-E! You may also see a couple A113 references through out this project as well, another classic Pixar easter egg!" %}
+
 
 One Possible solution could be the Environmental Conditions feature. Where you design with added layers of context considering your user’s environment. Thinking beyond static visuals but experiences that are affected by the user’s surroundings. Working at night or in a dark room? Constrained by reduced network speeds? Building for an international market? All these considerations can more easily be made earlier in the design process that nicely blends into the Figma UI we all know and love.
 
@@ -172,7 +171,7 @@ This workflow diagram highlights the situation I wanted to improve with this pro
 
 Two ideas came to mind, the idea of a “Fidelity Switcher” where the user flow is abstracted out from the interface layer, and the idea of “Context layering” layering in user context and environmental conditions. 
 
-For the “Fidelity Switcher” concept think about a multi-modal experience, one where you might start the experience through voice and then handoff to a screen-based interface. Abstracting that interaction flow from the voice or screen interface would lead to clearer articulation of the user flow regardless of the interface. This idea also led to back to my work on <a target="_blank" rel="noopener" href="https://fluiddesign.rehanbutt.com">Fluid Design<span class="visually-hidden">Opens a new window</span></a>, as such I decided to explore the other route for this exercise, you should definitely check out that work!
+For the “Fidelity Switcher” concept think about a multi-modal experience, one where you might start the experience through voice and then handoff to a screen-based interface. Abstracting that interaction flow from the voice or screen interface would lead to clearer articulation of the user flow regardless of the interface. This idea also led to back to my work on {% include external-link.html link="https://fluiddesign.rehanbutt.com" content="Fluid Design" %}, as such I decided to explore the other route for this exercise, you should definitely check out that work!
 
 The “Context Layering” idea explores layering in context, such as a taking into consideration dark environments, slow network speeds, internationalization or a dedicated interface when used in a car. This new dimension more closely mimics the real-world scenarios that may otherwise be missed in a typical design process and aids in the collaboration between the design and the implementation. Throughout the rest of this project, I explored the idea of bringing forward user environmental considerations.
 

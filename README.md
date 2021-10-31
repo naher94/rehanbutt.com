@@ -44,7 +44,8 @@ Jekyll also uses the `Liquid` language as its templating language. Here are a co
 
 * Internal links using custom collections `<a href="{% link _projects/file.markdown %}">click here</a>`
 
-* External links should include a non-visual tag noting it goes external for enhanced accessibility `<a target="_blank" href="https://rehanbutt.com/">Rehan Butt<span class="visually-hidden">Opens a new window</span></a>`
+#### External Links
+* External links should use the `external-link` component via `{{% include external-link.html %}}` which includes a non-visual tag noting it goes external for enhanced accessibility `<a target="_blank" href="https://rehanbutt.com/">Rehan Butt<span class="visually-hidden">Opens a new window</span></a>`
 
 #### `_projects` Frontmatter Tags
 

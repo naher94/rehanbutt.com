@@ -30,7 +30,9 @@ Don't forget to check out the <a href="{% link _projects/shineregistrybrand.mark
 </div>
 
 {:.post-callout}
-Have a small business? Head over to <a href="https://shineregistry.com" target="_blank" rel="noopener">Shine Registry</a> and create a profile.
+Have a small business? Head over to {% include external-link.html link="https://shineregistry.com" content="Shine Registry" %} and create a profile.
+
+
 
 <div class="grid-x grid-padding-x grid-margin-y">
    <div class="cell">

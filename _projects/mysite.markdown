@@ -12,9 +12,12 @@ tags: web branding
     <img src="../img/mySite/mysitehero.png" alt="My site hero image: juxtaposition of the old and new">
   </div>
 </div>
-{% capture bts-title %} Behind the Scenes {% endcapture %}
-{% capture bts-description %} If you are interested in looking at the old site its archived on the web at <a href="https://old.rehanbutt.com" target="_blank" rel="noopener">old.rehanbutt.com</a> feel free to explore the past and see how fair we have come! {% endcapture %}
-{% include behind-the-scenes.html %}
+
+{% capture bts-description-website %}
+If you are interested in looking at the old site its archived on the web at {% include external-link.html link='https://v1.rehanbutt.com' content='v1.rehanbutt.com' %} feel free to explore the past and see how fair we have come!
+{% endcapture %}
+{% include behind-the-scenes.html title="Behind the Scenes" description=bts-description-website %}
+
 
 The goal with this new site was to make sure it was fully responsive and make sure it was clean in both design and development, as my site has grown quite a bit since it was first launched. There were many technical improvements as well that were made and of course it continues to evolve, check out the transformation over on <a target="_blank" href="https://github.com/naher94/rehanbutt.com" rel="noreferrer">github</a>. With the refresh I also wanted to streamline <a href="/mybrand">my brand</a> explore that project after this one to see the full picture.
 

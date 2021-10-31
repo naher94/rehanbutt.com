@@ -32,7 +32,7 @@ As part of my summer working with Consumer Reports. I explored a rebrand that be
   </div>
 </div>
 
-In addition to the logo a major part of the Consumer Reports brand is their iconic rating system. A mortified versions of <a href="https://en.wikipedia.org/wiki/Harvey_balls" target="_blank" rel="noopener">Harvey balls</a>. The red circle indicated the highest rating, the half red and white circle being the second highest rating, the white circle being neutral, the half black circle being the second-lowest rating, and the entirely black circle representing the lowest rating possible.
+In addition to the logo a major part of the Consumer Reports brand is their iconic rating system. A mortified versions of {% include external-link.html link="https://en.wikipedia.org/wiki/Harvey_balls" content="Harvey balls" %}. The red circle indicated the highest rating, the half red and white circle being the second highest rating, the white circle being neutral, the half black circle being the second-lowest rating, and the entirely black circle representing the lowest rating possible.
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">

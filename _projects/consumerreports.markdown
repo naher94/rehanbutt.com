@@ -86,7 +86,7 @@ One of the current visualizations. Something that was, often times, hard to dige
   </div>
 </div>
 
-A major part of the Consumer Reports brand is their iconic rating system. A mortified versions of <a href="https://en.wikipedia.org/wiki/Harvey_balls" target="_blank" rel="noopener">Harvey balls</a> (seen above). The red circle indicated the highest rating, the half red and white circle being the second highest rating, the white circle being neutral, the half black circle being the second-lowest rating, and the entirely black circle representing the lowest rating possible.
+A major part of the Consumer Reports brand is their iconic rating system. A mortified versions of {% include external-link.html link="https://en.wikipedia.org/wiki/Harvey_balls" content="Harvey balls" %} (seen above). The red circle indicated the highest rating, the half red and white circle being the second highest rating, the white circle being neutral, the half black circle being the second-lowest rating, and the entirely black circle representing the lowest rating possible.
 
 While exploring how to bubble up more of the testing data to the consumers, changing the Harvey balls rating system was explored. Also check out my <a href="{% link _projects/consumerreportsbrand.markdown %}">Consumer Reports Rebrand</a> project for related materials.
 

@@ -20,7 +20,7 @@ A fashion line with a new take on the production of clothes
 
 We developed this collection with 2 goals in mind, create something beautiful and explore non-traditional approaches to get there. I'd like to think we accomplished both, though maybe not the way we first imagined.
 
-We threw out the traditional production process of measure, cut, sew, fit and repeat in favor of more modern and adaptable processes. Leveraging digital design and fabrication techniques, primarily laser cutting and 3D printing and methods such as photogrammetry and computational design. The contrast of hand sewn silk garments versus digitally fabricated stark white tessellated garments leads us to Lustre’s concept. But first a huge shout out to 2 of my good friends Carolina Tamayo and <a target="_blank" href="https://ajhamilton.squarespace.com/">Alyssa Hamilton <span class="visually-hidden">Opens a new window</span></a>, who I got the chance to work with on this collection.
+We threw out the traditional production process of measure, cut, sew, fit and repeat in favor of more modern and adaptable processes. Leveraging digital design and fabrication techniques, primarily laser cutting and 3D printing and methods such as photogrammetry and computational design. The contrast of hand sewn silk garments versus digitally fabricated stark white tessellated garments leads us to Lustre’s concept. But first a huge shout out to 2 of my good friends Carolina Tamayo and {% include external-link.html link="https://ajhamilton.squarespace.com/" content="Alyssa Hamilton" %}, who I got the chance to work with on this collection.
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
@@ -118,7 +118,7 @@ This concept is directly linked to the idea of clothing being a shell of the hum
   </div>
 </div>
 
-I also want to thank <a target="_blank" href="http://yupousa.com">Yupo<span class="visually-hidden">Opens a new window</span></a> for being our sponsor for this collection and Jonathan Leung, Yutong Chen and Victor Song for many of the wonderful photos you see.
+I also want to thank {% include external-link.html link="http://yupousa.com" content="Yupo" %} for being our sponsor for this collection and Jonathan Leung, Yutong Chen and Victor Song for many of the wonderful photos you see.
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-4">
@@ -177,9 +177,7 @@ We did this by using a ABB robot (those big robotic arms you generally see assem
     <img src="../img/fashion/3d-print-model.jpg" alt="3D print digital model pieces">
   </div>
 </div>
-{% capture bts-title %} Behind the Scenes {% endcapture %}
-{% capture bts-description %} This project took quite a bit of computing power often times more them we had available. We regularly crashed several of our design tools as we tried to created higher resolutions pieces and while increasing the number of automated steps. {% endcapture %}
-{% include behind-the-scenes.html %}
+{% include behind-the-scenes.html title="Behind the Scenes" description="This project took quite a bit of computing power often times more them we had available. We regularly crashed several of our design tools as we tried to created higher resolutions pieces and while increasing the number of automated steps." %}
 
 
 Lots of iteration as we pushed the tolerances of our tools, from the fidelity of our 3D mesh models to the resolution of our 3D prints.
