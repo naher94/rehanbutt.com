@@ -5,7 +5,7 @@ tile-name: "Tesla Watch App"
 thumbnail: "teslaWatchApp"
 date: 2018-11-11
 tags: UI UX
-featured: true
+featured:
 tile-description: Bringing the Tesla experience to your wrist with Apple Watch
 ---
 
