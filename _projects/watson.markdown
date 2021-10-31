@@ -9,9 +9,7 @@ tags: web
 
 <div class="image-container"><img src="../img/watson/hero.png" alt="WatsON Hero Shot"/></div>
 
-{% capture bts-title %} Behind the Scenes {% endcapture %}
-{% capture bts-description %} Fun fact: I took the photo featured on the left of Nick Cave's Soundsuits. Really enjoy the crisp mask in contrast to the motion blur from the surrounding hair. Probably my favorite photo from this photo shoot.{% endcapture %}
-{% include behind-the-scenes.html %}
+{% include behind-the-scenes.html title="Behind the Scenes" description="Fun fact: I took the photo featured on the left of Nick Cave's Soundsuits. Really enjoy the crisp mask in contrast to the motion blur from the surrounding hair. Probably my favorite photo from this photo shoot." %}
 
 The wats:ON? Festival is a Carnegie Mellon staple, bringing an eclectic range of nationally and internationally renowned artists and their works to campus, providing a forum for interaction and collaboration between students and faculty from diverse fields within the campus community and beyond.
 

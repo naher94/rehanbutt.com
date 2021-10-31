@@ -177,9 +177,7 @@ We did this by using a ABB robot (those big robotic arms you generally see assem
     <img src="../img/fashion/3d-print-model.jpg" alt="3D print digital model pieces">
   </div>
 </div>
-{% capture bts-title %} Behind the Scenes {% endcapture %}
-{% capture bts-description %} This project took quite a bit of computing power often times more them we had available. We regularly crashed several of our design tools as we tried to created higher resolutions pieces and while increasing the number of automated steps. {% endcapture %}
-{% include behind-the-scenes.html %}
+{% include behind-the-scenes.html title="Behind the Scenes" description="This project took quite a bit of computing power often times more them we had available. We regularly crashed several of our design tools as we tried to created higher resolutions pieces and while increasing the number of automated steps." %}
 
 
 Lots of iteration as we pushed the tolerances of our tools, from the fidelity of our 3D mesh models to the resolution of our 3D prints.

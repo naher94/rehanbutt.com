@@ -30,9 +30,8 @@ One key aspect of this project was to build on to an existing design tool rather
     <img src="../img/environmental-conditions/hero.jpg" alt="Design with added layers of context considering your user's enviroment">
   </div>
 </div>
-{% capture bts-title %} Behind the Scenes {% endcapture %}
-{% capture bts-description %} To the keen eye you may recognize the leaf icon that I am using for the branding of this project, its from Wall-E! You may also see a couple A113 references through out this project as well, another classic Pixar easter egg! {% endcapture %}
-{% include behind-the-scenes.html %}
+{% include behind-the-scenes.html title="Behind the Scenes" description="To the keen eye you may recognize the leaf icon that I am using for the branding of this project, its from Wall-E! You may also see a couple A113 references through out this project as well, another classic Pixar easter egg!" %}
+
 
 One Possible solution could be the Environmental Conditions feature. Where you design with added layers of context considering your user’s environment. Thinking beyond static visuals but experiences that are affected by the user’s surroundings. Working at night or in a dark room? Constrained by reduced network speeds? Building for an international market? All these considerations can more easily be made earlier in the design process that nicely blends into the Figma UI we all know and love.
 

@@ -14,9 +14,7 @@ tile-description: "Building a dining table out of a retired bowling alley lane"
   <img src="../img/bowlingtable/hero.jpg" alt="Hero shot of the table" />
 </div>
 
-{% capture bts-title %} Behind the Scenes {% endcapture %}
-{% capture bts-description %} This photo took many hours to shot and even longer to edit due to all the perspective distortion coming out of the camera. {% endcapture %}
-{% include behind-the-scenes.html %}
+{% include behind-the-scenes.html title="Behind the Scenes" description="This photo took many hours to shot and even longer to edit due to all the perspective distortion coming out of the camera." %}
 
 This project started as a need for a dining table, but quickly turned into almost a yearlong  project from prepping the table top to designing the legs. Shortly after starting to look for a dining table I came across a section of a bowling alley lane from a recently closed alley and decided to design and fabricate a dining table from it.
 
@@ -24,10 +22,7 @@ This project started as a need for a dining table, but quickly turned into almos
   <img src="../img/bowlingtable/naildetail.jpg" alt="Detail photo of a found nail in the edge of the wood" />
 </div>
 
-{% capture bts-title %} Behind the Scenes {% endcapture %}
-{% capture bts-description %} This is by fair my favorite detail of the table because it shows the construction from the original use of this slab, a nailed together bowling alley lane. A happy accident from where we trimmed the piece down! {% endcapture %}
-{% include behind-the-scenes.html %}
-
+{% include behind-the-scenes.html title="Behind the Scenes" description="This is by fair my favorite detail of the table because it shows the construction from the original use of this slab, a nailed together bowling alley lane. A happy accident from where we trimmed the piece down!" %}
 
 <div class="image-container">
   <img src="../img/bowlingtable/edgedetail.jpg" alt="Detail photo of the table edge wood grain" />
