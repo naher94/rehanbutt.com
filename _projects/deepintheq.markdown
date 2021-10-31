@@ -27,8 +27,7 @@ As part of my time at YinzCam, I worked with the Cleveland Cavaliers to design a
   </div>
 </div>
 
-Some of the In-stadium zones that were set up for game day. Want to play along at home? Download the app: <a target="_blank" rel="noopener" href="https://itunes.apple.com/us/app/deep-in-the-q/id1225687551?mt=8">iOS</a>, <a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.yinzcam.deepintheq&hl=en">Android</a> Once you have downloaded the app, point the camera view at this target and shoot some baskets! Sound effects are included by the way, so turn that volume up!
-
+Some of the In-stadium zones that were set up for game day. Want to play along at home? Download the app: {% include external-link.html link="https://itunes.apple.com/us/app/deep-in-the-q/id1225687551?mt=8" content="iOS" %}, {% include external-link.html link="https://play.google.com/store/apps/details?id=com.yinzcam.deepintheq&hl=en" content="Android" %} Once you have downloaded the app, point the camera view at this target and shoot some baskets! Sound effects are included by the way, so turn that volume up!
 
 {:.post-callout-medium}
 "Budweiser and the Cleveland Cavaliers have teamed up to bring you a game that takes virtual hoops to a whole new level by challenging your shot making skills both at The Q and beyond."

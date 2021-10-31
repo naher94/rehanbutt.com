@@ -118,7 +118,7 @@ This concept is directly linked to the idea of clothing being a shell of the hum
   </div>
 </div>
 
-I also want to thank <a target="_blank" href="http://yupousa.com">Yupo<span class="visually-hidden">Opens a new window</span></a> for being our sponsor for this collection and Jonathan Leung, Yutong Chen and Victor Song for many of the wonderful photos you see.
+I also want to thank {% include external-link.html link="http://yupousa.com" content="Yupo" %} for being our sponsor for this collection and Jonathan Leung, Yutong Chen and Victor Song for many of the wonderful photos you see.
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-4">
