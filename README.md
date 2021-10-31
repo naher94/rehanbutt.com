@@ -26,7 +26,7 @@ Jekyll also uses the `Liquid` language as its templating language. Here are a co
 * When a project is featured an additional tile image is needed
 * Tile Titles should be _____________
 * Tile Descriptions should say something along the lines of a one-liner around the central theme of the project
-* Page Titles should be very similar to Tile Titles with _________ as an exception
+* Page Titles should be very similar to Tile Titles with but may be a longer phrase of the project
 
 #### Dribbble Share Links
 

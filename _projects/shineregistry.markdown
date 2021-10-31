@@ -29,7 +29,7 @@ Don't forget to check out the <a href="{% link _projects/shineregistrybrand.mark
    </div>
 </div>
 
-{:.post-callout}
+{:.post-callout-large}
 Have a small business? Head over to {% include external-link.html link="https://shineregistry.com" content="Shine Registry" %} and create a profile.
 
 
