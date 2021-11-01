@@ -7,33 +7,11 @@ date:   2015-12-01
 tags: iOS App
 ---
 
-<div class="image-container"><img src="../img/carnegieHere/screens1.png" alt="Screens 1" /></div>
-
-<div class="image-container"><img src="../img/carnegieHere/screens2.png" alt="Screens 2" /></div>
-
-Our project was to learn the full product cycle of designing and developing an mobile app for use on and around campus, while using iBeacon technology and VR (virtual reality) in a new and innovative way helping to give proof of concepts of these technologies for growth in local industries.
-
-<div class="image-container"><img style="width:100%;" src="../img/carnegieHere/theTeam.png" alt="The Team" /></div>
-
-The team at our all day hack-a-thon pushing through the rest of development.
-
-## Process
-
-<div class="image-container"><img src="../img/carnegieHere/interactionMap.svg" alt="Interaction Map" /></div>
-
-Our interaction map helps to give us a click through of our application, with out the full designs.
-
-<div class="image-container"><img src="../img/carnegieHere/sketches1.png" alt="Sketches" />
-<img src="../img/carnegieHere/sketches2.png" alt="Sketches" /></div>
-
-A couple images of sketches of our mobile interfaces.
-
-<div class="image-container"><img src="../img/carnegieHere/slack.png" alt="Slack" /></div>
-
-In order to keep track and make sure everyone was up to speed on what each team was doing we decided to use Slack for communications and updates project wide.
-
-<div class="image-container"><img src="../img/carnegieHere/wireframeStructure1.png" alt="Wireframe Structure" />
-<img src="../img/carnegieHere/wireframeStructure2.png" alt="Wireframe Structure Iterations" /></div>
+<div class="grid-x grid-padding-y">
+  <div class="cell">
+    <img src="../img/carnegieHere/hero.jpg" alt="Hero image of the project showcasing the branding and 2 main screen of the application">
+  </div>
+</div>
 
 <div class="slideshow-container">
   <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation1.png" alt="Slide 1" /> </div>
@@ -69,3 +47,31 @@ In order to keep track and make sure everyone was up to speed on what each team 
 </div>
 
 The slide deck we presented showing what we came up with.
+
+<div class="image-container"><img src="../img/carnegieHere/screens1.png" alt="Screens 1" /></div>
+
+<div class="image-container"><img src="../img/carnegieHere/screens2.png" alt="Screens 2" /></div>
+
+Our project was to learn the full product cycle of designing and developing an mobile app for use on and around campus, while using iBeacon technology and VR (virtual reality) in a new and innovative way helping to give proof of concepts of these technologies for growth in local industries.
+
+<div class="image-container"><img style="width:100%;" src="../img/carnegieHere/theTeam.png" alt="The Team" /></div>
+
+The team at our all day hack-a-thon pushing through the rest of development.
+
+## Process
+
+<div class="image-container"><img src="../img/carnegieHere/interactionMap.svg" alt="Interaction Map" /></div>
+
+Our interaction map helps to give us a click through of our application, with out the full designs.
+
+<div class="image-container"><img src="../img/carnegieHere/sketches1.png" alt="Sketches" />
+<img src="../img/carnegieHere/sketches2.png" alt="Sketches" /></div>
+
+A couple images of sketches of our mobile interfaces.
+
+<div class="image-container"><img src="../img/carnegieHere/slack.png" alt="Slack" /></div>
+
+In order to keep track and make sure everyone was up to speed on what each team was doing we decided to use Slack for communications and updates project wide.
+
+<div class="image-container"><img src="../img/carnegieHere/wireframeStructure1.png" alt="Wireframe Structure" />
+<img src="../img/carnegieHere/wireframeStructure2.png" alt="Wireframe Structure Iterations" /></div>
