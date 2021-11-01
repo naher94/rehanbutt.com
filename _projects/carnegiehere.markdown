@@ -67,4 +67,5 @@ In order to keep track and make sure everyone was up to speed on what each team 
   <a class="prev" onclick="plusSlides(-1)"><div class="arrow">&#10094;</div></a>
   <a class="next" onclick="plusSlides(1)"><div class="arrow">&#10095;</div></a>
 </div>
+
 The slide deck we presented showing what we came up with.
