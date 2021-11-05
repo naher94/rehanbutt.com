@@ -75,7 +75,7 @@ I created a set of personal LogoMarks using information about the people the Log
 Looking at the first logoMark, Yasmeen's, I starting on my computer within my vector program, Rhinoceros, I started with her initials "YA" looking at the outcome from current fonts and some interesting spaces and relations that could come of it. This was 1 of the 2 approaches I took. The second started from a stamp marking she already used to sign with, which is the marking below. First I vectorized it and then tried to overlay a geometry, which did not work out so well. So I decided to ditch the geometry and if I was going to use the stamp I was going to use it in the original vectorized form.
 
 <div class="image-container">
-  <img src="../img/logomark/logoMarkYaProcessStamp.png" alt="Yasmeen Almuhanna Stamp Mark" class="image-center" style="width:70%" />
+  <img src="../img/logomark/ya-process-stamp.png" alt="Yasmeen Almuhanna Stamp Mark" class="image-center" style="width:70%" />
 </div>
 
 <div class="grid-x grid-padding-x grid-margin-y">
@@ -87,7 +87,7 @@ Looking at the first logoMark, Yasmeen's, I starting on my computer within my ve
 Once I had finished the design, the steps that followed were which color to use, font to use for her name and whether or not to still incorporate the stamp. I knew the color was going to be a shade of pink, but the next step was deciding what shade. I wanted to go with a softer shade, something easy on the eyes but still clearly pink. Finally I choose the shade on the left. Soft, pink, not so in your face, and not so red either.
 
 <div class="image-container">
-  <img src="../img/logomark/logoMarkYaProcessColor.png" alt="Yasmeen Almuhanna Color" class="image-center" style="width:60%" />
+  <img src="../img/logomark/ya-process-color.png" alt="Yasmeen Almuhanna Color" class="image-center" style="width:60%" />
 </div>
 
 I played around with the stamp and the final iteration logo to see what could come of it and if it made sense to bring them together as the stamp was already part of her "branding". As the stamp was more free-flow and natural in character I wanted to use a circle, a less harsh shape and I also tried using triangles to match the logoMark. It did not seem to work for me to combine the 2 into 1 identity, but out of all of them I enjoy the bottom one the most. I like to call it the Starbucks variation.
