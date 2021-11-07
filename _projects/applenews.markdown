@@ -5,6 +5,7 @@ tile-name: "Apple News"
 thumbnail: "appleNews"
 date:   2016-10-9
 tags: digital UI UX
+published: false
 ---
 <div class="grid-x align-center">
 <div class="image-container cell small-8 medium-6 large-4"><img src="../img/appleNews/appIcon.png" alt="Logo"/></div>
