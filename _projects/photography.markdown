@@ -15,7 +15,7 @@ tags: photography
     <img style="width:100%" src="../img/photography/kidinatub.jpg" alt="A kid in a tub rowing down the river">
   </div>
 </div>
-<p class="post-callout">Check out my <a target="_blank" href="https://instagram.com/naher94">Instagram</a> page for more of my photography</p>
+<p class="post-callout-large">Check out my <a target="_blank" href="https://instagram.com/naher94">Instagram</a> page for more of my photography</p>
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
     <img style="width:100%" src="../img/photography/twoboats.jpg" alt="2 long river boats in Myanmar">

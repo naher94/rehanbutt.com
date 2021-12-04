@@ -15,7 +15,7 @@ tags: digital, illustration
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/popcorncat.gif" alt="Catto + Popcorn" /></div>
 </div>
 
-<p class="post-callout">Check out my <a target="_blank" href="https://instagram.com/naher94">Instagram</a> page for even more illustrations!</p>
+<p class="post-callout-large">Check out my <a target="_blank" href="https://instagram.com/naher94">Instagram</a> page for even more illustrations!</p>
 
 <div class="grid-x grid-padding-x grid-margin-y">
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/nycity.gif" alt="nycity Lettering" /></div>
@@ -53,7 +53,7 @@ tags: digital, illustration
       <img src="../img/illustrations/kiteMrBond.png" alt="Kite Dancing in a Hurricane Mr. Bond" />
     </div>
     <div class=" medium-6 large-6 cell">
-      <p class="post-callout">"You're a kite dancing in a hurricane Mr. Bond"</p>
+      <p class="post-callout-large">"You're a kite dancing in a hurricane Mr. Bond"</p>
     </div>
 </div>
 <div class="grid-x grid-padding-x grid-margin-y">
@@ -61,7 +61,7 @@ tags: digital, illustration
       <img src="../img/illustrations/followingFollowing.jpg" alt="Map that Leads to You" />
     </div>
     <div class="medium-6 large-6 cell">
-      <p class="post-callout">"The map that leads to you... Following, following, following to you"</p>
+      <p class="post-callout-large">"The map that leads to you... Following, following, following to you"</p>
     </div>
 </div>
 <div class="grid-x grid-padding-x grid-margin-y">

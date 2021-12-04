@@ -36,7 +36,7 @@ When starting this project we looked into other Carnegie Mellon campuses as well
 <div class="image-container"><img src="../img/nyc/nycInspiration.png" alt="NYC Inspiration" style="width:100%;" /></div>
 
 <div class="nyc-questions">
-  <p class="post-callout">Questions to Answer:</p>
+  <p class="post-callout-large">Questions to Answer:</p>
   <p class="post-callout-small">What are the public (emotional) associations of CMU?</p>
   <p class="post-callout-small"> What is the NYC campus providing? What is its program structure? What will their students receive?</p>
   <p class="post-callout-small">What kind of people does CMU want to attract to their NYC campus?</p>
