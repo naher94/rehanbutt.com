@@ -61,7 +61,7 @@ Similarly with the shape language, it was important to give greater contrasts be
   </div>
 </div>
 
-<p class="post-callout">Bringing together the color and shape languages to create this really <strong>sharp</strong>, <strong>natural</strong> and <strong>inviting</strong> tone.</p>
+<p class="post-callout-large">Bringing together the color and shape languages to create this really <strong>sharp</strong>, <strong>natural</strong> and <strong>inviting</strong> tone.</p>
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
