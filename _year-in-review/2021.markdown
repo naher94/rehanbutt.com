@@ -1,5 +1,6 @@
 ---
 year: 2021
-color: ""
-current: true
+color: "linear-gradient(120deg, #FBAA1D 0%, #FDD53E 100%);"
+color-dark: "linear-gradient(120deg, #b87a10 0%, #c2a12b 100%);"
+current:
 ---
