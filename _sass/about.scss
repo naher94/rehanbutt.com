@@ -21,6 +21,9 @@
         order: 3;
         margin-top: 2rem;
       }
+      a{
+        z-index: 1
+      }
       h1{
         padding-left: 0;
         font-family: $zilla;
