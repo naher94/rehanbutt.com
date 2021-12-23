@@ -161,7 +161,7 @@ function holidays() {
 		"10:31": "Happy Halloween! 🎃",
 		"11:25": "Happy Thanksgiving! 🦃",
 		"11:29": "Happy Hanukkah!",
-    "12:25": "Merry Christmas!",
+    "12:25": "Merry Christmas! 🎄",
 		"12:26": "Happy Kwanzaa!"
   }
 }
