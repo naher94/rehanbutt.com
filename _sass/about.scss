@@ -108,9 +108,6 @@
       width: 100%;
       z-index: 1;
       order: 1;
-      // img{
-      //   height: 700px;
-      // }
     }
     @include breakpoint(small only){
       margin-left: 5rem;
