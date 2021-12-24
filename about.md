@@ -18,10 +18,10 @@ footer-main: true
         </section>
         <div class="cell grid-x small-5 large-12 profile-2 grid-padding-x grid-padding-y">
           <div class="cell large-6">
-            <img src="/img/rehan-profile2.jpg" alt="">
+            <img src="/img/rehan-profile2.jpg" alt="Photo of Rehan Butt">
           </div>
           <div class="cell large-6">
-            <img src="/img/rehan-profile3.jpg" alt="">
+            <img src="/img/rehan-profile3.jpg" alt="Photo of Rehan Butt laughing">
           </div>
         </div>
       </div>
