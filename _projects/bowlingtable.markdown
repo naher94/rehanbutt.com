@@ -3,7 +3,7 @@ layout: post
 title:  "Bowling Table"
 tile-name: "Bowling Table"
 thumbnail: "bowlingtable"
-date:   2020-07-10
+date: 2020-07-10
 tags: woodworking
 flag:
 featured:
