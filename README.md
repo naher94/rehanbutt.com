@@ -2,7 +2,7 @@
 
 You have found the `readme` for the [rehanbutt.com](https://rehanbutt.com) codebase. Feel free to explore the code and see how my site is built.
 
-I use [Jekyll](https://jekyllrb.com) as my static site templating engine and [Foundation for Site](https://get.foundation/sites.html) as my CSS and JS framework.
+I use [Jekyll](https://jekyllrb.com) as my static site templating engine and [Foundation for Site](https://get.foundation/sites.html) as my CSS and JS framework. Current using Version 6.6.3
 
 Curious how the site has evolved over time? Check out the [releases](https://github.com/naher94/rehanbutt.com/releases) over the years. Pretty fun to time travel! Like my own personal [waybackmachine](http://web.archive.org). 😉
 
@@ -46,6 +46,45 @@ Jekyll also uses the `Liquid` language as its templating language. Here are a co
 
 #### External Links
 * External links should use the `external-link` component via `{{% include external-link.html %}}` which includes a non-visual tag noting it goes external for enhanced accessibility `<a target="_blank" href="https://rehanbutt.com/">Rehan Butt<span class="visually-hidden">Opens a new window</span></a>`
+
+#### 2D Array Hack
+In some cases using a 2D array is cleaner and easier than setting up a collection. Even though its not formally supported in Liquid it is possible with this hack.
+1. Create a string with 2 sets of unique dividing characters in the case below `,` and `|`
+2. Assign and split that string to generate an array
+3. Loop through that array to generate the 2nd degree element
+4. Use that content of the 2nd degree element!
+5. Done!
+```
+{% assign array-list = "(A|B|C),(D|E|F),(H|I|J)" | remove: "(" | remove: ")" | split: ',' %}
+{% for item in array-list %}
+{% assign each = item | split: '|' %}
+  <p>{{each[0]}}</p>
+  <p>{{each[1]}}</p>
+  <p>{{each[2]}}</p>
+{% endfor %}
+```
+
+```
+<!-- example from 2020.rehanbutt.com -->
+<!-- devices -->
+<div class="devices cell grid-x">
+  <div class="cell">
+    <h3>Device breakdown</h3>
+  </div>
+  {% assign device-list = "(🇺🇸|73%|Desktop),(🇨🇳|26%|Mobile),(🇩🇪|1%|Tablet)" | remove: "(" | remove: ")" | split: ',' %}
+
+  {% for device in device-list %}
+  {% assign each = device | split: '|' %}
+  <div class="cell small-6 medium-4 device-container">
+    <div class="device-wrapper">
+      <p class="flag">{{each[0]}}</p>
+      <p class="percentage">{{each[1]}}</p>
+      <p class="device-type">{{each[2]}}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+```
 
 #### `_projects` Frontmatter Tags
 
