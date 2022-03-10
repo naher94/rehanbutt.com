@@ -3,7 +3,7 @@ layout: post
 title: "3D Digital Art"
 tile-name: "3D Digital Art"
 thumbnail: "3d-art"
-flag: New
+flag:
 date: 2022-01-12
 tags: art blender 3d
 ---
