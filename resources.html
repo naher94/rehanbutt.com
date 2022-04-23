@@ -25,8 +25,37 @@ footer-other: true
   </div>
 </section>
 
-<!-- bundle based on tag -->
-<!-- have a pinned section at the top -->
+<section class="recently-added grid-x grid-padding-x grid-padding-y cell medium-12">
+  <h2 class="cell small-12">Recently Added</h2>
+  {% assign resources_sorted = site.resources | sort: 'date' | reverse %}
+    {%- for resource in resources_sorted limit:3 -%}
+      <a href="{{resource.link}}" target="_blank" rel="noreferrer" class="cell medium-6 large-4 resource-link">
+        <div class="resource">
+          <p class="meta {{resource.content-type | slugify}}">
+            {%- case resource.content-type -%}
+              {%- when 'video' -%}
+                <i class="fas fa-video"></i>
+              {%- when 'reading' or 'article' or 'blog' or 'portfolio' or 'publication' -%}
+                <i class="fas fa-book"></i>
+              {%- when 'interactive' -%}
+                <i class="fas fa-mouse-pointer"></i>
+              {%- when 'tool' -%}
+                <i class="fas fa-hammer"></i>
+              {%- when 'my content' -%}
+                <i class="fas fa-at"></i>
+              {%- when 'reference' -%}
+                <i class="fas fa-binoculars"></i>
+              {%- else -%}
+                <i class="fas fa-shapes"></i>
+            {%- endcase -%}
+            {{resource.content-type}}
+          </p>
+          <p class="title">{{resource.title}}<i class="fas fa-link"></i></p>
+          <p class="description">{{resource.description}}</p>
+        </div>
+      </a>
+    {%- endfor -%}
+</section>
 
 {% for tag in alltags %}
   <section class="tag-group grid-x grid-padding-x grid-padding-y cell medium-12" id="{{tag | replace: " ", "-"}}">
