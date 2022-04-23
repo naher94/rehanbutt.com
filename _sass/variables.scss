@@ -95,6 +95,12 @@ $semantic-colors:(
     button-fill: $navy-black,
     selection-background: $signature-teal-l6,
     code-bg: $navy-black-l9,
+    resources-video: #C60000,
+    resources-reading: #1D781D,
+    resources-interactive: #2736BB,
+    resources-tools: #6400B2,
+    resources-my-content: #A65000,
+    resources-reference: #C412B2,
   ),
   dark:(
     text: $pure-white,
@@ -116,6 +122,12 @@ $semantic-colors:(
     button-fill: $pure-white,
     selection-background: $signature-teal-d3,
     code-bg: $navy-black-d8,
+    resources-video: #FF5A5A,
+    resources-reading: #4DC94D,
+    resources-interactive: #7583FF,
+    resources-tools: #BD69FF,
+    resources-my-content: #FFA857,
+    resources-reference: #FD4AEB,
   ),
 );
 

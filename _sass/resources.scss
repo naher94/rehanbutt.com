@@ -22,15 +22,16 @@
 }
 
 .tag-section{
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
   margin-top: 2rem;
   h2{
     font-size: 2.5em;
   }
   .tags-container{
     .tag{
-      padding: 0.5rem 1rem;
-      margin-bottom: 0.5rem;
+      font-size: 0.8em;
+      padding: 0.25rem .75rem;
+      margin-bottom: 0.25rem;
       font-weight: $lato-bold;
       background-color: semantic-color(actionable-pill);
       color: $pure-white;
@@ -45,6 +46,9 @@
 
 .tag-group{
   margin-bottom: 6rem;
+  @media screen and (max-width: 40em) {
+    margin-bottom: 3rem;
+  }
   .section-header{
     &:hover{
       .hashtag{
@@ -53,7 +57,7 @@
     }
   }
   h2{
-    font-size: 3.5em;
+    font-size: 2.5em;
     color: semantic-color(text);
     display: inline;
     font-weight: $lato-black;
@@ -61,13 +65,15 @@
     flex-wrap: wrap;
     @media screen and (max-width: 40em) {
       line-height: 3.6rem;
+      padding-left: 0;
+      padding-right: 0;
     }
   }
   .divider{
     background-color: $signature-teal;
     border-radius: $pill-radius;
     content: '';
-    height: 0.5rem;
+    height: 0.35rem;
     margin-left: 1rem;
     @include breakpoint(small only) {
       margin-left: 0;
@@ -90,10 +96,39 @@
     }
   }
   .resource{
+    .meta{
+      padding: 0;
+      margin: 0;
+      text-transform: uppercase;
+      font-size: 0.5em;
+      font-weight: $lato-bold;
+      letter-spacing: 0.3em;
+      i{
+        margin-right: 0.25em;
+      }
+      &.video{
+        color: semantic-color(resources-video);
+      }
+      &.reading, &.blog, &.article, &.portfolio, &.publication{
+        color: semantic-color(resources-reading);
+      }
+      &.interactive{
+        color: semantic-color(resources-interactive);
+      }
+      &.tool{
+        color: semantic-color(resources-tools);
+      }
+      &.my-content{
+        color: semantic-color(resources-my-content);
+      }
+      &.reference{
+        color: semantic-color(resources-reference);
+      }
+    }
     .title{
       font-family: $zilla;
       font-weight: $zilla-bold;
-      font-size: 2rem;
+      font-size: 1.5rem;
       padding: 0;
       margin: 0;
       line-height: 1em;
@@ -106,6 +141,7 @@
 
     }
     .description{
+      font-size: 0.8em;
       padding: 0;
       margin: 0;
     }
