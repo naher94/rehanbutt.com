@@ -8,6 +8,7 @@
 			"link: $2"
 			"description: $3"
 			"tags: [$4]"
+			"content-type: $5"
 			"date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
 			"---"
 		],
