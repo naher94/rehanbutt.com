@@ -16,6 +16,7 @@ Jekyll uses the `Kramdown` markdown parser allowing for extended functionality, 
 
 Jekyll also uses the `Liquid` language as its templating language. Here are a couple great references:
 - [Shopify Cheat Sheet](https://www.shopify.com/partners/shopify-cheat-sheet)
+- [Liquid Cheat Sheet](https://shopify.github.io/liquid/)
 - [Jekyll Cheat Sheet](https://learn.cloudcannon.com/jekyll-cheat-sheet/)
 - [Liquid for Designs Wiki](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)
 
