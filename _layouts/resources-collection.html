@@ -1,0 +1,65 @@
+---
+layout: default
+---
+<article class="post resources-collection grid-x grid-padding-x grid-padding-y">
+
+  <aside class="cell medium-4">
+    <div class="tile cell grid-x" style="color: {{page.text-color}};">
+      <img src="/img/resources-collection/{{page.tile-image}}" alt="{{page.tile-image-alt}}">
+      <div class="content-container grid-x">
+        <div class="cell text-container small-12">
+          <h1 class="title">{{ page.title }}</h1>
+          <p class="sub-header">{{page.sub-header}}</p>
+        </div>
+        <div class="cell metadata-bar small-12 align-self-bottom grid-x align-justify">
+          <div class="cell shrink">{{page.resources | size}} Resources</div>
+          <div class="cell shrink">
+            <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20collection%20by%20%40naher94!&url={{page.url | prepend: site.url}}" class="share-item twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="" class="share-item link">
+              <i class="fas fa-link"></i>
+              <!-- TODO add the copy to clipboard thing here -->
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="collection-content cell medium-8">
+    <h2 class="intro">{{page.intro}}</h2>
+    {%- for resource-var in page.resources -%}
+    <!-- TODO fix the syntax issue with the var in var thing -->
+      {%- assign variable = {{resource-var}} | prepend: "/resources/" -%}
+      {%- assign resource = site.resources | where:"id", {{variable}} | first -%}
+      <!-- TODO componentize this -->
+      <a href="{{resource.link}}" target="_blank" rel="noreferrer" class="cell medium-6 large-4 resource-link">
+        <div class="resource">
+          <p class="meta {{resource.content-type | slugify}}">
+            {%- case resource.content-type -%}
+              {%- when 'video' -%}
+                <i class="fas fa-video"></i>
+              {%- when 'reading' or 'article' or 'blog' or 'portfolio' or 'publication' -%}
+                <i class="fas fa-book"></i>
+              {%- when 'interactive' -%}
+                <i class="fas fa-mouse-pointer"></i>
+              {%- when 'tool' -%}
+                <i class="fas fa-hammer"></i>
+              {%- when 'my content' -%}
+                <i class="fas fa-at"></i>
+              {%- when 'reference' -%}
+                <i class="fas fa-binoculars"></i>
+              {%- else -%}
+                <i class="fas fa-shapes"></i>
+            {%- endcase -%}
+            {{resource.content-type}}
+          </p>
+          <p class="title">{{resource.title}}<i class="fas fa-link"></i></p>
+          <p class="description">{{resource.description}}</p>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+
+</article>

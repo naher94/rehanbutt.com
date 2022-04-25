@@ -21,19 +21,174 @@
   }
 }
 
-.recently-added{
+.recently-added, .featured-collections{
   h2{
     font-size: 2.5em;
     color: semantic-color(text);
     display: inline;
-    // font-weight: $lato-black;
-    // font-family: $lato;
     font-weight: $zilla-bold;
     flex-wrap: wrap;
     @media screen and (max-width: 40em) {
       line-height: 3.6rem;
       padding-left: 0;
       padding-right: 0;
+    }
+  }
+}
+.resources-collection{
+  .tile{
+    border-radius: $tile-radius-big;
+    padding: 1.5em;
+    color: semantic-color(text);
+    background-color: semantic-color(resources-collection-card);
+    aspect-ratio: 3/4;
+    transition: $sprint;
+    position: relative;
+    overflow: hidden;
+    @include breakpoint(medium up) {
+      position: sticky;
+      top: 1em;
+    }
+    p{
+      padding: 0;
+      margin: 0;
+    }
+    .title{
+      font-family: $zilla;
+      font-weight: $zilla-bold;
+      font-size: 2em;
+      line-height: normal;
+      position: relative;
+    }
+    .sub-header{
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      font-size: 0.6em;
+      font-weight: $lato-bold;
+      opacity: 0.6;
+      position: relative;
+      margin-block-start: 1em;
+    }
+    img{
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .metadata-bar{
+      position: relative;
+      background-color: semantic-color(resources-collection-card-bar);
+      color: semantic-color(text);
+      border-radius: $tile-radius;
+      padding: 0.5em;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      font-weight: $lato-bold;
+      font-size: 0.8em;
+      .share-item{
+        color: semantic-color(text);
+        padding: 0.25em;
+        i{
+          transition: $sprint;
+        }
+        &.twitter{
+          &:hover{
+            i{
+              transition: $sprint;
+              color: $twitter-blue;
+              transform: rotate(-15deg) scale(1.5); 
+            }
+          }
+        }
+        &.link{
+          &:hover{
+            i{
+              transition: $sprint;
+              color: $signature-teal;
+              transform: rotate(360deg) scale(1.5); 
+            }
+          }
+        }
+      }
+    }
+  }
+  .collection-content{
+    h2{
+      &.intro{
+        font-family: $lato;
+        font-size: 1.5em;
+        line-height: normal;
+        margin-bottom: 1em;
+      }
+    }
+    .resource-link{
+      .resource{
+        margin-bottom: 1em;
+      }
+    }
+  }
+}
+
+.featured-collections{
+  .view-all{
+    font-weight: $lato-bold;
+    color: semantic-color(text);
+    padding: 0.5em 1em;
+    border-radius: $pill-radius;
+    transition: background-color 0.2s ease-in-out;
+    &:hover, &:focus{
+      background-color: semantic-color(resources-collection-view-all);
+    }
+    span{
+      margin-inline-end: 0.5em;
+    }
+    i{
+      margin-left: 0.25rem;
+      margin-right: 0.25rem;
+      transition: $sprint;
+    }
+    &:hover{
+      i{
+        margin-left: 0.5rem;
+        margin-right: 0rem;
+      }
+    }
+  }
+  .tile{
+    border-radius: $tile-radius;
+    padding: 1em;
+    color: semantic-color(text);
+    background-color: aquamarine;
+    aspect-ratio: 3/4;
+    transition: $sprint;
+    position: relative;
+    overflow: hidden;
+    p{
+      padding: 0;
+      margin: 0;
+    }
+    .title{
+      font-family: $zilla;
+      font-weight: $zilla-bold;
+      font-size: 1.5em;
+      line-height: normal;
+      position: relative;
+    }
+    .sub-header{
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      font-size: 0.6em;
+      font-weight: $lato-bold;
+      opacity: 0.6;
+      position: relative;
+    }
+    &:hover{
+      transform: rotate(4deg) scale(1.05);
+      box-shadow: $recessed-shadow semantic-color(shadow);
+    }
+    img{
+      position: absolute;
+      top: 0;
+      left: 0;
     }
   }
 }
