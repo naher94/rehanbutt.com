@@ -84,6 +84,9 @@
       backdrop-filter: blur(10px);
       font-weight: $lato-bold;
       font-size: 0.8em;
+      .count-label{
+        padding-inline-start: 0.25em;
+      }
       .share-item{
         color: semantic-color(text);
         padding: 0.25em;
@@ -94,7 +97,7 @@
           &:hover{
             i{
               transition: $sprint;
-              color: $twitter-blue;
+              // color: $twitter-blue;
               transform: rotate(-15deg) scale(1.5); 
             }
           }
@@ -103,7 +106,7 @@
           &:hover{
             i{
               transition: $sprint;
-              color: $signature-teal;
+              // color: $signature-teal;
               transform: rotate(360deg) scale(1.5); 
             }
           }
