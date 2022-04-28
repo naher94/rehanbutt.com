@@ -219,3 +219,15 @@ function getHappyDayString() {
 
 getHappyDayString();
 ///////////////////////////////////////////// End of Happy Day Label
+
+
+const copyToClipboardAsync = str => {
+  if (navigator && navigator.clipboard && navigator.clipboard.writeText){
+    var confirmation = document.getElementById("copy-confirmation");
+    confirmation.style.visibility = 'visible';
+    navigator.clipboard.writeText(str);  
+    setTimeout(function(){confirmation.style.visibility = 'hidden';}, 1500);
+    return;
+  }
+  return Promise.reject('The Clipboard API is not available.');
+};
