@@ -1,0 +1,23 @@
+---
+layout: default
+title: "Resource Collections"
+permalink: resources/collection
+exclude: "true"
+footer-other: false
+---
+
+<h1>Resource Collections</h1>
+
+<section class="all-collections grid-x grid-padding-x grid-padding-y cell medium-12">
+  {%- for collection-item in site.resources-collection -%}
+  <a href="{{collection-item.url | prepend: site.url}}" class="cell medium-3">
+    <div class="tile" style="color: {{collection-item.text-color}};">
+      <img src="/img/resources-collection/{{collection-item.tile-image}}" alt="{{collection-item.tile-image-alt}}">
+      <p class="title">{{collection-item.title}}</p>
+      <p class="sub-header">{{collection-item.sub-header}}</p>
+    </div>
+  </a>
+  {%- endfor -%}
+</section>
+
+<!-- TODO add in the suggestion CTA row -->
