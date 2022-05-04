@@ -101,6 +101,9 @@ $semantic-colors:(
     resources-tools: #6400B2,
     resources-my-content: #A65000,
     resources-reference: #C412B2,
+    resources-collection-card: $pure-white,
+    resources-collection-card-bar: rgba($pure-white,0.6),
+    resources-collection-view-all: $navy-black-l9,
   ),
   dark:(
     text: $pure-white,
@@ -128,6 +131,9 @@ $semantic-colors:(
     resources-tools: #BD69FF,
     resources-my-content: #FFA857,
     resources-reference: #FD4AEB,
+    resources-collection-card: $navy-black,
+    resources-collection-card-bar: rgba($navy-black,0.6),
+    resources-collection-view-all: $navy-black,
   ),
 );
 
