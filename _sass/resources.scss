@@ -97,7 +97,6 @@
           &:hover{
             i{
               transition: $sprint;
-              // color: $twitter-blue;
               transform: rotate(-15deg) scale(1.5); 
             }
           }
@@ -173,7 +172,7 @@
     border-radius: $tile-radius;
     padding: 1em;
     color: semantic-color(text);
-    background-color: aquamarine;
+    background-color: $navy-black;
     aspect-ratio: 3/4;
     transition: $sprint;
     position: relative;
