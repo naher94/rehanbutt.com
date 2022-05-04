@@ -3,7 +3,7 @@ layout: resources-collection
 title: How the Internet Works
 sub-header: Deep Dive
 intro: "Lots of cables"
-tile-image: test-tile-arch.png
+tile-image: test-tile.png
 tile-image-alt: This is the alt text
 text-color: "#ffffff"
 featured: true

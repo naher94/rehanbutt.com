@@ -3,7 +3,7 @@ layout: resources-collection
 title: My Tech Go Tos
 sub-header: Leveling Up
 intro: "Some of my favorite & everyday tech recommendations"
-tile-image: tech-go-to-2.png
+tile-image: tech-go-to.png
 tile-image-alt: This is the alt text
 text-color: "#ffffff"
 featured: true
