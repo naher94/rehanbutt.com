@@ -189,13 +189,11 @@
     @include breakpoint(small only) {
       font-size: 2em;
       padding: 0;
-      div{
-        aspect-ratio: 1/1;
-        min-width: 5rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
+      aspect-ratio: 1/1;
+      min-width: 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       span{
         display: none;
       }
