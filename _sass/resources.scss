@@ -28,13 +28,19 @@
     display: inline;
     font-weight: $zilla-bold;
     flex-wrap: wrap;
-    @media screen and (max-width: 40em) {
-      line-height: 3.6rem;
+    @include breakpoint(small only) {
+      line-height: normal;
       padding-left: 0;
       padding-right: 0;
     }
   }
 }
+.featured-collections{
+  @include breakpoint(small only) {
+    margin-bottom: 2rem;
+  }
+}
+
 .resources-collection{
   .tile{
     border-radius: $tile-radius-big;
@@ -53,21 +59,27 @@
       padding: 0;
       margin: 0;
     }
-    .title{
-      font-family: $zilla;
-      font-weight: $zilla-bold;
-      font-size: 2em;
-      line-height: normal;
-      position: relative;
-    }
-    .sub-header{
-      text-transform: uppercase;
-      letter-spacing: 0.3em;
-      font-size: 0.6em;
-      font-weight: $lato-bold;
-      opacity: 0.6;
-      position: relative;
-      margin-block-start: 1em;
+    .text-container{
+      @include breakpoint(small only) {
+        font-size: 1.25em;
+      }
+      .title{
+        font-family: $zilla;
+        font-weight: $zilla-bold;
+        font-size: 2em;
+        line-height: normal;
+        position: relative;
+        margin-bottom: 0;
+      }
+      .sub-header{
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        font-size: 0.8em;
+        font-weight: $lato-bold;
+        opacity: 0.6;
+        position: relative;
+        margin-block-start: .5em;
+      }
     }
     img{
       position: absolute;
@@ -84,6 +96,9 @@
       backdrop-filter: blur(10px);
       font-weight: $lato-bold;
       font-size: 0.8em;
+      @include breakpoint(small only) {
+        font-size: 1.2em;
+      }
       .count-label{
         padding-inline-start: 0.25em;
       }
@@ -133,6 +148,10 @@
         font-size: 1.5em;
         line-height: normal;
         margin-bottom: 1em;
+        @include breakpoint(small only) {
+          padding-left: 0;
+          padding-right: 0;
+        }
       }
     }
     .resource-link{
@@ -167,6 +186,26 @@
         margin-right: 0rem;
       }
     }
+    @include breakpoint(small only) {
+      font-size: 2em;
+      padding: 0;
+      aspect-ratio: 1/1;
+      min-width: 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      span{
+        display: none;
+      }
+      i{
+        margin: auto;
+      }
+      &:hover{
+        i{
+          margin: auto;
+        }
+      }
+    }
   }
   .tile{
     border-radius: $tile-radius;
@@ -177,6 +216,9 @@
     transition: $sprint;
     position: relative;
     overflow: hidden;
+    @include breakpoint(small only) {
+      font-size: 1.5em;
+    }
     p{
       padding: 0;
       margin: 0;
@@ -208,6 +250,15 @@
   }
 }
 
+h1{
+  &.resource-collections{
+    @include breakpoint(small only) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+}
+
 .tag-section{
   margin-bottom: 4rem;
   margin-top: 2rem;
@@ -233,7 +284,7 @@
 
 .tag-group{
   margin-bottom: 6rem;
-  @media screen and (max-width: 40em) {
+  @include breakpoint(small only) {
     margin-bottom: 3rem;
   }
   .section-header{
@@ -250,8 +301,8 @@
     font-weight: $lato-black;
     font-family: $lato;
     flex-wrap: wrap;
-    @media screen and (max-width: 40em) {
-      line-height: 3.6rem;
+    @include breakpoint(small only) {
+      line-height: normal;
       padding-left: 0;
       padding-right: 0;
     }

@@ -30,9 +30,8 @@ layout: default
   <div class="collection-content cell medium-8">
     <h2 class="intro">{{page.intro}}</h2>
     {%- for resource-var in page.resources -%}
-    <!-- TODO fix the syntax issue with the var in var thing -->
-      {%- assign variable = {{resource-var}} | prepend: "/resources/" -%}
-      {%- assign resource = site.resources | where:"id", {{variable}} | first -%}
+      {%- assign variable = resource-var | prepend: "/resources/" -%}
+      {%- assign resource = site.resources | where:"id", variable | first -%}
       <!-- TODO componentize this -->
       <a href="{{resource.link}}" target="_blank" rel="noreferrer" class="cell medium-6 large-4 resource-link">
         <div class="resource">
