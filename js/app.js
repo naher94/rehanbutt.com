@@ -220,14 +220,20 @@ function getHappyDayString() {
 getHappyDayString();
 ///////////////////////////////////////////// End of Happy Day Label
 
-// TODO update this function to inject the copied label as a sibling element
-const copyToClipboardAsync = str => {
-  if (navigator && navigator.clipboard && navigator.clipboard.writeText){
-    var confirmation = document.getElementById("copy-confirmation");
-    confirmation.style.visibility = 'visible';
-    navigator.clipboard.writeText(str);  
-    setTimeout(function(){confirmation.style.visibility = 'hidden';}, 1500);
+function copyToClipboard(link,clickedItem) {
+	if (navigator && navigator.clipboard && navigator.clipboard.writeText){
+		console.log("clickedItem", clickedItem);
+		var copyBadge = document.createElement("span");
+		copyBadge.classList.add("copied");
+		copyBadge.setAttribute("id", "copy-confirmation");
+		copyBadge.innerText = "Copied!";
+		clickedItem.appendChild(copyBadge);
+
+    copyBadge.style.visibility = 'visible';
+    navigator.clipboard.writeText(link);  
+    setTimeout(function(){copyBadge.style.visibility = 'hidden';}, 1500);
+		setTimeout(function(){copyBadge.remove();}, 1600);
     return;
-  }
+	}
   return Promise.reject('The Clipboard API is not available.');
-};
+}

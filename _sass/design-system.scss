@@ -174,7 +174,18 @@ ul {
   }
 }
 
-
+.copied{
+  background-color: semantic-color(actionable-pill);
+  box-shadow: $recessed-shadow semantic-color(shadow);
+  color: $pure-white;
+  border-radius: $pill-radius;
+  padding: 0.25em 0.5em;
+  transform: rotate(-15deg);
+  visibility: hidden;
+  position: absolute;
+  right: -50%;
+  top: 0;
+}
 
 
 
