@@ -220,7 +220,7 @@ function getHappyDayString() {
 getHappyDayString();
 ///////////////////////////////////////////// End of Happy Day Label
 
-
+// TODO update this function to inject the copied label as a sibling element
 const copyToClipboardAsync = str => {
   if (navigator && navigator.clipboard && navigator.clipboard.writeText){
     var confirmation = document.getElementById("copy-confirmation");
