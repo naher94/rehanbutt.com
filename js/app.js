@@ -154,9 +154,10 @@ function dayNames() {
 function holidays() {
   return {
     "1:1": "Happy New Year!",
-		"2:1": "Happy Lunar New Year!",
+		"1:22": "Happy Lunar New Year!",
     "2:23": "Happy 'Day I Wrote This Code' Day!",
     "2:29": "Happy Leap Day!",
+		"5:4": "May the 4th be with you!",
 		"7:22": "Happy Mango Day! 🥭",
 		"10:31": "Happy Halloween! 🎃",
 		"11:25": "Happy Thanksgiving! 🦃",
@@ -220,14 +221,20 @@ function getHappyDayString() {
 getHappyDayString();
 ///////////////////////////////////////////// End of Happy Day Label
 
+function copyToClipboard(link,clickedItem) {
+	if (navigator && navigator.clipboard && navigator.clipboard.writeText){
+		console.log("clickedItem", clickedItem);
+		var copyBadge = document.createElement("span");
+		copyBadge.classList.add("copied");
+		copyBadge.setAttribute("id", "copy-confirmation");
+		copyBadge.innerText = "Copied!";
+		clickedItem.appendChild(copyBadge);
 
-const copyToClipboardAsync = str => {
-  if (navigator && navigator.clipboard && navigator.clipboard.writeText){
-    var confirmation = document.getElementById("copy-confirmation");
-    confirmation.style.visibility = 'visible';
-    navigator.clipboard.writeText(str);  
-    setTimeout(function(){confirmation.style.visibility = 'hidden';}, 1500);
+    copyBadge.style.visibility = 'visible';
+    navigator.clipboard.writeText(link);  
+    setTimeout(function(){copyBadge.style.visibility = 'hidden';}, 1500);
+		setTimeout(function(){copyBadge.remove();}, 1600);
     return;
-  }
+	}
   return Promise.reject('The Clipboard API is not available.');
-};
+}

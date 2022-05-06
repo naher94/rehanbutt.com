@@ -17,9 +17,8 @@ layout: default
             <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20collection%20by%20%40naher94!&url={{page.url | prepend: site.url}}" class="share-item twitter">
               <i class="fab fa-twitter"></i>
             </a>
-            <span onclick="copyToClipboardAsync('{{page.url | prepend: site.url}}')" class="share-item link">
+            <span onclick="copyToClipboard('{{page.url | prepend: site.url}}', this)" class="share-item link">
               <i class="fas fa-link"></i>
-              <span class="copied" id="copy-confirmation">copied</span>
             </span>
           </div>
         </div>

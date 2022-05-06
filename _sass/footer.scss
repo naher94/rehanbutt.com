@@ -235,6 +235,24 @@ footer{
       color: $F500px-green;
     }
   }
+  &.email-wrapper{
+    position: relative;
+    display: inline;
+    cursor: pointer;
+    @include breakpoint(small only) {
+      padding-right: 0;
+    }
+    .copied{
+      font-size: 0.5em;
+      left: -20%;
+      right: unset;
+      font-weight: $lato-bold;
+      @include breakpoint(small only) {
+        left: unset;
+        right: -50%;
+      }
+    }
+  }
 }
 
 .logo-footer-container{

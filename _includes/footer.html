@@ -83,7 +83,9 @@
 
               {% include external-link.html css-class="social" link="https://github.com/naher94" content="<i class='fab fa-github fa-xs' title='Github'></i>" %}
 
-              {% include external-link.html css-class="social" link="mailto:me@rehanbutt.com" content="<i class='fas fa-envelope fa-xs' title='Email'></i>" %}
+              <div class="social email-wrapper" onclick="copyToClipboard('me@rehanbutt.com',this)">
+                <i class='fas fa-envelope fa-xs' title='Email'></i>
+              </div>
 
             </div>
             <div class="cell small-12 medium-shrink social-sub-2">
