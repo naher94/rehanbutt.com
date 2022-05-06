@@ -11,16 +11,13 @@ var pattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'Arr
 var current = 0;
 
 var keyHandler = function (event) {
-
 	// If the key isn't in the pattern, or isn't the current key in the pattern, reset
 	if (pattern.indexOf(event.key) < 0 || event.key !== pattern[current]) {
 		current = 0;
 		return;
 	}
-
 	// Update how much of the pattern is complete
 	current++;
-
 	// If complete, alert and reset
 	if (pattern.length === current) {
 		current = 0;
@@ -28,8 +25,11 @@ var keyHandler = function (event) {
     localStorage.setItem("eggKey", isEggVisable);
 		localStorage.setItem("behindTheScenesEasterEgg", true);
     setBTS();
+		gtag('event', 'Easter Eggs - Konami Code', {
+			'event_category': 'Special',
+			'event_label': 'Konami Code'
+		});
 	}
-
 };
 
 function isEgg (){
@@ -68,6 +68,10 @@ function carHorn(){
 	var audio = new Audio('carhorn.mp3');
 	audio.play();
 	localStorage.setItem("carHornEasterEgg", true);
+	gtag('event', 'Easter Eggs - Tesla Carhorn', {
+		'event_category': 'Special',
+		'event_label': 'Carhorn'
+	});
 }
 
 function paddington(){
