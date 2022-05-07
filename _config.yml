@@ -13,8 +13,8 @@ description: > # this means to ignore newlines until "baseurl:"
 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://rehanbutt.com" # the base hostname & protocol for your site
-version: 6.2.0
-version-naming: [Apricot, Blackcurrent, Coconut, Dragonfruit, Elderberry]
+version: 6.3.0
+version-naming: [Apricot, Blackcurrent, Coconut, Dragonfruit, Elderberry, Fig]
 
 # Build settings
 markdown: kramdown
