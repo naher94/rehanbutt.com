@@ -102,7 +102,7 @@ function isBadge() {
 	if (localStorage.getItem("behindTheScenesEasterEgg") == "true") {
 		let string_of_html = `
 			<div class="cell small-4 large-2">
-				<img src="../img/badges/behindthescenes.png" alt="Behind the Scenes Badge">
+				<img src="../../img/badges/behindthescenes.png" alt="Behind the Scenes Badge">
 				<p>Behind the Scenes Easter Egg</p>
 			</div>
 		`;
@@ -111,7 +111,7 @@ function isBadge() {
 	if (localStorage.getItem("carHornEasterEgg") == "true") {
 		let string_of_html = `
 			<div class="cell small-4 large-2">
-				<img src="../img/badges/carhorn.png" alt="Car Horn Badge">
+				<img src="../../img/badges/carhorn.png" alt="Car Horn Badge">
 				<p>Car Horn Easter Egg</p>
 			</div>
 		`;
