@@ -31,32 +31,7 @@ layout: default
     {%- for resource-var in page.resources -%}
       {%- assign variable = resource-var | prepend: "/resources/" -%}
       {%- assign resource = site.resources | where:"id", variable | first -%}
-      <!-- TODO componentize this -->
-      <a href="{{resource.link}}" target="_blank" rel="noreferrer" class="cell medium-6 large-4 resource-link">
-        <div class="resource">
-          <p class="meta {{resource.content-type | slugify}}">
-            {%- case resource.content-type -%}
-              {%- when 'video' -%}
-                <i class="fas fa-video"></i>
-              {%- when 'reading' or 'article' or 'blog' or 'portfolio' or 'publication' -%}
-                <i class="fas fa-book"></i>
-              {%- when 'interactive' -%}
-                <i class="fas fa-mouse-pointer"></i>
-              {%- when 'tool' -%}
-                <i class="fas fa-hammer"></i>
-              {%- when 'my content' -%}
-                <i class="fas fa-at"></i>
-              {%- when 'reference' -%}
-                <i class="fas fa-binoculars"></i>
-              {%- else -%}
-                <i class="fas fa-shapes"></i>
-            {%- endcase -%}
-            {{resource.content-type}}
-          </p>
-          <p class="title">{{resource.title}}<i class="fas fa-link"></i></p>
-          <p class="description">{{resource.description}}</p>
-        </div>
-      </a>
+      {%- include resource-element.html item=resource -%}
     {%- endfor -%}
   </div>
 
