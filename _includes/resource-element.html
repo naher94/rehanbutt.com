@@ -1,0 +1,25 @@
+<a href="{{include.item.link}}" target="_blank" rel="noreferrer" class="cell medium-6 large-4 resource-link">
+  <div class="resource">
+    <p class="meta {{include.item.content-type | slugify}}">
+      {%- case include.resource.content-type -%}
+        {%- when 'video' -%}
+          <i class="fas fa-video"></i>
+        {%- when 'reading' or 'article' or 'blog' or 'portfolio' or 'publication' -%}
+          <i class="fas fa-book"></i>
+        {%- when 'interactive' -%}
+          <i class="fas fa-mouse-pointer"></i>
+        {%- when 'tool' -%}
+          <i class="fas fa-hammer"></i>
+        {%- when 'my content' -%}
+          <i class="fas fa-at"></i>
+        {%- when 'reference' -%}
+          <i class="fas fa-binoculars"></i>
+        {%- else -%}
+          <i class="fas fa-shapes"></i>
+      {%- endcase -%}
+      {{include.item.content-type}}
+    </p>
+    <p class="title">{{include.item.title}}<i class="fas fa-link"></i></p>
+    <p class="description">{{include.item.description}}</p>
+  </div>
+</a>
