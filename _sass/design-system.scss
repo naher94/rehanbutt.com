@@ -163,6 +163,7 @@ ul {
     bottom: 0;
     background-color: semantic-color(link);
     transition: $run;
+    border-radius: 5px;
   }
 
   &:hover {
