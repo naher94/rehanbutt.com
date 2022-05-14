@@ -83,16 +83,18 @@ footer-main: true
       {% if event.link %}
         <a href="{{event.link}}" target="_blank" rel="noopener">
       {% endif %}
-      <h3>
-        {{event.title}}
+      <div>
+        <h3>
+          {{event.title}}
+          {% if event.link %}
+            <i class="fas fa-link"></i>
+          {% endif %}
+        </h3>
         <!-- Add a if for future event -->
         {% if event_date > current_date %}
         <span>Upcoming</span>
         {% endif %}
-        {% if event.link %}
-          <i class="fas fa-link"></i>
-        {% endif %}
-      </h3>
+      </div>
       <p class="date">{{event.date| date: "%B %Y" }}
         {% if event.location %}
         ・ {{event.location}}
