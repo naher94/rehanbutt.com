@@ -83,17 +83,16 @@ footer-main: true
       {% if event.link %}
         <a href="{{event.link}}" target="_blank" rel="noopener">
       {% endif %}
-      <div class="grid-x">
-        <h3>
-          {{event.title}}
-          {% if event.link %}
-            <i class="fas fa-link"></i>
-          {% endif %}
-        </h3>
+      <h3>
+        {{event.title}}
+        <!-- Add a if for future event -->
         {% if event_date > current_date %}
         <span>Upcoming</span>
         {% endif %}
-      </div>
+        {% if event.link %}
+          <i class="fas fa-link"></i>
+        {% endif %}
+      </h3>
       <p class="date">{{event.date| date: "%B %Y" }}
         {% if event.location %}
         ・ {{event.location}}
@@ -147,7 +146,7 @@ footer-main: true
       <div class="skills-item">UX Writing</div>
       <div class="skills-item">Design Ops</div>
       <div class="skills-item">3D Modeling</div>
-      <div class="skills-item">Motion Design</div>
+      <div class="skills-item">Animation</div>
       <div class="skills-item">Hand & Technical Drawing</div>
       <div class="skills-item">Photography</div>
       <div class="skills-item">Gif Curation 😝</div>
