@@ -157,9 +157,6 @@
     font-size: 0.7em;
     font-weight: $lato-black;
     margin-left: 0.5rem;
-    &:hover{
-      background-color: $signature-teal-d1;
-    }
   }
 }
 
@@ -177,6 +174,7 @@
     font-family: $lato;
     @include breakpoint(small only) {
       line-height: 1em;
+      padding: 0;
     }
     @include breakpoint(medium down) {
       line-height: 1em;
@@ -206,6 +204,9 @@
   .work-item, .speaking-item, .education-item{
     margin-top: 1rem;
     padding-left: 0.5rem;
+    @include breakpoint(small only) {
+      padding-left: 0;
+    }
     p{
       padding: 0;
       margin: 0;
