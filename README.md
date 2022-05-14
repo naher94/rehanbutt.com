@@ -19,6 +19,7 @@ Jekyll also uses the `Liquid` language as its templating language. Here are a co
 - [Liquid Cheat Sheet](https://shopify.github.io/liquid/)
 - [Jekyll Cheat Sheet](https://learn.cloudcannon.com/jekyll-cheat-sheet/)
 - [Liquid for Designs Wiki](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)
+- [cloudcannon Tutorial Directory](https://learn.cloudcannon.com/jekyll-liquid/#list)
 
 ### Content Notes
 
