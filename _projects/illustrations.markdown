@@ -15,7 +15,7 @@ tags: digital, illustration
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/popcorncat.gif" alt="Catto + Popcorn" /></div>
 </div>
 
-<p class="post-callout-large">Check out my <a target="_blank" href="https://instagram.com/naher94">Instagram</a> page for even more illustrations!</p>
+<p class="post-callout-large">Check out my {% include external-link.html link="https://instagram.com/naher94" content="Instagram" %} page for even more illustrations!</p>
 
 <div class="grid-x grid-padding-x grid-margin-y">
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/nycity.gif" alt="nycity Lettering" /></div>
