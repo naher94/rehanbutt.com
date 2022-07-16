@@ -3,7 +3,7 @@ layout: post-hero
 title:  "Safar TeleCare Splash Page"
 tile-name: "Safar Splash Page"
 thumbnail: "safar-splash"
-flag: new
+flag:
 date: 2022-06-01
 hero-background-color: "#FFFFFF"
 hero-background-color-dark: "#1B1D1F"
