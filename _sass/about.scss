@@ -53,6 +53,44 @@
           font-size: 1.2rem;
         }
       }
+      ul.todos{
+        padding: 0;
+        list-style-type: none;
+        .checkbox{
+          display: flex;
+          align-items: center;
+          height: 1em;
+          width: 1em;
+          border: 2px solid semantic-color(accent);
+          border-radius: 4px;
+          margin-right: 0.5em;
+          text-decoration: none;
+        }
+        @include breakpoint(small only) {
+          font-size: 1.2rem;
+          margin-left: 0.25rem;
+        }
+        li{
+          display: flex;
+          align-items: center;
+          font-size: inherit;
+          &.done{
+            .checkbox{
+              background: semantic-color(accent);
+              i{
+                font-size: .75em;
+                padding-left: 0.05em;
+                color: white; //TODO update to semantic color thought its always white
+              }
+            }
+            span{
+              text-decoration: line-through;
+              text-decoration-color: semantic-color(accent);
+              text-decoration-thickness: 0.15em;
+            }
+          }
+        }
+      }
       .basketball{
         cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='50' height='60' viewport='0 0 100 100' style='fill:black;font-size:30px;'><text y='50%'>🏀</text></svg>") 16 0, auto;
       }
