@@ -179,10 +179,10 @@ https://www.stickermule.com/user/1070655211/stickers | no | link to twitter & si
 http://BRND.life | yes | footer
 http://QULR.life | yes | footer
 http://snwg.eddyman.kim | yes | footer
-http://ideate.xsead.cmu.edu/profiles/profiles/naher94 | no |
+~http://ideate.xsead.cmu.edu/profiles/profiles/naher94~ | ~no~ |
 http://naher94.github.io/esporre/ | no |
 https://angel.co/rehan-butt | no |
-https://medium.com/@Naher94 | no |
+https://medium.com/@rehan-butt | no |
 https://yasmeenalmuhanna.com | no |
 https://stackoverflow.com/users/12394272/rehan-butt | |
 https://community.cmu.edu/s/ | |
