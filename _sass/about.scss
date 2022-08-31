@@ -74,7 +74,7 @@
           display: flex;
           align-items: center;
           font-size: inherit;
-          &.done{
+          &.accomplished{
             .checkbox{
               background: semantic-color(accent);
               i{
@@ -272,6 +272,12 @@
       padding-top: 0.5em;
       @include breakpoint(small only) {
         display: none;
+      }
+      &#disney-animation{
+        margin-left: -11.5rem;
+        img{
+          height: 6em;
+        }
       }
       &#duquesne{
         margin-left: -11.5em;

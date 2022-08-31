@@ -13,7 +13,26 @@ footer-main: true
           <p>I am a <span class="rainbow">devzgner</span> currently based in Pittsburgh, PA, USA working on healthcare technology at the University of Pittsburgh Medical Center (UPMC) Enterprises. Currently, I lead design for our technology solutions group developing telemedicine tools. During my time at UPMC I have led design across several products, from care delivery to research study tools and designed a suite of imaging tools for the radiology field with GE Healthcare. Prior to joining the healthcare world, I worked in the sports industry, collaborating with organizations like the <span class="basketball">NBA</span> and <span class="football">NFL</span> on consumer and enterprise applications, such as in-door wayfinding, an ads platform, and <a href="{% link _projects/deepintheq.markdown %}">AR experiences!</a> I have also spent time in the consumer advocacy space building tools that help to prioritize the interests of the consumer to shape a truly consumer-driven marketplace.</p>
           <p>I have been very fortunate to have lived all over the <span class="world">world</span> and continue my love for travel. Bringing my observations and experiences from unique aspects of each culture and geography into my design philosophy. During my travels, I have had the opportunity to grow my love of <span class="photography">photography</span> and have captured some amazing images along the way.</p>
           <p>I attended Carnegie Mellon University where I received a Master in Tangible Interaction Design and a Bachelor (BA) in Integrative Physical and Digital Media Studies. I’m always looking for opportunities to learn something new and share my knowledge with others. There are lot of great resources online, check out some of my recent finds <a href="{% link resources.html %}">here.</a> And sometimes I get a chance to share what I know on <a href="#speaking-events">stage.</a></p>
-          <p>When I’m not devzgning healthcare solutions, you can find me playing with code, drawing <span class="penguin">cute illustrations</span>, pushing buttons and sometimes doing a bit of <span class="woodworking">woodworking</span>. One day I’d like to publish a photo book, design and ship a hardware product and work in the animation industry.</p>
+          <p>When I’m not devzgning healthcare solutions, you can find me playing with code, drawing <span class="penguin">cute illustrations</span>, pushing buttons and sometimes doing a bit of <span class="woodworking">woodworking</span>.</p>
+          <p>One day I’d like to:</p>
+          <ul class="todos">
+            <li>
+              <div class="checkbox">
+              </div>
+              <span>publish a photo book</span>
+            </li>
+            <li>
+              <div class="checkbox">
+              </div>
+              <span>design and ship a hardware product</span>
+            </li>
+            <li>
+              <div class="checkbox">
+                <!-- <i class="fas fa-check"></i> -->
+              </div>
+              <span>work in the animation industry</span>
+            </li>
+          </ul>
           <p>Curious what else I’m up to? Shoot me an <a href="mailto:me@rehanbutt.com" class="email">email.</a></p>
         </section>
         <div class="cell grid-x small-5 large-12 profile-2 grid-padding-x grid-padding-y">
