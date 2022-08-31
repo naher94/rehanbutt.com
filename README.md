@@ -186,6 +186,6 @@ https://medium.com/@rehan-butt | no |
 https://yasmeenalmuhanna.com | no |
 https://stackoverflow.com/users/12394272/rehan-butt | |
 https://community.cmu.edu/s/ | |
-alumnifire | |
+saes.alumnifire.com | no | bio & photo
 https://jekyllrb.com/showcase/ | yes | Full screen shot of the home page
 https://codepen.io/naher94 | no | link to twitter & site
