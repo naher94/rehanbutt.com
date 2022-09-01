@@ -158,34 +158,34 @@ logo | A logo representing the event for visual context | `.svg`
 
 #### Places that Link to Me
 
-Links | Logo? | Notes | Location? | Bio? |
+Links | Logo? | Location? | Bio? | Notes
 :------------ | :------------- | :------------- | :------------- | :-------------
-https://scottylabs.org/portfolio/ |✅| |✖️|✖️
-https://dzgn.io/team/rehan.html |✖️| |✖️|✅
-https://twitter.com/naher94 |✅ header image||✅|✅
-https://dribbble.com/rehanbutt |✖️| social links|✅|✅
-https://adplist.org/mentors/rehan-butt |✅ header image| twitter link |✅|✅
-https://society6.com/rehanbutt/about |✅ header image| |✖️|✖️
-https://www.youtube.com/c/RehanButt1994 | ✅ header image| social links |✖️|✖️
-https://www.linkedin.com/in/rehan-butt/ | ✅ header image| |✅|✅
-https://www.pinterest.com/naher94/ | ✖️||✖️|✖️
-https://codepen.io/naher94 | ✖️| twitter link|✖️|✖️
-http://interchange.soa.cmu.edu | ✅ footer | |✖️|✖️
-http://tech.soa.cmu.edu | ✅ footer | |✖️|✖️
-https://www.stickermule.com/u/rehanbutt | ✖️| |✖️|✖️ 
-http://BRND.life | ✅ footer | |✖️|✖️
-http://QULR.life | ✅ footer | |✖️|✖️
-http://snwg.eddyman.kim | ✅ footer | |✖️|✖️
-http://naher94.github.io/esporre/ |✖️| |✖️|✖️
-https://angel.co/rehan-butt | ✖️| social links|✅|✅
-https://medium.com/@rehan-butt | ✖️| |✖️|✅
-https://yasmeenalmuhanna.com | ✖️| |✖️|✖️
-https://stackoverflow.com/users/12394272/rehan-butt |✖️| social links|✖️|✅
+https://scottylabs.org/portfolio/ |✅|✖️|✖️|
+https://dzgn.io/team/rehan.html |✖️|✖️|✅
+https://twitter.com/naher94 |✅ header image|✅|✅
+https://dribbble.com/rehanbutt |✖️|✅|✅|social links
+https://adplist.org/mentors/rehan-butt |✅ header image|✅|✅| twitter link 
+https://society6.com/rehanbutt/about |✅ header image|✖️|✖️
+https://www.youtube.com/c/RehanButt1994 | ✅ header image|✖️|✖️| social links
+https://www.linkedin.com/in/rehan-butt/ | ✅ header image|✅|✅
+https://www.pinterest.com/naher94/ | ✖️|✖️|✖️
+https://codepen.io/naher94 | ✖️|✖️|✖️| twitter link
+http://interchange.soa.cmu.edu | ✅ footer | ✖️|✖️
+http://tech.soa.cmu.edu | ✅ footer |✖️|✖️
+https://www.stickermule.com/u/rehanbutt | ✖️|✖️|✖️ 
+http://BRND.life | ✅ footer |✖️|✖️
+http://QULR.life | ✅ footer |✖️|✖️
+http://snwg.eddyman.kim | ✅ footer |✖️|✖️
+http://naher94.github.io/esporre/ |✖️|✖️|✖️
+https://angel.co/rehan-butt | ✖️|✅|✅| social links
+https://medium.com/@rehan-butt | ✖️|✖️|✅
+https://yasmeenalmuhanna.com | ✖️|✖️|✖️
+https://stackoverflow.com/users/12394272/rehan-butt |✖️|✖️|✅|social links
 https://community.cmu.edu/s/ | |
-https://saes.alumnifire.com | ✖️| bio & photo |✖️|✅
-https://jekyllrb.com/showcase/ | | Full screen shot of the home page
-~http://dianaconnolly.me~ | ~yes~ | ~footer~
-~https://soa.cmu.edu/design/~ | ~no~ | ~showing fashion work~
-~https://soa.cmu.edu/alumni/~ |~yes~ | ~SHOULD BE UPDATED~
-~http://soa.cmu.edu/students/~ | ~yes~ | ~Graduate Student Section~
+https://saes.alumnifire.com | ✖️|✖️|✅| bio & photo
+https://jekyllrb.com/showcase/ | ||| Full screen shot of the home page v4.0.0
+~http://dianaconnolly.me~ | ~yes~ ||| ~footer~
+~https://soa.cmu.edu/design/~ | ~no~ ||| ~showing fashion work~
+~https://soa.cmu.edu/alumni/~ |~yes~ ||| ~SHOULD BE UPDATED~
+~http://soa.cmu.edu/students/~ | ~yes~ ||| ~Graduate Student Section~
 ~http://ideate.xsead.cmu.edu/profiles/profiles/naher94~ | ~no~ |
