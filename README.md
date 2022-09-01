@@ -180,7 +180,7 @@ http://naher94.github.io/esporre/ |✖️| |✖️|✖️
 https://angel.co/rehan-butt | ✖️| social links|✅|✅
 https://medium.com/@rehan-butt | ✖️| |✖️|✅
 https://yasmeenalmuhanna.com | ✖️| |✖️|✖️
-https://stackoverflow.com/users/12394272/rehan-butt | |
+https://stackoverflow.com/users/12394272/rehan-butt |✖️| social links|✖️|✅
 https://community.cmu.edu/s/ | |
 https://saes.alumnifire.com | ✖️| bio & photo |✖️|✅
 https://jekyllrb.com/showcase/ | | Full screen shot of the home page
