@@ -174,6 +174,7 @@ https://society6.com/rehanbutt/about |✅ header image|✖️|✖️
 https://www.youtube.com/c/RehanButt1994 | ✅ header image|✖️|✖️| social links
 https://dzgn.io/team/rehan.html |✖️|✖️|✅
 https://www.clubhouse.com/@rehanbutt |✖️|✅|✅|Twitter link
+https://letterboxd.com/naher94/ |✖️|✖️|✅|
 https://scottylabs.org/portfolio/ |✅|✖️|✖️|
 http://interchange.soa.cmu.edu | ✅ footer | ✖️|✖️
 http://tech.soa.cmu.edu | ✅ footer |✖️|✖️
