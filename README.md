@@ -160,16 +160,21 @@ logo | A logo representing the event for visual context | `.svg`
 
 Links | Logo? | Location? | Bio? | Notes
 :------------ | :------------- | :------------- | :------------- | :-------------
-https://scottylabs.org/portfolio/ |✅|✖️|✖️|
-https://dzgn.io/team/rehan.html |✖️|✖️|✅
+https://www.linkedin.com/in/rehan-butt/ | ✅ header image|✅|✅
+https://instagram.com/naher94 |✖️|✖️|✅|
+https://github.com/naher94 |✖️|✖️|✅| Twitter link
 https://twitter.com/naher94 |✅ header image|✅|✅
+https://codepen.io/naher94 | ✖️|✖️|✖️| twitter link
+https://www.pinterest.com/naher94/ | ✖️|✖️|✖️
 https://dribbble.com/rehanbutt |✖️|✅|✅|social links
 https://adplist.org/mentors/rehan-butt |✅ header image|✅|✅| twitter link 
+https://angel.co/rehan-butt | ✖️|✅|✅| social links
+https://medium.com/@rehan-butt | ✖️|✖️|✅
 https://society6.com/rehanbutt/about |✅ header image|✖️|✖️
 https://www.youtube.com/c/RehanButt1994 | ✅ header image|✖️|✖️| social links
-https://www.linkedin.com/in/rehan-butt/ | ✅ header image|✅|✅
-https://www.pinterest.com/naher94/ | ✖️|✖️|✖️
-https://codepen.io/naher94 | ✖️|✖️|✖️| twitter link
+https://dzgn.io/team/rehan.html |✖️|✖️|✅
+https://www.clubhouse.com/@rehanbutt |✖️|✅|✅|Twitter link
+https://scottylabs.org/portfolio/ |✅|✖️|✖️|
 http://interchange.soa.cmu.edu | ✅ footer | ✖️|✖️
 http://tech.soa.cmu.edu | ✅ footer |✖️|✖️
 https://www.stickermule.com/u/rehanbutt | ✖️|✖️|✖️ 
@@ -177,8 +182,6 @@ http://BRND.life | ✅ footer |✖️|✖️
 http://QULR.life | ✅ footer |✖️|✖️
 http://snwg.eddyman.kim | ✅ footer |✖️|✖️
 http://naher94.github.io/esporre/ |✖️|✖️|✖️
-https://angel.co/rehan-butt | ✖️|✅|✅| social links
-https://medium.com/@rehan-butt | ✖️|✖️|✅
 https://yasmeenalmuhanna.com | ✖️|✖️|✖️
 https://stackoverflow.com/users/12394272/rehan-butt |✖️|✖️|✅|social links
 https://community.cmu.edu/s/ | |
