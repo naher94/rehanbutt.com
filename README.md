@@ -164,16 +164,18 @@ https://www.linkedin.com/in/rehan-butt/ | ✅ header image|✅|✅
 https://instagram.com/naher94 |✖️|✖️|✅|
 https://github.com/naher94 |✖️|✖️|✅| Twitter link
 https://twitter.com/naher94 |✅ header image|✅|✅
-https://codepen.io/naher94 | ✖️|✖️|✖️| twitter link
+https://codepen.io/naher94 | ✖️|✖️|✖️| Twitter link
 https://www.pinterest.com/naher94/ | ✖️|✖️|✖️
+https://500px.com/p/naher94 |✖️|✅|✅| Twitter & Instagram links
 https://dribbble.com/rehanbutt |✖️|✅|✅|social links
-https://adplist.org/mentors/rehan-butt |✅ header image|✅|✅| twitter link 
+https://adplist.org/mentors/rehan-butt |✅ header image|✅|✅| Twitter link 
 https://angel.co/rehan-butt | ✖️|✅|✅| social links
 https://medium.com/@rehan-butt | ✖️|✖️|✅
 https://society6.com/rehanbutt/about |✅ header image|✖️|✖️
 https://www.youtube.com/c/RehanButt1994 | ✅ header image|✖️|✖️| social links
 https://dzgn.io/team/rehan.html |✖️|✖️|✅
 https://www.clubhouse.com/@rehanbutt |✖️|✅|✅|Twitter link
+https://letterboxd.com/naher94/ |✖️|✖️|✅|
 https://scottylabs.org/portfolio/ |✅|✖️|✖️|
 http://interchange.soa.cmu.edu | ✅ footer | ✖️|✖️
 http://tech.soa.cmu.edu | ✅ footer |✖️|✖️
