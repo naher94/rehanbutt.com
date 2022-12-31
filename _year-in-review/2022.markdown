@@ -1,0 +1,6 @@
+---
+year: 2022
+color: "radial-gradient(circle at top left, rgba(102,255,246,1) 0%, rgba(169,101,255,1) 100%);"
+color-dark: "radial-gradient(circle at top left, rgb(73, 185, 177) 0%, rgb(106, 64, 162) 100%);"
+current:
+---
