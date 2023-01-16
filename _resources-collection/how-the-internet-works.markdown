@@ -2,12 +2,12 @@
 layout: resources-collection
 title: How the Internet Works
 sub-header: Deep Dive
-intro: "Lots of cables"
-tile-image: test-tile.png
-tile-image-alt: This is the alt text
+intro: "The internet that we use everyday is composed of many elements from submarine cables to satellite dishes and a whole lot more."
+tile-image: internet-works.png
+tile-image-alt: A digital art piece of a ethernet cable on the sea floor
 text-color: "#ffffff"
 featured: true
-resources: [steve-jobs-the-ideas-behind-the-pixar-office-design,steve-jobs-poured-imagination-pixar-office]
-date: 2022-04-25
-published: false
+resources: [how-internet-works,beach-house-connecting-internet,nyc-human-internet,bottom-of-internet,undersea-cables-hold-internet,keys-to-the-internet,submarine-cable-map]
+date: 2023-01-16
+published: true
 ---
