@@ -1,7 +1,7 @@
 <a href="{{include.item.link}}" target="_blank" rel="noreferrer" class="cell medium-6 large-4 resource-link">
   <div class="resource">
     <p class="meta {{include.item.content-type | slugify}}">
-      {%- case include.resource.content-type -%}
+      {%- case include.item.content-type -%}
         {%- when 'video' -%}
           <i class="fas fa-video"></i>
         {%- when 'reading' or 'article' or 'blog' or 'portfolio' or 'publication' -%}
