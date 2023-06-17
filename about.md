@@ -4,6 +4,7 @@ title: "About"
 permalink: about
 footer-main: true
 ---
+
 <div class="about-intro">
   <div class="grid-container about-bio">
     <div class="grid-x cell bio-wrapper">
