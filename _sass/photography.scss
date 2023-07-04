@@ -1,0 +1,36 @@
+.photoset-tile{
+  margin-bottom: 1.5em;
+  .thumbnail-container{
+    overflow: hidden;
+    .text-container{
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      // background: linear-gradient(0deg, rgba($navy-black,1) 0%, rgba($navy-black,0) 100%);
+      // background: linear-gradient(0deg, rgba($pure-black,1) 0%, rgba($pure-black,0.5) 60%, rgba($pure-black,0) 100%);
+      //background: linear-gradient(0deg, rgba($pure-black,1) 0%, rgba($pure-black,0) 100%);
+      background: linear-gradient(0deg, rgba($navy-black-d9,1) 0%, rgba($navy-black-d9,0) 100%); //TODO rendering color issue hex to rgb
+      color: $pure-white;
+      font-family: $lato;
+      padding: 2em;
+      padding-top: 4em;
+      h2{ 
+        font-family: $lato;
+        &.thumbnail-text{
+          opacity: 1;
+          position: unset;
+          bottom: unset;
+          left: unset;
+          right: unset;
+          margin: unset;
+          text-align: unset;
+          font-size: 3em;
+        }
+      }
+      .thumbnail-text-date{
+        color: $navy-black-l6;
+      }
+    }
+  }
+}

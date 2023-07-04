@@ -5,6 +5,7 @@ tile-name: "Photography"
 thumbnail: "photography"
 date: 2014-08-01
 tags: photography
+published: false
 ---
 
 <div class="grid-x grid-padding-x grid-margin-y">

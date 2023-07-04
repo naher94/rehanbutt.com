@@ -79,6 +79,14 @@ ul {
   }
 }
 
+.hero-photography{
+  .hero-image{
+    img{
+      border-radius: $tile-radius-big $tile-radius-big 0 0;
+    }
+  }
+}
+
 .hero-background-image{
   position: relative;
   max-width: 1800px;

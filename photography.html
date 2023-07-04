@@ -1,0 +1,28 @@
+---
+layout: default
+title: "Photography"
+permalink: photography
+footer-other: true
+---
+<h1 class="visually-hidden">Photography</h1>
+{% assign photography_order = site.photography | sort: 'date' | reverse %}
+{% for photoset in photography_order %}
+{%- if photoset.featured -%}
+  <div class="small-6 medium-12 cell photoset-tile">
+{%- else -%}
+  <div class="small-6 cell photoset-tile">
+{%- endif -%}
+    <a class="post-link" href="{{ photoset.url | prepend: site.baseurl }}">
+      <div class="thumbnail-container">
+        <img class="thumbnail-image" src="../img/photography/thumbnails/{{ photoset.thumbnail }}" alt="{{ project.tile-name }} Tile">
+        <div class="text-container">
+          <h2 class="thumbnail-text">{{ photoset.title }}</h2>
+          <span class="thumbnail-text-date">{{ photoset.date| date: "%B %Y" }}</span>
+        </div>
+        {% if photoset.flag %}
+        <span class="flag">{{ photoset.flag }}</span>
+        {% endif %}
+      </div>
+    </a>
+  </div>
+{% endfor %}
