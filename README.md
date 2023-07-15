@@ -31,6 +31,11 @@ Jekyll also uses the `Liquid` language as its templating language. Here are a co
 * Tile Descriptions should say something along the lines of a one-liner around the central theme of the project
 * Page Titles should be very similar to Tile Titles with but may be a longer phrase of the project
 
+#### Photography
+
+* Hero images for photosets should be `2x1` in aspect ratio
+* 
+
 #### Dribbble Share Links
 
 ```
@@ -119,6 +124,20 @@ hero-accent-color-dark | Used to update the nav items and logo in the header in 
 hero-image | The image that loads into the hero section | `path` as a `string` eg. `fashion/lustre-hero.jpg`; File should be an `.png` 1600 x 861
 hero-image-alt | The `alt` text for the hero image | `string` eg. `2 outfits in studio lighting`
 hero-background | The image that acts as a brand or vibe element in the hero section | `path` as a `string` eg. `shineregistry/shine-hero-background.svg`; File should be an `.svg` 780 x 448
+
+#### Type `post-photo`
+
+Tag | Use | Data Type
+:--- | :--- | :---
+layout | The template for structural reference | `.html`
+title | The `h1` that shows at the top of the project page | `string`
+thumbnail | thumbnail file name | `image` `.png` or `.jpg` when featured project
+thumbnail-alt | The `alt` text for the thumbnail image | `string` eg. `Burj Al Arab Atrium`
+hero-image | The image that loads into the hero section | `path` as a `string` eg. `dubai-expo/dubai-hero.jpg`; File should be an `.jpg` aspect ratio 2x1
+hero-image-alt | The `alt` text for the hero image | `string` eg. `Dubai Expo Center Dome`
+featured | Whether it renders in as featured (bigger tiles)  | `bool`
+date | `YYYY-MM-DD` | `date`
+
 
 #### `_resources` Frontmatter Tags
 
