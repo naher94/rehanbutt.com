@@ -8,7 +8,7 @@ hero-image-alt:
 featured:
 date: 15-01-2022
 
-hero-background-color: "#FFFFFF"
+hero-background-color: "#E9EAEB"
 hero-background-color-dark: "#161d27"
 hero-accent-color: "#1F2937"
 hero-accent-color-dark: "#FFFFFF"

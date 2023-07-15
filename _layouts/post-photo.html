@@ -6,6 +6,17 @@ hero-accent-color: {{hero-accent-color}}
 hero-accent-color-dark: {{hero-accent-color-dark}}
 ---
 
+<style>
+  .hero{
+    background: {{ page.hero-background-color}};
+  }
+  @media (prefers-color-scheme: dark) {
+    .hero{
+      background: {{ page.hero-background-color-dark}};
+    }
+  }
+</style>
+
 <div class="hero hero-photography">
   <div class="grid-container grid-x hero-image">
     <div class="cell">
