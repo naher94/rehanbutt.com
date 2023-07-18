@@ -7,7 +7,7 @@ footer-other: true
 <h1 class="visually-hidden">Photography</h1>
 {% assign photography_order = site.photography | sort: 'date' | reverse %}
 {% for photoset in photography_order %}
-{%- if photoset.featured -%}
+{%- if photoset.big-tile -%}
   <div class="small-6 medium-12 cell photoset-tile">
 {%- else -%}
   <div class="small-6 cell photoset-tile">

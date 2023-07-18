@@ -5,7 +5,7 @@ thumbnail: burj-al-arab.jpg
 thumbnail-alt: 
 hero-image: "assorted/burj-al-arab-hero.jpg"
 hero-image-alt:
-featured:
+featured: true
 date: 15-01-2022
 
 hero-background-color: "#E9EAEB"
