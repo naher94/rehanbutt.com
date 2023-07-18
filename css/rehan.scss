@@ -220,7 +220,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 }
 
 .featured-resources-speaking{
-  margin-bottom: 12rem;
+  margin-bottom: 6rem;
   color: $pure-white;
   .resources-container, .speaking-container{
     background-color: $navy-black;
@@ -398,7 +398,72 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
 }
 
+.photography-preview-container{
+  h2{
+    text-align: center;
+    font-weight: $zilla-bold;
+    margin-bottom: 3rem;
+    @include breakpoint(small only){
+      line-height: 2.8rem;
+    }
+  }
+  .photo-row{
+    margin-top: 1em;
+    margin-bottom: 5em;
+  }
+  .photo-wrapper{
+    .photo-tile{
+      scale: 1.2;
+      transition: $run;
+      &:hover{
+        scale: 1.3;
+      }
+      a{
+        color: $navy-black;
+      }
+      .photo-cell{
+        box-shadow: $recessed-shadow;
+        border-radius: $tile-radius;
+        overflow: hidden;
+        img{
+          border-radius: $tile-radius;
+          scale: 1.01; //To deal with edge artifacting
+        }
+      }
+    }
+    &:nth-child(odd){
+      .photo-tile{
+        rotate: -5deg;
+        padding-top: 2em;
+      }
+    }
+    &:nth-child(even){
+      .photo-tile{
+        rotate: 5deg;
+        padding-bottom: 2em;
+      }
+    }
+  }
+  .more-button{
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    color: $signature-teal;
+    border-radius: $pill-radius;
+    font-size: 1.5rem;
+    border: solid 0.2rem $signature-teal;
+    text-align: center;
+    display: block;
+    font-weight: $lato-bold;
+    transition: $sprint;
+    &:hover{
+      color: $pure-white;
+      background-color: $signature-teal;
+    }
+  }
+}
+
 .year-in-review{
+  margin-top: 10rem;
   margin-bottom: 10rem;
   @include breakpoint(small only){
     padding-bottom: 2rem;

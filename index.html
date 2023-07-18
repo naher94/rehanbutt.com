@@ -126,6 +126,35 @@ footer-main: true
   </div>
 </section>
 
+{%- assign photos_order = site.photography | sort: 'date' | reverse -%}
+
+<section class="photography-preview-container cell grid-x grid-padding-x">
+  <div class="cell">
+    <h2>Photography</h2>
+  </div>
+  <div class="photo-row grid-x cell">
+  {%- for photo in photos_order -%}
+    {%- if photo.featured == true -%}
+    <div class="cell small-6 medium-4 photo-wrapper">
+      <div class="photo-tile">
+        <a class="" href="{{ photo.url | prepend: site.baseurl }}">
+          <div class="photo-cell">
+            <img src="img/photography/thumbnails/{{photo.thumbnail}}" alt="{{photo.thumbnail-alt}}">
+          </div>
+        </a>
+      </div>
+    </div>
+    {%- endif -%}
+  {%- endfor -%}
+  </div>
+  <div class="cell grid-x align-center grid-padding-x">
+    <div class="cell small-12 medium-6 large-4">
+      <a class="more-button" href="/photography">Explore more photos</a>
+    </div>
+  </div>
+</section>
+
+
 {% assign yir_order = site.year-in-review | sort: 'year' | reverse %}
 
 <section class="year-in-review grid-x grid-padding-x">
