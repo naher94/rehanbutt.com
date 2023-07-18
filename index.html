@@ -135,7 +135,7 @@ footer-main: true
   <div class="photo-row grid-x cell">
   {%- for photo in photos_order -%}
     {%- if photo.featured == true -%}
-    <div class="cell small-6 medium-4 photo-wrapper">
+    <div class="cell small-12 medium-4 photo-wrapper">
       <div class="photo-tile">
         <a class="" href="{{ photo.url | prepend: site.baseurl }}">
           <div class="photo-cell">
@@ -147,7 +147,7 @@ footer-main: true
     {%- endif -%}
   {%- endfor -%}
   </div>
-  <div class="cell grid-x align-center grid-padding-x">
+  <div class="cell grid-x align-center">
     <div class="cell small-12 medium-6 large-4">
       <a class="more-button" href="/photography">Explore more photos</a>
     </div>
