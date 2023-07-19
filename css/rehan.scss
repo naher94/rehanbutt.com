@@ -418,6 +418,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       margin-bottom: 3em;
       @include breakpoint(small only){
         scale: 1;
+        margin-bottom: 0;
       }
       &:hover{
         scale: 1.3;
