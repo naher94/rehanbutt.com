@@ -17,7 +17,21 @@ footer-other: true
         <img class="thumbnail-image" src="../img/photography/thumbnails/{{ photoset.thumbnail }}" alt="{{ project.tile-name }} Tile">
         <div class="text-container">
           <h2 class="thumbnail-text">{{ photoset.title }}</h2>
-          <span class="thumbnail-text-date">{{ photoset.date| date: "%B %Y" }}</span>
+          <span class="thumbnail-text-date">
+            {%- assign photo-month = photoset.date| date: "%m" | plus:0 -%}
+            {%- if photo-month >= 3 and photo-month < 6 -%}
+              Spring
+            {%- elsif photo-month >= 6 and photo-month < 9 -%}
+              Summer
+            {%- elsif photo-month >= 9 and photo-month < 12 -%}
+              Fall
+            {%- elsif photo-month >= 12 -%}
+              Winter
+            {%- elsif photo-month < 3 -%}
+              Winter
+            {%- endif -%}
+            &nbsp;{{ photoset.date| date: "%Y" }}
+          </span>
         </div>
         {% if photoset.flag %}
         <span class="flag">{{ photoset.flag }}</span>
