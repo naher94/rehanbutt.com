@@ -415,6 +415,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     .photo-tile{
       scale: 1.2;
       transition: $run;
+      margin-bottom: 3em;
       @include breakpoint(small only){
         scale: 1;
       }
@@ -422,6 +423,14 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         scale: 1.3;
         @include breakpoint(small only){
           scale: 1.05;
+        }
+        margin-bottom: 0;
+        .photo-cell{
+          padding: .5em;
+          border-radius: calc($tile-radius + 0.5em);
+          p{
+            margin-top: 0.4em;
+          }
         }
       }
       a{
@@ -432,9 +441,19 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         border-radius: $tile-radius;
         overflow: hidden;
         transition: $run;
+        background-color: $pure-white;
+        font-family: $zilla;
+        font-weight: $zilla-bold;
         img{
           border-radius: $tile-radius;
           scale: 1.01; //To deal with edge artifacting
+        }
+        p{
+          padding: 0;
+          margin-bottom: 0;
+          margin-top: -2em;
+          transition: $run;
+          line-height: 1;
         }
       }
     }
