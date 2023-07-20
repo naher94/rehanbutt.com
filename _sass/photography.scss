@@ -39,10 +39,11 @@
   position: relative;
   overflow: hidden;
   .detail{
-    margin: 2em;
-    margin-left: 4em;
+    padding: 2em;
+    padding-left: 4em;
     @include breakpoint(small only) {
-      margin: 1em;
+      padding: 2em;
+      padding-bottom: 14em;
     }
     .detailed-map{
       background-color: rgba( $pure-white, 0.8);
@@ -66,6 +67,9 @@
         margin-right: 1em;
         border-radius: 5px;
         overflow: hidden;
+        @include breakpoint(small only) {
+          margin-right: 0.5em;
+        }
       }
       .text-wrapper{
         p{
@@ -90,5 +94,10 @@
     left: 0;
     right: 0;
     bottom: 0;
+    @include breakpoint(small only) {
+      top: unset;
+      scale: 3;
+      left: -75%;
+    }
   }
 }
