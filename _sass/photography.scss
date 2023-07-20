@@ -56,7 +56,8 @@
       }
     }
     .detail-footer{
-      background-color: rgba( $pure-white, 0.8);
+      background-color: rgba($pure-white, 0.8);
+      color: semantic-color(text-on-light-bg-always);
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
       border-radius: $tile-radius;
