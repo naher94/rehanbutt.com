@@ -464,9 +464,9 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     &:nth-child(odd){
       .photo-tile{
         rotate: -5deg;
-        padding-top: 2em;
+        margin-top: 2em;
         @include breakpoint(small only){
-          padding-top: 0;
+          margin-top: 0;
         }
         &:hover{
           rotate: -3deg;
@@ -476,9 +476,9 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     &:nth-child(even){
       .photo-tile{
         rotate: 5deg;
-        padding-bottom: 2em;
+        margin-bottom: 2em;
         @include breakpoint(small only){
-          padding-bottom: 0;
+          margin-bottom: 0;
         }
         &:hover{
           rotate: 3deg;
