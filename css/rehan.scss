@@ -412,6 +412,9 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     margin-bottom: 5em;
   }
   .photo-wrapper{
+    &:has(.photo-tile:hover){
+      z-index: 2;
+    }
     .photo-tile{
       scale: 1.2;
       transition: $run;
