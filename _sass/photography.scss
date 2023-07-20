@@ -39,15 +39,20 @@
   position: relative;
   overflow: hidden;
   .detail{
-    z-index: 2;
     margin: 2em;
     margin-left: 4em;
+    @include breakpoint(small only) {
+      margin: 1em;
+    }
     .detailed-map{
       background-color: rgba( $pure-white, 0.8);
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
       border-radius: $tile-radius;
       padding: 2em;
+      @include breakpoint(small only) {
+        padding: 1em;
+      }
     }
     .detail-footer{
       background-color: rgba( $pure-white, 0.8);
