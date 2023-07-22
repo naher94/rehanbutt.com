@@ -7,10 +7,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      // background: linear-gradient(0deg, rgba($navy-black,1) 0%, rgba($navy-black,0) 100%);
-      // background: linear-gradient(0deg, rgba($pure-black,1) 0%, rgba($pure-black,0.5) 60%, rgba($pure-black,0) 100%);
-      //background: linear-gradient(0deg, rgba($pure-black,1) 0%, rgba($pure-black,0) 100%);
-      background: linear-gradient(0deg, rgba($navy-black-d9,1) 0%, rgba($navy-black-d9,0) 100%); //TODO rendering color issue hex to rgb
+      background: linear-gradient(0deg, rgba($navy-black-d9,1) 0%, rgba($navy-black-d9,0) 100%);
       color: $pure-white;
       font-family: $lato;
       padding: 2em;
@@ -35,7 +32,7 @@
   }
 }
 .map-container{
-  background-color: rgba( $signature-teal, 0.25);
+  background-color: rgba($signature-teal, 0.25);
   position: relative;
   overflow: hidden;
   .detail{
