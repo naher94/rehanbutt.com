@@ -443,7 +443,6 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       .photo-cell{
         box-shadow: $recessed-shadow;
         border-radius: $tile-radius;
-        overflow: hidden;
         transition: $run;
         background-color: $pure-white;
         font-family: $zilla;
