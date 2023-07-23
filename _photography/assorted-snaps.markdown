@@ -14,8 +14,6 @@ hero-accent-color: "#1F2937"
 hero-accent-color-dark: "#FFFFFF"
 ---
 
-Assorted snaps from over the years.
-
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/photography/assorted/kidinatub.jpg" alt="A kid in a tub rowing down the river" style="width: 100%;">
@@ -49,28 +47,22 @@ Assorted snaps from over the years.
   <div class="cell" style="display: flex; flex: calc(504/768);">
     <img src="../img/photography/assorted/sydneyontherocks.jpg" alt="Sydney on the Rocks" style="width: 100%;">
   </div>
-</div>
-
-<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/photography/assorted/westminsterabbey.jpg" alt="Westminster Abbey side entry" style="width: 100%;">
   </div>
-  <div class="cell" style="display: flex; flex: calc(509/768);">
-    <img src="../img/photography/assorted/burjkhalifa.jpg" alt="Black & white upclose of the Burj Khalifa" style="width: 100%;">
-  </div>
-  <div class="cell" style="display: flex; flex: calc(1024/692);">
+  <div class="cell">
     <img src="../img/photography/assorted/burjalarabatrium.jpg" alt="The atrium of the Burj Al Arab in Dubai" style="width: 100%;">
   </div>
-</div>
-
-<div class="grid-x grid-padding-x grid-margin-y">
-  <div class="cell" style="display: flex; flex: calc(504/768);">
+  <div class="cell medium-6">
+    <img src="../img/photography/assorted/burjkhalifa.jpg" alt="Black & white upclose of the Burj Khalifa" style="width: 100%;">
+  </div>
+  <div class="cell medium-6">
     <img src="../img/photography/assorted/forbiddencity.jpg" alt="Forbidden City in Beijing through a entry way" style="width: 100%;">
   </div>
-  <div class="cell" style="display: flex; flex: calc(504/768);">
+  <div class="cell medium-6">
     <img src="../img/photography/assorted/pa.jpg" alt="Pagoda care taking" style="width: 100%;">
   </div>
-  <div class="cell" style="display: flex; flex: calc(509/768);">
+  <div class="cell medium-6">
     <img src="../img/photography/assorted/jelly.jpg" alt="Jelly fish" style="width: 100%;">
   </div>
 </div>
