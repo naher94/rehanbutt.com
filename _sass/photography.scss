@@ -87,14 +87,13 @@
   }
   .map{
     position: absolute;
-    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     @include breakpoint(small only) {
-      top: unset;
       scale: 3;
-      left: -75%;
+      left: -72%;
+      bottom: 2em;
     }
   }
 }
