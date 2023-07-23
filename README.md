@@ -36,7 +36,7 @@ Jekyll also uses the `Liquid` language as its templating language. Here are a co
 * Hero images for photosets should be `2x1` in aspect ratio
 * Map View should follow the Figma template
 * Detailed map should be exported as 1x1 and tightly bound
-  * [https://simplemaps.com/all-maps](https://simplemaps.com/all-maps)
+  * [https://www.amcharts.com/svg-maps/](https://www.amcharts.com/svg-maps/)
 * Images should be at max 1400px wide and size less then 1mb
 * Flag SVG template in Figma
 
