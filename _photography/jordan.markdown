@@ -14,7 +14,7 @@ hero-accent-color: "#1F2937"
 hero-accent-color-dark: "#FFFFFF"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae tortor a tortor malesuada placerat vel nec dui. Praesent elementum faucibus quam pellentesque cursus. Aenean maximus eleifend iaculis. Pellentesque molestie tincidunt placerat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque porttitor sem nec eros tempus, in pharetra magna lobortis. Nullam sed eros accumsan, tempor tortor et, vulputate ex. Nam sagittis magna ut orci lobortis pellentesque.
+During the winter of 2022, I went on a trip around Jordan exploring many of the sites. From the legendary city of Petra to the golden dunes of Wadi Rum, exploring these ancient landmarks was quite a sight. Enjoy some of my favorite shots from my trip. 
 
 <!-- TODO should this be a component?? -->
 <div class="grid-x grid-padding-x grid-margin-y">
@@ -62,6 +62,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae tortor 
     <img src="../img/photography/jordan-2022/dessert-pano.jpg" alt="">
   </div>
   <div class="cell">
-    <img src="../img/photography/jordan-2022/petra-treasury.jpg" alt="">
+    <img src="../img/photography/jordan-2022/petra-treasury.jpg" alt="The Treasury at Petra">
   </div>
 </div>
