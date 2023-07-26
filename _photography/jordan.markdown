@@ -1,10 +1,10 @@
 ---
 layout: post-photo
 title: Jordan
-thumbnail: dubai.jpg
-thumbnail-alt: Al Wasl Plaza Dome in daylight
-hero-image: "dubai-expo/dubai-hero.jpg"
-hero-image-alt: Al Wasl Plaza Dome in daylight
+thumbnail: jordan2022.jpg
+thumbnail-alt: The Treasury at Petra
+hero-image: "jordan-2022/jordan-hero.jpg"
+hero-image-alt: The Treasury at Petra
 featured: true
 big-tile: false
 date: 15-02-2022
@@ -36,5 +36,32 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae tortor 
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="grid-x grid-padding-x grid-margin-y">
+  <div class="cell medium-6">
+    <img src="../img/photography/jordan-2022/camel-treasury.jpg" alt="">
+  </div>
+  <div class="cell medium-6">
+    <img src="../img/photography/jordan-2022/portal.jpg" alt="">
+  </div>
+  <div class="cell">
+    <img src="../img/photography/jordan-2022/train-tracks.jpg" alt="">
+  </div>
+  <div class="cell">
+    <img src="../img/photography/jordan-2022/goat-truck.jpg" alt="">
+  </div>
+  <div class="cell">
+    <img src="../img/photography/jordan-2022/dessert-truck.jpg" alt="">
+  </div>
+  <div class="cell">
+    <img src="../img/photography/jordan-2022/camels-chilling.jpg" alt="">
+  </div>
+  <div class="cell">
+    <img src="../img/photography/jordan-2022/dessert-pano.jpg" alt="">
+  </div>
+  <div class="cell">
+    <img src="../img/photography/jordan-2022/petra-treasury.jpg" alt="">
   </div>
 </div>
