@@ -1,0 +1,99 @@
+.photoset-tile{
+  margin-bottom: 1.5em;
+  .thumbnail-container{
+    overflow: hidden;
+    .text-container{
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(0deg, rgba($navy-black-d9,1) 0%, rgba($navy-black-d9,0) 100%);
+      color: $pure-white;
+      font-family: $lato;
+      padding: 2em;
+      padding-top: 4em;
+      h2{ 
+        font-family: $lato;
+        &.thumbnail-text{
+          opacity: 1;
+          position: unset;
+          bottom: unset;
+          left: unset;
+          right: unset;
+          margin: unset;
+          text-align: unset;
+          font-size: 3em;
+        }
+      }
+      .thumbnail-text-date{
+        color: $navy-black-l6;
+      }
+    }
+  }
+}
+.map-container{
+  background-color: rgba($signature-teal, 0.25);
+  position: relative;
+  overflow: hidden;
+  .detail{
+    padding: 2em;
+    padding-left: 4em;
+    @include breakpoint(small only) {
+      padding: 2em;
+      padding-bottom: 14em;
+    }
+    .detailed-map{
+      background-color: rgba( $pure-white, 0.8);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border-radius: $tile-radius;
+      padding: 2em;
+      @include breakpoint(small only) {
+        padding: 1em;
+      }
+    }
+    .detail-footer{
+      background-color: rgba($pure-white, 0.8);
+      color: semantic-color(text-on-light-bg-always);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border-radius: $tile-radius;
+      margin-top: 0.5em;
+      padding: 1em;
+      .flag-wrapper{
+        margin-right: 1em;
+        border-radius: 5px;
+        overflow: hidden;
+        @include breakpoint(small only) {
+          margin-right: 0.5em;
+        }
+      }
+      .text-wrapper{
+        p{
+          margin: 0;
+          padding: 0;
+          line-height: 1.2;
+        }
+        .country-name{
+          font-weight: $lato-bold;
+          font-size: 1.25em;
+        }
+        .country-label{
+          text-transform: uppercase;
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+  .map{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    @include breakpoint(small only) {
+      scale: 3;
+      left: -72%;
+      bottom: 2em;
+    }
+  }
+}
