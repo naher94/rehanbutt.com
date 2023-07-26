@@ -7,7 +7,7 @@ tile-image: job-portals.png
 tile-image-alt: A watercolor style image of a series of briefcases with a magnifying glass over top
 text-color: "#000000"
 featured: false
-resources: [linkedin-jobs,builtin,a16z-jobs,wellfound,authentic-jobs,weloveproduct,coroflot-jobs,remotive,design-gold-hiring-episode,levels-fyi,designx-salary,h1bsalary]
+resources: [linkedin-jobs,builtin,a16z-jobs,wellfound,authentic-jobs,weloveproduct,coroflot-jobs,remotive,awwwards-jobs,tealhq-jobs,design-gold-hiring-episode,levels-fyi,designx-salary,h1bsalary]
 date: 2023-06-25
 published: true
 ---
