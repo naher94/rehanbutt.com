@@ -1,5 +1,8 @@
 .photoset-tile{
   margin-bottom: 1.5em;
+  @include breakpoint(small only) {
+    margin-bottom: 1em;
+  }
   .thumbnail-container{
     overflow: hidden;
     .text-container{
@@ -12,6 +15,10 @@
       font-family: $lato;
       padding: 2em;
       padding-top: 4em;
+      @include breakpoint(small only) {
+        padding: 1em;
+        padding-top: 3em;
+      }
       h2{ 
         font-family: $lato;
         &.thumbnail-text{
@@ -23,6 +30,10 @@
           margin: unset;
           text-align: unset;
           font-size: 3em;
+          @include breakpoint(small only) {
+            font-size: 2em;
+            padding: 0;
+          }
         }
       }
       .thumbnail-text-date{
