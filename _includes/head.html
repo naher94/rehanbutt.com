@@ -40,10 +40,12 @@
   <meta property="og:type" content="website" />
   
   <meta property="og:image" content="
-    {% if page.thumbnail %}
-      {{ page.thumbnail | append: '.png' | prepend: '/img/thumbnails/' | prepend: site.baseurl | prepend: site.url }}
-    {% elsif page.layout == "resources-collection" %}
+    {% if page.layout == "resources-collection" %}
       {{ page.tile-image | prepend: '/img/resources-collection/' | prepend: site.baseurl | prepend: site.url }}
+    {% elsif page.layout == "post-photo" %}
+      {{ page.thumbnail | prepend: '/img/photography/thumbnails/' | prepend: site.baseurl | prepend: site.url }}
+    {% elsif page.thumbnail %}
+      {{ page.thumbnail | append: '.png' | prepend: '/img/thumbnails/' | prepend: site.baseurl | prepend: site.url }}
     {% else %}
       {{ "/img/favicon.png" | prepend: site.baseurl | prepend: site.url }}
     {% endif %}" />
