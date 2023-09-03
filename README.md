@@ -46,6 +46,11 @@ Jekyll also uses the `Liquid` language as its templating language. Here are a co
 <a href="https://rehanbutt.com">My Website</a> | <a href="https://twitter.com/naher94/">Twitter</a> | <a href="https://instagram.com/naher94">Instagram</a> | <a href="https://500px.com/naher94">500px</a> | <a href="https://www.pinterest.com/naher94/">Pinterest</a> | <a href="https://github.com/naher94">Github</a>
 ```
 
+#### .MOV to .MP4
+
+`ffmpeg -i demo.mov -vcodec h264 demo.mp4`
+[Convert .mov to .mp4 on a Mac](https://medium.com/macoclock/convert-mov-to-mp4-on-a-mac-c9c93b730d84)
+
 ### Development Notes
 
 #### General
