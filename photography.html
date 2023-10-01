@@ -14,7 +14,7 @@ footer-other: true
 {%- endif -%}
     <a class="post-link" href="{{ photoset.url | prepend: site.baseurl }}">
       <div class="thumbnail-container">
-        <img class="thumbnail-image" src="../img/photography/thumbnails/{{ photoset.thumbnail }}" alt="{{ project.tile-name }} Tile">
+        <img class="thumbnail-image" src="../img/photography/thumbnails/{{ photoset.thumbnail }}" alt="{{photoset.thumbnail-alt}}">
         <div class="text-container">
           <h2 class="thumbnail-text">{{ photoset.title }}</h2>
           <span class="thumbnail-text-date">
