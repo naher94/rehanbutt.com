@@ -1,5 +1,4 @@
 //******* About Page Styling
-
 .about-intro{
   position: relative;
   overflow-x: hidden;
@@ -333,6 +332,37 @@
     }
     &:hover .brand-logo-container{
       opacity: 1;
+    }
+  }
+}
+
+.work-experience{
+  .work-item{
+    .film-credit-container{
+      background-color: semantic-color(film-credit-container-bg);
+      border-radius: 15px;
+      padding: 0.25em;
+      margin-block-start: 0.5em;
+      .film-poster{
+        border-radius: $tile-radius;
+        overflow: hidden;
+        img{
+          max-width: 3.5em;
+        }
+      }
+      .text-container{
+        margin-inline-start: 0.75em;
+        p{
+          line-height: 1.2;
+        }
+        .film-name{
+          font-weight: $lato-bold;
+          font-size: 1.5em;
+          span{
+            font-weight: $lato-regular;
+          }
+        }
+      }
     }
   }
 }
