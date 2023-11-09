@@ -339,28 +339,27 @@
 .work-experience{
   .work-item{
     .film-credit-container{
-      background-color: semantic-color(film-credit-container-bg);
-      border-radius: 15px;
-      padding: 0.25em;
       margin-block-start: 0.5em;
       .film-poster{
-        border-radius: $tile-radius;
+        border-radius: 5px;
         overflow: hidden;
         img{
-          max-width: 3.5em;
+          max-width: 3em;
         }
       }
       .text-container{
-        margin-inline-start: 0.75em;
+        margin-inline-start: 0.5em;
         p{
           line-height: 1.2;
         }
         .film-name{
-          font-weight: $lato-bold;
-          font-size: 1.5em;
+          font-weight: $lato-black;
           span{
-            font-weight: $lato-regular;
+            font-weight: $lato-bold;
           }
+        }
+        .credit-description{
+          margin-top: 0;
         }
       }
     }

@@ -14,6 +14,6 @@ sort-order: -1
   </div>
   <div class="text-container cell auto">
     <p class="film-name">Wish <span>2023</span></p>
-    <p>Credited under Technology - Engineering Services</p>
+    <p class="credit-description">Credited under Technology - Engineering Services</p>
   </div>
 </div>
