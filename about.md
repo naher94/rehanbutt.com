@@ -63,13 +63,13 @@ footer-main: true
     {% assign work_prev = "hello" %}
     {% for work in work_order %}
       <div class="work-item">
-        <!-- Logo thing here -->
+        <!-- Adds logo -->
         {% if work.logo %}
         <div class="brand-logo-container" id="{{work.logo}}">
           <img class="brand-logo" src="/img/{{work.logo}}-logo.svg" alt="{{work.logo}} Logo">
         </div>
         {% endif %}
-        <!-- how to handle the grouping thing many roles in 1 company?? -->
+        <!-- Handle the grouping when many roles in 1 company -->
         {% if work_prev.company != work.company%}
           <h3>{{work.company}}</h3>
         {% endif %}
@@ -77,6 +77,9 @@ footer-main: true
         <!-- what happens when the date is present? -->
         <p class="date">{{work.date-start | date: "%B %Y"}}・{{work.date-end | date: "%B %Y"}}</p>
         <p class="description">{{work.description}}</p>
+        {%- if work.company == "Walt Disney Animation Studios" -%}
+          {{work.content}}
+        {%- endif -%}
       </div>
       {% assign work_prev = work %}
     {% endfor %}

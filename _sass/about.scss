@@ -1,5 +1,4 @@
 //******* About Page Styling
-
 .about-intro{
   position: relative;
   overflow-x: hidden;
@@ -333,6 +332,36 @@
     }
     &:hover .brand-logo-container{
       opacity: 1;
+    }
+  }
+}
+
+.work-experience{
+  .work-item{
+    .film-credit-container{
+      margin-block-start: 0.5em;
+      .film-poster{
+        border-radius: 5px;
+        overflow: hidden;
+        img{
+          max-width: 3em;
+        }
+      }
+      .text-container{
+        margin-inline-start: 0.5em;
+        p{
+          line-height: 1.2;
+        }
+        .film-name{
+          font-weight: $lato-black;
+          span{
+            font-weight: $lato-bold;
+          }
+        }
+        .credit-description{
+          margin-top: 0;
+        }
+      }
     }
   }
 }

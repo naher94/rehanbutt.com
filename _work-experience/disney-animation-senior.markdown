@@ -7,3 +7,13 @@ description: "Working in the technology department, I lead design for a broad ra
 logo: disney-animation
 sort-order: -1
 ---
+
+<div class="film-credit-container grid-x align-middle">
+  <div class="film-poster cell shrink">
+    <img src="/img/film-posters/wish-poster.jpg" alt="Disney's Wish movie poster">
+  </div>
+  <div class="text-container cell auto">
+    <p class="film-name">Wish <span>2023</span></p>
+    <p class="credit-description">Credited under Technology - Engineering Services</p>
+  </div>
+</div>
