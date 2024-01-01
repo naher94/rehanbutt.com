@@ -1,0 +1,6 @@
+---
+year: 2023
+color: "linear-gradient(90deg, rgb(188, 38, 73) 0%, rgb(141, 25, 52) 100%);"
+color-dark: "linear-gradient(90deg, rgb(188, 38, 73) 0%, rgb(141, 25, 52) 100%);"
+current:
+---
