@@ -190,6 +190,7 @@ Links | Logo? | Location? | Bio? | Notes
 :------------ | :------------- | :------------- | :------------- | :-------------
 https://www.linkedin.com/in/rehan-butt/ | ✅ header image|✅|✅
 https://instagram.com/naher94 |✖️|✖️|✅|
+https://www.threads.net/@naher94 |✖️|✖️|✅|
 https://github.com/naher94 |✖️|✖️|✅| Twitter link
 https://twitter.com/naher94 |✅ header image|✅|✅
 https://codepen.io/naher94 | ✖️|✖️|✖️| Twitter link
