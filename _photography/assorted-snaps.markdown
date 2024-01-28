@@ -5,7 +5,7 @@ thumbnail: burj-al-arab.jpg
 thumbnail-alt: Lobby of Burj Al Arab
 hero-image: "assorted/burj-al-arab-hero.jpg"
 hero-image-alt: Lobby of Burj Al Arab
-featured: true
+featured:
 date: 15-01-2014
 
 hero-background-color: "#FFFFFF"
