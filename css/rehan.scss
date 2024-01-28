@@ -431,7 +431,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         margin-bottom: 0;
         .photo-cell{
           padding: .5em;
-          border-radius: calc($tile-radius + 0.5em);
+          border-radius: calc(#{$tile-radius} + 0.5em);
           p{
             margin-top: 0.4em;
           }
