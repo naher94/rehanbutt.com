@@ -203,16 +203,12 @@ https://angel.co/rehan-butt | ✖️|✅|✅| social links
 https://medium.com/@rehan-butt | ✖️|✖️|✅
 https://society6.com/rehanbutt/about |✅ header image|✖️|✖️
 https://www.youtube.com/c/RehanButt1994 | ✅ header image|✖️|✖️| social links
-https://dzgn.io/team/rehan.html |✖️|✖️|✅
 https://www.clubhouse.com/@rehanbutt |✖️|✅|✅|Twitter link
 https://letterboxd.com/naher94/ |✖️|✖️|✅|
-https://scottylabs.org/portfolio/ |✅|✖️|✖️|
 http://interchange.soa.cmu.edu | ✅ footer | ✖️|✖️
-http://tech.soa.cmu.edu | ✅ footer |✖️|✖️
 https://www.stickermule.com/u/rehanbutt | ✖️|✖️|✖️ 
 http://BRND.life | ✅ footer |✖️|✖️
 http://QULR.life | ✅ footer |✖️|✖️
-http://snwg.eddyman.kim | ✅ footer |✖️|✖️
 http://naher94.github.io/esporre/ |✖️|✖️|✖️
 https://yasmeenalmuhanna.com | ✖️|✖️|✖️
 https://stackoverflow.com/users/12394272/rehan-butt |✖️|✖️|✅|social links
@@ -224,3 +220,7 @@ https://jekyllrb.com/showcase/ |✅|✖️|✖️| Full screen shot of the home 
 ~https://soa.cmu.edu/alumni/~ |~yes~ ||| ~SHOULD BE UPDATED~
 ~http://soa.cmu.edu/students/~ | ~yes~ ||| ~Graduate Student Section~
 ~http://ideate.xsead.cmu.edu/profiles/profiles/naher94~ | ~no~ |
+~https://scottylabs.org/portfolio/~ |~✅~|✖️|✖️|
+~http://tech.soa.cmu.edu~ | ~✅ footer~ |✖️|✖️
+~http://snwg.eddyman.kim~ | ~✅ footer~ |✖️|✖️
+~https://dzgn.io/team/rehan.html~ |✖️|✖️|~✅~
