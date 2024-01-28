@@ -5,8 +5,8 @@ thumbnail: abu-dhabi.jpg
 thumbnail-alt: The Columns of Sheikh Zayed Grand Mosque
 hero-image: "abu-dhabi-2023/abu-dhabi-hero.jpg"
 hero-image-alt: The Columns of Sheikh Zayed Grand Mosque
-featured:
-big-tile: 
+featured: true
+big-tile: true
 date: 15-12-2023
 hero-background-color: "#FFFFFF"
 hero-background-color-dark: "#161d27"
@@ -89,5 +89,5 @@ During my trip to Abu Dhabi I had the chance to visit Sheikh Zayed Grand Mosque,
   <div class="cell medium-6">
     <img src="/img/photography/abu-dhabi-2023/minaret.jpg" alt="Minaret of Sheikh Zayed Grand Mosque">
   </div>
-  <!-- TODO palace shot overview -->
+  <!-- TODO add palace shots -->
 </div>
