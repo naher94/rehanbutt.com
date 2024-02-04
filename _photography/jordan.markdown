@@ -5,7 +5,7 @@ thumbnail: jordan2022.jpg
 thumbnail-alt: The Treasury at Petra
 hero-image: "jordan-2022/jordan-hero.jpg"
 hero-image-alt: The Treasury at Petra
-featured: true
+featured:
 big-tile: false
 date: 15-02-2022
 hero-background-color: "#FFFFFF"
