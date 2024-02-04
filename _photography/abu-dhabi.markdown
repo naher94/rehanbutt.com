@@ -6,7 +6,7 @@ thumbnail-alt: The Columns of Sheikh Zayed Grand Mosque
 hero-image: "abu-dhabi-2023/abu-dhabi-hero.jpg"
 hero-image-alt: The Columns of Sheikh Zayed Grand Mosque
 featured: true
-big-tile: true
+big-tile:
 date: 15-12-2023
 hero-background-color: "#FFFFFF"
 hero-background-color-dark: "#161d27"
