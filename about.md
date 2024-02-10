@@ -18,12 +18,14 @@ footer-main: true
           <p>One day I'd like to:</p>
           <ul class="todos">
             <li>
-              <div class="checkbox">
+              <div class="checkbox" onclick="easterEggMessage(this)">
+                <div class="click-easter-egg">Ha! If only it was that easy 😊</div>
               </div>
               <span>publish a photo book</span>
             </li>
             <li>
-              <div class="checkbox">
+              <div class="checkbox" onclick="easterEggMessage(this)">
+                <div class="click-easter-egg">Ha! If only it was that easy 😊</div>
               </div>
               <span>design and ship a hardware product</span>
             </li>

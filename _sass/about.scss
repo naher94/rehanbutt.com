@@ -65,6 +65,22 @@
             border-radius: 4px;
             margin-right: 0.5em;
             text-decoration: none;
+            position: relative;
+            .click-easter-egg{
+              background-color: $navy-black; //TODO make semantic
+              box-shadow: $recessed-shadow semantic-color(shadow);
+              color: $pure-white;
+              border-radius: $tile-radius;
+              padding: 0.25em 0.5em;
+              transform: rotate(-5deg);
+              width: 9em;
+              line-height: 1.2;
+              opacity: 0;
+              position: absolute;
+              left: 150%;
+              top: -200%;
+              transition: $sprint;
+            }
           }
           @include breakpoint(small only) {
             font-size: 1.2rem;
