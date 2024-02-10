@@ -52,40 +52,58 @@
           font-size: 1.2rem;
         }
       }
-      ul.todos{
-        padding: 0;
-        list-style-type: none;
-        .checkbox{
-          display: flex;
-          align-items: center;
-          height: 1em;
-          width: 1em;
-          border: 2px solid semantic-color(accent);
-          border-radius: 4px;
-          margin-right: 0.5em;
-          text-decoration: none;
-        }
-        @include breakpoint(small only) {
-          font-size: 1.2rem;
-          margin-left: 0.25rem;
-        }
-        li{
-          display: flex;
-          align-items: center;
-          font-size: inherit;
-          &.accomplished{
-            .checkbox{
-              background: semantic-color(accent);
-              i{
-                font-size: .75em;
-                padding-left: 0.05em;
-                color: white; //TODO update to semantic color thought its always white
-              }
+      ul{
+        &.todos{
+          padding: 0;
+          list-style-type: none;
+          .checkbox{
+            display: flex;
+            align-items: center;
+            height: 1em;
+            width: 1em;
+            border: 2px solid semantic-color(accent);
+            border-radius: 4px;
+            margin-right: 0.5em;
+            text-decoration: none;
+            position: relative;
+            .click-easter-egg{
+              background-color: $navy-black; //TODO make semantic
+              box-shadow: $recessed-shadow semantic-color(shadow);
+              color: $pure-white;
+              border-radius: $tile-radius;
+              padding: 0.25em 0.5em;
+              transform: rotate(-5deg);
+              width: 9em;
+              line-height: 1.2;
+              opacity: 0;
+              position: absolute;
+              left: 150%;
+              top: -200%;
+              transition: $sprint;
             }
-            span{
-              text-decoration: line-through;
-              text-decoration-color: semantic-color(accent);
-              text-decoration-thickness: 0.15em;
+          }
+          @include breakpoint(small only) {
+            font-size: 1.2rem;
+            margin-left: 0.25rem;
+          }
+          li{
+            display: flex;
+            align-items: center;
+            font-size: inherit;
+            &.accomplished{
+              .checkbox{
+                background: semantic-color(accent);
+                i{
+                  font-size: .75em;
+                  padding-left: 0.05em;
+                  color: white; //TODO update to semantic color thought its always white
+                }
+              }
+              span{
+                text-decoration: line-through;
+                text-decoration-color: semantic-color(accent);
+                text-decoration-thickness: 0.15em;
+              }
             }
           }
         }

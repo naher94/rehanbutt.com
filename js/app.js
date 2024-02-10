@@ -243,3 +243,12 @@ function copyToClipboard(link,clickedItem) {
 	}
   return Promise.reject('The Clipboard API is not available.');
 }
+///////////////////////////////////////////// End of Copy to Clipboard
+
+///////////////////////////////////////////// Start of Checkbox Easter Egg Message on About Page
+function easterEggMessage(clickedItem){
+	console.log("children",clickedItem.children);
+	clickedItem.children[0].style.opacity = '1';
+	setTimeout(function(){clickedItem.children[0].style.opacity = '0';}, 1500);
+}
+///////////////////////////////////////////// End of Checkbox Easter Egg Message on About Page
