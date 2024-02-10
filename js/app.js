@@ -225,6 +225,7 @@ function getHappyDayString() {
 getHappyDayString();
 ///////////////////////////////////////////// End of Happy Day Label
 
+///////////////////////////////////////////// Start of Copy to Clipboard
 function copyToClipboard(link,clickedItem) {
 	if (navigator && navigator.clipboard && navigator.clipboard.writeText){
 		console.log("clickedItem", clickedItem);
