@@ -158,12 +158,11 @@ function dayNames() {
 function holidays() {
   return {
     "1:1": "Happy New Year!",
-		"1:22": "Happy Lunar New Year!",
+		"2:10": "Happy Lunar New Year!",
     "2:23": "Happy 'Day I Wrote This Code' Day!",
     "2:29": "Happy Leap Day!",
 		"5:4": "May the 4th be with you!",
 		"7:22": "Happy Mango Day! 🥭",
-		"10:16": "Happy 100th Mickey!",
 		"10:31": "Happy Halloween! 🎃",
 		"11:23": "Happy Thanksgiving! 🦃",
 		"11:29": "Happy Hanukkah!",
