@@ -22,15 +22,6 @@ In [Version (V1.0)](https://github.com/naher94/jasper/releases/tag/V1.0) Jasper 
 
 <div class="image-container" style="margin-top:50px;"><img src="../img/colorBot/conversation.png" alt="A full Conversation with Jasper"/></div>
 
-<div class="grid-x grid-padding-x grid-padding-y">
-  <div class="cell">
-    <a target="_blank" href="https://github.com/naher94/jasper">
-        <div class="colorbot-button content-button"> Check out the code
-        </div>
-    </a>
-  </div>
-</div>
-
 ## Process
 
 | Effort/Priority | High   | Medium    | Low |

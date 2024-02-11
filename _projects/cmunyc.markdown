@@ -9,14 +9,6 @@ tags: web Dzgn.IO
 
 
 <div class="image-container"><img src="../img/nyc/nycDIO.png" alt="Home Page" /></div>
-
-<!-- <div>
-<a target="_blank" href="http://nyc.dzgn.io">
-    <div class="nyc-button content-button"> Check out the full site
-    </div>
-</a>
-</div> -->
-
 <div class="image-container"><img src="../img/nyc/screenshots.png" alt="Page Screens" /></div>
 
 
