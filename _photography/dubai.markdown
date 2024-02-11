@@ -14,8 +14,7 @@ hero-accent-color: "#1F2937"
 hero-accent-color-dark: "#FFFFFF"
 ---
 
-Words go here words go here. 2012 + 2022 .... I had the incredible opportunity to visit Dubai Expo in 2022, two years after its originally planned date, as the global pandemic had caused a delay. This event carries on the rich heritage of the World's Fair, where groundbreaking technologies like the telephone and color TV were first unveiled, alongside iconic architectural landmarks such as the Eiffel Tower and the Space Needle, which left a lasting impact on the world stage.
-TODO update this copy and add all the alt text
+Had the opportunity to visit Dubai twice, 10 years apart. First in 2012 then 2022 when I attended the <a href="{% link _photography/dubai-expo.markdown %}">World Expo</a>. Enjoy some of my favorite shots from my trip exploring architecture and culture.
 
 <!-- TODO should this be a component?? -->
 <div class="grid-x grid-padding-x grid-margin-y">
