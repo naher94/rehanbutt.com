@@ -850,31 +850,10 @@ article{
   }
 }
 
-.nyc-button {
-  background-color: #EA4D5B;
-  &:hover {
-    background-color: darken(#EA4D5B, $color-percentage);
-  }
-}
-
 .processly-button {
   background-color: #7C1F5E;
   &:hover {
     background-color: darken(#7C1F5E, $color-percentage);
-  }
-}
-
-.colorbot-button {
-  background-color: #E82730;
-  &:hover {
-    background-color: darken(#E82730, $color-percentage);
-  }
-}
-
-.interchange-button {
-  background-color: #313131;
-  &:hover {
-    background-color: darken(#313131, $color-percentage);
   }
 }
 
@@ -889,27 +868,6 @@ article{
   background-color: #acdeea;
   &:hover{
     background-color: darken(#acdeea, $color-percentage);
-  }
-}
-
-.qulr-button{
-  background-color: #d4d4d4;
-  &:hover{
-    background-color: darken(#d4d4d4, $color-percentage);
-  }
-}
-
-.techsoa-button{
-  background-color: #00e59f;
-  &:hover{
-    background-color: darken(#00e59f, $color-percentage);
-  }
-}
-
-.deepintheq-button{
-  background-color: #870039;
-  &:hover{
-    background-color: darken(#870039, $color-percentage);
   }
 }
 //******* End of Project Specific Styling
