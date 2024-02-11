@@ -1,25 +1,21 @@
 ---
 layout: post-photo
-title: Dubai Expo
+title: Dubai
 thumbnail: dubai.jpg
-thumbnail-alt: Al Wasl Plaza Dome in daylight
-hero-image: "dubai-expo/dubai-hero.jpg"
-hero-image-alt: Al Wasl Plaza Dome in daylight
-featured: true
-big-tile: true
-date: 15-03-2022
+thumbnail-alt: Lobby of Burj Al Arab
+hero-image: "dubai/hero.jpg"
+hero-image-alt: Lobby of Burj Al Arab
+featured:
+big-tile:
+date: 15-12-2012
 hero-background-color: "#FFFFFF"
 hero-background-color-dark: "#161d27"
 hero-accent-color: "#1F2937"
 hero-accent-color-dark: "#FFFFFF"
 ---
 
-I had the incredible opportunity to visit Dubai Expo in 2022, two years after its originally planned date, as the global pandemic had caused a delay. This event carries on the rich heritage of the World's Fair, where groundbreaking technologies like the telephone and color TV were first unveiled, alongside iconic architectural landmarks such as the Eiffel Tower and the Space Needle, which left a lasting impact on the world stage.
-
-Now, the World Expo has evolved to emphasize the celebration of global culture. The captivating performances of traditional dances, melodious music, and vibrant exhibitions of art and crafts spoke a universal language, uniting humanity under the inspiring banner of creativity.
-
-I invite you to experience this extraordinary event that united the world with a shared vision of a brighter, interconnected future. Join me on my photographic journey of Dubai Expo 2020.
-
+Words go here words go here. 2012 + 2022 .... I had the incredible opportunity to visit Dubai Expo in 2022, two years after its originally planned date, as the global pandemic had caused a delay. This event carries on the rich heritage of the World's Fair, where groundbreaking technologies like the telephone and color TV were first unveiled, alongside iconic architectural landmarks such as the Eiffel Tower and the Space Needle, which left a lasting impact on the world stage.
+TODO update this copy and add all the alt text
 
 <!-- TODO should this be a component?? -->
 <div class="grid-x grid-padding-x grid-margin-y">
@@ -44,59 +40,51 @@ I invite you to experience this extraordinary event that united the world with a
   </div>
 </div>
 
+<!-- TODO add future museum elevator??? -->
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
-    <img src="../img/photography/dubai-expo/marrocco-pavilion.jpg" alt="Shot of the Morocco pavilion looking up through the atrium">
-  </div>
-  <div class="cell" style="display: flex; flex: calc(1000/667);">
-    <img src="../img/photography/dubai-expo/white-slats.jpg" alt="Abstract curved white slats">
-  </div>
-  <div class="cell" style="display: flex; flex: calc(667/1000);">
-    <img src="../img/photography/dubai-expo/white-cube.jpg" alt="Looking out of a white perforated box">
+    <img src="../img/photography/dubai/burj-al-arab-atrium-gold.jpg" alt="Atrium of the Burj al Arab with the gold arches">
   </div>
   <div class="cell">
-    <img src="../img/photography/dubai-expo/uk-inside.jpg" alt="The inside if the UK pavilion looking towards the wall of words">
-  </div>
-  <div class="cell">
-    <img src="../img/photography/dubai-expo/blue-bird.jpg" alt="Costumed bird characters interaction with kids in the plaza">
-  </div>
-  <div class="cell">
-    <img src="../img/photography/dubai-expo/gold-tent.jpg" alt="Gold and white tent from the inside">
+    <img src="../img/photography/dubai/metro.jpg" alt="Metro line of Dubai">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/dubai-expo/russia-lines.jpg" alt="Colorful lines of the Russia pavilion against a blue sky">
+    <img src="../img/photography/dubai/boat.jpg" alt="Dubai boats">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/dubai-expo/korea-cubes.jpg" alt="Red and yellow boxes of the south korean pavilion in a abstract stack">
+    <img src="../img/photography/dubai/boat2.jpg" alt="Dubai boats">
   </div>
   <div class="cell">
-    <img src="../img/photography/dubai-expo/opportunity-pavilion.jpg" alt="Abstract architectural shot of the opportunity pavilion">
+    <img src="../img/photography/dubai/sail-detail.jpg" alt="Detail of the Burj Al Arab's sail">
   </div>
   <div class="cell">
-    <img src="../img/photography/dubai-expo/pink-bird.jpg" alt="Glowing faceted pink bird sculpture">
+    <img src="../img/photography/dubai/jumeirah-beach.jpg" alt="Jumeirah Beach Resort and surrounding area from above">
   </div>
   <div class="cell">
-    <img src="../img/photography/dubai-expo/orange-tent.jpg" alt="Abstract shot of an orange tent with foliage shot at night">
+    <img src="../img/photography/dubai/future-emirates-towers.jpg" alt="Emirates Towers and the Future Museum">
+  </div>
+  <div class="cell">
+    <img src="../img/photography/dubai/future-museum.jpg" alt="Spiral staircase of the Future Museum">
+  </div>
+  <div class="cell">
+    <img src="../img/photography/dubai/museum-species.jpg" alt="The library at the Future Museum">
+  </div>
+  <div class="cell">
+    <img src="../img/photography/dubai/whale-species.jpg" alt="Detail of the blue whale at the library in the Future Museum">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/dubai-expo/red-ribbon.jpg" alt="A floating ribbon sculpture in an atrium wit red lighting">
+    <img src="../img/photography/dubai/burj-al-arab-sail.jpg" alt="The sail of the Burj Al Arab">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/dubai-expo/egg.jpg" alt="An egg sculpture with arabic script in the courtyard at night">
+    <img src="../img/photography/dubai/twist.jpg" alt="Twisted building">
+  </div>
+  <div class="cell" style="display: flex; flex: calc(927/1400);">
+    <img src="../img/photography/dubai/burj-khalifa-detail.jpg" alt="Black & white upclose of the Burj Khalifa">
+  </div>
+  <div class="cell" style="display: flex; flex: calc(1/1);">
+    <img src="../img/photography/dubai/burj-khalifa.jpg" alt="Black & white of the Burj Khalifa">
   </div>
   <div class="cell">
-    <img src="../img/photography/dubai-expo/pakistan-scales.jpg" alt="Exterior look at the scales of the Pakistan pavilion">
-  </div>
-  <div class="cell">
-    <img src="../img/photography/dubai-expo/uzbekistan-pattern.jpg" alt="Pattern detailing of the exterior of the Uzbekistan pavilion">
-  </div>
-  <div class="cell">
-    <img src="../img/photography/dubai-expo/parasol-structure.jpg" alt="Structural detailing of a large parasol building">
-  </div>
-  <div class="cell">
-    <img src="../img/photography/dubai-expo/thai-pavilion.jpg" alt="Facade of the Thai pavilion with motifs of traditional Thai architecture">
-  </div>
-  <div class="cell">
-    <img src="../img/photography/dubai-expo/center-dome.jpg" alt="Al Wasl Plaza Dome in daylight">
+    <img src="../img/photography/dubai/burj-al-arab-atrium.jpg" alt="The atrium of the Burj Al Arab">
   </div>
 </div>

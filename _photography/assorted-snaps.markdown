@@ -1,10 +1,10 @@
 ---
 layout: post-photo
 title: Assorted Snaps
-thumbnail: burj-al-arab.jpg
-thumbnail-alt: Lobby of Burj Al Arab
-hero-image: "assorted/burj-al-arab-hero.jpg"
-hero-image-alt: Lobby of Burj Al Arab
+thumbnail: assorted.jpg
+thumbnail-alt: Fishing boat with lush green river plants
+hero-image: "assorted/hero.jpg"
+hero-image-alt: Fishing boat with lush green river plants
 featured:
 date: 15-01-2014
 
@@ -49,12 +49,6 @@ hero-accent-color-dark: "#FFFFFF"
   </div>
   <div class="cell">
     <img src="../img/photography/assorted/westminsterabbey.jpg" alt="Westminster Abbey side entry" style="width: 100%;">
-  </div>
-  <div class="cell">
-    <img src="../img/photography/assorted/burjalarabatrium.jpg" alt="The atrium of the Burj Al Arab in Dubai" style="width: 100%;">
-  </div>
-  <div class="cell medium-6">
-    <img src="../img/photography/assorted/burjkhalifa.jpg" alt="Black & white upclose of the Burj Khalifa" style="width: 100%;">
   </div>
   <div class="cell medium-6">
     <img src="../img/photography/assorted/forbiddencity.jpg" alt="Forbidden City in Beijing through a entry way" style="width: 100%;">
