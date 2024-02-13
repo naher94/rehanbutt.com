@@ -6,14 +6,20 @@ on:
       - '**/*' # This triggers the workflow for any file changes
 
 jobs:
-  print-changes:
-    runs-on: ubuntu-latest
-
+  build:
+    runs-on: ubuntu-latest  # windows-latest | macos-latest
+    name: Test changed-files
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
 
-      - name: Print Changed Files
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v14.6
+
+      - name: List all changed files
         run: |
-          echo "Changed Files 122:"
-          git diff --name-only ${{ github.base_ref }}..${{ github.head_ref }}
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
