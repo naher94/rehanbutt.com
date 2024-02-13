@@ -30,10 +30,11 @@ jobs:
               echo "Version incremented. Check passed."
             else
               echo "Error: Version in 'config.yml' was not incremented. Please update the version before merging."
-              exit 1
+              exit 1  # This line triggers a failure by exiting with a non-zero code
             fi
           else
-            echo "config.yml not modified. Skipping version check."
+            echo "Error: config.yml not modified in this pull request. Please make changes to config.yml before merging."
+            exit 1  # This line triggers a failure by exiting with a non-zero code
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
