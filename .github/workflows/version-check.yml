@@ -2,10 +2,8 @@ name: Version Check
 
 on:
   pull_request:
-    paths:
-      - 'config.yml'
-    branches:
-      - 'gh-pages'
+    paths: [ "config.yml" ]
+    branches: [ "gh-pages" ]
 
 jobs:
   check-version:
