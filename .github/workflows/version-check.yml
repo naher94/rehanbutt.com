@@ -17,9 +17,14 @@ jobs:
 
       - name: Check version increment
         run: |
+          # Get the default branch name
+          DEFAULT_BRANCH=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
+          echo "Default branch is: $DEFAULT_BRANCH"
+      
           # Get the base commit SHA (where the branch started)
           BASE_SHA=$(git merge-base $DEFAULT_BRANCH $GITHUB_SHA)
-
+          echo "Base SHA: $BASE_SHA"
+      
           # Check if 'config.yml' was modified in this pull request
           if git diff --name-only $BASE_SHA $GITHUB_SHA | grep -q 'config.yml'; then
             # Check if the version was incremented
