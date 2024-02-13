@@ -18,10 +18,10 @@ jobs:
       - name: Print changed files
         run: |
           echo "Changed files in this pull request:"
-          git show --name-only --pretty="" ${{ github.event.before }} ${{ github.sha }}
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }}
 
           # Check if '_config.yml' was modified in this pull request
-          if git show --name-only --pretty="" ${{ github.event.before }} ${{ github.sha }} | grep -q -E '^_config\.yml$'; then
+          if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q -E '^_config\.yml$'; then
             echo "Changes in '_config.yml':"
             git diff ${{ github.event.before }} ${{ github.sha }} '_config.yml'
 
