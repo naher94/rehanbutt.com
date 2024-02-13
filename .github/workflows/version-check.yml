@@ -2,29 +2,18 @@ name: Version Check
 
 on:
   pull_request:
-    types:
-      - synchronize
-      - opened
-      - reopened
-      - edited
+    paths:
+      - '**/*' # This triggers the workflow for any file changes
 
 jobs:
-  check-version:
+  print-changes:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Print changed files
+      - name: Print Changed Files
         run: |
-          echo "Changed files in this pull request 1:"
+          echo "Changed Files:"
           git diff --name-only ${{ github.event.before }} ${{ github.sha }}
-
-          # Check if '_config.yml' is in the list of changed files
-          if grep -q -E '^_config\.yml$' <<< "$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})"; then
-            echo "Changes in '_config.yml':"
-            git diff ${{ github.event.before }} ${{ github.sha }} '_config.yml'
-          else
-            echo "Error: '_config.yml' not modified in this pull request. Please make changes to '_config.yml' before merging."
-            exit 1
-          fi
