@@ -17,7 +17,7 @@ jobs:
 
       - name: Print changed files
         run: |
-          echo "Changed files in this pull request:"
+          echo "Changed files in this pull request 1:"
           git diff --name-only ${{ github.event.before }} ${{ github.sha }}
 
           # Check if '_config.yml' is in the list of changed files
