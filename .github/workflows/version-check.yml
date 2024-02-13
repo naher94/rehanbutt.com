@@ -23,9 +23,14 @@ jobs:
 
       - name: Check version increment
         run: |
+          # Print the list of changed files
+          echo "Changed files in this pull request:"
+          git diff --name-only $DEFAULT_BRANCH HEAD
+      
           # Check if 'config.yml' was modified in this pull request
           if git diff --name-only $DEFAULT_BRANCH HEAD | grep -q 'config.yml'; then
             # Print the changes in 'config.yml' for debugging
+            echo "Changes in 'config.yml':"
             git diff $DEFAULT_BRANCH HEAD 'config.yml'
       
             # Check if the version was incremented
