@@ -1,14 +1,16 @@
 name: Version Check
+
 on:
-  push:
-    branches:
-    - main
+  pull_request:
+    paths:
+      - 'config.yml'
+
 jobs:
   check-version:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
       - name: Check version increment
         run: |
@@ -29,3 +31,5 @@ jobs:
           else
             echo "config.yml not modified. Skipping version check."
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
