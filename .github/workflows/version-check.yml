@@ -1,4 +1,4 @@
-name: Version Check
+name: Print Changed Files
 
 on:
   pull_request:
@@ -15,5 +15,5 @@ jobs:
 
       - name: Print Changed Files
         run: |
-          echo "Changed Files:"
-          git diff --name-only ${{ github.event.before }} ${{ github.sha }}
+          echo "Changed Files 122:"
+          git diff --name-only ${{ github.base_ref }}..${{ github.head_ref }}
