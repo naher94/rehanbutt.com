@@ -1,9 +1,6 @@
 name: Version Check
 
-on:
-  pull_request:
-    paths: [ "config.yml" ]
-    branches: [ "gh-pages" ]
+on: workflow_dispatch
 
 jobs:
   check-version:
