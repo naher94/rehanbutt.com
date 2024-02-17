@@ -1,7 +1,7 @@
 name: Broken Link Finder
 on:
   schedule:
-    - cron: '0 1 * * 6'
+    - cron: '30 18 * * 5'
 
 jobs:
   broken-link:
