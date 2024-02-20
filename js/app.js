@@ -247,8 +247,11 @@ function copyToClipboard(link,clickedItem) {
 
 ///////////////////////////////////////////// Start of Checkbox Easter Egg Message on About Page
 function easterEggMessage(clickedItem){
-	console.log("children",clickedItem.children);
 	clickedItem.children[0].style.opacity = '1';
+	gtag('event', 'Easter Eggs - ToDo Check List', {
+		'event_category': 'Special',
+		'event_label': 'ToDo Check List'
+	});
 	setTimeout(function(){clickedItem.children[0].style.opacity = '0';}, 1500);
 }
 ///////////////////////////////////////////// End of Checkbox Easter Egg Message on About Page
