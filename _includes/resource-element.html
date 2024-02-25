@@ -1,4 +1,4 @@
-<a href="{{include.item.link}}" target="_blank" rel="noreferrer" class="cell medium-6 large-4 resource-link">
+<a href="{{include.item.link}}" target="_blank" rel="noreferrer" class="cell {{include.css-class}} resource-link">
   <div class="resource">
     <p class="meta {{include.item.content-type | slugify}}">
       {%- case include.item.content-type -%}

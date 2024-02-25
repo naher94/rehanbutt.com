@@ -77,14 +77,9 @@ footer-main: true
       <p class="section-description">A bunch references you may find useful. Here are a few of my most recent finds.</p>
     </div>
     {% assign resources_sorted = site.resources | sort: 'date' | reverse %}
+    <!-- TODO if no tags then skip -->
     {%- for resource in resources_sorted limit:3 -%}
-      <a href="{{resource.link}}" target="_blank" rel="noreferrer" class="cell resource-link">
-        <!-- TODO add the content type here -->
-        <div class="resource">
-          <p class="title">{{resource.title}}<i class="fas fa-link"></i></p>
-          <p class="description">{{resource.description}}</p>
-        </div>
-      </a>
+      {%- include resource-element.html item=resource -%}
     {%- endfor -%}
     <a class="more-button cell align-self-bottom" href="/resources">More resources</a>
     <div class="black-cat">
