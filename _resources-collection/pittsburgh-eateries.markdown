@@ -7,7 +7,7 @@ tile-image: pittsburgh-eateries.png
 tile-image-alt: A bowl of noodles on a rustic table top
 text-color: "#ffffff"
 featured: false
-resources: [progression-fyi]
+resources: [noodlehead,millies-icecream,gaucho,pusadees-garden,iron-born-pizza]
 date: 2024-02-24
 published: true
 ---
