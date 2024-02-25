@@ -30,9 +30,7 @@ footer-other: true
   {% assign resources_sorted = site.resources | sort: 'date' | reverse %}
     <!-- TODO if no tags then skip.. hard to test since local and deployed is not acting the same -->
     {%- for resource in resources_sorted limit:3 -%}
-      {% if resource.tags != "" %}
-        {% include resource-element.html item=resource css-class="medium-6 large-4" %}
-      {% endif %}
+      {% include resource-element.html item=resource css-class="medium-6 large-4" %}
     {%- endfor -%}
 </section>
 
