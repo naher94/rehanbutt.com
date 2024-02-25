@@ -28,7 +28,8 @@ footer-other: true
 <section class="recently-added grid-x grid-padding-x grid-padding-y cell medium-12">
   <h2 class="cell small-12">Recently Added</h2>
   {% assign resources_sorted = site.resources | sort: 'date' | reverse %}
-    <!-- TODO if no tags then skip.. hard to test since local and deployed is not acting the same -->
+    <!-- TODO if tags array is empty then skip as that is current logic for not showing in the list -->
+    <!-- hard to test since local and deployed is not acting the same -->
     {%- for resource in resources_sorted limit:3 -%}
       {% include resource-element.html item=resource css-class="medium-6 large-4" %}
     {%- endfor -%}

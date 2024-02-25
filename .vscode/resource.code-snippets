@@ -8,7 +8,7 @@
 			"link: $2"
 			"description: $3"
 			"tags: [$4]"
-			"content-type: $5"
+			"content-type: ${5|reference,tools,interactive,video,my content,reading,publication,portfolio,article,blog|}"
 			"date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
 			"---"
 		],
