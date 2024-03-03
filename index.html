@@ -94,7 +94,9 @@ footer-main: true
     <div class="cell">
       <h2>Speaking</h2>
       <p class="section-description">I've been fortunate to speak at many events on design, development and start-ups. I love to share what I know with others and speaking is 1 of the ways I get to do that.</p>
-      <!-- <p class="section-description">Check out one of my recent favorites about working with design systems in a world of new and legacy products. <a href="https://www.youtube.com/watch?v=q5R9hmpvGUo&t=13s" target="_blank" rel="noopener">Watch the talk.</a></p> -->
+      {%- comment -%}
+      <p class="section-description">Check out one of my recent favorites about working with design systems in a world of new and legacy products. <a href="https://www.youtube.com/watch?v=q5R9hmpvGUo&t=13s" target="_blank" rel="noopener">Watch the talk.</a></p>
+      {%- endcomment -%}
 
       <p class="section-description section-description-special">Looking for a speaker for your next event? Let's connect!</p>
       <div class="speaking-socials">
@@ -115,7 +117,7 @@ footer-main: true
       </div>
 
     </div>
-    <!-- upcoming speaking events -->
+    {%- comment -%}upcoming speaking events{%- endcomment -%}
 
     <a class="more-button cell align-self-bottom" href="/about#speaking-events">Where I've spoken</a>
   </div>
@@ -154,8 +156,12 @@ footer-main: true
 {% assign yir_order = site.year-in-review | sort: 'year' | reverse %}
 
 <section class="year-in-review grid-x grid-padding-x">
-  <div class="cell">
+  <div class="cell yir-header">
     <h2>Year in Review <span class="time-travel">a little bit of time travel</span></h2>
+    <p class="making-of">
+      Curious what goes into creating my year in review? Checkout the
+      {% include external-link.html css-class="" link="https://www.making-of-year-in-review.rehanbutt.com" content="Making Of" %}
+    </p>
   </div>
 
   {%- for year in yir_order -%}
