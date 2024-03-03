@@ -7,7 +7,7 @@ tile-image: chicago-eateries.jpg
 tile-image-alt: A bowl of green beans and chickpea fritters on a rustic table top
 text-color: '#ffffff'
 featured: false
-resources: []
+resources: [girl-goat,ema,au-cheval,beatrix,green-street-meats,duck-duck-goat,fig-olive,lena-brava]
 date: 2024-03-03
 published: true
 ---
