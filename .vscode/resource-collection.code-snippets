@@ -12,7 +12,7 @@
 			"tile-image-alt: $5"
       "text-color: '${6|#ffffff,#1f2937|}'"
       "featured: ${7|false,true|}"
-      "resouces: [$8]"
+      "resources: [$8]"
 			"date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
       "published: ${9|true,false|}"
 			"---"
