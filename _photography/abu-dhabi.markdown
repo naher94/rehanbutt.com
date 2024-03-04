@@ -14,7 +14,7 @@ hero-accent-color: "#1F2937"
 hero-accent-color-dark: "#FFFFFF"
 ---
 
-During my trip to Abu Dhabi I had the chance to visit Sheikh Zayed Grand Mosque, Yas Island & the Louve as well as several other site. Enjoy some of my favorite photos from my trip.
+During my trip to Abu Dhabi I had the chance to visit Sheikh Zayed Grand Mosque, Yas Island & the Louvre as well as several other site. Enjoy some of my favorite photos from my trip.
 
 
 <!-- TODO should this be a component?? -->
