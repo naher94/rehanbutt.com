@@ -12,6 +12,9 @@
   #rehan-logo-header{
     height: 50px;
     transition: $sprint;
+    @include breakpoint(small only) {
+      height: 40px;
+    }
     &:hover{
       transform: scale(1.1);
     }
