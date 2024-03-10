@@ -46,6 +46,12 @@ img {
   }
 }
 
+video{
+  @media (prefers-color-scheme: dark) {
+    filter: brightness(0.8);
+  }
+}
+
 .image-container {
   margin-top: 1.25em;
   margin-bottom: 1.25em;
