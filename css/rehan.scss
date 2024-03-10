@@ -320,7 +320,16 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
   .speaking-socials{
     margin-bottom: 1em;
-    a{
+    .email-container{
+      display: inline;
+      position: relative;
+      cursor: pointer;
+      .copied{
+        font-size: 0.5em;
+        right: 0;
+      }
+    }
+    a, .email-container{
       padding-right: 0.8em;
       font-size: 2em;
       color: inherit;
