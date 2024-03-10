@@ -228,7 +228,6 @@ getHappyDayString();
 ///////////////////////////////////////////// Start of Copy to Clipboard
 function copyToClipboard(link,clickedItem) {
 	if (navigator && navigator.clipboard && navigator.clipboard.writeText){
-		console.log("clickedItem", clickedItem);
 		var copyBadge = document.createElement("span");
 		copyBadge.classList.add("copied");
 		copyBadge.setAttribute("id", "copy-confirmation");
