@@ -31,23 +31,23 @@
     // TODO add this for each easter egg
     &.konami-unlocked{
       .icon-container{
-        background-color: rgb(129, 255, 87);
+        background-color: rgb(129, 255, 87); //TODO update color and semantic
       }
     }
     &.car-horn-unlocked{
       .icon-container{
-        background-color: lightblue;
+        background-color: lightblue; //TODO update color and semantic
       }
     }
     &.code-snoop-unlocked{
       .icon-container{
-        background-color: red;
+        background-color: red; //TODO update color and semantic
       }
     }
   	// TODO check if paddington was actually ever built out
     &.paddington-unlocked{
       .icon-container{
-        background-color: lightblue;
+        background-color: lightblue; //TODO update color and semantic
       }
     }
     p{
