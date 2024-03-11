@@ -2,7 +2,7 @@
 
 // I see you snooping in the code 😉, trying to bypass the hunt of finding all the easter eggs? That's no fun, on the flip side you found another easter egg.. SO YAY!
 
-// Create and set a localStorage variable "codeSnoopingEasterEgg" to true to claim your badge
+// Create and set a localStorage variable "codeSnoopingEasterEgg" to "true" to claim your achievement
 
 
 
