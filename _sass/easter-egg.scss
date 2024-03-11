@@ -1,10 +1,39 @@
+@mixin easter-card{
+  background-color: #F9F9F9;
+  box-shadow: inset 0 0 0 3px rgba(#D2D4D7, 0.28);
+  border-radius: $tile-radius-big;
+}
+
 .easter-egg-vault-container{
-  .achievement-card{
-    border-radius: $tile-radius-big;
-    background-color: #F9F9F9;
+  .progress-card{
     padding-inline: 2em;
     padding-block: 3em;
-    box-shadow: inset 0 0 0 3px rgba(#D2D4D7, 0.28);
+    @include easter-card();
+    .text-container{
+      font-weight: $lato-bold;
+      font-size: 3em;
+      p{
+        padding: 0;
+        margin: 0;
+        line-height: 1;
+        span{
+          font-size: 1.5em;
+          font-weight: $lato-black;
+        }
+      }
+    }
+  }
+  .intro-description{
+    font-size: 1.5em;
+    line-height: 1.2em;
+    padding: 0;
+    margin: 1em .5em;
+  }
+  .achievement-card{
+    padding-inline: 2em;
+    padding-block: 3em;
+    @include easter-card();
+
     @include breakpoint(small only) {
       padding-inline: 1em;
       padding-block: 1.5em;
