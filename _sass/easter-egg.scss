@@ -87,6 +87,11 @@
         background-color: #ffB947; //TODO update color and semantic
       }
     }
+    &.todos-unlocked{
+      .icon-container{
+        background-color: #f6ff00; //TODO update color and semantic
+      }
+    }
     p{
       margin: 0;
       padding: 0;

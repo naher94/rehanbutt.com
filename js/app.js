@@ -98,6 +98,9 @@ function isAchievementUnlocked() {
 	if (localStorage.getItem("paddingtonEasterEgg") == "true") {
 		achievementContainer.querySelector("#paddington").classList.add("paddington-unlocked");
 	}
+	if (localStorage.getItem("todoChecklistEasterEgg") == "true") {
+		achievementContainer.querySelector("#to-dos").classList.add("todos-unlocked");
+	}
 }
 
 isEgg();
@@ -106,7 +109,18 @@ isAchievementUnlocked();
 // Listen for keydown events
 document.addEventListener('keydown', keyHandler, false);
 
-
+// TODO add a badge for todoEasterEgg
+///////////////////////////////////////////// Start of Checkbox Easter Egg Message on About Page
+function easterEggMessage(clickedItem){
+	clickedItem.children[0].style.opacity = '1';
+	localStorage.setItem("todoChecklistEasterEgg", true);
+	gtag('event', 'Easter Eggs - ToDo Check List', {
+		'event_category': 'Special',
+		'event_label': 'ToDo Check List'
+	});
+	setTimeout(function(){clickedItem.children[0].style.opacity = '0';}, 1500);
+}
+///////////////////////////////////////////// End of Checkbox Easter Egg Message on About Page
 
 
 ///////////////////////////////////////////// Happy Day Label
@@ -206,16 +220,3 @@ function copyToClipboard(link,clickedItem) {
   return Promise.reject('The Clipboard API is not available.');
 }
 ///////////////////////////////////////////// End of Copy to Clipboard
-
-
-// TODO add a badge for todoEasterEgg
-///////////////////////////////////////////// Start of Checkbox Easter Egg Message on About Page
-function easterEggMessage(clickedItem){
-	clickedItem.children[0].style.opacity = '1';
-	gtag('event', 'Easter Eggs - ToDo Check List', {
-		'event_category': 'Special',
-		'event_label': 'ToDo Check List'
-	});
-	setTimeout(function(){clickedItem.children[0].style.opacity = '0';}, 1500);
-}
-///////////////////////////////////////////// End of Checkbox Easter Egg Message on About Page
