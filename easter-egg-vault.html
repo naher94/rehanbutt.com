@@ -7,11 +7,14 @@ exclude-footer: false
 footer-other: true
 ---
 
-<section class="easter-egg-vault-container">
+<section class="easter-egg-vault-container grid-container">
   <h1>Achievements</h1>
+  <div class="progress-card">
+    3/6 completed
+  </div>
   <p>Through out my site there are several easter eggs. As you find them check back and see what remains to be found.</p>
   <!-- TODO check why grid-padding is not working -->
-  <div class="grid-x grid-padding-x grid-padding-y" id="easter-egg-achievement-container">
+  <div class="grid-x grid-margin-x grid-margin-y" id="easter-egg-achievement-container">
     {%- for egg in site.easter-eggs -%}
     <div class="achievement-card cell small-6 medium-4" id="{{egg.title | strip | downcase | replace: " ", '-'}}">
       <div class="content-container">
