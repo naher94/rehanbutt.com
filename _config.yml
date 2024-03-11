@@ -43,4 +43,6 @@ collections:
     output: true
   changelog:
     output: false
+  easter-eggs:
+    output: false
   

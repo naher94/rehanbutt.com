@@ -96,49 +96,27 @@ function showPaddingtons(){
 	//this will show all the paddington bears across the site
 }
 
-function isBadge() {
-	var badgeContainerElement = document.getElementById("badge-container");
-	//If the local storage value for each badge is true show the badge in the footer tray
+//If the local storage value for each badge is true show the badge in the footer tray
+function isAchievementUnlocked() {
+	var achievementContainer = document.getElementById("easter-egg-achievement-container");
+
 	if (localStorage.getItem("behindTheScenesEasterEgg") == "true") {
-		let string_of_html = `
-			<div class="cell small-4 large-2">
-				<img src="../../img/badges/behindthescenes.png" alt="Behind the Scenes Badge">
-				<p>Behind the Scenes Easter Egg</p>
-			</div>
-		`;
-		badgeContainerElement.innerHTML += string_of_html;
-  }
+		achievementContainer.querySelector("#konami").classList.add("konami-unlocked");
+	}
 	if (localStorage.getItem("carHornEasterEgg") == "true") {
-		let string_of_html = `
-			<div class="cell small-4 large-2">
-				<img src="../../img/badges/carhorn.png" alt="Car Horn Badge">
-				<p>Car Horn Easter Egg</p>
-			</div>
-		`;
-		badgeContainerElement.innerHTML += string_of_html;
-  }
-	if (localStorage.getItem("paddingtonEasterEgg") == "true") {
-		let string_of_html = `
-			<div class="cell small-4 large-2">
-				<img src="../img/badges/paddington.png" alt="Paddington Badge">
-				<p>Paddington Bear Easter Egg</p>
-			</div>
-		`;
-		badgeContainerElement.innerHTML += string_of_html;
-  }
+		achievementContainer.querySelector("#car-horn").classList.add("car-horn-unlocked");
+	}
 	if (localStorage.getItem("codeSnoopingEasterEgg") == "true") {
-		let string_of_html = `
-			<div class="cell small-4 large-2">
-				<img src="../img/badges/code.png" alt="Code Snooping Badge">
-				<p>Code Snooping Easter Egg</p>
-			</div>
-		`;
-		badgeContainerElement.innerHTML += string_of_html;
-  }
+		achievementContainer.querySelector("#code-snoop").classList.add("code-snoop-unlocked");
+	}
+	// TODO check if paddington was actually ever built out
+	if (localStorage.getItem("paddingtonEasterEgg") == "true") {
+		achievementContainer.querySelector("#paddington").classList.add("paddington-unlocked");
+	}
 }
 
 isEgg();
-isBadge();
+isAchievementUnlocked();
 
 // Listen for keydown events
 document.addEventListener('keydown', keyHandler, false);
@@ -244,6 +222,8 @@ function copyToClipboard(link,clickedItem) {
 }
 ///////////////////////////////////////////// End of Copy to Clipboard
 
+
+// TODO add a badge for todoEasterEgg
 ///////////////////////////////////////////// Start of Checkbox Easter Egg Message on About Page
 function easterEggMessage(clickedItem){
 	clickedItem.children[0].style.opacity = '1';

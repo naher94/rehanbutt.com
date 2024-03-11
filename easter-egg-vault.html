@@ -7,26 +7,26 @@ exclude-footer: false
 footer-other: true
 ---
 
-<div class="vault-wrapper">
-  <div class="grid-x grid-container">
-    <input class="spaceship-btn" type="checkbox" id="spaceship-btn" onclick="gtag('event', 'Easter Eggs - Vault Found', {
-      'event_category': 'Special',
-      'event_label': 'Vault Found'
-    });">
-    <label for="spaceship-btn" class="spaceship-icon">
-      <span class="spaceship">🛸</span>
-    </label>
-    <div class="vault cell grid-x">
-      <div class="cell">
-        <h2>You Found the Vault</h2>
-        <p class="subheader">Uncover easter eggs throughout the site to unlock achievements</p>
-      </div>
-      {%- comment -%}<div class="cell medium-6">
-        <label>Secret Password</label>
-        <input type="text" placeholder="Secret Password">{%- endcomment -%}
-      <div class="cell grid-x grid-padding-x grid-padding-y" id="badge-container">
-       {%- comment -%} Badges get injected here {%- endcomment -%}
+<section class="easter-egg-vault-container">
+  <h1>Achievements</h1>
+  <p>Through out my site there are several easter eggs. As you find them check back and see what remains to be found.</p>
+  <!-- TODO check why grid-padding is not working -->
+  <div class="grid-x grid-padding-x grid-padding-y" id="easter-egg-achievement-container">
+    {%- for egg in site.easter-eggs -%}
+    <div class="achievement-card cell small-6 align-center grid-x" id="{{egg.title | strip | downcase | replace: " ", '-'}}">
+      <div class="content-container cell align-center">
+        <div class="icon-container">
+          <div class="empty-icon">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div class="unlocked-icon">
+            {{egg.icon}}
+          </div>
+        </div>
+        <p class="easter-egg-name">{{egg.title}}</p>
+      <p class="easter-egg-description">{{egg.description}}</p>
       </div>
     </div>
+    {%- endfor -%}
   </div>
-</div>
+</section>

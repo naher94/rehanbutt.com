@@ -1,52 +1,70 @@
-.spaceship{
-  position: absolute;
-  top: -2.2rem;
-  font-size: 3rem;
-  animation-name: ufo-animation;
-  animation-duration: 2.5s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-}
-.vault-wrapper{
-  background-color: $navy-black;
-  color: $pure-white;
-  .vault{
-    display: none;
-    h2{
-      font-weight: $zilla-bold;
-    }
-    p{
-      padding: 0;
-      margin: 0;
-    }
-    input[type=text]{
-      border-radius: 2rem;
-      margin-top: 2rem;
-      padding-left: 1rem;
-      padding-right: 1rem;
-      &::placeholder{
-        font-style: italic;
-        font-weight: $lato-bold;
+.easter-egg-vault-container{
+  .achievement-card{
+    border-radius: $tile-radius-big;
+    background-color: #F9F9F9;
+    padding-inline: 2em;
+    padding-block: 3em;
+    box-shadow: inset 0 0 0 3px rgba(#D2D4D7, 0.28);
+    .icon-container{
+      aspect-ratio: 1/1;
+      background-color: $navy-black-l8;
+      border-radius: $pill-radius;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3em;
+      width: 3em;
+      box-shadow: inset 0 4px 6px -2px rgba($pure-black, 0.25);
+      margin: auto;
+      .unlocked-icon{
+        display: none;
       }
     }
-    label{
-      display: none;
+    &[class*="unlocked"]{
+      .empty-icon{
+        display: none;
+      }
+      .unlocked-icon{
+        display: block;
+      }
+    }
+    // TODO add this for each easter egg
+    &.konami-unlocked{
+      .icon-container{
+        background-color: rgb(129, 255, 87);
+      }
+    }
+    &.car-horn-unlocked{
+      .icon-container{
+        background-color: lightblue;
+      }
+    }
+    &.code-snoop-unlocked{
+      .icon-container{
+        background-color: red;
+      }
+    }
+  	// TODO check if paddington was actually ever built out
+    &.paddington-unlocked{
+      .icon-container{
+        background-color: lightblue;
+      }
+    }
+    p{
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .easter-egg-name{
+      font-size: 2em;
+      font-weight: $lato-bold;
+      line-height: 1.2;
+      margin-block-start: 1em;
+    }
+    .easter-egg-description{
+      font-size: 1.5em;
+      line-height: 1.2;
+      color: $navy-black-l3;
     }
   }
-}
-
-.spaceship-btn{
-  display: none;
-  &:checked{
-    &~.vault{
-      display: block;
-      margin: 3rem 0;
-    }
-  }
-}
-
-@keyframes ufo-animation {
-  0% { transform: translatey(0) rotate(12.0deg)}
- 60% { transform: translatey(-4px) rotate(12.0deg)}
-100% { transform: translatey(0) rotate(12.0deg)}
 }
