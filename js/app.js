@@ -75,25 +75,11 @@ function carHorn(){
 }
 
 function paddington(){
-	paddingtonAdd()
-	//reveal all paddington bears
-
-	//Set this when all Paddingtons are clicked
-	if (localStorage.getItem("paddingtonCounter") >= 6) {
-		localStorage.setItem("paddingtonEasterEgg", true);
-	}
-}
-
-function paddingtonAdd(){
-	console.log("in the add paddington function");
-	var count = localStorage.getItem("paddingtonCounter")
-	var newCount = parseInt(count) + 1;
-	console.log(newCount);
-	localStorage.setItem("paddingtonCounter", newCount);
-}
-
-function showPaddingtons(){
-	//this will show all the paddington bears across the site
+	localStorage.setItem("paddingtonEasterEgg", true);
+	gtag('event', 'Easter Eggs - Qulr Paddington Bear', {
+		'event_category': 'Special',
+		'event_label': 'Paddington'
+	});
 }
 
 //If the local storage value for each badge is true show the badge in the footer tray
@@ -109,7 +95,6 @@ function isAchievementUnlocked() {
 	if (localStorage.getItem("codeSnoopingEasterEgg") == "true") {
 		achievementContainer.querySelector("#code-snoop").classList.add("code-snoop-unlocked");
 	}
-	// TODO check if paddington was actually ever built out
 	if (localStorage.getItem("paddingtonEasterEgg") == "true") {
 		achievementContainer.querySelector("#paddington").classList.add("paddington-unlocked");
 	}
