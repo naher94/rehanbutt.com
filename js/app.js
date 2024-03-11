@@ -82,6 +82,17 @@ function paddington(){
 	});
 }
 
+function isCodeSnoop(){
+	if(localStorage.getItem("codeSnoopingEasterEgg") == "true" && localStorage.getItem("CodeSnoopEventTrigger") != "true"){
+		console.log("in the CodeSnoop IF statement");
+		gtag('event', 'Easter Eggs - Code Snoop', {
+			'event_category': 'Special',
+			'event_label': 'Code Snoop'
+		});
+	localStorage.setItem("CodeSnoopEventTrigger", true);
+	}
+}
+
 //If the local storage value for each badge is true show the badge in the footer tray
 function isAchievementUnlocked() {
 	var achievementContainer = document.getElementById("easter-egg-achievement-container");
@@ -104,6 +115,7 @@ function isAchievementUnlocked() {
 }
 
 isEgg();
+isCodeSnoop();
 isAchievementUnlocked();
 
 // Listen for keydown events
