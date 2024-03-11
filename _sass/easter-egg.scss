@@ -69,17 +69,17 @@
     // TODO add this for each easter egg
     &.konami-unlocked{
       .icon-container{
-        background-color: rgb(129, 255, 87); //TODO update color and semantic
+        background-color: rgb(121, 225, 87); //TODO update color and semantic
       }
     }
     &.car-horn-unlocked{
       .icon-container{
-        background-color: lightblue; //TODO update color and semantic
+        background-color: rgb(255, 91, 91); //TODO update color and semantic
       }
     }
     &.code-snoop-unlocked{
       .icon-container{
-        background-color: red; //TODO update color and semantic
+        background-color: rgb(157, 59, 222); //TODO update color and semantic
       }
     }
     &.paddington-unlocked{
@@ -89,7 +89,7 @@
     }
     &.todos-unlocked{
       .icon-container{
-        background-color: #f6ff00; //TODO update color and semantic
+        background-color: #f5e63f; //TODO update color and semantic
       }
     }
     p{
