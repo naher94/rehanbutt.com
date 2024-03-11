@@ -13,7 +13,7 @@ footer-other: true
   <!-- TODO check why grid-padding is not working -->
   <div class="grid-x grid-padding-x grid-padding-y" id="easter-egg-achievement-container">
     {%- for egg in site.easter-eggs -%}
-    <div class="achievement-card cell small-6 align-center grid-x" id="{{egg.title | strip | downcase | replace: " ", '-'}}">
+    <div class="achievement-card cell small-6 medium-4 align-center grid-x" id="{{egg.title | strip | downcase | replace: " ", '-'}}">
       <div class="content-container cell align-center">
         <div class="icon-container">
           <div class="empty-icon">
