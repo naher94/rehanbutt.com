@@ -93,35 +93,12 @@ function isCodeSnoop(){
 	}
 }
 
-//If the local storage value for each badge is true show the badge in the footer tray
-function isAchievementUnlocked() {
-	var achievementContainer = document.getElementById("easter-egg-achievement-container");
-
-	if (localStorage.getItem("behindTheScenesEasterEgg") == "true") {
-		achievementContainer.querySelector("#konami").classList.add("konami-unlocked");
-	}
-	if (localStorage.getItem("carHornEasterEgg") == "true") {
-		achievementContainer.querySelector("#car-horn").classList.add("car-horn-unlocked");
-	}
-	if (localStorage.getItem("codeSnoopingEasterEgg") == "true") {
-		achievementContainer.querySelector("#code-snoop").classList.add("code-snoop-unlocked");
-	}
-	if (localStorage.getItem("paddingtonEasterEgg") == "true") {
-		achievementContainer.querySelector("#paddington").classList.add("paddington-unlocked");
-	}
-	if (localStorage.getItem("todoChecklistEasterEgg") == "true") {
-		achievementContainer.querySelector("#to-dos").classList.add("todos-unlocked");
-	}
-}
-
 isEgg();
 isCodeSnoop();
-isAchievementUnlocked();
 
 // Listen for keydown events
 document.addEventListener('keydown', keyHandler, false);
 
-// TODO add a badge for todoEasterEgg
 ///////////////////////////////////////////// Start of Checkbox Easter Egg Message on About Page
 function easterEggMessage(clickedItem){
 	clickedItem.children[0].style.opacity = '1';
