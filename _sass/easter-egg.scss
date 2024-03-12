@@ -6,12 +6,25 @@
 
 .easter-egg-vault-container{
   .progress-card{
-    padding-inline: 2em;
-    padding-block: 3em;
     @include easter-card();
+    margin-block-start: 2em;
+    .image-container{
+      margin: 0;
+      // padding-inline-start: 1.5em;
+      padding-block-start: 1.5em;
+      @include breakpoint(small only) {
+        padding-inline: 1em;
+        padding-block-start: 0;
+      }
+    }
     .text-container{
       font-weight: $lato-bold;
       font-size: 3em;
+      padding-inline: 0.5em;
+      padding-block: 1em;
+      @include breakpoint(small only) {
+        text-align: center;
+      }
       p{
         padding: 0;
         margin: 0;
