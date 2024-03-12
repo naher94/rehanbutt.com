@@ -9,14 +9,15 @@ footer-other: true
 
 <section class="easter-egg-vault-container grid-container">
   <h1>Achievements</h1>
-  <div class="progress-card grid-x">
-    <div class="cell medium-6 image-container small-order-2 medium-order-1">
-      image goes here
+  <div class="progress-card grid-x align-center">
+    <div class="cell small-10 medium-4 image-container small-order-2 medium-order-1">
+      <img src="/img/achievement-card.png" alt="Achievement Card">
     </div>
-    <div class="cell medium-6 text-container small-order-1 medium-order-2">
-      <!-- TODO how to get current unlocked count? -->
-      <p><span>3</span>/{{site.easter-eggs | size}}</p>
-      <p>Completed</p>
+    <div class="cell medium-4 text-container small-order-1 medium-order-2 align-middle grid-x">
+      <div class="cell">
+        <p><span id="easter-egg-unlocked-value">0</span>/{{site.easter-eggs | size}}</p>
+        <p>Completed</p>
+      </div>
     </div>
   </div>
   <p class="intro-description">Through out my site there are several easter eggs. As you find them check back and see what remains to be found.</p>
