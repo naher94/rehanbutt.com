@@ -23,6 +23,10 @@ function isAchievementUnlocked() {
 		achievementContainer.querySelector("#to-dos").classList.add("todos-unlocked");
 		achievementUnlockCount++;
 	}
+	if (localStorage.getItem("highFiveEasterEgg") == "true") {
+		achievementContainer.querySelector("#high-five").classList.add("high-five-unlocked");
+		achievementUnlockCount++;
+	}
 	document.getElementById("easter-egg-unlocked-value").innerHTML = achievementUnlockCount;
 }
 

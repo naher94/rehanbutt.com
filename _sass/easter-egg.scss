@@ -107,7 +107,7 @@
     }
     &.code-snoop-unlocked{
       .icon-container{
-        background-color: rgb(157, 59, 222); //TODO update color and semantic
+        background-color: rgb(170, 82, 230); //TODO update color and semantic
       }
     }
     &.paddington-unlocked{
@@ -118,6 +118,11 @@
     &.todos-unlocked{
       .icon-container{
         background-color: #f5e63f; //TODO update color and semantic
+      }
+    }
+    &.high-five-unlocked{
+      .icon-container{
+        background-color: #7588ff; //TODO update color and semantic
       }
     }
     p{

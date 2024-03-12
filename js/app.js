@@ -84,13 +84,20 @@ function paddington(){
 
 function isCodeSnoop(){
 	if(localStorage.getItem("codeSnoopingEasterEgg") == "true" && localStorage.getItem("CodeSnoopEventTrigger") != "true"){
-		console.log("in the CodeSnoop IF statement");
 		gtag('event', 'Easter Eggs - Code Snoop', {
 			'event_category': 'Special',
 			'event_label': 'Code Snoop'
 		});
 	localStorage.setItem("CodeSnoopEventTrigger", true);
 	}
+}
+
+function highFive(){
+	localStorage.setItem("highFiveEasterEgg", true);
+	gtag('event', 'Easter Eggs - High Five', {
+		'event_category': 'Special',
+		'event_label': 'High Five'
+	});
 }
 
 isEgg();
