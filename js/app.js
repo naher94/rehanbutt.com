@@ -5,7 +5,6 @@
 // Create and set a localStorage variable "codeSnoopingEasterEgg" to "true" to claim your achievement
 
 function snackbar(name) {
-	// TODO pass in the info from each of the easter eggs
   var x = document.getElementById("easter-egg-snackbar-container");
 	x.querySelector("#achievement-name").innerHTML = name;
   x.classList.add("show");
