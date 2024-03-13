@@ -5,6 +5,7 @@
 }
 
 .easter-egg-vault-container{
+  margin-block-end: 2rem;
   .progress-card{
     @include easter-card();
     margin-block-start: 2em;
