@@ -19,7 +19,8 @@
             {%- comment -%} footer-other section {%- endcomment -%}
             <div class="cell shrink nav-section">
               <p class="section-title">Other Things</p>
-              {% for my_page in site.pages %}
+              {% assign items_order = site.pages | sort: 'sort-order' %}
+              {% for my_page in items_order %}
                 {% if my_page.exclude-footer != true and my_page.footer-other == true %}
                   {% if my_page.title %}
                   <div class="nav-wrap">
@@ -27,10 +28,12 @@
                   </div>
                   {% endif %} 
                 {% endif %}
+                {%- if my_page.sort-order == 2 -%}
+                <div class="nav-wrap">
+                  <a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store<span class="visually-hidden">Opens a new window</span></a>
+                </div>
+                {%- endif -%}
               {% endfor %}
-              <div class="nav-wrap">
-                <a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store<span class="visually-hidden">Opens a new window</span></a>
-              </div>
             </div>
 
             <div class="cell shrink nav-section">
