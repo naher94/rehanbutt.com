@@ -798,6 +798,79 @@ article{
   }
 }
 
+@keyframes snackbar-fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+
+  to {
+    top: 2em;
+    opacity: 1;
+  }
+}
+
+@keyframes snackbar-fadeout {
+  from {
+    top: 2em;
+    opacity: 1;
+  }
+
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
+
+#easter-egg-snackbar-container{
+  z-index: 2;
+  top: 2em;
+  position: sticky;
+  height: 0;
+  padding-inline: 2em;
+  font-size: 1rem;
+  visibility: hidden;
+  #easter-egg-snackbar{
+    border-radius: $tile-radius-medium;
+    background-color: semantic-color(floating-card-bg);
+    padding: 1rem;
+    padding-inline: 1.5rem;
+    box-shadow: $recessed-shadow semantic-color(shadow);
+    color: semantic-color(text);
+    .icon-container{
+      aspect-ratio: 1/1;
+      color: inherit;
+      border-radius: $pill-radius;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      font-size: 2em;
+      width: 2.25em;
+      box-shadow: inset 0 4px 6px -2px rgba($pure-black, 0.25);
+      .unlocked-icon{
+        display: block;
+      }
+    }
+    p{
+      margin: 0;
+      padding: 0;
+      line-height: 1.2;
+      &.description{
+        font-weight: $lato-bold;
+        font-size: 1.25em;
+      }
+      &.view{
+        text-decoration: underline;
+      }
+    }
+  }
+  &.show {
+    visibility: visible;
+    animation: snackbar-fadein 0.5s, snackbar-fadeout 0.5s 2.5s;
+  }
+}
+
 .paddington{
   position: absolute;
   width: 10rem;

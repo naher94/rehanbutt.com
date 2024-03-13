@@ -4,7 +4,16 @@
 
 // Create and set a localStorage variable "codeSnoopingEasterEgg" to "true" to claim your achievement
 
-
+function snackbar(name) {
+	// TODO pass in the info from each of the easter eggs
+  var x = document.getElementById("easter-egg-snackbar-container");
+	x.querySelector("#achievement-name").innerHTML = name;
+  x.classList.add("show");
+  
+  setTimeout(function () {
+    x.classList.remove("show");
+  }, 3000);
+}
 
 // Easter egg code
 var pattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -29,6 +38,7 @@ var keyHandler = function (event) {
 			'event_category': 'Special',
 			'event_label': 'Konami Code'
 		});
+		snackbar("Konami");
 	}
 };
 
@@ -72,6 +82,7 @@ function carHorn(){
 		'event_category': 'Special',
 		'event_label': 'Carhorn'
 	});
+	snackbar("Car Horn");
 }
 
 function paddington(){
@@ -80,6 +91,7 @@ function paddington(){
 		'event_category': 'Special',
 		'event_label': 'Paddington'
 	});
+	snackbar("Paddington");
 }
 
 function isCodeSnoop(){
@@ -98,6 +110,7 @@ function highFive(){
 		'event_category': 'Special',
 		'event_label': 'High Five'
 	});
+	snackbar("High Five");
 }
 
 isEgg();
@@ -115,6 +128,7 @@ function easterEggMessage(clickedItem){
 		'event_label': 'ToDo Check List'
 	});
 	setTimeout(function(){clickedItem.children[0].style.opacity = '0';}, 1500);
+	snackbar("To Dos");
 }
 ///////////////////////////////////////////// End of Checkbox Easter Egg Message on About Page
 
