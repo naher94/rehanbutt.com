@@ -1,0 +1,146 @@
+@mixin easter-card{
+  background-color: semantic-color(easter-egg-card-bg);
+  box-shadow: inset 0 0 0 3px semantic-color(easter-egg-card-outline);
+  border-radius: $tile-radius-big;
+}
+
+.easter-egg-vault-container{
+  margin-block-end: 2rem;
+  .progress-card{
+    @include easter-card();
+    margin-block-start: 2em;
+    .image-container{
+      margin: 0;
+      padding-block-start: 1.5em;
+      @include breakpoint(small only) {
+        padding-inline: 1em;
+        padding-block-start: 0;
+      }
+    }
+    .text-container{
+      font-weight: $lato-bold;
+      font-size: 3em;
+      padding-inline: 0.5em;
+      padding-block: 1em;
+      @include breakpoint(small only) {
+        text-align: center;
+      }
+      p{
+        padding: 0;
+        margin: 0;
+        line-height: 1;
+        span{
+          font-size: 1.5em;
+          font-weight: $lato-black;
+        }
+      }
+    }
+    img{
+      @media (prefers-color-scheme: dark) {
+        filter: none;
+      }
+    }
+    .lightmode-flip{
+      @media (prefers-color-scheme: dark) {
+        display: none;
+      } 
+    }
+    .darkmode-flip{
+      display: none;
+      @media (prefers-color-scheme: dark) {
+        display: block;
+      } 
+    }
+  }
+  .intro-description{
+    font-size: 1.5em;
+    line-height: 1.2em;
+    padding: 0;
+    margin: 1em .5em;
+  }
+  .achievement-card{
+    padding-inline: 2em;
+    padding-block: 3em;
+    @include easter-card();
+
+    @include breakpoint(small only) {
+      padding-inline: 1em;
+      padding-block: 1.5em;
+    }
+    .icon-container{
+      aspect-ratio: 1/1;
+      background-color: semantic-color(easter-egg-card-icon-bg);
+      border-radius: $pill-radius;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5em;
+      width: 2.5em;
+      box-shadow: inset 0 4px 6px -2px rgba($pure-black, 0.25);
+      margin: auto;
+      @include breakpoint(small only) {
+        font-size: 2.25em;
+        width: 2.25em;
+        
+      }
+      .unlocked-icon{
+        display: none;
+      }
+    }
+    &[class*="unlocked"]{
+      .empty-icon{
+        display: none;
+      }
+      .unlocked-icon{
+        display: block;
+      }
+    }
+    // TODO add this for each easter egg
+    &.konami-unlocked{
+      .icon-container{
+        background-color: rgb(121, 225, 87); //TODO update color and semantic
+      }
+    }
+    &.car-horn-unlocked{
+      .icon-container{
+        background-color: rgb(255, 91, 91); //TODO update color and semantic
+      }
+    }
+    &.code-snoop-unlocked{
+      .icon-container{
+        background-color: rgb(170, 82, 230); //TODO update color and semantic
+      }
+    }
+    &.paddington-unlocked{
+      .icon-container{
+        background-color: #ffB947; //TODO update color and semantic
+      }
+    }
+    &.todos-unlocked{
+      .icon-container{
+        background-color: #f5e63f; //TODO update color and semantic
+      }
+    }
+    &.high-five-unlocked{
+      .icon-container{
+        background-color: #7588ff; //TODO update color and semantic
+      }
+    }
+    p{
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .easter-egg-name{
+      font-size: 1.5em;
+      font-weight: $lato-bold;
+      line-height: 1.2;
+      margin-block-start: 1em;
+    }
+    .easter-egg-description{
+      font-size: 1em;
+      line-height: 1.2;
+      color: semantic-color(easter-egg-card-description);
+    }
+  }
+}

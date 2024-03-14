@@ -4,7 +4,6 @@ footer{
   background-color: semantic-color(footer-bg);
   color: semantic-color(text);
   padding-bottom: 2rem;
-  position: relative; // Needed for the UFO positioning
   .footer-content{
     padding-top: 2rem;
     @include breakpoint(small only){
@@ -73,52 +72,6 @@ footer{
             display: none;
           }
         }
-      }
-    }
-  }
-  .spaceship{
-    position: absolute;
-    top: -2.2rem;
-    font-size: 3rem;
-    animation-name: ufo-animation;
-    animation-duration: 2.5s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-  }
-  .vault-wrapper{
-    background-color: $navy-black;
-    color: $pure-white;
-    .vault{
-      display: none;
-      h2{
-        font-weight: $zilla-bold;
-      }
-      p{
-        padding: 0;
-        margin: 0;
-      }
-      input[type=text]{
-        border-radius: 2rem;
-        margin-top: 2rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        &::placeholder{
-          font-style: italic;
-          font-weight: $lato-bold;
-        }
-      }
-      label{
-        display: none;
-      }
-    }
-  }
-
-  .spaceship-btn{
-    display: none;
-    &:checked{
-      &~.vault{
-        display: block;
-        margin: 3rem 0;
       }
     }
   }
@@ -270,10 +223,4 @@ footer{
       }
     }
   }
-}
-
-@keyframes ufo-animation {
-    0% { transform: translatey(0) rotate(12.0deg)}
-   60% { transform: translatey(-4px) rotate(12.0deg)}
-  100% { transform: translatey(0) rotate(12.0deg)}
 }

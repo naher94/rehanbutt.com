@@ -2,9 +2,17 @@
 
 // I see you snooping in the code 😉, trying to bypass the hunt of finding all the easter eggs? That's no fun, on the flip side you found another easter egg.. SO YAY!
 
-// Create and set a localStorage variable "codeSnoopingEasterEgg" to true to claim your badge
+// Create and set a localStorage variable "codeSnoopingEasterEgg" to "true" to claim your achievement
 
-
+function snackbar(name) {
+  var x = document.getElementById("easter-egg-snackbar-container");
+	x.querySelector("#achievement-name").innerHTML = name;
+  x.classList.add("show");
+  
+  setTimeout(function () {
+    x.classList.remove("show");
+  }, 3000);
+}
 
 // Easter egg code
 var pattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -29,6 +37,7 @@ var keyHandler = function (event) {
 			'event_category': 'Special',
 			'event_label': 'Konami Code'
 		});
+		snackbar("Konami");
 	}
 };
 
@@ -72,78 +81,55 @@ function carHorn(){
 		'event_category': 'Special',
 		'event_label': 'Carhorn'
 	});
+	snackbar("Car Horn");
 }
 
 function paddington(){
-	paddingtonAdd()
-	//reveal all paddington bears
+	localStorage.setItem("paddingtonEasterEgg", true);
+	gtag('event', 'Easter Eggs - Qulr Paddington Bear', {
+		'event_category': 'Special',
+		'event_label': 'Paddington'
+	});
+	snackbar("Paddington");
+}
 
-	//Set this when all Paddingtons are clicked
-	if (localStorage.getItem("paddingtonCounter") >= 6) {
-		localStorage.setItem("paddingtonEasterEgg", true);
+function isCodeSnoop(){
+	if(localStorage.getItem("codeSnoopingEasterEgg") == "true" && localStorage.getItem("CodeSnoopEventTrigger") != "true"){
+		gtag('event', 'Easter Eggs - Code Snoop', {
+			'event_category': 'Special',
+			'event_label': 'Code Snoop'
+		});
+	localStorage.setItem("CodeSnoopEventTrigger", true);
 	}
 }
 
-function paddingtonAdd(){
-	console.log("in the add paddington function");
-	var count = localStorage.getItem("paddingtonCounter")
-	var newCount = parseInt(count) + 1;
-	console.log(newCount);
-	localStorage.setItem("paddingtonCounter", newCount);
-}
-
-function showPaddingtons(){
-	//this will show all the paddington bears across the site
-}
-
-function isBadge() {
-	var badgeContainerElement = document.getElementById("badge-container");
-	//If the local storage value for each badge is true show the badge in the footer tray
-	if (localStorage.getItem("behindTheScenesEasterEgg") == "true") {
-		let string_of_html = `
-			<div class="cell small-4 large-2">
-				<img src="../../img/badges/behindthescenes.png" alt="Behind the Scenes Badge">
-				<p>Behind the Scenes Easter Egg</p>
-			</div>
-		`;
-		badgeContainerElement.innerHTML += string_of_html;
-  }
-	if (localStorage.getItem("carHornEasterEgg") == "true") {
-		let string_of_html = `
-			<div class="cell small-4 large-2">
-				<img src="../../img/badges/carhorn.png" alt="Car Horn Badge">
-				<p>Car Horn Easter Egg</p>
-			</div>
-		`;
-		badgeContainerElement.innerHTML += string_of_html;
-  }
-	if (localStorage.getItem("paddingtonEasterEgg") == "true") {
-		let string_of_html = `
-			<div class="cell small-4 large-2">
-				<img src="../img/badges/paddington.png" alt="Paddington Badge">
-				<p>Paddington Bear Easter Egg</p>
-			</div>
-		`;
-		badgeContainerElement.innerHTML += string_of_html;
-  }
-	if (localStorage.getItem("codeSnoopingEasterEgg") == "true") {
-		let string_of_html = `
-			<div class="cell small-4 large-2">
-				<img src="../img/badges/code.png" alt="Code Snooping Badge">
-				<p>Code Snooping Easter Egg</p>
-			</div>
-		`;
-		badgeContainerElement.innerHTML += string_of_html;
-  }
+function highFive(){
+	localStorage.setItem("highFiveEasterEgg", true);
+	gtag('event', 'Easter Eggs - High Five', {
+		'event_category': 'Special',
+		'event_label': 'High Five'
+	});
+	snackbar("High Five");
 }
 
 isEgg();
-isBadge();
+isCodeSnoop();
 
 // Listen for keydown events
 document.addEventListener('keydown', keyHandler, false);
 
-
+///////////////////////////////////////////// Start of Checkbox Easter Egg Message on About Page
+function easterEggMessage(clickedItem){
+	clickedItem.children[0].style.opacity = '1';
+	localStorage.setItem("todoChecklistEasterEgg", true);
+	gtag('event', 'Easter Eggs - ToDo Check List', {
+		'event_category': 'Special',
+		'event_label': 'ToDo Check List'
+	});
+	setTimeout(function(){clickedItem.children[0].style.opacity = '0';}, 1500);
+	snackbar("To Dos");
+}
+///////////////////////////////////////////// End of Checkbox Easter Egg Message on About Page
 
 
 ///////////////////////////////////////////// Happy Day Label
@@ -243,14 +229,3 @@ function copyToClipboard(link,clickedItem) {
   return Promise.reject('The Clipboard API is not available.');
 }
 ///////////////////////////////////////////// End of Copy to Clipboard
-
-///////////////////////////////////////////// Start of Checkbox Easter Egg Message on About Page
-function easterEggMessage(clickedItem){
-	clickedItem.children[0].style.opacity = '1';
-	gtag('event', 'Easter Eggs - ToDo Check List', {
-		'event_category': 'Special',
-		'event_label': 'ToDo Check List'
-	});
-	setTimeout(function(){clickedItem.children[0].style.opacity = '0';}, 1500);
-}
-///////////////////////////////////////////// End of Checkbox Easter Egg Message on About Page

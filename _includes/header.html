@@ -68,7 +68,7 @@
           <ul class="menu-links">
             <li class="nav-item-container"><a class="nav" href="/">Home</a></li>
               {% for my_page in site.pages %}
-                {% if my_page.exclude != "true" %}
+                {% if my_page.exclude-header != true %}
                   {% if my_page.title %}
                     <li class="nav-item-container"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></li>
                   {% endif %}
@@ -80,7 +80,7 @@
         <div class="navbar">
           <a class="nav nav-home" href="/" title="home"><i class="fas fa-home"></i></a>
             {% for my_page in site.pages %}
-              {% if my_page.exclude != "true" %}
+              {% if my_page.exclude-header != true %}
                 {% if my_page.title %}
                   <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
                 {% endif %}
