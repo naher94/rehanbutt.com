@@ -28,8 +28,7 @@ I wanted a better way to hold my colors. Collecting Post-its, swatch books and j
 
 <div class="grid-x">
   <div class="cell medium-6" style="position:relative;">
-    <!-- <img onclick="paddingtonAdd()" src="../img/paddington.svg" alt="Paddington Bear" class="paddington bear-1"> -->
-    <img src="../img/qulr/tilevariationsmarmalade.png" alt="Tile Iterations Series">
+    <img src="../img/qulr/tilevariationsmarmalade.png" alt="Tile Iterations Series" onclick="paddington()">
   </div>
   <div class="cell medium-6">
     <img src="../img/qulr/tilevariationsgrape.png" alt="Tile Iterations Series">

@@ -1,28 +1,4 @@
 <footer class="site-footer">
-  <div class="vault-wrapper">
-    <div class="grid-x grid-container">
-      <input class="spaceship-btn" type="checkbox" id="spaceship-btn" onclick="gtag('event', 'Easter Eggs - Vault Found', {
-        'event_category': 'Special',
-        'event_label': 'Vault Found'
-      });">
-      <label for="spaceship-btn" class="spaceship-icon">
-        <span class="spaceship">🛸</span>
-      </label>
-      <div class="vault cell grid-x">
-        <div class="cell">
-          <h2>You Found the Vault</h2>
-          <p class="subheader">Uncover easter eggs throughout the site to unlock achievements</p>
-        </div>
-        {%- comment -%}<div class="cell medium-6">
-          <label>Secret Password</label>
-          <input type="text" placeholder="Secret Password">{%- endcomment -%}
-        <div class="cell grid-x grid-padding-x grid-padding-y" id="badge-container">
-         {%- comment -%} Badges get injected here {%- endcomment -%}
-        </div>
-      </div>
-    </div>
-  </div>
-
     <div class="grid-x grid-container footer-content align-justify">
           <div class="site-pages small-12 large-shrink cell grid-x">
 
@@ -30,7 +6,7 @@
               <p class="section-title">The Main Stuff</p>
               <div class="nav-wrap"><a class="nav" href="/">Home</a></div>
               {% for my_page in site.pages %}
-                {% if my_page.exclude != "true" and my_page.footer-main == true %}
+                {% if my_page.exclude-footer != true and my_page.footer-main == true %}
                   {% if my_page.title %}
                   <div class="nav-wrap">
                     <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
@@ -43,18 +19,22 @@
             {%- comment -%} footer-other section {%- endcomment -%}
             <div class="cell shrink nav-section">
               <p class="section-title">Other Things</p>
-              {% for my_page in site.pages %}
-                {% if my_page.exclude != "true" and my_page.footer-other == true %}
+              {% assign items_order = site.pages | sort: 'sort-order' %}
+              {% for my_page in items_order %}
+                {% if my_page.exclude-footer != true and my_page.footer-other == true %}
                   {% if my_page.title %}
                   <div class="nav-wrap">
                     <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
                   </div>
                   {% endif %} 
                 {% endif %}
+                {%- comment -%}This sets the order manually zero indexed array hence the 2 for third position{%- endcomment -%}
+                {%- if my_page.sort-order == 2 -%}
+                <div class="nav-wrap">
+                  <a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store<span class="visually-hidden">Opens a new window</span></a>
+                </div>
+                {%- endif -%}
               {% endfor %}
-              <div class="nav-wrap">
-                <a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store<span class="visually-hidden">Opens a new window</span></a>
-              </div>
             </div>
 
             <div class="cell shrink nav-section">
