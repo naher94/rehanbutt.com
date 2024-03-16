@@ -17,7 +17,7 @@ hero-accent-color-dark: "#FFFFFF"
 During the winter of 2023, I visited the city of Istanbul. While there I visited many sites and made friends with several street cats. Enjoy some of my favorite shots from my trip.
 
 <!-- TODO should this be a component?? -->
-<div class="grid-x grid-padding-x grid-margin-y">
+<div class="grid-x grid-margin-x grid-margin-y">
   <div class="grid-x cell">
     <div class="map-container cell grid-x">
       <img class="map" src="../img/photography/istanbul-2023//worldmap-turkey.svg" alt="Illustrated map of the world with a focus on Turkey">
@@ -39,7 +39,7 @@ During the winter of 2023, I visited the city of Istanbul. While there I visited
   </div>
 </div>
 
-<div class="grid-x grid-padding-x grid-margin-y">
+<div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell">
     <img src="/img/photography/istanbul-2023/doner.jpg" alt="Panoramic shot of a shop keeper slicing Doner Kebab in the street">
   </div>
@@ -123,7 +123,7 @@ During the winter of 2023, I visited the city of Istanbul. While there I visited
 
 Istanbul has many street cats. Here are several I caught on camera!
 
-<div class="grid-x grid-padding-x grid-margin-y">
+<div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell small-6 medium-4">
     <img src="/img/photography/istanbul-2023/cats/cat1.jpg" alt="Yawning cat stretched out">
   </div>

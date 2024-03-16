@@ -14,7 +14,7 @@ hero-accent-color: "#1F2937"
 hero-accent-color-dark: "#FFFFFF"
 ---
 
-<div class="grid-x grid-padding-x grid-margin-y">
+<div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell">
     <img src="../img/photography/assorted/kidinatub.jpg" alt="A kid in a tub rowing down the river" style="width: 100%;">
   </div>
@@ -28,7 +28,7 @@ hero-accent-color-dark: "#FFFFFF"
     <img src="../img/photography/assorted/greenboat.jpg" alt="River boat harvesting the floating gardens" style="width: 100%;">
   </div>
 </div>
-<div class="grid-x grid-padding-x grid-margin-y">
+<div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell" style="display: flex; flex: calc(509/768);">
     <img src="../img/photography/assorted/monkshave.jpg" alt="A monk having a shave" style="width: 100%;">
   </div>

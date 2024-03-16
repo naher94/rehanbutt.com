@@ -18,7 +18,7 @@ During my trip to Abu Dhabi I had the chance to visit Sheikh Zayed Grand Mosque,
 
 
 <!-- TODO should this be a component?? -->
-<div class="grid-x grid-padding-x grid-margin-y">
+<div class="grid-x grid-margin-x grid-margin-y">
   <div class="grid-x cell">
     <div class="map-container cell grid-x">
       <img class="map" src="../img/photography/abu-dhabi-2023/worldmap-abu-dhabi.svg" alt="Illustrated map of the world with a focus on the United Arab Emirates">
@@ -40,7 +40,7 @@ During my trip to Abu Dhabi I had the chance to visit Sheikh Zayed Grand Mosque,
   </div>
 </div>
 
-<div class="grid-x grid-padding-x grid-margin-y">
+<div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell">
     <img src="/img/photography/abu-dhabi-2023/mosque.jpg" alt="Sheikh Zayed Grand Mosque in full">
   </div>
