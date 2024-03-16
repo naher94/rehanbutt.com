@@ -22,7 +22,7 @@ I invite you to experience this extraordinary event that united the world with a
 
 
 <!-- TODO should this be a component?? -->
-<div class="grid-x grid-padding-x grid-margin-y">
+<div class="grid-x grid-margin-x grid-margin-y">
   <div class="grid-x cell">
     <div class="map-container cell grid-x">
       <img class="map" src="../img/photography/dubai/worldmap-dubai.svg" alt="Illustrated map of the world with a focus on the United Arab Emirates">
@@ -44,7 +44,7 @@ I invite you to experience this extraordinary event that united the world with a
   </div>
 </div>
 
-<div class="grid-x grid-padding-x grid-margin-y">
+<div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell">
     <img src="../img/photography/dubai-expo/marrocco-pavilion.jpg" alt="Shot of the Morocco pavilion looking up through the atrium">
   </div>
