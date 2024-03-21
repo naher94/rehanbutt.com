@@ -526,16 +526,28 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     margin-bottom: 2rem;
     overflow: hidden;
   }
+  .yir-header{
+    margin-bottom: 4rem;
+    @include breakpoint(small only){
+      margin-bottom: 3rem;
+    }
+  }
   h2{
     text-align: center;
     font-weight: $zilla-bold;
-    margin-bottom: 3rem;
     @include breakpoint(small only){
       line-height: 2.8rem;
     }
   }
-  a{
-    color: $navy-black;
+  .making-of{
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    text-wrap: pretty;
+    @include breakpoint(small only){
+      font-size: 1.25rem;
+    }
   }
   .time-travel{
     font-size: 2rem;
