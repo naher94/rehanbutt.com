@@ -6,8 +6,9 @@ thumbnail-alt: Lobby of Burj Al Arab
 hero-image: "dubai/hero.jpg"
 hero-image-alt: Lobby of Burj Al Arab
 featured:
-big-tile:
-date: 15-12-2012
+big-tile: true
+date: 15-03-2022
+display-date: Winter 2012 & Spring 2022
 hero-background-color: "#FFFFFF"
 hero-background-color-dark: "#161d27"
 hero-accent-color: "#1F2937"

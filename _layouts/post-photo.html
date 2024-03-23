@@ -31,19 +31,23 @@ hero-accent-color-dark: {{hero-accent-color-dark}}
 
       <header class="post-header post-header-hero">
         <p class="date-stamp">
-          {%- assign photo-month = photoset.date| date: "%m" | plus:0 -%}
-          {%- if photo-month >= 3 and photo-month < 6 -%}
-            Spring
-          {%- elsif photo-month >= 6 and photo-month < 9 -%}
-            Summer
-          {%- elsif photo-month >= 9 and photo-month < 12 -%}
-            Fall
-          {%- elsif photo-month >= 12 -%}
-            Winter
-          {%- elsif photo-month < 3 -%}
-            Winter
-          {%- endif -%}
-          &nbsp;{{ page.date| date: "%Y" }}
+          {% if page.display-date %}
+              {{page.display-date}}
+            {% else %}
+              {% assign photo-month = page.date| date: "%m" | plus:0 %}
+              {% if photo-month >= 3 and photo-month < 6 %}
+                Spring
+              {% elsif photo-month >= 6 and photo-month < 9 %}
+                Summer
+              {% elsif photo-month >= 9 and photo-month < 12 %}
+                Fall
+              {% elsif photo-month >= 12 %}
+                Winter
+              {% elsif photo-month < 3 %}
+                Winter
+              {% endif %}
+              {{ page.date| date: "%Y" }}
+            {% endif %}
         </p>
         <h1 itemprop="name headline">{{ page.title }}</h1>
         <p class="post-meta">{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
