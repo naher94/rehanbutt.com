@@ -6,7 +6,7 @@ thumbnail-alt: Al Wasl Plaza Dome in daylight
 hero-image: "dubai-expo/dubai-hero.jpg"
 hero-image-alt: Al Wasl Plaza Dome in daylight
 featured: true
-big-tile: true
+big-tile:
 date: 15-03-2022
 hero-background-color: "#FFFFFF"
 hero-background-color-dark: "#161d27"
