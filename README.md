@@ -147,8 +147,10 @@ thumbnail | thumbnail file name | `image` `.png` or `.jpg` when featured project
 thumbnail-alt | The `alt` text for the thumbnail image | `string` eg. `Burj Al Arab Atrium`
 hero-image | The image that loads into the hero section | `path` as a `string` eg. `dubai-expo/dubai-hero.jpg`; File should be an `.jpg` aspect ratio 2x1
 hero-image-alt | The `alt` text for the hero image | `string` eg. `Dubai Expo Center Dome`
-featured | Whether it renders in as featured (bigger tiles)  | `bool`
+featured | Whether it renders on `/`  | `bool`
+big-tile | Whether it renders as a big tile on `/photography` | `bool` eg. `true`
 date | `YYYY-MM-DD` | `date`
+display-date | Use in the case of multiple dates | `string` eg. `Winter 2012 & Spring 2022`
 
 
 #### `_resources` Frontmatter Tags
