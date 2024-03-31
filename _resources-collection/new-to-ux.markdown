@@ -7,6 +7,6 @@ tile-image: new-to-ux.png
 tile-image-alt: A illustration of a mobile software interfaces as wireframes on a blue gradient background
 text-color: "#ffffff"
 featured: true
-resources: [design-dictionary, bbc-global-experience-language, infuriating-truth-behind-elevator-buttons, designkit, design-gold, defining-design-generalists, laws-of-ux, methodofaction, refactor-ui, uxr, userinyerface, ten-usability-heuristics, wish-list-three-uiux-casual-user]
+resources: [tony-fadell-design-ted,design-dictionary, bbc-global-experience-language, infuriating-truth-behind-elevator-buttons, designkit, design-gold, defining-design-generalists, laws-of-ux, methodofaction, refactor-ui, uxr, userinyerface, ten-usability-heuristics, wish-list-three-uiux-casual-user]
 date: 2023-04-9
 ---
