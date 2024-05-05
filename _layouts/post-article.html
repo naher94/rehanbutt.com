@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+<article class="post post-article" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
     <img class="article-hero" src="/img/articles/{{page.hero}}" alt="{{page.hero-alt}}">
@@ -14,4 +14,19 @@ layout: default
     {{ content }}
   </div>
 
+  <div class="grid-x align-center share-bar-wrapper">
+    <div class="cell share-bar grid-x align-justify medium-8">
+      <div class="cell medium-shrink count-label">{{page.title}}</div>
+      <div class="cell medium-shrink">
+        Share
+        <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20article%20by%20%40naher94!&url={{page.url | prepend: site.url}}" class="share-item twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <span onclick="copyToClipboard('{{page.url | prepend: site.url}}', this)" class="share-item link">
+          <i class="fas fa-link"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+  
 </article>
