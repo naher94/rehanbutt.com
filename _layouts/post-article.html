@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <img class="article-hero" src="/img/articles/{{page.hero}}" alt="{{page.hero-alt}}">
+    <p class="date-stamp">{{ page.date| date: "%B %e, %Y" }}</p>
+    <h1 itemprop="name headline">{{ page.title }}</h1>
+    <p class="post-meta">{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+</article>
