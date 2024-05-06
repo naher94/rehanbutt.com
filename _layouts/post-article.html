@@ -5,7 +5,19 @@ layout: default
 
   <header class="post-header">
     <img class="article-hero" src="/img/articles/{{page.hero}}" alt="{{page.hero-alt}}">
-    <p class="date-stamp">{{ page.date| date: "%B %e, %Y" }}</p>
+    <div class="grid-x align-justify align-middle">
+      <div class="cell shrink">
+        <p class="date-stamp">{{ page.date| date: "%B %e, %Y" }}</p>
+      </div>
+      <div class="cell shrink social-share">
+        <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20article%20by%20%40naher94!&url={{page.url | prepend: site.url}}" class="share-item twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <span onclick="copyToClipboard('{{page.url | prepend: site.url}}', this)" class="share-item link">
+          <i class="fas fa-link"></i>
+        </span>
+      </div>
+    </div>
     <h1 itemprop="name headline">{{ page.title }}</h1>
     <p class="post-meta">{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
   </header>
@@ -15,7 +27,7 @@ layout: default
   </div>
 
   <div class="grid-x align-center share-bar-wrapper">
-    <div class="cell share-bar grid-x align-justify medium-8">
+    <div class="cell share-bar grid-x align-justify">
       <div class="cell medium-shrink count-label">{{page.title}}</div>
       <div class="cell medium-shrink">
         Share

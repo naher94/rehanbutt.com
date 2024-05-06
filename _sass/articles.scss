@@ -3,6 +3,34 @@
     .article-hero{
       border-radius: $tile-radius-big;
     }
+    .social-share{
+      font-size: 1.25em;
+      .share-item{
+        color: semantic-color(text);
+        padding: 0.25em;
+        i{
+          transition: $sprint;
+        }
+        &.twitter{
+          &:hover{
+            i{
+              transition: $sprint;
+              transform: rotate(-15deg) scale(1.5); 
+            }
+          }
+        }
+        &.link{
+          cursor: pointer;
+          position: relative;
+          &:hover{
+            i{
+              transition: $sprint;
+              transform: rotate(360deg) scale(1.5); 
+            }
+          }
+        }
+      }
+    }
   }
   .share-bar-wrapper{
     padding-right: 0.625rem;
