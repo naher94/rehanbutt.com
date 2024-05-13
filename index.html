@@ -76,10 +76,16 @@ footer-main: true
       <h2>Resources</h2>
       <p class="section-description">A bunch references you may find useful. Here are a few of my most recent finds.</p>
     </div>
-    {% assign resources_sorted = site.resources | sort: 'date' | reverse %}
+    {% assign allresources = site.resources | concat: site.articles %}
+    {% assign resources_sorted = allresources | sort: 'date' | reverse %}
     <!-- TODO if no tags then skip -->
+    <!-- TODO add articles to this page as well.. CONFIRM THIS WORKS -->
     {%- for resource in resources_sorted limit:3 -%}
-      {%- include resource-element.html item=resource -%}
+      {%- if resource.article == true -%}
+      {% include article-element.html item=resource %}
+      {%- else -%}
+      {% include resource-element.html item=resource %}
+      {%- endif -%}
     {%- endfor -%}
     <a class="more-button cell align-self-bottom" href="/resources">More resources</a>
     <div class="black-cat">

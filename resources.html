@@ -10,8 +10,9 @@ sort-order: 2
   <p>A bunch of resources and references curated by me, with the goal to help others learn something new. For more frequent bursts of resources and other related content join me over on {% include external-link.html link="https://www.twitter.com/naher94/" content="Twitter" %}.</p>
 </header>
 
-<!-- collect all the unique tags from the resources -->
-{% assign alltags = site.resources | map: "tags" | uniq | sort %}
+{%- comment -%}collect all the unique tags from the resources and articles{%- endcomment -%}
+{% assign allresources = site.resources | concat: site.articles %}
+{% assign alltags = allresources | map: "tags" | uniq | sort %}
 
 <section class="cell tag-section">
   <h2 class="visually-hidden">Categories</h2>
@@ -28,7 +29,7 @@ sort-order: 2
 
 <section class="recently-added grid-x grid-padding-x grid-padding-y cell medium-12">
   <h2 class="cell small-12">Recently Added</h2>
-  {% assign resources_sorted = site.resources | sort: 'date' | reverse %}
+  {% assign resources_sorted = allresources | sort: 'date' | reverse %}
     <!-- TODO if tags array is empty then skip as that is current logic for not showing in the list -->
     <!-- hard to test since local and deployed is not acting the same -->
     {%- for resource in resources_sorted limit:3 -%}
@@ -64,9 +65,13 @@ sort-order: 2
       </a>
       <div class="cell small-12 medium-auto divider"></div>
     </div>
-  {% for resource in site.resources %}
+  {% for resource in allresources %}
     {% if resource.tags contains tag %}
+      {%- if resource.article == true -%}
+      {% include article-element.html item=resource css-class="medium-6 large-4" %}
+      {%- else -%}
       {% include resource-element.html item=resource css-class="medium-6 large-4" %}
+      {%- endif -%}
     {% endif %}
   {% endfor %}
   </section>
