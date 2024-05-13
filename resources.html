@@ -33,7 +33,11 @@ sort-order: 2
     <!-- TODO if tags array is empty then skip as that is current logic for not showing in the list -->
     <!-- hard to test since local and deployed is not acting the same -->
     {%- for resource in resources_sorted limit:3 -%}
+      {%- if resource.article == true -%}
+      {% include article-element.html item=resource css-class="medium-6 large-4" %}
+      {%- else -%}
       {% include resource-element.html item=resource css-class="medium-6 large-4" %}
+      {%- endif -%}
     {%- endfor -%}
 </section>
 
