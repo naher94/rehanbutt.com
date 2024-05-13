@@ -45,4 +45,6 @@ collections:
     output: false
   easter-eggs:
     output: false
+  articles:
+    output: true
   
