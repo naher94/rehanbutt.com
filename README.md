@@ -152,6 +152,19 @@ big-tile | Whether it renders as a big tile on `/photography` | `bool` eg. `true
 date | `YYYY-MM-DD` | `date`
 display-date | Use in the case of multiple dates | `string` eg. `Winter 2012 & Spring 2022`
 
+#### Type `post-article`
+
+Tag | Use | Data Type
+:--- | :--- | :---
+layout | The template for structural reference | `.html`
+article | Should always be `true` as it helps set the link type across the site | `bool` eg. `true`
+title | The name of the article | `string`
+description | A short explanation of the article | `string`
+hero-image | The image that loads into the hero section | `path` as a `string` eg. `product-principles-strategies/hero.jpg`; File should be an `.jpg` aspect ratio 2x1
+hero-image-alt | The `alt` text for the hero image | `string` eg. `Illustration of Pepper the Product Panda excited to showcase product principles and strategies`
+tags | an array of related topics for the resource `[leadership,product development]` | comma separated `string`
+content-type | The media type such as reference, tool, interactive, video, my content, reading, publication, portfolio, article, blog. | `string`
+date | `YYYY-MM-DD` | `date`
 
 #### `_resources` Frontmatter Tags
 
@@ -162,6 +175,7 @@ title | The main name that references the resource in each tile | `string`
 link | The external `url` to the resource | `string`
 description | A short explanation of the resource | `string`
 tags | an array of related topics for the resource `[film,games,tools]` | comma separated `string`
+content-type | The media type such as reference, tool, interactive, video, my content, reading, publication, portfolio, article, blog. | `string`
 
 #### `_work-experience` Frontmatter Tags
 
