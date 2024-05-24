@@ -154,6 +154,8 @@ display-date | Use in the case of multiple dates | `string` eg. `Winter 2012 & S
 
 #### Type `post-article`
 
+note that there is a separate file for article styling `articles.scss`
+
 Tag | Use | Data Type
 :--- | :--- | :---
 layout | The template for structural reference | `.html`
