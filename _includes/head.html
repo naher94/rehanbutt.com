@@ -42,6 +42,8 @@
   <meta property="og:image" content="
     {% if page.layout == "resources-collection" %}
       {{ page.tile-image | prepend: '/img/resources-collection/' | prepend: site.baseurl | prepend: site.url }}
+    {% elsif page.layout == "post-article" %}
+      {{ page.hero | prepend: '/img/articles/' | prepend: site.baseurl | prepend: site.url }}
     {% elsif page.layout == "post-photo" %}
       {{ page.thumbnail | prepend: '/img/photography/thumbnails/' | prepend: site.baseurl | prepend: site.url }}
     {% elsif page.thumbnail %}
