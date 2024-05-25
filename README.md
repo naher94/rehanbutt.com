@@ -214,9 +214,9 @@ https://instagram.com/naher94 |✖️|✖️|✅|
 https://www.threads.net/@naher94 |✖️|✖️|✅|
 https://github.com/naher94 |✖️|✖️|✅| Twitter link
 https://twitter.com/naher94 |✅ header image|✅|✅
-https://codepen.io/naher94 | ✖️|✖️|✖️| Twitter link
+https://codepen.io/rehanbutt | ✖️|✖️|✖️| Twitter link
 https://www.pinterest.com/naher94/ | ✖️|✖️|✖️
-https://500px.com/p/naher94 |✖️|✅|✅| Twitter & Instagram links
+https://500px.com/p/rehan_butt |✖️|✅|✅| Twitter & Instagram links
 https://dribbble.com/rehanbutt |✖️|✅|✅|social links
 https://www.imdb.com/name/nm15449795/ |✖️|✖️|✖️| rehanbutt.com & Linkedin links
 https://adplist.org/mentors/rehan-butt |✅ header image|✅|✅| Twitter link 
