@@ -1,0 +1,20 @@
+{
+	"article frontmatter": {
+		"scope": "markdown",
+		"prefix": "article frontmatter",
+		"body": [
+			"---"
+			"layout: post-article"
+			"article: true"
+			"title: '$1'"
+			"description: $2"
+			"hero-image: $3"
+			"hero-image-alt: $4"
+			"tags: [$5]"
+			"content-type: ${6|reference,tool,interactive,video,my content,reading,publication,portfolio,article,blog|}"
+			"date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
+			"---"
+		],
+		"description" : "Frontmatter for a Article"
+	}
+}

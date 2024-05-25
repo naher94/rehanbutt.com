@@ -41,13 +41,6 @@
         .rainbow{
           font-weight: $zilla-bold;
         }
-        code{
-          color: inherit;
-          border-radius: 5px;
-          padding-bottom: 0.15em;
-          background-color: semantic-color(inline-code);
-          border: 0;
-        }
         @include breakpoint(small only) {
           font-size: 1.2rem;
         }
