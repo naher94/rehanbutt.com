@@ -32,24 +32,16 @@
 @import 'xy-grid/xy-grid';
 // Generic components
 @import 'components/button';
-@import 'components/button-group';
-@import 'components/close-button';
 @import 'components/label';
 @import 'components/progress-bar';
 @import 'components/slider';
 @import 'components/switch';
 @import 'components/table';
 // Basic components
-@import 'components/badge';
-@import 'components/breadcrumbs';
-@import 'components/callout';
-@import 'components/card';
-@import 'components/dropdown';
 @import 'components/pagination';
 @import 'components/tooltip';
 
 // Containers
-@import 'components/accordion';
 @import 'components/media-object';
 @import 'components/orbit';
 @import 'components/responsive-embed';
@@ -58,9 +50,6 @@
 // Menu-based containers
 @import 'components/menu';
 @import 'components/menu-icon';
-@import 'components/accordion-menu';
-@import 'components/drilldown';
-@import 'components/dropdown-menu';
 
 // Layout components
 @import 'components/off-canvas';
@@ -116,7 +105,6 @@
   @include foundation-switch;
   @include foundation-table;
   // Basic components
-  @include foundation-badge;
   @include foundation-breadcrumbs;
   @include foundation-callout;
   @include foundation-card;
