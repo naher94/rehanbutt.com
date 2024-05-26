@@ -16,15 +16,9 @@
 @include foundation-button;
 @include foundation-label;
 @include foundation-table;
-// Basic components
-@include foundation-tooltip;
 
 // Containers
 @include foundation-responsive-embed;
-@include foundation-tabs;
-
-// Layout components
-@include foundation-reveal;
 
 // Helpers
 @include foundation-float-classes;
