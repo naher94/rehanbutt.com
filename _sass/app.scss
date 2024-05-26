@@ -15,8 +15,6 @@
 // Generic components
 @include foundation-button;
 @include foundation-label;
-@include foundation-progress-bar;
-@include foundation-slider;
 @include foundation-switch;
 @include foundation-table;
 // Basic components
@@ -24,16 +22,13 @@
 
 // Containers
 @include foundation-media-object;
-@include foundation-orbit;
 @include foundation-responsive-embed;
 @include foundation-tabs;
 @include foundation-thumbnail;
 // Menu-based containers
-@include foundation-menu;
 @include foundation-menu-icon;
 
 // Layout components
-@include foundation-off-canvas;
 @include foundation-reveal;
 @include foundation-sticky;
 @include foundation-title-bar;

@@ -33,8 +33,6 @@
 // Generic components
 @import 'components/button';
 @import 'components/label';
-@import 'components/progress-bar';
-@import 'components/slider';
 @import 'components/switch';
 @import 'components/table';
 // Basic components
@@ -42,16 +40,13 @@
 
 // Containers
 @import 'components/media-object';
-@import 'components/orbit';
 @import 'components/responsive-embed';
 @import 'components/tabs';
 @import 'components/thumbnail';
 // Menu-based containers
-@import 'components/menu';
 @import 'components/menu-icon';
 
 // Layout components
-@import 'components/off-canvas';
 @import 'components/reveal';
 @import 'components/sticky';
 @import 'components/title-bar';
