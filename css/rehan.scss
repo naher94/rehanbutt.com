@@ -753,6 +753,12 @@ article{
   }
 }
 
+.easter-egg-banner-wrapper-wrapper{
+  position: sticky;
+  bottom: 2rem;
+  z-index: 2;
+}
+
 .easter-egg-banner-container{
   display: none; // Handled with JS on Konami Entry
   position: sticky;
