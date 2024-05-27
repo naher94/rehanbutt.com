@@ -4,6 +4,7 @@
 {% include head.html %}
 
 <body>
+  {% include easter-egg-snackbar.html %}
   {% include tag-manager.html %}
 
   {% capture background-color-override %}
@@ -22,6 +23,7 @@
 
     <main class="page-content">
       {{ content }}
+      <!-- TODO check how the easter-egg-banner is showing up without it being included here?????? -->
     </main>
     {% include footer-buffer.html %}
     {% include footer.html %}
