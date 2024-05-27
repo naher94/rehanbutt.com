@@ -5,6 +5,21 @@
   color: $pure-white;
   padding-top: 2em;
   padding-bottom: 2em;
+
+  [type='checkbox']+label[for] {
+    cursor: pointer;
+  }
+  [type='checkbox']+label {
+    display: inline-block;
+    vertical-align: baseline;
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+    margin-bottom: 0;
+  }
+  // TODO update vertical align of mobile header, this font size is a manual override
+  label{
+    font-size: .875rem;
+  }
 }
 
 .logo{
