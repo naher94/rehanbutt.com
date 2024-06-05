@@ -2,7 +2,7 @@
 layout: post-article
 article: true
 title: 'Product Principles & Strategies'
-description: A series of principles and strategies that I have found to work well when building product. Whether in the discovery phase or implementation phase they can help teams built the best experiences.
+description: A series of principles and strategies that I have found to work well when building product. Whether in the discovery phase or implementation phase they can help teams build the best experiences.
 hero: "product-principles-strategies/hero.jpg"
 hero-alt: Illustration of Pepper the Product Panda excited to showcase product principles and strategies
 tags: [leadership,product development]
@@ -10,7 +10,7 @@ content-type: my content
 date: 2024-05-04
 ---
 
-A series of principles and strategies that I have found to work well when building product. Whether in the discovery phase or implementation phase they can help teams built the best experiences.
+A series of principles and strategies that I have found to work well when building product. Whether in the discovery phase or implementation phase they can help teams build the best experiences.
 
 <div class="product-principles-strategies grid-x">
   <div class="cell grid-x align-middle grid-padding-x">
@@ -19,7 +19,7 @@ A series of principles and strategies that I have found to work well when buildi
     </div>
     <div class="cell medium-6">
       <h2>Users First</h2>
-      <p>Your users are not your designers, the more popular your product the more thoughts and comments you’ll receive. The more the merrier unless they’re bug reports. Use all the feedback as an opportunity to understand your user’s need. Stay true to the vision. Solve the problem – don’t just build the feature.</p>
+      <p>Your users are not your designers, the more popular your product the more thoughts and comments you’ll receive. The more the merrier unless they’re bug reports. Use all the feedback as an opportunity to understand your user’s needs. Stay true to the vision. Solve the problem – don’t just build the feature.</p>
     </div>
   </div>
   <div class="cell grid-x align-middle grid-padding-x">
@@ -64,7 +64,7 @@ A series of principles and strategies that I have found to work well when buildi
     </div>
     <div class="cell medium-6">
       <h2>Keep it Simple</h2>
-      <p>Start simple, allowing you to solve and validate a core problem and value proposition. Complexity is a distraction and holds us back.</p>
+      <p>Start simple, allowing the team to solve and validate a core problem and value proposition. Complexity is a distraction and holds us back.</p>
     </div>
   </div>
   <div class="cell grid-x align-middle grid-padding-x">
@@ -91,7 +91,7 @@ A series of principles and strategies that I have found to work well when buildi
     </div>
     <div class="cell medium-6">
       <h2>Opinionated Software</h2>
-      <p>Software should be opinionated. Its the only way software can excel at the task at hand. Flexible software lets everyone invent their own workflows, which can create chaos as the user group scales. And distracts the team from the product vision.</p>
+      <p>Software should be opinionated. It's the only way software can excel at the task at hand. Flexible software lets everyone invent their own workflows, which can create chaos as the user group scales. And distracts the team from the product vision.</p>
     </div>
   </div>
 </div>
