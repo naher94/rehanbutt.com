@@ -41,11 +41,14 @@
               <p class="section-title">Year in Review</p>
               {% assign yir_order = site.year-in-review | sort: 'year' | reverse %}
               {%- for year in yir_order -%}
-                {% if year.current != true %}
+                {% if year.year == 2023 %}
+                <div class="nav-wrap">
+                  <a class="nav" href="https://making-of-year-in-review.rehanbutt.com">Making Of </a>
+                </div>
+                {% endif %}
                 <div class="nav-wrap">
                   <a class="nav" href="https://{{ year.year | append: ".rehanbutt.com" }}" target="_blank" rel="noopener">{{year.year}}</a>
                 </div>
-                {% endif %}
               {%- endfor -%}
             </div>
           </div>
