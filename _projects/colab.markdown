@@ -8,61 +8,110 @@ tags: digital app
 ---
 
 <div class="grid-x">
-  <div class="image-container cell"><img src="../img/colab/colabhero.png" alt="CoLab Logo and Hero Shot"/></div>
+  <div class="cell">
+    <img src="../img/colab/colabhero.png" alt="CoLab Logo and Hero Shot"/>
+  </div>
 </div>
+{% include behind-the-scenes.html title="Behind the Scenes" description="Future me here, Looks like there was quite a bit opportunity on this ideas, as so many tools have launched a similar feature set. Figma launching at the end of 2016 and Sketch several years later. Cheers to us!" %}
 
-## Problem
-
+{:.post-callout-medium}
 Design is inherently collaborative. Existing tools such as Photoshop and Sketch are inconvenient for designers, since they have to work separately, then manually compare designs to resolve differences. Designers end up wasting time on redundant work, due to the lack of standard version control and file sharing methods.
 
-## Our Solution
-CoLab is a plugin that enables real-time collaboration and version control in Sketch, a popular tool among designers, and makes it convenient for them to design with their teams any me, anywhere.
+We Look to solve this problem with our new product CoLab. CoLab is a plugin that enables real-time collaboration and version control in Sketch, a popular tool among designers, and makes it convenient for them to design with their teams anytime, anywhere.
 
 <div class="responsive-embed widescreen">
-  <iframe width="100%" src="https://www.youtube.com/embed/w0ZcpQ547Gg?rel=0" frameborder="0" allowfullscreen title="Product Introduction"></iframe>
+  <iframe width="100%" src="https://www.youtube.com/embed/w0ZcpQ547Gg?rel=0" frameborder="0" allowfullscreen title="CoLab Product Introduction"></iframe>
 </div>
 
 As part of this project I worked with Alex Du, Aparna Sridhar Murthy, Chris Barker, Rishikesh Yardi.
 
-<div class="image-container" style="margin-top:100px;"><img src="../img/colab/screenshots-markup.jpg" alt="Screenshots"/></div>
+<div class="grid-x grid-margin-y">
+  <div class="cell">
+    <img src="../img/colab/screenshots-markup.jpg" alt="Screenshots"/>
+  </div>
+  <div class="cell">
+    <img src="../img/colab/presentation/presentation24.png" style="width:100%">
+  </div>
+  <div class="cell">
+    <img src="../img/colab/presentation/presentation25.png" style="width:100%">
+  </div>
+  <div class="cell">
+    <img src="../img/colab/presentation/presentation26.png" style="width:100%">
+  </div>
+  <div class="cell">
+    <img src="../img/colab/presentation/presentation27.png" style="width:100%">
+  </div>
+  <div class="cell">
+    <img src="../img/colab/presentation/presentation28.png" style="width:100%">
+  </div>
+  <div class="cell">
+    <img src="../img/colab/workflow-sketches.jpg" alt="Sketches of workflow pain">
+  </div>
+  <div class="cell">
+    <img src="../img/colab/data-structure.svg" alt="Data Implementation"/>
+  </div>
+</div>
 
-<div class="image-container" style="margin-top:100px;"><img src="../img/colab/data-structure.svg" alt="Data Implementation"/></div>
+Now that we have seen the product let's discuss the business side. Our target market is UI/UX designers and existing sketch users and through proxy data we know that the market is quite large. In the United States alone there are 261,000 graphic designers, 38,000 industrial designers, 74,600 art directions.* (*Bureau of Labor Statistics, U.S. Department of Labor, Occupational Outlook Handbook, 2016-17 Edition)
 
-<div class="image-container" style="margin-top:100px;"><img src="../img/colab/stats.svg" alt="Statistics"/></div>
+#### Our research hypotheses are as follows:
+- The collaboration tools designers have access to are not solving the problem
+- Designers would be able to collaborate better if they could see real-time updates made by their fellow designers
+- Design teams would be able to collaborate better if multiple designers could edit the same file at the same time
+- Designers would benefit from a version control system
 
-<div class="image-container" style="margin-top:100px;"><img src="../img/colab/competitiveAnalysis.png" alt="Competitive Analysis"/></div>
+#### Insights
+- 82.5% of designers collaborate with peers on their projects
+  - Work is generally split by software or phase (wireframe, style guide)
+- Most commonly used tools
+  - Sketch - 48.1%
+  - Photoshop & InDesign - 59.3%
+  - Illustrator - 74.1%
+- Major pain points
+  - Version control & file sharing
+  - Simultaneous editing to maintain consistency
+- Need for enterprises and consumer level solutions
 
+#### Marketing & Sales Strategies
+- Peer-to-peer
+- Advertizing
+- "Reference customer" companies
+- Word-of-mouth & advocacy
+- Hackathons
+  - Disrupt
+  - MHacks
+  - AngelHack
+- Design conferences
+  - UXPA
+  - ConFab
+  - AIGA
+- Early adopter promotions
+  - Discounts
+  - Trial periods
 
-<div class="slideshow-container">
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation2.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation3.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation4.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation5.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation6.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation7.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation8.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation9.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation10.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation11.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation12.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation13.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation14.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation15.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation16.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation17.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation18.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation19.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation20.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation21.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation22.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation23.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation24.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation25.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation26.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation27.png" style="width:100%"> </div>
-  <div class="gallery-asset fade"> <img src="../img/colab/presentation/presentation28.png" style="width:100%"> </div>
-
-  <a class="prev" onclick="plusSlides(-1)"><div class="arrow">&#10094;</div></a>
-  <a class="next" onclick="plusSlides(1)"><div class="arrow">&#10095;</div></a>
+<div class="grid-x grid-margin-y">
+  <div class="cell">
+    <img src="../img/colab/stats.svg" alt="Statistics"/>
+  </div>
+  <div class="cell">
+    <img src="../img/colab/competitiveAnalysis.png" alt="Competitive Analysis"/>
+  </div>
+  <div class="cell">
+    <img src="../img/colab/presentation/presentation8.png" style="width:100%">
+  </div>
+  <div class="cell">
+    <img src="../img/colab/growth-costs.jpg" alt="growth and long term costs">
+  </div>
+  <div class="cell">
+    <img src="../img/colab/presentation/presentation15.png" style="width:100%">
+  </div>
+  <div class="cell">
+    <img src="../img/colab/presentation/presentation17.png" style="width:100%">
+  </div>
+  <div>
+    <img src="../img/colab/hypothesis.jpg" alt="Hypothesis">
+  </div>
+  <div class="cell">
+    <img src="../img/colab/rev-costs.jpg" alt="Revenues & Costs">
+  </div>
 </div>
