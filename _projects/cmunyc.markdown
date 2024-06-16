@@ -14,10 +14,13 @@ tags: web Dzgn.IO
 
 ## Process
 
-<div class="image-container"><img src="../img/nyc/cmuEntities.png" alt="Other CMU Programs" />
-<img src="../img/nyc/cornell.png" alt="Cornell Campuses" />
-<img src="../img/nyc/uc1.png" alt="UC Schools Part 1" />
-<img src="../img/nyc/uc2.png" alt="UC schools Part 2" /></div>
+<div class="image-container">
+  <img src="../img/nyc/cmu-entities.jpg" alt="Other CMU Programs" />
+  <img src="../img/nyc/cornell.jpg" alt="Cornell Campuses" />
+
+  <img src="../img/nyc/uc-schools1.jpg" alt="UC Schools Part 1" />
+  <img src="../img/nyc/uc-schools2.jpg" alt="UC schools Part 2" />
+</div>
 
 
 When starting this project we looked into other Carnegie Mellon campuses as well as other universities for how they deal with multiple campuses with different goals in mind. Cornell uses the same main branding across their entities with a secondary brand image representing that particular campus. In comparison the University of California system uses a different brand image for each campus and different visual language.
