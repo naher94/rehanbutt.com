@@ -24,9 +24,9 @@ CoLab is a plugin that enables real-time collaboration and version control in Sk
 
 As part of this project I worked with Alex Du, Aparna Sridhar Murthy, Chris Barker, Rishikesh Yardi.
 
-<div class="image-container" style="margin-top:100px;"><img src="../img/colab/screenShots.png" alt="Screenshots"/></div>
+<div class="image-container" style="margin-top:100px;"><img src="../img/colab/screenshots-markup.jpg" alt="Screenshots"/></div>
 
-<div class="image-container" style="margin-top:100px;"><img src="../img/colab/dataStructure.svg" alt="Data Implementation"/></div>
+<div class="image-container" style="margin-top:100px;"><img src="../img/colab/data-structure.svg" alt="Data Implementation"/></div>
 
 <div class="image-container" style="margin-top:100px;"><img src="../img/colab/stats.svg" alt="Statistics"/></div>
 
