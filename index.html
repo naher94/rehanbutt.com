@@ -187,7 +187,17 @@ footer-main: true
   <div class="cell small-6 medium-4">
     <a href="https://{{ year.year | append: ".rehanbutt.com" }}" target="_blank" rel="noopener">
       <div class="year-container">
-        <div class="year-square" style="background: {{year.color}}">
+        <style>
+          .year-square-{{year.year}} {
+            background: {{year.color}};
+          }
+          @media (prefers-color-scheme: dark) {
+            .year-square-{{year.year}} {
+              background: {{year.color-dark}};
+            }
+          }
+        </style>
+        <div class="year-square year-square-{{year.year}}">
           <div class="overlay">
           </div>
           <svg class="" viewBox="0 0 83 50">
