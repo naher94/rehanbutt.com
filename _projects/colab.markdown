@@ -30,19 +30,19 @@ As part of this project I worked with Alex Du, Aparna Sridhar Murthy, Chris Bark
     <img src="../img/colab/screenshots-markup.jpg" alt="Screenshots"/>
   </div>
   <div class="cell">
-    <img src="../img/colab/presentation/presentation24.png" style="width:100%">
+    <img src="../img/colab/presentation/presentation24.png" alt="Interface Overview" style="width:100%">
   </div>
   <div class="cell">
-    <img src="../img/colab/presentation/presentation25.png" style="width:100%">
+    <img src="../img/colab/presentation/presentation25.png" alt="Version History Viewing" style="width:100%">
   </div>
   <div class="cell">
-    <img src="../img/colab/presentation/presentation26.png" style="width:100%">
+    <img src="../img/colab/presentation/presentation26.png" alt="Reverting Changes" style="width:100%">
   </div>
   <div class="cell">
-    <img src="../img/colab/presentation/presentation27.png" style="width:100%">
+    <img src="../img/colab/presentation/presentation27.png" alt="Live Updates" style="width:100%">
   </div>
   <div class="cell">
-    <img src="../img/colab/presentation/presentation28.png" style="width:100%">
+    <img src="../img/colab/presentation/presentation28.png" alt="Working Offline" style="width:100%">
   </div>
   <div class="cell">
     <img src="../img/colab/workflow-sketches.jpg" alt="Sketches of workflow pain">
