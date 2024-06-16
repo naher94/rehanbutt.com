@@ -38,11 +38,11 @@ When starting this project we looked into other Carnegie Mellon campuses as well
 
 <div class="image-container">
 <img src="../img/nyc/brandSketches.png" alt="Brand Sketches" />
-<img src="../img/nyc/brandingProcess.png" alt="Branding Process" />
-<img src="../img/nyc/colorIteration.png" alt="Color Iteration"/>
+<img src="../img/nyc/branding-process.jpg" alt="Branding Process" />
+<img src="../img/nyc/color-iterations.jpg" alt="Color Iteration"/>
 <img src="../img/nyc/persona.jpg" alt="Persona" />
 <img src="../img/nyc/persona2.jpg" alt="Persona" />
-<img src="../img/nyc/programChart.png" alt="Program Chart" />
+<img src="../img/nyc/program-chart.jpg" alt="Program Chart" />
 <img src="../img/nyc/originalSiteBreakdown.png" alt="Original Site Breakdown" />
 <img src="../img/nyc/siteBreakdownDetail.png" alt="Site Breakdown Detail" />
 <img src="../img/nyc/bannerIterations.png" alt="Banner Iterations" />
