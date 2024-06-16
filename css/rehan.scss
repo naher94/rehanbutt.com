@@ -76,7 +76,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 }
 
 .post-header{
-  @include breakpoint(medium down) {
+  @include breakpoint(large down) {
     padding-left: 0.5em;
     padding-right: 0.5em;
   }
