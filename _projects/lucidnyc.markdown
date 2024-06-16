@@ -17,12 +17,12 @@ Throughout this project the goal for the team was to bring to light the interest
 
 ## Process
 
-<div class="image-container"><img src="../img/lucid/brandingExploration.svg" alt="Branding iterations with different typefaces"/></div>
+<div class="image-container"><img src="../img/lucid/branding-exploration.svg" alt="Branding iterations with different typefaces"/></div>
 
-<div class="image-container"><img src="../img/lucid/brandingExploration2.svg" alt="Branding iterations with different shapes"/></div>
+<div class="image-container"><img src="../img/lucid/branding-exploration2.svg" alt="Branding iterations with different shapes"/></div>
 
 <div class="image-container"><img src="../img/lucid/colors.svg" alt="Brand color exploration"/></div>
 
-<div class="image-container"><img src="../img/lucid/tileIterations.png" alt="Article Tile Design Iterations"/></div>
+<div class="image-container"><img src="../img/lucid/tile-iterations.jpg" alt="Article Tile Design Iterations"/></div>
 
 <div class="image-container"><img src="../img/lucid/splashpage.png" alt="Mobile and desktop splash pages mockups"/></div>
