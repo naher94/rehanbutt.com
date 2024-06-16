@@ -9,7 +9,7 @@ tags: branding
 
 <div class="grid-x align-center teal-container">
   <div class="cell medium-8">
-    <img src="../img/mybrand/mylogo.svg" alt="My new logo">
+    <img src="../img/mybrand/mylogo.svg" alt="My new logo" style="filter: none;">
   </div>
 </div>
 

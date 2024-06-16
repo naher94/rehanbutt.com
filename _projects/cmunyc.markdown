@@ -14,10 +14,13 @@ tags: web Dzgn.IO
 
 ## Process
 
-<div class="image-container"><img src="../img/nyc/cmuEntities.png" alt="Other CMU Programs" />
-<img src="../img/nyc/cornell.png" alt="Cornell Campuses" />
-<img src="../img/nyc/uc1.png" alt="UC Schools Part 1" />
-<img src="../img/nyc/uc2.png" alt="UC schools Part 2" /></div>
+<div class="image-container">
+  <img src="../img/nyc/cmu-entities.jpg" alt="Other CMU Programs" />
+  <img src="../img/nyc/cornell.jpg" alt="Cornell Campuses" />
+
+  <img src="../img/nyc/uc-schools1.jpg" alt="UC Schools Part 1" />
+  <img src="../img/nyc/uc-schools2.jpg" alt="UC schools Part 2" />
+</div>
 
 
 When starting this project we looked into other Carnegie Mellon campuses as well as other universities for how they deal with multiple campuses with different goals in mind. Cornell uses the same main branding across their entities with a secondary brand image representing that particular campus. In comparison the University of California system uses a different brand image for each campus and different visual language.
@@ -38,11 +41,11 @@ When starting this project we looked into other Carnegie Mellon campuses as well
 
 <div class="image-container">
 <img src="../img/nyc/brandSketches.png" alt="Brand Sketches" />
-<img src="../img/nyc/brandingProcess.png" alt="Branding Process" />
-<img src="../img/nyc/colorIteration.png" alt="Color Iteration"/>
+<img src="../img/nyc/branding-process.jpg" alt="Branding Process" />
+<img src="../img/nyc/color-iterations.jpg" alt="Color Iteration"/>
 <img src="../img/nyc/persona.jpg" alt="Persona" />
 <img src="../img/nyc/persona2.jpg" alt="Persona" />
-<img src="../img/nyc/programChart.png" alt="Program Chart" />
+<img src="../img/nyc/program-chart.jpg" alt="Program Chart" />
 <img src="../img/nyc/originalSiteBreakdown.png" alt="Original Site Breakdown" />
 <img src="../img/nyc/siteBreakdownDetail.png" alt="Site Breakdown Detail" />
 <img src="../img/nyc/bannerIterations.png" alt="Banner Iterations" />
