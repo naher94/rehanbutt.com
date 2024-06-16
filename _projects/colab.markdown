@@ -97,16 +97,16 @@ Now that we have seen the product let's discuss the business side. Our target ma
     <img src="../img/colab/competitiveAnalysis.png" alt="Competitive Analysis"/>
   </div>
   <div class="cell">
-    <img src="../img/colab/presentation/presentation8.png" style="width:100%">
+    <img src="../img/colab/presentation/presentation8.png" alt="Feature overlap" style="width:100%">
   </div>
   <div class="cell">
     <img src="../img/colab/growth-costs.jpg" alt="growth and long term costs">
   </div>
   <div class="cell">
-    <img src="../img/colab/presentation/presentation15.png" style="width:100%">
+    <img src="../img/colab/presentation/presentation15.png" alt="Startup Costs" style="width:100%">
   </div>
   <div class="cell">
-    <img src="../img/colab/presentation/presentation17.png" style="width:100%">
+    <img src="../img/colab/presentation/presentation17.png" alt="Sketch API availability" style="width:100%">
   </div>
   <div>
     <img src="../img/colab/hypothesis.jpg" alt="Hypothesis">
