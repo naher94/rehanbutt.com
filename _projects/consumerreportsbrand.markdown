@@ -7,7 +7,7 @@ date:   2015-08-20
 tags: UI UX branding
 ---
 
-<div class="grid-x grid-padding-x">
+<div class="grid-x grid-padding-x grid-padding-y">
   <div class="cell">
     <img src="../img/cr/logo-color.svg" alt="Consumer Report's new logo full color">
   </div>
@@ -89,7 +89,7 @@ Typeface and lockup exploration
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
-    <img src="../img/cr/CRblobs.png" alt="CR Rating Blobs" />
+    <img src="../img/cr/cr-blobs.jpg" alt="CR Rating Blobs" />
   </div>
 </div>
 
