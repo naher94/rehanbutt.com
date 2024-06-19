@@ -29,7 +29,7 @@ The last set of interfaces that I would like to highlight include the schedule p
 
 I wanted to take full advantage of the topic categories created for CES. As such I created a color system that maps each category to a color for identifying events, booths and several other things across the app experience.
 
-<div class="image-container"><img src="../img/ces/userflowmap.png" alt="User Flow Map"/></div>
+<div class="image-container"><img src="../img/ces/userflowmap.jpg" alt="User Flow Map"/></div>
 
 ## Process
 
@@ -56,6 +56,8 @@ Several screens from the current app.
 
 Some interaction and static interfaces, that I used as inspiration. Looking at things like ease of use, hierarchy and legibility to name a few.
 
-<div class="image-container small-12 medium-10 cell medium-centered"><img src="../img/ces/topics.png" alt="Topic Groups"/></div>
+<div class="cell">
+  <img src="../img/ces/topics.png" alt="Topic Groups" style="width:100%;"/>
+</div>
 
-<div class="image-container"><img src="../img/ces/eventtiles.png" alt="Event Tile Iterations"/></div>
+<div class="image-container"><img src="../img/ces/event-tiles.jpg" alt="Event Tile Iterations"/></div>
