@@ -18,7 +18,7 @@ tags: web
 
 ## Process
 
-<div class="image-container"><img src="../img/lechuga/logoiterations.svg" alt="Logo Iterations"/></div>
+<div class="image-container"><img src="../img/lechuga/logo-iterations.jpg" alt="Logo Iterations"/></div>
 <div class="image-container"><img src="../img/lechuga/brandingsketches.png" alt="Brand Sketches"/></div>
 <div class="image-container"><img src="../img/lechuga/appsketches.png" alt="Experience Sketches"/></div>
 <div class="image-container"><img src="../img/lechuga/competitiveaudit.png" alt="Other Food Services"/></div>
