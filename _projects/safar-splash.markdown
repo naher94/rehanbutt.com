@@ -20,7 +20,7 @@ Every product needs to make a splash!
 
 With the new splash page for Safar TeleCare we wanted to extend the brand and showcase the main value and benefits of Safar for clinical staff and their support teams. Shaping the future of healthcare tools from traditionally complex enterprise applications to simple and straight forward apps that are designed with consumer sensibilities in mind.
 
-Interested in how we bring consumer sensibilities to the enterprise world? Check out the talk I'm giving on the topic later this year!
+<!-- Interested in how we bring consumer sensibilities to the enterprise world? Check out the talk I'm giving on the topic later this year! -->
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
