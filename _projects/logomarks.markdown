@@ -74,11 +74,10 @@ I created a set of personal LogoMarks using information about the people the Log
 
 Looking at the first logoMark, Yasmeen's, I starting on my computer within my vector program, Rhinoceros, I started with her initials "YA" looking at the outcome from current fonts and some interesting spaces and relations that could come of it. This was 1 of the 2 approaches I took. The second started from a stamp marking she already used to sign with, which is the marking below. First I vectorized it and then tried to overlay a geometry, which did not work out so well. So I decided to ditch the geometry and if I was going to use the stamp I was going to use it in the original vectorized form.
 
-<div class="image-container">
-  <img src="../img/logomark/ya-process-stamp.png" alt="Yasmeen Almuhanna Stamp Mark" class="image-center" style="width:70%" />
-</div>
-
 <div class="grid-x grid-padding-x grid-margin-y">
+<div class="cell">
+  <img src="../img/logomark/ya-process-stamp.jpg" alt="Yasmeen Almuhanna Stamp Mark"/>
+</div>
   <div class="cell">
     <img src="../img/logomark/ya-shape-iterations.jpg" alt="Shape Iterations of the YA Logomark">
   </div>
