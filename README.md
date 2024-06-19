@@ -227,7 +227,6 @@ https://society6.com/rehanbutt/about |✅ header image|✖️|✖️
 https://www.youtube.com/c/RehanButt1994 | ✅ header image|✖️|✖️| social links
 https://www.clubhouse.com/@rehanbutt |✖️|✅|✅|Twitter link
 https://letterboxd.com/naher94/ |✖️|✖️|✅|
-http://interchange.soa.cmu.edu | ✅ footer | ✖️|✖️
 https://www.stickermule.com/u/rehanbutt | ✖️|✖️|✖️ 
 http://BRND.life | ✅ footer |✖️|✖️
 http://QULR.life | ✅ footer |✖️|✖️
@@ -241,6 +240,7 @@ https://jekyllrb.com/showcase/ |✅|✖️|✖️| Full screen shot of the home 
 ~https://soa.cmu.edu/design/~ | ~no~ ||| ~showing fashion work~
 ~https://soa.cmu.edu/alumni/~ |~yes~ ||| ~SHOULD BE UPDATED~
 ~http://soa.cmu.edu/students/~ | ~yes~ ||| ~Graduate Student Section~
+~http://interchange.soa.cmu.edu~ | ~✅ footer~ | ✖️|✖️
 ~http://ideate.xsead.cmu.edu/profiles/profiles/naher94~ | ~no~ |
 ~https://scottylabs.org/portfolio/~ |~✅~|✖️|✖️|
 ~http://tech.soa.cmu.edu~ | ~✅ footer~ |✖️|✖️

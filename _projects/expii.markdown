@@ -37,13 +37,13 @@ Across all the public facing platforms I came across four distinct brand images 
 
 Some inspiration I used to articulate the brand, the flow, clarity, and hierarchy of the experiences.
 
-<div class="image-container"><img src="../img/expii/brandProposal.svg" alt="Simple Brand Proposal"/></div>
+<div class="image-container"><img src="../img/expii/brand-proposal.svg" alt="Simple Brand Proposal"/></div>
 
 When designing this brand image, I looked at it as the starting point for a bigger brand system. Using the pill shapes as a thematic element that could be used across all Expii products and marketing materials with an approachable color scheme and mascot to guide users through the Expii experience.
 
 ### Experiences
 
-<div class="image-container"><img src="../img/expii/platforms.png" alt="Platforms Expii Exists On" style="margin-bottom:70px;"/></div>
+<div class="image-container"><img src="../img/expii/platforms.png" alt="Platforms Expii Exists On"/></div>
 Extending from the brand audit, I looked at whether the product differed based on platform and if each platform was being capitalized on to the fullest extent. iOS only provided one of the two Expii products--Solve. Upon opening the app, the experience was immediately gated by a user login, which can be a big deterrent for users to try out a product or service. The Expii Android app was a webview leaving the interactions to be identical to the site. One of the benefits of a native app, however, is that resources can be stored on the device for easy retrieval and offline usage in many cases--something especially important in developing countries where infrastructure may not be as reliable but the added value of a learning tool like Expii would be far bigger. Lastly, I explored the desktop web experience as it is the most prominent and fully featured.
 
 <div class="image-container"><img src="../img/expii/products.png" alt="Products"/></div>
