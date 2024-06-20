@@ -932,6 +932,23 @@ article{
   }
 }
 
+@media (prefers-color-scheme: dark){
+  #colorbot-table{
+    thead{
+      background: $navy-black-d5;
+      color: semantic-color(text);
+      border: 1px solid $navy-black-l1;
+    }
+    tbody{
+      background-color: $navy-black-d3; //same as page background
+      border: 1px solid $navy-black-l1;
+      tr:nth-child(even){
+        background-color: $navy-black-d1;
+      }
+    }
+  }
+}
+
 .camleon-button {
   background-color: #6cbe45;
   &:hover {
