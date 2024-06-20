@@ -24,6 +24,7 @@ In [Version (V1.0)](https://github.com/naher94/jasper/releases/tag/V1.0) Jasper 
 
 ## Process
 
+{:#colorbot-table}
 | Effort/Priority | High   | Medium    | Low |
 | --------------- | ------ | -------   | --- |
 | **Low**         | Pull Tweets with #coloroftheday | clear formating | Creative error handling |
