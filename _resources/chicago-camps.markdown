@@ -1,8 +1,8 @@
 ---
-title: 'Chicago Camps Recordings'
-link: https://vimeo.com/user47291241
-description: Low-cost, high-value events serving the technology community.
-content-type: video
-tags: [film, product development]
-date: 2021-12-24
+title: 'Chicago Camps'
+link: https://www.chicagocamps.org
+description: From in-depth conferences to lively podcast discussions, our events cater to all aspects of design learning and leadership development. Explore our events to find your next opportunity for growth, inspiration, and connection in the ever-evolving world of UX and design.
+tags: []
+content-type: event
+date: 2024-08-06
 ---
