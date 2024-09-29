@@ -160,7 +160,7 @@ footer{
     padding-right: 0.25rem;
   }
   &:hover, &:focus{
-    .fab, .fas{
+    .fab, .fas, .fa-brands{
       animation: boing 300ms ease-out;
     }
     .fa-envelope{
@@ -186,6 +186,9 @@ footer{
     }
     .fa-500px{
       color: $F500px-green;
+    }
+    .fa-threads{
+      color: $threads-orange;
     }
   }
   &.email-wrapper{
