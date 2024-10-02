@@ -226,7 +226,7 @@ https://duqux.com/about-duqux/ | ✖️| ✖️|✅ | Photo
 https://society6.com/rehanbutt/about |✅ header image|✖️|✖️
 https://www.youtube.com/c/RehanButt1994 | ✅ header image|✖️|✖️| social links
 https://www.clubhouse.com/@rehanbutt |✖️|✅|✅|Twitter link
-https://letterboxd.com/naher94/ |✖️|✖️|✅|
+https://letterboxd.com/rehanbutt |✖️|✖️|✅|
 https://www.stickermule.com/u/rehanbutt | ✖️|✖️|✖️ 
 http://BRND.life | ✅ footer |✖️|✖️
 http://QULR.life | ✅ footer |✖️|✖️
