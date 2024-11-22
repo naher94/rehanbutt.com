@@ -13,7 +13,7 @@ sort-order: -1
     <img src="/img/film-posters/moana2.jpg" alt="Disney's Moana 2 movie poster">
   </div>
   <div class="text-container cell auto">
-    <p class="film-name">Moana 2 <span>(2024)</span></p>
+    <p class="film-name">Moana 2<span>・2024</span></p>
     <p class="credit-description">Credited under Technology - Engineering Services</p>
   </div>
 </div>
@@ -22,7 +22,7 @@ sort-order: -1
     <img src="/img/film-posters/wish-poster.jpg" alt="Disney's Wish movie poster">
   </div>
   <div class="text-container cell auto">
-    <p class="film-name">Wish <span>(2023)</span></p>
+    <p class="film-name">Wish<span>・2023</span></p>
     <p class="credit-description">Credited under Technology - Engineering Services</p>
   </div>
 </div>
