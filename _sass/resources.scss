@@ -108,7 +108,10 @@
         i{
           transition: $sprint;
         }
-        &.twitter{
+        &.threads{
+          i{
+            font-size: 1.1em;
+          }
           &:hover{
             i{
               transition: $sprint;
