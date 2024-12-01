@@ -274,7 +274,9 @@ h1{
           margin-inline-end: 0.25em;
         }
         &:hover{
-          // TODO add the rainbow hover effect #753
+          background-image: linear-gradient(90deg, #00a2e2 0%, #1bad6b 20%, #fec609 40%, #e92687 60%, #6d358d 80%, #00a2e2 100%);
+          background-size: 200% auto;
+          animation: rainbow 3s linear infinite;
         }
       }
     }
