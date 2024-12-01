@@ -13,7 +13,6 @@ sort-order: 2
 {%- comment -%}collect all the unique tags from the resources and articles{%- endcomment -%}
 {% assign allresources = site.resources | concat: site.articles %}
 {% assign alltags = allresources | map: "tags" | uniq | sort %}
-
 <section class="cell tag-section">
   <h2 class="visually-hidden">Categories</h2>
   <div class="tags-container cell">
@@ -24,6 +23,14 @@ sort-order: 2
         </div>
       </a>
     {% endfor %}
+    <!-- TODO add the surprise me button here #753 -->
+     <!-- in the href do a random section with JS -->
+     <a href="#" class="resource-surprise-me-button">
+      <div class="tag surprise-me">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        surprise me
+      </div>
+     </a>
   </div>
 </section>
 

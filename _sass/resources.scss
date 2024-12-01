@@ -269,6 +269,14 @@ h1{
       &:hover{
         background-color: semantic-color(actionable-pill-hover);
       }
+      &.surprise-me{
+        i{
+          margin-inline-end: 0.25em;
+        }
+        &:hover{
+          // TODO add the rainbow hover effect #753
+        }
+      }
     }
   }
 }
