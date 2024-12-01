@@ -10,8 +10,8 @@ layout: default
         <p class="date-stamp">{{ page.date| date: "%B %e, %Y" }}</p>
       </div>
       <div class="cell shrink social-share">
-        <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20article%20by%20%40naher94!&url={{page.url | prepend: site.url}}" class="share-item twitter">
-          <i class="fab fa-twitter"></i>
+        <a href="https://threads.net/intent/post?text=Check%20out%20this%20article%20by%20%40naher94!%20{{page.url | prepend: site.url}}" target="_blank" class="share-item threads">
+          <i class="fa-brands fa-threads"></i>
         </a>
         <span onclick="copyToClipboard('{{page.url | prepend: site.url}}', this)" class="share-item link">
           <i class="fas fa-link"></i>
@@ -31,8 +31,8 @@ layout: default
       <div class="cell medium-shrink count-label">{{page.title}}</div>
       <div class="cell medium-shrink">
         Share
-        <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20article%20by%20%40naher94!&url={{page.url | prepend: site.url}}" class="share-item twitter">
-          <i class="fab fa-twitter"></i>
+        <a href="https://threads.net/intent/post?text=Check%20out%20this%20article%20by%20%40naher94!%20{{page.url | prepend: site.url}}" target="_blank" class="share-item threads">
+          <i class="fa-brands fa-threads"></i>
         </a>
         <span onclick="copyToClipboard('{{page.url | prepend: site.url}}', this)" class="share-item link">
           <i class="fas fa-link"></i>
