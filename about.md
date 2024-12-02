@@ -165,18 +165,19 @@ footer-main: true
     <h3>Some of the things I do well</h3>
     <div class="skills-container">
       <div class="skills-item">Design Thinking</div>
+      <div class="skills-item">Systems Design</div>
+      <div class="skills-item">Product Management</div>
       <div class="skills-item">Project Management</div>
       <div class="skills-item">Problem Solving</div>
       <div class="skills-item">Team Management</div>
-      <div class="skills-item">Systems Design</div>
       <div class="skills-item">Interaction Design</div>
+      <div class="skills-item">Design Ops</div>
       <div class="skills-item">Information Architecture</div>
       <div class="skills-item">UX Writing</div>
-      <div class="skills-item">Design Ops</div>
       <div class="skills-item">3D Modeling</div>
       <div class="skills-item">Animation</div>
-      <div class="skills-item">Hand & Technical Drawing</div>
       <div class="skills-item">Photography</div>
+      <div class="skills-item">Hand & Technical Drawing</div>
       <div class="skills-item">Gif Curation 😝</div>
     </div>
   </section>
@@ -189,11 +190,10 @@ footer-main: true
     <div class="skills-container">
       <div class="skills-item">Figma</div>
       <div class="skills-item">Sketch</div>
-      <div class="skills-item">Framer</div>
       <div class="skills-item">Photoshop</div>
       <div class="skills-item">Illustrator</div>
       <div class="skills-item">InDesign</div>
-      <div class="skills-item">Adobe XD</div>
+      <div class="skills-item">Blender</div>
       <div class="skills-item">HTML</div>
       <div class="skills-item">CSS</div>
       <div class="skills-item">Javascript</div>
