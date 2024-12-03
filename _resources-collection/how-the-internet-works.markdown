@@ -7,6 +7,7 @@ tile-image: internet-works.png
 tile-image-alt: A digital art piece of a ethernet cable on the sea floor
 text-color: "#ffffff"
 featured: true
+tag: fun
 resources: [how-internet-works,beach-house-connecting-internet,nyc-human-internet,bottom-of-internet,undersea-cables-hold-internet,keys-to-the-internet,submarine-cable-map]
 date: 2023-01-16
 published: true

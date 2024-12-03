@@ -320,6 +320,46 @@ h1{
   }
 }
 
+.inline-collection-tile-link{
+  &:hover{
+    p{
+      &.title{
+        @include swipe-underline-hover(false);
+      }
+    }
+  }
+}
+
+.inline-collection-tile{
+  .small-2half{
+    width: 20%;
+  }
+  img{
+    border-radius: $tile-radius;
+  }
+  .text-content{
+    margin-inline-start: 0.5em;
+  }
+  p{
+    padding: 0;
+    margin: 0;
+    color: semantic-color(text);
+    &.sub-header{
+      text-transform: uppercase;
+      font-size: 0.5em;
+      font-weight: $lato-bold;
+      letter-spacing: 0.3em;
+    }
+    &.title{
+      font-family: $zilla;
+      font-weight: $zilla-bold;
+      font-size: 1.5rem;
+      line-height: 1em;
+      @include swipe-underline(semantic-color(text-bg),false);
+    }
+  }
+}
+
 .resource-link{
   margin-bottom: 1em;
   color: inherit;

@@ -66,6 +66,7 @@ sort-order: 2
   {%- endfor -%}
 </section>
 
+{%- assign allcollections = site.resources-collection | sort: 'date' | reverse -%}
 {% for tag in alltags %}
   <section class="tag-group grid-x grid-padding-x grid-padding-y cell medium-12" id="{{tag | replace: " ", "-"}}">
     <div class="cell grid-x align-middle">
@@ -74,6 +75,43 @@ sort-order: 2
       </a>
       <div class="cell small-12 medium-auto divider"></div>
     </div>
+  
+  {% assign tag_found = false %}
+
+  {% for collection in allcollections %}
+    {%- if collection.tag == tag -%}
+      {% assign tag_found = true %}
+      {% break %}
+    {% endif %}
+    
+    {% if tag_found %}
+      {% break %}
+    {% endif %}
+
+  {% endfor %}
+  
+  {% if tag_found %}
+  <div class="cell grid-x collection-row">
+  {% endif %}
+  
+    {%- for collection in allcollections -%}
+    {%- if collection.tag == tag -%}
+    <a href="{{collection.url | prepend: site.url}}" class="cell medium-4 inline-collection-tile-link">
+      <div class="inline-collection-tile grid-x align-middle">
+        <img src="../img/resources-collection/{{collection.tile-image}}" alt="{{collection.tile-image-alt}}" class="cell small-2half">
+        <div class="text-content cell auto">
+          <p class="sub-header">{{collection.sub-header}}</p>
+          <p class="title">{{collection.title}}</p>
+        </div>
+      </div>
+    </a>
+    {%- endif -%}
+    {%- endfor -%}
+  
+    {% if tag_found %}
+  </div>
+  {% endif %}
+
   {% for resource in allresources %}
     {% if resource.tags contains tag %}
       {%- if resource.article == true -%}
