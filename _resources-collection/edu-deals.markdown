@@ -7,6 +7,7 @@ tile-image: edu-deals.jpg
 tile-image-alt: Flat illustration of laptop and pencils against a desktop
 text-color: '#ffffff'
 featured: false
+tag: tools
 resources: [sketch-edu,figma-edu,rhino3d-edu,apple-pro-apps-edu,office-365-edu,github-student-dev-pack,webflow-edu,loom-edu]
 date: 2024-03-16
 published: true
