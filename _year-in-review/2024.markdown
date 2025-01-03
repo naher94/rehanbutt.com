@@ -1,0 +1,6 @@
+---
+year: 2024
+color: "linear-gradient(140deg, rgba(255,50,247,1) 0%, rgba(50,197,255,1) 50%, rgba(255,224,50,1) 100%)"
+color-dark: "linear-gradient(140deg, rgba(255,50,247,1) 0%, rgba(50,197,255,1) 50%, rgba(255,224,50,1) 100%)"
+current:
+---
