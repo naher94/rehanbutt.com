@@ -110,6 +110,8 @@ $semantic-colors:(
     easter-egg-card-outline: rgba(#D2D4D7, 0.28),
     easter-egg-card-description: $navy-black-l3,
     easter-egg-card-icon-bg: $navy-black-l8,
+    about-easter-egg-checkbox-tooltip-bg: $navy-black,
+    about-easter-egg-checkbox-check: $pure-white,
     article-share-bar-bg: $navy-black-l9,
   ),
   dark:(
@@ -146,6 +148,8 @@ $semantic-colors:(
     easter-egg-card-outline: $navy-black,
     easter-egg-card-description: $navy-black-l5,
     easter-egg-card-icon-bg: $navy-black-l2,
+    about-easter-egg-checkbox-tooltip-bg: $navy-black,
+    about-easter-egg-checkbox-check: $pure-white,
     article-share-bar-bg: $navy-black-d2,
   ),
 );

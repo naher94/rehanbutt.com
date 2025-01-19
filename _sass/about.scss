@@ -60,7 +60,7 @@
             text-decoration: none;
             position: relative;
             .click-easter-egg{
-              background-color: $navy-black; //TODO make semantic
+              background-color: semantic-color(about-easter-egg-checkbox-tooltip-bg);
               box-shadow: $recessed-shadow semantic-color(shadow);
               color: $pure-white;
               border-radius: $tile-radius;
@@ -89,7 +89,7 @@
                 i{
                   font-size: .75em;
                   padding-left: 0.05em;
-                  color: white; //TODO update to semantic color thought its always white
+                  color: semantic-color(about-easter-egg-checkbox-check);
                 }
               }
               span{
@@ -170,8 +170,6 @@
     }
   }
 }
-
-
 
 .speaking-item{
   i{
