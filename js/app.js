@@ -142,6 +142,7 @@ function dayNames() {
 function holidays() {
   return {
     "1:1": "Happy New Year!",
+		"1:19": "Happy National Popcorn Day! 🍿",
 		"1:29": "Happy Lunar New Year!",
     "2:23": "Happy 'Day I Wrote This Code' Day!",
     "2:29": "Happy Leap Day!",
@@ -149,8 +150,8 @@ function holidays() {
 		"7:14": "Happy World Orca Day!",
 		"7:22": "Happy Mango Day! 🥭",
 		"10:31": "Happy Halloween! 🎃",
-		"11:28": "Happy Thanksgiving! 🦃",
-		"1:2": "Happy Hanukkah!",
+		"11:27": "Happy Thanksgiving! 🦃",
+		"12:14": "Happy Hanukkah!",
     "12:25": "Merry Christmas! 🎄",
 		"12:26": "Happy Kwanzaa!"
   }
