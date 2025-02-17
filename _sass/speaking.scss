@@ -21,6 +21,10 @@
       &:first-child{
         background-color: semantic-color(button-fill);
         color: semantic-color(text-inverted);
+        &:hover{
+          background-color: semantic-color(speaking-button-primary-fill-hover);
+          border-color: semantic-color(speaking-button-primary-border-hover);
+        }
         @include breakpoint(medium up) {
           margin-right: 0.5em;
         }
