@@ -3,27 +3,125 @@
     p{
       padding: 0;
     }
-  }
-  h2{
-    font-size: 3.5em;
-    font-weight: $lato-black;
-    font-family: $lato;
-    @include breakpoint(small only) {
-      line-height: 1em;
-      padding: 0;
+    .cta-button{
+      padding: 0.7rem 1rem;
+      color: inherit;
+      border-radius: 14px;
+      border: solid 0.2rem semantic-color(button-outline);
+      font-weight: $lato-bold;
+      transition: $sprint;
+      text-align: center;
+      &:hover{
+        color: semantic-color(text-inverted);
+        background-color: semantic-color(button-fill);
+      }
+      i{
+        margin-right: 0.25em;
+      }
+      &:first-child{
+        background-color: semantic-color(button-fill);
+        color: semantic-color(text-inverted);
+        @include breakpoint(medium up) {
+          margin-right: 0.5em;
+        }
+      }
+      &.email-wrapper{
+        position: relative;
+        display: inline;
+        cursor: pointer;
+        .copied{
+          font-size: 1em;
+          left: 20%;
+          right: unset;
+          font-weight: $lato-bold;
+          @include breakpoint(small only) {
+            left: 40%;
+          }
+        }
+      }
     }
-    @include breakpoint(medium down) {
-      line-height: 1em;
+  }
+  // ////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////
+  // some speaking events related styling lives in about.scss
+  // ////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////
+  .speaking-item-featured{
+    border-radius: $tile-radius-medium;
+    background-color: aquamarine;
+    box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    ~ .speaking-events {
+      margin-top: 2em !important; //TODO remove the important.. related to &:nth-of-type(2)
+    }
+    &#ux-summit-2024{
+      background: linear-gradient(180deg, rgba(121,0,255,0.1) 0%, rgba(255,0,141,0.1) 100%),
+      radial-gradient(circle at 25% 100%, rgba(255, 249, 0, 0.1) 0%, rgba(255, 249, 0, 0) 100%),
+      radial-gradient(circle at 5% 10%, rgba(0,255,213,0.1) 0%, rgba(255,249,0,0) 100%),
+      radial-gradient(circle at 75% 50%, rgba(255,0,27,0.1) 0%, rgba(255,249,0,0) 100%);
+
+    }
+    .top-images, .bottom-images{
+      img{
+        height: 13em;
+        border-radius: $tile-radius-medium;
+        box-shadow: 0px 0px 30px 5px rgba(0,0,0,0.2);
+        // TODO there is probs a better way to position these images
+        // thinking about responsive things
+        &.top-square-img{
+          rotate: -5deg;
+          translate: 5em -1.5em;
+        }
+        &.top-img{
+          rotate: 10deg;
+          translate: 28em -1em;
+        }
+        &.bottom-img{
+          rotate: 7deg;
+          height: 15em;
+          translate: 10em 2em;
+        }
+      }
+    }
+    .main-content{
+      padding: 1em;
+      .brand-logo{
+        width: 5em;
+        margin-inline-end: 2em;
+        @media (prefers-color-scheme: dark) {
+          filter: contrast(800%) invert(100%);
+        }
+      }
+      h3{
+        font-family: $lato;
+        font-size: 1.5em;
+        font-weight: $lato-black;
+        padding: 0;
+        margin-bottom: 0;
+        line-height: 1.2;
+      }
+      p{
+        padding: 0;
+        margin: 0;
+        margin-top: -0.25em;
+      }
+      .date{
+        font-family: $lato;
+        font-size: 1em;
+        font-weight: 300;
+        font-style: italic;
+      }
+      .description{
+        font-family: $lato;
+        font-size: 1em;
+        font-weight: $lato-regular;
+        line-height: 1.2em;
+      }
     }
   }
-  .divider{
-    background-color: $signature-teal;
-    border-radius: $pill-radius;
-    content: '';
-    height: 0.5rem;
-    margin-left: 1rem;
-    @include breakpoint(small only) {
-      margin-left: 0;
+  .speaking-events{
+    &:nth-of-type(2){
+      margin-top: 0;
     }
   }
 }
