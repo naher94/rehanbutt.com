@@ -1,0 +1,29 @@
+.speaking-page{
+  .speaking-intro{
+    p{
+      padding: 0;
+    }
+  }
+  h2{
+    font-size: 3.5em;
+    font-weight: $lato-black;
+    font-family: $lato;
+    @include breakpoint(small only) {
+      line-height: 1em;
+      padding: 0;
+    }
+    @include breakpoint(medium down) {
+      line-height: 1em;
+    }
+  }
+  .divider{
+    background-color: $signature-teal;
+    border-radius: $pill-radius;
+    content: '';
+    height: 0.5rem;
+    margin-left: 1rem;
+    @include breakpoint(small only) {
+      margin-left: 0;
+    }
+  }
+}

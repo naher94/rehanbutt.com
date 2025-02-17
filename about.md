@@ -94,52 +94,6 @@ footer-sort-order: 2
       {% assign work_prev = work %}
     {% endfor %}
   </section>
-  <section class="speaking-events" id="speaking-events">
-    <div class="cell grid-x align-middle">
-      <h2 class="cell small-12 medium-shrink">Speaking Events</h2>
-      <div class="cell small-12 medium-auto divider"></div>
-    </div>
-    {% assign event_order = site.speaking | sort: 'date' | reverse %}
-    {% for event in event_order %}
-    {% assign current_date = 'now' | date: "%s" %}
-    {% assign event_date = event.date | date: "%s" %}
-    <div class="speaking-item
-      {% if event_date > current_date %}
-        future-event
-      {% endif %}
-    "> <!-- adding future-event class -->
-      {% if event.logo %}
-      <div class="brand-logo-container" id="{{event.logo}}">
-        <img class="brand-logo" src="/img/{{event.logo}}-logo.svg" alt="{{event.logo}} Logo">
-      </div>
-      {% endif %}
-      {% if event.link %}
-        <a href="{{event.link}}" target="_blank" rel="noopener">
-      {% endif %}
-      <div>
-        <h3>
-          {{event.title}}
-          {% if event.link %}
-            <i class="fas fa-link"></i>
-          {% endif %}
-        </h3>
-        <!-- Add a if for future event -->
-        {% if event_date > current_date %}
-        <span>Upcoming</span>
-        {% endif %}
-      </div>
-      <p class="date">{{event.date| date: "%B %Y" }}
-        {% if event.location %}
-        ・ {{event.location}}
-        {% endif %}
-      </p>
-      <p class="description">{{event.description}}</p>
-      {% if event.link %}
-        </a>
-      {% endif %}
-    </div>
-    {% endfor %}
-  </section>
   <section class="education" id="education">
     <div class="cell grid-x align-middle">
       <h2 class="cell small-12 medium-shrink">Education</h2>
