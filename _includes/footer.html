@@ -1,33 +1,28 @@
 <footer class="site-footer">
     <div class="grid-x grid-container footer-content align-justify">
           <div class="site-pages small-12 large-shrink cell grid-x">
-
+            {% assign footer_main_items = site.pages | where: "footer-main", true | sort: "sort-order" %}
+            {% assign footer_other_items = site.pages | where: "footer-other", true | sort: "sort-order" %}
+            <!-- create 2 arrays main and other -->
+            <!-- then sort them and iterate through them with the respective loops -->
             <div class="cell shrink nav-section">
               <p class="section-title">The Main Stuff</p>
-              <div class="nav-wrap"><a class="nav" href="/">Home</a></div>
-              {% for my_page in site.pages %}
-                {% if my_page.exclude-footer != true and my_page.footer-main == true %}
-                  {% if my_page.title %}
-                  <div class="nav-wrap">
-                    <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
-                  </div>
-                  {% endif %} 
-                {% endif %}
+              {% for my_page in footer_main_items %}
+                <div class="nav-wrap">
+                  <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+                </div>
               {% endfor %}
             </div>
 
             {%- comment -%} footer-other section {%- endcomment -%}
             <div class="cell shrink nav-section">
               <p class="section-title">Other Things</p>
-              {% assign items_order = site.pages | sort: 'sort-order' %}
-              {% for my_page in items_order %}
-                {% if my_page.exclude-footer != true and my_page.footer-other == true %}
-                  {% if my_page.title %}
-                  <div class="nav-wrap">
-                    <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
-                  </div>
-                  {% endif %} 
-                {% endif %}
+              {%- comment -%}{% assign items_order = site.pages | sort: 'sort-order' %} 
+              {%- endcomment -%}
+              {% for my_page in footer_other_items %}
+                <div class="nav-wrap">
+                  <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+                </div>
                 {%- comment -%}This sets the order manually zero indexed array hence the 2 for third position{%- endcomment -%}
                 {%- if my_page.sort-order == 2 -%}
                 <div class="nav-wrap">

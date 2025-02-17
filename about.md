@@ -3,6 +3,7 @@ layout: blank
 title: "About"
 permalink: about
 footer-main: true
+sort-order: 2
 ---
 
 <div class="about-intro">
