@@ -56,6 +56,7 @@
   <nav class="nav-container">
     <div class="site-nav grid-x grid-container">
       <div class="menu-container grid-x cell align-justify">
+        {% assign header_items = site.pages | where: "header-visibility", "show" | sort: "header-sort-order" %}
         <div class="burger-container">
           <input class="burger-btn" type="checkbox" id="burger-btn"/>
           <label class="burger-icon" for="burger-btn">
@@ -66,7 +67,6 @@
             <a class="nav" href="/about">About</a>
           </div>
           <ul class="menu-links">
-          {% assign header_items = site.pages | where: "header-visibility", "show" | sort: "header-sort-order" %}
           {% for my_page in header_items %}
             {% if my_page.title %}
               <li class="nav-item-container"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></li>
@@ -76,14 +76,15 @@
         </div>
 
         <div class="navbar">
-          <a class="nav nav-home" href="/" title="home"><i class="fas fa-home"></i></a>
-            {% for my_page in site.pages %}
-              {% if my_page.exclude-header != true %}
-                {% if my_page.title %}
-                  <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
-                {% endif %}
-              {% endif %}
-            {% endfor %}
+        {% for my_page in header_items %}
+          {% if my_page.title %}
+            {%- if my_page.title == "Home" -%}
+              <a class="nav nav-home" href="/" title="home"><i class="fas fa-home"></i></a>
+              {%- else -%}
+              <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+            {%- endif -%}
+          {% endif %}
+        {% endfor %}
         </div>
 
         <div class="logo">
