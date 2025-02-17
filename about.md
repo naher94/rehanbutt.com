@@ -7,6 +7,9 @@ sort-order: 2
 
 header-visibility: show
 header-sort-order: 2
+
+footer-section: main
+footer-sort-order: 2
 ---
 
 <div class="about-intro">
