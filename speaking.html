@@ -36,7 +36,6 @@ footer-sort-order: 3
     {% assign event_date = event.date | date: "%s" %}
 
     {%- if event.featured == true -%}
-      <!-- TODO this section -->
       <div class="speaking-item-featured" id="{{event.featured-id}}">
         <div class="top-images cell">
           <img class="top-square-img" src="../img/speaking-events/{{event.featured-id}}/{{event.image-top-square}}" alt="">
@@ -128,7 +127,9 @@ footer-sort-order: 3
         </div>
       </div>
     </section>
-  <!-- //////////////////////// -->
-  <!-- Insert new sections here -->
-  <!-- //////////////////////// -->
+    {%- comment -%}
+    <!-- //////////////////////// -->
+    <!-- Insert new sections here -->
+    <!-- //////////////////////// -->
+    {%- endcomment -%}
 </div>
