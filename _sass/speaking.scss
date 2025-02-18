@@ -86,6 +86,9 @@
           @include breakpoint(small only){
             translate: 5.5em -0.5em;
           }
+          @include breakpoint(medium only){
+            translate: 20em -1em;
+          }
         }
         &.bottom-img{
           rotate: 7deg;
