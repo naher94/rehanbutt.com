@@ -7,8 +7,9 @@ logo: ux-summit
 featured: true
 featured-id: ux-summit-2024
 image-top-square: me.jpg
+image-top-square-alt: "An action shot of me speaking on stage"
 image-top: color-script.jpg
+image-top-alt: "A photo of me speaking to the audience, with the audience in the foreground"
 image-bottom: intro-crowd.jpg
+image-bottom-alt: "A photo of me introducing myself to the audience, with space and attendees in view"
 ---
-
-<!-- TODO add alt tags for the images -->

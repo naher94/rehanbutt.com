@@ -38,8 +38,8 @@ footer-sort-order: 3
     {%- if event.featured == true -%}
       <div class="speaking-item-hero" id="{{event.featured-id}}">
         <div class="top-images cell">
-          <img class="top-square-img" src="../img/speaking-events/{{event.featured-id}}/{{event.image-top-square}}" alt="">
-          <img class="top-img" src="../img/speaking-events/{{event.featured-id}}/{{event.image-top}}" alt="">
+          <img class="top-square-img" src="../img/speaking-events/{{event.featured-id}}/{{event.image-top-square}}" alt="{{event.image-top-square-alt}}">
+          <img class="top-img" src="../img/speaking-events/{{event.featured-id}}/{{event.image-top}}" alt="{{event.image-top-alt}}">
         </div>
         <div class="main-content cell grid-x align-middle align-center">
           <div class="logo-wrapper cell shrink">
@@ -72,7 +72,7 @@ footer-sort-order: 3
           </div>
         </div>
         <div class="bottom-images cell">
-          <img class="bottom-img" src="../img/speaking-events/{{event.featured-id}}/{{event.image-bottom}}" alt="">
+          <img class="bottom-img" src="../img/speaking-events/{{event.featured-id}}/{{event.image-bottom}}" alt="{{event.image-bottom-alt}}">
         </div>
       </div>
     {%- else -%}
