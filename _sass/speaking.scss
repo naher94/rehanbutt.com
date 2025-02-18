@@ -160,6 +160,7 @@
     margin-block-start: 2em;
     @include breakpoint(small only) {
       font-size: 1.2em;
+      margin-block-end: 1em;
     }
     p{
       margin: 0;
