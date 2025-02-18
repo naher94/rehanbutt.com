@@ -43,6 +43,31 @@
       }
     }
   }
+  .speaking-events-intro{
+    margin-top: 4em;
+    h2{
+      font-size: 3.5em;
+      font-weight: $lato-black;
+      font-family: $lato;
+      @include breakpoint(small only) {
+        line-height: 1em;
+        padding: 0;
+      }
+      @include breakpoint(medium down) {
+        line-height: 1em;
+      }
+    }
+    .divider{
+      background-color: $signature-teal;
+      border-radius: $pill-radius;
+      content: '';
+      height: 0.5rem;
+      margin-left: 1rem;
+      @include breakpoint(small only) {
+        margin-left: 0;
+      }
+    }
+  }
   // ////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////
   // some speaking events related styling lives in about.scss
@@ -50,17 +75,17 @@
   // ////////////////////////////////////////////////////////
   
   .speaking-events{
-    &:nth-of-type(2){
-      margin-top: 0;
-    }
+    margin-top: 0;
   }
-  .speaking-item-featured{
+  .speaking-item-hero{
     border-radius: $tile-radius-medium;
     background-color: aquamarine;
     box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.05);
     overflow: hidden;
-    ~ .speaking-events {
-      margin-top: 2em;
+    margin-block: 2em;
+    // in the case there are multiple heroes next to one another then reduce the space between then
+    & + .speaking-item-hero {
+      margin-block-start: 0;
     }
     @include breakpoint(small only){
       margin-block-start: 2em;

@@ -23,7 +23,7 @@ footer-sort-order: 3
       </div>
     </div>
     
-    <section class="speaking-events cell medium-8" id="speaking-events">
+    <section class="speaking-events-intro cell medium-8" id="speaking-events">
       <div class="cell grid-x align-middle">
         <h2 class="cell small-12 medium-shrink">Speaking Events</h2>
         <div class="cell small-12 medium-auto divider"></div>
@@ -36,7 +36,7 @@ footer-sort-order: 3
     {% assign event_date = event.date | date: "%s" %}
 
     {%- if event.featured == true -%}
-      <div class="speaking-item-featured" id="{{event.featured-id}}">
+      <div class="speaking-item-hero" id="{{event.featured-id}}">
         <div class="top-images cell">
           <img class="top-square-img" src="../img/speaking-events/{{event.featured-id}}/{{event.image-top-square}}" alt="">
           <img class="top-img" src="../img/speaking-events/{{event.featured-id}}/{{event.image-top}}" alt="">
@@ -75,11 +75,8 @@ footer-sort-order: 3
           <img class="bottom-img" src="../img/speaking-events/{{event.featured-id}}/{{event.image-bottom}}" alt="">
         </div>
       </div>
-    {%- endif -%}
-    {% endfor %}
-
+    {%- else -%}
     <section class="speaking-events cell medium-8">
-      {% for event in event_order %}
       {% if event.featured != true %}
       <div class="speaking-item {% if event_date > current_date %}future-event{% endif %}">
         {% if event.logo %}
@@ -112,8 +109,10 @@ footer-sort-order: 3
         {% endif %}
       </div>
       {% endif %}
-      {% endfor %}
     </section>
+    {%- endif -%}
+    {% endfor %}
+
     <section class="grid-x cell cta-bar-wrapper">
       <div class="cta-bar cell grid-x align-justify">
         <div class="cell grid-x medium-shrink text-area">
