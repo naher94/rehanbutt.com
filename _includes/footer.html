@@ -1,88 +1,80 @@
 <footer class="site-footer">
     <div class="grid-x grid-container footer-content align-justify">
-          <div class="site-pages small-12 large-shrink cell grid-x">
-
-            <div class="cell shrink nav-section">
-              <p class="section-title">The Main Stuff</p>
-              <div class="nav-wrap"><a class="nav" href="/">Home</a></div>
-              {% for my_page in site.pages %}
-                {% if my_page.exclude-footer != true and my_page.footer-main == true %}
-                  {% if my_page.title %}
-                  <div class="nav-wrap">
-                    <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
-                  </div>
-                  {% endif %} 
-                {% endif %}
-              {% endfor %}
+      <div class="site-pages small-12 large-shrink cell grid-x">
+        {% assign footer_main_items = site.pages | where: "footer-section", "main" | sort: "footer-sort-order" %}
+        {% assign footer_other_items = site.pages | where: "footer-section", "other" | sort: "footer-sort-order" %}
+        <div class="cell shrink nav-section">
+          <p class="section-title">The Main Stuff</p>
+          {% for my_page in footer_main_items %}
+            <div class="nav-wrap">
+              <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
             </div>
+          {% endfor %}
+        </div>
 
-            {%- comment -%} footer-other section {%- endcomment -%}
-            <div class="cell shrink nav-section">
-              <p class="section-title">Other Things</p>
-              {% assign items_order = site.pages | sort: 'sort-order' %}
-              {% for my_page in items_order %}
-                {% if my_page.exclude-footer != true and my_page.footer-other == true %}
-                  {% if my_page.title %}
-                  <div class="nav-wrap">
-                    <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
-                  </div>
-                  {% endif %} 
-                {% endif %}
-                {%- comment -%}This sets the order manually zero indexed array hence the 2 for third position{%- endcomment -%}
-                {%- if my_page.sort-order == 2 -%}
-                <div class="nav-wrap">
-                  <a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store<span class="visually-hidden">Opens a new window</span></a>
-                </div>
-                {%- endif -%}
-              {% endfor %}
+        <div class="cell shrink nav-section">
+          <p class="section-title">Other Things</p>
+          {%- comment -%}{% assign items_order = site.pages | sort: 'sort-order' %} 
+          {%- endcomment -%}
+          {% for my_page in footer_other_items %}
+            <div class="nav-wrap">
+              <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
             </div>
+            {%- comment -%}This sets the order manually zero indexed array hence the 2 for third position{%- endcomment -%}
+            {%- if my_page.footer-sort-order == 2 -%}
+            <div class="nav-wrap">
+              <a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store<span class="visually-hidden">Opens a new window</span></a>
+            </div>
+            {%- endif -%}
+          {% endfor %}
+        </div>
 
-            <div class="cell shrink nav-section">
-              <p class="section-title">Year in Review</p>
-              {% assign yir_order = site.year-in-review | sort: 'year' | reverse %}
-              {%- for year in yir_order -%}
-                {% if year.year == 2023 %}
-                <div class="nav-wrap">
-                  <a class="nav" href="https://making-of-year-in-review.rehanbutt.com" target="_blank" rel="noopener">Making Of </a>
-                </div>
-                {% endif %}
-                <div class="nav-wrap">
-                  <a class="nav" href="https://{{ year.year | append: ".rehanbutt.com" }}" target="_blank" rel="noopener">{{year.year}}</a>
-                </div>
-              {%- endfor -%}
+        <div class="cell shrink nav-section">
+          <p class="section-title">Year in Review</p>
+          {% assign yir_order = site.year-in-review | sort: 'year' | reverse %}
+          {%- for year in yir_order -%}
+            {% if year.year == 2023 %}
+            <div class="nav-wrap">
+              <a class="nav" href="https://making-of-year-in-review.rehanbutt.com" target="_blank" rel="noopener">Making Of </a>
             </div>
+            {% endif %}
+            <div class="nav-wrap">
+              <a class="nav" href="https://{{ year.year | append: ".rehanbutt.com" }}" target="_blank" rel="noopener">{{year.year}}</a>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="grid-x cell small-12 large-auto">
+        <div class="logo-footer-container cell small-12 medium-12">
+          <a href="/" class="logo-footer" aria-label="Go to homepage">
+          {% capture location %}footer{% endcapture %}
+          {% include rehan-logo.svg %}
+          </a>
+        </div>
+        <div class="social-container cell grid-x small-shrink medium-12 align-self-bottom align-right">
+          <div class="cell small-12 medium-shrink social-sub-1">
+          
+            {% include external-link.html css-class="social" link="https://www.threads.net/@naher94" content="<i class='fa-brands fa-threads fa-xs' title='Threads'></i>" %}
+          
+            {% include external-link.html css-class="social" link="https://www.linkedin.com/in/rehan-butt/" content="<i class='fab fa-linkedin-in fa-xs' title='Linkedin'></i>" %}
+
+            {% include external-link.html css-class="social" link="https://github.com/naher94" content="<i class='fab fa-github fa-xs' title='Github'></i>" %}
+
           </div>
-
-        <div class="grid-x cell small-12 large-auto">
-          <div class="logo-footer-container cell small-12 medium-12">
-            <a href="/" class="logo-footer" aria-label="Go to homepage">
-            {% capture location %}footer{% endcapture %}
-            {% include rehan-logo.svg %}
-            </a>
-          </div>
-          <div class="social-container cell grid-x small-shrink medium-12 align-self-bottom align-right">
-            <div class="cell small-12 medium-shrink social-sub-1">
+          <div class="cell small-12 medium-shrink social-sub-2">
             
-              {% include external-link.html css-class="social" link="https://www.threads.net/@naher94" content="<i class='fa-brands fa-threads fa-xs' title='Threads'></i>" %}
-            
-              {% include external-link.html css-class="social" link="https://www.linkedin.com/in/rehan-butt/" content="<i class='fab fa-linkedin-in fa-xs' title='Linkedin'></i>" %}
-
-              {% include external-link.html css-class="social" link="https://github.com/naher94" content="<i class='fab fa-github fa-xs' title='Github'></i>" %}
-
+            <div class="social email-wrapper" onclick="copyToClipboard('me@rehanbutt.com',this)">
+              <i class='fas fa-envelope fa-xs' title='Email'></i>
             </div>
-            <div class="cell small-12 medium-shrink social-sub-2">
-              
-              <div class="social email-wrapper" onclick="copyToClipboard('me@rehanbutt.com',this)">
-                <i class='fas fa-envelope fa-xs' title='Email'></i>
-              </div>
 
-              {% include external-link.html css-class="social" link="https://codepen.io/rehanbutt" content="<i class='fab fa-codepen fa-xs' title='codepen'></i>" %}
+            {% include external-link.html css-class="social" link="https://codepen.io/rehanbutt" content="<i class='fab fa-codepen fa-xs' title='codepen'></i>" %}
+          
+            {% include external-link.html css-class="social" link="https://instagram.com/naher94" content="<i class='fab fa-instagram fa-xs' title='instagram'></i>" %}
             
-              {% include external-link.html css-class="social" link="https://instagram.com/naher94" content="<i class='fab fa-instagram fa-xs' title='instagram'></i>" %}
-              
-            </div>
           </div>
         </div>
+      </div>
       <div class="cell grid-x align-justify metadata">
         {% assign version-seperate = site.version | split: '.' %}
         {% assign ver-number = version-seperate[0] | minus: 1 %}

@@ -158,7 +158,8 @@
 
 .burger-btn:checked {
   ~ .menu-links {
-    max-height: 340px;
+    // TODO fix this height to auto
+    max-height: 402px;
     display: block;
     transition: $run;
   }

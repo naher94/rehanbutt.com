@@ -1,0 +1,219 @@
+.speaking-page{
+  .speaking-intro{
+    p{
+      padding: 0;
+    }
+  }
+  .cta-button{
+    padding: 0.7rem 1rem;
+    color: inherit;
+    border-radius: 14px;
+    border: solid 0.2rem semantic-color(button-outline);
+    font-weight: $lato-bold;
+    transition: $sprint;
+    text-align: center;
+    &:hover{
+      color: semantic-color(text-inverted);
+      background-color: semantic-color(button-fill);
+    }
+    i{
+      margin-right: 0.25em;
+    }
+    &:first-child{
+      background-color: semantic-color(button-fill);
+      color: semantic-color(text-inverted);
+      margin-right: 0.5em;
+      &:hover{
+        background-color: semantic-color(speaking-button-primary-fill-hover);
+        border-color: semantic-color(speaking-button-primary-border-hover);
+      }
+    }
+    &.email-wrapper{
+      position: relative;
+      display: inline;
+      cursor: pointer;
+      .copied{
+        font-size: 1em;
+        left: 20%;
+        right: unset;
+        font-weight: $lato-bold;
+        @include breakpoint(small only) {
+          left: 40%;
+        }
+      }
+    }
+  }
+  .speaking-events-intro{
+    margin-top: 4em;
+    h2{
+      font-size: 3.5em;
+      font-weight: $lato-black;
+      font-family: $lato;
+      @include breakpoint(small only) {
+        line-height: 1em;
+        padding: 0;
+      }
+      @include breakpoint(medium down) {
+        line-height: 1em;
+      }
+    }
+    .divider{
+      background-color: $signature-teal;
+      border-radius: $pill-radius;
+      content: '';
+      height: 0.5rem;
+      margin-left: 1rem;
+      @include breakpoint(small only) {
+        margin-left: 0;
+      }
+    }
+  }
+  // ////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////
+  // some speaking events related styling lives in about.scss
+  // ////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////
+  
+  .speaking-events{
+    margin-top: 0;
+  }
+  .speaking-item-hero{
+    border-radius: $tile-radius-medium;
+    background-color: aquamarine;
+    box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    margin-block: 2em;
+    // in the case there are multiple heroes next to one another then reduce the space between then
+    & + .speaking-item-hero {
+      margin-block-start: 0;
+    }
+    @include breakpoint(small only){
+      margin-block-start: 2em;
+    }
+    &#ux-summit-2024{
+      background: linear-gradient(180deg, rgba(121,0,255,0.1) 0%, rgba(255,0,141,0.1) 100%),
+      radial-gradient(circle at 25% 100%, rgba(255, 249, 0, 0.1) 0%, rgba(255, 249, 0, 0) 100%),
+      radial-gradient(circle at 5% 10%, rgba(0,255,213,0.1) 0%, rgba(255,249,0,0) 100%),
+      radial-gradient(circle at 75% 50%, rgba(255,0,27,0.1) 0%, rgba(255,249,0,0) 100%);
+
+    }
+    .top-images, .bottom-images{
+      img{
+        height: 13em;
+        border-radius: $tile-radius-medium;
+        box-shadow: 0px 0px 30px 5px rgba(0,0,0,0.2);
+        &.top-square-img{
+          rotate: -5deg;
+          translate: 5em -1.5em;
+          @include breakpoint(small only){
+            translate: -1em 2em;
+          }
+        }
+        &.top-img{
+          rotate: 10deg;
+          translate: 28em -1em;
+          @include breakpoint(small only){
+            translate: 5.5em -0.5em;
+          }
+          @include breakpoint(medium only){
+            translate: 20em -1em;
+          }
+        }
+        &.bottom-img{
+          rotate: 7deg;
+          height: 15em;
+          translate: 10em 2em;
+          @include breakpoint(small only){
+            height: 9em;
+            translate: 2em 2em;
+          }
+        }
+        @include breakpoint(small only){
+          height: 7em;
+          border-radius: $tile-radius;
+        }
+      }
+    }
+    .main-content{
+      padding: 1em;
+      .brand-logo{
+        width: 5em;
+        margin-inline-end: 2em;
+        @media (prefers-color-scheme: dark) {
+          filter: contrast(800%) invert(100%);
+        }
+        @include breakpoint(small only){
+          margin-inline-end: 0;
+          margin-block-end: 2em;
+        }
+      }
+      h3{
+        font-family: $lato;
+        font-size: 1.5em;
+        font-weight: $lato-black;
+        padding: 0;
+        margin-bottom: 0;
+        line-height: 1.2;
+      }
+      p{
+        padding: 0;
+        margin: 0;
+        margin-top: -0.25em;
+      }
+      .date{
+        font-family: $lato;
+        font-size: 1em;
+        font-weight: 300;
+        font-style: italic;
+      }
+      .description{
+        font-family: $lato;
+        font-size: 1em;
+        font-weight: $lato-regular;
+        line-height: 1.2em;
+      }
+    }
+  }
+  .cta-bar{
+    position: relative;
+    background-color: semantic-color(article-share-bar-bg);
+    color: semantic-color(text);
+    border-radius: $tile-radius-medium;
+    padding: 1em;
+    font-weight: $lato-bold;
+    margin-block-start: 2em;
+    @include breakpoint(small only) {
+      font-size: 1.2em;
+      margin-block-end: 1em;
+    }
+    p{
+      margin: 0;
+      padding: 0;
+      line-height: 1.4;
+      &.text-main{
+        font-size: 1.25em;
+        @include breakpoint(small only){
+          font-size: 1em;
+        }
+      }
+      &.text-secondary{
+        font-weight: $lato-regular;
+        @include breakpoint(small only){
+          font-size: 1rem;
+        }
+      }
+    }
+    .text-area{
+      @include breakpoint(small only){
+        margin-block-end: 0.75em;
+      }
+    }
+    .cta-button{
+      margin-right: 0;
+      @include breakpoint(small only){
+        font-size: 1rem;
+        padding: 0.4rem 0.75rem;
+      }
+    }
+  }
+}

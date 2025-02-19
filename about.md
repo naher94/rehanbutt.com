@@ -3,6 +3,13 @@ layout: blank
 title: "About"
 permalink: about
 footer-main: true
+sort-order: 2
+
+header-visibility: show
+header-sort-order: 2
+
+footer-section: main
+footer-sort-order: 2
 ---
 
 <div class="about-intro">
@@ -13,7 +20,7 @@ footer-main: true
           <h1>Hi! I'm Rehan <span class="wave" onclick="highFive()">👋</span></h1>
           <p>I am a <span class="rainbow">devzgner</span> currently based in Los Angeles California, USA creating <span class="magic">magic</span> & filmmaking tools at Walt Disney Animation Studios. Currently, I lead design across a broad range of tools used by artists and filmmakers. Previously I worked on healthcare technology at the University of Pittsburgh Medical Center (UPMC) Enterprises, where I led design for our technology group. During my time at UPMC I led design across several products, from care delivery to research study tools and designed a suite of imaging tools for the radiology field with GE Healthcare. Prior to joining the healthcare world, I worked in the sports industry, collaborating with organizations like the <span class="basketball">NBA</span> and <span class="football">NFL</span> on consumer and enterprise applications, such as in-door wayfinding, an ads platform, and <a href="{% link _projects/deepintheq.markdown %}">AR experiences!</a> I have also spent time in the consumer advocacy space building tools that help to prioritize the interests of the consumer to shape a truly consumer-driven marketplace.</p>
           <p>I have been very fortunate to have lived all over the <span class="world">world</span> and continue my love for travel. Bringing my observations and experiences from unique aspects of each culture and geography into my design philosophy. During my travels, I have had the opportunity to grow my love of <span class="photography">photography</span> and have captured some amazing images along the way.</p>
-          <p>I attended Carnegie Mellon University where I received a Master in Tangible Interaction Design and a Bachelor (BA) in Integrative Physical and Digital Media Studies. I'm always looking for opportunities to learn something new and share my knowledge with others. There are lot of great resources online, check out some of my recent finds <a href="{% link resources.html %}">here.</a> And sometimes I get a chance to share what I know on <a href="#speaking-events">stage.</a></p>
+          <p>I attended Carnegie Mellon University where I received a Master in Tangible Interaction Design and a Bachelor (BA) in Integrative Physical and Digital Media Studies. I'm always looking for opportunities to learn something new and share my knowledge with others. There are lot of great resources online, check out some of my recent finds <a href="{% link resources.html %}">here.</a> And sometimes I get a chance to share what I know on <a href="/speaking">stage.</a></p>
           <p>When I'm not devzgning filmmaking tools, you can find me playing with code, drawing <span class="penguin">cute illustrations</span>, pushing buttons and sometimes doing a bit of <span class="woodworking">woodworking</span>.</p>
           <p>One day I'd like to:</p>
           <ul class="todos">
@@ -85,52 +92,6 @@ footer-main: true
         {%- endif -%}
       </div>
       {% assign work_prev = work %}
-    {% endfor %}
-  </section>
-  <section class="speaking-events" id="speaking-events">
-    <div class="cell grid-x align-middle">
-      <h2 class="cell small-12 medium-shrink">Speaking Events</h2>
-      <div class="cell small-12 medium-auto divider"></div>
-    </div>
-    {% assign event_order = site.speaking | sort: 'date' | reverse %}
-    {% for event in event_order %}
-    {% assign current_date = 'now' | date: "%s" %}
-    {% assign event_date = event.date | date: "%s" %}
-    <div class="speaking-item
-      {% if event_date > current_date %}
-        future-event
-      {% endif %}
-    "> <!-- adding future-event class -->
-      {% if event.logo %}
-      <div class="brand-logo-container" id="{{event.logo}}">
-        <img class="brand-logo" src="/img/{{event.logo}}-logo.svg" alt="{{event.logo}} Logo">
-      </div>
-      {% endif %}
-      {% if event.link %}
-        <a href="{{event.link}}" target="_blank" rel="noopener">
-      {% endif %}
-      <div>
-        <h3>
-          {{event.title}}
-          {% if event.link %}
-            <i class="fas fa-link"></i>
-          {% endif %}
-        </h3>
-        <!-- Add a if for future event -->
-        {% if event_date > current_date %}
-        <span>Upcoming</span>
-        {% endif %}
-      </div>
-      <p class="date">{{event.date| date: "%B %Y" }}
-        {% if event.location %}
-        ・ {{event.location}}
-        {% endif %}
-      </p>
-      <p class="description">{{event.description}}</p>
-      {% if event.link %}
-        </a>
-      {% endif %}
-    </div>
     {% endfor %}
   </section>
   <section class="education" id="education">
