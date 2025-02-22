@@ -16,29 +16,13 @@ hero-accent-color-dark: "#FFFFFF"
 
 During my trip to Abu Dhabi I had the chance to visit Sheikh Zayed Grand Mosque, Yas Island & the Louvre as well as several other site. Enjoy some of my favorite photos from my trip.
 
-
-<!-- TODO should this be a component?? -->
-<div class="grid-x grid-margin-x grid-margin-y">
-  <div class="grid-x cell">
-    <div class="map-container cell grid-x">
-      <img class="map" src="../img/photography/abu-dhabi-2023/worldmap-abu-dhabi.svg" alt="Illustrated map of the world with a focus on the United Arab Emirates">
-      <div class="detail cell small-12 medium-shrink">
-        <div class="detailed-map cell">
-          <img src="../img/photography/abu-dhabi-2023/mapdetail-abu-dhabi.svg" alt="Illustrated map of the United Arab Emirates">
-        </div>
-        <div class="detail-footer cell grid-x align-middle">
-          <div class="cell small-2 medium-shrink flag-wrapper">
-            <img src="../img/photography/flags/uae.svg" alt="Flag of United Arab Emirates">
-          </div>
-          <div class="cell shrink text-wrapper">
-            <p class="country-name">United Arab Emirates</p>
-            <p class="country-label">Country</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+{% include photo-map.html 
+  worldmap-file="abu-dhabi-2023/worldmap-abu-dhabi.svg"
+  mapdetail-file="abu-dhabi-2023/mapdetail-abu-dhabi.svg"
+  flag-file="uae.svg"
+  country-name="United Arab Emirates"
+  country-name-alt-text="the United Arab Emirates" 
+%}
 
 <div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell">

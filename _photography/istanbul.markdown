@@ -16,28 +16,13 @@ hero-accent-color-dark: "#FFFFFF"
 
 During the winter of 2023, I visited the city of Istanbul. While there I visited many sites and made friends with several street cats. Enjoy some of my favorite shots from my trip.
 
-<!-- TODO should this be a component?? -->
-<div class="grid-x grid-margin-x grid-margin-y">
-  <div class="grid-x cell">
-    <div class="map-container cell grid-x">
-      <img class="map" src="../img/photography/istanbul-2023//worldmap-turkey.svg" alt="Illustrated map of the world with a focus on Turkey">
-      <div class="detail cell small-12 medium-shrink">
-        <div class="detailed-map cell">
-          <img src="../img/photography/istanbul-2023/mapdetail-turkey.svg" alt="Illustrated map of Turkey">
-        </div>
-        <div class="detail-footer cell grid-x align-middle">
-          <div class="cell small-2 medium-shrink flag-wrapper">
-            <img src="../img/photography/flags/turkey.svg" alt="Flag of Turkey">
-          </div>
-          <div class="cell shrink text-wrapper">
-            <p class="country-name">Turkey</p>
-            <p class="country-label">Country</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+{% include photo-map.html 
+  worldmap-file="istanbul-2023/worldmap-turkey.svg"
+  mapdetail-file="istanbul-2023/mapdetail-turkey.svg"
+  flag-file="turkey.svg"
+  country-name="Turkey"
+  country-name-alt-text="Turkey" 
+%}
 
 <div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell">

@@ -20,29 +20,13 @@ Now, the World Expo has evolved to emphasize the celebration of global culture. 
 
 I invite you to experience this extraordinary event that united the world with a shared vision of a brighter, interconnected future. Join me on my photographic journey of Dubai Expo 2020.
 
-
-<!-- TODO should this be a component?? -->
-<div class="grid-x grid-margin-x grid-margin-y">
-  <div class="grid-x cell">
-    <div class="map-container cell grid-x">
-      <img class="map" src="../img/photography/dubai/worldmap-dubai.svg" alt="Illustrated map of the world with a focus on the United Arab Emirates">
-      <div class="detail cell small-12 medium-shrink">
-        <div class="detailed-map cell">
-          <img src="../img/photography/dubai/mapdetail-dubai.svg" alt="Illustrated map of the United Arab Emirates">
-        </div>
-        <div class="detail-footer cell grid-x align-middle">
-          <div class="cell small-2 medium-shrink flag-wrapper">
-            <img src="../img/photography/flags/uae.svg" alt="Flag of United Arab Emirates">
-          </div>
-          <div class="cell shrink text-wrapper">
-            <p class="country-name">United Arab Emirates</p>
-            <p class="country-label">Country</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+{% include photo-map.html 
+  worldmap-file="dubai/worldmap-dubai.svg"
+  mapdetail-file="dubai/mapdetail-dubai.svg"
+  flag-file="uae.svg"
+  country-name="United Arab Emirates"
+  country-name-alt-text="the United Arab Emirates" 
+%}
 
 <div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell">

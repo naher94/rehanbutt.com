@@ -16,28 +16,13 @@ hero-accent-color-dark: "#FFFFFF"
 
 During the winter of 2022, I went on a trip around Jordan exploring many of the sites. From the legendary city of Petra to the golden dunes of Wadi Rum, exploring these ancient landmarks was quite a sight. Enjoy some of my favorite shots from my trip. 
 
-<!-- TODO should this be a component?? -->
-<div class="grid-x grid-margin-x grid-margin-y">
-  <div class="grid-x cell">
-    <div class="map-container cell grid-x">
-      <img class="map" src="../img/photography/jordan-2022/worldmap-jordan.svg" alt="Illustrated map of the world with a focus on Jordan">
-      <div class="detail cell small-12 medium-shrink">
-        <div class="detailed-map cell">
-          <img src="../img/photography/jordan-2022/mapdetail-jordan.svg" alt="Illustrated map of Jordan">
-        </div>
-        <div class="detail-footer cell grid-x align-middle">
-          <div class="cell small-2 medium-shrink flag-wrapper">
-            <img src="../img/photography/flags/jordan.svg" alt="Flag of Jordan">
-          </div>
-          <div class="cell shrink text-wrapper">
-            <p class="country-name">Jordan</p>
-            <p class="country-label">Country</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+{% include photo-map.html 
+  worldmap-file="jordan-2022/worldmap-jordan.svg"
+  mapdetail-file="jordan-2022/mapdetail-jordan.svg"
+  flag-file="jordan.svg"
+  country-name="Jordan"
+  country-name-alt-text="Jordan" 
+%}
 
 <div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell medium-6">
