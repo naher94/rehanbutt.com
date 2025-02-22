@@ -41,8 +41,6 @@ collections:
     output: false
   photography:
     output: true
-  changelog:
-    output: false
   easter-eggs:
     output: false
   articles:
