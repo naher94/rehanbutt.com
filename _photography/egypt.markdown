@@ -16,28 +16,13 @@ hero-accent-color-dark: "#FFFFFF"
 
 During the winter of 2024, I had the incredible opportunity to visit Egypt, a country rich in history, culture, and breathtaking landscapes. My journey took me through several cities, each offering its own unique charm and fascinating sites. From the awe-inspiring pyramids of Giza to the ancient temples of Luxor and the vibrant markets of Cairo, every stop was filled with unforgettable moments. I explored the serene waters of the Nile, wandered through centuries-old ruins, and immersed myself in the local culture and cuisine. Here are some of my favorite shots from this unforgettable adventure—capturing the essence of Egypt through my lens.
 
-<!-- TODO should this be a component?? -->
-<div class="grid-x grid-margin-x grid-margin-y">
-  <div class="grid-x cell">
-    <div class="map-container cell grid-x">
-      <img class="map" src="../img/photography/egypt-2024/worldmap-egypt.svg" alt="Illustrated map of the world with a focus on Egypt">
-      <div class="detail cell small-12 medium-shrink">
-        <div class="detailed-map cell">
-          <img src="../img/photography/egypt-2024/mapdetail-egypt.svg" alt="Illustrated map of Egypt">
-        </div>
-        <div class="detail-footer cell grid-x align-middle">
-          <div class="cell small-2 medium-shrink flag-wrapper">
-            <img src="../img/photography/flags/egypt.svg" alt="Flag of Egypt">
-          </div>
-          <div class="cell shrink text-wrapper">
-            <p class="country-name">Egypt</p>
-            <p class="country-label">Country</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+{% include photo-map.html 
+  worldmap-file="egypt-2024/worldmap-egypt.svg"
+  mapdetail-file="egypt-2024/mapdetail-egypt.svg"
+  flag-file="egypt.svg"
+  country-name="Egypt"
+  country-name-alt-text="Egypt" 
+%}
 
 <div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell" style="display: flex; flex: calc(1400/2097);">

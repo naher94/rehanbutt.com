@@ -17,28 +17,13 @@ hero-accent-color-dark: "#FFFFFF"
 
 Had the opportunity to visit Dubai twice, 10 years apart. First in 2012 then 2022 when I attended the <a href="{% link _photography/dubai-expo.markdown %}">World Expo</a>. Enjoy some of my favorite shots from my trip exploring architecture and culture.
 
-<!-- TODO should this be a component?? -->
-<div class="grid-x grid-margin-x grid-margin-y">
-  <div class="grid-x cell">
-    <div class="map-container cell grid-x">
-      <img class="map" src="../img/photography/dubai-expo/worldmap-dubai.svg" alt="Illustrated map of the world with a focus on the United Arab Emirates">
-      <div class="detail cell small-12 medium-shrink">
-        <div class="detailed-map cell">
-          <img src="../img/photography/dubai-expo/mapdetail-dubai.svg" alt="Illustrated map of the United Arab Emirates">
-        </div>
-        <div class="detail-footer cell grid-x align-middle">
-          <div class="cell small-2 medium-shrink flag-wrapper">
-            <img src="../img/photography/flags/uae.svg" alt="Flag of United Arab Emirates">
-          </div>
-          <div class="cell shrink text-wrapper">
-            <p class="country-name">United Arab Emirates</p>
-            <p class="country-label">Country</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+{% include photo-map.html 
+  worldmap-file="dubai-expo/worldmap-dubai.svg"
+  mapdetail-file="dubai-expo/mapdetail-dubai.svg"
+  flag-file="uae.svg"
+  country-name="United Arab Emirates"
+  country-name-alt-text="the United Arab Emirates" 
+%}
 
 <!-- TODO add future museum elevator??? -->
 <div class="grid-x grid-margin-x grid-margin-y">
