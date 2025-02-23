@@ -26,7 +26,7 @@ hero-accent-color-dark: "#FFFFFF"
 
 <div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell medium-6">
-    <img src="../img/photography/disneyland/halloween-balloon.jpg" alt="">
+    <img src="../img/photography/disneyland/halloween-balloon.jpg" alt="Balloon guy selling Halloween themed balloons">
   </div>
   <div class="cell medium-6">
     <img src="../img/photography/disneyland/easter-balloon.jpg" alt="Bundle of easter balloons against the sky">
@@ -38,30 +38,33 @@ hero-accent-color-dark: "#FFFFFF"
     <img src="../img/photography/disneyland/flying-alien.jpg" alt="Little green man from Toy Story flying away on a jetpack">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/disneyland/pixar-pier-coaster.jpg" alt="">
+    <img src="../img/photography/disneyland/pixar-pier-coaster.jpg" alt="Incredicoaster in the loop in front of the Pixar Pier sign">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/disneyland/luigi-cars.jpg" alt="">
+    <img src="../img/photography/disneyland/luigi-cars.jpg" alt="Luigi's Tire's ride cars">
   </div>
   <div class="cell">
-    <img src="../img/photography/disneyland/pan-pacific-pins.jpg" alt="">
+    <img src="../img/photography/disneyland/pan-pacific-pins.jpg" alt="Pan Pacific pin cart at night">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/disneyland/flos-v8-cafe.jpg" alt="">
+    <img src="../img/photography/disneyland/flos-v8-cafe.jpg" alt="Flo's V8 Cafe neon at night">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/disneyland/luigi-tires-sign.jpg" alt="">
+    <img src="../img/photography/disneyland/luigi-tires-sign.jpg" alt="Luigi's Tire's neon sign at night">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/disneyland/tomorrowland-top.jpg" alt="">
+    <img src="../img/photography/disneyland/tomorrowland-top.jpg" alt="Building top from Tomorrowland">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/disneyland/silver-facade.jpg" alt="">
+    <img src="../img/photography/disneyland/silver-facade.jpg" alt="Tomorrowland reflective curved wall">
+  </div>
+  <div class="cell">
+    <img src="../img/photography/disneyland/pixar-pier.jpg" alt="Street photography style image at Pixar Pier">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/disneyland/animation.jpg" alt="">
+    <img src="../img/photography/disneyland/animation.jpg" alt="Animation building from Hollywood Land at Disney's California Adventure">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/disneyland/monsters-inc-doors.jpg" alt="">
+    <img src="../img/photography/disneyland/monsters-inc-doors.jpg" alt="Monsters Inc door facade">
   </div>
 </div>
