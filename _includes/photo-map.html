@@ -1,19 +1,17 @@
 <div class="grid-x grid-margin-x grid-margin-y">
-  <div class="grid-x cell">
-    <div class="map-container cell grid-x">
-      <img class="map" src="../img/photography/{{include.worldmap-file}}" alt="Illustrated map of the world with a focus on {{include.country-name-alt-text}}">
-      <div class="detail cell small-12 medium-shrink">
-        <div class="detailed-map cell">
-          <img src="../img/photography/{{include.mapdetail-file}}" alt="Illustrated map of {{include.country-name-alt-text}}">
+  <div class="map-container cell grid-x">
+    <img class="map" src="../img/photography/{{include.worldmap-file}}" alt="Illustrated map of the world with a focus on {{include.country-name-alt-text}}">
+    <div class="detail cell small-12 medium-shrink">
+      <div class="detailed-map cell">
+        <img src="../img/photography/{{include.mapdetail-file}}" alt="Illustrated map of {{include.country-name-alt-text}}">
+      </div>
+      <div class="detail-footer cell grid-x align-middle">
+        <div class="cell small-2 medium-shrink flag-wrapper">
+          <img src="../img/photography/flags/{{include.flag-file}}" alt="Flag of {{include.country-name}}">
         </div>
-        <div class="detail-footer cell grid-x align-middle">
-          <div class="cell small-2 medium-shrink flag-wrapper">
-            <img src="../img/photography/flags/{{include.flag-file}}" alt="Flag of {{include.country-name}}">
-          </div>
-          <div class="cell shrink text-wrapper">
-            <p class="country-name">{{include.country-name}}</p>
-            <p class="country-label">Country</p>
-          </div>
+        <div class="cell shrink text-wrapper">
+          <p class="country-name">{{include.country-name}}</p>
+          <p class="country-label">Country</p>
         </div>
       </div>
     </div>
