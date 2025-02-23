@@ -53,6 +53,12 @@ hero-accent-color-dark: "#FFFFFF"
     <img src="../img/photography/disneyland/luigi-tires-sign.jpg" alt="Luigi's Tire's neon sign at night">
   </div>
   <div class="cell medium-6">
+    <img src="../img/photography/disneyland/carousel.jpg" alt="Disneyland carousel close up shot at night">
+  </div>
+  <div class="cell medium-6">
+    <img src="../img/photography/disneyland/pixar-pier-sign.jpg" alt="The Pixar Pier sign at night lit up">
+  </div>
+  <div class="cell medium-6">
     <img src="../img/photography/disneyland/tomorrowland-top.jpg" alt="Building top from Tomorrowland">
   </div>
   <div class="cell medium-6">
@@ -66,5 +72,11 @@ hero-accent-color-dark: "#FFFFFF"
   </div>
   <div class="cell medium-6">
     <img src="../img/photography/disneyland/monsters-inc-doors.jpg" alt="Monsters Inc door facade">
+  </div>
+  <div class="cell medium-6">
+    <img src="../img/photography/disneyland/port-san-fransokyo.jpg" alt="Dining area of the Port of San Fransokyo">
+  </div>
+  <div class="cell medium-6">
+    <img src="../img/photography/disneyland/bakery-tour.jpg" alt="Grain silo at the Boudin Bakery Tour in San Fransokyo Square">
   </div>
 </div>
