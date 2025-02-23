@@ -74,6 +74,15 @@ hero-accent-color-dark: "#FFFFFF"
     <img src="../img/photography/disneyland/monsters-inc-doors.jpg" alt="Monsters Inc door facade">
   </div>
   <div class="cell medium-6">
+    <img src="../img/photography/disneyland/bear.jpg" alt="The bear at Grizzly River Run holding a trick-or-treat pumpkin pail">
+  </div>
+  <div class="cell medium-6">
+    <img src="../img/photography/disneyland/castle-back.jpg" alt="The back of Sleeping Beauty's Castle at Disneyland">
+  </div>
+  <div class="cell">
+    <img src="../img/photography/disneyland/castle.jpg" alt="Upclose photo of the Sleeping Beauty Castle at Disneyland">
+  </div>
+  <div class="cell medium-6">
     <img src="../img/photography/disneyland/port-san-fransokyo.jpg" alt="Dining area of the Port of San Fransokyo">
   </div>
   <div class="cell medium-6">
