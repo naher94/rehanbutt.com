@@ -44,9 +44,6 @@ hero-accent-color-dark: "#FFFFFF"
   <div class="cell" style="display: flex; flex: calc(509/768);">
     <img src="../img/photography/assorted/koalaclimb.jpg" alt="Koala climbing to grab a snack" style="width: 100%;">
   </div>
-  <div class="cell" style="display: flex; flex: calc(504/768);">
-    <img src="../img/photography/assorted/sydneyontherocks.jpg" alt="Sydney on the Rocks" style="width: 100%;">
-  </div>
   <div class="cell">
     <img src="../img/photography/assorted/westminsterabbey.jpg" alt="Westminster Abbey side entry" style="width: 100%;">
   </div>
