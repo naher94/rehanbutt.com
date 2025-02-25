@@ -32,10 +32,10 @@ I invite you to experience this extraordinary event that united the world with a
   <div class="cell">
     <img src="../img/photography/dubai-expo/marrocco-pavilion.jpg" alt="Shot of the Morocco pavilion looking up through the atrium">
   </div>
-  <div class="cell" style="display: flex; flex: calc(1000/667);">
+  <div class="cell force-flex-mobile" style="display: flex; flex: calc(1000/667);">
     <img src="../img/photography/dubai-expo/white-slats.jpg" alt="Abstract curved white slats">
   </div>
-  <div class="cell" style="display: flex; flex: calc(667/1000);">
+  <div class="cell force-flex-mobile" style="display: flex; flex: calc(667/1000);">
     <img src="../img/photography/dubai-expo/white-cube.jpg" alt="Looking out of a white perforated box">
   </div>
   <div class="cell">

@@ -63,10 +63,10 @@ Had the opportunity to visit Dubai twice, 10 years apart. First in 2012 then 202
   <div class="cell medium-6">
     <img src="../img/photography/dubai/twist.jpg" alt="Twisted building">
   </div>
-  <div class="cell" style="display: flex; flex: calc(927/1400);">
+  <div class="cell force-flex-mobile" style="display: flex; flex: calc(927/1400);">
     <img src="../img/photography/dubai/burj-khalifa-detail.jpg" alt="Black & white upclose of the Burj Khalifa">
   </div>
-  <div class="cell" style="display: flex; flex: calc(1/1);">
+  <div class="cell force-flex-mobile" style="display: flex; flex: calc(1/1);">
     <img src="../img/photography/dubai/burj-khalifa.jpg" alt="Black & white of the Burj Khalifa">
   </div>
   <div class="cell">
