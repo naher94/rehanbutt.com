@@ -69,6 +69,13 @@ video{
   display: block;
 }
 
+//Use for photos that have inline styles of multiple aspect ratios in 1 row
+.force-flex-mobile{
+  @include breakpoint(small only){
+    flex: 0 0 auto !important;
+  }
+}
+
 iframe { //this should probs be aspect ratio // TODO Gissue #385
   height: 600px;
   @include breakpoint(small only) {
