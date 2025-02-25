@@ -25,10 +25,10 @@ During the winter of 2024, I had the incredible opportunity to visit Egypt, a co
 %}
 
 <div class="grid-x grid-margin-x grid-margin-y">
-  <div class="cell" style="display: flex; flex: calc(1400/2097);">
+  <div class="cell force-flex-mobile" style="display: flex; flex: calc(1400/2097);">
     <img src="/img/photography/egypt-2024/pyramids-camels.jpg" alt="Caravan of camels in front of the Pyramids of Giza">
   </div>
-  <div class="cell" style="display: flex; flex: calc(1000/1000);">
+  <div class="cell force-flex-mobile" style="display: flex; flex: calc(1000/1000);">
     <img src="/img/photography/egypt-2024/pyramid-ruins.jpg" alt="Pyramid of Giza through the ruins of adjacent structures">
   </div>
   <div class="cell">
@@ -43,10 +43,10 @@ During the winter of 2024, I had the incredible opportunity to visit Egypt, a co
   <div class="cell">
     <img src="/img/photography/egypt-2024/bags.jpg" alt="A wall of souvenir bags">
   </div>
-  <div class="cell" style="display: flex; flex: calc(1400/935);">
+  <div class="cell force-flex-mobile" style="display: flex; flex: calc(1400/935);">
     <img src="/img/photography/egypt-2024/boat-sales.jpg" alt="Salesmen selling clothing off their floating store">
   </div>
-  <div class="cell" style="display: flex; flex: calc(935/1400);">
+  <div class="cell force-flex-mobile" style="display: flex; flex: calc(935/1400);">
     <img src="/img/photography/egypt-2024/boat-sales2.jpg" alt="Salesmen selling clothing off their floating store">
   </div>
   <p>One of the most unexpected experiences I had on the Nile was encountering these floating gift shops. These small boats would pull up alongside river cruises, selling shirts, scarves, blankets, and various other items. In a remarkable display of skill, the vendors would toss their merchandise up four stories to the rooftop deck, where tourists could browse and buy. And these sales guys were committed to making a sale!

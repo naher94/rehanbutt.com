@@ -40,28 +40,28 @@ During my trip to Abu Dhabi I had the chance to visit Sheikh Zayed Grand Mosque,
   <div class="cell">
     <img src="/img/photography/abu-dhabi-2023/louve-contrast.jpg" alt="Louve roof detailing contrasted against the white stone walls">
   </div>
-  <div class="cell" style="display: flex; flex: calc(935/1400);">
+  <div class="cell force-flex-mobile" style="display: flex; flex: calc(935/1400);">
     <img src="/img/photography/abu-dhabi-2023/louve-color-pond.jpg" alt="Color Prism at the Louve">
   </div>
-  <div class="cell" style="display: flex; flex: calc(1050/1400);">
+  <div class="cell force-flex-mobile" style="display: flex; flex: calc(1050/1400);">
     <img src="/img/photography/abu-dhabi-2023/louve-color.jpg" alt="Color Prism Detail shot at the Louve">
   </div>
   <div class="cell">
     <img src="/img/photography/abu-dhabi-2023/louve-sunset.jpg" alt="Under the Louve canopy at sunset">
   </div>
-  <div class="cell" style="display: flex; flex: calc(935/1400);">
+  <div class="cell force-flex-mobile" style="display: flex; flex: calc(935/1400);">
     <img src="/img/photography/abu-dhabi-2023/louve-exterior.jpg" alt="The Louve seen from the outside, water contrasting with the white stone and the canopy structure">
   </div>
-  <div class="cell" style="display: flex; flex: calc(964/1400);">
+  <div class="cell force-flex-mobile" style="display: flex; flex: calc(964/1400);">
     <img src="/img/photography/abu-dhabi-2023/louve-interior.jpg" alt="Under the canopy at the Louve">
   </div>
   <div class="cell">
     <img src="/img/photography/abu-dhabi-2023/columns-inside.jpg" alt="Column pathway at Sheikh Zayed Grand Mosque">
   </div>
-  <div class="cell" style="display: flex; flex: calc(1/1);">
+  <div class="cell force-flex-mobile" style="display: flex; flex: calc(1/1);">
     <img src="/img/photography/abu-dhabi-2023/w-building.jpg" alt="Yas Island W LED Canopy">
   </div>
-  <div class="cell" style="display: flex; flex: calc(935/1400);">
+  <div class="cell force-flex-mobile" style="display: flex; flex: calc(935/1400);">
     <img src="/img/photography/abu-dhabi-2023/climbing-gym.jpg" alt="Geometric climbing gym building">
   </div>
   <div class="cell">
