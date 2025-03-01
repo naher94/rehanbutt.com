@@ -52,6 +52,10 @@ jobs:
       - name: Parse Dead Links & Create Issue
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          GITHUB_EVENT_REPOSITORY_NAME: ${{ github.event.repository.name }}
         run: |
           node - <<EOF
           const fs = require('fs');
@@ -96,25 +100,25 @@ jobs:
               }
             });
 
-            issueBody += `\n[Download Full Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})`;
+            issueBody += `\n[Download Full Report](https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})`;
 
             const issueTitle = "🚨 Dead Links Found!";
             const { Octokit } = require("@octokit/core");
             const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
             async function createIssue() {
-              const { data: issues } = await octokit.request('GET /repos/${{ github.repository }}/issues', {
-                owner: '${{ github.repository_owner }}',
-                repo: '${{ github.event.repository.name }}',
+              const { data: issues } = await octokit.request('GET /repos/' + process.env.GITHUB_REPOSITORY + '/issues', {
+                owner: process.env.GITHUB_REPOSITORY_OWNER,
+                repo: process.env.GITHUB_EVENT_REPOSITORY_NAME,
                 state: 'open',
                 labels: 'dead-link-alert'
               });
 
               if (!issues.some(issue => issue.title === issueTitle)) {
                 console.log("Creating GitHub issue...");
-                await octokit.request('POST /repos/${{ github.repository }}/issues', {
-                  owner: '${{ github.repository_owner }}',
-                  repo: '${{ github.event.repository.name }}',
+                await octokit.request('POST /repos/' + process.env.GITHUB_REPOSITORY + '/issues', {
+                  owner: process.env.GITHUB_REPOSITORY_OWNER,
+                  repo: process.env.GITHUB_EVENT_REPOSITORY_NAME,
                   title: issueTitle,
                   body: issueBody,
                   labels: ["dead-link-alert"]
