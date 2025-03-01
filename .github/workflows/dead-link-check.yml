@@ -28,9 +28,9 @@ jobs:
             --require-https
             --max-concurrency 5
             --exclude "./_sass,./_site,./_vendor,./css,./img,./_config.yml,./README.md"
-            --format json
-            --output lychee-report.json
             .
+
+          output: lychee-report.json  # Let the action handle output
 
       - name: Debugging - List files after Lychee
         run: ls -R
@@ -41,7 +41,7 @@ jobs:
             echo "✅ Lychee report found."
           else
             echo "⚠️ Warning: Lychee report not found. Creating an empty file."
-            touch lychee-report.json  # Create an empty file to prevent failure
+            touch lychee-report.json  # Prevents workflow failure
           fi
 
       - name: Upload Lychee Report (if failure)
@@ -101,4 +101,4 @@ jobs:
                 body: issueBody,
                 labels: ["dead-link-alert"]
               });
-            }
+            };
