@@ -28,7 +28,7 @@ jobs:
             --no-progress
             --require-https
             --max-concurrency 5
-            --exclude "./_sass,./_site,./_vendor,./css,./img,./_config.yml,./README.md"
+            --exclude "./_sass,./_vendor,./css,./img,./_config.yml,./README.md"
             --fail false
             .
 
