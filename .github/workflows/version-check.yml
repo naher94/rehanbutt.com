@@ -1,0 +1,40 @@
+name: Version Increment Check
+
+on:
+  pull_request:
+    branches:
+      - gh-pages  # Base branch is now gh-pages
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout destination branch (gh-pages)
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages  # Checkout the base branch
+          path: base
+
+      - name: Checkout pull request branch
+        uses: actions/checkout@v4
+        with:
+          path: pr
+
+      - name: Extract version from base branch
+        id: base_version
+        run: echo "VERSION=$(grep '^version:' base/_config.yml | awk '{print $2}')" >> $GITHUB_ENV
+
+      - name: Extract version from PR branch
+        id: pr_version
+        run: echo "VERSION_PR=$(grep '^version:' pr/_config.yml | awk '{print $2}')" >> $GITHUB_ENV
+
+      - name: Compare versions
+        run: |
+          if [ "$(printf '%s\n' "$VERSION" "$VERSION_PR" | sort -V | tail -n 1)" != "$VERSION_PR" ]; then
+            echo "Error: Version number has not incremented!"
+            exit 1
+          fi
+        env:
+          VERSION: ${{ env.VERSION }}
+          VERSION_PR: ${{ env.VERSION_PR }}
