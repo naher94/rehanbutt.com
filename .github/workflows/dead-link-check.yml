@@ -19,6 +19,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run lychee link checker
+        id: lychee
+        continue-on-error: true  # Ensure workflow continues even if Lychee finds dead links
         uses: lycheeverse/lychee-action@v1
         with:
           args: >
@@ -29,8 +31,7 @@ jobs:
             --max-concurrency 5
             --exclude "./_sass,./_site,./_vendor,./css,./img,./_config.yml,./README.md"
             .
-
-          output: lychee-report.json  # Let the action handle output
+          output: lychee-report.json
 
       - name: Debugging - List files after Lychee
         run: ls -R
@@ -41,8 +42,11 @@ jobs:
             echo "✅ Lychee report found."
           else
             echo "⚠️ Warning: Lychee report not found. Creating an empty file."
-            touch lychee-report.json  # Prevents workflow failure
+            touch lychee-report.json  # Prevents failure
           fi
+
+      - name: Debugging - Show report contents
+        run: cat lychee-report.json || echo "No report content"
 
       - name: Upload Lychee Report (if failure)
         if: always()  # Uploads report even if job fails
@@ -52,7 +56,7 @@ jobs:
           path: ./lychee-report.json
 
       - name: Parse dead links and create issue
-        if: failure()
+        if: steps.lychee.outcome == 'failure' || steps.lychee.conclusion == 'failure'
         uses: actions/github-script@v7
         with:
           script: |
@@ -101,4 +105,4 @@ jobs:
                 body: issueBody,
                 labels: ["dead-link-alert"]
               });
-            };
+            }
