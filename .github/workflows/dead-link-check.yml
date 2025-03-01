@@ -1,8 +1,8 @@
-name: Check Dead Links
+name: Link Checker
 
 on:
   schedule:
-    - cron: '0 10 * * *' # Runs daily at 10 AM UTC
+    - cron: '0 10 * * *' # Runs every day at 10 AM UTC
   push:
     branches:
       - gh-pages
@@ -11,7 +11,6 @@ on:
 
 jobs:
   link-check:
-    name: Run Lychee Link Checker
     runs-on: ubuntu-latest
 
     steps:
@@ -31,82 +30,103 @@ jobs:
             --exclude "./_sass,./_site,./_vendor,./css,./img,./_config.yml,./README.md"
             --format json
             .
-
           output: ./lychee-report.json
 
-      - name: Check if Lychee report exists
+      - name: Check if report exists
         id: check_report
         run: |
           if [ -f "./lychee-report.json" ]; then
-            echo "Report exists"
+            echo "Report found."
           else
             echo "Lychee report not found."
             exit 1
           fi
 
-      - name: Upload Lychee Report
+      - name: Upload Lychee report
         uses: actions/upload-artifact@v4
         with:
           name: lychee-report
           path: ./lychee-report.json
           retention-days: 7
 
-      - name: Parse dead links and create GitHub issue
-        if: always() # Ensure this step always runs
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const path = './lychee-report.json';
+      - name: Parse Dead Links & Create Issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node - <<EOF
+          const fs = require('fs');
+          const path = './lychee-report.json';
 
-            if (!fs.existsSync(path)) {
-              console.log('No report found');
-              return;
+          if (!fs.existsSync(path)) {
+            console.log('No report found');
+            process.exit(0);
+          }
+
+          let fileContent = fs.readFileSync(path, 'utf8').trim();
+
+          try {
+            // Extract valid JSON portion
+            let firstCurlyBrace = fileContent.indexOf('{');
+            let lastCurlyBrace = fileContent.lastIndexOf('}');
+            if (firstCurlyBrace === -1 || lastCurlyBrace === -1) {
+              throw new Error("Invalid JSON structure detected");
             }
+            fileContent = fileContent.substring(firstCurlyBrace, lastCurlyBrace + 1);
 
-            const report = JSON.parse(fs.readFileSync(path, 'utf8'));
+            const report = JSON.parse(fileContent);
 
             if (!report.summary || report.summary.errors === 0) {
               console.log('No dead links found');
-              return;
+              process.exit(0);
             }
 
             console.log(`Found ${report.summary.errors} broken links`);
 
-            let issueBody = `🚨 **Lychee found ${report.summary.errors} broken links!**\n\n`;
-            issueBody += `| Status        | Count |\n|---------------|-------|\n`;
-            issueBody += `| 🔍 Total      | ${report.summary.total}  |\n`;
-            issueBody += `| ✅ Successful | ${report.summary.successful}  |\n`;
-            issueBody += `| ⏳ Timeouts   | ${report.summary.timeouts}  |\n`;
-            issueBody += `| 🚫 Errors     | ${report.summary.errors}  |\n\n`;
+            let issueBody = "🚨 **Lychee found " + report.summary.errors + " broken links!**\n\n";
+            issueBody += "| Status        | Count |\n|---------------|-------|\n";
+            issueBody += "| 🔍 Total      | " + report.summary.total + "  |\n";
+            issueBody += "| ✅ Successful | " + report.summary.successful + "  |\n";
+            issueBody += "| ⏳ Timeouts   | " + report.summary.timeouts + "  |\n";
+            issueBody += "| 🚫 Errors     | " + report.summary.errors + "  |\n\n";
 
-            // Include specific broken links
             issueBody += "**Broken Links:**\n";
             report.links.forEach(link => {
               if (link.status !== 'OK') {
-                issueBody += `- **${link.url}** (in **${link.file}**)\n`;
+                issueBody += "- **" + link.url + "** (in **" + link.file + "**)\n";
               }
             });
 
             issueBody += `\n[Download Full Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})`;
 
             const issueTitle = "🚨 Dead Links Found!";
-            const { data: issues } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: "open",
-              labels: "dead-link-alert"
-            });
+            const { Octokit } = require("@octokit/core");
+            const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
-            if (!issues.some(issue => issue.title === issueTitle)) {
-              console.log("Creating GitHub issue...");
-              await github.rest.issues.create({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                title: issueTitle,
-                body: issueBody,
-                labels: ["dead-link-alert"]
+            async function createIssue() {
+              const { data: issues } = await octokit.request('GET /repos/${{ github.repository }}/issues', {
+                owner: '${{ github.repository_owner }}',
+                repo: '${{ github.event.repository.name }}',
+                state: 'open',
+                labels: 'dead-link-alert'
               });
-            } else {
-              console.log("Issue already exists.");
+
+              if (!issues.some(issue => issue.title === issueTitle)) {
+                console.log("Creating GitHub issue...");
+                await octokit.request('POST /repos/${{ github.repository }}/issues', {
+                  owner: '${{ github.repository_owner }}',
+                  repo: '${{ github.event.repository.name }}',
+                  title: issueTitle,
+                  body: issueBody,
+                  labels: ["dead-link-alert"]
+                });
+              } else {
+                console.log("Issue already exists.");
+              }
             }
+
+            createIssue().catch(error => console.error(error));
+          } catch (error) {
+            console.log("Error parsing lychee-report.json. It might not be in JSON format.");
+            console.log("File content:\n", fileContent);
+          }
+          EOF
