@@ -6,8 +6,8 @@ on:
   pull_request:
   push:
     branches:
-      - gh-pages
-      - development
+      - gh-pages  # Check gh-pages branch
+      - development  # Check development branch
   workflow_dispatch:
 
 jobs:
@@ -28,9 +28,9 @@ jobs:
             --no-progress
             --require-https
             --max-concurrency 5
+            --exclude "./_sass,./_site,./_vendor,./css,./img,./_config.yml,./README.md"
+            --output lychee-report.json
             --fail false
-            --exclude "./sass,./_sass,./_site,./_vendor,./css,./img,./_config.yml,./README.md"
-            --output lychee-report.json  # Change to JSON for easier parsing
             .
 
       - name: Upload Lychee Report (if failure)
