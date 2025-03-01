@@ -1,132 +1,45 @@
-name: Link Checker
+name: Check for Dead Links
 
 on:
   schedule:
-    - cron: '0 10 * * *' # Runs every day at 10 AM UTC
-  push:
-    branches:
-      - gh-pages
-      - development
-  workflow_dispatch: # Allows manual trigger
+    # This cron syntax will trigger the workflow every week (every Monday at 00:00 UTC)
+    - cron: '0 0 * * 1'
+  workflow_dispatch: # Allows manual triggering of the workflow
 
 jobs:
-  link-check:
+  check-links:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout the repository
+        uses: actions/checkout@v3
 
-      - name: Run Lychee link checker
-        id: lychee
-        uses: lycheeverse/lychee-action@v1
-        with:
-          args: >-
-            --verbose
-            --accept 200,206
-            --no-progress
-            --require-https
-            --max-concurrency 5
-            --exclude "./_sass,./_site,./_vendor,./css,./img,./_config.yml,./README.md"
-            --format json
-            .
-          output: ./lychee-report.json
-
-      - name: Check if report exists
-        id: check_report
+      - name: Set up Jekyll (optional, only if you need it)
         run: |
-          if [ -f "./lychee-report.json" ]; then
-            echo "Report found."
-          else
-            echo "Lychee report not found."
-            exit 1
-          fi
+          gem install jekyll
 
-      - name: Upload Lychee report
-        uses: actions/upload-artifact@v4
-        with:
-          name: lychee-report
-          path: ./lychee-report.json
-          retention-days: 7
-
-      - name: Parse Dead Links & Create Issue
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install link-checking tool
         run: |
-          node - <<EOF
-          const fs = require('fs');
-          const path = './lychee-report.json';
+          sudo apt-get update
+          sudo apt-get install -y linkchecker
 
-          if (!fs.existsSync(path)) {
-            console.log('No report found');
-            process.exit(0);
-          }
+      - name: Check for dead links in the gh-pages branch
+        run: |
+          git fetch origin gh-pages
+          git checkout gh-pages
+          linkchecker --quiet --no-warnings --recursive --check-extern --timeout=10 --nofollow --report-file=dead-links.txt . || true
 
-          let fileContent = fs.readFileSync(path, 'utf8').trim();
+      - name: Create GitHub issue for dead links
+        if: success() && steps.check-links.outputs.dead_links != ''
+        run: |
+          DEAD_LINKS=$(cat dead-links.txt)
+          ISSUE_BODY="Dead links found in the gh-pages branch:\n\n$DEAD_LINKS"
 
-          try {
-            // Extract valid JSON portion
-            let firstCurlyBrace = fileContent.indexOf('{');
-            let lastCurlyBrace = fileContent.lastIndexOf('}');
-            if (firstCurlyBrace === -1 || lastCurlyBrace === -1) {
-              throw new Error("Invalid JSON structure detected");
-            }
-            fileContent = fileContent.substring(firstCurlyBrace, lastCurlyBrace + 1);
-
-            const report = JSON.parse(fileContent);
-
-            if (!report.summary || report.summary.errors === 0) {
-              console.log('No dead links found');
-              process.exit(0);
-            }
-
-            console.log(`Found ${report.summary.errors} broken links`);
-
-            let issueBody = "🚨 **Lychee found " + report.summary.errors + " broken links!**\n\n";
-            issueBody += "| Status        | Count |\n|---------------|-------|\n";
-            issueBody += "| 🔍 Total      | " + report.summary.total + "  |\n";
-            issueBody += "| ✅ Successful | " + report.summary.successful + "  |\n";
-            issueBody += "| ⏳ Timeouts   | " + report.summary.timeouts + "  |\n";
-            issueBody += "| 🚫 Errors     | " + report.summary.errors + "  |\n\n";
-
-            issueBody += "**Broken Links:**\n";
-            report.links.forEach(link => {
-              if (link.status !== 'OK') {
-                issueBody += "- **" + link.url + "** (in **" + link.file + "**)\n";
-              }
-            });
-
-            issueBody += `\n[Download Full Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})`;
-
-            const issueTitle = "🚨 Dead Links Found!";
-            const { Octokit } = require("@octokit/core");
-            const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
-
-            async function createIssue() {
-              const { data: issues } = await octokit.request('GET /repos/${{ github.repository }}/issues', {
-                owner: '${{ github.repository_owner }}',
-                repo: '${{ github.event.repository.name }}',
-                state: 'open',
-                labels: 'dead-link-alert'
-              });
-
-              if (!issues.some(issue => issue.title === issueTitle)) {
-                console.log("Creating GitHub issue...");
-                await octokit.request('POST /repos/${{ github.repository }}/issues', {
-                  owner: '${{ github.repository_owner }}',
-                  repo: '${{ github.event.repository.name }}',
-                  title: issueTitle,
-                  body: issueBody,
-                  labels: ["dead-link-alert"]
-                });
-              } else {
-                console.log("Issue already exists.");
-              }
-            }
-
-            createIssue().catch(error => console.error(error));
-          } catch (error) {
-            console.log("Error parsing lychee-report.json. It might not be in JSON format.");
-            console.log("File content:\n", fileContent);
-          }
-          EOF
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -X POST \
+            -d "{
+              \"title\": \"Dead links found in gh-pages\",
+              \"body\": \"$ISSUE_BODY\",
+              \"labels\": [\"bug\"]
+            }" \
+            "https://api.github.com/repos/${{ github.repository }}/issues"
