@@ -28,11 +28,19 @@ jobs:
             --require-https
             --max-concurrency 5
             --exclude "./_sass,./_site,./_vendor,./css,./img,./_config.yml,./README.md"
-            --output ./lychee-report.json
-            .
+            .  # Run on the current directory
 
       - name: Debugging - List files in current directory
         run: ls -la
+
+      - name: Check if report exists
+        run: |
+          if [ -f "./lychee-report.json" ]; then
+            echo "Lychee report found."
+          else
+            echo "Lychee report not found."
+            exit 1
+          fi
 
       - name: Upload Lychee Report (if failure)
         if: always()  # Always upload report, even if there are failures
