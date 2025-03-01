@@ -36,6 +36,7 @@ hero-accent-color-dark: "#FFFFFF"
     <img src="../img/photography/assorted/twoboats.jpg" alt="2 long river boats in Myanmar" style="width: 100%;">
   </div>
 </div>
+
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell" style="display: flex; flex: calc(494/768);">
     <img src="../img/photography/assorted/thedock.jpg" alt="Wooden boat dock" style="width: 100%;">
