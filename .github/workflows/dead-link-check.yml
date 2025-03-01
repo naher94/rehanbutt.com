@@ -2,7 +2,7 @@ name: Link Checker
 
 on:
   schedule:
-    - cron: '0 10 * * *' # Runs every day at 10 AM UTC
+    - cron: '0 3 * * 6' # Runs every day at 10 AM UTC
   push:
     branches:
       - gh-pages
