@@ -3,7 +3,7 @@ name: Version Increment Check
 on:
   pull_request:
     branches:
-      - gh-pages  # Base branch is now gh-pages
+      - gh-pages  # Ensure this is the correct base branch
 
 jobs:
   check-version:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout destination branch (gh-pages)
         uses: actions/checkout@v4
         with:
-          ref: gh-pages  # Checkout the base branch
+          ref: gh-pages
           path: base
 
       - name: Checkout pull request branch
@@ -23,17 +23,35 @@ jobs:
 
       - name: Extract version from base branch
         id: base_version
-        run: echo "VERSION=$(grep '^version:' base/_config.yml | awk '{print $2}')" >> $GITHUB_ENV
+        run: |
+          BASE_VERSION=$(grep '^version:' base/_config.yml | sed 's/version: //' | tr -d '[:space:]')
+          echo "Base branch version: $BASE_VERSION"
+          echo "VERSION=$BASE_VERSION" >> $GITHUB_ENV
 
       - name: Extract version from PR branch
         id: pr_version
-        run: echo "VERSION_PR=$(grep '^version:' pr/_config.yml | awk '{print $2}')" >> $GITHUB_ENV
+        run: |
+          PR_VERSION=$(grep '^version:' pr/_config.yml | sed 's/version: //' | tr -d '[:space:]')
+          echo "Pull request branch version: $PR_VERSION"
+          echo "VERSION_PR=$PR_VERSION" >> $GITHUB_ENV
 
       - name: Compare versions
         run: |
-          if [ "$(printf '%s\n' "$VERSION" "$VERSION_PR" | sort -V | tail -n 1)" != "$VERSION_PR" ]; then
-            echo "Error: Version number has not incremented!"
+          echo "Comparing versions..."
+          echo "Base: $VERSION, PR: $VERSION_PR"
+          
+          # Ensure both versions are extracted
+          if [[ -z "$VERSION" || -z "$VERSION_PR" ]]; then
+            echo "Error: Could not extract versions properly."
             exit 1
+          fi
+          
+          # Check if the new version is greater
+          if [ "$(printf '%s\n' "$VERSION" "$VERSION_PR" | sort -V | tail -n 1)" != "$VERSION_PR" ]; then
+            echo "❌ Error: Version number has NOT incremented! Please update _config.yml."
+            exit 1
+          else
+            echo "✅ Version increment check passed."
           fi
         env:
           VERSION: ${{ env.VERSION }}
