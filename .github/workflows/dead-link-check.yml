@@ -14,10 +14,6 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v3
 
-      - name: Set up Jekyll (optional, only if you need it)
-        run: |
-          gem install jekyll
-
       - name: Install link-checking tool
         run: |
           sudo apt-get update
