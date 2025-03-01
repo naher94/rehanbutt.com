@@ -1,0 +1,88 @@
+name: Check for Dead Links
+
+on:
+  schedule:
+    - cron: '0 10 * * *'  # Runs daily at 10 AM UTC
+  pull_request:
+  push:
+    branches:
+      - gh-pages
+      - development
+  workflow_dispatch:
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run lychee link checker
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: >
+            --verbose
+            --accept 200,206
+            --exclude-mail
+            --no-progress
+            --require-https
+            --max-concurrency 5
+            --fail false
+            --exclude "./sass,./_sass,./_site,./_vendor,./css,./img,./_config.yml,./README.md"
+            --output lychee-report.json  # Change to JSON for easier parsing
+            .
+
+      - name: Upload Lychee Report (if failure)
+        if: always()  # Always upload report, even if there are failures
+        uses: actions/upload-artifact@v4
+        with:
+          name: lychee-report
+          path: lychee-report.json
+
+      - name: Parse dead links and create issue
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = './lychee-report.json';
+            
+            if (!fs.existsSync(path)) {
+              console.log('No report found');
+              return;
+            }
+
+            const report = JSON.parse(fs.readFileSync(path, 'utf8'));
+            const deadLinks = report.filter(link => link.status !== 'OK');
+            
+            if (deadLinks.length === 0) {
+              console.log('No dead links found');
+              return;
+            }
+
+            // Generate the issue body with dead links
+            let issueBody = "Lychee found broken links in the latest check:\n\n";
+            deadLinks.forEach(link => {
+              issueBody += `**${link.url}** in file **${link.file}**\n`;
+            });
+            issueBody += `\n[Download Full Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})`;
+
+            const issueTitle = "🚨 Dead Links Found!";
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              labels: "dead-link-alert"
+            });
+
+            // Only create a new issue if one doesn't already exist
+            if (!issues.some(issue => issue.title === issueTitle)) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issueTitle,
+                body: issueBody,
+                labels: ["dead-link-alert"]
+              });
+            }
