@@ -3,7 +3,7 @@ name: Version Increment Check
 on:
   pull_request:
     branches:
-      - gh-pages  # Ensure this is the correct base branch
+      - gh-pages  # Ensure this matches your base branch
 
 jobs:
   check-version:
@@ -39,16 +39,22 @@ jobs:
         run: |
           echo "Comparing versions..."
           echo "Base: $VERSION, PR: $VERSION_PR"
-          
+
           # Ensure both versions are extracted
           if [[ -z "$VERSION" || -z "$VERSION_PR" ]]; then
-            echo "Error: Could not extract versions properly."
+            echo "❌ Error: Could not extract versions properly."
             exit 1
           fi
           
-          # Check if the new version is greater
+          # Check if the PR version is the same as the base version
+          if [[ "$VERSION" == "$VERSION_PR" ]]; then
+            echo "❌ Error: Version number has NOT changed! Please update _config.yml."
+            exit 1
+          fi
+
+          # Check if the new version is actually greater
           if [ "$(printf '%s\n' "$VERSION" "$VERSION_PR" | sort -V | tail -n 1)" != "$VERSION_PR" ]; then
-            echo "❌ Error: Version number has NOT incremented! Please update _config.yml."
+            echo "❌ Error: Version number has not incremented! Please update _config.yml."
             exit 1
           else
             echo "✅ Version increment check passed."
