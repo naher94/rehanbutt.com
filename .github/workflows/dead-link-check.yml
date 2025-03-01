@@ -49,7 +49,7 @@ jobs:
           path: ./lychee-report.json
           retention-days: 7
 
-      - name: Parse Dead Links & Create Issue
+      - name: Create Issue for Dead Links
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -69,14 +69,6 @@ jobs:
           let fileContent = fs.readFileSync(path, 'utf8').trim();
 
           try {
-            // Extract valid JSON portion
-            let firstCurlyBrace = fileContent.indexOf('{');
-            let lastCurlyBrace = fileContent.lastIndexOf('}');
-            if (firstCurlyBrace === -1 || lastCurlyBrace === -1) {
-              throw new Error("Invalid JSON structure detected");
-            }
-            fileContent = fileContent.substring(firstCurlyBrace, lastCurlyBrace + 1);
-
             const report = JSON.parse(fileContent);
 
             if (!report.summary || report.summary.errors === 0) {
@@ -86,21 +78,8 @@ jobs:
 
             console.log(`Found ${report.summary.errors} broken links`);
 
-            let issueBody = "🚨 **Lychee found " + report.summary.errors + " broken links!**\n\n";
-            issueBody += "| Status        | Count |\n|---------------|-------|\n";
-            issueBody += "| 🔍 Total      | " + report.summary.total + "  |\n";
-            issueBody += "| ✅ Successful | " + report.summary.successful + "  |\n";
-            issueBody += "| ⏳ Timeouts   | " + report.summary.timeouts + "  |\n";
-            issueBody += "| 🚫 Errors     | " + report.summary.errors + "  |\n\n";
-
-            issueBody += "**Broken Links:**\n";
-            report.links.forEach(link => {
-              if (link.status !== 'OK') {
-                issueBody += "- **" + link.url + "** (in **" + link.file + "**)\n";
-              }
-            });
-
-            issueBody += `\n[Download Full Report](https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})`;
+            const issueBody = `🚨 **Lychee found ${report.summary.errors} broken links!**\n\n` +
+                              `[Download Full Report](https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})`;
 
             const issueTitle = "🚨 Dead Links Found!";
             const { Octokit } = require("@octokit/core");
