@@ -2,40 +2,60 @@ name: Check for Dead Links
 
 on:
   schedule:
-    # This cron syntax will trigger the workflow every week (every Monday at 00:00 UTC)
-    - cron: '0 0 * * 1'
-  workflow_dispatch: # Allows manual triggering of the workflow
+    - cron: '0 3 * * 6'
+  push:
+    branches:
+      - gh-pages
+  workflow_dispatch:
 
 jobs:
   check-links:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Install link-checking tool
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y linkchecker
+    - name: Run Lychee link checker
+      id: lychee
+      uses: lycheeverse/lychee-action@v1
+      with:
+        args: --verbose --output json
 
-      - name: Check for dead links in the gh-pages branch
-        run: |
-          git fetch origin gh-pages
-          git checkout gh-pages
-          linkchecker --quiet --no-warnings --recursive --check-extern --timeout=10 --nofollow --report-file=dead-links.txt . || true
+    - name: Create Issue for Broken Links
+      if: steps.lychee.outputs.exit-code != 0
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          const content = fs.readFileSync('lychee/out.json', 'utf8');
+          const results = JSON.parse(content);
+          const brokenLinks = results.issues.map(issue => issue.message).join('\n');
 
-      - name: Create GitHub issue for dead links
-        if: success() && steps.check-links.outputs.dead_links != ''
-        run: |
-          DEAD_LINKS=$(cat dead-links.txt)
-          ISSUE_BODY="Dead links found in the gh-pages branch:\n\n$DEAD_LINKS"
+          const issueTitle = 'Broken Links Detected';
+          const issueBody = `The following links were found to be broken:\n\n${brokenLinks}`;
 
-          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -X POST \
-            -d "{
-              \"title\": \"Dead links found in gh-pages\",
-              \"body\": \"$ISSUE_BODY\",
-              \"labels\": [\"bug\"]
-            }" \
-            "https://api.github.com/repos/${{ github.repository }}/issues"
+          const { data: existingIssues } = await github.issues.listForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'open',
+            labels: 'broken-link'
+          });
+
+          let issueExists = false;
+          for (const issue of existingIssues) {
+            if (issue.title === issueTitle) {
+              issueExists = true;
+              break;
+            }
+          }
+
+          if (!issueExists) {
+            await github.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: issueTitle,
+              body: issueBody,
+              labels: ['broken-link']
+            });
+          }
