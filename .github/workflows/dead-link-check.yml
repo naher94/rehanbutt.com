@@ -1,29 +1,28 @@
-name: Check for Dead Links
+name: Check Dead Links
 
 on:
   schedule:
-    - cron: '0 10 * * *'  # Runs daily at 10 AM UTC
-  pull_request:
+    - cron: '0 10 * * *' # Runs daily at 10 AM UTC
   push:
     branches:
       - gh-pages
       - development
-  workflow_dispatch:
+  workflow_dispatch: # Allows manual trigger
 
 jobs:
   link-check:
+    name: Run Lychee Link Checker
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run lychee link checker
+      - name: Run Lychee link checker
         id: lychee
-        continue-on-error: true  # Ensure workflow continues even if Lychee finds dead links
         uses: lycheeverse/lychee-action@v1
         with:
-          args: >
+          args: >-
             --verbose
             --accept 200,206
             --no-progress
@@ -31,38 +30,34 @@ jobs:
             --max-concurrency 5
             --exclude "./_sass,./_site,./_vendor,./css,./img,./_config.yml,./README.md"
             .
-          output: lychee-report.json
 
-      - name: Debugging - List files after Lychee
-        run: ls -R
+          output: ./lychee-report.json
 
-      - name: Check if report exists
+      - name: Check if Lychee report exists
+        id: check_report
         run: |
           if [ -f "./lychee-report.json" ]; then
-            echo "✅ Lychee report found."
+            echo "Report exists"
           else
-            echo "⚠️ Warning: Lychee report not found. Creating an empty file."
-            touch lychee-report.json  # Prevents failure
+            echo "Lychee report not found."
+            exit 1
           fi
 
-      - name: Debugging - Show report contents
-        run: cat lychee-report.json || echo "No report content"
-
-      - name: Upload Lychee Report (if failure)
-        if: always()  # Uploads report even if job fails
+      - name: Upload Lychee Report
         uses: actions/upload-artifact@v4
         with:
           name: lychee-report
           path: ./lychee-report.json
+          retention-days: 7
 
-      - name: Parse dead links and create issue
-        if: steps.lychee.outcome == 'failure' || steps.lychee.conclusion == 'failure'
+      - name: Parse dead links and create GitHub issue
+        if: always() # Ensure this step always runs
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
             const path = './lychee-report.json';
-            
+
             if (!fs.existsSync(path)) {
               console.log('No report found');
               return;
@@ -70,22 +65,28 @@ jobs:
 
             const report = JSON.parse(fs.readFileSync(path, 'utf8'));
 
-            if (!report.links || report.links.length === 0) {
+            if (!report.summary || report.summary.errors === 0) {
               console.log('No dead links found');
               return;
             }
 
-            // Filter only broken links
-            const deadLinks = report.links.filter(link => link.status !== 'OK');
-            if (deadLinks.length === 0) {
-              console.log('No dead links found');
-              return;
-            }
+            console.log(`Found ${report.summary.errors} broken links`);
 
-            let issueBody = "🚨 Lychee found broken links:\n\n";
-            deadLinks.forEach(link => {
-              issueBody += `- **${link.url}** (in **${link.file}**)\n`;
+            let issueBody = `🚨 **Lychee found ${report.summary.errors} broken links!**\n\n`;
+            issueBody += `| Status        | Count |\n|---------------|-------|\n`;
+            issueBody += `| 🔍 Total      | ${report.summary.total}  |\n`;
+            issueBody += `| ✅ Successful | ${report.summary.successful}  |\n`;
+            issueBody += `| ⏳ Timeouts   | ${report.summary.timeouts}  |\n`;
+            issueBody += `| 🚫 Errors     | ${report.summary.errors}  |\n\n`;
+
+            // Include specific broken links
+            issueBody += "**Broken Links:**\n";
+            report.links.forEach(link => {
+              if (link.status !== 'OK') {
+                issueBody += `- **${link.url}** (in **${link.file}**)\n`;
+              }
             });
+
             issueBody += `\n[Download Full Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})`;
 
             const issueTitle = "🚨 Dead Links Found!";
@@ -96,8 +97,8 @@ jobs:
               labels: "dead-link-alert"
             });
 
-            // Create an issue if one doesn't already exist
             if (!issues.some(issue => issue.title === issueTitle)) {
+              console.log("Creating GitHub issue...");
               await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -105,4 +106,6 @@ jobs:
                 body: issueBody,
                 labels: ["dead-link-alert"]
               });
+            } else {
+              console.log("Issue already exists.");
             }
