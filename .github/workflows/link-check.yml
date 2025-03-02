@@ -40,7 +40,7 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           fail: false
-          files: 'files-to-check.txt'
+          files: './files-to-check.txt'
           base: https://rehanbutt.com
 
       - name: Create Issue From File
