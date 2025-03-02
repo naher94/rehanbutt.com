@@ -41,8 +41,12 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           fail: false
-          files: './files-to-check.txt'
-          base: https://rehanbutt.com
+          args: >-
+            --exclude https://codepen.io/rehanbutt https://www.linkedin.com/in/rehan-butt/
+            --exclude-path /_site/css /_site/img
+            --base https://rehanbutt.com 
+            --no-progress 
+            --verbose
 
       - name: Create Issue From File
         if: steps.lychee.outputs.exit_code != 0
@@ -50,3 +54,4 @@ jobs:
         with:
           title: Dead Links Found - Link Checker Report
           content-filepath: ./lychee/out.md
+          labels: bug, report, automated issue
