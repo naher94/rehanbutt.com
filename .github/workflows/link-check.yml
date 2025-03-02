@@ -30,12 +30,19 @@ jobs:
       - name: Build Jekyll site
         run: bundle exec jekyll build --trace
 
+      - name: Filter files to check (include _site, exclude _site/css and _site/img)
+        run: |
+          # Find all files in _site, but exclude _site/css and _site/img
+          find ./_site -type f | grep -vE '/(css|img)/' > files-to-check.txt
+          cat files-to-check.txt
+
       - name: Link Checker
         id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
-          args: '--exclude-path "/css /img" --base https://rehanbutt.com --no-progress --verbose'
           fail: false
+          files: './files-to-check.txt'
+          base: https://rehanbutt.com
 
       - name: Create Issue From File
         if: steps.lychee.outputs.exit_code != 0
@@ -43,4 +50,3 @@ jobs:
         with:
           title: Dead Links Found - Link Checker Report
           content-filepath: ./lychee/out.md
-          labels: report, automated issue
