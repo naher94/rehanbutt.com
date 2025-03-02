@@ -40,8 +40,16 @@ jobs:
           else
             echo "Lychee report not found."
             exit 1
-          fi
-
+          
+      - name: Parse Lychee report
+        id: parse_report
+        run: |
+          dead_links=$(jq '.statistics.total - .statistics.ok' ./lychee-report.json)
+          if [ "$dead_links" -gt 0 ]; then
+            echo "dead_links=true" >> $GITHUB_ENV
+          else
+            echo "dead_links=false" >> $GITHUB_ENV
+          
       - name: Upload Lychee report
         uses: actions/upload-artifact@v4
         with:
@@ -50,6 +58,7 @@ jobs:
           retention-days: 7
 
       - name: Create GitHub Issue
+        if: env.dead_links == 'true'
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/${{ github.repository }}/issues
