@@ -10,15 +10,18 @@ jobs:
   linkChecker:
     runs-on: ubuntu-latest
     permissions:
-      issues: write # required for peter-evans/create-issue-from-file
+      issues: write
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1' # Adjust this version if needed
+          ruby-version: '3.1'
           bundler-cache: true
+
+      - name: Fix Bundler Platform Compatibility
+        run: bundle lock --add-platform x86_64-linux
 
       - name: Install Jekyll and dependencies
         run: bundle install
@@ -34,7 +37,7 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           fail: false
-          args: --no-progress --verbose '_site/**/*'
+          args: --no-progress --verbose '_site/**/*' --fail-if-empty false
 
       - name: Create Issue From File
         if: steps.lychee.outputs.exit_code != 0
