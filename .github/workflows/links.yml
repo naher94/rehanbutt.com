@@ -18,7 +18,7 @@ jobs:
           ref: gh-pages
 
       - name: Set up Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.0.0
 
