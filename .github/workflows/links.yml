@@ -28,7 +28,7 @@ jobs:
           bundle install
 
       - name: Build Jekyll site
-        run: bundle exec jekyll build
+        run: bundle exec jekyll build --trace
 
       - name: Link Checker
         id: lychee
