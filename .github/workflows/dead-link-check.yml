@@ -55,7 +55,7 @@ jobs:
           route: POST /repos/${{ github.repository }}/issues
           data: |
             {
-              "title": "New Issue",
+              "title": "Dead Links Found",
               "body": "This is an issue created by a GitHub Action.",
               "labels": ["bug"]
             }
