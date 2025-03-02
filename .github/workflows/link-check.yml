@@ -34,6 +34,7 @@ jobs:
         run: |
           # Find all files in _site, but exclude _site/css and _site/img
           find ./_site -type f | grep -vE '/(css|img)/' > files-to-check.txt
+          cat files-to-check.txt
 
       - name: Link Checker
         id: lychee
