@@ -20,11 +20,11 @@ jobs:
       - name: Set up Ruby
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 3.0
+          ruby-version: 3.0.0
 
-      - name: Install Jekyll and Bundler
+      - name: Install Dependencies
         run: |
-          gem install jekyll bundler
+          gem install bundler
           bundle install
 
       - name: Build Jekyll site
