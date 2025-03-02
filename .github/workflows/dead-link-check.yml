@@ -35,7 +35,9 @@ jobs:
       - name: Parse Lychee report
         id: parse_report
         run: |
-          dead_links=$(jq '.statistics.total - .statistics.ok' ./lychee-report.json)
+          total=$(jq '.statistics.total // 0' ./lychee-report.json)
+          ok=$(jq '.statistics.ok // 0' ./lychee-report.json)
+          dead_links=$((total - ok))
           if [ "$dead_links" -gt 0 ]; then
             echo "dead_links=true" >> $GITHUB_ENV
           else
