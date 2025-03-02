@@ -49,10 +49,21 @@ jobs:
           path: ./lychee-report.json
           retention-days: 7
 
+      - name: Set up GitHub CLI
+        run: |
+          curl -fsSL https://cli.github.com/install.sh | sh
+
       - name: Create GitHub Issue
         run: |
           LOG_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          gh auth login --with-token < ${{ secrets.GITHUB_TOKEN }}
+          echo "Log URL: $LOG_URL"  # Debugging line to check the URL
+          
+          # Attempt authentication with the GitHub token
+          echo "Authenticating with GitHub CLI..."
+          gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+
+          # Create the issue
+          echo "Creating the issue..."
           gh issue create --title "Automated Issue Title" \
                            --body "This issue was created automatically by a GitHub Action. For more details, view the [workflow logs here]($LOG_URL)." \
                            --label "bug"
