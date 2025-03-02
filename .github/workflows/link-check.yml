@@ -36,7 +36,6 @@ jobs:
         with:
           fail: false
           directory: _site
-          args: --exclude-path "_site/css _site/img"
 
       - name: Create Issue From File
         if: steps.lychee.outputs.exit_code != 0
