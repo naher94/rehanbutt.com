@@ -31,7 +31,8 @@ jobs:
             --format json
             .
           output: ./lychee-report.json
-          
+          debug: true # Enable debug mode
+
       - name: Parse Lychee report
         id: parse_report
         run: |
@@ -42,7 +43,7 @@ jobs:
             echo "dead_links=true" >> $GITHUB_ENV
           else
             echo "dead_links=false" >> $GITHUB_ENV
-          
+
       - name: Upload Lychee report
         uses: actions/upload-artifact@v4
         with:
