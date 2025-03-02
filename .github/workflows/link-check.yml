@@ -1,4 +1,4 @@
-name: Links
+name: Link Checker
 
 on:
   repository_dispatch:
@@ -36,11 +36,12 @@ jobs:
         with:
           fail: false
           directory: _site
+          args: --exclude-path "_site/css _site/img"
 
       - name: Create Issue From File
         if: steps.lychee.outputs.exit_code != 0
         uses: peter-evans/create-issue-from-file@v5
         with:
-          title: Link Checker Report
+          title: Dead Links Found - Link Checker Report
           content-filepath: ./lychee/out.md
           labels: report, automated issue
