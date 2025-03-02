@@ -1,6 +1,6 @@
 ---
 title: 'DesignX Salary'
-link: https://designx.community/salary/
+link: https://designx.community/design-salaries/
 description: An Open Database of Design Salaries, Promoting salary transparency & pay equity amongst design professionals across industries, experience levels & geographies.
 tags: []
 content-type: reference
