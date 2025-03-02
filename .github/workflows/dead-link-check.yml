@@ -31,15 +31,6 @@ jobs:
             --format json
             .
           output: ./lychee-report.json
-
-      - name: Check if report exists
-        id: check_report
-        run: |
-          if [ -f "./lychee-report.json" ]; then
-            echo "Report found."
-          else
-            echo "Lychee report not found."
-            exit 1
           
       - name: Parse Lychee report
         id: parse_report
