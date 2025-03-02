@@ -41,6 +41,7 @@ jobs:
         with:
           fail: false
           files: 'files-to-check.txt'
+          base: https://rehanbutt.com
 
       - name: Create Issue From File
         if: steps.lychee.outputs.exit_code != 0
