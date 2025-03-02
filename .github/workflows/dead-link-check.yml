@@ -49,67 +49,12 @@ jobs:
           path: ./lychee-report.json
           retention-days: 7
 
-      - name: Create Issue for Dead Links
+      - name: Create GitHub Issue
+        run: |
+          LOG_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          gh auth login --with-token < ${{ secrets.GITHUB_TOKEN }}
+          gh issue create --title "Automated Issue Title" \
+                           --body "This issue was created automatically by a GitHub Action. For more details, view the [workflow logs here]($LOG_URL)." \
+                           --label "bug"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_RUN_ID: ${{ github.run_id }}
-          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
-          GITHUB_EVENT_REPOSITORY_NAME: ${{ github.event.repository.name }}
-        run: |
-          node - <<EOF
-          const fs = require('fs');
-          const path = './lychee-report.json';
-
-          if (!fs.existsSync(path)) {
-            console.log('No report found');
-            process.exit(0);
-          }
-
-          let fileContent = fs.readFileSync(path, 'utf8').trim();
-
-          try {
-            const report = JSON.parse(fileContent);
-
-            if (!report.summary || report.summary.errors === 0) {
-              console.log('No dead links found');
-              process.exit(0);
-            }
-
-            console.log(`Found ${report.summary.errors} broken links`);
-
-            const issueBody = `🚨 **Lychee found ${report.summary.errors} broken links!**\n\n` +
-                              `[Download Full Report](https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})`;
-
-            const issueTitle = "🚨 Dead Links Found!";
-            const { Octokit } = require("@octokit/core");
-            const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
-
-            async function createIssue() {
-              const { data: issues } = await octokit.request('GET /repos/' + process.env.GITHUB_REPOSITORY + '/issues', {
-                owner: process.env.GITHUB_REPOSITORY_OWNER,
-                repo: process.env.GITHUB_EVENT_REPOSITORY_NAME,
-                state: 'open',
-                labels: 'dead-link-alert'
-              });
-
-              if (!issues.some(issue => issue.title === issueTitle)) {
-                console.log("Creating GitHub issue...");
-                await octokit.request('POST /repos/' + process.env.GITHUB_REPOSITORY + '/issues', {
-                  owner: process.env.GITHUB_REPOSITORY_OWNER,
-                  repo: process.env.GITHUB_EVENT_REPOSITORY_NAME,
-                  title: issueTitle,
-                  body: issueBody,
-                  labels: ["dead-link-alert"]
-                });
-              } else {
-                console.log("Issue already exists.");
-              }
-            }
-
-            createIssue().catch(error => console.error(error));
-          } catch (error) {
-            console.log("Error parsing lychee-report.json. It might not be in JSON format.");
-            console.log("File content:\n", fileContent);
-          }
-          EOF
