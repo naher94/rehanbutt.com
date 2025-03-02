@@ -34,6 +34,7 @@ jobs:
         id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
+          directory: _site
           fail: false
 
       - name: Create Issue From File
