@@ -41,12 +41,8 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           fail: false
-          args: >-
-            --exclude https://codepen.io/rehanbutt https://www.linkedin.com/in/rehan-butt/
-            --exclude-path ./_site/css ./_site/img
-            --base https://rehanbutt.com 
-            --no-progress 
-            --verbose
+          files: './files-to-check.txt'
+          base: https://rehanbutt.com
 
       - name: Create Issue From File
         if: steps.lychee.outputs.exit_code != 0
