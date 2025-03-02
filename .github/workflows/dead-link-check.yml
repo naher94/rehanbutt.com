@@ -53,8 +53,11 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/${{ github.repository }}/issues
-          title: "Dead Links Found"
-          body: "This is an issue created by a GitHub Action."
-          labels: 'bug'
+          data: |
+            {
+              "title": "New Issue",
+              "body": "This is an issue created by a GitHub Action.",
+              "labels": ["bug"]
+            }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
