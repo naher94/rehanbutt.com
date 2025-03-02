@@ -14,8 +14,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build site
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1' # Adjust this version if needed
+          bundler-cache: true
+
+      - name: Install Jekyll and dependencies
+        run: bundle install
+
+      - name: Build Site
         run: bundle exec jekyll build
+
+      - name: Debug file listing
+        run: ls -R _site/
 
       - name: Link Checker
         id: lychee
