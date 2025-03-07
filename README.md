@@ -220,7 +220,7 @@ https://500px.com/p/rehan_butt |✖️|✅|✅| Twitter & Instagram links
 https://dribbble.com/rehanbutt |✖️|✅|✅|social links
 https://www.imdb.com/name/nm15449795/ |✖️|✖️|✖️| rehanbutt.com & Linkedin links
 https://adplist.org/mentors/rehan-butt |✅ header image|✅|✅| Twitter link 
-https://angel.co/rehan-butt | ✖️|✅|✅| social links
+https://wellfound.com/u/rehan-butt | ✖️|✅|✅| social links
 https://medium.com/@rehan-butt | ✖️|✖️|✅
 https://society6.com/rehanbutt/about |✅ header image|✖️|✖️
 https://www.youtube.com/c/RehanButt1994 | ✅ header image|✖️|✖️| social links
