@@ -24,7 +24,7 @@ tags: interactions animations
 </div>
 
 <p class="post-callout-large">Looking for more? Head over to my 
-{% include external-link.html link="https://codepen.io/naher94" content="Codepen" %} and explore even more interaction details!</p>
+{% include external-link.html link="https://codepen.io/rehanbutt" content="Codepen" %} and explore even more interaction details!</p>
 
 <div class="grid-x">
   <div class="small-12 medium-6 cell image-container"><img src="../img/interactions/checkoutbutton.gif" alt="Checkout Button Interaction" /></div>
