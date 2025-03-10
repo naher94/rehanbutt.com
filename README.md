@@ -67,8 +67,6 @@ Code Snippets are helpful in populating common sections such as a resource's fro
 #### External Links
 * External links should use the `external-link` component via `{{% include external-link.html %}}` which includes a non-visual tag noting it goes external for enhanced accessibility `<a target="_blank" href="https://rehanbutt.com/">Rehan Butt<span class="visually-hidden">Opens a new window</span></a>`
 
-In the case an external link is used where there is no need for a empty page on the local site, such as with a project, then `permalink: ""` can be set at the page level. This will prevent the page from being generated and will redirect to the external link. `fluid.markdown` is one example of such a case.
-
 #### 2D Array Hack
 In some cases using a 2D array is cleaner and easier than setting up a collection. Even though its not formally supported in Liquid it is possible with this hack.
 1. Create a string with 2 sets of unique dividing characters in the case below `,` and `|`
