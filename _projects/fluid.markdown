@@ -8,5 +8,4 @@ external-link: http://fluiddesign.rehanbutt.com
 tags: design app tool voice screen multi-platform
 featured: true
 tile-description: A multi-modal design tool
-permalink: ""
 ---
