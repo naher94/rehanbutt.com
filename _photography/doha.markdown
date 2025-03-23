@@ -117,7 +117,7 @@ Through my lens, I explored the many facets of Doha, Qatar, where towering skysc
     <img src="../img/photography/doha/ferris-wheel-green-pink.jpg" alt="Ferris wheel illuminated with vibrant pink and green lights at night in Doha, creating a striking contrast against the dark sky.">
   </div>
   <div class="cell medium-4">
-    <img src="../img/photography/doha/ferris-wheel-rgb.jpg" alt="Ferris wheel illuminated with vibrant colorful lights at night in Doha, creating a striking contrast against the dark sky."">
+    <img src="../img/photography/doha/ferris-wheel-rgb.jpg" alt="Ferris wheel illuminated with vibrant colorful lights at night in Doha, creating a striking contrast against the dark sky.">
   </div>
   <div class="cell">
     <img src="../img/photography/doha/cooling-tower.jpg" alt="Cooling tower in Doha, showcasing its intricate architectural design with layered concrete patterns against a clear blue sky.">
