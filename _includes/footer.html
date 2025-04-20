@@ -21,11 +21,6 @@
               <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
             </div>
             {%- comment -%}This sets the order manually zero indexed array hence the 2 for third position{%- endcomment -%}
-            {%- if my_page.footer-sort-order == 2 -%}
-            <div class="nav-wrap">
-              <a class="nav" rel="noopener" target="_blank" href="https://society6.com/rehanbutt">Store<span class="visually-hidden">Opens a new window</span></a>
-            </div>
-            {%- endif -%}
           {% endfor %}
         </div>
 

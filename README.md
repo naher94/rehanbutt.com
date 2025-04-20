@@ -222,7 +222,6 @@ https://www.imdb.com/name/nm15449795/ |✖️|✖️|✖️| rehanbutt.com & Lin
 https://adplist.org/mentors/rehan-butt |✅ header image|✅|✅| Twitter link 
 https://wellfound.com/u/rehan-butt | ✖️|✅|✅| social links
 https://medium.com/@rehan-butt | ✖️|✖️|✅
-https://society6.com/a/artists/rehanbutt |✅ header image|✖️|✖️
 https://www.youtube.com/c/RehanButt1994 | ✅ header image|✖️|✖️| social links
 https://www.clubhouse.com/@rehanbutt |✖️|✅|✅|Twitter link
 https://letterboxd.com/rehanbutt |✖️|✖️|✅|
