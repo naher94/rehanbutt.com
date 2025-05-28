@@ -45,6 +45,7 @@
   }
   .speaking-events-intro{
     margin-top: 4em;
+    margin-bottom: 1rem;
     h2{
       font-size: 3.5em;
       font-weight: $lato-black;
@@ -76,6 +77,11 @@
   
   .speaking-events{
     margin-top: 0;
+    .speaking-item{
+      &:first-of-type{
+        margin-top: 0;
+      }
+    }
   }
   .speaking-item-hero{
     border-radius: $tile-radius-medium;
