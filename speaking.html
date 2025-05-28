@@ -35,6 +35,11 @@ footer-sort-order: 3
     {% assign current_date = 'now' | date: "%s" %}
     {% assign event_date = event.date | date: "%s" %}
 
+    {% assign prev_index = forloop.index0 | minus: 1 %}
+    {% assign next_index = forloop.index0 | plus: 1 %}
+    {% assign prev_event = event_order[prev_index] %}
+    {% assign next_event = event_order[next_index] %}
+
     {%- if event.featured == true -%}
       <div class="speaking-item-hero" id="{{event.featured-id}}">
         <div class="top-images cell">
@@ -76,9 +81,14 @@ footer-sort-order: 3
         </div>
       </div>
     {%- else -%}
-    <!-- TODO repeated section in the DOM render should be reduced -->
-    <section class="speaking-events cell medium-8">
-      {% if event.featured != true %}
+      {%- comment -%}
+        Only open the section if this is the first in a series of non-featured events
+        (either the first event overall, or the previous event is featured)
+      {%- endcomment -%}
+      {%- if forloop.first or prev_event.featured == true -%}
+        <section class="speaking-events cell medium-8">
+      {%- endif -%}
+
       <div class="speaking-item {% if event_date > current_date %}future-event{% endif %}">
         {% if event.logo %}
         <div class="brand-logo-container" id="{{event.logo}}">
@@ -109,8 +119,14 @@ footer-sort-order: 3
           </a>
         {% endif %}
       </div>
-      {% endif %}
-    </section>
+
+      {%- comment -%}
+        Only close the section if this is the last in a series of non-featured events
+        (either the last event overall, or the next event is featured)
+      {%- endcomment -%}
+      {%- if forloop.last or next_event.featured == true -%}
+        </section>
+      {%- endif -%}
     {%- endif -%}
     {% endfor %}
 
