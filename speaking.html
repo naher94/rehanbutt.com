@@ -76,6 +76,7 @@ footer-sort-order: 3
         </div>
       </div>
     {%- else -%}
+    <!-- TODO repeated section in the DOM render should be reduced -->
     <section class="speaking-events cell medium-8">
       {% if event.featured != true %}
       <div class="speaking-item {% if event_date > current_date %}future-event{% endif %}">
