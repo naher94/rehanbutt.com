@@ -119,9 +119,13 @@
       background: linear-gradient(45deg, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%);
       .brand-logo{
         width: 10em;
+        @include breakpoint(small only){
+          width: 8em;
+        }
       }
       a{
         color: semantic-color(text);
+        // TODO add hover effect
       }
     }
     .top-images, .bottom-images{
