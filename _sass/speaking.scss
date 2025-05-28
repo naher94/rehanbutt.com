@@ -114,7 +114,15 @@
       radial-gradient(circle at 25% 100%, rgba(255, 249, 0, 0.1) 0%, rgba(255, 249, 0, 0) 100%),
       radial-gradient(circle at 5% 10%, rgba(0,255,213,0.1) 0%, rgba(255,249,0,0) 100%),
       radial-gradient(circle at 75% 50%, rgba(255,0,27,0.1) 0%, rgba(255,249,0,0) 100%);
-
+    }
+    &#config-2025{
+      background: linear-gradient(45deg, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%);
+      .brand-logo{
+        width: 10em;
+      }
+      a{
+        color: semantic-color(text);
+      }
     }
     .top-images, .bottom-images{
       img{
