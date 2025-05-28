@@ -131,7 +131,21 @@
       }
       a{
         color: semantic-color(text);
-        // TODO add hover effect
+        // TODO generalize this hover jazz to all hero cards
+        &:hover{
+          h3{
+            @include swipe-underline-hover(false);
+          }
+          .fa-link{
+            transform: rotate(360deg);
+          }
+        }
+        .fa-link{
+          transition: transform .3s;
+        }
+        h3{
+          @include swipe-underline(semantic-color(text-bg),false);
+        }
       }
     }
     .top-images, .bottom-images{
