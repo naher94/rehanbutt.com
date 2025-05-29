@@ -202,6 +202,9 @@
           margin-block-end: 2em;
         }
       }
+      div:has(> h3) {
+        text-wrap: pretty;
+      }
       h3{
         font-family: $lato;
         font-size: 1.5em;
