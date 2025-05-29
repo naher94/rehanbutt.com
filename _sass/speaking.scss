@@ -45,6 +45,7 @@
   }
   .speaking-events-intro{
     margin-top: 4em;
+    margin-bottom: 1rem;
     h2{
       font-size: 3.5em;
       font-weight: $lato-black;
@@ -76,6 +77,11 @@
   
   .speaking-events{
     margin-top: 0;
+    .speaking-item{
+      &:first-of-type{
+        margin-top: 0;
+      }
+    }
   }
   .speaking-item-hero{
     border-radius: $tile-radius-medium;
@@ -114,7 +120,33 @@
       radial-gradient(circle at 25% 100%, rgba(255, 249, 0, 0.1) 0%, rgba(255, 249, 0, 0) 100%),
       radial-gradient(circle at 5% 10%, rgba(0,255,213,0.1) 0%, rgba(255,249,0,0) 100%),
       radial-gradient(circle at 75% 50%, rgba(255,0,27,0.1) 0%, rgba(255,249,0,0) 100%);
-
+    }
+    &#config-2025{
+      background: linear-gradient(45deg, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%);
+      .brand-logo{
+        width: 10em;
+        @include breakpoint(small only){
+          width: 8em;
+        }
+      }
+      a{
+        color: semantic-color(text);
+        // TODO generalize this hover jazz to all hero cards
+        &:hover{
+          h3{
+            @include swipe-underline-hover(false);
+          }
+          .fa-link{
+            transform: rotate(360deg);
+          }
+        }
+        .fa-link{
+          transition: transform .3s;
+        }
+        h3{
+          @include swipe-underline(semantic-color(text-bg),false);
+        }
+      }
     }
     .top-images, .bottom-images{
       img{
@@ -169,6 +201,9 @@
           margin-inline-end: 0;
           margin-block-end: 2em;
         }
+      }
+      div:has(> h3) {
+        text-wrap: pretty;
       }
       h3{
         font-family: $lato;

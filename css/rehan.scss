@@ -175,7 +175,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         transform: scale(1.02) rotate(2deg);
         box-shadow: $recessed-shadow semantic-color(shadow);
       }
-       .thumbnail-image-featured{
+      .thumbnail-image-featured{
         border-radius: $tile-radius-big;
       }
     }

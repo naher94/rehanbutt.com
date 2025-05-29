@@ -182,6 +182,7 @@ ul {
     height: 100%;
   }
 }
+//******* End of A Tag Underline Expand Styling
 
 .copied{
   background-color: semantic-color(actionable-pill);
@@ -196,16 +197,12 @@ ul {
   top: 0;
 }
 
-
-
 p, li, h3{
   a {
     @include link-expand();
   }
 }
 
-
-//******* End of A Tag Underline Expand Styling
 @mixin swipe-underline($color,$inline-hover) {
   display: inline;
   background: linear-gradient($color, $color);
@@ -220,7 +217,7 @@ p, li, h3{
   }
 }
 
-//// Use when you want to trigger the over from a different element
+//// Use when you want to trigger the hover from a different element
 @mixin swipe-underline-hover($is-important) {
   @if $is-important {
     background-size: 100% 10px !important;
