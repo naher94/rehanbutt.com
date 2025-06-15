@@ -30,6 +30,9 @@ jobs:
       - name: Build Jekyll site
         run: bundle exec jekyll build --trace
 
+      - name: Debug Lychee Version
+        run: lychee --version
+
       - name: Link Checker
         id: lychee
         uses: lycheeverse/lychee-action@v2
