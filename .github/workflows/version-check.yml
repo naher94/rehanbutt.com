@@ -11,13 +11,13 @@ jobs:
 
     steps:
       - name: Checkout destination branch (gh-pages)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: gh-pages
           path: base
 
       - name: Checkout pull request branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: pr
 
