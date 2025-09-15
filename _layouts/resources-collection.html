@@ -31,7 +31,9 @@ layout: default
     {%- for resource-var in page.resources -%}
       {%- assign variable = resource-var | prepend: "/resources/" -%}
       {%- assign resource = site.resources | where:"id", variable | first -%}
-      {%- include resource-element.html item=resource -%}
+      {%- if resource.title != null -%}
+        {%- include resource-element.html item=resource -%}
+      {%- endif -%}
     {%- endfor -%}
   </div>
 
