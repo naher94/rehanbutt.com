@@ -234,3 +234,4 @@ https://stackoverflow.com/users/12394272/rehan-butt |✖️|✖️|✅|social li
 https://community.cmu.edu/s/ | |
 https://saes.alumnifire.com | ✖️|✖️|✅| bio & photo
 https://jekyllrb.com/showcase/ |✅|✖️|✖️| Full screen shot of the home page v4.0.0
+https://dl.acm.org/profile/99661657353 |✖️|✖️|✅|
