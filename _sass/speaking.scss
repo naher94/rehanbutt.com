@@ -81,6 +81,9 @@
       &:first-of-type{
         margin-top: 0;
       }
+      .description{
+        text-wrap: pretty;
+      }
     }
   }
   .speaking-item-hero{
@@ -147,6 +150,12 @@
           @include swipe-underline(semantic-color(text-bg),false);
         }
       }
+    }
+    &#design-summit-2025{
+      background: linear-gradient(180deg, rgba(121,0,255,0.1) 0%, rgba(255,0,141,0.1) 100%),
+      radial-gradient(circle at 25% 100%, rgba(255, 249, 0, 0.1) 0%, rgba(255, 249, 0, 0) 100%),
+      radial-gradient(circle at 5% 10%, rgba(0,255,213,0.1) 0%, rgba(255,249,0,0) 100%),
+      radial-gradient(circle at 75% 50%, rgba(255,0,27,0.1) 0%, rgba(255,249,0,0) 100%);
     }
     .top-images, .bottom-images{
       img{
@@ -229,6 +238,7 @@
         font-size: 1em;
         font-weight: $lato-regular;
         line-height: 1.2em;
+        text-wrap: pretty;
       }
     }
   }
