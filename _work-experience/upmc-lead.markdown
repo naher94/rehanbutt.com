@@ -3,7 +3,7 @@ role: "Lead Product Designer"
 date-start: 2021-06-15
 date-end: 2022-08-05
 company: UPMC Enterprises
-description: "Leading our technology solution’s design efforts including discovery, concept development and bridging the user needs with the technical underpinnings. Establishing design services in support of our extended internal teams and portfolio companies alike. And spearheading activities to accelerate the UX maturity of the organization."
+description: "Led the design strategy for Technology Solutions, from discovery and concept development to aligning user needs with technical foundations. Built and scaled design services to support both internal teams and portfolio companies, while driving initiatives that elevated the organization’s UX maturity."
 logo: upmc
 sort-order: 1
 ---
