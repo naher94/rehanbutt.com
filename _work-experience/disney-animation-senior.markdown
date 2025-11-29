@@ -10,6 +10,15 @@ sort-order: -2
 
 <div class="film-credit-container grid-x align-middle">
   <div class="film-poster cell shrink">
+    <img src="/img/film-posters/zootopia2-poster.jpg" alt="Disney's Zootopia 2 movie poster">
+  </div>
+  <div class="text-container cell auto">
+    <p class="film-name">Zootopia 2<span>・2025</span></p>
+    <p class="credit-description">Credited under Technology - Engineering Services</p>
+  </div>
+</div>
+<div class="film-credit-container grid-x align-middle">
+  <div class="film-poster cell shrink">
     <img src="/img/film-posters/moana2.jpg" alt="Disney's Moana 2 movie poster">
   </div>
   <div class="text-container cell auto">
