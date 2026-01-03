@@ -5,8 +5,8 @@ thumbnail: istanbul.jpg
 thumbnail-alt: Dome of the Suleymaniye Mosque
 hero-image: "istanbul-2023/hero.jpg"
 hero-image-alt: Dome of the Suleymaniye Mosque
-featured: true
-big-tile: true
+featured: 
+big-tile: 
 date: 15-12-2023
 hero-background-color: "#FFFFFF"
 hero-background-color-dark: "#161d27"
