@@ -1,0 +1,6 @@
+---
+year: 2025
+color: "radial-gradient(circle at 0% 50%,rgba(239, 213, 255, 1) 0%, rgba(81, 90, 218, 1) 100%)"
+color-dark: "radial-gradient(circle at 50% 0%,rgba(239, 213, 255, 1) 0%, rgba(81, 90, 218, 1) 100%)"
+current:
+---
