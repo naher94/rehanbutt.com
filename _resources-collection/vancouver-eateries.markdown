@@ -7,7 +7,7 @@ tile-image: vancouver-eateries.jpg
 tile-image-alt: Mini quiche and mango coconut mousse cake from Breka Bakery
 text-color: '#000000'
 featured: false
-resources: [breka-bakery]
+resources: [breka-bakery,nightingale,glowbal,nuba,motorettagelato]
 date: 2026-01-03
 published: true
 ---
