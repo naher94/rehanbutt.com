@@ -181,6 +181,10 @@ ul {
   &:hover::after {
     height: 100%;
   }
+
+  &:focus{
+    color: semantic-color(link);
+  }
 }
 //******* End of A Tag Underline Expand Styling
 
