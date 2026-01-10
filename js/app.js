@@ -151,6 +151,7 @@ function holidays() {
 		"5:4": "May the 4th be with you!",
 		"7:14": "Happy World Orca Day!",
 		"7:22": "Happy Mango Day! 🥭",
+		"8:18": "Happy World Photography Day! 📷",
 		"10:31": "Happy Halloween! 🎃",
 		"11:26": "Happy Thanksgiving! 🦃",
 		"12:4": "Happy Hanukkah!",
