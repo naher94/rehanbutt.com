@@ -139,6 +139,9 @@
         font-size: 1.5em;
         line-height: normal;
         margin-bottom: 1em;
+        a{
+          @include link-expand;
+        }
         @include breakpoint(small only) {
           padding-left: 0;
           padding-right: 0;
