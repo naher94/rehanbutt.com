@@ -5,5 +5,5 @@ date-end: 2016-05-15
 company: YinzCam
 description: "Evaluated the current app experiences and designed enhancements across consumer facing products and enterprise applications."
 logo:
-sort-order: 9
+sort-order: 10
 ---
