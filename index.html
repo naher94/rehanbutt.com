@@ -171,21 +171,7 @@ sort-order: 1
   </div>
 
   {%- for year in yir_order -%}
-  {% if year.current == true %}
-  <div class="cell small-6 medium-4">
-      <div class="year-container">
-        <div class="year-square current-year">
-          <svg class="" viewBox="0 0 83 50">
-            <text  x='-10%' y="75%" textLength="100" lengthAdjust="spacing">{{year.year}}</text>
-          </svg>
-        </div>
-        <div class="yir-label">
-          {{year.year}} in progress
-        </div>
-      </div>
-  </div>
-  {% else %}
-  <div class="cell small-6 medium-4">
+  <div class="cell small-6 medium-3">
     <a href="https://{{ year.year | append: ".rehanbutt.com" }}" target="_blank" rel="noopener">
       <div class="year-container">
         <style>
@@ -212,6 +198,5 @@ sort-order: 1
       <span class="visually-hidden">Opens a new window</span>
     </a>
   </div>
-  {% endif %}
   {%- endfor -%}
 </section>
