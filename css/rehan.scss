@@ -574,13 +574,10 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     background-color: $pure-white;
     border-radius: $tile-radius-medium;
     box-shadow: $recessed-shadow semantic-color(shadow);
-    padding: 2rem;
+    padding: 0.5em;
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
     transition: $sprint;
-    @include breakpoint(medium down){
-      padding: 1rem;
-    }
     &:hover{
       transform: rotate(4deg) scale(1.05);
       .year-square{
@@ -588,9 +585,6 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
           opacity: 0;
         }
       }
-    }
-    .current-year{
-      background-color: $navy-black-l6 !important;
     }
     .year-square{ 
       background-color: $navy-black;
@@ -600,6 +594,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       font-size: 10.6rem;
       position: relative;
       overflow: hidden;
+      border-radius: $tile-radius;
       svg{
         width: 100%;
         height: 100%;
@@ -651,20 +646,15 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       }  
     }
     .yir-label{
-      font-size: 2.5rem;
+      font-size: 2rem;
       text-align: center;
       font-family: $caveat;
       font-weight: $caveat-regular;
       line-height: 1;
-      padding: 1rem 0;
+      padding-top: 0.25rem;
       color: semantic-color(text-on-light-bg-always);
-      @include breakpoint(small only){
+      @include breakpoint(medium down){
         font-size: 1.5rem;
-        padding: 0.5rem 0;
-      }
-      @include breakpoint(medium only){
-        font-size: 2rem;
-        padding: 0.5rem 0;
       }
     }
     &:hover{
