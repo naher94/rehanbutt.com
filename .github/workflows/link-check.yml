@@ -36,7 +36,7 @@ jobs:
         with:
           args: _site --root-dir _site --exclude '^https://www\.linkedin\.com/in/rehan-butt/' --exclude '^https://codepen\.io/rehanbutt' --exclude '^https://instagram\.com/naher94' --exclude '^https://www\.threads\.net/@naher94' --accept 100..=103,200..=299,403 --user-agent "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0"
           fail: false
-          checkbox: true
+          format: markdown
 
       - name: Create Issue From File
         if: steps.lychee.outputs.exit_code != 0
