@@ -1048,6 +1048,7 @@ article{
     }
   }
   .watermark{
+    display: none;
     width: 110%;
     margin-left: -5%;
     position: absolute;
@@ -1071,6 +1072,7 @@ article{
     padding-right: 0;
     font-weight: $lato-bold;
     line-height: 1.5;
+    margin-block: 0.75em;
   }
 
   a{
