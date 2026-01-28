@@ -1085,6 +1085,7 @@ article{
     }
     &#photography{
       position: relative;
+      isolation: isolate;
       &:hover{
         img{
           $img-scale: 1.6;
@@ -1102,13 +1103,15 @@ article{
         transform-origin: right center;
         transition: $sprint;
         margin-inline: 0.15em 0.2em;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: high-quality;
         &:first-of-type{
           position: absolute;
           left: 0;
           top: 0;
           z-index: 2;
           transform: rotate(7deg) translate(0.1em, 0);
-          // TODO figure out why this is blurry on Safari after hover
+          isolation: isolate;
         }
         &:last-of-type{
           transform: rotate(-5deg) translate(-0.1em, 0.2em);
