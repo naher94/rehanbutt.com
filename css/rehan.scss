@@ -1087,30 +1087,30 @@ article{
       position: relative;
       &:hover{
         img{
-          scale: 1.5;
-          scale: 5;
+          $img-scale: 1.6;
           &:first-of-type{
-            rotate: 8deg;
-            translate: 0 -0.3em;
+            transform: scale($img-scale) rotate(14deg) translate(0.1em, -0.3em);
           }
           &:last-of-type{
-            rotate: -13deg;
-            translate: 0 0.3em;
+            transform: scale($img-scale) rotate(-10deg) translate(-0.2em, 0.4em);
           }
         }
       }
       img{
         box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
-        transform-origin: bottom right;
-        // will-change: transform;
-        // transform: translateZ(0);
+        border-radius: 5px;
+        transform-origin: right center;
+        transition: $sprint;
+        margin-inline: 0.15em 0.2em;
         &:first-of-type{
           position: absolute;
-          rotate: 5deg;
+          left: 0;
+          top: 0;
           z-index: 2;
+          transform: rotate(7deg) translate(0.1em, 0);
         }
         &:last-of-type{
-          rotate: -10deg;
+          transform: rotate(-5deg) translate(-0.1em, 0.2em);
         }
       }
     }
