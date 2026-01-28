@@ -1025,59 +1025,122 @@ article{
 .site-intro{
   margin-bottom: 8rem;
   margin-top: 3rem;
-  @include breakpoint(small only){
-    overflow: hidden; //resolves an issue with the watermark container overflow TODO
-  }
-  .emoji-wrapper{
-    font-size: 2rem;
-    div{
-      margin-bottom: 0.5rem;
-      transition: $sprint;
-      &:hover{
-        transform: scale(1.4);
-        text-shadow: 0 0 10px rbga($navy-black, 0.2);
-      }
-    }
-    @include breakpoint(small only){
-      @include flex-direction(row); // Does a Flips Grid-y to Grid-x On Mobile
-      margin-bottom: 1rem;
-      div{
-        width: auto; // Does a Flips Grid-y to Grid-x On Mobile (Needed for the cells)
-        margin-right: 1rem;
-      }
-    }
-  }
-  .watermark{
-    display: none;
-    width: 110%;
-    margin-left: -5%;
-    position: absolute;
-    fill: rgba($signature-teal, 0.1);
-    z-index: -1;
-    @include breakpoint(small only){
-      margin-left: 0;
-      margin-top: 5%;
-    }
-    text{
-      font-family: $zilla;
-      font-weight: $zilla-bold;
-    }
-  }
   span.wave{
     font-size: 0.8em;
-    margin-left: 0.5em;
+    margin-inline: 0.25em;
   }
-  p{
+  h1, p{
+    font-family: $zilla;
     padding-left: 0;
     padding-right: 0;
-    font-weight: $lato-bold;
-    line-height: 1.5;
+    font-size: 1.8em;
+    line-height: 1.4em;
+    font-weight: $zilla-bold;
     margin-block: 0.75em;
+    text-wrap: pretty;
+    &:first-of-type{
+      display: inline;
+    }
   }
+  #devzgn{
+    text-decoration: underline dotted 4px;
+    text-decoration-color: rgba($navy-black, 0.5);
+    // text-decoration: solid dotted purple 4px;
+    // text-emphasis-style: circle;
+    // text-emphasis-position: under;
+  }
+  img{
+    display: inline-block;
+    height: 1.2em;
+    border-radius: 7px;
+    vertical-align: text-top;
+    transition: $sprint;
+    &#upmc{
+      // scale: 1.1;
+    }
+  }
+  span{
+    cursor: pointer;
+    &#me{
+      &:hover{
+        img{
+          scale: 1.6;
+        }
+      }
+      img{
+        scale: 1.4;
+        margin-inline: 0.3em 0.6em;
+        rotate: -3deg;
+        border-radius: 6px;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+      }
+    }
+    &#panda{
+      &:hover{
+        img{
+          scale: 1.1;
+          rotate: -5deg;
+        }
+      }
+    }
+    &#photography{
+      position: relative;
+      &:hover{
+        img{
+          scale: 1.5;
+          scale: 5;
+          &:first-of-type{
+            rotate: 8deg;
+            translate: 0 -0.3em;
+          }
+          &:last-of-type{
+            rotate: -13deg;
+            translate: 0 0.3em;
+          }
+        }
+      }
+      img{
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+        transform-origin: bottom right;
+        // will-change: transform;
+        // transform: translateZ(0);
+        &:first-of-type{
+          position: absolute;
+          rotate: 5deg;
+          z-index: 2;
+        }
+        &:last-of-type{
+          rotate: -10deg;
+        }
+      }
+    }
+  }
+  .config{
+    position: relative;
+    .stage-photo{
+      position: absolute;
+      left: 50%;
+      bottom: 1.5em;
+      opacity: 0;
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
 
+    }
+    &:hover{
+      .stage-photo{
+        opacity: 1;
+        scale: 5;
+        rotate: 5deg;
+        border-radius: 4px;
+        transform-origin: 100% 50%;
+        transform-origin: 50% 100%;
+      }
+    }
+  }
   a{
     padding: 0.5rem 0;
-    font-weight: $lato-bold;
+    font-family: $zilla;
+    font-weight: $zilla-bold;
+    font-size: 2em;
     color: $signature-teal;
     @include squiggly-underline($signature-teal);
     i{
