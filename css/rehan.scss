@@ -1041,6 +1041,14 @@ article{
     &:first-of-type{
       display: inline;
     }
+    a{
+      color: inherit;
+      text-decoration: underline dotted 4px;
+      text-decoration-color: rgba($navy-black, 0.5);
+      &::after{
+        content: none;
+      }
+    }
   }
   #devzgn{
     text-decoration: underline dotted 4px;
@@ -1060,13 +1068,13 @@ article{
     }
   }
   span{
-    cursor: pointer;
+    // cursor: pointer; //TODO update / move this figma and devzgn items
     &#me{
-      &:hover{
-        img{
-          scale: 1.6;
-        }
-      }
+      // &:hover{
+      //   img{
+      //     scale: 1.6;
+      //   }
+      // }
       img{
         scale: 1.4;
         margin-inline: 0.3em 0.6em;
@@ -1140,7 +1148,7 @@ article{
       }
     }
   }
-  a{
+  > a{
     padding: 0.5rem 0;
     font-family: $zilla;
     font-weight: $zilla-bold;
