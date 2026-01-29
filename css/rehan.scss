@@ -1051,11 +1051,46 @@ article{
     }
   }
   #devzgn{
+    position: relative;
     text-decoration: underline dotted 4px;
     text-decoration-color: rgba($navy-black, 0.5);
-    // text-decoration: solid dotted purple 4px;
-    // text-emphasis-style: circle;
-    // text-emphasis-position: under;
+    cursor: pointer;
+    .tooltip{
+      position: absolute;
+      bottom: calc(100% + 0.5em);
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      transform-origin: bottom center;
+      padding: 12px 16px;
+      background: semantic-color(floating-card-bg);
+      color: semantic-color(text);
+      -webkit-text-fill-color: semantic-color(text);
+      -webkit-background-clip: unset;
+      background-clip: unset;
+      border-radius: $tile-radius;
+      box-shadow: $recessed-shadow rgba(0,0,0,0.15);
+      font-family: $lato;
+      font-size: 16px;
+      font-weight: $lato-regular;
+      line-height: 1.4;
+      width: max-content;
+      max-width: 250px;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out, visibility 0.2s;
+      pointer-events: none;
+      z-index: 100;
+    }
+    &:hover .tooltip,
+    &:focus .tooltip{
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) scale(1);
+    }
+    &:focus{
+      outline: none;
+    }
   }
   img{
     display: inline-block;
@@ -1109,7 +1144,7 @@ article{
         box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
         border-radius: 5px;
         transform-origin: right center;
-        transition: $sprint;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         margin-inline: 0.15em 0.2em;
         image-rendering: -webkit-optimize-contrast;
         image-rendering: high-quality;
@@ -1135,24 +1170,22 @@ article{
       bottom: 1.5em;
       opacity: 0;
       box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-
+      transform-origin: 50% 100%;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out;
     }
     &:hover{
       .stage-photo{
         opacity: 1;
-        scale: 5;
-        rotate: 5deg;
+        transform: scale(5) rotate(5deg);
         border-radius: 4px;
-        transform-origin: 100% 50%;
-        transform-origin: 50% 100%;
       }
     }
   }
-  > a{
+  > div > div > a{
     padding: 0.5rem 0;
     font-family: $zilla;
     font-weight: $zilla-bold;
-    font-size: 2em;
+    font-size: 1.8em;
     color: $signature-teal;
     @include squiggly-underline($signature-teal);
     i{
