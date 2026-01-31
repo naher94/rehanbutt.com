@@ -122,8 +122,11 @@ sort-order: 1
 {%- assign photos_order = site.photography | sort: 'date' | reverse -%}
 
 <section class="photography-preview-container cell grid-x grid-padding-x">
-  <div class="cell">
-    <h2>Photography</h2>
+  <div class="cell grid-x home-section-header">
+    <h2 class="cell">Photography</h2>
+    <p class="home-section-description cell medium-8">
+      Photo description goes here...
+    </p>
   </div>
   <div class="photo-row grid-x cell">
   {%- for photo in photos_order -%}
@@ -152,9 +155,9 @@ sort-order: 1
 {% assign yir_order = site.year-in-review | sort: 'year' | reverse %}
 
 <section class="year-in-review grid-x grid-padding-x">
-  <div class="cell yir-header grid-x">
+  <div class="cell yir-header home-section-header grid-x">
     <h2 class="cell">Year in Review</h2>
-    <p class="making-of cell medium-8">
+    <p class="home-section-description cell medium-8">
       A little bit of time travel through the moments and learnings that shaped the year. Curious what goes into it? Checkout the
       {% include external-link.html css-class="" link="https://making-of-year-in-review.rehanbutt.com" content="Making Of" %}
     </p>
