@@ -277,26 +277,16 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       line-height: 1.3rem;
     }
   }
-  .more-button{
-    padding-top: 0.7rem;
-    padding-bottom: 0.7rem;
-    color: $pure-white;
-    border-radius: 14px;
-    border: solid 0.2rem $pure-white;
-    text-align: center;
-    display: block;
-    font-weight: $lato-bold;
-    transition: $sprint;
-    &:hover{
-      color: $navy-black;
-      background-color: $pure-white;
-    }
-  }
 }
 
 .resources-container{
   background-color: semantic-color(recent-resources-bg);
   position: relative;
+  h2 a{
+    color: semantic-color(text);
+    white-space: nowrap;
+    @include double-arrow-slide;
+  }
   &:hover{
     .black-cat{
       transform: rotate(-5deg) translateY(-9rem);
@@ -317,7 +307,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 
 .speaking-container{
   h2 a{
-    color: semantic-color(text);
+    color: $pure-white;
     white-space: nowrap;
     @include double-arrow-slide;
   }
