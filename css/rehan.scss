@@ -420,12 +420,12 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 }
 
 .photography-preview-container{
-  a:has(h2){
-    color: semantic-color(text);
-    @include double-arrow-slide;
-  }
   h2{
     font-weight: $zilla-bold;
+    a{
+      color: semantic-color(text);
+      @include double-arrow-slide;
+    }
     @include breakpoint(small only){
       line-height: 1;
     }
