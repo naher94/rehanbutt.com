@@ -1103,7 +1103,6 @@ article{
     }
   }
   span{
-    // cursor: pointer; //TODO update / move this figma and devzgn items
     &#me{
       // &:hover{
       //   img{
@@ -1167,6 +1166,7 @@ article{
   }
   .config{
     position: relative;
+    cursor: pointer;
     .stage-photo{
       position: absolute;
       left: 50%;
@@ -1190,7 +1190,6 @@ article{
     font-weight: $zilla-bold;
     font-size: 1.8em;
     color: $signature-teal;
-    // @include squiggly-underline($signature-teal);
     @include double-arrow-slide;
   }
 }
