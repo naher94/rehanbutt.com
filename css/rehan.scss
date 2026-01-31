@@ -234,77 +234,23 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
 }
 
-.featured-resources-speaking{
-  margin-bottom: 6rem;
+.resources-container, .speaking-container{
+  margin-bottom: 2rem;
   color: $pure-white;
-  .resources-container, .speaking-container{
-    background-color: $navy-black;
-    border-radius: $tile-radius-big;
-    padding: 2rem;
-    padding-top: 1rem;
-    h2{
-      padding: 0;
-      font-size: 2.5em;
-      font-weight: $zilla-bold;
-      @include breakpoint(small only){
-        font-size: 2em;
-      }
-    }
+  background-color: $navy-black;
+  border-radius: $tile-radius-big;
+  padding: 2rem;
+  padding-top: 1rem;
+  h2{
+    padding: 0;
+    font-size: 2.5em;
+    font-weight: $zilla-bold;
     @include breakpoint(small only){
-      padding: 1rem;
+      font-size: 2em;
     }
   }
-  .resources-container{
-    background-color: semantic-color(recent-resources-bg);
-    position: relative;
-    &:hover{
-      .black-cat{
-        transform: rotate(-5deg) translateY(-9rem);
-        transition: $run;
-        transition-delay: 1s;
-      }
-      // .black-cat-2{
-      //   transform: rotate(-5deg) translateY(-9rem);
-      //   z-index: 1;
-      //   transition: $run;
-      //   .paws{
-      //     transform: translateY(7.5rem) rotate(7deg);
-      //     opacity: 1;
-      //     // animation-name:paws;
-      //     // animation-duration: 2.5s;
-      //     transition: $run;
-      //   }
-      // }
-    }
-    .black-cat{
-      position: absolute;
-      z-index: -1;
-      transition: $jog;
-      transition-delay: 1s;
-      .head{
-        width: 10rem;
-      }
-    }
-    // .black-cat-2{
-    //   position: absolute;
-    //   // z-index: -1;
-    //   transition: $jog;
-    //   transition-delay: 2s;
-    //   // animation-name:paws;
-    //   // animation-duration: 2.5s;
-    //   .paws{
-    //     width: 10rem;
-    //     transform: translateY(4rem);
-    //     opacity: 0;
-    //   }
-    // }
-
-    // @keyframes paws {
-    //     0% { transform: translateY(7.5rem) rotate(0deg); opacity:0; }
-    //    50% { transform: translateY(3rem) rotate(5deg); opacity:1; }
-    //   100% { transform: translateY(7.5rem) rotate(7deg); opacity:1; }
-    // }
-
+  @include breakpoint(small only){
+    padding: 1rem;
   }
   .section-description{
     padding: 0;
@@ -333,34 +279,6 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     font-weight: $lato-bold;
     font-style: italic;
     margin-bottom: 0;
-  }
-  .speaking-socials{
-    margin-bottom: 1em;
-    .email-container{
-      display: inline;
-      position: relative;
-      cursor: pointer;
-      .copied{
-        font-size: 0.5em;
-        right: 0;
-      }
-    }
-    a, .email-container{
-      padding-right: 0.8em;
-      font-size: 2em;
-      color: inherit;
-      &:hover, &:focus{
-        .fab, .fas{
-          animation: boing 300ms ease-out;
-        }
-        .fa-envelope{
-          color: $signature-teal;
-        }
-        .fa-linkedin-in{
-          color: $linkedin-blue;
-        }
-      }
-    }
   }
   .resource-link{
     background-color: $pure-white;
@@ -392,6 +310,58 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     &:hover{
       color: $navy-black;
       background-color: $pure-white;
+    }
+  }
+}
+
+.resources-container{
+  background-color: semantic-color(recent-resources-bg);
+  position: relative;
+  &:hover{
+    .black-cat{
+      transform: rotate(-5deg) translateY(-9rem);
+      transition: $run;
+      transition-delay: 1s;
+    }
+  }
+  .black-cat{
+    position: absolute;
+    z-index: -1;
+    transition: $jog;
+    transition-delay: 1s;
+    .head{
+      width: 10rem;
+    }
+  }
+}
+
+.speaking-container{
+  .speaking-socials{
+    margin-bottom: 1em;
+    .email-container{
+      display: inline;
+      position: relative;
+      cursor: pointer;
+      .copied{
+        font-size: 0.5em;
+        right: 0;
+      }
+    }
+    a, .email-container{
+      padding-right: 0.8em;
+      font-size: 2em;
+      color: inherit;
+      &:hover, &:focus{
+        .fab, .fas{
+          animation: boing 300ms ease-out;
+        }
+        .fa-envelope{
+          color: $signature-teal;
+        }
+        .fa-linkedin-in{
+          color: $linkedin-blue;
+        }
+      }
     }
   }
 }

@@ -28,6 +28,32 @@ sort-order: 1
   </div>
 </section>
 
+<section class="cell grid-x speaking-container grid-padding-x">
+  <div class="cell">
+    <h2>Speaking</h2>
+    <p class="section-description">I've had the privilege of speaking at various events on design, development, and product, sharing my knowledge and experiences with others. Whether at schools or conferences, I'm passionate about discussing design and technology.</p>
+    {%- comment -%}
+    <p class="section-description">Check out one of my recent favorites about working with design systems in a world of new and legacy products. <a href="https://www.youtube.com/watch?v=q5R9hmpvGUo&t=13s" target="_blank" rel="noopener">Watch the talk.</a></p>
+    {%- endcomment -%}
+
+    <p class="section-description section-description-special">I'm always eager for new opportunities to share insights and inspire conversations. Planning an event? Let's connect!</p>
+    <div class="speaking-socials">
+      <div class="email-container" onclick="copyToClipboard('me@rehanbutt.com',this)">
+        <i class='fas fa-envelope fa-xs' title='Email'></i>
+      </div>
+
+      <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/rehan-butt/">
+        <i class="fab fa-linkedin-in fa-xs" title="Linkedin"></i>
+        <span class="visually-hidden">Opens a new window</span>
+      </a>
+    </div>
+
+  </div>
+  {%- comment -%}upcoming speaking events{%- endcomment -%}
+
+  <a class="more-button cell align-self-bottom" href="/speaking">Where I've spoken</a>
+</section>
+
 {% assign project_order = site.projects | sort: 'date' | reverse %}
 
 <section class="featured-projects">
@@ -66,57 +92,6 @@ sort-order: 1
     <div class="cell small-12 medium-6 large-4">
       <a class="more-button" href="/portfolio">Explore more projects</a>
     </div>
-  </div>
-</section>
-
-
-<section class="cell grid-x featured-resources-speaking grid-padding-x grid-margin-x grid-margin-y">
-  <div class="cell small-12 medium-6 grid-x resources-container">
-    <div class="cell">
-      <h2>Resources</h2>
-      <p class="section-description">A bunch references you may find useful. Here are a few of my most recent finds.</p>
-    </div>
-    {% assign allresources = site.resources | concat: site.articles %}
-    {% assign resources_sorted = allresources | sort: 'date' | reverse %}
-    <!-- TODO if no tags then skip -->
-    <!-- TODO add articles to this page as well.. CONFIRM THIS WORKS -->
-    {%- for resource in resources_sorted limit:3 -%}
-      {%- if resource.article == true -%}
-      {% include article-element.html item=resource %}
-      {%- else -%}
-      {% include resource-element.html item=resource %}
-      {%- endif -%}
-    {%- endfor -%}
-    <a class="more-button cell align-self-bottom" href="/resources">More resources</a>
-    <div class="black-cat">
-      <img class="head" src="/img/black-cat.svg" alt="Black Cat Illustration">
-    </div>
-  </div>
-
-  <div class="cell small-12 medium-6 grid-x speaking-container">
-    <div class="cell">
-      <h2>Speaking</h2>
-      <p class="section-description">I've had the privilege of speaking at various events on design, development, and product, sharing my knowledge and experiences with others. Whether at schools or conferences, I'm passionate about discussing design and technology.</p>
-      {%- comment -%}
-      <p class="section-description">Check out one of my recent favorites about working with design systems in a world of new and legacy products. <a href="https://www.youtube.com/watch?v=q5R9hmpvGUo&t=13s" target="_blank" rel="noopener">Watch the talk.</a></p>
-      {%- endcomment -%}
-
-      <p class="section-description section-description-special">I'm always eager for new opportunities to share insights and inspire conversations. Planning an event? Let's connect!</p>
-      <div class="speaking-socials">
-        <div class="email-container" onclick="copyToClipboard('me@rehanbutt.com',this)">
-          <i class='fas fa-envelope fa-xs' title='Email'></i>
-        </div>
-
-        <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/rehan-butt/">
-          <i class="fab fa-linkedin-in fa-xs" title="Linkedin"></i>
-          <span class="visually-hidden">Opens a new window</span>
-        </a>
-      </div>
-
-    </div>
-    {%- comment -%}upcoming speaking events{%- endcomment -%}
-
-    <a class="more-button cell align-self-bottom" href="/speaking">Where I've spoken</a>
   </div>
 </section>
 
@@ -188,4 +163,26 @@ sort-order: 1
     </a>
   </div>
   {%- endfor -%}
+</section>
+
+<section class="cell grid-x resources-container grid-padding-x">
+  <div class="cell">
+    <h2>Resources</h2>
+    <p class="section-description">A bunch references you may find useful. Here are a few of my most recent finds.</p>
+  </div>
+  {% assign allresources = site.resources | concat: site.articles %}
+  {% assign resources_sorted = allresources | sort: 'date' | reverse %}
+  <!-- TODO if no tags then skip -->
+  <!-- TODO add articles to this page as well.. CONFIRM THIS WORKS -->
+  {%- for resource in resources_sorted limit:3 -%}
+    {%- if resource.article == true -%}
+    {% include article-element.html item=resource %}
+    {%- else -%}
+    {% include resource-element.html item=resource %}
+    {%- endif -%}
+  {%- endfor -%}
+  <a class="more-button cell align-self-bottom" href="/resources">More resources</a>
+  <div class="black-cat">
+    <img class="head" src="/img/black-cat.svg" alt="Black Cat Illustration">
+  </div>
 </section>
