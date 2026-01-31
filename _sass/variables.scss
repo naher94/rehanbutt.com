@@ -183,6 +183,7 @@ $semantic-colors:(
 $sprint: all 0.20s ease-in-out;
 $run: all 0.30s ease-in-out;
 $jog: all 0.50s ease-in-out;
+$tight-spring: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 @keyframes boing{
   15%{
