@@ -246,4 +246,46 @@ p, li, h3{
   }
 }
 
+/// Double arrow slide animation for links
+/// On hover, reveals a second arrow that slides in from the left while both arrows move right
+///
+/// Required HTML structure:
+/// <span class="arrow-animation">
+///   <i class="fas fa-arrow-right first"></i>
+///   <i class="fas fa-angle-right second"></i>
+/// </span>
+///
+/// @param {Length} $spacing [0.25rem] - Left margin of the arrow container
+/// @param {Length} $slide-distance [0.15em] - How far the arrows slide on hover
+@mixin double-arrow-slide($spacing: 0.25rem, $slide-distance: 0.15em) {
+  .arrow-animation{
+    display: inline-flex;
+    margin-left: $spacing;
+    vertical-align: middle;
+    i{
+      transition: $tight-spring;
+      &.first{
+        transform: translateX(0);
+      }
+      &.second{
+        opacity: 0;
+        transform: translateX(-0.5em);
+      }
+    }
+  }
+  &:hover{
+    .arrow-animation{
+      i{
+        &.first{
+          transform: translateX($slide-distance);
+        }
+        &.second{
+          opacity: 1;
+          transform: translateX($slide-distance - 0.1em);
+        }
+      }
+    }
+  }
+}
+
 

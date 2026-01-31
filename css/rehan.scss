@@ -577,7 +577,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     padding: 0.5em;
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
-    transition: $sprint;
+    transition: $tight-spring;
     &:hover{
       transform: rotate(4deg) scale(1.05);
       .year-square{
@@ -1191,34 +1191,7 @@ article{
     font-size: 1.8em;
     color: $signature-teal;
     // @include squiggly-underline($signature-teal);
-    .arrow-animation{
-      display: inline-flex;
-      margin-left: 0.25rem;
-      vertical-align: middle;
-      i{
-        transition: $tight-spring;
-        &.first{
-          transform: translateX(0);
-        }
-        &.second{
-          opacity: 0;
-          transform: translateX(-0.5em);
-        }
-      }
-    }
-    &:hover{
-      .arrow-animation{
-        i{
-          &.first{
-            transform: translateX(0.15em);
-          }
-          &.second{
-            opacity: 1;
-            transform: translateX(0.05em);
-          }
-        }
-      }
-    }
+    @include double-arrow-slide;
   }
 }
 //******* End of Intro
