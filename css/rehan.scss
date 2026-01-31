@@ -438,7 +438,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       z-index: 2;
     }
     .photo-tile{
-      scale: 1.2;
+      scale: 1.1;
       transition: $run;
       margin-bottom: 3em;
       @include breakpoint(small only){
@@ -446,7 +446,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         margin-bottom: 0;
       }
       &:hover{
-        scale: 1.3;
+        scale: 1.2;
         @include breakpoint(small only){
           scale: 1.05;
         }
