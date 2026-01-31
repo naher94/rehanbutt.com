@@ -29,8 +29,8 @@ sort-order: 1
 </section>
 
 <section class="cell grid-x speaking-container grid-padding-x">
-  <div class="cell">
-    <h2>Speaking</h2>
+  <div class="cell home-section-header">
+    <h2><a href="/speaking">Speaking <span class="arrow-animation"><i class="fas fa-arrow-right first"></i><i class="fas fa-angle-right second"></i></span></a></h2>
     <p class="section-description">I've had the privilege of speaking at various events on design, development, and product, sharing my knowledge and experiences with others. Whether at schools or conferences, I'm passionate about discussing design and technology.</p>
     {%- comment -%}
     <p class="section-description">Check out one of my recent favorites about working with design systems in a world of new and legacy products. <a href="https://www.youtube.com/watch?v=q5R9hmpvGUo&t=13s" target="_blank" rel="noopener">Watch the talk.</a></p>
@@ -50,8 +50,6 @@ sort-order: 1
 
   </div>
   {%- comment -%}upcoming speaking events{%- endcomment -%}
-
-  <a class="more-button cell align-self-bottom" href="/speaking">Where I've spoken</a>
 </section>
 
 {% assign project_order = site.projects | sort: 'date' | reverse %}
