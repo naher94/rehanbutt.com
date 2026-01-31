@@ -235,23 +235,9 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 }
 
 .resources-container, .speaking-container{
-  // margin-bottom: 2rem;
-  // color: $pure-white;
-  // background-color: $navy-black;
-  // border-radius: $tile-radius-big;
-  // padding: 2rem;
-  // padding-top: 1rem;
-  h2{
-    padding: 0;
-    font-size: 2.5em;
-    font-weight: $zilla-bold;
-    @include breakpoint(small only){
-      font-size: 2em;
-    }
-  }
-  @include breakpoint(small only){
-    padding: 1rem;
-  }
+  // @include breakpoint(small only){
+  //   padding: 1rem;
+  // }
   .section-description{
     padding: 0;
     margin: 0;
@@ -263,16 +249,10 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       line-height: 1.3;
     }
     a{
-      // color: $pure-white;
-      // background-color: rgba($pure-white, 0.1);
       border-radius: 8px;
       padding: 0 0.2em;
       font-weight: $lato-bold;
       font-style: italic;
-      &:hover{
-        // background-color: $pure-white;
-        // color: $navy-black;
-      }
     }
   }
   .section-description-special{
