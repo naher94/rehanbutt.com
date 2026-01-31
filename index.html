@@ -152,10 +152,10 @@ sort-order: 1
 {% assign yir_order = site.year-in-review | sort: 'year' | reverse %}
 
 <section class="year-in-review grid-x grid-padding-x">
-  <div class="cell yir-header">
-    <h2>Year in Review <span class="time-travel">a little bit of time travel</span></h2>
-    <p class="making-of">
-      Curious what goes into creating my Year in Review? Checkout the
+  <div class="cell yir-header grid-x">
+    <h2 class="cell">Year in Review</h2>
+    <p class="making-of cell medium-8">
+      A little bit of time travel through the moments and learnings that shaped the year. Curious what goes into it? Checkout the
       {% include external-link.html css-class="" link="https://making-of-year-in-review.rehanbutt.com" content="Making Of" %}
     </p>
   </div>
