@@ -307,7 +307,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 
 .speaking-container{
   h2 a{
-    color: $pure-white;
+    color: semantic-color(text);
     white-space: nowrap;
     @include double-arrow-slide;
   }
