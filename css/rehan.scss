@@ -97,6 +97,11 @@ $home-section-vertical-spacing-mobile: 4rem;
 .site-intro{
   margin-bottom: 8rem;
   margin-top: 3rem;
+  @media (prefers-color-scheme: dark) {
+    img{
+      filter: none;
+    }
+  }
   span.wave{
     font-size: 0.8em;
     margin-left: -1.5em;
@@ -117,7 +122,10 @@ $home-section-vertical-spacing-mobile: 4rem;
     a{
       color: inherit;
       text-decoration: underline dotted 4px;
-      text-decoration-color: rgba($navy-black, 0.5);
+      text-decoration-color: rgba($navy-black, 0.5); //TODO update with semantic-color
+      @media (prefers-color-scheme: dark) {
+        text-decoration-color: rgba($pure-white, 0.5);      
+      }
       &::after{
         content: none;
       }
@@ -126,7 +134,10 @@ $home-section-vertical-spacing-mobile: 4rem;
   #devzgn{
     position: relative;
     text-decoration: underline dotted 4px;
-    text-decoration-color: rgba($navy-black, 0.5);
+    text-decoration-color: rgba($navy-black, 0.5); //TODO update with semantic-color
+    @media (prefers-color-scheme: dark) {
+      text-decoration-color: rgba($pure-white, 0.5);      
+    }
     cursor: pointer;
     .tooltip{
       position: absolute;
@@ -299,6 +310,7 @@ $home-section-vertical-spacing-mobile: 4rem;
     font-size: 1.5rem;
     line-height: 1.8rem;
     margin-bottom: 2rem;
+    text-wrap: pretty;
     @include breakpoint(small only){
       font-size: 1rem;
       line-height: 1.3;
