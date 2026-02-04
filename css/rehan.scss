@@ -960,7 +960,7 @@ article{
       text-align: center;
       opacity: 0;
       visibility: hidden;
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out, visibility 0.2s;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out, visibility 0.2s; //TODO update to use tight-spring var
       pointer-events: none;
       z-index: 100;
     }
@@ -1001,7 +1001,7 @@ article{
     }
     &#panda{
       img{
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: $tight-spring;
       }
       &:hover{
         img{
@@ -1028,7 +1028,7 @@ article{
         box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
         border-radius: 5px;
         transform-origin: right center;
-        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: $tight-spring;
         margin-inline: 0.15em 0.2em;
         image-rendering: -webkit-optimize-contrast;
         image-rendering: high-quality;
