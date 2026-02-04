@@ -159,7 +159,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     .thumbnail-container-featured{
       background-color: $navy-black;
       border-radius: $tile-radius-big;
-      transition: $sprint;
+      transition: $tight-spring;
       &:hover{
         transform: scale(1.02) rotate(2deg);
         box-shadow: $recessed-shadow semantic-color(shadow);
@@ -447,7 +447,6 @@ $home-section-vertical-spacing-mobile: 4rem;
   }
 }
 .year-in-review-container{
-  // margin-top: $home-section-vertical-spacing;
   @include breakpoint(small only){
     padding-bottom: 2rem;
     overflow: hidden;
