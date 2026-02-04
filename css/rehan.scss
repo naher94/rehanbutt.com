@@ -140,9 +140,8 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 }
 
 .featured-projects{
-  margin-bottom: 8rem;
   .feature-row{
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     &:nth-child(even){
       .image-wrapper{
         .thumbnail-container-featured{
@@ -188,15 +187,31 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         font-size: 1.5rem;
         padding: 0;
         margin: 0;
+        text-wrap: pretty;
       }
     }
   }
 }
 
-.resources-container, .speaking-container, .projects-container{
-  // @include breakpoint(small only){
-  //   padding: 1rem;
-  // }
+// Home Page Section Spacing
+$home-section-vertical-spacing: 8rem;
+$home-section-vertical-spacing-mobile: 4rem;
+
+@mixin home-section-base {
+  margin-bottom: $home-section-vertical-spacing;
+  @include breakpoint(small only) {
+    margin-bottom: $home-section-vertical-spacing-mobile;
+  }
+}
+
+// Shared styles for all home page section containers
+.speaking-container,
+.projects-container,
+.photography-container,
+.year-in-review-container,
+.resources-container {
+  @include home-section-base;
+
   .section-description{
     padding: 0;
     margin: 0;
@@ -219,6 +234,19 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     font-style: italic;
     margin-bottom: 0;
   }
+
+  // Shared h2 a arrow animation for sections with links
+  h2 a{
+    color: semantic-color(text);
+    white-space: nowrap;
+    @include double-arrow-slide;
+  }
+}
+
+.resources-container{
+  background-color: semantic-color(recent-resources-bg);
+  position: relative;
+
   .resource-link{
     background-color: $pure-white;
     color: semantic-color(text-on-light-bg-always);
@@ -236,16 +264,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       line-height: 1.3rem;
     }
   }
-}
 
-.resources-container{
-  background-color: semantic-color(recent-resources-bg);
-  position: relative;
-  h2 a{
-    color: semantic-color(text);
-    white-space: nowrap;
-    @include double-arrow-slide;
-  }
   &:hover{
     .black-cat{
       transform: rotate(-5deg) translateY(-9rem);
@@ -261,14 +280,6 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     .head{
       width: 10rem;
     }
-  }
-}
-
-.speaking-container, .projects-container{
-  h2 a{
-    color: semantic-color(text);
-    white-space: nowrap;
-    @include double-arrow-slide;
   }
 }
 
@@ -326,13 +337,9 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
 }
 
-.photography-preview-container{
+.photography-container{
   h2{
     font-weight: $zilla-bold;
-    a{
-      color: semantic-color(text);
-      @include double-arrow-slide;
-    }
     @include breakpoint(small only){
       line-height: 1;
     }
@@ -447,23 +454,10 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     }
   }
 }
-.home-section-description{
-  font-size: 1.5rem;
-  margin: 0;
-  text-wrap: pretty;
-  @include breakpoint(small only){
-    font-size: 1.25rem;
-  }
-  @include breakpoint(medium up){
-    padding: 0;
-  }
-}
-.year-in-review{
-  margin-top: 10rem;
-  margin-bottom: 10rem;
+.year-in-review-container{
+  margin-top: $home-section-vertical-spacing;
   @include breakpoint(small only){
     padding-bottom: 2rem;
-    margin-bottom: 2rem;
     overflow: hidden;
   }
   .year-container{
