@@ -170,13 +170,13 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     }
     
     .featured-text{
-      @include breakpoint(small only){
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-      }
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      margin-block-start: 0.5rem;
       h2{
         font-size: 2.5rem;
         font-weight: $zilla-bold;
+        margin-bottom: 0;
         @include breakpoint(small only){
           line-height: 1.1;
           padding-left: 0;
@@ -226,7 +226,6 @@ $home-section-vertical-spacing-mobile: 4rem;
       border-radius: 8px;
       padding: 0 0.2em;
       font-weight: $lato-bold;
-      font-style: italic;
     }
   }
   .section-description-special{
