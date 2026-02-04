@@ -141,14 +141,13 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 
 .featured-projects{
   margin-bottom: 8rem;
+  .home-section-header{
+    margin-bottom: 3rem;
+  }
   .feature-row{
     margin-bottom: 4rem;
     &:nth-child(even){
-      .text-wrapper{
-        order: 2;
-      }
       .image-wrapper{
-        order: 1;
         .thumbnail-container-featured{
           &:hover{
             transform: scale(1.02) rotate(-2deg);
@@ -158,13 +157,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     }
     .text-wrapper{
       @include breakpoint(small only) {
-        order: 2;
         margin-top: 1rem;
-      }
-    }
-    .image-wrapper{
-      @include breakpoint(small only) {
-        order: 1;
       }
     }
     .thumbnail-container-featured{
@@ -198,21 +191,6 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         font-size: 1.5rem;
         padding: 0;
         margin: 0;
-      }
-      .explore-wrapper{
-        margin-top: 2rem;
-      }
-      .explore-button{
-        padding: 0.7rem 1rem;
-        color: inherit;
-        border-radius: 14px;
-        border: solid 0.2rem semantic-color(button-outline);
-        font-weight: $lato-bold;
-        transition: $sprint;
-        &:hover{
-          color: semantic-color(text-inverted);
-          background-color: semantic-color(button-fill);
-        }
       }
     }
   }
