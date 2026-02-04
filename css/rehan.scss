@@ -17,6 +17,8 @@
 @import 'articles';
 @import 'speaking';
 
+
+//******* Global Utilities
 .no-select{
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -75,126 +77,12 @@ video{
     flex: 0 0 auto !important;
   }
 }
+//******* End of Global Utilities
 
-iframe { //this should probs be aspect ratio // TODO Gissue #385
-  height: 600px;
-  @include breakpoint(small only) {
-    height: 220px;
-  }
-}
 
-.post-header{
-  @include breakpoint(large down) {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-}
+//******* Home Page Styles
 
-.post-header-hero{
-  margin-top: 1em;
-  @include breakpoint(small only) {
-    margin-top: 0.5em;
-  }
-}
-
-.thumbnail-container {
-  position: relative; //For flag to show correctly
-  display: block; //For flag to show correctly
-  background-color: $navy-black;
-  border-radius: $tile-radius-medium;
-  transition: $sprint;
-  &:hover{
-    transform: scale(1.05);
-    box-shadow: $recessed-shadow semantic-color(shadow);
-  }
-  &:hover .thumbnail-text{
-    opacity: 1;
-    transition: $run;
-  }
-  &:hover .thumbnail-image{
-    opacity: 0.8;
-    transition: $run;
-  }
-  .thumbnail-image{
-    border-radius: $tile-radius-medium;
-  }
-}
-
-.thumbnail-text {
-  position: absolute;
-  bottom: 1rem;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  color: $pure-white;
-  opacity: 0;
-  text-shadow: 0px 0px 5px $navy-black;
-  font-size: 1.65em;
-  line-height: 1em;
-  text-align: center;
-  font-weight: $zilla-bold;
-  font-family: $zilla;
-  @include breakpoint(small only) {
-    font-size: 1.4em;
-  }
-}
-
-.featured-projects{
-  .feature-item{
-    margin-bottom: 4rem;
-    &:nth-child(even){
-      .image-wrapper{
-        .thumbnail-container-featured{
-          &:hover{
-            transform: scale(1.02) rotate(-2deg);
-          }
-        }
-      }
-    }
-    .text-wrapper{
-      @include breakpoint(small only) {
-        margin-top: 1rem;
-      }
-    }
-    .thumbnail-container-featured{
-      background-color: $navy-black;
-      border-radius: $tile-radius-big;
-      transition: $tight-spring;
-      &:hover{
-        transform: scale(1.02) rotate(2deg);
-        box-shadow: $recessed-shadow semantic-color(shadow);
-      }
-      .thumbnail-image-featured{
-        border-radius: $tile-radius-big;
-      }
-    }
-    
-    .featured-text{
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      margin-block-start: 0.5rem;
-      h2{
-        font-size: 2.5rem;
-        font-weight: $zilla-bold;
-        margin-bottom: 0;
-        @include breakpoint(small only){
-          line-height: 1.1;
-          padding-left: 0;
-          padding-right: 0;
-        }
-      }
-      p{
-        line-height: 1.2;
-        font-size: 1.5rem;
-        padding: 0;
-        margin: 0;
-        text-wrap: pretty;
-      }
-    }
-  }
-}
-
-// Home Page Section Spacing
+// --- Home Page Variables & Mixins ---
 $home-section-vertical-spacing: 8rem;
 $home-section-vertical-spacing-mobile: 4rem;
 
@@ -205,7 +93,207 @@ $home-section-vertical-spacing-mobile: 4rem;
   }
 }
 
-// Shared styles for all home page section containers
+// --- Home Page Intro ---
+.site-intro{
+  margin-bottom: 8rem;
+  margin-top: 3rem;
+  span.wave{
+    font-size: 0.8em;
+    margin-left: -1.5em;
+    margin-right: 0.25em;
+  }
+  h1, p{
+    font-family: $zilla;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 1.8em;
+    line-height: 1.4em;
+    font-weight: $zilla-bold;
+    margin-block: 0.75em;
+    text-wrap: pretty;
+    &:first-of-type{
+      display: inline;
+    }
+    a{
+      color: inherit;
+      text-decoration: underline dotted 4px;
+      text-decoration-color: rgba($navy-black, 0.5);
+      &::after{
+        content: none;
+      }
+    }
+  }
+  #devzgn{
+    position: relative;
+    text-decoration: underline dotted 4px;
+    text-decoration-color: rgba($navy-black, 0.5);
+    cursor: pointer;
+    .tooltip{
+      position: absolute;
+      bottom: calc(100% + 0.5em);
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      transform-origin: bottom center;
+      padding: 12px 16px;
+      background: semantic-color(floating-card-bg);
+      color: semantic-color(text);
+      -webkit-text-fill-color: semantic-color(text);
+      -webkit-background-clip: unset;
+      background-clip: unset;
+      border-radius: $tile-radius;
+      box-shadow: $recessed-shadow rgba(0,0,0,0.15);
+      font-family: $lato;
+      font-size: 16px;
+      font-weight: $lato-regular;
+      line-height: 1.4;
+      width: max-content;
+      max-width: 250px;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out, visibility 0.2s; //TODO update to use tight-spring var
+      pointer-events: none;
+      z-index: 100;
+    }
+    &:hover .tooltip,
+    &:focus .tooltip{
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) scale(1);
+    }
+    &:focus{
+      outline: none;
+    }
+  }
+  img{
+    display: inline-block;
+    height: 1.2em;
+    border-radius: 7px;
+    vertical-align: text-top;
+    transition: $sprint;
+    &#upmc{
+      // scale: 1.1;
+    }
+  }
+  span{
+    &#me{
+      // &:hover{
+      //   img{
+      //     scale: 1.6;
+      //   }
+      // }
+      img{
+        scale: 1.4;
+        margin-inline: 0.3em 0.6em;
+        rotate: -3deg;
+        border-radius: 6px;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+      }
+    }
+    &#panda{
+      img{
+        transition: $tight-spring;
+      }
+      &:hover{
+        img{
+          scale: 1.1;
+          rotate: -5deg;
+        }
+      }
+    }
+    &#photography{
+      position: relative;
+      isolation: isolate;
+      &:hover{
+        img{
+          $img-scale: 1.6;
+          &:first-of-type{
+            transform: scale($img-scale) rotate(14deg) translate(0.1em, -0.3em);
+          }
+          &:last-of-type{
+            transform: scale($img-scale) rotate(-10deg) translate(-0.2em, 0.4em);
+          }
+        }
+      }
+      img{
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        transform-origin: right center;
+        transition: $tight-spring;
+        margin-inline: 0.15em 0.2em;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: high-quality;
+        &:first-of-type{
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: 2;
+          transform: rotate(7deg) translate(0.1em, 0);
+          isolation: isolate;
+        }
+        &:last-of-type{
+          transform: rotate(-5deg) translate(-0.1em, 0.2em);
+        }
+      }
+    }
+  }
+  .config{
+    position: relative;
+    cursor: pointer;
+    .stage-photo{
+      position: absolute;
+      left: 50%;
+      bottom: 1.5em;
+      opacity: 0;
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+      transform-origin: 50% 100%;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out;
+    }
+    &:hover{
+      .stage-photo{
+        opacity: 1;
+        transform: scale(5) rotate(5deg);
+        border-radius: 4px;
+      }
+    }
+  }
+  > div > div > a{
+    padding: 0.5rem 0;
+    font-family: $zilla;
+    font-weight: $zilla-bold;
+    font-size: 1.8em;
+    color: $signature-teal;
+    @include double-arrow-slide;
+  }
+}
+
+#plane-effect, #world-effect, #camera-effect, #penguin-effect{
+  @include swipe-underline(semantic-color(text-bg),false);
+}
+
+.intro-swipe-effect{
+  @include swipe-underline-hover(true);
+}
+
+// --- Home Page Section Header (shared) ---
+.home-section-header{
+  margin-bottom: 3rem;
+  @include breakpoint(small only){
+    margin-bottom: 2rem;
+  }
+  h2{
+    line-height: normal;
+    font-weight: $zilla-bold;
+    margin-bottom: 0;
+    line-height: normal;
+    @include breakpoint(small only){
+      margin-bottom: 0.25em;
+      line-height: 1;
+    }
+  }
+}
+
+// --- Home Page Section Containers (shared base styles) ---
 .speaking-container,
 .projects-container,
 .photography-container,
@@ -243,42 +331,7 @@ $home-section-vertical-spacing-mobile: 4rem;
   }
 }
 
-.resources-container{
-  background-color: lightcoral;
-  position: relative;
-  .resource-link{
-    color: semantic-color(text-on-light-bg-always);
-    margin-bottom: 1rem;
-    .title{
-      font-size: 1.5rem;
-      @media (prefers-color-scheme: dark){
-        @include swipe-underline($signature-teal-l6,false);
-      }
-    }
-    .description{
-      font-size: 1rem;
-      line-height: 1.3rem;
-    }
-  }
-
-  &:hover{
-    .black-cat{
-      transform: rotate(-5deg) translateY(-9rem);
-      transition: $run;
-      transition-delay: 1s;
-    }
-  }
-  .black-cat{
-    position: absolute;
-    z-index: -1;
-    transition: $jog;
-    transition-delay: 1s;
-    .head{
-      width: 10rem;
-    }
-  }
-}
-
+// --- Speaking Section ---
 .speaking-container{
   // TODO remove the bottom spacing for the header section
   .cta-button{
@@ -322,29 +375,63 @@ $home-section-vertical-spacing-mobile: 4rem;
   }
 }
 
-.thumbnail-tile {
-  margin-bottom: 1.5em;
-  @include breakpoint(small only){
-    margin-bottom: 1em;
+// --- Projects Section ---
+.featured-projects{
+  .feature-item{
+    margin-bottom: 4rem;
+    &:nth-child(even){
+      .image-wrapper{
+        .thumbnail-container-featured{
+          &:hover{
+            transform: scale(1.02) rotate(-2deg);
+          }
+        }
+      }
+    }
+    .text-wrapper{
+      @include breakpoint(small only) {
+        margin-top: 1rem;
+      }
+    }
+    .thumbnail-container-featured{
+      background-color: $navy-black;
+      border-radius: $tile-radius-big;
+      transition: $tight-spring;
+      &:hover{
+        transform: scale(1.02) rotate(2deg);
+        box-shadow: $recessed-shadow semantic-color(shadow);
+      }
+      .thumbnail-image-featured{
+        border-radius: $tile-radius-big;
+      }
+    }
+
+    .featured-text{
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      margin-block-start: 0.5rem;
+      h2{
+        font-size: 2.5rem;
+        font-weight: $zilla-bold;
+        margin-bottom: 0;
+        @include breakpoint(small only){
+          line-height: 1.1;
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
+      p{
+        line-height: 1.2;
+        font-size: 1.5rem;
+        padding: 0;
+        margin: 0;
+        text-wrap: pretty;
+      }
+    }
   }
 }
 
-.flag {
-  position: absolute;
-  font-size: 0.8em;
-  top: -1rem;
-  right: -1rem;
-  padding: 0.25em 1em 0.25em 1em;
-  font-weight: $lato-bold;
-  background-color: $signature-teal;
-  color: $pure-white;
-  border-radius: $pill-radius;
-  @include breakpoint(small only) {
-    right: -0.5rem;
-    top: -0.5rem;
-  }
-}
-
+// --- Photography Section ---
 .photography-container{
   h2{
     font-weight: $zilla-bold;
@@ -430,22 +517,8 @@ $home-section-vertical-spacing-mobile: 4rem;
     }
   }
 }
-.home-section-header{
-  margin-bottom: 3rem;
-  @include breakpoint(small only){
-    margin-bottom: 2rem;
-  }
-  h2{
-    line-height: normal;
-    font-weight: $zilla-bold;
-    margin-bottom: 0;
-    line-height: normal;
-    @include breakpoint(small only){
-      margin-bottom: 0.25em;
-      line-height: 1;
-    }
-  }
-}
+
+// --- Year in Review Section ---
 .year-in-review-container{
   @include breakpoint(small only){
     padding-bottom: 2rem;
@@ -467,7 +540,7 @@ $home-section-vertical-spacing-mobile: 4rem;
         }
       }
     }
-    .year-square{ 
+    .year-square{
       background-color: $navy-black;
       color: $pure-white;
       font-family: $zilla;
@@ -524,7 +597,7 @@ $home-section-vertical-spacing-mobile: 4rem;
         content: '';
         display: block;
         padding-top: 100%;
-      }  
+      }
     }
     .yir-label{
       font-size: 2rem;
@@ -543,6 +616,135 @@ $home-section-vertical-spacing-mobile: 4rem;
         background-color: $signature-teal;
       }
     }
+  }
+}
+
+// --- Resources Section ---
+.resources-container{
+  background-color: lightcoral;
+  position: relative;
+  .resource-link{
+    color: semantic-color(text-on-light-bg-always);
+    margin-bottom: 1rem;
+    .title{
+      font-size: 1.5rem;
+      @media (prefers-color-scheme: dark){
+        @include swipe-underline($signature-teal-l6,false);
+      }
+    }
+    .description{
+      font-size: 1rem;
+      line-height: 1.3rem;
+    }
+  }
+
+  &:hover{
+    .black-cat{
+      transform: rotate(-5deg) translateY(-9rem);
+      transition: $run;
+      transition-delay: 1s;
+    }
+  }
+  .black-cat{
+    position: absolute;
+    z-index: -1;
+    transition: $jog;
+    transition-delay: 1s;
+    .head{
+      width: 10rem;
+    }
+  }
+}
+//******* End of Home Page Styles
+
+
+//******* Shared Components (used across pages)
+.thumbnail-container {
+  position: relative; //For flag to show correctly
+  display: block; //For flag to show correctly
+  background-color: $navy-black;
+  border-radius: $tile-radius-medium;
+  transition: $sprint;
+  &:hover{
+    transform: scale(1.05);
+    box-shadow: $recessed-shadow semantic-color(shadow);
+  }
+  &:hover .thumbnail-text{
+    opacity: 1;
+    transition: $run;
+  }
+  &:hover .thumbnail-image{
+    opacity: 0.8;
+    transition: $run;
+  }
+  .thumbnail-image{
+    border-radius: $tile-radius-medium;
+  }
+}
+
+.thumbnail-text {
+  position: absolute;
+  bottom: 1rem;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  color: $pure-white;
+  opacity: 0;
+  text-shadow: 0px 0px 5px $navy-black;
+  font-size: 1.65em;
+  line-height: 1em;
+  text-align: center;
+  font-weight: $zilla-bold;
+  font-family: $zilla;
+  @include breakpoint(small only) {
+    font-size: 1.4em;
+  }
+}
+
+.thumbnail-tile {
+  margin-bottom: 1.5em;
+  @include breakpoint(small only){
+    margin-bottom: 1em;
+  }
+}
+
+.flag {
+  position: absolute;
+  font-size: 0.8em;
+  top: -1rem;
+  right: -1rem;
+  padding: 0.25em 1em 0.25em 1em;
+  font-weight: $lato-bold;
+  background-color: $signature-teal;
+  color: $pure-white;
+  border-radius: $pill-radius;
+  @include breakpoint(small only) {
+    right: -0.5rem;
+    top: -0.5rem;
+  }
+}
+//******* End of Shared Components
+
+
+//******* Post/Article Styles
+iframe { //this should probs be aspect ratio // TODO Gissue #385
+  height: 600px;
+  @include breakpoint(small only) {
+    height: 220px;
+  }
+}
+
+.post-header{
+  @include breakpoint(large down) {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+}
+
+.post-header-hero{
+  margin-top: 1em;
+  @include breakpoint(small only) {
+    margin-top: 0.5em;
   }
 }
 
@@ -568,6 +770,7 @@ article{
     }
   }
 }
+
 .quote-color-block{
   background-color: #EAF8EC;
   height: 100%;
@@ -599,6 +802,20 @@ article{
     aspect-ratio: 1/1;
   }
 }
+
+.highlight{
+  pre{
+    padding: 2rem;
+    border-radius: 20px;
+    code{
+      border: none;
+      color: $pure-white;
+      background-color: transparent;
+    }
+  }
+}
+//******* End of Post/Article Styles
+
 
 //******* Easter Egg Styling
 .behind-the-scenes-container{
@@ -881,201 +1098,6 @@ article{
   }
 }
 //******* End of Banner Styling
-
-.highlight{
-  pre{
-    padding: 2rem;
-    border-radius: 20px;
-    code{
-      border: none;
-      color: $pure-white;
-      background-color: transparent;
-    }
-  }
-}
-
-#plane-effect, #world-effect, #camera-effect, #penguin-effect{
-  @include swipe-underline(semantic-color(text-bg),false);
-}
-
-.intro-swipe-effect{
-  @include swipe-underline-hover(true);
-}
-
-//******* Intro
-.site-intro{
-  margin-bottom: 8rem;
-  margin-top: 3rem;
-  span.wave{
-    font-size: 0.8em;
-    margin-left: -1.5em;
-    margin-right: 0.25em;
-  }
-  h1, p{
-    font-family: $zilla;
-    padding-left: 0;
-    padding-right: 0;
-    font-size: 1.8em;
-    line-height: 1.4em;
-    font-weight: $zilla-bold;
-    margin-block: 0.75em;
-    text-wrap: pretty;
-    &:first-of-type{
-      display: inline;
-    }
-    a{
-      color: inherit;
-      text-decoration: underline dotted 4px;
-      text-decoration-color: rgba($navy-black, 0.5);
-      &::after{
-        content: none;
-      }
-    }
-  }
-  #devzgn{
-    position: relative;
-    text-decoration: underline dotted 4px;
-    text-decoration-color: rgba($navy-black, 0.5);
-    cursor: pointer;
-    .tooltip{
-      position: absolute;
-      bottom: calc(100% + 0.5em);
-      left: 50%;
-      transform: translateX(-50%) scale(0);
-      transform-origin: bottom center;
-      padding: 12px 16px;
-      background: semantic-color(floating-card-bg);
-      color: semantic-color(text);
-      -webkit-text-fill-color: semantic-color(text);
-      -webkit-background-clip: unset;
-      background-clip: unset;
-      border-radius: $tile-radius;
-      box-shadow: $recessed-shadow rgba(0,0,0,0.15);
-      font-family: $lato;
-      font-size: 16px;
-      font-weight: $lato-regular;
-      line-height: 1.4;
-      width: max-content;
-      max-width: 250px;
-      text-align: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out, visibility 0.2s; //TODO update to use tight-spring var
-      pointer-events: none;
-      z-index: 100;
-    }
-    &:hover .tooltip,
-    &:focus .tooltip{
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) scale(1);
-    }
-    &:focus{
-      outline: none;
-    }
-  }
-  img{
-    display: inline-block;
-    height: 1.2em;
-    border-radius: 7px;
-    vertical-align: text-top;
-    transition: $sprint;
-    &#upmc{
-      // scale: 1.1;
-    }
-  }
-  span{
-    &#me{
-      // &:hover{
-      //   img{
-      //     scale: 1.6;
-      //   }
-      // }
-      img{
-        scale: 1.4;
-        margin-inline: 0.3em 0.6em;
-        rotate: -3deg;
-        border-radius: 6px;
-        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
-      }
-    }
-    &#panda{
-      img{
-        transition: $tight-spring;
-      }
-      &:hover{
-        img{
-          scale: 1.1;
-          rotate: -5deg;
-        }
-      }
-    }
-    &#photography{
-      position: relative;
-      isolation: isolate;
-      &:hover{
-        img{
-          $img-scale: 1.6;
-          &:first-of-type{
-            transform: scale($img-scale) rotate(14deg) translate(0.1em, -0.3em);
-          }
-          &:last-of-type{
-            transform: scale($img-scale) rotate(-10deg) translate(-0.2em, 0.4em);
-          }
-        }
-      }
-      img{
-        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
-        border-radius: 5px;
-        transform-origin: right center;
-        transition: $tight-spring;
-        margin-inline: 0.15em 0.2em;
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: high-quality;
-        &:first-of-type{
-          position: absolute;
-          left: 0;
-          top: 0;
-          z-index: 2;
-          transform: rotate(7deg) translate(0.1em, 0);
-          isolation: isolate;
-        }
-        &:last-of-type{
-          transform: rotate(-5deg) translate(-0.1em, 0.2em);
-        }
-      }
-    }
-  }
-  .config{
-    position: relative;
-    cursor: pointer;
-    .stage-photo{
-      position: absolute;
-      left: 50%;
-      bottom: 1.5em;
-      opacity: 0;
-      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-      transform-origin: 50% 100%;
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out;
-    }
-    &:hover{
-      .stage-photo{
-        opacity: 1;
-        transform: scale(5) rotate(5deg);
-        border-radius: 4px;
-      }
-    }
-  }
-  > div > div > a{
-    padding: 0.5rem 0;
-    font-family: $zilla;
-    font-weight: $zilla-bold;
-    font-size: 1.8em;
-    color: $signature-teal;
-    @include double-arrow-slide;
-  }
-}
-//******* End of Intro
 
 
 //******* Mobile Styling
