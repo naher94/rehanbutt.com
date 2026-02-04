@@ -234,7 +234,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
 }
 
-.resources-container, .speaking-container{
+.resources-container, .speaking-container, .projects-container{
   // @include breakpoint(small only){
   //   padding: 1rem;
   // }
@@ -305,12 +305,15 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
   }
 }
 
-.speaking-container{
+.speaking-container, .projects-container{
   h2 a{
     color: semantic-color(text);
     white-space: nowrap;
     @include double-arrow-slide;
   }
+}
+
+.speaking-container{
   .speaking-socials{
     margin-bottom: 1em;
     .email-container{

@@ -54,6 +54,13 @@ sort-order: 1
 
 {% assign project_order = site.projects | sort: 'date' | reverse %}
 
+<section class="cell grid-x projects-container grid-padding-x">
+  <div class="cell home-section-header">
+    <h2><a href="/portfolio">Projects <span class="arrow-animation"><i class="fas fa-arrow-right first"></i><i class="fas fa-angle-right second"></i></span></a></h2>
+    <p class="section-description">A collection of work spanning product design, development, and creative exploration.</p>
+  </div>
+</section>
+
 <section class="featured-projects">
 {% for project in project_order %}
   {% if project.featured == true %}
