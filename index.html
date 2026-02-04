@@ -37,15 +37,11 @@ sort-order: 1
     {%- endcomment -%}
 
     <p class="section-description section-description-special">I'm always eager for new opportunities to share insights and inspire conversations. Planning an event? Let's connect!</p>
-    <div class="speaking-socials">
-      <div class="email-container" onclick="copyToClipboard('me@rehanbutt.com',this)">
-        <i class='fas fa-envelope fa-xs' title='Email'></i>
+    <div class="grid-x cta-container">
+      <div class="email-wrapper cta-button cell shrink" onclick="copyToClipboard('me@rehanbutt.com',this)">
+        <i class="fa-solid fa-envelope"></i> Email Me
       </div>
-
-      <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/rehan-butt/">
-        <i class="fab fa-linkedin-in fa-xs" title="Linkedin"></i>
-        <span class="visually-hidden">Opens a new window</span>
-      </a>
+      {% include external-link.html css-class="cta-button cell shrink" link="https://www.linkedin.com/in/rehan-butt/" content="<i class='fa-brands fa-linkedin'></i> Message Me" %}
     </div>
 
   </div>
