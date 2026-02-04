@@ -140,7 +140,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 }
 
 .featured-projects{
-  .feature-row{
+  .feature-item{
     margin-bottom: 2rem;
     &:nth-child(even){
       .image-wrapper{

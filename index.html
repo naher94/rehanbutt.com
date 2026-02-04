@@ -54,7 +54,7 @@ sort-order: 1
 
 {% assign project_order = site.projects | sort: 'date' | reverse %}
 
-<section class="projects-container featured-projects cell grid-x grid-padding-x">
+<section class="projects-container featured-projects cell grid-x grid-padding-x align-top">
   <div class="cell home-section-header">
     <h2><a href="/portfolio">Projects <span class="arrow-animation"><i class="fas fa-arrow-right first"></i><i class="fas fa-angle-right second"></i></span></a></h2>
     <p class="section-description">A collection of work spanning product design, development, and creative exploration.</p>
@@ -62,8 +62,8 @@ sort-order: 1
 
 {% for project in project_order %}
   {% if project.featured == true %}
-  <div class="cell grid-x medium-6 feature-row">
-    <div class="cell image-wrapper">
+  <div class="cell medium-6 feature-item">
+    <div class="image-wrapper">
       {% if project.external-link %}
         <a class="" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank"><span class="visually-hidden">Opens a new window</span>
       {% else %}
@@ -74,8 +74,8 @@ sort-order: 1
           </div>
       </a>
     </div>
-    <div class="cell grid-x text-wrapper">
-      <div class="featured-text cell">
+    <div class="text-wrapper">
+      <div class="featured-text">
         <h2 class="">{{ project.tile-name }}</h2>
         <p class="">{{ project.tile-description }}</p>
       </div>
