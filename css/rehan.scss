@@ -244,15 +244,11 @@ $home-section-vertical-spacing-mobile: 4rem;
 }
 
 .resources-container{
-  background-color: semantic-color(recent-resources-bg);
+  background-color: lightcoral;
   position: relative;
-
   .resource-link{
-    background-color: $pure-white;
     color: semantic-color(text-on-light-bg-always);
-    padding: 1rem;
-    border-radius: $tile-radius-medium;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     .title{
       font-size: 1.5rem;
       @media (prefers-color-scheme: dark){
