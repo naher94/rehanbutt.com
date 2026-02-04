@@ -267,14 +267,6 @@ $home-section-vertical-spacing-mobile: 4rem;
   }
 }
 
-#plane-effect, #world-effect, #camera-effect, #penguin-effect{
-  @include swipe-underline(semantic-color(text-bg),false);
-}
-
-.intro-swipe-effect{
-  @include swipe-underline-hover(true);
-}
-
 // --- Home Page Section Header (shared) ---
 .home-section-header{
   margin-bottom: 3rem;
