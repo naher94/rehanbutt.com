@@ -307,9 +307,9 @@ $home-section-vertical-spacing-mobile: 4rem;
   .section-description{
     padding: 0;
     margin: 0;
+    // TODO decide if I want to update this font-size.. 1.25rem could be great
     font-size: 1.5rem;
     line-height: 1.8rem;
-    margin-bottom: 2rem;
     text-wrap: pretty;
     @include breakpoint(small only){
       font-size: 1rem;
@@ -321,12 +321,6 @@ $home-section-vertical-spacing-mobile: 4rem;
       font-weight: $lato-bold;
     }
   }
-  .section-description-special{
-    font-weight: $lato-bold;
-    font-style: italic;
-    margin-bottom: 0;
-  }
-
   // Shared h2 a arrow animation for sections with links
   h2 a{
     color: semantic-color(text);
@@ -382,7 +376,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 // --- Projects Section ---
 .featured-projects{
   .feature-item{
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     &:nth-child(even){
       .image-wrapper{
         .thumbnail-container-featured{
@@ -411,11 +405,11 @@ $home-section-vertical-spacing-mobile: 4rem;
     }
 
     .featured-text{
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      margin-block-start: 0.5rem;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      margin-block-start: 1rem;
       h2{
-        font-size: 2.5rem;
+        font-size: 2rem;
         font-weight: $zilla-bold;
         margin-bottom: 0;
         @include breakpoint(small only){
@@ -426,7 +420,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       }
       p{
         line-height: 1.2;
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         padding: 0;
         margin: 0;
         text-wrap: pretty;
