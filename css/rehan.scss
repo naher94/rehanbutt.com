@@ -141,9 +141,6 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
 
 .featured-projects{
   margin-bottom: 8rem;
-  .home-section-header{
-    margin-bottom: 3rem;
-  }
   .feature-row{
     margin-bottom: 4rem;
     &:nth-child(even){
@@ -192,22 +189,6 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         padding: 0;
         margin: 0;
       }
-    }
-  }
-  .more-button{
-    padding-top: 0.7rem;
-    padding-bottom: 0.7rem;
-    color: $signature-teal;
-    border-radius: $pill-radius;
-    font-size: 1.5rem;
-    border: solid 0.2rem $signature-teal;
-    text-align: center;
-    display: block;
-    font-weight: $lato-bold;
-    transition: $sprint;
-    &:hover{
-      color: $pure-white;
-      background-color: $signature-teal;
     }
   }
 }
