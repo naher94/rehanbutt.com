@@ -421,22 +421,6 @@ $home-section-vertical-spacing-mobile: 4rem;
       }
     }
   }
-  .more-button{
-    padding-top: 0.7rem;
-    padding-bottom: 0.7rem;
-    color: $signature-teal;
-    border-radius: $pill-radius;
-    font-size: 1.5rem;
-    border: solid 0.2rem $signature-teal;
-    text-align: center;
-    display: block;
-    font-weight: $lato-bold;
-    transition: $sprint;
-    &:hover{
-      color: $pure-white;
-      background-color: $signature-teal;
-    }
-  }
 }
 .home-section-header{
   margin-bottom: 3rem;
