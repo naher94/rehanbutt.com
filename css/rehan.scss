@@ -280,6 +280,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 }
 
 .speaking-container{
+  // TODO remove the bottom spacing for the header section
   .cta-button{
     padding: 0.7rem 1rem;
     color: inherit;
@@ -446,7 +447,7 @@ $home-section-vertical-spacing-mobile: 4rem;
   }
 }
 .year-in-review-container{
-  margin-top: $home-section-vertical-spacing;
+  // margin-top: $home-section-vertical-spacing;
   @include breakpoint(small only){
     padding-bottom: 2rem;
     overflow: hidden;
