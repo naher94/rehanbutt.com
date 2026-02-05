@@ -170,11 +170,11 @@ sort-order: 1
   {% assign resources_sorted = allresources | sort: 'date' | reverse %}
   <!-- TODO if no tags then skip -->
   <!-- TODO add articles to this page as well.. CONFIRM THIS WORKS -->
-  {%- for resource in resources_sorted limit:3 -%}
+  {%- for resource in resources_sorted limit:6 -%}
     {%- if resource.article == true -%}
-    {% include article-element.html item=resource %}
+    {% include article-element.html item=resource css-class="medium-6 large-4" %}
     {%- else -%}
-    {% include resource-element.html item=resource %}
+    {% include resource-element.html item=resource css-class="medium-6 large-4" %}
     {%- endif -%}
   {%- endfor -%}
   <div class="black-cat">
