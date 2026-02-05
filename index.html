@@ -30,19 +30,28 @@ sort-order: 1
 <section class="speaking-container cell grid-x grid-padding-x">
   <div class="cell grid-x home-section-header">
     <h2 class="cell"><a href="/speaking">Speaking <span class="arrow-animation"><i class="fas fa-arrow-right first"></i><i class="fas fa-angle-right second"></i></span></a></h2>
-    <p class="section-description cell medium-6">I've had the privilege of speaking at various events on design, development, and product, sharing my knowledge and experiences with others. Whether at schools or conferences, I'm passionate about discussing design and technology.</p>
-    {%- comment -%}
-    <p class="section-description">Check out one of my recent favorites about working with design systems in a world of new and legacy products. <a href="https://www.youtube.com/watch?v=q5R9hmpvGUo&t=13s" target="_blank" rel="noopener">Watch the talk.</a></p>
-    {%- endcomment -%}
+    <div class="cell medium-8">
+      <p class="section-description cell">I've had the privilege of speaking at various events on design, development, and product, sharing my knowledge and experiences with others. Whether at schools or conferences, I'm passionate about discussing design and technology.</p>
 
-    <p class="section-description cell medium-6">I'm always eager for new opportunities to share insights and inspire conversations. Planning an event? Let's connect!</p>
-    <div class="grid-x cta-container">
-      <div class="email-wrapper cta-button cell shrink" onclick="copyToClipboard('me@rehanbutt.com',this)">
-        <i class="fa-solid fa-envelope"></i> Email Me
+      <p class="section-description cell">I'm always eager for new opportunities to share insights and inspire conversations. Planning an event? Let's connect!</p>
+      <div class="grid-x cta-container cell">
+        <div class="email-wrapper cta-button cell shrink" onclick="copyToClipboard('me@rehanbutt.com',this)">
+          <i class="fa-solid fa-envelope"></i> Email Me
+        </div>
+        {% include external-link.html css-class="cta-button cell shrink" link="https://www.linkedin.com/in/rehan-butt/" content="<i class='fa-brands fa-linkedin'></i> Message Me" %}
       </div>
-      {% include external-link.html css-class="cta-button cell shrink" link="https://www.linkedin.com/in/rehan-butt/" content="<i class='fa-brands fa-linkedin'></i> Message Me" %}
     </div>
-
+    <div class="cell auto image-section">
+      <div class="speaking-image-container config-headshot">
+        <img src="/img/home/me-stage.jpg" alt="Rehan Butt speaking on stage at Figma's conference Config">
+        <p class="image-label">Config 2025</p>
+      </div>
+      <div class="speaking-image-container config-disney-history">
+        <img src="/img/home/disney-history.jpg" alt="A photo of me speaking to the audience, with the audience in the foreground">
+        <p class="image-label">Config 2025</p>
+      </div>
+      <!-- images go here -->
+    </div>
   </div>
   {%- comment -%}upcoming speaking events{%- endcomment -%}
 </section>
@@ -52,7 +61,7 @@ sort-order: 1
 <section class="projects-container featured-projects cell grid-x grid-padding-x align-top">
   <div class="cell grid-x home-section-header">
     <h2 class="cell"><a href="/portfolio">Projects <span class="arrow-animation"><i class="fas fa-arrow-right first"></i><i class="fas fa-angle-right second"></i></span></a></h2>
-    <p class="section-description cell medium-6">A collection of work spanning product design, development, and creative exploration.</p>
+    <p class="section-description cell medium-8">A collection of work spanning product design, development, and creative exploration.</p>
   </div>
 
 {% for project in project_order %}
@@ -85,7 +94,7 @@ sort-order: 1
 <section class="photography-container cell grid-x grid-padding-x">
   <div class="cell grid-x home-section-header">
     <h2 class="cell"><a href="/photography">Photography <span class="arrow-animation"><i class="fas fa-arrow-right first"></i><i class="fas fa-angle-right second"></i></span></a></h2>
-    <p class="section-description cell medium-6">
+    <p class="section-description cell medium-8">
       Moments captured from around the world.
     </p>
   </div>
@@ -113,7 +122,7 @@ sort-order: 1
 <section class="year-in-review-container cell grid-x grid-padding-x">
   <div class="cell grid-x home-section-header">
     <h2 class="cell">Year in Review</h2>
-    <p class="section-description cell medium-6">
+    <p class="section-description cell medium-8">
       A little bit of time travel through the moments and learnings that shaped the year. Curious what goes into it? Checkout the
       {% include external-link.html css-class="" link="https://making-of-year-in-review.rehanbutt.com" content="Making Of" %}
     </p>
@@ -153,7 +162,7 @@ sort-order: 1
 <section class="resources-container cell grid-x grid-padding-x">
   <div class="cell grid-x home-section-header">
     <h2 class="cell"><a href="/resources">Resources <span class="arrow-animation"><i class="fas fa-arrow-right first"></i><i class="fas fa-angle-right second"></i></span></a></h2>
-    <p class="section-description cell medium-6">A bunch references you may find useful. Here are a few of my most recent finds.</p>
+    <p class="section-description cell medium-8">A bunch references you may find useful. Here are a few of my most recent finds.</p>
   </div>
   {% assign allresources = site.resources | concat: site.articles %}
   {% assign resources_sorted = allresources | sort: 'date' | reverse %}
