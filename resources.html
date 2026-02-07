@@ -14,8 +14,8 @@ footer-sort-order: 2
   <p>A bunch of resources and references curated by me, with the goal to help others learn something new. For more frequent bursts of resources and other related content join me over on {% include external-link.html link="https://www.threads.net/@naher94" content="Threads" %}.</p>
 </header>
 
-{%- comment -%}collect all the unique tags from the resources and articles{%- endcomment -%}
-{% assign allresources = site.resources | concat: site.articles %}
+{%- comment -%}collect all the unique tags from the resources and posts{%- endcomment -%}
+{% assign allresources = site.resources | concat: site.posts %}
 {% assign alltags = allresources | map: "tags" | uniq | sort %}
 <section class="cell tag-section">
   <h2 class="visually-hidden">Categories</h2>

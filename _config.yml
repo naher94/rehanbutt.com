@@ -24,6 +24,8 @@ sass:
 
 plugins: [jekyll-sitemap]
 
+permalink: /posts/:title/
+
 collections:
   projects:
     output: true
@@ -43,5 +45,3 @@ collections:
     output: true
   easter-eggs:
     output: false
-  articles:
-    output: true
