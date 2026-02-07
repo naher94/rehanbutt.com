@@ -29,10 +29,10 @@ Though no precise record exists of how the winning design was ultimately chosen,
 
 <div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell">
-    <img src="../img/photography/sydney-2012/opera-house-night.jpg" alt="Long exposure shot of the Sydney Opera House at night">
+    <img src="/img/photography/sydney-2012/opera-house-night.jpg" alt="Long exposure shot of the Sydney Opera House at night">
   </div>
   <div class="cell">
-    <img src="../img/photography/sydney-2012/sails.jpg" alt="Architectural abstract of the sails of the Sydney Opera House">
+    <img src="/img/photography/sydney-2012/sails.jpg" alt="Architectural abstract of the sails of the Sydney Opera House">
   </div>
 </div>
 
@@ -40,28 +40,28 @@ Even though the shells of the opera house appear uniformly white from a distance
 
 <div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell">
-    <img src="../img/photography/sydney-2012/opera-house-bay.jpg" alt="Sydney Opera House in day light">
+    <img src="/img/photography/sydney-2012/opera-house-bay.jpg" alt="Sydney Opera House in day light">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/sydney-2012/interior-sail.jpg" alt="Interior shot of the structure of one of sails of the Sydney Opera House">
+    <img src="/img/photography/sydney-2012/interior-sail.jpg" alt="Interior shot of the structure of one of sails of the Sydney Opera House">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/sydney-2012/interior-atrium.jpg" alt="Interior shot of the structure of the atrium of the Sydney Opera House">
+    <img src="/img/photography/sydney-2012/interior-atrium.jpg" alt="Interior shot of the structure of the atrium of the Sydney Opera House">
   </div>
   <div class="cell">
-    <img src="../img/photography/sydney-2012/bay-pano.jpg" alt="Sydney Opera House and the Harbour Bridge panoramic">
+    <img src="/img/photography/sydney-2012/bay-pano.jpg" alt="Sydney Opera House and the Harbour Bridge panoramic">
   </div>
   <div class="cell">
-    <img src="../img/photography/sydney-2012/seats.jpg" alt="A series of red seats at the Sydney Opera House">
+    <img src="/img/photography/sydney-2012/seats.jpg" alt="A series of red seats at the Sydney Opera House">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/sydney-2012/opera-square.jpg" alt="A sail from the Sydney Opera House straight on">
+    <img src="/img/photography/sydney-2012/opera-square.jpg" alt="A sail from the Sydney Opera House straight on">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/sydney-2012/bridge-square.jpg" alt="Harbour Bridge midday">
+    <img src="/img/photography/sydney-2012/bridge-square.jpg" alt="Harbour Bridge midday">
   </div>
   <div class="cell">
-    <img src="../img/photography/sydney-2012/new-years-fireworks.jpg" alt="Sydney Opera House with fireworks at New Years">
+    <img src="/img/photography/sydney-2012/new-years-fireworks.jpg" alt="Sydney Opera House with fireworks at New Years">
   </div>
 </div>
 
@@ -69,30 +69,30 @@ I had the amazing opportunity to welcome the New Year 2013 in Sydney and witness
 
 <div class="grid-x grid-margin-x grid-margin-y">
   <div class="cell">
-    <img src="../img/photography/sydney-2012/new-years-fireworks2.jpg" alt="Sydney Opera House with fireworks at New Years">
+    <img src="/img/photography/sydney-2012/new-years-fireworks2.jpg" alt="Sydney Opera House with fireworks at New Years">
   </div>
   <div class="cell">
-    <img src="../img/photography/sydney-2012/new-years-harbour-bridge.jpg" alt="Harbour Bridge with fireworks at New Years">
+    <img src="/img/photography/sydney-2012/new-years-harbour-bridge.jpg" alt="Harbour Bridge with fireworks at New Years">
   </div>
   <div class="cell">
-    <img src="../img/photography/sydney-2012/harbour-bridge-night.jpg" alt="Harbour bridge at night">
+    <img src="/img/photography/sydney-2012/harbour-bridge-night.jpg" alt="Harbour bridge at night">
   </div>
   <div class="cell">
-    <img src="../img/photography/sydney-2012/curved-glass.jpg" alt="Black and white photo of an all glass facade">
+    <img src="/img/photography/sydney-2012/curved-glass.jpg" alt="Black and white photo of an all glass facade">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/sydney-2012/lighthouse.jpg" alt="White lighthouse against the blue sky">
+    <img src="/img/photography/sydney-2012/lighthouse.jpg" alt="White lighthouse against the blue sky">
   </div>
   <div class="cell medium-6">
-    <img src="../img/photography/sydney-2012/sharp-corner.jpg" alt="Contemporary facade in glass and stone">
+    <img src="/img/photography/sydney-2012/sharp-corner.jpg" alt="Contemporary facade in glass and stone">
   </div>
   <div class="cell">
-    <img src="../img/photography/sydney-2012/building-round-corner.jpg" alt="Curved facade of a parisian style residential building">
+    <img src="/img/photography/sydney-2012/building-round-corner.jpg" alt="Curved facade of a parisian style residential building">
   </div>
   <div class="cell force-flex-mobile" style="display: flex; flex: calc(935/1400);">
-    <img src="../img/photography/sydney-2012/sail-closeup.jpg" alt="Upclose photo of a Sydney Opera House sail showcasing the several colors of the tiles">
+    <img src="/img/photography/sydney-2012/sail-closeup.jpg" alt="Upclose photo of a Sydney Opera House sail showcasing the several colors of the tiles">
   </div>
   <div class="cell force-flex-mobile" style="display: flex; flex: calc(1400/1400);">
-    <img src="../img/photography/sydney-2012/ferry-shot.jpg" alt="Sydney Opera House below the Harbour Bridge">
+    <img src="/img/photography/sydney-2012/ferry-shot.jpg" alt="Sydney Opera House below the Harbour Bridge">
   </div>
 </div>
