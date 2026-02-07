@@ -684,22 +684,6 @@ $home-section-vertical-spacing-mobile: 4rem;
     }
   }
 
-  &:hover{
-    .black-cat{
-      transform: rotate(-5deg) translateY(-9rem);
-      transition: $run;
-      transition-delay: 1s;
-    }
-  }
-  .black-cat{
-    position: absolute;
-    z-index: -1;
-    transition: $jog;
-    transition-delay: 1s;
-    .head{
-      width: 10rem;
-    }
-  }
 }
 //******* End of Home Page Styles
 
