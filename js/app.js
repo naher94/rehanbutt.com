@@ -223,10 +223,12 @@ function copyToClipboard(link,clickedItem) {
 		copyBadge.innerText = "Copied!";
 		clickedItem.appendChild(copyBadge);
 
-    copyBadge.style.visibility = 'visible';
-    navigator.clipboard.writeText(link);  
-    setTimeout(function(){copyBadge.style.visibility = 'hidden';}, 1500);
-		setTimeout(function(){copyBadge.remove();}, 1600);
+    navigator.clipboard.writeText(link);
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ copyBadge.classList.add('visible'); });
+    });
+    setTimeout(function(){ copyBadge.classList.remove('visible'); }, 1500);
+		setTimeout(function(){ copyBadge.remove(); }, 1900);
     return;
 	}
   return Promise.reject('The Clipboard API is not available.');

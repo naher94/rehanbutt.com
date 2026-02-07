@@ -194,12 +194,19 @@ ul {
   color: $pure-white;
   border-radius: $pill-radius;
   padding: 0.25em 0.5em;
-  transform: rotate(-15deg);
-  visibility: hidden;
   position: absolute;
   right: -50%;
   top: 0;
+  opacity: 0;
+  transform: scale(0.5) rotate(0deg);
+  transition: opacity 0.4s $tight-spring-curve, transform 0.4s $tight-spring-curve;
+
+  &.visible{
+    opacity: 1;
+    transform: scale(1) rotate(-15deg);
+  }
 }
+
 
 p, li, h3{
   a {
