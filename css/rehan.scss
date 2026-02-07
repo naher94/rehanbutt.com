@@ -324,6 +324,11 @@ $home-section-vertical-spacing-mobile: 4rem;
 // --- Speaking Section ---
 .speaking-container{
   // TODO remove the bottom spacing for the header section
+  .home-section-header{
+    @include breakpoint(small only){
+      justify-content: center;
+    }
+  }
   .section-description{
     margin-block-end: 1rem;
   }
