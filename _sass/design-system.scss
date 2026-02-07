@@ -204,6 +204,7 @@ ul {
   &.visible{
     opacity: 1;
     transform: scale(1) rotate(-15deg);
+    transition: opacity 0.2s $tight-spring-curve, transform 0.2s $tight-spring-curve;
   }
 }
 
