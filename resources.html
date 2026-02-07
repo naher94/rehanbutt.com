@@ -51,11 +51,8 @@ footer-sort-order: 2
 </section>
 
 <section class="featured-collections grid-x grid-padding-x grid-padding-y cell medium-12">
-  <div class="cell grid-x align-middle align-justify">
-    <h2 class="cell small-8 medium-shrink">Featured Collections</h2>
-    <a href="{% link resource-collection.html %}" class="view-all">
-        <span>view all</span><i class="fas fa-arrow-right"></i>
-    </a>
+  <div class="cell grid-x align-middle">
+    <h2 class="cell shrink"><a href="{% link resource-collection.html %}">Collections <span class="arrow-animation"><i class="fas fa-arrow-right first"></i><i class="fas fa-angle-right second"></i></span></a></h2>
   </div>
   {%- for featured in site.resources-collection -%}
   {% if featured.featured == true %}
