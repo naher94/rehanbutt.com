@@ -64,7 +64,8 @@
       slides: shuffledSlides,
       label: label,
       currentIndex: 0,
-      intervalId: null
+      timerId: null,
+      running: false
     });
   }
 
@@ -99,28 +100,33 @@
     }
   }
 
-  function startSlot(slot) {
-    if (slot.intervalId) return;
-    slot.intervalId = setInterval(function () {
+  function scheduleNext(slot) {
+    slot.timerId = setTimeout(function () {
       advanceSlot(slot);
+      if (slot.running) scheduleNext(slot);
     }, CYCLE_INTERVAL);
   }
 
+  function startSlot(slot, delay) {
+    if (slot.running) return;
+    slot.running = true;
+    slot.timerId = setTimeout(function () {
+      advanceSlot(slot);
+      if (slot.running) scheduleNext(slot);
+    }, delay);
+  }
+
   function stopSlot(slot) {
-    if (slot.intervalId) {
-      clearInterval(slot.intervalId);
-      slot.intervalId = null;
+    slot.running = false;
+    if (slot.timerId) {
+      clearTimeout(slot.timerId);
+      slot.timerId = null;
     }
   }
 
   function startAll() {
     for (var i = 0; i < slots.length; i++) {
-      (function (index) {
-        var delay = index * STAGGER_OFFSET;
-        setTimeout(function () {
-          startSlot(slots[index]);
-        }, delay);
-      })(i);
+      startSlot(slots[i], CYCLE_INTERVAL + (i * STAGGER_OFFSET));
     }
   }
 
