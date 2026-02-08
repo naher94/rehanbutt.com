@@ -57,10 +57,10 @@
       <div class="menu-container grid-x cell align-justify">
         {% assign header_items = site.pages | where: "header-visibility", "show" | sort: "header-sort-order" %}
         <div class="burger-container">
-          <input class="burger-btn" type="checkbox" id="burger-btn"/>
-          <label class="burger-icon" for="burger-btn">
+          <button class="burger-icon" popovertarget="mobile-menu-toggle" aria-label="Toggle menu">
             <span class="nav-burger-icon"></span>
-          </label>
+          </button>
+          <div id="mobile-menu-toggle" popover></div>
           <div class="mobile-navbar">
             <a class="nav" href="/portfolio">Portfolio</a>
             <a class="nav" href="/about">About</a>

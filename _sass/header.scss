@@ -5,17 +5,6 @@
   color: $pure-white;
   padding-top: 2em;
   padding-bottom: 2em;
-
-  [type='checkbox']+label[for] {
-    cursor: pointer;
-  }
-  [type='checkbox']+label {
-    display: inline-block;
-    vertical-align: baseline;
-    margin-left: 0.5rem;
-    margin-right: 1rem;
-    margin-bottom: 0;
-  }
 }
 
 .logo{
@@ -82,6 +71,15 @@
     display: none;
     float: left;
     user-select: none;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: $pill-radius;
+    &:focus-visible{
+      outline: 2px solid $pure-white;
+      outline-offset: 4px;
+    }
     @include breakpoint(small only) {
       display: block;
     }
@@ -96,8 +94,23 @@
   }
 }
 
-.burger-icon, .burger-btn, .nav-burger-icon{
+.burger-icon, .nav-burger-icon{
   user-select: none;
+}
+
+#mobile-menu-toggle {
+  position: fixed;
+  inset: 0;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  overflow: hidden;
+  &::backdrop {
+    background: transparent;
+  }
 }
 
 .menu-links {
@@ -152,34 +165,25 @@
   }
 }
 
-.burger-btn {
-  display: none;
-}
-
-.burger-btn:checked {
-  ~ .menu-links {
-    // TODO fix this height to auto
-    max-height: 402px;
-    display: block;
+.burger-container:has(:popover-open) {
+  .menu-links {
+    max-height: 500px;
     transition: $run;
   }
-  ~ .mobile-navbar{
+  .mobile-navbar{
     @include breakpoint(small only) {
       display: none;
     }
   }
-  ~ .burger-icon .nav-burger-icon {
+  .burger-icon .nav-burger-icon {
     background: transparent;
   }
-  ~ .burger-icon .nav-burger-icon:before {
+  .burger-icon .nav-burger-icon:before {
     transform: rotate(-45deg);
+    top: 0;
   }
-  ~ .burger-icon .nav-burger-icon:after {
+  .burger-icon .nav-burger-icon:after {
     transform: rotate(45deg);
+    top: 0;
   }
-}
-
-.burger-btn:checked ~ .burger-icon:not(.steps) .nav-burger-icon:before,
-.burger-btn:checked ~ .burger-icon:not(.steps) .nav-burger-icon:after {
-  top: 0;
 }
