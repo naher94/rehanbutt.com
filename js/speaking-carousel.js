@@ -1,28 +1,17 @@
 /**
- * Speaking Section Crossfade Carousel
+ * Speaking Section Drop-Settle-Stack Carousel
  *
  * Two independent carousel slots that cycle through speaking event photos
- * with configurable transition effects. The slots are staggered so they
+ * with a drop-settle-stack transition. The slots are staggered so they
  * don't transition simultaneously.
- *
- * Change TRANSITION_EFFECT to switch between effects:
- *   crossfade | scale-fade | blur-crossfade | shuffle |
- *   slide-reveal | ken-burns | flip | drop-settle | drop-settle-card |
- *   drop-settle-stack | rotation-swap
  */
 (function () {
   'use strict';
 
   // ── Configuration ──
-  var TRANSITION_EFFECT = 'drop-settle-stack';
   var CYCLE_INTERVAL = 7000;
   var STAGGER_OFFSET = 2000;
   var CLEANUP_DELAY = 900;
-
-  // Force simplest effect if user prefers reduced motion
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    TRANSITION_EFFECT = 'crossfade';
-  }
 
   var carousels = document.querySelectorAll('.speaking-carousel');
   if (!carousels.length) return;
@@ -46,7 +35,7 @@
     if (slides.length <= 1) continue;
 
     // Set transition effect attribute for CSS targeting
-    container.setAttribute('data-transition', TRANSITION_EFFECT);
+    container.setAttribute('data-transition', 'drop-settle-stack');
 
     var slideArray = Array.prototype.slice.call(slides);
     shuffle(slideArray);
@@ -70,68 +59,30 @@
       label.textContent = firstImg.getAttribute('data-label') || '';
     }
 
-    // Read the parent container's base rotation for rotation-swap effect
-    var parentEl = container.closest('.speaking-image-container');
-    var baseRot = 0;
-    if (parentEl) {
-      var rotVal = getComputedStyle(parentEl).rotate;
-      if (rotVal && rotVal !== 'none') {
-        baseRot = parseFloat(rotVal) || 0;
-      }
-    }
-
     slots.push({
       container: container,
-      parent: parentEl,
       slides: shuffledSlides,
       label: label,
       currentIndex: 0,
-      intervalId: null,
-      baseRotation: baseRot,
-      currentRotation: baseRot,
-      rotationDirection: 1
+      intervalId: null
     });
   }
 
   function advanceSlot(slot) {
-    var effect = slot.container.getAttribute('data-transition') || 'crossfade';
     var current = slot.slides[slot.currentIndex];
     slot.currentIndex = (slot.currentIndex + 1) % slot.slides.length;
     var next = slot.slides[slot.currentIndex];
-
-    // ── Effect-specific pre-transition logic ──
-    if (effect === 'shuffle') {
-      current.style.zIndex = '1';
-      next.style.zIndex = '2';
-    }
-
-    if (effect === 'rotation-swap' && slot.parent) {
-      slot.currentRotation += (3 * slot.rotationDirection);
-      if (Math.abs(slot.currentRotation - slot.baseRotation) > 9) {
-        slot.rotationDirection *= -1;
-      }
-      slot.parent.style.rotate = slot.currentRotation + 'deg';
-    }
 
     // ── Core transition ──
     current.classList.add('is-exiting');
     current.classList.remove('is-visible');
     next.classList.add('is-visible');
-
-    if (effect === 'drop-settle' || effect === 'drop-settle-card' || effect === 'drop-settle-stack') {
-      next.classList.add('is-entering');
-    }
+    next.classList.add('is-entering');
 
     // ── Cleanup after transition completes ──
     setTimeout(function () {
       current.classList.remove('is-exiting');
-      if (effect === 'shuffle') {
-        current.style.zIndex = '';
-        next.style.zIndex = '';
-      }
-      if (effect === 'drop-settle' || effect === 'drop-settle-card' || effect === 'drop-settle-stack') {
-        next.classList.remove('is-entering');
-      }
+      next.classList.remove('is-entering');
     }, CLEANUP_DELAY);
 
     // ── Label update ──
