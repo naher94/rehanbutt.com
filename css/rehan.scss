@@ -161,14 +161,10 @@ $home-section-vertical-spacing-mobile: 4rem;
       pointer-events: none;
       z-index: 100;
     }
-    &:hover .tooltip,
-    &:focus .tooltip{
+    &:hover .tooltip{
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) scale(1);
-    }
-    &:focus{
-      outline: none;
     }
   }
   img{
