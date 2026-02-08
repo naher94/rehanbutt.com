@@ -9,8 +9,9 @@
   'use strict';
 
   // ── Configuration ──
-  var CYCLE_INTERVAL = 7000;
-  var STAGGER_OFFSET = 2000;
+  var IMAGE_DWELL = 7000;       // Base time each image is visible (ms)
+  var SLOT_OFFSET = 700;        // Per-slot interval offset to prevent sync (ms)
+  var STAGGER_OFFSET = 2500;    // Initial delay between slot starts (ms)
   var CLEANUP_DELAY = 900;
 
   var carousels = document.querySelectorAll('.speaking-carousel');
@@ -64,6 +65,7 @@
       slides: shuffledSlides,
       label: label,
       currentIndex: 0,
+      interval: IMAGE_DWELL + (c * SLOT_OFFSET),
       timerId: null,
       running: false
     });
@@ -104,7 +106,7 @@
     slot.timerId = setTimeout(function () {
       advanceSlot(slot);
       if (slot.running) scheduleNext(slot);
-    }, CYCLE_INTERVAL);
+    }, slot.interval);
   }
 
   function startSlot(slot, delay) {
@@ -126,7 +128,7 @@
 
   function startAll() {
     for (var i = 0; i < slots.length; i++) {
-      startSlot(slots[i], CYCLE_INTERVAL + (i * STAGGER_OFFSET));
+      startSlot(slots[i], slots[i].interval + (i * STAGGER_OFFSET));
     }
   }
 
