@@ -426,6 +426,9 @@ $home-section-vertical-spacing-mobile: 4rem;
             pointer-events: auto;
           }
         }
+        .slide-label{
+          display: none;
+        }
         .image-label{
           grid-row: 2;
           grid-column: 1;
@@ -599,6 +602,47 @@ $home-section-vertical-spacing-mobile: 4rem;
 }
 .speaking-image-container[data-transition="drop-settle-card"]:has(.is-entering){
   animation: drop-in-card 0.7s $tight-spring-curve forwards;
+}
+
+// 11. Drop & Settle Stack (new card drops on top of old)
+.image-section .speaking-image-container[data-transition="drop-settle-stack"]{
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  .carousel-slide{
+    background-color: $pure-white;
+    border-radius: $tile-radius-medium;
+    box-shadow: $recessed-shadow semantic-color(shadow);
+    padding: 0.5em;
+    padding-bottom: 0.5rem;
+    transition: opacity 0.5s ease-in-out;
+    &.is-exiting{
+      opacity: 0;
+      z-index: 1;
+    }
+    &.is-visible{
+      z-index: 2;
+    }
+    &.is-visible.is-entering{
+      animation: drop-in-card 0.7s $tight-spring-curve forwards;
+      z-index: 3;
+    }
+    .slide-label{
+      display: block;
+      font-family: $caveat;
+      font-weight: $caveat-regular;
+      font-size: 1.5rem;
+      text-align: center;
+      line-height: 1;
+      padding: 0;
+      margin: 0;
+      padding-top: 0.25rem;
+      color: semantic-color(text-on-light-bg-always);
+    }
+  }
+  .image-label{
+    display: none;
+  }
 }
 
 // ── Reduced Motion ──

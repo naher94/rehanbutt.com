@@ -7,13 +7,14 @@
  *
  * Change TRANSITION_EFFECT to switch between effects:
  *   crossfade | scale-fade | blur-crossfade | shuffle |
- *   slide-reveal | ken-burns | flip | drop-settle | drop-settle-card | rotation-swap
+ *   slide-reveal | ken-burns | flip | drop-settle | drop-settle-card |
+ *   drop-settle-stack | rotation-swap
  */
 (function () {
   'use strict';
 
   // ── Configuration ──
-  var TRANSITION_EFFECT = 'drop-settle-card';
+  var TRANSITION_EFFECT = 'drop-settle-stack';
   var CYCLE_INTERVAL = 7000;
   var STAGGER_OFFSET = 2000;
   var CLEANUP_DELAY = 900;
@@ -117,7 +118,7 @@
     current.classList.remove('is-visible');
     next.classList.add('is-visible');
 
-    if (effect === 'drop-settle' || effect === 'drop-settle-card') {
+    if (effect === 'drop-settle' || effect === 'drop-settle-card' || effect === 'drop-settle-stack') {
       next.classList.add('is-entering');
     }
 
@@ -128,7 +129,7 @@
         current.style.zIndex = '';
         next.style.zIndex = '';
       }
-      if (effect === 'drop-settle' || effect === 'drop-settle-card') {
+      if (effect === 'drop-settle' || effect === 'drop-settle-card' || effect === 'drop-settle-stack') {
         next.classList.remove('is-entering');
       }
     }, CLEANUP_DELAY);
