@@ -1,0 +1,119 @@
+/**
+ * Speaking Section Crossfade Carousel
+ *
+ * Two independent carousel slots that cycle through speaking event photos
+ * with crossfade transitions. The slots are staggered so they don't
+ * transition simultaneously.
+ */
+(function () {
+  'use strict';
+
+  var CYCLE_INTERVAL = 4500;
+  var STAGGER_OFFSET = 2000;
+
+  var carousels = document.querySelectorAll('.speaking-carousel');
+  if (!carousels.length) return;
+
+  function shuffle(array) {
+    var i, j, temp;
+    for (i = array.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+  }
+
+  var slots = [];
+
+  for (var c = 0; c < carousels.length; c++) {
+    var container = carousels[c];
+    var slides = container.querySelectorAll('.carousel-slide');
+    if (slides.length <= 1) continue;
+
+    var slideArray = Array.prototype.slice.call(slides);
+    shuffle(slideArray);
+
+    for (var s = 0; s < slideArray.length; s++) {
+      container.appendChild(slideArray[s]);
+    }
+
+    var shuffledSlides = container.querySelectorAll('.carousel-slide');
+    for (var k = 0; k < shuffledSlides.length; k++) {
+      if (k === 0) {
+        shuffledSlides[k].classList.add('is-visible');
+      } else {
+        shuffledSlides[k].classList.remove('is-visible');
+      }
+    }
+
+    slots.push({
+      container: container,
+      slides: shuffledSlides,
+      currentIndex: 0,
+      intervalId: null
+    });
+  }
+
+  function advanceSlot(slot) {
+    var current = slot.slides[slot.currentIndex];
+    slot.currentIndex = (slot.currentIndex + 1) % slot.slides.length;
+    var next = slot.slides[slot.currentIndex];
+    current.classList.remove('is-visible');
+    next.classList.add('is-visible');
+  }
+
+  function startSlot(slot) {
+    if (slot.intervalId) return;
+    slot.intervalId = setInterval(function () {
+      advanceSlot(slot);
+    }, CYCLE_INTERVAL);
+  }
+
+  function stopSlot(slot) {
+    if (slot.intervalId) {
+      clearInterval(slot.intervalId);
+      slot.intervalId = null;
+    }
+  }
+
+  function startAll() {
+    for (var i = 0; i < slots.length; i++) {
+      (function (index) {
+        var delay = index * STAGGER_OFFSET;
+        setTimeout(function () {
+          startSlot(slots[index]);
+        }, delay);
+      })(i);
+    }
+  }
+
+  function stopAll() {
+    for (var i = 0; i < slots.length; i++) {
+      stopSlot(slots[i]);
+    }
+  }
+
+  if ('IntersectionObserver' in window) {
+    var speakingSection = document.querySelector('.speaking-container');
+    if (speakingSection) {
+      var observer = new IntersectionObserver(function (entries) {
+        for (var e = 0; e < entries.length; e++) {
+          if (entries[e].isIntersecting) {
+            startAll();
+          } else {
+            stopAll();
+          }
+        }
+      }, {
+        threshold: 0.2
+      });
+      observer.observe(speakingSection);
+    } else {
+      startAll();
+    }
+  } else {
+    startAll();
+  }
+})();

@@ -413,7 +413,25 @@ $home-section-vertical-spacing-mobile: 4rem;
           font-size: 1.5rem;
         }
       }
+      &.speaking-carousel{
+        display: grid;
+        .carousel-slide{
+          grid-area: 1 / 1;
+          opacity: 0;
+          transition: opacity 0.8s ease-in-out;
+          pointer-events: none;
+          &.is-visible{
+            opacity: 1;
+            pointer-events: auto;
+          }
+        }
+      }
     }
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  .speaking-carousel .carousel-slide{
+    transition: none;
   }
 }
 
