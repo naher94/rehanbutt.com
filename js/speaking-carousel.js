@@ -8,7 +8,7 @@
 (function () {
   'use strict';
 
-  var CYCLE_INTERVAL = 4500;
+  var CYCLE_INTERVAL = 7000;
   var STAGGER_OFFSET = 2000;
 
   var carousels = document.querySelectorAll('.speaking-carousel');
@@ -48,9 +48,16 @@
       }
     }
 
+    var label = container.querySelector('.image-label');
+    var firstImg = shuffledSlides[0].querySelector('img');
+    if (label && firstImg) {
+      label.textContent = firstImg.getAttribute('data-label') || '';
+    }
+
     slots.push({
       container: container,
       slides: shuffledSlides,
+      label: label,
       currentIndex: 0,
       intervalId: null
     });
@@ -62,6 +69,18 @@
     var next = slot.slides[slot.currentIndex];
     current.classList.remove('is-visible');
     next.classList.add('is-visible');
+
+    if (slot.label) {
+      var nextImg = next.querySelector('img');
+      var newText = nextImg ? nextImg.getAttribute('data-label') : '';
+      if (newText !== slot.label.textContent) {
+        slot.label.classList.add('label-fading');
+        setTimeout(function () {
+          slot.label.textContent = newText;
+          slot.label.classList.remove('label-fading');
+        }, 300);
+      }
+    }
   }
 
   function startSlot(slot) {
