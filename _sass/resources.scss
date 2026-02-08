@@ -342,6 +342,24 @@ h1{
     }
   }
   .resource{
+    .resource-thumbnail{
+      margin-bottom: 0.5em;
+      border-radius: $tile-radius;
+      overflow: hidden;
+      position: relative;
+      &::after{
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: $tile-radius;
+        box-shadow: inset 0 0 0 2px rgba($pure-black, 0.1);
+        pointer-events: none;
+      }
+      img{
+        width: 100%;
+        display: block;
+      }
+    }
     .meta{
       padding: 0;
       margin: 0;
