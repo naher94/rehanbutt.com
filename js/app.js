@@ -145,6 +145,7 @@ function holidays() {
 		"1:19": "Happy National Popcorn Day! 🍿",
 		"2:17": "Happy Lunar New Year!",
 		"2:14": "Happy Valentine's Day ❤️",
+		"2:15": "Happy National Hippo Day 🦛",
     "2:23": "Happy 'Day I Wrote This Code' Day!",
     "2:29": "Happy Leap Day!",
 		"4:13": "Happy Songkran! 🇹🇭",
