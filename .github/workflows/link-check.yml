@@ -44,4 +44,4 @@ jobs:
         with:
           title: Dead Links Found - Link Checker Report
           content-filepath: ./lychee/out.md
-          labels: bug, report, automated
+          labels: bug, report, automated, CI/CD
