@@ -75,6 +75,46 @@
   }
 }
 
+.share-highlighter{
+  position: absolute;
+  transform: translateX(-50%) scale(0.8);
+  background-color: semantic-color(share-highlighter-bg);
+  color: semantic-color(share-highlighter-text);
+  border-radius: $pill-radius;
+  padding: 0.3em 0.6em;
+  font-size: 1.1em;
+  display: flex;
+  gap: 0.4em;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s $tight-spring-curve, transform 0.2s $tight-spring-curve;
+  z-index: 100;
+  box-shadow: $recessed-shadow semantic-color(shadow);
+
+  &.visible{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) scale(1);
+  }
+
+  .share-highlighter-item{
+    color: semantic-color(share-highlighter-text);
+    cursor: pointer;
+    padding: 0.15em 0.25em;
+    position: relative;
+    i{
+      transition: $sprint;
+    }
+    &.threads:hover i{
+      transform: rotate(-15deg) scale(1.3);
+    }
+    &.copy:hover i{
+      transform: rotate(360deg) scale(1.3);
+    }
+  }
+}
+
 .product-principles-strategies{
   h2{
     line-height: 1.2;
