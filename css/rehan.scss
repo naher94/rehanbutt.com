@@ -274,12 +274,10 @@ $home-section-vertical-spacing-mobile: 4rem;
   .section-description{
     padding: 0;
     margin: 0;
-    // TODO decide if I want to update this font-size.. 1.25rem could be great
     font-size: 1.5rem;
     line-height: 1.8rem;
     text-wrap: pretty;
     @include breakpoint(small only){
-      font-size: 1.25em; //TODO fix this
       font-size: 1em;
       line-height: 1.3;
     }
