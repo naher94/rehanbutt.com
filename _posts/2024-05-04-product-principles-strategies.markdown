@@ -15,7 +15,7 @@ A series of principles and strategies that I have found to work well when buildi
 <div class="product-principles-strategies grid-x">
   <div class="cell grid-x align-middle grid-padding-x">
     <div class="cell medium-6">
-      <img src="{{"/img/articles/product-principles-strategies/users-first.jpg" | prepend: site.url }}" alt="Illustration of Pepper, the purple panda, standing on 1st place of a podium">
+      <img src="{{"/img/posts/product-principles-strategies/users-first.jpg" | prepend: site.url }}" alt="Illustration of Pepper, the purple panda, standing on 1st place of a podium">
     </div>
     <div class="cell medium-6">
       <h2>Users First</h2>
@@ -24,7 +24,7 @@ A series of principles and strategies that I have found to work well when buildi
   </div>
   <div class="cell grid-x align-middle grid-padding-x">
     <div class="cell medium-6">
-      <img src="{{"/img/articles/product-principles-strategies/problem.jpg" | prepend: site.url }}" alt="">
+      <img src="{{"/img/posts/product-principles-strategies/problem.jpg" | prepend: site.url }}" alt="">
     </div>
     <div class="cell medium-6">
       <h2>Start with the Problem</h2>
@@ -33,7 +33,7 @@ A series of principles and strategies that I have found to work well when buildi
   </div>
   <div class="cell grid-x align-middle grid-padding-x">
     <div class="cell medium-6">
-      <img src="{{"/img/articles/product-principles-strategies/direction-purpose.jpg" | prepend: site.url }}" alt="">
+      <img src="{{"/img/posts/product-principles-strategies/direction-purpose.jpg" | prepend: site.url }}" alt="">
     </div>
     <div class="cell medium-6">
       <h2>Direction with Purpose</h2>
@@ -42,7 +42,7 @@ A series of principles and strategies that I have found to work well when buildi
   </div>
   <div class="cell grid-x align-middle grid-padding-x">
     <div class="cell medium-6">
-      <img src="{{"/img/articles/product-principles-strategies/cross-functional.jpg" | prepend: site.url }}" alt="">
+      <img src="{{"/img/posts/product-principles-strategies/cross-functional.jpg" | prepend: site.url }}" alt="">
     </div>
     <div class="cell medium-6">
       <h2>Everyday is Cross-functional</h2>
@@ -51,7 +51,7 @@ A series of principles and strategies that I have found to work well when buildi
   </div>
   <div class="cell grid-x align-middle grid-padding-x">
     <div class="cell medium-6">
-      <img src="{{"/img/articles/product-principles-strategies/kind-candid.jpg" | prepend: site.url }}" alt="">
+      <img src="{{"/img/posts/product-principles-strategies/kind-candid.jpg" | prepend: site.url }}" alt="">
     </div>
     <div class="cell medium-6">
       <h2>Be Candid and Kind</h2>
@@ -60,7 +60,7 @@ A series of principles and strategies that I have found to work well when buildi
   </div>
   <div class="cell grid-x align-middle grid-padding-x">
     <div class="cell medium-6">
-      <img src="{{"/img/articles/product-principles-strategies/simple.jpg" | prepend: site.url }}" alt="">
+      <img src="{{"/img/posts/product-principles-strategies/simple.jpg" | prepend: site.url }}" alt="">
     </div>
     <div class="cell medium-6">
       <h2>Keep it Simple</h2>
@@ -69,7 +69,7 @@ A series of principles and strategies that I have found to work well when buildi
   </div>
   <div class="cell grid-x align-middle grid-padding-x">
     <div class="cell medium-6">
-      <img src="{{"/img/articles/product-principles-strategies/clarity.jpg" | prepend: site.url }}" alt="">
+      <img src="{{"/img/posts/product-principles-strategies/clarity.jpg" | prepend: site.url }}" alt="">
     </div>
     <div class="cell medium-6">
       <h2>Clarity is Key</h2>
@@ -78,7 +78,7 @@ A series of principles and strategies that I have found to work well when buildi
   </div>
   <div class="cell grid-x align-middle grid-padding-x">
     <div class="cell medium-6">
-      <img src="{{"/img/articles/product-principles-strategies/prioritize.jpg" | prepend: site.url }}" alt="">
+      <img src="{{"/img/posts/product-principles-strategies/prioritize.jpg" | prepend: site.url }}" alt="">
     </div>
     <div class="cell medium-6">
       <h2>Prioritize Aggressively</h2>
@@ -87,7 +87,7 @@ A series of principles and strategies that I have found to work well when buildi
   </div>
   <div class="cell grid-x align-middle grid-padding-x">
     <div class="cell medium-6">
-      <img src="{{"/img/articles/product-principles-strategies/opinionated-software.jpg" | prepend: site.url }}" alt="">
+      <img src="{{"/img/posts/product-principles-strategies/opinionated-software.jpg" | prepend: site.url }}" alt="">
     </div>
     <div class="cell medium-6">
       <h2>Opinionated Software</h2>

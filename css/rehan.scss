@@ -17,6 +17,8 @@
 @import 'articles';
 @import 'speaking';
 
+
+//******* Global Utilities
 .no-select{
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -75,80 +77,412 @@ video{
     flex: 0 0 auto !important;
   }
 }
+//******* End of Global Utilities
 
-iframe { //this should probs be aspect ratio // TODO Gissue #385
-  height: 600px;
+
+//******* Home Page Styles
+
+// --- Home Page Variables & Mixins ---
+$home-section-vertical-spacing: 8rem;
+$home-section-vertical-spacing-mobile: 4rem;
+
+@mixin home-section-base {
+  margin-bottom: $home-section-vertical-spacing;
   @include breakpoint(small only) {
-    height: 220px;
+    margin-bottom: $home-section-vertical-spacing-mobile;
   }
 }
 
-.post-header{
-  @include breakpoint(large down) {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-}
-
-.post-header-hero{
-  margin-top: 1em;
-  @include breakpoint(small only) {
-    margin-top: 0.5em;
-  }
-}
-
-.thumbnail-container {
-  position: relative; //For flag to show correctly
-  display: block; //For flag to show correctly
-  background-color: $navy-black;
-  border-radius: $tile-radius-medium;
-  transition: $sprint;
-  &:hover{
-    transform: scale(1.05);
-    box-shadow: $recessed-shadow semantic-color(shadow);
-  }
-  &:hover .thumbnail-text{
-    opacity: 1;
-    transition: $run;
-  }
-  &:hover .thumbnail-image{
-    opacity: 0.8;
-    transition: $run;
-  }
-  .thumbnail-image{
-    border-radius: $tile-radius-medium;
-  }
-}
-
-.thumbnail-text {
-  position: absolute;
-  bottom: 1rem;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  color: $pure-white;
-  opacity: 0;
-  text-shadow: 0px 0px 5px $navy-black;
-  font-size: 1.65em;
-  line-height: 1em;
-  text-align: center;
-  font-weight: $zilla-bold;
-  font-family: $zilla;
-  @include breakpoint(small only) {
-    font-size: 1.4em;
-  }
-}
-
-.featured-projects{
+// --- Home Page Intro ---
+.site-intro{
   margin-bottom: 8rem;
-  .feature-row{
-    margin-bottom: 4rem;
-    &:nth-child(even){
-      .text-wrapper{
-        order: 2;
+  margin-top: 3rem;
+  @include breakpoint(small only){
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    img{
+      filter: none;
+    }
+  }
+  h1, p{
+    font-family: $zilla;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 1.8em;
+    line-height: 1.4em;
+    font-weight: $zilla-bold;
+    margin-block: 0.75em;
+    text-wrap: pretty;
+    @include breakpoint(small only){
+      font-size: 1.25em;
+    }
+    &:first-of-type{
+      display: inline;
+    }
+    a{
+      color: inherit;
+      text-decoration: underline dotted 4px;
+      text-decoration-color: rgba($navy-black, 0.5); //TODO update with semantic-color
+      @media (prefers-color-scheme: dark) {
+        text-decoration-color: rgba($pure-white, 0.5);      
       }
+      &::after{
+        content: none;
+      }
+    }
+  }
+  .site-intro-cta{
+    padding: 0.5rem 0;
+    font-family: $zilla;
+    font-weight: $zilla-bold;
+    font-size: 1.8em;
+    color: $signature-teal;
+    @include double-arrow-slide;
+    @include breakpoint(small only){
+      font-size: 1.25em;
+    }
+  }
+  img{
+    display: inline-block;
+    height: 1.2em;
+    vertical-align: text-top;
+    transition: $sprint;
+    &#upmc, &#config-fig{
+      border-radius: 7px;
+      @include breakpoint(small only){
+        border-radius: 5px;
+      }
+    }
+  }
+  span{
+    &#me{
+      img{
+        scale: 1.4;
+        margin-inline: 0.3em 0.6em;
+        rotate: -3deg;
+        border-radius: 6px;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+        @include breakpoint(small only){
+          border-radius: 4px;
+        }
+      }
+    }
+    &#panda{
+      img{
+        transition: $tight-spring;
+      }
+      &:hover{
+        img{
+          scale: 1.1;
+          rotate: -5deg;
+        }
+      }
+    }
+    &#photography{
+      position: relative;
+      isolation: isolate;
+      &:hover{
+        img{
+          $img-scale: 1.6;
+          &:first-of-type{
+            transform: scale($img-scale) rotate(14deg) translate(0.1em, -0.3em);
+          }
+          &:last-of-type{
+            transform: scale($img-scale) rotate(-10deg) translate(-0.2em, 0.4em);
+          }
+        }
+      }
+      img{
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        transform-origin: right center;
+        transition: $tight-spring;
+        margin-inline: 0.15em 0.2em;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: high-quality;
+        &:first-of-type{
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: 2;
+          transform: rotate(7deg) translate(0.1em, 0);
+          isolation: isolate;
+        }
+        &:last-of-type{
+          transform: rotate(-5deg) translate(-0.1em, 0.2em);
+        }
+      }
+    }
+  }
+  .config{
+    position: relative;
+    cursor: pointer;
+    .stage-photo{
+      position: absolute;
+      left: 50%;
+      bottom: 1.5em;
+      opacity: 0;
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+      transform-origin: 50% 100%;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out;
+    }
+    &:hover{
+      .stage-photo{
+        opacity: 1;
+        transform: scale(5) rotate(5deg);
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+// --- Home Page Section Header (shared) ---
+.home-section-header{
+  margin-bottom: 3rem;
+  @include breakpoint(small only){
+    margin-bottom: 2rem;
+  }
+  h2{
+    line-height: normal;
+    font-weight: $zilla-bold;
+    margin-bottom: 0;
+    line-height: normal;
+    @include breakpoint(small only){
+      margin-bottom: 0.25em;
+      line-height: 1;
+    }
+  }
+}
+
+// --- Home Page Section Containers (shared base styles) ---
+.speaking-container,
+.projects-container,
+.photography-container,
+.year-in-review-container,
+.resources-container {
+  @include home-section-base;
+  h2{
+    padding-left: 0;
+    padding-right: 0;
+    @include breakpoint(small only){
+      font-size: 2.5em;
+    }
+  }
+  .section-description{
+    padding: 0;
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    text-wrap: pretty;
+    @include breakpoint(small only){
+      font-size: 1em;
+      line-height: 1.3;
+    }
+    a{
+      border-radius: 8px;
+      padding: 0 0.2em;
+      font-weight: $lato-bold;
+    }
+  }
+  // Shared h2 a arrow animation for sections with links
+  h2 a{
+    color: semantic-color(text);
+    white-space: nowrap;
+    @include double-arrow-slide;
+  }
+}
+
+// --- Speaking Section ---
+.speaking-container{
+  // TODO remove the bottom spacing for the header section
+  .home-section-header{
+    @include breakpoint(small only){
+      justify-content: center;
+    }
+  }
+  .section-description{
+    margin-block-end: 1rem;
+  }
+  .cta-container{
+    margin-block-start: 2rem;
+  }
+  .cta-button{
+    padding: 0.7rem 1rem;
+    color: inherit;
+    border-radius: 14px;
+    border: solid 0.2rem semantic-color(button-outline);
+    font-weight: $lato-bold;
+    transition: $sprint;
+    text-align: center;
+    &:hover{
+      color: semantic-color(text-inverted);
+      background-color: semantic-color(button-fill);
+    }
+    i{
+      margin-right: 0.25em;
+    }
+    &:first-child{
+      background-color: semantic-color(button-fill);
+      color: semantic-color(text-inverted);
+      margin-right: 0.5em;
+      &:hover{
+        background-color: semantic-color(speaking-button-primary-fill-hover);
+        border-color: semantic-color(speaking-button-primary-border-hover);
+      }
+    }
+    &.email-wrapper{
+      position: relative;
+      display: inline;
+      cursor: pointer;
+      .copied{
+        font-size: 1em;
+        left: 20%;
+        right: unset;
+        font-weight: $lato-bold;
+        @include breakpoint(small only) {
+          left: 40%;
+        }
+      }
+    }
+  }
+  .image-section{
+    .speaking-image-container{
+      background-color: $pure-white;
+      border-radius: $tile-radius-medium;
+      box-shadow: $recessed-shadow semantic-color(shadow);
+      padding: 0.5em;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      &.config-headshot{
+        width: 16rem;
+        rotate: -6deg;
+        position: relative;
+        z-index: 2;
+        margin-block-start: -9rem;
+        @include breakpoint(small only){
+          margin-block-start: 2rem;
+        }
+      }
+      &.config-disney-history{
+        width: 20rem;
+        rotate: 5deg;
+        margin-block-start: -4rem;
+      }
+      img{
+        border-radius: $tile-radius;
+        width: 100%;
+        display: block;
+      }
+      .image-label{
+        font-size: 2rem;
+        font-size: 1.5rem;
+        text-align: center;
+        font-family: $caveat;
+        font-weight: $caveat-regular;
+        padding: 0;
+        margin: 0;
+        line-height: 1;
+        padding-top: 0.25rem;
+        color: semantic-color(text-on-light-bg-always);
+        @include breakpoint(medium down){
+          font-size: 1.5rem;
+        }
+      }
+      &.speaking-carousel{
+        display: grid;
+        grid-template-rows: 1fr auto;
+        .carousel-slide{
+          grid-row: 1;
+          grid-column: 1;
+          opacity: 0;
+          pointer-events: none;
+          &.is-visible{
+            opacity: 1;
+            pointer-events: auto;
+          }
+        }
+        .slide-label{
+          display: none;
+        }
+        .image-label{
+          grid-row: 2;
+          grid-column: 1;
+          transition: opacity 0.3s ease-in-out;
+          &.label-fading{
+            opacity: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ── Carousel Transition: Drop & Settle Stack ──
+@keyframes drop-in-card{
+  0%{ transform: translateY(-25%); opacity: 0; }
+  50%{ transform: translateY(4%); opacity: 1; }
+  75%{ transform: translateY(-2%); }
+  100%{ transform: translateY(0); opacity: 1; }
+}
+.image-section .speaking-image-container[data-transition="drop-settle-stack"]{
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  .carousel-slide{
+    background-color: $pure-white;
+    border-radius: $tile-radius-medium;
+    box-shadow: $recessed-shadow semantic-color(shadow);
+    padding: 0.5em;
+    padding-bottom: 0.5rem;
+    transition: opacity 0.5s ease-in-out;
+    &.is-exiting{
+      opacity: 0;
+      z-index: 1;
+    }
+    &.is-visible{
+      z-index: 2;
+    }
+    &.is-visible.is-entering{
+      animation: drop-in-card 0.7s $tight-spring-curve forwards;
+      z-index: 3;
+    }
+    .slide-label{
+      display: block;
+      font-family: $caveat;
+      font-weight: $caveat-regular;
+      font-size: 1.5rem;
+      text-align: center;
+      line-height: 1;
+      padding: 0;
+      margin: 0;
+      padding-top: 0.25rem;
+      color: semantic-color(text-on-light-bg-always);
+    }
+  }
+  .image-label{
+    display: none;
+  }
+}
+
+// ── Reduced Motion ──
+@media (prefers-reduced-motion: reduce){
+  .speaking-carousel .carousel-slide{
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+// --- Projects Section ---
+.featured-projects{
+  .feature-item{
+    margin-bottom: 3rem;
+    @include breakpoint(small only){
+      margin-bottom: 2rem;
+    }
+    &:nth-child(even){
       .image-wrapper{
-        order: 1;
         .thumbnail-container-featured{
           &:hover{
             transform: scale(1.02) rotate(-2deg);
@@ -158,19 +492,13 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     }
     .text-wrapper{
       @include breakpoint(small only) {
-        order: 2;
         margin-top: 1rem;
-      }
-    }
-    .image-wrapper{
-      @include breakpoint(small only) {
-        order: 1;
       }
     }
     .thumbnail-container-featured{
       background-color: $navy-black;
       border-radius: $tile-radius-big;
-      transition: $sprint;
+      transition: $tight-spring;
       &:hover{
         transform: scale(1.02) rotate(2deg);
         box-shadow: $recessed-shadow semantic-color(shadow);
@@ -179,265 +507,54 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         border-radius: $tile-radius-big;
       }
     }
-    
+
     .featured-text{
-      @include breakpoint(small only){
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-      }
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      margin-block-start: 1rem;
       h2{
-        font-size: 2.5rem;
+        font-size: 2rem;
         font-weight: $zilla-bold;
+        margin-bottom: 0;
         @include breakpoint(small only){
+          font-size: 1.5rem;
           line-height: 1.1;
           padding-left: 0;
           padding-right: 0;
+          margin-bottom: 0.25em;
         }
       }
       p{
-        font-size: 1.5rem;
+        line-height: 1.2;
+        font-size: 1.25rem;
         padding: 0;
         margin: 0;
-      }
-      .explore-wrapper{
-        margin-top: 2rem;
-      }
-      .explore-button{
-        padding: 0.7rem 1rem;
-        color: inherit;
-        border-radius: 14px;
-        border: solid 0.2rem semantic-color(button-outline);
-        font-weight: $lato-bold;
-        transition: $sprint;
-        &:hover{
-          color: semantic-color(text-inverted);
-          background-color: semantic-color(button-fill);
+        text-wrap: pretty;
+        @include breakpoint(small only){
+          font-size: 1rem;
         }
       }
     }
   }
-  .more-button{
-    padding-top: 0.7rem;
-    padding-bottom: 0.7rem;
-    color: $signature-teal;
-    border-radius: $pill-radius;
-    font-size: 1.5rem;
-    border: solid 0.2rem $signature-teal;
-    text-align: center;
-    display: block;
-    font-weight: $lato-bold;
-    transition: $sprint;
-    &:hover{
-      color: $pure-white;
-      background-color: $signature-teal;
-    }
-  }
 }
 
-.featured-resources-speaking{
-  margin-bottom: 6rem;
-  color: $pure-white;
-  .resources-container, .speaking-container{
-    background-color: $navy-black;
-    border-radius: $tile-radius-big;
-    padding: 2rem;
-    padding-top: 1rem;
-    h2{
-      padding: 0;
-      font-size: 2.5em;
-      font-weight: $zilla-bold;
-      @include breakpoint(small only){
-        font-size: 2em;
-      }
-    }
-    @include breakpoint(small only){
-      padding: 1rem;
-    }
-  }
-  .resources-container{
-    background-color: semantic-color(recent-resources-bg);
-    position: relative;
-    &:hover{
-      .black-cat{
-        transform: rotate(-5deg) translateY(-9rem);
-        transition: $run;
-        transition-delay: 1s;
-      }
-      // .black-cat-2{
-      //   transform: rotate(-5deg) translateY(-9rem);
-      //   z-index: 1;
-      //   transition: $run;
-      //   .paws{
-      //     transform: translateY(7.5rem) rotate(7deg);
-      //     opacity: 1;
-      //     // animation-name:paws;
-      //     // animation-duration: 2.5s;
-      //     transition: $run;
-      //   }
-      // }
-    }
-    .black-cat{
-      position: absolute;
-      z-index: -1;
-      transition: $jog;
-      transition-delay: 1s;
-      .head{
-        width: 10rem;
-      }
-    }
-    // .black-cat-2{
-    //   position: absolute;
-    //   // z-index: -1;
-    //   transition: $jog;
-    //   transition-delay: 2s;
-    //   // animation-name:paws;
-    //   // animation-duration: 2.5s;
-    //   .paws{
-    //     width: 10rem;
-    //     transform: translateY(4rem);
-    //     opacity: 0;
-    //   }
-    // }
-
-    // @keyframes paws {
-    //     0% { transform: translateY(7.5rem) rotate(0deg); opacity:0; }
-    //    50% { transform: translateY(3rem) rotate(5deg); opacity:1; }
-    //   100% { transform: translateY(7.5rem) rotate(7deg); opacity:1; }
-    // }
-
-  }
-  .section-description{
-    padding: 0;
-    margin: 0;
-    font-size: 1.5rem;
-    line-height: 1.8rem;
-    margin-bottom: 2rem;
-    @include breakpoint(small only){
-      font-size: 1rem;
-      line-height: 1.3;
-    }
-    a{
-      color: $pure-white;
-      background-color: rgba($pure-white, 0.1);
-      border-radius: 8px;
-      padding: 0 0.2em;
-      font-weight: $lato-bold;
-      font-style: italic;
-      &:hover{
-        background-color: $pure-white;
-        color: $navy-black;
-      }
-    }
-  }
-  .section-description-special{
-    font-weight: $lato-bold;
-    font-style: italic;
-    margin-bottom: 0;
-  }
-  .speaking-socials{
-    margin-bottom: 1em;
-    .email-container{
-      display: inline;
-      position: relative;
-      cursor: pointer;
-      .copied{
-        font-size: 0.5em;
-        right: 0;
-      }
-    }
-    a, .email-container{
-      padding-right: 0.8em;
-      font-size: 2em;
-      color: inherit;
-      &:hover, &:focus{
-        .fab, .fas{
-          animation: boing 300ms ease-out;
-        }
-        .fa-envelope{
-          color: $signature-teal;
-        }
-        .fa-linkedin-in{
-          color: $linkedin-blue;
-        }
-      }
-    }
-  }
-  .resource-link{
-    background-color: $pure-white;
-    color: semantic-color(text-on-light-bg-always);
-    padding: 1rem;
-    border-radius: $tile-radius-medium;
-    margin-bottom: 0.5rem;
-    .title{
-      font-size: 1.5rem;
-      @media (prefers-color-scheme: dark){
-        @include swipe-underline($signature-teal-l6,false);
-      }
-    }
-    .description{
-      font-size: 1rem;
-      line-height: 1.3rem;
-    }
-  }
-  .more-button{
-    padding-top: 0.7rem;
-    padding-bottom: 0.7rem;
-    color: $pure-white;
-    border-radius: 14px;
-    border: solid 0.2rem $pure-white;
-    text-align: center;
-    display: block;
-    font-weight: $lato-bold;
-    transition: $sprint;
-    &:hover{
-      color: $navy-black;
-      background-color: $pure-white;
-    }
-  }
-}
-
-.thumbnail-tile {
-  margin-bottom: 1.5em;
-  @include breakpoint(small only){
-    margin-bottom: 1em;
-  }
-}
-
-.flag {
-  position: absolute;
-  font-size: 0.8em;
-  top: -1rem;
-  right: -1rem;
-  padding: 0.25em 1em 0.25em 1em;
-  font-weight: $lato-bold;
-  background-color: $signature-teal;
-  color: $pure-white;
-  border-radius: $pill-radius;
-  @include breakpoint(small only) {
-    right: -0.5rem;
-    top: -0.5rem;
-  }
-}
-
-.photography-preview-container{
+// --- Photography Section ---
+.photography-container{
   h2{
-    text-align: center;
     font-weight: $zilla-bold;
-    margin-bottom: 3rem;
     @include breakpoint(small only){
-      line-height: 2.8rem;
+      line-height: 1;
     }
   }
   .photo-row{
     margin-top: 1em;
-    margin-bottom: 4em;
   }
   .photo-wrapper{
     &:has(.photo-tile:hover){
       z-index: 2;
     }
     .photo-tile{
-      scale: 1.2;
+      scale: 1.1;
       transition: $run;
       margin-bottom: 3em;
       @include breakpoint(small only){
@@ -445,7 +562,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         margin-bottom: 0;
       }
       &:hover{
-        scale: 1.3;
+        scale: 1.2;
         @include breakpoint(small only){
           scale: 1.05;
         }
@@ -506,69 +623,12 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
       }
     }
   }
-  .more-button{
-    padding-top: 0.7rem;
-    padding-bottom: 0.7rem;
-    color: $signature-teal;
-    border-radius: $pill-radius;
-    font-size: 1.5rem;
-    border: solid 0.2rem $signature-teal;
-    text-align: center;
-    display: block;
-    font-weight: $lato-bold;
-    transition: $sprint;
-    &:hover{
-      color: $pure-white;
-      background-color: $signature-teal;
-    }
-  }
 }
 
-.year-in-review{
-  margin-top: 10rem;
-  margin-bottom: 10rem;
+// --- Year in Review Section ---
+.year-in-review-container{
   @include breakpoint(small only){
     padding-bottom: 2rem;
-    margin-bottom: 2rem;
-    overflow: hidden;
-  }
-  .yir-header{
-    margin-bottom: 4rem;
-    @include breakpoint(small only){
-      margin-bottom: 3rem;
-    }
-  }
-  h2{
-    text-align: center;
-    font-weight: $zilla-bold;
-    @include breakpoint(small only){
-      line-height: 2.8rem;
-    }
-  }
-  .making-of{
-    font-size: 1.5rem;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    text-wrap: pretty;
-    @include breakpoint(small only){
-      font-size: 1.25rem;
-    }
-  }
-  .time-travel{
-    font-size: 2rem;
-    font-family: $caveat;
-    font-weight: $caveat-regular;
-    position: absolute;
-    transform: rotate(10deg);
-    max-width: 10rem;
-    line-height: 2rem;
-    margin-left: -3rem;
-    margin-top: -2rem;
-    @include breakpoint(small only){
-      margin-left: -5rem;
-      margin-top: -6rem;
-    }
   }
   .year-container{
     background-color: $pure-white;
@@ -577,7 +637,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
     padding: 0.5em;
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
-    transition: $sprint;
+    transition: $tight-spring;
     &:hover{
       transform: rotate(4deg) scale(1.05);
       .year-square{
@@ -586,7 +646,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         }
       }
     }
-    .year-square{ 
+    .year-square{
       background-color: $navy-black;
       color: $pure-white;
       font-family: $zilla;
@@ -643,7 +703,7 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         content: '';
         display: block;
         padding-top: 100%;
-      }  
+      }
     }
     .yir-label{
       font-size: 2rem;
@@ -662,6 +722,112 @@ iframe { //this should probs be aspect ratio // TODO Gissue #385
         background-color: $signature-teal;
       }
     }
+  }
+}
+
+// --- Resources Section ---
+.resources-container{
+  // background-color: lightcoral;
+  position: relative;
+  .resource-link{
+    color: semantic-color(text-on-light-bg-always);
+    margin-bottom: 1rem;
+    .title{
+      font-size: 1.5rem;
+      @media (prefers-color-scheme: dark){
+        @include swipe-underline($signature-teal-l6,false);
+      }
+    }
+    .description{
+      font-size: 1rem;
+      line-height: 1.3rem;
+    }
+  }
+
+}
+//******* End of Home Page Styles
+
+
+//******* Shared Components (used across pages)
+.thumbnail-container {
+  position: relative; //For flag to show correctly
+  display: block; //For flag to show correctly
+  background-color: $navy-black;
+  border-radius: $tile-radius-medium;
+  transition: $sprint;
+  &:hover{
+    transform: scale(1.05);
+    box-shadow: $recessed-shadow semantic-color(shadow);
+  }
+  &:hover .thumbnail-text{
+    opacity: 1;
+    transition: $run;
+  }
+  &:hover .thumbnail-image{
+    opacity: 0.8;
+    transition: $run;
+  }
+  .thumbnail-image{
+    border-radius: $tile-radius-medium;
+  }
+}
+
+.thumbnail-text {
+  position: absolute;
+  bottom: 1rem;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  color: $pure-white;
+  opacity: 0;
+  text-shadow: 0px 0px 5px $navy-black;
+  font-size: 1.65em;
+  line-height: 1em;
+  text-align: center;
+  font-weight: $zilla-bold;
+  font-family: $zilla;
+  @include breakpoint(small only) {
+    font-size: 1.4em;
+  }
+}
+
+.thumbnail-tile {
+  margin-bottom: 1.5em;
+  @include breakpoint(small only){
+    margin-bottom: 1em;
+  }
+}
+
+.flag {
+  position: absolute;
+  font-size: 0.8em;
+  top: -1rem;
+  right: -1rem;
+  padding: 0.25em 1em 0.25em 1em;
+  font-weight: $lato-bold;
+  background-color: $signature-teal;
+  color: $pure-white;
+  border-radius: $pill-radius;
+  @include breakpoint(small only) {
+    right: -0.5rem;
+    top: -0.5rem;
+  }
+}
+//******* End of Shared Components
+
+
+//******* Post/Article Styles
+.post-header{
+  @include breakpoint(large down) {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+}
+
+.post-header-hero{
+  margin-top: 1em;
+  @include breakpoint(small only) {
+    margin-top: 0.5em;
   }
 }
 
@@ -687,6 +853,7 @@ article{
     }
   }
 }
+
 .quote-color-block{
   background-color: #EAF8EC;
   height: 100%;
@@ -718,6 +885,20 @@ article{
     aspect-ratio: 1/1;
   }
 }
+
+.highlight{
+  pre{
+    padding: 2rem;
+    border-radius: 20px;
+    code{
+      border: none;
+      color: $pure-white;
+      background-color: transparent;
+    }
+  }
+}
+//******* End of Post/Article Styles
+
 
 //******* Easter Egg Styling
 .behind-the-scenes-container{
@@ -1000,98 +1181,6 @@ article{
   }
 }
 //******* End of Banner Styling
-
-.highlight{
-  pre{
-    padding: 2rem;
-    border-radius: 20px;
-    code{
-      border: none;
-      color: $pure-white;
-      background-color: transparent;
-    }
-  }
-}
-
-#plane-effect, #world-effect, #camera-effect, #penguin-effect{
-  @include swipe-underline(semantic-color(text-bg),false);
-}
-
-.intro-swipe-effect{
-  @include swipe-underline-hover(true);
-}
-
-//******* Intro
-.site-intro{
-  margin-bottom: 8rem;
-  margin-top: 3rem;
-  @include breakpoint(small only){
-    overflow: hidden; //resolves an issue with the watermark container overflow TODO
-  }
-  .emoji-wrapper{
-    font-size: 2rem;
-    div{
-      margin-bottom: 0.5rem;
-      transition: $sprint;
-      &:hover{
-        transform: scale(1.4);
-        text-shadow: 0 0 10px rbga($navy-black, 0.2);
-      }
-    }
-    @include breakpoint(small only){
-      @include flex-direction(row); // Does a Flips Grid-y to Grid-x On Mobile
-      margin-bottom: 1rem;
-      div{
-        width: auto; // Does a Flips Grid-y to Grid-x On Mobile (Needed for the cells)
-        margin-right: 1rem;
-      }
-    }
-  }
-  .watermark{
-    display: none;
-    width: 110%;
-    margin-left: -5%;
-    position: absolute;
-    fill: rgba($signature-teal, 0.1);
-    z-index: -1;
-    @include breakpoint(small only){
-      margin-left: 0;
-      margin-top: 5%;
-    }
-    text{
-      font-family: $zilla;
-      font-weight: $zilla-bold;
-    }
-  }
-  span.wave{
-    font-size: 0.8em;
-    margin-left: 0.5em;
-  }
-  p{
-    padding-left: 0;
-    padding-right: 0;
-    font-weight: $lato-bold;
-    line-height: 1.5;
-    margin-block: 0.75em;
-  }
-
-  a{
-    padding: 0.5rem 0;
-    font-weight: $lato-bold;
-    color: $signature-teal;
-    @include squiggly-underline($signature-teal);
-    i{
-      margin-left: 0.25rem;
-      transition: $sprint;
-    }
-    &:hover{
-      i{
-        margin-left: 0.5rem;
-      }
-    }
-  }
-}
-//******* End of Intro
 
 
 //******* Mobile Styling

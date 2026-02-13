@@ -11,6 +11,8 @@ tags: digital, illustration
 <div class="grid-x grid-padding-x grid-margin-y">
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/mango.jpg" alt="Penguin + Mango" /></div>
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/catworld.jpg" alt="Catto + World" /></div>
+    <div class=" medium-6 large-6 cell "><img src="../img/illustrations/cross-functional.jpg" alt="Pepper Panda + Team" /></div>
+    <div class=" medium-6 large-6 cell "><img src="../img/illustrations/problem.jpg" alt="Pepper Panda solving problems" /></div>
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/bus.png" alt="Penguin + London Bus" /></div>
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/popcorncat.gif" alt="Catto + Popcorn" /></div>
 </div>
@@ -18,7 +20,8 @@ tags: digital, illustration
 <p class="post-callout-large">Check out my {% include external-link.html link="https://instagram.com/naher94" content="Instagram" %} page for even more illustrations!</p>
 
 <div class="grid-x grid-padding-x grid-margin-y">
-    <div class=" medium-6 large-6 cell "><img src="../img/illustrations/nycity.gif" alt="nycity Lettering" /></div>
+    <div class="cell"><img src="../img/illustrations/panda-hero.jpg" alt="Pepper Panda excited" /></div>
+    <div class=" medium-6 large-6 cell"><img src="../img/illustrations/nycity.gif" alt="nycity Lettering" /></div>
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/laugh.gif" alt="Laugh Lettering" /></div>
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/stingray.gif" alt="Stingray Drawing" /></div>
     <div class=" medium-6 large-6 cell "><img src="../img/illustrations/giraffe.png" alt="Giraffe Drawing" /></div>
