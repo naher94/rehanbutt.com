@@ -118,13 +118,16 @@ document.addEventListener('keydown', keyHandler, false);
 
 ///////////////////////////////////////////// Start of Checkbox Easter Egg Message on About Page
 function easterEggMessage(clickedItem){
-	clickedItem.children[0].style.opacity = '1';
+	var easterEgg = clickedItem.children[0];
 	localStorage.setItem("todoChecklistEasterEgg", true);
 	gtag('event', 'Easter Eggs - ToDo Check List', {
 		'event_category': 'Special',
 		'event_label': 'ToDo Check List'
 	});
-	setTimeout(function(){clickedItem.children[0].style.opacity = '0';}, 1500);
+	requestAnimationFrame(function(){
+		requestAnimationFrame(function(){ easterEgg.classList.add('visible'); });
+	});
+	setTimeout(function(){ easterEgg.classList.remove('visible'); }, 1500);
 	snackbar("To Dos");
 }
 ///////////////////////////////////////////// End of Checkbox Easter Egg Message on About Page
