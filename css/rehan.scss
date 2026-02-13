@@ -133,8 +133,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       }
     }
   }
-  // TODO check if this level of specificity is needed
-  > div > div > a{
+  .site-intro-cta{
     padding: 0.5rem 0;
     font-family: $zilla;
     font-weight: $zilla-bold;
