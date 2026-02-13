@@ -91,7 +91,6 @@ $semantic-colors:(
     footer-bg: $navy-black-l9,
     footer-nav-hover: $navy-black-l8,
     footer-logo: $navy-black,
-    recent-resources-bg: $signature-teal,
     button-outline: $navy-black,
     button-fill: $navy-black,
     selection-background: $signature-teal-l6,
@@ -104,7 +103,6 @@ $semantic-colors:(
     resources-reference: #C412B2,
     resources-collection-card: $pure-white,
     resources-collection-card-bar: rgba($pure-white,0.6),
-    resources-collection-view-all: $navy-black-l9,
     film-credit-container-bg: $navy-black-l9,
     easter-egg-card-bg: #F9F9F9,
     easter-egg-card-outline: rgba(#D2D4D7, 0.28),
@@ -131,7 +129,6 @@ $semantic-colors:(
     footer-bg: $navy-black-d2,
     footer-nav-hover: $navy-black-l1,
     footer-logo: $pure-white,
-    recent-resources-bg: $signature-teal-d2,
     button-outline: $pure-white,
     button-fill: $pure-white,
     selection-background: $signature-teal-d3,
@@ -144,7 +141,6 @@ $semantic-colors:(
     resources-reference: #FD4AEB,
     resources-collection-card: $navy-black,
     resources-collection-card-bar: rgba($navy-black,0.6),
-    resources-collection-view-all: $navy-black,
     film-credit-container-bg: $navy-black,
     easter-egg-card-bg: $navy-black-d1,
     easter-egg-card-outline: $navy-black,
@@ -183,6 +179,8 @@ $semantic-colors:(
 $sprint: all 0.20s ease-in-out;
 $run: all 0.30s ease-in-out;
 $jog: all 0.50s ease-in-out;
+$tight-spring-curve: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$tight-spring: all 0.3s $tight-spring-curve;
 
 @keyframes boing{
   15%{
