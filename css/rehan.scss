@@ -817,13 +817,6 @@ $home-section-vertical-spacing-mobile: 4rem;
 
 
 //******* Post/Article Styles
-iframe { //this should probs be aspect ratio // TODO Gissue #385
-  height: 600px;
-  @include breakpoint(small only) {
-    height: 220px;
-  }
-}
-
 .post-header{
   @include breakpoint(large down) {
     padding-left: 0.5em;

@@ -42,7 +42,9 @@ The overall user flow of the application
 
 <div class="grid-x">
   <div class="cell">
-    <iframe width="100%" src="https://www.youtube.com/embed/Iwb5-t_nVJE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="responsive-embed widescreen">
+      <iframe src="https://www.youtube.com/embed/Iwb5-t_nVJE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
   </div>
 </div>
 
