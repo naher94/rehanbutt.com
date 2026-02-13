@@ -97,6 +97,10 @@ $home-section-vertical-spacing-mobile: 4rem;
 .site-intro{
   margin-bottom: 8rem;
   margin-top: 3rem;
+  @include breakpoint(small only){
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+  }
   @media (prefers-color-scheme: dark) {
     img{
       filter: none;
@@ -111,6 +115,9 @@ $home-section-vertical-spacing-mobile: 4rem;
     font-weight: $zilla-bold;
     margin-block: 0.75em;
     text-wrap: pretty;
+    @include breakpoint(small only){
+      font-size: 1.25em;
+    }
     &:first-of-type{
       display: inline;
     }
@@ -126,6 +133,18 @@ $home-section-vertical-spacing-mobile: 4rem;
       }
     }
   }
+  // TODO check if this level of specificity is needed
+  > div > div > a{
+    padding: 0.5rem 0;
+    font-family: $zilla;
+    font-weight: $zilla-bold;
+    font-size: 1.8em;
+    color: $signature-teal;
+    @include double-arrow-slide;
+    @include breakpoint(small only){
+      font-size: 1.25em;
+    }
+  }
   img{
     display: inline-block;
     height: 1.2em;
@@ -133,6 +152,9 @@ $home-section-vertical-spacing-mobile: 4rem;
     transition: $sprint;
     &#upmc, &#config-fig{
       border-radius: 7px;
+      @include breakpoint(small only){
+        border-radius: 5px;
+      }
     }
   }
   span{
@@ -143,6 +165,9 @@ $home-section-vertical-spacing-mobile: 4rem;
         rotate: -3deg;
         border-radius: 6px;
         box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+        @include breakpoint(small only){
+          border-radius: 4px;
+        }
       }
     }
     &#panda{
@@ -212,14 +237,6 @@ $home-section-vertical-spacing-mobile: 4rem;
       }
     }
   }
-  > div > div > a{
-    padding: 0.5rem 0;
-    font-family: $zilla;
-    font-weight: $zilla-bold;
-    font-size: 1.8em;
-    color: $signature-teal;
-    @include double-arrow-slide;
-  }
 }
 
 // --- Home Page Section Header (shared) ---
@@ -250,6 +267,9 @@ $home-section-vertical-spacing-mobile: 4rem;
   h2{
     padding-left: 0;
     padding-right: 0;
+    @include breakpoint(small only){
+      font-size: 2.5em;
+    }
   }
   .section-description{
     padding: 0;
@@ -259,7 +279,8 @@ $home-section-vertical-spacing-mobile: 4rem;
     line-height: 1.8rem;
     text-wrap: pretty;
     @include breakpoint(small only){
-      // font-size: 1rem;
+      font-size: 1.25em; //TODO fix this
+      font-size: 1em;
       line-height: 1.3;
     }
     a{
@@ -460,6 +481,9 @@ $home-section-vertical-spacing-mobile: 4rem;
 .featured-projects{
   .feature-item{
     margin-bottom: 3rem;
+    @include breakpoint(small only){
+      margin-bottom: 2rem;
+    }
     &:nth-child(even){
       .image-wrapper{
         .thumbnail-container-featured{
@@ -496,9 +520,11 @@ $home-section-vertical-spacing-mobile: 4rem;
         font-weight: $zilla-bold;
         margin-bottom: 0;
         @include breakpoint(small only){
+          font-size: 1.5rem;
           line-height: 1.1;
           padding-left: 0;
           padding-right: 0;
+          margin-bottom: 0.25em;
         }
       }
       p{
@@ -507,6 +533,9 @@ $home-section-vertical-spacing-mobile: 4rem;
         padding: 0;
         margin: 0;
         text-wrap: pretty;
+        @include breakpoint(small only){
+          font-size: 1rem;
+        }
       }
     }
   }
