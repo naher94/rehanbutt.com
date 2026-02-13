@@ -5,10 +5,12 @@
   tooltip.innerHTML =
     '<a class="share-highlighter-item threads" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-threads"></i></a>' +
     '<span class="share-highlighter-item copy"><i class="fas fa-link"></i></span>';
-  document.body.appendChild(tooltip);
 
   var postContent = document.querySelector('.post-content');
   if (!postContent) return;
+
+  postContent.style.position = 'relative';
+  postContent.appendChild(tooltip);
 
   var isVisible = false;
 
@@ -18,11 +20,10 @@
     var shareText = '"' + selectedText + '" — ' + pageUrl;
     threadsLink.href = 'https://threads.net/intent/post?text=' + encodeURIComponent(shareText);
 
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    var containerRect = postContent.getBoundingClientRect();
 
-    tooltip.style.top = (rect.top + scrollTop - 48) + 'px';
-    tooltip.style.left = (rect.left + scrollLeft + (rect.width / 2)) + 'px';
+    tooltip.style.top = (rect.top - containerRect.top - 48) + 'px';
+    tooltip.style.left = (rect.left - containerRect.left + (rect.width / 2)) + 'px';
 
     requestAnimationFrame(function() {
       tooltip.classList.add('visible');
