@@ -630,7 +630,6 @@ $home-section-vertical-spacing-mobile: 4rem;
 .year-in-review-container{
   @include breakpoint(small only){
     padding-bottom: 2rem;
-    // overflow: hidden; //TODO is this needed? causing an issue with the shadows 
   }
   .year-container{
     background-color: $pure-white;
