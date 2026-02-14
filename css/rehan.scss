@@ -126,7 +126,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       text-decoration: underline dotted 4px;
       text-decoration-color: rgba($navy-black, 0.5); //TODO update with semantic-color
       @include breakpoint(small only){
-        text-decoration: underline dotted 3px;
+        text-decoration: underline dotted 2px;
         text-decoration-color: rgba($navy-black, 0.5); //TODO update with semantic-color
       }
       @media (prefers-color-scheme: dark) {
