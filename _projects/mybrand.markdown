@@ -40,9 +40,6 @@ With the refresh of my site I also wanted to refresh my visual brand identity, s
   <div class="cell">
     <img src="../img/mybrand/sketches.jpg" alt="Sketches of Logo Iterations" />
   </div>
-</div>
-
-<div class="grid-x grid-margin-y">
   <div class="cell">
     <img src="../img/mybrand/exploration.jpg" alt="Logo explorations"/>
   </div>
@@ -57,7 +54,7 @@ With the refresh of my site I also wanted to refresh my visual brand identity, s
 {:.post-callout-medium}
 In order to reduce the number of horizontal lines I had to either slide the middle segment of the “E” down or move the “R” horizontal up. I decided to slide the “E” segment down so that I did not mess with the curvature of the “R”.
 
-<div class="grid-x grid-margin-y">
+<div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell">
     <img src="../img/mybrand/han-alignment.jpg" alt="Alignment of the H A and N" />
   </div>
