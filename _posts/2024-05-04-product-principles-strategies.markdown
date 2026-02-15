@@ -7,6 +7,7 @@ hero: "product-principles-strategies/hero.jpg"
 hero-alt: Illustration of Pepper the Product Panda excited to showcase product principles and strategies
 tags: [leadership,product development]
 content-type: my content
+featured: true
 date: 2024-05-04
 ---
 

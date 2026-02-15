@@ -200,9 +200,17 @@ sort-order: 1
   </div>
   {% assign allresources = site.resources | concat: site.posts %}
   {% assign resources_sorted = allresources | sort: 'date' | reverse %}
-  <!-- TODO if no tags then skip -->
-  <!-- TODO add articles to this page as well.. CONFIRM THIS WORKS -->
-  {%- for resource in resources_sorted limit:6 -%}
+  {% assign featured_resources = resources_sorted | where: 'featured', true %}
+  {% assign recent_resources = resources_sorted | where_exp: 'item', 'item.featured != true' %}
+  {%- for resource in featured_resources -%}
+    {%- if resource.article == true -%}
+    {% include article-element.html item=resource css-class="medium-6" %}
+    {%- else -%}
+    {% include resource-element.html item=resource css-class="medium-6" %}
+    {%- endif -%}
+  {%- endfor -%}
+  <div class="cell divider"></div>
+  {%- for resource in recent_resources limit:6 -%}
     {%- if resource.article == true -%}
     {% include article-element.html item=resource css-class="medium-6 large-4" %}
     {%- else -%}
