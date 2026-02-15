@@ -731,8 +731,17 @@ $home-section-vertical-spacing-mobile: 4rem;
 
 // --- Resources Section ---
 .resources-container{
-  // background-color: lightcoral;
   position: relative;
+  .divider{
+    height: 2px;
+    background-color: rgba($navy-black, 0.1);
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    @include breakpoint(small only){
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+  }
   .resource-link{
     color: semantic-color(text-on-light-bg-always);
     margin-bottom: 1rem;
