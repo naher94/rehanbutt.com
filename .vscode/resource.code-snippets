@@ -10,6 +10,9 @@
 			"tags: [$4]"
 			"content-type: ${5|reference,tool,interactive,video,my content,reading,publication,portfolio,article,blog,good eats|}"
 			"date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
+			"featured: ${6|false,true|}"
+			"thumbnail: \"$7\""
+			"thumbnail-alt: \"$8\""
 			"---"
 		],
 		"description" : "Frontmatter for a Resource"

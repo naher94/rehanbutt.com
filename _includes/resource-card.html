@@ -6,6 +6,10 @@
     <div class="resource-thumbnail">
       <img src="/img/posts/{{include.item.hero}}" alt="{{include.item.hero-alt}}" loading="lazy">
     </div>
+    {%- elsif include.item.thumbnail -%}
+    <div class="resource-thumbnail">
+      <img src="/img/resources/{{include.item.thumbnail}}" alt="{{include.item.thumbnail-alt}}" loading="lazy">
+    </div>
     {%- endif -%}
     <p class="meta {{include.item.content-type | slugify}}">
       {%- case include.item.content-type -%}
