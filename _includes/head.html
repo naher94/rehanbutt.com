@@ -53,6 +53,12 @@
 
     <meta property="og:see_also" content="https://www.threads.net/@naher94" />
 
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@naher94">
+  <meta name="twitter:title" content="{% if page.title %}{{ site.title | escape }} | {{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
+  <meta name="twitter:description" content="{% if page.layout == "resources-collection" %}{{ page.intro | strip_newlines | truncate: 160 }}{% elsif page.excerpt %}{{ page.content | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <meta name="twitter:image" content="{% if page.layout == "resources-collection" %}{{ page.tile-image | prepend: '/img/resources-collection/' | prepend: site.baseurl | prepend: site.url }}{% elsif page.layout == "post-article" %}{{ page.hero | prepend: '/img/posts/' | prepend: site.baseurl | prepend: site.url }}{% elsif page.layout == "post-photo" %}{{ page.thumbnail | prepend: '/img/photography/thumbnails/' | prepend: site.baseurl | prepend: site.url }}{% elsif page.thumbnail %}{{ page.thumbnail | append: '.png' | prepend: '/img/thumbnails/' | prepend: site.baseurl | prepend: site.url }}{% else %}{{ "/img/favicon.png" | prepend: site.baseurl | prepend: site.url }}{% endif %}">
+
   <link rel="stylesheet" href="{{"/css/gallery.css" | prepend: site.baseurl }}"/>
   <link rel="stylesheet" href="{{"/css/rehan.css" | prepend: site.baseurl }}"/>
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
@@ -66,16 +72,18 @@
     "name": "Rehan Butt",
     "url": "https://www.rehanbutt.com",
     "image": "https://www.rehanbutt.com/img/rehan.png",
-    "alumniOf": {
-      "@type": "CollegeOrUniversity",
-      "name": "Carnegie Mellon University",
-      "sameAs": "https://www.cmu.edu"
-    },
-    {
-      "@type": "HighSchool",
-      "name": "St. Andrew's Episcopal School",
-      "sameAs": "https://www.saes.org"
-    },
+    "alumniOf": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "Carnegie Mellon University",
+        "sameAs": "https://www.cmu.edu"
+      },
+      {
+        "@type": "HighSchool",
+        "name": "St. Andrew's Episcopal School",
+        "sameAs": "https://www.saes.org"
+      }
+    ],
     "sameAs": [
       "https://twitter.com/naher94",
       "https://www.instagram.com/naher94/",
