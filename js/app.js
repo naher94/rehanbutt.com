@@ -218,6 +218,18 @@ function getHappyDayString() {
 getHappyDayString();
 ///////////////////////////////////////////// End of Happy Day Label
 
+///////////////////////////////////////////// Send It Easter Egg
+function updateSendItLabel() {
+  const isSpecialDay = getMonth() === 9 && getDate() === 7;
+  const label = document.getElementById("ship-it-label");
+  if (label) {
+    label.innerHTML = isSpecialDay ? "🧗‍♀️ Send It!" : "⛵ Ship It!";
+  }
+}
+
+updateSendItLabel();
+///////////////////////////////////////////// End of Send It Easter Egg
+
 ///////////////////////////////////////////// Start of Copy to Clipboard
 function copyToClipboard(link,clickedItem) {
 	if (navigator && navigator.clipboard && navigator.clipboard.writeText){
