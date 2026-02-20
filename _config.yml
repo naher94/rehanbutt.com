@@ -13,7 +13,7 @@ description: > # this means to ignore newlines until "baseurl:"
 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://rehanbutt.com" # the base hostname & protocol for your site
-version: 10.7.0
+version: 10.7.1
 version-naming: [Apricot, Blackcurrent, Coconut, Dragonfruit, Elderberry, Fig, Guava, Honeydew, Imbe, Jackfruit]
 
 # Build settings
