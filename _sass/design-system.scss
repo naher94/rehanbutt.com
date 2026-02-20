@@ -174,7 +174,8 @@ ul {
     border-radius: 5px;
   }
 
-  &:hover {
+  &:hover,
+  &:visited:hover {
     color: $pure-white;
   }
 
@@ -182,6 +183,8 @@ ul {
     height: 100%;
   }
 
+  &:visited,
+  &:active,
   &:focus{
     color: semantic-color(link);
   }
