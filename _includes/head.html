@@ -24,6 +24,9 @@
   <link rel="apple-touch-icon" type="image/png" href="{{site.url}}/img/favicon.png" sizes="120x120"/>
   <link rel="apple-touch-icon" type="image/png" href="{{site.url}}/img/favicon.png" sizes="152x152"/>
 
+  <meta name="theme-color" content="{% if page.hero-background-color %}{{ page.hero-background-color | strip }}{% else %}#12abc4{% endif %}">
+  <meta name="theme-color" content="{% if page.hero-background-color-dark %}{{ page.hero-background-color-dark | strip }}{% else %}#12abc4{% endif %}" media="(prefers-color-scheme: dark)">
+
   <meta property="og:url" content="{{ page.url | replace:' . index.html','' | prepend: site.baseurl | prepend: site.url }}" />
   <meta property="og:title" content="{% if page.title %}{{ site.title | escape }} | {{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}" />
   

@@ -1,4 +1,11 @@
 //******* Footer Styling
+
+// Sets the overscroll canvas color at the bottom of the page to match the footer
+// Fixes Safari 26 safe area showing white at the bottom
+html {
+  background-color: semantic-color(footer-bg);
+}
+
 footer{
   margin-top: 2rem;
   background-color: semantic-color(footer-bg);
