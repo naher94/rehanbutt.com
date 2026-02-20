@@ -1,0 +1,50 @@
+########################
+# Lychee Link Checker Configuration
+########################
+
+# Increase timeout from default 20s to handle slow corporate sites
+# (mckinsey.com, qulr.life, yasmeenalmuhanna.com were timing out)
+timeout = 30
+
+# Retry failed requests to handle transient failures
+max_retries = 3
+
+# Accept HTTP status codes that indicate the site is alive but blocking bots
+# 401: Sites like unsplash.com and Vimeo embeds that require auth/cookies
+# 403: Sites that block automated crawlers
+# 429: Rate limiting responses (not a broken link)
+# 436: Non-standard code returned by cssmatic.com
+accept = ["200..=299", "401", "403", "429", "436"]
+
+# Modern browser user-agent to reduce bot detection
+# (Updated from Firefox 59 which was triggering blocks)
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0"
+
+# Allow insecure SSL connections — several sites have intermittent cert issues
+# but are otherwise functional (informationisbeautiful.net, avataaars.com,
+# jeffsum.com, sporttechie.com). Using insecure instead of excluding means
+# we still catch these sites if they actually go offline.
+insecure = true
+
+# Don't check mailto links
+include_mail = false
+
+# Exclude URL patterns (regex)
+exclude = [
+  # Social media profiles that aggressively block automated crawlers
+  '^https://www\.linkedin\.com/in/',
+  '^https://codepen\.io/rehanbutt',
+  '^https://instagram\.com/naher94',
+  '^https://www\.threads\.net/@naher94',
+  '^https://threads\.net/intent/',
+
+  # TED redirects bots in a loop to "unsupported browser" page
+  '^https://www\.ted\.com/talks/',
+
+  # Vimeo embed URLs require browser cookies/referrer to load
+  '^https://player\.vimeo\.com/video/',
+]
+
+# WATCH LIST — Sites with errors that may be temporary:
+# - r2d3.us (522 Cloudflare error as of 2026-02) — popular ML visualization
+#   If this persists for 2+ months, replace with Wayback Machine archive URL
