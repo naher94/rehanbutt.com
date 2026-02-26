@@ -141,5 +141,11 @@
       line-height: 1.2;
       color: semantic-color(easter-egg-card-description);
     }
+    .easter-egg-unlock-date{
+      font-size: 0.85em;
+      line-height: 1.2;
+      color: semantic-color(easter-egg-card-description);
+      margin-block-start: 0.5em;
+    }
   }
 }
