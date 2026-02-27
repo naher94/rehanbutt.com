@@ -1,6 +1,6 @@
 // I see you snooping in the code 😉, trying to bypass the hunt of finding all the easter eggs? That's no fun, but on the flip side you found another easter egg, SO YAY!
 
-// Create and set a localStorage variable "codeSnoopingEasterEgg" to "true" to claim your achievement
+// Create and set a localStorage variable "codeSnoopingEasterEgg" to new Date().toISOString() to claim your achievement
 
 function snackbar(name) {
   var x = document.getElementById("easter-egg-snackbar-container");
@@ -29,7 +29,7 @@ var keyHandler = function (event) {
 		current = 0;
     isEggVisable = true;
     localStorage.setItem("eggKey", isEggVisable);
-		localStorage.setItem("behindTheScenesEasterEgg", true);
+		localStorage.setItem("behindTheScenesEasterEgg", new Date().toISOString());
     setBTS();
 		gtag('event', 'Easter Eggs - Konami Code', {
 			'event_category': 'Special',
@@ -74,7 +74,7 @@ function unsetBTS(){
 function carHorn(){
 	var audio = new Audio('carhorn.mp3');
 	audio.play();
-	localStorage.setItem("carHornEasterEgg", true);
+	localStorage.setItem("carHornEasterEgg", new Date().toISOString());
 	gtag('event', 'Easter Eggs - Tesla Carhorn', {
 		'event_category': 'Special',
 		'event_label': 'Carhorn'
@@ -83,7 +83,7 @@ function carHorn(){
 }
 
 function paddington(){
-	localStorage.setItem("paddingtonEasterEgg", true);
+	localStorage.setItem("paddingtonEasterEgg", new Date().toISOString());
 	gtag('event', 'Easter Eggs - Qulr Paddington Bear', {
 		'event_category': 'Special',
 		'event_label': 'Paddington'
@@ -102,7 +102,7 @@ function isCodeSnoop(){
 }
 
 function highFive(){
-	localStorage.setItem("highFiveEasterEgg", true);
+	localStorage.setItem("highFiveEasterEgg", new Date().toISOString());
 	gtag('event', 'Easter Eggs - High Five', {
 		'event_category': 'Special',
 		'event_label': 'High Five'
@@ -119,7 +119,7 @@ document.addEventListener('keydown', keyHandler, false);
 ///////////////////////////////////////////// Start of Checkbox Easter Egg Message on About Page
 function easterEggMessage(clickedItem){
 	var easterEgg = clickedItem.children[0];
-	localStorage.setItem("todoChecklistEasterEgg", true);
+	localStorage.setItem("todoChecklistEasterEgg", new Date().toISOString());
 	gtag('event', 'Easter Eggs - ToDo Check List', {
 		'event_category': 'Special',
 		'event_label': 'ToDo Check List'
