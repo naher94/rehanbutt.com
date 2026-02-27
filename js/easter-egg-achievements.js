@@ -20,10 +20,12 @@ function isAchievementUnlocked() {
 			achievementUnlockCount++;
 
 			if (value !== "true") {
+				card.classList.add("has-date");
 				const date = new Date(value);
-				const dateEl = card.querySelector(".easter-egg-unlock-date");
-				if (dateEl) {
-					dateEl.textContent = "Unlocked " + date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+				const formattedDate = date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }).toUpperCase().replace(",", "");
+				const arcText = card.querySelector(".arc-date-text");
+				if (arcText) {
+					arcText.textContent = formattedDate;
 				}
 			}
 		}

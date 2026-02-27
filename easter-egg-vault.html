@@ -35,10 +35,16 @@ footer-sort-order: 4
           <div class="unlocked-icon">
             {{egg.icon}}
           </div>
+          <svg class="date-arc" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <path id="arc-{{egg.title | strip | downcase | replace: ' ', '-'}}" d="M 14.4,-0.8 A 62,62 0 0,1 85.6,-0.8" />
+            </defs>
+            <path class="ring-arc" d="M 87.3,-3.2 A 65,65 0 1,1 12.7,-3.2" fill="none" />
+            <text><textPath href="#arc-{{egg.title | strip | downcase | replace: ' ', '-'}}" startOffset="50%" text-anchor="middle" class="arc-date-text"></textPath></text>
+          </svg>
         </div>
         <p class="easter-egg-name">{{egg.title}}</p>
       <p class="easter-egg-description">{{egg.description}}</p>
-      <p class="easter-egg-unlock-date"></p>
       </div>
     </div>
     {%- endfor -%}
