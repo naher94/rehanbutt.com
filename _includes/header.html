@@ -62,13 +62,13 @@
             <span class="nav-burger-icon"></span>
           </label>
           <div class="mobile-navbar">
-            <a class="nav" href="/portfolio">Portfolio</a>
-            <a class="nav" href="/about">About</a>
+            <a class="nav" href="/portfolio" {% if page.url contains '/portfolio' %}aria-current="page"{% endif %}>Portfolio</a>
+            <a class="nav" href="/about" {% if page.url contains '/about' %}aria-current="page"{% endif %}>About</a>
           </div>
           <ul class="menu-links">
           {% for my_page in header_items %}
             {% if my_page.title %}
-              <li class="nav-item-container"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></li>
+              <li class="nav-item-container"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}" {% if page.url == my_page.url %}aria-current="page"{% endif %}>{{ my_page.title }}</a></li>
             {% endif %}
           {% endfor %}
           </ul>
@@ -78,9 +78,9 @@
         {% for my_page in header_items %}
           {% if my_page.title %}
             {%- if my_page.title == "Home" -%}
-              <a class="nav nav-home" href="/" title="home"><i class="fas fa-home"></i></a>
+              <a class="nav nav-home" href="/" title="home" {% if page.url == '/' %}aria-current="page"{% endif %}><i class="fas fa-home"></i></a>
               {%- else -%}
-              <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+              <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}" {% if page.url == my_page.url %}aria-current="page"{% endif %}>{{ my_page.title }}</a>
             {%- endif -%}
           {% endif %}
         {% endfor %}
