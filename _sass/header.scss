@@ -109,12 +109,15 @@
   user-select: none;
   margin-bottom: 0;
   a {
-    color: inherit;
+    color: $pure-white;
     font-family: $zilla;
     font-weight: $zilla-bold;
     font-size: 1.25em;
     border-radius: $pill-radius;
     padding: 0.25em 0.6em;
+    &:visited, &:active, &:focus {
+      color: $pure-white;
+    }
     &:hover{
       background-color: $signature-teal-d1;
     }
