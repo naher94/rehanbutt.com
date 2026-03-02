@@ -229,9 +229,9 @@ https://www.stickermule.com/u/rehanbutt | ✖️|✖️|✖️
 http://BRND.life | ✅ footer |✖️|✖️
 http://QULR.life | ✅ footer |✖️|✖️
 http://naher94.github.io/esporre/ |✖️|✖️|✖️
-https://yasmeenalmuhanna.com | ✖️|✖️|✖️
 https://stackoverflow.com/users/12394272/rehan-butt |✖️|✖️|✅|social links
 https://community.cmu.edu/s/ | |
 https://saes.alumnifire.com | ✖️|✖️|✅| bio & photo
 https://jekyllrb.com/showcase/ |✅|✖️|✖️| Full screen shot of the home page v4.0.0
 https://dl.acm.org/profile/99661657353 |✖️|✖️|✅|
+https://devzgn.com |✖️|✖️|✖️|just a link
