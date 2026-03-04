@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Jeffsum"
-link: https://jeffsum.com
+link: https://jeffsum.oliverturner.cloud
 description: A little text placeholder generator of Jeff Goldblum awesomeness.
 content-type: tool
 tags: tools
