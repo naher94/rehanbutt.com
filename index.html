@@ -201,8 +201,9 @@ sort-order: 1
   </div>
   {% assign allresources = site.resources | concat: site.posts %}
   {% assign resources_sorted = allresources | sort: 'date' | reverse %}
-  {% assign featured_resources = resources_sorted | where: 'featured', true %}
-  {% assign recent_resources = resources_sorted | where_exp: 'item', 'item.featured != true' %}
+  {% assign tagged_resources = resources_sorted | where_exp: 'item', 'item.tags.size > 0' %}
+  {% assign featured_resources = tagged_resources | where: 'featured', true %}
+  {% assign recent_resources = tagged_resources | where_exp: 'item', 'item.featured != true' %}
   {%- for resource in featured_resources -%}
     {%- if resource.article == true -%}
     {% include article-element.html item=resource css-class="medium-6" %}
