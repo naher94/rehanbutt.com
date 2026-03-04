@@ -47,6 +47,8 @@
       {{ page.thumbnail | prepend: '/img/photography/thumbnails/' | prepend: site.baseurl | prepend: site.url }}
     {% elsif page.thumbnail %}
       {{ page.thumbnail | append: '.png' | prepend: '/img/thumbnails/' | prepend: site.baseurl | prepend: site.url }}
+    {% elsif page.og-image %}
+      {{ page.og-image | prepend: '/img/og/' | prepend: site.baseurl | prepend: site.url }}
     {% else %}
       {{ "/img/favicon.png" | prepend: site.baseurl | prepend: site.url }}
     {% endif %}" />
@@ -57,7 +59,7 @@
   <meta name="twitter:site" content="@naher94">
   <meta name="twitter:title" content="{% if page.title %}{{ site.title | escape }} | {{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
   <meta name="twitter:description" content="{% if page.layout == "resources-collection" %}{{ page.intro | strip_newlines | truncate: 160 }}{% elsif page.excerpt %}{{ page.content | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-  <meta name="twitter:image" content="{% if page.layout == "resources-collection" %}{{ page.tile-image | prepend: '/img/resources-collection/' | prepend: site.baseurl | prepend: site.url }}{% elsif page.layout == "post-article" %}{{ page.hero | prepend: '/img/posts/' | prepend: site.baseurl | prepend: site.url }}{% elsif page.layout == "post-photo" %}{{ page.thumbnail | prepend: '/img/photography/thumbnails/' | prepend: site.baseurl | prepend: site.url }}{% elsif page.thumbnail %}{{ page.thumbnail | append: '.png' | prepend: '/img/thumbnails/' | prepend: site.baseurl | prepend: site.url }}{% else %}{{ "/img/favicon.png" | prepend: site.baseurl | prepend: site.url }}{% endif %}">
+  <meta name="twitter:image" content="{% if page.layout == "resources-collection" %}{{ page.tile-image | prepend: '/img/resources-collection/' | prepend: site.baseurl | prepend: site.url }}{% elsif page.layout == "post-article" %}{{ page.hero | prepend: '/img/posts/' | prepend: site.baseurl | prepend: site.url }}{% elsif page.layout == "post-photo" %}{{ page.thumbnail | prepend: '/img/photography/thumbnails/' | prepend: site.baseurl | prepend: site.url }}{% elsif page.thumbnail %}{{ page.thumbnail | append: '.png' | prepend: '/img/thumbnails/' | prepend: site.baseurl | prepend: site.url }}{% elsif page.og-image %}{{ page.og-image | prepend: '/img/og/' | prepend: site.baseurl | prepend: site.url }}{% else %}{{ "/img/favicon.png" | prepend: site.baseurl | prepend: site.url }}{% endif %}">
 
   <link rel="stylesheet" href="{{"/css/gallery.css" | prepend: site.baseurl }}"/>
   <link rel="stylesheet" href="{{"/css/rehan.css" | prepend: site.baseurl }}"/>
