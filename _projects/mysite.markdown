@@ -5,6 +5,7 @@ tile-name: "My Site"
 thumbnail: "mysite"
 date:   2014-12-10
 tags: web branding
+published: false
 ---
 
 <div class="grid-x">
