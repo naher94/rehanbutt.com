@@ -9,7 +9,7 @@ tags: web color
 
 <div class="image-container"><img src="../img/qulr/colorCards.png" alt="Color Cards"/></div>
 
-I’m a big fan of color and creating fun names for them. As such I started QULR as a first step of a much larger exploration and tool creation surrounding color. {% include external-link.html link="https://qulr.life" content="QULR" %} is my way of sharing some of the many fun colors I come across.
+I’m a big fan of color and creating fun names for them. As such I started QULR as a first step of a much larger exploration and tool creation surrounding color. {% include external-link.html link="https://www.qulr.life" content="QULR" %} is my way of sharing some of the many fun colors I come across.
 
 <div class="image-container"><img src="../img/qulr/screenshot.png" alt="Website Screenshot"/></div>
 
