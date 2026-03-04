@@ -1,6 +1,7 @@
 ---
 layout: blank
 title: "About"
+og-image: about.jpg
 permalink: about
 footer-main: true
 sort-order: 2
