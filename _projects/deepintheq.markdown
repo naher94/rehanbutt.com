@@ -1,7 +1,7 @@
 ---
 layout: post-hero
 title:  "Deep in The Q - AR Game"
-tile-name: "Deep in The Q - AR Game"
+tile-name: "Deep in The Q AR Sports Game"
 thumbnail: "deepInTheQ"
 date: 2017-05-23
 hero-background-color: "#6f263d"
