@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Interchange"
-tile-name: "Interchange"
+tile-name: "Interchange Brand & Web Presence"
 thumbnail: "interchange"
 date:   2016-12-30
 tags: branding webdev
