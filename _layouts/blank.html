@@ -1,22 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-{% include head.html %}
-
-<body>
-  {% include easter-egg-snackbar.html %}
-  {% include tag-manager.html %}
-  {% include header.html %}
-
-  <main class="page-content">
-    {{ content }}
-    <!-- TODO width of this is not right given that it jumps from what is shown on default.html -->
-    <div class="grid-container grid-x easter-egg-banner-wrapper-wrapper">
-      {% include easter-egg-banner.html %}
-    </div>
-  </main>
-  {% include footer.html %}
-  {% include foot.html %}
-</body>
-
-</html>
+---
+layout: base
+---
+<main class="page-content">
+  {{ content }}
+</main>

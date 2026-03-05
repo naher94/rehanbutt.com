@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include head.html %}
+
+<body>
+  <a class="show-on-focus" href="#main-content">Skip to main content</a>
+  {% include easter-egg-snackbar.html %}
+  {% include tag-manager.html %}
+  {% include header.html %}
+
+  {{ content }}
+
+  {% include footer-buffer.html %}
+  {% include footer.html %}
+  {% include foot.html %}
+  {% include easter-egg-banner.html %}
+</body>
+
+</html>

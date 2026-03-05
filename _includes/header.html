@@ -1,51 +1,51 @@
 <header>
   <style>
   .nav-container{
-    background-color: {{background-color-override}};
+    background-color: {{page.hero-background-color}};
   }
   .nav, .nav:hover{
-    color: {{accent-color-override}};
+    color: {{page.hero-accent-color}};
   }
   .nav:hover{
-    background-color: {{accent-color-override | strip | append: "33"}};
+    background-color: {{page.hero-accent-color | strip | append: "33"}};
   }
   .logo #rehan-logo-header g{
-    fill: {{accent-color-override}};
+    fill: {{page.hero-accent-color}};
   }
 
   .nav-burger-icon:before,.nav-burger-icon:after{
-    background: {{accent-color-override}};
+    background: {{page.hero-accent-color}};
   }
 
   .menu-links a{
-    color: {{accent-color-override}};
+    color: {{page.hero-accent-color}};
   }
   .menu-links a:hover{
-    background-color: {{accent-color-override | strip | append: "33"}};
+    background-color: {{page.hero-accent-color | strip | append: "33"}};
   }
   @media (prefers-color-scheme: dark) {
     .nav-container{
-      background-color: {{background-color-override-dark}};
+      background-color: {{page.hero-background-color-dark}};
     }
     .nav, .nav:hover{
-      color: {{accent-color-override-dark}};
+      color: {{page.hero-accent-color-dark}};
     }
     .nav:hover{
-      background-color: {{accent-color-override-dark | strip | append: "33"}};
+      background-color: {{page.hero-accent-color-dark | strip | append: "33"}};
     }
     .logo #rehan-logo-header g{
-      fill: {{accent-color-override-dark}};
+      fill: {{page.hero-accent-color-dark}};
     }
 
     .nav-burger-icon:before,.nav-burger-icon:after{
-      background: {{accent-color-override-dark}};
+      background: {{page.hero-accent-color-dark}};
     }
 
     .menu-links a{
-      color: {{accent-color-override-dark}};
+      color: {{page.hero-accent-color-dark}};
     }
     .menu-links a:hover{
-      background-color: {{accent-color-override-dark | strip | append: "33"}};
+      background-color: {{page.hero-accent-color-dark | strip | append: "33"}};
     }
 
   }
