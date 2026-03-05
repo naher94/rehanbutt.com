@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "ISU Branding"
-tile-name: "ISU Branding"
+tile-name: "ISU Brand Identity"
 thumbnail: "isuBranding"
 date:   2015-02-10
 tags: branding
