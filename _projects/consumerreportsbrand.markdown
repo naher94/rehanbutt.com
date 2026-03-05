@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Consumer Reports Rebrand"
-tile-name: "Consumer Reports Rebrand"
+tile-name: "Consumer Reports Brand Identity"
 thumbnail: "consumerreports-brand"
 date:   2015-08-20
 tags: UI UX branding
