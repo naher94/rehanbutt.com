@@ -27,7 +27,7 @@ Jekyll also uses the `Liquid` language as its templating language. Here are a co
 #### Projects
 
 * When a project is featured an additional tile image is needed
-* Tile Titles should be _____________
+* Tile Titles should be the project name followed by a brief descriptor of the work type (e.g. "CMU NYC Brand & Web Presence", "Esporre Portfolio Tool")
 * Tile Descriptions should say something along the lines of a one-liner around the central theme of the project
 * Page Titles should be very similar to Tile Titles with but may be a longer phrase of the project
 
