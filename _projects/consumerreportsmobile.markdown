@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Consumer Reports"
-tile-name: "Consumer Reports Mobile"
+tile-name: "Consumer Reports Mobile App"
 thumbnail: "consumerReports"
 date:   2015-08-20
 tags: UI UX Mobile
