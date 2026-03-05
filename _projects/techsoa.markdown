@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "tech.soa"
-tile-name: "tech.soa Site"
+tile-name: "tech.soa Web Presence"
 thumbnail: "techsoa"
 date: 2017-08-23
 tags: web
