@@ -1,7 +1,7 @@
 ---
 layout: post-hero
 title:  "Safar TeleCare Splash Page"
-tile-name: "Safar Splash Page"
+tile-name: "Safar TeleCare Splash Page"
 thumbnail: "safar-splash"
 flag:
 date: 2022-06-01
