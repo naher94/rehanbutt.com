@@ -1,7 +1,7 @@
 ---
 layout: post-hero
 title:  "Noodlehead Web Refresh"
-tile-name: "Web Refresh"
+tile-name: "Noodlehead Web Refresh"
 thumbnail: "noodlehead"
 hero-background-color: "#EDEDED"
 hero-background-color-dark: "#1F2937"
