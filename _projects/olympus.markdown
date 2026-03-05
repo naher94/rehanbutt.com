@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Project Olympus Branding"
-tile-name: "Olympus Branding"
+tile-name: "Project Olympus Brand Identity"
 thumbnail: "olympus"
 date: 2017-09-22
 tags: Branding
