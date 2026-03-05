@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Lucid NYC"
-tile-name: "Lucid NYC"
+tile-name: "Lucid NYC Brand & Web Presence"
 thumbnail: "lucid"
 date:   2016-02-15
 tags: digital UI UX
