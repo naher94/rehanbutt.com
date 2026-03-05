@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Wats:ON? Website Refresh"
-tile-name: "Web Refresh"
+tile-name: "Wats:ON? Web Refresh"
 thumbnail: "watson"
 date: 2016-11-15
 tags: web
