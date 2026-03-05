@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Augmented Reality Glasses"
-tile-name: "AR Glasses"
+tile-name: "AR Glasses Industrial Design"
 thumbnail: "arGlasses"
 date: 2017-08-29
 tags: Industrial Design
