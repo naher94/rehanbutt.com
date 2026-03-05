@@ -1,7 +1,7 @@
 ---
 layout: post-hero
 title:  "Shine Registry"
-tile-name: "Shine Registry"
+tile-name: "Shine Registry Web Redesign"
 thumbnail: "shine"
 flag:
 date: 2021-02-01

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Consumer Reports"
-tile-name: "Consumer Reports"
+tile-name: "Consumer Reports UX Design"
 thumbnail: "consumerReports"
 date:   2015-08-20
 tags: UI UX

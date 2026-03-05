@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Conversational Design"
-tile-name: "Conversational Design"
+tile-name: "Conversational Bot Design"
 thumbnail: "conversationalDesign"
 date: 2016-12-16
 tags: bot

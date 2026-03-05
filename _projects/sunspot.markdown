@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Sun Spot: Portable UV Detection"
-tile-name: "Sun Spot"
+tile-name: "Sun Spot UV Detection"
 thumbnail: "sunSpot"
 date:   2016-03-01
 tags: fabrication physical computing

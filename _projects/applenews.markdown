@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Apple News for MacOS"
-tile-name: "Apple News"
+tile-name: "Apple News macOS Redesign"
 thumbnail: "appleNews"
 date:   2016-10-9
 tags: digital UI UX

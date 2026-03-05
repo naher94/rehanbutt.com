@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "My Site"
-tile-name: "My Site"
+tile-name: "Personal Website Design"
 thumbnail: "mysite"
 date:   2014-12-10
 tags: web branding

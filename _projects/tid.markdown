@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Tangible Interaction Design Branding"
-tile-name: "TiD Branding"
+tile-name: "TiD Brand Identity"
 thumbnail: "tid"
 date:   2017-01-25
 tags: Branding

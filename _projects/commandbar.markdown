@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "CommandBar (Photoshop Extension)"
-tile-name: "Photoshop Extension"
+tile-name: "CommandBar Photoshop Extension"
 thumbnail: "commandBar"
 date:   2014-09-26
 tags: photoshop plugin

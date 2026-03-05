@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Motion Capture Wrapping Paper"
-tile-name: "Motion Capture Pattern Design"
+tile-name: "Motion Capture Wrapping Paper"
 thumbnail: "mocappaper"
 date:   2016-12-2
 tags: digital

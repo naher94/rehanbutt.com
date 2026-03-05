@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "CoLab (Sketch Plugin)"
-tile-name: "Sketch Plugin"
+tile-name: "CoLab Sketch Plugin"
 thumbnail: "coLab"
 date:   2016-03-01
 tags: digital app

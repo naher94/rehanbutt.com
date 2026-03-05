@@ -561,12 +561,14 @@ $home-section-vertical-spacing-mobile: 4rem;
         font-size: 2rem;
         font-weight: $zilla-bold;
         margin-bottom: 0;
+        text-wrap: pretty;
+        line-height: 1.1;
+        margin-block-end: 0.25em;
         @include breakpoint(small only){
           font-size: 1.5rem;
           line-height: 1.1;
           padding-left: 0;
           padding-right: 0;
-          margin-bottom: 0.25em;
         }
       }
       p{
@@ -840,6 +842,8 @@ $home-section-vertical-spacing-mobile: 4rem;
   text-align: center;
   font-weight: $zilla-bold;
   font-family: $zilla;
+  text-wrap: pretty;
+  padding-inline: 0.25em;
   @include breakpoint(small only) {
     font-size: 1.4em;
   }

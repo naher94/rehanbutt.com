@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "CES Mobile App Redesign"
-tile-name: "CES Mobile App"
+tile-name: "CES Mobile App Redesign"
 thumbnail: "ces"
 date: 2018-01-21
 tags: mobile app

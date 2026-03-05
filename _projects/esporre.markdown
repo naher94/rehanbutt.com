@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Esporre (Web Portfolio Tool)"
-tile-name: "Portfolio Tool"
+tile-name: "Esporre Portfolio Tool"
 thumbnail: "esporre"
 date:   2015-12-12
 tags: web portfolio learning edtech

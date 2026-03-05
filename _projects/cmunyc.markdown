@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Carnegie Mellon NYC"
-tile-name: "CMU NYC"
+tile-name: "CMU NYC Brand & Web Presence"
 thumbnail: "nyc"
 date: 2016-02-09
 tags: web Dzgn.IO

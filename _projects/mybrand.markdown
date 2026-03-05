@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "My Brand"
-tile-name: "My Brand"
+tile-name: "Personal Brand Identity"
 thumbnail: "mybrand"
 date:   2014-12-12
 tags: branding

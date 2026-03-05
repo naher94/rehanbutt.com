@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Expii Exploration"
-tile-name: "Expii Audit"
+tile-name: "Expii UX Audit"
 thumbnail: "expii"
 date: 2017-06-12
 tags: UI UX Research edtech

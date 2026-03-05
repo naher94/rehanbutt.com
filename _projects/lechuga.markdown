@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Lechuga Restaurant Concept"
-tile-name: "Food Ordering"
+tile-name: "Lechuga App Design Concept"
 thumbnail: "lechuga"
 date: 2018-03-11
 tags: web

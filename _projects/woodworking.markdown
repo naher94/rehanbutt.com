@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Wood Working"
-tile-name: "Wood Working"
+tile-name: "Woodworking"
 thumbnail: "woodworking"
 date:   2021-01-15
 tags: fabrication wood

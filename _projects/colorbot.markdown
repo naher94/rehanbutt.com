@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Jasper the Color Bot"
-tile-name: "Color Bot"
+tile-name: "Jasper the Color Bot"
 thumbnail: "jasper"
 date:   2016-12-4
 tags: bot color

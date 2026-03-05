@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Processly"
-tile-name: "Processly"
+tile-name: "Processly Product Design"
 thumbnail: "processly"
 date: 2017-03-15
 tags: product web

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Tesla Watch App"
-tile-name: "Tesla Watch App"
+tile-name: "Tesla Apple Watch App"
 thumbnail: "teslaWatchApp"
 date: 2018-11-11
 tags: UI UX

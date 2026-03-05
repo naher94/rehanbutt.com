@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Bowling Table"
-tile-name: "Bowling Table"
+tile-name: "Bowling Table Build"
 thumbnail: "bowlingtable"
 date: 2020-07-10
 tags: woodworking

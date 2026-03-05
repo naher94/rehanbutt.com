@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Slotted Furniture"
-tile-name: "Slotted Furniture"
+tile-name: "Slotted Furniture Fabrication"
 thumbnail: "slottedFurniture"
 date:   2013-11-01
 tags: Fabrication

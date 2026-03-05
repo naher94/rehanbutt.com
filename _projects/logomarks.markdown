@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Personal LogoMarks"
-tile-name: "LogoMarks"
+tile-name: "Personal Logomark Collection"
 thumbnail: "logoMarks"
 date:   2014-09-25
 tags: logos

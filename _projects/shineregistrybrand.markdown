@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Shine Registry Rebrand"
-tile-name: "Shine Registry Rebrand"
+tile-name: "Shine Registry Brand Identity"
 thumbnail: "shine-brand"
 flag:
 date: 2021-01-31

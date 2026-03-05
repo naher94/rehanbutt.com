@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "gitApp"
-tile-name: "gitApp"
+tile-name: "GitHub Mobile App"
 thumbnail: "gitApp"
 date:   2014-01-30
 tags: iOS App
