@@ -840,6 +840,8 @@ $home-section-vertical-spacing-mobile: 4rem;
   text-align: center;
   font-weight: $zilla-bold;
   font-family: $zilla;
+  text-wrap: pretty;
+  padding-inline: 0.25em;
   @include breakpoint(small only) {
     font-size: 1.4em;
   }
