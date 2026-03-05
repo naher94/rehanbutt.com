@@ -187,6 +187,8 @@ $home-section-vertical-spacing-mobile: 4rem;
     @include double-arrow-slide;
     @include breakpoint(small only){
       font-size: 1.25em;
+    }
+  }
   img{
     display: inline-block;
     height: 1.2em;
