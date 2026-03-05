@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Al Dente Recipe Builder Concept"
-tile-name: "Recipe Builder"
+tile-name: "Al Dente Recipe Builder"
 thumbnail: "aldente"
 flag: New
 date: 2020-03-28
