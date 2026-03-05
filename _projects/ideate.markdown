@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Ideate Branding"
-tile-name: "Ideate Branding"
+tile-name: "Ideate Brand Identity"
 thumbnail: "ideate"
 date:   2016-03-01
 tags: digital branding
