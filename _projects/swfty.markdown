@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Swfty Mobile Application"
-tile-name: "Mobile App"
+tile-name: "Swfty Mobile App"
 thumbnail: "swfty"
 date:   2014-10-13
 tags: iOS mobile
