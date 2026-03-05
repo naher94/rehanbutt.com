@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "QULR.Life"
-tile-name: "QULR.Life"
+tile-name: "QULR Color Tool"
 thumbnail: "qulr"
 date: 2017-08-12
 tags: web color
