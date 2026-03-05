@@ -1,7 +1,7 @@
 ---
 layout: post-hero
 title:  "Lustre"
-tile-name: "Lustre"
+tile-name: "Lustre Fashion Line"
 thumbnail: "fashion"
 date: 2015-02-20
 hero-background-color: "#FFFFFF"
