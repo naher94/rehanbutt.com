@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Sticker Packs"
-tile-name: "Sticker Packs"
+tile-name: "iMessage Sticker Packs"
 thumbnail: "stickerPack"
 date: 2017-03-03
 tags: stickers iOS illustrations
