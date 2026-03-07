@@ -73,9 +73,10 @@
       }
       &.link{
         position: relative;
+        cursor: pointer;
         .copied{
-          font-size: 0.75em;
-          left: 10%;
+          font-size: 1em;
+          left: 20%;
           right: unset;
           font-weight: $lato-bold;
         }
