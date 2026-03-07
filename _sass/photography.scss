@@ -30,9 +30,9 @@
           margin: unset;
           text-align: unset;
           font-size: 3em;
+          padding: 0;
           @include breakpoint(small only) {
             font-size: 2em;
-            padding: 0;
           }
         }
       }
