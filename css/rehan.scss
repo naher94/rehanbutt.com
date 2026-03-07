@@ -995,9 +995,11 @@ article{
 
 .easter-egg-banner-container{
   display: none; // Handled with JS on Konami Entry
-  position: sticky;
+  position: fixed;
   bottom: 2rem;
-  z-index: 2;
+  left: 0;
+  right: 0;
+  z-index: 100;
   .easter-egg-banner{
     border-radius: $tile-radius-medium;
     background-color: semantic-color(floating-card-bg);
