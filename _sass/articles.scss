@@ -41,34 +41,43 @@
     position: relative;
     background-color: semantic-color(article-share-bar-bg);
     color: semantic-color(text);
-    border-radius: $tile-radius-medium;
+    border-radius: $tile-radius-big;
     padding: 1em;
     font-weight: $lato-bold;
     @include breakpoint(small only) {
       font-size: 1.2em;
     }
-    .share-item{
-      color: semantic-color(text);
-      padding: 0.25em;
-      i{
-        transition: $sprint;
+    .share-buttons{
+      column-gap: 0.5em;
+      @include breakpoint(small only) {
+        margin-top: 0.75em;
+        > .cta-button {
+          flex: 1;
+        }
       }
-      &.threads{
+    }
+    .cta-button{
+      @include breakpoint(small only) {
+        font-size: 1rem;
+        padding: 0.4rem 0.75rem;
+      }
+      &:first-child{
+        background-color: transparent;
+        color: inherit;
+        margin-right: 0;
         &:hover{
-          i{
-            transition: $sprint;
-            transform: rotate(-15deg) scale(1.5); 
-          }
+          background-color: semantic-color(button-fill);
+          color: semantic-color(text-inverted);
+          border-color: semantic-color(button-outline);
         }
       }
       &.link{
-        cursor: pointer;
         position: relative;
-        &:hover{
-          i{
-            transition: $sprint;
-            transform: rotate(360deg) scale(1.5); 
-          }
+        .copied{
+          font-size: 0.75em;
+          left: 10%;
+          right: unset;
+          font-weight: $lato-bold;
         }
       }
     }
