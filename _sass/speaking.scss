@@ -5,29 +5,6 @@
     }
   }
   .cta-button{
-    padding: 0.7rem 1rem;
-    color: inherit;
-    border-radius: 14px;
-    border: solid 0.2rem semantic-color(button-outline);
-    font-weight: $lato-bold;
-    transition: $sprint;
-    text-align: center;
-    &:hover{
-      color: semantic-color(text-inverted);
-      background-color: semantic-color(button-fill);
-    }
-    i{
-      margin-right: 0.25em;
-    }
-    &:first-child{
-      background-color: semantic-color(button-fill);
-      color: semantic-color(text-inverted);
-      margin-right: 0.5em;
-      &:hover{
-        background-color: semantic-color(speaking-button-primary-fill-hover);
-        border-color: semantic-color(speaking-button-primary-border-hover);
-      }
-    }
     &.email-wrapper{
       position: relative;
       display: inline;
