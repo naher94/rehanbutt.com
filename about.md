@@ -78,7 +78,6 @@ footer-sort-order: 2
     {% assign work_prev = "hello" %}
     {% for work in work_order %}
       <div class="work-item">
-        <!-- Adds logo -->
         {% if work.logo %}
         <div class="brand-logo-container" id="{{work.logo}}">
           <img class="brand-logo" src="/img/{{work.logo}}-logo.svg" alt="{{work.logo}} Logo">
@@ -88,9 +87,11 @@ footer-sort-order: 2
         {% if work_prev.company != work.company%}
           <h3>{{work.company}}</h3>
         {% endif %}
-        <h4>{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
-        <!-- what happens when the date is present? -->
-        <p class="date">{{work.date-start | date: "%B %Y"}}・{{work.date-end | date: "%B %Y"}}</p>
+        <div class="title-date grid-x align-justify">
+          <h4 class="cell medium-shrink">{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
+          <!-- what happens when the date is present? -->
+          <p class="date cell medium-shrink">{{work.date-start | date: "%B %Y"}}・{{work.date-end | date: "%B %Y"}}</p>
+        </div>
         <p class="description">{{work.description}}</p>
         {%- if work.company == "Walt Disney Animation Studios" -%}
           {{work.content}}

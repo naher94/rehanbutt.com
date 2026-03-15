@@ -391,13 +391,18 @@
 }
 
 .work-item{
+  & + &{
+    h3{
+      margin-block-start: 1em;
+    }
+  }
   h3{
     font-family: $lato;
     font-size: 1.4em;
     font-weight: $lato-black;
-    font-style: italic;
     padding: 0;
     margin-bottom: 0;
+    margin-block-start: 0;
   }
   h4{
     font-family: $lato;
@@ -406,6 +411,9 @@
     padding: 0;
     margin-bottom: 0;
     margin-top: 0;
+  }
+  .title-date{
+    margin-block-end: 0.25em;
   }
 }
 
