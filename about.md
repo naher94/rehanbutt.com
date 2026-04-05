@@ -75,8 +75,35 @@ footer-sort-order: 2
       <div class="cell small-12 medium-auto divider"></div>
     </div>
     {% assign work_order = site.work-experience | sort: 'sort-order' %}
-    {% assign work_prev = "hello" %}
+    {% assign current_year = "now" | date: "%Y" | plus: 0 %}
+    {% assign cutoff_year = current_year | minus: 5 %}
+    <!-- Pre-pass: find consecutive same-company blocks that have at least one recent role -->
+    {% assign block_has_recent = "" %}
+    {% assign pre_block_id = "" %}
+    {% assign pre_prev_company = "" %}
     {% for work in work_order %}
+      {% if work.company != pre_prev_company %}
+        {% assign pre_block_id = work.sort-order | prepend: "block_" %}
+        {% assign pre_prev_company = work.company %}
+      {% endif %}
+      {% if work.date-end == "Present" %}
+        {% assign bkey = pre_block_id | append: "|||" %}
+        {% unless block_has_recent contains bkey %}{% assign block_has_recent = block_has_recent | append: bkey %}{% endunless %}
+      {% else %}
+        {% assign pre_end_year = work.date-end | date: "%Y" | plus: 0 %}
+        {% if pre_end_year > cutoff_year %}
+          {% assign bkey = pre_block_id | append: "|||" %}
+          {% unless block_has_recent contains bkey %}{% assign block_has_recent = block_has_recent | append: bkey %}{% endunless %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% assign work_prev = "hello" %}
+    {% assign render_block_id = "" %}
+    {% for work in work_order %}
+      <!-- Track current consecutive block ID -->
+      {% if work.company != work_prev.company %}
+        {% assign render_block_id = work.sort-order | prepend: "block_" %}
+      {% endif %}
       <div class="work-item">
         {% if work.logo %}
         <div class="brand-logo-container" id="{{work.logo}}">
@@ -87,12 +114,40 @@ footer-sort-order: 2
         {% if work_prev.company != work.company%}
           <h3>{{work.company}}</h3>
         {% endif %}
-        <div class="title-date grid-x align-justify">
-          <h4 class="cell medium-shrink">{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
-          <!-- what happens when the date is present? -->
-          <p class="date cell medium-shrink">{{work.date-start | date: "%B %Y"}}・{{work.date-end | date: "%B %Y"}}</p>
-        </div>
-        <p class="description">{{work.description}}</p>
+        <!-- Determine if this role is old -->
+        {% if work.date-end == "Present" %}
+          {% assign work_is_old = false %}
+        {% else %}
+          {% assign work_end_year = work.date-end | date: "%Y" | plus: 0 %}
+          {% if work_end_year <= cutoff_year %}
+            {% assign work_is_old = true %}
+          {% else %}
+            {% assign work_is_old = false %}
+          {% endif %}
+        {% endif %}
+        <!-- If this block has a recent role, show all descriptions in the block expanded -->
+        {% assign bkey = render_block_id | append: "|||" %}
+        {% if work_is_old and block_has_recent contains bkey %}
+          {% assign work_is_old = false %}
+        {% endif %}
+        {% if work_is_old %}
+          <details class="description-details">
+            <summary>
+              <div class="title-date grid-x align-justify">
+                <h4 class="cell medium-shrink">{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
+                <p class="date cell medium-shrink">{{work.date-start | date: "%B %Y"}}・{{work.date-end | date: "%B %Y"}}</p>
+              </div>
+            </summary>
+            <p class="description">{{work.description}}</p>
+          </details>
+        {% else %}
+          <div class="title-date grid-x align-justify">
+            <h4 class="cell medium-shrink">{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
+            <!-- what happens when the date is present? -->
+            <p class="date cell medium-shrink">{{work.date-start | date: "%B %Y"}}・{{work.date-end | date: "%B %Y"}}</p>
+          </div>
+          <p class="description">{{work.description}}</p>
+        {% endif %}
         {%- if work.company == "Walt Disney Animation Studios" -%}
           {{work.content}}
         {%- endif -%}
