@@ -51,7 +51,9 @@
   }
 
 </style>
-{% include banner.html %}
+{% if site.show_banner %}
+  {% include banner.html %}
+{% endif %}
   <nav class="nav-container">
     <div class="site-nav grid-x grid-container">
       <div class="menu-container grid-x cell align-justify">
