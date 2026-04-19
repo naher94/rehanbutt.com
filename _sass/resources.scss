@@ -411,3 +411,409 @@ h1{
     }
   }
 }
+
+// ─── Filter Bar ───────────────────────────────────────────────────────────────
+
+.resource-filter-bar {
+  position: relative;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  .filter-bar-top {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    @include breakpoint(small only) {
+      gap: 0.5rem;
+    }
+  }
+
+  .search-wrapper {
+    position: relative;
+    flex: 1;
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: semantic-color(text);
+      opacity: 0.4;
+      pointer-events: none;
+      font-size: 0.9em;
+    }
+
+    .resource-search {
+      width: 100%;
+      border: 2px solid semantic-color(text);
+      border-radius: $pill-radius;
+      padding: 0.65rem 1.25rem 0.65rem 2.5rem;
+      font-size: 1rem;
+      font-family: $lato;
+      font-weight: $lato-regular;
+      background-color: transparent;
+      color: semantic-color(text);
+      outline: none;
+      transition: $sprint;
+      -webkit-appearance: none;
+      appearance: none;
+
+      &:focus {
+        border-color: $signature-teal;
+      }
+
+      &::placeholder {
+        color: semantic-color(text);
+        opacity: 0.4;
+      }
+
+      &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        appearance: none;
+      }
+    }
+  }
+
+  .filter-bar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .resource-surprise-me-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: stretch;
+    height: 2.7rem;
+
+    .tag.surprise-me {
+      font-size: 0.8em;
+      padding: 0 0.75rem;
+      font-weight: $lato-bold;
+      background-color: semantic-color(actionable-pill);
+      color: $pure-white;
+      border-radius: $pill-radius;
+      display: flex;
+      align-items: center;
+      transition: $sprint;
+
+      i {
+        margin-inline-end: 0.25em;
+      }
+
+      &:hover {
+        background-image: linear-gradient(90deg, #00a2e2 0%, #1bad6b 20%, #fec609 40%, #e92687 60%, #6d358d 80%, #00a2e2 100%);
+        background-size: 200% auto;
+        animation: rainbow 3s linear infinite;
+      }
+    }
+
+  }
+
+  .resource-filter-toggle {
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 50%;
+    border: 2px solid semantic-color(text);
+    background: transparent;
+    color: semantic-color(text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: $sprint;
+    flex-shrink: 0;
+    padding: 0;
+
+    i {
+      font-size: 0.9em;
+      pointer-events: none;
+    }
+
+    &:hover {
+      border-color: $signature-teal;
+      color: $signature-teal;
+    }
+
+    &.has-active-filters {
+      border-color: $signature-teal;
+      background-color: $signature-teal;
+      color: $pure-white;
+      border-radius: $pill-radius;
+      width: auto;
+      padding: 0 1rem;
+      gap: 0.4rem;
+
+      .filter-count {
+        position: static;
+        background: transparent;
+        color: $pure-white;
+        width: auto;
+        height: auto;
+        font-size: 1rem;
+        font-weight: $lato-bold;
+        border-radius: 0;
+      }
+    }
+
+    .filter-count {
+      position: absolute;
+      top: -0.4rem;
+      right: -0.4rem;
+      background: $signature-teal;
+      color: $pure-white;
+      border-radius: 50%;
+      width: 1.1rem;
+      height: 1.1rem;
+      font-size: 0.6rem;
+      font-weight: $lato-bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      pointer-events: none;
+
+      &[hidden] {
+        display: none !important;
+      }
+    }
+  }
+}
+
+// ─── Filter Panel ─────────────────────────────────────────────────────────────
+
+.resource-filter-panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 100;
+  background: semantic-color(floating-card-bg);
+  border-radius: $tile-radius-medium;
+  box-shadow: $recessed-shadow semantic-color(shadow);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  min-width: 520px;
+  max-width: 90vw;
+
+  @include breakpoint(small only) {
+    min-width: 0;
+    width: calc(100vw - 2rem);
+    right: auto;
+    left: 0;
+  }
+
+  .filter-panel-inner {
+    display: flex;
+    padding: 1.5rem;
+    gap: 1.5rem;
+
+    @include breakpoint(small only) {
+      flex-direction: column;
+    }
+  }
+
+  h3 {
+    font-size: 0.65em;
+    font-weight: $lato-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.75rem;
+    color: semantic-color(text);
+    opacity: 0.5;
+    font-family: $lato;
+  }
+
+  .filter-section {
+    &.content-types {
+      min-width: 150px;
+      flex-shrink: 0;
+
+      .filter-type-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 0.7em;
+        font-weight: $lato-bold;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        padding: 0.4rem 0.5rem;
+        width: 100%;
+        text-align: left;
+        transition: $sprint;
+        border-radius: 6px;
+        opacity: 0.65;
+        font-family: $lato;
+
+        &.video     { color: semantic-color(resources-video); }
+        &.reading   { color: semantic-color(resources-reading); }
+        &.interactive { color: semantic-color(resources-interactive); }
+        &.tool      { color: semantic-color(resources-tools); }
+        &.reference { color: semantic-color(resources-reference); }
+        &.my-content { color: semantic-color(resources-my-content); }
+
+        i {
+          width: 1em;
+          text-align: center;
+          flex-shrink: 0;
+        }
+
+        &:hover {
+          opacity: 1;
+        }
+
+        &.active {
+          opacity: 1;
+          background-color: rgba(128, 128, 128, 0.1);
+
+          &::after {
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            content: '\f00c';
+            margin-left: auto;
+            color: $signature-teal;
+            font-size: 0.9em;
+          }
+        }
+      }
+    }
+
+    &.filter-tags {
+      flex: 1;
+      min-width: 0;
+
+      .filter-tags-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        max-height: 220px;
+        overflow-y: auto;
+      }
+
+      .filter-tag-btn {
+        font-size: 0.75em;
+        padding: 0.2rem 0.65rem;
+        font-weight: $lato-bold;
+        background-color: semantic-color(actionable-pill);
+        color: $pure-white;
+        border: none;
+        border-radius: $pill-radius;
+        cursor: pointer;
+        transition: $sprint;
+        font-family: $lato;
+
+        &:hover {
+          background-color: semantic-color(actionable-pill-hover);
+        }
+
+        &.active {
+          background-color: $signature-teal-d2;
+
+          &::before {
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            content: '\f00c';
+            margin-right: 0.3em;
+          }
+        }
+      }
+    }
+  }
+
+  .filter-divider {
+    width: 1px;
+    background-color: rgba(128, 128, 128, 0.2);
+    align-self: stretch;
+    flex-shrink: 0;
+
+    @include breakpoint(small only) {
+      width: auto;
+      height: 1px;
+    }
+  }
+
+  .filter-panel-footer {
+    padding: 0.75rem 1.5rem;
+    border-top: 1px solid rgba(128, 128, 128, 0.12);
+    display: flex;
+    justify-content: flex-end;
+
+    .filter-clear-all {
+      background: none;
+      border: none;
+      color: $signature-teal;
+      cursor: pointer;
+      font-weight: $lato-bold;
+      font-size: 0.85em;
+      padding: 0.25rem 0;
+      font-family: $lato;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// ─── Resource Grid ────────────────────────────────────────────────────────────
+
+.resource-grid {
+  margin-top: 1rem;
+}
+
+.resource-tag-divider {
+  display: flex;
+  align-items: center;
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
+
+  &:first-of-type {
+    margin-top: 1rem;
+  }
+
+  h3 {
+    font-size: 2em;
+    font-weight: $lato-black;
+    font-family: $lato;
+    color: semantic-color(text);
+    white-space: nowrap;
+    margin: 0;
+  }
+
+  .tag-anchor-link {
+    color: inherit;
+    text-decoration: none;
+    transition: $sprint;
+
+    .hashtag {
+      color: $signature-teal;
+      margin-right: 0.1em;
+    }
+
+    &:hover {
+      color: $signature-teal;
+    }
+  }
+
+  .divider {
+    background-color: $signature-teal;
+    border-radius: $pill-radius;
+    height: 0.35rem;
+    flex: 1;
+    margin-left: 1rem;
+  }
+}
+
+.resource-no-results {
+  text-align: center;
+  color: semantic-color(text);
+  opacity: 0.45;
+  font-size: 1.2em;
+  padding: 4rem 0;
+}
