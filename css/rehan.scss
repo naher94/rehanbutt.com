@@ -97,15 +97,9 @@ $home-section-vertical-spacing-mobile: 4rem;
 .site-intro{
   margin-bottom: 8rem;
   margin-top: 3rem;
-  // TODO remove padding here.. currently used to keep the same width of the text objects
-  padding-left: 15px;
-  padding-right: 15px;
   @include breakpoint(small only){
     margin-top: 1rem;
     margin-bottom: 5rem;
-    // TODO remove padding here.. currently used to keep the same width of the text objects
-    padding-left: 10px;
-    padding-right: 10px;
   }
   @media (prefers-color-scheme: dark) {
     img{
@@ -319,6 +313,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 .photography-container,
 .year-in-review-container,
 .resources-container {
+  width: 100%;
   @include home-section-base;
   h2{
     padding-left: 0;
@@ -607,6 +602,13 @@ $home-section-vertical-spacing-mobile: 4rem;
 
 // --- Photography Section ---
 .photography-container{
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  @include breakpoint(small only){
+    padding-left: 10px;
+    padding-right: 10px;
+  }
   h2{
     font-weight: $zilla-bold;
     @include breakpoint(small only){
@@ -614,7 +616,13 @@ $home-section-vertical-spacing-mobile: 4rem;
     }
   }
   .photo-row{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
     margin-top: 1em;
+    @include breakpoint(small only){
+      grid-template-columns: 1fr;
+    }
   }
   .photo-wrapper{
     &:has(.photo-tile:hover){
