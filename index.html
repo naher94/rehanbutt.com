@@ -95,35 +95,37 @@ sort-order: 1
 
 {% assign project_order = site.projects | sort: 'date' | reverse %}
 
-<section class="projects-container featured-projects cell grid-x grid-padding-x align-top">
+<section class="projects-container featured-projects cell">
   <div class="home-section-header">
     <h2><a href="/portfolio">Projects <span class="arrow-animation"><i class="fas fa-arrow-right first"></i><i class="fas fa-angle-right second"></i></span></a></h2>
     <p class="section-description">A collection of work spanning product design, development, and creative exploration.</p>
   </div>
 
-{% for project in project_order %}
-  {% if project.featured == true %}
-  <div class="cell medium-6 feature-item">
-    <div class="image-wrapper">
-      {% if project.external-link %}
-        <a class="" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank"><span class="visually-hidden">Opens a new window</span>
-      {% else %}
-        <a class="" href="{{ project.url | prepend: site.baseurl }}">
-      {% endif %}
-          <div class="thumbnail-container-featured">
-            <img class="thumbnail-image-featured" src="img/thumbnails/{{ project.thumbnail | append: '-featured.jpg' }}" alt="{{ project.tile-name }} Tile">
-          </div>
-      </a>
-    </div>
-    <div class="text-wrapper">
-      <div class="featured-text">
-        <h2 class="">{{ project.tile-name }}</h2>
-        <p class="">{{ project.tile-description }}</p>
+  <div class="projects-grid">
+  {% for project in project_order %}
+    {% if project.featured == true %}
+    <div class="feature-item">
+      <div class="image-wrapper">
+        {% if project.external-link %}
+          <a class="" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank"><span class="visually-hidden">Opens a new window</span>
+        {% else %}
+          <a class="" href="{{ project.url | prepend: site.baseurl }}">
+        {% endif %}
+            <div class="thumbnail-container-featured">
+              <img class="thumbnail-image-featured" src="img/thumbnails/{{ project.thumbnail | append: '-featured.jpg' }}" alt="{{ project.tile-name }} Tile">
+            </div>
+        </a>
+      </div>
+      <div class="text-wrapper">
+        <div class="featured-text">
+          <h2 class="">{{ project.tile-name }}</h2>
+          <p class="">{{ project.tile-description }}</p>
+        </div>
       </div>
     </div>
+    {% endif %}
+  {% endfor %}
   </div>
-  {% endif %}
-{% endfor %}
 </section>
 
 {%- assign photos_order = site.photography | sort: 'date' | reverse -%}

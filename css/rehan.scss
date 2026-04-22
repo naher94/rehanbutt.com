@@ -529,16 +529,22 @@ $home-section-vertical-spacing-mobile: 4rem;
 
 // --- Projects Section ---
 .featured-projects{
-  .feature-item{
-    margin-bottom: 3rem;
+  .projects-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 1.25rem;
+    align-items: start;
     @include breakpoint(small only){
-      margin-bottom: 2rem;
+      grid-template-columns: 1fr;
+      row-gap: 2rem;
     }
+  }
+  .feature-item{
     &:nth-child(even){
       .image-wrapper{
         .thumbnail-container-featured{
           &:hover{
-            transform: scale(1.02) rotate(-2deg);
+            transform: scale(1.02) rotate(2deg);
           }
         }
       }
@@ -553,7 +559,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       border-radius: $tile-radius-big;
       transition: $tight-spring;
       &:hover{
-        transform: scale(1.02) rotate(2deg);
+        transform: scale(1.02) rotate(-2deg);
         box-shadow: $recessed-shadow semantic-color(shadow);
       }
       .thumbnail-image-featured{
