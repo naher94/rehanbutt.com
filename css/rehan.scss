@@ -348,18 +348,36 @@ $home-section-vertical-spacing-mobile: 4rem;
 
 // --- Speaking Section ---
 .speaking-container{
-  // TODO remove the bottom spacing for the header section
-  .home-section-header{
-    flex-direction: row;
-    flex-wrap: wrap;
+  .speaking-layout{
+    display: grid;
+    grid-template-columns: 5fr 3fr;
+    gap: 3rem;
+    align-items: start;
     @include breakpoint(small only){
-      justify-content: center;
+      grid-template-columns: 1fr;
     }
   }
-  .section-description{
-    margin-block-end: 1rem;
+  .speaking-text{
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    h2{
+      line-height: normal;
+      font-weight: $zilla-bold;
+      margin-bottom: 0;
+      @include breakpoint(small only){
+        margin-bottom: 0.25em;
+        line-height: 1;
+      }
+    }
+    .section-description{
+      max-width: 66ch;
+    }
   }
   .cta-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     margin-block-start: 2rem;
   }
   .cta-button{
@@ -380,7 +398,7 @@ $home-section-vertical-spacing-mobile: 4rem;
     &:first-child{
       background-color: semantic-color(button-fill);
       color: semantic-color(text-inverted);
-      margin-right: 0.5em;
+      margin-right: 0;
       &:hover{
         background-color: semantic-color(speaking-button-primary-fill-hover);
         border-color: semantic-color(speaking-button-primary-border-hover);
@@ -402,6 +420,10 @@ $home-section-vertical-spacing-mobile: 4rem;
     }
   }
   .image-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
     .speaking-image-container{
       background-color: $pure-white;
       border-radius: $tile-radius-medium;
@@ -410,6 +432,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       padding-bottom: 0.5rem;
       margin-bottom: 1rem;
       &.config-headshot{
+        align-self: flex-end;
         width: 16rem;
         rotate: -6deg;
         position: relative;
