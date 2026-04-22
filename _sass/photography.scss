@@ -1,7 +1,20 @@
-.photoset-tile{
-  margin-bottom: 1.5em;
+.photography-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5em;
+  padding-left: $home-section-padding;
+  padding-right: $home-section-padding;
   @include breakpoint(small only) {
-    margin-bottom: 1em;
+    grid-template-columns: 1fr;
+    gap: 1em;
+    padding-left: $home-section-padding-mobile;
+    padding-right: $home-section-padding-mobile;
+  }
+}
+
+.photoset-tile {
+  &--full {
+    grid-column: 1 / -1;
   }
   .thumbnail-container{
     overflow: hidden;

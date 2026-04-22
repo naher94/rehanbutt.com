@@ -12,12 +12,9 @@ footer-sort-order: 1
 ---
 <h1 class="visually-hidden">Photography</h1>
 {% assign photography_order = site.photography | sort: 'date' | reverse %}
+<div class="photography-grid">
 {% for photoset in photography_order %}
-{%- if photoset.big-tile -%}
-  <div class="small-12 medium-12 cell photoset-tile">
-{%- else -%}
-  <div class="small-12 medium-6 cell photoset-tile">
-{%- endif -%}
+  <div class="photoset-tile{% if photoset.big-tile %} photoset-tile--full{% endif %}">
     <a class="post-link" href="{{ photoset.url | prepend: site.baseurl }}">
       <div class="thumbnail-container">
         <img class="thumbnail-image" src="/img/photography/thumbnails/{{ photoset.thumbnail }}" alt="{{photoset.thumbnail-alt}}">
@@ -50,3 +47,4 @@ footer-sort-order: 1
     </a>
   </div>
 {% endfor %}
+</div>

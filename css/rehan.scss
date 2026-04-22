@@ -85,10 +85,6 @@ video{
 // --- Home Page Variables & Mixins ---
 $home-section-vertical-spacing: 8rem;
 $home-section-vertical-spacing-mobile: 4rem;
-$home-section-padding: 30px;
-$home-section-padding-mobile: 20px;
-$home-section-padding-cell: 15px;
-$home-section-padding-cell-mobile: 10px;
 
 @mixin home-section-base {
   margin-bottom: $home-section-vertical-spacing;
