@@ -1,19 +1,19 @@
 ---
 layout: default
 ---
-<article class="post resources-collection grid-x grid-padding-x grid-padding-y">
+<article class="post resources-collection">
 
-  <aside class="cell medium-4">
-    <div class="tile cell grid-x" style="color: {{page.text-color}};">
+  <aside>
+    <div class="tile" style="color: {{page.text-color}};">
       <img src="/img/resources-collection/{{page.tile-image}}" alt="{{page.tile-image-alt}}">
-      <div class="content-container grid-x">
-        <div class="cell text-container small-12">
+      <div class="content-container">
+        <div class="text-container">
           <h1 class="title">{{ page.title }}</h1>
           <p class="sub-header">{{page.sub-header}}</p>
         </div>
-        <div class="cell metadata-bar small-12 align-self-bottom grid-x align-justify">
-          <div class="cell shrink count-label">{{page.resources | size}} Resources</div>
-          <div class="cell shrink">
+        <div class="metadata-bar">
+          <div class="count-label">{{page.resources | size}} Resources</div>
+          <div>
             <a href="https://threads.net/intent/post?text=Check%20out%20this%20resource%20collection%20by%20%40naher94!%20{{page.url | prepend: site.url}}" target="_blank" class="share-item threads">
               <i class="fa-brands fa-threads"></i>
             </a>
@@ -26,7 +26,7 @@ layout: default
     </div>
   </aside>
 
-  <div class="collection-content cell medium-8">
+  <div class="collection-content">
     <h2 class="intro">{{page.intro}}</h2>
     {%- for resource-var in page.resources -%}
       {%- assign variable = resource-var | prepend: "/resources/" -%}

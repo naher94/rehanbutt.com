@@ -42,6 +42,16 @@
 }
 
 .resources-collection{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5em;
+  padding-left: $home-section-padding;
+  padding-right: $home-section-padding;
+  @include breakpoint(small only) {
+    grid-template-columns: 1fr;
+    padding-left: $home-section-padding-mobile;
+    padding-right: $home-section-padding-mobile;
+  }
   .tile{
     border-radius: $tile-radius-big;
     padding: 1.5em;
@@ -86,7 +96,20 @@
       top: 0;
       left: 0;
     }
+    .content-container{
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    .text-container{
+      flex: 1;
+    }
     .metadata-bar{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       position: relative;
       background-color: semantic-color(resources-collection-card-bar);
       color: semantic-color(text);
@@ -164,6 +187,20 @@
   }
 }
 
+.all-collections{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5em;
+  padding-left: $home-section-padding;
+  padding-right: $home-section-padding;
+  @include breakpoint(small only) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+    padding-left: $home-section-padding-mobile;
+    padding-right: $home-section-padding-mobile;
+  }
+}
+
 .featured-collections, .all-collections{
   .tile{
     border-radius: $tile-radius;
@@ -210,9 +247,11 @@
 
 h1{
   &.resource-collections{
+    margin-bottom: 1.5rem;
     @include breakpoint(small only) {
       padding-left: 1rem;
       padding-right: 1rem;
+      margin-bottom: 1rem;
     }
   }
 }
