@@ -790,6 +790,25 @@ $home-section-vertical-spacing-mobile: 4rem;
 // --- Resources Section ---
 .resources-container{
   position: relative;
+  .resources-featured{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    @include breakpoint(small only){
+      grid-template-columns: 1fr;
+    }
+  }
+  .resources-recent{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    @include breakpoint(medium only){
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include breakpoint(small only){
+      grid-template-columns: 1fr;
+    }
+  }
   .divider{
     height: 2px;
     background-color: rgba($navy-black, 0.1);

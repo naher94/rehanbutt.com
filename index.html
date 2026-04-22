@@ -196,7 +196,7 @@ sort-order: 1
   </div>
 </section>
 
-<section class="resources-container cell grid-x grid-padding-x">
+<section class="resources-container cell">
   <div class="home-section-header">
     <h2><a href="/resources">Resources <span class="arrow-animation"><i class="fas fa-arrow-right first"></i><i class="fas fa-angle-right second"></i></span></a></h2>
     <p class="section-description">A bunch references you may find useful. Here are a few of my most recent finds.</p>
@@ -206,19 +206,23 @@ sort-order: 1
   {% assign tagged_resources = resources_sorted | where_exp: 'item', 'item.tags.size > 0' %}
   {% assign featured_resources = tagged_resources | where: 'featured', true %}
   {% assign recent_resources = tagged_resources | where_exp: 'item', 'item.featured != true' %}
+  <div class="resources-featured">
   {%- for resource in featured_resources -%}
     {%- if resource.article == true -%}
-    {% include article-element.html item=resource css-class="medium-6" %}
+    {% include article-element.html item=resource css-class="" %}
     {%- else -%}
-    {% include resource-element.html item=resource css-class="medium-6" %}
+    {% include resource-element.html item=resource css-class="" %}
     {%- endif -%}
   {%- endfor -%}
-  <div class="cell divider"></div>
+  </div>
+  <div class="divider"></div>
+  <div class="resources-recent">
   {%- for resource in recent_resources limit:6 -%}
     {%- if resource.article == true -%}
-    {% include article-element.html item=resource css-class="medium-6 large-4" %}
+    {% include article-element.html item=resource css-class="" %}
     {%- else -%}
-    {% include resource-element.html item=resource css-class="medium-6 large-4" %}
+    {% include resource-element.html item=resource css-class="" %}
     {%- endif -%}
   {%- endfor -%}
+  </div>
 </section>
