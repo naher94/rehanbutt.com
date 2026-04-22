@@ -15,8 +15,9 @@ footer-sort-order: 4
 
 {% assign project_order = site.projects | sort: 'date' | reverse %}
 
+<div class="portfolio-grid">
 {% for project in project_order %}
-  <div class="small-6 medium-4 cell thumbnail-tile">
+  <div class="thumbnail-tile">
     {% if project.external-link %}
       <a class="post-link" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank"><span class="visually-hidden">Opens a new window</span>
     {% else %}
@@ -32,3 +33,4 @@ footer-sort-order: 4
     </a>
   </div>
 {% endfor %}
+</div>
