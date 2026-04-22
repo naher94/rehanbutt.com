@@ -285,6 +285,9 @@ $home-section-vertical-spacing-mobile: 4rem;
 
 // --- Home Page Section Header (shared) ---
 .home-section-header{
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
   margin-bottom: 3rem;
   @include breakpoint(small only){
     margin-bottom: 2rem;
@@ -298,6 +301,9 @@ $home-section-vertical-spacing-mobile: 4rem;
       margin-bottom: 0.25em;
       line-height: 1;
     }
+  }
+  .section-description{
+    max-width: 66ch;
   }
 }
 
@@ -343,6 +349,8 @@ $home-section-vertical-spacing-mobile: 4rem;
 .speaking-container{
   // TODO remove the bottom spacing for the header section
   .home-section-header{
+    flex-direction: row;
+    flex-wrap: wrap;
     @include breakpoint(small only){
       justify-content: center;
     }
@@ -677,13 +685,20 @@ $home-section-vertical-spacing-mobile: 4rem;
   @include breakpoint(small only){
     padding-bottom: 2rem;
   }
+  .year-in-review-tiles{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    @include breakpoint(small only){
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
   .year-container{
     background-color: $pure-white;
     border-radius: $tile-radius-medium;
     box-shadow: $recessed-shadow semantic-color(shadow);
     padding: 0.5em;
     padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
     transition: $tight-spring;
     &:hover{
       transform: rotate(4deg) scale(1.05);
