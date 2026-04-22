@@ -21,6 +21,43 @@
   }
 }
 
+.recently-added{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5em;
+  padding-left: $home-section-padding;
+  padding-right: $home-section-padding;
+  > h2 { grid-column: 1 / -1; }
+  @include breakpoint(medium only) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include breakpoint(small only) {
+    grid-template-columns: 1fr;
+    padding-left: $home-section-padding-mobile;
+    padding-right: $home-section-padding-mobile;
+  }
+}
+
+.featured-collections{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5em;
+  padding-left: $home-section-padding;
+  padding-right: $home-section-padding;
+  > .collections-header { grid-column: 1 / -1; }
+  @include breakpoint(small only) {
+    grid-template-columns: repeat(2, 1fr);
+    padding-left: $home-section-padding-mobile;
+    padding-right: $home-section-padding-mobile;
+    margin-bottom: 2rem;
+  }
+}
+
+.collections-header {
+  display: flex;
+  align-items: center;
+}
+
 .recently-added, .featured-collections{
   h2{
     font-size: 2.5em;
@@ -33,11 +70,6 @@
       padding-left: 0;
       padding-right: 0;
     }
-  }
-}
-.featured-collections{
-  @include breakpoint(small only) {
-    margin-bottom: 2rem;
   }
 }
 
@@ -259,6 +291,12 @@ h1{
 .tag-section{
   margin-bottom: 4rem;
   margin-top: 2rem;
+  padding-left: $home-section-padding;
+  padding-right: $home-section-padding;
+  @include breakpoint(small only) {
+    padding-left: $home-section-padding-mobile;
+    padding-right: $home-section-padding-mobile;
+  }
   h2{
     font-size: 2.5em;
   }
@@ -290,6 +328,21 @@ h1{
 }
 
 .tag-group{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5em;
+  padding-left: $home-section-padding;
+  padding-right: $home-section-padding;
+  > .tag-header,
+  > .collection-row { grid-column: 1 / -1; }
+  @include breakpoint(medium only) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include breakpoint(small only) {
+    grid-template-columns: 1fr;
+    padding-left: $home-section-padding-mobile;
+    padding-right: $home-section-padding-mobile;
+  }
   margin-bottom: 6rem;
   @include breakpoint(small only) {
     margin-bottom: 3rem;
@@ -314,15 +367,24 @@ h1{
       padding-right: 0;
     }
   }
+  .tag-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    .divider { flex: 1; }
+    @include breakpoint(small only) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+      .divider { width: 100%; flex: none; }
+    }
+  }
   .divider{
     background-color: $signature-teal;
     border-radius: $pill-radius;
     content: '';
     height: 0.35rem;
-    margin-left: 1rem;
-    @include breakpoint(small only) {
-      margin-left: 0;
-    }
+    margin-left: 0;
   }
 }
 
@@ -336,14 +398,25 @@ h1{
   }
 }
 
-.inline-collection-tile{
-  .small-2half{
-    width: 20%;
+.collection-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5em;
+  @include breakpoint(small only) {
+    grid-template-columns: 1fr;
   }
+}
+
+.inline-collection-tile{
+  display: flex;
+  align-items: center;
   img{
+    width: 20%;
+    flex: 0 0 20%;
     border-radius: $tile-radius;
   }
   .text-content{
+    flex: 1;
     margin-inline-start: 0.5em;
   }
   p{
@@ -367,6 +440,7 @@ h1{
 }
 
 .resource-link{
+  display: block;
   margin-bottom: 1em;
   color: inherit;
   &:hover{
