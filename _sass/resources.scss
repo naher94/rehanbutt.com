@@ -131,8 +131,8 @@
     .content-container{
       display: flex;
       flex-direction: column;
-      height: 100%;
-      position: relative;
+      position: absolute;
+      inset: 1.5em; // mirrors .tile's padding — gives a definite box regardless of aspect-ratio
       z-index: 1;
     }
     .text-container{
