@@ -1,0 +1,43 @@
+// =============================================================================
+// Scaffold CSS — Entry Point
+// Import this file to get all utility classes:
+//   @use 'scaffold';
+//
+// Or link the compiled scaffold.css for drop-in use without SCSS.
+//
+// Container classes live here since they don't belong to grid or flex alone.
+// =============================================================================
+
+@use 'sass:map';
+@forward 'variables';
+@forward 'mixins';
+@forward 'grid';
+@forward 'flex';
+
+@use 'variables' as vars;
+@use 'mixins' as scaffold;
+
+
+// Custom properties — container
+// -----------------------------------------------------------------------------
+:root {
+  --scaffold-container-width:      #{vars.$container-width};
+  --scaffold-container-padding:    #{vars.$container-padding};
+  --scaffold-container-padding-sm: #{vars.$container-padding-sm};
+}
+
+
+// Container
+// Centered max-width wrapper with responsive padding.
+// -----------------------------------------------------------------------------
+.scaffold-container {
+  @include scaffold.container();
+}
+
+
+// Container full
+// Full-width wrapper that keeps side padding but has no max-width cap.
+// -----------------------------------------------------------------------------
+.scaffold-container-full {
+  @include scaffold.container($full: true);
+}

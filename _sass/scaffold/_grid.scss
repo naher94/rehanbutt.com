@@ -1,0 +1,63 @@
+// =============================================================================
+// Scaffold CSS — Grid
+// Utility classes for .scaffold-grid, .scaffold-grid-span-*, and .scaffold-gap-*.
+// Responsive variants generated for all span classes across all breakpoints.
+// =============================================================================
+
+@use 'sass:map';
+@use 'variables' as vars;
+@use 'mixins' as scaffold;
+
+
+// Custom properties
+// Declared at :root so they can be overridden globally or scoped per-element.
+// -----------------------------------------------------------------------------
+:root {
+  --scaffold-gap:    #{vars.$gap-md};
+  --scaffold-gap-sm: #{vars.$gap-sm};
+  --scaffold-gap-md: #{vars.$gap-md};
+  --scaffold-gap-lg: #{vars.$gap-lg};
+}
+
+
+// Grid container
+// -----------------------------------------------------------------------------
+.scaffold-grid {
+  @include scaffold.grid();
+}
+
+
+// Gap utilities
+// Works in both grid and flex contexts.
+// -----------------------------------------------------------------------------
+.scaffold-gap-sm { gap: var(--scaffold-gap-sm); }
+.scaffold-gap-md { gap: var(--scaffold-gap-md); }
+.scaffold-gap-lg { gap: var(--scaffold-gap-lg); }
+
+
+// Span utilities
+// Only meaningful inside .scaffold-grid.
+// Span names map to fixed grid-column values based on a 12-column grid.
+// -----------------------------------------------------------------------------
+$span-sizes: (full, half, third, two-thirds, quarter, three-quarters);
+
+@each $size in $span-sizes {
+  .scaffold-grid-span-#{$size} {
+    @include scaffold.span($size);
+  }
+}
+
+
+// Responsive span variants
+// Generated for every span × every breakpoint — mobile-first.
+// e.g. md:scaffold-grid-span-half applies at md and above.
+// -----------------------------------------------------------------------------
+@each $bp, $value in vars.$breakpoints {
+  @each $size in $span-sizes {
+    @include scaffold.breakpoint($bp) {
+      .#{$bp}\:scaffold-grid-span-#{$size} {
+        @include scaffold.span($size);
+      }
+    }
+  }
+}

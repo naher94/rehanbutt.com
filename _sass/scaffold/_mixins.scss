@@ -1,0 +1,153 @@
+// =============================================================================
+// Scaffold CSS — Mixins
+// Primitive layer. All utility classes are generated from these mixins.
+// Use mixins directly when you want Scaffold's logic inside your own class names.
+//
+// Import: @use 'scaffold';
+// Usage:  @include scaffold.grid();
+// =============================================================================
+
+@use 'sass:map';
+@use 'variables' as vars;
+
+
+// grid()
+// Sets up a 12-column grid container.
+//
+// $cols — grid-template-columns value. Mixin argument = compile-time, baked in.
+//         Custom property --scaffold-cols = runtime, overridable per-instance.
+// $gap  — gap value. Same compile-time vs runtime tradeoff as $cols.
+//
+// Example:
+//   .my-layout        { @include scaffold.grid(); }
+//   .sidebar          { @include scaffold.grid($cols: repeat(4, 1fr)); }
+//   .tight-grid       { @include scaffold.grid($gap: 0.5rem); }
+// -----------------------------------------------------------------------------
+@mixin grid(
+  $cols: var(--scaffold-cols, repeat(12, 1fr)),
+  $gap:  var(--scaffold-gap, 1rem)
+) {
+  // Declare --scaffold-cols locally so nested .scaffold-grid elements
+  // always reset to 12 columns and don't inherit a parent override.
+  --scaffold-cols: repeat(12, 1fr);
+  display: grid;
+  grid-template-columns: $cols;
+  row-gap:    var(--scaffold-row-gap, var(--scaffold-gap, 1rem));
+  column-gap: var(--scaffold-col-gap, var(--scaffold-gap, 1rem));
+}
+
+
+// span()
+// Sets grid-column on a grid child.
+// Only meaningful inside a .scaffold-grid container.
+// Accepts unquoted semantic tokens — no quotes needed.
+//
+// Accepted values: full | half | third | two-thirds | quarter | three-quarters
+//
+// Example:
+//   .article  { @include scaffold.span(two-thirds); }
+//   .sidebar  { @include scaffold.span(third); }
+// -----------------------------------------------------------------------------
+@mixin span($size) {
+  $spans: (
+    half:           span 6,
+    third:          span 4,
+    two-thirds:     span 8,
+    quarter:        span 3,
+    three-quarters: span 9,
+  );
+
+  @if $size == full {
+    grid-column: 1 / -1;
+  } @else if map.has-key($spans, $size) {
+    grid-column: map.get($spans, $size);
+  } @else {
+    @error 'scaffold.span(): unknown size `#{$size}`. Expected: full, half, third, two-thirds, quarter, three-quarters.';
+  }
+}
+
+
+// flex()
+// Sets up a flex container.
+// All arguments are optional — defaults match .scaffold-flex utility class.
+//
+// Example:
+//   .nav-bar    { @include scaffold.flex(); }
+//   .card-stack { @include scaffold.flex($direction: column, $wrap: nowrap); }
+// -----------------------------------------------------------------------------
+@mixin flex(
+  $direction: row,
+  $wrap:      wrap,
+  $gap:       var(--scaffold-gap, 1rem)
+) {
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  gap: $gap;
+}
+
+
+// container()
+// Creates a centered max-width wrapper.
+// Pass $full: true for a full-width container that keeps side padding.
+//
+// Example:
+//   .page         { @include scaffold.container(); }
+//   .page--narrow { @include scaffold.container($width: 720px); }
+//   .page--full   { @include scaffold.container($full: true); }
+// -----------------------------------------------------------------------------
+@mixin container(
+  $width:      var(--scaffold-container-width, #{vars.$container-width}),
+  $padding:    var(--scaffold-container-padding, #{vars.$container-padding}),
+  $padding-sm: var(--scaffold-container-padding-sm, #{vars.$container-padding-sm}),
+  $full:       false
+) {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: $padding-sm;
+
+  @if $full != true {
+    max-width: $width;
+  }
+
+  @include breakpoint(md) {
+    padding-inline: $padding;
+  }
+}
+
+
+// breakpoint()
+// Wraps content in a media query.
+// Supports mobile-first (up, default) and desktop-first (down) directions.
+// Neither argument requires quotes.
+//
+// Accepted sizes: sm | md | lg | xl
+//
+// Example:
+//   .article {
+//     @include scaffold.span(full);
+//     @include scaffold.breakpoint(md) { @include scaffold.span(two-thirds); }
+//   }
+//   .sidebar {
+//     @include scaffold.breakpoint(md, down) { display: none; }
+//   }
+// -----------------------------------------------------------------------------
+@mixin breakpoint($size, $direction: up) {
+  @if not map.has-key(vars.$breakpoints, $size) {
+    @error 'scaffold.breakpoint(): unknown size `#{$size}`. Expected: #{map.keys(vars.$breakpoints)}.';
+  }
+
+  $value: map.get(vars.$breakpoints, $size);
+
+  @if $direction == up {
+    @media (min-width: $value) {
+      @content;
+    }
+  } @else if $direction == down {
+    @media (max-width: $value - 1px) {
+      @content;
+    }
+  } @else {
+    @error 'scaffold.breakpoint(): unknown direction `#{$direction}`. Expected: up, down.';
+  }
+}

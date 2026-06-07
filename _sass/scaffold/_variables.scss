@@ -1,0 +1,34 @@
+// =============================================================================
+// Scaffold CSS — Variables
+// All design tokens. Override these in your own project before @use 'scaffold'.
+// =============================================================================
+
+
+// Breakpoints
+// Used by the breakpoint() mixin and responsive class generation.
+// Keys are unquoted — pass them without quotes: breakpoint(md), breakpoint(lg, down)
+// -----------------------------------------------------------------------------
+$breakpoints: (
+  sm:  640px,
+  md:  768px,
+  lg:  1024px,
+  xl:  1280px,
+) !default;
+
+
+// Gap
+// Three t-shirt sizes backed by CSS custom properties.
+// Override at :root or scope to any element via --scaffold-gap-*.
+// -----------------------------------------------------------------------------
+$gap-sm: 0.5rem !default;
+$gap-md: 1rem   !default;
+$gap-lg: 2rem   !default;
+
+
+// Container
+// Max-width and padding for .scaffold-container and .scaffold-container-full.
+// Two padding tokens — sm for mobile, default for md and up.
+// -----------------------------------------------------------------------------
+$container-width:      1280px  !default;
+$container-padding:    1.5rem  !default;
+$container-padding-sm: 1rem    !default;
