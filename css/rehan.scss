@@ -1021,12 +1021,32 @@ article{
   left: 0;
   right: 0;
   z-index: 100;
+  &.force-flex {
+    @include scaffold.grid();
+    // .force-flex sets `display: flex !important` globally — override back to grid.
+    display: grid !important;
+  }
   .easter-egg-banner{
+    // Centered grid placement — span 12 (full) on mobile, then explicit
+    // grid-column ranges to center an 8-of-12 / 6-of-12 card (the symmetric
+    // margins divide evenly here, so this reproduces medium-8/large-6 exactly).
+    grid-column: span 12;
+    @include scaffold.breakpoint(md) {
+      grid-column: 3 / span 8;
+    }
+    @include scaffold.breakpoint(lg) {
+      grid-column: 4 / span 6;
+    }
+    @include scaffold.flex($direction: column, $wrap: nowrap);
+    align-items: stretch;
+    @include scaffold.breakpoint(md) {
+      @include scaffold.flex($direction: row, $wrap: nowrap);
+      align-items: center;
+    }
     border-radius: $tile-radius-medium;
     background-color: semantic-color(floating-card-bg);
     padding: 1rem;
     box-shadow: $recessed-shadow semantic-color(shadow);
-    align-items: center;
     p{
       padding: 0;
       margin: 0;
@@ -1041,13 +1061,17 @@ article{
       }
     }
     .icon{
-      align-items: center;
+      flex: 0 0 auto;
       p{
         font-size: 2rem;
         margin-right: 1rem;
       }
     }
+    .description{
+      flex: 1 1 auto;
+    }
     button{
+      flex: 0 0 auto;
       border-radius: $tile-radius;
       background-color: $signature-teal;
       font-weight: $lato-bold;
