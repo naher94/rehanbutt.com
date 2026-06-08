@@ -966,7 +966,23 @@ article{
 //******* Easter Egg Styling
 .behind-the-scenes-container{
   display: none; //Show on Konami Code Entry
+  &.force-flex {
+    @include scaffold.grid();
+    // .force-flex sets `display: flex !important` globally — override back to grid.
+    display: grid !important;
+  }
   .behind-the-scenes{
+    // Centered grid placement — span 12 (full) on mobile, then explicit
+    // grid-column ranges to center a 10-of-12 / 8-of-12 card (scaffold.span()
+    // only covers fractions that divide 12 evenly; these don't, so the docs'
+    // recommended fallback is explicit grid-column placement).
+    grid-column: span 12;
+    @include scaffold.breakpoint(md) {
+      grid-column: 2 / span 10;
+    }
+    @include scaffold.breakpoint(lg) {
+      grid-column: 3 / span 8;
+    }
     border-radius: $tile-radius-medium;
     background-color: semantic-color(floating-card-bg);
     padding: 1rem;
