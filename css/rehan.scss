@@ -977,8 +977,10 @@ article{
     // only covers fractions that divide 12 evenly; these don't, so the docs'
     // recommended fallback is explicit grid-column placement).
     grid-column: span 12;
+    margin-inline: 1rem;
     @include scaffold.breakpoint(md) {
       grid-column: 2 / span 10;
+      margin-inline: 0;
     }
     @include scaffold.breakpoint(lg) {
       grid-column: 3 / span 8;
