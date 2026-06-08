@@ -2,6 +2,7 @@
   # Front matter comment to ensure Jekyll properly reads file.
 ---
 @charset "utf-8";
+@use 'scaffold/scaffold' as scaffold;
 @import 'app';
 @import 'monokai.css';
 @import 'variables';
@@ -1082,6 +1083,8 @@ article{
 }
 
 #easter-egg-snackbar-container{
+  @include scaffold.flex();
+  justify-content: center;
   z-index: 2;
   top: 2em;
   position: sticky;
@@ -1090,6 +1093,7 @@ article{
   font-size: 1rem;
   visibility: hidden;
   #easter-egg-snackbar{
+    @include scaffold.flex();
     border-radius: $tile-radius-medium;
     background-color: semantic-color(floating-card-bg);
     padding: 1rem;
