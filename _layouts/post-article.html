@@ -5,11 +5,11 @@ layout: default
 
   <header class="post-header">
     <img class="article-hero" src="/img/posts/{{page.hero}}" alt="{{page.hero-alt}}">
-    <div class="grid-x align-justify align-middle">
-      <div class="cell shrink">
+    <div class="scaffold-flex post-header-meta">
+      <div>
         <p class="date-stamp">{{ page.date| date: "%B %e, %Y" }}</p>
       </div>
-      <div class="cell shrink social-share">
+      <div class="social-share">
         <a href="https://threads.net/intent/post?text=Check%20out%20this%20article%20by%20%40naher94!%20{{page.url | prepend: site.url}}" target="_blank" class="share-item threads">
           <i class="fa-brands fa-threads"></i>
         </a>
@@ -26,15 +26,15 @@ layout: default
     {{ content }}
   </div>
 
-  <div class="grid-x align-center share-bar-wrapper">
-    <div class="cell share-bar grid-x align-justify align-middle">
-      <div class="cell small-12 medium-auto count-label">{{page.title}}</div>
-      <div class="cell small-12 medium-shrink share-buttons grid-x">
-        <a href="https://threads.net/intent/post?text=Check%20out%20this%20article%20by%20%40naher94!%20{{page.url | prepend: site.url}}" target="_blank" class="cta-button cell medium-shrink">
+  <div class="share-bar-wrapper">
+    <div class="share-bar scaffold-flex">
+      <div class="count-label">{{page.title}}</div>
+      <div class="share-buttons scaffold-flex">
+        <a href="https://threads.net/intent/post?text=Check%20out%20this%20article%20by%20%40naher94!%20{{page.url | prepend: site.url}}" target="_blank" class="cta-button">
           <i class="fa-brands fa-threads"></i> Share on Threads
           <span class="visually-hidden">Opens a new window</span>
         </a>
-        <span onclick="copyToClipboard('{{page.url | prepend: site.url}}', this)" class="cta-button link cell medium-shrink">
+        <span onclick="copyToClipboard('{{page.url | prepend: site.url}}', this)" class="cta-button link">
           <i class="fas fa-link"></i> Copy Link
         </span>
       </div>

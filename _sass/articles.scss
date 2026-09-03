@@ -3,6 +3,15 @@
     .article-hero{
       border-radius: $tile-radius-big;
     }
+    // Date on the left, share icons on the right (was grid-x align-justify
+    // align-middle; the row is a .scaffold-flex now). (Gissue #1196)
+    .post-header-meta{
+      justify-content: space-between;
+      align-items: center;
+      > *{
+        flex: 0 0 auto;
+      }
+    }
     .social-share{
       font-size: 1.25em;
       .share-item{
@@ -44,16 +53,34 @@
     border-radius: $tile-radius-big;
     padding: 1em;
     font-weight: $lato-bold;
-    @include breakpoint(small only) {
-      font-size: 1.2em;
+    // Label left, buttons right (was grid-x align-justify align-middle). The
+    // row gap replaces .share-buttons' margin-top when the two stack, so the
+    // flex container owns the spacing rather than splitting it. (Gissue #1196)
+    --scaffold-gap: 0;
+    justify-content: space-between;
+    align-items: center;
+    .count-label{
+      // Basis 0 (Foundation's `medium-auto`), not auto: the title's max-content
+      // width would otherwise push the buttons onto a second row well before
+      // the stacking breakpoint.
+      flex: 1 1 0;
+      min-width: 0;
     }
     .share-buttons{
-      column-gap: 0.5em;
-      @include breakpoint(small only) {
-        margin-top: 0.75em;
-        > .cta-button {
-          flex: 1;
-        }
+      --scaffold-gap: 0.5em;
+      flex: 0 0 auto;
+    }
+    // Stacked below medium. Must come after the two rules above -- same
+    // specificity, so source order decides.
+    @include breakpoint(small only) {
+      font-size: 1.2em;
+      --scaffold-gap: 0.75em;
+      .count-label,
+      .share-buttons{
+        flex: 0 0 100%;
+      }
+      .share-buttons > .cta-button{
+        flex: 1;
       }
     }
     .cta-button{

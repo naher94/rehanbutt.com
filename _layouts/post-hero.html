@@ -25,15 +25,12 @@ hero-accent-color-dark: {{hero-accent-color-dark}}
     </div>
     {% endif %}
 
-    <div class="grid-container grid-x hero-image">
-      <div class="cell">
-        <img src="../img/{{ page.hero-image }}" alt="{{ page.hero-image-alt }}">
-      </div>
+    <div class="scaffold-container hero-image">
+      <img src="../img/{{ page.hero-image }}" alt="{{ page.hero-image-alt }}">
     </div>
   </div>
 
-<div class="grid-container">
-  <div class="grid-x grid-margin-x"> <!-- TODO does this grid margin x need to be here? messing with child use of grid-margin-x -->
+<div class="scaffold-container">
     <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
       <header class="post-header post-header-hero">
@@ -47,5 +44,4 @@ hero-accent-color-dark: {{hero-accent-color-dark}}
       </div>
 
     </article>
-  </div>
 </div>

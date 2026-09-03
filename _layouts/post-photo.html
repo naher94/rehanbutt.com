@@ -18,15 +18,12 @@ hero-accent-color-dark: {{hero-accent-color-dark}}
 </style>
 
 <div class="hero hero-photography">
-  <div class="grid-container grid-x hero-image">
-    <div class="cell">
-      <img src="/img/photography/{{ page.hero-image }}" alt="{{ page.hero-image-alt }}">
-    </div>
+  <div class="scaffold-container hero-image">
+    <img src="/img/photography/{{ page.hero-image }}" alt="{{ page.hero-image-alt }}">
   </div>
 </div>
 
-<div class="grid-container">
-  <div class="grid-x">
+<div class="scaffold-container">
     <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
       <header class="post-header post-header-hero">
@@ -58,5 +55,4 @@ hero-accent-color-dark: {{hero-accent-color-dark}}
       </div>
 
     </article>
-  </div>
 </div>
