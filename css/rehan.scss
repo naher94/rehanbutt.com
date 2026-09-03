@@ -2,7 +2,25 @@
   # Front matter comment to ensure Jekyll properly reads file.
 ---
 @charset "utf-8";
-@use 'scaffold/scaffold' as scaffold;
+// TEMPORARY — Foundation → ScaffoldCSS migration (Gissue #1196, step 0).
+// Foundation and Scaffold disagree on breakpoint values (Foundation medium is
+// 640px, Scaffold md is 768px), so mixing `breakpoint(small only)` with
+// `scaffold.breakpoint(md)` in the same rule leaves a 640–767px dead zone where
+// neither fires. Aligning Scaffold's tokens to Foundation's lets migrated and
+// un-migrated code agree while the migration is in flight.
+// Once Foundation is removed (step 7), delete this config to fall back to
+// Scaffold's own defaults — sm 640 / md 768 / lg 1024 / xl 1280, 1280px container.
+@use 'scaffold/scaffold' as scaffold with (
+  $breakpoints: (
+    sm: 0,      // Foundation `small`
+    md: 640px,  // Foundation `medium`
+    lg: 1024px, // Foundation `large`
+    xl: 1200px, // Foundation `xlarge`
+  ),
+  $container-width: 75rem,          // Foundation $global-width
+  $container-padding-sm: 0.625rem,  // .grid-container padding below medium
+  $container-padding: 0.9375rem     // .grid-container padding at medium and up
+);
 @import 'app';
 @import 'monokai.css';
 @import 'variables';
