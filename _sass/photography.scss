@@ -1,8 +1,5 @@
 .photoset-tile{
-  margin-bottom: 1.5em;
-  @include breakpoint(small only) {
-    margin-bottom: 1em;
-  }
+  // Vertical spacing now comes from .tile-grid's row gap. (Gissue #1196)
   .thumbnail-container{
     overflow: hidden;
     .text-container{

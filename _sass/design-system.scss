@@ -63,6 +63,10 @@ ul {
 }
 
 .content-wrapper{
+  // Was a flex container (Foundation `grid-x`), which contained its children's
+  // vertical margins. Now that it's a plain block, flow-root keeps the last
+  // section's margin-bottom from collapsing out through the footer. (Gissue #1196)
+  display: flow-root;
   padding-top: 3em;
   @include breakpoint(small only) {
     padding-top: 1em;

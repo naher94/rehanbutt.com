@@ -872,10 +872,13 @@ $home-section-vertical-spacing-mobile: 4rem;
   }
 }
 
-.thumbnail-tile {
-  margin-bottom: 1.5em;
+// Vertical rhythm for tile grids (portfolio, photography). The row gap replaces
+// the per-tile margin-bottom these tiles carried under Foundation, so the grid
+// owns spacing on both axes rather than splitting it with the child. (Gissue #1196)
+.tile-grid{
+  --scaffold-row-gap: 1.5rem;
   @include breakpoint(small only){
-    margin-bottom: 1em;
+    --scaffold-row-gap: 1rem;
   }
 }
 
