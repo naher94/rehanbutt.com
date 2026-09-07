@@ -10,24 +10,24 @@ footer-section: other
 footer-sort-order: 4
 ---
 
-<section class="easter-egg-vault-container grid-container">
+<section class="easter-egg-vault-container scaffold-container">
   <h1>Achievements</h1>
-  <div class="progress-card grid-x align-center">
-    <div class="cell small-10 medium-4 image-container small-order-2 medium-order-1">
+  <div class="progress-card scaffold-flex">
+    <div class="image-container">
       <img src="/img/achievement-card.png" alt="Achievement Card" class="lightmode-flip">
       <img src="/img/achievement-card-dark.png" alt="Achievement Card" class="darkmode-flip">
     </div>
-    <div class="cell medium-4 text-container small-order-1 medium-order-2 align-middle grid-x">
-      <div class="cell">
+    <div class="text-container scaffold-flex">
+      <div>
         <p><span id="easter-egg-unlocked-value">0</span>/{{site.easter-eggs | size}}</p>
         <p>Completed</p>
       </div>
     </div>
   </div>
   <p class="intro-description">Through out my site there are several easter eggs. As you find them check back and see what remains to be found.</p>
-  <div class="grid-x grid-margin-x grid-margin-y" id="easter-egg-achievement-container">
+  <div class="scaffold-grid achievement-grid" id="easter-egg-achievement-container">
     {%- for egg in site.easter-eggs -%}
-    <div class="achievement-card cell small-6 medium-4" id="{{egg.title | strip | downcase | replace: " ", '-'}}">
+    <div class="achievement-card scaffold-grid-span-half md:scaffold-grid-span-third" id="{{egg.title | strip | downcase | replace: " ", '-'}}">
       <div class="content-container">
         <div class="icon-container">
           <div class="empty-icon">

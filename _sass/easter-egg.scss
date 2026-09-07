@@ -6,9 +6,51 @@
 
 .easter-egg-vault-container{
   margin-block-end: 2rem;
+  // Achievement grid. Foundation's grid-margin-x/y put half a gutter of margin
+  // on each cell and pulled the container out by the same amount; the gap
+  // reproduces the spacing between cards, and the block margin replaces the
+  // outer half-gutter above and below. (Gissue #1196)
+  .achievement-grid{
+    --scaffold-gap: 1.875rem;
+    margin-block: 0.9375rem;
+    @include breakpoint(small only) {
+      --scaffold-gap: 1.25rem;
+      margin-block: 0.625rem;
+    }
+  }
   .progress-card{
     @include easter-card();
     margin-block-start: 2em;
+    // Image and counter, centred, swapping order at medium (was align-center
+    // plus small-/medium-order and small-10 / medium-4 cells).
+    --scaffold-gap: 0;
+    justify-content: center;
+    .image-container{
+      flex: 0 0 83.33333%;
+      min-width: 0;
+      order: 2;
+      @include breakpoint(medium) {
+        flex: 0 0 33.33333%;
+        order: 1;
+      }
+    }
+    .text-container{
+      --scaffold-gap: 0;
+      flex: 0 0 100%;
+      min-width: 0;
+      order: 1;
+      align-items: center;
+      @include breakpoint(medium) {
+        flex: 0 0 33.33333%;
+        order: 2;
+      }
+      > div{
+        // min-width: 0 or the 60px "Completed" sets an automatic minimum
+        // wider than the 100% basis, as Foundation's `.cell` prevented.
+        flex: 0 0 100%;
+        min-width: 0;
+      }
+    }
     .image-container{
       margin: 0;
       padding-block-start: 1.5em;
