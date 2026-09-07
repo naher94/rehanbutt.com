@@ -112,6 +112,22 @@ $home-section-vertical-spacing-mobile: 4rem;
   }
 }
 
+// Home page section grids. Foundation drove these with grid-padding-x, which
+// puts half a gutter of padding inside every cell: the column gap covers the
+// spacing between them, and the container's own padding restores the outer
+// half-gutter, so the sections keep the insets they had. There was no
+// grid-padding-y, so the row gap stays 0 and vertical rhythm remains on each
+// item's margin-bottom. (Gissue #1196)
+.home-grid{
+  --scaffold-col-gap: 1.875rem;
+  --scaffold-row-gap: 0;
+  padding-inline: 0.9375rem;
+  @include breakpoint(small only) {
+    --scaffold-col-gap: 1.25rem;
+    padding-inline: 0.625rem;
+  }
+}
+
 // --- Home Page Intro ---
 .site-intro{
   margin-bottom: 8rem;
@@ -311,6 +327,37 @@ $home-section-vertical-spacing-mobile: 4rem;
   margin-bottom: 3rem;
   @include breakpoint(small only){
     margin-bottom: 2rem;
+  }
+  // Heading on its own line, then the copy beside the imagery at medium and up
+  // (was cell / medium-8 / medium-auto inside a grid-x).
+  --scaffold-gap: 0;
+  > h2{
+    flex: 0 0 100%;
+  }
+  > .section-description,
+  > .header-text{
+    flex: 0 0 100%;
+    min-width: 0;
+    @include breakpoint(medium){
+      flex: 0 0 66.66667%;
+    }
+  }
+  > .image-section{
+    flex: 0 0 100%;
+    min-width: 0;
+    @include breakpoint(medium){
+      flex: 1 1 0;
+    }
+  }
+  .cta-container{
+    --scaffold-gap: 0;
+    > *{
+      flex: 0 0 auto;
+    }
+  }
+  .image-row{
+    --scaffold-gap: 0;
+    justify-content: flex-end;
   }
   h2{
     line-height: normal;
@@ -544,6 +591,8 @@ $home-section-vertical-spacing-mobile: 4rem;
 
 // --- Projects Section ---
 .featured-projects{
+  // Was `align-top`; grid items would otherwise stretch to the tallest in the row.
+  align-items: start;
   .feature-item{
     margin-bottom: 3rem;
     @include breakpoint(small only){
@@ -618,6 +667,12 @@ $home-section-vertical-spacing-mobile: 4rem;
   }
   .photo-row{
     margin-top: 1em;
+    // The photo tiles sat flush against each other under Foundation -- this row
+    // was a plain grid-x with no gutters of its own. The axis-specific custom
+    // properties have to be reset, not --scaffold-gap: the section's
+    // --scaffold-col-gap inherits in and would otherwise win.
+    --scaffold-col-gap: 0;
+    --scaffold-row-gap: 0;
   }
   .photo-wrapper{
     &:has(.photo-tile:hover){
