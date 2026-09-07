@@ -22,8 +22,6 @@
 @import 'global';
 @import 'typography/typography';
 
-// Grids
-@import 'xy-grid/xy-grid';
 // Generic components
 @import 'components/button';
 @import 'components/table';
@@ -32,59 +30,4 @@
 @import 'components/responsive-embed';
 
 // Helpers
-@import 'components/float';
-@import 'components/flex';
 @import 'components/visibility';
-
-
-@mixin foundation-everything(
-  $flex: true,
-  $prototype: false,
-  $xy-grid: $xy-grid
-) {
-  @if $flex {
-    $global-flexbox: true !global;
-  }
-
-  @if $xy-grid {
-    $xy-grid: true !global;
-  }
-
-  // Global styles
-  @include foundation-global-styles;
-  @include foundation-forms;
-  @include foundation-typography;
-
-  // Grids
-  @if not $flex {
-    @include foundation-grid;
-  }
-  @else {
-    @if $xy-grid {
-      @include foundation-xy-grid-classes;
-    }
-    @else {
-      @include foundation-flex-grid;
-    }
-  }
-
-  // Generic components
-  @include foundation-button;
-  @include foundation-label;
-  @include foundation-table;
-  // Basic components
-  @include foundation-tooltip;
-
-  // Containers
-  @include foundation-responsive-embed;
-  @include foundation-tabs;
-
-  // Layout components
-  @include foundation-reveal;
-
-  // Helpers
-  @include foundation-float-classes;
-  @if $flex { @include foundation-flex-classes; }
-  @include foundation-visibility-classes;
-  @if $prototype { @include foundation-prototype-classes; }
-}

@@ -7,10 +7,6 @@
 @include foundation-global-styles;
 @include foundation-typography;
 
-// Grids (choose one)
-@include foundation-xy-grid-classes;
-// @include foundation-flex-grid;
-
 // Generic components
 @include foundation-button;
 @include foundation-table;
@@ -19,6 +15,4 @@
 @include foundation-responsive-embed;
 
 // Helpers
-@include foundation-float-classes;
-@include foundation-flex-classes;
 @include foundation-visibility-classes;
