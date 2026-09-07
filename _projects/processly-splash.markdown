@@ -7,8 +7,8 @@ date: 2017-01-15
 tags: branding web
 ---
 
-<div class="grid-x">
-  <div class="cell">
+<div class="scaffold-grid content-grid">
+  <div class="scaffold-grid-span-full">
     <img src="../img/processly-splash/hero.jpg" alt="Screenshot of the homepage of Processly.io">
   </div>
 </div>
@@ -20,14 +20,14 @@ As with the Processly tagline, Exposing the Process, I wanted to expose the proc
 
 <!-- Learn more about the core product. PROCESSLY PROJECT LINK HERE. -->
 
-<div class="grid-x grid-padding-y">
-  <div class="cell">
+<div class="scaffold-grid content-grid gy py">
+  <div class="scaffold-grid-span-full">
     <img src="../img/processly-splash/features.jpg" alt="The core features of Processly">
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/processly-splash/iterations.jpg" alt="Iterations of the home page design">
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/processly-splash/404.jpg" alt="Shredder 404 page">
   </div>
 </div>

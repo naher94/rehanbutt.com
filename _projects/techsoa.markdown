@@ -15,8 +15,8 @@ The goal with tech.soa was to pull all the resources from around the department 
 
 <div class="image-container"><img src="../img/techsoa/pageProcess.png" alt="Home Page Versions"/></div>
 <div class="image-container"><img src="../img/techsoa/tile-iterations.svg" alt="Tile Iterations"/></div>
-<div class="grid-x">
-  <div class="medium-4 cell"><img src="../img/techsoa/interactionTitlesTags.gif" alt="Hover Interaction For Titles & Tags"/></div>
-  <div class="medium-4 cell"><img src="../img/techsoa/interactionTile.gif" alt="Hover Interaction for Tiles"/></div>
-  <div class="medium-4 cell"><img src="../img/techsoa/interactionLinks.gif" alt="Hover Interaction for Inline Link"/></div>
+<div class="scaffold-grid content-grid">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-third"><img src="../img/techsoa/interactionTitlesTags.gif" alt="Hover Interaction For Titles & Tags"/></div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-third"><img src="../img/techsoa/interactionTile.gif" alt="Hover Interaction for Tiles"/></div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-third"><img src="../img/techsoa/interactionLinks.gif" alt="Hover Interaction for Inline Link"/></div>
 </div>

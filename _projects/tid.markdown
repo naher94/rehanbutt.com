@@ -6,8 +6,8 @@ thumbnail: "tid"
 date:   2017-01-25
 tags: Branding
 ---
-<div class="grid-x align-center">
-  <div class="image-container cell medium-8">
+<div class="scaffold-flex content-flex center">
+  <div class="w-12 md:w-8 image-container">
     <img src="../img/tid/logo.png" alt="Final Logo" class="image-center"/>
   </div>
 </div>
@@ -15,20 +15,20 @@ This past year the Masters of Tangible Interaction Design (MTID) program came ba
 
 <div class="image-container"><img src="../img/tid/logo2.png" alt="Final Logo + Context"/></div>
 
-<div class="grid-x grid-padding-x grid-margin-y">
-  <div class="cell">
+<div class="scaffold-grid content-grid gx px gy">
+  <div class="scaffold-grid-span-full">
     <img src="../img/tid/tid-notebook.jpg" alt="TiD branded notebook">
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/tid/tid-hoodie.jpg" alt="TiD branded hoodie">
   </div>
 </div>
 
-<div class="grid-x grid-padding-x grid-margin-y">
-  <div class="cell">
+<div class="scaffold-grid content-grid gx px gy">
+  <div class="scaffold-grid-span-full">
     <img src="../img/tid/logomark-sketches.jpg" alt="Logomark Sketches">
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/tid/logomark-iteration.svg" alt="Logomark Iteration">
   </div>
 </div>
@@ -38,11 +38,11 @@ Several logo iterations looking at shape, scale, placement, weight and intensity
 <!-- <div class="image-container"><img src="../img/tid/sketches2.png" alt="Branding Sketches"/></div> -->
 <div class="image-container"><img src="../img/tid/brandInspiration.png" alt="Branding Inspiration"/></div>
 
-<div class="grid-x">
-  <div class="small-6 medium-4 cell"><img src="../img/tid/animate1.gif" alt="Animation Inspiration"/></div>
-  <div class="small-6 medium-4 cell"><img src="../img/tid/animate2.gif" alt="Animation Inspiration"/></div>
-  <div class="small-6 medium-4 cell"><img src="../img/tid/animate4.gif" alt="Animation Inspiration"/></div>
-  <!-- <div class="small-6 medium-3 cell"><img src="../img/tid/animate3.gif" alt="Animation Inspiration"/></div> -->
+<div class="scaffold-grid content-grid">
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-third"><img src="../img/tid/animate1.gif" alt="Animation Inspiration"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-third"><img src="../img/tid/animate2.gif" alt="Animation Inspiration"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-third"><img src="../img/tid/animate4.gif" alt="Animation Inspiration"/></div>
+  <!-- <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/tid/animate3.gif" alt="Animation Inspiration"/></div> -->
 </div>
 <!-- <div class="image-container" style="margin-top:50px;"><img src="../img/tid/logoIterations.svg" alt="Logo Iterations"/></div> -->
 

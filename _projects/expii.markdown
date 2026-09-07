@@ -27,11 +27,11 @@ With these I was seeing where all Expii engaged their users and if the brand ima
 
 Across all the public facing platforms I came across four distinct brand images and several tones when speaking or writing about the product. I started by exploring the color schemes that users are presented with and then progressing on to typeface, type style, and brand usage. Noticing that several different typefaces, weights, and combinations of upper and lowercase lettering was being used. As such, I created one potential brand iteration solving many of the problems with the current implementation.
 
-<div class="grid-x">
-  <div class="small-6 medium-3 cell"><img src="../img/expii/actionButton.gif" alt="Animation Inspiration"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/expii/funColors.gif" alt="Animation Inspiration"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/expii/liquidButton.gif" alt="Animation Inspiration"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/expii/iconAnimation.gif" alt="Animation Inspiration"/></div>
+<div class="scaffold-grid content-grid">
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/expii/actionButton.gif" alt="Animation Inspiration"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/expii/funColors.gif" alt="Animation Inspiration"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/expii/liquidButton.gif" alt="Animation Inspiration"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/expii/iconAnimation.gif" alt="Animation Inspiration"/></div>
 </div>
 <div class="image-container"><img src="../img/expii/inspiration.png" alt="Inspiration"/></div>
 

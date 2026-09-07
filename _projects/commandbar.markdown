@@ -7,8 +7,8 @@ date:   2014-09-26
 tags: photoshop plugin
 ---
 
-<div class="grid-x">
-  <div class="cell">
+<div class="scaffold-grid content-grid">
+  <div class="scaffold-grid-span-full">
     <img src="../img/commandBar/commandbarhero.png" alt="Hero Image: Branding and Screenshot">
   </div>
 </div>

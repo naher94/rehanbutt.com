@@ -14,10 +14,10 @@ footer-sort-order: 2
 ---
 
 <div class="about-intro">
-  <div class="grid-container about-bio">
-    <div class="grid-x cell bio-wrapper">
-      <div class="small-12 large-8 cell grid-x">
-        <section class="bio cell">
+  <div class="scaffold-container about-bio">
+    <div class="scaffold-grid content-grid bio-wrapper">
+      <div class="scaffold-grid-span-full scaffold-grid lg:scaffold-grid-span-two-thirds content-grid">
+        <section class="bio scaffold-grid-span-full">
           <h1>Hi! I'm Rehan <span class="wave" onclick="highFive()">👋</span></h1>
           <p>I am a <span class="rainbow">devzgner</span> currently based in Los Angeles California, USA creating <span class="magic">magic</span> & filmmaking tools at Walt Disney Animation Studios, where I lead design across a broad range of tools used by artists and filmmakers. I am naturally curious and tend to think in systems, always drawn to understanding how products, people, and technology come together.</p>
           <p>Previously, I led design for the technology group at UPMC Enterprises, part of the University of Pittsburgh Medical Center. My work spanned care delivery platforms, research study tools, and a suite of imaging applications for the radiology field in collaboration with GE Healthcare.</p>
@@ -51,11 +51,11 @@ footer-sort-order: 2
           <p>Curious what else I'm up to? Shoot me an <span onclick="copyToClipboard('me@rehanbutt.com',this)" class="email">email.</span>
           </p>
         </section>
-        <div class="cell grid-x small-5 large-12 profile-2 grid-padding-x grid-padding-y">
-          <div class="cell large-6">
+        <div class="span-5 scaffold-grid lg:scaffold-grid-span-full content-grid gx px gy py profile-2">
+          <div class="scaffold-grid-span-full lg:scaffold-grid-span-half">
             <img src="/img/rehan-profile2.jpg" alt="Photo of Rehan Butt">
           </div>
-          <div class="cell large-6">
+          <div class="scaffold-grid-span-full lg:scaffold-grid-span-half">
             <img src="/img/rehan-profile3.jpg" alt="Photo of Rehan Butt laughing">
           </div>
         </div>
@@ -67,12 +67,12 @@ footer-sort-order: 2
   </div>
 </div>
 
-<div class="grid-container grid-x">
-  <div class="small-12 large-8 large-offset-4 cell">
+<div class="scaffold-container scaffold-grid content-grid">
+  <div class="scaffold-grid-span-full lg:scaffold-grid-span-two-thirds large-offset-4">
   <section class="work-experience" id="work-experience">
-    <div class="cell grid-x align-middle">
-      <h2 class="cell small-12 medium-shrink">Work Experience</h2>
-      <div class="cell small-12 medium-auto divider"></div>
+    <div class="scaffold-flex about-heading">
+      <h2>Work Experience</h2>
+      <div class="divider"></div>
     </div>
     {% assign work_order = site.work-experience | sort: 'sort-order' %}
     {% assign work_prev = "hello" %}
@@ -100,9 +100,9 @@ footer-sort-order: 2
     {% endfor %}
   </section>
   <section class="education" id="education">
-    <div class="cell grid-x align-middle">
-      <h2 class="cell small-12 medium-shrink">Education</h2>
-      <div class="cell small-12 medium-auto divider"></div>
+    <div class="scaffold-flex about-heading">
+      <h2>Education</h2>
+      <div class="divider"></div>
     </div>
     <div class="education-item">
       <div class="brand-logo-container" id="cmu">
@@ -124,9 +124,9 @@ footer-sort-order: 2
     </div>
   </section>
   <section class="skills" id="skills">
-    <div class="cell grid-x align-middle">
-      <h2 class="cell small-12 medium-shrink">Skills</h2>
-      <div class="cell small-12 medium-auto divider"></div>
+    <div class="scaffold-flex about-heading">
+      <h2>Skills</h2>
+      <div class="divider"></div>
     </div>
     <h3>Some of the things I do well</h3>
     <div class="skills-container">
@@ -148,9 +148,9 @@ footer-sort-order: 2
     </div>
   </section>
   <section class="tools" id="tools">
-    <div class="cell grid-x align-middle">
-      <h2 class="cell small-12 medium-shrink">Tools</h2>
-      <div class="cell small-12 medium-auto divider"></div>
+    <div class="scaffold-flex about-heading">
+      <h2>Tools</h2>
+      <div class="divider"></div>
     </div>
     <h3>Some of the toolsets I am quite familiar with</h3>
     <div class="skills-container">

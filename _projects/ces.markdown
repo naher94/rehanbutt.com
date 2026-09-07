@@ -47,16 +47,16 @@ Several screens from the current app.
 
 <div class="image-container"><img src="../img/ces/inspiration.png" alt="App Inspirations"/></div>
 
-<div class="grid-x">
-  <div class="small-6 medium-3 cell"><img src="../img/ces/inspo1.gif" alt="Animation Inspiration"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/ces/inspo2.gif" alt="Animation Inspiration"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/ces/inspo3.gif" alt="Animation Inspiration"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/ces/inspo4.gif" alt="Animation Inspiration"/></div>
+<div class="scaffold-grid content-grid">
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/ces/inspo1.gif" alt="Animation Inspiration"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/ces/inspo2.gif" alt="Animation Inspiration"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/ces/inspo3.gif" alt="Animation Inspiration"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/ces/inspo4.gif" alt="Animation Inspiration"/></div>
 </div>
 
 Some interaction and static interfaces, that I used as inspiration. Looking at things like ease of use, hierarchy and legibility to name a few.
 
-<div class="cell">
+<div class="">
   <img src="../img/ces/topics.png" alt="Topic Groups" style="width:100%;"/>
 </div>
 

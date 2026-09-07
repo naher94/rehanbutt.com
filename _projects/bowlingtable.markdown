@@ -36,11 +36,11 @@ This project started as a need for a dining table, but quickly turned into almos
 
 ## Process
 
-<div class="grid-x">
-  <div class="cell medium-8">
+<div class="scaffold-grid content-grid">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-two-thirds">
     <img src="../img/bowlingtable/bowlingtablelegsketches1.jpg" alt="Sketches of Leg shapes and configurations">
   </div>
-  <div class="cell medium-4">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-third">
     <img src="../img/bowlingtable/bowlingtablelegsketches2.jpg" alt="Sketches of the Leg cross sections">
   </div>
 
@@ -53,11 +53,11 @@ This project started as a need for a dining table, but quickly turned into almos
 
 A quick render I did to make sure the proportions all looked good and worked well when actually sitting at the table. For example, making sure not to have a seat right in front of a leg and determining the appropriate height for comfort of the table top.
 
-<div class="grid-x grid-padding-x grid-padding-y">
-  <div class="cell medium-7">
+<div class="scaffold-grid content-grid gx px gy py">
+  <div class="scaffold-grid-span-full md:span-7">
     <img src="../img/bowlingtable/precut.jpeg" alt="The slab of bowling lane from the beginning of the project">
   </div>
-  <div class="cell medium-5">
+  <div class="scaffold-grid-span-full md:span-5">
     <img src="../img/bowlingtable/undersidefinished.jpg" alt="Underside of the table in a nearly completed state">
   </div>
   <p>Some in-process photos, the first a photo taken towards the very beginning of the project sanding down the surface and filling any cracks or holes. The second, an almost complete look at the underside of the table top with added supports to due to the construction of bowling lanes and a little signature! 😃</p>

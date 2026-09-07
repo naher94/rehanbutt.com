@@ -8,8 +8,8 @@ tags: iOS App
 published: false
 ---
 
-<div class="grid-x">
-  <div class="cell">
+<div class="scaffold-grid content-grid">
+  <div class="scaffold-grid-span-full">
   <img src="../img/gitApp/gitapphero.png" alt="Git App Hero Image"/>
   </div>
 </div>

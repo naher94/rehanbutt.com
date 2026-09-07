@@ -9,8 +9,8 @@ tags: web portfolio learning edtech
 
 <div class="image-container"><img src="../img/esporre/esporreLogo.svg" alt="Esporre Logo" class="image-center" style="width: 40%" /></div>
 
-<div class="grid-x grid-padding-x" style="margin-top: 60px">
-  <div class="cell">
+<div class="scaffold-grid content-grid gx px" style="margin-top: 60px">
+  <div class="scaffold-grid-span-full">
     <a target="_blank" href="http://processly.io">
         <div class="processly-button content-button"> Check out further development here
         </div>

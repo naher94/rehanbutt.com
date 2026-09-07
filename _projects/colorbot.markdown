@@ -43,9 +43,9 @@ In order to create a better bot experience, I wanted to make sure Jasper had som
 
 #### "Awesome sauce! Give me one second." "Coming right up!" "Enjoy your Inspiration!" "You there? Wonderful colors await you!" "Happy coloring! 🎨🎉" "I'm Jasper your friendly neighborhood color master"
 
-<div class="small-12 medium-6 large-6 columns image-container" style="margin-top:20px;"><img src="../img/colorBot/workflowDiagram.png" alt="Workflow Diagram"/></div>
+<div class="image-container" style="margin-top:20px;"><img src="../img/colorBot/workflowDiagram.png" alt="Workflow Diagram"/></div>
 
-<div class="small-12 medium-6 large-6 columns image-container" style="margin-top:20px; margin-bottom:50px;"><img src="../img/colorBot/workflowDiagramUpdated.png" alt="Workflow Diagram Updated"/></div>
+<div class="image-container" style="margin-top:20px; margin-bottom:50px;"><img src="../img/colorBot/workflowDiagramUpdated.png" alt="Workflow Diagram Updated"/></div>
 
 <div class="image-container" style="margin-top:20px; margin-bottom:50px;"><img src="../img/colorBot/workflowDiagramFinal.png" alt="Workflow Diagram Final"/></div>
 

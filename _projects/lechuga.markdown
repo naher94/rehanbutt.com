@@ -25,19 +25,19 @@ tags: web
 <div class="image-container"><img src="../img/lechuga/inspiration1.png" alt="Mobile Food Ordering Inspiration"/></div>
 <div class="image-container"><img src="../img/lechuga/inspiration2.png" alt="Mobile Food Ordering Inspiration"/></div>
 
-<div class="grid-x grid-padding-x grid-margin-y">
-  <div class="medium-4 cell"><img src="../img/lechuga/tileheart.gif" alt="Interaction Prototype"/></div>
-  <div class="medium-4 cell"><img src="../img/lechuga/tileexpand.gif" alt="Interaction Prototype"/></div>
-  <div class="medium-4 cell"><img src="../img/lechuga/tilegreen.gif" alt="Interaction Prototype"/></div>
+<div class="scaffold-grid content-grid gx px gy">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-third"><img src="../img/lechuga/tileheart.gif" alt="Interaction Prototype"/></div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-third"><img src="../img/lechuga/tileexpand.gif" alt="Interaction Prototype"/></div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-third"><img src="../img/lechuga/tilegreen.gif" alt="Interaction Prototype"/></div>
 </div>
 <div class="image-container"><img src="../img/lechuga/framerplay.png" alt="Framer Coding"/></div>
 <div class="image-container"><img src="../img/lechuga/framerdesign.png" alt="Framer Design"/></div>
 
-<div class="grid-x grid-padding-x grid-margin-y">
-  <div class="small-6 medium-3 cell"><img src="../img/lechuga/reorderscroll.gif" alt="Interaction Prototype"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/lechuga/itemselect.gif" alt="Interaction Prototype"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/lechuga/addtobag.gif" alt="Interaction Prototype"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/lechuga/mangoexpand.gif" alt="Interaction Prototype"/></div>
+<div class="scaffold-grid content-grid gx px gy">
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/lechuga/reorderscroll.gif" alt="Interaction Prototype"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/lechuga/itemselect.gif" alt="Interaction Prototype"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/lechuga/addtobag.gif" alt="Interaction Prototype"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/lechuga/mangoexpand.gif" alt="Interaction Prototype"/></div>
 </div>
 
 <div class="image-container"><img src="../img/lechuga/orderpayiterations.png" alt="Order & Pay Card Iterations"/></div>

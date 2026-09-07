@@ -16,15 +16,15 @@ A couple years ago I started creating a bunch of penguin illustrations, just bec
 
 After creating the penguin sticker pack, I decided to expand the stickers of my friend's dog, Naara, who has a huge following on Instagram. Follow her <a target="_blank" href="https://www.instagram.com/naara.thehusky/">here.</a> Enjoy!
 
-<div class="grid-x grid-padding-x grid-margin-y">
-  <div class="cell medium-6">
+<div class="scaffold-grid content-grid gx px gy">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
     <a target="_blank" href="http://penguin.rehanbutt.com">
         <div class="stickerpack-button content-button"> Check out the Penguin Stickers
         </div>
     </a>
   </div>
 
-  <div class="cell medium-6">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
     <a target="_blank" href="http://naara.rehanbutt.com">
         <div class="stickerpacknaara-button content-button"> Check out the Naara Stickers
         </div>
@@ -32,11 +32,11 @@ After creating the penguin sticker pack, I decided to expand the stickers of my 
   </div>
 </div>
 
-<div class="grid-x" style="padding:0px; margin:30px 0px 0px 0px;">
-  <div class="small-6 medium-3 cell"><img src="../img/stickerPack/tube.png" alt="Penguin + Tube"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/stickerPack/bb8.png" alt="Penguin + BB-8"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/stickerPack/heart.png" alt="Penguin + Heart"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/stickerPack/lights.png" alt="Penguin + Lights"/></div>
+<div class="scaffold-grid content-grid" style="padding:0px; margin:30px 0px 0px 0px;">
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/stickerPack/tube.png" alt="Penguin + Tube"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/stickerPack/bb8.png" alt="Penguin + BB-8"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/stickerPack/heart.png" alt="Penguin + Heart"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/stickerPack/lights.png" alt="Penguin + Lights"/></div>
 </div>
 
 ## Process

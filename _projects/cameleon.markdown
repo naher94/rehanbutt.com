@@ -10,12 +10,12 @@ published: false
 
 <!--branding process-->
 <!--process not already on splash page-->
-<div class="grid-x align-center">
-  <div class="image-container cell small-8 medium-6"><img src="../img/cameleon/logo.svg" alt="Cameleon Logo"/></div>
+<div class="scaffold-flex content-flex center">
+  <div class="w-8 md:w-6 image-container"><img src="../img/cameleon/logo.svg" alt="Cameleon Logo"/></div>
 </div>
 
-<div class="grid-x grid-padding-x" style="margin-top:4rem;">
-  <div class="cell">
+<div class="scaffold-grid content-grid gx px" style="margin-top:4rem;">
+  <div class="scaffold-grid-span-full">
     <a target="_blank" href="http://naher94.github.io/cameleon">
       <div class="camleon-button content-button"> Check out the project at the splash page</div>
     </a>

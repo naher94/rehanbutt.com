@@ -6,29 +6,29 @@ thumbnail: "interactions"
 date: 2018-03-20
 tags: interactions animations
 ---
-<div class="grid-x">
-  <div class="small-12 medium-6 cell image-container">
+<div class="scaffold-grid content-grid">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half image-container">
     <img src="../img/interactions/tag-expand.gif" alt="Tag expanding out hover effect" />
   </div>
-  <div class="small-12 medium-6 cell image-container">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half image-container">
     <img src="../img/interactions/basketballrefresh.gif" alt="Basketball Pull to Refresh Animation" />
   </div>
-  <div class="small-12 medium-6 cell image-container">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half image-container">
     <img src="../img/interactions/card-pulse.gif" alt="Attention grabbing pulse animation" />
   </div>
-  <div class="small-12 medium-6 cell image-container">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half image-container">
     <img src="../img/interactions/cloverbutton.gif" alt="4 Leaf Clover Button" />
   </div>
-  <div class="small-12 medium-6 cell image-container"><img src="../img/interactions/qulrextracted.gif" alt="Color Extracted Hover Interaction" /></div>
-  <div class="small-12 medium-6 cell image-container"><img src="../img/interactions/underlineexpand.gif" alt="Expanded Underline Hover Interaction" /></div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half image-container"><img src="../img/interactions/qulrextracted.gif" alt="Color Extracted Hover Interaction" /></div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half image-container"><img src="../img/interactions/underlineexpand.gif" alt="Expanded Underline Hover Interaction" /></div>
 </div>
 
 <p class="post-callout-large">Looking for more? Head over to my 
 {% include external-link.html link="https://codepen.io/rehanbutt" content="Codepen" %} and explore even more interaction details!</p>
 
-<div class="grid-x">
-  <div class="small-12 medium-6 cell image-container"><img src="../img/interactions/checkoutbutton.gif" alt="Checkout Button Interaction" /></div>
-  <div class="small-12 medium-6 cell image-container"><img src="../img/interactions/socialbutton.gif" alt="Social Action Button Interaction" /></div>
-  <div class="small-12 medium-6 cell image-container"><img src="../img/interactions/letitsnow.gif" alt="Let It Snow Button Interaction" /></div>
-  <div class="small-12 medium-6 cell image-container"><img src="../img/interactions/hoverspread.gif" alt="Icon Spread Hover Interaction" /></div>
+<div class="scaffold-grid content-grid">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half image-container"><img src="../img/interactions/checkoutbutton.gif" alt="Checkout Button Interaction" /></div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half image-container"><img src="../img/interactions/socialbutton.gif" alt="Social Action Button Interaction" /></div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half image-container"><img src="../img/interactions/letitsnow.gif" alt="Let It Snow Button Interaction" /></div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half image-container"><img src="../img/interactions/hoverspread.gif" alt="Icon Spread Hover Interaction" /></div>
 </div>

@@ -1,0 +1,159 @@
+@use 'scaffold/mixins' as scaffold;
+@use 'sass:math';
+
+// Flex basis for an n-of-12 child, less one full gutter -- the child carries
+// half that gutter as margin on each side, as Foundation's cells did.
+@function content-width($n) {
+  @return calc(#{math.percentage(math.div($n, 12))} - var(--content-gap));
+}
+
+// Layout support for the case-study markup in _projects, _photography and
+// _posts. That content uses Scaffold's own grid and span classes; what it also
+// needs, and Scaffold does not provide, is per-container gutters and a few span
+// fractions. (Gissue #1196)
+//
+// Foundation's grid-margin-* and grid-padding-* both produced the same visible
+// result: a full gutter between cells and a half gutter inset at the container
+// edge. The gap covers the first, the container's own padding the second --
+// padding rather than margin because these containers sit directly next to each
+// other in the post body, and adjacent margins would collapse where Foundation's
+// per-cell margins, being inside the container, did not.
+// Gutters are 20px below medium and 30px at medium and up, as Foundation's
+// $grid-margin-gutters had them.
+
+$content-gutter-sm: 1.25rem;
+$content-gutter: 1.875rem;
+$content-edge-sm: 0.625rem;
+$content-edge: 0.9375rem;
+
+// Foundation's `align-middle`.
+.content-grid.items-center,
+.content-flex.items-center{
+  align-items: center;
+}
+
+// A direct child with no span class -- a paragraph the markdown left inside the
+// row, most often -- filled its line under Foundation's flex. As a grid item it
+// would instead take a single track and skew the sizing of the rest, so it
+// spans the row by default. :where() holds this at zero specificity so every
+// span class still wins.
+:where(.content-grid) > :where(*){
+  grid-column: 1 / -1;
+}
+
+.content-grid{
+  --scaffold-col-gap: 0;
+  --scaffold-row-gap: 0;
+
+  // grid-padding-* put half a gutter of padding inside each cell, so the
+  // container edge is inset. grid-margin-* put that half gutter on the cell as
+  // a margin and cancelled it with a negative container margin, so the edge is
+  // flush. `px` / `py` mark the inset variants.
+  &.gx{
+    --content-gap: #{$content-gutter-sm};
+    column-gap: var(--content-gap);
+    @include scaffold.breakpoint(md){ --content-gap: #{$content-gutter}; }
+  }
+  &.px{
+    padding-inline: $content-edge-sm;
+    @include scaffold.breakpoint(md){ padding-inline: $content-edge; }
+  }
+  &.gy{
+    row-gap: $content-gutter-sm;
+    @include scaffold.breakpoint(md){ row-gap: $content-gutter; }
+  }
+  &.py{
+    padding-block: $content-edge-sm;
+    @include scaffold.breakpoint(md){ padding-block: $content-edge; }
+  }
+  &.py{
+    padding-block: $content-edge-sm;
+    @include scaffold.breakpoint(md){ padding-block: $content-edge; }
+  }
+
+  // Span fractions Scaffold has no token for. Scaffold covers the ones that
+  // divide 12 evenly; these don't, so they're set as explicit grid-column.
+  > .span-2  { grid-column: span 2; }
+  > .span-5  { grid-column: span 5; }
+  > .span-7  { grid-column: span 7; }
+  > .span-10 { grid-column: span 10; }
+  > .span-11 { grid-column: span 11; }
+  @include scaffold.breakpoint(md){
+    > .md\:span-2  { grid-column: span 2; }
+    > .md\:span-5  { grid-column: span 5; }
+    > .md\:span-7  { grid-column: span 7; }
+    > .md\:span-10 { grid-column: span 10; }
+  }
+
+}
+
+// Rows whose children size themselves by aspect ratio via an inline
+// `flex: calc(w/h)`. That is a flex behaviour with no grid equivalent, so these
+// rows stay flex; `.force-flex-mobile` still opts a child out of it on mobile.
+.content-flex{
+  // These rows reproduce Foundation's margin gutters rather than using a flex
+  // gap. With a gap, a row of aspect-ratio children (flex-basis 0) fits one
+  // more child per line than Foundation did, because Foundation charged each
+  // child a full gutter of margin and a gap only charges the space between.
+  // Matching the margins keeps the wrap points, and so the page heights.
+  --content-gap: 0px;
+  --scaffold-gap: 0;
+
+  &.gx{
+    --content-gap: #{$content-gutter-sm};
+    margin-inline: -#{$content-edge-sm};
+    > *{ margin-inline: $content-edge-sm; }
+    @include scaffold.breakpoint(md){
+      --content-gap: #{$content-gutter};
+      margin-inline: -#{$content-edge};
+      > *{ margin-inline: $content-edge; }
+    }
+  }
+  &.px{
+    padding-inline: $content-edge-sm;
+    @include scaffold.breakpoint(md){ padding-inline: $content-edge; }
+  }
+  &.gy{
+    margin-block: -#{$content-edge-sm};
+    > *{ margin-block: $content-edge-sm; }
+    @include scaffold.breakpoint(md){
+      margin-block: -#{$content-edge};
+      > *{ margin-block: $content-edge; }
+    }
+  }
+  &.py{
+    padding-block: $content-edge-sm;
+    @include scaffold.breakpoint(md){ padding-block: $content-edge; }
+  }
+
+  // Foundation's `.cell` carried min-width: 0; without it a flex child's
+  // automatic minimum size is its image's intrinsic width. It also carried a
+  // width, which is what a child falls back to when something overrides its
+  // flex -- `.force-flex-mobile` does exactly that below medium.
+  > *{
+    min-width: 0;
+    width: calc(100% - var(--content-gap));
+  }
+
+  // `align-center` centred a row of cells whose widths were percentages. That
+  // is flex centring rather than grid placement -- a grid child spanning fewer
+  // than 12 columns sits at the start of its row -- so those rows stay flex and
+  // their children keep percentage widths.
+  &.center{
+    justify-content: center;
+  }
+
+  @each $n in (2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12) {
+    > .w-#{$n} { flex: 0 0 content-width($n); }
+  }
+  @include scaffold.breakpoint(md){
+    @each $n in (2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12) {
+      > .md\:w-#{$n} { flex: 0 0 content-width($n); }
+    }
+  }
+  @include scaffold.breakpoint(lg){
+    @each $n in (4, 6) {
+      > .lg\:w-#{$n} { flex: 0 0 content-width($n); }
+    }
+  }
+}

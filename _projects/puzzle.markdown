@@ -29,9 +29,9 @@ I created this project for a friend who loves puzzles. As such I wanted to creat
 
 <div class="image-container"><img src="../img/puzzle/colorize2.png" alt="Colorizing" /></div>
 
-<div class="grid-x grid-padding-x grid-margin-y">
-  <div class="medium-6 cell"><img src="../img/puzzle/lasercut-test.jpg" alt="Lasercut test piece for accuracy"></div>
-  <div class="medium-6 cell"><img src="../img/puzzle/lasercut-detail.jpg" alt="Lasercut puzzle removal"></div>
-  <div class="medium-6 cell"><img src="../img/puzzle/lasercut-process.jpg" alt="Laser in process"></div>
-  <div class="medium-6 cell"><img src="../img/puzzle/lasercut-full.jpg" alt="Lasercut full puzzle shot"></div>
+<div class="scaffold-grid content-grid gx px gy">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/puzzle/lasercut-test.jpg" alt="Lasercut test piece for accuracy"></div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/puzzle/lasercut-detail.jpg" alt="Lasercut puzzle removal"></div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/puzzle/lasercut-process.jpg" alt="Laser in process"></div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/puzzle/lasercut-full.jpg" alt="Lasercut full puzzle shot"></div>
 </div>

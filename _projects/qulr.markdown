@@ -19,18 +19,18 @@ I’m a big fan of color and creating fun names for them. As such I started QULR
 
 I wanted a better way to hold my colors. Collecting Post-its, swatch books and just writing down color values was not a great solution.
 
-<div class="grid-x grid-margin-y">
-  <div class="small-6 medium-3 cell"><img src="../img/qulr/inspo1.gif" alt="Animation Inspiration"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/qulr/inspo2.gif" alt="Animation Inspiration"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/qulr/inspo3.gif" alt="Animation Inspiration"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/qulr/inspo4.gif" alt="Animation Inspiration"/></div>
+<div class="scaffold-grid content-grid gy">
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/qulr/inspo1.gif" alt="Animation Inspiration"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/qulr/inspo2.gif" alt="Animation Inspiration"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/qulr/inspo3.gif" alt="Animation Inspiration"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/qulr/inspo4.gif" alt="Animation Inspiration"/></div>
 </div>
 
-<div class="grid-x">
-  <div class="cell medium-6" style="position:relative;">
+<div class="scaffold-grid content-grid">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half" style="position:relative;">
     <img src="../img/qulr/tilevariationsmarmalade.png" alt="Tile Iterations Series" onclick="paddington()">
   </div>
-  <div class="cell medium-6">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
     <img src="../img/qulr/tilevariationsgrape.png" alt="Tile Iterations Series">
   </div>
 </div>

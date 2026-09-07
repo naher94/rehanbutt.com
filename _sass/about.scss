@@ -1,4 +1,23 @@
 @use 'scaffold/mixins' as scaffold;
+// Section heading beside a rule that fills the rest of the row; both go full
+// width when stacked. Was `cell grid-x align-middle` with medium-shrink /
+// medium-auto children. (Gissue #1196)
+.about-heading{
+  --scaffold-gap: 0;
+  align-items: center;
+  > h2{
+    flex: 0 0 auto;
+  }
+  > .divider{
+    flex: 1 1 0;
+  }
+  @include scaffold.breakpoint(md, down){
+    > h2,
+    > .divider{
+      flex: 0 0 100%;
+    }
+  }
+}
 //******* About Page Styling
 .about-intro{
   position: relative;

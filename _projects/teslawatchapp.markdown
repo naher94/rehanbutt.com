@@ -9,8 +9,8 @@ featured:
 tile-description: Bringing the Tesla experience to your wrist with Apple Watch
 ---
 
-<div class="grid-x align-center">
-  <div class="image-container cell small-11 medium-10">
+<div class="scaffold-flex content-flex center">
+  <div class="w-11 md:w-10 image-container">
     <img onclick="carHorn()" src="../img/teslaWatchApp/complicationshero.png" alt="Complications Hero" usemap="#image-map"/>
     <map name="image-map">
       <area alt="car horn" title="car horn" onclick="carHorn()" coords="1169,409,47" shape="circle" href="#">

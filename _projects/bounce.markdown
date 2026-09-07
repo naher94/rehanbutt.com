@@ -7,8 +7,8 @@ date: 2017-03-20
 tags: UI UX Branding
 ---
 
-<div class="grid-x align-center">
-  <div class="cell medium-8">
+<div class="scaffold-flex content-flex center">
+  <div class="w-12 md:w-8">
     <div class="image-container"><img src="../img/bounce/logo.svg" alt="Final Logo"/></div>
   </div>
 </div>

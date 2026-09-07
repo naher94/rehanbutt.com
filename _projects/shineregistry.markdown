@@ -23,8 +23,8 @@ Shine Registry is a platform that gives founders a place to ask for support as t
 
 Don't forget to check out the <a href="{% link _projects/shineregistrybrand.markdown %}">rebrand</a> as well.
 
- <div class="grid-x grid-padding-x grid-margin-y">
-   <div class="cell">
+ <div class="scaffold-grid content-grid gx px gy">
+   <div class="scaffold-grid-span-full">
      <img src="../img/shineregistry/shine-mobile-hero.jpg" alt="Mobile views of Shineregistry.com">
    </div>
 </div>
@@ -34,20 +34,20 @@ Have a small business? Head over to {% include external-link.html link="https://
 
 
 
-<div class="grid-x grid-padding-x grid-margin-y">
-   <div class="cell">
+<div class="scaffold-grid content-grid gx px gy">
+   <div class="scaffold-grid-span-full">
      <img src="../img/shineregistry/featured-tag.jpg" alt="Featured tag sponsorship">
    </div>
-   <div class="cell medium-6">
+   <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
      <img src="../img/shineregistry/tag-callout.jpg" alt="Featured tag page recognizing SustainableApparel">
    </div>
-   <div class="cell medium-6">
+   <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
      <img src="../img/shineregistry/design-sponsored.jpg" alt="Sponsored featured tag page for Design">
    </div>
-   <!-- <div class="cell medium-6">
+   <!-- <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
      <img src="../img/shineregistry/pittsburgh-sponsored.jpg" alt="Sponsored featued tag page for Pittsburgh">
    </div> -->
-   <div class="cell">
+   <div class="scaffold-grid-span-full">
      <img src="../img/shineregistry/registry-tile-grid.jpg" alt="Grid of registry tiles">
    </div>
  </div>
@@ -61,11 +61,11 @@ Especially with the 'Featured Tag' pages as we like to call them. Giving a commu
 
 Which also leads to a natural progression of helping bring new folks to the table through community partnerships.
 
-<div class="grid-x grid-padding-x grid-margin-y">
-  <div class="cell medium-6">
+<div class="scaffold-grid content-grid gx px gy">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
     <img src="../img/shineregistry/info-arch-former.jpg" alt="Former information architecture">
   </div>
-  <div class="cell medium-6">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
     <img src="../img/shineregistry/info-arch.jpg" alt="Information architecture">
   </div>
 </div>
@@ -75,15 +75,15 @@ Every redesign starts with solid architecture
 
 The biggest architectural change we made was separating the idea of a registry or business from the owner of that registry, previously they were one in the same. So if you supported someone else on the platform it was as your business. We noticed that overtime it became conceptually difficult to separate what the business represented and what the founders were supporting outside of their businesses. Our change to separate owners from their businesses on Shine Registry also gives businesses an opportunity to associate team members as they grow.
 
-<div class="grid-x grid-padding-x grid-margin-y">
-  <div class="cell medium-12">
+<div class="scaffold-grid content-grid gx px gy">
+  <div class="scaffold-grid-span-full">
     <img src="../img/shineregistry/registry-user-profile.jpg" alt="Shine Registry's Business & User Profile Pages">
   </div>
 </div>
 
 
-<div class="grid-x grid-padding-x grid-margin-y">
-  <div class="cell medium-12">
+<div class="scaffold-grid content-grid gx px gy">
+  <div class="scaffold-grid-span-full">
     <img src="../img/shineregistry/review-history.jpg" alt="Shine Registry's Design Evolution">
   </div>
 </div>
