@@ -1,3 +1,4 @@
+@use 'scaffold/mixins' as scaffold;
 //******* Header Styling
 
 .nav-container{
@@ -26,7 +27,7 @@
   #rehan-logo-header{
     height: 50px;
     transition: $sprint;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       height: 40px;
     }
     &:hover{
@@ -61,7 +62,7 @@
   display: none;
   float: left;
   line-height: 2.5em;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     display: block;
     line-height: 40px;
   }
@@ -71,7 +72,7 @@
   color: inherit;
   float: left;
   line-height: 2.5em;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     clear: both;
     display: none;
   }
@@ -86,7 +87,7 @@
     display: none;
     float: left;
     user-select: none;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       display: block;
     }
   }
@@ -95,7 +96,7 @@
 .burger-container{
   float: left;
   display: none;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     display: block;
   }
 }
@@ -171,7 +172,7 @@
     transition: $run;
   }
   ~ .mobile-navbar{
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       display: none;
     }
   }

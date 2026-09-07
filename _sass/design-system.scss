@@ -1,10 +1,11 @@
+@use 'scaffold/mixins' as scaffold;
 // Design System
 body {
   font-family: $lato;
   font-weight: $lato-regular;
   font-size: 20px; // = 1em
   color: semantic-color(text);
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     font-size: 16px;
   }
   @media (prefers-color-scheme: dark) {
@@ -29,7 +30,7 @@ h1{
 h2{
   font-size: 3.5em;
   font-weight: $zilla-medium;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
@@ -47,7 +48,7 @@ p{
   padding-right: 5em;
   margin-top: 1.25em;
   margin-bottom: 1.25em;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     padding-left: 0.5em;
     padding-right: 0.5em;
   }
@@ -56,7 +57,7 @@ p{
 ul {
   padding-left: 5em;
   padding-right: 5em;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     padding-left: 0.5em;
     padding-right: 0.5em;
   }
@@ -68,7 +69,7 @@ ul {
   // section's margin-bottom from collapsing out through the footer. (Gissue #1196)
   display: flow-root;
   padding-top: 3em;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     padding-top: 1em;
   }
 }
@@ -99,7 +100,7 @@ ul {
     position: absolute;
     padding-left: 2em;
     padding-right: 2em;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       padding-left: 0.5em;
       padding-right: 0.5em;
     }
@@ -141,7 +142,7 @@ ul {
   line-height: 1.3em;
   font-weight: $lato-bold;
   font-style: italic;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     padding-left: 0.25em;
     padding-right: 0.25em;
   }

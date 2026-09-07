@@ -1,11 +1,12 @@
+@use 'scaffold/mixins' as scaffold;
 .resource-header{
   h1{
     font-weight: $zilla-bold;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       margin-left: 0.5rem;
       margin-right: 0.5rem;
     }
-    @include breakpoint(medium down) {
+    @include scaffold.breakpoint(lg, down) {
       margin-left: 0.5rem;
       margin-right: 0.5rem;
     }
@@ -15,7 +16,7 @@
     line-height: 1.2em;
     padding: 0;
     margin: 0.5em;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       font-size: 1em;
     }
   }
@@ -28,7 +29,7 @@
 // headings above them instead of inset 15px from them. (Gissue #1196)
 .resource-grid{
   --scaffold-gap: 1.875rem;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     --scaffold-gap: 1.25rem;
   }
 }
@@ -40,7 +41,7 @@
     display: inline;
     font-weight: $zilla-bold;
     flex-wrap: wrap;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       line-height: normal;
       padding-left: 0;
       padding-right: 0;
@@ -48,7 +49,7 @@
   }
 }
 .featured-collections{
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     margin-bottom: 2rem;
   }
 }
@@ -63,7 +64,7 @@
     transition: $sprint;
     position: relative;
     overflow: hidden;
-    @include breakpoint(medium up) {
+    @include scaffold.breakpoint(md) {
       position: sticky;
       top: 1em;
     }
@@ -72,7 +73,7 @@
       margin: 0;
     }
     .text-container{
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         font-size: 1.25em;
       }
       .title{
@@ -124,7 +125,7 @@
       backdrop-filter: blur(10px);
       font-weight: $lato-bold;
       font-size: 0.8em;
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         font-size: 1.2em;
       }
       .count-label{
@@ -170,7 +171,7 @@
         a{
           @include link-expand;
         }
-        @include breakpoint(small only) {
+        @include scaffold.breakpoint(md, down) {
           padding-left: 0;
           padding-right: 0;
         }
@@ -202,7 +203,7 @@
     transition: $sprint;
     position: relative;
     overflow: hidden;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       font-size: 1.5em;
     }
     p{
@@ -238,7 +239,7 @@
 
 h1{
   &.resource-collections{
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       padding-left: 1rem;
       padding-right: 1rem;
     }
@@ -280,7 +281,7 @@ h1{
 
 .tag-group{
   margin-bottom: 6rem;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     margin-bottom: 3rem;
   }
   // Tag name on the left, rule filling the rest of the row; both go full width
@@ -294,7 +295,7 @@ h1{
     .divider{
       flex: 1 1 0;
     }
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       .section-header,
       .divider{
         flex: 0 0 100%;
@@ -315,7 +316,7 @@ h1{
     font-weight: $lato-black;
     font-family: $lato;
     flex-wrap: wrap;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       line-height: normal;
       padding-left: 0;
       padding-right: 0;
@@ -327,7 +328,7 @@ h1{
     content: '';
     height: 0.35rem;
     margin-left: 1rem;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       margin-left: 0;
     }
   }

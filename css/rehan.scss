@@ -2,25 +2,7 @@
   # Front matter comment to ensure Jekyll properly reads file.
 ---
 @charset "utf-8";
-// TEMPORARY — Foundation → ScaffoldCSS migration (Gissue #1196, step 0).
-// Foundation and Scaffold disagree on breakpoint values (Foundation medium is
-// 640px, Scaffold md is 768px), so mixing `breakpoint(small only)` with
-// `scaffold.breakpoint(md)` in the same rule leaves a 640–767px dead zone where
-// neither fires. Aligning Scaffold's tokens to Foundation's lets migrated and
-// un-migrated code agree while the migration is in flight.
-// Once Foundation is removed (step 7), delete this config to fall back to
-// Scaffold's own defaults — sm 640 / md 768 / lg 1024 / xl 1280, 1280px container.
-@use 'scaffold/scaffold' as scaffold with (
-  $breakpoints: (
-    sm: 0,      // Foundation `small`
-    md: 640px,  // Foundation `medium`
-    lg: 1024px, // Foundation `large`
-    xl: 1200px, // Foundation `xlarge`
-  ),
-  $container-width: 75rem,          // Foundation $global-width
-  $container-padding-sm: 0.625rem,  // .grid-container padding below medium
-  $container-padding: 0.9375rem     // .grid-container padding at medium and up
-);
+@use 'scaffold/scaffold' as scaffold;
 @import 'app';
 @import 'monokai.css';
 @import 'variables';
@@ -35,6 +17,18 @@
 @import 'easter-egg';
 @import 'articles';
 @import 'speaking';
+
+
+// The site's own content measure, kept across the Foundation removal: Scaffold
+// defaults to a 1280px container with 1rem/1.5rem gutters, this site has always
+// been 1200px with 10px/15px. Scaffold exposes these as custom properties, so
+// they are set here rather than configured at compile time. (Gissue #1196,
+// width tracked separately in Gissue #404)
+:root{
+  --scaffold-container-width: 75rem;
+  --scaffold-container-padding: 0.9375rem;
+  --scaffold-container-padding-sm: 0.625rem;
+}
 
 
 //******* Global Utilities
@@ -92,7 +86,7 @@ video{
 
 //Use for photos that have inline styles of multiple aspect ratios in 1 row
 .force-flex-mobile{
-  @include breakpoint(small only){
+  @include scaffold.breakpoint(md, down){
     flex: 0 0 auto !important;
   }
 }
@@ -107,7 +101,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 
 @mixin home-section-base {
   margin-bottom: $home-section-vertical-spacing;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     margin-bottom: $home-section-vertical-spacing-mobile;
   }
 }
@@ -122,7 +116,7 @@ $home-section-vertical-spacing-mobile: 4rem;
   --scaffold-col-gap: 1.875rem;
   --scaffold-row-gap: 0;
   padding-inline: 0.9375rem;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     --scaffold-col-gap: 1.25rem;
     padding-inline: 0.625rem;
   }
@@ -132,7 +126,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 .site-intro{
   margin-bottom: 8rem;
   margin-top: 3rem;
-  @include breakpoint(small only){
+  @include scaffold.breakpoint(md, down){
     margin-top: 1rem;
     margin-bottom: 5rem;
   }
@@ -150,7 +144,7 @@ $home-section-vertical-spacing-mobile: 4rem;
     font-weight: $zilla-bold;
     margin-block: 0.75em;
     text-wrap: pretty;
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       font-size: 1.25em;
     }
     &:first-of-type{
@@ -160,7 +154,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       color: inherit;
       text-decoration: underline dotted 4px;
       text-decoration-color: rgba($navy-black, 0.5); //TODO update with semantic-color
-      @include breakpoint(small only){
+      @include scaffold.breakpoint(md, down){
         text-decoration: underline dotted 2px;
         text-decoration-color: rgba($navy-black, 0.5); //TODO update with semantic-color
       }
@@ -176,7 +170,7 @@ $home-section-vertical-spacing-mobile: 4rem;
     position: relative;
     text-decoration: underline dotted 4px;
     text-decoration-color: rgba($navy-black, 0.5); //TODO update with semantic-color
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       text-decoration: underline dotted 2px;
       text-decoration-color: rgba($navy-black, 0.5); //TODO update with semantic-color
     }
@@ -224,7 +218,7 @@ $home-section-vertical-spacing-mobile: 4rem;
     font-size: 1.8em;
     color: $signature-teal;
     @include double-arrow-slide;
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       font-size: 1.25em;
     }
   }
@@ -235,7 +229,7 @@ $home-section-vertical-spacing-mobile: 4rem;
     transition: $sprint;
     &#upmc, &#config-fig{
       border-radius: 7px;
-      @include breakpoint(small only){
+      @include scaffold.breakpoint(md, down){
         border-radius: 5px;
       }
     }
@@ -248,7 +242,7 @@ $home-section-vertical-spacing-mobile: 4rem;
         rotate: -3deg;
         border-radius: 6px;
         box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           border-radius: 4px;
         }
       }
@@ -325,7 +319,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 // --- Home Page Section Header (shared) ---
 .home-section-header{
   margin-bottom: 3rem;
-  @include breakpoint(small only){
+  @include scaffold.breakpoint(md, down){
     margin-bottom: 2rem;
   }
   // Heading on its own line, then the copy beside the imagery at medium and up
@@ -338,14 +332,14 @@ $home-section-vertical-spacing-mobile: 4rem;
   > .header-text{
     flex: 0 0 100%;
     min-width: 0;
-    @include breakpoint(medium){
+    @include scaffold.breakpoint(md){
       flex: 0 0 66.66667%;
     }
   }
   > .image-section{
     flex: 0 0 100%;
     min-width: 0;
-    @include breakpoint(medium){
+    @include scaffold.breakpoint(md){
       flex: 1 1 0;
     }
   }
@@ -364,7 +358,7 @@ $home-section-vertical-spacing-mobile: 4rem;
     font-weight: $zilla-bold;
     margin-bottom: 0;
     line-height: normal;
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       margin-bottom: 0.25em;
       line-height: 1;
     }
@@ -381,7 +375,7 @@ $home-section-vertical-spacing-mobile: 4rem;
   h2{
     padding-left: 0;
     padding-right: 0;
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       font-size: 2.5em;
     }
   }
@@ -391,7 +385,7 @@ $home-section-vertical-spacing-mobile: 4rem;
     font-size: 1.5rem;
     line-height: 1.8rem;
     text-wrap: pretty;
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       font-size: 1em;
       line-height: 1.3;
     }
@@ -413,7 +407,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 .speaking-container{
   // TODO remove the bottom spacing for the header section
   .home-section-header{
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       justify-content: center;
     }
   }
@@ -456,7 +450,7 @@ $home-section-vertical-spacing-mobile: 4rem;
         left: 20%;
         right: unset;
         font-weight: $lato-bold;
-        @include breakpoint(small only) {
+        @include scaffold.breakpoint(md, down) {
           left: 40%;
         }
       }
@@ -476,7 +470,7 @@ $home-section-vertical-spacing-mobile: 4rem;
         position: relative;
         z-index: 2;
         margin-block-start: -9rem;
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           margin-block-start: 2rem;
         }
       }
@@ -501,7 +495,7 @@ $home-section-vertical-spacing-mobile: 4rem;
         line-height: 1;
         padding-top: 0.25rem;
         color: semantic-color(text-on-light-bg-always);
-        @include breakpoint(medium down){
+        @include scaffold.breakpoint(lg, down){
           font-size: 1.5rem;
         }
       }
@@ -595,7 +589,7 @@ $home-section-vertical-spacing-mobile: 4rem;
   align-items: start;
   .feature-item{
     margin-bottom: 3rem;
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       margin-bottom: 2rem;
     }
     &:nth-child(even){
@@ -608,7 +602,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       }
     }
     .text-wrapper{
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         margin-top: 1rem;
       }
     }
@@ -636,7 +630,7 @@ $home-section-vertical-spacing-mobile: 4rem;
         text-wrap: pretty;
         line-height: 1.1;
         margin-block-end: 0.25em;
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           font-size: 1.5rem;
           line-height: 1.1;
           padding-left: 0;
@@ -649,7 +643,7 @@ $home-section-vertical-spacing-mobile: 4rem;
         padding: 0;
         margin: 0;
         text-wrap: pretty;
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           font-size: 1rem;
         }
       }
@@ -661,7 +655,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 .photography-container{
   h2{
     font-weight: $zilla-bold;
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       line-height: 1;
     }
   }
@@ -682,13 +676,13 @@ $home-section-vertical-spacing-mobile: 4rem;
       scale: 1.1;
       transition: $run;
       margin-bottom: 3em;
-      @include breakpoint(small only){
+      @include scaffold.breakpoint(md, down){
         scale: 1;
         margin-bottom: 0;
       }
       &:hover{
         scale: 1.2;
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           scale: 1.05;
         }
         margin-bottom: 0;
@@ -727,7 +721,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       .photo-tile{
         rotate: -5deg;
         margin-top: 3em;
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           margin-top: 0;
         }
         &:hover{
@@ -739,7 +733,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       .photo-tile{
         rotate: 5deg;
         margin-bottom: 3em;
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           margin-bottom: 0;
         }
         &:hover{
@@ -752,7 +746,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 
 // --- Year in Review Section ---
 .year-in-review-container{
-  @include breakpoint(small only){
+  @include scaffold.breakpoint(md, down){
     padding-bottom: 2rem;
   }
   .year-container{
@@ -810,12 +804,15 @@ $home-section-vertical-spacing-mobile: 4rem;
         top: 7%;
         margin: auto;
         left: -7%;
-        @include breakpoint(medium only){
-          font-size: 7rem;
-          top: 4%;
-          left: -12%;
+        // Scaffold has no `only`; nesting md-up inside lg-down is the same range.
+        @include scaffold.breakpoint(md){
+          @include scaffold.breakpoint(lg, down){
+            font-size: 7rem;
+            top: 4%;
+            left: -12%;
+          }
         }
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           font-size: 4.5rem;
           top: 8%;
           left: -7%;
@@ -838,7 +835,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       line-height: 1;
       padding-top: 0.25rem;
       color: semantic-color(text-on-light-bg-always);
-      @include breakpoint(medium down){
+      @include scaffold.breakpoint(lg, down){
         font-size: 1.5rem;
       }
     }
@@ -858,7 +855,7 @@ $home-section-vertical-spacing-mobile: 4rem;
     background-color: rgba($navy-black, 0.1);
     margin-top: 2rem;
     margin-bottom: 3rem;
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       margin-top: 1rem;
       margin-bottom: 1.5rem;
     }
@@ -922,7 +919,7 @@ $home-section-vertical-spacing-mobile: 4rem;
   font-family: $zilla;
   text-wrap: pretty;
   padding-inline: 0.25em;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     font-size: 1.4em;
   }
 }
@@ -932,7 +929,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 // owns spacing on both axes rather than splitting it with the child. (Gissue #1196)
 .tile-grid{
   --scaffold-row-gap: 1.5rem;
-  @include breakpoint(small only){
+  @include scaffold.breakpoint(md, down){
     --scaffold-row-gap: 1rem;
   }
 }
@@ -947,7 +944,7 @@ $home-section-vertical-spacing-mobile: 4rem;
   background-color: $signature-teal;
   color: $pure-white;
   border-radius: $pill-radius;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     right: -0.5rem;
     top: -0.5rem;
   }
@@ -957,7 +954,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 
 //******* Post/Article Styles
 .post-header{
-  @include breakpoint(large down) {
+  @include scaffold.breakpoint(xl, down) {
     padding-left: 0.5em;
     padding-right: 0.5em;
   }
@@ -965,7 +962,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 
 .post-header-hero{
   margin-top: 1em;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     margin-top: 0.5em;
   }
 }
@@ -998,7 +995,7 @@ article{
   height: 100%;
   margin-left: .9375rem;
   margin-right: .9375rem;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     margin-left: .625rem;
     margin-right: .625rem;
   }
@@ -1080,7 +1077,7 @@ article{
       line-height: 1.5rem;
       font-size: 1rem;
     }
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       margin-top: -3rem;
     }
   }
@@ -1131,10 +1128,10 @@ article{
       font-weight: $lato-bold;
       font-size: 1rem;
       line-height: 1.3rem;
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         font-size: 1rem;
       }
-      @include breakpoint(medium down) {
+      @include scaffold.breakpoint(lg, down) {
         font-size: 1rem;
       }
     }
@@ -1160,7 +1157,7 @@ article{
       font-size: 1rem;
       margin: 0;
       margin-left: 0.5rem;
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         margin-left: 0;
         margin-top: 0.5rem;
       }
@@ -1266,11 +1263,11 @@ article{
     &:hover{
       transform: rotate(-5deg) scale(1.1);
     }
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       left: 1rem;
     }
   }
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     width: 6rem;
   }
 }
@@ -1374,7 +1371,7 @@ article{
 
 
 //******* Mobile Styling
-@include breakpoint(small only) {
+@include scaffold.breakpoint(md, down) {
 
   .nav{
     padding: 10px;

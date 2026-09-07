@@ -1,3 +1,4 @@
+@use 'scaffold/mixins' as scaffold;
 .post-article{
   .post-header{
     .article-hero{
@@ -72,7 +73,7 @@
     }
     // Stacked below medium. Must come after the two rules above -- same
     // specificity, so source order decides.
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       font-size: 1.2em;
       --scaffold-gap: 0.75em;
       .count-label,
@@ -84,7 +85,7 @@
       }
     }
     .cta-button{
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         font-size: 1rem;
         padding: 0.4rem 0.75rem;
       }
@@ -118,7 +119,7 @@
   }
   p{
     margin: 0;
-    @include breakpoint(medium up) {
+    @include scaffold.breakpoint(md) {
       padding: 0;
     }
   }

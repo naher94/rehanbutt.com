@@ -1,22 +1,23 @@
+@use 'scaffold/mixins' as scaffold;
 //******* About Page Styling
 .about-intro{
   position: relative;
   overflow-x: hidden;
   margin-top: 2rem;
   .about-bio{
-    @include breakpoint(medium down){
+    @include scaffold.breakpoint(lg, down){
       display: flex;
       flex-flow: row wrap;
     }
   }
   .bio-wrapper{
-    @include breakpoint(medium down){
+    @include scaffold.breakpoint(lg, down){
       order: 2;
     }
     .bio {
       margin-top: 6rem;
       margin-bottom: 3rem;
-      @include breakpoint(medium down){
+      @include scaffold.breakpoint(lg, down){
         order: 3;
         margin-top: 2rem;
       }
@@ -42,7 +43,7 @@
         .rainbow{
           font-weight: $zilla-bold;
         }
-        @include breakpoint(small only) {
+        @include scaffold.breakpoint(md, down) {
           font-size: 1.2rem;
         }
       }
@@ -82,7 +83,7 @@
               }
             }
           }
-          @include breakpoint(small only) {
+          @include scaffold.breakpoint(md, down) {
             font-size: 1.2rem;
             margin-left: 0.25rem;
           }
@@ -136,12 +137,12 @@
       }
     }
     .profile-2{
-      @include breakpoint(medium down){
+      @include scaffold.breakpoint(lg, down){
         margin-top: -20rem;
         z-index: 4;
         order: 1;
       }
-      @include breakpoint(small only){
+      @include scaffold.breakpoint(md, down){
         margin-top: -10rem;
         z-index: 4;
       }
@@ -149,7 +150,7 @@
   }
   .profile-container{
     position: absolute;
-    @include breakpoint(large){
+    @include scaffold.breakpoint(lg){
       right: -5rem;
       top: 0;
       z-index: -1;
@@ -160,7 +161,7 @@
     @media screen and (min-width: 100em){
       left: 50vw;
     }
-    @include breakpoint(medium down){
+    @include scaffold.breakpoint(lg, down){
       position: relative;
       flex: 0 0 auto;
       min-height: 0px;
@@ -169,11 +170,14 @@
       z-index: 1;
       order: 1;
     }
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       margin-left: 5rem;
     }
-    @include breakpoint(medium only){
-      margin-left: 8rem;
+    // Scaffold has no `only`; nesting md-up inside lg-down is the same range.
+    @include scaffold.breakpoint(md){
+      @include scaffold.breakpoint(lg, down){
+        margin-left: 8rem;
+      }
     }
   }
 }
@@ -232,11 +236,11 @@
     font-size: 3.5em;
     font-weight: $lato-black;
     font-family: $lato;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       line-height: 1em;
       padding: 0;
     }
-    @include breakpoint(medium down) {
+    @include scaffold.breakpoint(lg, down) {
       line-height: 1em;
     }
   }
@@ -246,7 +250,7 @@
     content: '';
     height: 0.5rem;
     margin-left: 1rem;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       margin-left: 0;
     }
   }
@@ -264,7 +268,7 @@
   .work-item, .speaking-item, .education-item{
     margin-top: 1rem;
     padding-left: 0.5rem;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       padding-left: 0;
     }
     p{
@@ -290,7 +294,7 @@
       margin-left: -4em;
       transition: $run;
       padding-top: 0.5em;
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         display: none;
       }
       &#disney-animation{
@@ -421,12 +425,12 @@
     padding: 0;
     margin-top: -1.5rem;
     margin-bottom: 1rem;
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       margin-top: -2rem;
     }
   }
   .divider{
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       margin-top: 1rem;
     }
   }

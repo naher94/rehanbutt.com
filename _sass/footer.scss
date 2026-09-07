@@ -1,3 +1,4 @@
+@use 'scaffold/mixins' as scaffold;
 //******* Footer Styling
 footer{
   margin-top: 2rem;
@@ -21,7 +22,7 @@ footer{
   }
   .site-pages{
     flex: 0 0 100%;
-    @include breakpoint(large){
+    @include scaffold.breakpoint(lg){
       flex: 0 0 auto;
     }
     .nav-section{
@@ -30,7 +31,7 @@ footer{
   }
   .footer-brand{
     flex: 0 0 100%;
-    @include breakpoint(large){
+    @include scaffold.breakpoint(lg){
       flex: 1 1 0;
       min-width: 0;
     }
@@ -47,7 +48,7 @@ footer{
     .social-sub-1,
     .social-sub-2{
       flex: 0 0 100%;
-      @include breakpoint(medium){
+      @include scaffold.breakpoint(md){
         flex: 0 0 auto;
       }
     }
@@ -59,7 +60,7 @@ footer{
   .version-wrap,
   .happy-copyright{
     flex: 0 0 100%;
-    @include breakpoint(medium){
+    @include scaffold.breakpoint(md){
       flex: 0 0 auto;
     }
   }
@@ -70,7 +71,7 @@ footer{
 
   .footer-content{
     padding-top: 2rem;
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       padding-left: 2rem;
       padding-right: 2rem;
     }
@@ -85,7 +86,7 @@ footer{
     }
     .metadata{
       margin-top: 2rem;
-      @include breakpoint(small only){
+      @include scaffold.breakpoint(md, down){
         text-align: right;
       }
       div{
@@ -93,7 +94,7 @@ footer{
       }
       a{
         color: inherit;
-        @include breakpoint (small only){
+        @include scaffold.breakpoint(md, down){
           order: 2;
         }
         &:hover{
@@ -110,7 +111,7 @@ footer{
         margin-left: 0.5rem;
         visibility: hidden;
         display: inline;
-        @include breakpoint (small only){
+        @include scaffold.breakpoint(md, down){
           order: 1;
           margin-right: 0.5rem;
         }
@@ -125,14 +126,14 @@ footer{
       .happy-copyright{
         p{
           display: inline;
-          @include breakpoint(small only){
+          @include scaffold.breakpoint(md, down){
             display: block;
           }
         }
         .middle-dot{
           margin-left: 0.5em;
           margin-right: 0.5em;
-          @include breakpoint(small only){
+          @include scaffold.breakpoint(md, down){
             display: none;
           }
         }
@@ -142,7 +143,7 @@ footer{
   .site-pages{
     padding-left: 0;
     padding-right: 0;
-    @include breakpoint(medium down){
+    @include scaffold.breakpoint(lg, down){
       text-align: right;
       justify-content: flex-end;
       margin-bottom: 3rem;
@@ -154,7 +155,7 @@ footer{
         margin-right: -1rem;
       }
     }
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       font-size: 1.5em;
       .nav{
         font-size: 1.1em;
@@ -195,7 +196,7 @@ footer{
         }
       }
     }
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       .social-sub-1{
         margin-top: 1rem;
         margin-bottom: -1rem;
@@ -207,7 +208,7 @@ footer{
       }
     }
   }
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     margin-top: 0.5em;
     padding-bottom: 4rem;
   }
@@ -218,7 +219,7 @@ footer{
   padding-right: 0.5em;
   font-size: 2em;
   color: inherit;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     font-size: 3em;
     padding-left: 0.25rem;
     padding-right: 0.25rem;
@@ -256,7 +257,7 @@ footer{
     position: relative;
     display: inline;
     cursor: pointer;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       padding-right: 0;
     }
     .copied{
@@ -264,7 +265,7 @@ footer{
       left: -20%;
       right: unset;
       font-weight: $lato-bold;
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         left: unset;
         right: -50%;
       }
