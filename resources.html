@@ -18,9 +18,9 @@ footer-sort-order: 2
 {%- comment -%}collect all the unique tags from the resources and posts{%- endcomment -%}
 {% assign allresources = site.resources | concat: site.posts %}
 {% assign alltags = allresources | map: "tags" | uniq | sort %}
-<section class="cell tag-section">
+<section class="tag-section">
   <h2 class="visually-hidden">Categories</h2>
-  <div class="tags-container cell">
+  <div class="tags-container">
     {% for tag in alltags %}
       <a href="#{{tag | replace: " ", "-"}}">
         <div class="tag">
@@ -37,26 +37,26 @@ footer-sort-order: 2
   </div>
 </section>
 
-<section class="recently-added grid-x grid-padding-x grid-padding-y cell medium-12">
-  <h2 class="cell small-12">Recently Added</h2>
+<section class="recently-added scaffold-grid resource-grid">
+  <h2 class="scaffold-grid-span-full">Recently Added</h2>
   {% assign resources_sorted = allresources | sort: 'date' | reverse %}
   {% assign tagged_sorted = resources_sorted | where_exp: 'item', 'item.tags.size > 0' %}
     {%- for resource in tagged_sorted limit:3 -%}
       {%- if resource.article == true -%}
-      {% include article-element.html item=resource css-class="medium-6 large-4" %}
+      {% include article-element.html item=resource css-class="scaffold-grid-span-full md:scaffold-grid-span-half lg:scaffold-grid-span-third" %}
       {%- else -%}
-      {% include resource-element.html item=resource css-class="medium-6 large-4" %}
+      {% include resource-element.html item=resource css-class="scaffold-grid-span-full md:scaffold-grid-span-half lg:scaffold-grid-span-third" %}
       {%- endif -%}
     {%- endfor -%}
 </section>
 
-<section class="featured-collections grid-x grid-padding-x grid-padding-y cell medium-12">
-  <div class="cell grid-x align-middle">
-    <h2 class="cell shrink"><a href="{% link resource-collection.html %}">Collections <span class="arrow-animation"><i class="fas fa-arrow-right first"></i><i class="fas fa-angle-right second"></i></span></a></h2>
+<section class="featured-collections scaffold-grid resource-grid">
+  <div class="scaffold-grid-span-full">
+    <h2><a href="{% link resource-collection.html %}">Collections <span class="arrow-animation"><i class="fas fa-arrow-right first"></i><i class="fas fa-angle-right second"></i></span></a></h2>
   </div>
   {%- for featured in site.resources-collection -%}
   {% if featured.featured == true %}
-    <a href="{{featured.url | prepend: site.url}}" class="cell medium-3">
+    <a href="{{featured.url | prepend: site.url}}" class="scaffold-grid-span-full md:scaffold-grid-span-quarter">
       <div class="tile" style="color: {{featured.text-color}};">
         <img src="../img/resources-collection/{{featured.tile-image}}" alt="{{featured.tile-image-alt}}">
         <p class="title">{{featured.title}}</p>
@@ -69,12 +69,12 @@ footer-sort-order: 2
 
 {%- assign allcollections = site.resources-collection | sort: 'date' | reverse -%}
 {% for tag in alltags %}
-  <section class="tag-group grid-x grid-padding-x grid-padding-y cell medium-12" id="{{tag | replace: " ", "-"}}">
-    <div class="cell grid-x align-middle">
+  <section class="tag-group scaffold-grid resource-grid" id="{{tag | replace: " ", "-"}}">
+    <div class="scaffold-grid-span-full scaffold-flex tag-heading">
       <a href="#{{tag | replace: " ", "-"}}" class="section-header">
-        <h2 class="cell small-12 medium-shrink"><span class="hashtag">#</span>{{tag}}</h2>
+        <h2><span class="hashtag">#</span>{{tag}}</h2>
       </a>
-      <div class="cell small-12 medium-auto divider"></div>
+      <div class="divider"></div>
     </div>
   
   {% assign tag_found = false %}
@@ -92,15 +92,15 @@ footer-sort-order: 2
   {% endfor %}
   
   {% if tag_found %}
-  <div class="cell grid-x collection-row">
+  <div class="collection-row scaffold-grid-span-full scaffold-grid">
   {% endif %}
   
     {%- for collection in allcollections -%}
     {%- if collection.tag == tag -%}
-    <a href="{{collection.url | prepend: site.url}}" class="cell medium-4 inline-collection-tile-link">
-      <div class="inline-collection-tile grid-x align-middle">
-        <img src="../img/resources-collection/{{collection.tile-image}}" alt="{{collection.tile-image-alt}}" class="cell small-2half">
-        <div class="text-content cell auto">
+    <a href="{{collection.url | prepend: site.url}}" class="scaffold-grid-span-full md:scaffold-grid-span-third inline-collection-tile-link">
+      <div class="inline-collection-tile scaffold-flex">
+        <img src="../img/resources-collection/{{collection.tile-image}}" alt="{{collection.tile-image-alt}}" class="tile-thumb">
+        <div class="text-content">
           <p class="sub-header">{{collection.sub-header}}</p>
           <p class="title">{{collection.title}}</p>
         </div>
@@ -116,9 +116,9 @@ footer-sort-order: 2
   {% for resource in allresources %}
     {% if resource.tags contains tag %}
       {%- if resource.article == true -%}
-      {% include article-element.html item=resource css-class="medium-6 large-4" %}
+      {% include article-element.html item=resource css-class="scaffold-grid-span-full md:scaffold-grid-span-half lg:scaffold-grid-span-third" %}
       {%- else -%}
-      {% include resource-element.html item=resource css-class="medium-6 large-4" %}
+      {% include resource-element.html item=resource css-class="scaffold-grid-span-full md:scaffold-grid-span-half lg:scaffold-grid-span-third" %}
       {%- endif -%}
     {% endif %}
   {% endfor %}

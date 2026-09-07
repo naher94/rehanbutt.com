@@ -21,6 +21,18 @@
   }
 }
 
+// Gutters for the resource grids. Foundation drove these with grid-padding-x/y
+// (padding on each cell); the gap reproduces the same 30px / 20px spacing
+// between items, minus the half-gutter of padding the outer cells used to carry
+// -- so grid items now sit flush with the section edge, aligned with the
+// headings above them instead of inset 15px from them. (Gissue #1196)
+.resource-grid{
+  --scaffold-gap: 1.875rem;
+  @include breakpoint(small only) {
+    --scaffold-gap: 1.25rem;
+  }
+}
+
 .recently-added, .featured-collections{
   h2{
     font-size: 2.5em;
@@ -86,7 +98,23 @@
       top: 0;
       left: 0;
     }
+    // Title block and metadata bar stack full width; the bar sits at the bottom
+    // of its line, as `align-self-bottom` did on the Foundation cell.
+    .content-container{
+      --scaffold-gap: 0;
+      > *{
+        flex: 0 0 100%;
+      }
+    }
     .metadata-bar{
+      align-self: flex-end;
+      // Count on the left, share icons on the right (was align-justify).
+      --scaffold-gap: 0;
+      justify-content: space-between;
+      align-items: center;
+      > *{
+        flex: 0 0 auto;
+      }
       position: relative;
       background-color: semantic-color(resources-collection-card-bar);
       color: semantic-color(text);
@@ -255,6 +283,24 @@ h1{
   @include breakpoint(small only) {
     margin-bottom: 3rem;
   }
+  // Tag name on the left, rule filling the rest of the row; both go full width
+  // when stacked. Was grid-x align-middle + medium-shrink / medium-auto.
+  .tag-heading{
+    --scaffold-gap: 0;
+    align-items: center;
+    .section-header{
+      flex: 0 0 auto;
+    }
+    .divider{
+      flex: 1 1 0;
+    }
+    @include breakpoint(small only) {
+      .section-header,
+      .divider{
+        flex: 0 0 100%;
+      }
+    }
+  }
   .section-header{
     &:hover{
       .hashtag{
@@ -298,13 +344,24 @@ h1{
 }
 
 .inline-collection-tile{
-  .small-2half{
-    width: 20%;
+  // The row's own gutter is the thumbnail's margin, not a flex gap.
+  --scaffold-gap: 0;
+  align-items: center;
+  // Renamed from .small-2half, which only looked like a Foundation size class
+  // and would read as a false positive in the step 7 grep.
+  .tile-thumb{
+    flex: 0 0 20%;
+    // Without this the img's automatic minimum size (its intrinsic width)
+    // overrides the 20% basis and it fills the row. Foundation's `.cell`
+    // carried the `min-width: 0` that used to prevent this.
+    min-width: 0;
   }
   img{
     border-radius: $tile-radius;
   }
   .text-content{
+    flex: 1 1 0;
+    min-width: 0;
     margin-inline-start: 0.5em;
   }
   p{
