@@ -1,4 +1,97 @@
 .speaking-page{
+  // Flex plumbing replacing Foundation's grid-x / cell / size classes.
+  // Foundation's grid carried no gap, so each row zeroes it. (Gissue #1196)
+  --scaffold-gap: 0;
+  justify-content: center;
+  > .speaking-intro,
+  > .speaking-events-intro,
+  > .speaking-events,
+  > .cta-bar-wrapper{
+    flex: 0 0 100%;
+    min-width: 0;
+  }
+  > .speaking-intro,
+  > .speaking-events-intro,
+  > .speaking-events{
+    @include breakpoint(medium){
+      flex: 0 0 66.66667%;
+    }
+  }
+  // No cell class of its own -- sized by its content, capped at the row width.
+  > .speaking-item-hero{
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+  .cta-container{
+    --scaffold-gap: 0;
+    > *{
+      flex: 0 0 auto;
+    }
+  }
+  // Heading on the left, rule filling the rest; both full width when stacked.
+  .events-heading{
+    --scaffold-gap: 0;
+    align-items: center;
+    h2{
+      flex: 0 0 auto;
+    }
+    .divider{
+      flex: 1 1 0;
+    }
+    @include breakpoint(small only){
+      h2,
+      .divider{
+        flex: 0 0 100%;
+      }
+    }
+  }
+  .main-content{
+    --scaffold-gap: 0;
+    align-items: center;
+    justify-content: center;
+    .logo-wrapper{
+      flex: 0 0 auto;
+    }
+    .text-wrapper{
+      flex: 0 0 100%;
+      min-width: 0;
+      @include breakpoint(medium){
+        flex: 0 0 66.66667%;
+      }
+    }
+  }
+  .cta-bar{
+    --scaffold-gap: 0;
+    justify-content: space-between;
+    .text-area,
+    .cta-bar-action{
+      flex: 0 0 100%;
+      min-width: 0;
+      @include breakpoint(medium){
+        flex: 0 0 auto;
+      }
+    }
+    // Stays a flex row even though its two paragraphs each take a full line:
+    // as a block its max-content width would be the wider paragraph, but as a
+    // row it is their sum, which is the width the bar was built around.
+    .text-area{
+      --scaffold-gap: 0;
+      > p{
+        flex: 0 0 100%;
+        min-width: 0;
+      }
+    }
+    .cta-bar-action{
+      --scaffold-gap: 0;
+      align-items: center;
+      .cta-button{
+        flex: 0 0 100%;
+        @include breakpoint(medium){
+          flex: 0 0 auto;
+        }
+      }
+    }
+  }
   .speaking-intro{
     p{
       padding: 0;
