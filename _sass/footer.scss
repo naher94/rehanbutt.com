@@ -4,6 +4,70 @@ footer{
   background-color: semantic-color(footer-bg);
   color: semantic-color(text);
   padding-bottom: 2rem;
+
+  // Flex plumbing replacing Foundation's grid-x / cell / size classes.
+  // Foundation's grid carried no gap, so every one of these rows zeroes it and
+  // keeps spacing on the existing margins. (Gissue #1196)
+  .footer-content,
+  .site-pages,
+  .footer-brand,
+  .social-container,
+  .metadata,
+  .version-wrap{
+    --scaffold-gap: 0;
+  }
+  .footer-content{
+    justify-content: space-between;
+  }
+  .site-pages{
+    flex: 0 0 100%;
+    @include breakpoint(large){
+      flex: 0 0 auto;
+    }
+    .nav-section{
+      flex: 0 0 auto;
+    }
+  }
+  .footer-brand{
+    flex: 0 0 100%;
+    @include breakpoint(large){
+      flex: 1 1 0;
+      min-width: 0;
+    }
+  }
+  .logo-footer-container{
+    flex: 0 0 100%;
+  }
+  .social-container{
+    // Full width at every size. The markup asked for `small-shrink`, but
+    // Foundation never generates that class, so the `cell`'s width: 100% won.
+    flex: 0 0 100%;
+    align-self: flex-end;
+    justify-content: flex-end;
+    .social-sub-1,
+    .social-sub-2{
+      flex: 0 0 100%;
+      @include breakpoint(medium){
+        flex: 0 0 auto;
+      }
+    }
+  }
+  .metadata{
+    flex: 0 0 100%;
+    justify-content: space-between;
+  }
+  .version-wrap,
+  .happy-copyright{
+    flex: 0 0 100%;
+    @include breakpoint(medium){
+      flex: 0 0 auto;
+    }
+  }
+  .version-wrap > a,
+  .version-wrap > .ship-it{
+    flex: 0 0 auto;
+  }
+
   .footer-content{
     padding-top: 2rem;
     @include breakpoint(small only){

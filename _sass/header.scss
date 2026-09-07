@@ -78,6 +78,10 @@
 }
 
 .menu-container{
+  // Burger / nav links / logo spread across the bar (was grid-x align-justify).
+  // Foundation's grid had no gap, so the flex gap is zeroed. (Gissue #1196)
+  --scaffold-gap: 0;
+  justify-content: space-between;
   .burger-icon{
     display: none;
     float: left;

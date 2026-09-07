@@ -55,8 +55,8 @@
   {% include banner.html %}
 {% endif %}
   <nav class="nav-container">
-    <div class="site-nav grid-x grid-container">
-      <div class="menu-container grid-x cell align-justify">
+    <div class="site-nav scaffold-container">
+      <div class="menu-container scaffold-flex">
         {% assign header_items = site.pages | where: "header-visibility", "show" | sort: "header-sort-order" %}
         <div class="burger-container">
           <input class="burger-btn" type="checkbox" id="burger-btn"/>

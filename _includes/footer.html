@@ -1,9 +1,9 @@
 <footer class="site-footer">
-    <div class="grid-x grid-container footer-content align-justify">
-      <div class="site-pages small-12 large-shrink cell grid-x">
+    <div class="footer-content scaffold-container scaffold-flex">
+      <div class="site-pages scaffold-flex">
         {% assign footer_main_items = site.pages | where: "footer-section", "main" | sort: "footer-sort-order" %}
         {% assign footer_other_items = site.pages | where: "footer-section", "other" | sort: "footer-sort-order" %}
-        <div class="cell shrink nav-section">
+        <div class="nav-section">
           <p class="section-title">The Main Stuff</p>
           {% for my_page in footer_main_items %}
             <div class="nav-wrap">
@@ -12,7 +12,7 @@
           {% endfor %}
         </div>
 
-        <div class="cell shrink nav-section">
+        <div class="nav-section">
           <p class="section-title">Other Things</p>
           {%- comment -%}{% assign items_order = site.pages | sort: 'sort-order' %} 
           {%- endcomment -%}
@@ -24,7 +24,7 @@
           {% endfor %}
         </div>
 
-        <div class="cell shrink nav-section">
+        <div class="nav-section">
           <p class="section-title">Year in Review</p>
           {% assign yir_order = site.year-in-review | sort: 'year' | reverse %}
           {%- for year in yir_order -%}
@@ -40,15 +40,15 @@
         </div>
       </div>
 
-      <div class="grid-x cell small-12 large-auto">
-        <div class="logo-footer-container cell small-12 medium-12">
+      <div class="footer-brand scaffold-flex">
+        <div class="logo-footer-container">
           <a href="/" class="logo-footer" aria-label="Go to homepage">
           {% capture location %}footer{% endcapture %}
           {% include rehan-logo.svg %}
           </a>
         </div>
-        <div class="social-container cell grid-x small-shrink medium-12 align-self-bottom align-right">
-          <div class="cell small-12 medium-shrink social-sub-1">
+        <div class="social-container scaffold-flex">
+          <div class="social-sub-1">
           
             {% include external-link.html css-class="social" link="https://www.threads.net/@naher94" content="<i class='fa-brands fa-threads fa-xs' title='Threads'></i>" %}
           
@@ -57,7 +57,7 @@
             {% include external-link.html css-class="social" link="https://github.com/naher94" content="<i class='fab fa-github fa-xs' title='Github'></i>" %}
 
           </div>
-          <div class="cell small-12 medium-shrink social-sub-2">
+          <div class="social-sub-2">
             
             <div class="social email-wrapper" onclick="copyToClipboard('me@rehanbutt.com',this)">
               <i class='fas fa-envelope fa-xs' title='Email'></i>
@@ -70,16 +70,16 @@
           </div>
         </div>
       </div>
-      <div class="cell grid-x align-justify metadata">
+      <div class="metadata scaffold-flex">
         {% assign version-seperate = site.version | split: '.' %}
         {% assign ver-number = version-seperate[0] | minus: 1 %}
-        <div class="cell small-12 medium-shrink grid-x">
-          <a class="cell shrink" href="https://github.com/naher94/rehanbutt.com/releases" target="_blank" rel="noopener">
+        <div class="version-wrap scaffold-flex">
+          <a href="https://github.com/naher94/rehanbutt.com/releases" target="_blank" rel="noopener">
             <p class="version-name">{{ site.version-naming[ver-number]}} v{{ site.version }}</p>
           </a>
-          <p class="ship-it cell shrink" id="ship-it-label">⛵ Ship It!</p>
+          <p class="ship-it" id="ship-it-label">⛵ Ship It!</p>
         </div>
-        <div class="cell small-12 medium-shrink happy-copyright">
+        <div class="happy-copyright">
           <p class="day" id="day-sentance">Have a nice <span id="data-day">day</span>!</p> <span class="middle-dot">●</span>
           <p class="no-select">copyright © {{ 'now' | date: "%Y" }} Rehan Butt</p>
         </div>
