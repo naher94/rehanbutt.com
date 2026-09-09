@@ -383,6 +383,9 @@
       &#cr{
         background-color: $consumer-reports-green;
       }
+      &#cmu{
+        background-color: $carnegie-mellon-red;
+      }
     }
   }
 }
@@ -499,9 +502,17 @@
       padding: 0.25em 0.5em;
       margin-inline: -0.5em;
       border-radius: $tile-radius;
-      // Scoped to background-color on purpose: `all` would also sweep up the
-      // open-state margin-bottom, animating the gap above the description
+      // Scoped on purpose: `all` would sweep up padding, border-radius and the
+      // rest alongside the properties that actually need to move
       transition: background-color $run-duration $run-easing;
+      // Only where the reveal itself animates is it worth easing the gap above
+      // the description, so the space and the text grow together. Without both
+      // features the content pops open instantly and a lone easing gap lags it.
+      @supports selector(::details-content) and (interpolate-size: allow-keywords){
+        transition:
+          background-color $run-duration $run-easing,
+          margin-bottom $run-duration $run-easing;
+      }
       &::-webkit-details-marker { display: none; }
       &:hover {
         background-color: semantic-color(work-role-row-hover-bg);
