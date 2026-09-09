@@ -474,6 +474,21 @@
     }
   }
   .description-details {
+    // Animate the reveal on the same clock as the summary's own transition.
+    // interpolate-size is scoped here rather than :root so enabling keyword
+    // interpolation doesn't change height transitions elsewhere on the site.
+    // Unsupported browsers just skip the animation and open instantly.
+    interpolate-size: allow-keywords;
+    &::details-content{
+      block-size: 0;
+      overflow: hidden;
+      transition:
+        block-size $run-duration $run-easing,
+        content-visibility $run-duration $run-easing allow-discrete;
+    }
+    &[open]::details-content{
+      block-size: auto;
+    }
     summary {
       display: flex;
       align-items: center;
@@ -484,7 +499,9 @@
       padding: 0.25em 0.5em;
       margin-inline: -0.5em;
       border-radius: $tile-radius;
-      transition: $run;
+      // Scoped to background-color on purpose: `all` would also sweep up the
+      // open-state margin-bottom, animating the gap above the description
+      transition: background-color $run-duration $run-easing;
       &::-webkit-details-marker { display: none; }
       &:hover {
         background-color: semantic-color(work-role-row-hover-bg);

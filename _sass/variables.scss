@@ -185,8 +185,12 @@ $semantic-colors:(
 }
 
 // Animations
+// Duration and easing are split out so rules that transition specific
+// properties can stay in step with the `all` shorthands below
+$run-duration: 0.30s;
+$run-easing: ease-in-out;
 $sprint: all 0.20s ease-in-out;
-$run: all 0.30s ease-in-out;
+$run: all $run-duration $run-easing;
 $jog: all 0.50s ease-in-out;
 $tight-spring-curve: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 $tight-spring: all 0.3s $tight-spring-curve;
