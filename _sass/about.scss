@@ -367,10 +367,39 @@
       height: 3em;
       padding: 0.5em;
       margin-block-end: 0.5em;
-      background-color: semantic-color(brand-logo-card-bg);
+      // --card-bg / --card-fill are set per brand below. A card without a pair
+      // falls back to the neutral tokens and keeps the grey hover; a branded
+      // card wears its colour at rest, so hover leaves it alone.
+      background-color: var(--card-bg, #{semantic-color(brand-logo-card-bg)});
       border-radius: $tile-radius;
       box-shadow: inset 0 0 0 1px semantic-color(brand-logo-card-outline);
       transition: $run;
+
+      &#cr{
+        --card-bg: #{$consumer-reports-green};
+        --card-fill: #{$pure-white};
+      }
+      &#cmu{
+        --card-bg: #{$carnegie-mellon-red};
+        --card-fill: #{$pure-white};
+      }
+      &#processly{
+        --card-bg: #{$processly-plum};
+        --card-fill: #{$pure-white};
+      }
+      &#disney-animation{
+        --card-bg: #{$disney-animation-orange};
+        // No --card-fill: the orange is light enough that the default navy
+        // reads better on it than a white knockout would
+      }
+      &#upmc{
+        --card-bg: #{$upmc-purple};
+        --card-fill: #{$pure-white};
+      }
+      &#duquesne{
+        --card-bg: #{$duquesne-red};
+        --card-fill: #{$pure-white};
+      }
     }
     .brand-logo{
       width: 100%;
@@ -379,50 +408,14 @@
       // fits the mark the way object-fit: contain did for the old <img>.
       // Matches the #1f2937 the files ship with, and is now overridable per
       // brand and per theme.
-      fill: $navy-black;
+      fill: var(--card-fill, #{$navy-black});
       // Same clock as the card background it sits on, so they change together
       transition: fill $run-duration $run-easing;
     }
+    // Branded cards define --card-bg, so this resolves to their own colour and
+    // they hold it on hover. Only unbranded cards fall through to the grey.
     &:hover .brand-logo-container{
-      background-color: semantic-color(brand-logo-card-bg-hover);
-      // Brand-coloured hover, keyed off the logo id
-      &#cr{
-        background-color: $consumer-reports-green;
-        .brand-logo{
-          fill: $pure-white;
-        }
-      }
-      &#cmu{
-        background-color: $carnegie-mellon-red;
-        // Navy on Carnegie red is too dark to read, so knock the mark out white
-        .brand-logo{
-          fill: $pure-white;
-        }
-      }
-      &#processly{
-        background-color: $processly-plum;
-        .brand-logo{
-          fill: $pure-white;
-        }
-      }
-      &#disney-animation{
-        background-color: $disney-animation-orange;
-        .brand-logo{
-          fill: $pure-white;
-        }
-      }
-      &#upmc{
-        background-color: $upmc-purple;
-        .brand-logo{
-          fill: $pure-white;
-        }
-      }
-      &#duquesne{
-        background-color: $duquesne-red;
-        .brand-logo{
-          fill: $pure-white;
-        }
-      }
+      background-color: var(--card-bg, #{semantic-color(brand-logo-card-bg-hover)});
     }
   }
 }
