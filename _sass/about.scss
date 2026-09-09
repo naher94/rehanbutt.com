@@ -413,7 +413,19 @@
     margin-top: 0;
   }
   .title-date{
-    margin-block-end: 0.25em;
+    margin-block-end: 0.5em;
+    // background-color: red;
+    .date{
+      // work-experience dates only, without touching speaking or education
+      font-weight: $lato-regular;
+      font-style: normal;
+      background-color: $navy-black-l9;
+      border-radius: $pill-radius;
+      font-size: 0.9em;
+      // padding: 0.1rem 1rem;
+      padding: 0 0.75rem;
+      margin-top: 0;
+    }
   }
   .description-details {
     summary {
