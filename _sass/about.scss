@@ -375,16 +375,53 @@
     .brand-logo{
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      // Inline SVG, so the viewBox plus the default preserveAspectRatio already
+      // fits the mark the way object-fit: contain did for the old <img>.
+      // Matches the #1f2937 the files ship with, and is now overridable per
+      // brand and per theme.
+      fill: $navy-black;
+      // Same clock as the card background it sits on, so they change together
+      transition: fill $run-duration $run-easing;
     }
     &:hover .brand-logo-container{
       background-color: semantic-color(brand-logo-card-bg-hover);
       // Brand-coloured hover, keyed off the logo id
       &#cr{
         background-color: $consumer-reports-green;
+        .brand-logo{
+          fill: $pure-white;
+        }
       }
       &#cmu{
         background-color: $carnegie-mellon-red;
+        // Navy on Carnegie red is too dark to read, so knock the mark out white
+        .brand-logo{
+          fill: $pure-white;
+        }
+      }
+      &#processly{
+        background-color: $processly-plum;
+        .brand-logo{
+          fill: $pure-white;
+        }
+      }
+      &#disney-animation{
+        background-color: $disney-animation-orange;
+        .brand-logo{
+          fill: $pure-white;
+        }
+      }
+      &#upmc{
+        background-color: $upmc-purple;
+        .brand-logo{
+          fill: $pure-white;
+        }
+      }
+      &#duquesne{
+        background-color: $duquesne-red;
+        .brand-logo{
+          fill: $pure-white;
+        }
       }
     }
   }
