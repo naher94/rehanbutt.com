@@ -7,4 +7,5 @@ description: "We design and create with an approach of playful pragmatism. A gro
 logo: dio
 sort-order: -1
 
+collapsed: false
 ---

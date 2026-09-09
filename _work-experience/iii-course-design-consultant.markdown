@@ -6,4 +6,5 @@ company: Carnegie Mellon University
 logo: cmu
 description: "Served as a course consultant for Integrated Innovation Institute -  Carnegie Mellon University. Contributed to the curriculum development of Product Design Innovation Certificate. Leveraged my industry expertise to guide the creation of assignments, projects, and supporting materials, ensuring alignment with real-world challenges and industry standards."
 sort-order: 4
+collapsed: true
 ---

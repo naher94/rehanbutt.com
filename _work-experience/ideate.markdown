@@ -7,4 +7,5 @@ group: IDeATe Digital Fabrication Lab
 description: "Taught students digital preparation & machining techniques in laser cutting, 3D printing & CNC milling. Best practices for production and sustainable material use."
 logo: cmu
 sort-order: 11
+collapsed: true
 ---

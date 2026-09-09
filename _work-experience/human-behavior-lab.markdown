@@ -7,4 +7,5 @@ group: Human Behavior Computing Lab
 description: "Designed and created a web presence for the lab to showcase its projects and members."
 logo: cmu
 sort-order: 14
+collapsed: true
 ---
