@@ -485,7 +485,6 @@
       margin-inline: -0.5em;
       border-radius: $tile-radius;
       transition: $run;
-      margin-bottom: 0.5rem;
       &::-webkit-details-marker { display: none; }
       &:hover {
         background-color: semantic-color(work-role-row-hover-bg);
@@ -502,6 +501,11 @@
         flex: 1;
         margin-block-end: 0;
       }
+    }
+    // Only needed to separate the summary from the description it reveals, so
+    // collapsed rows don't carry it and can stack tight
+    &[open] summary {
+      margin-bottom: 0.5rem;
     }
     &[open] summary h4::after {
       transform: rotate(90deg);
