@@ -284,6 +284,10 @@
       font-weight: $lato-regular;
       line-height: 1.2em;
     }
+  }
+
+  // Speaking events keep the original faded watermark in the left gutter
+  .speaking-item{
     .brand-logo-container{
       position: absolute;
       opacity: 0.2;
@@ -358,6 +362,31 @@
       opacity: 1;
     }
   }
+
+  // Work experience and education show the logo as a card above the company name
+  .work-item, .education-item{
+    .brand-logo-container{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 5em;
+      height: 5em;
+      padding: 0.75em;
+      margin-block-end: 0.75em;
+      background-color: semantic-color(brand-logo-card-bg);
+      border-radius: $tile-radius-medium;
+      box-shadow: inset 0 0 0 1px semantic-color(brand-logo-card-outline);
+      transition: $run;
+    }
+    .brand-logo{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    &:hover .brand-logo-container{
+      background-color: semantic-color(brand-logo-card-bg-hover);
+    }
+  }
 }
 
 .work-experience{
@@ -395,6 +424,13 @@
     h3{
       margin-block-start: 1em;
     }
+    // A new company block leads with the logo card, so the gap belongs above it
+    .brand-logo-container{
+      margin-block-start: 1em;
+    }
+  }
+  .brand-logo-container + h3{
+    margin-block-start: 0;
   }
   h3{
     font-family: $lato;

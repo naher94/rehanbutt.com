@@ -105,13 +105,13 @@ footer-sort-order: 2
         {% assign render_block_id = work.sort-order | prepend: "block_" %}
       {% endif %}
       <div class="work-item">
-        {% if work.logo %}
-        <div class="brand-logo-container" id="{{work.logo}}">
-          <img class="brand-logo" src="/img/{{work.logo}}-logo.svg" alt="{{work.logo}} Logo">
-        </div>
-        {% endif %}
         <!-- Handle the grouping when many roles in 1 company -->
         {% if work_prev.company != work.company%}
+          {% if work.logo %}
+          <div class="brand-logo-container" id="{{work.logo}}">
+            <img class="brand-logo" src="/img/{{work.logo}}-logo.svg" alt="{{work.logo}} Logo">
+          </div>
+          {% endif %}
           <h3>{{work.company}}</h3>
         {% endif %}
         <!-- Determine if this role is old -->
