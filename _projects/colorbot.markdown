@@ -11,13 +11,13 @@ tags: bot color
 
 Jasper is a color tool to expand your color vocabulary and provide a new form of inspiration.
 
-Building on colors inspiration tools like [Adobe's Color](http://color.adobe.com), [Design Seeds](https://www.design-seeds.com) and [LOLColors](http://www.lolcolors.com). I want to give users daily color inspiration from Pantone's [color of the day](https://www.pantone.com/colorstrology). I would like to build a Slack bot to help users think about color in a new light (the Pantone light) and expand the user's color vocabulary. Additionally, I would like users to have the option to request images that use that color for further inspiration. I plan to build this by pulling the color of the day from Pantone's [Colorstrology](https://www.pantone.com/colorstrology) and using that color to search Dribbble or other similar sites to surface images for the user.
+Building on colors inspiration tools like [Adobe's Color](http://color.adobe.com), [Design Seeds](https://www.design-seeds.com) and [LOLColors](http://www.lolcolors.com). I want to give users daily color inspiration from Pantone's color of the day. I would like to build a Slack bot to help users think about color in a new light (the Pantone light) and expand the user's color vocabulary. Additionally, I would like users to have the option to request images that use that color for further inspiration. I plan to build this by pulling the color of the day from Pantone's Colorstrology and using that color to search Dribbble or other similar sites to surface images for the user.
 
 For this iteration, I decided to build Jasper as an SMS bot using Twilio, to keep development. I plan to port Jasper to Slack as the interactions for a team will be far more compelling than that of an individual.
 
 Sadnote: Pantone does not store a public list of all their daily colors :(
 
-In [Version (V1.0)](https://github.com/naher94/jasper/releases/tag/V1.0) Jasper can pull up today’s color of the day and provide up to 4 images using that color. Jasper can also pull up yesterday’s color with images and have a bit of fun with the responses. The color data is scraped from Pantone's [Colorstrology](https://www.pantone.com/colorstrology) site and stored in the Swatch Table of the database. After the color data is collected a secondary function runs that scrapes 4 images from Dribbble given the hex value of the color, and stores it in the Image Table.
+In [Version (V1.0)](https://github.com/naher94/jasper/releases/tag/V1.0) Jasper can pull up today’s color of the day and provide up to 4 images using that color. Jasper can also pull up yesterday’s color with images and have a bit of fun with the responses. The color data is scraped from Pantone's Colorstrology site and stored in the Swatch Table of the database. After the color data is collected a secondary function runs that scrapes 4 images from Dribbble given the hex value of the color, and stores it in the Image Table.
 
 
 <div class="image-container" style="margin-top:50px;"><img src="../img/colorBot/conversation.png" alt="A full Conversation with Jasper"/></div>

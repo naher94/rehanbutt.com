@@ -1,6 +1,6 @@
 ---
 title: 'Anker 321 MagGo Battery (PowerCore Magnetic 5K)'
-link: https://www.anker.com/products/a1616
+link: https://www.amazon.com/dp/B0BV5LKB1V?tag=rehanbutt-20
 description: A 5000mAh capacity MagSafe compatible battery pack.
 tags: []
 content-type: product

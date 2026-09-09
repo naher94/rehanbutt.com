@@ -7,6 +7,6 @@ tile-image: tech-go-to.png
 tile-image-alt: A stylized illustration of a computer mouse and a Macbook charger
 text-color: "#ffffff"
 featured: true
-resources: [logitech-mx-master-3,microsoft-sculpt-keyboard,logitech-c920-webcam,anker-powercore-fusion,belkin-wall-mount-surge-protector,dell-34-u3423we]
+resources: [logitech-mx-master-4,microsoft-sculpt-keyboard,logitech-c920-webcam,anker-321-battery,belkin-mini-travel-surge-protector,dell-pro-34-plus-p3425we]
 date: 2022-04-26
 ---
