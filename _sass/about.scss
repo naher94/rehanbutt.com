@@ -397,12 +397,21 @@
         --card-fill: #{$pure-white};
       }
       &#disney-animation{
-        --card-bg: #{$disney-animation-orange};
+        --card-bg: #{$disney-animation-cream};
         // No --card-fill: the orange is light enough that the default navy
         // reads better on it than a white knockout would
       }
       &#upmc{
         --card-bg: #{$upmc-purple};
+        --card-fill: #{$pure-white};
+      }
+      &#yinzcam{
+        --card-bg: #{$yinzcam-amber};
+        --card-fill: #{$pure-black};
+      }
+      &#nus{
+        --card-bg: #{$nus-blue};
+        // The default navy would sit at ~1.3:1 on this blue, so white is required
         --card-fill: #{$pure-white};
       }
       // id comes from `logo:` in the role's front matter, currently `duq`
