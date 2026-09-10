@@ -409,6 +409,11 @@
         --card-bg: #{$yinzcam-amber};
         --card-fill: #{$pure-black};
       }
+      // Architrave's role uses the Banyan Tree mark, so the id is `banyantree`
+      &#banyantree{
+        --card-bg: #{$banyantree-green};
+        --card-fill: #{$pure-white};
+      }
       &#nus{
         --card-bg: #{$nus-blue};
         // The default navy would sit at ~1.3:1 on this blue, so white is required
