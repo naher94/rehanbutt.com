@@ -82,10 +82,13 @@ footer-sort-order: 2
         {% if work_prev.company != work.company%}
           {% if work.logo %}
           <!-- Inlined so the mark's fill can be driven from CSS. Sources live in
-               _includes/logos/; speaking.html still uses <img> for its own set. -->
-          {% capture logo_include %}logos/{{ work.logo }}-logo.svg{% endcapture %}
+               img/logos/ and must carry class="brand-logo" with no fill attribute,
+               or the CSS colours won't apply. include_relative resolves from this
+               file's own directory, which is why the path has no leading slash.
+               speaking.html still uses <img> against img/ for its own set. -->
+          {% capture logo_include %}img/logos/{{ work.logo }}-logo.svg{% endcapture %}
           <div class="brand-logo-container" id="{{work.logo}}" role="img" aria-label="{{work.company}} logo">
-            {% include {{ logo_include }} %}
+            {% include_relative {{ logo_include }} %}
           </div>
           {% endif %}
           <h3>{{work.company}}</h3>
@@ -123,7 +126,7 @@ footer-sort-order: 2
     </div>
     <div class="education-item">
       <div class="brand-logo-container" id="cmu" role="img" aria-label="Carnegie Mellon University logo">
-        {% include logos/cmu-logo.svg %}
+        {% include_relative img/logos/cmu-logo.svg %}
       </div>
       <h3>Carnegie Mellon University</h3>
       <p class="description">Masters in Tangible Interaction Design</p>
@@ -134,7 +137,7 @@ footer-sort-order: 2
     </div>
     <div class="education-item">
       <div class="brand-logo-container" id="nus" role="img" aria-label="National University of Singapore logo">
-        {% include logos/nus-logo.svg %}
+        {% include_relative img/logos/nus-logo.svg %}
       </div>
       <h3>National University of Singapore</h3>
       <p class="description">Design Certificate Program - Designing for Active Aging</p>
