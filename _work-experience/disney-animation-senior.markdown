@@ -15,7 +15,7 @@ collapsed: false
   </div>
   <div class="text-container cell auto">
     <p class="film-name">Zootopia 2<span>・2025</span></p>
-    <p class="credit-description">Credited under Technology - Engineering Services</p>
+    <p class="credit-description">Credited under Technology</p>
   </div>
 </div>
 <div class="film-credit-container grid-x align-middle">
@@ -24,7 +24,7 @@ collapsed: false
   </div>
   <div class="text-container cell auto">
     <p class="film-name">Moana 2<span>・2024</span></p>
-    <p class="credit-description">Credited under Technology - Engineering Services</p>
+    <p class="credit-description">Credited under Technology</p>
   </div>
 </div>
 <div class="film-credit-container grid-x align-middle">
@@ -33,6 +33,6 @@ collapsed: false
   </div>
   <div class="text-container cell auto">
     <p class="film-name">Wish<span>・2023</span></p>
-    <p class="credit-description">Credited under Technology - Engineering Services</p>
+    <p class="credit-description">Credited under Technology</p>
   </div>
 </div>
