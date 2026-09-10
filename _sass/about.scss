@@ -371,6 +371,9 @@
       // falls back to the neutral tokens and keeps the grey hover; a branded
       // card wears its colour at rest, so hover leaves it alone.
       background-color: var(--card-bg, #{semantic-color(brand-logo-card-bg)});
+      // --card-image is for cards whose brand is a gradient rather than a flat
+      // colour; it paints over --card-bg, so only one of the two is ever set
+      background-image: var(--card-image, none);
       border-radius: $tile-radius;
       box-shadow: inset 0 0 0 1px semantic-color(brand-logo-card-outline);
       transition: $run;
@@ -378,6 +381,12 @@
       &#cr{
         --card-bg: #{$consumer-reports-green};
         --card-fill: #{$pure-white};
+      }
+      &#dio{
+        // ⬇︎ TUNE ME: 135deg runs the gradient corner to corner; `to right`
+        //   for a straight horizontal sweep
+        --card-image: linear-gradient(135deg, #{$dzgnio-cyan}, #{$dzgnio-mint});
+        // No --card-fill: both stops are light, so the default navy reads
       }
       &#cmu{
         --card-bg: #{$carnegie-mellon-red};
@@ -396,7 +405,8 @@
         --card-bg: #{$upmc-purple};
         --card-fill: #{$pure-white};
       }
-      &#duquesne{
+      // id comes from `logo:` in the role's front matter, currently `duq`
+      &#duq{
         --card-bg: #{$duquesne-red};
         --card-fill: #{$pure-white};
       }
@@ -547,13 +557,38 @@
       &:hover {
         background-color: semantic-color(work-role-row-hover-bg);
       }
-      // Disclosure chevron trails the role title
+      // Flex so the chevron centres against the title exactly, at any font
+      // size. vertical-align: middle left it ~2px low, since it aligns to the
+      // line box rather than the cap height.
+      h4{
+        display: flex;
+        align-items: center;
+      }
+      // Disclosure chevron trails the role title. fa-chevron-right from Font
+      // Awesome 6 Free Solid, which the kit already loads for the site's other
+      // icons, so this pulls down no additional font. Weight 900 is what
+      // selects Solid; Regular (400) would trigger a second download.
       h4::after {
-        content: "❯";
+        content: "\f054";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-style: normal;
+        // ⬇︎ TUNE ME: chevron size relative to the role title
+        font-size: 0.75em;
         display: inline-block;
         margin-inline-start: 0.5em;
-        font-weight: $lato-regular;
-        transition: transform 0.2s ease;
+        // Centred by the flex rule on h4 above, not by a translate, because
+        // [open] overwrites transform with the rotation and would drop any
+        // offset stored there. Never let a long title squash the glyph.
+        flex-shrink: 0;
+        // Optical nudge down. Deliberately position/top rather than padding-top:
+        // padding would grow the box, and since transform-origin defaults to the
+        // box centre, the glyph would rotate about a point below itself. This
+        // leaves the box untouched, so it still spins about its own centre.
+        // ⬇︎ TUNE ME: optical centring of the chevron
+        position: relative;
+        top: 0.15em;
+        transition: transform $run-duration $run-easing;
       }
       .title-date {
         flex: 1;
