@@ -15,6 +15,7 @@
 @import 'easter-egg';
 @import 'articles';
 @import 'speaking';
+@import 'gallery';
 @import 'home';
 
 //******* Global Utilities
@@ -59,10 +60,6 @@ video{
 .image-container {
   margin-top: 1.25em;
   margin-bottom: 1.25em;
-}
-
-.slideshow-container{
-  box-shadow: $recessed-shadow;
 }
 
 .image-center {
