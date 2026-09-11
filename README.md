@@ -222,6 +222,25 @@ It writes two files beside itself, both gitignored:
 
 Use `--no-html` for the data only, or `--out` / `--html` to redirect either output.
 
+#### Type Audit
+
+`_tools/type-audit.py` is the typography equivalent. It walks every built page in `_site`, matches the compiled CSS rules to each element, sorts them by specificity and carries font-size down the tree — so it reports what type actually renders as, not what the stylesheet declares. That distinction matters here: more than half the font-sizes in the compiled stylesheet are still `em`, and Sass never resolves those, so a declaration on its own says nothing about the size on screen.
+
+```
+bundle exec jekyll build && python3 _tools/type-audit.py
+```
+
+Each distinct combination of family, size, weight, style, line-height, tracking and case counts as one style. File attribution comes from the Sass source map (`_site/css/rehan.css.map`), so every style knows which partial wrote it.
+
+It writes two files beside itself, both gitignored:
+
+* `type-audit.json` — the dataset
+* `type-atlas.html` — a standalone page listing each style as a specimen rendered at its true size, with a usage count, grouped by family or by file, and filtered by family, weight, source and whether the size is on the scale. Open it directly in a browser.
+
+The scale it reports against is the `SCALE` tuple at the top of the script. It is fitted to real usage rather than to a formula, and it describes the site as it is — edit it when the scale is decided.
+
+Same flags as the colour audit, plus `--pages N` to sample the first N pages for a quick look.
+
 
 ### Reference
 

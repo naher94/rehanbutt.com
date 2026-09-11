@@ -1,0 +1,461 @@
+<title>Type Atlas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@300;400;500;700&family=Lato:wght@300;400;700;900&family=Caveat&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#F6F7F8; --surface:#FFFFFF; --surface-2:#EEF0F2;
+    --ink:#1F2937; --ink-muted:#626973; --ink-faint:#8B919B;
+    --rule:#DFE3E7; --rule-strong:#C6CCD3;
+    --accent:#12ABC4; --accent-deep:#0B7F92;
+    --flag-high:#BA3D54; --flag-med:#B4751C; --flag-ok:#2F7D5B;
+    --chip:#E7EAED;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#151B24; --surface:#1C232D; --surface-2:#232B36;
+      --ink:#EDEFF2; --ink-muted:#A3AAB4; --ink-faint:#7C838D;
+      --rule:#2D3742; --rule-strong:#3D4854;
+      --accent:#3FC4DA; --accent-deep:#7FDCEB;
+      --flag-high:#E08196; --flag-med:#D9A85C; --flag-ok:#6BBF95;
+      --chip:#2A3441;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#151B24; --surface:#1C232D; --surface-2:#232B36;
+    --ink:#EDEFF2; --ink-muted:#A3AAB4; --ink-faint:#7C838D;
+    --rule:#2D3742; --rule-strong:#3D4854;
+    --accent:#3FC4DA; --accent-deep:#7FDCEB;
+    --flag-high:#E08196; --flag-med:#D9A85C; --flag-ok:#6BBF95;
+    --chip:#2A3441;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:"Lato",-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:16px; line-height:1.55; margin:0; padding:0 24px 72px;
+  }
+  .wrap{max-width:1240px;margin:0 auto}
+  code,.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+
+  header.top{padding:48px 0 22px;border-bottom:2px solid var(--ink);margin-bottom:26px}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent-deep);margin:0 0 12px}
+  h1{font-family:"Zilla Slab",Georgia,serif;font-weight:700;
+    font-size:clamp(32px,4.6vw,48px);line-height:1.08;margin:0 0 12px;text-wrap:balance}
+  .standfirst{font-size:18px;color:var(--ink-muted);max-width:64ch;margin:0}
+
+  /* controls */
+  .bar{display:flex;flex-wrap:wrap;gap:18px;align-items:center;
+    justify-content:space-between;margin-bottom:10px}
+  .segs{display:flex;gap:12px;flex-wrap:wrap}
+  .seg{display:inline-flex;border:1px solid var(--rule-strong);border-radius:3px;overflow:hidden}
+  .seg button{
+    font-family:"Lato",sans-serif;font-size:14px;font-weight:700;
+    padding:8px 16px;border:0;background:var(--surface);color:var(--ink-muted);cursor:pointer;
+  }
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+  .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .stats{display:flex;gap:22px;flex-wrap:wrap;font-family:"JetBrains Mono",monospace;
+    font-size:12.5px;color:var(--ink-muted)}
+  .stats b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+
+  .viewnote{font-size:14.5px;color:var(--ink-muted);margin:0 0 16px;max-width:78ch}
+
+  /* filters */
+  .filters{display:flex;flex-wrap:wrap;gap:12px 30px;margin:0 0 18px;
+    padding:14px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:3px}
+  .fgroup{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .flabel{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-muted)}
+  .chips{display:flex;gap:7px;flex-wrap:wrap}
+  .chip{font-family:"Lato",sans-serif;font-size:13.5px;font-weight:700;
+    padding:5px 11px;border:1px solid var(--rule-strong);border-radius:2px;
+    background:var(--surface);color:var(--ink-faint);cursor:pointer;
+    display:inline-flex;align-items:center;gap:7px}
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+  .chip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .chip .n{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:400;
+    opacity:.7;font-variant-numeric:tabular-nums}
+  .noresults{padding:40px 16px;text-align:center;color:var(--ink-faint);font-size:15px}
+
+  /* layout */
+  .cols{display:grid;grid-template-columns:1fr 372px;gap:26px;align-items:start}
+  @media (max-width:1000px){.cols{grid-template-columns:1fr}}
+
+  .sheet{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+    overflow:hidden}
+
+  .group{border-bottom:1px solid var(--rule)}
+  .group:last-child{border-bottom:none}
+  .ghead{display:flex;align-items:baseline;gap:12px;padding:14px 18px 10px;
+    background:var(--surface-2);border-bottom:1px solid var(--rule);
+    position:sticky;top:0;z-index:2}
+  .ghead h3{margin:0;font-family:"JetBrains Mono",monospace;font-weight:500;
+    font-size:13px;letter-spacing:.04em}
+  .ghead .gmeta{font-family:"JetBrains Mono",monospace;font-size:11px;
+    color:var(--ink-muted);font-variant-numeric:tabular-nums}
+
+  /* a specimen row: the sample at its real size, then the numbers */
+  .row{display:grid;grid-template-columns:1fr 148px 58px;gap:16px;align-items:center;
+    width:100%;text-align:left;padding:14px 18px;border:0;border-bottom:1px solid var(--rule);
+    background:transparent;color:inherit;cursor:pointer;font:inherit}
+  .row:last-child{border-bottom:none}
+  .row:hover{background:var(--surface-2)}
+  .row:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .row[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 10%,transparent);
+    box-shadow:inset 3px 0 0 var(--accent-deep)}
+
+  /* The specimen is the whole point, so it is rendered at true px. Long
+     samples are clipped rather than wrapped: a wrapped 70px headline would
+     push every other row off the screen. */
+  .spec{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+    color:var(--ink)}
+  /* Rows taller than this would make the sheet unscannable; the sample still
+     renders at true size, the row just stops growing with it. */
+  .specwrap{max-height:96px;display:flex;align-items:center;overflow:hidden}
+
+  .facts{font-family:"JetBrains Mono",monospace;font-size:11.5px;
+    color:var(--ink-muted);line-height:1.5;font-variant-numeric:tabular-nums}
+  .facts b{color:var(--ink);font-weight:500}
+  .facts .off{color:var(--flag-med)}
+  .count{font-family:"JetBrains Mono",monospace;font-size:15px;font-weight:500;
+    text-align:right;font-variant-numeric:tabular-nums}
+  .count small{display:block;font-size:10px;font-weight:400;color:var(--ink-faint);
+    letter-spacing:.08em;text-transform:uppercase}
+
+  /* a bar under the count, so scale is readable without reading numbers */
+  .bar-track{grid-column:1/-1;height:2px;background:var(--surface-2);margin-top:10px}
+  .bar-fill{height:2px;background:var(--accent-deep);opacity:.55}
+
+  /* detail panel */
+  .panel{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+    padding:18px 18px 22px;position:sticky;top:18px;max-height:calc(100vh - 36px);overflow-y:auto}
+  .panel .empty{color:var(--ink-faint);font-size:14.5px}
+  .pspec{border:1px solid var(--rule);border-radius:3px;padding:14px;margin-bottom:14px;
+    overflow:hidden;background:var(--ground)}
+  .pspec div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pname{font-family:"JetBrains Mono",monospace;font-size:15px;font-weight:500;
+    margin:0 0 4px;word-break:break-word}
+  .pmeta{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
+  .tag{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.07em;
+    text-transform:uppercase;padding:3px 8px;border-radius:2px;background:var(--chip);color:var(--ink-muted)}
+  .tag.vendor{background:color-mix(in srgb,var(--flag-med) 18%,transparent);color:var(--flag-med)}
+  .tag.off{background:color-mix(in srgb,var(--flag-high) 16%,transparent);color:var(--flag-high)}
+  .tag.on{background:color-mix(in srgb,var(--flag-ok) 16%,transparent);color:var(--flag-ok)}
+  .pair{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;margin:12px 0;
+    font-family:"JetBrains Mono",monospace;font-size:12.5px}
+  .pair dt{color:var(--ink-muted)}
+  .pair dd{margin:0;word-break:break-word}
+  .panel h4{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-muted);font-weight:500;
+    margin:18px 0 8px;padding-top:12px;border-top:1px solid var(--rule)}
+  .use{font-family:"JetBrains Mono",monospace;font-size:12px;padding:7px 0;
+    border-bottom:1px solid var(--rule);line-height:1.45;
+    display:flex;justify-content:space-between;gap:10px}
+  .use:last-child{border-bottom:none}
+  /* rows from the file group you clicked, lifted to the top of the list */
+  .use.here{border-left:3px solid var(--accent-deep);padding-left:10px;margin-left:-13px}
+  .use.here .loc{font-weight:500}
+  .use .loc{color:var(--accent-deep)}
+  .use .n{color:var(--ink-faint);font-variant-numeric:tabular-nums}
+  .samples{font-size:13px;color:var(--ink-muted);line-height:1.5}
+  .samples li{margin-bottom:6px}
+  .samples{padding-left:18px;margin:0}
+
+  footer.note{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
+    font-size:13.5px;color:var(--ink-faint);max-width:78ch}
+  footer.note code{font-size:12.5px}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">rehanbutt.com &middot; design system</p>
+    <h1>Type Atlas</h1>
+    <p class="standfirst">Every distinct piece of type on the site, rendered at the
+      size it actually renders at. Built from the rendered pages, not the
+      stylesheet &mdash; Sass leaves <code>em</code> unresolved, so only a real
+      cascade says what anything looks like.</p>
+  </header>
+
+  <div class="bar">
+    <div class="segs">
+      <div class="seg" role="group" aria-label="Group by">
+        <button id="g-family" aria-pressed="true">By family</button>
+        <button id="g-file" aria-pressed="false">By file</button>
+      </div>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+
+  <p class="viewnote" id="viewnote"></p>
+
+  <div class="filters" id="filters"></div>
+
+  <div class="cols">
+    <div class="sheet" id="sheet"></div>
+    <aside class="panel" id="panel"><p class="empty">Pick a specimen to see where it is used.</p></aside>
+  </div>
+
+  <footer class="note" id="foot"></footer>
+</div>
+
+<script>
+const DATA = __DATA__;
+const STYLES = DATA.styles;
+const T = DATA.totals;
+
+/* ------------------------------------------------------------------ state */
+const state = {
+  group: "family",
+  family: new Set(),          // empty set == everything
+  weight: new Set(),
+  source: new Set(),
+  scale:  new Set(),
+  sel: null,                  // style id
+  selFile: null               // which file group it was clicked in
+};
+
+const fileOf = s => (s.files[0] ? s.files[0].file : "&mdash;");
+const srcOf  = s => s.vendor ? "vendor" : "authored";
+const scaleOf= s => s.on_scale ? "on scale" : "off scale";
+const short  = f => f.replace(/^_sass\//, "").replace(/^css\//, "css/");
+
+function pass(s){
+  const f = state;
+  if (f.family.size && !f.family.has(s.family)) return false;
+  if (f.weight.size && !f.weight.has(s.weight)) return false;
+  if (f.source.size && !f.source.has(srcOf(s))) return false;
+  if (f.scale.size  && !f.scale.has(scaleOf(s))) return false;
+  return true;
+}
+
+/* -------------------------------------------------------------- filters */
+function counts(fn){
+  const m = new Map();
+  for (const s of STYLES) {
+    for (const k of [].concat(fn(s))) m.set(k, (m.get(k) || 0) + s.count);
+  }
+  return m;
+}
+
+const FILTERS = [
+  { key:"family", label:"Family", of:s=>s.family },
+  { key:"weight", label:"Weight", of:s=>s.weight },
+  { key:"source", label:"Source", of:srcOf },
+  { key:"scale",  label:"Scale",  of:scaleOf }
+];
+
+function drawFilters(){
+  const box = document.getElementById("filters");
+  box.innerHTML = "";
+  for (const f of FILTERS) {
+    const m = counts(f.of);
+    const keys = [...m.keys()].sort((a,b)=>m.get(b)-m.get(a));
+    const g = document.createElement("div");
+    g.className = "fgroup";
+    g.innerHTML = `<span class="flabel">${f.label}</span>`;
+    const chips = document.createElement("div");
+    chips.className = "chips";
+    for (const k of keys) {
+      const on = state[f.key].size === 0 || state[f.key].has(k);
+      const b = document.createElement("button");
+      b.className = "chip";
+      b.type = "button";
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.innerHTML = `${k}<span class="n">${m.get(k).toLocaleString()}</span>`;
+      b.onclick = () => {
+        const set = state[f.key];
+        // an untouched group shows everything; the first click narrows to the
+        // rest, which is what "turn this one off" has to mean when nothing is
+        // explicitly selected
+        if (set.size === 0) keys.forEach(x => set.add(x));
+        set.has(k) ? set.delete(k) : set.add(k);
+        if (set.size === keys.length) set.clear();
+        draw();
+      };
+      chips.appendChild(b);
+    }
+    g.appendChild(chips);
+    box.appendChild(g);
+  }
+}
+
+/* ---------------------------------------------------------------- sheet */
+function specimenStyle(s){
+  // single quotes: this string goes into a style="..." attribute, and a double
+  // quote here closes the attribute and silently drops the whole declaration
+  return `font-family:'${s.family}',${s.family === "Zilla Slab" ? "Georgia,serif"
+          : s.family === "Consolas" ? "ui-monospace,monospace" : "sans-serif"};`
+       + `font-size:${s.size}px;font-weight:${s.weight};font-style:${s.style};`
+       + (typeof s.line_height === "number" ? `line-height:${s.line_height}px;` : "")
+       + (s.letter_spacing !== "normal" ? `letter-spacing:${s.letter_spacing};` : "")
+       + (s.text_transform !== "none" ? `text-transform:${s.text_transform};` : "");
+}
+
+const SPECIMEN = "Designing tools for expert users";
+
+function sampleFor(s){
+  // the longest real line, not the first: the first is usually chrome
+  // ("Skip to main content"), which says nothing about what the style is for
+  const t = (s.samples || [])
+    .filter(x => x && x.length > 3 && x.length <= 64)
+    .sort((a, b) => b.length - a.length)[0];
+  return t || SPECIMEN;
+}
+
+function rowEl(s, fileCtx){
+  const b = document.createElement("button");
+  b.className = "row";
+  b.type = "button";
+  b.setAttribute("aria-pressed", state.sel === s.id && state.selFile === fileCtx ? "true" : "false");
+  const lh = typeof s.line_height === "number" ? s.line_height + "px" : (s.line_height || "&mdash;");
+  b.innerHTML =
+    `<span class="specwrap"><span class="spec" style="${specimenStyle(s)}">${esc(sampleFor(s))}</span></span>
+     <span class="facts">
+       <b>${s.size}px</b> / ${lh} &middot; w${s.weight}<br>
+       ${esc(s.family)}${s.on_scale ? "" : ' <span class="off">off scale</span>'}<br>
+       ${s.page_count} page${s.page_count === 1 ? "" : "s"}
+     </span>
+     <span class="count">${s.count.toLocaleString()}<small>uses</small></span>`;
+  b.onclick = () => { state.sel = s.id; state.selFile = fileCtx; draw(); };
+  return b;
+}
+
+function groups(rows){
+  // [name, styles, total] &mdash; `total` is the number of elements this group
+  // accounts for, which is not the same thing in the two modes
+  const m = new Map();
+  const add = (k, s, n) => {
+    let g = m.get(k);
+    if (!g) m.set(k, g = { list: [], total: 0 });
+    g.list.push(s);
+    g.total += n;
+  };
+  if (state.group === "family") {
+    for (const s of rows) add(s.family, s, s.count);
+  } else {
+    // a style written across several files appears under each of them, and the
+    // group total is what that file is responsible for &mdash; not the style's
+    // whole count, which would sum to far more than the site has elements
+    for (const s of rows) {
+      const fs = s.files.length ? s.files : [{ file: "browser default", count: s.count }];
+      for (const f of fs) add(f.file, s, f.count);
+    }
+  }
+  for (const [, g] of m) g.list.sort((a, b) => b.count - a.count);
+  return [...m.entries()]
+    .sort((a, b) => b[1].total - a[1].total)
+    .map(([k, g]) => [k, g.list, g.total]);
+}
+const d3sum = arr => arr.reduce((n, s) => n + s.count, 0);
+
+function drawSheet(){
+  const sheet = document.getElementById("sheet");
+  sheet.innerHTML = "";
+  const rows = STYLES.filter(pass);
+  if (!rows.length) {
+    sheet.innerHTML = `<p class="noresults">Nothing matches those filters.</p>`;
+    return;
+  }
+  const max = Math.max(...rows.map(s => s.count));
+  for (const [name, list, total] of groups(rows)) {
+    const g = document.createElement("section");
+    g.className = "group";
+    const head = document.createElement("div");
+    head.className = "ghead";
+    head.innerHTML = `<h3>${esc(state.group === "file" ? short(name) : name)}</h3>
+      <span class="gmeta">${list.length} style${list.length === 1 ? "" : "s"}
+      &middot; ${total.toLocaleString()} ${state.group === "file" ? "elements from here" : "uses"}</span>`;
+    g.appendChild(head);
+    for (const s of list) {
+      const r = rowEl(s, state.group === "file" ? name : null);
+      const track = document.createElement("span");
+      track.className = "bar-track";
+      track.innerHTML = `<span class="bar-fill" style="width:${(s.count / max * 100).toFixed(1)}%"></span>`;
+      r.appendChild(track);
+      g.appendChild(r);
+    }
+    sheet.appendChild(g);
+  }
+}
+
+/* ---------------------------------------------------------------- panel */
+function drawPanel(){
+  const p = document.getElementById("panel");
+  const s = STYLES.find(x => x.id === state.sel);
+  if (!s) { p.innerHTML = `<p class="empty">Pick a specimen to see where it is used.</p>`; return; }
+  const lh = typeof s.line_height === "number" ? s.line_height + "px" : (s.line_height || "&mdash;");
+  const ratio = typeof s.line_height === "number"
+    ? (s.line_height / s.size).toFixed(2) : "&mdash;";
+
+  // in file mode, the file you clicked comes first &mdash; the whole reason to be
+  // in that mode is to ask what this file is doing
+  const files = s.files.slice().sort((a, b) =>
+    (b.file === state.selFile) - (a.file === state.selFile) || b.count - a.count);
+
+  p.innerHTML = `
+    <div class="pspec"><div style="${specimenStyle(s)}">${esc(sampleFor(s))}</div></div>
+    <p class="pname">${esc(s.family)} ${s.size}px &middot; ${s.weight}</p>
+    <div class="pmeta">
+      <span class="tag ${s.on_scale ? "on" : "off"}">${s.on_scale ? "on scale" : "off scale"}</span>
+      ${s.vendor ? `<span class="tag vendor">vendor</span>` : `<span class="tag">authored</span>`}
+      ${s.text_transform !== "none" ? `<span class="tag">${s.text_transform}</span>` : ""}
+      ${s.style !== "normal" ? `<span class="tag">${s.style}</span>` : ""}
+    </div>
+    <dl class="pair">
+      <dt>size</dt><dd>${s.size}px</dd>
+      <dt>line-height</dt><dd>${lh}${ratio !== "&mdash;" ? ` <span style="opacity:.6">(${ratio})</span>` : ""}</dd>
+      <dt>weight</dt><dd>${s.weight}</dd>
+      <dt>tracking</dt><dd>${s.letter_spacing}</dd>
+      <dt>uses</dt><dd>${s.count.toLocaleString()} on ${s.page_count} page${s.page_count === 1 ? "" : "s"}</dd>
+      <dt>elements</dt><dd>${s.tags.join(", ")}</dd>
+    </dl>
+    ${s.classes.length ? `<h4>Classes</h4><div class="use">${s.classes.map(esc).join("<br>")}</div>` : ""}
+    <h4>Written in</h4>
+    ${files.length ? files.map(f => `
+      <div class="use ${f.file === state.selFile ? "here" : ""}">
+        <span class="loc">${esc(short(f.file))}</span><span class="n">${f.count.toLocaleString()}</span>
+      </div>`).join("") : `<div class="use">browser default</div>`}
+    <h4>Pages</h4>
+    ${s.pages.slice(0, 20).map(x => `<div class="use"><span>${esc(x)}</span></div>`).join("")}
+    ${s.page_count > 20 ? `<div class="use"><span class="n">+ ${s.page_count - 20} more</span></div>` : ""}
+    ${s.samples.length ? `<h4>Samples</h4><ul class="samples">${
+      s.samples.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
+  `;
+}
+
+/* ----------------------------------------------------------------- chrome */
+function drawStats(){
+  const rows = STYLES.filter(pass);
+  document.getElementById("stats").innerHTML = `
+    <span><b>${rows.length}</b>/${T.styles} styles</span>
+    <span><b>${d3sum(rows).toLocaleString()}</b> elements</span>
+    <span><b>${T.pages}</b> pages</span>
+    <span><b>${T.off_scale.toLocaleString()}</b> off scale</span>`;
+  document.getElementById("viewnote").innerHTML = state.group === "family"
+    ? "Grouped by typeface. Each row is one distinct computed style &mdash; a size, weight, line-height and tracking that some element on the site actually renders with."
+    : "Grouped by the stylesheet that wrote it. A style written across several files appears under each of them, so the same specimen can show up more than once.";
+  document.getElementById("foot").innerHTML =
+    `Scale: ${DATA.totals.scale.map(n => n + "px").join(" &middot; ")}. ` +
+    `Anything else is flagged off scale. Sizes are computed from the built pages ` +
+    `in <code>_site</code>; file attribution comes from the Sass source map. ` +
+    `Regenerate with <code>python3 _tools/type-audit.py</code>.`;
+}
+
+function draw(){ drawFilters(); drawSheet(); drawPanel(); drawStats(); }
+
+function esc(s){
+  return String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+}
+
+document.getElementById("g-family").onclick = () => setGroup("family");
+document.getElementById("g-file").onclick = () => setGroup("file");
+function setGroup(g){
+  state.group = g;
+  if (g === "family") state.selFile = null;
+  document.getElementById("g-family").setAttribute("aria-pressed", g === "family");
+  document.getElementById("g-file").setAttribute("aria-pressed", g === "file");
+  draw();
+}
+
+draw();
+</script>
