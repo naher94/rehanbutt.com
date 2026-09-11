@@ -409,6 +409,11 @@
         --card-bg: #{$yinzcam-amber};
         --card-fill: #{$pure-black};
       }
+      // Artwork ships white with its own shadow layer, so no --card-fill here:
+      // nothing in the file inherits from the root for CSS to colour
+      &#shine-registry{
+        --card-bg: #{$shine-registry-rose};
+      }
       // Architrave's role uses the Banyan Tree mark, so the id is `banyantree`
       &#banyantree{
         --card-bg: #{$banyantree-green};
