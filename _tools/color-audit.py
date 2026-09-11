@@ -257,7 +257,31 @@ def scan_source(varmap):
     for path in files:
         rel = str(path.relative_to(ROOT))
         is_vendor = path.name in VENDOR_FILES or path.parent.name in VENDOR_DIRS
-        for i, line in enumerate(path.read_text().splitlines(), 1):
+        text = path.read_text()
+
+        # Gradients are found across the whole file first, because a gradient
+        # can be written over several lines. They are then blanked out (newlines
+        # kept, so line numbers still line up) before the per-line scan, which
+        # is what stops their stops being counted as standalone colours.
+        whole = []
+        for s0, e0, src in find_gradients(text):
+            line_no = text.count("\n", 0, s0) + 1
+            whole.append((line_no, src))
+            text = text[:s0] + "".join(
+                "\n" if c == "\n" else " " for c in text[s0:e0]
+            ) + text[e0:]
+        for line_no, src in whole:
+            decl = src.split("\n")[0].strip()[:160]
+            prop = None
+            pm = re.match(r"\s*([-\w]+)\s*:", decl)
+            if pm and pm.group(1) in COLOR_PROPS:
+                prop = pm.group(1)
+            hits.append(dict(kind="gradient", value=gradient_key(src), raw=src,
+                             stops=gradient_stops(src),
+                             file=rel, line=line_no, prop=prop, decl=decl,
+                             origin="vendor" if is_vendor else "authored"))
+
+        for i, line in enumerate(text.splitlines(), 1):
             if line.strip().startswith("//"):
                 continue
             vendor_line = is_vendor or "!default" in line
@@ -266,19 +290,7 @@ def scan_source(varmap):
             if pm and pm.group(1) in COLOR_PROPS:
                 prop = pm.group(1)
 
-            # Gradients are one decision, not N colours. Record each as its own
-            # entry, then blank it out so its stops are not also counted as
-            # standalone colours.
-            grads = find_gradients(line)
-            for _s, _e, src in grads:
-                hits.append(dict(kind="gradient", value=gradient_key(src), raw=src,
-                                 stops=gradient_stops(src),
-                                 file=rel, line=i, prop=prop,
-                                 decl=line.strip()[:160],
-                                 origin="vendor" if vendor_line else "authored"))
             scan_line = line
-            for s, e, _src in reversed(grads):
-                scan_line = scan_line[:s] + (" " * (e - s)) + scan_line[e:]
 
             for raw in re.findall(HEX, scan_line):
                 hits.append(dict(kind="literal", value=norm_hex(raw), raw=raw,
