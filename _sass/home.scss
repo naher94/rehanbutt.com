@@ -85,7 +85,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       -webkit-background-clip: unset;
       background-clip: unset;
       border-radius: $tile-radius;
-      box-shadow: $recessed-shadow rgba(0,0,0,0.15);
+      box-shadow: $recessed-shadow rgba(0,0,0,0.15); //TODO Compare Shadow
       font-family: $lato;
       font-size: 16px;
       font-weight: $lato-regular;
@@ -135,7 +135,7 @@ $home-section-vertical-spacing-mobile: 4rem;
         margin-inline: 0.3em 0.6em;
         rotate: -3deg;
         border-radius: 6px;
-        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+        box-shadow: $diffuse-shadow rgba(0, 0, 0, 0.25); //TODO Compare Shadow
         @include breakpoint(small only){
           border-radius: 4px;
         }
@@ -167,7 +167,7 @@ $home-section-vertical-spacing-mobile: 4rem;
         }
       }
       img{
-        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+        box-shadow: $diffuse-shadow rgba(0, 0, 0, 0.25); //TODO Compare Shadow
         border-radius: 5px;
         transform-origin: right center;
         transition: $tight-spring;
@@ -196,7 +196,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       left: 50%;
       bottom: 1.5em;
       opacity: 0;
-      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+      box-shadow: $diffuse-shadow rgba(0, 0, 0, 0.25); //TODO Compare Shadow
       transform-origin: 50% 100%;
       transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out;
     }
