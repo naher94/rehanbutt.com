@@ -138,7 +138,7 @@
       img{
         height: 13em;
         border-radius: $tile-radius-medium;
-        box-shadow: 0px 0px 30px 5px rgba(0,0,0,0.25); //TODO Compare Shadow
+        box-shadow: $glow-shadow semantic-color(shadow-soft);
         transition: $run;
         &.top-square-img{
           rotate: -5deg;

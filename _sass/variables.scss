@@ -8,6 +8,7 @@ $tile-radius-big: 30px;
 $pill-radius: 500px;
 $recessed-shadow: 0px 10px 33px -10px;
 $diffuse-shadow:  0px 0px 5px 0px;
+$glow-shadow:     0px 0px 30px 5px;
 
 // Colors
 $pure-white: #ffffff;
@@ -99,6 +100,9 @@ $semantic-colors:(
     actionable-pill: $signature-teal,
     actionable-pill-hover: $signature-teal-d1,
     shadow: rgba($navy-black,0.75),
+    // Paired with $diffuse-shadow / $glow-shadow. Heavier in dark,
+    // where a 0.25 black all but vanishes against the page ground.
+    shadow-soft: rgba($navy-black,0.25),
     floating-card-bg: $pure-white,
     footer-bg: $navy-black-l9,
     footer-nav-hover: $navy-black-l8,
@@ -137,6 +141,7 @@ $semantic-colors:(
     actionable-pill: $signature-teal-d1,
     actionable-pill-hover: $signature-teal-d2,
     shadow: rgba($navy-black-d9,0.75),
+    shadow-soft: rgba($navy-black-d9,0.45),
     floating-card-bg: $navy-black,
     footer-bg: $navy-black-d2,
     footer-nav-hover: $navy-black-l1,
