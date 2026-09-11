@@ -5,7 +5,7 @@ tile-name: "Cameleon Color Learning Game"
 thumbnail: "cameleon"
 date:   2015-05-05
 tags: web game color
-published: true
+published: false
 ---
 
 <!--branding process-->
