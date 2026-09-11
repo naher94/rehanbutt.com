@@ -3,6 +3,7 @@
 ---
 @charset "utf-8";
 @import 'app';
+// Rouge syntax highlighting theme for Jekyll highlight tags / fenced code. Nothing on the site renders a `.highlight` block at the moment
 @import 'monokai.css';
 @import 'variables';
 @import 'design-system';
