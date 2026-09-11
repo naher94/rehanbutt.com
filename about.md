@@ -98,17 +98,17 @@ footer-sort-order: 2
           <details class="description-details">
             <summary>
               <div class="title-date grid-x align-justify">
-                <h4 class="cell medium-shrink">{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
-                <p class="date cell medium-shrink">{{work.date-start | date: "%b %Y"}}・{{work.date-end | date: "%b %Y"}}</p>
+                <h4 class="cell shrink">{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
+                <p class="date cell shrink">{{work.date-start | date: "%b %Y"}}・{{work.date-end | date: "%b %Y"}}</p>
               </div>
             </summary>
             <p class="description">{{work.description}}</p>
           </details>
         {% else %}
           <div class="title-date grid-x align-justify">
-            <h4 class="cell medium-shrink">{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
+            <h4 class="cell shrink">{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
             <!-- what happens when the date is present? -->
-            <p class="date cell medium-shrink">{{work.date-start | date: "%b %Y"}}・{{work.date-end | date: "%b %Y"}}</p>
+            <p class="date cell shrink">{{work.date-start | date: "%b %Y"}}・{{work.date-end | date: "%b %Y"}}</p>
           </div>
           <p class="description">{{work.description}}</p>
         {% endif %}
