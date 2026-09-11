@@ -1,0 +1,626 @@
+<title>Colour Atlas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;700&family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;500&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<style>
+  :root{
+    --ground:#F6F7F8; --surface:#FFFFFF; --surface-2:#EEF0F2;
+    --ink:#1F2937; --ink-muted:#626973; --ink-faint:#8B919B;
+    --rule:#DFE3E7; --rule-strong:#C6CCD3;
+    --accent:#12ABC4; --accent-deep:#0B7F92;
+    --flag-high:#BA3D54; --flag-med:#B4751C; --flag-ok:#2F7D5B;
+    --chip:#E7EAED;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#151B24; --surface:#1C232D; --surface-2:#232B36;
+      --ink:#EDEFF2; --ink-muted:#A3AAB4; --ink-faint:#7C838D;
+      --rule:#2D3742; --rule-strong:#3D4854;
+      --accent:#3FC4DA; --accent-deep:#7FDCEB;
+      --flag-high:#E08196; --flag-med:#D9A85C; --flag-ok:#6BBF95;
+      --chip:#2A3441;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#151B24; --surface:#1C232D; --surface-2:#232B36;
+    --ink:#EDEFF2; --ink-muted:#A3AAB4; --ink-faint:#7C838D;
+    --rule:#2D3742; --rule-strong:#3D4854;
+    --accent:#3FC4DA; --accent-deep:#7FDCEB;
+    --flag-high:#E08196; --flag-med:#D9A85C; --flag-ok:#6BBF95;
+    --chip:#2A3441;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:"Lato",-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:16px; line-height:1.55; margin:0; padding:0 24px 72px;
+  }
+  .wrap{max-width:1240px;margin:0 auto}
+  code,.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+
+  header.top{padding:48px 0 22px;border-bottom:2px solid var(--ink);margin-bottom:26px}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent-deep);margin:0 0 12px}
+  h1{font-family:"Zilla Slab",Georgia,serif;font-weight:700;
+    font-size:clamp(32px,4.6vw,48px);line-height:1.08;margin:0 0 12px;text-wrap:balance}
+  .standfirst{font-size:18px;color:var(--ink-muted);max-width:64ch;margin:0}
+
+  /* controls */
+  /* the view note explains the toggle, so it sits tight under the bar and
+     keeps its distance from the filters below */
+  .bar{display:flex;flex-wrap:wrap;gap:18px;align-items:center;
+    justify-content:space-between;margin-bottom:10px}
+  .segs{display:flex;gap:12px;flex-wrap:wrap}
+  .seg{display:inline-flex;border:1px solid var(--rule-strong);border-radius:3px;overflow:hidden}
+  .seg button[disabled]{opacity:.45;cursor:not-allowed}
+  .seg button{
+    font-family:"Lato",sans-serif;font-size:14px;font-weight:700;
+    padding:8px 16px;border:0;background:var(--surface);color:var(--ink-muted);cursor:pointer;
+  }
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+  .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .stats{display:flex;gap:22px;flex-wrap:wrap;font-family:"JetBrains Mono",monospace;
+    font-size:12.5px;color:var(--ink-muted)}
+  .stats b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+
+  /* filters */
+  .filters{display:flex;flex-wrap:wrap;gap:12px 30px;margin:0 0 18px;
+    padding:14px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:3px}
+  .fgroup{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .flabel{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-muted)}
+  .chips{display:flex;gap:7px;flex-wrap:wrap}
+  .chip{font-family:"Lato",sans-serif;font-size:13.5px;font-weight:700;
+    padding:5px 11px;border:1px solid var(--rule-strong);border-radius:2px;
+    background:var(--surface);color:var(--ink-faint);cursor:pointer;
+    display:inline-flex;align-items:center;gap:7px}
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+  .chip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .chip .n{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:400;
+    opacity:.7;font-variant-numeric:tabular-nums}
+  .noresults{padding:40px 16px;text-align:center;color:var(--ink-faint);font-size:15px}
+
+  .viewnote{font-size:14.5px;color:var(--ink-muted);margin:0 0 20px;max-width:76ch}
+
+  /* layout */
+  .cols{display:grid;grid-template-columns:1fr 372px;gap:26px;align-items:start}
+  @media (max-width:1000px){.cols{grid-template-columns:1fr}}
+
+  /* One canvas: colours pack within their hue, hues pack against each other */
+  .canvas{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+    padding:14px;overflow-x:auto}
+  .canvas svg{display:block;width:100%;height:auto}
+  .famkey{display:flex;flex-wrap:wrap;gap:6px 18px;margin:12px 2px 0;
+    font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-muted)}
+  .famkey b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+  .famkey i{width:9px;height:9px;border-radius:50%;display:inline-block;
+    margin-right:6px;border:1px solid rgba(0,0,0,.25);vertical-align:-1px}
+  /* One ring for every swatch, so near-white colours stay visible. Origin is
+     reported in the detail panel rather than encoded in the ring — the ring is
+     doing visibility work and can't carry a second meaning legibly. */
+  circle.sw{cursor:pointer;transition:opacity .12s;
+    stroke:rgba(0,0,0,.25);stroke-width:1;
+    /* the canvas scales to its column, so keep the ring a true 1px */
+    vector-effect:non-scaling-stroke;
+    /* hit-test on geometry, not paint — otherwise fully transparent swatches
+       like rgba(0,0,0,0) are invisible to clicks */
+    pointer-events:all}
+  circle.sw:hover{opacity:.75}
+  circle.sw:focus-visible{outline:none;stroke:var(--accent-deep);stroke-width:3}
+  /* File names sit under their cluster. paint-order puts a background-coloured
+     stroke behind the glyphs so a label stays readable where clusters crowd. */
+  text.cluster-label{font-family:"JetBrains Mono",monospace;font-size:11px;
+    fill:var(--ink);text-anchor:middle;pointer-events:none;
+    paint-order:stroke;stroke:var(--surface);stroke-width:4;stroke-linejoin:round}
+  text.cluster-label tspan.n{fill:var(--ink-faint)}
+
+  /* Selection has to read on any fill — near-white, near-black, or a gradient —
+     so it is drawn as a separate ring outside the swatch rather than a stroke
+     on it. A single stroke colour always loses to some fill; a halo does not. */
+  circle.sel-ring{fill:none;pointer-events:none;vector-effect:non-scaling-stroke}
+  circle.sel-ring.halo{stroke:var(--surface);stroke-width:6}
+  circle.sel-ring.line{stroke:var(--accent-deep);stroke-width:2.5}
+  circle.sel-ring.dot{fill:var(--accent-deep);stroke:var(--surface);stroke-width:1.5}
+
+  /* detail panel */
+  .panel{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+    padding:18px 18px 22px;position:sticky;top:18px;max-height:calc(100vh - 36px);overflow-y:auto}
+  .panel .empty{color:var(--ink-faint);font-size:14.5px}
+  .pswatch{height:56px;border-radius:3px;border:1px solid rgba(0,0,0,.25);margin-bottom:12px}
+  .pname{font-family:"JetBrains Mono",monospace;font-size:15px;font-weight:500;
+    word-break:break-all;margin:0 0 4px}
+  .pmeta{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
+  .tag{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.07em;
+    text-transform:uppercase;padding:3px 8px;border-radius:2px;background:var(--chip);color:var(--ink-muted)}
+  .tag.vendor{background:color-mix(in srgb,var(--flag-med) 18%,transparent);color:var(--flag-med)}
+  .tag.derived{background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent-deep)}
+  .tag.token{background:color-mix(in srgb,var(--flag-ok) 16%,transparent);color:var(--flag-ok)}
+  .pair{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;margin:12px 0;
+    font-family:"JetBrains Mono",monospace;font-size:12.5px}
+  .pair dt{color:var(--ink-muted)}
+  .pair dd{margin:0;word-break:break-all}
+  .panel h4{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-muted);font-weight:500;
+    margin:18px 0 8px;padding-top:12px;border-top:1px solid var(--rule)}
+  .use{font-family:"JetBrains Mono",monospace;font-size:12px;padding:7px 0;
+    border-bottom:1px solid var(--rule);line-height:1.45}
+  .use:last-child{border-bottom:none}
+  /* rows from the cluster you clicked, lifted to the top of the list */
+  .use.here{border-left:3px solid var(--accent-deep);padding-left:10px;margin-left:-13px}
+  .use.here .loc{font-weight:500}
+  .use .loc{color:var(--accent-deep)}
+  .use .decl{color:var(--ink-muted);display:block;word-break:break-all;margin-top:2px}
+  .more{font-size:12px;color:var(--ink-faint);font-family:"JetBrains Mono",monospace;padding-top:8px}
+
+  .legend{margin:26px 0 0;padding-top:16px;border-top:1px solid var(--rule)}
+  .legend h3{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-muted);font-weight:500;margin:0 0 12px}
+  .origins{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:16px 26px;margin:0}
+  .origins dt{font-family:"JetBrains Mono",monospace;font-size:12.5px;
+    color:var(--ink);margin-bottom:3px}
+  .origins dd{margin:0;font-size:14px;color:var(--ink-muted);line-height:1.45}
+  .origins code{background:var(--chip);padding:1px 4px;border-radius:2px;
+    font-size:12px;font-family:"JetBrains Mono",monospace}
+  .sizenote{font-size:13.5px;color:var(--ink-faint);margin:16px 0 0}
+  /* the origin line inside the detail panel */
+  .odef{font-size:13.5px;color:var(--ink-muted);line-height:1.45;margin:8px 0 0}
+  .stop{display:flex;align-items:center;gap:9px;font-family:"JetBrains Mono",monospace;
+    font-size:12px;padding:5px 0;border-bottom:1px solid var(--rule);word-break:break-all}
+  .stop:last-child{border-bottom:none}
+  .stop i{width:17px;height:17px;border-radius:3px;flex:0 0 auto;
+    border:1px solid rgba(0,0,0,.25)}
+
+  .drift{background:var(--surface);border:1px solid var(--rule);
+    border-left:4px solid var(--flag-med);border-radius:3px;padding:16px 18px;margin:26px 0 0}
+  .drift h3{font-family:"Lato",sans-serif;font-weight:900;font-size:16px;margin:0 0 6px}
+  .drift p{margin:0;font-size:15px;color:var(--ink-muted);max-width:70ch}
+  .drift code{background:var(--chip);padding:1.5px 5px;border-radius:2px;font-size:12.5px}
+
+  footer{border-top:1px solid var(--rule);margin-top:44px;padding-top:18px;
+    font-size:13px;color:var(--ink-faint);font-family:"JetBrains Mono",monospace;max-width:82ch;line-height:1.6}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">Colour audit · rehanbutt.com</p>
+    <h1>Every colour the site uses, sized by how often</h1>
+    <p class="standfirst">Circles are scaled to usage count and clustered by hue. Gradients sit in the hue they read as. Click any one to see where it comes from and where it lands. Companion to the stylesheet drift report.</p>
+  </header>
+
+  <div class="bar">
+    <div class="segs">
+      <div class="seg" role="group" aria-label="View">
+        <button id="btn-authored" aria-pressed="true">As authored</button>
+        <button id="btn-rendered" aria-pressed="false">As rendered</button>
+      </div>
+      <div class="seg" role="group" aria-label="Group by">
+        <button id="btn-palette" aria-pressed="true">Group by palette</button>
+        <button id="btn-file" aria-pressed="false">Group by file</button>
+      </div>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+
+  <p class="viewnote" id="viewnote"></p>
+
+  <div class="filters">
+    <div class="fgroup"><span class="flabel">Type</span><div class="chips" id="f-type"></div></div>
+    <div class="fgroup"><span class="flabel">Source</span><div class="chips" id="f-cat"></div></div>
+  </div>
+
+  <div class="cols">
+    <div>
+      <div class="canvas" id="canvas"></div>
+      <div class="famkey" id="famkey"></div>
+    </div>
+    <aside class="panel" id="panel"><p class="empty">Select a colour to see where it is defined and used.</p></aside>
+  </div>
+
+  <div class="legend">
+    <h3>Where a colour comes from</h3>
+    <dl class="origins" id="origins"></dl>
+    <p class="sizenote">Circle area is proportional to usage count. Every swatch carries the same
+      25% black ring so near-white colours stay visible — origin is reported in the panel when you
+      select one.</p>
+  </div>
+
+  <div class="drift" id="drift"></div>
+
+  <footer id="footer"></footer>
+</div>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(function(){
+  const DATA = JSON.parse(document.getElementById('data').textContent);
+  const FAM_ORDER = ['neutral','red','orange','yellow','green','teal','blue','purple','pink','unknown'];
+
+  // Give each gradient a paintable CSS value from its resolved stops. Stops
+  // that stay unresolved are mixin parameters ($color), which have no fixed
+  // value by design — those fall back to a hatch so they read as "varies".
+  const HATCH = 'repeating-linear-gradient(45deg,#c9ced4 0 5px,#e8ebee 5px 10px)';
+  ['authored','rendered'].forEach(v => DATA[v].forEach(d => {
+    if (d.kind !== 'gradient') return;
+    const ok = (d.stops||[]).filter(s => /^#|^rgba?\(/i.test(s));
+    d.resolvedStops = ok;
+    d.unresolved = (d.stops||[]).length - ok.length;
+    d.display = ok.length >= 2 ? `linear-gradient(90deg, ${ok.join(', ')})`
+              : ok.length === 1 ? ok[0] : HATCH;
+  }));
+  // A swatch gets exactly one category. "token" is a kind and the others are
+  // origins, but a token is always authored — so folding them into one axis
+  // keeps every swatch in exactly one bucket and makes the filter honest.
+  const CATEGORY = {
+    token: {label:'design token',
+      def:'Held in the <code>$semantic-colors</code> map and used through <code>semantic-color()</code>. It carries a light and a dark value, and changing it changes every use at once.'},
+    authored: {label:'hand-written',
+      def:'Typed directly into <code>_sass/</code> or <code>css/</code> rather than going through a token. A colour you chose, with a file and line to edit — and the drift the system has not absorbed yet.'},
+    derived: {label:'Sass-derived',
+      def:'Produced at build time from your palette by <code>mix()</code>, <code>rgba()</code> or <code>darken()</code>. It appears in no source file, which is why it has selectors but no source lines.'},
+    vendor: {label:'vendor',
+      def:'Ships with the framework, usually declared with <code>!default</code>. Not a decision you made.'}
+  };
+  const catOf = d => d.kind === 'token' ? 'token' : d.origin;
+  const CAT_ORDER = ['token','authored','derived','vendor'];
+
+  // every filter starts on, so the page opens showing everything
+  const filters = {
+    type: new Set(['solid','gradient']),
+    cat:  new Set(CAT_ORDER)
+  };
+  const typeOf = d => d.kind === 'gradient' ? 'gradient' : 'solid';
+  let groupBy = 'palette';
+
+  // Grouping by file changes the unit: a colour used in four files becomes four
+  // nodes, each sized by its uses in that file. Grouping by palette keeps one
+  // node per colour, sized by its total. The two counts are different things.
+  function nodes(){
+    const vis = visible();
+    if (groupBy === 'palette')
+      return vis.map(d => ({...d, _group: d.family, _count: d.count}));
+    const out = [];
+    vis.forEach(d => Object.entries(d.files || {}).forEach(([file, n]) =>
+      out.push({...d, _group: file, _count: n, _file: file, _fileCount: n})));
+    return out;
+  }
+  const visible = () => DATA[view].filter(d =>
+    filters.type.has(typeOf(d)) && filters.cat.has(catOf(d)));
+  let view = 'authored';
+  let selected = null;
+
+  const shortFile = f => String(f).replace(/^_sass\//,'').replace(/^css\//,'');
+  const esc = s => String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  function stats(){
+    const items = visible();
+    const uses = items.reduce((a,b)=>a+b.count,0);
+    const fileCount = new Set(items.flatMap(i => Object.keys(i.files||{}))).size;
+    const byOrigin = {};
+    items.forEach(i => byOrigin[i.origin] = (byOrigin[i.origin]||0)+1);
+    const parts = [
+      `<span><b>${items.length}</b> colours</span>`,
+      `<span><b>${uses}</b> uses</span>`,
+      `<span><b>${DATA.totals.tokens}</b> tokens</span>`
+    ];
+    if (groupBy === 'file') parts.splice(2, 0, `<span><b>${fileCount}</b> files</span>`);
+    Object.keys(byOrigin).sort().forEach(o =>
+      parts.push(`<span><b>${byOrigin[o]}</b> ${o}</span>`));
+    document.getElementById('stats').innerHTML = parts.join('');
+
+  }
+
+  function draw(){
+    const host = d3.select('#canvas');
+    host.selectAll('*').remove();
+    const items = nodes();
+    // Assign gradient fill ids BEFORE clustering. The pack step spreads each
+    // datum into a copy, so anything set after that never reaches the bound
+    // data — the circles would resolve url(#undefined) and paint nothing.
+    let gi = 0;
+    items.forEach(d => { if (d.kind === 'gradient') d.fillId = `grad-${view}-${gi++}`; });
+    if (!items.length){
+      host.append('p').attr('class','noresults')
+        .text('No colours match these filters.');
+      d3.select('#famkey').html('');
+      return;
+    }
+    const groups = d3.group(items, d => d._group);
+    const maxCount = d3.max(items, d => d._count) || 1;
+    // area ∝ count, with a floor so single-use colours stay clickable
+    const r = d3.scaleSqrt().domain([1, maxCount]).range([9, 52]);
+
+    // 1. pack each hue's colours into a cluster, positioned around its own origin
+    // palette clusters follow the spectrum; file clusters go biggest first
+    const order = groupBy === 'palette'
+      ? FAM_ORDER.filter(f => groups.has(f))
+      : [...groups.keys()].sort((a,b) => groups.get(b).length - groups.get(a).length);
+    const clusters = order.map(fam => {
+      const list = groups.get(fam).slice().sort((a,b)=>b._count-a._count);
+      const packed = d3.packSiblings(list.map(d => ({...d, r: r(d._count) + 2})));
+      const enc = d3.packEnclose(packed);
+      // recentre on the cluster's own enclosing circle
+      packed.forEach(n => { n.x -= enc.x; n.y -= enc.y; });
+      // file clusters need extra room underneath for their label
+      const pad = groupBy === 'file' ? 26 : 14;
+      return {fam, nodes: packed, r: enc.r + pad};
+    });
+
+    // 2. pack the clusters against each other — the second level
+    d3.packSiblings(clusters);
+    const outer = d3.packEnclose(clusters);
+    const pad = 10;
+    const W = outer.r * 2 + pad * 2, H = outer.r * 2 + pad * 2;
+
+    const svg = host.append('svg')
+      .attr('viewBox', `0 0 ${Math.ceil(W)} ${Math.ceil(H)}`)
+      .attr('role','img')
+      .attr('aria-label', `${items.length} colours grouped into ${clusters.length} hue families`);
+
+    // SVG needs a paint server per gradient — a CSS gradient string won't fill
+    const defs = svg.append('defs');
+    items.filter(d => d.kind === 'gradient').forEach(d => {
+      const stops = d.resolvedStops.length ? d.resolvedStops : ['#c9ced4','#e8ebee'];
+      const lg = defs.append('linearGradient')
+        .attr('id', d.fillId).attr('x1','0').attr('y1','0').attr('x2','1').attr('y2','0');
+      stops.forEach((s,i) => lg.append('stop')
+        .attr('offset', (stops.length === 1 ? 0 : i/(stops.length-1)*100) + '%')
+        .attr('stop-color', s));
+    });
+
+    const root = svg.append('g')
+      .attr('transform', `translate(${-outer.x + outer.r + pad},${-outer.y + outer.r + pad})`);
+
+    clusters.forEach(c => {
+      c.nodes.forEach(n => { n._ax = c.x + n.x; n._ay = c.y + n.y; });
+      root.append('g')
+        .attr('transform', `translate(${c.x},${c.y})`)
+        .attr('aria-label', `${c.fam} colours`)
+        .selectAll('circle').data(c.nodes).join('circle')
+          .attr('class', d => 'sw ' + (d.origin === 'authored' ? '' : d.origin))
+          .attr('cx', d=>d.x).attr('cy', d=>d.y).attr('r', d=>d.r-2)
+          .attr('fill', d => d.kind === 'gradient' ? `url(#${d.fillId})` : (d.display || '#ccc'))
+          .attr('tabindex', 0)
+          .attr('role','button')
+          .attr('aria-label', d => `${d.kind === 'gradient' ? 'gradient' : d.label}, ${d.count} uses, ${d.origin}`)
+          .on('click', (e,d) => select(d))
+          .on('keydown', (e,d) => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); select(d); } })
+          .append('title').text(d => `${d.label} — ${d.count} use${d.count===1?'':'s'} — ${d.origin}`);
+    });
+
+    if (groupBy === 'file'){
+      const labels = root.append('g').attr('class','labels');
+      clusters.forEach(c => {
+        const name = shortFile(c.fam);
+        const n = groups.get(c.fam).length;
+        labels.append('text').attr('class','cluster-label')
+          .attr('x', c.x).attr('y', c.y + c.r - 4)
+          .html(`${esc(name)} <tspan class="n">${n}</tspan>`);
+      });
+    }
+
+    root.append('g').attr('class','rings');
+
+    // hue counts move out of the canvas into a key, so the canvas stays clean
+    d3.select('#famkey').html(
+      clusters.map(c => {
+        const members = groups.get(c.fam);
+        const g0 = members.find(x => x.kind !== 'gradient') || members[0];
+        const swatch = g0.display || '#ccc';
+        const name = groupBy === 'palette' ? c.fam : c.fam.replace(/^_sass\//,'');
+        return `<span><i style="background:${swatch}"></i>${esc(name)} <b>${members.length}</b></span>`;
+      }).join('')
+    );
+
+    if (selected) markSelected();
+  }
+
+  function markSelected(){
+    const svg = d3.select('#canvas svg');
+    if (svg.empty()) return;
+    svg.classed('has-sel', !!selected);
+    d3.selectAll('circle.sw').classed('sel', d => selected && d.id === selected.id);
+
+    const layer = svg.select('g.rings');
+    layer.selectAll('*').remove();
+    if (!selected) return;
+
+    // the same colour can appear in several file clusters, so ring them all
+    const hits = [];
+    d3.selectAll('circle.sw').each(function(d){ if (d.id === selected.id) hits.push(d); });
+    hits.forEach(d => {
+      const rr = (d.r - 2) + 6;
+      layer.append('circle').attr('class','sel-ring halo')
+        .attr('cx', d._ax).attr('cy', d._ay).attr('r', rr);
+      layer.append('circle').attr('class','sel-ring line')
+        .attr('cx', d._ax).attr('cy', d._ay).attr('r', rr);
+    });
+    // The dot marks the one you actually clicked. In file mode the same colour
+    // is ringed in several clusters, so matching on identity alone would put a
+    // dot on all of them and lose which was picked. Fall back to the first hit
+    // only for the initial auto-selection, which has no click position.
+    const clicked = (selected._ax !== undefined
+      && hits.find(h => h._ax === selected._ax && h._ay === selected._ay)) || hits[0];
+    if (clicked){
+      const rr = (clicked.r - 2) + 6;
+      layer.append('circle').attr('class','sel-ring dot')
+        .attr('cx', clicked._ax).attr('cy', clicked._ay - rr).attr('r', 3.5);
+    }
+  }
+
+  function usesList(arr, render){
+    if (!arr || !arr.length) return '<div class="more">none recorded</div>';
+    return arr.slice(0,40).map(render).join('')
+      + (arr.length > 40 ? `<div class="more">+ ${arr.length-40} more</div>` : '');
+  }
+
+  function select(d){
+    selected = d;
+    markSelected();
+    const p = document.getElementById('panel');
+    const cat = catOf(d);
+    const o = CATEGORY[cat] || {label:cat, def:''};
+    const tags = [
+      `<span class="tag ${cat === 'authored' ? '' : cat}">${esc(o.label)}</span>`,
+      `<span class="tag">${d.kind === 'gradient' ? 'gradient' : 'solid'}</span>`,
+      `<span class="tag">${esc(d.family)}</span>`
+    ];
+
+    // In file mode the clicked cluster is the context, so lead the source list
+    // with that file. Sort is stable, so order within each group is preserved.
+    const here = d._file || null;
+    const hereCount = here ? d.source.filter(s => s.file === here).length : 0;
+    const srcList = here
+      ? [...d.source].sort((a, b) => (b.file === here) - (a.file === here))
+      : d.source;
+
+    let pairs = `<dt>uses</dt><dd>${d.count}${d._file ? ` · ${d._fileCount} in this file` : ''}</dd>`;
+    if (d._file) pairs += `<dt>file</dt><dd>${esc(d._file)}</dd>`;
+    if (d.kind === 'token'){
+      pairs += `<dt>light</dt><dd>${esc(d.light)}</dd><dt>dark</dt><dd>${esc(d.dark)}</dd>`;
+    } else if (d.kind === 'gradient'){
+      pairs += `<dt>stops</dt><dd>${d.stops.length}</dd>`;
+      pairs += `<dt>packs in</dt><dd>${esc(d.family)}${d.anchor ? ', by its most saturated stop ' + esc(d.anchor) : ''}</dd>`;
+      if (d.unresolved) pairs += `<dt>varies</dt><dd>${d.unresolved} mixin parameter${d.unresolved===1?'':'s'}</dd>`;
+    } else {
+      pairs += `<dt>value</dt><dd>${esc(d.display)}</dd>`;
+    }
+    if (d.props && d.props.length)
+      pairs += `<dt>properties</dt><dd>${esc(d.props.join(', '))}</dd>`;
+
+    p.innerHTML = `
+      <div class="pswatch" style="background:${esc(d.display)}"></div>
+      <p class="pname">${esc(d.label)}</p>
+      <div class="pmeta">${tags.join('')}</div>
+      <p class="odef">${o.def}</p>
+      <dl class="pair">${pairs}</dl>
+      ${d.kind === 'gradient' ? `<h4>Stops, in order</h4>${
+        d.stops.map(s => {
+          const paint = /^#|^rgba?\(/i.test(s) ? s : HATCH;
+          return `<div class="stop"><i style="background:${esc(paint)}"></i>
+            <span>${esc(s)}</span></div>`;
+        }).join('')}` : ''}
+      <h4>Authored in source (${d.source.length})${
+        here ? ` · ${hereCount} in ${esc(shortFile(here))}` : ''}</h4>
+      ${usesList(srcList, s => `<div class="use${s.file === here ? ' here' : ''}">
+          <span class="loc">${esc(s.file)}:${s.line}</span>
+          <span class="decl">${esc(s.decl)}</span></div>`)}
+      <h4>Rendered selectors (${d.selectors.length})</h4>
+      ${usesList(d.selectors, s => `<div class="use">
+          <span class="loc">${esc(s.prop)}</span>
+          <span class="decl">${esc(s.selector)}</span></div>`)}
+    `;
+    p.scrollTop = 0;
+  }
+
+  function drift(){
+    const keys = Object.keys(DATA.notation_drift || {});
+    const el = document.getElementById('drift');
+    if (!keys.length){ el.style.display = 'none'; return; }
+    const list = keys.map(k =>
+      `<code>${esc(DATA.notation_drift[k].join('</code> and <code>'))}</code>`).join(', ');
+    el.innerHTML = `<h3>Same colour, written more than one way</h3>
+      <p>${list} — identical colours that every counting tool, including this one before it normalises, reads as separate values. Cheap to unify, and it shrinks the palette without changing a pixel.</p>`;
+  }
+
+  function foot(){
+    const t = DATA.totals;
+    const nc = (DATA.non_colour_tokens||[]).map(n=>`--color-${n}`).join(', ');
+    document.getElementById('footer').innerHTML =
+      `Static snapshot from ${t.source_files} source files and ${t.css_bytes.toLocaleString()} bytes of compiled CSS. ` +
+      `Regenerate with <code>python3 bin/color-audit.py</code>, then republish. ` +
+      (nc ? `Excluded: ${esc(nc)} — theme-varying tokens that hold filters, not colours.` : '');
+  }
+
+  document.getElementById('btn-authored').addEventListener('click', ()=>setView('authored'));
+  document.getElementById('btn-rendered').addEventListener('click', ()=>setView('rendered'));
+  document.getElementById('btn-palette').addEventListener('click', ()=>setGroup('palette'));
+  document.getElementById('btn-file').addEventListener('click', ()=>setGroup('file'));
+
+  function clearPanel(){
+    selected = null;
+    document.getElementById('panel').innerHTML =
+      '<p class="empty">Select a colour to see where it is defined and used.</p>';
+  }
+
+  function setGroup(g){
+    groupBy = g;
+    document.getElementById('btn-palette').setAttribute('aria-pressed', g==='palette');
+    document.getElementById('btn-file').setAttribute('aria-pressed', g==='file');
+    clearPanel(); stats(); draw(); note();
+  }
+
+  // Rendered entries come from compiled CSS, which has selectors but no source
+  // files — so grouping by file has nothing to group on in that view.
+  function syncGroupAvailability(){
+    const btn = document.getElementById('btn-file');
+    const blocked = view === 'rendered';
+    btn.disabled = blocked;
+    btn.title = blocked
+      ? 'Compiled CSS carries selectors, not source files — switch to As authored'
+      : '';
+    if (blocked && groupBy === 'file') setGroup('palette');
+  }
+
+  function note(){
+    const v = view === 'authored'
+      ? 'What is written in _sass/ and css/. A colour held in a design token appears once under its token name, showing both theme values — so anything sitting here as a bare hex is a colour that escaped the system.'
+      : 'What the browser actually receives after Sass runs, flattened to literal values. Includes colours no source file contains, because mix() and rgba() produced them at build time.';
+    const g = groupBy === 'file'
+      ? ' Grouped by file, a colour used in several files appears once per file, sized by its uses there — so these circles count usages, not colours.'
+      : '';
+    document.getElementById('viewnote').textContent = v + g;
+  }
+  function setView(v){
+    view = v; selected = null;
+    document.getElementById('btn-authored').setAttribute('aria-pressed', v==='authored');
+    document.getElementById('btn-rendered').setAttribute('aria-pressed', v==='rendered');
+    clearPanel(); syncGroupAvailability();
+    chips(); stats(); draw(); origins(); note();
+  }
+
+  function origins(){
+    const n = {};
+    DATA[view].forEach(i => { const c = catOf(i); n[c] = (n[c]||0)+1; });
+    document.getElementById('origins').innerHTML =
+      CAT_ORDER.filter(k => n[k]).map(k =>
+        `<div><dt>${esc(CATEGORY[k].label)} — ${n[k]} here</dt><dd>${CATEGORY[k].def}</dd></div>`
+      ).join('');
+  }
+
+  function chips(){
+    const all = DATA[view];
+    const tCount = {solid:0, gradient:0};
+    const cCount = {};
+    all.forEach(d => { tCount[typeOf(d)]++; cCount[catOf(d)] = (cCount[catOf(d)]||0)+1; });
+
+    const render = (host, keys, counts, labels, set) => {
+      host.innerHTML = keys.filter(k => counts[k]).map(k =>
+        `<button class="chip" data-k="${k}" aria-pressed="${set.has(k)}">
+           ${esc(labels[k])}<span class="n">${counts[k]}</span></button>`).join('');
+      host.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => {
+        const k = b.dataset.k;
+        // never let the last chip in a group turn off — an empty axis is a
+        // dead end the user has to guess their way out of
+        if (set.has(k) && set.size === 1) return;
+        set.has(k) ? set.delete(k) : set.add(k);
+        b.setAttribute('aria-pressed', set.has(k));
+        selected = null;
+        document.getElementById('panel').innerHTML =
+          '<p class="empty">Select a colour to see where it is defined and used.</p>';
+        stats(); draw();
+      }));
+    };
+    render(document.getElementById('f-type'), ['solid','gradient'], tCount,
+           {solid:'Solid', gradient:'Gradient'}, filters.type);
+    render(document.getElementById('f-cat'), CAT_ORDER, cCount,
+           Object.fromEntries(CAT_ORDER.map(k => [k, CATEGORY[k].label])), filters.cat);
+  }
+
+  syncGroupAvailability(); chips(); stats(); draw(); origins(); note(); drift(); foot();
+  // open on the most-used colour so the page shows its own behaviour at rest
+  const first = nodes()[0];
+  if (first) select(first);
+})();
+</script>
