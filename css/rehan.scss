@@ -39,6 +39,23 @@
   width: 1px;
 }
 
+// Skip link in _layouts/base.html. Hidden until keyboard focus, then shown.
+// Previously came from foundation-visibility-classes, which is no longer
+// included — the two rules below are what that mixin supplied.
+.show-on-focus{
+  @extend .visually-hidden;
+  &:active,
+  &:focus{
+    clip: auto;
+    clip-path: none;
+    height: auto;
+    overflow: visible;
+    position: static;
+    white-space: normal;
+    width: auto;
+  }
+}
+
 img {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -299,6 +316,19 @@ article{
       }
     }
     button{
+      // Self-contained since foundation-button was dropped: the properties
+      // below the colour ones are what Foundation's .button used to supply.
+      display: inline-block;
+      vertical-align: middle;
+      padding: 0.85em 1em;
+      border: 1px solid transparent;
+      line-height: 1;
+      text-align: center;
+      cursor: pointer;
+      font-family: inherit;
+      -webkit-appearance: none;
+      color: $pure-white;
+      transition: $sprint;
       border-radius: $tile-radius;
       background-color: $signature-teal;
       font-weight: $lato-bold;
