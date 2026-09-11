@@ -203,6 +203,26 @@ link | `url` to the event's recording or related materials | `string`
 logo | A logo representing the event for visual context | `.svg`
 
 
+### Tooling
+
+#### Color Audit
+
+`_tools/color-audit.py` scans the SCSS and CSS sources alongside the compiled stylesheet and reports every colour the site uses — how often, which file it is authored in, which selectors it renders on, and whether it comes from a design token, a hand-written literal, Sass (`mix()`, `rgba()`, `darken()`) or a vendor stylesheet. Gradients are counted as single entries rather than as their individual stops.
+
+```
+bundle exec jekyll build && python3 _tools/color-audit.py
+```
+
+The build must come first — the script reads `_site/css/rehan.css` for the rendered side, so skipping it compares new source against stale output.
+
+It writes two files beside itself, both gitignored:
+
+* `color-audit.json` — the dataset
+* `color-atlas.html` — a standalone page that plots the palette as circles sized by usage, clustered by hue or by file, with a panel for each colour's source lines and selectors. Open it directly in a browser.
+
+Use `--no-html` for the data only, or `--out` / `--html` to redirect either output.
+
+
 ### Reference
 
 #### Places that Link to Me
