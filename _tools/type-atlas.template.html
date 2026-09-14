@@ -161,6 +161,48 @@
   .samples li{margin-bottom:6px}
   .samples{padding-left:18px;margin:0}
 
+  /* merge view: the variants of one role, and what collapsing them costs */
+  .badge{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.06em;
+    text-transform:uppercase;padding:3px 8px;border-radius:2px;
+    background:color-mix(in srgb,var(--flag-high) 15%,transparent);color:var(--flag-high)}
+  .ghead .spacer{flex:1}
+  .row.variant .count{color:var(--ink-muted)}
+  /* the variant everything else would collapse into */
+  .row.keeper{box-shadow:inset 3px 0 0 var(--flag-ok)}
+  .row.keeper .count{color:var(--ink)}
+  .movenote{font-family:"JetBrains Mono",monospace;font-size:11px;
+    color:var(--flag-high);white-space:nowrap}
+
+  /* matrix */
+  .matrix{padding:18px}
+  .matrix + .matrix{border-top:1px solid var(--rule)}
+  .matrix h3{margin:0 0 12px;font-family:"JetBrains Mono",monospace;
+    font-weight:500;font-size:13px;letter-spacing:.04em}
+  .matrix table{border-collapse:collapse;font-family:"JetBrains Mono",monospace;
+    font-size:12px;font-variant-numeric:tabular-nums}
+  .matrix th{font-weight:500;color:var(--ink-muted);padding:6px 10px;text-align:right}
+  .matrix thead th{text-align:center}
+  .matrix td{padding:0;text-align:center;border:1px solid var(--rule)}
+  .matrix td button{font:inherit;border:0;background:transparent;color:var(--ink);
+    width:100%;padding:8px 12px;cursor:pointer;line-height:1.3}
+  .matrix td button:hover{background:var(--surface-2)}
+  .matrix td button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .matrix td.empty{background:var(--ground)}
+  .matrix td b{display:block;font-weight:500}
+  .matrix td small{color:var(--ink-faint);font-size:10px}
+  .matrix th.size.offscale{color:var(--flag-med)}
+  .matrix th.size.offscale::after{content:" *"}
+  .mnote{font-size:13px;color:var(--ink-muted);margin:14px 0 0}
+
+  /* panel: what was actually written */
+  .decl{font-family:"JetBrains Mono",monospace;font-size:11.5px;
+    padding:6px 0;border-bottom:1px solid var(--rule);line-height:1.5}
+  .decl:last-child{border-bottom:none}
+  .decl .p{color:var(--ink-muted)}
+  .decl .v{color:var(--ink);font-weight:500}
+  .decl .loc{color:var(--accent-deep)}
+  .decl .n{color:var(--ink-faint);float:right}
+
   footer.note{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
     font-size:13.5px;color:var(--ink-faint);max-width:78ch}
   footer.note code{font-size:12.5px}
@@ -178,9 +220,14 @@
 
   <div class="bar">
     <div class="segs">
+      <div class="seg" role="group" aria-label="View">
+        <button id="v-specimens" aria-pressed="true">Specimens</button>
+        <button id="v-matrix" aria-pressed="false">Matrix</button>
+      </div>
       <div class="seg" role="group" aria-label="Group by">
         <button id="g-family" aria-pressed="true">By family</button>
         <button id="g-file" aria-pressed="false">By file</button>
+        <button id="g-role" aria-pressed="false">By role</button>
       </div>
     </div>
     <div class="stats" id="stats"></div>
@@ -202,38 +249,63 @@
 const DATA = __DATA__;
 const STYLES = DATA.styles;
 const T = DATA.totals;
+const TAIL = 25;                 // "long tail" threshold, in elements
+
+/* A role is a style with the line-height taken off. Two styles in the same
+   role render identically apart from their leading, which is what makes them
+   merge candidates rather than separate decisions. */
+const roleKey = s => [s.family, s.size, s.weight, s.style,
+                      s.letter_spacing, s.text_transform].join("|");
+const roleLabel = s => `${s.family} ${s.size}px w${s.weight}`
+  + (s.style !== "normal" ? ` ${s.style}` : "")
+  + (s.letter_spacing !== "normal" ? ` ${s.letter_spacing}` : "")
+  + (s.text_transform !== "none" ? ` ${s.text_transform}` : "");
+
+const ROLES = new Map();
+for (const s of STYLES) {
+  const k = roleKey(s);
+  if (!ROLES.has(k)) ROLES.set(k, []);
+  ROLES.get(k).push(s);
+}
+for (const [, v] of ROLES) v.sort((a, b) => b.count - a.count);
 
 /* ------------------------------------------------------------------ state */
 const state = {
+  view: "specimens",
   group: "family",
-  family: new Set(),          // empty set == everything
-  weight: new Set(),
-  source: new Set(),
-  scale:  new Set(),
-  sel: null,                  // style id
-  selFile: null               // which file group it was clicked in
+  sort: "uses",
+  family: new Set(), weight: new Set(), source: new Set(), scale: new Set(),
+  narrow: new Set(),          // "merge" and/or "tail"
+  size: null,                 // set only by a matrix cell click
+  sel: null, selFile: null
 };
 
-const fileOf = s => (s.files[0] ? s.files[0].file : "&mdash;");
-const srcOf  = s => s.vendor ? "vendor" : "authored";
-const scaleOf= s => s.on_scale ? "on scale" : "off scale";
-const short  = f => f.replace(/^_sass\//, "").replace(/^css\//, "css/");
+const srcOf   = s => s.vendor ? "vendor" : "authored";
+const scaleOf = s => s.on_scale ? "on scale" : "off scale";
+const short   = f => f.replace(/^_sass\//, "");
+const total   = arr => arr.reduce((n, s) => n + s.count, 0);
 
 function pass(s){
-  const f = state;
-  if (f.family.size && !f.family.has(s.family)) return false;
-  if (f.weight.size && !f.weight.has(s.weight)) return false;
-  if (f.source.size && !f.source.has(srcOf(s))) return false;
-  if (f.scale.size  && !f.scale.has(scaleOf(s))) return false;
+  if (state.family.size && !state.family.has(s.family)) return false;
+  if (state.weight.size && !state.weight.has(s.weight)) return false;
+  if (state.source.size && !state.source.has(srcOf(s))) return false;
+  if (state.scale.size  && !state.scale.has(scaleOf(s))) return false;
+  if (state.size !== null && s.size !== state.size) return false;
+  if (state.narrow.has("merge") && ROLES.get(roleKey(s)).length < 2) return false;
+  if (state.narrow.has("tail") && s.count >= TAIL) return false;
   return true;
 }
+
+const SORTS = {
+  uses:  (a, b) => b.count - a.count,
+  size:  (a, b) => b.size - a.size || b.count - a.count,
+  pages: (a, b) => b.page_count - a.page_count || b.count - a.count
+};
 
 /* -------------------------------------------------------------- filters */
 function counts(fn){
   const m = new Map();
-  for (const s of STYLES) {
-    for (const k of [].concat(fn(s))) m.set(k, (m.get(k) || 0) + s.count);
-  }
+  for (const s of STYLES) m.set(fn(s), (m.get(fn(s)) || 0) + s.count);
   return m;
 }
 
@@ -249,7 +321,7 @@ function drawFilters(){
   box.innerHTML = "";
   for (const f of FILTERS) {
     const m = counts(f.of);
-    const keys = [...m.keys()].sort((a,b)=>m.get(b)-m.get(a));
+    const keys = [...m.keys()].sort((a, b) => m.get(b) - m.get(a));
     const g = document.createElement("div");
     g.className = "fgroup";
     g.innerHTML = `<span class="flabel">${f.label}</span>`;
@@ -257,12 +329,7 @@ function drawFilters(){
     chips.className = "chips";
     for (const k of keys) {
       const on = state[f.key].size === 0 || state[f.key].has(k);
-      const b = document.createElement("button");
-      b.className = "chip";
-      b.type = "button";
-      b.setAttribute("aria-pressed", on ? "true" : "false");
-      b.innerHTML = `${k}<span class="n">${m.get(k).toLocaleString()}</span>`;
-      b.onclick = () => {
+      chips.appendChild(chip(k, m.get(k), on, () => {
         const set = state[f.key];
         // an untouched group shows everything; the first click narrows to the
         // rest, which is what "turn this one off" has to mean when nothing is
@@ -271,12 +338,65 @@ function drawFilters(){
         set.has(k) ? set.delete(k) : set.add(k);
         if (set.size === keys.length) set.clear();
         draw();
-      };
-      chips.appendChild(b);
+      }));
     }
     g.appendChild(chips);
     box.appendChild(g);
   }
+
+  // These two are not a dimension of the data, they are extra conditions, so
+  // they are off by default rather than following the "empty means all" rule.
+  const nMerge = STYLES.filter(s => ROLES.get(roleKey(s)).length > 1).length;
+  const nTail  = STYLES.filter(s => s.count < TAIL).length;
+  const g = document.createElement("div");
+  g.className = "fgroup";
+  g.innerHTML = `<span class="flabel">Narrow to</span>`;
+  const chips = document.createElement("div");
+  chips.className = "chips";
+  chips.appendChild(chip("merge candidates", nMerge, state.narrow.has("merge"), () => {
+    state.narrow.has("merge") ? state.narrow.delete("merge") : state.narrow.add("merge");
+    draw();
+  }));
+  chips.appendChild(chip(`tail (under ${TAIL})`, nTail, state.narrow.has("tail"), () => {
+    state.narrow.has("tail") ? state.narrow.delete("tail") : state.narrow.add("tail");
+    draw();
+  }));
+  if (state.size !== null) {
+    // only a matrix click sets this, so it needs its own way back out
+    const n = STYLES.filter(x => x.size === state.size).length;
+    chips.appendChild(chip(`${state.size}px only  X`, n, true,
+      () => { state.size = null; draw(); }));
+  }
+  g.appendChild(chips);
+  box.appendChild(g);
+
+  // sort
+  const sg = document.createElement("div");
+  sg.className = "fgroup";
+  sg.innerHTML = `<span class="flabel">Sort</span>`;
+  const seg = document.createElement("div");
+  seg.className = "seg";
+  for (const [k, label] of [["uses","Uses"],["size","Size"],["pages","Pages"]]) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = label;
+    b.setAttribute("aria-pressed", state.sort === k ? "true" : "false");
+    b.disabled = state.view === "matrix";
+    b.onclick = () => { state.sort = k; draw(); };
+    seg.appendChild(b);
+  }
+  sg.appendChild(seg);
+  box.appendChild(sg);
+}
+
+function chip(label, n, on, fn){
+  const b = document.createElement("button");
+  b.className = "chip";
+  b.type = "button";
+  b.setAttribute("aria-pressed", on ? "true" : "false");
+  b.innerHTML = `${esc(label)}<span class="n">${n.toLocaleString()}</span>`;
+  b.onclick = fn;
+  return b;
 }
 
 /* ---------------------------------------------------------------- sheet */
@@ -302,11 +422,12 @@ function sampleFor(s){
   return t || SPECIMEN;
 }
 
-function rowEl(s, fileCtx){
+function rowEl(s, fileCtx, opts = {}){
   const b = document.createElement("button");
-  b.className = "row";
+  b.className = "row" + (opts.variant ? " variant" : "") + (opts.keeper ? " keeper" : "");
   b.type = "button";
-  b.setAttribute("aria-pressed", state.sel === s.id && state.selFile === fileCtx ? "true" : "false");
+  b.setAttribute("aria-pressed",
+    state.sel === s.id && state.selFile === fileCtx ? "true" : "false");
   const lh = typeof s.line_height === "number" ? s.line_height + "px" : (s.line_height || "&mdash;");
   b.innerHTML =
     `<span class="specwrap"><span class="spec" style="${specimenStyle(s)}">${esc(sampleFor(s))}</span></span>
@@ -321,32 +442,57 @@ function rowEl(s, fileCtx){
 }
 
 function groups(rows){
-  // [name, styles, total] &mdash; `total` is the number of elements this group
-  // accounts for, which is not the same thing in the two modes
+  // [name, styles, total] -- `total` is the number of elements the group
+  // accounts for, which is not the same thing in every mode
   const m = new Map();
   const add = (k, s, n) => {
     let g = m.get(k);
-    if (!g) m.set(k, g = { list: [], total: 0 });
+    if (!g) m.set(k, g = { list: [], tot: 0 });
     g.list.push(s);
-    g.total += n;
+    g.tot += n;
   };
   if (state.group === "family") {
     for (const s of rows) add(s.family, s, s.count);
+  } else if (state.group === "role") {
+    for (const s of rows) add(roleKey(s), s, s.count);
   } else {
     // a style written across several files appears under each of them, and the
-    // group total is what that file is responsible for &mdash; not the style's
-    // whole count, which would sum to far more than the site has elements
+    // group total is what that file is responsible for -- not the style's whole
+    // count, which would sum to far more than the site has elements
     for (const s of rows) {
       const fs = s.files.length ? s.files : [{ file: "browser default", count: s.count }];
       for (const f of fs) add(f.file, s, f.count);
     }
   }
-  for (const [, g] of m) g.list.sort((a, b) => b.count - a.count);
+  for (const [, g] of m) g.list.sort(SORTS[state.sort]);
   return [...m.entries()]
-    .sort((a, b) => b[1].total - a[1].total)
-    .map(([k, g]) => [k, g.list, g.total]);
+    .sort((a, b) => b[1].tot - a[1].tot)
+    .map(([k, g]) => [k, g.list, g.tot]);
 }
-const d3sum = arr => arr.reduce((n, s) => n + s.count, 0);
+
+function headFor(name, list, tot){
+  const head = document.createElement("div");
+  head.className = "ghead";
+  if (state.group === "role") {
+    // every variant but the biggest is what a merge would have to move
+    const all = ROLES.get(name);
+    const shown = list.length;
+    const cost = tot - Math.max(...list.map(s => s.count));
+    head.innerHTML =
+      `<h3>${esc(roleLabel(list[0]))}</h3>
+       <span class="gmeta">${shown} line-height${shown === 1 ? "" : "s"}
+       &middot; ${tot.toLocaleString()} elements${
+         shown < all.length ? ` &middot; ${all.length - shown} hidden by filters` : ""}</span>
+       <span class="spacer"></span>
+       ${shown > 1 ? `<span class="badge">merging moves ${cost.toLocaleString()}</span>` : ""}`;
+  } else {
+    head.innerHTML =
+      `<h3>${esc(state.group === "file" ? short(name) : name)}</h3>
+       <span class="gmeta">${list.length} style${list.length === 1 ? "" : "s"}
+       &middot; ${tot.toLocaleString()} ${state.group === "file" ? "elements from here" : "uses"}</span>`;
+  }
+  return head;
+}
 
 function drawSheet(){
   const sheet = document.getElementById("sheet");
@@ -356,18 +502,18 @@ function drawSheet(){
     sheet.innerHTML = `<p class="noresults">Nothing matches those filters.</p>`;
     return;
   }
+  if (state.view === "matrix") return drawMatrix(sheet, rows);
+
   const max = Math.max(...rows.map(s => s.count));
-  for (const [name, list, total] of groups(rows)) {
+  for (const [name, list, tot] of groups(rows)) {
     const g = document.createElement("section");
     g.className = "group";
-    const head = document.createElement("div");
-    head.className = "ghead";
-    head.innerHTML = `<h3>${esc(state.group === "file" ? short(name) : name)}</h3>
-      <span class="gmeta">${list.length} style${list.length === 1 ? "" : "s"}
-      &middot; ${total.toLocaleString()} ${state.group === "file" ? "elements from here" : "uses"}</span>`;
-    g.appendChild(head);
+    g.appendChild(headFor(name, list, tot));
+    const multi = state.group === "role" && list.length > 1;
+    const top = multi ? Math.max(...list.map(s => s.count)) : null;
     for (const s of list) {
-      const r = rowEl(s, state.group === "file" ? name : null);
+      const r = rowEl(s, state.group === "file" ? name : null,
+                      { variant: multi, keeper: multi && s.count === top });
       const track = document.createElement("span");
       track.className = "bar-track";
       track.innerHTML = `<span class="bar-fill" style="width:${(s.count / max * 100).toFixed(1)}%"></span>`;
@@ -378,19 +524,74 @@ function drawSheet(){
   }
 }
 
+/* --------------------------------------------------------------- matrix */
+function drawMatrix(sheet, rows){
+  const byFamily = new Map();
+  for (const s of rows) {
+    if (!byFamily.has(s.family)) byFamily.set(s.family, []);
+    byFamily.get(s.family).push(s);
+  }
+  const fams = [...byFamily.entries()].sort((a, b) => total(b[1]) - total(a[1]));
+  for (const [family, list] of fams) {
+    const sizes = [...new Set(list.map(s => s.size))].sort((a, b) => b - a);
+    const weights = [...new Set(list.map(s => s.weight))].sort((a, b) => +a - +b);
+    const cell = new Map();
+    for (const s of list) {
+      const k = s.size + "|" + s.weight;
+      if (!cell.has(k)) cell.set(k, []);
+      cell.get(k).push(s);
+    }
+    const sec = document.createElement("section");
+    sec.className = "matrix";
+    let html = `<h3>${esc(family)}</h3><table><thead><tr><th></th>`;
+    for (const w of weights) html += `<th>w${w}</th>`;
+    html += `</tr></thead><tbody>`;
+    for (const size of sizes) {
+      const off = !DATA.totals.scale.includes(size);
+      html += `<tr><th class="size${off ? " offscale" : ""}">${size}px</th>`;
+      for (const w of weights) {
+        const c = cell.get(size + "|" + w);
+        html += c
+          ? `<td><button data-family="${esc(family)}" data-weight="${w}" data-size="${size}">
+               <b>${total(c).toLocaleString()}</b>
+               <small>${c.length} style${c.length === 1 ? "" : "s"}</small></button></td>`
+          : `<td class="empty"></td>`;
+      }
+      html += `</tr>`;
+    }
+    html += `</tbody></table>
+      <p class="mnote">Each cell is the elements rendering at that size and weight.
+      Sizes marked <span style="color:var(--flag-med)">*</span> are off the scale.
+      Neighbouring rows with small counts are the merge candidates &mdash; click a
+      cell to see its styles.</p>`;
+    sec.innerHTML = html;
+    sec.querySelectorAll("button[data-family]").forEach(b => {
+      b.onclick = () => {
+        state.family = new Set([b.dataset.family]);
+        state.weight = new Set([b.dataset.weight]);
+        state.size = +b.dataset.size;
+        setView("specimens");
+        setGroup("role");
+      };
+    });
+    sheet.appendChild(sec);
+  }
+}
+
 /* ---------------------------------------------------------------- panel */
 function drawPanel(){
   const p = document.getElementById("panel");
   const s = STYLES.find(x => x.id === state.sel);
   if (!s) { p.innerHTML = `<p class="empty">Pick a specimen to see where it is used.</p>`; return; }
   const lh = typeof s.line_height === "number" ? s.line_height + "px" : (s.line_height || "&mdash;");
-  const ratio = typeof s.line_height === "number"
-    ? (s.line_height / s.size).toFixed(2) : "&mdash;";
+  const ratio = typeof s.line_height === "number" ? (s.line_height / s.size).toFixed(2) : null;
 
-  // in file mode, the file you clicked comes first &mdash; the whole reason to be
-  // in that mode is to ask what this file is doing
+  // in file mode, the file you clicked comes first -- the whole reason to be in
+  // that mode is to ask what this file is doing
   const files = s.files.slice().sort((a, b) =>
     (b.file === state.selFile) - (a.file === state.selFile) || b.count - a.count);
+
+  const siblings = ROLES.get(roleKey(s)).filter(x => x.id !== s.id);
 
   p.innerHTML = `
     <div class="pspec"><div style="${specimenStyle(s)}">${esc(sampleFor(s))}</div></div>
@@ -398,47 +599,75 @@ function drawPanel(){
     <div class="pmeta">
       <span class="tag ${s.on_scale ? "on" : "off"}">${s.on_scale ? "on scale" : "off scale"}</span>
       ${s.vendor ? `<span class="tag vendor">vendor</span>` : `<span class="tag">authored</span>`}
-      ${s.text_transform !== "none" ? `<span class="tag">${s.text_transform}</span>` : ""}
-      ${s.style !== "normal" ? `<span class="tag">${s.style}</span>` : ""}
+      ${s.text_transform !== "none" ? `<span class="tag">${esc(s.text_transform)}</span>` : ""}
+      ${s.style !== "normal" ? `<span class="tag">${esc(s.style)}</span>` : ""}
     </div>
     <dl class="pair">
       <dt>size</dt><dd>${s.size}px</dd>
-      <dt>line-height</dt><dd>${lh}${ratio !== "&mdash;" ? ` <span style="opacity:.6">(${ratio})</span>` : ""}</dd>
+      <dt>line-height</dt><dd>${lh}${ratio ? ` <span style="opacity:.6">(${ratio})</span>` : ""}</dd>
       <dt>weight</dt><dd>${s.weight}</dd>
-      <dt>tracking</dt><dd>${s.letter_spacing}</dd>
+      <dt>tracking</dt><dd>${esc(s.letter_spacing)}</dd>
       <dt>uses</dt><dd>${s.count.toLocaleString()} on ${s.page_count} page${s.page_count === 1 ? "" : "s"}</dd>
-      <dt>elements</dt><dd>${s.tags.join(", ")}</dd>
+      <dt>elements</dt><dd>${esc(s.tags.join(", "))}</dd>
     </dl>
-    ${s.classes.length ? `<h4>Classes</h4><div class="use">${s.classes.map(esc).join("<br>")}</div>` : ""}
+
+    ${siblings.length ? `<h4>Same role, other leading</h4>
+      ${siblings.map(x => `<div class="use">
+        <span class="loc">${typeof x.line_height === "number" ? x.line_height + "px" : x.line_height}</span>
+        <span class="n">${x.count.toLocaleString()}</span></div>`).join("")}
+      <div class="use"><span class="n">merging this role moves ${
+        (ROLES.get(roleKey(s)).reduce((n, x) => n + x.count, 0)
+         - Math.max(...ROLES.get(roleKey(s)).map(x => x.count))).toLocaleString()
+      } elements</span></div>` : ""}
+
+    <h4>Written as</h4>
+    ${s.decls.length ? s.decls.map(d => `
+      <div class="decl"><span class="n">${d.count.toLocaleString()}</span>
+        <span class="p">${esc(d.prop)}:</span> <span class="v">${esc(d.value)}</span><br>
+        <span class="loc">${esc(short(d.file || "?"))}${d.line ? ":" + d.line : ""}</span>
+      </div>`).join("") : `<div class="use">browser default</div>`}
+
     <h4>Written in</h4>
     ${files.length ? files.map(f => `
       <div class="use ${f.file === state.selFile ? "here" : ""}">
         <span class="loc">${esc(short(f.file))}</span><span class="n">${f.count.toLocaleString()}</span>
       </div>`).join("") : `<div class="use">browser default</div>`}
+
+    ${s.classes.length ? `<h4>Classes</h4><div class="use"><span>${
+      s.classes.map(esc).join("<br>")}</span></div>` : ""}
+
     <h4>Pages</h4>
     ${s.pages.slice(0, 20).map(x => `<div class="use"><span>${esc(x)}</span></div>`).join("")}
     ${s.page_count > 20 ? `<div class="use"><span class="n">+ ${s.page_count - 20} more</span></div>` : ""}
+
     ${s.samples.length ? `<h4>Samples</h4><ul class="samples">${
       s.samples.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
   `;
 }
 
 /* ----------------------------------------------------------------- chrome */
+const NOTES = {
+  family: "Grouped by typeface. Each row is one distinct computed style &mdash; a size, weight, line-height and tracking that some element on the site actually renders with.",
+  file: "Grouped by the stylesheet that wrote it. A style written across several files appears under each of them, so the same specimen can show up more than once.",
+  role: "Grouped by role &mdash; everything about a style except its leading. Rows inside a group render identically apart from line-height, so they are the merge candidates. The green rule marks the variant the others would collapse into; the badge is how many elements that would move.",
+  matrix: "Size against weight, per family. Adjacent rows carrying small counts are near-duplicates; a cell on its own in a sparse row is usually one page's exception. Click any cell to open its styles."
+};
+
 function drawStats(){
   const rows = STYLES.filter(pass);
+  const roles = new Set(rows.map(roleKey));
   document.getElementById("stats").innerHTML = `
     <span><b>${rows.length}</b>/${T.styles} styles</span>
-    <span><b>${d3sum(rows).toLocaleString()}</b> elements</span>
-    <span><b>${T.pages}</b> pages</span>
+    <span><b>${roles.size}</b> roles</span>
+    <span><b>${total(rows).toLocaleString()}</b> elements</span>
     <span><b>${T.off_scale.toLocaleString()}</b> off scale</span>`;
-  document.getElementById("viewnote").innerHTML = state.group === "family"
-    ? "Grouped by typeface. Each row is one distinct computed style &mdash; a size, weight, line-height and tracking that some element on the site actually renders with."
-    : "Grouped by the stylesheet that wrote it. A style written across several files appears under each of them, so the same specimen can show up more than once.";
+  document.getElementById("viewnote").innerHTML =
+    state.view === "matrix" ? NOTES.matrix : NOTES[state.group];
   document.getElementById("foot").innerHTML =
     `Scale: ${DATA.totals.scale.map(n => n + "px").join(" &middot; ")}. ` +
     `Anything else is flagged off scale. Sizes are computed from the built pages ` +
-    `in <code>_site</code>; file attribution comes from the Sass source map. ` +
-    `Regenerate with <code>python3 _tools/type-audit.py</code>.`;
+    `in <code>_site</code>; declarations and line numbers come from the Sass ` +
+    `source map. Regenerate with <code>python3 _tools/type-audit.py</code>.`;
 }
 
 function draw(){ drawFilters(); drawSheet(); drawPanel(); drawStats(); }
@@ -447,15 +676,27 @@ function esc(s){
   return String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
 }
 
-document.getElementById("g-family").onclick = () => setGroup("family");
-document.getElementById("g-file").onclick = () => setGroup("file");
 function setGroup(g){
   state.group = g;
-  if (g === "family") state.selFile = null;
-  document.getElementById("g-family").setAttribute("aria-pressed", g === "family");
-  document.getElementById("g-file").setAttribute("aria-pressed", g === "file");
+  if (g !== "file") state.selFile = null;
+  for (const k of ["family","file","role"])
+    document.getElementById("g-" + k).setAttribute("aria-pressed", String(g === k));
   draw();
 }
+function setView(v){
+  state.view = v;
+  for (const [k, id] of [["specimens","v-specimens"],["matrix","v-matrix"]])
+    document.getElementById(id).setAttribute("aria-pressed", String(v === k));
+  for (const k of ["family","file","role"])
+    document.getElementById("g-" + k).disabled = v === "matrix";
+  draw();
+}
+
+document.getElementById("g-family").onclick = () => setGroup("family");
+document.getElementById("g-file").onclick   = () => setGroup("file");
+document.getElementById("g-role").onclick   = () => setGroup("role");
+document.getElementById("v-specimens").onclick = () => setView("specimens");
+document.getElementById("v-matrix").onclick    = () => setView("matrix");
 
 draw();
 </script>

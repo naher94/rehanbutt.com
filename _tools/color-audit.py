@@ -218,23 +218,44 @@ def resolve_variables(text):
 # --------------------------------------------------------------------------
 
 def token_map(css):
-    """--color-x -> {light, dark}. The dark block redefines a subset."""
+    """--color-x -> {light, dark}.
+
+    In the Sass source the dark values read as an `@media` nested inside the
+    `:root` rule, but Sass hoists it: the compiled stylesheet holds a plain
+    `:root{...}` followed by `@media (prefers-color-scheme:dark){:root{...}}`.
+    Matching `:root{...}` on its own therefore finds the dark block as a second
+    light block and overwrites every light value with its dark counterpart --
+    which is why this has to work from the media query's span, not from nesting.
+    """
+    def body_at(open_brace):
+        """The brace-balanced text inside the block starting at `open_brace`."""
+        depth = 0
+        for k in range(open_brace, len(css)):
+            if css[k] == "{":
+                depth += 1
+            elif css[k] == "}":
+                depth -= 1
+                if depth == 0:
+                    return css[open_brace + 1:k], k
+        return css[open_brace + 1:], len(css)
+
+    # every region of the stylesheet that only applies in dark mode
+    dark_spans = []
+    for m in re.finditer(r'@media[^{]*prefers-color-scheme:\s*dark[^{]*\{', css):
+        _, end = body_at(m.end() - 1)
+        dark_spans.append((m.start(), end))
+
+    def in_dark(i):
+        return any(a <= i < b for a, b in dark_spans)
+
     tokens = defaultdict(dict)
-    root_blocks = re.findall(r":root\s*\{(.*?)\n?\}", css, re.S)
-    # first :root is light; the dark values live in a media query inside it
-    for block in root_blocks:
-        dark_part = ""
-        m = re.search(r"@media\s*\(prefers-color-scheme:\s*dark\)\s*\{(.*?)\}", block, re.S)
-        if m:
-            dark_part = m.group(1)
-            light_part = block[: m.start()]
-        else:
-            light_part = block
-        for name, val in re.findall(r"--color-([\w-]+)\s*:\s*([^;]+)", light_part):
-            tokens[name]["light"] = val.strip()
-        for name, val in re.findall(r"--color-([\w-]+)\s*:\s*([^;]+)", dark_part):
-            tokens[name]["dark"] = val.strip()
-    # values defined only in light apply to both themes
+    for m in re.finditer(r':root[^{]*\{', css):
+        body, _ = body_at(m.end() - 1)
+        theme = "dark" if in_dark(m.start()) else "light"
+        for name, val in re.findall(r'--color-([\w-]+)\s*:\s*([^;}]+)', body):
+            tokens[name][theme] = val.strip()
+
+    # a value defined only in one theme applies to both
     for name, pair in tokens.items():
         pair.setdefault("dark", pair.get("light"))
         pair.setdefault("light", pair.get("dark"))

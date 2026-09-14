@@ -32,27 +32,20 @@ Stdlib only, so it runs anywhere Python does.
 """
 
 import argparse
-import bisect
-import html.parser
 import json
 import pathlib
 import re
 import sys
 from collections import defaultdict
 
-HERE = pathlib.Path(__file__).resolve().parent
-ROOT = HERE.parent
-SITE = ROOT / "_site"
-CSS = SITE / "css" / "rehan.css"
+from cascade import (CSS, DOM, HERE, SITE, SKIP, SourceMap, compile_selector,
+                     is_vendor, matches, parse_rules, specificity,
+                     strip_at_rules)
 
 TYPE_PROPS = ("font-family", "font-size", "font-weight", "font-style",
               "line-height", "letter-spacing", "text-transform")
 INHERITED = set(TYPE_PROPS)          # all of these inherit in CSS
 
-VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link",
-        "meta", "param", "source", "track", "wbr"}
-SKIP = {"script", "style", "head", "meta", "link", "title", "svg", "path", "g",
-        "defs", "clippath", "lineargradient", "stop", "br"}
 
 ROOT_FONT_PX = 16.0                  # html default; the site never overrides it
 
@@ -63,319 +56,6 @@ ROOT_FONT_PX = 16.0                  # html default; the site never overrides it
 # Edit this when the scale is decided; the audit reports against it, it does
 # not define it.
 SCALE = (10.0, 12.0, 16.0, 20.0, 24.0, 32.0, 40.0, 50.0, 60.0, 70.0)
-
-
-# --------------------------------------------------------------------------
-# a very small DOM
-# --------------------------------------------------------------------------
-
-class Node:
-    __slots__ = ("tag", "classes", "id", "parent", "children", "style",
-                 "origin", "text")
-
-    def __init__(self, tag, attrs, parent):
-        self.tag = tag
-        a = dict(attrs)
-        self.classes = set((a.get("class") or "").split())
-        self.id = a.get("id")
-        self.parent = parent
-        self.children = []
-        self.style = {}
-        self.origin = {}
-        self.text = ""
-
-
-class DOM(html.parser.HTMLParser):
-    def __init__(self):
-        super().__init__(convert_charrefs=True)
-        self.root = Node("[root]", {}, None)
-        self.cur = self.root
-        self.nodes = []
-
-    def handle_starttag(self, tag, attrs):
-        n = Node(tag, attrs, self.cur)
-        self.cur.children.append(n)
-        self.nodes.append(n)
-        if tag not in VOID:
-            self.cur = n
-
-    def handle_startendtag(self, tag, attrs):
-        n = Node(tag, attrs, self.cur)
-        self.cur.children.append(n)
-        self.nodes.append(n)
-
-    def handle_endtag(self, tag):
-        if tag in VOID:
-            return
-        node = self.cur
-        while node is not self.root and node.tag != tag:
-            node = node.parent
-        if node is not self.root:
-            self.cur = node.parent
-
-    def handle_data(self, data):
-        d = data.strip()
-        if d and self.cur is not self.root:
-            self.cur.text = (self.cur.text + " " + d).strip()[:120]
-
-
-# --------------------------------------------------------------------------
-# CSS: parse, then match
-# --------------------------------------------------------------------------
-
-def strip_at_rules(css):
-    """Blank out at-rules that do not apply, in place.
-
-    Returns a string the SAME LENGTH as the input, so every character offset
-    still points at the same place in the real stylesheet — which is what the
-    source map is keyed on. Dropped regions become spaces; for a query that
-    does apply, only its prelude and closing brace are blanked, flattening the
-    body up a level while leaving it where it sits.
-
-    Media queries are kept when they hold on a wide screen; this audit reports
-    the desktop resting state.
-    """
-    buf = list(css)
-
-    def blank(a, b):
-        for i in range(a, b):
-            if buf[i] != "\n":
-                buf[i] = " "
-
-    def scan(start, end):
-        i = start
-        while i < end:
-            if css[i] != "@":
-                i += 1
-                continue
-            j = css.find("{", i)
-            semi = css.find(";", i)
-            # statement at-rules (@import, @charset) end at the semicolon and
-            # have no block; blanking to the next brace would eat a real rule
-            if semi >= 0 and (j < 0 or semi < j):
-                blank(i, min(semi + 1, end))
-                i = semi + 1
-                continue
-            if j < 0 or j >= end:
-                blank(i, end)
-                return
-            at = css[i:j]
-            depth, k = 0, j
-            while k < end:
-                if css[k] == "{":
-                    depth += 1
-                elif css[k] == "}":
-                    depth -= 1
-                    if depth == 0:
-                        break
-                k += 1
-            keep = ("min-width" in at and "max-width" not in at) or \
-                   ("media" not in at and "supports" in at)
-            if keep:
-                blank(i, j + 1)        # the prelude
-                blank(k, k + 1)        # the closing brace
-                scan(j + 1, k)         # nested at-rules inside
-            else:
-                blank(i, min(k + 1, end))
-            i = k + 1
-
-    scan(0, len(css))
-    out = "".join(buf)
-    assert len(out) == len(css)
-    return out
-
-
-# --------------------------------------------------------------------------
-# source map: which .scss file wrote this byte of the stylesheet
-# --------------------------------------------------------------------------
-
-B64 = {c: i for i, c in enumerate(
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")}
-
-
-def vlq_decode(segment):
-    """Base64 VLQ -> list of ints."""
-    out, shift, acc = [], 0, 0
-    for ch in segment:
-        d = B64[ch]
-        acc += (d & 31) << shift
-        if d & 32:
-            shift += 5
-            continue
-        sign = acc & 1
-        val = acc >> 1
-        out.append(-val if sign else val)
-        shift, acc = 0, 0
-    return out
-
-
-class SourceMap:
-    """Column -> source file, for a single-line (compressed) stylesheet."""
-
-    def __init__(self, path):
-        self.sources = []
-        self.points = []
-        self.astral = []                 # sorted [(generated_col, src_idx)]
-        if not path.exists():
-            return
-        m = json.loads(path.read_text())
-        self.sources = [normalise_source(s) for s in m["sources"]]
-        gen_col = src_idx = 0
-        for line in m["mappings"].split(";"):
-            gen_col = 0                  # generated column resets each line
-            for seg in line.split(","):
-                if not seg:
-                    continue
-                f = vlq_decode(seg)
-                gen_col += f[0]
-                if len(f) >= 4:
-                    src_idx += f[1]
-                    self.points.append((gen_col, src_idx))
-        self.points.sort(key=lambda p: p[0])
-        self.cols = [p[0] for p in self.points]
-
-    def index(self, css):
-        """Note where the astral characters are.
-
-        Source-map columns count UTF-16 code units; Python counts characters.
-        The site's emoji cursors (`url("...🪄...")` in about.scss) are astral,
-        so each one puts the two counts one further apart. Without this the
-        lookup drifts a few columns and starts crediting the wrong file.
-        """
-        self.astral = [i for i, ch in enumerate(css) if ord(ch) > 0xFFFF]
-
-    def lookup(self, col):
-        if not self.points:
-            return None
-        col += bisect.bisect_right(self.astral, col)
-        i = bisect.bisect_right(self.cols, col) - 1
-        if i < 0:
-            return None
-        return self.sources[self.points[i][1]]
-
-
-VENDOR_DIRS = ("vendor/", "typography/", "xy-grid/", "components/", "util/",
-               "forms/", "grid/")
-VENDOR_FILES = ("_settings.scss", "foundation.scss", "app.scss")
-
-
-def normalise_source(src):
-    """'../_sass/about.scss' -> '_sass/about.scss'."""
-    s = src.replace("\\", "/")
-    s = re.sub(r'^(\.\./)+', '', s)
-    if not s.startswith("_sass/") and "/" not in s:
-        s = "css/" + s
-    return s
-
-
-def is_vendor(src):
-    if not src:
-        return False
-    tail = src.split("/")[-1]
-    return any(d in src for d in VENDOR_DIRS) or tail in VENDOR_FILES
-
-
-def parse_rules(css, smap=None):
-    """[(selector, {prop: value}, order, {prop: source_file})] for type rules."""
-    rules = []
-    for order, m in enumerate(re.finditer(r'([^{}]+)\{([^{}]*)\}', css)):
-        body, base = m.group(2), m.start(2)
-        decls, origin, at = {}, {}, 0
-        for d in body.split(";"):
-            start, at = at, at + len(d) + 1
-            if ":" not in d:
-                continue
-            p, _, v = d.partition(":")
-            p = p.strip().lower()
-            if p in TYPE_PROPS:
-                decls[p] = v.strip()
-                origin[p] = smap.lookup(base + start) if smap else None
-        if not decls:
-            continue
-        for sel in m.group(1).split(","):
-            sel = sel.strip()
-            if not sel or "::" in sel or sel.startswith("@"):
-                continue
-            # state selectors describe interaction, not resting type
-            if re.search(r':(hover|focus|active|visited|checked|disabled)', sel):
-                continue
-            rules.append((sel, decls, order, origin))
-    return rules
-
-
-COMPOUND = re.compile(r'^([a-zA-Z][\w-]*)?((?:[.#][\w-]+)*)')
-
-
-def parse_compound(part):
-    """'div.foo#bar' -> ('div', {'foo'}, 'bar'). Unsupported bits -> None."""
-    part = re.sub(r':(?!:)[\w-]+(\([^)]*\))?', '', part)   # drop :pseudo
-    part = re.sub(r'\[[^\]]*\]', '', part)                 # drop [attr]
-    if not part:
-        return ("*", set(), None)
-    m = COMPOUND.match(part)
-    if not m or m.end() != len(part):
-        return None
-    tag = (m.group(1) or "*").lower()
-    classes, ident = set(), None
-    for tok in re.findall(r'[.#][\w-]+', m.group(2) or ""):
-        (classes.add(tok[1:]) if tok[0] == "." else None)
-        if tok[0] == "#":
-            ident = tok[1:]
-    return (tag, classes, ident)
-
-
-def compile_selector(sel):
-    """Descendant-only selector -> list of compounds, or None if unsupported."""
-    if ">" in sel or "+" in sel or "~" in sel:
-        return None
-    parts = [p for p in sel.split() if p]
-    out = []
-    for p in parts:
-        c = parse_compound(p)
-        if c is None:
-            return None
-        out.append(c)
-    return out or None
-
-
-def matches_compound(node, comp):
-    tag, classes, ident = comp
-    if tag != "*" and node.tag != tag:
-        return False
-    if classes and not classes <= node.classes:
-        return False
-    if ident and node.id != ident:
-        return False
-    return True
-
-
-def matches(node, compounds):
-    """Right-to-left descendant match."""
-    if not matches_compound(node, compounds[-1]):
-        return False
-    n = node.parent
-    for comp in reversed(compounds[:-1]):
-        while n is not None:
-            if matches_compound(n, comp):
-                break
-            n = n.parent
-        else:
-            return False
-        if n is None:
-            return False
-        n = n.parent
-    return True
-
-
-def specificity(compounds):
-    a = b = c = 0
-    for tag, classes, ident in compounds:
-        if ident:
-            a += 1
-        b += len(classes)
-        if tag != "*":
-            c += 1
-    return (a, b, c)
 
 
 # --------------------------------------------------------------------------
@@ -489,9 +169,15 @@ def style_page(path, compiled):
         own = node.style
         # font-size first: everything else can depend on it
         parent_px = inherited.get("_size_px", ROOT_FONT_PX)
-        if "font-size" in own:
+        # `font-size: inherit` is a no-op, exactly like the line-height case
+        # below. Foundation writes it on several elements; recording it would
+        # credit the size to the file holding the `inherit` rather than to
+        # whichever rule actually set the pixels.
+        if "font-size" in own and \
+                own["font-size"].strip().lower() not in ("inherit", "unset"):
             size_px = resolve_size(own["font-size"], parent_px)
-            files["font-size"] = node.origin.get("font-size")
+            files["font-size"] = (own["font-size"],) + \
+                (node.origin.get("font-size") or (None, None))
         else:
             size_px = parent_px
         computed["_size_px"] = size_px
@@ -503,7 +189,7 @@ def style_page(path, compiled):
                 if own[p].strip().lower() in ("inherit", "unset"):
                     continue
                 computed[p] = own[p]
-                files[p] = node.origin.get(p)
+                files[p] = (own[p],) + (node.origin.get(p) or (None, None))
         if node.tag not in ("html", "[root]") and node.text:
             out.append(dict(
                 tag=node.tag,
@@ -517,7 +203,9 @@ def style_page(path, compiled):
                 spacing=(computed.get("letter-spacing") or "normal").strip(),
                 transform=(computed.get("text-transform") or "none").strip(),
                 sample=node.text,
-                files=sorted({f for f in files.values() if f}),
+                # what was written, where: (prop, value, file, line)
+                decls=sorted((p,) + v for p, v in files.items()),
+                files=sorted({v[1] for v in files.values() if v[1]}),
             ))
         for c in node.children:
             walk(c, computed, files)
@@ -536,7 +224,7 @@ def build(out_path, limit=None):
     css = strip_at_rules(raw)
     compiled = []
     unsupported = 0
-    for sel, decls, order, origin in parse_rules(css, smap):
+    for sel, decls, order, origin, _ in parse_rules(css, smap, TYPE_PROPS):
         comps = compile_selector(sel)
         if comps is None:
             unsupported += 1
@@ -549,6 +237,7 @@ def build(out_path, limit=None):
 
     styles = defaultdict(lambda: dict(count=0, pages=set(), tags=set(),
                                       classes=set(), samples=[],
+                                      decls=defaultdict(int),
                                       files=defaultdict(int)))
     for p in pages:
         rel = str(p.relative_to(SITE))
@@ -563,6 +252,10 @@ def build(out_path, limit=None):
             e["tags"].add(el["tag"])
             if el["classes"]:
                 e["classes"].add(el["classes"])
+            for d in el["decls"]:
+                e["decls"][d] += 1
+            # per element, not per declaration: a file that sets three
+            # properties on one element is still one element's worth
             for f in el["files"]:
                 e["files"][f] += 1
             # keep the five longest samples, not the first five: the first
@@ -585,6 +278,9 @@ def build(out_path, limit=None):
             pages=sorted(e["pages"])[:40], page_count=len(e["pages"]),
             tags=sorted(e["tags"]), classes=sorted(e["classes"])[:12],
             samples=e["samples"],
+            decls=[dict(prop=p, value=v, file=f, line=ln, count=c)
+                   for (p, v, f, ln), c in
+                   sorted(e["decls"].items(), key=lambda kv: (kv[0][0], -kv[1]))],
             files=[dict(file=f, count=c)
                    for f, c in sorted(e["files"].items(), key=lambda kv: -kv[1])],
             vendor=all(is_vendor(f) for f in e["files"]) if e["files"] else False,

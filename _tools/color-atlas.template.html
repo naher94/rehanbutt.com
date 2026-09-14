@@ -79,6 +79,25 @@
     opacity:.7;font-variant-numeric:tabular-nums}
   .noresults{padding:40px 16px;text-align:center;color:var(--ink-faint);font-size:15px}
 
+  /* review state: a checkbox in the panel, and its counterpart in the filters */
+  .chip.clear{border-style:dashed;color:var(--ink-muted)}
+  .chip.clear:hover{color:var(--flag-high);border-color:var(--flag-high)}
+  .review{display:flex;align-items:center;gap:10px;width:100%;margin:14px 0 2px;
+    padding:10px 12px;border:1px solid var(--rule-strong);border-radius:3px;
+    background:var(--surface);color:var(--ink);cursor:pointer;
+    font-family:"Lato",sans-serif;font-size:14px;font-weight:700;text-align:left}
+  .review:hover{border-color:var(--accent-deep)}
+  .review:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .review .box{width:16px;height:16px;border:1.5px solid var(--rule-strong);
+    border-radius:2px;flex:none;display:grid;place-items:center;
+    font-size:11px;line-height:1;color:transparent}
+  .review[aria-pressed="true"]{background:color-mix(in srgb,var(--flag-ok) 12%,transparent);
+    border-color:var(--flag-ok)}
+  .review[aria-pressed="true"] .box{background:var(--flag-ok);border-color:var(--flag-ok);
+    color:#fff}
+  .review .hint{margin-left:auto;font-weight:400;font-size:12px;color:var(--ink-faint)}
+  .stale{margin:8px 0 0;font-size:12.5px;color:var(--flag-med)}
+
   .viewnote{font-size:14.5px;color:var(--ink-muted);margin:0 0 20px;max-width:76ch}
 
   /* layout */
@@ -207,6 +226,7 @@
   <div class="filters">
     <div class="fgroup"><span class="flabel">Type</span><div class="chips" id="f-type"></div></div>
     <div class="fgroup"><span class="flabel">Source</span><div class="chips" id="f-cat"></div></div>
+    <div class="fgroup"><span class="flabel">Reviewed</span><div class="chips" id="f-reviewed"></div></div>
   </div>
 
   <div class="cols">
@@ -264,10 +284,63 @@
   const catOf = d => d.kind === 'token' ? 'token' : d.origin;
   const CAT_ORDER = ['token','authored','derived','vendor'];
 
+  /* ------------------------------------------------------------------
+     Reviewed: colours you have checked off, remembered across sessions.
+
+     Kept in localStorage as { "<view>|<id>": "<signature>" }. Keyed by the
+     entry id rather than by its value, so renaming nothing and changing a
+     token's colour are told apart -- and the signature is stored alongside so
+     a colour that has since changed can un-review itself. An audit tool must
+     not hide the one thing that moved.
+
+     Namespaced because browsers treat every file:// page as one storage
+     origin: without the prefix the three atlases would overwrite each other.
+  ------------------------------------------------------------------ */
+  const STORE = 'rehanbutt.color-atlas.reviewed';
+
+  // what "unchanged" means for a colour: tokens carry two values, one per theme
+  const sig = d => d.kind === 'token' ? `${d.light}|${d.dark}` : String(d.display);
+  const rkey = d => `${view}|${d.id}`;
+
+  let reviewed = {};
+  let staleCount = 0;
+  try { reviewed = JSON.parse(localStorage.getItem(STORE) || '{}') || {}; }
+  catch (e) { reviewed = {}; }
+
+  function saveReviewed(){
+    // storage can throw in a private window or with site data blocked; the
+    // page has to keep working without it
+    try { localStorage.setItem(STORE, JSON.stringify(reviewed)); } catch (e) {}
+  }
+
+  // drop ticks whose colour has changed since, and forget entries the audit no
+  // longer knows about at all
+  function pruneReviewed(){
+    const live = new Map();
+    ['authored','rendered'].forEach(v =>
+      DATA[v].forEach(d => live.set(`${v}|${d.id}`,
+        d.kind === 'token' ? `${d.light}|${d.dark}` : String(d.display))));
+    let changed = 0, dropped = 0;
+    for (const k of Object.keys(reviewed)) {
+      if (!live.has(k)) { delete reviewed[k]; dropped++; }
+      else if (live.get(k) !== reviewed[k]) { delete reviewed[k]; changed++; }
+    }
+    staleCount = changed;
+    if (changed || dropped) saveReviewed();
+  }
+
+  const isReviewed = d => Object.prototype.hasOwnProperty.call(reviewed, rkey(d));
+  function toggleReviewed(d){
+    isReviewed(d) ? delete reviewed[rkey(d)] : reviewed[rkey(d)] = sig(d);
+    saveReviewed();
+  }
+  const reviewedCount = () => DATA[view].filter(isReviewed).length;
+
   // every filter starts on, so the page opens showing everything
   const filters = {
     type: new Set(['solid','gradient']),
-    cat:  new Set(CAT_ORDER)
+    cat:  new Set(CAT_ORDER),
+    showReviewed: false        // ticking a colour takes it off the grid
   };
   const typeOf = d => d.kind === 'gradient' ? 'gradient' : 'solid';
   let groupBy = 'palette';
@@ -285,7 +358,8 @@
     return out;
   }
   const visible = () => DATA[view].filter(d =>
-    filters.type.has(typeOf(d)) && filters.cat.has(catOf(d)));
+    filters.type.has(typeOf(d)) && filters.cat.has(catOf(d)) &&
+    (filters.showReviewed || !isReviewed(d)));
   let view = 'authored';
   let selected = null;
 
@@ -489,9 +563,15 @@
     if (d.props && d.props.length)
       pairs += `<dt>properties</dt><dd>${esc(d.props.join(', '))}</dd>`;
 
+    const done = isReviewed(d);
     p.innerHTML = `
       <div class="pswatch" style="background:${esc(d.display)}"></div>
       <p class="pname">${esc(d.label)}</p>
+      <button class="review" id="mark-reviewed" aria-pressed="${done}">
+        <span class="box">&#10003;</span>
+        ${done ? 'Reviewed' : 'Mark reviewed'}
+        <span class="hint">${done ? 'click to undo' : 'takes it off the grid'}</span>
+      </button>
       <div class="pmeta">${tags.join('')}</div>
       <p class="odef">${o.def}</p>
       <dl class="pair">${pairs}</dl>
@@ -511,6 +591,13 @@
           <span class="loc">${esc(s.prop)}</span>
           <span class="decl">${esc(s.selector)}</span></div>`)}
     `;
+
+    p.querySelector('#mark-reviewed').addEventListener('click', () => {
+      toggleReviewed(d);
+      chips(); stats(); draw();
+      // hidden the moment it is ticked, so the panel has nothing left to show
+      if (!filters.showReviewed && isReviewed(d)) clearPanel(); else select(d);
+    });
     p.scrollTop = 0;
   }
 
@@ -616,9 +703,44 @@
            {solid:'Solid', gradient:'Gradient'}, filters.type);
     render(document.getElementById('f-cat'), CAT_ORDER, cCount,
            Object.fromEntries(CAT_ORDER.map(k => [k, CATEGORY[k].label])), filters.cat);
+    reviewChips();
   }
 
+  function reviewChips(){
+    const host = document.getElementById('f-reviewed');
+    const n = reviewedCount();
+    const total = DATA[view].length;
+    host.innerHTML =
+      `<button class="chip" id="c-showrev" aria-pressed="${filters.showReviewed}">
+         Show reviewed<span class="n">${n}</span></button>` +
+      (n ? `<button class="chip clear" id="c-clearrev">Clear ${
+             filters.showReviewed ? 'all' : 'all'}</button>` : '') +
+      `<span class="flabel" style="align-self:center">${n} of ${total} done</span>`;
+
+    host.querySelector('#c-showrev').addEventListener('click', () => {
+      filters.showReviewed = !filters.showReviewed;
+      chips(); stats(); draw();
+    });
+    const clear = host.querySelector('#c-clearrev');
+    if (clear) clear.addEventListener('click', () => {
+      if (!confirm(`Clear all ${n} reviewed colours in the ${view} view?`)) return;
+      DATA[view].forEach(d => delete reviewed[`${view}|${d.id}`]);
+      saveReviewed();
+      chips(); stats(); draw();
+      if (selected) select(selected);
+    });
+  }
+
+  pruneReviewed();
   syncGroupAvailability(); chips(); stats(); draw(); origins(); note(); drift(); foot();
+  if (staleCount) {
+    const el = document.createElement('p');
+    el.className = 'stale';
+    el.textContent = `${staleCount} colour${staleCount === 1 ? ' has' : 's have'} ` +
+      `changed value since you reviewed ${staleCount === 1 ? 'it' : 'them'}, ` +
+      `so ${staleCount === 1 ? 'it is' : 'they are'} showing again.`;
+    document.getElementById('viewnote').after(el);
+  }
   // open on the most-used colour so the page shows its own behaviour at rest
   const first = nodes()[0];
   if (first) select(first);

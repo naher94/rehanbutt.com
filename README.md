@@ -222,6 +222,8 @@ It writes two files beside itself, both gitignored:
 
 Use `--no-html` for the data only, or `--out` / `--html` to redirect either output.
 
+Colours can be checked off as you work through them. **Mark reviewed** in the detail panel takes a colour off the grid, the Reviewed filter brings them back or clears them, and the state lives in `localStorage` so it survives regenerating the page. It is keyed by the entry's id with the colour's value stored alongside — so if a colour changes after you reviewed it, the tick is dropped and the colour reappears with a note saying why. Reviews are tracked separately for the authored and rendered views, and the key is namespaced because browsers treat every `file://` page as one storage origin.
+
 #### Type Audit
 
 `_tools/type-audit.py` is the typography equivalent. It walks every built page in `_site`, matches the compiled CSS rules to each element, sorts them by specificity and carries font-size down the tree — so it reports what type actually renders as, not what the stylesheet declares. That distinction matters here: more than half the font-sizes in the compiled stylesheet are still `em`, and Sass never resolves those, so a declaration on its own says nothing about the size on screen.
@@ -235,11 +237,45 @@ Each distinct combination of family, size, weight, style, line-height, tracking 
 It writes two files beside itself, both gitignored:
 
 * `type-audit.json` — the dataset
-* `type-atlas.html` — a standalone page listing each style as a specimen rendered at its true size, with a usage count, grouped by family or by file, and filtered by family, weight, source and whether the size is on the scale. Open it directly in a browser.
+* `type-atlas.html` — a standalone page listing each style as a specimen rendered at its true size. Open it directly in a browser.
+
+The page exists to answer whether the site needs everything it currently has, so it is built around merging:
+
+* **By role** groups styles by everything except their line-height. Rows inside a group render identically apart from their leading, so they are the merge candidates; the header says how many elements collapsing them would move.
+* **Matrix** plots size against weight per family. Adjacent rows with small counts are near-duplicates; clicking a cell opens its styles.
+* **Narrow to** isolates either the styles that share a role with another, or the long tail under 25 uses.
+* The detail panel shows the authored declaration and source line behind every property — `font-size: 1em → _sass/header.scss:48` — so a row can be acted on without going hunting.
+
+Grouping by family or by file, sorting, and filters for family, weight, source and on/off scale are all there too.
 
 The scale it reports against is the `SCALE` tuple at the top of the script. It is fitted to real usage rather than to a formula, and it describes the site as it is — edit it when the scale is decided.
 
 Same flags as the colour audit, plus `--pages N` to sample the first N pages for a quick look.
+
+#### CSS Reachability
+
+`_tools/css-audit.py` asks one question of every rule in the compiled stylesheet: does anything on the site match it?
+
+```
+bundle exec jekyll build && python3 _tools/css-audit.py
+```
+
+It reports rules rather than selectors, because a rule is only deletable when its whole selector list is dead. A live rule carrying dead entries in its list is counted separately as bloat — that is usually an `@extend` emitting combinations the markup never produces, and the fix is in the Sass rather than in deleting a line.
+
+A wrong "dead" would send you deleting working code, so anything the matcher cannot evaluate exactly is widened first — `a > b` to `a b`, `a + b` to `b`, `.x:hover` to `.x`, `.x[open]` to `.x` — and reported dead only when even the wider form matches nothing. Widening can only match more, never less, so every error falls on the safe side. Two blind spots are reported separately instead of being folded in: classes a script adds at runtime (every identifier in the site's JavaScript is collected, and a rule naming one is held back as script-reachable) and pages that are not built, since the audit only knows `_site`.
+
+It writes two files beside itself, both gitignored:
+
+* `css-audit.json` — the dataset
+* `css-atlas.html` — a standalone page built around deciding what to remove. It opens with the whole stylesheet's weight split into unreachable, dead list entries, script-reachable and matched, then explains each verdict and what it asks you to do. Rules are split into two lanes, because they need different actions: **yours** are deleted one at a time, ordered by how much compiled CSS each removal saves, while **Foundation's** are emitted wholesale by the includes in `_sass/app.scss` — a partial flagged `whole file` is telling you its include is not earning its place. Group by file or verdict, mark dead entries inside their selector list, and the panel names the file and line with the specific next step. Open it directly in a browser.
+
+Byte figures are compiled output before gzip, not the size of the source edit — a few lines of nested Sass can emit a kilobyte of selectors.
+
+`--list` prints every dead rule with its source line; `--list-file _sass/home.scss` narrows that to one file; `--no-html` skips the page.
+
+#### Shared Cascade
+
+All three audits sit on `_tools/cascade.py` — the built pages parsed into a DOM, the compiled stylesheet parsed into rules, selector matching, and the Sass source map that maps any byte of the output back to the partial and line that wrote it. It is not run directly.
 
 
 ### Reference
