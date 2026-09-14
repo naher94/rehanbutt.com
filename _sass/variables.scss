@@ -241,3 +241,77 @@ $lato-black: 900;
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 $caveat: 'Caveat', cursive;
 $caveat-regular: 400;
+
+//******* Type Styles
+// Named by the job the type does on the page, never by a tag and never by a
+// rank. A section heading is `section-title` whether it is marked up as an h2
+// or an h3, which is the whole point -- `.h1` on an `<h2>` is the thing this
+// vocabulary exists to avoid. For the same reason there are no numbered names:
+// `title-1` / `title-2` reintroduces the hierarchy confusion one layer down.
+//
+// Size lives in the value, not the name, so `section-title` can move off 37.5px
+// without anything being renamed.
+//
+// Values are the site's current computed values, to the pixel, so adopting a
+// style changes nothing on screen. Sizes are px rather than em on purpose: an
+// em is resolved against whatever parent it lands in, which is how the same
+// declaration ended up rendering at six different sizes.
+//
+// Usage:  h2 { @include type-style(section-title); }
+
+$type-styles: (
+  // ---- hierarchy: rank on the page ----------------------------------------
+  // `expressive` borrows IBM Carbon's split: productive type is for reading
+  // and navigating, expressive type is for impact. It is the tier above a page
+  // title, for type doing a graphic job rather than a structural one -- a hero
+  // line, a statement over an image -- and it is the one entry here not taken
+  // from current usage, since nothing on the site is set this way yet. Set
+  // tighter than a heading on both axes, because large type reads loose at
+  // settings that suit 16px. If a second impact size is ever needed, the
+  // Carbon shape is `expressive-lg` / `expressive-sm` rather than a number.
+  expressive:    (family: $zilla, size: 90px,   weight: $zilla-bold,   line-height: 86px,
+                  letter-spacing: -0.01em),
+  // 70px, larger than page-title. That inversion is real on the site today --
+  // about.html sets its sections at 70px under a 48px h1 -- and is recorded
+  // here rather than quietly corrected, so the fix is a deliberate edit.
+  section-title: (family: $zilla, size: 70px,   weight: $zilla-bold,   line-height: normal),
+  page-title:    (family: $zilla, size: 60px,   weight: $zilla-bold,   line-height: 54px),
+  body:          (family: $lato,  size: 20px,   weight: $lato-regular, line-height: 30px),
+  body-strong:   (family: $lato,  size: 20px,   weight: $lato-bold,    line-height: 32px),
+  body-sm:       (family: $lato,  size: 16px,   weight: $lato-regular, line-height: 25.6px),
+
+  // ---- component styles ---------------------------------------------------
+  // Named for the thing they are, not for a rank. They sit apart because a
+  // nav link is not a tier -- nothing is "one step below" it.
+  nav-link:      (family: $zilla, size: 37.5px, weight: $zilla-bold,   line-height: 60px),
+  card-title:    (family: $zilla, size: 24px,   weight: $zilla-bold,   line-height: 24px),
+  ui:            (family: $lato,  size: 16px,   weight: $lato-bold,    line-height: 25.6px),
+  eyebrow:       (family: $lato,  size: 10px,   weight: $lato-bold,    line-height: 16px,
+                  letter-spacing: .3em, text-transform: uppercase),
+);
+@function type-value($style-key, $prop) {
+  @if not map-has-key($type-styles, $style-key) {
+    @error 'Unknown type style `#{$style-key}`. Known: #{map-keys($type-styles)}.';
+  }
+  @return map-get(map-get($type-styles, $style-key), $prop);
+}
+
+// Emits the whole style. Optional properties are only written when the style
+// defines them, so a rule never carries `letter-spacing: normal` it did not ask
+// for -- that would override an inherited value rather than leave it alone.
+@mixin type-style($style-key) {
+  $style: map-get($type-styles, $style-key);
+  @if $style == null {
+    @error 'Unknown type style `#{$style-key}`. Known: #{map-keys($type-styles)}.';
+  }
+  font-family: map-get($style, family);
+  font-size: map-get($style, size);
+  font-weight: map-get($style, weight);
+  line-height: map-get($style, line-height);
+  @each $prop in (letter-spacing, text-transform, font-style) {
+    $value: map-get($style, $prop);
+    @if $value != null {
+      #{$prop}: $value;
+    }
+  }
+}
