@@ -713,13 +713,9 @@ $home-section-vertical-spacing-mobile: 4rem;
     }
   }
   .resource-link{
-    color: semantic-color(text-on-light-bg-always);
     margin-bottom: 1rem;
     .title{
       font-size: 1.5rem;
-      @media (prefers-color-scheme: dark){
-        @include swipe-underline($signature-teal-l6,false);
-      }
     }
     .description{
       font-size: 1rem;
@@ -728,4 +724,3 @@ $home-section-vertical-spacing-mobile: 4rem;
   }
 
 }
-//******* End of Home Page Styles
