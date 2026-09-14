@@ -209,6 +209,8 @@ logo | A logo representing the event for visual context | `.svg`
 
 `_tools/color-audit.py` scans the SCSS and CSS sources alongside the compiled stylesheet and reports every colour the site uses — how often, which file it is authored in, which selectors it renders on, and whether it comes from a design token, a hand-written literal, Sass (`mix()`, `rgba()`, `darken()`) or a vendor stylesheet. Gradients are counted as single entries rather than as their individual stops.
 
+Rendered colours are traced through the Sass source map back to the partial and line that produced them, so a compiled value is judged by the declaration that actually made it. A colour reached through a token is judged by how the token was written rather than by the rule that used it, since the rule only says `var(--color-x)`.
+
 ```
 bundle exec jekyll build && python3 _tools/color-audit.py
 ```

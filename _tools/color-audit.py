@@ -43,6 +43,8 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
 
 # Third-party stylesheets: their palettes are not decisions made here.
+from cascade import SourceMap
+
 VENDOR_FILES = {"_settings.scss", "foundation.scss", "app.scss", "monokai.css"}
 VENDOR_DIRS = {"xy-grid"}
 
@@ -339,6 +341,71 @@ def scan_source(varmap):
     return hits
 
 
+_SRC_CACHE = {}
+
+
+def source_lines(rel):
+    """The lines of a source file named the way the source map names it."""
+    if rel not in _SRC_CACHE:
+        path = ROOT / rel
+        try:
+            _SRC_CACHE[rel] = path.read_text(errors="ignore").splitlines()
+        except OSError:
+            _SRC_CACHE[rel] = []
+    return _SRC_CACHE[rel]
+
+
+_VENDOR_CACHE = {}
+
+
+def vendor_file(rel):
+    """Is this partial the framework's rather than yours?
+
+    Name and directory catch most of it. The tell for the rest is `!default`:
+    Foundation declares its variables that way so a project can override them,
+    and nothing hand-written on this site uses it -- _global.scss has 26 and
+    variables.scss has none.
+    """
+    if rel in _VENDOR_CACHE:
+        return _VENDOR_CACHE[rel]
+    name = rel.split("/")[-1]
+    parent = rel.split("/")[-2] if "/" in rel else ""
+    verdict = (name in VENDOR_FILES or parent in VENDOR_DIRS
+               or parent in {"typography", "util", "components", "forms",
+                             "grid", "vendor", "xy-grid"}
+               or any("!default" in ln for ln in source_lines(rel)))
+    _VENDOR_CACHE[rel] = verdict
+    return verdict
+
+
+def token_definitions(text):
+    """token name -> the value as written in the light half of $semantic-colors.
+
+    The point is how it was written, not what it resolves to: `$navy-black-l8`
+    is derived, `#F9F9F9` was typed by hand, and only the source says which.
+    """
+    out = {}
+    m = re.search(r'\$semantic-colors\s*:\s*\(', text)
+    if not m:
+        return out
+    i = text.index("light", m.end())
+    depth, start = 0, text.index("(", i)
+    for k in range(start, len(text)):
+        if text[k] == "(":
+            depth += 1
+        elif text[k] == ")":
+            depth -= 1
+            if depth == 0:
+                break
+    body = text[start + 1:k]
+    line0 = text[:start].count("\n") + 1
+    for n, line in enumerate(body.splitlines()):
+        dm = re.match(r'\s*([\w-]+)\s*:\s*(.+?),?\s*$', line)
+        if dm and not line.strip().startswith("//"):
+            out[dm.group(1)] = (dm.group(2).strip().rstrip(","), line0 + n)
+    return out
+
+
 def split_rules(css):
     """(selector, body) for every rule, ignoring at-rule wrappers."""
     out = []
@@ -372,37 +439,74 @@ def split_rules(css):
     return out
 
 
-def scan_compiled(css):
-    """Colours as rendered: selector + property, from the built stylesheet."""
+def scan_compiled(css, smap=None):
+    """Colours as rendered, each carrying the source line that produced it.
+
+    Offsets matter here: the source map is keyed on them, and it is the only
+    thing that can say which partial wrote a given declaration. Matching rules
+    with a regex keeps `m.start(2)` meaningful, where rebuilding the text
+    character by character would not.
+    """
     hits = []
-    for sel, body in split_rules(css):
-        if sel.startswith(":root"):
+    for m in re.finditer(r'([^{}]+)\{([^{}]*)\}', css):
+        sel = m.group(1).strip()
+        if sel.startswith("@") or sel.startswith(":root"):
             continue
+        body, base = m.group(2), m.start(2)
+        at = 0
         for decl in body.split(";"):
+            start, at = at, at + len(decl) + 1
             if ":" not in decl:
                 continue
             prop, _, val = decl.partition(":")
             prop = prop.strip()
             if prop.startswith("--"):
                 continue
+            where = smap.lookup(base + start) if smap else None
+            common = dict(selector=sel[:220], prop=prop,
+                          file=where[0] if where else None,
+                          line=where[1] if where else None)
             grads = find_gradients(val)
             for _s, _e, src in grads:
                 hits.append(dict(value=None, gradient=gradient_key(src), raw=src,
-                                 stops=gradient_stops(src),
-                                 selector=sel[:220], prop=prop))
+                                 stops=gradient_stops(src), **common))
             scan_val = val
-            for s, e, _src in reversed(grads):
-                scan_val = scan_val[:s] + (" " * (e - s)) + scan_val[e:]
+            for s_, e_, _src in reversed(grads):
+                scan_val = scan_val[:s_] + (" " * (e_ - s_)) + scan_val[e_:]
 
             for raw in re.findall(HEX, scan_val):
-                hits.append(dict(value=norm_hex(raw), selector=sel[:220], prop=prop))
+                hits.append(dict(value=norm_hex(raw), **common))
             for raw in re.findall(FUNC, scan_val):
                 if "var(" in raw:
                     continue
-                hits.append(dict(value=raw.strip(), selector=sel[:220], prop=prop))
+                hits.append(dict(value=raw.strip(), **common))
             for tok in re.findall(r"var\(\s*--color-([\w-]+)", scan_val):
-                hits.append(dict(value=None, token=tok, selector=sel[:220], prop=prop))
+                hits.append(dict(value=None, token=tok, **common))
     return hits
+
+
+def classify_hit(h, tokendefs):
+    """Where this rendered colour actually came from.
+
+    A colour reached through a token is judged by how the token was written,
+    not by the rule that used it -- the rule only says `var(--color-x)`.
+    Everything else is judged by the source line the map points at.
+    """
+    if h.get("token"):
+        raw, _line = tokendefs.get(h["token"], (None, None))
+        if raw is None:
+            return "derived", "_sass/variables.scss"
+        if re.search(HEX, raw):
+            return "authored", "_sass/variables.scss"
+        return "derived", "_sass/variables.scss"
+    rel = h.get("file")
+    if not rel:
+        return "derived", None
+    if vendor_file(rel):
+        return "vendor", rel
+    lines = source_lines(rel)
+    src = lines[h["line"] - 1] if h.get("line") and h["line"] <= len(lines) else ""
+    return ("authored" if re.search(HEX, src) else "derived"), rel
 
 
 # --------------------------------------------------------------------------
@@ -416,11 +520,16 @@ def build(out_path):
     css = COMPILED.read_text()
     varmap = resolve_variables((ROOT / "_sass" / "variables.scss").read_text())
     tokens = token_map(css)
+    smap = SourceMap(COMPILED.with_suffix(".css.map"))
+    smap.index(css)
+    tokendefs = token_definitions((ROOT / "_sass" / "variables.scss").read_text())
     src_hits = scan_source(varmap)
-    cmp_hits = scan_compiled(css)
+    cmp_hits = scan_compiled(css, smap)
 
     # ---- rendered view: flat literal values -------------------------------
-    rendered = defaultdict(lambda: dict(count=0, selectors=[], props=set()))
+    rendered = defaultdict(lambda: dict(count=0, selectors=[], props=set(),
+                                        origins=defaultdict(int),
+                                        files=defaultdict(int), source=[]))
     for h in cmp_hits:
         if h.get("gradient"):                # handled separately, below
             continue
@@ -434,6 +543,22 @@ def build(out_path):
         e = rendered[val]
         e["count"] += 1
         e["props"].add(h["prop"])
+        origin, rel = classify_hit(h, tokendefs)
+        e["origins"][origin] += 1
+        if rel:
+            e["files"][rel] += 1
+        if len(e["source"]) < 40:
+            loc = dict(file=rel, line=h.get("line"), prop=h["prop"],
+                       via=("var(--color-%s)" % h["token"]) if h.get("token") else None)
+            if h.get("token"):
+                raw, ln = tokendefs.get(h["token"], (None, None))
+                loc["decl"] = f"{h['token']}: {raw}" if raw else None
+                loc["file"], loc["line"] = "_sass/variables.scss", ln
+            else:
+                lines = source_lines(rel) if rel else []
+                loc["decl"] = (lines[h["line"] - 1].strip()[:160]
+                               if rel and h.get("line") and h["line"] <= len(lines) else None)
+            e["source"].append(loc)
         if len(e["selectors"]) < 60:
             e["selectors"].append(dict(selector=h["selector"], prop=h["prop"]))
 
@@ -517,14 +642,18 @@ def build(out_path):
 
     rendered_list = []
     for val, e in rendered.items():
-        in_source = val.lower() in source_text
+        # decided per declaration now: anything you actually typed wins, then
+        # anything Sass computed, and vendor only when every use is the
+        # framework's own
+        o = e["origins"]
+        origin = ("authored" if o.get("authored") else
+                  "derived" if o.get("derived") else "vendor")
         rendered_list.append(dict(
             id="r:" + val, kind="literal", label=val, display=val,
-            count=e["count"],
-            origin="authored" if in_source else "derived",
+            count=e["count"], origin=origin, origins=dict(o),
             family=hue_family(to_rgb(val)), rgb=to_rgb(val),
             props=sorted(p for p in e["props"] if p),
-            files={}, source=[], selectors=e["selectors"],
+            files=dict(e["files"]), source=e["source"], selectors=e["selectors"],
         ))
 
     # ---- gradients: one entry per distinct gradient, in both views ---------
