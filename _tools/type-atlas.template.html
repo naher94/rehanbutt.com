@@ -117,6 +117,9 @@
     color:var(--ink-muted);line-height:1.5;font-variant-numeric:tabular-nums}
   .facts b{color:var(--ink);font-weight:500}
   .facts .off{color:var(--flag-med)}
+  .facts .verdict{font-weight:700}
+  .facts .verdict.keep{color:var(--flag-ok)}
+  .facts .verdict.move{color:var(--flag-med)}
   .count{font-family:"JetBrains Mono",monospace;font-size:15px;font-weight:500;
     text-align:right;font-variant-numeric:tabular-nums}
   .count small{display:block;font-size:10px;font-weight:400;color:var(--ink-faint);
@@ -157,6 +160,33 @@
   .use.here .loc{font-weight:500}
   .use .loc{color:var(--accent-deep)}
   .use .n{color:var(--ink-faint);font-variant-numeric:tabular-nums}
+  /* the recommendation is the answer, so it gets colour and weight while the
+     supporting list stays quiet */
+  .rec{font-size:13.5px;line-height:1.5;margin:0 0 10px;padding:10px 12px;
+    border-radius:3px;border-left:3px solid var(--rule-strong);background:var(--ground)}
+  .rec b{color:var(--ink)}
+  .rec.keep{border-left-color:var(--flag-ok);
+    background:color-mix(in srgb,var(--flag-ok) 10%,transparent)}
+  .rec.move{border-left-color:var(--flag-med);
+    background:color-mix(in srgb,var(--flag-med) 10%,transparent)}
+  .rec.none{color:var(--ink-muted)}
+  .rec.where{background:transparent;border-left-color:var(--rule);
+    color:var(--ink-muted);font-size:12.5px}
+  .rec code{font-family:"JetBrains Mono",monospace;font-size:12px;
+    background:var(--chip);padding:1px 5px;border-radius:2px}
+  /* reads as a link, behaves as a button */
+  .golink{font:inherit;font-weight:700;color:var(--accent-deep);background:none;
+    border:0;padding:0;cursor:pointer;text-decoration:underline;
+    text-underline-offset:2px}
+  .golink:hover{text-decoration-thickness:2px}
+  .golink:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  button.use.jump{display:flex;width:100%;text-align:left;background:none;
+    border:0;border-bottom:1px solid var(--rule);cursor:pointer;font:inherit;
+    font-family:"JetBrains Mono",monospace;font-size:12px;color:inherit}
+  button.use.jump:hover{background:var(--surface-2)}
+  button.use.jump:hover .loc{text-decoration:underline;text-underline-offset:2px}
+  button.use.jump:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
   .samples{font-size:13px;color:var(--ink-muted);line-height:1.5}
   .samples li{margin-bottom:6px}
   .samples{padding-left:18px;margin:0}
@@ -274,6 +304,7 @@ const state = {
   view: "specimens",
   group: "family",
   sort: "uses",
+  dir: "desc",                // clicking the active sort flips it
   family: new Set(), weight: new Set(), source: new Set(), scale: new Set(),
   narrow: new Set(),          // "merge" and/or "tail"
   size: null,                 // set only by a matrix cell click
@@ -296,10 +327,18 @@ function pass(s){
   return true;
 }
 
+// Each comparator is written descending; ascending is the same comparison with
+// the sign flipped. The tie-break stays on count either way -- two styles at
+// the same size are still more usefully ordered by how much they are used.
 const SORTS = {
   uses:  (a, b) => b.count - a.count,
   size:  (a, b) => b.size - a.size || b.count - a.count,
   pages: (a, b) => b.page_count - a.page_count || b.count - a.count
+};
+
+const sorter = () => {
+  const cmp = SORTS[state.sort], sign = state.dir === "asc" ? -1 : 1;
+  return (a, b) => sign * cmp(a, b);
 };
 
 /* -------------------------------------------------------------- filters */
@@ -377,12 +416,26 @@ function drawFilters(){
   const seg = document.createElement("div");
   seg.className = "seg";
   for (const [k, label] of [["uses","Uses"],["size","Size"],["pages","Pages"]]) {
+    const on = state.sort === k;
+    const asc = state.dir === "asc";
     const b = document.createElement("button");
     b.type = "button";
-    b.textContent = label;
-    b.setAttribute("aria-pressed", state.sort === k ? "true" : "false");
+    // the arrow only rides the active button; on the others it would read as
+    // three competing directions
+    b.innerHTML = on ? `${label} <span aria-hidden="true">${asc ? "&uarr;" : "&darr;"}</span>`
+                     : label;
+    b.setAttribute("aria-pressed", on ? "true" : "false");
+    b.title = on ? `${label}, ${asc ? "smallest" : "largest"} first `
+                 + `\u2014 click to reverse`
+                 : `Sort by ${label.toLowerCase()}`;
     b.disabled = state.view === "matrix";
-    b.onclick = () => { state.sort = k; draw(); };
+    b.onclick = () => {
+      // re-picking the current key reverses it; a new key starts largest-first,
+      // which is what you want the moment you switch axis
+      if (state.sort === k) state.dir = asc ? "desc" : "asc";
+      else { state.sort = k; state.dir = "desc"; }
+      draw();
+    };
     seg.appendChild(b);
   }
   sg.appendChild(seg);
@@ -428,13 +481,17 @@ function rowEl(s, fileCtx, opts = {}){
   b.type = "button";
   b.setAttribute("aria-pressed",
     state.sel === s.id && state.selFile === fileCtx ? "true" : "false");
+  b.dataset.id = s.id;
   const lh = typeof s.line_height === "number" ? s.line_height + "px" : (s.line_height || "&mdash;");
   b.innerHTML =
     `<span class="specwrap"><span class="spec" style="${specimenStyle(s)}">${esc(sampleFor(s))}</span></span>
      <span class="facts">
        <b>${s.size}px</b> / ${lh} &middot; w${s.weight}<br>
        ${esc(s.family)}${s.on_scale ? "" : ' <span class="off">off scale</span>'}<br>
-       ${s.page_count} page${s.page_count === 1 ? "" : "s"}
+       ${opts.variant ? (opts.keeper
+          ? '<span class="verdict keep">keep</span>'
+          : `<span class="verdict move">&rarr; ${lhLabel(ROLES.get(roleKey(s))[0])}</span>`)
+         : `${s.page_count} page${s.page_count === 1 ? "" : "s"}`}
      </span>
      <span class="count">${s.count.toLocaleString()}<small>uses</small></span>`;
   b.onclick = () => { state.sel = s.id; state.selFile = fileCtx; draw(); };
@@ -464,9 +521,10 @@ function groups(rows){
       for (const f of fs) add(f.file, s, f.count);
     }
   }
-  for (const [, g] of m) g.list.sort(SORTS[state.sort]);
+  for (const [, g] of m) g.list.sort(sorter());
+  const sign = state.dir === "asc" ? -1 : 1;
   return [...m.entries()]
-    .sort((a, b) => b[1].tot - a[1].tot)
+    .sort((a, b) => sign * (b[1].tot - a[1].tot))
     .map(([k, g]) => [k, g.list, g.tot]);
 }
 
@@ -595,7 +653,9 @@ function drawPanel(){
 
   p.innerHTML = `
     <div class="pspec"><div style="${specimenStyle(s)}">${esc(sampleFor(s))}</div></div>
-    <p class="pname">${esc(s.family)} ${s.size}px &middot; ${s.weight}</p>
+    <!-- the leading belongs in the title: two styles in a role differ by
+         nothing else, so without it a jump between them looks like a no-op -->
+    <p class="pname">${esc(s.family)} ${s.size}px / ${lhLabel(s)} &middot; ${s.weight}</p>
     <div class="pmeta">
       <span class="tag ${s.on_scale ? "on" : "off"}">${s.on_scale ? "on scale" : "off scale"}</span>
       ${s.vendor ? `<span class="tag vendor">vendor</span>` : `<span class="tag">authored</span>`}
@@ -611,14 +671,8 @@ function drawPanel(){
       <dt>elements</dt><dd>${esc(s.tags.join(", "))}</dd>
     </dl>
 
-    ${siblings.length ? `<h4>Same role, other leading</h4>
-      ${siblings.map(x => `<div class="use">
-        <span class="loc">${typeof x.line_height === "number" ? x.line_height + "px" : x.line_height}</span>
-        <span class="n">${x.count.toLocaleString()}</span></div>`).join("")}
-      <div class="use"><span class="n">merging this role moves ${
-        (ROLES.get(roleKey(s)).reduce((n, x) => n + x.count, 0)
-         - Math.max(...ROLES.get(roleKey(s)).map(x => x.count))).toLocaleString()
-      } elements</span></div>` : ""}
+    <h4>Merge</h4>
+    ${recommendation(s)}
 
     <h4>Written as</h4>
     ${s.decls.length ? s.decls.map(d => `
@@ -643,6 +697,76 @@ function drawPanel(){
     ${s.samples.length ? `<h4>Samples</h4><ul class="samples">${
       s.samples.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
   `;
+
+  p.querySelectorAll("[data-go]").forEach(el => el.addEventListener("click", () => {
+    goTo(el.dataset.go);
+  }));
+  p.scrollTop = 0;
+}
+
+/* Select a style by id, wherever it is. The row may be filtered out of the
+   sheet entirely -- the panel still shows it, because checking a
+   recommendation should not depend on the current filters. */
+function goTo(id){
+  const target = STYLES.find(x => x.id === id);
+  if (!target) return;
+  state.sel = id;
+  if (state.group === "file")
+    // keep a file context only if this style is actually written there
+    state.selFile = (target.files || []).some(f => f.file === state.selFile)
+      ? state.selFile : null;
+  draw();
+  const row = document.querySelector(`.row[data-id="${CSS.escape(id)}"]`);
+  if (row) row.scrollIntoView({ block: "center", behavior: "smooth" });
+}
+
+const lhLabel = x => typeof x.line_height === "number"
+  ? x.line_height + "px" : String(x.line_height);
+
+/* The whole point of the role view is a decision, so say it in words rather
+   than leaving it to be inferred from which row carries a green rule. */
+function recommendation(s){
+  const role = ROLES.get(roleKey(s));          // already sorted, biggest first
+  const keeper = role[0];
+  const total = role.reduce((n, x) => n + x.count, 0);
+  const cost = total - keeper.count;
+
+  if (role.length === 1)
+    return `<p class="rec none"><b>Nothing to merge.</b> This role renders with
+      one line-height, so it is already as consolidated as it gets.</p>`;
+
+  // every other leading in the role is a link, so a recommendation can be
+  // checked rather than taken on trust
+  const others = role.filter(x => x.id !== s.id);
+  const list = others.map(x =>
+    `<button type="button" class="use jump${x.id === keeper.id ? " here" : ""}"
+             data-go="${esc(x.id)}">
+       <span class="loc">${lhLabel(x)}${x.id === keeper.id ? " &mdash; the keeper" : ""}</span>
+       <span class="n">${x.count.toLocaleString()}</span></button>`).join("");
+
+  // where the line-height is written, so the change has an address
+  const lh = (s.decls || []).filter(d => d.prop === "line-height");
+  const where = lh.length
+    ? `<p class="rec where">Its line-height is written as
+        <code>${esc(lh[0].value)}</code> at
+        <code>${esc(short(lh[0].file || "?"))}${lh[0].line ? ":" + lh[0].line : ""}</code>${
+        lh.length > 1 ? ` and ${lh.length - 1} other place${lh.length > 2 ? "s" : ""}` : ""}.</p>`
+    : "";
+
+  if (s.id === keeper.id)
+    return `<p class="rec keep"><b>Keep this one.</b> It is the most used of
+      ${role.length} leadings on ${esc(roleLabel(s))}. Folding the other
+      ${role.length - 1} into it moves ${cost.toLocaleString()} element${
+      cost === 1 ? "" : "s"}.</p>${list}`;
+
+  return `<p class="rec move"><b>Merge into
+    <button type="button" class="golink" data-go="${esc(keeper.id)}">${
+      lhLabel(keeper)}</button>.</b>
+    ${esc(roleLabel(s))} renders with ${role.length} different leadings;
+    ${lhLabel(keeper)} is the most used at ${keeper.count.toLocaleString()},
+    against ${s.count.toLocaleString()} here. Changing this one costs
+    ${s.count.toLocaleString()} element${s.count === 1 ? "" : "s"} on
+    ${s.page_count} page${s.page_count === 1 ? "" : "s"}.</p>${where}${list}`;
 }
 
 /* ----------------------------------------------------------------- chrome */

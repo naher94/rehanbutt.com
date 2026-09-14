@@ -243,12 +243,13 @@ It writes two files beside itself, both gitignored:
 
 The page exists to answer whether the site needs everything it currently has, so it is built around merging:
 
-* **By role** groups styles by everything except their line-height. Rows inside a group render identically apart from their leading, so they are the merge candidates; the header says how many elements collapsing them would move.
+* **By role** groups styles by everything except their line-height. Rows inside a group render identically apart from their leading, so they are the merge candidates; the header says how many elements collapsing them would move, and each row is marked `keep` or `-> <target>`.
+* The detail panel states the recommendation in words for any style, in any grouping: keep it, merge it into a named line-height, or nothing to merge. Where it says merge, it names the cost in elements and pages and the file and line the line-height is written at. The named target and every other leading in the role are links, so a recommendation can be reviewed rather than taken on trust — they work regardless of the current filters.
 * **Matrix** plots size against weight per family. Adjacent rows with small counts are near-duplicates; clicking a cell opens its styles.
 * **Narrow to** isolates either the styles that share a role with another, or the long tail under 25 uses.
 * The detail panel shows the authored declaration and source line behind every property — `font-size: 1em → _sass/header.scss:48` — so a row can be acted on without going hunting.
 
-Grouping by family or by file, sorting, and filters for family, weight, source and on/off scale are all there too.
+Grouping by family or by file, and filters for family, weight, source and on/off scale are all there too. Sort by uses, size or pages; clicking the active sort reverses it, and the direction applies to the groups as well as the rows inside them.
 
 The scale it reports against is the `SCALE` tuple at the top of the script. It is fitted to real usage rather than to a formula, and it describes the site as it is — edit it when the scale is decided.
 
