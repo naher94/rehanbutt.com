@@ -38,7 +38,7 @@ import re
 import sys
 from collections import defaultdict
 
-from cascade import (CSS, DOM, HERE, SITE, SKIP, SourceMap, compile_selector,
+from cascade import (CSS, DOM, HERE, ROOT, SITE, SKIP, SourceMap, compile_selector,
                      is_vendor, matches, parse_rules, specificity,
                      strip_at_rules)
 
@@ -60,6 +60,63 @@ SCALE = (10.0, 12.0, 16.0, 20.0, 24.0, 32.0, 40.0, 50.0, 60.0, 70.0)
 # occurrences recorded per style. Enough to open a few and see the pattern;
 # the full count is always reported, so a truncated list never reads as total.
 USE_CAP = 60
+WIDEST = None                        # set in build(), the widest breakpoint name
+
+
+_SRC_LINES = {}
+
+
+def source_line(rel, line):
+    if rel not in _SRC_LINES:
+        try:
+            _SRC_LINES[rel] = (ROOT / rel).read_text(errors="ignore").splitlines()
+        except OSError:
+            _SRC_LINES[rel] = []
+    lines = _SRC_LINES[rel]
+    return lines[line - 1] if line and 0 < line <= len(lines) else ""
+
+
+def authored_as(rel, line, prop, value):
+    """What the declaration says in the source, when that is not the value.
+
+    `font-weight: 900` in the output is `$lato-black` in the source, and the
+    name is the useful half -- it says which decision produced the number.
+    Returns None for a plain literal, where the source adds nothing.
+
+    Guarded on the line actually declaring this property: the source map
+    occasionally points at the rule rather than the declaration, and reading
+    the wrong line would invent an attribution.
+    """
+    if not rel or not line:
+        return None
+    text = source_line(rel, line).strip()
+    m = re.match(r'([-\w]+)\s*:\s*(.+?)\s*;?\s*$', text)
+    if not m or m.group(1) != prop:
+        return None
+    expr = m.group(2)
+    if expr == value:
+        return None                       # written exactly as it renders
+    if "map-get($style" in expr:
+        return "type-style()"             # emitted by the mixin, not hand-written
+    return expr if ("$" in expr or "(" in expr) else None
+
+
+def project_breakpoints():
+    """Foundation's `$breakpoints`, read from _settings.scss.
+
+    Read rather than restated so the audit cannot drift from the project. The
+    `small: 0` entry is sampled at a real phone width -- resolving at 0 would
+    be a viewport no device has.
+    """
+    text = (ROOT / "_sass" / "_settings.scss").read_text()
+    m = re.search(r'\$breakpoints\s*:\s*\((.*?)\);', text, re.S)
+    if not m:
+        return [("large", 1024.0)]
+    out = []
+    for name, value, unit in re.findall(r'([\w-]+)\s*:\s*([\d.]+)(px|em|rem)?', m.group(1)):
+        px = float(value) * (1.0 if (unit or "px") == "px" else 16.0)
+        out.append((name, 375.0 if px == 0 else px))
+    return out
 
 
 # --------------------------------------------------------------------------
@@ -139,14 +196,22 @@ def norm_weight(value):
 # the walk
 # --------------------------------------------------------------------------
 
-def style_page(path, compiled):
-    """Compute resting type for every text-bearing element on one page."""
+def style_page(path, compiled_sets):
+    """Resting type for every text-bearing element, at each breakpoint.
+
+    -> {breakpoint: [element, ...]}, the lists aligned index for index because
+    the same DOM is walked each time. Parsing once and matching several rule
+    sets against it keeps the cost in the matching, where it belongs.
+    """
     dom = DOM()
     try:
         dom.feed(path.read_text(errors="ignore"))
     except Exception:
-        return []
+        return {name: [] for name in compiled_sets}
+    return {name: _resolve(dom, rules) for name, rules in compiled_sets.items()}
 
+
+def _resolve(dom, compiled):
     # collect declarations per node, cascade-ordered
     for node in dom.nodes:
         if node.tag in SKIP:
@@ -226,65 +291,98 @@ def build(out_path, limit=None):
     raw = CSS.read_text()
     smap = SourceMap(CSS.with_suffix(".css.map"))
     smap.index(raw)
-    css = strip_at_rules(raw)
-    compiled = []
-    unsupported = 0
-    for sel, decls, order, origin, _ in parse_rules(css, smap, TYPE_PROPS):
-        comps = compile_selector(sel)
-        if comps is None:
-            unsupported += 1
-            continue
-        compiled.append((comps, decls, order, specificity(comps), origin))
+    # One rule set per breakpoint. The stylesheet is re-flattened at each
+    # width, so a `small only` rule is present at 375 and absent at 1024 --
+    # which is the whole point: resolving only the wide branch reported the
+    # mobile menu at a size no phone ever renders.
+    breakpoints = project_breakpoints()
+    compiled_sets, unsupported = {}, 0
+    for name, width in breakpoints:
+        css = strip_at_rules(raw, width=width)
+        rules = []
+        for sel, decls, order, origin, _ in parse_rules(css, smap, TYPE_PROPS):
+            comps = compile_selector(sel)
+            if comps is None:
+                unsupported += 1
+                continue
+            rules.append((comps, decls, order, specificity(comps), origin))
+        compiled_sets[name] = rules
+    unsupported = unsupported // max(1, len(breakpoints))
+
+    global WIDEST
+    WIDEST = breakpoints[-1][0]
 
     pages = sorted(p for p in SITE.rglob("*.html"))
     if limit:
         pages = pages[:limit]
 
-    styles = defaultdict(lambda: dict(count=0, pages=set(), tags=set(),
+    styles = defaultdict(lambda: dict(pages=set(), tags=set(),
                                       classes=set(), samples=[],
                                       decls=defaultdict(int),
                                       files=defaultdict(int),
-                                      uses=[], srcsets={}))
+                                      uses=[], srcsets={},
+                                      bp=defaultdict(int)))
+    bp_names = [n for n, _ in breakpoints]
+
+    def key_of(el):
+        return (el["family"], el["size"], el["weight"], el["style"],
+                el["lh"], el["spacing"], el["transform"])
+
     for p in pages:
         rel = str(p.relative_to(SITE))
-        for el in style_page(p, compiled):
-            if not el["family"]:
-                continue
-            key = (el["family"], el["size"], el["weight"], el["style"],
-                   el["lh"], el["spacing"], el["transform"])
-            e = styles[key]
-            e["count"] += 1
-            e["pages"].add(rel)
-            # a capped sample of actual occurrences: enough to go and look,
-            # not so many that the dataset doubles
-            if len(e["uses"]) < USE_CAP:
-                # Elements of one style nearly always resolve through the same
-                # rules -- the median style has a single declaration set. So the
-                # sets are stored once and each occurrence points at one, rather
-                # than repeating five declarations per element.
-                key = tuple(el["decls"])
-                idx = e["srcsets"].setdefault(key, len(e["srcsets"]))
-                e["uses"].append(dict(page=rel, line=el["line"],
-                                      tag=el["tag"], classes=el["classes"],
-                                      text=(el["sample"] or "")[:70], src=idx))
-            e["tags"].add(el["tag"])
-            if el["classes"]:
-                e["classes"].add(el["classes"])
-            for d in el["decls"]:
-                e["decls"][d] += 1
-            # per element, not per declaration: a file that sets three
-            # properties on one element is still one element's worth
-            for f in el["files"]:
-                e["files"][f] += 1
-            # keep the five longest samples, not the first five: the first
-            # text a page yields is chrome ("Skip to main content"), which
-            # says nothing about what the style is for
-            sample = el["sample"]
-            if sample:
-                e["samples"].append(sample)
-                if len(e["samples"]) > 5:
-                    e["samples"].sort(key=len, reverse=True)
-                    del e["samples"][5:]
+        per_bp = style_page(p, compiled_sets)
+        n = len(per_bp[bp_names[0]])
+        for i in range(n):
+            # Group the breakpoints by what this one element resolves to. Type
+            # that does not change across widths collapses to a single entry
+            # covering every breakpoint, so only genuinely responsive type is
+            # reported per width -- and an element is never counted twice at
+            # the same width.
+            by_key = defaultdict(list)
+            for bp_name in bp_names:
+                el = per_bp[bp_name][i]
+                if not el["family"]:
+                    continue
+                by_key[key_of(el)].append((bp_name, el))
+
+            for key, entries in by_key.items():
+                at = [b for b, _ in entries]
+                el = entries[0][1]
+                e = styles[key]
+                for b in at:
+                    e["bp"][b] += 1
+                e["pages"].add(rel)
+                e["tags"].add(el["tag"])
+                if el["classes"]:
+                    e["classes"].add(el["classes"])
+                for d in el["decls"]:
+                    e["decls"][d] += 1
+                # per element, not per declaration: a file that sets three
+                # properties on one element is still one element's worth
+                for f in el["files"]:
+                    e["files"][f] += 1
+                # a capped sample of actual occurrences: enough to go and look,
+                # not so many that the dataset doubles
+                if len(e["uses"]) < USE_CAP:
+                    # Elements of one style nearly always resolve through the
+                    # same rules -- the median style has a single declaration
+                    # set. The sets are stored once and each occurrence points
+                    # at one, rather than repeating five declarations.
+                    sig = tuple(el["decls"])
+                    idx = e["srcsets"].setdefault(sig, len(e["srcsets"]))
+                    e["uses"].append(dict(page=rel, line=el["line"],
+                                          tag=el["tag"], classes=el["classes"],
+                                          text=(el["sample"] or "")[:70],
+                                          src=idx, at=at))
+                # keep the five longest samples, not the first five: the first
+                # text a page yields is chrome ("Skip to main content"), which
+                # says nothing about what the style is for
+                sample = el["sample"]
+                if sample:
+                    e["samples"].append(sample)
+                    if len(e["samples"]) > 5:
+                        e["samples"].sort(key=len, reverse=True)
+                        del e["samples"][5:]
 
     items = []
     for (family, size, weight, style, lh, spacing, transform), e in styles.items():
@@ -292,16 +390,22 @@ def build(out_path, limit=None):
             id=f"{family}|{size}|{weight}|{style}|{lh}|{spacing}|{transform}",
             family=family, size=size, weight=weight, style=style,
             line_height=lh, letter_spacing=spacing, text_transform=transform,
-            count=e["count"],
+            count=max(e["bp"].values()) if e["bp"] else 0,
+            bp=dict(e["bp"]),
+            # named only when the style does not hold everywhere; type that is
+            # the same at every width needs no breakpoint annotation at all
+            responsive=(len(e["bp"]) < len(bp_names)),
             pages=sorted(e["pages"])[:40], page_count=len(e["pages"]),
             tags=sorted(e["tags"]), classes=sorted(e["classes"])[:12],
             samples=e["samples"],
             uses=sorted(e["uses"], key=lambda u: (u["page"], u["line"])),
-            sources=[[dict(prop=d[0], value=d[1], file=d[2], line=d[3])
+            sources=[[dict(prop=d[0], value=d[1], file=d[2], line=d[3],
+                           via=authored_as(d[2], d[3], d[0], d[1]))
                       for d in key]
                      for key, _ in sorted(e["srcsets"].items(),
                                           key=lambda kv: kv[1])],
-            decls=[dict(prop=p, value=v, file=f, line=ln, count=c)
+            decls=[dict(prop=p, value=v, file=f, line=ln, count=c,
+                        via=authored_as(f, ln, p, v))
                    for (p, v, f, ln), c in
                    sorted(e["decls"].items(), key=lambda kv: (kv[0][0], -kv[1]))],
             files=[dict(file=f, count=c)
@@ -311,10 +415,43 @@ def build(out_path, limit=None):
         ))
     items.sort(key=lambda d: -d["count"])
 
+    # Per breakpoint, because a single set of totals across widths would be an
+    # average of layouts that never coexist.
+    per_bp = {}
+    for name in bp_names:
+        live = [i for i in items if i["bp"].get(name)]
+        per_bp[name] = dict(
+            styles=len(live),
+            elements=sum(i["bp"][name] for i in live),
+            families=len({i["family"] for i in live}),
+            sizes=len({i["size"] for i in live}),
+            weights=len({i["weight"] for i in live}),
+            off_scale=sum(i["bp"][name] for i in live if not i["on_scale"]),
+        )
+
+    # Breakpoints that resolve to exactly the same type are not choices. On
+    # this site xlarge and xxlarge are indistinguishable from large, so
+    # offering all five would be three ways to see one thing.
+    sig = {}
+    for name in bp_names:
+        sig[name] = frozenset((i["id"], i["bp"][name])
+                              for i in items if i["bp"].get(name))
+    distinct, seen = [], {}
+    for name, width in breakpoints:
+        if sig[name] in seen:
+            distinct[seen[sig[name]]]["covers"].append(name)
+        else:
+            seen[sig[name]] = len(distinct)
+            distinct.append(dict(name=name, width=width, covers=[name]))
+    for d in distinct:
+        d["label"] = d["name"] if len(d["covers"]) == 1 else \
+            f"{d['name']} and up" if d["covers"][-1] == bp_names[-1] else \
+            f"{d['name']}-{d['covers'][-1]}"
+
     data = dict(
         totals=dict(
             styles=len(items),
-            elements=sum(i["count"] for i in items),
+            elements=max(v["elements"] for v in per_bp.values()),
             pages=len(pages),
             families=len({i["family"] for i in items}),
             sizes=len({i["size"] for i in items}),
@@ -322,6 +459,10 @@ def build(out_path, limit=None):
             off_scale=sum(i["count"] for i in items if not i["on_scale"]),
             scale=list(SCALE),
             unsupported_selectors=unsupported,
+            breakpoints=[dict(name=n, width=w) for n, w in breakpoints],
+            default_breakpoint=distinct[-1]["name"],
+            distinct_breakpoints=distinct,
+            per_breakpoint=per_bp,
         ),
         styles=items,
     )

@@ -94,17 +94,54 @@ class DOM(html.parser.HTMLParser):
 # CSS: parse, then match
 # --------------------------------------------------------------------------
 
-def strip_at_rules(css, keep_all=False):
+MEDIA_EM = 16.0          # media-query em is the initial font size, not :root
+
+
+def media_applies(query, width_px):
+    """Does this @media condition hold on a screen `width_px` wide?
+
+    Only width matters here. Print-only branches are out; so is
+    `prefers-color-scheme: dark`, because the audit reports the light theme,
+    and `prefers-reduced-motion`, which carries no type. A feature this does
+    not understand is kept rather than dropped -- silently discarding a rule
+    would understate what renders.
+
+    An em in a media query resolves against the initial font size, not :root,
+    so 40em is 640px whatever the page sets.
+    """
+    q = query.lower()
+    if ("prefers-color-scheme" in q and "dark" in q) or "prefers-reduced-motion" in q:
+        return False
+
+    def branch_holds(branch):
+        if branch == "print" or branch.startswith("print and"):
+            return False
+        for feature, value, unit in re.findall(
+                r'\(\s*(min-width|max-width)\s*:\s*([\d.]+)(px|em|rem)\s*\)', branch):
+            px = float(value) * (1.0 if unit == "px" else MEDIA_EM)
+            if feature == "min-width" and width_px < px:
+                return False
+            if feature == "max-width" and width_px > px:
+                return False
+        return True
+
+    # a comma-separated query holds if any branch does
+    body = q.split("@media", 1)[-1]
+    return any(branch_holds(b.strip()) for b in body.split(","))
+
+
+def strip_at_rules(css, keep_all=False, width=None):
     """Blank out at-rules that do not apply, in place.
 
     Returns a string the SAME LENGTH as the input, so every character offset
-    still points at the same place in the real stylesheet — which is what the
+    still points at the same place in the real stylesheet -- which is what the
     source map is keyed on. Dropped regions become spaces; for a query that
     does apply, only its prelude and closing brace are blanked, flattening the
     body up a level while leaving it where it sits.
 
-    Media queries are kept when they hold on a wide screen; this audit reports
-    the desktop resting state.
+    `width` resolves media queries for a screen that wide, which is how the
+    type audit reports each breakpoint. `keep_all` keeps every branch, for
+    reachability, where the question is whether a rule can ever apply.
     """
     buf = list(css)
 
@@ -147,11 +184,15 @@ def strip_at_rules(css, keep_all=False):
             name = re.match(r'@([\w-]+)', at)
             conditional = bool(name) and name.group(1).lower() in (
                 "media", "supports", "container", "layer", "scope")
-            # reachability asks "could this ever apply", so every branch counts;
-            # the type audit asks what renders at rest on a wide screen
-            keep = conditional and (keep_all or
-                   ("min-width" in at and "max-width" not in at) or
-                   ("media" not in at and "supports" in at))
+            if not conditional:
+                keep = False
+            elif keep_all:
+                keep = True
+            elif width is not None:
+                keep = ("media" not in at) or media_applies(at, width)
+            else:
+                keep = ("min-width" in at and "max-width" not in at) or \
+                       ("media" not in at and "supports" in at)
             if keep:
                 blank(i, j + 1)        # the prelude
                 blank(k, k + 1)        # the closing brace

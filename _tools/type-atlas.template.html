@@ -46,6 +46,19 @@
     font-size:clamp(32px,4.6vw,48px);line-height:1.08;margin:0 0 12px;text-wrap:balance}
   .standfirst{font-size:18px;color:var(--ink-muted);max-width:64ch;margin:0}
 
+  /* breakpoint switcher: the numbers only ever describe one width, because a
+     figure averaged across layouts that never coexist means nothing */
+  .bpbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 14px;
+    padding:10px 14px;background:var(--surface);border:1px solid var(--rule);
+    border-left:3px solid var(--accent-deep);border-radius:3px}
+  .bpbar .flabel{margin-right:2px}
+  .bpbar .note{font-size:13px;color:var(--ink-muted)}
+  .bpbar .seg button small{display:block;font-family:"JetBrains Mono",monospace;
+    font-size:9.5px;font-weight:400;opacity:.75;letter-spacing:.04em}
+  .respflag{font-family:"JetBrains Mono",monospace;font-size:9.5px;
+    letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:2px;
+    background:color-mix(in srgb,var(--accent) 16%,transparent);
+    color:var(--accent-deep);margin-left:8px;vertical-align:2px}
   /* controls */
   .bar{display:flex;flex-wrap:wrap;gap:18px;align-items:center;
     justify-content:space-between;margin-bottom:10px}
@@ -283,6 +296,9 @@
 
   .srcset{padding:2px 0 12px 16px;border-left:2px solid var(--rule);
     margin:0 0 10px 3px}
+  /* the source name beside the value: `900` says what renders, `$lato-black`
+     says which decision produced it */
+  .via{color:var(--ink-faint);font-weight:400}
   .srcline{font-family:"JetBrains Mono",monospace;font-size:11px;
     line-height:1.5;padding:4px 0;color:var(--ink-muted)}
   .srcline b{color:var(--ink);font-weight:500}
@@ -322,6 +338,8 @@
     <div class="stats" id="stats"></div>
   </div>
 
+  <div class="bpbar" id="bpbar"></div>
+
   <p class="viewnote" id="viewnote"></p>
 
   <div class="filters" id="filters"></div>
@@ -344,6 +362,10 @@ const TAIL = 25;                 // "long tail" threshold, in elements
 /* A role is a style with the line-height taken off. Two styles in the same
    role render identically apart from their leading, which is what makes them
    merge candidates rather than separate decisions. */
+// a role's members are only those that exist at the selected width
+const role = s => (ROLES.get(roleKey(s)) || []).filter(atBp);
+const roleAt = s => role(s).slice().sort((a, b) => bpCount(b) - bpCount(a));
+
 const roleKey = s => [s.family, s.size, s.weight, s.style,
                       s.letter_spacing, s.text_transform].join("|");
 const roleLabel = s => `${s.family} ${s.size}px w${s.weight}`
@@ -371,19 +393,73 @@ const state = {
   sel: null, selFile: null
 };
 
+/* ------------------------------------------------------------ breakpoints --
+   Every count is per width. A style that renders the same at all of them
+   carries no annotation; only genuinely responsive type is called out.
+--------------------------------------------------------------------------- */
+const BPS = (T.distinct_breakpoints || [{name: "large", label: "large", width: 1024}]);
+state.bp = T.default_breakpoint || BPS[BPS.length - 1].name;
+
+// counts for the selected width, with the whole-site figure as the fallback
+// for data built before breakpoints existed
+const bpCount = s => (s.bp ? (s.bp[state.bp] || 0) : s.count);
+const atBp = s => bpCount(s) > 0;
+const bpUses = s => (s.uses || []).filter(u => !u.at || u.at.includes(state.bp));
+
+/* Which of the offered widths a style exists at -- named only when that is
+   fewer than all of them. Type that renders the same everywhere needs no
+   breakpoint annotation, and labelling it would bury the type that does. */
+function bpAt(s){
+  return s.bp ? BPS.filter(b => s.bp[b.name]) : BPS;
+}
+// Flagged on a row only when the style exists at this width and no other.
+// Anything spanning several widths is already visible at the one you are on,
+// and badging almost every row would bury the type that really is specific.
+function bpOnly(s){
+  const at = bpAt(s);
+  return at.length === 1 ? at[0].label : null;
+}
+// The panel carries the full picture, where there is room to be complete.
+function bpScope(s){
+  const at = bpAt(s);
+  return at.length === BPS.length
+    ? "every width"
+    : at.map(b => `${b.label} (${s.bp[b.name].toLocaleString()})`).join(", ");
+}
+
+function drawBpBar(){
+  const host = document.getElementById("bpbar");
+  if (!host) return;
+  const v = (T.per_breakpoint || {})[state.bp] || {};
+  host.innerHTML = `<span class="flabel">Width</span>
+    <div class="seg" role="group" aria-label="Breakpoint">${BPS.map(b =>
+      `<button data-bp="${b.name}" aria-pressed="${b.name === state.bp}">
+         ${esc(b.label)}<small>${b.width}px</small></button>`).join("")}</div>
+    <span class="note">Every count on this page is for this width.${
+      BPS.length < (T.breakpoints || []).length
+        ? ` The project defines ${(T.breakpoints || []).length} breakpoints; the others resolve to type identical to one of these, so they are not offered as separate choices.`
+        : ""}</span>`;
+  host.querySelectorAll("[data-bp]").forEach(b => b.addEventListener("click", () => {
+    state.bp = b.dataset.bp;
+    state.sel = null;
+    draw();
+  }));
+}
+
 const srcOf   = s => s.vendor ? "vendor" : "authored";
 const scaleOf = s => s.on_scale ? "on scale" : "off scale";
 const short   = f => f.replace(/^_sass\//, "");
-const total   = arr => arr.reduce((n, s) => n + s.count, 0);
+const total   = arr => arr.reduce((n, s) => n + bpCount(s), 0);
 
 function pass(s){
+  if (!atBp(s)) return false;
   if (state.family.size && !state.family.has(s.family)) return false;
   if (state.weight.size && !state.weight.has(s.weight)) return false;
   if (state.source.size && !state.source.has(srcOf(s))) return false;
   if (state.scale.size  && !state.scale.has(scaleOf(s))) return false;
   if (state.size !== null && s.size !== state.size) return false;
-  if (state.narrow.has("merge") && ROLES.get(roleKey(s)).length < 2) return false;
-  if (state.narrow.has("tail") && s.count >= TAIL) return false;
+  if (state.narrow.has("merge") && role(s).length < 2) return false;
+  if (state.narrow.has("tail") && bpCount(s) >= TAIL) return false;
   return true;
 }
 
@@ -391,9 +467,9 @@ function pass(s){
 // the sign flipped. The tie-break stays on count either way -- two styles at
 // the same size are still more usefully ordered by how much they are used.
 const SORTS = {
-  uses:  (a, b) => b.count - a.count,
-  size:  (a, b) => b.size - a.size || b.count - a.count,
-  pages: (a, b) => b.page_count - a.page_count || b.count - a.count
+  uses:  (a, b) => bpCount(b) - bpCount(a),
+  size:  (a, b) => b.size - a.size || bpCount(b) - bpCount(a),
+  pages: (a, b) => b.page_count - a.page_count || bpCount(b) - bpCount(a)
 };
 
 const sorter = () => {
@@ -404,7 +480,7 @@ const sorter = () => {
 /* -------------------------------------------------------------- filters */
 function counts(fn){
   const m = new Map();
-  for (const s of STYLES) m.set(fn(s), (m.get(fn(s)) || 0) + s.count);
+  for (const s of STYLES) if (atBp(s)) m.set(fn(s), (m.get(fn(s)) || 0) + bpCount(s));
   return m;
 }
 
@@ -445,8 +521,8 @@ function drawFilters(){
 
   // These two are not a dimension of the data, they are extra conditions, so
   // they are off by default rather than following the "empty means all" rule.
-  const nMerge = STYLES.filter(s => ROLES.get(roleKey(s)).length > 1).length;
-  const nTail  = STYLES.filter(s => s.count < TAIL).length;
+  const nMerge = STYLES.filter(s => atBp(s) && role(s).length > 1).length;
+  const nTail  = STYLES.filter(s => atBp(s) && bpCount(s) < TAIL).length;
   const g = document.createElement("div");
   g.className = "fgroup";
   g.innerHTML = `<span class="flabel">Narrow to</span>`;
@@ -547,13 +623,14 @@ function rowEl(s, fileCtx, opts = {}){
     `<span class="specwrap"><span class="spec" style="${specimenStyle(s)}">${esc(sampleFor(s))}</span></span>
      <span class="facts">
        <b>${s.size}px</b> / ${lh} &middot; w${s.weight}<br>
-       ${esc(s.family)}${s.on_scale ? "" : ' <span class="off">off scale</span>'}<br>
+       ${esc(s.family)}${s.on_scale ? "" : ' <span class="off">off scale</span>'}${
+         bpOnly(s) ? ` <span class="respflag">${esc(bpOnly(s))} only</span>` : ""}<br>
        ${opts.variant ? (opts.keeper
           ? '<span class="verdict keep">keep</span>'
-          : `<span class="verdict move">&rarr; ${lhLabel(ROLES.get(roleKey(s))[0])}</span>`)
+          : `<span class="verdict move">&rarr; ${lhLabel(roleAt(s)[0])}</span>`)
          : `${s.page_count} page${s.page_count === 1 ? "" : "s"}`}
      </span>
-     <span class="count">${s.count.toLocaleString()}<small>uses</small></span>`;
+     <span class="count">${bpCount(s).toLocaleString()}<small>uses</small></span>`;
   b.onclick = () => { state.sel = s.id; state.selFile = fileCtx; draw(); };
   return b;
 }
@@ -569,15 +646,15 @@ function groups(rows){
     g.tot += n;
   };
   if (state.group === "family") {
-    for (const s of rows) add(s.family, s, s.count);
+    for (const s of rows) add(s.family, s, bpCount(s));
   } else if (state.group === "role") {
-    for (const s of rows) add(roleKey(s), s, s.count);
+    for (const s of rows) add(roleKey(s), s, bpCount(s));
   } else {
     // a style written across several files appears under each of them, and the
     // group total is what that file is responsible for -- not the style's whole
     // count, which would sum to far more than the site has elements
     for (const s of rows) {
-      const fs = s.files.length ? s.files : [{ file: "browser default", count: s.count }];
+      const fs = s.files.length ? s.files : [{ file: "browser default", count: bpCount(s) }];
       for (const f of fs) add(f.file, s, f.count);
     }
   }
@@ -595,7 +672,7 @@ function headFor(name, list, tot){
     // every variant but the biggest is what a merge would have to move
     const all = ROLES.get(name);
     const shown = list.length;
-    const cost = tot - Math.max(...list.map(s => s.count));
+    const cost = tot - Math.max(...list.map(s => bpCount(s)));
     head.innerHTML =
       `<h3>${esc(roleLabel(list[0]))}</h3>
        <span class="gmeta">${shown} line-height${shown === 1 ? "" : "s"}
@@ -622,19 +699,19 @@ function drawSheet(){
   }
   if (state.view === "matrix") return drawMatrix(sheet, rows);
 
-  const max = Math.max(...rows.map(s => s.count));
+  const max = Math.max(...rows.map(s => bpCount(s)));
   for (const [name, list, tot] of groups(rows)) {
     const g = document.createElement("section");
     g.className = "group";
     g.appendChild(headFor(name, list, tot));
     const multi = state.group === "role" && list.length > 1;
-    const top = multi ? Math.max(...list.map(s => s.count)) : null;
+    const top = multi ? Math.max(...list.map(s => bpCount(s))) : null;
     for (const s of list) {
       const r = rowEl(s, state.group === "file" ? name : null,
-                      { variant: multi, keeper: multi && s.count === top });
+                      { variant: multi, keeper: multi && bpCount(s) === top });
       const track = document.createElement("span");
       track.className = "bar-track";
-      track.innerHTML = `<span class="bar-fill" style="width:${(s.count / max * 100).toFixed(1)}%"></span>`;
+      track.innerHTML = `<span class="bar-fill" style="width:${(bpCount(s) / max * 100).toFixed(1)}%"></span>`;
       r.appendChild(track);
       g.appendChild(r);
     }
@@ -709,7 +786,7 @@ function drawPanel(){
   const files = s.files.slice().sort((a, b) =>
     (b.file === state.selFile) - (a.file === state.selFile) || b.count - a.count);
 
-  const siblings = ROLES.get(roleKey(s)).filter(x => x.id !== s.id);
+  const siblings = role(s).filter(x => x.id !== s.id);
 
   p.innerHTML = `
     <div class="pspec"><div style="${specimenStyle(s)}">${esc(sampleFor(s))}</div></div>
@@ -729,6 +806,7 @@ function drawPanel(){
       <dt>tracking</dt><dd>${esc(s.letter_spacing)}</dd>
       <dt>uses</dt><dd>${s.count.toLocaleString()} on ${s.page_count} page${s.page_count === 1 ? "" : "s"}</dd>
       <dt>elements</dt><dd>${esc(s.tags.join(", "))}</dd>
+      <dt>widths</dt><dd>${esc(bpScope(s))}</dd>
     </dl>
 
     <h4>Merge</h4>
@@ -737,7 +815,8 @@ function drawPanel(){
     <h4>Written as</h4>
     ${s.decls.length ? s.decls.map(d => `
       <div class="decl"><span class="n">${d.count.toLocaleString()}</span>
-        <span class="p">${esc(d.prop)}:</span> <span class="v">${esc(d.value)}</span><br>
+        <span class="p">${esc(d.prop)}:</span> <span class="v">${esc(d.value)}</span>${
+          d.via ? ` <span class="via">(${esc(viaLabel(d.via))})</span>` : ""}<br>
         <span class="loc">${esc(short(d.file || "?"))}${d.line ? ":" + d.line : ""}</span>
       </div>`).join("") : `<div class="use">browser default</div>`}
 
@@ -786,10 +865,12 @@ const lhLabel = x => typeof x.line_height === "number"
 /* The whole point of the role view is a decision, so say it in words rather
    than leaving it to be inferred from which row carries a green rule. */
 function recommendation(s){
-  const role = ROLES.get(roleKey(s));          // already sorted, biggest first
+  // ranked for the selected width -- the biggest variant at 1024 is not
+  // necessarily the biggest at 375
+  const role = roleAt(s);
   const keeper = role[0];
-  const total = role.reduce((n, x) => n + x.count, 0);
-  const cost = total - keeper.count;
+  const total = role.reduce((n, x) => n + bpCount(x), 0);
+  const cost = total - bpCount(keeper);
 
   if (role.length === 1)
     return `<p class="rec none"><b>Nothing to merge.</b> This role renders with
@@ -802,7 +883,7 @@ function recommendation(s){
     `<button type="button" class="use jump${x.id === keeper.id ? " here" : ""}"
              data-go="${esc(x.id)}">
        <span class="loc">${lhLabel(x)}${x.id === keeper.id ? " &mdash; the keeper" : ""}</span>
-       <span class="n">${x.count.toLocaleString()}</span></button>`).join("");
+       <span class="n">${bpCount(x).toLocaleString()}</span></button>`).join("");
 
   // where the line-height is written, so the change has an address
   const lh = (s.decls || []).filter(d => d.prop === "line-height");
@@ -823,9 +904,9 @@ function recommendation(s){
     <button type="button" class="golink" data-go="${esc(keeper.id)}">${
       lhLabel(keeper)}</button>.</b>
     ${esc(roleLabel(s))} renders with ${role.length} different leadings;
-    ${lhLabel(keeper)} is the most used at ${keeper.count.toLocaleString()},
-    against ${s.count.toLocaleString()} here. Changing this one costs
-    ${s.count.toLocaleString()} element${s.count === 1 ? "" : "s"} on
+    ${lhLabel(keeper)} is the most used at ${bpCount(keeper).toLocaleString()},
+    against ${bpCount(s).toLocaleString()} here. Changing this one costs
+    ${bpCount(s).toLocaleString()} element${bpCount(s) === 1 ? "" : "s"} on
     ${s.page_count} page${s.page_count === 1 ? "" : "s"}.</p>${where}${list}`;
 }
 
@@ -844,7 +925,8 @@ function drawStats(){
     <span><b>${rows.length}</b>/${T.styles} styles</span>
     <span><b>${roles.size}</b> roles</span>
     <span><b>${total(rows).toLocaleString()}</b> elements</span>
-    <span><b>${T.off_scale.toLocaleString()}</b> off scale</span>`;
+    <span><b>${(((T.per_breakpoint || {})[state.bp] || {}).off_scale
+        ?? T.off_scale).toLocaleString()}</b> off scale</span>`;
   document.getElementById("viewnote").innerHTML =
     state.view === "matrix" ? NOTES.matrix : NOTES[state.group];
   document.getElementById("foot").innerHTML =
@@ -858,6 +940,13 @@ function drawStats(){
    actually lands, so the recommendation can be checked against real pages. */
 
 /* One occurrence, with the declarations behind it folded away underneath. */
+/* Foundation writes things like `unitless-calc($header-lineheight, ...)`.
+   The name is the useful half; the machinery is not. */
+function viaLabel(v){
+  if (!v) return "";
+  return v.length > 38 ? v.slice(0, 36) + "\u2026" : v;
+}
+
 function useRow(u){
   const sig = esc(u.tag) + (u.classes ? "." + esc(u.classes).split(" ").join(".") : "");
   const src = u._src || [];
@@ -868,7 +957,8 @@ function useRow(u){
   if (!src.length) return `<div class="use-row use-line">${head}</div>`;
   return `<details class="use-item"><summary class="use-line">${head}</summary>
     <div class="srcset">${src.map(d => `<div class="srcline">
-      ${esc(d.prop)}: <b>${esc(d.value)}</b><br>
+      ${esc(d.prop)}: <b>${esc(d.value)}</b>${
+        d.via ? ` <span class="via">(${esc(viaLabel(d.via))})</span>` : ""}<br>
       <span class="loc">${esc(short(d.file))}${d.line ? ":" + d.line : ""}</span>
     </div>`).join("")}</div></details>`;
 }
@@ -877,7 +967,7 @@ function drawWhere(){
   const host = document.getElementById("where");
   const s = STYLES.find(x => x.id === state.sel);
   // `src` indexes into the style's own deduped source sets
-  const uses = s ? (s.uses || []).map(u =>
+  const uses = s ? bpUses(s).map(u =>
     ({ ...u, _src: (s.sources || [])[u.src] })) : [];
   if (!s || !uses.length) {
     host.innerHTML = s
@@ -888,9 +978,9 @@ function drawWhere(){
   const pages = new Set(uses.map(u => u.page)).size;
   let html = `<h4>Rendered at</h4>
     <p class="samples" style="padding-left:0;margin:0 0 12px">${
-      uses.length < s.count
-        ? `${uses.length} of ${s.count.toLocaleString()} occurrences`
-        : `${s.count.toLocaleString()} occurrence${s.count === 1 ? "" : "s"}`}
+      uses.length < bpCount(s)
+        ? `${uses.length} of ${bpCount(s).toLocaleString()} occurrences`
+        : `${bpCount(s).toLocaleString()} occurrence${bpCount(s) === 1 ? "" : "s"}`}
       across ${pages} page${pages === 1 ? "" : "s"}.</p>`;
   let page = null;
   for (const u of uses) {
@@ -900,7 +990,9 @@ function drawWhere(){
   host.innerHTML = html;
 }
 
-function draw(){ drawFilters(); drawSheet(); drawPanel(); drawWhere(); drawStats(); }
+
+
+function draw(){ drawBpBar(); drawFilters(); drawSheet(); drawPanel(); drawWhere(); drawStats(); }
 
 function esc(s){
   return String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));

@@ -161,6 +161,19 @@
   .samples li{margin-bottom:6px}
   .samples{padding-left:18px;margin:0}
 
+  /* breakpoint switcher: the numbers only ever describe one width, because a
+     figure averaged across layouts that never coexist means nothing */
+  .bpbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 14px;
+    padding:10px 14px;background:var(--surface);border:1px solid var(--rule);
+    border-left:3px solid var(--accent-deep);border-radius:3px}
+  .bpbar .flabel{margin-right:2px}
+  .bpbar .note{font-size:13px;color:var(--ink-muted)}
+  .bpbar .seg button small{display:block;font-family:"JetBrains Mono",monospace;
+    font-size:9.5px;font-weight:400;opacity:.75;letter-spacing:.04em}
+  .respflag{font-family:"JetBrains Mono",monospace;font-size:9.5px;
+    letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:2px;
+    background:color-mix(in srgb,var(--accent) 16%,transparent);
+    color:var(--accent-deep);margin-left:8px;vertical-align:2px}
   /* --- specimen cards -------------------------------------------------- */
   .secthead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
     padding:14px 0 10px;border-bottom:2px solid var(--ink);margin:26px 0 16px}
@@ -266,6 +279,9 @@
 
   .srcset{padding:2px 0 12px 16px;border-left:2px solid var(--rule);
     margin:0 0 10px 3px}
+  /* the source name beside the value: `900` says what renders, `$lato-black`
+     says which decision produced it */
+  .via{color:var(--ink-faint);font-weight:400}
   .srcline{font-family:"JetBrains Mono",monospace;font-size:11px;
     line-height:1.5;padding:4px 0;color:var(--ink-muted)}
   .srcline b{color:var(--ink);font-weight:500}
@@ -309,6 +325,8 @@
     <div class="stats" id="stats"></div>
   </div>
 
+  <div class="bpbar" id="bpbar"></div>
+
   <p class="viewnote" id="viewnote"></p>
   <p class="nominal" id="nominal" hidden></p>
 
@@ -343,6 +361,56 @@ const state = {
   sel: null
 };
 
+/* ------------------------------------------------------------ breakpoints --
+   Every count is per width. A style that renders the same at all of them
+   carries no annotation; only genuinely responsive type is called out.
+--------------------------------------------------------------------------- */
+const BPS = (T.distinct_breakpoints || [{name: "large", label: "large", width: 1024}]);
+state.bp = T.default_breakpoint || BPS[BPS.length - 1].name;
+
+// counts for the selected width, with the whole-site figure as the fallback
+// for data built before breakpoints existed
+const bpCount = s => (s.bp ? (s.bp[state.bp] || 0) : s.count);
+const atBp = s => bpCount(s) > 0;
+const bpUses = s => (s.uses || []).filter(u => !u.at || u.at.includes(state.bp));
+
+function bpAt(s){
+  return s.bp ? BPS.filter(b => s.bp[b.name]) : BPS;
+}
+// Flagged on a row only when the style exists at this width and no other.
+// Anything spanning several widths is already visible at the one you are on,
+// and badging almost every row would bury the type that really is specific.
+function bpOnly(s){
+  const at = bpAt(s);
+  return at.length === 1 ? at[0].label : null;
+}
+// The panel carries the full picture, where there is room to be complete.
+function bpScope(s){
+  const at = bpAt(s);
+  return at.length === BPS.length
+    ? "every width"
+    : at.map(b => `${b.label} (${s.bp[b.name].toLocaleString()})`).join(", ");
+}
+
+function drawBpBar(){
+  const host = document.getElementById("bpbar");
+  if (!host) return;
+  const v = (T.per_breakpoint || {})[state.bp] || {};
+  host.innerHTML = `<span class="flabel">Width</span>
+    <div class="seg" role="group" aria-label="Breakpoint">${BPS.map(b =>
+      `<button data-bp="${b.name}" aria-pressed="${b.name === state.bp}">
+         ${esc(b.label)}<small>${b.width}px</small></button>`).join("")}</div>
+    <span class="note">Every count on this page is for this width.${
+      BPS.length < (T.breakpoints || []).length
+        ? ` The project defines ${(T.breakpoints || []).length} breakpoints; the others resolve to type identical to one of these, so they are not offered as separate choices.`
+        : ""}</span>`;
+  host.querySelectorAll("[data-bp]").forEach(b => b.addEventListener("click", () => {
+    state.bp = b.dataset.bp;
+    state.sel = null;
+    draw();
+  }));
+}
+
 const esc = s => String(s == null ? "" : s)
   .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 const short = f => String(f || "?").replace(/^_sass\//, "");
@@ -368,9 +436,10 @@ function addTo(map, key, n, style, declared){
 function computedGroups(){
   const size = new Map(), weight = new Map(), family = new Map();
   for (const s of STYLES) {
-    addTo(size, s.size, s.count, s);
-    addTo(weight, s.weight, s.count, s);
-    addTo(family, s.family, s.count, s);
+    if (!atBp(s)) continue;
+    addTo(size, s.size, bpCount(s), s);
+    addTo(weight, s.weight, bpCount(s), s);
+    addTo(family, s.family, bpCount(s), s);
     // which authored spellings produced this computed value
     for (const d of s.decls || []) {
       const target = d.prop === "font-size" ? size
@@ -392,6 +461,7 @@ function computedGroups(){
 function declaredGroups(){
   const size = new Map(), weight = new Map(), family = new Map();
   for (const s of STYLES) {
+    if (!atBp(s)) continue;
     for (const d of s.decls || []) {
       const target = d.prop === "font-size" ? size
                    : d.prop === "font-weight" ? weight
@@ -537,15 +607,15 @@ function drawSheet(){
 
 function drawCombined(sheet){
   // one card per distinct style, drawn as itself
-  const arr = [...STYLES];
-  if (state.sort === "count") arr.sort((a, b) => b.count - a.count);
+  const arr = STYLES.filter(atBp);
+  if (state.sort === "count") arr.sort((a, b) => bpCount(b) - bpCount(a));
   else if (state.sort === "az")
     arr.sort((a, b) => (a.family + a.weight).localeCompare(b.family + b.weight));
   else arr.sort((a, b) => b.size - a.size);
   const sec = document.createElement("section");
   sec.innerHTML = `<div class="secthead"><h2>Every style</h2>
     <span class="tot">UNIQUE <b>${arr.length}</b> &middot;
-    ELEMENTS <b>${arr.reduce((n, s) => n + s.count, 0).toLocaleString()}</b></span></div>`;
+    ELEMENTS <b>${arr.reduce((n, s) => n + bpCount(s), 0).toLocaleString()}</b></span></div>`;
   const box = document.createElement("div");
   box.className = "cards";
   for (const s of arr) {
@@ -557,9 +627,10 @@ function drawCombined(sheet){
     b.innerHTML = `<span class="glyph" style="font-size:${Math.min(s.size, MAX_GLYPH)}px;
         font-family:${famStack(s.family)};font-weight:${s.weight};
         font-style:${s.style};">${SPECIMEN}</span>
-      <span class="val">${px(s.size)} &middot; ${s.weight}</span>
+      <span class="val">${px(s.size)} &middot; ${s.weight}${
+        bpOnly(s) ? ` <span class="respflag">${esc(bpOnly(s))}</span>` : ""}</span>
       <span class="val" style="border-top:0;color:var(--ink-muted)">${esc(s.family)}</span>
-      <span class="n"><span class="cid">${idForStyle(s)}</span>${s.count.toLocaleString()}</span>`;
+      <span class="n"><span class="cid">${idForStyle(s)}</span>${bpCount(s).toLocaleString()}</span>`;
     b.onclick = () => { state.sel = s.id; state._selData = { style: s }; draw(); };
     box.appendChild(b);
   }
@@ -582,12 +653,14 @@ function drawPanel(){
       <dl class="pair">
         <dt>line-height</dt><dd>${typeof s.line_height === "number" ? px(s.line_height) : s.line_height}</dd>
         <dt>tracking</dt><dd>${esc(s.letter_spacing)}</dd>
-        <dt>uses</dt><dd>${s.count.toLocaleString()} on ${s.page_count} pages</dd>
+        <dt>uses</dt><dd>${bpCount(s).toLocaleString()} on ${s.page_count} pages</dd>
+        <dt>widths</dt><dd>${esc(bpScope(s))}</dd>
         <dt>elements</dt><dd>${esc(s.tags.join(", "))}</dd>
       </dl>
       <h4>Written as</h4>
       ${(s.decls || []).map(x => `<div class="brk">
-        <span class="k">${esc(x.prop)}: <b>${esc(x.value)}</b><br>
+        <span class="k">${esc(x.prop)}: <b>${esc(x.value)}</b>${
+          x.via ? ` <span class="via">(${esc(viaLabel(x.via))})</span>` : ""}<br>
           <span class="loc">${esc(short(x.file))}${x.line ? ":" + x.line : ""}</span></span>
         <span class="v">${x.count.toLocaleString()}</span></div>`).join("")}
       <p class="samples" style="padding-left:0;margin-top:14px">
@@ -683,6 +756,13 @@ function drawChrome(){
 --------------------------------------------------------------------------- */
 
 /* One occurrence, with the declarations behind it folded away underneath. */
+/* Foundation writes things like `unitless-calc($header-lineheight, ...)`.
+   The name is the useful half; the machinery is not. */
+function viaLabel(v){
+  if (!v) return "";
+  return v.length > 38 ? v.slice(0, 36) + "\u2026" : v;
+}
+
 function useRow(u){
   const sig = esc(u.tag) + (u.classes ? "." + esc(u.classes).split(" ").join(".") : "");
   const src = u._src || [];
@@ -693,7 +773,8 @@ function useRow(u){
   if (!src.length) return `<div class="use-row use-line">${head}</div>`;
   return `<details class="use-item"><summary class="use-line">${head}</summary>
     <div class="srcset">${src.map(d => `<div class="srcline">
-      ${esc(d.prop)}: <b>${esc(d.value)}</b><br>
+      ${esc(d.prop)}: <b>${esc(d.value)}</b>${
+        d.via ? ` <span class="via">(${esc(viaLabel(d.via))})</span>` : ""}<br>
       <span class="loc">${esc(short(d.file))}${d.line ? ":" + d.line : ""}</span>
     </div>`).join("")}</div></details>`;
 }
@@ -707,16 +788,16 @@ function drawWhere(){
   }
   let uses = [], total = 0, label = "";
   if (d.style) {
-    uses = (d.style.uses || []).map(u =>
+    uses = bpUses(d.style).map(u =>
       ({ ...u, _src: (d.style.sources || [])[u.src] }));
-    total = d.style.count;
+    total = bpCount(d.style);
     label = `${px(d.style.size)} ${d.style.family}`;
   } else {
     const ids = d.e.styles;
     const feed = STYLES.filter(s => ids.has(s.id));
     // a value card pools several styles, and `src` is relative to each one,
     // so the set has to be resolved before they are merged
-    feed.forEach(s => (s.uses || []).forEach(u =>
+    feed.forEach(s => bpUses(s).forEach(u =>
       uses.push({ ...u, _src: (s.sources || [])[u.src] })));
     uses.sort((a, b) => a.page.localeCompare(b.page) || a.line - b.line);
     total = d.e.count;
@@ -741,7 +822,9 @@ function drawWhere(){
   host.innerHTML = html;
 }
 
-function draw(){ drawSections(); drawSheet(); drawPanel(); drawWhere(); drawChrome(); }
+
+
+function draw(){ drawBpBar(); drawSections(); drawSheet(); drawPanel(); drawWhere(); drawChrome(); }
 
 function press(id, on){ document.getElementById(id).setAttribute("aria-pressed", String(on)); }
 function setMode(m){ state.mode = m; state.sel = null; state._selData = null;
