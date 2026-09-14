@@ -37,7 +37,7 @@ SKIP = {"script", "style", "head", "meta", "link", "title", "svg", "path", "g",
 
 class Node:
     __slots__ = ("tag", "classes", "id", "parent", "children", "style",
-                 "origin", "text")
+                 "origin", "text", "line")
 
     def __init__(self, tag, attrs, parent):
         self.tag = tag
@@ -49,6 +49,7 @@ class Node:
         self.style = {}
         self.origin = {}
         self.text = ""
+        self.line = 0
 
 
 class DOM(html.parser.HTMLParser):
@@ -60,6 +61,9 @@ class DOM(html.parser.HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         n = Node(tag, attrs, self.cur)
+        # the line in the built file, so a style can be pointed at rather than
+        # only counted -- html.parser tracks this for free
+        n.line = self.getpos()[0]
         self.cur.children.append(n)
         self.nodes.append(n)
         if tag not in VOID:
@@ -67,6 +71,7 @@ class DOM(html.parser.HTMLParser):
 
     def handle_startendtag(self, tag, attrs):
         n = Node(tag, attrs, self.cur)
+        n.line = self.getpos()[0]
         self.cur.children.append(n)
         self.nodes.append(n)
 

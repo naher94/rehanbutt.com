@@ -33,7 +33,10 @@
     font-family:"Lato",-apple-system,BlinkMacSystemFont,sans-serif;
     font-size:16px; line-height:1.55; margin:0; padding:0 24px 72px;
   }
-  .wrap{max-width:1240px;margin:0 auto}
+  /* The page fills the window. Nothing here is prose that needs a measure --
+     the grids and card sheets want every pixel they can get -- and the few
+     blocks that ARE prose cap themselves in ch below. */
+  .wrap{max-width:none;margin:0}
   code,.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
 
   header.top{padding:48px 0 22px;border-bottom:2px solid var(--ink);margin-bottom:26px}
@@ -78,7 +81,9 @@
   .noresults{padding:40px 16px;text-align:center;color:var(--ink-faint);font-size:15px}
 
   /* layout */
-  .cols{display:grid;grid-template-columns:1fr 372px;gap:26px;align-items:start}
+  .cols{display:grid;grid-template-columns:minmax(0,1fr) 340px 340px;gap:22px;
+    align-items:start}
+  @media (max-width:1320px){.cols{grid-template-columns:minmax(0,1fr) 340px}}
   @media (max-width:1000px){.cols{grid-template-columns:1fr}}
 
   .sheet{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
@@ -233,6 +238,23 @@
   .decl .loc{color:var(--accent-deep)}
   .decl .n{color:var(--ink-faint);float:right}
 
+  /* where it lands: page, line and the text, so a specimen can be gone and
+     looked at rather than only counted */
+  .where-card{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+    padding:18px;position:sticky;top:18px;max-height:calc(100vh - 36px);overflow-y:auto}
+  .where-card .empty{color:var(--ink-faint);font-size:14.5px}
+  .use-row{padding:7px 0;border-bottom:1px solid var(--rule);line-height:1.45}
+  .use-row:last-child{border-bottom:none}
+  .use-row .loc{font-family:"JetBrains Mono",monospace;font-size:11.5px;
+    color:var(--accent-deep);display:block}
+  .use-row .txt{font-size:13px;color:var(--ink);overflow-wrap:anywhere}
+  .use-row .el{font-family:"JetBrains Mono",monospace;font-size:10.5px;
+    color:var(--ink-faint)}
+  .pagebreak{font-family:"JetBrains Mono",monospace;font-size:10.5px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);
+    margin:14px 0 4px;padding-top:10px;border-top:1px solid var(--rule)}
+  .pagebreak:first-child{margin-top:0;padding-top:0;border-top:none}
+
   footer.note{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
     font-size:13.5px;color:var(--ink-faint);max-width:78ch}
   footer.note code{font-size:12.5px}
@@ -270,6 +292,7 @@
   <div class="cols">
     <div class="sheet" id="sheet"></div>
     <aside class="panel" id="panel"><p class="empty">Pick a specimen to see where it is used.</p></aside>
+    <aside class="where-card" id="where"><p class="empty">&hellip; and where it lands.</p></aside>
   </div>
 
   <footer class="note" id="foot"></footer>
@@ -794,7 +817,38 @@ function drawStats(){
     `source map. Regenerate with <code>python3 _tools/type-audit.py</code>.`;
 }
 
-function draw(){ drawFilters(); drawSheet(); drawPanel(); drawStats(); }
+/* The panel says what a style is and what to do about it; this says where it
+   actually lands, so the recommendation can be checked against real pages. */
+function drawWhere(){
+  const host = document.getElementById("where");
+  const s = STYLES.find(x => x.id === state.sel);
+  const uses = s ? (s.uses || []) : [];
+  if (!s || !uses.length) {
+    host.innerHTML = s
+      ? `<h4>Rendered at</h4><p class="empty">No occurrences recorded.</p>`
+      : `<p class="empty">&hellip; and where it lands.</p>`;
+    return;
+  }
+  const pages = new Set(uses.map(u => u.page)).size;
+  let html = `<h4>Rendered at</h4>
+    <p class="samples" style="padding-left:0;margin:0 0 12px">${
+      uses.length < s.count
+        ? `${uses.length} of ${s.count.toLocaleString()} occurrences`
+        : `${s.count.toLocaleString()} occurrence${s.count === 1 ? "" : "s"}`}
+      across ${pages} page${pages === 1 ? "" : "s"}.</p>`;
+  let page = null;
+  for (const u of uses) {
+    if (u.page !== page) { page = u.page; html += `<div class="pagebreak">${esc(page)}</div>`; }
+    html += `<div class="use-row">
+      <span class="loc">${esc(u.page)}:${u.line}</span>
+      <span class="txt">${esc(u.text) || "<span class=\"el\">(no text)</span>"}</span>
+      <span class="el">${esc(u.tag)}${u.classes ? "." + esc(u.classes).split(" ").join(".") : ""}</span>
+    </div>`;
+  }
+  host.innerHTML = html;
+}
+
+function draw(){ drawFilters(); drawSheet(); drawPanel(); drawWhere(); drawStats(); }
 
 function esc(s){
   return String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));

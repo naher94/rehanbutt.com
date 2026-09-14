@@ -240,6 +240,13 @@ It writes two files beside itself, both gitignored:
 
 * `type-audit.json` — the dataset
 * `type-atlas.html` — a standalone page listing each style as a specimen rendered at its true size. Open it directly in a browser.
+* `type-specimens.html` — a second view of the same data, one card per *value* rather than per style: font-sizes, weights and families drawn at the size they render, counted by elements. Sections can be shown or hidden, or swapped for a combined view with a card per style.
+
+Both pages carry a third column, **Rendered at**, listing the actual occurrences of whatever is selected — `about.html:312 · Work Experience · h2.cell.small-12.medium-shrink` — grouped by page and sorted by line. It samples up to 60 per style and always states the true total, so a truncated list never reads as the whole picture.
+
+Every card carries a short id — `S4`, `W2`, `F3`, `DS7` in Declared, `C1` in the combined view — so a specimen can be named in conversation. The ids are fixed to the value rather than to render order, so they survive re-sorting.
+
+The specimen sheet has a **Computed / Declared** switch. Computed draws each card at its real rendered size and the panel says which authored spellings feed it. Declared shows what was typed — 23 spellings against 19 computed values — and the panel says what each one computes to. Declared sizes are drawn *nominally* against a 16px base and the page says so: `1em` on this site renders anywhere from 10px to 70px, so those cards show the spelling, not the rendering.
 
 The page exists to answer whether the site needs everything it currently has, so it is built around merging:
 

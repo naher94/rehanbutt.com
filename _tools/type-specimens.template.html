@@ -1,0 +1,710 @@
+<title>Type Specimens</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@300;400;500;700&family=Lato:wght@300;400;700;900&family=Caveat&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#F6F7F8; --surface:#FFFFFF; --surface-2:#EEF0F2;
+    --ink:#1F2937; --ink-muted:#626973; --ink-faint:#8B919B;
+    --rule:#DFE3E7; --rule-strong:#C6CCD3;
+    --accent:#12ABC4; --accent-deep:#0B7F92;
+    --flag-high:#BA3D54; --flag-med:#B4751C; --flag-ok:#2F7D5B;
+    --chip:#E7EAED;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#151B24; --surface:#1C232D; --surface-2:#232B36;
+      --ink:#EDEFF2; --ink-muted:#A3AAB4; --ink-faint:#7C838D;
+      --rule:#2D3742; --rule-strong:#3D4854;
+      --accent:#3FC4DA; --accent-deep:#7FDCEB;
+      --flag-high:#E08196; --flag-med:#D9A85C; --flag-ok:#6BBF95;
+      --chip:#2A3441;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#151B24; --surface:#1C232D; --surface-2:#232B36;
+    --ink:#EDEFF2; --ink-muted:#A3AAB4; --ink-faint:#7C838D;
+    --rule:#2D3742; --rule-strong:#3D4854;
+    --accent:#3FC4DA; --accent-deep:#7FDCEB;
+    --flag-high:#E08196; --flag-med:#D9A85C; --flag-ok:#6BBF95;
+    --chip:#2A3441;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:"Lato",-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:16px; line-height:1.55; margin:0; padding:0 24px 72px;
+  }
+  /* The page fills the window. Nothing here is prose that needs a measure --
+     the grids and card sheets want every pixel they can get -- and the few
+     blocks that ARE prose cap themselves in ch below. */
+  .wrap{max-width:none;margin:0}
+  code,.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+
+  header.top{padding:48px 0 22px;border-bottom:2px solid var(--ink);margin-bottom:26px}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent-deep);margin:0 0 12px}
+  h1{font-family:"Zilla Slab",Georgia,serif;font-weight:700;
+    font-size:clamp(32px,4.6vw,48px);line-height:1.08;margin:0 0 12px;text-wrap:balance}
+  .standfirst{font-size:18px;color:var(--ink-muted);max-width:64ch;margin:0}
+
+  /* controls */
+  .bar{display:flex;flex-wrap:wrap;gap:18px;align-items:center;
+    justify-content:space-between;margin-bottom:10px}
+  .segs{display:flex;gap:12px;flex-wrap:wrap}
+  .seg{display:inline-flex;border:1px solid var(--rule-strong);border-radius:3px;overflow:hidden}
+  .seg button{
+    font-family:"Lato",sans-serif;font-size:14px;font-weight:700;
+    padding:8px 16px;border:0;background:var(--surface);color:var(--ink-muted);cursor:pointer;
+  }
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+  .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .stats{display:flex;gap:22px;flex-wrap:wrap;font-family:"JetBrains Mono",monospace;
+    font-size:12.5px;color:var(--ink-muted)}
+  .stats b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+
+  .viewnote{font-size:14.5px;color:var(--ink-muted);margin:0 0 16px;max-width:78ch}
+
+  /* filters */
+  .filters{display:flex;flex-wrap:wrap;gap:12px 30px;margin:0 0 18px;
+    padding:14px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:3px}
+  .fgroup{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .flabel{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-muted)}
+  .chips{display:flex;gap:7px;flex-wrap:wrap}
+  .chip{font-family:"Lato",sans-serif;font-size:13.5px;font-weight:700;
+    padding:5px 11px;border:1px solid var(--rule-strong);border-radius:2px;
+    background:var(--surface);color:var(--ink-faint);cursor:pointer;
+    display:inline-flex;align-items:center;gap:7px}
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+  .chip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .chip .n{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:400;
+    opacity:.7;font-variant-numeric:tabular-nums}
+  .noresults{padding:40px 16px;text-align:center;color:var(--ink-faint);font-size:15px}
+
+  /* layout */
+  .cols{display:grid;grid-template-columns:minmax(0,1fr) 340px 340px;gap:22px;
+    align-items:start}
+  @media (max-width:1320px){.cols{grid-template-columns:minmax(0,1fr) 340px}}
+  @media (max-width:1000px){.cols{grid-template-columns:1fr}}
+
+  .sheet{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+    overflow:hidden}
+
+  .group{border-bottom:1px solid var(--rule)}
+  .group:last-child{border-bottom:none}
+  .ghead{display:flex;align-items:baseline;gap:12px;padding:14px 18px 10px;
+    background:var(--surface-2);border-bottom:1px solid var(--rule);
+    position:sticky;top:0;z-index:2}
+  .ghead h3{margin:0;font-family:"JetBrains Mono",monospace;font-weight:500;
+    font-size:13px;letter-spacing:.04em}
+  .ghead .gmeta{font-family:"JetBrains Mono",monospace;font-size:11px;
+    color:var(--ink-muted);font-variant-numeric:tabular-nums}
+
+  /* detail panel */
+  .panel{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+    padding:18px 18px 22px;position:sticky;top:18px;max-height:calc(100vh - 36px);overflow-y:auto}
+  .panel .empty{color:var(--ink-faint);font-size:14.5px}
+  .pspec{border:1px solid var(--rule);border-radius:3px;padding:14px;margin-bottom:14px;
+    overflow:hidden;background:var(--ground)}
+  .pspec div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pname{font-family:"JetBrains Mono",monospace;font-size:15px;font-weight:500;
+    margin:0 0 4px;word-break:break-word}
+  .pmeta{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
+  .tag{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.07em;
+    text-transform:uppercase;padding:3px 8px;border-radius:2px;background:var(--chip);color:var(--ink-muted)}
+  .tag.vendor{background:color-mix(in srgb,var(--flag-med) 18%,transparent);color:var(--flag-med)}
+  .tag.off{background:color-mix(in srgb,var(--flag-high) 16%,transparent);color:var(--flag-high)}
+  .tag.on{background:color-mix(in srgb,var(--flag-ok) 16%,transparent);color:var(--flag-ok)}
+  .pair{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;margin:12px 0;
+    font-family:"JetBrains Mono",monospace;font-size:12.5px}
+  .pair dt{color:var(--ink-muted)}
+  .pair dd{margin:0;word-break:break-word}
+  .panel h4{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-muted);font-weight:500;
+    margin:18px 0 8px;padding-top:12px;border-top:1px solid var(--rule)}
+  .use{font-family:"JetBrains Mono",monospace;font-size:12px;padding:7px 0;
+    border-bottom:1px solid var(--rule);line-height:1.45;
+    display:flex;justify-content:space-between;gap:10px}
+  .use:last-child{border-bottom:none}
+  /* rows from the file group you clicked, lifted to the top of the list */
+  .use.here{border-left:3px solid var(--accent-deep);padding-left:10px;margin-left:-13px}
+  .use.here .loc{font-weight:500}
+  .use .loc{color:var(--accent-deep)}
+  .use .n{color:var(--ink-faint);font-variant-numeric:tabular-nums}
+  /* the recommendation is the answer, so it gets colour and weight while the
+     supporting list stays quiet */
+  .rec{font-size:13.5px;line-height:1.5;margin:0 0 10px;padding:10px 12px;
+    border-radius:3px;border-left:3px solid var(--rule-strong);background:var(--ground)}
+  .rec b{color:var(--ink)}
+  .rec.keep{border-left-color:var(--flag-ok);
+    background:color-mix(in srgb,var(--flag-ok) 10%,transparent)}
+  .rec.move{border-left-color:var(--flag-med);
+    background:color-mix(in srgb,var(--flag-med) 10%,transparent)}
+  .rec.none{color:var(--ink-muted)}
+  .rec.where{background:transparent;border-left-color:var(--rule);
+    color:var(--ink-muted);font-size:12.5px}
+  .rec code{font-family:"JetBrains Mono",monospace;font-size:12px;
+    background:var(--chip);padding:1px 5px;border-radius:2px}
+  /* reads as a link, behaves as a button */
+  .golink{font:inherit;font-weight:700;color:var(--accent-deep);background:none;
+    border:0;padding:0;cursor:pointer;text-decoration:underline;
+    text-underline-offset:2px}
+  .golink:hover{text-decoration-thickness:2px}
+  .golink:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  button.use.jump{display:flex;width:100%;text-align:left;background:none;
+    border:0;border-bottom:1px solid var(--rule);cursor:pointer;font:inherit;
+    font-family:"JetBrains Mono",monospace;font-size:12px;color:inherit}
+  button.use.jump:hover{background:var(--surface-2)}
+  button.use.jump:hover .loc{text-decoration:underline;text-underline-offset:2px}
+  button.use.jump:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+  .samples{font-size:13px;color:var(--ink-muted);line-height:1.5}
+  .samples li{margin-bottom:6px}
+  .samples{padding-left:18px;margin:0}
+
+  /* --- specimen cards -------------------------------------------------- */
+  .secthead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+    padding:14px 0 10px;border-bottom:2px solid var(--ink);margin:26px 0 16px}
+  .secthead h2{margin:0;font-family:"Zilla Slab",Georgia,serif;font-weight:700;
+    font-size:22px;line-height:1}
+  .secthead .tot{margin-left:auto;font-family:"JetBrains Mono",monospace;
+    font-size:12px;color:var(--ink-muted);font-variant-numeric:tabular-nums}
+  .secthead .tot b{color:var(--ink);font-weight:500}
+
+  /* cards sit on a baseline row and grow with their value, the way a real
+     specimen sheet does -- align-items:end keeps the labels lined up */
+  .cards{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin-bottom:8px}
+  .card{border:1px solid var(--rule-strong);border-radius:3px;background:var(--surface);
+    overflow:hidden;cursor:pointer;padding:0;font:inherit;color:inherit;
+    display:flex;flex-direction:column;min-width:58px;text-align:center}
+  .card:hover{border-color:var(--accent-deep)}
+  .card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .card[aria-pressed="true"]{border-color:var(--accent-deep);
+    box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 40%,transparent)}
+  .card .glyph{display:flex;align-items:center;justify-content:center;
+    padding:10px 14px;line-height:1.05;white-space:nowrap;color:var(--ink)}
+  .card .val{border-top:1px solid var(--rule);padding:4px 8px;
+    font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink);
+    white-space:nowrap}
+  .card .n{border-top:1px solid var(--rule);padding:3px 8px;
+    font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-muted);
+    font-variant-numeric:tabular-nums}
+  .card.off .val{color:var(--flag-med)}
+  /* the handle sits with the count rather than in its own row, so naming a
+     card costs no height */
+  .cid{display:inline-block;font-weight:500;color:var(--accent-deep);
+    margin-right:6px;letter-spacing:.02em}
+  .cid.big{font-family:"JetBrains Mono",monospace;font-size:12px;
+    background:var(--chip);padding:2px 7px;border-radius:2px;margin-right:8px;
+    vertical-align:2px}
+  .card.capped .glyph::after{content:"";}
+  .card.capped .val::before{content:"~ ";color:var(--flag-med)}
+
+  .nominal{font-size:13.5px;color:var(--flag-med);margin:0 0 14px;
+    padding:10px 12px;border-left:3px solid var(--flag-med);
+    background:color-mix(in srgb,var(--flag-med) 8%,transparent);border-radius:3px;
+    max-width:82ch}
+
+  .toggles{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .sectoggle{font-family:"Lato",sans-serif;font-size:13.5px;font-weight:700;
+    padding:5px 11px;border:1px solid var(--rule-strong);border-radius:2px;
+    background:var(--surface);color:var(--ink-faint);cursor:pointer}
+  .sectoggle[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);
+    color:var(--ground)}
+  .sectoggle:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
+  .panel h4:first-of-type{margin-top:0;padding-top:0;border-top:none}
+  .brk{font-family:"JetBrains Mono",monospace;font-size:12px;padding:6px 0;
+    border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;
+    gap:10px;line-height:1.45}
+  .brk:last-child{border-bottom:none}
+  .brk .k{overflow-wrap:anywhere}
+  .brk .v{color:var(--ink-faint);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .brk .loc{color:var(--accent-deep)}
+
+  /* where it lands: page, line and the text, so a specimen can be gone and
+     looked at rather than only counted */
+  .where-card{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+    padding:18px;position:sticky;top:18px;max-height:calc(100vh - 36px);overflow-y:auto}
+  .where-card .empty{color:var(--ink-faint);font-size:14.5px}
+  .use-row{padding:7px 0;border-bottom:1px solid var(--rule);line-height:1.45}
+  .use-row:last-child{border-bottom:none}
+  .use-row .loc{font-family:"JetBrains Mono",monospace;font-size:11.5px;
+    color:var(--accent-deep);display:block}
+  .use-row .txt{font-size:13px;color:var(--ink);overflow-wrap:anywhere}
+  .use-row .el{font-family:"JetBrains Mono",monospace;font-size:10.5px;
+    color:var(--ink-faint)}
+  .pagebreak{font-family:"JetBrains Mono",monospace;font-size:10.5px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);
+    margin:14px 0 4px;padding-top:10px;border-top:1px solid var(--rule)}
+  .pagebreak:first-child{margin-top:0;padding-top:0;border-top:none}
+
+  footer.note{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
+    font-size:13.5px;color:var(--ink-faint);max-width:80ch}
+  footer.note code{font-size:12.5px}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">rehanbutt.com &middot; design system</p>
+    <h1>Type Specimens</h1>
+    <p class="standfirst">Every value the site uses for size, weight and family,
+      drawn at the size it renders and counted by how many elements carry it.
+      The companion to the <a href="type-atlas.html">Type Atlas</a>, which lists
+      whole styles rather than single properties.</p>
+  </header>
+
+  <div class="bar">
+    <div class="segs">
+      <div class="seg" role="group" aria-label="Values">
+        <button id="m-computed" aria-pressed="true">Computed</button>
+        <button id="m-declared" aria-pressed="false">Declared</button>
+      </div>
+      <div class="seg" role="group" aria-label="View">
+        <button id="v-props" aria-pressed="true">By property</button>
+        <button id="v-combined" aria-pressed="false">Combined</button>
+      </div>
+      <div class="seg" role="group" aria-label="Sort">
+        <button id="s-value" aria-pressed="false">Value</button>
+        <button id="s-count" aria-pressed="true">Count</button>
+        <button id="s-az" aria-pressed="false">A&ndash;Z</button>
+      </div>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+
+  <p class="viewnote" id="viewnote"></p>
+  <p class="nominal" id="nominal" hidden></p>
+
+  <div class="filters" id="filters">
+    <div class="fgroup"><span class="flabel">Show</span>
+      <div class="toggles" id="sections"></div></div>
+  </div>
+
+  <div class="cols">
+    <div id="sheet"></div>
+    <aside class="panel" id="panel"><p class="empty">Pick a specimen to see what feeds it.</p></aside>
+    <aside class="where-card" id="where"><p class="empty">&hellip; and where it lands.</p></aside>
+  </div>
+
+  <footer class="note" id="foot"></footer>
+</div>
+
+<script>
+const DATA = __DATA__;
+const STYLES = DATA.styles;
+const T = DATA.totals;
+
+const MAX_GLYPH = 132;        // a 10rem card would otherwise own the page
+const BASE = 30;              // weight and family have no size of their own
+const SPECIMEN = "AaBb";
+
+const state = {
+  mode: "computed",           // computed | declared
+  view: "props",              // props | combined
+  sort: "count",              // value | count | az
+  show: { size: true, weight: true, family: true },
+  sel: null
+};
+
+const esc = s => String(s == null ? "" : s)
+  .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const short = f => String(f || "?").replace(/^_sass\//, "");
+const px = n => (Number.isInteger(n) ? n : +n.toFixed(2)) + "px";
+const famStack = f => `'${f}',` + (f === "Zilla Slab" ? "Georgia,serif"
+  : f === "Consolas" ? "ui-monospace,monospace" : "sans-serif");
+
+/* ---------------------------------------------------------------- data ----
+   Two readings of the same dataset. Computed asks what the browser produced;
+   declared asks what was typed. They disagree because Sass leaves `em` alone,
+   which is the whole reason this audit renders rather than reads.
+--------------------------------------------------------------------------- */
+
+function addTo(map, key, n, style, declared){
+  let e = map.get(key);
+  if (!e) map.set(key, e = { key, count: 0, styles: new Set(),
+                             feeds: new Map(), files: new Map() });
+  e.count += n;
+  if (style) e.styles.add(style.id);
+  if (declared) e.feeds.set(declared, (e.feeds.get(declared) || 0) + n);
+}
+
+function computedGroups(){
+  const size = new Map(), weight = new Map(), family = new Map();
+  for (const s of STYLES) {
+    addTo(size, s.size, s.count, s);
+    addTo(weight, s.weight, s.count, s);
+    addTo(family, s.family, s.count, s);
+    // which authored spellings produced this computed value
+    for (const d of s.decls || []) {
+      const target = d.prop === "font-size" ? size
+                   : d.prop === "font-weight" ? weight
+                   : d.prop === "font-family" ? family : null;
+      if (!target) continue;
+      const k = d.prop === "font-size" ? s.size
+              : d.prop === "font-weight" ? s.weight : s.family;
+      const e = target.get(k);
+      if (!e) continue;
+      e.feeds.set(d.value, (e.feeds.get(d.value) || 0) + d.count);
+      const loc = `${short(d.file)}${d.line ? ":" + d.line : ""}`;
+      e.files.set(loc, (e.files.get(loc) || 0) + d.count);
+    }
+  }
+  return { size, weight, family };
+}
+
+function declaredGroups(){
+  const size = new Map(), weight = new Map(), family = new Map();
+  for (const s of STYLES) {
+    for (const d of s.decls || []) {
+      const target = d.prop === "font-size" ? size
+                   : d.prop === "font-weight" ? weight
+                   : d.prop === "font-family" ? family : null;
+      if (!target) continue;
+      addTo(target, d.value, d.count, s);
+      const e = target.get(d.value);
+      // the computed values a single spelling turns into -- the payoff of
+      // this mode is seeing `1em` land on six different sizes
+      const c = d.prop === "font-size" ? px(s.size)
+              : d.prop === "font-weight" ? s.weight : s.family;
+      e.feeds.set(c, (e.feeds.get(c) || 0) + d.count);
+      const loc = `${short(d.file)}${d.line ? ":" + d.line : ""}`;
+      e.files.set(loc, (e.files.get(loc) || 0) + d.count);
+    }
+  }
+  return { size, weight, family };
+}
+
+/* A declared size has no real size of its own: `1em` is whatever its parent
+   was. Drawing it needs an assumed base, so it is drawn nominally and the page
+   says so rather than pretending. */
+function nominalPx(v){
+  const m = String(v).trim().match(/^(-?[\d.]+)(px|em|rem|%|pt)?$/);
+  if (!m) return null;
+  const n = parseFloat(m[1]), unit = m[2] || "px";
+  if (unit === "px") return n;
+  if (unit === "rem" || unit === "em") return n * 16;
+  if (unit === "%") return n * 16 / 100;
+  if (unit === "pt") return n * 4 / 3;
+  return null;
+}
+
+const groups = () => state.mode === "computed" ? computedGroups() : declaredGroups();
+
+/* ------------------------------------------------------------------ ids ---
+   Short handles so a card can be named out loud. Assigned from a canonical
+   ordering computed once, never from render order -- otherwise changing the
+   sort would renumber every card and an id would mean nothing five minutes
+   later. Prefixes keep the two modes apart, since they list different values.
+
+     S / W / F     computed size, weight, family
+     DS / DW / DF  the declared spellings
+     C             a whole style, in the combined view
+--------------------------------------------------------------------------- */
+const CARD_ID = (() => {
+  const map = new Map();
+  const num = v => typeof v === "number" ? v : (nominalPx(v) ?? parseFloat(v));
+  const assign = (prefix, keys, order) => {
+    [...keys].sort(order).forEach((k, i) => map.set(`${prefix}|${k}`, prefix + (i + 1)));
+  };
+  const byValue = (a, b) => {
+    const x = num(a), y = num(b);
+    return (isNaN(x) || isNaN(y)) ? String(a).localeCompare(String(b)) : x - y;
+  };
+  const alpha = (a, b) => String(a).localeCompare(String(b));
+
+  const c = computedGroups(), d = declaredGroups();
+  assign("S",  c.size.keys(),   byValue);
+  assign("W",  c.weight.keys(), byValue);
+  assign("F",  c.family.keys(), alpha);
+  assign("DS", d.size.keys(),   byValue);
+  assign("DW", d.weight.keys(), byValue);
+  assign("DF", d.family.keys(), alpha);
+  STYLES.slice().sort((a, b) => b.count - a.count)
+    .forEach((s, i) => map.set("C|" + s.id, "C" + (i + 1)));
+  return map;
+})();
+
+const idFor = (kind, key) => CARD_ID.get(
+  `${state.mode === "declared" ? "D" : ""}${kind === "size" ? "S"
+    : kind === "weight" ? "W" : "F"}|${key}`) || "?";
+const idForStyle = s => CARD_ID.get("C|" + s.id) || "?";
+
+/* --------------------------------------------------------------- render -- */
+function sortEntries(list, kind){
+  const arr = [...list];
+  if (state.sort === "count") arr.sort((a, b) => b.count - a.count);
+  else if (state.sort === "az")
+    arr.sort((a, b) => String(a.key).localeCompare(String(b.key), undefined, { numeric: true }));
+  else {
+    // "Value" means numerically where that is meaningful, alphabetically where
+    // it is not -- a family has no magnitude to sort on
+    const num = v => kind === "family" ? NaN
+                   : (typeof v === "number" ? v : nominalPx(v) ?? parseFloat(v));
+    arr.sort((a, b) => {
+      const x = num(a.key), y = num(b.key);
+      if (isNaN(x) || isNaN(y)) return String(a.key).localeCompare(String(b.key));
+      return y - x;
+    });
+  }
+  return arr;
+}
+
+function cardEl(e, kind){
+  const id = `${state.mode}|${kind}|${e.key}`;
+  let size = BASE, family = null, weight = null, capped = false;
+  if (kind === "size") {
+    const real = state.mode === "computed" ? e.key : nominalPx(e.key);
+    size = real == null ? BASE : real;
+    if (size > MAX_GLYPH) { size = MAX_GLYPH; capped = true; }
+  } else if (kind === "weight") weight = e.key;
+  else family = e.key;
+
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = "card" + (capped ? " capped" : "")
+    + (kind === "size" && state.mode === "computed"
+       && !DATA.totals.scale.includes(e.key) ? " off" : "");
+  b.setAttribute("aria-pressed", state.sel === id ? "true" : "false");
+  const style = `font-size:${size}px;`
+    + (family ? `font-family:${famStack(family)};` : "")
+    + (weight ? `font-weight:${weight};` : "");
+  b.innerHTML = `<span class="glyph" style="${style}">${SPECIMEN}</span>
+    <span class="val">${esc(kind === "size" && state.mode === "computed" ? px(e.key) : e.key)}</span>
+    <span class="n"><span class="cid">${idFor(kind, e.key)}</span>${e.count.toLocaleString()}</span>`;
+  b.onclick = () => { state.sel = id; state._selData = { e, kind }; draw(); };
+  return b;
+}
+
+const KINDS = [["size","Font-sizes"],["weight","Weights"],["family","Families"]];
+
+function drawSheet(){
+  const sheet = document.getElementById("sheet");
+  sheet.innerHTML = "";
+  if (state.view === "combined") return drawCombined(sheet);
+  const g = groups();
+  for (const [kind, label] of KINDS) {
+    if (!state.show[kind]) continue;
+    const entries = sortEntries(g[kind].values(), kind);
+    const total = entries.reduce((n, e) => n + e.count, 0);
+    const sec = document.createElement("section");
+    sec.innerHTML = `<div class="secthead"><h2>${label}</h2>
+      <span class="tot">UNIQUE <b>${entries.length}</b> &middot;
+      ELEMENTS <b>${total.toLocaleString()}</b></span></div>`;
+    const box = document.createElement("div");
+    box.className = "cards";
+    entries.forEach(e => box.appendChild(cardEl(e, kind)));
+    sec.appendChild(box);
+    sheet.appendChild(sec);
+  }
+}
+
+function drawCombined(sheet){
+  // one card per distinct style, drawn as itself
+  const arr = [...STYLES];
+  if (state.sort === "count") arr.sort((a, b) => b.count - a.count);
+  else if (state.sort === "az")
+    arr.sort((a, b) => (a.family + a.weight).localeCompare(b.family + b.weight));
+  else arr.sort((a, b) => b.size - a.size);
+  const sec = document.createElement("section");
+  sec.innerHTML = `<div class="secthead"><h2>Every style</h2>
+    <span class="tot">UNIQUE <b>${arr.length}</b> &middot;
+    ELEMENTS <b>${arr.reduce((n, s) => n + s.count, 0).toLocaleString()}</b></span></div>`;
+  const box = document.createElement("div");
+  box.className = "cards";
+  for (const s of arr) {
+    const capped = s.size > MAX_GLYPH;
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "card" + (s.on_scale ? "" : " off") + (capped ? " capped" : "");
+    b.setAttribute("aria-pressed", state.sel === s.id ? "true" : "false");
+    b.innerHTML = `<span class="glyph" style="font-size:${Math.min(s.size, MAX_GLYPH)}px;
+        font-family:${famStack(s.family)};font-weight:${s.weight};
+        font-style:${s.style};">${SPECIMEN}</span>
+      <span class="val">${px(s.size)} &middot; ${s.weight}</span>
+      <span class="val" style="border-top:0;color:var(--ink-muted)">${esc(s.family)}</span>
+      <span class="n"><span class="cid">${idForStyle(s)}</span>${s.count.toLocaleString()}</span>`;
+    b.onclick = () => { state.sel = s.id; state._selData = { style: s }; draw(); };
+    box.appendChild(b);
+  }
+  sec.appendChild(box);
+  sheet.appendChild(sec);
+}
+
+/* ---------------------------------------------------------------- panel -- */
+function drawPanel(){
+  const p = document.getElementById("panel");
+  const d = state._selData;
+  if (!d || !state.sel) {
+    p.innerHTML = `<p class="empty">Pick a specimen to see what feeds it.</p>`;
+    return;
+  }
+  if (d.style) {
+    const s = d.style;
+    p.innerHTML = `<p class="pname"><span class="cid big">${idForStyle(s)}</span>${
+      esc(s.family)} ${px(s.size)} &middot; ${s.weight}</p>
+      <dl class="pair">
+        <dt>line-height</dt><dd>${typeof s.line_height === "number" ? px(s.line_height) : s.line_height}</dd>
+        <dt>tracking</dt><dd>${esc(s.letter_spacing)}</dd>
+        <dt>uses</dt><dd>${s.count.toLocaleString()} on ${s.page_count} pages</dd>
+        <dt>elements</dt><dd>${esc(s.tags.join(", "))}</dd>
+      </dl>
+      <h4>Written as</h4>
+      ${(s.decls || []).map(x => `<div class="brk">
+        <span class="k">${esc(x.prop)}: <b>${esc(x.value)}</b><br>
+          <span class="loc">${esc(short(x.file))}${x.line ? ":" + x.line : ""}</span></span>
+        <span class="v">${x.count.toLocaleString()}</span></div>`).join("")}
+      <p class="samples" style="padding-left:0;margin-top:14px">
+        Open this style in the <a href="type-atlas.html">Type Atlas</a> for its
+        merge recommendation and pages.</p>`;
+    return;
+  }
+  const { e, kind } = d;
+  const feedLabel = state.mode === "computed"
+    ? "Written as" : (kind === "size" ? "Computes to" : "Resolves to");
+  p.innerHTML = `
+    <p class="pname"><span class="cid big">${idFor(kind, e.key)}</span>${
+      esc(kind === "size" && state.mode === "computed" ? px(e.key) : e.key)}</p>
+    <div class="pmeta">
+      <span class="tag">${state.mode}</span><span class="tag">${kind}</span>
+      ${kind === "size" && state.mode === "computed"
+        ? `<span class="tag ${DATA.totals.scale.includes(e.key) ? "on" : "off"}">${
+            DATA.totals.scale.includes(e.key) ? "on scale" : "off scale"}</span>` : ""}
+    </div>
+    <dl class="pair">
+      <dt>elements</dt><dd>${e.count.toLocaleString()}</dd>
+      <dt>styles</dt><dd>${e.styles.size}</dd>
+    </dl>
+    <h4>${feedLabel}</h4>
+    ${[...e.feeds.entries()].sort((a, b) => b[1] - a[1]).map(([k, n]) =>
+      `<div class="brk"><span class="k">${esc(k)}</span>
+        <span class="v">${n.toLocaleString()}</span></div>`).join("")
+      || `<div class="brk"><span class="k">inherited &mdash; never declared directly</span></div>`}
+    ${e.files.size ? `<h4>Where</h4>${[...e.files.entries()]
+      .sort((a, b) => b[1] - a[1]).slice(0, 20).map(([k, n]) =>
+      `<div class="brk"><span class="k loc">${esc(k)}</span>
+        <span class="v">${n.toLocaleString()}</span></div>`).join("")}` : ""}`;
+}
+
+/* --------------------------------------------------------------- chrome -- */
+function drawSections(){
+  const host = document.getElementById("sections");
+  host.innerHTML = "";
+  if (state.view === "combined") {
+    host.innerHTML = `<span class="flabel">All three properties at once</span>`;
+    return;
+  }
+  for (const [kind, label] of KINDS) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "sectoggle";
+    b.textContent = label;
+    b.setAttribute("aria-pressed", state.show[kind] ? "true" : "false");
+    b.onclick = () => {
+      const on = Object.values(state.show).filter(Boolean).length;
+      if (state.show[kind] && on === 1) return;   // never hide everything
+      state.show[kind] = !state.show[kind];
+      draw();
+    };
+    host.appendChild(b);
+  }
+}
+
+function drawChrome(){
+  const g = groups();
+  document.getElementById("stats").innerHTML =
+    `<span><b>${g.size.size}</b> sizes</span>
+     <span><b>${g.weight.size}</b> weights</span>
+     <span><b>${g.family.size}</b> families</span>
+     <span><b>${T.pages}</b> pages</span>`;
+  document.getElementById("viewnote").innerHTML = state.view === "combined"
+    ? "One card per distinct style, drawn as itself. This is the same set the Type Atlas lists, shown as specimens rather than rows."
+    : state.mode === "computed"
+      ? "What the browser produced, per property. Each card is drawn at the value it renders, and the panel shows which authored spellings feed it."
+      : "What was typed in the stylesheet, per property. The panel shows what each spelling actually computes to &mdash; which is where the same declaration lands on several different sizes.";
+  const nom = document.getElementById("nominal");
+  const showNom = state.mode === "declared" && state.view === "props" && state.show.size;
+  nom.hidden = !showNom;
+  if (showNom) nom.innerHTML = `Declared sizes are drawn <b>nominally</b>, against a
+    16px base. A relative value has no size of its own &mdash; <code>1em</code> on this
+    site renders anywhere from 10px to 70px depending on its parent &mdash; so these
+    cards show the spelling, not the rendering. Switch to Computed for real sizes.`;
+  document.getElementById("foot").innerHTML =
+    `Every card carries a short id &mdash; <code>S</code> size, <code>W</code> weight, ` +
+    `<code>F</code> family, <code>D</code> prefixed in Declared, <code>C</code> for a ` +
+    `whole style &mdash; fixed to the value, not to the current sort, so it stays ` +
+    `the same card however the page is ordered. ` +
+    `Counted by elements across ${T.pages} built pages, not by declarations. ` +
+    `Cards over ${MAX_GLYPH}px are drawn at ${MAX_GLYPH}px and marked <code>~</code>. ` +
+    `Weight and family cards are drawn at ${BASE}px, having no size of their own. ` +
+    `Regenerate with <code>python3 _tools/type-audit.py</code>.`;
+}
+
+/* --------------------------------------------------------------- where --
+   A value card (S4) covers several styles, so its occurrences are pooled from
+   all of them. The per-style cap means a long list is a sample, and the header
+   says so rather than letting a truncated list read as the whole truth.
+--------------------------------------------------------------------------- */
+function drawWhere(){
+  const host = document.getElementById("where");
+  const d = state._selData;
+  if (!d || !state.sel) {
+    host.innerHTML = `<p class="empty">&hellip; and where it lands.</p>`;
+    return;
+  }
+  let uses = [], total = 0, label = "";
+  if (d.style) {
+    uses = d.style.uses || [];
+    total = d.style.count;
+    label = `${px(d.style.size)} ${d.style.family}`;
+  } else {
+    const ids = d.e.styles;
+    const feed = STYLES.filter(s => ids.has(s.id));
+    feed.forEach(s => { uses = uses.concat(s.uses || []); });
+    uses.sort((a, b) => a.page.localeCompare(b.page) || a.line - b.line);
+    total = d.e.count;
+    label = `${d.kind} ${d.e.key}`;
+  }
+  if (!uses.length) {
+    host.innerHTML = `<h4>Rendered at</h4><p class="empty">No occurrences recorded.</p>`;
+    return;
+  }
+  let html = `<h4>Rendered at</h4>
+    <p class="samples" style="padding-left:0;margin:0 0 12px">${
+      uses.length < total
+        ? `${uses.length} of ${total.toLocaleString()} occurrences`
+        : `${total.toLocaleString()} occurrence${total === 1 ? "" : "s"}`}
+      across ${new Set(uses.map(u => u.page)).size} page${
+      new Set(uses.map(u => u.page)).size === 1 ? "" : "s"}.</p>`;
+  let page = null;
+  for (const u of uses) {
+    if (u.page !== page) { page = u.page; html += `<div class="pagebreak">${esc(page)}</div>`; }
+    html += `<div class="use-row">
+      <span class="loc">${esc(u.page)}:${u.line}</span>
+      <span class="txt">${esc(u.text) || "<span class=\"el\">(no text)</span>"}</span>
+      <span class="el">${esc(u.tag)}${u.classes ? "." + esc(u.classes).split(" ").join(".") : ""}</span>
+    </div>`;
+  }
+  host.innerHTML = html;
+}
+
+function draw(){ drawSections(); drawSheet(); drawPanel(); drawWhere(); drawChrome(); }
+
+function press(id, on){ document.getElementById(id).setAttribute("aria-pressed", String(on)); }
+function setMode(m){ state.mode = m; state.sel = null; state._selData = null;
+  press("m-computed", m === "computed"); press("m-declared", m === "declared"); draw(); }
+function setView(v){ state.view = v; state.sel = null; state._selData = null;
+  press("v-props", v === "props"); press("v-combined", v === "combined"); draw(); }
+function setSort(s){ state.sort = s;
+  press("s-value", s === "value"); press("s-count", s === "count"); press("s-az", s === "az");
+  draw(); }
+
+document.getElementById("m-computed").onclick = () => setMode("computed");
+document.getElementById("m-declared").onclick = () => setMode("declared");
+document.getElementById("v-props").onclick    = () => setView("props");
+document.getElementById("v-combined").onclick = () => setView("combined");
+document.getElementById("s-value").onclick    = () => setSort("value");
+document.getElementById("s-count").onclick    = () => setSort("count");
+document.getElementById("s-az").onclick       = () => setSort("az");
+
+draw();
+</script>

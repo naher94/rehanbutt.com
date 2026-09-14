@@ -57,6 +57,10 @@ ROOT_FONT_PX = 16.0                  # html default; the site never overrides it
 # not define it.
 SCALE = (10.0, 12.0, 16.0, 20.0, 24.0, 32.0, 40.0, 50.0, 60.0, 70.0)
 
+# occurrences recorded per style. Enough to open a few and see the pattern;
+# the full count is always reported, so a truncated list never reads as total.
+USE_CAP = 60
+
 
 # --------------------------------------------------------------------------
 # value resolution
@@ -193,6 +197,7 @@ def style_page(path, compiled):
         if node.tag not in ("html", "[root]") and node.text:
             out.append(dict(
                 tag=node.tag,
+                line=node.line,
                 classes=" ".join(sorted(node.classes)) or None,
                 family=first_family(computed.get("font-family")),
                 size=round(size_px, 2),
@@ -238,7 +243,8 @@ def build(out_path, limit=None):
     styles = defaultdict(lambda: dict(count=0, pages=set(), tags=set(),
                                       classes=set(), samples=[],
                                       decls=defaultdict(int),
-                                      files=defaultdict(int)))
+                                      files=defaultdict(int),
+                                      uses=[]))
     for p in pages:
         rel = str(p.relative_to(SITE))
         for el in style_page(p, compiled):
@@ -249,6 +255,12 @@ def build(out_path, limit=None):
             e = styles[key]
             e["count"] += 1
             e["pages"].add(rel)
+            # a capped sample of actual occurrences: enough to go and look,
+            # not so many that the dataset doubles
+            if len(e["uses"]) < USE_CAP:
+                e["uses"].append(dict(page=rel, line=el["line"],
+                                      tag=el["tag"], classes=el["classes"],
+                                      text=(el["sample"] or "")[:70]))
             e["tags"].add(el["tag"])
             if el["classes"]:
                 e["classes"].add(el["classes"])
@@ -278,6 +290,7 @@ def build(out_path, limit=None):
             pages=sorted(e["pages"])[:40], page_count=len(e["pages"]),
             tags=sorted(e["tags"]), classes=sorted(e["classes"])[:12],
             samples=e["samples"],
+            uses=sorted(e["uses"], key=lambda u: (u["page"], u["line"])),
             decls=[dict(prop=p, value=v, file=f, line=ln, count=c)
                    for (p, v, f, ln), c in
                    sorted(e["decls"].items(), key=lambda kv: (kv[0][0], -kv[1]))],
@@ -307,14 +320,16 @@ def build(out_path, limit=None):
 
 
 TEMPLATE = HERE / "type-atlas.template.html"
+SPECIMEN_TEMPLATE = HERE / "type-specimens.template.html"
 
 
-def build_html(json_path, html_path):
-    if not TEMPLATE.exists():
-        print(f"no template at {TEMPLATE} — skipping the page")
+def build_html(json_path, html_path, template=None):
+    template = template or TEMPLATE
+    if not template.exists():
+        print(f"no template at {template} — skipping the page")
         return None
     data = json_path.read_text().replace("</script>", "<\\/script>")
-    page = TEMPLATE.read_text().replace("__DATA__", data)
+    page = template.read_text().replace("__DATA__", data)
     if "__DATA__" in page:
         sys.exit("template still contains __DATA__ after substitution")
     html_path.write_text(page)
@@ -325,6 +340,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="Typography audit for rehanbutt.com")
     ap.add_argument("--out", default=str(HERE / "type-audit.json"))
     ap.add_argument("--html", default=str(HERE / "type-atlas.html"))
+    ap.add_argument("--specimens", default=str(HERE / "type-specimens.html"))
     ap.add_argument("--no-html", action="store_true")
     ap.add_argument("--pages", type=int, default=None,
                     help="only walk the first N pages")
@@ -341,6 +357,10 @@ if __name__ == "__main__":
         print(f"selectors skipped   : {t['unsupported_selectors']} (combinators/attrs)")
     print(f"\nwrote {args.out}")
     if not args.no_html:
-        made = build_html(pathlib.Path(args.out), pathlib.Path(args.html))
-        if made:
-            print(f"wrote {made}  ({made.stat().st_size:,} bytes)")
+        # two views of one dataset: the atlas lists distinct styles, the
+        # specimen sheet shows each property's values drawn at their real size
+        for html, template in ((args.html, TEMPLATE),
+                               (args.specimens, SPECIMEN_TEMPLATE)):
+            made = build_html(pathlib.Path(args.out), pathlib.Path(html), template)
+            if made:
+                print(f"wrote {made}  ({made.stat().st_size:,} bytes)")

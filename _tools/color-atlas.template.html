@@ -34,7 +34,10 @@
     font-family:"Lato",-apple-system,BlinkMacSystemFont,sans-serif;
     font-size:16px; line-height:1.55; margin:0; padding:0 24px 72px;
   }
-  .wrap{max-width:1240px;margin:0 auto}
+  /* The page fills the window. Nothing here is prose that needs a measure --
+     the grids and card sheets want every pixel they can get -- and the few
+     blocks that ARE prose cap themselves in ch below. */
+  .wrap{max-width:none;margin:0}
   code,.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
 
   header.top{padding:48px 0 22px;border-bottom:2px solid var(--ink);margin-bottom:26px}
