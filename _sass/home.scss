@@ -85,7 +85,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       -webkit-background-clip: unset;
       background-clip: unset;
       border-radius: $tile-radius;
-      box-shadow: $recessed-shadow rgba(0,0,0,0.15); //TODO Compare Shadow
+      box-shadow: $recessed-shadow rgba($pure-black,0.15); //TODO Compare Shadow
       font-family: $lato;
       font-size: 16px;
       font-weight: $lato-regular;
