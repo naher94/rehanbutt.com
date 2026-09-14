@@ -240,9 +240,11 @@ It writes two files beside itself, both gitignored:
 
 * `type-audit.json` — the dataset
 * `type-atlas.html` — a standalone page listing each style as a specimen rendered at its true size. Open it directly in a browser.
-* `type-specimens.html` — a second view of the same data, one card per *value* rather than per style: font-sizes, weights and families drawn at the size they render, counted by elements. Sections can be shown or hidden, or swapped for a combined view with a card per style.
+* `type-specimens.html` — a second view of the same data, drawn as cards at the size they render and counted by elements. It opens on the combined view (a card per style, largest first); switching to **By property** breaks it into font-sizes, weights and families, each section showable or hideable.
 
 Both pages carry a third column, **Rendered at**, listing the actual occurrences of whatever is selected — `about.html:312 · Work Experience · h2.cell.small-12.medium-shrink` — grouped by page and sorted by line. It samples up to 60 per style and always states the true total, so a truncated list never reads as the whole picture.
+
+Each occurrence expands onto the declarations that produced *that one element*, with the partial and line for every property. Elements of a style nearly always resolve through the same rules, so the sets are stored once and referenced — which is what makes the difference visible when they don't: the four Work Experience headings resolve through `about.scss`, the Speaking one through a duplicate block in `speaking.scss`.
 
 Every card carries a short id — `S4`, `W2`, `F3`, `DS7` in Declared, `C1` in the combined view — so a specimen can be named in conversation. The ids are fixed to the value rather than to render order, so they survive re-sorting.
 

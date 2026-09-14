@@ -243,13 +243,50 @@
   .where-card{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
     padding:18px;position:sticky;top:18px;max-height:calc(100vh - 36px);overflow-y:auto}
   .where-card .empty{color:var(--ink-faint);font-size:14.5px}
-  .use-row{padding:7px 0;border-bottom:1px solid var(--rule);line-height:1.45}
+  /* The rendered text leads, because that is what you recognise on the page.
+     The location rides the same line, right-aligned, and the element signature
+     sits under both -- detail you want available, not announced.
+
+     The three spans are scoped to .use-line so the rules hold whether the row
+     is a plain div or the summary of a disclosure. Scoping them to .use-row
+     alone silently unstyled every row the moment they moved inside <summary>,
+     which is why they all rendered in one face. */
+  .use-row, details.use-item > summary{
+    display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 14px;
+    padding:10px 0;line-height:1.35}
+  .use-row{border-bottom:1px solid var(--rule)}
   .use-row:last-child{border-bottom:none}
-  .use-row .loc{font-family:"JetBrains Mono",monospace;font-size:11.5px;
-    color:var(--accent-deep);display:block}
-  .use-row .txt{font-size:13px;color:var(--ink);overflow-wrap:anywhere}
-  .use-row .el{font-family:"JetBrains Mono",monospace;font-size:10.5px;
-    color:var(--ink-faint)}
+
+  .use-line .txt{font-size:15px;font-weight:700;color:var(--ink);
+    overflow-wrap:anywhere;min-width:0}
+  .use-line .loc{font-family:"JetBrains Mono",monospace;font-size:11px;
+    font-weight:400;color:var(--accent-deep);justify-self:end;
+    white-space:nowrap;padding-top:4px}
+  .use-line .el{grid-column:1 / -1;font-family:"JetBrains Mono",monospace;
+    font-size:10.5px;font-weight:400;color:var(--ink-faint);
+    overflow-wrap:anywhere;letter-spacing:.01em}
+
+  /* each occurrence opens onto the rules that produced it, so "why is this one
+     different" is answered in place rather than by reading the aggregate list
+     in the other card */
+  details.use-item{border-bottom:1px solid var(--rule)}
+  details.use-item:last-child{border-bottom:none}
+  details.use-item > summary{cursor:pointer;list-style:none}
+  details.use-item > summary::-webkit-details-marker{display:none}
+  details.use-item > summary:hover .txt{color:var(--accent-deep)}
+  details.use-item > summary:focus-visible{outline:2px solid var(--accent);
+    outline-offset:2px;border-radius:2px}
+  /* the marker belongs on the thing you read first, not on the fine print */
+  details.use-item .txt::before{content:"\25B8";color:var(--accent-deep);
+    font-size:11px;margin-right:7px;vertical-align:1px}
+  details.use-item[open] .txt::before{content:"\25BE"}
+
+  .srcset{padding:2px 0 12px 16px;border-left:2px solid var(--rule);
+    margin:0 0 10px 3px}
+  .srcline{font-family:"JetBrains Mono",monospace;font-size:11px;
+    line-height:1.5;padding:4px 0;color:var(--ink-muted)}
+  .srcline b{color:var(--ink);font-weight:500}
+  .srcline .loc{color:var(--accent-deep)}
   .pagebreak{font-family:"JetBrains Mono",monospace;font-size:10.5px;
     letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);
     margin:14px 0 4px;padding-top:10px;border-top:1px solid var(--rule)}
@@ -819,10 +856,29 @@ function drawStats(){
 
 /* The panel says what a style is and what to do about it; this says where it
    actually lands, so the recommendation can be checked against real pages. */
+
+/* One occurrence, with the declarations behind it folded away underneath. */
+function useRow(u){
+  const sig = esc(u.tag) + (u.classes ? "." + esc(u.classes).split(" ").join(".") : "");
+  const src = u._src || [];
+  const head = `<span class="txt">${esc(u.text)
+      || `<span style="color:var(--ink-faint)">(no text)</span>`}</span>
+    <span class="loc">${esc(u.page)}:${u.line}</span>
+    <span class="el">${sig}</span>`;
+  if (!src.length) return `<div class="use-row use-line">${head}</div>`;
+  return `<details class="use-item"><summary class="use-line">${head}</summary>
+    <div class="srcset">${src.map(d => `<div class="srcline">
+      ${esc(d.prop)}: <b>${esc(d.value)}</b><br>
+      <span class="loc">${esc(short(d.file))}${d.line ? ":" + d.line : ""}</span>
+    </div>`).join("")}</div></details>`;
+}
+
 function drawWhere(){
   const host = document.getElementById("where");
   const s = STYLES.find(x => x.id === state.sel);
-  const uses = s ? (s.uses || []) : [];
+  // `src` indexes into the style's own deduped source sets
+  const uses = s ? (s.uses || []).map(u =>
+    ({ ...u, _src: (s.sources || [])[u.src] })) : [];
   if (!s || !uses.length) {
     host.innerHTML = s
       ? `<h4>Rendered at</h4><p class="empty">No occurrences recorded.</p>`
@@ -839,11 +895,7 @@ function drawWhere(){
   let page = null;
   for (const u of uses) {
     if (u.page !== page) { page = u.page; html += `<div class="pagebreak">${esc(page)}</div>`; }
-    html += `<div class="use-row">
-      <span class="loc">${esc(u.page)}:${u.line}</span>
-      <span class="txt">${esc(u.text) || "<span class=\"el\">(no text)</span>"}</span>
-      <span class="el">${esc(u.tag)}${u.classes ? "." + esc(u.classes).split(" ").join(".") : ""}</span>
-    </div>`;
+    html += useRow(u);
   }
   host.innerHTML = html;
 }

@@ -244,7 +244,7 @@ def build(out_path, limit=None):
                                       classes=set(), samples=[],
                                       decls=defaultdict(int),
                                       files=defaultdict(int),
-                                      uses=[]))
+                                      uses=[], srcsets={}))
     for p in pages:
         rel = str(p.relative_to(SITE))
         for el in style_page(p, compiled):
@@ -258,9 +258,15 @@ def build(out_path, limit=None):
             # a capped sample of actual occurrences: enough to go and look,
             # not so many that the dataset doubles
             if len(e["uses"]) < USE_CAP:
+                # Elements of one style nearly always resolve through the same
+                # rules -- the median style has a single declaration set. So the
+                # sets are stored once and each occurrence points at one, rather
+                # than repeating five declarations per element.
+                key = tuple(el["decls"])
+                idx = e["srcsets"].setdefault(key, len(e["srcsets"]))
                 e["uses"].append(dict(page=rel, line=el["line"],
                                       tag=el["tag"], classes=el["classes"],
-                                      text=(el["sample"] or "")[:70]))
+                                      text=(el["sample"] or "")[:70], src=idx))
             e["tags"].add(el["tag"])
             if el["classes"]:
                 e["classes"].add(el["classes"])
@@ -291,6 +297,10 @@ def build(out_path, limit=None):
             tags=sorted(e["tags"]), classes=sorted(e["classes"])[:12],
             samples=e["samples"],
             uses=sorted(e["uses"], key=lambda u: (u["page"], u["line"])),
+            sources=[[dict(prop=d[0], value=d[1], file=d[2], line=d[3])
+                      for d in key]
+                     for key, _ in sorted(e["srcsets"].items(),
+                                          key=lambda kv: kv[1])],
             decls=[dict(prop=p, value=v, file=f, line=ln, count=c)
                    for (p, v, f, ln), c in
                    sorted(e["decls"].items(), key=lambda kv: (kv[0][0], -kv[1]))],
