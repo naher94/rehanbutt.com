@@ -249,17 +249,33 @@
      is a plain div or the summary of a disclosure. Scoping them to .use-row
      alone silently unstyled every row the moment they moved inside <summary>,
      which is why they all rendered in one face. */
+  /* The location column is capped and allowed to shrink. Left as `auto` it
+     demanded the full width of a long path -- `resources/collection/
+     2023-favorite-things.html:9` -- which squeezed the text column to about
+     one character and set the title vertically, a letter per line. */
   .use-row, details.use-item > summary{
-    display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 14px;
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,46%);gap:3px 14px;
     padding:10px 0;line-height:1.35}
   .use-row{border-bottom:1px solid var(--rule)}
   .use-row:last-child{border-bottom:none}
 
+  /* break-word, not anywhere: a long title should wrap between words and only
+     break one when a single word genuinely cannot fit */
   .use-line .txt{font-size:15px;font-weight:700;color:var(--ink);
-    overflow-wrap:anywhere;min-width:0}
+    overflow-wrap:break-word;min-width:0}
+  /* the path truncates, the line number never does -- the number is the half
+     you would type, so losing it to an ellipsis would defeat the point */
   .use-line .loc{font-family:"JetBrains Mono",monospace;font-size:11px;
     font-weight:400;color:var(--accent-deep);justify-self:end;
-    white-space:nowrap;padding-top:4px}
+    padding-top:4px;display:flex;min-width:0;max-width:100%}
+  /* Truncate from the start, so the filename survives and the directories go:
+     `...collection/2023-favorite-things.html` rather than `resources/coll...`.
+     `direction: rtl` is what moves the ellipsis to the front; the <bdi> inside
+     keeps the characters in their real order. Without it the leading
+     underscore of `_sass/...` is reordered to the end of the line. */
+  .use-line .loc .path{overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;min-width:0;direction:rtl;text-align:left}
+  .use-line .loc .ln{flex:none}
   .use-line .el{grid-column:1 / -1;font-family:"JetBrains Mono",monospace;
     font-size:10.5px;font-weight:400;color:var(--ink-faint);
     overflow-wrap:anywhere;letter-spacing:.01em}
@@ -290,6 +306,7 @@
   .srcline .loc{color:var(--accent-deep)}
   .pagebreak{font-family:"JetBrains Mono",monospace;font-size:10.5px;
     letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);
+    overflow-wrap:anywhere;
     margin:14px 0 4px;padding-top:10px;border-top:1px solid var(--rule)}
   .pagebreak:first-child{margin-top:0;padding-top:0;border-top:none}
 
@@ -829,7 +846,8 @@ function useRow(u){
   const src = u._src || [];
   const head = `<span class="txt">${esc(u.text)
       || `<span style="color:var(--ink-faint)">(no text)</span>`}</span>
-    <span class="loc">${esc(u.page)}:${u.line}</span>
+    <span class="loc" title="${esc(u.page)}:${u.line}"><span class="path"><bdi>${
+      esc(u.page)}</bdi></span><span class="ln">:${u.line}</span></span>
     <span class="el">${sig}</span>`;
   if (!src.length) return `<div class="use-row use-line">${head}</div>`;
   return `<details class="use-item"><summary class="use-line">${head}</summary>
