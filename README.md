@@ -203,6 +203,20 @@ link | `url` to the event's recording or related materials | `string`
 logo | A logo representing the event for visual context | `.svg`
 
 
+#### Type Styles
+
+`_sass/variables.scss` holds a `$type-styles` map beside `$semantic-colors`, applied with a mixin:
+
+```scss
+h2 { @include type-style(section-title); }
+```
+
+The map is in two halves. **Hierarchy** — `expressive`, `section-title`, `page-title`, `body`, `body-strong`, `body-sm` — describes rank on the page. **Component styles** — `nav-link`, `card-title`, `ui`, `eyebrow` — name the thing they are, and sit apart because nothing is "one step below" a nav link. Either way the name is the job the type does, never a tag and never a rank number. A section heading is `section-title` whether it is marked up as an `h2` or an `h3`, which is the point: `class="h1"` on an `<h2>` is what this vocabulary exists to avoid. There are deliberately no numbered names, since `title-1` / `title-2` reintroduces the same confusion one layer down. Size lives in the value rather than the name, so `nav-link` can move off 37.5px onto the scale without anything being renamed.
+
+Values are the site's current computed values to the pixel, so adopting a style changes nothing on screen — with one exception. `expressive` borrows IBM Carbon's productive/expressive split — productive type is for reading and navigating, expressive type is for impact. It is the tier above a page title, for type doing a graphic job rather than a structural one, and nothing on the site is set that way yet; it is the only aspirational entry and is commented as such. Note also that `section-title` (70px) is larger than `page-title` (60px): that inversion is real on the site today and is recorded rather than quietly corrected, so fixing it stays a deliberate edit. Sizes are `px` rather than `em` on purpose — an `em` resolves against whichever parent it lands in, which is how one declaration ended up rendering at six different sizes. `type-value(body, size)` reads a single property, and an unknown name fails the build with the list of valid ones rather than emitting nothing.
+
+Nothing is migrated onto it yet; the type atlas shows what each rule currently resolves to, which is the input for doing that a rule at a time.
+
 ### Tooling
 
 #### Color Audit
@@ -242,9 +256,15 @@ It writes two files beside itself, both gitignored:
 * `type-atlas.html` — a standalone page listing each style as a specimen rendered at its true size. Open it directly in a browser.
 * `type-specimens.html` — a second view of the same data, drawn as cards at the size they render and counted by elements. It opens on the combined view (a card per style, largest first); switching to **By property** breaks it into font-sizes, weights and families, each section showable or hideable.
 
+Both pages resolve the stylesheet **at each of the project's breakpoints**, read from `$breakpoints` in `_settings.scss` rather than restated. **Width** is a multi-select filter alongside Family and Weight, all widths on by default, and selecting several shows every style present at any of them. A style that covers only part of the current selection carries a badge naming the widths it does cover; one that holds across all of them carries none, since a badge on every row says nothing.
+
+No figure anywhere is a sum across widths — the same paragraph counted at three widths would inflate a 6,970-element site to 12,055. Totals report the busiest single width, and the atlas's count column lists one figure per selected width rather than adding them. Breakpoints that resolve to identical type are collapsed and not offered as separate choices: this site defines five, but `xlarge` and `xxlarge` render exactly as `large` does, so three are shown.
+
+This matters more than it sounds. The body font-size drops to 16px on small, so most `em`-derived type shifts with it: **728 off-scale elements at desktop, 3,594 at 375px**. Before this, `small only` rules were dropped entirely and mobile type went unreported — which is how the mobile menu came to be listed at a size no phone renders. A style is flagged on a row only when it exists at one width and no other; the panel's `widths` row carries the full picture.
+
 Both pages carry a third column, **Rendered at**, listing the actual occurrences of whatever is selected — `about.html:312 · Work Experience · h2.cell.small-12.medium-shrink` — grouped by page and sorted by line. It samples up to 60 per style and always states the true total, so a truncated list never reads as the whole picture.
 
-Each occurrence expands onto the declarations that produced *that one element*, with the partial and line for every property. Elements of a style nearly always resolve through the same rules, so the sets are stored once and referenced — which is what makes the difference visible when they don't: the four Work Experience headings resolve through `about.scss`, the Speaking one through a duplicate block in `speaking.scss`.
+Each occurrence expands onto the declarations that produced *that one element*, with the partial and line for every property, and the Sass name beside the value where there is one — `font-weight: 900 ($lato-black)`, `line-height: 1.6 ($paragraph-lineheight)`. The name says which decision produced the number, which the number alone cannot. It is read back from the source line and only shown when that line actually declares the property, since the source map occasionally points at the rule rather than the declaration. Elements of a style nearly always resolve through the same rules, so the sets are stored once and referenced — which is what makes the difference visible when they don't: the four Work Experience headings resolve through `about.scss`, the Speaking one through a duplicate block in `speaking.scss`.
 
 Every card carries a short id — `S4`, `W2`, `F3`, `DS7` in Declared, `C1` in the combined view — so a specimen can be named in conversation. The ids are fixed to the value rather than to render order, so they survive re-sorting.
 

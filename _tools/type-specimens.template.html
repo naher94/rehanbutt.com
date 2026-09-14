@@ -76,6 +76,8 @@
     display:inline-flex;align-items:center;gap:7px}
   .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
   .chip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .chip .bw{font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:400;
+    opacity:.6}
   .chip .n{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:400;
     opacity:.7;font-variant-numeric:tabular-nums}
   .noresults{padding:40px 16px;text-align:center;color:var(--ink-faint);font-size:15px}
@@ -331,6 +333,8 @@
   <p class="nominal" id="nominal" hidden></p>
 
   <div class="filters" id="filters">
+    <div class="fgroup"><span class="flabel">Width</span>
+      <div class="chips" id="widths"></div></div>
     <div class="fgroup"><span class="flabel">Show</span>
       <div class="toggles" id="sections"></div></div>
   </div>
@@ -366,23 +370,45 @@ const state = {
    carries no annotation; only genuinely responsive type is called out.
 --------------------------------------------------------------------------- */
 const BPS = (T.distinct_breakpoints || [{name: "large", label: "large", width: 1024}]);
-state.bp = T.default_breakpoint || BPS[BPS.length - 1].name;
+state.width = new Set();            // empty == every width, as the other groups
 
-// counts for the selected width, with the whole-site figure as the fallback
-// for data built before breakpoints existed
-const bpCount = s => (s.bp ? (s.bp[state.bp] || 0) : s.count);
+// the widths currently in play
+const bpsOn = () => state.width.size ? BPS.filter(b => state.width.has(b.name)) : BPS;
+
+// Per-width counts for the selected widths. The aggregate figure is the
+// largest of them, never the sum: one paragraph counted at two widths is
+// still one paragraph, and summing would inflate every total on the page.
+const bpCounts = s => bpsOn()
+  .map(b => ({ label: b.label, n: s.bp ? (s.bp[b.name] || 0) : s.count }))
+  .filter(x => x.n > 0);
+const bpCount = s => Math.max(0, ...bpCounts(s).map(x => x.n));
 const atBp = s => bpCount(s) > 0;
-const bpUses = s => (s.uses || []).filter(u => !u.at || u.at.includes(state.bp));
 
+/* Totals across a set of styles. Summing each style's largest width would
+   count the same paragraph once per width it renders at -- 12,055 "elements"
+   on a site with 6,970. The truthful figure is the busiest single width. */
+function acrossWidths(rows, pick){
+  return Math.max(0, ...bpsOn().map(b =>
+    rows.reduce((n, s) => n + ((pick ? pick(s) : true) && s.bp ? (s.bp[b.name] || 0) : 0), 0)));
+}
+const bpUses = s => {
+  const on = new Set(bpsOn().map(b => b.name));
+  return (s.uses || []).filter(u => !u.at || u.at.some(a => on.has(a)));
+};
+
+/* Which of the offered widths a style exists at -- named only when that is
+   fewer than all of them. Type that renders the same everywhere needs no
+   breakpoint annotation, and labelling it would bury the type that does. */
 function bpAt(s){
   return s.bp ? BPS.filter(b => s.bp[b.name]) : BPS;
 }
 // Flagged on a row only when the style exists at this width and no other.
 // Anything spanning several widths is already visible at the one you are on,
 // and badging almost every row would bury the type that really is specific.
+// Badged whenever a style does not hold at every width the project defines.
 function bpOnly(s){
   const at = bpAt(s);
-  return at.length === 1 ? at[0].label : null;
+  return at.length === BPS.length ? null : at.map(b => b.label).join(", ");
 }
 // The panel carries the full picture, where there is room to be complete.
 function bpScope(s){
@@ -396,19 +422,13 @@ function drawBpBar(){
   const host = document.getElementById("bpbar");
   if (!host) return;
   const v = (T.per_breakpoint || {})[state.bp] || {};
-  host.innerHTML = `<span class="flabel">Width</span>
-    <div class="seg" role="group" aria-label="Breakpoint">${BPS.map(b =>
-      `<button data-bp="${b.name}" aria-pressed="${b.name === state.bp}">
-         ${esc(b.label)}<small>${b.width}px</small></button>`).join("")}</div>
-    <span class="note">Every count on this page is for this width.${
+  const on = bpsOn();
+  host.innerHTML = `<span class="note">Type is resolved at each width the
+    project defines, so a style that only exists on one of them is listed only
+    there. Showing <b>${on.map(b => esc(b.label)).join(", ")}</b>.${
       BPS.length < (T.breakpoints || []).length
-        ? ` The project defines ${(T.breakpoints || []).length} breakpoints; the others resolve to type identical to one of these, so they are not offered as separate choices.`
+        ? ` The project defines ${(T.breakpoints || []).length} breakpoints; the others resolve to type identical to one of these, so they are not offered separately.`
         : ""}</span>`;
-  host.querySelectorAll("[data-bp]").forEach(b => b.addEventListener("click", () => {
-    state.bp = b.dataset.bp;
-    state.sel = null;
-    draw();
-  }));
 }
 
 const esc = s => String(s == null ? "" : s)
@@ -427,8 +447,19 @@ const famStack = f => `'${f}',` + (f === "Zilla Slab" ? "Georgia,serif"
 function addTo(map, key, n, style, declared){
   let e = map.get(key);
   if (!e) map.set(key, e = { key, count: 0, styles: new Set(),
-                             feeds: new Map(), files: new Map() });
-  e.count += n;
+                             feeds: new Map(), files: new Map(),
+                             bp: Object.create(null) });
+  // accumulate per width, so the card can report the busiest single width
+  // rather than a sum of the same elements counted once per width
+  if (style && style.bp) {
+    for (const b of bpsOn()) {
+      const c = style.bp[b.name] || 0;
+      if (c) e.bp[b.name] = (e.bp[b.name] || 0) + c;
+    }
+    e.count = Math.max(0, ...bpsOn().map(b => e.bp[b.name] || 0));
+  } else {
+    e.count += n;
+  }
   if (style) e.styles.add(style.id);
   if (declared) e.feeds.set(declared, (e.feeds.get(declared) || 0) + n);
 }
@@ -576,7 +607,10 @@ function cardEl(e, kind){
     + (family ? `font-family:${famStack(family)};` : "")
     + (weight ? `font-weight:${weight};` : "");
   b.innerHTML = `<span class="glyph" style="${style}">${SPECIMEN}</span>
-    <span class="val">${esc(kind === "size" && state.mode === "computed" ? px(e.key) : e.key)}</span>
+    <span class="val">${esc(kind === "size" && state.mode === "computed" ? px(e.key) : e.key)}${
+      (() => { const on = bpsOn(), at = on.filter(b => e.bp && e.bp[b.name]);
+               return at.length && at.length < on.length
+                 ? ` <span class="respflag">${esc(at.map(b => b.label).join(", "))}</span>` : ""; })()}</span>
     <span class="n"><span class="cid">${idFor(kind, e.key)}</span>${e.count.toLocaleString()}</span>`;
   b.onclick = () => { state.sel = id; state._selData = { e, kind }; draw(); };
   return b;
@@ -592,7 +626,8 @@ function drawSheet(){
   for (const [kind, label] of KINDS) {
     if (!state.show[kind]) continue;
     const entries = sortEntries(g[kind].values(), kind);
-    const total = entries.reduce((n, e) => n + e.count, 0);
+    const total = Math.max(0, ...bpsOn().map(b =>
+      entries.reduce((n, e) => n + ((e.bp && e.bp[b.name]) || 0), 0)));
     const sec = document.createElement("section");
     sec.innerHTML = `<div class="secthead"><h2>${label}</h2>
       <span class="tot">UNIQUE <b>${entries.length}</b> &middot;
@@ -615,7 +650,7 @@ function drawCombined(sheet){
   const sec = document.createElement("section");
   sec.innerHTML = `<div class="secthead"><h2>Every style</h2>
     <span class="tot">UNIQUE <b>${arr.length}</b> &middot;
-    ELEMENTS <b>${arr.reduce((n, s) => n + bpCount(s), 0).toLocaleString()}</b></span></div>`;
+    ELEMENTS <b>${acrossWidths(arr).toLocaleString()}</b></span></div>`;
   const box = document.createElement("div");
   box.className = "cards";
   for (const s of arr) {
@@ -696,6 +731,32 @@ function drawPanel(){
 }
 
 /* --------------------------------------------------------------- chrome -- */
+function drawWidthChips(){
+  const host = document.getElementById("widths");
+  host.innerHTML = "";
+  for (const b of BPS) {
+    const on = state.width.size === 0 || state.width.has(b.name);
+    const n = STYLES.filter(x => x.bp && x.bp[b.name]).length;
+    const btn = document.createElement("button");
+    btn.className = "chip";
+    btn.type = "button";
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+    btn.title = `${b.label} — resolved at ${b.width}px`;
+    btn.innerHTML = `${esc(b.label)} <span class="bw">${b.width}</span>
+      <span class="n">${n}</span>`;
+    btn.onclick = () => {
+      const set = state.width;
+      if (set.size === 0) BPS.forEach(x => set.add(x.name));
+      set.has(b.name) ? set.delete(b.name) : set.add(b.name);
+      if (set.size === BPS.length) set.clear();
+      if (set.size === 0 && !on) set.add(b.name);
+      state.sel = null; state._selData = null;
+      draw();
+    };
+    host.appendChild(btn);
+  }
+}
+
 function drawSections(){
   const host = document.getElementById("sections");
   host.innerHTML = "";
@@ -824,7 +885,7 @@ function drawWhere(){
 
 
 
-function draw(){ drawBpBar(); drawSections(); drawSheet(); drawPanel(); drawWhere(); drawChrome(); }
+function draw(){ drawBpBar(); drawWidthChips(); drawSections(); drawSheet(); drawPanel(); drawWhere(); drawChrome(); }
 
 function press(id, on){ document.getElementById(id).setAttribute("aria-pressed", String(on)); }
 function setMode(m){ state.mode = m; state.sel = null; state._selData = null;
