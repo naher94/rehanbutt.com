@@ -260,6 +260,31 @@
   .jnone{display:flex;align-items:center;justify-content:center;padding:16px 12px;
     font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-faint)}
 
+  /* --- provenance: where a value came from ----------------------------- */
+  /* Four segments, one per type property, in the order family / size /
+     weight / leading. A whole extra row per card would cost more height than
+     the information is worth, so it rides as a 4px strip under the count. */
+  .provbar{display:flex;height:4px;border-top:1px solid var(--rule)}
+  .provseg{flex:1}
+  .provseg + .provseg{border-left:1px solid var(--surface)}
+  .p-token{background:var(--accent-deep)}
+  .p-variable{background:var(--flag-med)}
+  .p-literal{background:var(--flag-high)}
+  .p-none{background:var(--rule)}
+  .provchip{font-family:"JetBrains Mono",monospace;font-size:9.5px;
+    letter-spacing:.06em;text-transform:uppercase;padding:1px 5px;
+    border-radius:2px;margin-left:6px;white-space:nowrap}
+  .provchip.p-token{background:color-mix(in srgb,var(--accent) 18%,transparent);
+    color:var(--accent-deep)}
+  .provchip.p-variable{background:color-mix(in srgb,var(--flag-med) 18%,transparent);
+    color:var(--flag-med)}
+  .provchip.p-literal{background:color-mix(in srgb,var(--flag-high) 16%,transparent);
+    color:var(--flag-high)}
+  .provkey{display:flex;gap:14px;flex-wrap:wrap;align-items:center;
+    font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-muted)}
+  .provkey i{display:inline-block;width:10px;height:10px;border-radius:2px;
+    margin-right:5px;vertical-align:-1px;font-style:normal}
+
   .nominal{font-size:13.5px;color:var(--flag-med);margin:0 0 14px;
     padding:10px 12px;border-left:3px solid var(--flag-med);
     background:color-mix(in srgb,var(--flag-med) 8%,transparent);border-radius:3px;
@@ -397,11 +422,14 @@
   <div class="bpbar" id="bpbar"></div>
 
   <p class="viewnote" id="viewnote"></p>
+  <div class="provkey" id="provkey"></div>
   <p class="nominal" id="nominal" hidden></p>
 
   <div class="filters" id="filters">
     <div class="fgroup"><span class="flabel">Width</span>
       <div class="chips" id="widths"></div></div>
+    <div class="fgroup"><span class="flabel">Source</span>
+      <div class="chips" id="provs"></div></div>
     <div class="fgroup"><span class="flabel">Show</span>
       <div class="toggles" id="sections"></div></div>
   </div>
@@ -430,6 +458,7 @@ const state = {
   group: "style",             // style | journey  (combined view only)
   sort: "value",              // value | count | az
   show: { size: true, weight: true, family: true },
+  prov: new Set(),            // empty == every source, as the widths do
   sel: null
 };
 
@@ -634,6 +663,63 @@ const idFor = (kind, key) => CARD_ID.get(
   `${state.mode === "declared" ? "D" : ""}${kind === "size" ? "S"
     : kind === "weight" ? "W" : "F"}|${key}`) || "?";
 const idForStyle = s => CARD_ID.get("C|" + s.id) || "?";
+
+/* ----------------------------------------------------------- provenance ---
+   Where a value came from, in three levels rather than two.
+
+     token     the type map, via `type-style()`; named as `product/page-title`
+               where the entry can be identified, `type-style()` where several
+               entries share the value and only one property is token-sourced
+     variable  a Sass name like `$zilla` -- decided somewhere, but not by the
+               type system, which is the distinction that matters here
+     literal   written as it renders
+
+   Collapsing the middle case would read as progress that has not happened:
+   font-family is 99% named and 0% from the map.
+--------------------------------------------------------------------------- */
+const PROV_PROPS = [["font-family", "family"], ["font-size", "size"],
+                    ["font-weight", "weight"], ["line-height", "leading"]];
+
+const provOf = via => !via ? "literal"
+  : (via.indexOf("/") !== -1 || via === "type-style()") ? "token" : "variable";
+
+// A style pools the declarations of every element rendering as it, so one
+// property can arrive by more than one route -- C1's size is `product/body` on
+// some elements and a literal on others. The weakest wins, because a size that
+// is hand-written anywhere is not migrated however many tokens also reach it.
+// `mixed` is tracked alongside so the bar can say so rather than implying the
+// token is absent; the panel lists every route in full.
+const RANK = { token: 0, variable: 1, literal: 2, none: -1 };
+function styleProv(s){
+  const out = {};
+  for (const [prop] of PROV_PROPS) {
+    let worst = "none", seen = new Set();
+    for (const d of (s.decls || [])) {
+      if (d.prop !== prop) continue;
+      const p = provOf(d.via);
+      seen.add(p);
+      if (RANK[p] > RANK[worst]) worst = p;
+    }
+    out[prop] = worst;
+    out[prop + "|mixed"] = seen.size > 1;
+  }
+  return out;
+}
+
+function provBar(s){
+  const p = styleProv(s);
+  const seg = PROV_PROPS.map(([prop, label]) => {
+    const lv = p[prop];
+    const how = lv === "none" ? "not declared"
+      : p[prop + "|mixed"] ? lv + " (mixed — reached by more than one route)"
+      : lv;
+    return `<span class="provseg p-${lv}" title="${label}: ${how}"></span>`;
+  }).join("");
+  return `<span class="provbar" aria-hidden="true">${seg}</span>`;
+}
+
+const provLabel = via => via && via.indexOf("/") !== -1 ? via
+  : via === "type-style()" ? "type map" : provOf(via);
 
 /* ------------------------------------------------------------- journeys ---
    One element followed across every width, instead of one card per width.
@@ -864,7 +950,7 @@ function drawJourneys(sheet){
 function drawCombined(sheet){
   if (state.group === "journey") return drawJourneys(sheet);
   // one card per distinct style, drawn as itself
-  const arr = STYLES.filter(atBp);
+  const arr = STYLES.filter(s => atBp(s) && provOn(s));
   if (state.sort === "count") arr.sort((a, b) => bpCount(b) - bpCount(a));
   else if (state.sort === "az")
     arr.sort((a, b) => (a.family + a.weight).localeCompare(b.family + b.weight));
@@ -887,7 +973,8 @@ function drawCombined(sheet){
       <span class="val">${px(s.size)} &middot; ${s.weight}${
         bpOnly(s) ? ` <span class="respflag">${esc(bpOnly(s))}</span>` : ""}</span>
       <span class="val" style="border-top:0;color:var(--ink-muted)">${esc(s.family)}</span>
-      <span class="n"><span class="cid">${idForStyle(s)}</span>${bpCount(s).toLocaleString()}</span>`;
+      <span class="n"><span class="cid">${idForStyle(s)}</span>${bpCount(s).toLocaleString()}</span>
+      ${provBar(s)}`;
     b.onclick = () => { state.sel = s.id; state._selData = { style: s }; draw(); };
     box.appendChild(b);
   }
@@ -916,8 +1003,8 @@ function drawPanel(){
       </dl>
       <h4>Written as</h4>
       ${(s.decls || []).map(x => `<div class="brk">
-        <span class="k">${esc(x.prop)}: <b>${esc(x.value)}</b>${
-          x.via ? ` <span class="via">(${esc(viaLabel(x.via))})</span>` : ""}<br>
+        <span class="k">${esc(x.prop)}: <b>${esc(x.value)}</b><span
+          class="provchip p-${provOf(x.via)}">${esc(provLabel(x.via))}</span><br>
           <span class="loc">${esc(short(x.file))}${x.line ? ":" + x.line : ""}</span></span>
         <span class="v">${x.count.toLocaleString()}</span></div>`).join("")}
       <p class="samples" style="padding-left:0;margin-top:14px">
@@ -979,6 +1066,52 @@ function drawWidthChips(){
   }
 }
 
+const PROV_LEVELS = [["token","from the type map"],
+                     ["variable","a Sass name, not the map"],
+                     ["literal","written as it renders"]];
+
+// A style matches when any of its four type properties sits at a selected
+// level, so filtering to `literal` answers "what is still hand-written".
+function provOn(s){
+  if (!state.prov.size) return true;
+  const p = styleProv(s);
+  return PROV_PROPS.some(([prop]) => state.prov.has(p[prop]));
+}
+
+function drawProvChips(){
+  const host = document.getElementById("provs");
+  host.innerHTML = "";
+  const counts = {};
+  PROV_LEVELS.forEach(([lv]) => counts[lv] = 0);
+  STYLES.forEach(s => {
+    const p = styleProv(s);
+    PROV_LEVELS.forEach(([lv]) => {
+      if (PROV_PROPS.some(([prop]) => p[prop] === lv)) counts[lv]++;
+    });
+  });
+  for (const [lv, why] of PROV_LEVELS) {
+    const on = state.prov.size === 0 || state.prov.has(lv);
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.type = "button";
+    b.title = why;
+    b.setAttribute("aria-pressed", on ? "true" : "false");
+    b.innerHTML = `<i class="provseg p-${lv}" style="display:inline-block;width:9px;
+      height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px"></i>${lv}
+      <span class="n">${counts[lv]}</span>`;
+    b.onclick = () => {
+      const set = state.prov;
+      if (set.size === 0) PROV_LEVELS.forEach(([x]) => set.add(x));
+      set.has(lv) ? set.delete(lv) : set.add(lv);
+      if (set.size === PROV_LEVELS.length) set.clear();
+      if (set.size === 0 && !on) set.add(lv);
+      state.sel = null; state._selData = null;
+      draw();
+    };
+    host.appendChild(b);
+  }
+}
+
 function drawSections(){
   const host = document.getElementById("sections");
   host.innerHTML = "";
@@ -1008,8 +1141,21 @@ function drawChrome(){
     `<span><b>${g.size.size}</b> sizes</span>
      <span><b>${g.weight.size}</b> weights</span>
      <span><b>${g.family.size}</b> families</span>
-     <span><b>${T.pages}</b> pages</span>`;
+     <span><b>${T.pages}</b> pages</span>
+     <span><b>${(() => {
+       let tok = 0, all = 0;
+       STYLES.forEach(s => (s.decls || []).forEach(d => {
+         if (d.prop !== "font-size") return;
+         all++; if (provOf(d.via) === "token") tok++;
+       }));
+       return all ? Math.round(100 * tok / all) : 0;
+     })()}%</b> sizes from tokens</span>`;
   document.getElementById("groupseg").hidden = state.view !== "combined";
+  document.getElementById("provkey").innerHTML =
+    `<span><i class="p-token"></i>token — from $product-type / $expressive-type</span>
+     <span><i class="p-variable"></i>variable — a Sass name, not the map</span>
+     <span><i class="p-literal"></i>literal — written as it renders</span>
+     <span>strip order: family · size · weight · leading</span>`;
   document.getElementById("viewnote").innerHTML = state.view === "combined"
     ? state.group === "journey"
       ? "One row per element path, followed across every width. In the other grouping these are separate cards with nothing linking them &mdash; here <code>C5 &rarr; C6</code> is one nav link at two widths, not two nav styles. Ordered worst-first: type that grows as the screen narrows, then type that sits on the scale at one width and off it at another. The width chips choose which columns are drawn, not which journeys exist."
@@ -1117,7 +1263,7 @@ function drawWhere(){
 
 
 
-function draw(){ drawBpBar(); drawWidthChips(); drawSections(); drawSheet(); drawPanel(); drawWhere(); drawChrome(); }
+function draw(){ drawBpBar(); drawWidthChips(); drawProvChips(); drawSections(); drawSheet(); drawPanel(); drawWhere(); drawChrome(); }
 
 function press(id, on){ document.getElementById(id).setAttribute("aria-pressed", String(on)); }
 function setMode(m){ state.mode = m; state.sel = null; state._selData = null;

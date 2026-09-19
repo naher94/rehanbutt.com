@@ -76,7 +76,92 @@ def source_line(rel, line):
     return lines[line - 1] if line and 0 < line <= len(lines) else ""
 
 
-def authored_as(rel, line, prop, value):
+TOKEN_PROPS = {"family": "font-family", "size": "font-size",
+               "weight": "font-weight", "line-height": "line-height",
+               "letter-spacing": "letter-spacing",
+               "text-transform": "text-transform"}
+
+
+def type_style_map():
+    """`$product-type` / `$expressive-type` from variables.scss, as
+    {(register, key): {css-prop: rendered-value}}.
+
+    Read rather than restated, for the same reason the breakpoints are. The
+    values are compared against compiled CSS, so they are normalised the way
+    the compiler writes them: `0.625rem` loses its leading zero, `$zilla`
+    resolves to its stack, weights to their numbers.
+    """
+    text = (ROOT / "_sass" / "variables.scss").read_text()
+    families, weights = {}, {}
+    for m in re.finditer(r'^\$([-\w]+):\s*([^;]+);', text, re.M):
+        name, val = "$" + m.group(1), m.group(2).strip()
+        if val.startswith(("'", '"')):
+            families[name] = re.sub(r"'", '"', val)
+        elif val.isdigit():
+            weights[name] = val
+
+    def norm(v):
+        v = v.strip()
+        v = families.get(v, weights.get(v, v))
+        v = re.sub(r',\s+', ',', v)                # "Lato", sans -> "Lato",sans
+        v = re.sub(r'^0(\.\d)', r'\1', v)          # 0.625rem -> .625rem
+        return v.rstrip("0").rstrip(".") if re.fullmatch(r'\d+\.\d+', v) else v
+
+    out = {}
+    for register in ("product", "expressive"):
+        block = re.search(r'\$%s-type:\s*\((.*?)\n\);' % register, text, re.S)
+        if not block:
+            continue
+        for m in re.finditer(r'^\s{2}([-\w]+):\s*\((.*?)\)\s*,', block.group(1),
+                             re.S | re.M):
+            entry = {}
+            for pm in re.finditer(r'([-\w]+):\s*([^,)]+)', m.group(2)):
+                prop = TOKEN_PROPS.get(pm.group(1))
+                if prop:
+                    entry[prop] = norm(pm.group(2))
+            out[(register, m.group(1))] = entry
+    return out
+
+
+_TYPE_STYLES = None
+
+
+def from_mixin(rel, line, prop):
+    """Whether this declaration was emitted by `type-style()` rather than written."""
+    text = source_line(rel, line).strip()
+    m = re.match(r'([-\w]+)\s*:\s*(.+?)\s*;?\s*$', text)
+    return bool(m and m.group(1) == prop and "map-get($style" in m.group(2))
+
+
+def token_for(decls):
+    """Which map entry produced this style's mixin-emitted declarations.
+
+    The source map points at the mixin body -- `font-size: map-get($style,
+    size)` -- so the line says a token was used but not which one. Every
+    property the mixin emits for one element came from the same `$style`,
+    though, so intersecting the entries that match each value identifies it.
+    A single property is often ambiguous (`1rem` is both `body-sm` and `ui`);
+    the combination usually is not.
+
+    Only mixin-emitted declarations are considered. A style aggregates the
+    declarations of every element that renders as it, so folding in a literal
+    written somewhere else would empty the intersection and lose the name.
+    """
+    global _TYPE_STYLES
+    if _TYPE_STYLES is None:
+        _TYPE_STYLES = type_style_map()
+    hits = None
+    for prop, value, rel, line in decls:
+        if not from_mixin(rel, line, prop):
+            continue
+        cands = {k for k, e in _TYPE_STYLES.items() if e.get(prop) == value}
+        hits = cands if hits is None else (hits & cands)
+        if not hits:
+            return None
+    return "%s/%s" % sorted(hits)[0] if hits and len(hits) == 1 else None
+
+
+def authored_as(rel, line, prop, value, token=None):
     """What the declaration says in the source, when that is not the value.
 
     `font-weight: 900` in the output is `$lato-black` in the source, and the
@@ -97,8 +182,20 @@ def authored_as(rel, line, prop, value):
     if expr == value:
         return None                       # written exactly as it renders
     if "map-get($style" in expr:
-        return "type-style()"             # emitted by the mixin, not hand-written
+        # emitted by the mixin; name the entry when it can be identified
+        return token or "type-style()"
     return expr if ("$" in expr or "(" in expr) else None
+
+
+def provenance(via):
+    """token | variable | literal -- how the value got there.
+
+    `$zilla` is a name but not the design system, which is the distinction
+    that matters when asking how much of the site renders from the type map.
+    """
+    if not via:
+        return "literal"
+    return "token" if ("/" in via or via == "type-style()") else "variable"
 
 
 def project_breakpoints():
@@ -386,6 +483,9 @@ def build(out_path, limit=None):
 
     items = []
     for (family, size, weight, style, lh, spacing, transform), e in styles.items():
+        # every mixin-emitted declaration on one element shares a `$style`, so
+        # the entry is identified once per style and reused for its properties
+        style_token = token_for(list(e["decls"]))
         items.append(dict(
             id=f"{family}|{size}|{weight}|{style}|{lh}|{spacing}|{transform}",
             family=family, size=size, weight=weight, style=style,
@@ -400,12 +500,13 @@ def build(out_path, limit=None):
             samples=e["samples"],
             uses=sorted(e["uses"], key=lambda u: (u["page"], u["line"])),
             sources=[[dict(prop=d[0], value=d[1], file=d[2], line=d[3],
-                           via=authored_as(d[2], d[3], d[0], d[1]))
+                           via=authored_as(d[2], d[3], d[0], d[1],
+                                           token_for(list(key))))
                       for d in key]
                      for key, _ in sorted(e["srcsets"].items(),
                                           key=lambda kv: kv[1])],
             decls=[dict(prop=p, value=v, file=f, line=ln, count=c,
-                        via=authored_as(f, ln, p, v))
+                        via=authored_as(f, ln, p, v, style_token))
                    for (p, v, f, ln), c in
                    sorted(e["decls"].items(), key=lambda kv: (kv[0][0], -kv[1]))],
             files=[dict(file=f, count=c)
