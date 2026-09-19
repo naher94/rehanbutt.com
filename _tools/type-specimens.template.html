@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Type Specimens</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@300;400;500;700&family=Lato:wght@300;400;700;900&family=Caveat&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
@@ -195,15 +196,15 @@
   .card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .card[aria-pressed="true"]{border-color:var(--accent-deep);
     box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 40%,transparent)}
-  .card .glyph{display:flex;align-items:center;justify-content:center;
+  .card .glyph,.jstep .glyph{display:flex;align-items:center;justify-content:center;
     padding:10px 14px;line-height:1.05;white-space:nowrap;color:var(--ink)}
-  .card .val{border-top:1px solid var(--rule);padding:4px 8px;
+  .card .val,.jstep .val{border-top:1px solid var(--rule);padding:4px 8px;
     font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink);
     white-space:nowrap}
-  .card .n{border-top:1px solid var(--rule);padding:3px 8px;
+  .card .n,.jstep .n{border-top:1px solid var(--rule);padding:3px 8px;
     font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-muted);
     font-variant-numeric:tabular-nums}
-  .card.off .val{color:var(--flag-med)}
+  .card.off .val,.jstep.off .val{color:var(--flag-med)}
   /* the handle sits with the count rather than in its own row, so naming a
      card costs no height */
   .cid{display:inline-block;font-weight:500;color:var(--accent-deep);
@@ -212,7 +213,52 @@
     background:var(--chip);padding:2px 7px;border-radius:2px;margin-right:8px;
     vertical-align:2px}
   .card.capped .glyph::after{content:"";}
-  .card.capped .val::before{content:"~ ";color:var(--flag-med)}
+  .card.capped .val::before,.jstep.capped .val::before{content:"~ ";color:var(--flag-med)}
+
+  /* --- journeys: one element, across every width ------------------------ */
+  /* The steps share a baseline for the same reason the specimen cards do:
+     30px -> 37.5px has to read as type, not as two numbers that differ. */
+  .jrows{display:flex;flex-direction:column;gap:14px;margin-bottom:8px}
+  .jrow{border:1px solid var(--rule-strong);border-radius:3px;
+    background:var(--surface);overflow:hidden}
+  .jrow.flagged{border-color:var(--flag-high)}
+  .jhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:7px 12px;
+    border-bottom:1px solid var(--rule);background:var(--surface-2);
+    font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-muted);
+    font-variant-numeric:tabular-nums}
+  .jhead .jsig{color:var(--ink);font-weight:500;margin-right:4px}
+  .jhead .jcount{margin-left:auto;white-space:nowrap}
+  .jflag{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.06em;
+    text-transform:uppercase;padding:2px 6px;border-radius:2px;
+    background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent-deep)}
+  .jflag.hi{background:color-mix(in srgb,var(--flag-high) 18%,transparent);
+    color:var(--flag-high)}
+  .jflag.med{background:color-mix(in srgb,var(--flag-med) 18%,transparent);
+    color:var(--flag-med)}
+  .jflag.quiet{background:none;color:var(--ink-faint);padding-left:0}
+  /* equal columns, set per row from the number of widths on screen, so the
+     same width sits under the same width all the way down the sheet -- with
+     content-sized steps the columns jag row to row and nothing is scannable */
+  .jsteps{display:grid;align-items:end}
+  .jstep{min-width:0;overflow:hidden;padding:0;border:0;
+    border-right:1px solid var(--rule);background:none;font:inherit;color:inherit;
+    cursor:pointer;display:flex;flex-direction:column;text-align:center}
+  .jstep:last-child{border-right:0}
+  .jstep:hover{background:var(--surface-2)}
+  .jstep:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .jstep[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+  .jband{padding:5px 9px;border-bottom:1px solid var(--rule);
+    font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--ink-faint);white-space:nowrap}
+  /* a step that repeats the one before it is drawn, because the pick was to
+     see the type at every width -- but dimmed, so the widths that actually
+     change are the ones the eye lands on */
+  .jstep.same .glyph{opacity:.4}
+  .jstep.same .val,.jstep.same .n{color:var(--ink-faint)}
+  .jstep.none{cursor:default}
+  .jstep.none:hover{background:none}
+  .jnone{display:flex;align-items:center;justify-content:center;padding:16px 12px;
+    font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-faint)}
 
   .nominal{font-size:13.5px;color:var(--flag-med);margin:0 0 14px;
     padding:10px 12px;border-left:3px solid var(--flag-med);
@@ -335,6 +381,10 @@
         <button id="v-props" aria-pressed="false">By property</button>
         <button id="v-combined" aria-pressed="true">Combined</button>
       </div>
+      <div class="seg" role="group" aria-label="Group" id="groupseg">
+        <button id="g-style" aria-pressed="true">By style</button>
+        <button id="g-journey" aria-pressed="false">Across widths</button>
+      </div>
       <div class="seg" role="group" aria-label="Sort">
         <button id="s-value" aria-pressed="true">Value</button>
         <button id="s-count" aria-pressed="false">Count</button>
@@ -377,6 +427,7 @@ const SPECIMEN = "AaBb";
 const state = {
   mode: "computed",           // computed | declared
   view: "combined",           // props | combined
+  group: "style",             // style | journey  (combined view only)
   sort: "value",              // value | count | az
   show: { size: true, weight: true, family: true },
   sel: null
@@ -584,6 +635,86 @@ const idFor = (kind, key) => CARD_ID.get(
     : kind === "weight" ? "W" : "F"}|${key}`) || "?";
 const idForStyle = s => CARD_ID.get("C|" + s.id) || "?";
 
+/* ------------------------------------------------------------- journeys ---
+   One element followed across every width, instead of one card per width.
+   Almost every question this sheet gets asked -- "why are these two nearly
+   the same?" -- turns out to be one element at two widths, and the per-width
+   cards cannot say so: they are siblings with no link between them. C5 and C6
+   are not two nav styles, they are one nav link at 375px and at 1024px.
+
+   Keyed on the rendered element rather than on a selector, because the audit
+   records what rendered, not what matched -- and because the thing you want
+   to follow is the element, not the rule, when several rules feed it. Where
+   two siblings share a source line the pair is split by encounter order,
+   which is exact unless those siblings carry different type at some width.
+--------------------------------------------------------------------------- */
+const BAND_NAMES = new Set(BPS.map(b => b.name));
+
+const JOURNEYS = (() => {
+  const el = new Map(), seen = new Map();
+  for (const s of STYLES) {
+    for (const u of (s.uses || [])) {
+      for (const band of (u.at && u.at.length ? u.at : BPS.map(b => b.name))) {
+        if (!BAND_NAMES.has(band)) continue;
+        const base = `${u.page}|${u.line}|${u.tag}|${u.classes || ""}`;
+        const ck = base + "@" + band;
+        const i = seen.get(ck) || 0;
+        seen.set(ck, i + 1);
+        const key = base + "#" + i;
+        let m = el.get(key);
+        if (!m) el.set(key, m = { _page: u.page });
+        m[band] = s;
+      }
+    }
+  }
+  // element paths that behave identically are one journey, not many
+  const bySig = new Map();
+  for (const m of el.values()) {
+    const sig = BPS.map(b => (m[b.name] ? m[b.name].id : "")).join(" ");
+    let j = bySig.get(sig);
+    if (!j) bySig.set(sig, j = {
+      sig, steps: BPS.map(b => m[b.name] || null), n: 0, pages: new Set()
+    });
+    j.n++;
+    j.pages.add(m._page);
+  }
+  const out = [...bySig.values()];
+  for (const j of out) {
+    const live = j.steps.filter(Boolean);
+    const sizes = live.map(s => s.size);
+    j.distinct   = new Set(live.map(s => s.id)).size;
+    j.responsive = j.distinct > 1;
+    // narrowest width it renders at, against the widest: type that grows as
+    // the screen shrinks is almost always an override nobody meant to leave
+    j.inverted   = sizes.length > 1 && sizes[0] > sizes[sizes.length - 1];
+    j.splitScale = new Set(live.map(s => !!s.on_scale)).size > 1;
+    j.partial    = j.steps.some(s => !s);
+    // the busiest single width, never the sum -- same rule as everywhere else
+    j.weight     = Math.max(0, ...live.map(s => s.count || 0));
+    j.score      = (j.inverted ? 4 : 0) + (j.splitScale ? 2 : 0)
+                 + (j.distinct > 2 ? 1 : 0);
+  }
+  return out;
+})();
+
+/* The width chips narrow which columns are drawn, never which journeys exist.
+   Dropping a journey because you filtered to one width would delete the thing
+   you are comparing against, which is the whole point of the view. */
+const journeysOn = () => {
+  const on = bpsOn();
+  return JOURNEYS.filter(j => on.some(b => j.steps[BPS.indexOf(b)]));
+};
+
+function sortJourneys(list){
+  const arr = [...list];
+  const fam = j => { const s = j.steps.find(Boolean) || {};
+                     return String(s.family) + s.weight; };
+  if (state.sort === "count") arr.sort((a, b) => b.weight - a.weight || b.score - a.score);
+  else if (state.sort === "az") arr.sort((a, b) => fam(a).localeCompare(fam(b)));
+  else arr.sort((a, b) => b.score - a.score || b.weight - a.weight);
+  return arr;
+}
+
 /* --------------------------------------------------------------- render -- */
 function sortEntries(list, kind){
   const arr = [...list];
@@ -657,7 +788,81 @@ function drawSheet(){
   }
 }
 
+function journeyEl(j, on){
+  const row = document.createElement("div");
+  row.className = "jrow" + (j.score ? " flagged" : "");
+
+  const flags = [];
+  if (j.inverted)      flags.push(`<span class="jflag hi">inverted</span>`);
+  if (j.splitScale)    flags.push(`<span class="jflag med">split scale</span>`);
+  if (j.distinct > 2)  flags.push(`<span class="jflag">${j.distinct} steps</span>`);
+  if (j.partial)       flags.push(`<span class="jflag">not at every width</span>`);
+  // "holds" is only meaningful about type that is actually offered at every
+  // width -- saying it about a journey that renders at one of them reads as a
+  // contradiction of the flag beside it
+  if (!j.responsive && !j.partial) flags.push(`<span class="jflag quiet">holds</span>`);
+
+  const head = document.createElement("div");
+  head.className = "jhead";
+  head.innerHTML = `<span class="jsig">${
+      j.steps.map(s => s ? idForStyle(s) : "—").join(" → ")}</span>
+    ${flags.join("")}
+    <span class="jcount">${j.n.toLocaleString()} sampled &middot; ${
+      j.pages.size} page${j.pages.size === 1 ? "" : "s"}</span>`;
+  row.appendChild(head);
+
+  const steps = document.createElement("div");
+  steps.className = "jsteps";
+  steps.style.gridTemplateColumns = `repeat(${on.length},minmax(0,1fr))`;
+  BPS.forEach((b, i) => {
+    if (!on.includes(b)) return;
+    const s = j.steps[i], prev = j.steps[i - 1];
+    const btn = document.createElement("button");
+    btn.type = "button";
+    if (!s) {
+      btn.className = "jstep none";
+      btn.disabled = true;
+      btn.innerHTML = `<span class="jband">${esc(b.label)}</span>
+        <span class="jnone">not rendered</span>`;
+      steps.appendChild(btn);
+      return;
+    }
+    const capped = s.size > MAX_GLYPH, same = prev && prev.id === s.id;
+    btn.className = "jstep" + (s.on_scale ? "" : " off")
+      + (capped ? " capped" : "") + (same ? " same" : "");
+    btn.setAttribute("aria-pressed", state.sel === s.id ? "true" : "false");
+    btn.innerHTML = `<span class="jband">${esc(b.label)}${
+        same ? " &middot; unchanged" : ""}</span>
+      <span class="glyph" style="font-size:${Math.min(s.size, MAX_GLYPH)}px;
+        font-family:${famStack(s.family)};font-weight:${s.weight};
+        font-style:${s.style};">${SPECIMEN}</span>
+      <span class="val">${px(s.size)} &middot; ${s.weight}</span>
+      <span class="n"><span class="cid">${idForStyle(s)}</span>${
+        ((s.bp && s.bp[b.name]) || s.count || 0).toLocaleString()}</span>`;
+    btn.onclick = () => { state.sel = s.id; state._selData = { style: s }; draw(); };
+    steps.appendChild(btn);
+  });
+  row.appendChild(steps);
+  return row;
+}
+
+function drawJourneys(sheet){
+  const on = bpsOn();
+  const arr = sortJourneys(journeysOn());
+  const sec = document.createElement("section");
+  sec.innerHTML = `<div class="secthead"><h2>Across widths</h2>
+    <span class="tot">JOURNEYS <b>${arr.length}</b> &middot;
+    RESPONSIVE <b>${arr.filter(j => j.responsive).length}</b> &middot;
+    FLAGGED <b>${arr.filter(j => j.score > 0).length}</b></span></div>`;
+  const box = document.createElement("div");
+  box.className = "jrows";
+  for (const j of arr) box.appendChild(journeyEl(j, on));
+  sec.appendChild(box);
+  sheet.appendChild(sec);
+}
+
 function drawCombined(sheet){
+  if (state.group === "journey") return drawJourneys(sheet);
   // one card per distinct style, drawn as itself
   const arr = STYLES.filter(atBp);
   if (state.sort === "count") arr.sort((a, b) => bpCount(b) - bpCount(a));
@@ -804,8 +1009,11 @@ function drawChrome(){
      <span><b>${g.weight.size}</b> weights</span>
      <span><b>${g.family.size}</b> families</span>
      <span><b>${T.pages}</b> pages</span>`;
+  document.getElementById("groupseg").hidden = state.view !== "combined";
   document.getElementById("viewnote").innerHTML = state.view === "combined"
-    ? "One card per distinct style, drawn as itself. This is the same set the Type Atlas lists, shown as specimens rather than rows."
+    ? state.group === "journey"
+      ? "One row per element path, followed across every width. In the other grouping these are separate cards with nothing linking them &mdash; here <code>C5 &rarr; C6</code> is one nav link at two widths, not two nav styles. Ordered worst-first: type that grows as the screen narrows, then type that sits on the scale at one width and off it at another. The width chips choose which columns are drawn, not which journeys exist."
+      : "One card per distinct style, drawn as itself. This is the same set the Type Atlas lists, shown as specimens rather than rows."
     : state.mode === "computed"
       ? "What the browser produced, per property. Each card is drawn at the value it renders, and the panel shows which authored spellings feed it."
       : "What was typed in the stylesheet, per property. The panel shows what each spelling actually computes to &mdash; which is where the same declaration lands on several different sizes.";
@@ -822,6 +1030,12 @@ function drawChrome(){
     `whole style &mdash; fixed to the value, not to the current sort, so it stays ` +
     `the same card however the page is ordered. ` +
     `Counted by elements across ${T.pages} built pages, not by declarations. ` +
+    (state.view === "combined" && state.group === "journey"
+      ? `A journey's own figure is <b>sampled</b>, because the audit records at ` +
+        `most 60 occurrences per style; the count on each step is the real one ` +
+        `for that width. Journeys are keyed on the rendered element, so two ` +
+        `siblings sharing a source line are told apart by encounter order &mdash; ` +
+        `exact unless they carry different type at some width. ` : "") +
     `Cards over ${MAX_GLYPH}px are drawn at ${MAX_GLYPH}px and marked <code>~</code>. ` +
     `Weight and family cards are drawn at ${BASE}px, having no size of their own. ` +
     `Regenerate with <code>python3 _tools/type-audit.py</code>.`;
@@ -910,6 +1124,8 @@ function setMode(m){ state.mode = m; state.sel = null; state._selData = null;
   press("m-computed", m === "computed"); press("m-declared", m === "declared"); draw(); }
 function setView(v){ state.view = v; state.sel = null; state._selData = null;
   press("v-props", v === "props"); press("v-combined", v === "combined"); draw(); }
+function setGroup(g){ state.group = g; state.sel = null; state._selData = null;
+  press("g-style", g === "style"); press("g-journey", g === "journey"); draw(); }
 function setSort(s){ state.sort = s;
   press("s-value", s === "value"); press("s-count", s === "count"); press("s-az", s === "az");
   draw(); }
@@ -918,6 +1134,8 @@ document.getElementById("m-computed").onclick = () => setMode("computed");
 document.getElementById("m-declared").onclick = () => setMode("declared");
 document.getElementById("v-props").onclick    = () => setView("props");
 document.getElementById("v-combined").onclick = () => setView("combined");
+document.getElementById("g-style").onclick    = () => setGroup("style");
+document.getElementById("g-journey").onclick  = () => setGroup("journey");
 document.getElementById("s-value").onclick    = () => setSort("value");
 document.getElementById("s-count").onclick    = () => setSort("count");
 document.getElementById("s-az").onclick       = () => setSort("az");
