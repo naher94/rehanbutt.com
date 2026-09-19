@@ -456,6 +456,8 @@
       <div class="chips" id="widths"></div></div>
     <div class="fgroup"><span class="flabel">Source</span>
       <div class="chips" id="provs"></div></div>
+    <div class="fgroup"><span class="flabel">Register</span>
+      <div class="chips" id="regs"></div></div>
     <div class="fgroup"><span class="flabel">Show</span>
       <div class="toggles" id="sections"></div></div>
   </div>
@@ -485,6 +487,7 @@ const state = {
   sort: "value",              // value | count | az
   show: { size: true, weight: true, family: true },
   prov: new Set(),            // empty == every source, as the widths do
+  reg:  new Set(),            // empty == every register
   sel: null
 };
 
@@ -1011,7 +1014,7 @@ function drawJourneys(sheet){
 function drawCombined(sheet){
   if (state.group === "journey") return drawJourneys(sheet);
   // one card per distinct style, drawn as itself
-  const arr = STYLES.filter(s => atBp(s) && provOn(s));
+  const arr = STYLES.filter(s => atBp(s) && provOn(s) && regOn(s));
   if (state.sort === "count") arr.sort((a, b) => bpCount(b) - bpCount(a));
   else if (state.sort === "az")
     arr.sort((a, b) => (a.family + a.weight).localeCompare(b.family + b.weight));
@@ -1204,6 +1207,53 @@ function drawProvChips(){
   }
 }
 
+/* A style's register comes from the map when the audit could name its entry,
+   and from your own tag when it could not. `unassigned` is neither -- the pile
+   still to triage, and the reason this is three chips rather than the two
+   asked for: filtering to `product` should mean product, not product plus a
+   hundred styles nobody has placed yet. */
+const REG_LEVELS = [["product", "in $product-type, or tagged product"],
+                    ["expressive", "in $expressive-type, or tagged expressive"],
+                    ["unassigned", "not in either map and not tagged"]];
+
+function registerOf(s){
+  const entry = mappedEntry(s);
+  if (entry) return entry.split("/")[0];
+  return tagOf(s) || null;
+}
+
+function regOn(s){
+  if (!state.reg.size) return true;
+  return state.reg.has(registerOf(s) || "unassigned");
+}
+
+function drawRegChips(){
+  const host = document.getElementById("regs");
+  host.innerHTML = "";
+  const counts = {};
+  REG_LEVELS.forEach(function (r) { counts[r[0]] = 0; });
+  STYLES.forEach(function (s) { counts[registerOf(s) || "unassigned"]++; });
+  for (const [lv, why] of REG_LEVELS) {
+    const on = state.reg.size === 0 || state.reg.has(lv);
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.type = "button";
+    b.title = why;
+    b.setAttribute("aria-pressed", on ? "true" : "false");
+    b.innerHTML = `${lv} <span class="n">${counts[lv]}</span>`;
+    b.onclick = () => {
+      const set = state.reg;
+      if (set.size === 0) REG_LEVELS.forEach(function (r) { set.add(r[0]); });
+      set.has(lv) ? set.delete(lv) : set.add(lv);
+      if (set.size === REG_LEVELS.length) set.clear();
+      if (set.size === 0 && !on) set.add(lv);
+      state.sel = null; state._selData = null;
+      draw();
+    };
+    host.appendChild(b);
+  }
+}
+
 function drawSections(){
   const host = document.getElementById("sections");
   host.innerHTML = "";
@@ -1355,7 +1405,7 @@ function drawWhere(){
 
 
 
-function draw(){ drawBpBar(); drawWidthChips(); drawProvChips(); drawSections(); drawSheet(); drawPanel(); drawWhere(); drawChrome(); }
+function draw(){ drawBpBar(); drawWidthChips(); drawProvChips(); drawRegChips(); drawSections(); drawSheet(); drawPanel(); drawWhere(); drawChrome(); }
 
 function press(id, on){ document.getElementById(id).setAttribute("aria-pressed", String(on)); }
 function setMode(m){ state.mode = m; state.sel = null; state._selData = null;
