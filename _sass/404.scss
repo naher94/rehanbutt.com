@@ -1,11 +1,8 @@
 //******* 404 Styling
 .title-404 {
-  font-size: 3em;
-  font-weight: $zilla-bold;
+  @include type-style(page-title);
   @include breakpoint(small only) {
     text-align: center;
-    font-size: 3.5em;
-
   }
 }
 
