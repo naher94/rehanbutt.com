@@ -263,18 +263,18 @@ $product-type: (
   // ---- hierarchy: rank on the page ----------------------------------------
   // section-title is deliberately larger than page-title: that inversion is
   // real on the site today, so correcting it stays a deliberate edit.
-  section-title: (family: $zilla, size: 4.375rem,   weight: $zilla-bold,   line-height: normal), // 70px
-  page-title:    (family: $zilla, size: 3.75rem,    weight: $zilla-bold,   line-height: 0.9),    // 60px
-  body:          (family: $lato,  size: 1.25rem,    weight: $lato-regular),                      // 20px, inherits 1.5
-  body-strong:   (family: $lato,  size: 1.25rem,    weight: $lato-bold,    line-height: 1.6),    // 20px
-  body-sm:       (family: $lato,  size: 1rem,       weight: $lato-regular, line-height: 1.6),    // 16px
+  section-title: (family: $zilla, size: 4.375rem,   font-weight: $zilla-bold,   line-height: normal), // 70px
+  page-title:    (family: $zilla, size: 3.75rem,    font-weight: $zilla-bold,   line-height: 0.9),    // 60px
+  body:          (family: $lato,  size: 1.25rem,    font-weight: $lato-regular),                      // 20px, inherits 1.5
+  body-strong:   (family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.6),    // 20px
+  body-sm:       (family: $lato,  size: 1rem,       font-weight: $lato-regular, line-height: 1.6),    // 16px
 
   // ---- component styles: named for the thing, not for a rank --------------
   // nav-link's 1.6 is the list leading it inherits by being a `ul`, not a choice.
-  nav-link:      (family: $zilla, size: 2.34375rem, weight: $zilla-bold,   line-height: 1.6),    // 37.5px
-  card-title:    (family: $zilla, size: 1.5rem,     weight: $zilla-bold,   line-height: 1),      // 24px
-  ui:            (family: $lato,  size: 1rem,       weight: $lato-bold,    line-height: 1.6),    // 16px
-  eyebrow:       (family: $lato,  size: 0.625rem,   weight: $lato-bold,    line-height: 1.6,     // 10px
+  nav-link:      (family: $zilla, size: 2.34375rem, font-weight: $zilla-bold,   line-height: 1.6),    // 37.5px
+  card-title:    (family: $zilla, size: 1.5rem,     font-weight: $zilla-bold,   line-height: 1),      // 24px
+  ui:            (family: $lato,  size: 1rem,       font-weight: $lato-bold,    line-height: 1.6),    // 16px
+  eyebrow:       (family: $lato,  size: 0.625rem,   font-weight: $lato-bold,    line-height: 1.6,     // 10px
                   letter-spacing: .3em, text-transform: uppercase),
 
   // Pull-quotes in the case studies, mirroring the three .post-callout-*
@@ -282,23 +282,25 @@ $product-type: (
   // Sizes are the desktop values -- the classes are written in `em`, so each
   // also renders a fifth smaller at the small breakpoint (40 / 32 / 24), which
   // a single fixed value cannot carry.
-  callout-lg:    (family: $lato,  size: 3.125rem,   weight: $lato-regular, line-height: 1.3),    // 50px
-  callout-md:    (family: $lato,  size: 2.5rem,     weight: $lato-bold,    line-height: 1.3,     // 40px
+  callout-lg:    (family: $lato,  size: 3.125rem,   font-weight: $lato-regular, line-height: 1.3),    // 50px
+  callout-md:    (family: $lato,  size: 2.5rem,     font-weight: $lato-bold,    line-height: 1.3,     // 40px
                   font-style: italic),
-  // The only entry in either map that is off the scale. 30px is what the class
-  // renders today; the nearest step is 32px, and moving it is a design edit
-  // rather than a transcription, so it is recorded as-is.
-  callout-sm:    (family: $lato,  size: 1.875rem,   weight: $lato-regular, line-height: 1.3),    // 30px
+  // No font-weight: the class decides none, so its instances take 400 from the
+  // page or 700 from the `p` rule in rehan.scss, and emitting a weight here
+  // would flatten ten bold pull-quotes to regular. Off the scale at 30px --
+  // the only entry in either map that is; the nearest step is 32px, and moving
+  // it is a design edit rather than a transcription, so it is recorded as-is.
+  callout-sm:    (family: $lato,  size: 1.875rem,                               line-height: 1.3),    // 30px
 );
 
 // Fewer, and it should stay that way: a style that turns up on a second page
 // has stopped being expressive and belongs in $product-type instead.
 $expressive-type: (
-  counter:       (family: $lato,  size: 5.625rem,   weight: $lato-black,   line-height: 1),      // 90px, the achievement numeral
+  counter:       (family: $lato,  size: 5.625rem,   font-weight: $lato-black,   line-height: 1),      // 90px, the achievement numeral
   // The only value in either map not taken from current usage -- the slot for a
   // hero line or a statement over an image, set tight because large type reads
   // loose at settings that suit 16px.
-  statement:     (family: $zilla, size: 5.625rem,   weight: $zilla-bold,   line-height: 0.955,   // 90px
+  statement:     (family: $zilla, size: 5.625rem,   font-weight: $zilla-bold,   line-height: 0.955,   // 90px
                   letter-spacing: -0.01em),
 );
 
@@ -332,8 +334,7 @@ $type-registers: (product: $product-type, expressive: $expressive-type);
   }
   font-family: map-get($style, family);
   font-size: map-get($style, size);
-  font-weight: map-get($style, weight);
-  @each $prop in (line-height, letter-spacing, text-transform, font-style) {
+  @each $prop in (font-weight, line-height, letter-spacing, text-transform, font-style) {
     $value: map-get($style, $prop);
     @if $value != null {
       #{$prop}: $value;

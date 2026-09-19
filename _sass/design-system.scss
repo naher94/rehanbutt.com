@@ -131,32 +131,36 @@ ul {
 
 .post-callout-large{
   margin: 2rem 0;
-  font-size: 2.5em;
   padding-left: 0.5em;
   padding-right: 0.5em;
-  line-height: 1.3em;
+  @include type-style(product, callout-lg);
+  @include breakpoint(small only) {
+    font-size: 2.5rem; // 40px. TODO remap once the map holds a per-breakpoint
+                       // size; already on the scale, so this is a value worth
+                       // keeping rather than an em artifact to correct.
+  }
 }
 
 .post-callout-medium{
   margin: 2rem 0;
-  font-size: 2em;
   padding-left: 2.5em;
   padding-right: 2.5em;
-  line-height: 1.3em;
-  font-weight: $lato-bold;
-  font-style: italic;
+  @include type-style(product, callout-md);
   @include breakpoint(small only) {
     padding-left: 0.25em;
     padding-right: 0.25em;
+    font-size: 2rem; // 32px, on the scale. TODO as above.
   }
 }
 
 .post-callout-small{
   margin: 2rem 0;
-  font-size: 1.5em;
   padding-left: 0.5em;
   padding-right: 0.5em;
-  line-height: 1.3em;
+  @include type-style(product, callout-sm);
+  @include breakpoint(small only) {
+    font-size: 1.5rem; // 24px, on the scale. TODO as above.
+  }
 }
 
 
