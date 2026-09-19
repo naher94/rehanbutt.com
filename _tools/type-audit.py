@@ -77,7 +77,7 @@ def source_line(rel, line):
 
 
 TOKEN_PROPS = {"family": "font-family", "size": "font-size",
-               "weight": "font-weight", "line-height": "line-height",
+               "font-weight": "font-weight", "line-height": "line-height",
                "letter-spacing": "letter-spacing",
                "text-transform": "text-transform",
                "font-style": "font-style"}
