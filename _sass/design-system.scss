@@ -1,11 +1,15 @@
 // Design System
+// `product/body` declares no line-height, which is what makes the whole style
+// safe to apply here: the root inherits the global unitless 1.5 and passes it
+// down as a ratio. A length would re-lead every child to that one figure.
+//
+// The small-only size stays a literal -- the map holds one value per style and
+// has no per-breakpoint form yet.
 body {
-  font-family: $lato;
-  font-weight: $lato-regular;
-  font-size: 20px; // = 1em
+  @include type-style(product, body); // = 1em
   color: semantic-color(text);
   @include breakpoint(small only) {
-    font-size: 16px;
+    font-size: 16px; //TODO remap this to use the type scales in variables.scss
   }
   background-color: $pure-white;
   @media (prefers-color-scheme: dark) {
