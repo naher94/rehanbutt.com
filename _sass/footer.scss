@@ -15,8 +15,11 @@ footer{
       .section-title{
         padding: 0;
         margin: 0;
-        font-weight: $lato-bold;
+        @include type-style(product, body-strong);
         margin-bottom: 1rem;
+        @include breakpoint(small only) {
+          font-size: 1.5rem; //TODO update this
+        }
       }
     }
     .metadata{
@@ -55,9 +58,7 @@ footer{
         padding: 0;
         margin: 0;
       }
-      font-family: $lato;
-      font-weight: $lato-bold;
-      font-size: 1rem;
+      @include type-style(product, ui);
       .happy-copyright{
         p{
           display: inline;
