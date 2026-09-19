@@ -26,9 +26,12 @@ h1, h2, h3, h4 {
 }
 
 h1{
-  font-size: 3em;
-  line-height: 0.9em;
-  font-weight: $zilla-bold;
+  @include type-style(product, page-title);
+  @include breakpoint(small only) {
+    font-size: 3rem; //TODO remap to page-title once the map holds a
+                     // per-breakpoint size; 3em against a 16px root is where
+                     // this came from, and 48px is off the scale either way.
+  }
 }
 
 h2{
