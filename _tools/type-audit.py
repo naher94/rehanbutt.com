@@ -126,9 +126,18 @@ def type_style_map():
 _TYPE_STYLES = None
 
 
+# The mixin emits its optional properties through a loop, as `#{$prop}: $value`,
+# so the source line names no property at all. Matching only `prop: map-get(...)`
+# missed every one of them and reported line-height, letter-spacing and
+# text-transform as hand-written literals.
+MIXIN_EMIT = re.compile(r'^#\{\$[-\w]+\}\s*:\s*\$[-\w]+\s*;?\s*$')
+
+
 def from_mixin(rel, line, prop):
     """Whether this declaration was emitted by `type-style()` rather than written."""
     text = source_line(rel, line).strip()
+    if MIXIN_EMIT.match(text):
+        return True
     m = re.match(r'([-\w]+)\s*:\s*(.+?)\s*;?\s*$', text)
     return bool(m and m.group(1) == prop and "map-get($style" in m.group(2))
 
@@ -175,6 +184,12 @@ def authored_as(rel, line, prop, value, token=None):
     if not rel or not line:
         return None
     text = source_line(rel, line).strip()
+    if MIXIN_EMIT.match(text):
+        # An interpolated emit names no property, so the usual guard below
+        # cannot confirm it. `token_for` still has to match the value against
+        # the map to name an entry, so a wrong line degrades to `type-style()`
+        # rather than inventing an attribution.
+        return token or "type-style()"
     m = re.match(r'([-\w]+)\s*:\s*(.+?)\s*;?\s*$', text)
     if not m or m.group(1) != prop:
         return None

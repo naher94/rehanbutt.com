@@ -173,10 +173,12 @@
   .bpbar .note{font-size:13px;color:var(--ink-muted)}
   .bpbar .seg button small{display:block;font-family:"JetBrains Mono",monospace;
     font-size:9.5px;font-weight:400;opacity:.75;letter-spacing:.04em}
+  /* Neutral on purpose. The accent now means one thing only -- a value that
+     came from the type map -- so a breakpoint badge must not borrow it. */
   .respflag{font-family:"JetBrains Mono",monospace;font-size:9.5px;
     letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:2px;
-    background:color-mix(in srgb,var(--accent) 16%,transparent);
-    color:var(--accent-deep);margin-left:8px;vertical-align:2px}
+    background:var(--chip);
+    color:var(--ink-muted);margin-left:8px;vertical-align:2px}
   /* --- specimen cards -------------------------------------------------- */
   .secthead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
     padding:14px 0 10px;border-bottom:2px solid var(--ink);margin:26px 0 16px}
@@ -230,7 +232,7 @@
   .jhead .jcount{margin-left:auto;white-space:nowrap}
   .jflag{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.06em;
     text-transform:uppercase;padding:2px 6px;border-radius:2px;
-    background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent-deep)}
+    background:var(--chip);color:var(--ink-muted)}
   .jflag.hi{background:color-mix(in srgb,var(--flag-high) 18%,transparent);
     color:var(--flag-high)}
   .jflag.med{background:color-mix(in srgb,var(--flag-med) 18%,transparent);
