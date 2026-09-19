@@ -282,6 +282,30 @@
     color:var(--flag-med)}
   .provchip.p-literal{background:color-mix(in srgb,var(--flag-high) 16%,transparent);
     color:var(--flag-high)}
+  /* --- mapped / tagged --------------------------------------------------- */
+  /* A filled badge is fact -- the audit resolved this style to one map entry.
+     A dashed one is intent -- you said where it should go, and nothing in the
+     stylesheet agrees yet. Keeping those two visually separate matters more
+     than either badge on its own. */
+  .mapbadge{display:block;border-top:1px solid var(--rule);padding:3px 8px;
+    font-family:"JetBrains Mono",monospace;font-size:10px;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis;
+    background:color-mix(in srgb,var(--accent) 16%,transparent);
+    color:var(--accent-deep)}
+  .mapbadge.expressive{background:color-mix(in srgb,var(--flag-ok) 18%,transparent);
+    color:var(--flag-ok)}
+  .tagbadge{display:block;border-top:1px dashed var(--rule-strong);padding:3px 8px;
+    font-family:"JetBrains Mono",monospace;font-size:10px;white-space:nowrap;
+    color:var(--ink-muted);background:repeating-linear-gradient(135deg,
+      transparent,transparent 4px,var(--surface-2) 4px,var(--surface-2) 8px)}
+  .tagrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+  .tagrow button{font-family:"Lato",sans-serif;font-size:12.5px;font-weight:700;
+    padding:4px 10px;border:1px solid var(--rule-strong);border-radius:2px;
+    background:var(--surface);color:var(--ink-muted);cursor:pointer}
+  .tagrow button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);
+    color:var(--ground)}
+  .tagrow button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
   .provkey{display:flex;gap:14px;flex-wrap:wrap;align-items:center;
     font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-muted)}
   .provkey i{display:inline-block;width:10px;height:10px;border-radius:2px;
@@ -723,6 +747,41 @@ function provBar(s){
 const provLabel = via => via && via.indexOf("/") !== -1 ? via
   : via === "type-style()" ? "type map" : provOf(via);
 
+/* ------------------------------------------------------ mapped / tagged ---
+   Mapped: the audit resolved every mixin-emitted declaration on this style to
+   one entry, so it can say `product/page-title` rather than just "a token".
+   Where several entries share the value it stays unnamed, which is why this is
+   a weaker claim than "fully migrated" -- a style can be mapped here and still
+   reach some of its elements through a literal. The provenance strip says so.
+
+   Tagged: your own note about where an unmapped style should end up. Stored
+   per style id, and because that id is the style's value signature, editing
+   the type changes the id and the tag simply stops matching rather than
+   quietly following the value somewhere it was never meant to go.
+--------------------------------------------------------------------------- */
+function mappedEntry(s){
+  const names = new Set();
+  (s.decls || []).forEach(function (d) {
+    if (d.via && d.via.indexOf("/") !== -1) names.add(d.via);
+  });
+  return names.size === 1 ? [...names][0] : null;
+}
+
+const TAG_STORE = "rb-type-register-tags-v1";
+function loadTags(){
+  try { return JSON.parse(localStorage.getItem(TAG_STORE) || "{}") || {}; }
+  catch (e) { return {}; }
+}
+function saveTags(t){
+  try { localStorage.setItem(TAG_STORE, JSON.stringify(t)); } catch (e) {}
+}
+let TAGS = loadTags();
+const tagOf = s => TAGS[s.id] || null;
+function setTag(s, register){
+  if (register) TAGS[s.id] = register; else delete TAGS[s.id];
+  saveTags(TAGS);
+}
+
 /* ------------------------------------------------------------- journeys ---
    One element followed across every width, instead of one card per width.
    Almost every question this sheet gets asked -- "why are these two nearly
@@ -976,6 +1035,17 @@ function drawCombined(sheet){
         bpOnly(s) ? ` <span class="respflag">${esc(bpOnly(s))}</span>` : ""}</span>
       <span class="val" style="border-top:0;color:var(--ink-muted)">${esc(s.family)}</span>
       <span class="n"><span class="cid">${idForStyle(s)}</span>${bpCount(s).toLocaleString()}</span>
+      ${(() => {
+        const entry = mappedEntry(s);
+        if (entry) {
+          const reg = entry.split("/")[0];
+          return `<span class="mapbadge ${reg}" title="mapped to ${esc(entry)}">${
+            esc(entry.split("/")[1])}</span>`;
+        }
+        const tag = tagOf(s);
+        return tag ? `<span class="tagbadge" title="tagged ${tag} — not in the map yet">→ ${
+          esc(tag)}</span>` : "";
+      })()}
       ${provBar(s)}`;
     b.onclick = () => { state.sel = s.id; state._selData = { style: s }; draw(); };
     box.appendChild(b);
@@ -1011,7 +1081,27 @@ function drawPanel(){
         <span class="v">${x.count.toLocaleString()}</span></div>`).join("")}
       <p class="samples" style="padding-left:0;margin-top:14px">
         Open this style in the <a href="type-atlas.html">Type Atlas</a> for its
-        merge recommendation and pages.</p>`;
+        merge recommendation and pages.</p>
+      ${(() => {
+        const entry = mappedEntry(s);
+        if (entry) return `<h4>Register</h4><div class="brk"><span class="k">mapped to <b>${
+          esc(entry)}</b></span></div>`;
+        const tag = tagOf(s);
+        return `<h4>Register</h4>
+          <p class="samples" style="padding-left:0;margin:0 0 4px">Not in the map.
+          Tag where it should go — kept in this browser, not written to the stylesheet.</p>
+          <div class="tagrow">
+            <button data-tag="product" aria-pressed="${tag === 'product'}">product</button>
+            <button data-tag="expressive" aria-pressed="${tag === 'expressive'}">expressive</button>
+            <button data-tag="" aria-pressed="false"${tag ? "" : " disabled"}>clear</button>
+          </div>`;
+      })()}`;
+    p.querySelectorAll(".tagrow button").forEach(function (b) {
+      b.onclick = function () {
+        setTag(s, b.getAttribute("data-tag"));
+        draw();
+      };
+    });
     return;
   }
   const { e, kind } = d;
