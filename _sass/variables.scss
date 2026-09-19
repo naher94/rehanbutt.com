@@ -276,6 +276,19 @@ $product-type: (
   ui:            (family: $lato,  size: 1rem,       weight: $lato-bold,    line-height: 1.6),    // 16px
   eyebrow:       (family: $lato,  size: 0.625rem,   weight: $lato-bold,    line-height: 1.6,     // 10px
                   letter-spacing: .3em, text-transform: uppercase),
+
+  // Pull-quotes in the case studies, mirroring the three .post-callout-*
+  // classes. All three share 1.3 leading; -md is the only italic in either map.
+  // Sizes are the desktop values -- the classes are written in `em`, so each
+  // also renders a fifth smaller at the small breakpoint (40 / 32 / 24), which
+  // a single fixed value cannot carry.
+  callout-lg:    (family: $lato,  size: 3.125rem,   weight: $lato-regular, line-height: 1.3),    // 50px
+  callout-md:    (family: $lato,  size: 2.5rem,     weight: $lato-bold,    line-height: 1.3,     // 40px
+                  font-style: italic),
+  // The only entry in either map that is off the scale. 30px is what the class
+  // renders today; the nearest step is 32px, and moving it is a design edit
+  // rather than a transcription, so it is recorded as-is.
+  callout-sm:    (family: $lato,  size: 1.875rem,   weight: $lato-regular, line-height: 1.3),    // 30px
 );
 
 // Fewer, and it should stay that way: a style that turns up on a second page
