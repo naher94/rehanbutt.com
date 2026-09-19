@@ -1,6 +1,6 @@
 //******* 404 Styling
 .title-404 {
-  @include type-style(page-title);
+  @include type-style(product, page-title);
   @include breakpoint(small only) {
     text-align: center;
   }

@@ -257,20 +257,41 @@ $caveat-regular: 400;
 // em is resolved against whatever parent it lands in, which is how the same
 // declaration ended up rendering at six different sizes.
 //
-// Usage:  h2 { @include type-style(section-title); }
+// ---- the two registers -----------------------------------------------------
+// Product type is engineered for consistency across many pages, which makes it
+// right for the templated work that carries most of the site -- project pages,
+// resource collections, articles. One decision here lands on seventy-odd pages,
+// so it has to be systematic and sit on the scale.
+//
+// Expressive type is set for a single moment, to carry a graphic idea that
+// appears nowhere else -- a hero, a statement over an image, a standalone
+// numeral. It answers to that moment and to nothing else, and it is free to be
+// hand-tuned because there is no second instance to stay consistent with.
+//
+// The axis is repetition, not volume. Loud is not expressive: the post callouts
+// run across eleven case studies and the tag headings repeat sixty times down
+// one page, so both are product however large they are set.
+//
+// The register is named at the call site rather than stored on the entry,
+// because moving a style between registers is exactly the kind of change that
+// should make you look at every place it is used.
+//
+// ---- the two families ------------------------------------------------------
+// Zilla Slab is the display face: it names things -- headings, titles, nav.
+// Lato is the text face: it is read -- sentences, labels, metadata, UI.
+// For anything ambiguous the test is whether you are naming it or saying it.
+//
+// Product type follows that rule. Expressive type is exempt, which is the whole
+// point of it: `counter` is Lato Black at 90px, a text face doing display work,
+// and it is the most distinctive type on the site precisely because of that.
+//
+// Zilla has no size floor. It is the display face by role, not by size, so the
+// nav stays Zilla at every width.
+//
+// Usage:  h2 { @include type-style(product, section-title); }
 
-$type-styles: (
+$product-type: (
   // ---- hierarchy: rank on the page ----------------------------------------
-  // `expressive` borrows IBM Carbon's split: productive type is for reading
-  // and navigating, expressive type is for impact. It is the tier above a page
-  // title, for type doing a graphic job rather than a structural one -- a hero
-  // line, a statement over an image -- and it is the one entry here not taken
-  // from current usage, since nothing on the site is set this way yet. Set
-  // tighter than a heading on both axes, because large type reads loose at
-  // settings that suit 16px. If a second impact size is ever needed, the
-  // Carbon shape is `expressive-lg` / `expressive-sm` rather than a number.
-  expressive:    (family: $zilla, size: 90px,   weight: $zilla-bold,   line-height: 86px,
-                  letter-spacing: -0.01em),
   // 70px, larger than page-title. That inversion is real on the site today --
   // about.html sets its sections at 70px under a 48px h1 -- and is recorded
   // here rather than quietly corrected, so the fix is a deliberate edit.
@@ -289,20 +310,49 @@ $type-styles: (
   eyebrow:       (family: $lato,  size: 10px,   weight: $lato-bold,    line-height: 16px,
                   letter-spacing: .3em, text-transform: uppercase),
 );
-@function type-value($style-key, $prop) {
-  @if not map-has-key($type-styles, $style-key) {
-    @error 'Unknown type style `#{$style-key}`. Known: #{map-keys($type-styles)}.';
+
+// Fewer, and it should stay that way. An expressive style that turns up on a
+// second page has stopped being one, and belongs in $product-type instead.
+$expressive-type: (
+  // The achievement numeral on easter-eggs.html: one element, one page, and the
+  // only type on the site that holds its scale against the body copy beside it
+  // at every width -- 4.5x on desktop, still 2.7x at 375px.
+  counter:       (family: $lato,  size: 90px,   weight: $lato-black,   line-height: 90px),
+  // Not set anywhere yet, and the only value here not taken from current usage.
+  // Kept as the slot for a hero line or a statement over an image. Set tighter
+  // than a heading on both axes, because large type reads loose at settings
+  // that suit 16px.
+  statement:     (family: $zilla, size: 90px,   weight: $zilla-bold,   line-height: 86px,
+                  letter-spacing: -0.01em),
+);
+
+$type-registers: (product: $product-type, expressive: $expressive-type);
+
+@function type-map($register) {
+  $map: map-get($type-registers, $register);
+  @if $map == null {
+    @error 'Unknown type register `#{$register}`. Known: #{map-keys($type-registers)}.';
   }
-  @return map-get(map-get($type-styles, $style-key), $prop);
+  @return $map;
+}
+
+@function type-value($register, $style-key, $prop) {
+  $style: map-get(type-map($register), $style-key);
+  @if $style == null {
+    @error 'Unknown #{$register} type style `#{$style-key}`. '
+         + 'Known: #{map-keys(type-map($register))}.';
+  }
+  @return map-get($style, $prop);
 }
 
 // Emits the whole style. Optional properties are only written when the style
 // defines them, so a rule never carries `letter-spacing: normal` it did not ask
 // for -- that would override an inherited value rather than leave it alone.
-@mixin type-style($style-key) {
-  $style: map-get($type-styles, $style-key);
+@mixin type-style($register, $style-key) {
+  $style: map-get(type-map($register), $style-key);
   @if $style == null {
-    @error 'Unknown type style `#{$style-key}`. Known: #{map-keys($type-styles)}.';
+    @error 'Unknown #{$register} type style `#{$style-key}`. '
+         + 'Known: #{map-keys(type-map($register))}.';
   }
   font-family: map-get($style, family);
   font-size: map-get($style, size);
