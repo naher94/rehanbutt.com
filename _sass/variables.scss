@@ -257,6 +257,14 @@ $caveat-regular: 400;
 // the style inherits, which here means 1.5 globally, 1.6 on paragraphs and
 // lists, 1.4 on headings.
 //
+// A style may also carry `at`: a map of Foundation breakpoint expressions to
+// the properties that change there. `size` stays the desktop value and `at`
+// holds the exceptions, which matches how the rest of the site is written --
+// a desktop base with `small only` corrections, not mobile-first. Keys are
+// unquoted (`small only`, never `'small only'`): Foundation reads the
+// direction keyword with `nth($val, 2)`, and quoting collapses the pair into
+// one string.
+//
 // Usage:  h2 { @include type-style(product, section-title); }
 
 $product-type: (
@@ -264,8 +272,14 @@ $product-type: (
   // section-title is deliberately larger than page-title: that inversion is
   // real on the site today, so correcting it stays a deliberate edit.
   section-title: (family: $zilla, size: 4.375rem,   font-weight: $zilla-bold,   line-height: normal), // 70px
-  page-title:    (family: $zilla, size: 3.75rem,    font-weight: $zilla-bold,   line-height: 0.9),    // 60px
-  body:          (family: $lato,  size: 1.25rem,    font-weight: $lato-regular),                      // 20px, inherits 1.5
+  // 48px is off the scale, and was `3em` against the 16px root before it moved
+  // here. Two h1s used to hold 60px on a phone -- the 404 title and the about
+  // hero -- because their class-specificity rules outranked the bare `h1`
+  // media query this replaces. Both shrink to 48px now, deliberately.
+  page-title:    (family: $zilla, size: 3.75rem,    font-weight: $zilla-bold,   line-height: 0.9,     // 60px
+                  at: (small only: (size: 3rem))),                                                    // 48px
+  body:          (family: $lato,  size: 1.25rem,    font-weight: $lato-regular,                       // 20px, inherits 1.5
+                  at: (small only: (size: 1rem))),                                                    // 16px, == the root
   body-strong:   (family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.6),    // 20px
   body-sm:       (family: $lato,  size: 1rem,       font-weight: $lato-regular, line-height: 1.6),    // 16px
 
@@ -279,18 +293,22 @@ $product-type: (
 
   // Pull-quotes in the case studies, mirroring the three .post-callout-*
   // classes. All three share 1.3 leading; -md is the only italic in either map.
-  // Sizes are the desktop values -- the classes are written in `em`, so each
-  // also renders a fifth smaller at the small breakpoint (40 / 32 / 24), which
-  // a single fixed value cannot carry.
-  callout-lg:    (family: $lato,  size: 3.125rem,   font-weight: $lato-regular, line-height: 1.3),    // 50px
+  // `size` is the desktop value; `at` carries the small-breakpoint one, each
+  // about a fifth smaller (50/40/30 -> 40/32/24). The classes used to hold
+  // those as hand-written font-size overrides, which meant the mobile size
+  // was invisible from here and the audit could not name the token at 375px.
+  callout-lg:    (family: $lato,  size: 3.125rem,   font-weight: $lato-regular, line-height: 1.3,     // 50px
+                  at: (small only: (size: 2.5rem))),                                                  // 40px
   callout-md:    (family: $lato,  size: 2.5rem,     font-weight: $lato-bold,    line-height: 1.3,     // 40px
-                  font-style: italic),
+                  font-style: italic,
+                  at: (small only: (size: 2rem))),                                                    // 32px
   // No font-weight: the class decides none, so its instances take 400 from the
   // page or 700 from the `p` rule in rehan.scss, and emitting a weight here
   // would flatten ten bold pull-quotes to regular. Off the scale at 30px --
   // the only entry in either map that is; the nearest step is 32px, and moving
   // it is a design edit rather than a transcription, so it is recorded as-is.
-  callout-sm:    (family: $lato,  size: 1.875rem,                               line-height: 1.3),    // 30px
+  callout-sm:    (family: $lato,  size: 1.875rem,                               line-height: 1.3,     // 30px
+                  at: (small only: (size: 1.5rem))),                                                  // 24px
 );
 
 // Fewer, and it should stay that way: a style that turns up on a second page
@@ -323,21 +341,63 @@ $type-registers: (product: $product-type, expressive: $expressive-type);
   @return map-get($style, $prop);
 }
 
-// Emits the whole style. Optional properties are only written when the style
-// defines them, so a rule never carries `letter-spacing: normal` it did not ask
-// for -- that would override an inherited value rather than leave it alone.
+// The seven properties a style may set, in the order they are written. `family`
+// and `size` are named for the map rather than for CSS, so the pairing is what
+// translates them; the other five are already their own CSS names.
+$type-properties: (
+  family:         font-family,
+  size:           font-size,
+  font-weight:    font-weight,
+  line-height:    line-height,
+  letter-spacing: letter-spacing,
+  text-transform: text-transform,
+  font-style:     font-style,
+);
+
+// Optional properties are only written when the style defines them, so a rule
+// never carries `letter-spacing: normal` it did not ask for -- that would
+// override an inherited value rather than leave it alone. Shared with the `at`
+// blocks, which are the same thing with everything optional.
+@mixin type-declarations($style) {
+  @each $key, $prop in $type-properties {
+    $value: map-get($style, $key);
+    @if $value != null {
+      #{$prop}: $value;
+    }
+  }
+}
+
+// Emits the whole style, plus a media query per `at` entry.
 @mixin type-style($register, $style-key) {
   $style: map-get(type-map($register), $style-key);
   @if $style == null {
     @error 'Unknown #{$register} type style `#{$style-key}`. '
          + 'Known: #{map-keys(type-map($register))}.';
   }
-  font-family: map-get($style, family);
-  font-size: map-get($style, size);
-  @each $prop in (font-weight, line-height, letter-spacing, text-transform, font-style) {
-    $value: map-get($style, $prop);
-    @if $value != null {
-      #{$prop}: $value;
+  // Every property is optional to `type-declarations`, so a base style missing
+  // its family or size would emit a half-empty rule rather than fail. Asserted
+  // here instead: the `at` blocks are corrections and may hold either.
+  @each $required in (family, size) {
+    @if map-get($style, $required) == null {
+      @error '#{$register}/#{$style-key} has no `#{$required}`. '
+           + 'A base style must set both family and size.';
+    }
+  }
+  @include type-declarations($style);
+
+  $at: map-get($style, at);
+  @if $at != null {
+    @each $query, $overrides in $at {
+      // `small only` is a two-item list, so the name is its first item. A typo
+      // would otherwise reach Foundation as an unknown breakpoint and resolve
+      // to an always-true query rather than an error.
+      @if not map-has-key($breakpoints, nth($query, 1)) {
+        @error 'Unknown breakpoint `#{nth($query, 1)}` on '
+             + '#{$register}/#{$style-key}. Known: #{map-keys($breakpoints)}.';
+      }
+      @include breakpoint($query) {
+        @include type-declarations($overrides);
+      }
     }
   }
 }

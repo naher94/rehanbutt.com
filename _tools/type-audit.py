@@ -83,14 +83,55 @@ TOKEN_PROPS = {"family": "font-family", "size": "font-size",
                "font-style": "font-style"}
 
 
+def balanced(text, open_at):
+    """The body between the `(` at `open_at` and its matching `)`.
+
+    A style may hold an `at` map, and that map holds one map per breakpoint, so
+    an entry is no longer flat enough for a regex: `\\)\\s*,` would end the
+    match at the first nested query rather than at the end of the style.
+    """
+    depth = 0
+    for i in range(open_at, len(text)):
+        if text[i] == "(":
+            depth += 1
+        elif text[i] == ")":
+            depth -= 1
+            if depth == 0:
+                return text[open_at + 1:i]
+    raise ValueError("unbalanced `(` at %d in variables.scss" % open_at)
+
+
+def split_top_level(body):
+    """`body` split on the commas that are not inside a nested map."""
+    parts, depth, cur = [], 0, ""
+    for ch in body:
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth -= 1
+        if ch == "," and depth == 0:
+            parts.append(cur)
+            cur = ""
+        else:
+            cur += ch
+    parts.append(cur)
+    return [p.strip() for p in parts if p.strip()]
+
+
 def type_style_map():
     """`$product-type` / `$expressive-type` from variables.scss, as
-    {(register, key): {css-prop: rendered-value}}.
+    {(register, key): {css-prop: {rendered-value, ...}}}.
 
     Read rather than restated, for the same reason the breakpoints are. The
     values are compared against compiled CSS, so they are normalised the way
     the compiler writes them: `0.625rem` loses its leading zero, `$zilla`
     resolves to its stack, weights to their numbers.
+
+    A property maps to the *set* of values the style can render, not one value:
+    an entry with `at: (small only: (size: 2.5rem))` is 50px on desktop and
+    40px on a phone, and both are that token. The audit resolves each page at
+    every breakpoint, so a single value would leave the token unidentifiable at
+    all but one width -- which is what used to happen to the three callouts.
     """
     text = (ROOT / "_sass" / "variables.scss").read_text()
     families, weights = {}, {}
@@ -108,18 +149,37 @@ def type_style_map():
         v = re.sub(r'^0(\.\d)', r'\1', v)          # 0.625rem -> .625rem
         return v.rstrip("0").rstrip(".") if re.fullmatch(r'\d+\.\d+', v) else v
 
+    def collect(body, entry):
+        """Fold one map body's own properties into `entry`, recursing into `at`.
+
+        Nested queries are flattened deliberately: which breakpoint a value
+        belongs to is not the question here. `token_for` asks whether a
+        rendered value is one this token can produce, and the resolver has
+        already established the width.
+        """
+        for part in split_top_level(body):
+            key, _, value = part.partition(":")
+            key, value = key.strip(), value.strip()
+            if key == "at":
+                for query in split_top_level(balanced(value, value.index("("))):
+                    _, _, nested = query.partition(":")
+                    nested = nested.strip()
+                    collect(balanced(nested, nested.index("(")), entry)
+            elif key in TOKEN_PROPS:
+                entry.setdefault(TOKEN_PROPS[key], set()).add(norm(value))
+
+    # Comments are stripped first: several carry unbalanced or comma-bearing
+    # prose (`(50/40/30 -> 40/32/24)`) that the scanners would read as syntax.
+    stripped = re.sub(r'//[^\n]*', '', text)
     out = {}
     for register in ("product", "expressive"):
-        block = re.search(r'\$%s-type:\s*\((.*?)\n\);' % register, text, re.S)
-        if not block:
+        head = re.search(r'\$%s-type:\s*\(' % register, stripped)
+        if not head:
             continue
-        for m in re.finditer(r'^\s{2}([-\w]+):\s*\((.*?)\)\s*,', block.group(1),
-                             re.S | re.M):
+        block = balanced(stripped, head.end() - 1)
+        for m in re.finditer(r'^\s{2}([-\w]+):\s*\(', block, re.M):
             entry = {}
-            for pm in re.finditer(r'([-\w]+):\s*([^,)]+)', m.group(2)):
-                prop = TOKEN_PROPS.get(pm.group(1))
-                if prop:
-                    entry[prop] = norm(pm.group(2))
+            collect(balanced(block, m.end() - 1), entry)
             out[(register, m.group(1))] = entry
     return out
 
@@ -164,7 +224,7 @@ def token_for(decls):
     for prop, value, rel, line in decls:
         if not from_mixin(rel, line, prop):
             continue
-        cands = {k for k, e in _TYPE_STYLES.items() if e.get(prop) == value}
+        cands = {k for k, e in _TYPE_STYLES.items() if value in e.get(prop, ())}
         hits = cands if hits is None else (hits & cands)
         if not hits:
             return None

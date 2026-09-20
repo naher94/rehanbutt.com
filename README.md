@@ -329,13 +329,46 @@ written when the style defines them, so a rule never carries a
 `letter-spacing: normal` it did not ask for — that would override an inherited
 value rather than leave it alone.
 
-Both fail the build on an unknown name, with the valid ones listed:
+A style may also carry `at`, a map of Foundation breakpoint expressions to the
+properties that change there:
+
+```scss
+callout-lg: (family: $lato, size: 3.125rem, font-weight: $lato-regular, line-height: 1.3,
+             at: (small only: (size: 2.5rem))),
+```
+
+`size` stays the desktop value and `at` holds the exceptions — a desktop base
+with `small only` corrections, matching how the rest of the site is written
+rather than mobile-first. The mixin emits one media query per entry, identical
+to writing it by hand. Keys are unquoted: Foundation reads the direction
+keyword as the second item of a list, so `'small only'` in quotes collapses to
+one string and loses it.
+
+The three `.post-callout-*` classes are the reason it exists. Each declared its
+mobile size as a hand-written `font-size` beside the `@include`, which put half
+the style out of the map's sight — the audit could name the token at 1024px and
+not at 375px, and deleting the override silently rendered a 50px pull-quote on a
+phone. `body` and `page-title` had the same split and now carry `at` too.
+
+Moving an override into the map changes its specificity, which is the one thing
+to check before doing it. `page-title`'s 48px lived on a bare `h1` selector, so
+two h1s ignored it — the 404 title and the about hero, both re-applying
+`page-title` from a class-specificity rule that outranked the media query. From
+the map the query is emitted inside each call site, so those two now shrink with
+everything else. That was a deliberate call; a style whose mobile step is
+genuinely meant for only some of its call sites wants a separate entry instead.
+
+All of it fails the build on an unknown name, with the valid ones listed:
 
 ```
 Unknown product type style `nosuchstyle`.
 Known: section-title, page-title, body, body-strong, body-sm, nav-link, card-title, ui, eyebrow.
 
 Unknown type register `productive`. Known: product, expressive.
+
+Unknown breakpoint `smal` on product/callout-lg. Known: small, medium, large, xlarge, xxlarge.
+
+product/callout-lg has no `size`. A base style must set both family and size.
 ```
 
 #### Migrating onto it

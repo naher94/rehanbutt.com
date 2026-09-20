@@ -3,14 +3,10 @@
 // safe to apply here: the root inherits the global unitless 1.5 and passes it
 // down as a ratio. A length would re-lead every child to that one figure.
 //
-// The small-only size stays a literal -- the map holds one value per style and
-// has no per-breakpoint form yet.
+// Both small-only sizes are in the map now, under `at`.
 body {
   @include type-style(product, body); // = 1em
   color: semantic-color(text);
-  @include breakpoint(small only) {
-    font-size: 16px; //TODO remap this to use the type scales in variables.scss
-  }
   background-color: $pure-white;
   @media (prefers-color-scheme: dark) {
     background-color: $navy-black-d3;
@@ -27,11 +23,6 @@ h1, h2, h3, h4 {
 
 h1{
   @include type-style(product, page-title);
-  @include breakpoint(small only) {
-    font-size: 3rem; //TODO remap to page-title once the map holds a
-                     // per-breakpoint size; 3em against a 16px root is where
-                     // this came from, and 48px is off the scale either way.
-  }
 }
 
 h2{
@@ -129,16 +120,14 @@ ul {
   transition: $run;
 }
 
+// The small-breakpoint font-sizes these three used to declare are in the map
+// now, under `at`. What is left in the media query is padding, which is layout
+// rather than type and stays here.
 .post-callout-large{
   margin: 2rem 0;
   padding-left: 0.5em;
   padding-right: 0.5em;
   @include type-style(product, callout-lg);
-  @include breakpoint(small only) {
-    font-size: 2.5rem; // 40px. TODO remap once the map holds a per-breakpoint
-                       // size; already on the scale, so this is a value worth
-                       // keeping rather than an em artifact to correct.
-  }
 }
 
 .post-callout-medium{
@@ -149,7 +138,6 @@ ul {
   @include breakpoint(small only) {
     padding-left: 0.25em;
     padding-right: 0.25em;
-    font-size: 2rem; // 32px, on the scale. TODO as above.
   }
 }
 
@@ -158,9 +146,6 @@ ul {
   padding-left: 0.5em;
   padding-right: 0.5em;
   @include type-style(product, callout-sm);
-  @include breakpoint(small only) {
-    font-size: 1.5rem; // 24px, on the scale. TODO as above.
-  }
 }
 
 
