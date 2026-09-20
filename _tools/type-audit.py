@@ -345,21 +345,28 @@ def token_for(decls, rendered=None):
     # literal that contradicts every remaining candidate is ignored rather than
     # allowed to empty the set -- that is the aggregation problem again, and an
     # honest `type-style()` beats a wrong name.
+    # Whether the entry is this element's own include. If every mixin-emitted
+    # value was inherited the entry belongs to an ancestor, and a literal here
+    # is this element overriding it, not identifying it.
+    own_mixin = any(from_mixin(d[2], d[3], d[0]) and (d[4] if len(d) > 4 else True)
+                    for d in decls)
     if sized and hits and len(hits) > 1:
         for decl in decls:
             prop, value, rel, line = decl[0], decl[1], decl[2], decl[3]
             own = decl[4] if len(decl) > 4 else True
-            # An inherited literal is evidence only for leading. Family and
-            # weight are what a container overrides, so eliminating on them
-            # reads the container's choice as the entry's: the home page photo
-            # captions take their size from `body` and their Zilla bold from
-            # the tile around them, and named `nav-link-sm` the moment an entry
-            # existed at Zilla 1rem. Leading is the opposite -- entries are
-            # mostly silent on it, and the one it rules out is the one whose
-            # own declaration the element plainly is not using.
-            if not own and prop != "line-height":
-                continue
             if from_mixin(rel, line, prop):
+                continue
+            # Leading is always admissible: entries are mostly silent on it, so
+            # the one it rules out is the one whose own declaration the element
+            # plainly is not using. Every other property has to be a literal the
+            # element owns, on an entry the element owns. Otherwise it is either
+            # the container's choice -- the home page photo captions take their
+            # size from `body` and their Zilla bold from the tile around them --
+            # or an override of an ancestor's entry, and eliminating on the
+            # value that was overridden picks whichever decoy still matches it:
+            # `・2025` inherits `body` and sets its own 700, which ruled `body`
+            # out and named it `meta`.
+            if prop != "line-height" and not (own and own_mixin):
                 continue
             # Checked against the variants that already fit, not against the
             # entry as a whole: reading the size off one variant and the weight
