@@ -306,19 +306,19 @@ $product-type: (
   meta:          (family: $lato,  size: 1rem,       font-weight: $lato-bold),                         // 16px
   // The dateline under a post or case-study title, and the only Zilla the site
   // sets at regular weight -- every other Zilla entry here is bold.
-  date-stamp:    (family: $zilla, size: 2rem,       font-weight: $zilla-regular, line-height: 1.6,    // 32px
+  date-stamp:    (family: $zilla, size: 2rem,       font-weight: $zilla-regular,                      // 32px
                   at: (small only: (size: 1.6rem))),                                                  // 25.6px
-  eyebrow:       (family: $lato,  size: 0.625rem,   font-weight: $lato-bold,    line-height: 1.6,     // 10px
+  eyebrow:       (family: $lato,  size: 0.625rem,   font-weight: $lato-bold,                          // 10px
                   letter-spacing: .3em, text-transform: uppercase),
   // The same kicker on a collection card, sized against a 30px title rather
   // than the 20px one `eyebrow` sits under. Bigger on small, where the tile
   // scales up to keep the grid legible at one column.
-  eyebrow-lg:    (family: $lato,  size: 0.75rem,    font-weight: $lato-bold,    line-height: 1.6,     // 12px
+  eyebrow-lg:    (family: $lato,  size: 0.75rem,    font-weight: $lato-bold,                          // 12px
                   letter-spacing: .3em, text-transform: uppercase,
                   at: (small only: (size: 0.875rem))),                                                // 14px
   // The hero tile on a collection page, whose title is 40px. One size at every
   // width: the tile scales on small, but this was tuned to land back on 16px.
-  eyebrow-xl:    (family: $lato,  size: 1rem,       font-weight: $lato-bold,    line-height: 1.6,     // 16px
+  eyebrow-xl:    (family: $lato,  size: 1rem,       font-weight: $lato-bold,                          // 16px
                   letter-spacing: .3em, text-transform: uppercase),
   // Names what an adjacent value is -- "COUNTRY" under "Japan". Uppercase but
   // deliberately untracked, so it is not an `eyebrow`. The leading is carried
