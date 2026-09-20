@@ -227,7 +227,14 @@ def from_mixin(rel, line, prop):
     return bool(m and m.group(1) == prop and "map-get($style" in m.group(2))
 
 
-def token_for(decls):
+# Properties whose absence is visible: nothing declares `text-transform: none`,
+# so a style rendering one of these at its initial value was never touched by an
+# entry that sets it. `type-style` emits an entry's properties together.
+INITIAL = {"letter-spacing": "normal", "text-transform": "none",
+           "font-style": "normal"}
+
+
+def token_for(decls, rendered=None):
     """Which map entry produced this style's mixin-emitted declarations.
 
     The source map points at the mixin body -- `font-size: map-get($style,
@@ -270,6 +277,15 @@ def token_for(decls):
             return None, False
 
         def fits(variant):
+            # An entry that sets a property this style renders as initial is
+            # out: `eyebrow-xl` is `meta` plus tracking and uppercase, and
+            # without this it swallowed all 450 of meta's elements. An entry
+            # whose declaration merely lost to a literal is excluded by the
+            # value check below instead -- the literal is observed.
+            for prop, initial in INITIAL.items():
+                if (rendered and rendered.get(prop) == initial
+                        and variant.get(prop, initial) != initial):
+                    return False
             for prop, value, own in obs:
                 if prop in variant:
                     if variant[prop] != value:
@@ -928,7 +944,9 @@ def build(out_path, limit=None):
     for (family, size, weight, style, lh, spacing, transform), e in styles.items():
         # every mixin-emitted declaration on one element shares a `$style`, so
         # the entry is identified once per style and reused for its properties
-        style_token = token_for(list(e["decls"]))
+        rendered = {"letter-spacing": spacing, "text-transform": transform,
+                    "font-style": style}
+        style_token = token_for(list(e["decls"]), rendered)
         items.append(dict(
             id=f"{family}|{size}|{weight}|{style}|{lh}|{spacing}|{transform}",
             family=family, size=size, weight=weight, style=style,
@@ -944,7 +962,7 @@ def build(out_path, limit=None):
             uses=sorted(e["uses"], key=lambda u: (u["page"], u["line"])),
             sources=[[dict(prop=d[0], value=d[1], file=d[2], line=d[3],
                            via=authored_as(d[2], d[3], d[0], d[1],
-                                           token_for(list(key))))
+                                           token_for(list(key), rendered)))
                       for d in key]
                      for key, _ in sorted(e["srcsets"].items(),
                                           key=lambda kv: kv[1])],
