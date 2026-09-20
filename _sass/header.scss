@@ -67,15 +67,18 @@
 
 .navbar{
   color: inherit;
-  float: left;
-  line-height: 2.5em;
   @include breakpoint(small only) {
-    clear: both;
     display: none;
   }
 }
 
 .menu-container{
+  align-items: center;
+  @include breakpoint(small only) {
+    // Not at small: the burger menu expands inside .burger-container, so
+    // centring drags the logo to the middle of the opened menu.
+    align-items: flex-start;
+  }
   .burger-icon{
     display: none;
     float: left;
