@@ -63,6 +63,21 @@ SCALE = (10.0, 12.0, 16.0, 20.0, 24.0, 32.0, 40.0, 50.0, 60.0, 70.0)
 USE_CAP = 60
 WIDEST = None                        # set in build(), the widest breakpoint name
 
+# Classes that clip their element to a 1px box for screen readers. The type on
+# them renders nowhere, so it is counted and then kept out of the inventory:
+# 480 `<span class="visually-hidden">Opens a new window</span>` were filling two
+# whole cards at 48px and 40px, sizes that appear nowhere a reader can see.
+#
+# Reported rather than dropped -- a tool that silently discards 7% of its
+# elements is worse than one that says it did. And not pinned to a token in the
+# stylesheet either: that would tidy the sheet by claiming a real style renders
+# on 480 elements nobody can see.
+#
+# `show-on-focus` is deliberately absent. It @extends this class in SCSS, but
+# carries its own class in the HTML and becomes visible on focus, so the skip
+# link's type is real and stays audited.
+HIDDEN_CLASSES = ("visually-hidden",)
+
 
 _SRC_LINES = {}
 
@@ -749,6 +764,7 @@ def _resolve(dom, compiled, tree=None, bp=None, rel=None,
                 tag=node.tag,
                 line=node.line,
                 classes=" ".join(sorted(node.classes)) or None,
+                hidden=bool(node.classes & set(HIDDEN_CLASSES)),
                 family=first_family(computed.get("font-family")),
                 size=round(size_px, 2),
                 weight=norm_weight(computed.get("font-weight")) or "400",
@@ -815,6 +831,7 @@ def build(out_path, limit=None):
         pages = pages[:limit]
 
     tree = CascadeTree()
+    hidden_count = defaultdict(int)     # clipped elements, counted not inventoried
     styles = defaultdict(lambda: dict(pages=set(), tags=set(),
                                       classes=set(), samples=[],
                                       decls=defaultdict(int),
@@ -841,6 +858,9 @@ def build(out_path, limit=None):
             for bp_name in bp_names:
                 el = per_bp[bp_name][i]
                 if not el["family"]:
+                    continue
+                if el.get("hidden"):
+                    hidden_count[bp_name] += 1
                     continue
                 by_key[key_of(el)].append((bp_name, el))
 
@@ -962,6 +982,8 @@ def build(out_path, limit=None):
             off_scale=sum(i["count"] for i in items if not i["on_scale"]),
             scale=list(SCALE),
             unsupported_selectors=unsupported,
+            hidden_elements=max(hidden_count.values()) if hidden_count else 0,
+            hidden_classes=list(HIDDEN_CLASSES),
             breakpoints=[dict(name=n, width=w) for n, w in breakpoints],
             default_breakpoint=distinct[-1]["name"],
             distinct_breakpoints=distinct,
@@ -1023,6 +1045,9 @@ if __name__ == "__main__":
     t = d["totals"]
     print(f"pages walked        : {t['pages']}")
     print(f"text elements       : {t['elements']}")
+    if t.get("hidden_elements"):
+        print(f"clipped, not counted: {t['hidden_elements']} "
+              f"({', '.join('.' + c for c in t['hidden_classes'])})")
     print(f"distinct styles     : {t['styles']}")
     print(f"families / sizes    : {t['families']} / {t['sizes']}")
     print(f"weights             : {t['weights']}")

@@ -1325,6 +1325,10 @@ function drawChrome(){
      <span><b>${g.weight.size}</b> weights</span>
      <span><b>${g.family.size}</b> families</span>
      <span><b>${T.pages}</b> pages</span>
+     ${T.hidden_elements ? `<span title="${
+       T.hidden_classes.map(c => "." + c).join(", ")
+     } — clipped to a 1px box, so their type renders nowhere. Counted here and left out of the sheet."
+       }><b>${T.hidden_elements.toLocaleString()}</b> clipped</span>` : ""}
      <span><b>${(() => {
        let tok = 0, all = 0;
        STYLES.forEach(s => (s.decls || []).forEach(d => {
