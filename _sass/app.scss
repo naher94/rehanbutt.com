@@ -6,13 +6,20 @@
 // Global styles
 @include foundation-global-styles;
 
-// `foundation-typography` expanded into its four parts so one can be left out.
-// `foundation-text-alignment` emits the `.text-left` / `.text-center` family,
-// and the reachability audit finds every one of them dead across all 90 built
-// pages -- 462 bytes, 100% unused. Dropped here rather than edited out of the
-// vendored partial, which a Foundation upgrade would overwrite.
-@include foundation-typography-base;
-@include foundation-typography-helpers;
+// Foundation's typography, minus the parts this site does not use.
+//
+// `foundation-typography-base` and `-helpers` are replaced by _type-reset.scss:
+// between them they emitted 93 declarations and 36 ever won a cascade, so the
+// file is those 36 transcribed at the values they already rendered. Imported
+// here, in the slot the includes occupied, so source order is unchanged.
+//
+// `-text-alignment` emitted the `.text-left` / `.text-center` family, dead on
+// all 90 pages, and is simply gone.
+//
+// `-print-styles` stays. Half of it is live, it cannot be separated from the
+// dead half, and its `*{color:#000}` reset is what stops a page printed from a
+// dark-mode browser coming out as white text on white paper.
+@import 'type-reset';
 @include foundation-print-styles;
 
 // Grids (choose one)
