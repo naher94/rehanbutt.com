@@ -39,13 +39,11 @@
 }
 
 .nav{
+  @include type-style(product, nav-link);
   color: inherit;
   padding: 0.7em;
   height: inherit;
-  font-family: $zilla;
-  font-weight: $zilla-bold;
   border-radius: $pill-radius;
-  font-size: 1em;
   transition: background-color 0.2s ease-in-out;
   &:hover, &:focus{
     color: inherit;
@@ -109,10 +107,8 @@
   user-select: none;
   margin-bottom: 0;
   a {
+    @include type-style(product, menu-link);
     color: $pure-white;
-    font-family: $zilla;
-    font-weight: $zilla-bold;
-    font-size: 1.25em;
     border-radius: $pill-radius;
     padding: 0.25em 0.6em;
     &:visited, &:active, &:focus {

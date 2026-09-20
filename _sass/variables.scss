@@ -281,8 +281,12 @@ $product-type: (
   body-sm-strong:(family: $lato,  size: 1rem,       font-weight: $lato-bold,    line-height: 1.3),    // 16px
 
   // ---- component styles: named for the thing, not for a rank --------------
-  // nav-link's 1.6 is the list leading it inherits by being a `ul`, not a choice.
-  nav-link:      (family: $zilla, size: 2.34375rem, font-weight: $zilla-bold,   line-height: 1.6),    // 37.5px
+  // Two navs, each with one real size: the bar is hidden below medium and the
+  // overlay above it, so the other value each resolves to renders nowhere.
+  // Neither declares a leading -- the bar inherits the navbar's 2.5em for
+  // vertical centring, the overlay the 1.6 it gets from being a `ul`.
+  nav-link:      (family: $zilla, size: 1.25rem,    font-weight: $zilla-bold),                        // 20px
+  menu-link:     (family: $zilla, size: 1.875rem,   font-weight: $zilla-bold),                        // 30px
   card-title:    (family: $zilla, size: 1.5rem,     font-weight: $zilla-bold,   line-height: 1),      // 24px
   // `control` and `meta` were one `ui` entry. Interface is a category, not a
   // job, and it was covering two: a button label and the footer's chrome.
