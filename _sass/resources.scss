@@ -1,6 +1,5 @@
 .resource-header{
   h1{
-    font-weight: $zilla-bold;
     @include breakpoint(small only) {
       margin-left: 0.5rem;
       margin-right: 0.5rem;
@@ -72,10 +71,7 @@
         margin-bottom: 0;
       }
       .sub-header{
-        text-transform: uppercase;
-        letter-spacing: 0.3em;
-        font-size: 0.8em;
-        font-weight: $lato-bold;
+        @include type-style(product, eyebrow-xl);
         opacity: 0.6;
         position: relative;
         margin-block-start: .5em;
@@ -135,9 +131,11 @@
   .collection-content{
     h2{
       &.intro{
-        font-family: $lato;
-        font-size: 1.5em;
-        line-height: normal;
+        @include type-style(product, callout-sm);
+        // Stated, not inherited: `callout-sm` declares no weight, so without
+        // this the bold comes from the `section-title` include on `article.post
+        // h2` and changing that entry would restyle these.
+        font-weight: $lato-bold;
         margin-bottom: 1em;
         a{
           @include link-expand;
@@ -182,17 +180,11 @@
       margin: 0;
     }
     .title{
-      font-family: $zilla;
-      font-weight: $zilla-bold;
-      font-size: 1.5em;
-      line-height: normal;
+      @include type-style(product, tile-title);
       position: relative;
     }
     .sub-header{
-      text-transform: uppercase;
-      letter-spacing: 0.3em;
-      font-size: 0.6em;
-      font-weight: $lato-bold;
+      @include type-style(product, eyebrow-lg);
       opacity: 0.6;
       position: relative;
     }
@@ -225,10 +217,9 @@ h1{
   }
   .tags-container{
     .tag{
-      font-size: 0.8em;
-      padding: 0.25rem .75rem;
+      @include type-style(product, control);
+      padding: .5rem 1rem;
       margin-bottom: 0.25rem;
-      font-weight: $lato-bold;
       background-color: semantic-color(actionable-pill);
       color: $pure-white;
       border-radius: $pill-radius;
@@ -263,14 +254,11 @@ h1{
     }
   }
   h2{
-    font-size: 2.5em;
+    @include type-style(product, section-title);
     color: semantic-color(text);
     display: inline;
-    font-weight: $lato-black;
-    font-family: $lato;
     flex-wrap: wrap;
     @include breakpoint(small only) {
-      line-height: normal;
       padding-left: 0;
       padding-right: 0;
     }
@@ -312,10 +300,7 @@ h1{
     margin: 0;
     color: semantic-color(text);
     &.sub-header{
-      text-transform: uppercase;
-      font-size: 0.5em;
-      font-weight: $lato-bold;
-      letter-spacing: 0.3em;
+      @include type-style(product, eyebrow);
     }
     &.title{
       font-family: $zilla;
@@ -363,10 +348,7 @@ h1{
     .meta{
       padding: 0;
       margin: 0;
-      text-transform: uppercase;
-      font-size: 0.5em;
-      font-weight: $lato-bold;
-      letter-spacing: 0.3em;
+      @include type-style(product, eyebrow);
       i{
         margin-right: 0.25em;
       }
@@ -390,12 +372,9 @@ h1{
       }
     }
     .title{
-      font-family: $zilla;
-      font-weight: $zilla-bold;
-      font-size: 1.5rem;
+      @include type-style(product, body-strong);
       padding: 0;
       margin: 0;
-      line-height: 1em;
       @include swipe-underline(semantic-color(text-bg),false);
     }
     .fa-link{
@@ -405,7 +384,7 @@ h1{
 
     }
     .description{
-      font-size: 0.8em;
+      @include type-style(product, body-sm);
       padding: 0;
       margin: 0;
     }

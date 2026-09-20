@@ -202,6 +202,134 @@ description | A short explanation of the speaking event | `string`
 link | `url` to the event's recording or related materials | `string`
 logo | A logo representing the event for visual context | `.svg`
 
+### Type System
+
+`_sass/variables.scss` holds the type vocabulary beside `$semantic-colors`: two
+maps, one mixin, register named at the call site.
+
+```scss
+h2            { @include type-style(product, section-title); }
+.count .value { @include type-style(expressive, counter); }
+```
+
+#### The two registers
+
+**Product** is type that repeats — project pages, resource collections,
+articles. One decision lands on seventy-odd pages, so it stays systematic and on
+the scale. **Expressive** is set for a single moment and answers to nothing
+else.
+
+The axis is **repetition, not volume**. Loud is not expressive: the post
+callouts run across eleven case studies and the tag headings repeat sixty times
+down one page, so both are product however large they are set. A style that
+turns up on a second page has stopped being expressive.
+
+The register sits in the call rather than on the entry, so moving a style
+between registers makes you look at every place it is used.
+
+The names come from [IBM
+Carbon](https://carbondesignsystem.com/elements/typography/style-strategies/),
+the axis does not: Carbon splits on user intent, which on an editorial site
+would have one value nearly everywhere. Two consequences — expressive here is a
+short list of one-offs rather than a parallel hierarchy, so the maps are not
+symmetric and are not meant to be. Carbon's rule that type stays consistent
+within a component still holds.
+
+#### The two families
+
+**Zilla names, Lato reads.** Headings, titles and nav are Zilla; sentences,
+labels, metadata and UI are Lato. For anything ambiguous, ask whether you are
+*naming* it or *saying* it — a section header names, a pull-quote says.
+
+Product follows that rule; **expressive is exempt**, which is the point of it.
+`counter` is Lato Black at 90px, a text face doing display work, and is the most
+distinctive type on the site because of that.
+
+Zilla has no size floor — it is the display face by role, so the nav stays Zilla
+at every width. Caveat annotates photo captions and Consolas appears in code.
+Neither is in the maps.
+
+#### Naming
+
+The name is the job the type does, never a tag and never a rank: a section
+heading is `section-title` whether it is marked up as an `h2` or an `h3`, which
+is what `class="h1"` on an `<h2>` exists to avoid. No numbered names —
+`title-1` / `title-2` reintroduces the same confusion one layer down. Size lives
+in the value, so `nav-link` can move onto the scale without being renamed.
+
+#### Values
+
+`$product-type` has two halves. **Hierarchy** — `page-title`, `section-title`,
+`body`, `body-strong`, `body-sm` — is rank on the page. **Component styles** —
+`nav-link`, `card-title`, `control`, `meta`, `eyebrow` — are named for the thing
+they are,
+because nothing is "one step below" a nav link. `$expressive-type` holds
+`counter` and `statement`.
+
+Sizes are `rem` against the 16px root, never `em`: an `em` resolves against
+whichever parent it lands in, which is how one declaration ended up rendering at
+six different sizes.
+
+Values match what the site already renders, with two exceptions:
+
+* **`statement` is aspirational.** Nothing is set that way yet. It is the slot
+  for a hero line or a statement over an image, set tighter than a heading on
+  both axes because large type reads loose at settings that suit 16px.
+* **`section-title` changed what renders.** The 32 `.tag-group h2` headings on
+  the resources page were Lato Black; a section header names, so the entry is
+  Zilla Bold. Adopting it moved them to Zilla 700, and they merged with the
+  project and collection titles already at that rank on 27 other pages.
+
+#### API
+
+```scss
+@include type-style($register, $style-key);   // emits the whole style
+type-value($register, $style-key, $prop);     // reads one property
+```
+
+Optional properties (`letter-spacing`, `text-transform`, `font-style`) are
+emitted only when the style defines them, so a rule never carries a
+`letter-spacing: normal` that would override an inherited value.
+
+`at` holds per-breakpoint exceptions, with `size` staying the desktop value —
+a desktop base with `small only` corrections, matching how the rest of the site
+is written rather than mobile-first:
+
+```scss
+callout-lg: (family: $lato, size: 3.125rem, font-weight: $lato-regular, line-height: 1.3,
+             at: (small only: (size: 2.5rem))),
+```
+
+Two things to know about it:
+
+* **Keys are unquoted.** Foundation reads the direction keyword as the second
+  item of a list, so `'small only'` collapses to one string and loses it.
+* **Moving an override into the map changes its specificity.** `page-title`'s
+  48px lived on a bare `h1` selector, so two h1s ignored it — the 404 title and
+  the about hero, both re-applying `page-title` at class specificity. From the
+  map the query is emitted inside each call site, so those two now shrink with
+  everything else. A mobile step meant for only some call sites wants its own
+  entry instead.
+
+Unknown names fail the build, with the valid ones listed:
+
+```
+Unknown product type style `nosuchstyle`.
+Known: page-title, section-title, body, body-strong, body-sm, nav-link, card-title, control, meta, eyebrow, callout-lg, callout-md, callout-sm.
+
+Unknown type register `productive`. Known: product, expressive.
+
+Unknown breakpoint `smal` on product/callout-lg. Known: small, medium, large, xlarge, xxlarge.
+
+product/callout-lg has no `size`. A base style must set both family and size.
+```
+
+#### Migrating onto it
+
+Little is migrated yet. The atlas and specimen sheet in [Tooling](#tooling) show
+what each rule resolves to — in particular **Across widths**, which follows one
+element across every breakpoint instead of listing each width as a separate
+style. Most of what looks like two styles is one declaration seen twice.
 
 ### Tooling
 
@@ -236,19 +364,58 @@ bundle exec jekyll build && python3 _tools/type-audit.py
 
 Each distinct combination of family, size, weight, style, line-height, tracking and case counts as one style. File attribution comes from the Sass source map (`_site/css/rehan.css.map`), so every style knows which partial wrote it.
 
-It writes two files beside itself, both gitignored:
+It writes these beside itself, all gitignored:
 
 * `type-audit.json` — the dataset
 * `type-atlas.html` — a standalone page listing each style as a specimen rendered at its true size. Open it directly in a browser.
+* `type-specimens.html` — a second view of the same data, drawn as cards at the size they render and counted by elements. It opens on the combined view (a card per style, largest first); switching to **By property** breaks it into font-sizes, weights and families, each section showable or hideable.
+* `type-cascade.json` / `type-cascade.html` — the third view, and the only one organised by **where a value came from** rather than by what it renders as. See below.
+
+#### Type Cascade
+
+The atlas and the specimen sheet both group type by outcome: every element that renders Lato 20px/400 lands in one bucket. That is the right shape for "what does this site use," and the wrong shape for "why is this element like this" — a card can only show a resolved value and the file:line that produced it, which makes a size inherited from `body` four levels up indistinguishable from one written on the element itself.
+
+`type-cascade.html` is one tree for the whole site, drawn as a node network: columns by depth, curved edges, and a box per node. A node is an element that declares a type property; elements that declare none are collapsed away, because an element that changes nothing is not a branch point. That takes 6,970 elements down to **225 nodes**, median depth 4.
+
+Every node is drawn as one of two things, which is the whole idea:
+
+* **Where type renders** — text actually rests on the node — it shows the specimen. `AaBb` in the real family, weight, slant, tracking and case, drawn at the real size up to a 46px cap, captioned with the atlas card number, the true size and the family. A node resolves to exactly one card, so the specimen is never an average of several.
+* **Where it does not** — a pure branch point, nothing resting on it — there is nothing to draw, so it says what it contributes in words: `wt bold`, `size 100%`, `fam Zilla Slab`. Coloured by whether the value came from the map, a variable or a literal.
+
+Identity is the chain of signatures from the root, so the same path on ninety pages is one node carrying a count of ninety — which makes the tree a synthesis rather than any one page's DOM, and it says so in the footer. A signature is the element's tag and classes **plus a stamp for the rules that won on it**: a bare `<p>` inside `.cta-bar` and one inside `.home` are both `p` but are matched by different descendant selectors and end up with different type. Keying on tag and classes alone put seven distinct styles on one `html/body/p` node and recorded whichever page happened to be walked last. Each node prints the source lines its declarations came from, so two siblings that share a signature and a rendered style are still told apart.
+
+Clicking a node gives the route:
+
+* **Sets here** — what this node declares, with the value, the file and line, and whether it came from a map entry, a Sass variable or a bare literal.
+* **Arrives from above** — for every property the node does *not* set, the value and the ancestor that decided it, as a link.
+* **Elements** — how many rest here, split into the ones that set some of their own type and the ones that inherit all of it. That split is also the bar on every row, and the headline figure: at desktop, **952 of 6,970 elements (14%) inherit their type entirely**.
+* **Resolves to** — the atlas cards these elements become, by the same C-numbers the specimen sheet uses, at the selected width.
+
+The width selector re-resolves the whole tree, so a node that sets a size only at `small` appears there and nowhere else. It ships its own JSON rather than riding along in `type-audit.json`, which would put 480KB of ancestry inside two pages that never ask for it.
+
+The atlas and specimen sheet resolve the stylesheet **at each of the project's breakpoints**, read from `$breakpoints` in `_settings.scss` rather than restated. **Width** is a multi-select filter alongside Family and Weight, all widths on by default, and selecting several shows every style present at any of them. A style that covers only part of the current selection carries a badge naming the widths it does cover; one that holds across all of them carries none, since a badge on every row says nothing.
+
+No figure anywhere is a sum across widths — the same paragraph counted at three widths would inflate a 6,970-element site to 12,055. Totals report the busiest single width, and the atlas's count column lists one figure per selected width rather than adding them. Breakpoints that resolve to identical type are collapsed and not offered as separate choices: this site defines five, but `xlarge` and `xxlarge` render exactly as `large` does, so three are shown.
+
+This matters more than it sounds. The body font-size drops to 16px on small, so most `em`-derived type shifts with it: **728 off-scale elements at desktop, 3,594 at 375px**. Before this, `small only` rules were dropped entirely and mobile type went unreported — which is how the mobile menu came to be listed at a size no phone renders. A style is flagged on a row only when it exists at one width and no other; the panel's `widths` row carries the full picture.
+
+Both pages carry a third column, **Rendered at**, listing the actual occurrences of whatever is selected — `about.html:312 · Work Experience · h2.cell.small-12.medium-shrink` — grouped by page and sorted by line. It samples up to 60 per style and always states the true total, so a truncated list never reads as the whole picture.
+
+Each occurrence expands onto the declarations that produced *that one element*, with the partial and line for every property, and the Sass name beside the value where there is one — `font-weight: 900 ($lato-black)`, `line-height: 1.6 ($paragraph-lineheight)`. The name says which decision produced the number, which the number alone cannot. It is read back from the source line and only shown when that line actually declares the property, since the source map occasionally points at the rule rather than the declaration. Elements of a style nearly always resolve through the same rules, so the sets are stored once and referenced — which is what makes the difference visible when they don't: the four Work Experience headings resolve through `about.scss`, the Speaking one through a duplicate block in `speaking.scss`.
+
+Every card carries a short id — `S4`, `W2`, `F3`, `DS7` in Declared, `C1` in the combined view — so a specimen can be named in conversation. The ids are fixed to the value rather than to render order, so they survive re-sorting.
+
+The specimen sheet has a **Computed / Declared** switch. Computed draws each card at its real rendered size and the panel says which authored spellings feed it. Declared shows what was typed — 23 spellings against 19 computed values — and the panel says what each one computes to. Declared sizes are drawn *nominally* against a 16px base and the page says so: `1em` on this site renders anywhere from 10px to 70px, so those cards show the spelling, not the rendering.
 
 The page exists to answer whether the site needs everything it currently has, so it is built around merging:
 
-* **By role** groups styles by everything except their line-height. Rows inside a group render identically apart from their leading, so they are the merge candidates; the header says how many elements collapsing them would move.
+* **By role** groups styles by everything except their line-height. Rows inside a group render identically apart from their leading, so they are the merge candidates; the header says how many elements collapsing them would move, and each row is marked `keep` or `-> <target>`.
+* The detail panel states the recommendation in words for any style, in any grouping: keep it, merge it into a named line-height, or nothing to merge. Where it says merge, it names the cost in elements and pages and the file and line the line-height is written at. The named target and every other leading in the role are links, so a recommendation can be reviewed rather than taken on trust — they work regardless of the current filters.
 * **Matrix** plots size against weight per family. Adjacent rows with small counts are near-duplicates; clicking a cell opens its styles.
 * **Narrow to** isolates either the styles that share a role with another, or the long tail under 25 uses.
 * The detail panel shows the authored declaration and source line behind every property — `font-size: 1em → _sass/header.scss:48` — so a row can be acted on without going hunting.
 
-Grouping by family or by file, sorting, and filters for family, weight, source and on/off scale are all there too.
+Grouping by family or by file, and filters for family, weight, source and on/off scale are all there too. Sort by uses, size or pages; clicking the active sort reverses it, and the direction applies to the groups as well as the rows inside them.
 
 The scale it reports against is the `SCALE` tuple at the top of the script. It is fitted to real usage rather than to a formula, and it describes the site as it is — edit it when the scale is decided.
 
@@ -278,7 +445,6 @@ Byte figures are compiled output before gzip, not the size of the source edit �
 #### Shared Cascade
 
 All three audits sit on `_tools/cascade.py` — the built pages parsed into a DOM, the compiled stylesheet parsed into rules, selector matching, and the Sass source map that maps any byte of the output back to the partial and line that wrote it. It is not run directly.
-
 
 ### Reference
 

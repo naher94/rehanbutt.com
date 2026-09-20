@@ -119,6 +119,7 @@ video{
 }
 
 .thumbnail-text {
+  @include type-style(product, tile-title);
   position: absolute;
   bottom: 1rem;
   margin: 0 auto;
@@ -127,16 +128,9 @@ video{
   color: $pure-white;
   opacity: 0;
   text-shadow: 0px 0px 5px $navy-black;
-  font-size: 1.65em;
-  line-height: 1em;
   text-align: center;
-  font-weight: $zilla-bold;
-  font-family: $zilla;
   text-wrap: pretty;
   padding-inline: 0.25em;
-  @include breakpoint(small only) {
-    font-size: 1.4em;
-  }
 }
 
 .thumbnail-tile {
@@ -182,8 +176,7 @@ video{
 article{
   &.post{
     h2{
-      font-size: 2.5em;
-      font-weight: $zilla-bold;
+      @include type-style(product, section-title);
     }
     .post-callout-small{
       span{
@@ -258,18 +251,21 @@ article{
     box-shadow: $recessed-shadow semantic-color(shadow);
     margin-top: -6rem;
     z-index: 1;
-    h1{
+    h2{
       font-weight: $zilla-bold;
       font-size: 1.6rem;
       margin: 0;
+      @include breakpoint(small only) {
+        padding-inline: 0;
+      }
     }
     p{
+      //TODO should we mpa this body instead and update the scaling??
+      @include type-style(product, body-sm);
       margin-top: 0;
       margin-bottom: 0;
       padding-left: 0;
       padding-right: 0;
-      line-height: 1.5rem;
-      font-size: 1rem;
     }
     @include breakpoint(small only) {
       margin-top: -3rem;
@@ -297,17 +293,9 @@ article{
     box-shadow: $recessed-shadow semantic-color(shadow);
     align-items: center;
     p{
+      @include type-style(product, body-sm-strong);
       padding: 0;
       margin: 0;
-      font-weight: $lato-bold;
-      font-size: 1rem;
-      line-height: 1.3rem;
-      @include breakpoint(small only) {
-        font-size: 1rem;
-      }
-      @include breakpoint(medium down) {
-        font-size: 1rem;
-      }
     }
     .icon{
       align-items: center;
@@ -317,23 +305,18 @@ article{
       }
     }
     button{
-      // Self-contained since foundation-button was dropped: the properties
-      // below the colour ones are what Foundation's .button used to supply.
+      @include type-style(product, control);
       display: inline-block;
       vertical-align: middle;
       padding: 0.85em 1em;
       border: 1px solid transparent;
-      line-height: 1;
       text-align: center;
       cursor: pointer;
-      font-family: inherit;
       -webkit-appearance: none;
       color: $pure-white;
       transition: $sprint;
       border-radius: $tile-radius;
       background-color: $signature-teal;
-      font-weight: $lato-bold;
-      font-size: 1rem;
       margin: 0;
       margin-left: 0.5rem;
       @include breakpoint(small only) {
@@ -516,14 +499,3 @@ article{
   }
 }
 //******* End of Banner Styling
-
-
-//******* Mobile Styling
-@include breakpoint(small only) {
-
-  .nav{
-    padding: 10px;
-    font-size: 16px;
-  }
-}
-//******* End of Mobile Styling
