@@ -272,7 +272,7 @@ $product-type: (
 
   page-title:    (family: $zilla, size: 3.75rem,    font-weight: $zilla-bold,   line-height: 0.9,     // 60px
                   at: (small only: (size: 3rem))),                                                    // 48px
-  section-title: (family: $zilla, size: 3.125rem,   font-weight: $zilla-bold,   line-height: 1.4,     // 50px
+  section-title: (family: $zilla, size: 3.125rem,   font-weight: $zilla-bold,                         // 50px
                   at: (small only: (size: 2.5rem, line-height: normal))),                             // 40px
   body:          (family: $lato,  size: 1.25rem,    font-weight: $lato-regular,                       // 20px, inherits 1.5
                   at: (small only: (size: 1rem))),                                                    // 16px, == the root

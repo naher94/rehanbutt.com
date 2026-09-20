@@ -182,8 +182,7 @@ video{
 article{
   &.post{
     h2{
-      font-size: 2.5em;
-      font-weight: $zilla-bold;
+      @include type-style(product, section-title);
     }
     .post-callout-small{
       span{
