@@ -327,15 +327,17 @@ $product-type: (
                   text-transform: uppercase,
                   at: (small only: (size: 0.75rem))),                                                 // 12px
 
-  // Pull-quotes in the case studies, mirroring the three .post-callout-*
-  // classes. All three share 1.3 leading; -md is the only italic in either map.
+  // Prose set apart from the body at three sizes: the case-study pull-quotes
+  // that mirror the three .post-callout-* classes, and -sm also carries the
+  // standfirst opening every collection page.
+  // All three share 1.3 leading; -md is the only italic in either map.
   // `size` is the desktop value; `at` carries the small-breakpoint one, each
   // about a fifth smaller (50/40/30 -> 40/32/24). The classes used to hold
   // those as hand-written font-size overrides, which meant the mobile size
   // was invisible from here and the audit could not name the token at 375px.
-  callout-lg:    (family: $lato,  size: 3.125rem,   font-weight: $lato-regular, line-height: 1.3,     // 50px
+  callout-lg:    (family: $lato,  size: 3.125rem,   font-weight: $lato-regular,                       // 50px
                   at: (small only: (size: 2.5rem))),                                                  // 40px
-  callout-md:    (family: $lato,  size: 2.5rem,     font-weight: $lato-bold,    line-height: 1.3,     // 40px
+  callout-md:    (family: $lato,  size: 2.5rem,     font-weight: $lato-bold,                          // 40px
                   font-style: italic,
                   at: (small only: (size: 2rem))),                                                    // 32px
   // No font-weight: the class decides none, so its instances take 400 from the
@@ -343,7 +345,7 @@ $product-type: (
   // would flatten ten bold pull-quotes to regular. Off the scale at 30px --
   // the only entry in either map that is; the nearest step is 32px, and moving
   // it is a design edit rather than a transcription, so it is recorded as-is.
-  callout-sm:    (family: $lato,  size: 1.875rem,                               line-height: 1.3,     // 30px
+  callout-sm:    (family: $lato,  size: 1.875rem,                                                     // 30px
                   at: (small only: (size: 1.5rem))),                                                  // 24px
 );
 

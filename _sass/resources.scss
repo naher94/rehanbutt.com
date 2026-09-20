@@ -131,9 +131,11 @@
   .collection-content{
     h2{
       &.intro{
-        font-family: $lato;
-        font-size: 1.5em;
-        line-height: normal;
+        @include type-style(product, callout-sm);
+        // Stated, not inherited: `callout-sm` declares no weight, so without
+        // this the bold comes from the `section-title` include on `article.post
+        // h2` and changing that entry would restyle these.
+        font-weight: $lato-bold;
         margin-bottom: 1em;
         a{
           @include link-expand;
