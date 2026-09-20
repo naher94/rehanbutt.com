@@ -6,4 +6,5 @@ company: YinzCam
 description: "Evaluated the current app experiences and designed enhancements across consumer facing products and enterprise applications."
 logo:
 sort-order: 10
+collapsed: true
 ---

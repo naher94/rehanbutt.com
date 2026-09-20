@@ -284,6 +284,10 @@
       font-weight: $lato-regular;
       line-height: 1.2em;
     }
+  }
+
+  // Speaking events keep the original faded watermark in the left gutter
+  .speaking-item{
     .brand-logo-container{
       position: absolute;
       opacity: 0.2;
@@ -348,14 +352,99 @@
         margin-left: -12em;
       }
     }
-    .brand-logo{
-      float: right;
-      @media (prefers-color-scheme: dark) {
-        filter: contrast(800%) invert(100%);
-      }
-    }
     &:hover .brand-logo-container{
       opacity: 1;
+    }
+  }
+
+  // Work experience and education show the logo as a card above the company name
+  .work-item, .education-item{
+    .brand-logo-container{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3em;
+      height: 3em;
+      padding: 0.5em;
+      margin-block-end: 0.5em;
+      // --card-bg / --card-fill are set per brand below. A card without a pair
+      // falls back to the neutral tokens and keeps the grey hover; a branded
+      // card wears its colour at rest, so hover leaves it alone.
+      background-color: var(--card-bg, #{semantic-color(brand-logo-card-bg)});
+      // --card-image is for cards whose brand is a gradient rather than a flat
+      // colour; it paints over --card-bg, so only one of the two is ever set
+      background-image: var(--card-image, none);
+      border-radius: $tile-radius;
+      box-shadow: inset 0 0 0 1px semantic-color(brand-logo-card-outline);
+      transition: $run;
+
+      &#cr{
+        --card-bg: #{$consumer-reports-green};
+        --card-fill: #{$pure-white};
+      }
+      &#dio{
+        // ⬇︎ TUNE ME: 135deg runs the gradient corner to corner; `to right`
+        //   for a straight horizontal sweep
+        --card-image: linear-gradient(135deg, #{$dzgnio-cyan}, #{$dzgnio-mint});
+        // No --card-fill: both stops are light, so the default navy reads
+      }
+      &#cmu{
+        --card-bg: #{$carnegie-mellon-red};
+        --card-fill: #{$pure-white};
+      }
+      &#processly{
+        --card-bg: #{$processly-plum};
+        --card-fill: #{$pure-white};
+      }
+      &#disney-animation{
+        --card-bg: #{$disney-animation-cream};
+        // No --card-fill: the orange is light enough that the default navy
+        // reads better on it than a white knockout would
+      }
+      &#upmc{
+        --card-bg: #{$upmc-purple};
+        --card-fill: #{$pure-white};
+      }
+      &#yinzcam{
+        --card-bg: #{$yinzcam-amber};
+        --card-fill: #{$pure-black};
+      }
+      // Artwork ships white with its own shadow layer, so no --card-fill here:
+      // nothing in the file inherits from the root for CSS to colour
+      &#shine-registry{
+        --card-bg: #{$shine-registry-rose};
+      }
+      // Architrave's role uses the Banyan Tree mark, so the id is `banyantree`
+      &#banyantree{
+        --card-bg: #{$banyantree-green};
+        --card-fill: #{$pure-white};
+      }
+      &#nus{
+        --card-bg: #{$nus-blue};
+        // The default navy would sit at ~1.3:1 on this blue, so white is required
+        --card-fill: #{$pure-white};
+      }
+      // id comes from `logo:` in the role's front matter, currently `duq`
+      &#duq{
+        --card-bg: #{$duquesne-red};
+        --card-fill: #{$pure-white};
+      }
+    }
+    .brand-logo{
+      width: 100%;
+      height: 100%;
+      // Inline SVG, so the viewBox plus the default preserveAspectRatio already
+      // fits the mark the way object-fit: contain did for the old <img>.
+      // Matches the #1f2937 the files ship with, and is now overridable per
+      // brand and per theme.
+      fill: var(--card-fill, #{$navy-black});
+      // Same clock as the card background it sits on, so they change together
+      transition: fill $run-duration $run-easing;
+    }
+    // Branded cards define --card-bg, so this resolves to their own colour and
+    // they hold it on hover. Only unbranded cards fall through to the grey.
+    &:hover .brand-logo-container{
+      background-color: var(--card-bg, #{semantic-color(brand-logo-card-bg-hover)});
     }
   }
 }
@@ -391,13 +480,37 @@
 }
 
 .work-item{
+  & + &{
+    h3{
+      margin-block-start: 1em;
+    }
+    // A new company block leads with the logo card, so the gap belongs above it
+    .brand-logo-container{
+      margin-block-start: 1em;
+    }
+  }
+  // Roles in the same company sit tighter together. A continuation role renders
+  // no <h3>, which is what marks it as same-company.
+  // The gap depends only on the role ABOVE: a closed role lets the next one sit
+  // tight, and opening a role pushes down only the one after it, never itself.
+  // :has() keeps this live as rows open and close.
+  &:has(> .description-details:not([open])) + &:not(:has(h3)){
+    // ⬇︎ TUNE ME: how tightly stacked collapsed roles read.
+    //   Raise toward the 1rem default to loosen, drop toward 0 to tighten.
+    //   The default gap lives on `.work-item { margin-top: 1rem }` further up
+    //   this file, and still applies to every other pair of roles.
+    margin-top: 0.125rem;
+  }
+  .brand-logo-container + h3{
+    margin-block-start: 0;
+  }
   h3{
     font-family: $lato;
     font-size: 1.4em;
     font-weight: $lato-black;
-    font-style: italic;
     padding: 0;
     margin-bottom: 0;
+    margin-block-start: 0;
   }
   h4{
     font-family: $lato;
@@ -406,6 +519,109 @@
     padding: 0;
     margin-bottom: 0;
     margin-top: 0;
+  }
+  .title-date{
+    margin-block-end: 0.5em;
+    // background-color: red;
+    .date{
+      // work-experience dates only, without touching speaking or education
+      font-weight: $lato-regular;
+      font-style: normal;
+      background-color: $navy-black-l9;
+      border-radius: $pill-radius;
+      font-size: 0.9em;
+      // padding: 0.1rem 1rem;
+      padding: 0 0.75rem;
+      margin-top: 0;
+    }
+  }
+  .description-details {
+    // Animate the reveal on the same clock as the summary's own transition.
+    // interpolate-size is scoped here rather than :root so enabling keyword
+    // interpolation doesn't change height transitions elsewhere on the site.
+    // Unsupported browsers just skip the animation and open instantly.
+    interpolate-size: allow-keywords;
+    &::details-content{
+      block-size: 0;
+      overflow: hidden;
+      transition:
+        block-size $run-duration $run-easing,
+        content-visibility $run-duration $run-easing allow-discrete;
+    }
+    &[open]::details-content{
+      block-size: auto;
+    }
+    summary {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      list-style: none;
+      // Padding gives the hover background room; the matching negative inline
+      // margin keeps the text aligned with the always-expanded roles
+      padding: 0.25em 0.5em;
+      margin-inline: -0.5em;
+      border-radius: $tile-radius;
+      // Scoped on purpose: `all` would sweep up padding, border-radius and the
+      // rest alongside the properties that actually need to move
+      transition: background-color $run-duration $run-easing;
+      // Only where the reveal itself animates is it worth easing the gap above
+      // the description, so the space and the text grow together. Without both
+      // features the content pops open instantly and a lone easing gap lags it.
+      @supports selector(::details-content) and (interpolate-size: allow-keywords){
+        transition:
+          background-color $run-duration $run-easing,
+          margin-bottom $run-duration $run-easing;
+      }
+      &::-webkit-details-marker { display: none; }
+      &:hover {
+        background-color: semantic-color(work-role-row-hover-bg);
+      }
+      // Flex so the chevron centres against the title exactly, at any font
+      // size. vertical-align: middle left it ~2px low, since it aligns to the
+      // line box rather than the cap height.
+      h4{
+        display: flex;
+        align-items: center;
+      }
+      // Disclosure chevron trails the role title. fa-chevron-right from Font
+      // Awesome 6 Free Solid, which the kit already loads for the site's other
+      // icons, so this pulls down no additional font. Weight 900 is what
+      // selects Solid; Regular (400) would trigger a second download.
+      h4::after {
+        content: "\f054";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-style: normal;
+        // ⬇︎ TUNE ME: chevron size relative to the role title
+        font-size: 0.75em;
+        display: inline-block;
+        margin-inline-start: 0.5em;
+        // Centred by the flex rule on h4 above, not by a translate, because
+        // [open] overwrites transform with the rotation and would drop any
+        // offset stored there. Never let a long title squash the glyph.
+        flex-shrink: 0;
+        // Optical nudge down. Deliberately position/top rather than padding-top:
+        // padding would grow the box, and since transform-origin defaults to the
+        // box centre, the glyph would rotate about a point below itself. This
+        // leaves the box untouched, so it still spins about its own centre.
+        // ⬇︎ TUNE ME: optical centring of the chevron
+        position: relative;
+        top: 0.15em;
+        transition: transform $run-duration $run-easing;
+      }
+      .title-date {
+        flex: 1;
+        margin-block-end: 0;
+      }
+    }
+    // Only needed to separate the summary from the description it reveals, so
+    // collapsed rows don't carry it and can stack tight
+    &[open] summary {
+      margin-bottom: 0.5rem;
+    }
+    &[open] summary h4::after {
+      transform: rotate(90deg);
+    }
   }
 }
 

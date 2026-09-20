@@ -35,6 +35,18 @@ $rainbow-gradient: linear-gradient(90deg,
   #00a2e2 100%
 );
 
+$consumer-reports-green: #05AE3C;
+$carnegie-mellon-red: #C41230;
+$processly-plum: #7C205E;
+$disney-animation-cream: #FFFBEC;
+$upmc-purple: #771B61;
+$duquesne-red: #BA0C2F;
+$yinzcam-amber: #FFAD2F;
+$nus-blue: #003D7C;
+$banyantree-green: #082B26;
+$shine-registry-rose: #BA3D54;
+$dzgnio-cyan: #00C9FF;
+$dzgnio-mint: #92FE9D;
 $signature-teal: #12abc4;
 $navy-black: #1f2937;
 //// [number indicates number of step removed from main]
@@ -122,6 +134,11 @@ $semantic-colors:(
     film-credit-container-bg: $navy-black-l9,
     easter-egg-card-bg: #F9F9F9,
     easter-egg-card-outline: rgba($navy-black-l8, 0.28),
+    easter-egg-card-outline: rgba(#D2D4D7, 0.28),
+    brand-logo-card-bg: #F9F9F9,
+    brand-logo-card-bg-hover: $navy-black-l9,
+    brand-logo-card-outline: rgba(#D2D4D7, 0.28),
+    work-role-row-hover-bg: rgba($navy-black, 0.04),
     easter-egg-card-description: $navy-black-l3,
     easter-egg-card-icon-bg: $navy-black-l8,
     about-easter-egg-checkbox-tooltip-bg: $navy-black,
@@ -161,6 +178,10 @@ $semantic-colors:(
     film-credit-container-bg: $navy-black,
     easter-egg-card-bg: $navy-black-d1,
     easter-egg-card-outline: $navy-black,
+    brand-logo-card-bg: $navy-black-d1,
+    brand-logo-card-bg-hover: $navy-black-l1,
+    brand-logo-card-outline: $navy-black,
+    work-role-row-hover-bg: rgba($pure-white, 0.07),
     easter-egg-card-description: $navy-black-l5,
     easter-egg-card-icon-bg: $navy-black-l2,
     about-easter-egg-checkbox-tooltip-bg: $navy-black,
@@ -193,8 +214,12 @@ $semantic-colors:(
 }
 
 // Animations
+// Duration and easing are split out so rules that transition specific
+// properties can stay in step with the `all` shorthands below
+$run-duration: 0.30s;
+$run-easing: ease-in-out;
 $sprint: all 0.20s ease-in-out;
-$run: all 0.30s ease-in-out;
+$run: all $run-duration $run-easing;
 $jog: all 0.50s ease-in-out;
 $tight-spring-curve: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 $tight-spring: all 0.3s $tight-spring-curve;
