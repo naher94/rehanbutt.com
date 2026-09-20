@@ -299,17 +299,9 @@ article{
     box-shadow: $recessed-shadow semantic-color(shadow);
     align-items: center;
     p{
+      @include type-style(product, body-sm-strong);
       padding: 0;
       margin: 0;
-      font-weight: $lato-bold;
-      font-size: 1rem;
-      line-height: 1.3rem;
-      @include breakpoint(small only) {
-        font-size: 1rem;
-      }
-      @include breakpoint(medium down) {
-        font-size: 1rem;
-      }
     }
     .icon{
       align-items: center;

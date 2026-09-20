@@ -278,6 +278,7 @@ $product-type: (
                   at: (small only: (size: 1rem))),                                                    // 16px, == the root
   body-strong:   (family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.6),    // 20px
   body-sm:       (family: $lato,  size: 1rem,       font-weight: $lato-regular, line-height: 1.6),    // 16px
+  body-sm-strong:(family: $lato,  size: 1rem,       font-weight: $lato-bold,    line-height: 1.3),    // 16px
 
   // ---- component styles: named for the thing, not for a rank --------------
   // nav-link's 1.6 is the list leading it inherits by being a `ul`, not a choice.
