@@ -870,13 +870,25 @@ const journeysOn = () => {
   return JOURNEYS.filter(j => on.some(b => j.steps[BPS.indexOf(b)]));
 };
 
+/* Sorted on the numbers the row actually prints. `j.weight` -- the busiest
+   style a journey touches -- is a property of the style, not the journey, so
+   ordering by it against a row showing `j.n` looked like no order at all. */
 function sortJourneys(list){
   const arr = [...list];
-  const fam = j => { const s = j.steps.find(Boolean) || {};
-                     return String(s.family) + s.weight; };
-  if (state.sort === "count") arr.sort((a, b) => b.weight - a.weight || b.score - a.score);
-  else if (state.sort === "az") arr.sort((a, b) => fam(a).localeCompare(fam(b)));
-  else arr.sort((a, b) => b.score - a.score || b.weight - a.weight);
+  const first = j => j.steps.find(Boolean) || {};
+  if (state.sort === "count") {
+    arr.sort((a, b) => b.n - a.n || b.score - a.score);
+  } else if (state.sort === "az") {
+    arr.sort((a, b) => {
+      const x = first(a), y = first(b);
+      return String(x.family).localeCompare(String(y.family))
+          || (y.size || 0) - (x.size || 0)
+          || String(x.weight).localeCompare(String(y.weight));
+    });
+  } else {
+    // the default: worst-first, as the view note describes
+    arr.sort((a, b) => b.score - a.score || b.n - a.n);
+  }
   return arr;
 }
 
@@ -1458,7 +1470,14 @@ function setMode(m){ state.mode = m; state.sel = null; state._selData = null;
 function setView(v){ state.view = v; state.sel = null; state._selData = null;
   press("v-props", v === "props"); press("v-combined", v === "combined"); draw(); }
 function setGroup(g){ state.group = g; state.sel = null; state._selData = null;
-  press("g-style", g === "style"); press("g-journey", g === "journey"); draw(); }
+  press("g-style", g === "style"); press("g-journey", g === "journey");
+  // The default sort means two different things. Grouped by style it is the
+  // property's value; grouped across widths there is no single value to sort
+  // on, so it is worst-first -- which the button should say rather than
+  // claiming a sort it is not doing.
+  document.getElementById("s-value").textContent =
+    g === "journey" ? "Flagged" : "Value";
+  draw(); }
 function setSort(s){ state.sort = s;
   press("s-value", s === "value"); press("s-count", s === "count"); press("s-az", s === "az");
   draw(); }
