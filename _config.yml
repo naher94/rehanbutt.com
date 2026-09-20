@@ -20,6 +20,23 @@ version-naming: [Apricot, Blackcurrent, Coconut, Dragonfruit, Elderberry, Fig, G
 # Build settings
 markdown: kramdown
 
+# Setting `exclude` replaces Jekyll's defaults rather than adding to them, so the
+# stock entries are repeated here. Without this the repo's own documentation ends
+# up served from the site: README.md was live at rehanbutt.com/README.md as raw
+# markdown, because a file with no front matter is copied through verbatim.
+exclude:
+  - .jekyll-cache/
+  - .sass-cache/
+  - Gemfile
+  - Gemfile.lock
+  - gemfiles/
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+
 sass:
   style: compressed
 

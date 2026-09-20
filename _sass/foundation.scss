@@ -25,16 +25,12 @@
 // Grids
 @import 'xy-grid/xy-grid';
 // Generic components
-@import 'components/button';
-@import 'components/table';
 
 // Containers
 @import 'components/responsive-embed';
 
 // Helpers
-@import 'components/float';
 @import 'components/flex';
-@import 'components/visibility';
 
 
 @mixin foundation-everything(

@@ -22,6 +22,7 @@
       h2{ 
         font-family: $lato;
         &.thumbnail-text{
+          @include type-style(product, gallery-title);
           opacity: 1;
           position: unset;
           bottom: unset;
@@ -29,11 +30,7 @@
           right: unset;
           margin: unset;
           text-align: unset;
-          font-size: 3em;
           padding: 0;
-          @include breakpoint(small only) {
-            font-size: 2em;
-          }
         }
       }
       .thumbnail-text-date{
@@ -90,8 +87,7 @@
           font-size: 1.25em;
         }
         .country-label{
-          text-transform: uppercase;
-          font-size: 0.8em;
+          @include type-style(product, data-label);
         }
       }
     }

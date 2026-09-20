@@ -25,12 +25,10 @@
       }
       h1{
         padding-left: 0;
-        font-family: $zilla;
-        font-weight: $zilla-bold;
-        font-size: 3rem;
+        @include type-style(product, page-title);
         margin-bottom: 1rem;
         span{
-          font-size: 2.5rem;
+          font-size: 0.8em;
         }
       }
       p{
@@ -230,8 +228,10 @@
   margin-top: 4em;
   h2{
     font-size: 3.5em;
-    font-weight: $lato-black;
-    font-family: $lato;
+    // font-weight: $lato-black; TODO confirm type change
+    // font-family: $lato;
+    font-weight: $zilla-bold;
+    // font-family: $zilla;
     @include breakpoint(small only) {
       line-height: 1em;
       padding: 0;
@@ -658,7 +658,7 @@
 }
 
 .rainbow{
-  background-image: linear-gradient(90deg,#00a2e2 0%,#1bad6b 20%,#fec609 40%,#e92687 60%,#6d358d 80%,#00a2e2 100%);
+  background-image: $rainbow-gradient;
   background-size: 200% auto;
   background-clip: text;
   text-fill-color: transparent;

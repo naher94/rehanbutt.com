@@ -1,0 +1,610 @@
+<title>Reachability Atlas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@300;400;500;700&family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#F6F7F8; --surface:#FFFFFF; --surface-2:#EEF0F2;
+    --ink:#1F2937; --ink-muted:#626973; --ink-faint:#8B919B;
+    --rule:#DFE3E7; --rule-strong:#C6CCD3;
+    --accent:#12ABC4; --accent-deep:#0B7F92;
+    --flag-high:#BA3D54; --flag-med:#B4751C; --flag-ok:#2F7D5B;
+    --chip:#E7EAED;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#151B24; --surface:#1C232D; --surface-2:#232B36;
+      --ink:#EDEFF2; --ink-muted:#A3AAB4; --ink-faint:#7C838D;
+      --rule:#2D3742; --rule-strong:#3D4854;
+      --accent:#3FC4DA; --accent-deep:#7FDCEB;
+      --flag-high:#E08196; --flag-med:#D9A85C; --flag-ok:#6BBF95;
+      --chip:#2A3441;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#151B24; --surface:#1C232D; --surface-2:#232B36;
+    --ink:#EDEFF2; --ink-muted:#A3AAB4; --ink-faint:#7C838D;
+    --rule:#2D3742; --rule-strong:#3D4854;
+    --accent:#3FC4DA; --accent-deep:#7FDCEB;
+    --flag-high:#E08196; --flag-med:#D9A85C; --flag-ok:#6BBF95;
+    --chip:#2A3441;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:"Lato",-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:16px; line-height:1.55; margin:0; padding:0 24px 72px;
+  }
+  /* The page fills the window. Nothing here is prose that needs a measure --
+     the grids and card sheets want every pixel they can get -- and the few
+     blocks that ARE prose cap themselves in ch below. */
+  .wrap{max-width:none;margin:0}
+  code,.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+
+  header.top{padding:48px 0 22px;border-bottom:2px solid var(--ink);margin-bottom:26px}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent-deep);margin:0 0 12px}
+  h1{font-family:"Zilla Slab",Georgia,serif;font-weight:700;
+    font-size:clamp(32px,4.6vw,48px);line-height:1.08;margin:0 0 12px;text-wrap:balance}
+  .standfirst{font-size:18px;color:var(--ink-muted);max-width:64ch;margin:0}
+
+  /* controls */
+  .bar{display:flex;flex-wrap:wrap;gap:18px;align-items:center;
+    justify-content:space-between;margin-bottom:10px}
+  .segs{display:flex;gap:12px;flex-wrap:wrap}
+  .seg{display:inline-flex;border:1px solid var(--rule-strong);border-radius:3px;overflow:hidden}
+  .seg button{
+    font-family:"Lato",sans-serif;font-size:14px;font-weight:700;
+    padding:8px 16px;border:0;background:var(--surface);color:var(--ink-muted);cursor:pointer;
+  }
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+  .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .stats{display:flex;gap:22px;flex-wrap:wrap;font-family:"JetBrains Mono",monospace;
+    font-size:12.5px;color:var(--ink-muted)}
+  .stats b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+
+  .viewnote{font-size:14.5px;color:var(--ink-muted);margin:0 0 16px;max-width:78ch}
+
+  /* filters */
+  .filters{display:flex;flex-wrap:wrap;gap:12px 30px;margin:0 0 18px;
+    padding:14px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:3px}
+  .fgroup{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .flabel{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-muted)}
+  .chips{display:flex;gap:7px;flex-wrap:wrap}
+  .chip{font-family:"Lato",sans-serif;font-size:13.5px;font-weight:700;
+    padding:5px 11px;border:1px solid var(--rule-strong);border-radius:2px;
+    background:var(--surface);color:var(--ink-faint);cursor:pointer;
+    display:inline-flex;align-items:center;gap:7px}
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+  .chip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .chip .n{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:400;
+    opacity:.7;font-variant-numeric:tabular-nums}
+  .noresults{padding:40px 16px;text-align:center;color:var(--ink-faint);font-size:15px}
+
+  /* layout */
+  .cols{display:grid;grid-template-columns:1fr 372px;gap:26px;align-items:start}
+  @media (max-width:1000px){.cols{grid-template-columns:1fr}}
+
+  .sheet{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+    overflow:hidden}
+
+  .group{border-bottom:1px solid var(--rule)}
+  .group:last-child{border-bottom:none}
+  .ghead{display:flex;align-items:baseline;gap:12px;padding:14px 18px 10px;
+    background:var(--surface-2);border-bottom:1px solid var(--rule);
+    position:sticky;top:0;z-index:2}
+  .ghead h3{margin:0;font-family:"JetBrains Mono",monospace;font-weight:500;
+    font-size:13px;letter-spacing:.04em}
+  .ghead .gmeta{font-family:"JetBrains Mono",monospace;font-size:11px;
+    color:var(--ink-muted);font-variant-numeric:tabular-nums}
+
+  /* the headline: what share of the stylesheet is doing nothing */
+  .weigh{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+    padding:16px 18px;margin:0 0 18px}
+  .weigh h2{margin:0 0 12px;font-family:"JetBrains Mono",monospace;font-weight:500;
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted)}
+  .stack{display:flex;height:26px;border-radius:2px;overflow:hidden;
+    border:1px solid var(--rule-strong)}
+  .stack span{display:block}
+  .stack .s-live{background:var(--surface-2)}
+  .stack .s-dead{background:var(--flag-high)}
+  .stack .s-bloat{background:var(--flag-med)}
+  .stack .s-script{background:var(--accent)}
+  .wkey{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:10px;
+    font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-muted)}
+  .wkey b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+  .wkey i{width:9px;height:9px;border-radius:2px;display:inline-block;
+    margin-right:6px;vertical-align:-1px;border:1px solid rgba(0,0,0,.25)}
+
+  /* how to read this: the verdicts, and what each one asks you to do */
+  .guide{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 18px}
+  @media (max-width:860px){.guide{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+    padding:14px 16px}
+  .card h3{margin:0 0 8px;display:flex;align-items:center;gap:8px;
+    font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:500;
+    letter-spacing:.04em}
+  .card p{margin:0 0 8px;font-size:13.5px;color:var(--ink-muted);line-height:1.45}
+  .card .do{margin:0;font-size:13.5px;color:var(--ink);font-weight:700}
+  .card .do::before{content:"-> ";font-family:"JetBrains Mono",monospace;
+    color:var(--accent-deep);font-weight:400}
+
+  /* lanes: authored rules are deleted one by one, vendor rules are not */
+  .lane{display:flex;flex-wrap:wrap;gap:14px;align-items:baseline;margin:0 0 14px}
+  .lanenote{font-size:14px;color:var(--ink-muted);margin:0 0 18px;max-width:82ch;
+    padding:12px 14px;background:var(--surface);border:1px solid var(--rule);
+    border-left:3px solid var(--accent-deep);border-radius:3px}
+  .lanenote code{font-family:"JetBrains Mono",monospace;font-size:12.5px;
+    background:var(--chip);padding:1px 5px;border-radius:2px}
+  .lanenote b{color:var(--ink)}
+
+  .allgone{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.06em;
+    text-transform:uppercase;padding:2px 7px;border-radius:2px;
+    background:color-mix(in srgb,var(--flag-high) 16%,transparent);color:var(--flag-high)}
+
+  /* a rule row */
+  .row{display:grid;grid-template-columns:1fr 168px 74px;gap:16px;align-items:start;
+    width:100%;text-align:left;padding:11px 18px;border:0;border-bottom:1px solid var(--rule);
+    background:transparent;color:inherit;cursor:pointer;font:inherit}
+  .row:last-child{border-bottom:none}
+  .row:hover{background:var(--surface-2)}
+  .row:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .row[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 10%,transparent);
+    box-shadow:inset 3px 0 0 var(--accent-deep)}
+  /* selectors are the content here, so they get the monospace and the room */
+  /* a long @extend list would make one row taller than the screen */
+  .sel{font-family:"JetBrains Mono",monospace;font-size:12px;line-height:1.5;
+    min-width:0;overflow-wrap:anywhere;max-height:92px;overflow:hidden}
+  .panel .sel{max-height:none}
+  .sel .s-dead{color:var(--flag-high)}
+  .sel .s-live{color:var(--ink-faint)}
+  .sel .more{color:var(--ink-faint)}
+  .where{font-family:"JetBrains Mono",monospace;font-size:11px;
+    color:var(--accent-deep);overflow-wrap:anywhere}
+  .weight{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:500;
+    text-align:right;font-variant-numeric:tabular-nums}
+  .weight small{display:block;font-size:10px;font-weight:400;color:var(--ink-faint);
+    letter-spacing:.06em;text-transform:uppercase}
+
+  .vtag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.06em;
+    text-transform:uppercase;padding:2px 7px;border-radius:2px;white-space:nowrap}
+  .vtag.dead{background:color-mix(in srgb,var(--flag-high) 16%,transparent);color:var(--flag-high)}
+  .vtag.bloat{background:color-mix(in srgb,var(--flag-med) 18%,transparent);color:var(--flag-med)}
+  .vtag.script{background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent-deep)}
+  .vtag.unevaluable{background:var(--chip);color:var(--ink-muted)}
+
+  /* per-file bar in the group header */
+  .ghead{gap:10px}
+  .fbar{width:120px;height:5px;background:var(--surface-2);border-radius:2px;overflow:hidden;
+    display:flex}
+  .fbar span{display:block;height:5px}
+  .fbar .b-dead{background:var(--flag-high)}
+  .fbar .b-bloat{background:var(--flag-med)}
+
+  /* detail panel */
+  .panel{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+    padding:18px 18px 22px;position:sticky;top:18px;max-height:calc(100vh - 36px);overflow-y:auto}
+  .panel .empty{color:var(--ink-faint);font-size:14.5px}
+  .pname{font-family:"JetBrains Mono",monospace;font-size:15px;font-weight:500;
+    margin:0 0 4px;word-break:break-word}
+  .pmeta{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
+  .tag{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.07em;
+    text-transform:uppercase;padding:3px 8px;border-radius:2px;background:var(--chip);color:var(--ink-muted)}
+  .tag.vendor{background:color-mix(in srgb,var(--flag-med) 18%,transparent);color:var(--flag-med)}
+  .tag.off{background:color-mix(in srgb,var(--flag-high) 16%,transparent);color:var(--flag-high)}
+  .tag.on{background:color-mix(in srgb,var(--flag-ok) 16%,transparent);color:var(--flag-ok)}
+  .pair{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;margin:12px 0;
+    font-family:"JetBrains Mono",monospace;font-size:12.5px}
+  .pair dt{color:var(--ink-muted)}
+  .pair dd{margin:0;word-break:break-word}
+  .panel h4{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-muted);font-weight:500;
+    margin:18px 0 8px;padding-top:12px;border-top:1px solid var(--rule)}
+  .use{font-family:"JetBrains Mono",monospace;font-size:12px;padding:7px 0;
+    border-bottom:1px solid var(--rule);line-height:1.45;
+    display:flex;justify-content:space-between;gap:10px}
+  .use:last-child{border-bottom:none}
+  /* rows from the file group you clicked, lifted to the top of the list */
+  .use.here{border-left:3px solid var(--accent-deep);padding-left:10px;margin-left:-13px}
+  .use.here .loc{font-weight:500}
+  .use .loc{color:var(--accent-deep)}
+  .use .n{color:var(--ink-faint);font-variant-numeric:tabular-nums}
+  .samples{font-size:13px;color:var(--ink-muted);line-height:1.5}
+  .samples li{margin-bottom:6px}
+  .samples{padding-left:18px;margin:0}
+
+  .panel .sel{font-size:12px;margin:0}
+  .plist div{padding:5px 0;border-bottom:1px solid var(--rule);
+    font-family:"JetBrains Mono",monospace;font-size:11.5px;overflow-wrap:anywhere}
+  .plist div:last-child{border-bottom:none}
+
+  footer.note{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
+    font-size:13.5px;color:var(--ink-faint);max-width:80ch}
+  footer.note code{font-size:12.5px}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">rehanbutt.com &middot; design system</p>
+    <h1>Reachability Atlas</h1>
+    <p class="standfirst">Every rule in the compiled stylesheet, against every built
+      page, answering one question: does anything match it? Rules rather than
+      selectors, because a rule is only deletable once its whole list is dead.</p>
+  </header>
+
+  <div class="weigh" id="weigh"></div>
+
+  <div class="guide" id="guide"></div>
+
+  <div class="bar">
+    <div class="segs">
+      <div class="seg" role="group" aria-label="Whose code">
+        <button id="l-authored" aria-pressed="true">Yours</button>
+        <button id="l-vendor" aria-pressed="false">Foundation</button>
+        <button id="l-all" aria-pressed="false">Everything</button>
+      </div>
+      <div class="seg" role="group" aria-label="Group by">
+        <button id="g-file" aria-pressed="true">By file</button>
+        <button id="g-verdict" aria-pressed="false">By verdict</button>
+      </div>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+
+  <p class="lanenote" id="lanenote"></p>
+
+  <div class="filters" id="filters"></div>
+
+  <div class="cols">
+    <div class="sheet" id="sheet"></div>
+    <aside class="panel" id="panel"><p class="empty">Pick a rule to see its full selector list.</p></aside>
+  </div>
+
+  <footer class="note" id="foot"></footer>
+</div>
+
+<script>
+const DATA = __DATA__;
+const RULES = DATA.rules;          // every rule that is not wholly live
+const T = DATA.totals;
+const FILES = new Map(DATA.by_file.map(f => [f.file, f]));
+
+const VERDICTS = {
+  dead:        "nothing on the site matches this rule",
+  bloat:       "the rule is live, but entries in its selector list are not",
+  script:      "no match in the built HTML, but a script names this class",
+  unevaluable: "the matcher could not evaluate this selector, so it is not judged"
+};
+
+// What each verdict asks you to do, in one word, under every byte figure.
+// Vendor rules never say "delete": you do not edit Foundation's partials, you
+// decide whether the include that emits them stays.
+const ACTION_MINE = { dead: "delete", bloat: "restructure", script: "keep",
+                      unevaluable: "check" };
+function action(r){
+  if (r.verdict === "script") return "keep";
+  if (r.vendor) return "via include";
+  return ACTION_MINE[r.verdict] || "check";
+}
+
+const state = {
+  lane: "authored",
+  group: "file",
+  verdict: new Set(),
+  source: new Set(),
+  sel: null
+};
+
+const short  = f => (f || "?").replace(/^_sass\//, "");
+const srcOf  = r => r.vendor ? "vendor" : "authored";
+const bytes  = n => n >= 1024 ? (n / 1024).toFixed(1) + " kB" : n + " b";
+
+function pass(r){
+  if (state.lane !== "all" && srcOf(r) !== state.lane) return false;
+  if (state.verdict.size && !state.verdict.has(r.verdict)) return false;
+  return true;
+}
+
+/* ------------------------------------------------------------- headline */
+function drawWeigh(){
+  const total = T.stylesheet_bytes;
+  const rv = T.rule_verdicts;
+  // dead and bloat are weighed by what removing them saves; a script-reachable
+  // rule is not proven waste, so it is shown at its full size instead
+  const dead  = (rv.dead  || {waste:0}).waste;
+  const bloat = (rv.bloat || {waste:0}).waste;
+  const script= (rv.script|| {bytes:0}).bytes;
+  const live  = Math.max(0, total - dead - bloat - script);
+  const pct = n => (n / total * 100);
+  document.getElementById("weigh").innerHTML = `
+    <h2>Weight of the stylesheet</h2>
+    <div class="stack">
+      <span class="s-dead"   style="width:${pct(dead)}%"></span>
+      <span class="s-bloat"  style="width:${pct(bloat)}%"></span>
+      <span class="s-script" style="width:${pct(script)}%"></span>
+      <span class="s-live"   style="width:${pct(live)}%"></span>
+    </div>
+    <div class="wkey">
+      <span><i class="s-dead" style="background:var(--flag-high)"></i>
+        unreachable <b>${bytes(dead)}</b> (${pct(dead).toFixed(1)}%)</span>
+      <span><i class="s-bloat" style="background:var(--flag-med)"></i>
+        dead list entries <b>${bytes(bloat)}</b> (${pct(bloat).toFixed(1)}%)</span>
+      <span><i class="s-script" style="background:var(--accent)"></i>
+        script-reachable <b>${bytes(script)}</b></span>
+      <span><i class="s-live" style="background:var(--surface-2)"></i>
+        matched <b>${bytes(live)}</b></span>
+    </div>`;
+}
+
+/* -------------------------------------------------------------- filters */
+function counts(fn, within = () => true){
+  const m = new Map();
+  for (const r of RULES) if (within(r)) m.set(fn(r), (m.get(fn(r)) || 0) + 1);
+  return m;
+}
+
+function drawFilters(){
+  const box = document.getElementById("filters");
+  box.innerHTML = "";
+  for (const f of [{ key:"verdict", label:"Verdict", of:r=>r.verdict }]) {
+    // counted within the current lane, so the numbers match what is listed
+    const m = counts(f.of, r => state.lane === "all" || srcOf(r) === state.lane);
+    const keys = [...m.keys()].sort((a, b) => m.get(b) - m.get(a));
+    const g = document.createElement("div");
+    g.className = "fgroup";
+    g.innerHTML = `<span class="flabel">${f.label}</span>`;
+    const chips = document.createElement("div");
+    chips.className = "chips";
+    for (const k of keys) {
+      const on = state[f.key].size === 0 || state[f.key].has(k);
+      const b = document.createElement("button");
+      b.className = "chip";
+      b.type = "button";
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.innerHTML = `${esc(k)}<span class="n">${m.get(k).toLocaleString()}</span>`;
+      b.onclick = () => {
+        const set = state[f.key];
+        // an untouched group shows everything; the first click narrows to the
+        // rest, which is what "turn this one off" has to mean when nothing is
+        // explicitly selected
+        if (set.size === 0) keys.forEach(x => set.add(x));
+        set.has(k) ? set.delete(k) : set.add(k);
+        if (set.size === keys.length) set.clear();
+        draw();
+      };
+      chips.appendChild(b);
+    }
+    g.appendChild(chips);
+    box.appendChild(g);
+  }
+}
+
+/* ---------------------------------------------------------------- sheet */
+function selectorHTML(r, limit){
+  const parts = r.selectors.map((s, i) =>
+    `<span class="${r.verdicts[i] === "dead" ? "s-dead" : "s-live"}">${esc(s)}</span>`);
+  if (limit && parts.length > limit)
+    return parts.slice(0, limit).join(", ")
+      + `<span class="more">, + ${parts.length - limit} more</span>`;
+  return parts.join(", ");
+}
+
+function rowEl(r, i){
+  const b = document.createElement("button");
+  b.className = "row";
+  b.type = "button";
+  b.setAttribute("aria-pressed", state.sel === i ? "true" : "false");
+  b.innerHTML = `
+    <span class="sel">${selectorHTML(r, 3)}</span>
+    <span class="where">${esc(short(r.file))}${r.line ? ":" + r.line : ""}<br>
+      <span class="vtag ${r.verdict}">${r.verdict === "bloat"
+        ? `${r.dead} of ${r.total} dead` : r.verdict}</span></span>
+    <span class="weight" title="compiled CSS, before gzip">${
+      r.waste ? bytes(r.waste) : "&mdash;"}<small>${action(r)}</small></span>`;
+  b.onclick = () => { state.sel = i; draw(); };
+  return b;
+}
+
+function groups(rows){
+  const m = new Map();
+  for (const r of rows) {
+    const k = state.group === "file" ? (r.file || "?") : r.verdict;
+    if (!m.has(k)) m.set(k, []);
+    m.get(k).push(r);
+  }
+  for (const [, v] of m) v.sort((a, b) => b.waste - a.waste);
+  return [...m.entries()]
+    .sort((a, b) => sum(b[1]) - sum(a[1]));
+}
+const sum = arr => arr.reduce((n, r) => n + r.waste, 0);
+
+function drawSheet(){
+  const sheet = document.getElementById("sheet");
+  sheet.innerHTML = "";
+  const rows = RULES.map((r, i) => [r, i]).filter(([r]) => pass(r));
+  if (!rows.length) {
+    sheet.innerHTML = `<p class="noresults">Nothing matches those filters.</p>`;
+    return;
+  }
+  for (const [name, list] of groups(rows.map(([r]) => r))) {
+    const g = document.createElement("section");
+    g.className = "group";
+    const head = document.createElement("div");
+    head.className = "ghead";
+    const waste = sum(list);
+    if (state.group === "file") {
+      const f = FILES.get(name) || { total_bytes: waste };
+      const share = f.total_bytes ? waste / f.total_bytes * 100 : 0;
+      const d = (FILES.get(name) || {}).bytes || 0;
+      const bl = (FILES.get(name) || {}).bloat_bytes || 0;
+      head.innerHTML = `<h3>${esc(short(name))}</h3>
+        <span class="gmeta">${list.length} rule${list.length === 1 ? "" : "s"}
+        &middot; ${bytes(waste)} of ${bytes(f.total_bytes)} (${share.toFixed(0)}%)</span>
+        ${share >= 90 ? `<span class="allgone">whole file</span>` : ""}
+        <span class="spacer" style="flex:1"></span>
+        <span class="fbar">
+          <span class="b-dead" style="width:${f.total_bytes ? d / f.total_bytes * 100 : 0}%"></span>
+          <span class="b-bloat" style="width:${f.total_bytes ? bl / f.total_bytes * 100 : 0}%"></span>
+        </span>`;
+    } else {
+      head.innerHTML = `<h3>${esc(name)}</h3>
+        <span class="gmeta">${list.length} rule${list.length === 1 ? "" : "s"}
+        &middot; ${bytes(waste)} &middot; ${esc(VERDICTS[name] || "")}</span>`;
+    }
+    g.appendChild(head);
+    for (const r of list) g.appendChild(rowEl(r, RULES.indexOf(r)));
+    sheet.appendChild(g);
+  }
+}
+
+/* ---------------------------------------------------------------- panel */
+function drawPanel(){
+  const p = document.getElementById("panel");
+  const r = RULES[state.sel];
+  if (!r) { p.innerHTML = `<p class="empty">Pick a rule to see its full selector list.</p>`; return; }
+  // group by the selector's own verdict, not by "dead vs everything else":
+  // a script-reachable selector matches nothing either, and filing it under
+  // "still matched" would say the opposite of what the audit found
+  const bucket = v => r.selectors.filter((_, i) => r.verdicts[i] === v);
+  const SECTIONS = [
+    ["dead",        r.verdict === "dead" ? "Matches nothing" : "Dead entries"],
+    ["script",      "Reached only by script"],
+    ["unevaluable", "Not judged"],
+    ["live",        "Still matched"]
+  ];
+  p.innerHTML = `
+    <div class="pmeta"><span class="vtag ${r.verdict}">${esc(r.verdict)}</span>
+      <span class="tag">${r.vendor ? "vendor" : "authored"}</span></div>
+    <p class="pname">${esc(short(r.file))}${r.line ? ":" + r.line : ""}</p>
+    <dl class="pair">
+      <dt>selectors</dt><dd>${r.total}</dd>
+      <dt>unreachable</dt><dd>${r.dead}</dd>
+      <dt>rule size</dt><dd>${bytes(r.bytes)}</dd>
+      <dt>${r.verdict === "dead" ? "deleting saves" : "wasted"}</dt><dd>${bytes(r.waste)}</dd>
+    </dl>
+    ${SECTIONS.map(([v, label]) => {
+      const list = bucket(v);
+      if (!list.length) return "";
+      return `<h4>${label}</h4><div class="plist">${list.map(s =>
+        `<div class="${v === "dead" ? "s-dead" : ""}">${esc(s)}</div>`).join("")}</div>`;
+    }).join("")}
+    <h4>What to do</h4>
+    <p class="samples" style="padding-left:0">${todo(r)}</p>`;
+}
+
+function todo(r){
+  if (r.vendor)
+    return `Foundation wrote this. Do not edit the partial &mdash; it is emitted by
+      an include in <code>_sass/app.scss</code>. Judge the include, not the rule.`;
+  if (r.verdict === "dead")
+    return `Nothing matches any of its ${r.total} selector${r.total === 1 ? "" : "s"}.
+      Delete it at <code>${esc(short(r.file))}:${r.line}</code>. The edit is likely
+      smaller than ${bytes(r.waste)} suggests &mdash; that figure is compiled output,
+      and nested Sass multiplies one block into many selectors.`;
+  if (r.verdict === "bloat")
+    return `The rule is live, so it stays. ${r.dead} of its ${r.total} selectors
+      match nothing, which is nesting or an <code>@extend</code> producing ancestor
+      combinations your markup cannot make. Narrow the nesting at
+      <code>${esc(short(r.file))}:${r.line}</code> rather than deleting anything.`;
+  if (r.verdict === "script")
+    return `No element matches this at rest, but your JavaScript names the class,
+      so it is probably applied on an interaction. Leave it. It is counted at zero
+      saving precisely because static pages cannot prove either way.`;
+  return `The matcher could not evaluate this selector, so it is judged neither way
+    and counts toward no total.`;
+}
+
+/* --------------------------------------------------------------- chrome */
+function drawStats(){
+  const rows = RULES.filter(pass);
+  document.getElementById("stats").innerHTML = `
+    <span><b>${rows.length}</b> rules listed</span>
+    <span><b>${bytes(sum(rows))}</b> recoverable</span>
+    <span><b>${T.rules.toLocaleString()}</b> rules on the site</span>
+    <span><b>${T.pages}</b> pages</span>`;
+  drawLaneNote();
+  document.getElementById("foot").innerHTML =
+    `Judged against ${T.pages} built pages. Anything the matcher could not evaluate ` +
+    `exactly was widened first (<code>a &gt; b</code> to <code>a b</code>, ` +
+    `<code>.x:hover</code> to <code>.x</code>) and called dead only when the wider ` +
+    `form still matched nothing, so errors fall on the safe side. Classes added by ` +
+    `script are held back as script-reachable rather than dead. ` +
+    `Regenerate with <code>python3 _tools/css-audit.py</code>.`;
+}
+
+const GUIDE = [
+  ["dead",   "Nothing on the site matches any selector in the rule.",
+             "Delete the rule."],
+  ["bloat",  "The rule is live, but most entries in its selector list are not. "
+             + "Usually nesting or an <code>@extend</code> multiplying ancestors "
+             + "into combinations the markup never produces.",
+             "Fix the Sass that generates it, not the output."],
+  ["script", "Nothing matches in the built HTML, but a class in the selector "
+             + "appears in your JavaScript, so it may be added at runtime.",
+             "Leave it. Counted at zero saving."]
+];
+
+function drawGuide(){
+  const rv = T.rule_verdicts;
+  document.getElementById("guide").innerHTML = GUIDE.map(([k, what, act]) => {
+    const e = rv[k] || { count: 0, waste: 0, bytes: 0 };
+    const n = k === "script" ? e.bytes : e.waste;
+    return `<section class="card">
+      <h3><span class="vtag ${k}">${k}</span>
+        <span style="color:var(--ink-muted)">${e.count} rules &middot; ${bytes(n)}</span></h3>
+      <p>${what}</p>
+      <p class="do">${act}</p>
+    </section>`;
+  }).join("");
+}
+
+function drawLaneNote(){
+  const inc = (DATA.includes || []).map(i =>
+    `<code>${esc(i.name)}</code>`).join(", ");
+  const grouped = state.group === "file"
+    ? "Grouped by the partial that wrote it; the bar is the share of that file's own output nothing matches."
+    : "Grouped by verdict.";
+  const notes = {
+    authored: `<b>Rules you wrote.</b> These are deleted one at a time, and the
+      list is ordered by how much compiled CSS each removal saves &mdash; so work
+      it top down. Note the byte figure is compiled output, not the size of the
+      edit: a few lines of nested Sass can emit a kilobyte of selectors.`,
+    vendor: `<b>Rules Foundation wrote.</b> Do not edit these partials &mdash; they
+      are emitted wholesale by the includes in <code>_sass/app.scss</code>, which
+      currently switches on ${inc}. A partial that is all but entirely dead is
+      telling you its include is not earning its place. That is the one decision
+      here, and it is worth far more than any single rule.`,
+    all: `<b>Everything.</b> Useful for the totals, less so for deciding anything
+      &mdash; your rules and Foundation's need different actions.`
+  };
+  document.getElementById("lanenote").innerHTML = notes[state.lane] + " " + grouped;
+}
+
+function draw(){ drawWeigh(); drawGuide(); drawFilters(); drawSheet();
+                 drawPanel(); drawStats(); }
+
+function esc(s){
+  return String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+}
+
+function setGroup(g){
+  state.group = g;
+  for (const k of ["file","verdict"])
+    document.getElementById("g-" + k).setAttribute("aria-pressed", String(g === k));
+  draw();
+}
+function setLane(l){
+  state.lane = l;
+  state.sel = null;
+  for (const [k, id] of [["authored","l-authored"],["vendor","l-vendor"],["all","l-all"]])
+    document.getElementById(id).setAttribute("aria-pressed", String(l === k));
+  draw();
+}
+
+document.getElementById("g-file").onclick    = () => setGroup("file");
+document.getElementById("g-verdict").onclick = () => setGroup("verdict");
+document.getElementById("l-authored").onclick = () => setLane("authored");
+document.getElementById("l-vendor").onclick   = () => setLane("vendor");
+document.getElementById("l-all").onclick      = () => setLane("all");
+
+draw();
+</script>

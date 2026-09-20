@@ -13,10 +13,18 @@ footer{
     .nav-section{
       margin-inline-end: 3rem;
       .section-title{
+        @include type-style(product, body-strong);
         padding: 0;
         margin: 0;
-        font-weight: $lato-bold;
         margin-bottom: 1rem;
+        // The footer scales up for touch, like the nav beside it. Not a map
+        // entry: an entry matching body-strong above small would be
+        // indistinguishable from it, and the atlas would lose the name on all
+        // 720 body-strong elements to put one on these 270.
+        @include breakpoint(small only) {
+          font-size: 1.5rem;
+          font-weight: $lato-black;
+        }
       }
     }
     .metadata{
@@ -55,9 +63,7 @@ footer{
         padding: 0;
         margin: 0;
       }
-      font-family: $lato;
-      font-weight: $lato-bold;
-      font-size: 1rem;
+      @include type-style(product, meta);
       .happy-copyright{
         p{
           display: inline;
@@ -93,13 +99,10 @@ footer{
     @include breakpoint(small only){
       font-size: 1.5em;
       .nav{
-        font-size: 1.1em;
+        font-size: 1.5rem;
       }
       .nav-section{
         margin-block-end: 2rem;
-        .section-title{
-          font-weight: $lato-black;
-        }
         .nav-wrap{
           margin-bottom: 0;
         }

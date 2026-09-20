@@ -1,12 +1,13 @@
 // Design System
+// `product/body` declares no line-height, which is what makes the whole style
+// safe to apply here: the root inherits the global unitless 1.5 and passes it
+// down as a ratio. A length would re-lead every child to that one figure.
+//
+// Both small-only sizes are in the map now, under `at`.
 body {
-  font-family: $lato;
-  font-weight: $lato-regular;
-  font-size: 20px; // = 1em
+  @include type-style(product, body); // = 1em
   color: semantic-color(text);
-  @include breakpoint(small only) {
-    font-size: 16px;
-  }
+  background-color: $pure-white;
   @media (prefers-color-scheme: dark) {
     background-color: $navy-black-d3;
   }
@@ -21,9 +22,7 @@ h1, h2, h3, h4 {
 }
 
 h1{
-  font-size: 3em;
-  line-height: 0.9em;
-  font-weight: $zilla-bold;
+  @include type-style(product, page-title);
 }
 
 h2{
@@ -103,10 +102,8 @@ ul {
 }
 
 .date-stamp{
-  font-size: 1.6em;
+  @include type-style(product, date-stamp);
   margin-top: 0;
-  font-weight: $zilla-regular;
-  font-family: $zilla;
   margin-bottom: 0;
   padding: 0;
 }
@@ -121,22 +118,21 @@ ul {
   transition: $run;
 }
 
+// The small-breakpoint font-sizes these three used to declare are in the map
+// now, under `at`. What is left in the media query is padding, which is layout
+// rather than type and stays here.
 .post-callout-large{
   margin: 2rem 0;
-  font-size: 2.5em;
   padding-left: 0.5em;
   padding-right: 0.5em;
-  line-height: 1.3em;
+  @include type-style(product, callout-lg);
 }
 
 .post-callout-medium{
   margin: 2rem 0;
-  font-size: 2em;
   padding-left: 2.5em;
   padding-right: 2.5em;
-  line-height: 1.3em;
-  font-weight: $lato-bold;
-  font-style: italic;
+  @include type-style(product, callout-md);
   @include breakpoint(small only) {
     padding-left: 0.25em;
     padding-right: 0.25em;
@@ -145,10 +141,9 @@ ul {
 
 .post-callout-small{
   margin: 2rem 0;
-  font-size: 1.5em;
   padding-left: 0.5em;
   padding-right: 0.5em;
-  line-height: 1.3em;
+  @include type-style(product, callout-sm);
 }
 
 
