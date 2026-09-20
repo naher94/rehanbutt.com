@@ -867,7 +867,17 @@ const JOURNEYS = (() => {
    you are comparing against, which is the whole point of the view. */
 const journeysOn = () => {
   const on = bpsOn();
-  return JOURNEYS.filter(j => on.some(b => j.steps[BPS.indexOf(b)]));
+  // Register and Source narrow which journeys exist, the way they narrow which
+  // cards exist in the other grouping. A journey is kept when any of its steps
+  // passes, since its steps can sit in different registers -- filtering to
+  // `product` should still show the row where an element is product at one
+  // width and unassigned at another, because that gap is the finding.
+  // Width is the exception below, deliberately.
+  return JOURNEYS.filter(j => {
+    if (!on.some(b => j.steps[BPS.indexOf(b)])) return false;
+    const live = j.steps.filter(Boolean);
+    return live.some(regOn) && live.some(provOn);
+  });
 };
 
 /* Sorted on the numbers the row actually prints. `j.weight` -- the busiest
