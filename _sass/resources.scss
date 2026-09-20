@@ -218,10 +218,9 @@ h1{
   }
   .tags-container{
     .tag{
-      font-size: 0.8em;
-      padding: 0.25rem .75rem;
+      @include type-style(product, control);
+      padding: .5rem 1rem;
       margin-bottom: 0.25rem;
-      font-weight: $lato-bold;
       background-color: semantic-color(actionable-pill);
       color: $pure-white;
       border-radius: $pill-radius;
