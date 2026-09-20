@@ -262,14 +262,11 @@ h1{
     }
   }
   h2{
-    font-size: 2.5em;
+    @include type-style(product, section-title);
     color: semantic-color(text);
     display: inline;
-    font-weight: $lato-black;
-    font-family: $lato;
     flex-wrap: wrap;
     @include breakpoint(small only) {
-      line-height: normal;
       padding-left: 0;
       padding-right: 0;
     }

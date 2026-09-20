@@ -268,16 +268,12 @@ $caveat-regular: 400;
 // Usage:  h2 { @include type-style(product, section-title); }
 
 $product-type: (
-  // ---- hierarchy: rank on the page ----------------------------------------
-  // section-title is deliberately larger than page-title: that inversion is
-  // real on the site today, so correcting it stays a deliberate edit.
-  section-title: (family: $zilla, size: 4.375rem,   font-weight: $zilla-bold,   line-height: normal), // 70px
-  // 48px is off the scale, and was `3em` against the 16px root before it moved
-  // here. Two h1s used to hold 60px on a phone -- the 404 title and the about
-  // hero -- because their class-specificity rules outranked the bare `h1`
-  // media query this replaces. Both shrink to 48px now, deliberately.
+  // ---- hierarchy: rank on the page, largest first --------------------------
+
   page-title:    (family: $zilla, size: 3.75rem,    font-weight: $zilla-bold,   line-height: 0.9,     // 60px
                   at: (small only: (size: 3rem))),                                                    // 48px
+  section-title: (family: $zilla, size: 3.125rem,   font-weight: $zilla-bold,   line-height: 1.4,     // 50px
+                  at: (small only: (size: 2.5rem, line-height: normal))),                             // 40px
   body:          (family: $lato,  size: 1.25rem,    font-weight: $lato-regular,                       // 20px, inherits 1.5
                   at: (small only: (size: 1rem))),                                                    // 16px, == the root
   body-strong:   (family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.6),    // 20px
