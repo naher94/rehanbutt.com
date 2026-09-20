@@ -293,6 +293,13 @@ $product-type: (
   nav-link:      (family: $zilla, size: 1.25rem,    font-weight: $zilla-bold),                        // 20px
   nav-link-sm:   (family: $zilla, size: 1rem,       font-weight: $zilla-bold,   line-height: 1.2),    // 16px
   menu-link:     (family: $zilla, size: 1.875rem,   font-weight: $zilla-bold),                        // 30px
+  // Two jobs that share the `.thumbnail-text` class and nothing else: the
+  // caption that fades in over a portfolio thumbnail, and the heading naming a
+  // collection on the photography index, which unsets the overlay entirely.
+  tile-title:    (family: $zilla, size: 2rem,       font-weight: $zilla-bold,   line-height: 1,       // 32px
+                  at: (small only: (size: 1.5rem))),                                                  // 24px
+  gallery-title: (family: $lato,  size: 3.75rem,    font-weight: $lato-bold,    line-height: 1,       // 60px
+                  at: (small only: (size: 2rem))),                                                    // 32px
   // `control` and `meta` were one `ui` entry. Interface is a category, not a
   // job, and it was covering two: a button label and the footer's chrome.
   control:       (family: $lato,  size: 1rem,       font-weight: $lato-bold,    line-height: 1),      // 16px
