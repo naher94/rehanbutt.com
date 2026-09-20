@@ -298,7 +298,7 @@ $product-type: (
   // scales up to keep the grid legible at one column.
   eyebrow-lg:    (family: $lato,  size: 0.75rem,    font-weight: $lato-bold,    line-height: 1.6,     // 12px
                   letter-spacing: .3em, text-transform: uppercase,
-                  at: (small only: (size: 0.875rem))),                                                  // 14.4px
+                  at: (small only: (size: 0.875rem))),                                                // 14px
   // The hero tile on a collection page, whose title is 40px. One size at every
   // width: the tile scales on small, but this was tuned to land back on 16px.
   eyebrow-xl:    (family: $lato,  size: 1rem,       font-weight: $lato-bold,    line-height: 1.6,     // 16px
