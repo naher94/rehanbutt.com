@@ -326,6 +326,10 @@ $product-type: (
   data-label:    (family: $lato,  size: 1rem,       font-weight: $lato-regular, line-height: 1.2,     // 16px
                   text-transform: uppercase,
                   at: (small only: (size: 0.75rem))),                                                 // 12px
+  // The handwritten note under a photo, a carousel slide and a year square --
+  // the only place either map reaches for Caveat, and the only thing on the
+  // site that uses it.
+  annotation:    (family: $caveat, size: 1.5rem,   font-weight: $caveat-regular, line-height: 1),     // 24px
 
   // Prose set apart from the body at three sizes: the case-study pull-quotes
   // that mirror the three .post-callout-* classes, and -sm also carries the

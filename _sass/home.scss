@@ -348,19 +348,12 @@ $home-section-vertical-spacing-mobile: 4rem;
         display: block;
       }
       .image-label{
-        font-size: 2rem;
-        font-size: 1.5rem;
+        @include type-style(product, annotation);
         text-align: center;
-        font-family: $caveat;
-        font-weight: $caveat-regular;
         padding: 0;
         margin: 0;
-        line-height: 1;
         padding-top: 0.25rem;
         color: semantic-color(text-on-light-bg-always);
-        @include breakpoint(medium down){
-          font-size: 1.5rem;
-        }
       }
       &.speaking-carousel{
         display: grid;
@@ -421,12 +414,9 @@ $home-section-vertical-spacing-mobile: 4rem;
       z-index: 3;
     }
     .slide-label{
+      @include type-style(product, annotation);
       display: block;
-      font-family: $caveat;
-      font-weight: $caveat-regular;
-      font-size: 1.5rem;
       text-align: center;
-      line-height: 1;
       padding: 0;
       margin: 0;
       padding-top: 0.25rem;
@@ -680,15 +670,13 @@ $home-section-vertical-spacing-mobile: 4rem;
       }
     }
     .yir-label{
-      font-size: 2rem;
+      @include type-style(product, annotation);
       text-align: center;
-      font-family: $caveat;
-      font-weight: $caveat-regular;
-      line-height: 1;
       padding-top: 0.25rem;
       color: semantic-color(text-on-light-bg-always);
-      @include breakpoint(medium down){
-        font-size: 1.5rem;
+      // Bigger only where the year squares have the room.
+      @include breakpoint(large up){
+        font-size: 2rem;
       }
     }
     &:hover{
