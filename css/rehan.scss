@@ -316,23 +316,18 @@ article{
       }
     }
     button{
-      // Self-contained since foundation-button was dropped: the properties
-      // below the colour ones are what Foundation's .button used to supply.
+      @include type-style(product, ui);
       display: inline-block;
       vertical-align: middle;
       padding: 0.85em 1em;
       border: 1px solid transparent;
-      line-height: 1;
       text-align: center;
       cursor: pointer;
-      font-family: inherit;
       -webkit-appearance: none;
       color: $pure-white;
       transition: $sprint;
       border-radius: $tile-radius;
       background-color: $signature-teal;
-      font-weight: $lato-bold;
-      font-size: 1rem;
       margin: 0;
       margin-left: 0.5rem;
       @include breakpoint(small only) {

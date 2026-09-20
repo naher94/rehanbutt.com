@@ -283,7 +283,7 @@ $product-type: (
   // nav-link's 1.6 is the list leading it inherits by being a `ul`, not a choice.
   nav-link:      (family: $zilla, size: 2.34375rem, font-weight: $zilla-bold,   line-height: 1.6),    // 37.5px
   card-title:    (family: $zilla, size: 1.5rem,     font-weight: $zilla-bold,   line-height: 1),      // 24px
-  ui:            (family: $lato,  size: 1rem,       font-weight: $lato-bold,    line-height: 1.6),    // 16px
+  ui:            (family: $lato,  size: 1rem,       font-weight: $lato-bold,    ),    // 16px
   eyebrow:       (family: $lato,  size: 0.625rem,   font-weight: $lato-bold,    line-height: 1.6,     // 10px
                   letter-spacing: .3em, text-transform: uppercase),
 
