@@ -238,6 +238,17 @@
   .jflag.med{background:color-mix(in srgb,var(--flag-med) 18%,transparent);
     color:var(--flag-med)}
   .jflag.quiet{background:none;color:var(--ink-faint);padding-left:0}
+  /* Which register the type came from, as a category rather than a warning --
+     so it sits before the flags and does not borrow their alarm colours. */
+  .jreg{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.06em;
+    text-transform:uppercase;padding:2px 6px;border-radius:2px;
+    background:var(--chip);color:var(--ink-muted)}
+  .jreg[data-reg="product"]{background:var(--accent);color:#04222A}
+  .jreg[data-reg="expressive"]{background:var(--accent-deep);color:var(--ground)}
+  .jreg[data-reg="mapped"]{background:none;color:var(--ink-muted);
+    box-shadow:inset 0 0 0 1px var(--rule-strong)}
+  .jreg[data-reg="unassigned"]{background:none;color:var(--flag-high);
+    box-shadow:inset 0 0 0 1px currentColor}
   /* equal columns, set per row from the number of widths on screen, so the
      same width sits under the same width all the way down the sheet -- with
      content-sized steps the columns jag row to row and nothing is scannable */
@@ -942,11 +953,37 @@ function drawSheet(){
   }
 }
 
+/* Which register a journey's type comes from.
+   A journey spans one style per width, so the answer is the set of registers
+   across its steps -- `registerOf`, the same reading the Register chips use,
+   so filtering to `unassigned` never turns up a row tagged anything else.
+   Where a journey is unassigned but its declarations did come through
+   `type-style()`, that is shown as a qualifier rather than a register: the
+   entry could not be named, which is a different problem from never having
+   been mapped, and sends you somewhere different to fix it. */
+function registersOf(j){
+  const live = j.steps.filter(Boolean);
+  const found = new Set(live.map(s => registerOf(s) || "unassigned"));
+  const viaMixin = live.some(s => (s.decls || []).some(d => d.via === "type-style()"));
+  return { regs: [...found], unnamed: viaMixin && found.has("unassigned") };
+}
+
+const REG_TITLE = {
+  product: "in $product-type",
+  expressive: "in $expressive-type",
+  unassigned: "not in either map and not tagged"
+};
+
 function journeyEl(j, on){
   const row = document.createElement("div");
   row.className = "jrow" + (j.score ? " flagged" : "");
 
-  const flags = [];
+  const reg = registersOf(j);
+  const flags = reg.regs.map(r =>
+    `<span class="jreg" data-reg="${r}" title="${esc(REG_TITLE[r] || r)}">${r}</span>`);
+  if (reg.unnamed) flags.push(`<span class="jreg" data-reg="mapped" title="${
+    esc("emitted by type-style(), but the audit could not identify which entry")
+  }">via type-style()</span>`);
   if (j.inverted)      flags.push(`<span class="jflag hi">inverted</span>`);
   if (j.splitScale)    flags.push(`<span class="jflag med">split scale</span>`);
   if (j.distinct > 2)  flags.push(`<span class="jflag">${j.distinct} steps</span>`);

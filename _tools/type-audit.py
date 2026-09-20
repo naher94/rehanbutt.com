@@ -276,6 +276,11 @@ def token_for(decls):
 # know.
 UNVERIFIED = "(unverified)"
 
+# The trailing-comment strip requires whitespace before the `//`, so a value
+# holding a URL keeps its `https://`. Without it an inline comment is read as
+# part of the value, and one mentioning a `$variable` makes a literal look
+# like a token.
+DECL_COMMENT = re.compile(r'\s+//.*$')
 DECL_LINE = re.compile(r'([-\w]+)\s*:\s*(.+?)\s*;?\s*$')
 
 # How far to look for the declaration when the mapped line is not it. The
@@ -295,15 +300,17 @@ def declaring_line(rel, line, prop):
 
     -> (line, expression), or None when it cannot be pinned down.
     """
-    text = source_line(rel, line).strip()
-    m = DECL_LINE.match(text)
+    def read(n):
+        return DECL_LINE.match(DECL_COMMENT.sub("", source_line(rel, n).strip()))
+
+    m = read(line)
     if m and m.group(1) == prop:
         return line, m.group(2)
     found = []
     for off in range(-DECL_SEARCH, DECL_SEARCH + 1):
         if off == 0:
             continue
-        m2 = DECL_LINE.match(source_line(rel, line + off).strip())
+        m2 = read(line + off)
         if m2 and m2.group(1) == prop:
             found.append((line + off, m2.group(2)))
     return found[0] if len(found) == 1 else None
