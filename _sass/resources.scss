@@ -71,10 +71,7 @@
         margin-bottom: 0;
       }
       .sub-header{
-        text-transform: uppercase;
-        letter-spacing: 0.3em;
-        font-size: 0.8em;
-        font-weight: $lato-bold;
+        @include type-style(product, eyebrow-xl);
         opacity: 0.6;
         position: relative;
         margin-block-start: .5em;
@@ -188,10 +185,7 @@
       position: relative;
     }
     .sub-header{
-      text-transform: uppercase;
-      letter-spacing: 0.3em;
-      font-size: 0.6em;
-      font-weight: $lato-bold;
+      @include type-style(product, eyebrow-lg);
       opacity: 0.6;
       position: relative;
     }

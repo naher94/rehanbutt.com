@@ -293,6 +293,16 @@ $product-type: (
   meta:          (family: $lato,  size: 1rem,       font-weight: $lato-bold),                         // 16px
   eyebrow:       (family: $lato,  size: 0.625rem,   font-weight: $lato-bold,    line-height: 1.6,     // 10px
                   letter-spacing: .3em, text-transform: uppercase),
+  // The same kicker on a collection card, sized against a 30px title rather
+  // than the 20px one `eyebrow` sits under. Bigger on small, where the tile
+  // scales up to keep the grid legible at one column.
+  eyebrow-lg:    (family: $lato,  size: 0.75rem,    font-weight: $lato-bold,    line-height: 1.6,     // 12px
+                  letter-spacing: .3em, text-transform: uppercase,
+                  at: (small only: (size: 0.9rem))),                                                  // 14.4px
+  // The hero tile on a collection page, whose title is 40px. One size at every
+  // width: the tile scales on small, but this was tuned to land back on 16px.
+  eyebrow-xl:    (family: $lato,  size: 1rem,       font-weight: $lato-bold,    line-height: 1.6,     // 16px
+                  letter-spacing: .3em, text-transform: uppercase),
 
   // Pull-quotes in the case studies, mirroring the three .post-callout-*
   // classes. All three share 1.3 leading; -md is the only italic in either map.
