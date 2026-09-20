@@ -316,7 +316,7 @@ article{
       }
     }
     button{
-      @include type-style(product, ui);
+      @include type-style(product, control);
       display: inline-block;
       vertical-align: middle;
       padding: 0.85em 1em;

@@ -261,7 +261,8 @@ in the value, so `nav-link` can move onto the scale without being renamed.
 
 `$product-type` has two halves. **Hierarchy** — `page-title`, `section-title`,
 `body`, `body-strong`, `body-sm` — is rank on the page. **Component styles** —
-`nav-link`, `card-title`, `ui`, `eyebrow` — are named for the thing they are,
+`nav-link`, `card-title`, `control`, `meta`, `eyebrow` — are named for the thing
+they are,
 because nothing is "one step below" a nav link. `$expressive-type` holds
 `counter` and `statement`.
 
@@ -314,7 +315,7 @@ Unknown names fail the build, with the valid ones listed:
 
 ```
 Unknown product type style `nosuchstyle`.
-Known: page-title, section-title, body, body-strong, body-sm, nav-link, card-title, ui, eyebrow, callout-lg, callout-md, callout-sm.
+Known: page-title, section-title, body, body-strong, body-sm, nav-link, card-title, control, meta, eyebrow, callout-lg, callout-md, callout-sm.
 
 Unknown type register `productive`. Known: product, expressive.
 

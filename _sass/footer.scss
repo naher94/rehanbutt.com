@@ -58,7 +58,7 @@ footer{
         padding: 0;
         margin: 0;
       }
-      @include type-style(product, ui);
+      @include type-style(product, meta);
       .happy-copyright{
         p{
           display: inline;
