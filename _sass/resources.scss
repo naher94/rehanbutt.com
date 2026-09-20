@@ -1,6 +1,5 @@
 .resource-header{
   h1{
-    font-weight: $zilla-bold;
     @include breakpoint(small only) {
       margin-left: 0.5rem;
       margin-right: 0.5rem;

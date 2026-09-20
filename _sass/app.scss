@@ -5,7 +5,15 @@
 
 // Global styles
 @include foundation-global-styles;
-@include foundation-typography;
+
+// `foundation-typography` expanded into its four parts so one can be left out.
+// `foundation-text-alignment` emits the `.text-left` / `.text-center` family,
+// and the reachability audit finds every one of them dead across all 90 built
+// pages -- 462 bytes, 100% unused. Dropped here rather than edited out of the
+// vendored partial, which a Foundation upgrade would overwrite.
+@include foundation-typography-base;
+@include foundation-typography-helpers;
+@include foundation-print-styles;
 
 // Grids (choose one)
 @include foundation-xy-grid-classes;
