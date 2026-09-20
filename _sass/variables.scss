@@ -287,7 +287,6 @@ $product-type: (
   // vertical centring, the overlay the 1.6 it gets from being a `ul`.
   nav-link:      (family: $zilla, size: 1.25rem,    font-weight: $zilla-bold),                        // 20px
   menu-link:     (family: $zilla, size: 1.875rem,   font-weight: $zilla-bold),                        // 30px
-  card-title:    (family: $zilla, size: 1.5rem,     font-weight: $zilla-bold,   line-height: 1),      // 24px
   // `control` and `meta` were one `ui` entry. Interface is a category, not a
   // job, and it was covering two: a button label and the footer's chrome.
   control:       (family: $lato,  size: 1rem,       font-weight: $lato-bold,    line-height: 1),      // 16px
