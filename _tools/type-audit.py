@@ -224,15 +224,57 @@ def token_for(decls):
     global _TYPE_STYLES
     if _TYPE_STYLES is None:
         _TYPE_STYLES = type_style_map()
-    hits, sized = None, False
-    for prop, value, rel, line in decls:
-        if not from_mixin(rel, line, prop):
-            continue
-        cands = {k for k, e in _TYPE_STYLES.items() if value in e.get(prop, ())}
-        hits = cands if hits is None else (hits & cands)
-        if not hits:
-            return None
-        sized = sized or prop == "font-size"
+    def narrow(use_inherited, lenient=False):
+        """Intersect the entries matching each mixin-emitted declaration.
+
+        `use_inherited` decides whether values this element merely inherited
+        take part. They are credited to the mixin body of whichever ancestor's
+        include produced them, so they look identical to values emitted here.
+        """
+        hits, sized = None, False
+        for decl in decls:
+            prop, value, rel, line = decl[0], decl[1], decl[2], decl[3]
+            own = decl[4] if len(decl) > 4 else True
+            if not own and not use_inherited:
+                continue
+            if not from_mixin(rel, line, prop):
+                continue
+            if lenient and not own:
+                # an entry silent on a property is compatible with whatever
+                # value was inherited for it -- silence means "inherit"
+                cands = {k for k, e in _TYPE_STYLES.items()
+                         if not e.get(prop) or value in e[prop]}
+            else:
+                cands = {k for k, e in _TYPE_STYLES.items() if value in e.get(prop, ())}
+            hits = cands if hits is None else (hits & cands)
+            if not hits:
+                return None, False
+            sized = sized or prop == "font-size"
+        return hits, sized
+
+    # What the element declares for itself identifies it best. An entry silent
+    # on a property it inherits is still that entry, and matching the inherited
+    # value strictly threw the entry away: `callout-sm` declares no font-weight
+    # on purpose, and the 400 its pull-quotes inherit from `body` was enough to
+    # eliminate it.
+    hits, sized = narrow(False)
+    if not hits or len(hits) > 1:
+        # Nothing unique from the element's own declarations. Inherited values
+        # are weaker evidence -- they describe an ancestor -- but a value match
+        # is still the best answer available, and it is the reading every name
+        # in the atlas had before this.
+        wider, wider_sized = narrow(True)
+        if wider and (not hits or len(wider) < len(hits)):
+            hits, sized = wider, wider_sized
+    if not hits or len(hits) > 1:
+        # Last resort, and only for styles no stricter reading could name: an
+        # element that owns nothing, like a `span.byline` inside a pull-quote,
+        # has only inherited declarations, and a strict read of them eliminates
+        # the very entry it inherited from. Runs after the passes above, so it
+        # can add a name but never replace one.
+        loose, loose_sized = narrow(True, lenient=True)
+        if loose and len(loose) == 1:
+            hits, sized = loose, loose_sized
 
     # `body` and `body-strong` are both Lato at 1.25rem, so an element that
     # inherits its size from `body` and takes its weight from a rule of its own
@@ -255,7 +297,8 @@ def token_for(decls):
     # allowed to empty the set -- that is the aggregation problem again, and an
     # honest `type-style()` beats a wrong name.
     if sized and hits and len(hits) > 1:
-        for prop, value, rel, line in decls:
+        for decl in decls:
+            prop, value, rel, line = decl[0], decl[1], decl[2], decl[3]
             if from_mixin(rel, line, prop):
                 continue
             narrowed = {k for k in hits
@@ -570,7 +613,9 @@ class CascadeTree:
         redeciding.
         """
         def annotate(decls):
-            listed = [(p, v[0], v[1], v[2]) for p, v in decls.items()]
+            # a node's `sets` holds only what it declares itself, so every
+            # one of these is an own declaration
+            listed = [(p, v[0], v[1], v[2], True) for p, v in decls.items()]
             token = token_for(listed)
             return {p: [v[0], v[1], v[2],
                         authored_as(v[1], v[2], p, v[0], token)]
@@ -714,7 +759,12 @@ def _resolve(dom, compiled, tree=None, bp=None, rel=None,
                 transform=(computed.get("text-transform") or "none").strip(),
                 sample=node.text,
                 # what was written, where: (prop, value, file, line)
-                decls=sorted((p,) + v for p, v in files.items()),
+                # (prop, value, file, line, own) -- `own` separates a value
+                # this element declared from one it inherited. Both can be
+                # credited to the mixin body, and telling them apart is what
+                # lets a style that declares no weight survive an inherited one.
+                decls=sorted((p,) + v + (p in own_props,)
+                             for p, v in files.items()),
                 files=sorted({v[1] for v in files.values() if v[1]}),
             )
             out.append(el)
@@ -857,9 +907,9 @@ def build(out_path, limit=None):
                       for d in key]
                      for key, _ in sorted(e["srcsets"].items(),
                                           key=lambda kv: kv[1])],
-            decls=[dict(prop=p, value=v, file=f, line=ln, count=c,
+            decls=[dict(prop=p, value=v, file=f, line=ln, count=c, own=own,
                         via=authored_as(f, ln, p, v, style_token))
-                   for (p, v, f, ln), c in
+                   for (p, v, f, ln, own), c in
                    sorted(e["decls"].items(), key=lambda kv: (kv[0][0], -kv[1]))],
             files=[dict(file=f, count=c)
                    for f, c in sorted(e["files"].items(), key=lambda kv: -kv[1])],
