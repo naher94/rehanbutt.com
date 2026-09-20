@@ -178,10 +178,7 @@
       margin: 0;
     }
     .title{
-      font-family: $zilla;
-      font-weight: $zilla-bold;
-      font-size: 1.5em;
-      line-height: normal;
+      @include type-style(product, tile-title);
       position: relative;
     }
     .sub-header{
