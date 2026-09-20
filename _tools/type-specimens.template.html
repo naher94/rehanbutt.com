@@ -709,7 +709,11 @@ const idForStyle = s => CARD_ID.get("C|" + s.id) || "?";
 const PROV_PROPS = [["font-family", "family"], ["font-size", "size"],
                     ["font-weight", "weight"], ["line-height", "leading"]];
 
-const provOf = via => !via ? "literal"
+// `unverified` is the absence of an answer, not a fourth kind of source: the
+// source map landed on a line that declares something else and the declaration
+// could not be pinned down. Kept apart from `literal`, which is a claim.
+const provOf = via => via === "(unverified)" ? "unverified"
+  : !via ? "literal"
   : (via.indexOf("/") !== -1 || via === "type-style()") ? "token" : "variable";
 
 // A style pools the declarations of every element rendering as it, so one

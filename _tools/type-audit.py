@@ -269,19 +269,56 @@ def token_for(decls):
     return "%s/%s" % sorted(hits)[0] if hits and len(hits) == 1 else None
 
 
+# Returned when the source cannot be read, as distinct from read and found to
+# be a literal. Conflating the two reported 54 declarations as hand-written
+# literals on the strength of a line that said something else entirely -- which
+# is a finding someone acts on, so the tool has to be able to say it does not
+# know.
+UNVERIFIED = "(unverified)"
+
+DECL_LINE = re.compile(r'([-\w]+)\s*:\s*(.+?)\s*;?\s*$')
+
+# How far to look for the declaration when the mapped line is not it. The
+# offset observed here is a consistent +3, and a tight window is what keeps the
+# match unambiguous: widening it to 10 turns 5 clean hits into ambiguous ones.
+DECL_SEARCH = 3
+
+
+def declaring_line(rel, line, prop):
+    """The line that actually declares `prop`, near the one the map gave.
+
+    The source map lands on the enclosing rule rather than the declaration
+    often enough to matter. Rather than trust it or give up, look either side
+    for a line declaring this property, and accept the answer only when exactly
+    one candidate exists -- two would be a guess, and a guess here invents an
+    attribution.
+
+    -> (line, expression), or None when it cannot be pinned down.
+    """
+    text = source_line(rel, line).strip()
+    m = DECL_LINE.match(text)
+    if m and m.group(1) == prop:
+        return line, m.group(2)
+    found = []
+    for off in range(-DECL_SEARCH, DECL_SEARCH + 1):
+        if off == 0:
+            continue
+        m2 = DECL_LINE.match(source_line(rel, line + off).strip())
+        if m2 and m2.group(1) == prop:
+            found.append((line + off, m2.group(2)))
+    return found[0] if len(found) == 1 else None
+
+
 def authored_as(rel, line, prop, value, token=None):
     """What the declaration says in the source, when that is not the value.
 
     `font-weight: 900` in the output is `$lato-black` in the source, and the
     name is the useful half -- it says which decision produced the number.
-    Returns None for a plain literal, where the source adds nothing.
-
-    Guarded on the line actually declaring this property: the source map
-    occasionally points at the rule rather than the declaration, and reading
-    the wrong line would invent an attribution.
+    Returns None for a plain literal, where the source adds nothing, and
+    UNVERIFIED when the source line could not be identified at all.
     """
     if not rel or not line:
-        return None
+        return UNVERIFIED
     text = source_line(rel, line).strip()
     if MIXIN_EMIT.match(text):
         # An interpolated emit names no property, so the usual guard below
@@ -289,10 +326,10 @@ def authored_as(rel, line, prop, value, token=None):
         # the map to name an entry, so a wrong line degrades to `type-style()`
         # rather than inventing an attribution.
         return token or "type-style()"
-    m = re.match(r'([-\w]+)\s*:\s*(.+?)\s*;?\s*$', text)
-    if not m or m.group(1) != prop:
-        return None
-    expr = m.group(2)
+    hit = declaring_line(rel, line, prop)
+    if hit is None:
+        return UNVERIFIED
+    expr = hit[1]
     if expr == value:
         return None                       # written exactly as it renders
     if "map-get($style" in expr:
@@ -302,11 +339,16 @@ def authored_as(rel, line, prop, value, token=None):
 
 
 def provenance(via):
-    """token | variable | literal -- how the value got there.
+    """token | variable | literal | unverified -- how the value got there.
 
     `$zilla` is a name but not the design system, which is the distinction
     that matters when asking how much of the site renders from the type map.
+    `unverified` is not a fourth kind of source; it is the absence of an
+    answer, and it is kept apart from `literal` because "written by hand" is a
+    claim and "could not tell" is not.
     """
+    if via == UNVERIFIED:
+        return "unverified"
     if not via:
         return "literal"
     return "token" if ("/" in via or via == "type-style()") else "variable"

@@ -105,6 +105,7 @@
   .d[data-prov="token"] em{font-style:normal;color:var(--accent-deep);font-weight:700}
   .d[data-prov="variable"] em{font-style:normal;color:var(--ink-muted)}
   .d[data-prov="literal"] em{font-style:normal;color:var(--flag-high)}
+  .d[data-prov="unverified"] em{font-style:italic;color:var(--ink-faint)}
   .foot{display:flex;gap:7px;align-items:center;font-family:"JetBrains Mono",monospace;
     font-size:10px;color:var(--ink-faint);margin-top:4px}
   .more{position:absolute;right:-11px;top:50%;transform:translateY(-50%);z-index:2;
@@ -116,6 +117,8 @@
   .p[data-prov="variable"]{background:var(--rule-strong);color:var(--ink)}
   .p[data-prov="literal"]{background:transparent;color:var(--flag-high);
     box-shadow:inset 0 0 0 1px currentColor}
+  .p[data-prov="unverified"]{background:transparent;color:var(--ink-faint);
+    box-shadow:inset 0 0 0 1px currentColor;font-style:italic}
   .meter{width:52px;height:6px;background:var(--chip);border-radius:1px;overflow:hidden;display:flex}
   .meter i{display:block;height:100%}
   .meter .set{background:var(--flag-high)}
@@ -143,6 +146,8 @@
   .badge[data-prov="token"]{background:var(--accent);color:#04222A}
   .badge[data-prov="variable"]{background:var(--rule-strong);color:var(--ink)}
   .badge[data-prov="literal"]{color:var(--flag-high);box-shadow:inset 0 0 0 1px currentColor}
+  .badge[data-prov="unverified"]{color:var(--ink-faint);font-style:italic;
+    box-shadow:inset 0 0 0 1px currentColor}
   .empty{color:var(--ink-faint);font-size:14px;margin:0}
   .samples{margin:0;padding:0;list-style:none}
   .samples li{font-size:13px;color:var(--ink-muted);padding:3px 0;
@@ -231,6 +236,8 @@ const esc = s => String(s == null ? "" : s)
 
 /* token | variable | literal -- the same reading the specimen sheet uses. */
 function prov(via){
+  // `unverified` is the absence of an answer, not a fourth kind of source.
+  if (via === "(unverified)") return "unverified";
   if (!via) return "literal";
   return (via.indexOf("/") >= 0 || via === "type-style()") ? "token" : "variable";
 }

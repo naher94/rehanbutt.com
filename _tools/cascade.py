@@ -301,6 +301,36 @@ def is_vendor(src):
     return any(d in src for d in VENDOR_DIRS) or tail in VENDOR_FILES
 
 
+def split_decls(body):
+    """A rule body split on the semicolons that separate declarations.
+
+    -> [(fragment, offset)], the offset kept so the source-map lookup still
+    knows where the fragment started.
+
+    A plain `body.split(";")` breaks inside quoted values. The SVG data-URI
+    cursors in about.scss carry `font-size:30px` inside a
+    `url("data:image/svg+xml;...")`, and reading that fragment as a declaration
+    invented a whole 30px type style on eight spans that render at 20. Quotes
+    and parens are tracked so only top-level semicolons count.
+    """
+    out, depth, quote, start = [], 0, None, 0
+    for i, ch in enumerate(body):
+        if quote:
+            if ch == quote and (i == 0 or body[i - 1] != "\\"):
+                quote = None
+        elif ch in "\"'":
+            quote = ch
+        elif ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth = max(0, depth - 1)
+        elif ch == ";" and depth == 0:
+            out.append((body[start:i], start))
+            start = i + 1
+    out.append((body[start:], start))
+    return out
+
+
 def parse_rules(css, smap=None, props=None, keep_state=False):
     """Parse the stylesheet into rules.
 
@@ -318,9 +348,8 @@ def parse_rules(css, smap=None, props=None, keep_state=False):
     rules = []
     for order, m in enumerate(re.finditer(r'([^{}]+)\{([^{}]*)\}', css)):
         body, base = m.group(2), m.start(2)
-        decls, origin, at = {}, {}, 0
-        for d in body.split(";"):
-            start, at = at, at + len(d) + 1
+        decls, origin = {}, {}
+        for d, start in split_decls(body):
             if ":" not in d:
                 continue
             pr, _, v = d.partition(":")
