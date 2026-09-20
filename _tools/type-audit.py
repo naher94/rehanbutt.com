@@ -34,6 +34,7 @@ Stdlib only, so it runs anywhere Python does.
 import argparse
 import json
 import pathlib
+import hashlib
 import re
 import sys
 from collections import defaultdict
@@ -403,25 +404,188 @@ def norm_weight(value):
 
 
 # --------------------------------------------------------------------------
+# the cascade tree
+# --------------------------------------------------------------------------
+
+def node_sig(node):
+    """How an element is named when trees from ninety pages are merged."""
+    cls = ".".join(sorted(node.classes))
+    return f"{node.tag}.{cls}" if cls else node.tag
+
+
+def decl_digest(origin):
+    """A short stamp for the set of rules that won on an element.
+
+    Tag and classes alone are not an identity. A bare `<p>` inside `.cta-bar`
+    and one inside `.home` are both `p`, but they are matched by different
+    descendant selectors and end up with different type -- merging them put
+    seven distinct styles on one node and recorded whichever page was walked
+    last. Folding the winning declarations' source lines into the key keeps
+    them apart.
+
+    Taken at the widest width and reused at every other, so an element keeps
+    one identity across the tree: a `small only` rule is a correction to the
+    same element, not a different one.
+    """
+    if not origin:
+        return ""
+    stamp = ";".join(f"{p}@{v[0]}:{v[1]}" for p, v in sorted(origin.items()))
+    return hashlib.md5(stamp.encode()).hexdigest()[:6]
+
+
+class CascadeTree:
+    """The site's type as one tree of the places that change it.
+
+    A node is an element that declares a type property. Ancestors that declare
+    none are skipped: an element that changes nothing is not a branch point,
+    and keeping them buries five real decisions under forty structural divs.
+    Collapsing them takes 6,970 elements down to fewer than 200 nodes.
+
+    Identity is the chain of tag-and-class signatures from the root, so the
+    same path on ninety pages is one node carrying a count of ninety. That
+    makes the tree a synthesis rather than any one page's DOM -- which is the
+    point, since the question it answers is where the site decides its type,
+    not what one document happens to contain.
+
+    Every text element lands on exactly one node: the nearest ancestor-or-self
+    that sets something. `src` then says, per property, which node in the chain
+    supplied the value that survived to the leaf -- the part the specimen sheet
+    could not show, where a card's size comes from `body` four levels up while
+    its weight was set on the element itself.
+    """
+
+    def __init__(self):
+        self.nodes = {}
+
+    def at(self, chain):
+        n = self.nodes.get(chain)
+        if n is None:
+            n = self.nodes[chain] = dict(
+                sig=(chain[-1].split("#")[0] if chain else "(root)"),
+                depth=len(chain),
+                sets=defaultdict(dict),      # bp -> prop -> [value, file, line]
+                src=defaultdict(dict),       # bp -> prop -> depth of the setter
+                leaves=defaultdict(int),     # bp -> text elements resting here
+                own=defaultdict(int),        # bp -> of those, ones that set type
+                px=defaultdict(float),       # bp -> computed font-size
+                tags=defaultdict(int), pages=set(),
+                # per width: the same element resolves to a different card at
+                # 375 than at 1024, and collapsing the two reads as two
+                # elements rather than one that changes
+                styles=defaultdict(lambda: defaultdict(int)),
+                samples=[],
+            )
+        return n
+
+    def declare(self, chain, bp, files, own_props):
+        """Record what this node sets, with where each value was written."""
+        n = self.at(chain)
+        for prop in own_props:
+            entry = files.get(prop)
+            if entry:
+                n["sets"][bp][prop] = list(entry)
+
+    def rest(self, chain, bp, rel, node, src, size_px, style_id, own):
+        """Record a text element coming to rest on this node.
+
+        `own` is the question the sheet could not answer: did this element
+        decide any of its own type, or is every value on it inherited? An
+        element that sets nothing rests on an ancestor's node, and the two
+        counts kept apart here are what make that legible.
+        """
+        n = self.at(chain)
+        n["leaves"][bp] += 1
+        n["own"][bp] += 1 if own else 0
+        n["px"][bp] = round(size_px, 2)
+        n["pages"].add(rel)
+        n["styles"][bp][style_id] += 1
+        if bp == WIDEST:                      # one DOM; counting it five times
+            n["tags"][node.tag] += 1          # would multiply every tally by five
+        for prop, setter in src.items():
+            n["src"][bp][prop] = len(setter)
+        if bp == WIDEST and len(n["samples"]) < 4 and node.text:
+            n["samples"].append(node.text[:80])
+
+    def export(self):
+        """-> a flat list, parents before children, JSON-ready.
+
+        Each declaration is annotated with how it was written -- the map entry,
+        the Sass variable, or nothing when it is a bare literal -- using the
+        same reading the specimen sheet uses, so a value means the same thing
+        in both tools.
+
+        `through` counts every text element in a node's whole subtree, per
+        width, against `leaves` for the ones that stop there. The pair is what
+        makes a branch readable at a glance: `body` carries 6,970 through and
+        rests 39, so almost everything below it is inheriting rather than
+        redeciding.
+        """
+        def annotate(decls):
+            listed = [(p, v[0], v[1], v[2]) for p, v in decls.items()]
+            token = token_for(listed)
+            return {p: [v[0], v[1], v[2],
+                        authored_as(v[1], v[2], p, v[0], token)]
+                    for p, v in decls.items()}
+
+        subtree = defaultdict(lambda: defaultdict(int))
+        for chain, n in self.nodes.items():
+            for i in range(len(chain) + 1):
+                for bp, c in n["leaves"].items():
+                    subtree[chain[:i]][bp] += c
+
+        out = []
+        for chain in sorted(self.nodes, key=lambda c: (len(c), c)):
+            n = self.nodes[chain]
+            through = dict(subtree[chain])
+            out.append(dict(
+                id="/".join(chain) or "(root)",
+                parent="/".join(chain[:-1]) if len(chain) > 1 else None,
+                sig=n["sig"], depth=n["depth"],
+                sets={b: annotate(m) for b, m in n["sets"].items()},
+                src={b: dict(m) for b, m in n["src"].items()},
+                leaves=dict(n["leaves"]), own=dict(n["own"]),
+                px=dict(n["px"]),
+                through=through,
+                tags=dict(sorted(n["tags"].items(), key=lambda kv: -kv[1])),
+                pages=sorted(n["pages"]), page_count=len(n["pages"]),
+                styles={b: dict(sorted(m.items(), key=lambda kv: -kv[1]))
+                        for b, m in n["styles"].items()},
+                samples=n["samples"],
+            ))
+        return out
+
+
+# --------------------------------------------------------------------------
 # the walk
 # --------------------------------------------------------------------------
 
-def style_page(path, compiled_sets):
+def style_page(path, compiled_sets, tree=None, rel=None):
     """Resting type for every text-bearing element, at each breakpoint.
 
     -> {breakpoint: [element, ...]}, the lists aligned index for index because
     the same DOM is walked each time. Parsing once and matching several rule
     sets against it keeps the cost in the matching, where it belongs.
+
+    `tree`, when given, is filled during the same walk -- the cascade view
+    needs the ancestry the walk already holds and nothing more, so paying for
+    a second traversal of ninety DOMs at five widths would buy nothing.
     """
     dom = DOM()
     try:
         dom.feed(path.read_text(errors="ignore"))
     except Exception:
         return {name: [] for name in compiled_sets}
-    return {name: _resolve(dom, rules) for name, rules in compiled_sets.items()}
+    # The widest width runs first and stamps each element's identity; every
+    # other width reuses it, so one element is one node across the whole tree.
+    ident, out = {}, {}
+    for name in [WIDEST] + [n for n in compiled_sets if n != WIDEST]:
+        out[name] = _resolve(dom, compiled_sets[name], tree, name, rel,
+                             ident, seed=not ident)
+    return out
 
 
-def _resolve(dom, compiled):
+def _resolve(dom, compiled, tree=None, bp=None, rel=None,
+             ident=None, seed=False):
     # collect declarations per node, cascade-ordered
     for node in dom.nodes:
         if node.tag in SKIP:
@@ -437,15 +601,30 @@ def _resolve(dom, compiled):
             from_file.update(origin)
         node.style = merged
         node.origin = from_file
+        if seed and ident is not None:
+            ident[id(node)] = decl_digest(from_file)
 
     out = []
 
-    def walk(node, inherited, inherited_files):
+    def walk(node, inherited, inherited_files, chain=(), src=None):
         if node.tag in SKIP:
             return
         computed = dict(inherited)
         files = dict(inherited_files)
+        src = dict(src or {})
         own = node.style
+        # Which of this element's own declarations actually take effect. The
+        # `inherit`/`unset` filtering below is repeated here rather than read
+        # off `files` afterwards, because `files` cannot say whether a value
+        # arrived from this element or was carried down to it.
+        own_props = {p for p, v in own.items()
+                     if p in TYPE_PROPS
+                     and v.strip().lower() not in ("inherit", "unset")}
+        if own_props:
+            stamp = (ident or {}).get(id(node), "")
+            chain = chain + (node_sig(node) + ("#" + stamp if stamp else ""),)
+            for p in own_props:
+                src[p] = chain
         # font-size first: everything else can depend on it
         parent_px = inherited.get("_size_px", ROOT_FONT_PX)
         # `font-size: inherit` is a no-op, exactly like the line-height case
@@ -469,8 +648,10 @@ def _resolve(dom, compiled):
                     continue
                 computed[p] = own[p]
                 files[p] = (own[p],) + (node.origin.get(p) or (None, None))
+        if tree is not None and own_props:
+            tree.declare(chain, bp, files, own_props)
         if node.tag not in ("html", "[root]") and node.text:
-            out.append(dict(
+            el = dict(
                 tag=node.tag,
                 line=node.line,
                 classes=" ".join(sorted(node.classes)) or None,
@@ -486,9 +667,17 @@ def _resolve(dom, compiled):
                 # what was written, where: (prop, value, file, line)
                 decls=sorted((p,) + v for p, v in files.items()),
                 files=sorted({v[1] for v in files.values() if v[1]}),
-            ))
+            )
+            out.append(el)
+            if tree is not None:
+                tree.rest(chain, bp, rel, node, src, size_px,
+                          "%s|%s|%s|%s|%s|%s|%s" % (
+                              el["family"], el["size"], el["weight"],
+                              el["style"], el["lh"], el["spacing"],
+                              el["transform"]),
+                          bool(own_props))
         for c in node.children:
-            walk(c, computed, files)
+            walk(c, computed, files, chain, src)
 
     walk(dom.root, {"_size_px": ROOT_FONT_PX}, {})
     return out
@@ -526,6 +715,7 @@ def build(out_path, limit=None):
     if limit:
         pages = pages[:limit]
 
+    tree = CascadeTree()
     styles = defaultdict(lambda: dict(pages=set(), tags=set(),
                                       classes=set(), samples=[],
                                       decls=defaultdict(int),
@@ -540,7 +730,7 @@ def build(out_path, limit=None):
 
     for p in pages:
         rel = str(p.relative_to(SITE))
-        per_bp = style_page(p, compiled_sets)
+        per_bp = style_page(p, compiled_sets, tree, rel)
         n = len(per_bp[bp_names[0]])
         for i in range(n):
             # Group the breakpoints by what this one element resolves to. Type
@@ -681,11 +871,29 @@ def build(out_path, limit=None):
         styles=items,
     )
     out_path.write_text(json.dumps(data, indent=1))
+
+    # The cascade view ships its own file. It needs the tree plus enough of
+    # each style to label a card, and nothing else -- folding it into
+    # type-audit.json would put 200KB of ancestry inside two pages that never
+    # ask for it.
+    cascade = dict(
+        totals=data["totals"],
+        styles=[{k: s[k] for k in ("id", "count", "family", "size", "weight",
+                                   "style", "line_height", "letter_spacing",
+                                   "text_transform", "on_scale")}
+                for s in items],
+        tree=tree.export(),
+    )
+    cascade_path = out_path.with_name("type-cascade.json")
+    cascade_path.write_text(json.dumps(cascade, indent=1))
+    data["_cascade_path"] = str(cascade_path)
+    data["_tree_nodes"] = len(cascade["tree"])
     return data
 
 
 TEMPLATE = HERE / "type-atlas.template.html"
 SPECIMEN_TEMPLATE = HERE / "type-specimens.template.html"
+CASCADE_TEMPLATE = HERE / "type-cascade.template.html"
 
 
 def build_html(json_path, html_path, template=None):
@@ -706,6 +914,7 @@ if __name__ == "__main__":
     ap.add_argument("--out", default=str(HERE / "type-audit.json"))
     ap.add_argument("--html", default=str(HERE / "type-atlas.html"))
     ap.add_argument("--specimens", default=str(HERE / "type-specimens.html"))
+    ap.add_argument("--cascade", default=str(HERE / "type-cascade.html"))
     ap.add_argument("--no-html", action="store_true")
     ap.add_argument("--pages", type=int, default=None,
                     help="only walk the first N pages")
@@ -721,11 +930,17 @@ if __name__ == "__main__":
     if t["unsupported_selectors"]:
         print(f"selectors skipped   : {t['unsupported_selectors']} (combinators/attrs)")
     print(f"\nwrote {args.out}")
+    print(f"cascade tree nodes  : {d['_tree_nodes']}")
     if not args.no_html:
-        # two views of one dataset: the atlas lists distinct styles, the
-        # specimen sheet shows each property's values drawn at their real size
-        for html, template in ((args.html, TEMPLATE),
-                               (args.specimens, SPECIMEN_TEMPLATE)):
-            made = build_html(pathlib.Path(args.out), pathlib.Path(html), template)
+        # three views of one walk: the atlas lists distinct styles, the specimen
+        # sheet draws each property's values at their real size, and the cascade
+        # shows where those values were decided. The first two read
+        # type-audit.json; the cascade reads its own file, so the ancestry does
+        # not ride along in two pages that never ask for it.
+        for html, template, src in (
+                (args.html, TEMPLATE, args.out),
+                (args.specimens, SPECIMEN_TEMPLATE, args.out),
+                (args.cascade, CASCADE_TEMPLATE, d["_cascade_path"])):
+            made = build_html(pathlib.Path(src), pathlib.Path(html), template)
             if made:
                 print(f"wrote {made}  ({made.stat().st_size:,} bytes)")

@@ -19,3 +19,7 @@ _tools/type-specimens.html
 #   bundle exec jekyll build && python3 _tools/css-audit.py
 _tools/css-audit.json
 _tools/css-atlas.html
+
+# type cascade view
+_tools/type-cascade.json
+_tools/type-cascade.html

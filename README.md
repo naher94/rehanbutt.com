@@ -413,13 +413,36 @@ bundle exec jekyll build && python3 _tools/type-audit.py
 
 Each distinct combination of family, size, weight, style, line-height, tracking and case counts as one style. File attribution comes from the Sass source map (`_site/css/rehan.css.map`), so every style knows which partial wrote it.
 
-It writes two files beside itself, both gitignored:
+It writes these beside itself, all gitignored:
 
 * `type-audit.json` — the dataset
 * `type-atlas.html` — a standalone page listing each style as a specimen rendered at its true size. Open it directly in a browser.
 * `type-specimens.html` — a second view of the same data, drawn as cards at the size they render and counted by elements. It opens on the combined view (a card per style, largest first); switching to **By property** breaks it into font-sizes, weights and families, each section showable or hideable.
+* `type-cascade.json` / `type-cascade.html` — the third view, and the only one organised by **where a value came from** rather than by what it renders as. See below.
 
-Both pages resolve the stylesheet **at each of the project's breakpoints**, read from `$breakpoints` in `_settings.scss` rather than restated. **Width** is a multi-select filter alongside Family and Weight, all widths on by default, and selecting several shows every style present at any of them. A style that covers only part of the current selection carries a badge naming the widths it does cover; one that holds across all of them carries none, since a badge on every row says nothing.
+#### Type Cascade
+
+The atlas and the specimen sheet both group type by outcome: every element that renders Lato 20px/400 lands in one bucket. That is the right shape for "what does this site use," and the wrong shape for "why is this element like this" — a card can only show a resolved value and the file:line that produced it, which makes a size inherited from `body` four levels up indistinguishable from one written on the element itself.
+
+`type-cascade.html` is one tree for the whole site, drawn as a node network: columns by depth, curved edges, and a box per node. A node is an element that declares a type property; elements that declare none are collapsed away, because an element that changes nothing is not a branch point. That takes 6,970 elements down to **225 nodes**, median depth 4.
+
+Every node is drawn as one of two things, which is the whole idea:
+
+* **Where type renders** — text actually rests on the node — it shows the specimen. `AaBb` in the real family, weight, slant, tracking and case, drawn at the real size up to a 46px cap, captioned with the atlas card number, the true size and the family. A node resolves to exactly one card, so the specimen is never an average of several.
+* **Where it does not** — a pure branch point, nothing resting on it — there is nothing to draw, so it says what it contributes in words: `wt bold`, `size 100%`, `fam Zilla Slab`. Coloured by whether the value came from the map, a variable or a literal.
+
+Identity is the chain of signatures from the root, so the same path on ninety pages is one node carrying a count of ninety — which makes the tree a synthesis rather than any one page's DOM, and it says so in the footer. A signature is the element's tag and classes **plus a stamp for the rules that won on it**: a bare `<p>` inside `.cta-bar` and one inside `.home` are both `p` but are matched by different descendant selectors and end up with different type. Keying on tag and classes alone put seven distinct styles on one `html/body/p` node and recorded whichever page happened to be walked last. Each node prints the source lines its declarations came from, so two siblings that share a signature and a rendered style are still told apart.
+
+Clicking a node gives the route:
+
+* **Sets here** — what this node declares, with the value, the file and line, and whether it came from a map entry, a Sass variable or a bare literal.
+* **Arrives from above** — for every property the node does *not* set, the value and the ancestor that decided it, as a link.
+* **Elements** — how many rest here, split into the ones that set some of their own type and the ones that inherit all of it. That split is also the bar on every row, and the headline figure: at desktop, **952 of 6,970 elements (14%) inherit their type entirely**.
+* **Resolves to** — the atlas cards these elements become, by the same C-numbers the specimen sheet uses, at the selected width.
+
+The width selector re-resolves the whole tree, so a node that sets a size only at `small` appears there and nowhere else. It ships its own JSON rather than riding along in `type-audit.json`, which would put 480KB of ancestry inside two pages that never ask for it.
+
+The atlas and specimen sheet resolve the stylesheet **at each of the project's breakpoints**, read from `$breakpoints` in `_settings.scss` rather than restated. **Width** is a multi-select filter alongside Family and Weight, all widths on by default, and selecting several shows every style present at any of them. A style that covers only part of the current selection carries a badge naming the widths it does cover; one that holds across all of them carries none, since a badge on every row says nothing.
 
 No figure anywhere is a sum across widths — the same paragraph counted at three widths would inflate a 6,970-element site to 12,055. Totals report the busiest single width, and the atlas's count column lists one figure per selected width rather than adding them. Breakpoints that resolve to identical type are collapsed and not offered as separate choices: this site defines five, but `xlarge` and `xxlarge` render exactly as `large` does, so three are shown.
 
