@@ -257,10 +257,13 @@ article{
     box-shadow: $recessed-shadow semantic-color(shadow);
     margin-top: -6rem;
     z-index: 1;
-    h1{
+    h2{
       font-weight: $zilla-bold;
       font-size: 1.6rem;
       margin: 0;
+      @include breakpoint(small only) {
+        padding-inline: 0;
+      }
     }
     p{
       @include type-style(product, body-sm);
