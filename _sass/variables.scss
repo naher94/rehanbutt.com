@@ -286,11 +286,12 @@ $product-type: (
   // beside the burger above it too. The value each resolves to where it is
   // hidden renders nowhere -- and still shows up in the audit, which cannot
   // see `display: none`.
-  // None declares a leading: the bar inherits the navbar's 2.5em for vertical
-  // centring, the overlay the 1.6 it gets from being a `ul`, the pair the 40px
-  // `.mobile-navbar` sets for the same reason as the bar.
+  // The bar and the overlay inherit their leading -- the navbar's 2.5em for
+  // vertical centring, the 1.6 a `ul` carries. The pair declares its own: it
+  // is centred with flex, so its links are boxes whose padding counts, and the
+  // global 1.5 would grow the header.
   nav-link:      (family: $zilla, size: 1.25rem,    font-weight: $zilla-bold),                        // 20px
-  nav-link-sm:   (family: $zilla, size: 1rem,       font-weight: $zilla-bold),                        // 16px
+  nav-link-sm:   (family: $zilla, size: 1rem,       font-weight: $zilla-bold,   line-height: 1.2),    // 16px
   menu-link:     (family: $zilla, size: 1.875rem,   font-weight: $zilla-bold),                        // 30px
   // `control` and `meta` were one `ui` entry. Interface is a category, not a
   // job, and it was covering two: a button label and the footer's chrome.

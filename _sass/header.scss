@@ -58,10 +58,9 @@
 .mobile-navbar{
   display: none;
   float: left;
-  line-height: 2.5em;
   @include breakpoint(small only) {
-    display: block;
-    line-height: 40px;
+    display: flex;
+    align-items: center;
     .nav{
       @include type-style(product, nav-link-sm);
       padding: 10px;
