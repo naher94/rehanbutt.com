@@ -213,14 +213,17 @@ def token_for(decls):
     A single property is often ambiguous (`1rem` is both `body-sm` and `ui`);
     the combination usually is not.
 
-    Only mixin-emitted declarations are considered. A style aggregates the
-    declarations of every element that renders as it, so folding in a literal
-    written somewhere else would empty the intersection and lose the name.
+    Only mixin-emitted declarations can name a token. A style aggregates the
+    declarations of every element that renders as it, so folding a literal
+    written somewhere else into that intersection would empty it and lose a
+    name that was right. Where the mixin's own properties leave two entries
+    standing, though, a literal can still rule one of them out -- see the
+    second pass.
     """
     global _TYPE_STYLES
     if _TYPE_STYLES is None:
         _TYPE_STYLES = type_style_map()
-    hits = None
+    hits, sized = None, False
     for prop, value, rel, line in decls:
         if not from_mixin(rel, line, prop):
             continue
@@ -228,6 +231,40 @@ def token_for(decls):
         hits = cands if hits is None else (hits & cands)
         if not hits:
             return None
+        sized = sized or prop == "font-size"
+
+    # `body` and `body-strong` are both Lato at 1.25rem, so an element that
+    # inherits its size from `body` and takes its weight from a rule of its own
+    # ends the first pass holding both. The weight is the thing that separates
+    # them and it is right there in the source -- it just cannot be the thing
+    # that *names* the token, only the thing that eliminates the other one.
+    #
+    # Gated on the mixin having supplied a size. Family alone leaves nine Lato
+    # entries standing, and narrowing that on a literal picks a name out of a
+    # crowd on one property: it read a 72px easter-egg numeral as `counter` for
+    # sharing weight 900, and a 24px heading as `callout-sm` for sharing 1.5rem.
+    # A size from the mixin means the set is already small and specific, and the
+    # literal is breaking a tie rather than choosing a winner.
+    #
+    # Eliminating is done on contradiction alone: an entry silent on a property
+    # stays in, because saying nothing is not the same as disagreeing. `body`
+    # declares no line-height, so it survives whatever leading the element
+    # inherits, while `body-strong`'s 700 cannot survive a rendered 400. A
+    # literal that contradicts every remaining candidate is ignored rather than
+    # allowed to empty the set -- that is the aggregation problem again, and an
+    # honest `type-style()` beats a wrong name.
+    if sized and hits and len(hits) > 1:
+        for prop, value, rel, line in decls:
+            if from_mixin(rel, line, prop):
+                continue
+            narrowed = {k for k in hits
+                        if not _TYPE_STYLES[k].get(prop)
+                        or value in _TYPE_STYLES[k][prop]}
+            if narrowed:
+                hits = narrowed
+            if len(hits) == 1:
+                break
+
     return "%s/%s" % sorted(hits)[0] if hits and len(hits) == 1 else None
 
 
