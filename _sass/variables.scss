@@ -297,6 +297,10 @@ $product-type: (
   // job, and it was covering two: a button label and the footer's chrome.
   control:       (family: $lato,  size: 1rem,       font-weight: $lato-bold,    line-height: 1),      // 16px
   meta:          (family: $lato,  size: 1rem,       font-weight: $lato-bold),                         // 16px
+  // The dateline under a post or case-study title, and the only Zilla the site
+  // sets at regular weight -- every other Zilla entry here is bold.
+  date-stamp:    (family: $zilla, size: 2rem,       font-weight: $zilla-regular, line-height: 1.6,    // 32px
+                  at: (small only: (size: 1.6rem))),                                                  // 25.6px
   eyebrow:       (family: $lato,  size: 0.625rem,   font-weight: $lato-bold,    line-height: 1.6,     // 10px
                   letter-spacing: .3em, text-transform: uppercase),
   // The same kicker on a collection card, sized against a 30px title rather

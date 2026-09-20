@@ -102,10 +102,8 @@ ul {
 }
 
 .date-stamp{
-  font-size: 1.6em;
+  @include type-style(product, date-stamp);
   margin-top: 0;
-  font-weight: $zilla-regular;
-  font-family: $zilla;
   margin-bottom: 0;
   padding: 0;
 }
