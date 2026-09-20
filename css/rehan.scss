@@ -505,14 +505,3 @@ article{
   }
 }
 //******* End of Banner Styling
-
-
-//******* Mobile Styling
-@include breakpoint(small only) {
-
-  .nav{
-    padding: 10px;
-    font-size: 16px;
-  }
-}
-//******* End of Mobile Styling

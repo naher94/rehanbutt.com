@@ -281,11 +281,16 @@ $product-type: (
   body-sm-strong:(family: $lato,  size: 1rem,       font-weight: $lato-bold,    line-height: 1.3),    // 16px
 
   // ---- component styles: named for the thing, not for a rank --------------
-  // Two navs, each with one real size: the bar is hidden below medium and the
-  // overlay above it, so the other value each resolves to renders nowhere.
-  // Neither declares a leading -- the bar inherits the navbar's 2.5em for
-  // vertical centring, the overlay the 1.6 it gets from being a `ul`.
+  // Three navs, each with one real size, each hidden at the widths the other
+  // two cover: the bar below medium, the overlay above it, the compact pair
+  // beside the burger above it too. The value each resolves to where it is
+  // hidden renders nowhere -- and still shows up in the audit, which cannot
+  // see `display: none`.
+  // None declares a leading: the bar inherits the navbar's 2.5em for vertical
+  // centring, the overlay the 1.6 it gets from being a `ul`, the pair the 40px
+  // `.mobile-navbar` sets for the same reason as the bar.
   nav-link:      (family: $zilla, size: 1.25rem,    font-weight: $zilla-bold),                        // 20px
+  nav-link-sm:   (family: $zilla, size: 1rem,       font-weight: $zilla-bold),                        // 16px
   menu-link:     (family: $zilla, size: 1.875rem,   font-weight: $zilla-bold),                        // 30px
   // `control` and `meta` were one `ui` entry. Interface is a category, not a
   // job, and it was covering two: a button label and the footer's chrome.

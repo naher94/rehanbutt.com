@@ -348,6 +348,17 @@ def token_for(decls, rendered=None):
     if sized and hits and len(hits) > 1:
         for decl in decls:
             prop, value, rel, line = decl[0], decl[1], decl[2], decl[3]
+            own = decl[4] if len(decl) > 4 else True
+            # An inherited literal is evidence only for leading. Family and
+            # weight are what a container overrides, so eliminating on them
+            # reads the container's choice as the entry's: the home page photo
+            # captions take their size from `body` and their Zilla bold from
+            # the tile around them, and named `nav-link-sm` the moment an entry
+            # existed at Zilla 1rem. Leading is the opposite -- entries are
+            # mostly silent on it, and the one it rules out is the one whose
+            # own declaration the element plainly is not using.
+            if not own and prop != "line-height":
+                continue
             if from_mixin(rel, line, prop):
                 continue
             # Checked against the variants that already fit, not against the

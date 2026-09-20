@@ -62,6 +62,10 @@
   @include breakpoint(small only) {
     display: block;
     line-height: 40px;
+    .nav{
+      @include type-style(product, nav-link-sm);
+      padding: 10px;
+    }
   }
 }
 
