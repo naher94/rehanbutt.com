@@ -117,10 +117,16 @@
     color: $pure-white;
     border-radius: $pill-radius;
     padding: 0.25em 0.6em;
+    // The hero override in _includes/header.html must repeat these three states
+    // verbatim — at (0,2,1) they outrank a bare `.menu-links a`.
     &:visited, &:active, &:focus {
       color: $pure-white;
     }
-    &:hover{
+    // `link-expand` on `p, li, h3 a` also matches these as `li a:visited:hover`
+    // (0,2,2) and forces white, so the colour is stated here to give the
+    // override a selector it can tie on.
+    &:hover, &:visited:hover{
+      color: $pure-white;
       background-color: $signature-teal-d1;
     }
   }
