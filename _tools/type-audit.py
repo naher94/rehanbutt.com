@@ -136,7 +136,8 @@ def split_top_level(body):
 
 def type_style_map():
     """`$product-type` / `$expressive-type` from variables.scss, as
-    {(register, key): {css-prop: {rendered-value, ...}}}.
+    {(register, key): [variant, ...]} -- each variant a {css-prop: value} the
+    entry can actually render.
 
     Read rather than restated, for the same reason the breakpoints are. The
     values are compared against compiled CSS, so they are normalised the way
@@ -165,14 +166,16 @@ def type_style_map():
         v = re.sub(r'^0(\.\d)', r'\1', v)          # 0.625rem -> .625rem
         return v.rstrip("0").rstrip(".") if re.fullmatch(r'\d+\.\d+', v) else v
 
-    def collect(body, entry):
-        """Fold one map body's own properties into `entry`, recursing into `at`.
+    def variants(body):
+        """One entry -> the list of styles it can actually render.
 
-        Nested queries are flattened deliberately: which breakpoint a value
-        belongs to is not the question here. `token_for` asks whether a
-        rendered value is one this token can produce, and the resolver has
-        already established the width.
+        The base style, plus the base with each `at` block layered on. Kept as
+        whole variants rather than a set of values per property: an entry whose
+        `at` changes two properties would otherwise match any mix of them, and
+        `column-title` -- 20px/700 above small, 24px/900 below -- was matching a
+        20px/900 heading it never produces.
         """
+        base, overrides = {}, []
         for part in split_top_level(body):
             key, _, value = part.partition(":")
             key, value = key.strip(), value.strip()
@@ -180,9 +183,16 @@ def type_style_map():
                 for query in split_top_level(balanced(value, value.index("("))):
                     _, _, nested = query.partition(":")
                     nested = nested.strip()
-                    collect(balanced(nested, nested.index("(")), entry)
+                    over = {}
+                    for p2 in split_top_level(balanced(nested, nested.index("("))):
+                        k2, _, v2 = p2.partition(":")
+                        k2 = k2.strip()
+                        if k2 in TOKEN_PROPS:
+                            over[TOKEN_PROPS[k2]] = norm(v2.strip())
+                    overrides.append(over)
             elif key in TOKEN_PROPS:
-                entry.setdefault(TOKEN_PROPS[key], set()).add(norm(value))
+                base[TOKEN_PROPS[key]] = norm(value)
+        return [base] + [dict(base, **o) for o in overrides]
 
     # Comments are stripped first: several carry unbalanced or comma-bearing
     # prose (`(50/40/30 -> 40/32/24)`) that the scanners would read as syntax.
@@ -194,9 +204,7 @@ def type_style_map():
             continue
         block = balanced(stripped, head.end() - 1)
         for m in re.finditer(r'^\s{2}([-\w]+):\s*\(', block, re.M):
-            entry = {}
-            collect(balanced(block, m.end() - 1), entry)
-            out[(register, m.group(1))] = entry
+            out[(register, m.group(1))] = variants(balanced(block, m.end() - 1))
     return out
 
 
@@ -240,32 +248,42 @@ def token_for(decls):
     if _TYPE_STYLES is None:
         _TYPE_STYLES = type_style_map()
     def narrow(use_inherited, lenient=False):
-        """Intersect the entries matching each mixin-emitted declaration.
+        """Entries with a variant consistent with every observed declaration.
+
+        Matched a whole variant at a time, not property by property: an entry
+        whose `at` changes two properties can otherwise be satisfied by a mix
+        of them that it never actually renders.
 
         `use_inherited` decides whether values this element merely inherited
         take part. They are credited to the mixin body of whichever ancestor's
         include produced them, so they look identical to values emitted here.
         """
-        hits, sized = None, False
+        obs, sized = [], False
         for decl in decls:
             prop, value, rel, line = decl[0], decl[1], decl[2], decl[3]
             own = decl[4] if len(decl) > 4 else True
-            if not own and not use_inherited:
+            if (not own and not use_inherited) or not from_mixin(rel, line, prop):
                 continue
-            if not from_mixin(rel, line, prop):
-                continue
-            if lenient and not own:
-                # an entry silent on a property is compatible with whatever
-                # value was inherited for it -- silence means "inherit"
-                cands = {k for k, e in _TYPE_STYLES.items()
-                         if not e.get(prop) or value in e[prop]}
-            else:
-                cands = {k for k, e in _TYPE_STYLES.items() if value in e.get(prop, ())}
-            hits = cands if hits is None else (hits & cands)
-            if not hits:
-                return None, False
+            obs.append((prop, value, own))
             sized = sized or prop == "font-size"
-        return hits, sized
+        if not obs:
+            return None, False
+
+        def fits(variant):
+            for prop, value, own in obs:
+                if prop in variant:
+                    if variant[prop] != value:
+                        return False
+                # Silence is "inherit", so it is compatible with an inherited
+                # value but not with one the mixin emitted here.
+                elif not (lenient and not own):
+                    return False
+            return True
+
+        hits = {k: [v for v in variants if fits(v)]
+                for k, variants in _TYPE_STYLES.items()}
+        hits = {k: v for k, v in hits.items() if v}
+        return (hits or None), sized
 
     # What the element declares for itself identifies it best. An entry silent
     # on a property it inherits is still that entry, and matching the inherited
@@ -316,9 +334,12 @@ def token_for(decls):
             prop, value, rel, line = decl[0], decl[1], decl[2], decl[3]
             if from_mixin(rel, line, prop):
                 continue
-            narrowed = {k for k in hits
-                        if not _TYPE_STYLES[k].get(prop)
-                        or value in _TYPE_STYLES[k][prop]}
+            # Checked against the variants that already fit, not against the
+            # entry as a whole: reading the size off one variant and the weight
+            # off another names a style the entry never renders.
+            narrowed = {k: [v for v in vs if prop not in v or v[prop] == value]
+                        for k, vs in hits.items()}
+            narrowed = {k: v for k, v in narrowed.items() if v}
             if narrowed:
                 hits = narrowed
             if len(hits) == 1:
