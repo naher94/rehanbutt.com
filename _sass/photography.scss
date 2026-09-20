@@ -90,8 +90,7 @@
           font-size: 1.25em;
         }
         .country-label{
-          text-transform: uppercase;
-          font-size: 0.8em;
+          @include type-style(product, data-label);
         }
       }
     }
