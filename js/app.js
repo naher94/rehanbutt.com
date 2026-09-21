@@ -258,6 +258,7 @@ function copyToClipboard(link,clickedItem) {
 function mobileMenu() {
   const state = document.getElementById("mobile-menu-state");
   const button = document.querySelector("[popovertarget='mobile-menu-state']");
+  const links = document.getElementById("menu-links");
   if (!state || !button) { return; }
 
   // Stated from here rather than the markup: an explicit aria-expanded outranks
@@ -267,6 +268,11 @@ function mobileMenu() {
   state.addEventListener("toggle", function (event) {
     const isOpen = event.newState === "open";
     button.setAttribute("aria-expanded", isOpen);
+    // The links sit outside the popover, so the browser won't hand focus back
+    // the way it would for content the popover actually holds.
+    if (!isOpen && links && links.contains(document.activeElement)) {
+      button.focus();
+    }
     // Open only: the useful number is how often the menu gets reached for,
     // which is what says whether the shortcut links are doing their job.
     if (isOpen) {
