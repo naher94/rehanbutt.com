@@ -451,9 +451,20 @@
 
 .work-experience{
   .work-item{
-    .film-credit-container{
+    .film-credit-label{
       margin-block-start: 1em;
+      margin-block-end: 0.5em;
+    }
+    .film-credit-container{
+      display: grid;
       gap: 1rem;
+      // Phones stay at 3 up whatever the width; above that the column count is
+      // derived from a target poster width, so more films reflow on their own.
+      grid-template-columns: repeat(3, 1fr);
+      @include breakpoint(medium up) {
+        grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+        max-width: 44rem;
+      }
       .film-poster{
         border-radius: $tile-radius;
         overflow: hidden;
