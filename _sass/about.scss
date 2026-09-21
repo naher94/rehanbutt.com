@@ -458,6 +458,15 @@
 
 .work-experience{
   .work-item{
+    // Geometry the role row's nested corners are built from. Custom properties
+    // rather than Sass so the pill below is driven by the same numbers the
+    // radius is derived from, instead of merely agreeing with them by hand.
+    // ⬇︎ TUNE ME: the date pill's type and the air around it
+    --date-font-scale: 0.9;
+    --date-line-height: 1.6;
+    --row-pad-block: 0.25em;
+    // A true pill's radius is half its own box, i.e. scale x leading / 2.
+    --date-pill-radius: calc(var(--date-font-scale) * var(--date-line-height) * 0.5em);
     .film-credit-label{
       margin-block-start: 1em;
       margin-block-end: 0.5em;
@@ -553,7 +562,10 @@
       font-style: normal;
       background-color: $navy-black-l9;
       border-radius: $pill-radius;
-      font-size: 0.9em;
+      // Stated from the same vars the container's radius reads, so the pill
+      // can't silently change height and leave the corners non-concentric.
+      font-size: calc(var(--date-font-scale) * 1em);
+      line-height: var(--date-line-height);
       // padding: 0.1rem 1rem;
       padding: 0 0.75rem;
       margin-top: 0;
@@ -581,24 +593,42 @@
       cursor: pointer;
       list-style: none;
       // Padding gives the hover background room; the matching negative inline
-      // margin keeps the text aligned with the always-expanded roles
-      padding: 0.25em 0.5em;
-      margin-inline: -0.5em;
-      border-radius: $tile-radius;
+      // margin keeps the text aligned with the always-expanded roles. Asymmetric
+      // so the date sits nestled against the right edge while the role gets air.
+      // ⬇︎ TUNE ME: right is the tighter of the two
+      padding: var(--row-pad-block) 0.25em var(--row-pad-block) 0.5em;
+      margin-inline-start: -0.5em;
+      margin-inline-end: -0.25em;
+      // Concentric nesting: the outer corner is the inner corner plus the gap
+      // between them. `$pill-radius` only looks right while the row is exactly
+      // one pill tall — it clamps to half the box, so a wrapped role balloons
+      // to a lozenge. This holds at any font size because every term is em.
+      border-radius: calc(var(--date-pill-radius) + var(--row-pad-block));
       // Scoped on purpose: `all` would sweep up padding, border-radius and the
       // rest alongside the properties that actually need to move
-      transition: background-color $run-duration $run-easing;
+      transition:
+        background-color $run-duration $run-easing,
+        box-shadow $run-duration $run-easing;
       // Only where the reveal itself animates is it worth easing the gap above
       // the description, so the space and the text grow together. Without both
       // features the content pops open instantly and a lone easing gap lags it.
       @supports selector(::details-content) and (interpolate-size: allow-keywords){
         transition:
           background-color $run-duration $run-easing,
+          box-shadow $run-duration $run-easing,
           margin-bottom $run-duration $run-easing;
       }
       &::-webkit-details-marker { display: none; }
       &:hover {
         background-color: semantic-color(work-role-row-hover-bg);
+        // Extends the fill further left than the column has room for, using a
+        // shadow so it paints outside the box without joining the scrollable
+        // overflow. Not at small: the row already sits 2px off the edge there,
+        // so the bleed reads as the fill running off the screen.
+        // ⬇︎ TUNE ME: how far the highlight reaches past the role
+        @include breakpoint(medium up) {
+          box-shadow: -0.25em 0 0 semantic-color(work-role-row-hover-bg);
+        }
       }
       // Flex so the chevron centres against the title exactly, at any font
       // size. vertical-align: middle left it ~2px low, since it aligns to the
