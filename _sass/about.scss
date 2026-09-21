@@ -453,6 +453,7 @@
   .work-item{
     .film-credit-container{
       margin-block-start: 1em;
+      gap: 1rem;
       .film-poster{
         border-radius: $tile-radius;
         overflow: hidden;
