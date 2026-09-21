@@ -458,6 +458,7 @@
     .film-credit-container{
       display: grid;
       gap: 1rem;
+      //TODO update to scaffold when moving to scaffold
       // Phones stay at 3 up whatever the width; above that the column count is
       // derived from a target poster width, so more films reflow on their own.
       grid-template-columns: repeat(3, 1fr);

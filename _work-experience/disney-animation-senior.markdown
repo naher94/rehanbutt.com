@@ -21,7 +21,6 @@ collapsed: false
       <img src="/img/film-posters/{{ each[1] }}" alt="Disney's {{ each[2] }} movie poster">
     </div>
     <div class="text-container">
-        <!-- <p class="film-name">{{ each[2] }}<span>・{{ each[0] }}</span></p> -->
         <p class="film-name">{{ each[2] }}</p>
     </div>
   </div>
