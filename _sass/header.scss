@@ -119,12 +119,15 @@ $burger-bar-offset: 2.5px;
 .burger-container{
   float: left;
   display: none;
-  // ⬇︎ TUNE ME: the stagger's two dials
+  // ⬇︎ TUNE ME: the stagger's two dials, plus the burger's own
   --stagger-step: 50ms;
   --item-duration: 0.2s;
+  // Deliberately not derived: the burger answers the tap, so it tracks the
+  // finger rather than the list. Tying it to --open-duration made it slower
+  // every time a page was added to the nav.
+  --burger-duration: 0.2s;
   // Derived rather than set alongside them, so the list stops growing exactly
   // as the last item lands — at whatever `--nav-count` the nav happens to be.
-  // Stated here so the burger's own morph can read the same clock.
   --open-duration: calc((var(--nav-count) - 1) * var(--stagger-step) + var(--item-duration));
   @include breakpoint(small only) {
     display: block;
@@ -240,11 +243,10 @@ $burger-bar-offset: 2.5px;
     top: 0;
     // translate/rotate rather than `top` + `transform`: `top` relayouts an
     // absolutely positioned bar every frame, where these two stay on the
-    // compositor and can be transitioned independently. Sharing the menu's
-    // clock is what stops the X landing before the list has finished opening.
+    // compositor and can be transitioned independently.
     transition:
-      translate var(--open-duration) $run-easing,
-      rotate var(--open-duration) $run-easing;
+      translate var(--burger-duration) $run-easing,
+      rotate var(--burger-duration) $run-easing;
   }
   &:before{
     translate: 0 4px;
