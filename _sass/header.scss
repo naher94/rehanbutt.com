@@ -1,5 +1,10 @@
 //******* Header Styling
 
+// Half of `.nav-burger-icon`'s height. The two bars are placed symmetrically
+// about that element and its bottom edge is the button's, so this is how far
+// the burger's visual centre sits above the bottom of its box.
+$burger-bar-offset: 2.5px;
+
 .nav-container{
   background-color: $signature-teal;
   color: $pure-white;
@@ -87,6 +92,20 @@
     margin: 0 1rem 0 0.5rem;
     cursor: pointer;
     border-radius: $pill-radius;
+    position: relative;
+    // Hit area only — the box itself is 18x23 and can't grow without changing
+    // the float height and pushing the nav down. Centred on the bars rather
+    // than on the box, which `.nav-burger-icon`'s top margin pushes them out
+    // of. 40 wide, not 44: the shortcut links start 16px to the right.
+    &::after{
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 40px;
+      height: 44px;
+      translate: -50% calc(50% - #{$burger-bar-offset});
+    }
     &:focus-visible{
       outline: 2px solid $pure-white;
       outline-offset: 4px;
