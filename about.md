@@ -8,6 +8,7 @@ sort-order: 2
 
 header-visibility: show
 header-sort-order: 2
+mobile-shortcut: true
 
 footer-section: main
 footer-sort-order: 2

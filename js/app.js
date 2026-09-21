@@ -250,3 +250,33 @@ function copyToClipboard(link,clickedItem) {
   return Promise.reject('The Clipboard API is not available.');
 }
 ///////////////////////////////////////////// End of Copy to Clipboard
+
+///////////////////////////////////////////// Start of Mobile Menu
+// The popover is an empty state machine, so the relationship `popovertarget`
+// wires up points at a div with nothing in it. `aria-controls` in the markup
+// names the list that actually expands; `aria-expanded` is kept in step here.
+function mobileMenu() {
+  const state = document.getElementById("mobile-menu-state");
+  const button = document.querySelector("[popovertarget='mobile-menu-state']");
+  if (!state || !button) { return; }
+
+  // Stated from here rather than the markup: an explicit aria-expanded outranks
+  // the browser's own, so hardcoding one would leave it lying if this never ran.
+  button.setAttribute("aria-expanded", "false");
+
+  state.addEventListener("toggle", function (event) {
+    const isOpen = event.newState === "open";
+    button.setAttribute("aria-expanded", isOpen);
+    // Open only: the useful number is how often the menu gets reached for,
+    // which is what says whether the shortcut links are doing their job.
+    if (isOpen) {
+      gtag('event', 'Menu Open', {
+        'event_category': 'Header',
+        'event_label': 'Mobile Menu'
+      });
+    }
+  });
+}
+
+mobileMenu();
+///////////////////////////////////////////// End of Mobile Menu

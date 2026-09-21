@@ -17,6 +17,15 @@
     background: {{page.hero-accent-color}};
   }
 
+  {% comment %}Selector repeated from _sass/header.scss at (0,3,0): a bare
+  `.burger-icon:focus-visible` would lose to it and leave the keyboard focus
+  ring white on a white hero. Pages that set no accent emit an empty value,
+  which is invalid and falls back to the white the stylesheet already has —
+  correct against the default teal bar.{% endcomment %}
+  .menu-container .burger-icon:focus-visible{
+    outline-color: {{page.hero-accent-color}};
+  }
+
   {% comment %}States repeated to match _sass/header.scss: `.menu-links
   a:visited` is (0,2,1) and would otherwise outrank a bare `.menu-links a`,
   leaving already-visited links white instead of the accent.{% endcomment %}
@@ -50,6 +59,10 @@
       background: {{page.hero-accent-color-dark}};
     }
 
+    .menu-container .burger-icon:focus-visible{
+      outline-color: {{page.hero-accent-color-dark}};
+    }
+
     .menu-links a,
     .menu-links a:visited,
     .menu-links a:active,
@@ -73,22 +86,38 @@
     <div class="site-nav grid-x grid-container">
       <div class="menu-container grid-x cell align-justify">
         {% assign header_items = site.pages | where: "header-visibility", "show" | sort: "header-sort-order" %}
-        <div class="burger-container">
-          <input class="burger-btn" type="checkbox" id="burger-btn"/>
-          <label class="burger-icon" for="burger-btn">
+        {% assign nav_items = header_items | where_exp: "item", "item.title" %}
+        <div class="burger-container" style="--nav-count: {{ nav_items | size }}">
+          {% comment %}`aria-controls` names the list that actually expands,
+          since the popover below is an empty state machine and the relationship
+          `popovertarget` sets up points at nothing useful. `aria-expanded` is
+          deliberately NOT stated here — app.js adds it. An explicit one in the
+          markup would outrank the browser's own expanded state, so if app.js
+          ever fails to load it would sit on "false" while the menu is open.
+          {% endcomment %}
+          <button class="burger-icon" popovertarget="mobile-menu-state" aria-controls="menu-links" aria-label="Menu">
             <span class="nav-burger-icon"></span>
-          </label>
+          </button>
+          {% comment %}Empty by design. Keeping the menu out of the popover
+          leaves the list in normal flow, so it still pushes the page down,
+          while `popovertarget` supplies the button semantics, Esc and
+          light-dismiss that the checkbox it replaces never had.{% endcomment %}
+          <div id="mobile-menu-state" popover></div>
           <div class="mobile-navbar">
-            <a class="nav" href="/portfolio" {% if page.url contains '/portfolio' %}aria-current="page"{% endif %}>Portfolio</a>
-            <a class="nav" href="/about" {% if page.url contains '/about' %}aria-current="page"{% endif %}>About</a>
-          </div>
-          <ul class="menu-links">
-          {% for my_page in header_items %}
-            {% if my_page.title %}
-              <li class="nav-item-container"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}" {% if page.url == my_page.url %}aria-current="page"{% endif %}>{{ my_page.title }}</a></li>
-            {% endif %}
+          {% assign shortcut_items = header_items | where: "mobile-shortcut", true %}
+          {% for my_page in shortcut_items %}
+            <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}" {% if page.url contains my_page.url %}aria-current="page"{% endif %}>{{ my_page.title }}</a>
           {% endfor %}
-          </ul>
+          </div>
+          {% comment %}The wrapper is the grid whose single row animates from
+          0fr to 1fr; the list itself is the row's only item.{% endcomment %}
+          <div class="menu-links-wrap">
+            <ul class="menu-links" id="menu-links">
+            {% for my_page in nav_items %}
+              <li class="nav-item-container" style="--i: {{ forloop.index0 }}"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}" {% if page.url == my_page.url %}aria-current="page"{% endif %}>{{ my_page.title }}</a></li>
+            {% endfor %}
+            </ul>
+          </div>
         </div>
 
         <div class="navbar">

@@ -5,17 +5,6 @@
   color: $pure-white;
   padding-top: 2em;
   padding-bottom: 2em;
-
-  [type='checkbox']+label[for] {
-    cursor: pointer;
-  }
-  [type='checkbox']+label {
-    display: inline-block;
-    vertical-align: baseline;
-    margin-left: 0.5rem;
-    margin-right: 1rem;
-    margin-bottom: 0;
-  }
 }
 
 .logo{
@@ -58,6 +47,9 @@
 .mobile-navbar{
   display: none;
   float: left;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity var(--item-duration) $run-easing;
   @include breakpoint(small only) {
     display: flex;
     align-items: center;
@@ -86,6 +78,19 @@
     display: none;
     float: left;
     user-select: none;
+    // Button reset. The margins are the ones the `[type=checkbox]+label` rule
+    // used to supply — without them the burger slides left and takes the
+    // shortcut links with it.
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0 1rem 0 0.5rem;
+    cursor: pointer;
+    border-radius: $pill-radius;
+    &:focus-visible{
+      outline: 2px solid $pure-white;
+      outline-offset: 4px;
+    }
     @include breakpoint(small only) {
       display: block;
     }
@@ -95,20 +100,62 @@
 .burger-container{
   float: left;
   display: none;
+  // ⬇︎ TUNE ME: the stagger's two dials
+  --stagger-step: 50ms;
+  --item-duration: 0.2s;
+  // Derived rather than set alongside them, so the list stops growing exactly
+  // as the last item lands — at whatever `--nav-count` the nav happens to be.
+  // Stated here so the burger's own morph can read the same clock.
+  --open-duration: calc((var(--nav-count) - 1) * var(--stagger-step) + var(--item-duration));
   @include breakpoint(small only) {
     display: block;
   }
 }
 
-.burger-icon, .burger-btn, .nav-burger-icon{
+// A state machine, not a surface: zero-size and transparent so none of it
+// paints, while `:has(:popover-open)` below drives the menu that stays in flow.
+#mobile-menu-state{
+  position: fixed;
+  inset: 0;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  overflow: hidden;
+  &::backdrop{
+    background: transparent;
+  }
+}
+
+.burger-icon, .nav-burger-icon{
   user-select: none;
+}
+
+// A single grid row going 0fr → 1fr is what animates the reveal, and it needs
+// no measured height. `interpolate-size: allow-keywords` reads better and was
+// tried first, but it only ships in Chromium, so everywhere else the menu
+// snapped open. Either way this replaces a `max-height` constant that was exact
+// for today's six items and silently wrong for a seventh, a title that wraps,
+// or a change in type scale.
+.menu-links-wrap{
+  display: grid;
+  grid-template-rows: 0fr;
+  clear: both;
+  transition: grid-template-rows var(--open-duration) $run-easing;
 }
 
 .menu-links {
   overflow: hidden;
-  clear: both;
-  max-height: 0;
-  transition: max-height .3s ease-out;
+  // A grid item floors at its content height without this, which would leave
+  // the row unable to collapse back to 0fr.
+  min-block-size: 0;
+  // A zero-height row still leaves its links in the tab order, so a keyboard
+  // user tabs through six invisible items. visibility takes them out, delayed
+  // by the full open duration so they stay on screen while the row collapses.
+  visibility: hidden;
+  transition: visibility 0s linear var(--open-duration);
   margin-left: 0;
   user-select: none;
   margin-bottom: 0;
@@ -129,29 +176,41 @@
       color: $pure-white;
       background-color: $signature-teal-d1;
     }
+    // Same `link-expand` match paints a teal bar behind the text. It used to
+    // slip behind the bar's own background on z-index: -1 and go unseen; now
+    // that each item carries a `translate` for the stagger it opens a stacking
+    // context, which traps the bar in front of that background. Unwanted on a
+    // nav link either way, so it's dropped rather than recoloured.
+    &::after{
+      content: none;
+    }
   }
 }
 
 .nav-item-container{
   font-size: 1.5em;
+  opacity: 0;
+  translate: 0 -0.5rem;
+  transition:
+    opacity var(--item-duration) $run-easing,
+    // The spring overshoots — that's the pop. Kept off opacity, where anything
+    // past 1 clamps and would just end the fade early.
+    translate var(--item-duration) $tight-spring-curve;
   &:first-of-type{
     margin-top: 1em;
   }
 }
 
+// Two bars, not three. This element has never had a background of its own —
+// the 2019 original painted it $signature-teal on a $signature-teal bar — so
+// the middle stripe has never rendered on this site. The `transition: background`
+// and the `background: transparent` that used to hide it on open went with it.
 .nav-burger-icon {
   display: block;
   height: 5px;
   position: relative;
-  transition: background .2s ease-out;
   width: 18px;
   margin-top: 1.1em;
-  &:before{
-    top: 4px;
-  }
-  &:after{
-    top: -4px;
-  }
   &:before, &:after{
     background: $pure-white;
     content: '';
@@ -159,38 +218,75 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    transition: all .2s ease-out;
+    top: 0;
+    // translate/rotate rather than `top` + `transform`: `top` relayouts an
+    // absolutely positioned bar every frame, where these two stay on the
+    // compositor and can be transitioned independently. Sharing the menu's
+    // clock is what stops the X landing before the list has finished opening.
+    transition:
+      translate var(--open-duration) $run-easing,
+      rotate var(--open-duration) $run-easing;
+  }
+  &:before{
+    translate: 0 4px;
+  }
+  &:after{
+    translate: 0 -4px;
   }
 }
 
-.burger-btn {
-  display: none;
-}
-
-.burger-btn:checked {
-  ~ .menu-links {
-    // TODO fix this height to auto
-    max-height: 402px;
-    display: block;
-    transition: $run;
+.burger-container:has(:popover-open){
+  .menu-links-wrap{
+    grid-template-rows: 1fr;
   }
-  ~ .mobile-navbar{
+  .menu-links{
+    visibility: visible;
+    // No delay on the way in — the links have to be focusable from the moment
+    // the row starts opening.
+    transition: visibility 0s;
+  }
+  // Delay lives only in the open state, so closing reverts to zero and the
+  // items leave together. Staggering an exit adds latency to a dismissal.
+  .nav-item-container{
+    opacity: 1;
+    translate: 0 0;
+    transition-delay: calc(var(--i) * var(--stagger-step));
+  }
+  .mobile-navbar{
     @include breakpoint(small only) {
-      display: none;
+      // Faded rather than dropped, so the bar changes on the same clock as the
+      // list. visibility trails the fade to keep them off the tab order once
+      // they're invisible, and snaps back on open so they can fade in again.
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity var(--item-duration) $run-easing,
+        visibility 0s linear var(--item-duration);
     }
   }
-  ~ .burger-icon .nav-burger-icon {
-    background: transparent;
+  .nav-burger-icon:before{
+    translate: 0 0;
+    rotate: -45deg;
   }
-  ~ .burger-icon .nav-burger-icon:before {
-    transform: rotate(-45deg);
-  }
-  ~ .burger-icon .nav-burger-icon:after {
-    transform: rotate(45deg);
+  .nav-burger-icon:after{
+    translate: 0 0;
+    rotate: 45deg;
   }
 }
 
-.burger-btn:checked ~ .burger-icon:not(.steps) .nav-burger-icon:before,
-.burger-btn:checked ~ .burger-icon:not(.steps) .nav-burger-icon:after {
-  top: 0;
+// The stagger is motion even with the movement taken out, so what matters here
+// is the shorthand resetting transition-delay alongside the durations.
+@media (prefers-reduced-motion: reduce){
+  .menu-links-wrap,
+  .menu-links,
+  .nav-item-container,
+  .mobile-navbar,
+  .nav-burger-icon:before,
+  .nav-burger-icon:after,
+  // The open state re-declares `transition` on the shortcuts at (0,3,0), which
+  // outranks a bare `.mobile-navbar` here however late it appears. Matching that
+  // specificity is what actually stops the fade.
+  .burger-container:has(:popover-open) .mobile-navbar{
+    transition: none;
+  }
 }
