@@ -135,6 +135,9 @@
       }
     }
     .profile-2{
+      img{
+        border-radius: $tile-radius;
+      }
       @include breakpoint(medium down){
         margin-top: -20rem;
         z-index: 4;
@@ -148,6 +151,9 @@
   }
   .profile-container{
     position: absolute;
+    img{
+      border-radius: $tile-radius;
+    }
     @include breakpoint(large){
       right: -5rem;
       top: 0;
