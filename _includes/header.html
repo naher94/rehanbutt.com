@@ -104,7 +104,11 @@
           light-dismiss that the checkbox it replaces never had.{% endcomment %}
           <div id="mobile-menu-state" popover></div>
           <div class="mobile-navbar">
-          {% assign shortcut_items = header_items | where: "mobile-shortcut", true %}
+          {% comment %}`mobile-shortcut` is the position, not a flag, so this
+          row orders itself. Sorting on `header-sort-order` instead would tie
+          it to the full menu below, where these two sit apart and in the
+          other order.{% endcomment %}
+          {% assign shortcut_items = header_items | where_exp: "item", "item.mobile-shortcut" | sort: "mobile-shortcut" %}
           {% for my_page in shortcut_items %}
             <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}" {% if page.url contains my_page.url %}aria-current="page"{% endif %}>{{ my_page.title }}</a>
           {% endfor %}
