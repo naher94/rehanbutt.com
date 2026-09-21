@@ -530,7 +530,17 @@
   .title-date{
     margin-block-end: 0.5em;
     // background-color: red;
+    // A long role wraps onto a second line rather than pushing the date pill
+    // onto its own row. `shrink` is flex:0 0 auto on both sides, so without
+    // this the pill is what drops.
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 0.5rem;
+    h4{
+      flex-shrink: 1;
+    }
     .date{
+      flex-shrink: 0;
       // work-experience dates only, without touching speaking or education
       font-weight: $lato-regular;
       font-style: normal;
