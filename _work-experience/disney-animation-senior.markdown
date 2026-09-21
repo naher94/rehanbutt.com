@@ -9,30 +9,20 @@ sort-order: -2
 collapsed: false
 ---
 
-<div class="film-credit-container grid-x align-middle">
-  <div class="film-poster cell shrink">
-    <img src="/img/film-posters/zootopia2-poster.jpg" alt="Disney's Zootopia 2 movie poster">
+<!-- year|poster|title — year leads so `sort` keys on it; `reverse` puts newest
+     first, so rows can be added in any order. Alt text is derived from the title. -->
+{% assign film-list = "(2025|zootopia2-poster.jpg|Zootopia 2),(2024|moana2-poster.jpg|Moana 2),(2023|wish-poster.jpg|Wish)" | remove: "(" | remove: ")" | split: ',' | sort | reverse %}
+<p class="film-credit-label">Credited Projects</p>
+<div class="film-credit-container">
+  {% for film in film-list %}
+  {% assign each = film | split: '|' %}
+  <div class="film-credit">
+    <div class="film-poster">
+      <img src="/img/film-posters/{{ each[1] }}" alt="Disney's {{ each[2] }} movie poster">
+    </div>
+    <div class="text-container">
+        <p class="film-name">{{ each[2] }}</p>
+    </div>
   </div>
-  <div class="text-container cell auto">
-    <p class="film-name">Zootopia 2<span>・2025</span></p>
-    <p class="credit-description">Credited under Technology</p>
-  </div>
-</div>
-<div class="film-credit-container grid-x align-middle">
-  <div class="film-poster cell shrink">
-    <img src="/img/film-posters/moana2.jpg" alt="Disney's Moana 2 movie poster">
-  </div>
-  <div class="text-container cell auto">
-    <p class="film-name">Moana 2<span>・2024</span></p>
-    <p class="credit-description">Credited under Technology</p>
-  </div>
-</div>
-<div class="film-credit-container grid-x align-middle">
-  <div class="film-poster cell shrink">
-    <img src="/img/film-posters/wish-poster.jpg" alt="Disney's Wish movie poster">
-  </div>
-  <div class="text-container cell auto">
-    <p class="film-name">Wish<span>・2023</span></p>
-    <p class="credit-description">Credited under Technology</p>
-  </div>
+  {% endfor %}
 </div>

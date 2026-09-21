@@ -187,9 +187,11 @@ role | The job title | `string`
 date-start | `YYYY-MM-DD` | `date`
 date-end | `YYYY-MM-DD` or "Present" if current experience | `date` or `string` of "Present"
 company | Name of the organization | `string`
+group | Optional team, lab or course inside the company, appended to the role as `Role・Group`. No entry sets it today — the descriptions name the group instead | `string`
 description | Explanation of the role | `string`
 logo | A logo representing the job for visual context | `.svg`
 sort-order | Order in which the experiences are sorted and grouped `1` being the top | `int`
+collapsed | Renders the role inside a `<details>` element that starts closed | `boolean`
 
 #### `_speaking` Frontmatter Tags
 
