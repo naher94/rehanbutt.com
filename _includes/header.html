@@ -84,10 +84,12 @@
 {% endif %}
   <nav class="nav-container">
     <div class="site-nav grid-x grid-container">
-      <div class="menu-container grid-x cell align-justify">
-        {% assign header_items = site.pages | where: "header-visibility", "show" | sort: "header-sort-order" %}
-        {% assign nav_items = header_items | where_exp: "item", "item.title" %}
-        <div class="burger-container" style="--nav-count: {{ nav_items | size }}">
+      {% assign header_items = site.pages | where: "header-visibility", "show" | sort: "header-sort-order" %}
+      {% assign nav_items = header_items | where_exp: "item", "item.title" %}
+      {% comment %}`--nav-count` lives here rather than on .burger-container
+      because the expanding list is a sibling of it, not a child.{% endcomment %}
+      <div class="menu-container grid-x cell align-justify" style="--nav-count: {{ nav_items | size }}">
+        <div class="burger-container">
           {% comment %}`aria-controls` names the list that actually expands,
           since the popover below is an empty state machine and the relationship
           `popovertarget` sets up points at nothing useful. `aria-expanded` is
@@ -113,15 +115,21 @@
             <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}" {% if page.url contains my_page.url %}aria-current="page"{% endif %}>{{ my_page.title }}</a>
           {% endfor %}
           </div>
-          {% comment %}The wrapper is the grid whose single row animates from
-          0fr to 1fr; the list itself is the row's only item.{% endcomment %}
-          <div class="menu-links-wrap">
-            <ul class="menu-links" id="menu-links">
-            {% for my_page in nav_items %}
-              <li class="nav-item-container" style="--i: {{ forloop.index0 }}"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}" {% if page.url == my_page.url %}aria-current="page"{% endif %}>{{ my_page.title }}</a></li>
-            {% endfor %}
-            </ul>
-          </div>
+        </div>
+
+        {% comment %}A sibling of .burger-container, not a child: inside it,
+        opening the menu grew the flex item the logo aligns against and
+        dragged the logo down the page with it. On its own flex line the list
+        still sits in normal flow and still pushes the page down, but the row
+        above it keeps the height of the burger alone. The wrapper is the grid
+        whose single row animates from 0fr to 1fr; the list is its only item.
+        {% endcomment %}
+        <div class="menu-links-wrap">
+          <ul class="menu-links" id="menu-links">
+          {% for my_page in nav_items %}
+            <li class="nav-item-container" style="--i: {{ forloop.index0 }}"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}" {% if page.url == my_page.url %}aria-current="page"{% endif %}>{{ my_page.title }}</a></li>
+          {% endfor %}
+          </ul>
         </div>
 
         <div class="navbar">

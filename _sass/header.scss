@@ -21,7 +21,9 @@ $burger-bar-offset: 2.5px;
     height: 50px;
     transition: $sprint;
     @include breakpoint(small only) {
-      height: 40px;
+      // Free to shrink now the logo centres against the burger row instead of
+      // sitting flush with its top, where any height but ~40px looked off.
+      height: 32px;
     }
     &:hover{
       transform: scale(1.1);
@@ -73,12 +75,20 @@ $burger-bar-offset: 2.5px;
 }
 
 .menu-container{
+  // Safe at every width now the expanding list is on its own flex line:
+  // align-items works per line, so this centres the logo against the burger
+  // row only and the open menu can't reach it.
   align-items: center;
-  @include breakpoint(small only) {
-    // Not at small: the burger menu expands inside .burger-container, so
-    // centring drags the logo to the middle of the opened menu.
-    align-items: flex-start;
-  }
+  // ⬇︎ TUNE ME: the stagger's two dials, plus the burger's own
+  --stagger-step: 50ms;
+  --item-duration: 0.2s;
+  // Deliberately not derived: the burger answers the tap, so it tracks the
+  // finger rather than the list. Tying it to --open-duration made it slower
+  // every time a page was added to the nav.
+  --burger-duration: 0.2s;
+  // Derived rather than set alongside them, so the list stops growing exactly
+  // as the last item lands — at whatever `--nav-count` the nav happens to be.
+  --open-duration: calc((var(--nav-count) - 1) * var(--stagger-step) + var(--item-duration));
   .burger-icon{
     display: none;
     float: left;
@@ -119,18 +129,11 @@ $burger-bar-offset: 2.5px;
 .burger-container{
   float: left;
   display: none;
-  // ⬇︎ TUNE ME: the stagger's two dials, plus the burger's own
-  --stagger-step: 50ms;
-  --item-duration: 0.2s;
-  // Deliberately not derived: the burger answers the tap, so it tracks the
-  // finger rather than the list. Tying it to --open-duration made it slower
-  // every time a page was added to the nav.
-  --burger-duration: 0.2s;
-  // Derived rather than set alongside them, so the list stops growing exactly
-  // as the last item lands — at whatever `--nav-count` the nav happens to be.
-  --open-duration: calc((var(--nav-count) - 1) * var(--stagger-step) + var(--item-duration));
   @include breakpoint(small only) {
-    display: block;
+    // flow-root, not block: the burger and the shortcuts are the only
+    // children left and both float, so nothing would give this height. The
+    // list's `clear: both` used to do that job before it moved out.
+    display: flow-root;
   }
 }
 
@@ -162,10 +165,21 @@ $burger-bar-offset: 2.5px;
 // for today's six items and silently wrong for a seventh, a title that wraps,
 // or a change in type scale.
 .menu-links-wrap{
-  display: grid;
+  // Hidden above small, the way .burger-container is. It used to be a child
+  // of that element and inherited the hiding; as a sibling it needs its own,
+  // or a menu left open while the window widens reappears on the desktop bar.
+  display: none;
   grid-template-rows: 0fr;
-  clear: both;
   transition: grid-template-rows var(--open-duration) $run-easing;
+  @include breakpoint(small only) {
+    display: grid;
+    // Its own full-width flex line, below the burger row. `order` keeps the
+    // source order — burger, shortcuts, then these links — which is the order
+    // to tab through; without it the 100% basis would break the line early
+    // and push the logo down to a third one.
+    flex: 0 0 100%;
+    order: 1;
+  }
 }
 
 .menu-links {
@@ -256,7 +270,9 @@ $burger-bar-offset: 2.5px;
   }
 }
 
-.burger-container:has(:popover-open){
+// Scoped to .menu-container, not .burger-container: the list it opens is a
+// sibling of the burger now, so this is the nearest ancestor holding both.
+.menu-container:has(:popover-open){
   .menu-links-wrap{
     grid-template-rows: 1fr;
   }
@@ -307,7 +323,7 @@ $burger-bar-offset: 2.5px;
   // The open state re-declares `transition` on the shortcuts at (0,3,0), which
   // outranks a bare `.mobile-navbar` here however late it appears. Matching that
   // specificity is what actually stops the fade.
-  .burger-container:has(:popover-open) .mobile-navbar{
+  .menu-container:has(:popover-open) .mobile-navbar{
     transition: none;
   }
 }
