@@ -9,19 +9,20 @@ sort-order: -2
 collapsed: false
 ---
 
-<!-- poster|title|year — newest first. Alt text is derived from the title. -->
-{% assign film-list = "(zootopia2-poster.jpg|Zootopia 2|2025),(moana2-poster.jpg|Moana 2|2024),(wish-poster.jpg|Wish|2023)" | remove: "(" | remove: ")" | split: ',' %}
+<!-- year|poster|title — year leads so `sort` keys on it; `reverse` puts newest
+     first, so rows can be added in any order. Alt text is derived from the title. -->
+{% assign film-list = "(2025|zootopia2-poster.jpg|Zootopia 2),(2024|moana2-poster.jpg|Moana 2),(2023|wish-poster.jpg|Wish)" | remove: "(" | remove: ")" | split: ',' | sort | reverse %}
 <div class="film-credit-container grid-x">
   <p class="cell">Credited Projects</p>
   {% for film in film-list %}
   {% assign each = film | split: '|' %}
   <div class="film-credit cell small-4 medium-2">
     <div class="film-poster">
-      <img src="/img/film-posters/{{ each[0] }}" alt="Disney's {{ each[1] }} movie poster">
+      <img src="/img/film-posters/{{ each[1] }}" alt="Disney's {{ each[2] }} movie poster">
     </div>
     <div class="text-container cell auto">
-        <!-- <p class="film-name">{{ each[1] }}<span>・{{ each[2] }}</span></p> -->
-        <p class="film-name">{{ each[1] }}</p>
+        <!-- <p class="film-name">{{ each[2] }}<span>・{{ each[0] }}</span></p> -->
+        <p class="film-name">{{ each[2] }}</p>
     </div>
   </div>
   {% endfor %}
