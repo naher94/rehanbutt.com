@@ -452,21 +452,15 @@
 .work-experience{
   .work-item{
     .film-credit-container{
-      margin-block-start: 0.5em;
+      margin-block-start: 1em;
       .film-poster{
-        border-radius: 5px;
+        border-radius: $tile-radius;
         overflow: hidden;
-        img{
-          max-width: 3em;
-        }
       }
       .text-container{
-        margin-inline-start: 0.5em;
-        p{
-          line-height: 1.2;
-        }
+        margin-block-start: 0.25em;
         .film-name{
-          font-weight: $lato-black;
+          margin-top: 0;
           span{
             font-weight: $lato-bold;
           }
@@ -606,7 +600,7 @@
         // leaves the box untouched, so it still spins about its own centre.
         // ⬇︎ TUNE ME: optical centring of the chevron
         position: relative;
-        top: 0.15em;
+        // top: 0.15em;
         transition: transform $run-duration $run-easing;
       }
       .title-date {
