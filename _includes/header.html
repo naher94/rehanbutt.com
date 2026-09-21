@@ -3,10 +3,10 @@
   .nav-container{
     background-color: {{page.hero-background-color}};
   }
-  .nav, .nav:hover{
+  .nav, .nav:hover, .nav:focus{
     color: {{page.hero-accent-color}};
   }
-  .nav:hover{
+  .nav:hover, .nav:focus{
     background-color: {{page.hero-accent-color | strip | append: "33"}};
   }
   .logo #rehan-logo-header g{
@@ -17,20 +17,29 @@
     background: {{page.hero-accent-color}};
   }
 
-  .menu-links a{
+  {% comment %}States repeated to match _sass/header.scss: `.menu-links
+  a:visited` is (0,2,1) and would otherwise outrank a bare `.menu-links a`,
+  leaving already-visited links white instead of the accent.{% endcomment %}
+  .menu-links a,
+  .menu-links a:visited,
+  .menu-links a:active,
+  .menu-links a:focus,
+  .menu-links a:hover,
+  .menu-links a:visited:hover{
     color: {{page.hero-accent-color}};
   }
-  .menu-links a:hover{
+  .menu-links a:hover,
+  .menu-links a:visited:hover{
     background-color: {{page.hero-accent-color | strip | append: "33"}};
   }
   @media (prefers-color-scheme: dark) {
     .nav-container{
       background-color: {{page.hero-background-color-dark}};
     }
-    .nav, .nav:hover{
+    .nav, .nav:hover, .nav:focus{
       color: {{page.hero-accent-color-dark}};
     }
-    .nav:hover{
+    .nav:hover, .nav:focus{
       background-color: {{page.hero-accent-color-dark | strip | append: "33"}};
     }
     .logo #rehan-logo-header g{
@@ -41,10 +50,16 @@
       background: {{page.hero-accent-color-dark}};
     }
 
-    .menu-links a{
+    .menu-links a,
+    .menu-links a:visited,
+    .menu-links a:active,
+    .menu-links a:focus,
+    .menu-links a:hover,
+    .menu-links a:visited:hover{
       color: {{page.hero-accent-color-dark}};
     }
-    .menu-links a:hover{
+    .menu-links a:hover,
+    .menu-links a:visited:hover{
       background-color: {{page.hero-accent-color-dark | strip | append: "33"}};
     }
 
