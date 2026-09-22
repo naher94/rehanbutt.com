@@ -194,6 +194,14 @@
   .pagegrp{margin-bottom:9px}
   .pagegrp > b{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;
     color:var(--ink-muted);display:block;margin-bottom:2px}
+  /* The one thing on the panel that asks you to do something rather than
+     telling you something, so it is drawn as a card rather than as another
+     section. The fill is enough to set it apart. */
+  .act{margin-top:14px;padding:12px 14px;border-radius:9px;
+    background:var(--surface-2)}
+  .act h4{margin:0 0 2px;font-family:"Zilla Slab",serif;font-size:15px;font-weight:700}
+  .act p{margin:0 0 9px;font-size:12.5px;color:var(--ink-muted)}
+  .act .chip{font-size:12.5px;padding:4px 11px}
   .tagbtns{display:flex;gap:6px;flex-wrap:wrap}
   .note{font-size:12px;color:var(--ink-faint);margin:8px 0 0}
 </style>
@@ -32850,10 +32858,25 @@ function drawPanel(){
   host.innerHTML = `
     <h2>${esc(r.family)} ${px(r.size)} / ${esc(r.weight)}</h2>
     <div class="tags">
+      ${tagBadges(c).map(b =>
+        `<span class="badge ${b.cls}">${esc(b.txt)}</span>`).join("")}
       ${c.renders.map(x => x.card
         ? `<span class="badge b-cid">${esc(x.card)}${
             c.renders.length > 1 ? " &middot; " + esc(x.label) : ""}</span>` : "").join("")}
     </div>
+    ${entries.length > 1 ? `<p class="note">Two entries reach this row &mdash; it
+      renders one at some widths and the other where it is hidden.</p>` : ""}
+    ${entries.length ? "" : `
+      <div class="act">
+        <h4>Its size is written by hand</h4>
+        <p>Nothing in the stylesheet decides it. Where should it land?</p>
+        <div class="tagbtns">
+          ${["product", "expressive", ""].map(reg =>
+            `<button class="chip" data-tag="${reg}"
+               aria-pressed="${(TAGS[c.id] || "") === reg}">${
+               reg || "clear"}</button>`).join("")}
+        </div>
+      </div>`}
 
     <div class="sec">
       <h3>Renders as</h3>
@@ -32862,22 +32885,6 @@ function drawPanel(){
         <code>calc()</code> or <code>var()</code> the audit cannot evaluate: the size
         shown is the parent's, not this element's. Measure it in a browser before
         acting on it.</p>` : ""}
-    </div>
-
-    <div class="sec">
-      <h3>Map</h3>
-      ${entries.length
-        ? `<div class="tags">${tagBadges(c).map(b =>
-             `<span class="badge ${b.cls}">${esc(b.txt)}</span>`).join("")}</div>${
-           entries.length > 1 ? `<p class="note">Two entries reach this row &mdash;
-             it renders one at some widths and the other where it is hidden.</p>` : ""}`
-        : `<p class="note">Its size is written by hand. Where should it land?</p>
-           <div class="tagbtns">
-             ${["product", "expressive", ""].map(reg =>
-               `<button class="chip" data-tag="${reg}"
-                  aria-pressed="${(TAGS[c.id] || "") === reg}">${
-                  reg || "clear"}</button>`).join("")}
-           </div>`}
     </div>
 
     <div class="sec">
