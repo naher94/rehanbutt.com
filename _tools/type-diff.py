@@ -36,8 +36,14 @@ _spec.loader.exec_module(ta)
 ta.WIDEST = ta.project_breakpoints()[-1][0]
 
 # what counts as "the type of this element"; letter-spacing and transform
-# included because a token can change them without touching size
-FIELDS = ("family", "size", "weight", "style", "lh", "spacing", "transform")
+# included because a token can change them without touching size.
+#
+# `size_unresolved` is here so a size the resolver cannot read never compares
+# equal to one it can. Both sides of a `calc()` -> `rem` rewrite resolve to the
+# parent's size and this would have reported no change -- while the element
+# moved from 18px to 20px on the page.
+FIELDS = ("family", "size", "size_unresolved", "weight", "style",
+          "lh", "spacing", "transform")
 
 
 def compiled_sets_for(site):
@@ -119,8 +125,10 @@ def main():
         return 0
 
     def fmt(t):
-        fam, size, weight, style, lh, sp, tr = t
-        s = "%s %s/%s" % (fam, size, weight)
+        fam, size, unread, weight, style, lh, sp, tr = t
+        # `~` marks a size the resolver could not read: the number beside it is
+        # the parent's, so the row says which side of the change is a guess.
+        s = "%s %s%s/%s" % (fam, "~" if unread else "", size, weight)
         if lh not in (None, "normal"):
             s += "/%s" % lh
         if style != "normal":

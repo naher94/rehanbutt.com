@@ -591,8 +591,28 @@ ABS = {"xx-small": 9, "x-small": 10, "small": 13, "medium": 16,
        "large": 18, "x-large": 24, "xx-large": 32}
 
 
+def understood_size(value):
+    """Whether `resolve_size` can actually read this value.
+
+    `calc()`, `var()`, `clamp()` and friends all fall through to the parent's
+    size below, which is a guess wearing the costume of a measurement: the date
+    pill's `calc(var(--date-font-scale) * 1em)` was reported as its parent's
+    20px when it renders 18. Callers that report a number to someone, or
+    compare two builds, ask this first -- the same distinction `UNVERIFIED`
+    draws for a source line that could not be read.
+    """
+    v = (value or "").strip().lower()
+    return bool(v in ABS or v in ("inherit", "unset", "initial")
+                or re.match(r'^(-?[\d.]+)(px|em|rem|%|pt)?$', v))
+
+
 def resolve_size(value, parent_px):
-    """font-size -> px, given the parent's computed px."""
+    """font-size -> px, given the parent's computed px.
+
+    Falls back to the parent for anything it cannot read, so the cascade below
+    an unreadable value still resolves against something sane. `understood_size`
+    says whether that happened.
+    """
     v = value.strip().lower()
     if v in ABS:
         return float(ABS[v])
@@ -886,14 +906,20 @@ def _resolve(dom, compiled, tree=None, bp=None, rel=None,
         # below. Foundation writes it on several elements; recording it would
         # credit the size to the file holding the `inherit` rather than to
         # whichever rule actually set the pixels.
+        # An unreadable size is inherited as one: everything below a `calc()`
+        # is resolving against a number the audit had to guess, so the doubt
+        # travels down the tree the way the pixels do.
+        unresolved = inherited.get("_size_unresolved", False)
         if "font-size" in own and \
                 own["font-size"].strip().lower() not in ("inherit", "unset"):
             size_px = resolve_size(own["font-size"], parent_px)
+            unresolved = not understood_size(own["font-size"])
             files["font-size"] = (own["font-size"],) + \
                 (node.origin.get("font-size") or (None, None, None))
         else:
             size_px = parent_px
         computed["_size_px"] = size_px
+        computed["_size_unresolved"] = unresolved
         for p in TYPE_PROPS:
             if p in own and p != "font-size":
                 # `inherit` is a no-op: keep whatever came down the tree.
@@ -913,6 +939,10 @@ def _resolve(dom, compiled, tree=None, bp=None, rel=None,
                 hidden=bool(node.classes & set(HIDDEN_CLASSES)),
                 family=first_family(computed.get("font-family")),
                 size=round(size_px, 2),
+                # The size above is the parent's, not this element's -- see
+                # `understood_size`. Carried per element rather than derived
+                # later because only the walk knows what it could not read.
+                size_unresolved=unresolved,
                 weight=norm_weight(computed.get("font-weight")) or "400",
                 style=(computed.get("font-style") or "normal").strip(),
                 lh=(lambda x: round(x, 2) if isinstance(x, float) else x)(
@@ -988,9 +1018,14 @@ def build(out_path, limit=None):
                                       bp=defaultdict(int)))
     bp_names = [n for n, _ in breakpoints]
 
+    # An element whose size the walk could not read is kept apart from one that
+    # genuinely renders that size. They are not the same finding, and merging
+    # them is what let 18 date pills sit inside a card claiming 20px while they
+    # render 18.
     def key_of(el):
         return (el["family"], el["size"], el["weight"], el["style"],
-                el["lh"], el["spacing"], el["transform"])
+                el["lh"], el["spacing"], el["transform"],
+                el.get("size_unresolved", False))
 
     for p in pages:
         rel = str(p.relative_to(SITE))
@@ -1052,15 +1087,21 @@ def build(out_path, limit=None):
                         del e["samples"][5:]
 
     items = []
-    for (family, size, weight, style, lh, spacing, transform), e in styles.items():
+    for (family, size, weight, style, lh, spacing, transform,
+         size_unresolved), e in styles.items():
         # every mixin-emitted declaration on one element shares a `$style`, so
         # the entry is identified once per style and reused for its properties
         rendered = {"letter-spacing": spacing, "text-transform": transform,
                     "font-style": style}
         style_token = token_for(list(e["decls"]), rendered)
         items.append(dict(
-            id=f"{family}|{size}|{weight}|{style}|{lh}|{spacing}|{transform}",
+            id=f"{family}|{size}|{weight}|{style}|{lh}|{spacing}|{transform}"
+               + ("|?" if size_unresolved else ""),
             family=family, size=size, weight=weight, style=style,
+            # `size` above is the parent's, carried down because the authored
+            # value is a `calc()`/`var()` this cannot evaluate. The number is a
+            # placeholder, not a measurement -- do not report it as one.
+            size_unresolved=size_unresolved,
             line_height=lh, letter_spacing=spacing, text_transform=transform,
             count=max(e["bp"].values()) if e["bp"] else 0,
             bp=dict(e["bp"]),
@@ -1132,6 +1173,13 @@ def build(out_path, limit=None):
             off_scale=sum(i["count"] for i in items if not i["on_scale"]),
             scale=list(SCALE),
             unsupported_selectors=unsupported,
+            # Elements whose size the walk had to inherit rather than read.
+            # Reported for the same reason the clipped ones are: a tool that
+            # quietly guesses for some of its input is worse than one that says
+            # how much it guessed for.
+            unresolved_elements=max(
+                (sum(i["bp"].get(b, 0) for i in items if i["size_unresolved"])
+                 for b in bp_names), default=0),
             hidden_elements=max(hidden_count.values()) if hidden_count else 0,
             hidden_classes=list(HIDDEN_CLASSES),
             breakpoints=[dict(name=n, width=w) for n, w in breakpoints],
@@ -1201,6 +1249,9 @@ if __name__ == "__main__":
     print(f"distinct styles     : {t['styles']}")
     print(f"families / sizes    : {t['families']} / {t['sizes']}")
     print(f"weights             : {t['weights']}")
+    if t.get("unresolved_elements"):
+        print(f"size not readable   : {t['unresolved_elements']} "
+              f"(calc/var; reported at the parent's size)")
     if t["unsupported_selectors"]:
         print(f"selectors skipped   : {t['unsupported_selectors']} (combinators/attrs)")
     print(f"\nwrote {args.out}")
