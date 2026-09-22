@@ -256,7 +256,10 @@ $zilla-bold: 700;
 @import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900i,900&display=swap');
 $lato: 'Lato', sans-serif;
 $lato-thin: 100;
+// `$lato-light-italic` is the Google Fonts spelling of the weight, not a CSS
+// one -- `font-weight: 300i` is invalid. `$lato-light` is the weight alone.
 $lato-light-italic: 300i;
+$lato-light: 300;
 $lato-regular: 400;
 $lato-bold: 700;
 $lato-bold-italic: 700i;
@@ -336,6 +339,14 @@ $product-type: (
   item-org:      (family: $lato,  size: 1.75rem,    font-weight: $lato-black,                         // 28px
                   at: (small only: (size: 1.4rem))),                                                  // 22.4px
   item-title:    (family: $lato,  size: 1.25rem,    font-weight: $lato-black,                         // 20px
+                  at: (small only: (size: 1rem))),                                                    // 16px
+  // The other two lines of the same item: the date range beside the title, and
+  // the paragraph under it. `item-date` is the only 300 on the site, and it
+  // leaves its leading to the `p` reset the way the headings leave theirs to
+  // the heading reset -- it is one line and never wraps.
+  item-date:     (family: $lato,  size: 1.25rem,    font-weight: $lato-light,   font-style: italic,   // 20px
+                  at: (small only: (size: 1rem))),                                                    // 16px
+  item-detail:   (family: $lato,  size: 1.25rem,    font-weight: $lato-regular, line-height: 1.4,     // 20px
                   at: (small only: (size: 1rem))),                                                    // 16px
   // The achievement toast, whose two lines are the only type on the site set
   // at 1.2 outside a nav. Both carry their own leading: the card is two lines

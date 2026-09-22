@@ -289,16 +289,10 @@
       margin-top: -0.25em;
     }
     .date{
-      font-family: $lato;
-      font-size: 1em;
-      font-weight: 300;
-      font-style: italic;
+      @include type-style(product, item-date);
     }
     .description{
-      font-family: $lato;
-      font-size: 1em;
-      font-weight: $lato-regular;
-      line-height: 1.4;
+      @include type-style(product, item-detail);
     }
   }
 
