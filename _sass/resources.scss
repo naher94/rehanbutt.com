@@ -303,10 +303,7 @@ h1{
       @include type-style(product, eyebrow);
     }
     &.title{
-      font-family: $zilla;
-      font-weight: $zilla-bold;
-      font-size: 1.5rem;
-      line-height: 1em;
+      @include type-style(product, subsection-title);
       @include swipe-underline(semantic-color(text-bg),false);
     }
   }

@@ -252,8 +252,7 @@ article{
     margin-top: -6rem;
     z-index: 1;
     h2{
-      font-weight: $zilla-bold;
-      font-size: 1.6rem;
+      @include type-style(product, subsection-title);
       margin: 0;
       @include breakpoint(small only) {
         padding-inline: 0;

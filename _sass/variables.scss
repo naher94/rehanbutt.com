@@ -313,6 +313,11 @@ $product-type: (
   // whatever it is set at. Same rendering today, different behaviour later.
   section-intro: (family: $lato,  size: 1.5rem,     font-weight: $lato-regular, line-height: 1.2,     // 24px
                   at: (small only: (size: 1rem, line-height: 1.3))),                                  // 16px
+  // A heading a rank under `section-title`: a collection tile's title on the
+  // resources index, and the `Behind the Scenes` heading inside a project page.
+  // One size at every width, and its own leading -- both instances are one or
+  // two words, where the heading reset's 1.4 opens a gap under a single line.
+  subsection-title:(family: $zilla, size: 1.5rem,    font-weight: $zilla-bold,   line-height: 1),      // 24px
   body:          (family: $lato,  size: 1.25rem,    font-weight: $lato-regular,                       // 20px, inherits 1.5
                   at: (small only: (size: 1rem))),                                                    // 16px, == the root
   body-strong:   (family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.4),    // 20px
