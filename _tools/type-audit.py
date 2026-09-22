@@ -37,7 +37,7 @@ import pathlib
 import hashlib
 import re
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 
 from cascade import (CSS, DOM, HERE, ROOT, SITE, SKIP, SourceMap, compile_selector,
                      is_vendor, matches, parse_rules, specificity,
@@ -1010,6 +1010,15 @@ def build(out_path, limit=None):
 
     tree = CascadeTree()
     hidden_count = defaultdict(int)     # clipped elements, counted not inventoried
+    # The inventory view: one record per element's whole across-width profile,
+    # rather than one per width. A responsive style is one decision, and the
+    # per-width sheets report it as two cards that have to be reconciled by
+    # hand every time -- which is how the same `1em` on the about page came up
+    # as C27 and C28, C29 and C30, C31 and C32.
+    inventory = defaultdict(lambda: dict(pages=set(), tags=set(), classes=set(),
+                                         samples=[], uses=[], srcsets={},
+                                         fs=defaultdict(int), count=0,
+                                         renders=None))
     styles = defaultdict(lambda: dict(pages=set(), tags=set(),
                                       classes=set(), samples=[],
                                       decls=defaultdict(int),
@@ -1046,6 +1055,57 @@ def build(out_path, limit=None):
                     hidden_count[bp_name] += 1
                     continue
                 by_key[key_of(el)].append((bp_name, el))
+
+            # One element, one inventory record. The profile is the element's
+            # renderings paired with the widths they hold at, so two elements
+            # land together only when they agree at *every* width -- a style
+            # that differs on small alone is a different thing from one that
+            # does not.
+            if by_key:
+                # Sorted as text: a key mixes floats, strings and None
+                # (`line-height: normal`), which do not order against each
+                # other. The sort only has to be stable, not meaningful.
+                profile = tuple(sorted(((k, tuple(b for b, _ in v))
+                                        for k, v in by_key.items()),
+                                       key=repr))
+                inv = inventory[profile]
+                inv["count"] += 1
+                inv["pages"].add(rel)
+                if inv["renders"] is None:
+                    inv["renders"] = [(k, [b for b, _ in v])
+                                      for k, v in by_key.items()]
+                # The element as it resolves at the widest width, which is
+                # where its identity was stamped and where the declarations
+                # are the ones a desktop-first stylesheet actually wrote.
+                widest = next((el for k, v in by_key.items()
+                               for b, el in v if b == WIDEST),
+                              next(iter(by_key.values()))[0][1])
+                # This card's own font-size attribution, from its own
+                # elements. Reading it off the per-width style instead would
+                # pool in the entries of everything else that happens to render
+                # at the same size -- the metadata bar came back as `body`
+                # because 90 middle-dots share its card.
+                for _k, _v in by_key.items():
+                    for _b, _el in _v:
+                        for d in _el["decls"]:
+                            if d[0] == "font-size":
+                                inv["fs"][(d[5], d[1], d[2], d[3])] += 1
+                inv["tags"].add(widest["tag"])
+                if widest["classes"]:
+                    inv["classes"].add(widest["classes"])
+                if widest["sample"]:
+                    inv["samples"].append(widest["sample"])
+                    if len(inv["samples"]) > 5:
+                        inv["samples"].sort(key=len, reverse=True)
+                        del inv["samples"][5:]
+                if len(inv["uses"]) < USE_CAP:
+                    sig = tuple(widest["decls"])
+                    idx = inv["srcsets"].setdefault(sig, len(inv["srcsets"]))
+                    inv["uses"].append(dict(page=rel, line=widest["line"],
+                                            tag=widest["tag"],
+                                            classes=widest["classes"],
+                                            text=(widest["sample"] or "")[:70],
+                                            src=idx))
 
             for key, entries in by_key.items():
                 at = [b for b, _ in entries]
@@ -1207,12 +1267,99 @@ def build(out_path, limit=None):
     cascade_path.write_text(json.dumps(cascade, indent=1))
     data["_cascade_path"] = str(cascade_path)
     data["_tree_nodes"] = len(cascade["tree"])
+
+    # ---- the inventory ----------------------------------------------------
+    # The per-width sheets number their cards C1..Cn by element count. A card
+    # here usually covers two of them -- the desktop rendering and the small
+    # one -- so it carries the numbers rather than minting its own, and the
+    # panel prints them. A name that means the same thing in three tools is
+    # worth more than a tidy sequence.
+    card_no = {s["id"]: "C%d" % (i + 1) for i, s in enumerate(items)}
+    by_label = {d["name"]: d["label"] for d in distinct}
+    order = {n: i for i, (n, _) in enumerate(breakpoints)}
+
+    def render_of(key, widths):
+        family, size, weight, style, lh, spacing, transform, unread = key
+        sid = f"{family}|{size}|{weight}|{style}|{lh}|{spacing}|{transform}" \
+              + ("|?" if unread else "")
+        widths = sorted(widths, key=lambda w: order.get(w, 0))
+        return dict(family=family, size=size, weight=weight, style=style,
+                    line_height=lh, letter_spacing=spacing,
+                    text_transform=transform, size_unresolved=unread,
+                    on_scale=size in SCALE, style_id=sid,
+                    card=card_no.get(sid), widths=widths,
+                    label=by_label.get(widths[0], widths[0])
+                    if len(widths) == 1 else
+                    f"{widths[0]}\u2013{widths[-1]}")
+
+    cards = []
+    for profile, inv in inventory.items():
+        renders = sorted((render_of(k, w) for k, w in inv["renders"]),
+                         key=lambda r: -max(order.get(x, 0) for x in r["widths"]))
+        # A card that passes through two entries says so: the compact nav
+        # renders `nav-link` at the widths it is hidden at and `nav-link-sm`
+        # where it is not, and that is worth seeing rather than picking one.
+        entries = Counter()
+        for (entry, _v, _f, _l), n in inv["fs"].items():
+            if entry:
+                entries[entry] += n
+        # Gated on the size itself coming from the mixin. `token_for` can name
+        # an entry from any mixin-emitted property, so a card whose family and
+        # weight come from `body-sm-strong` and whose size is a hand-written
+        # `2rem` would read as mapped -- and this view exists to answer which
+        # sizes are still decided by hand.
+        sized = any(f and from_mixin(f, l, "font-size")
+                    for (_e, _v, f, l) in inv["fs"])
+        if not entries and sized:
+            rendered = {"letter-spacing": renders[0]["letter_spacing"],
+                        "text-transform": renders[0]["text_transform"],
+                        "font-style": renders[0]["style"]}
+            for key in inv["srcsets"]:
+                tok = token_for(list(key), rendered)
+                if tok:
+                    entries[tok] += 1
+        entries = dict(entries)
+        # The register is the map's own word for the kind of type this is, and
+        # a card reaches it through its entry. Silence where there is none: an
+        # unmapped card is not "product", it is undecided.
+        regs = {e.split("/")[0] for e in entries}
+        cards.append(dict(
+            id=hashlib.md5(repr(profile).encode()).hexdigest()[:10],
+            count=inv["count"], renders=renders,
+            responsive=len(renders) > 1,
+            entries=entries,
+            entry=sorted(entries, key=lambda e: -entries[e])[0] if entries else None,
+            register=regs.pop() if len(regs) == 1 else None,
+            pages=sorted(inv["pages"])[:40], page_count=len(inv["pages"]),
+            tags=sorted(inv["tags"]), classes=sorted(inv["classes"])[:12],
+            samples=inv["samples"],
+            uses=sorted(inv["uses"], key=lambda u: (u["page"], u["line"])),
+            sources=[[dict(prop=d[0], value=d[1], file=d[2], line=d[3],
+                           via=authored_as(d[2], d[3], d[0], d[1],
+                                           d[5] or (next(iter(entries), None)
+                                                    if len(entries) == 1 else None)))
+                      for d in key]
+                     for key, _ in sorted(inv["srcsets"].items(),
+                                          key=lambda kv: kv[1])],
+        ))
+    cards.sort(key=lambda c: -c["count"])
+
+    inv_path = out_path.with_name("type-inventory.json")
+    inv_path.write_text(json.dumps(dict(
+        totals=dict(data["totals"], cards=len(cards),
+                    mapped=sum(c["count"] for c in cards if c["entry"]),
+                    unmapped=sum(c["count"] for c in cards if not c["entry"]),
+                    responsive_cards=sum(1 for c in cards if c["responsive"])),
+        cards=cards), indent=1))
+    data["_inventory_path"] = str(inv_path)
+    data["_inventory_cards"] = len(cards)
     return data
 
 
 TEMPLATE = HERE / "type-atlas.template.html"
 SPECIMEN_TEMPLATE = HERE / "type-specimens.template.html"
 CASCADE_TEMPLATE = HERE / "type-cascade.template.html"
+INVENTORY_TEMPLATE = HERE / "type-inventory.template.html"
 
 
 def build_html(json_path, html_path, template=None):
@@ -1233,6 +1380,7 @@ if __name__ == "__main__":
     ap.add_argument("--out", default=str(HERE / "type-audit.json"))
     ap.add_argument("--html", default=str(HERE / "type-atlas.html"))
     ap.add_argument("--specimens", default=str(HERE / "type-specimens.html"))
+    ap.add_argument("--inventory", default=str(HERE / "type-inventory.html"))
     ap.add_argument("--cascade", default=str(HERE / "type-cascade.html"))
     ap.add_argument("--no-html", action="store_true")
     ap.add_argument("--pages", type=int, default=None,
@@ -1265,7 +1413,8 @@ if __name__ == "__main__":
         for html, template, src in (
                 (args.html, TEMPLATE, args.out),
                 (args.specimens, SPECIMEN_TEMPLATE, args.out),
-                (args.cascade, CASCADE_TEMPLATE, d["_cascade_path"])):
+                (args.cascade, CASCADE_TEMPLATE, d["_cascade_path"]),
+                (args.inventory, INVENTORY_TEMPLATE, d["_inventory_path"])):
             made = build_html(pathlib.Path(src), pathlib.Path(html), template)
             if made:
                 print(f"wrote {made}  ({made.stat().st_size:,} bytes)")

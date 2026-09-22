@@ -1,0 +1,385 @@
+<meta charset="utf-8">
+<title>Type Inventory</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@300;400;500;700&family=Lato:wght@100;300;400;700;900&family=Caveat&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#F6F7F8; --surface:#FFFFFF; --surface-2:#EEF0F2;
+    --ink:#1F2937; --ink-muted:#626973; --ink-faint:#8B919B;
+    --rule:#DFE3E7; --rule-strong:#C6CCD3;
+    --accent:#12ABC4; --accent-deep:#0B7F92;
+    --flag-high:#BA3D54; --flag-med:#B4751C; --flag-ok:#2F7D5B;
+    --chip:#E7EAED;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#151B24; --surface:#1C232D; --surface-2:#232B36;
+      --ink:#EDEFF2; --ink-muted:#A3AAB4; --ink-faint:#7C838D;
+      --rule:#2D3742; --rule-strong:#3D4854;
+      --accent:#3FC4DA; --accent-deep:#7FDCEB;
+      --flag-high:#E08196; --flag-med:#D9A85C; --flag-ok:#6BBF95;
+      --chip:#2A3441;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#151B24; --surface:#1C232D; --surface-2:#232B36;
+    --ink:#EDEFF2; --ink-muted:#A3AAB4; --ink-faint:#7C838D;
+    --rule:#2D3742; --rule-strong:#3D4854;
+    --accent:#3FC4DA; --accent-deep:#7FDCEB;
+    --flag-high:#E08196; --flag-med:#D9A85C; --flag-ok:#6BBF95;
+    --chip:#2A3441;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:"Lato",-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:16px; line-height:1.55; margin:0; padding:0 24px 72px;
+  }
+  h1{font-family:"Zilla Slab",serif;font-size:34px;margin:28px 0 4px;font-weight:700}
+  .lede{color:var(--ink-muted);max-width:74ch;margin:0 0 18px}
+  .lede code{font-family:"JetBrains Mono",monospace;font-size:12.5px;
+    background:var(--surface-2);padding:1px 5px;border-radius:4px}
+
+  /* ---- totals ------------------------------------------------------- */
+  .totals{display:flex;gap:26px;flex-wrap:wrap;padding:14px 0 16px;
+    border-block:1px solid var(--rule);margin-bottom:18px}
+  .tot b{display:block;font-family:"Zilla Slab",serif;font-size:26px;line-height:1.1}
+  .tot span{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint)}
+
+  /* ---- filter ------------------------------------------------------- */
+  .bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+  .bar .lbl{font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-faint);margin-right:2px}
+  .chip{font-family:"Lato",sans-serif;font-size:13.5px;font-weight:700;
+    background:var(--surface);border:1px solid var(--rule-strong);color:var(--ink);
+    border-radius:999px;padding:5px 13px;cursor:pointer}
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+  .chip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .chip .n{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:400;
+    opacity:.65;margin-left:6px}
+
+  /* ---- layout ------------------------------------------------------- */
+  .cols{display:grid;grid-template-columns:minmax(0,1fr) 430px;gap:22px;align-items:start}
+  @media (max-width:1100px){ .cols{grid-template-columns:minmax(0,1fr)} .panel{position:static} }
+
+  /* ---- rows --------------------------------------------------------- */
+  .rows{display:flex;flex-direction:column;gap:6px}
+  .row{display:grid;grid-template-columns:minmax(120px,210px) minmax(0,1fr) auto;
+    gap:16px;align-items:center;width:100%;text-align:left;
+    background:var(--surface);border:1px solid var(--rule);border-radius:10px;
+    padding:12px 16px;cursor:pointer;color:inherit;font:inherit}
+  .row:hover{border-color:var(--rule-strong)}
+  .row[aria-pressed="true"]{border-color:var(--accent);
+    box-shadow:0 0 0 1px var(--accent) inset}
+  .spec{white-space:nowrap;overflow:hidden;line-height:1.15;color:var(--ink)}
+  .meta{min-width:0}
+  .sizes{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:500}
+  .sizes .at{color:var(--ink-faint);font-weight:400}
+  .sizes .unread{color:var(--flag-med)}
+  .sub{font-size:12.5px;color:var(--ink-muted);white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis}
+  .count{font-family:"JetBrains Mono",monospace;font-size:15px;text-align:right}
+  .count small{display:block;font-size:10px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--ink-faint)}
+  .tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+  .badge{font-family:"JetBrains Mono",monospace;font-size:10.5px;border-radius:5px;
+    padding:2px 7px;white-space:nowrap}
+  .b-product{background:color-mix(in srgb,var(--accent) 20%,transparent);color:var(--accent-deep)}
+  .b-expressive{background:color-mix(in srgb,var(--flag-ok) 20%,transparent);color:var(--flag-ok)}
+  .b-none{background:var(--chip);color:var(--ink-faint)}
+  .b-tag{background:transparent;border:1px dashed var(--rule-strong);color:var(--ink-muted)}
+  .b-cid{background:var(--surface-2);color:var(--ink-faint)}
+  .b-warn{background:color-mix(in srgb,var(--flag-med) 20%,transparent);color:var(--flag-med)}
+
+  /* ---- panel -------------------------------------------------------- */
+  .panel{position:sticky;top:16px;background:var(--surface);border:1px solid var(--rule);
+    border-radius:10px;padding:16px 18px;max-height:calc(100vh - 32px);overflow:auto}
+  .panel h2{font-family:"Zilla Slab",serif;font-size:19px;margin:0 0 2px;font-weight:700}
+  .panel .empty{color:var(--ink-faint);margin:0}
+  .sec{margin-top:16px;padding-top:12px;border-top:1px solid var(--rule)}
+  .sec h3{font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-faint);margin:0 0 7px;font-weight:700}
+  .kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 12px;font-size:13px}
+  .kv dt{color:var(--ink-faint)}
+  .kv dd{margin:0;font-family:"JetBrains Mono",monospace;font-size:12.5px;
+    overflow-wrap:anywhere}
+  .rt{width:100%;border-collapse:collapse;font-size:12.5px;table-layout:auto}
+  .rt th{font-size:10px;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:700;text-align:left;padding:0 10px 4px 0;
+    border-bottom:1px solid var(--rule);white-space:nowrap}
+  .rt tbody th{font-size:11px;letter-spacing:0;text-transform:none;font-weight:400;
+    color:var(--ink-muted);border-bottom:0;padding:4px 12px 4px 0}
+  .rt td{font-family:"JetBrains Mono",monospace;font-size:12px;
+    padding:4px 10px 4px 0;white-space:nowrap}
+  .srcline{font-size:12px;margin-bottom:6px;font-family:"JetBrains Mono",monospace}
+  .srcline b{font-weight:500}
+  .via{color:var(--ink-faint);font-weight:400}
+  .loc{color:var(--ink-faint);font-size:11px}
+  .uses{font-size:12.5px}
+  .uses details{margin-bottom:3px}
+  .uses summary{cursor:pointer;list-style:none;display:grid;
+    grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:3px 0;
+    border-bottom:1px dotted var(--rule)}
+  .uses summary::-webkit-details-marker{display:none}
+  .uses .txt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .uses .el{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--ink-faint);
+    white-space:nowrap}
+  .pagegrp{margin-bottom:9px}
+  .pagegrp > b{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;
+    color:var(--ink-muted);display:block;margin-bottom:2px}
+  .tagbtns{display:flex;gap:6px;flex-wrap:wrap}
+  .note{font-size:12px;color:var(--ink-faint);margin:8px 0 0}
+</style>
+
+<h1>Type Inventory</h1>
+<p class="lede">One row per distinct thing the site renders, <b>combined across every
+width</b> &mdash; a style that steps down on small is one row, not two. Sorted by how many
+elements wear it. Click a row for its atlas numbers, what wrote it, and where it lands.</p>
+
+<div class="totals" id="totals"></div>
+<div class="bar" id="bar"></div>
+
+<div class="cols">
+  <div class="rows" id="rows"></div>
+  <div class="panel" id="panel"><p class="empty">Pick a row.</p></div>
+</div>
+
+<script>
+const DATA = __DATA__;
+const CARDS = DATA.cards, T = DATA.totals;
+
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g,
+  c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+const px  = n => (Math.round(n * 100) / 100) + "px";
+const short = f => String(f || "").replace(/^_sass\//, "").replace(/^css\//, "");
+
+/* A specimen is drawn at its real size, which a 70px card cannot be. Capped
+   for the row and stated in the numbers beside it, so the cap never reads as
+   the size. */
+const MAX_GLYPH = 40;
+const SPECIMEN = "AaBb";
+const famStack = f => f === "Zilla Slab" ? '"Zilla Slab",serif'
+  : f === "Caveat" ? '"Caveat",cursive'
+  : f === "Consolas" ? '"JetBrains Mono",monospace'
+  : '"Lato",sans-serif';
+
+/* Your own note about where an unmapped row should end up. Keyed by the card
+   id, which is derived from the values it renders -- so if the type changes,
+   the id changes and the tag stops matching rather than quietly following a
+   value somewhere it was never meant to go. */
+const TAG_STORE = "rb-type-inventory-tags-v1";
+const loadTags = () => { try { return JSON.parse(localStorage.getItem(TAG_STORE) || "{}") || {}; }
+                         catch (e) { return {}; } };
+let TAGS = loadTags();
+function setTag(id, reg){
+  if (reg) TAGS[id] = reg; else delete TAGS[id];
+  try { localStorage.setItem(TAG_STORE, JSON.stringify(TAGS)); } catch (e) {}
+}
+
+const state = { filter: "all", sel: null };
+
+/* ---- the size chain ------------------------------------------------------
+   Written widest-first, the way the stylesheet is: a desktop base with a
+   `small only` correction. `~` marks a size the audit could not read -- the
+   number beside it is the parent's, not the element's. */
+function chain(c){
+  return c.renders.map(r =>
+    `<span class="${r.size_unresolved ? "unread" : ""}">${
+      r.size_unresolved ? "~" : ""}${px(r.size)}</span>` +
+    (c.renders.length > 1 ? ` <span class="at">${esc(r.label)}</span>` : "")
+  ).join(' <span class="at">&rarr;</span> ');
+}
+
+function registerOf(c){
+  const tag = TAGS[c.id];
+  if (c.register) return { cls: "b-" + c.register, txt: c.entry.split("/")[1] };
+  if (Object.keys(c.entries).length > 1)
+    return { cls: "b-none", txt: Object.keys(c.entries).length + " entries" };
+  if (tag) return { cls: "b-tag", txt: "→ " + tag };
+  return { cls: "b-none", txt: "unmapped" };
+}
+
+const matches = c => state.filter === "all" ? true
+  : state.filter === "unmapped" ? !c.entry
+  : c.register === state.filter;
+
+function drawTotals(){
+  const el = document.getElementById("totals");
+  const rows = [
+    [T.cards, "rows"],
+    [T.elements.toLocaleString(), "elements"],
+    [T.responsive_cards, "step by width"],
+    [T.mapped.toLocaleString(), "size from the map"],
+    [T.unmapped.toLocaleString(), "size by hand"],
+    [T.pages, "pages"],
+  ];
+  if (T.unresolved_elements) rows.push([T.unresolved_elements, "size not readable"]);
+  el.innerHTML = rows.map(([n, l]) =>
+    `<div class="tot"><b>${n}</b><span>${l}</span></div>`).join("");
+}
+
+function drawBar(){
+  const counts = {
+    all: CARDS.length,
+    product: CARDS.filter(c => c.register === "product").length,
+    expressive: CARDS.filter(c => c.register === "expressive").length,
+    unmapped: CARDS.filter(c => !c.entry).length,
+  };
+  document.getElementById("bar").innerHTML =
+    `<span class="lbl">Register</span>` +
+    ["all", "product", "expressive", "unmapped"].map(k =>
+      `<button class="chip" data-f="${k}" aria-pressed="${state.filter === k}">${
+        k === "all" ? "Everything" : k}<span class="n">${counts[k]}</span></button>`).join("");
+  document.querySelectorAll("#bar .chip").forEach(b =>
+    b.onclick = () => { state.filter = b.dataset.f; draw(); });
+}
+
+function drawRows(){
+  const host = document.getElementById("rows");
+  const list = CARDS.filter(matches);
+  if (!list.length) { host.innerHTML = `<p class="note">Nothing under this filter.</p>`; return; }
+  host.innerHTML = list.map(c => {
+    const r = c.renders[0], reg = registerOf(c);
+    return `<button class="row" data-id="${c.id}"
+        aria-pressed="${state.sel === c.id}">
+      <span class="spec" style="font-size:${Math.min(r.size, MAX_GLYPH)}px;
+        font-family:${famStack(r.family)};font-weight:${r.weight};
+        font-style:${r.style};letter-spacing:${esc(r.letter_spacing)};
+        text-transform:${esc(r.text_transform)}">${SPECIMEN}</span>
+      <span class="meta">
+        <span class="sizes">${chain(c)}</span>
+        <span class="sub">${esc(r.family)} &middot; ${esc(r.weight)}${
+          c.classes.length ? " &middot; " + esc(c.classes.slice(0, 2).join(", ")) : ""}</span>
+        <span class="tags">
+          <span class="badge ${reg.cls}">${esc(reg.txt)}</span>
+          ${c.renders.map(x => x.card
+            ? `<span class="badge b-cid">${esc(x.card)}</span>` : "").join("")}
+          ${c.renders.some(x => x.size_unresolved)
+            ? `<span class="badge b-warn">size not readable</span>` : ""}
+        </span>
+      </span>
+      <span class="count">${c.count.toLocaleString()}<small>elements</small></span>
+    </button>`;
+  }).join("");
+  host.querySelectorAll(".row").forEach(b =>
+    b.onclick = () => { state.sel = state.sel === b.dataset.id ? null : b.dataset.id; draw(); });
+}
+
+/* Occurrences grouped by page, with the declarations that produced them folded
+   underneath. The list is capped per card and says so, so a truncated list
+   never reads as the whole picture. */
+function usesHtml(c){
+  const byPage = new Map();
+  c.uses.forEach(u => {
+    if (!byPage.has(u.page)) byPage.set(u.page, []);
+    byPage.get(u.page).push(u);
+  });
+  const groups = [...byPage.entries()].map(([page, us]) =>
+    `<div class="pagegrp"><b>${esc(page)}</b>${us.map(u => {
+      const sig = esc(u.tag) + (u.classes ? "." + esc(u.classes).split(" ").join(".") : "");
+      const src = (c.sources || [])[u.src] || [];
+      const head = `<span class="txt">${esc(u.text) ||
+          `<span style="color:var(--ink-faint)">(no text)</span>`}</span>
+        <span class="el">:${u.line} ${sig}</span>`;
+      if (!src.length) return `<div class="uses">${head}</div>`;
+      return `<details><summary>${head}</summary>${src.map(d =>
+        `<div class="srcline">${esc(d.prop)}: <b>${esc(d.value)}</b>${
+          d.via ? ` <span class="via">(${esc(d.via)})</span>` : ""}<br>
+        <span class="loc">${esc(short(d.file))}${d.line ? ":" + d.line : ""}</span></div>`
+      ).join("")}</details>`;
+    }).join("")}</div>`).join("");
+  const capped = c.count > c.uses.length;
+  return `<div class="uses">${groups}</div>` + (capped
+    ? `<p class="note">Showing ${c.uses.length} of ${c.count.toLocaleString()} &mdash;
+       a sample, enough to go and look.</p>` : "");
+}
+
+/* ---- renders as ----------------------------------------------------------
+   Column headed rather than slash-packed: `10px / 700 / 16px ls:.3em uppercase`
+   reads as one string until you already know the order, and a row with two
+   renderings makes you parse it twice.
+
+   The optional four are columns only when something in this card sets them, so
+   a plain body style shows three columns rather than seven of mostly nothing.
+   An em dash is a property this rendering leaves alone -- inherited, not set
+   to the default, which is a difference the map's entries lean on. */
+const COLS = [
+  { k: "size",            h: "Size",     get: x => (x.size_unresolved ? "~" : "") + px(x.size) },
+  { k: "weight",          h: "Weight",   get: x => x.weight },
+  { k: "line_height",     h: "Leading",  get: x => x.line_height == null ? "—"
+                                                 : x.line_height === "normal" ? "normal"
+                                                 : px(x.line_height),
+    opt: true, set: x => x.line_height != null && x.line_height !== "normal" },
+  { k: "letter_spacing",  h: "Tracking", get: x => x.letter_spacing === "normal"
+                                                 ? "—" : x.letter_spacing,
+    opt: true, set: x => x.letter_spacing !== "normal" },
+  { k: "text_transform",  h: "Case",     get: x => x.text_transform === "none"
+                                                 ? "—" : x.text_transform,
+    opt: true, set: x => x.text_transform !== "none" },
+  { k: "style",           h: "Slant",    get: x => x.style === "normal" ? "—" : x.style,
+    opt: true, set: x => x.style !== "normal" },
+];
+
+function rendersTable(c){
+  const cols = COLS.filter(col => !col.opt || c.renders.some(col.set));
+  const width = c.renders.length > 1;
+  return `<table class="rt">
+    <thead><tr>${width ? "<th>Width</th>" : ""}${
+      cols.map(col => `<th>${col.h}</th>`).join("")}</tr></thead>
+    <tbody>${c.renders.map(x => `<tr>${
+      width ? `<th scope="row">${esc(x.label)}</th>` : ""}${
+      cols.map(col => `<td>${esc(col.get(x))}</td>`).join("")}</tr>`).join("")}
+    </tbody></table>`;
+}
+
+function drawPanel(){
+  const host = document.getElementById("panel");
+  const c = CARDS.find(x => x.id === state.sel);
+  if (!c) { host.innerHTML = `<p class="empty">Pick a row.</p>`; return; }
+  const r = c.renders[0];
+  const entries = Object.keys(c.entries);
+  host.innerHTML = `
+    <h2>${esc(r.family)} ${px(r.size)} / ${esc(r.weight)}</h2>
+    <div class="tags">
+      ${c.renders.map(x => x.card
+        ? `<span class="badge b-cid">${esc(x.card)}${
+            c.renders.length > 1 ? " &middot; " + esc(x.label) : ""}</span>` : "").join("")}
+    </div>
+
+    <div class="sec">
+      <h3>Renders as</h3>
+      ${rendersTable(c)}
+      ${c.renders.some(x => x.size_unresolved) ? `<p class="note">A
+        <code>calc()</code> or <code>var()</code> the audit cannot evaluate: the size
+        shown is the parent's, not this element's. Measure it in a browser before
+        acting on it.</p>` : ""}
+    </div>
+
+    <div class="sec">
+      <h3>Map</h3>
+      ${entries.length
+        ? `<div class="tags">${entries.map(e =>
+             `<span class="badge b-${esc(e.split("/")[0])}">${esc(e.split("/")[1])}</span>`
+           ).join("")}</div>${
+           entries.length > 1 ? `<p class="note">Two entries reach this row &mdash;
+             it renders one at some widths and the other where it is hidden.</p>` : ""}`
+        : `<p class="note">Its size is written by hand. Where should it land?</p>
+           <div class="tagbtns">
+             ${["product", "expressive", ""].map(reg =>
+               `<button class="chip" data-tag="${reg}"
+                  aria-pressed="${(TAGS[c.id] || "") === reg}">${
+                  reg || "clear"}</button>`).join("")}
+           </div>`}
+    </div>
+
+    <div class="sec">
+      <h3>Where it lands &middot; ${c.page_count} page${c.page_count === 1 ? "" : "s"}</h3>
+      ${usesHtml(c)}
+    </div>`;
+  host.querySelectorAll("[data-tag]").forEach(b =>
+    b.onclick = () => { setTag(c.id, b.dataset.tag); draw(); });
+}
+
+function draw(){ drawBar(); drawRows(); drawPanel(); }
+drawTotals();
+draw();
+</script>
