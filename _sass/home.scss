@@ -237,15 +237,10 @@ $home-section-vertical-spacing-mobile: 4rem;
     padding-right: 0;
   }
   .section-description{
+    @include type-style(product, section-intro);
     padding: 0;
     margin: 0;
-    font-size: 1.5rem;
-    line-height: 1.8rem;
     text-wrap: pretty;
-    @include breakpoint(small only){
-      font-size: 1em;
-      line-height: 1.3;
-    }
     a{
       border-radius: 8px;
       padding: 0 0.2em;

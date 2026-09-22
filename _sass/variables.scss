@@ -307,6 +307,12 @@ $product-type: (
   // this one states its own at both widths rather than inheriting either.
   section-title-lg:(family: $zilla, size: 4.375rem,  font-weight: $zilla-bold,  line-height: normal,   // 70px
                   at: (small only: (size: 2.5rem, line-height: 1))),                                  // 40px
+  // The standfirst under each of those headings. Its leading is written as a
+  // ratio rather than the `1.8rem` the rule carried: a length would hand every
+  // link inside the paragraph a fixed 28.8px instead of one proportional to
+  // whatever it is set at. Same rendering today, different behaviour later.
+  section-intro: (family: $lato,  size: 1.5rem,     font-weight: $lato-regular, line-height: 1.2,     // 24px
+                  at: (small only: (size: 1rem, line-height: 1.3))),                                  // 16px
   body:          (family: $lato,  size: 1.25rem,    font-weight: $lato-regular,                       // 20px, inherits 1.5
                   at: (small only: (size: 1rem))),                                                    // 16px, == the root
   body-strong:   (family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.4),    // 20px
