@@ -141,6 +141,8 @@
   .b-tag{background:transparent;border:1px dashed var(--rule-strong);
     color:var(--ink-muted);padding:1px 6px}
   .b-cid{background:var(--surface-2);color:var(--ink-faint)}
+  /* Firmer than the atlas numbers beside it: this is the name that lasts. */
+  .b-rid{background:var(--surface-2);color:var(--ink-muted);font-weight:500}
   .b-warn{background:color-mix(in srgb,var(--flag-med) 20%,transparent);color:var(--flag-med)}
 
   /* ---- panel -------------------------------------------------------- */
@@ -321,6 +323,15 @@ const BANDS = DATA.totals.distinct_breakpoints.map(b => b.name);
    the family and weight on a row -- so the badges sort a copy rather than the
    array. Everything else on the page reads small to large, and the numbers
    were the one thing running the other way. */
+/* A row's own name, as opposed to its position. The atlas numbers beside it
+   are assigned by rank -- sorted by element count -- so any change in counts
+   renumbers everything below it, and `C42` means a different row after the
+   next audit run. This is the first four characters of the row's id, which is
+   a digest of what it renders at every width: stable across runs, and changing
+   only when the row's type changes, at which point it genuinely is a new row.
+   It is also what the URL carries as `sel`, so the badge and the link agree. */
+const rowId = c => "R\u00b7" + c.id.slice(0, 4);
+
 const rendersSmallFirst = c => c.renders.slice().sort(function (a, b) {
   return BANDS.findIndex(function (x) { return a.widths.includes(x); })
        - BANDS.findIndex(function (x) { return b.widths.includes(x); });
@@ -478,6 +489,7 @@ function rowHtml(c){
       <span class="tags">
         ${tagBadges(c).map(b =>
           `<span class="badge ${b.cls}">${esc(b.txt)}</span>`).join("")}
+        <span class="badge b-rid">${esc(rowId(c))}</span>
         ${rendersSmallFirst(c).map(x => x.card
           ? `<span class="badge b-cid">${esc(x.card)}</span>` : "").join("")}
         ${c.renders.some(x => x.size_unresolved)
@@ -628,6 +640,7 @@ function drawPanel(){
     <div class="tags">
       ${tagBadges(c).map(b =>
         `<span class="badge ${b.cls}">${esc(b.txt)}</span>`).join("")}
+      <span class="badge b-rid">${esc(rowId(c))}</span>
       ${rendersSmallFirst(c).map(x => x.card
         ? `<span class="badge b-cid">${esc(x.card)}${
             c.renders.length > 1 ? " &middot; " + esc(x.label) : ""}</span>` : "").join("")}
