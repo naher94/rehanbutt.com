@@ -327,6 +327,16 @@ $product-type: (
                   at: (small only: (size: 1.5rem))),                                                  // 24px
   footer-title:  (family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.6,     // 20px
                   at: (small only: (size: 1.5rem, font-weight: $lato-black))),                        // 24px
+  // The three CV lists -- work, education, speaking -- which are the same two
+  // ranks wearing different heading levels. `item-org` is the organisation a
+  // group of items sits under; `item-title` is what was actually done, the
+  // role or the talk. Education names an organisation and so takes the first,
+  // though its markup calls it an h3 the way work-item calls the second one an
+  // h4. Both leave their leading to the heading reset's 1.4.
+  item-org:      (family: $lato,  size: 1.75rem,    font-weight: $lato-black,                         // 28px
+                  at: (small only: (size: 1.4rem))),                                                  // 22.4px
+  item-title:    (family: $lato,  size: 1.25rem,    font-weight: $lato-black,                         // 20px
+                  at: (small only: (size: 1rem))),                                                    // 16px
   // The achievement toast, whose two lines are the only type on the site set
   // at 1.2 outside a nav. Both carry their own leading: the card is two lines
   // in a fixed box, and the global 1.5 would push it open.

@@ -300,6 +300,11 @@ article{
     .icon{
       align-items: center;
       p{
+        // Sizes the 🎬 glyph, which renders in the system emoji font -- the
+        // family and weight it inherits from `body-sm-strong` above never
+        // reach it. A literal rather than a map entry: the map records type
+        // decisions, and an entry here would put a Lato specimen in the atlas
+        // for something that is not set in Lato.
         font-size: 2rem;
         margin-right: 1rem;
       }
