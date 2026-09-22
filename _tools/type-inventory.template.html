@@ -681,12 +681,55 @@ function drawPanel(){
     b.onclick = () => { state.band = b.dataset.band; drawPanel(); });
 }
 
-function draw(){ drawBar(); drawRows(); drawPanel(); }
+/* ---- the url ------------------------------------------------------------
+   Filter, sort, grouping and the open row live in the hash, so a refresh lands
+   where you left off and a link carries the view with it -- `#filter=unmapped
+   &sort=size` is a sentence about what you were looking at.
+
+   Defaults are omitted rather than written out, so an untouched page keeps a
+   clean URL and only what you changed shows up.
+
+   `replaceState` rather than `push`: a filter is a view of one page, not a
+   place, and pushing would bury the way back under every chip you pressed. */
+const VALID = {
+  filter: ["all", "product", "expressive", "unmapped"],
+  sort: ["count", "size"],
+  group: ["none", "family"]
+};
+const DEFAULTS = { filter: "all", sort: "count", group: "none" };
+
+function readUrl(){
+  const p = new URLSearchParams(location.hash.replace(/^#/, ""));
+  Object.keys(VALID).forEach(function (k) {
+    const v = p.get(k);
+    if (VALID[k].indexOf(v) !== -1) state[k] = v;
+  });
+  const sel = p.get("sel");
+  /* A card id is derived from what it renders, so an id from an older run
+     stops matching rather than opening the wrong row. Falling back to the
+     first row is the same answer as arriving with no selection at all. */
+  state.sel = CARDS.some(function (c) { return c.id === sel; }) ? sel : null;
+}
+
+function writeUrl(){
+  const p = new URLSearchParams();
+  Object.keys(DEFAULTS).forEach(function (k) {
+    if (state[k] !== DEFAULTS[k]) p.set(k, state[k]);
+  });
+  if (state.sel) p.set("sel", state.sel);
+  const q = p.toString();
+  const url = location.pathname + location.search + (q ? "#" + q : "#");
+  try { history.replaceState(null, "", url); } catch (e) { location.hash = q; }
+}
+
+function draw(){ drawBar(); drawRows(); drawPanel(); writeUrl(); }
+
 drawTotals();
+readUrl();
 /* Open on the first row rather than on an empty panel. The panel is a third of
    the page, and `Pick a row.` is a worse thing to put there than the row the
    sort has just argued is the most worth looking at. */
-state.sel = (visible()[0] || {}).id || null;
+if (!state.sel) state.sel = (visible()[0] || {}).id || null;
 draw();
 
 /* ---- the splitter --------------------------------------------------------
