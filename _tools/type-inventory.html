@@ -48,6 +48,7 @@
   .bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
   .bar .lbl{font-size:11px;letter-spacing:.09em;text-transform:uppercase;
     color:var(--ink-faint);margin-right:2px}
+  .bar .sep{width:1px;align-self:stretch;background:var(--rule);margin:0 8px}
   .chip{font-family:"Lato",sans-serif;font-size:13.5px;font-weight:700;
     background:var(--surface);border:1px solid var(--rule-strong);color:var(--ink);
     border-radius:999px;padding:5px 13px;cursor:pointer}
@@ -79,7 +80,7 @@
   /* ---- rows --------------------------------------------------------- */
   .rows{display:flex;flex-direction:column;gap:6px}
   .row{display:grid;
-    grid-template-columns:minmax(120px,210px) minmax(190px,1fr) 250px auto;
+    grid-template-columns:minmax(120px,270px) minmax(190px,1fr) 250px auto;
     gap:16px;align-items:center;width:100%;text-align:left;
     background:var(--surface);border:1px solid var(--rule);border-radius:10px;
     padding:12px 16px;cursor:pointer;color:inherit;font:inherit}
@@ -126,7 +127,12 @@
   .b-reg-product{background:var(--ink);color:var(--ground)}
   .b-reg-expressive{background:var(--flag-ok);color:var(--ground)}
   .b-none{background:var(--chip);color:var(--ink-faint)}
-  .b-tag{background:transparent;border:1px dashed var(--rule-strong);color:var(--ink-muted)}
+  /* Not read out of the code: either your note about where a style should
+     land, or the absence of any decision at all. The dashed border carries
+     that; a solid one would claim it as a fact. The 1px border is taken out of
+     the padding so it sits level with the filled badges beside it. */
+  .b-tag{background:transparent;border:1px dashed var(--rule-strong);
+    color:var(--ink-muted);padding:1px 6px}
   .b-cid{background:var(--surface-2);color:var(--ink-faint)}
   .b-warn{background:color-mix(in srgb,var(--flag-med) 20%,transparent);color:var(--flag-med)}
 
@@ -32538,10 +32544,11 @@ const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g,
 const px  = n => (Math.round(n * 100) / 100) + "px";
 const short = f => String(f || "").replace(/^_sass\//, "").replace(/^css\//, "");
 
-/* A specimen is drawn at its real size, which a 70px card cannot be. Capped
-   for the row and stated in the numbers beside it, so the cap never reads as
-   the size. */
-const MAX_GLYPH = 40;
+/* Drawn at its real size, uncapped: 11 of the 73 rows are over 40px, and a
+   capped specimen is a picture of the cap rather than of the type. Rows are
+   as tall as their specimen needs, which is what a specimen sheet is for. The
+   size shown is the base -- the widest band -- matching the value in ink
+   beside it. */
 const SPECIMEN = "AaBb";
 const famStack = f => f === "Zilla Slab" ? '"Zilla Slab",serif'
   : f === "Caveat" ? '"Caveat",cursive'
@@ -32564,7 +32571,7 @@ function setTag(id, reg){
 /* `band` is which width's declarations the occurrence list expands onto. Kept
    across selections rather than reset per card, so you can hold it on `small`
    and walk down the list looking at what each one does there. */
-const state = { filter: "all", sel: null, band: null };
+const state = { filter: "all", sort: "count", sel: null, band: null };
 
 /* ---- the three bands -----------------------------------------------------
    Every row shows all three, small on the left, so a column can be read down
@@ -32601,11 +32608,16 @@ function bandsHtml(c){
   }).join("")}</span>`;
 }
 
-/* Two badges, not one. The register was carried by the badge's colour alone,
-   which needs a legend the page does not have; the name of the entry and the
-   register it belongs to are different facts and each gets its own tag. The
-   register is the coloured one -- it is the category -- and the entry name is
-   neutral, like the atlas numbers beside it, because it is data. */
+/* One badge for the state -- `product`, `expressive` or `unmapped` -- in two
+   styles that say where the answer came from. Solid is read out of the code:
+   the stylesheet includes an entry and the audit resolved it. Dashed is yours,
+   chosen in the panel, and so is a proposal rather than a finding; an unmapped
+   row with no tag is dashed too, because "nothing has decided this yet" is the
+   same kind of statement. A tagged row does not also say `unmapped` -- one
+   badge answers the question, and two answered it twice.
+
+   The entry name follows as its own badge, in the accent, because the name is
+   data rather than a category. */
 function tagBadges(c){
   const out = [];
   const entries = Object.keys(c.entries);
@@ -32614,12 +32626,11 @@ function tagBadges(c){
 
   if (regs.length === 1) out.push({ cls: "b-reg-" + regs[0], txt: regs[0] });
   else if (regs.length > 1) out.push({ cls: "b-none", txt: regs.join(" + ") });
-  else out.push({ cls: "b-none", txt: "unmapped" });
+  else out.push({ cls: "b-tag", txt: tag || "unmapped" });
 
   if (entries.length === 1) out.push({ cls: "b-entry", txt: entries[0].split("/")[1] });
   else if (entries.length > 1)
     out.push({ cls: "b-entry", txt: entries.map(e => e.split("/")[1]).join(" · ") });
-  else if (tag) out.push({ cls: "b-tag", txt: "→ " + tag });
 
   return out;
 }
@@ -32643,6 +32654,20 @@ function drawTotals(){
     `<div class="tot"><b>${n}</b><span>${l}</span></div>`).join("");
 }
 
+/* Size sorts on the base -- the widest band -- rather than on the largest of a
+   card's renderings. A style that is 70px on desktop and 40px on a phone is a
+   70px style with a correction, and sorting it among the 40s would put it
+   where nobody would look for it. Count breaks ties, so equal sizes still
+   arrive heaviest first. */
+const baseSize = c => {
+  const base = c.renders.find(r => r.widths.includes(BANDS[BANDS.length - 1]));
+  return (base || c.renders[0]).size;
+};
+const SORTS = {
+  count: (a, b) => b.count - a.count,
+  size:  (a, b) => baseSize(b) - baseSize(a) || b.count - a.count,
+};
+
 function drawBar(){
   const counts = {
     all: CARDS.length,
@@ -32654,20 +32679,26 @@ function drawBar(){
     `<span class="lbl">Register</span>` +
     ["all", "product", "expressive", "unmapped"].map(k =>
       `<button class="chip" data-f="${k}" aria-pressed="${state.filter === k}">${
-        k === "all" ? "Everything" : k}<span class="n">${counts[k]}</span></button>`).join("");
-  document.querySelectorAll("#bar .chip").forEach(b =>
+        k === "all" ? "Everything" : k}<span class="n">${counts[k]}</span></button>`).join("") +
+    `<span class="sep"></span><span class="lbl">Sort</span>` +
+    [["count", "most used"], ["size", "largest"]].map(([k, label]) =>
+      `<button class="chip" data-s="${k}" aria-pressed="${state.sort === k}">${
+        label}</button>`).join("");
+  document.querySelectorAll("#bar [data-f]").forEach(b =>
     b.onclick = () => { state.filter = b.dataset.f; draw(); });
+  document.querySelectorAll("#bar [data-s]").forEach(b =>
+    b.onclick = () => { state.sort = b.dataset.s; draw(); });
 }
 
 function drawRows(){
   const host = document.getElementById("rows");
-  const list = CARDS.filter(matches);
+  const list = CARDS.filter(matches).slice().sort(SORTS[state.sort]);
   if (!list.length) { host.innerHTML = `<p class="note">Nothing under this filter.</p>`; return; }
   host.innerHTML = list.map(c => {
     const r = c.renders[0];
     return `<button class="row" data-id="${c.id}"
         aria-pressed="${state.sel === c.id}">
-      <span class="spec" style="font-size:${Math.min(r.size, MAX_GLYPH)}px;
+      <span class="spec" style="font-size:${r.size}px;
         font-family:${famStack(r.family)};font-weight:${r.weight};
         font-style:${r.style};letter-spacing:${esc(r.letter_spacing)};
         text-transform:${esc(r.text_transform)}">${SPECIMEN}</span>
