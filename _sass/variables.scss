@@ -440,6 +440,13 @@ $expressive-type: (
   // loose at settings that suit 16px.
   statement:     (family: $zilla, size: 5.625rem,   font-weight: $zilla-bold,   line-height: 0.955,   // 90px
                   letter-spacing: -0.01em),
+  // The home page's opening lines -- the only running prose on the site set in
+  // Zilla, and the only place a paragraph is the page's largest type. One page,
+  // which is what keeps it here rather than in $product-type. Its leading is a
+  // ratio where the rule carried `1.4em`, so the links and spans inside each
+  // line lead from their own size rather than from a fixed 50.4px.
+  intro:         (family: $zilla, size: 2.25rem,    font-weight: $zilla-bold,   line-height: 1.4,     // 36px
+                  at: (small only: (size: 1.25rem))),                                                 // 20px
 );
 
 $type-registers: (product: $product-type, expressive: $expressive-type);

@@ -30,17 +30,11 @@ $home-section-vertical-spacing-mobile: 4rem;
     }
   }
   h1, p{
-    font-family: $zilla;
+    @include type-style(expressive, intro);
     padding-left: 0;
     padding-right: 0;
-    font-size: 1.8em;
-    line-height: 1.4em;
-    font-weight: $zilla-bold;
     margin-block: 0.75em;
     text-wrap: pretty;
-    @include breakpoint(small only){
-      font-size: 1.25em;
-    }
     &:first-of-type{
       display: inline;
     }
@@ -105,16 +99,13 @@ $home-section-vertical-spacing-mobile: 4rem;
       transform: translateX(-50%) scale(1);
     }
   }
+  // The line under the intro, in the same voice: it never declared a leading
+  // and so read at the global 1.5 while the lines above it lead at 1.4.
   .site-intro-cta{
+    @include type-style(expressive, intro);
     padding: 0.5rem 0;
-    font-family: $zilla;
-    font-weight: $zilla-bold;
-    font-size: 1.8em;
     color: $signature-teal;
     @include double-arrow-slide;
-    @include breakpoint(small only){
-      font-size: 1.25em;
-    }
   }
   img{
     display: inline-block;
