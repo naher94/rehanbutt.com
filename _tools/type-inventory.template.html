@@ -146,6 +146,15 @@
      read is what you can search the page or a URL for. */
   .b-rid{background:var(--surface-2);color:var(--ink-muted);font-weight:500;
     letter-spacing:.02em}
+  /* A copy target, but the same box as every other badge: `.tags` is a flex row
+     at the default `stretch`, so one taller chip lifts all of them. The border
+     comes out of the padding, the way `.b-tag` does it. */
+  .b-rid.copyable{cursor:copy;padding:1px 6px;border:1px solid transparent}
+  .b-rid.copyable:hover{border-color:var(--rule-strong);color:var(--ink)}
+  .b-rid.copied{background:color-mix(in srgb,var(--accent) 20%,transparent);
+    color:var(--accent-deep);border-color:transparent}
+  .b-rid.copyfail{background:color-mix(in srgb,var(--flag-high) 18%,transparent);
+    color:var(--flag-high);border-color:transparent}
   .b-warn{background:color-mix(in srgb,var(--flag-med) 20%,transparent);color:var(--flag-med)}
 
   /* ---- panel -------------------------------------------------------- */
@@ -335,6 +344,38 @@ const BANDS = DATA.totals.distinct_breakpoints.map(b => b.name);
    It is also what the URL carries as `sel`, so the badge and the link agree. */
 const rowId = c => "R" + c.id.slice(0, 4).toUpperCase();
 
+/* Opened off the filesystem, these pages often have no async clipboard at all,
+   and even where they do the write rejects unless the document has focus. So
+   the selection-based copy is a real fallback rather than an afterthought, and
+   the async attempt is *awaited* -- returning true the moment `writeText` is
+   called would make the badge say COPIED for a promise that went on to reject.
+   -> Promise<boolean>, resolved with whether anything actually reached the
+   clipboard. */
+function copySelection(s){
+  try {
+    const ta = document.createElement("textarea");
+    ta.value = s;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.top = "-1000px";
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    return ok;
+  } catch (e) { return false; }
+}
+
+function copyText(s){
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    return navigator.clipboard.writeText(s).then(
+      function () { return true; },
+      function () { return copySelection(s); }
+    );
+  }
+  return Promise.resolve(copySelection(s));
+}
+
 const rendersSmallFirst = c => c.renders.slice().sort(function (a, b) {
   return BANDS.findIndex(function (x) { return a.widths.includes(x); })
        - BANDS.findIndex(function (x) { return b.widths.includes(x); });
@@ -492,7 +533,8 @@ function rowHtml(c){
       <span class="tags">
         ${tagBadges(c).map(b =>
           `<span class="badge ${b.cls}">${esc(b.txt)}</span>`).join("")}
-        <span class="badge b-rid">${esc(rowId(c))}</span>
+        <span class="badge b-rid copyable" data-rid="${esc(rowId(c))}"
+          title="Copy ${esc(rowId(c))}">${esc(rowId(c))}</span>
         ${rendersSmallFirst(c).map(x => x.card
           ? `<span class="badge b-cid">${esc(x.card)}</span>` : "").join("")}
         ${c.renders.some(x => x.size_unresolved)
@@ -518,6 +560,24 @@ function drawRows(){
   }).join("");
   host.querySelectorAll(".row").forEach(b =>
     b.onclick = () => { state.sel = state.sel === b.dataset.id ? null : b.dataset.id; draw(); });
+  /* The badge sits inside the row's button, so the copy has to stop the click
+     reaching it -- otherwise copying an id would also open or close the row.
+     Feedback is written straight onto the element rather than through `draw`,
+     which would rebuild the list and throw the message away. */
+  host.querySelectorAll(".b-rid").forEach(function (b) {
+    b.onclick = function (e) {
+      e.stopPropagation();
+      const was = b.dataset.rid;
+      copyText(was).then(function (ok) {
+        b.textContent = ok ? "COPIED" : "COPY FAILED";
+        b.classList.add(ok ? "copied" : "copyfail");
+        setTimeout(function () {
+          b.textContent = was;
+          b.classList.remove("copied", "copyfail");
+        }, 900);
+      });
+    };
+  });
 }
 
 /* Occurrences grouped by page, with the declarations that produced them folded
