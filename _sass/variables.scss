@@ -327,6 +327,11 @@ $product-type: (
                   at: (small only: (size: 1.5rem))),                                                  // 24px
   footer-title:  (family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.6,     // 20px
                   at: (small only: (size: 1.5rem, font-weight: $lato-black))),                        // 24px
+  // The achievement toast, whose two lines are the only type on the site set
+  // at 1.2 outside a nav. Both carry their own leading: the card is two lines
+  // in a fixed box, and the global 1.5 would push it open.
+  snackbar-title:(family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.2),    // 20px
+  snackbar-link: (family: $lato,  size: 1rem,       font-weight: $lato-regular, line-height: 1.2),    // 16px
   // Two jobs that share the `.thumbnail-text` class and nothing else: the
   // caption that fades in over a portfolio thumbnail, and the heading naming a
   // collection on the photography index, which unsets the overlay entirely.

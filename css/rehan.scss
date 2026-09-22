@@ -396,12 +396,11 @@ article{
     p{
       margin: 0;
       padding: 0;
-      line-height: 1.2;
       &.description{
-        font-weight: $lato-bold;
-        font-size: 1.25em;
+        @include type-style(product, snackbar-title);
       }
       &.view{
+        @include type-style(product, snackbar-link);
         text-decoration: underline;
       }
     }

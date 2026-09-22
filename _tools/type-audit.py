@@ -212,14 +212,40 @@ _TYPE_STYLES = None
 
 
 # The include that produced a rule, read from the call site rather than guessed
-# from what it rendered. Same window and same rule as `declaring_line`: two
-# candidates is a guess, and a guess here invents an attribution.
+# from what it rendered. Same rule as `declaring_line`: two candidates is a
+# guess, and a guess here invents an attribution.
 INCLUDE_LINE = re.compile(
     r'@include\s+type-style\(\s*([-\w]+)\s*,\s*([-\w]+)\s*\)')
-INCLUDE_SEARCH = 3
+
+# Sass maps an `&`-nested rule to the line its parent opens on, so the include
+# sits below the mapped line rather than on it -- four lines below for a `p`
+# with two classed children. Wide enough to reach it, and safe at that width
+# only because `renders_as` throws out the neighbours it also reaches.
+INCLUDE_SEARCH = 6
 
 
-def call_site_entry(smap, span, css):
+def renders_as(entry, decls):
+    """Whether `entry` can render what this rule declares.
+
+    The window reaches the includes of nearby rules as well as this one's --
+    the snackbar's two lines sit four lines apart and each window holds both.
+    An entry that contradicts the rule it supposedly wrote did not write it:
+    `snackbar-title` is 20px/700 and the `.view` rule renders 16px/400.
+
+    Silence is not contradiction, so an entry that leaves a property to be
+    inherited still fits. A call site that overrides one of its own entry's
+    properties inline does not, and loses the name to `token_for` -- which is
+    the conservative direction: no name beats a wrong one.
+    """
+    global _TYPE_STYLES
+    if _TYPE_STYLES is None:
+        _TYPE_STYLES = type_style_map()
+    key = tuple(entry.split("/", 1))
+    return any(all(variant.get(p, v) == v for p, v in decls.items())
+               for variant in _TYPE_STYLES.get(key, ()))
+
+
+def call_site_entry(smap, span, css, decls):
     """`register/key` for the `type-style()` include that wrote this rule.
 
     The source map credits a mixin-emitted declaration to the mixin body, so
@@ -247,6 +273,7 @@ def call_site_entry(smap, span, css):
         m = INCLUDE_LINE.search(source_line(rel, line + off))
         if m:
             found.add("%s/%s" % (m.group(1), m.group(2)))
+    found = {e for e in found if renders_as(e, decls)}
     return found.pop() if len(found) == 1 else None
 
 
@@ -939,7 +966,7 @@ def build(out_path, limit=None):
             if comps is None:
                 unsupported += 1
                 continue
-            origin = name_origins(origin, call_site_entry(smap, span, css))
+            origin = name_origins(origin, call_site_entry(smap, span, css, decls))
             rules.append((comps, decls, order, specificity(comps), origin))
         compiled_sets[name] = rules
     unsupported = unsupported // max(1, len(breakpoints))
