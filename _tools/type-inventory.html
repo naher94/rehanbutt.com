@@ -32635,9 +32635,16 @@ function tagBadges(c){
   return out;
 }
 
+/* The register a card belongs to, however it got there: read out of the code
+   first, then your own tag. The filter has to agree with the badge -- a row
+   that says `expressive` and does not appear under `expressive` is the tool
+   contradicting itself -- so tagging a row moves it out of `unmapped` and into
+   the register you gave it, and the counts move with it. */
+const effReg = c => c.register || TAGS[c.id] || null;
+
 const matches = c => state.filter === "all" ? true
-  : state.filter === "unmapped" ? !c.entry
-  : c.register === state.filter;
+  : state.filter === "unmapped" ? !effReg(c)
+  : effReg(c) === state.filter;
 
 function drawTotals(){
   const el = document.getElementById("totals");
@@ -32671,9 +32678,9 @@ const SORTS = {
 function drawBar(){
   const counts = {
     all: CARDS.length,
-    product: CARDS.filter(c => c.register === "product").length,
-    expressive: CARDS.filter(c => c.register === "expressive").length,
-    unmapped: CARDS.filter(c => !c.entry).length,
+    product: CARDS.filter(c => effReg(c) === "product").length,
+    expressive: CARDS.filter(c => effReg(c) === "expressive").length,
+    unmapped: CARDS.filter(c => !effReg(c)).length,
   };
   document.getElementById("bar").innerHTML =
     `<span class="lbl">Register</span>` +
