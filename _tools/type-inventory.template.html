@@ -155,6 +155,20 @@
   .srcline b{font-weight:500}
   .via{color:var(--ink-faint);font-weight:400}
   .loc{color:var(--ink-faint);font-size:11px}
+  /* The control scopes the list under this heading, so it sits on the heading
+     rather than above the list. Wraps below it when the pane is dragged narrow
+     enough that the two would collide. */
+  .sechead{display:flex;align-items:center;justify-content:space-between;
+    gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .sechead h3{margin:0}
+  .seg{display:inline-flex;border:1px solid var(--rule-strong);border-radius:7px;
+    overflow:hidden}
+  .seg button{font-family:"Lato",sans-serif;font-size:12px;font-weight:700;
+    background:var(--surface);color:var(--ink-muted);border:0;
+    border-right:1px solid var(--rule-strong);padding:4px 11px;cursor:pointer}
+  .seg button:last-child{border-right:0}
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+  .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
   .uses{font-size:12.5px}
   .uses details{margin-bottom:3px}
   .uses summary{cursor:pointer;list-style:none;display:grid;
@@ -215,7 +229,10 @@ function setTag(id, reg){
   try { localStorage.setItem(TAG_STORE, JSON.stringify(TAGS)); } catch (e) {}
 }
 
-const state = { filter: "all", sel: null };
+/* `band` is which width's declarations the occurrence list expands onto. Kept
+   across selections rather than reset per card, so you can hold it on `small`
+   and walk down the list looking at what each one does there. */
+const state = { filter: "all", sel: null, band: null };
 
 /* ---- the three bands -----------------------------------------------------
    Every row shows all three, small on the left, so a column can be read down
@@ -330,7 +347,31 @@ function drawRows(){
 /* Occurrences grouped by page, with the declarations that produced them folded
    underneath. The list is capped per card and says so, so a truncated list
    never reads as the whole picture. */
+/* Which widths this card's occurrences actually resolve through different
+   rules at. A card whose declarations are the same everywhere gets no control:
+   three buttons that all show the same thing are three ways to learn nothing.*/
+function srcBands(c){
+  const bands = BANDS.filter(b => c.uses.some(u => u.src[b] !== undefined));
+  const distinct = new Set();
+  c.uses.forEach(u => distinct.add(bands.map(b => u.src[b]).join("/")));
+  const varies = bands.some(b =>
+    c.uses.some(u => u.src[b] !== u.src[bands[bands.length - 1]]));
+  return varies ? bands : [];
+}
+
+function bandPicker(c){
+  const bands = srcBands(c);
+  if (!bands.length) return "";
+  const sel = bands.includes(state.band) ? state.band : bands[bands.length - 1];
+  return `<div class="seg" role="group" aria-label="Declarations at width">${
+    bands.map(b => `<button data-band="${b}" aria-pressed="${b === sel}">${
+      esc(b)}</button>`).join("")}</div>`;
+}
+
 function usesHtml(c){
+  const bands = srcBands(c);
+  const band = bands.length && bands.includes(state.band)
+    ? state.band : (bands[bands.length - 1] || BANDS[BANDS.length - 1]);
   const byPage = new Map();
   c.uses.forEach(u => {
     if (!byPage.has(u.page)) byPage.set(u.page, []);
@@ -339,7 +380,9 @@ function usesHtml(c){
   const groups = [...byPage.entries()].map(([page, us]) =>
     `<div class="pagegrp"><b>${esc(page)}</b>${us.map(u => {
       const sig = esc(u.tag) + (u.classes ? "." + esc(u.classes).split(" ").join(".") : "");
-      const src = (c.sources || [])[u.src] || [];
+      const idx = u.src[band] !== undefined ? u.src[band]
+                : u.src[BANDS[BANDS.length - 1]];
+      const src = (c.sources || [])[idx] || [];
       const head = `<span class="txt">${esc(u.text) ||
           `<span style="color:var(--ink-faint)">(no text)</span>`}</span>
         <span class="el">:${u.line} ${sig}</span>`;
@@ -454,11 +497,16 @@ function drawPanel(){
     </div>
 
     <div class="sec">
-      <h3>Where it lands &middot; ${c.page_count} page${c.page_count === 1 ? "" : "s"}</h3>
+      <div class="sechead">
+        <h3>Where it lands &middot; ${c.page_count} page${c.page_count === 1 ? "" : "s"}</h3>
+        ${bandPicker(c)}
+      </div>
       ${usesHtml(c)}
     </div>`;
   host.querySelectorAll("[data-tag]").forEach(b =>
     b.onclick = () => { setTag(c.id, b.dataset.tag); draw(); });
+  host.querySelectorAll("[data-band]").forEach(b =>
+    b.onclick = () => { state.band = b.dataset.band; drawPanel(); });
 }
 
 function draw(){ drawBar(); drawRows(); drawPanel(); }

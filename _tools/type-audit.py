@@ -1099,13 +1099,22 @@ def build(out_path, limit=None):
                         inv["samples"].sort(key=len, reverse=True)
                         del inv["samples"][5:]
                 if len(inv["uses"]) < USE_CAP:
-                    sig = tuple(widest["decls"])
-                    idx = inv["srcsets"].setdefault(sig, len(inv["srcsets"]))
+                    # A source set per width, not one for the widest. The rule
+                    # that produces a card's step is by definition not the rule
+                    # that won at the base, so keying the occurrence on the
+                    # base hid the `small only` correction that the card exists
+                    # to show.
+                    src = {}
+                    for _k, _v in by_key.items():
+                        for _b, _el in _v:
+                            sig = tuple(_el["decls"])
+                            src[_b] = inv["srcsets"].setdefault(
+                                sig, len(inv["srcsets"]))
                     inv["uses"].append(dict(page=rel, line=widest["line"],
                                             tag=widest["tag"],
                                             classes=widest["classes"],
                                             text=(widest["sample"] or "")[:70],
-                                            src=idx))
+                                            src=src))
 
             for key, entries in by_key.items():
                 at = [b for b, _ in entries]
@@ -1276,6 +1285,7 @@ def build(out_path, limit=None):
     # worth more than a tidy sequence.
     card_no = {s["id"]: "C%d" % (i + 1) for i, s in enumerate(items)}
     by_label = {d["name"]: d["label"] for d in distinct}
+    band_names = {d["name"] for d in distinct}
     order = {n: i for i, (n, _) in enumerate(breakpoints)}
 
     def render_of(key, widths):
@@ -1333,7 +1343,12 @@ def build(out_path, limit=None):
             pages=sorted(inv["pages"])[:40], page_count=len(inv["pages"]),
             tags=sorted(inv["tags"]), classes=sorted(inv["classes"])[:12],
             samples=inv["samples"],
-            uses=sorted(inv["uses"], key=lambda u: (u["page"], u["line"])),
+            # Pruned to the bands that render differently: the other two
+            # breakpoints resolve to the same rules and would trip the panel
+            # into offering a choice that changes nothing.
+            uses=[dict(u, src={b: i for b, i in u["src"].items()
+                               if b in band_names})
+                  for u in sorted(inv["uses"], key=lambda u: (u["page"], u["line"]))],
             sources=[[dict(prop=d[0], value=d[1], file=d[2], line=d[3],
                            via=authored_as(d[2], d[3], d[0], d[1],
                                            d[5] or (next(iter(entries), None)
