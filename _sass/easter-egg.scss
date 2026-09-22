@@ -18,6 +18,8 @@
       }
     }
     .text-container{
+      // The 3em stays although the type below no longer reads from it: the
+      // padding on this container is in em and resolves against it.
       font-weight: $lato-bold;
       font-size: 3em;
       padding-inline: 0.5em;
@@ -26,12 +28,11 @@
         text-align: center;
       }
       p{
+        @include type-style(expressive, counter-label);
         padding: 0;
         margin: 0;
-        line-height: 1;
         span{
-          font-size: 1.5em;
-          font-weight: $lato-black;
+          @include type-style(expressive, counter);
         }
       }
     }

@@ -434,7 +434,13 @@ $product-type: (
 // Fewer, and it should stay that way: a style that turns up on a second page
 // has stopped being expressive and belongs in $product-type instead.
 $expressive-type: (
-  counter:       (family: $lato,  size: 5.625rem,   font-weight: $lato-black,   line-height: 1),      // 90px, the achievement numeral
+  counter:       (family: $lato,  size: 5.625rem,   font-weight: $lato-black,   line-height: 1,       // 90px, the achievement numeral
+                  at: (small only: (size: 4.5rem))),                                                  // 72px
+  // The line the numeral sits in -- the `/6` beside it and the `Completed`
+  // under it. A rank down from the numeral and a weight lighter, so the count
+  // reads first and its frame second.
+  counter-label: (family: $lato,  size: 3.75rem,    font-weight: $lato-bold,    line-height: 1,       // 60px
+                  at: (small only: (size: 3rem))),                                                    // 48px
   // The only value in either map not taken from current usage -- the slot for a
   // hero line or a statement over an image, set tight because large type reads
   // loose at settings that suit 16px.
