@@ -330,6 +330,12 @@ $product-type: (
                   at: (small only: (size: 1.5rem))),                                                  // 24px
   footer-title:  (family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.6,     // 20px
                   at: (small only: (size: 1.5rem, font-weight: $lato-black))),                        // 24px
+  // The about page's opening paragraphs and the list under them. `body` with
+  // one difference: it steps *up* on small rather than down, because the bio is
+  // the page's first read and it is set against nothing else there. No weight
+  // of its own, so it keeps tracking whatever `body` is.
+  bio-text:      (family: $lato,  size: 1.25rem,                                                      // 20px
+                  at: (small only: (size: 1.2rem))),                                                  // 19.2px
   // The three CV lists -- work, education, speaking -- which are the same two
   // ranks wearing different heading levels. `item-org` is the organisation a
   // group of items sits under; `item-title` is what was actually done, the

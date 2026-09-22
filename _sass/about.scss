@@ -32,7 +32,7 @@
         }
       }
       p{
-        font-family: $lato;
+        @include type-style(product, bio-text);
         padding: 0;
         margin: 0;
         margin-top: 1em;
@@ -40,12 +40,10 @@
         .rainbow{
           font-weight: $zilla-bold;
         }
-        @include breakpoint(small only) {
-          font-size: 1.2rem;
-        }
       }
       ul{
         &.todos{
+          @include type-style(product, bio-text);
           padding: 0;
           list-style-type: none;
           .checkbox{
@@ -81,7 +79,6 @@
             }
           }
           @include breakpoint(small only) {
-            font-size: 1.2rem;
             margin-left: 0.25rem;
           }
           li{
