@@ -258,10 +258,15 @@ const short = f => String(f || "").replace(/^_sass\//, "").replace(/^css\//, "")
    size shown is the base -- the widest band -- matching the value in ink
    beside it. */
 const SPECIMEN = "AaBb";
-const famStack = f => f === "Zilla Slab" ? '"Zilla Slab",serif'
-  : f === "Caveat" ? '"Caveat",cursive'
-  : f === "Consolas" ? '"JetBrains Mono",monospace'
-  : '"Lato",sans-serif';
+/* Single quotes inside the stack, because this is interpolated into a
+   double-quoted `style` attribute: a family written `"Zilla Slab"` closes the
+   attribute at its own first quote, and the browser drops everything after it.
+   That silently cost the specimens their family, weight, slant, tracking and
+   case -- only `font-size` survived, being first in the string. */
+const famStack = f => f === "Zilla Slab" ? "'Zilla Slab',serif"
+  : f === "Caveat" ? "'Caveat',cursive"
+  : f === "Consolas" ? "'JetBrains Mono',monospace"
+  : "'Lato',sans-serif";
 
 /* Your own note about where an unmapped row should end up. Keyed by the card
    id, which is derived from the values it renders -- so if the type changes,
