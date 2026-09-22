@@ -50,10 +50,11 @@ def compiled_sets_for(site):
     out = {}
     for name, width in ta.project_breakpoints():
         rules = []
-        for sel, decls, order, origin, _ in cascade.parse_rules(
+        for sel, decls, order, origin, span in cascade.parse_rules(
                 cascade.strip_at_rules(raw, width=width), smap, ta.TYPE_PROPS):
             comps = cascade.compile_selector(sel)
             if comps is not None:
+                origin = ta.name_origins(origin, None)
                 rules.append((comps, decls, order, cascade.specificity(comps), origin))
         out[name] = rules
     return out

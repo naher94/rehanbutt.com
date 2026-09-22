@@ -211,6 +211,60 @@ def type_style_map():
 _TYPE_STYLES = None
 
 
+# The include that produced a rule, read from the call site rather than guessed
+# from what it rendered. Same window and same rule as `declaring_line`: two
+# candidates is a guess, and a guess here invents an attribution.
+INCLUDE_LINE = re.compile(
+    r'@include\s+type-style\(\s*([-\w]+)\s*,\s*([-\w]+)\s*\)')
+INCLUDE_SEARCH = 3
+
+
+def call_site_entry(smap, span, css):
+    """`register/key` for the `type-style()` include that wrote this rule.
+
+    The source map credits a mixin-emitted declaration to the mixin body, so
+    every entry in both registers lands on the same line of variables.scss and
+    the name has to be recovered some other way. `token_for` recovers it by
+    matching rendered values back against the map, which cannot separate two
+    entries that render alike -- `footer-link` is `body` at every width above
+    small, and adding it took the name off all 1,496 `body` elements.
+
+    The rule's own span maps to the call site, which names the entry outright.
+    """
+    if not smap or not span:
+        return None
+    # Anchored on the selector's first character, not on the rule's span, which
+    # opens at whatever whitespace follows the previous `}`. A mapping is
+    # emitted for the selector; an offset before it resolves to the rule above,
+    # which put the `body` include on a `:root` media query 200 lines away.
+    text = css[span[0]:span[1]]
+    hit = smap.lookup(span[0] + len(text) - len(text.lstrip()))
+    if not hit:
+        return None
+    rel, line = hit
+    found = set()
+    for off in range(0, INCLUDE_SEARCH + 1):
+        m = INCLUDE_LINE.search(source_line(rel, line + off))
+        if m:
+            found.add("%s/%s" % (m.group(1), m.group(2)))
+    return found.pop() if len(found) == 1 else None
+
+
+def name_origins(origin, entry):
+    """Stamp the entry onto the declarations the mixin emitted for this rule.
+
+    -> {prop: (file, line, entry-or-None)}. Only mixin-emitted declarations are
+    stamped: a literal beside an include in the same rule is the call site
+    overriding the entry, not part of it.
+    """
+    out = {}
+    for prop, src in origin.items():
+        rel, line = src if src else (None, None)
+        named = entry if (entry and rel and from_mixin(rel, line, prop)) else None
+        out[prop] = (rel, line, named)
+    return out
+
+
 # The mixin emits its optional properties through a loop, as `#{$prop}: $value`,
 # so the source line names no property at all. Matching only `prop: map-get(...)`
 # missed every one of them and reported line-height, letter-spacing and
@@ -254,6 +308,16 @@ def token_for(decls, rendered=None):
     global _TYPE_STYLES
     if _TYPE_STYLES is None:
         _TYPE_STYLES = type_style_map()
+
+    # The call site named it. Own declarations first: an element that includes
+    # an entry of its own is that entry, whatever it inherited. Everything
+    # below is the fallback for rules the source map could not place.
+    named = lambda own: {d[5] for d in decls
+                         if len(d) > 5 and d[5] and (d[4] or not own)}
+    if len(named(True)) == 1:
+        return named(True).pop()
+    if not named(True) and len(named(False)) == 1:
+        return named(False).pop()
     def narrow(use_inherited, lenient=False):
         """Entries with a variant consistent with every observed declaration.
 
@@ -685,10 +749,10 @@ class CascadeTree:
         def annotate(decls):
             # a node's `sets` holds only what it declares itself, so every
             # one of these is an own declaration
-            listed = [(p, v[0], v[1], v[2], True) for p, v in decls.items()]
+            listed = [(p, v[0], v[1], v[2], True, v[3]) for p, v in decls.items()]
             token = token_for(listed)
             return {p: [v[0], v[1], v[2],
-                        authored_as(v[1], v[2], p, v[0], token)]
+                        authored_as(v[1], v[2], p, v[0], v[3] or token)]
                     for p, v in decls.items()}
 
         subtree = defaultdict(lambda: defaultdict(int))
@@ -799,7 +863,7 @@ def _resolve(dom, compiled, tree=None, bp=None, rel=None,
                 own["font-size"].strip().lower() not in ("inherit", "unset"):
             size_px = resolve_size(own["font-size"], parent_px)
             files["font-size"] = (own["font-size"],) + \
-                (node.origin.get("font-size") or (None, None))
+                (node.origin.get("font-size") or (None, None, None))
         else:
             size_px = parent_px
         computed["_size_px"] = size_px
@@ -811,7 +875,7 @@ def _resolve(dom, compiled, tree=None, bp=None, rel=None,
                 if own[p].strip().lower() in ("inherit", "unset"):
                     continue
                 computed[p] = own[p]
-                files[p] = (own[p],) + (node.origin.get(p) or (None, None))
+                files[p] = (own[p],) + (node.origin.get(p) or (None, None, None))
         if tree is not None and own_props:
             tree.declare(chain, bp, files, own_props)
         if node.tag not in ("html", "[root]") and node.text:
@@ -829,12 +893,13 @@ def _resolve(dom, compiled, tree=None, bp=None, rel=None,
                 spacing=(computed.get("letter-spacing") or "normal").strip(),
                 transform=(computed.get("text-transform") or "none").strip(),
                 sample=node.text,
-                # what was written, where: (prop, value, file, line)
-                # (prop, value, file, line, own) -- `own` separates a value
-                # this element declared from one it inherited. Both can be
-                # credited to the mixin body, and telling them apart is what
+                # what was written, where:
+                # (prop, value, file, line, own, entry). `own` separates a
+                # value this element declared from one it inherited -- both can
+                # be credited to the mixin body, and telling them apart is what
                 # lets a style that declares no weight survive an inherited one.
-                decls=sorted((p,) + v + (p in own_props,)
+                # `entry` is the map entry the include named, or None.
+                decls=sorted((p,) + v[:3] + (p in own_props, v[3])
                              for p, v in files.items()),
                 files=sorted({v[1] for v in files.values() if v[1]}),
             )
@@ -869,11 +934,12 @@ def build(out_path, limit=None):
     for name, width in breakpoints:
         css = strip_at_rules(raw, width=width)
         rules = []
-        for sel, decls, order, origin, _ in parse_rules(css, smap, TYPE_PROPS):
+        for sel, decls, order, origin, span in parse_rules(css, smap, TYPE_PROPS):
             comps = compile_selector(sel)
             if comps is None:
                 unsupported += 1
                 continue
+            origin = name_origins(origin, call_site_entry(smap, span, css))
             rules.append((comps, decls, order, specificity(comps), origin))
         compiled_sets[name] = rules
     unsupported = unsupported // max(1, len(breakpoints))
@@ -980,13 +1046,13 @@ def build(out_path, limit=None):
             uses=sorted(e["uses"], key=lambda u: (u["page"], u["line"])),
             sources=[[dict(prop=d[0], value=d[1], file=d[2], line=d[3],
                            via=authored_as(d[2], d[3], d[0], d[1],
-                                           token_for(list(key), rendered)))
+                                           d[5] or token_for(list(key), rendered)))
                       for d in key]
                      for key, _ in sorted(e["srcsets"].items(),
                                           key=lambda kv: kv[1])],
             decls=[dict(prop=p, value=v, file=f, line=ln, count=c, own=own,
-                        via=authored_as(f, ln, p, v, style_token))
-                   for (p, v, f, ln, own), c in
+                        via=authored_as(f, ln, p, v, entry or style_token))
+                   for (p, v, f, ln, own, entry), c in
                    sorted(e["decls"].items(), key=lambda kv: (kv[0][0], -kv[1]))],
             files=[dict(file=f, count=c)
                    for f, c in sorted(e["files"].items(), key=lambda kv: -kv[1])],
