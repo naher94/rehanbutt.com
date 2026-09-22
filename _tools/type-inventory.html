@@ -139,18 +139,21 @@
   .kv dd{margin:0;font-family:"JetBrains Mono",monospace;font-size:12.5px;
     overflow-wrap:anywhere}
   .rt{width:100%;border-collapse:collapse;font-size:12.5px;table-layout:auto}
+  /* Every cell carries the same inline padding, highlighted or not, so the
+     tint on a changed cell is inset around its value rather than displacing
+     it: a column has to read straight down whether or not a row is marked. */
   .rt th{font-size:10px;letter-spacing:.07em;text-transform:uppercase;
-    color:var(--ink-faint);font-weight:700;text-align:left;padding:0 10px 4px 0;
+    color:var(--ink-faint);font-weight:700;text-align:left;padding:0 8px 4px;
     border-bottom:1px solid var(--rule);white-space:nowrap}
   .rt tbody th{font-size:11px;letter-spacing:0;text-transform:none;font-weight:400;
     color:var(--ink-muted);border-bottom:0;padding:4px 12px 4px 0}
   .rt td{font-family:"JetBrains Mono",monospace;font-size:12px;
-    padding:4px 10px 4px 0;white-space:nowrap}
+    padding:4px 8px;white-space:nowrap}
+  .rt th:first-child, .rt td:first-child{padding-left:0}
   .rt .carried{color:var(--ink-faint)}
   /* What this width actually decides, against the wider one it corrects. */
   .rt td.changed{color:var(--accent-deep);font-weight:500;
-    background:color-mix(in srgb,var(--accent) 12%,transparent);
-    border-radius:4px;padding-inline:6px}
+    background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:4px}
   .srcline{font-size:12px;margin-bottom:6px;font-family:"JetBrains Mono",monospace}
   .srcline b{font-weight:500}
   .via{color:var(--ink-faint);font-weight:400}
