@@ -31,6 +31,10 @@ _spec = importlib.util.spec_from_file_location("type_audit", HERE / "type-audit.
 ta = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(ta)
 
+# `style_page` keys element identity off the widest breakpoint, and the audit
+# sets that in `build()` -- which this never calls.
+ta.WIDEST = ta.project_breakpoints()[-1][0]
+
 # what counts as "the type of this element"; letter-spacing and transform
 # included because a token can change them without touching size
 FIELDS = ("family", "size", "weight", "style", "lh", "spacing", "transform")
