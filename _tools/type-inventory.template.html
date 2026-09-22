@@ -9,6 +9,7 @@
     --accent:#12ABC4; --accent-deep:#0B7F92;
     --flag-high:#BA3D54; --flag-med:#B4751C; --flag-ok:#2F7D5B;
     --chip:#E7EAED;
+    --reg-product:#5A4FCF; --reg-expressive:#2F7D5B;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -18,6 +19,7 @@
       --accent:#3FC4DA; --accent-deep:#7FDCEB;
       --flag-high:#E08196; --flag-med:#D9A85C; --flag-ok:#6BBF95;
       --chip:#2A3441;
+      --reg-product:#9D93F2; --reg-expressive:#6BBF95;
     }
   }
   :root[data-theme="dark"]{
@@ -27,6 +29,7 @@
     --accent:#3FC4DA; --accent-deep:#7FDCEB;
     --flag-high:#E08196; --flag-med:#D9A85C; --flag-ok:#6BBF95;
     --chip:#2A3441;
+    --reg-product:#9D93F2; --reg-expressive:#6BBF95;
   }
   *{box-sizing:border-box}
   body{
@@ -131,8 +134,11 @@
      The register beside it is a category rather than a name: a solid chip, so
      the two never read as a pair of equal labels. */
   .b-entry{background:color-mix(in srgb,var(--accent) 20%,transparent);color:var(--accent-deep)}
-  .b-reg-product{background:var(--ink);color:var(--ground)}
-  .b-reg-expressive{background:var(--flag-ok);color:var(--ground)}
+  /* Registers get their own hues rather than borrowing from the UI: `--ink` is
+     the pressed-chip fill and the active segment, so a product badge in it read
+     as "selected" rather than as a category. */
+  .b-reg-product{background:var(--reg-product);color:var(--ground)}
+  .b-reg-expressive{background:var(--reg-expressive);color:var(--ground)}
   .b-none{background:var(--chip);color:var(--ink-faint)}
   /* Not read out of the code: either your note about where a style should
      land, or the absence of any decision at all. The dashed border carries
