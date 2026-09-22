@@ -79,6 +79,13 @@
 
   /* ---- rows --------------------------------------------------------- */
   .rows{display:flex;flex-direction:column;gap:6px}
+  /* The family name set in its own face, so the group header is itself a
+     specimen of what is under it. */
+  .grouphead{display:flex;align-items:baseline;justify-content:space-between;
+    gap:12px;padding:16px 4px 4px;font-size:19px;font-weight:700}
+  .grouphead:first-child{padding-top:2px}
+  .grouphead .n{font-family:"JetBrains Mono",monospace;font-size:11px;
+    font-weight:400;color:var(--ink-faint)}
   .row{display:grid;
     grid-template-columns:minmax(120px,270px) minmax(190px,1fr) 250px auto;
     gap:16px;align-items:center;width:100%;text-align:left;
@@ -284,7 +291,7 @@ function setTag(id, reg){
 /* `band` is which width's declarations the occurrence list expands onto. Kept
    across selections rather than reset per card, so you can hold it on `small`
    and walk down the list looking at what each one does there. */
-const state = { filter: "all", sort: "count", sel: null, band: null };
+const state = { filter: "all", sort: "count", group: "none", sel: null, band: null };
 
 /* One axis separates the two: does this repeat, or does it happen once? The
    examples are the useful half -- they let a row be decided without going back
@@ -423,24 +430,41 @@ function drawBar(){
     `<span class="sep"></span><span class="lbl">Sort</span>` +
     [["count", "most used"], ["size", "largest"]].map(([k, label]) =>
       `<button class="chip" data-s="${k}" aria-pressed="${state.sort === k}">${
+        label}</button>`).join("") +
+    `<span class="sep"></span><span class="lbl">Group</span>` +
+    [["none", "none"], ["family", "font"]].map(([k, label]) =>
+      `<button class="chip" data-g="${k}" aria-pressed="${state.group === k}">${
         label}</button>`).join("");
   document.querySelectorAll("#bar [data-f]").forEach(b =>
     b.onclick = () => { state.filter = b.dataset.f; draw(); });
   document.querySelectorAll("#bar [data-s]").forEach(b =>
     b.onclick = () => { state.sort = b.dataset.s; draw(); });
+  document.querySelectorAll("#bar [data-g]").forEach(b =>
+    b.onclick = () => { state.group = b.dataset.g; draw(); });
 }
 
 /* What the list is showing right now, filter and sort applied. Shared with the
    opening selection so "the first row" means the same thing in both places. */
 const visible = () => CARDS.filter(matches).slice().sort(SORTS[state.sort]);
 
-function drawRows(){
-  const host = document.getElementById("rows");
-  const list = visible();
-  if (!list.length) { host.innerHTML = `<p class="note">Nothing under this filter.</p>`; return; }
-  host.innerHTML = list.map(c => {
-    const r = c.renders[0];
-    return `<button class="row" data-id="${c.id}"
+/* Grouping keeps whatever sort is on: the groups appear in the order their
+   first row does, so `most used` puts the family carrying the most type first
+   and `largest` leads with whichever family owns the biggest style. Sorting the
+   groups separately would make the two controls argue. */
+function groupRows(list){
+  if (state.group === "none") return [["", list]];
+  const groups = new Map();
+  list.forEach(function (c) {
+    const k = c.renders[0].family;
+    if (!groups.has(k)) groups.set(k, []);
+    groups.get(k).push(c);
+  });
+  return [...groups.entries()];
+}
+
+function rowHtml(c){
+  const r = c.renders[0];
+  return `<button class="row" data-id="${c.id}"
         aria-pressed="${state.sel === c.id}">
       <span class="spec" style="font-size:${r.size}px;
         font-family:${famStack(r.family)};font-weight:${r.weight};
@@ -461,6 +485,21 @@ function drawRows(){
       </span>
       <span class="count">${c.count.toLocaleString()}<small>elements</small></span>
     </button>`;
+}
+
+function drawRows(){
+  const host = document.getElementById("rows");
+  const list = visible();
+  if (!list.length) { host.innerHTML = `<p class="note">Nothing under this filter.</p>`; return; }
+  host.innerHTML = groupRows(list).map(function (pair) {
+    const name = pair[0], cards = pair[1];
+    const els = cards.reduce(function (n, c) { return n + c.count; }, 0);
+    const head = name
+      ? `<div class="grouphead"><span style="font-family:${famStack(name)}">${
+          esc(name)}</span><span class="n">${cards.length} row${
+          cards.length === 1 ? "" : "s"} &middot; ${els.toLocaleString()} elements</span></div>`
+      : "";
+    return head + cards.map(rowHtml).join("");
   }).join("");
   host.querySelectorAll(".row").forEach(b =>
     b.onclick = () => { state.sel = state.sel === b.dataset.id ? null : b.dataset.id; draw(); });

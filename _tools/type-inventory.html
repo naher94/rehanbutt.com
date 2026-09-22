@@ -79,6 +79,13 @@
 
   /* ---- rows --------------------------------------------------------- */
   .rows{display:flex;flex-direction:column;gap:6px}
+  /* The family name set in its own face, so the group header is itself a
+     specimen of what is under it. */
+  .grouphead{display:flex;align-items:baseline;justify-content:space-between;
+    gap:12px;padding:16px 4px 4px;font-size:19px;font-weight:700}
+  .grouphead:first-child{padding-top:2px}
+  .grouphead .n{font-family:"JetBrains Mono",monospace;font-size:11px;
+    font-weight:400;color:var(--ink-faint)}
   .row{display:grid;
     grid-template-columns:minmax(120px,270px) minmax(190px,1fr) 250px auto;
     gap:16px;align-items:center;width:100%;text-align:left;
@@ -246,13 +253,13 @@
 <script>
 const DATA = {
  "totals": {
-  "styles": 101,
+  "styles": 100,
   "elements": 6487,
   "pages": 90,
   "families": 4,
-  "sizes": 23,
+  "sizes": 22,
   "weights": 5,
-  "off_scale": 875,
+  "off_scale": 870,
   "scale": [
    10.0,
    12.0,
@@ -327,12 +334,12 @@ const DATA = {
     "styles": 60,
     "elements": 6487,
     "families": 4,
-    "sizes": 16,
+    "sizes": 15,
     "weights": 5,
-    "off_scale": 770
+    "off_scale": 765
    },
    "medium": {
-    "styles": 61,
+    "styles": 60,
     "elements": 6487,
     "families": 4,
     "sizes": 17,
@@ -340,7 +347,7 @@ const DATA = {
     "off_scale": 646
    },
    "large": {
-    "styles": 62,
+    "styles": 61,
     "elements": 6487,
     "families": 4,
     "sizes": 17,
@@ -348,7 +355,7 @@ const DATA = {
     "off_scale": 646
    },
    "xlarge": {
-    "styles": 62,
+    "styles": 61,
     "elements": 6487,
     "families": 4,
     "sizes": 17,
@@ -356,7 +363,7 @@ const DATA = {
     "off_scale": 646
    },
    "xxlarge": {
-    "styles": 62,
+    "styles": 61,
     "elements": 6487,
     "families": 4,
     "sizes": 17,
@@ -364,10 +371,10 @@ const DATA = {
     "off_scale": 646
    }
   },
-  "cards": 73,
-  "mapped": 6229,
-  "unmapped": 258,
-  "responsive_cards": 54
+  "cards": 71,
+  "mapped": 6247,
+  "unmapped": 240,
+  "responsive_cards": 53
  },
  "cards": [
   {
@@ -1202,21 +1209,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/footer-link"
      },
      {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/footer-link"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/footer-link"
      },
      {
@@ -1232,21 +1239,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/footer-link"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/footer-link"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/footer-link"
      },
      {
@@ -1274,7 +1281,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Zilla Slab|30.0|700|normal|48.0|normal|none",
-     "card": "C6",
+     "card": "C5",
      "widths": [
       "small",
       "medium",
@@ -2075,21 +2082,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/menu-link"
      },
      {
       "prop": "font-size",
       "value": "1.875rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/menu-link"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/menu-link"
      },
      {
@@ -2098,6 +2105,834 @@ const DATA = {
       "file": "_sass/_type-reset.scss",
       "line": 95,
       "via": null
+     }
+    ]
+   ]
+  },
+  {
+   "id": "484b373f7e",
+   "count": 464,
+   "renders": [
+    {
+     "family": "Lato",
+     "size": 16.0,
+     "weight": "400",
+     "style": "normal",
+     "line_height": 25.6,
+     "letter_spacing": "normal",
+     "text_transform": "none",
+     "size_unresolved": false,
+     "on_scale": true,
+     "style_id": "Lato|16.0|400|normal|25.6|normal|none",
+     "card": "C3",
+     "widths": [
+      "small",
+      "medium",
+      "large",
+      "xlarge",
+      "xxlarge"
+     ],
+     "label": "small\u2013xxlarge"
+    }
+   ],
+   "responsive": false,
+   "entries": {
+    "product/body-sm": 2320
+   },
+   "entry": "product/body-sm",
+   "register": "product",
+   "pages": [
+    "bowlingtable.html",
+    "colab.html",
+    "enviromental-conditions.html",
+    "fashion.html",
+    "index.html",
+    "resources.html",
+    "resources/collection/2023-favorite-things.html",
+    "resources/collection/2024-favorite-things.html",
+    "resources/collection/2025-favorite-things.html",
+    "resources/collection/career-ladders.html",
+    "resources/collection/chicago-eateries.html",
+    "resources/collection/conferences.html",
+    "resources/collection/cost-bad-ux.html",
+    "resources/collection/edu-deals.html",
+    "resources/collection/how-the-internet-works.html",
+    "resources/collection/job-hunting.html",
+    "resources/collection/my-tech-stack.html",
+    "resources/collection/new-to-dev.html",
+    "resources/collection/new-to-ux.html",
+    "resources/collection/pittsburgh-eateries.html",
+    "resources/collection/shared-architecture-apple-pixar.html",
+    "resources/collection/tech-go-tos.html",
+    "resources/collection/vancouver-eateries.html",
+    "safar-splash.html",
+    "watson.html"
+   ],
+   "page_count": 25,
+   "tags": [
+    "p"
+   ],
+   "classes": [
+    "description"
+   ],
+   "samples": [
+    "This photo took many hours to shot and even longer to edit due to all the perspective distortion coming out of the camer",
+    "This is by fair my favorite detail of the table because it shows the construction from the original use of this slab, a ",
+    "Future me here, Looks like there was quite a bit opportunity on this ideas, as so many tools have launched a similar fea",
+    "To the keen eye you may recognize the leaf icon that I am using for the branding of this project, its from Wall-E! You m",
+    "This project took quite a bit of computing power often times more them we had available. We regularly crashed several of"
+   ],
+   "uses": [
+    {
+     "page": "bowlingtable.html",
+     "line": 292,
+     "tag": "p",
+     "classes": null,
+     "text": "This photo took many hours to shot and even longer to edit due to all ",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "bowlingtable.html",
+     "line": 307,
+     "tag": "p",
+     "classes": null,
+     "text": "This is by fair my favorite detail of the table because it shows the c",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "colab.html",
+     "line": 293,
+     "tag": "p",
+     "classes": null,
+     "text": "Future me here, Looks like there was quite a bit opportunity on this i",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "enviromental-conditions.html",
+     "line": 329,
+     "tag": "p",
+     "classes": null,
+     "text": "To the keen eye you may recognize the leaf icon that I am using for th",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "fashion.html",
+     "line": 473,
+     "tag": "p",
+     "classes": null,
+     "text": "This project took quite a bit of computing power often times more them",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "index.html",
+     "line": 795,
+     "tag": "p",
+     "classes": "description",
+     "text": "CSS Playground is a collection of small, interactive tools designed to",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "index.html",
+     "line": 806,
+     "tag": "p",
+     "classes": "description",
+     "text": "A series of principles and strategies that I have found to work well w",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "index.html",
+     "line": 815,
+     "tag": "p",
+     "classes": "description",
+     "text": "FlowingData explores how we use analysis and visualization to understa",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "index.html",
+     "line": 824,
+     "tag": "p",
+     "classes": "description",
+     "text": "This book is a guide to how we do product development at Basecamp. It\u2019",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "index.html",
+     "line": 833,
+     "tag": "p",
+     "classes": "description",
+     "text": "Get inspired and keep up with the latest web & mobile app UI design tr",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "index.html",
+     "line": 842,
+     "tag": "p",
+     "classes": "description",
+     "text": "The designer of famed logos had a rich and important career in designi",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "index.html",
+     "line": 851,
+     "tag": "p",
+     "classes": "description",
+     "text": "A searchable archive of typographic design, indexed by typeface, forma",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "index.html",
+     "line": 860,
+     "tag": "p",
+     "classes": "description",
+     "text": "Flexible, super charged, batch image processing for your Mac.",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2023-favorite-things.html",
+     "line": 306,
+     "tag": "p",
+     "classes": "description",
+     "text": "A 5000mAh capacity MagSafe compatible battery pack.",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2023-favorite-things.html",
+     "line": 315,
+     "tag": "p",
+     "classes": "description",
+     "text": "HUGE* If True is an optimistic show about using science and technology",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2023-favorite-things.html",
+     "line": 324,
+     "tag": "p",
+     "classes": "description",
+     "text": "Procreate Dreams is an award-winning animation app, packed with powerf",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2023-favorite-things.html",
+     "line": 333,
+     "tag": "p",
+     "classes": "description",
+     "text": "The official Wikipedia iOS app. Particularly enjoy the \"Picture of the",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2023-favorite-things.html",
+     "line": 342,
+     "tag": "p",
+     "classes": "description",
+     "text": "Stephen Wilkes\u2019s extraordinary panoramas depict famous landmarks from ",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2024-favorite-things.html",
+     "line": 306,
+     "tag": "p",
+     "classes": "description",
+     "text": "The Bic Cristal you know and love with a premium twist.",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2024-favorite-things.html",
+     "line": 315,
+     "tag": "p",
+     "classes": "description",
+     "text": "Sweet and delicious, these dried strawberries make a great snack!",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2024-favorite-things.html",
+     "line": 324,
+     "tag": "p",
+     "classes": "description",
+     "text": "'We play games where the world is our board.' - Think Amazing Race, bu",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2024-favorite-things.html",
+     "line": 333,
+     "tag": "p",
+     "classes": "description",
+     "text": "Supercharge Apple Shortcuts with a whole lot more actions!",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2024-favorite-things.html",
+     "line": 342,
+     "tag": "p",
+     "classes": "description",
+     "text": "A series following an aspiring chemist in a world that insists women b",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2024-favorite-things.html",
+     "line": 351,
+     "tag": "p",
+     "classes": "description",
+     "text": "A classic bolt action pen with an upcycled twist.",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2024-favorite-things.html",
+     "line": 360,
+     "tag": "p",
+     "classes": "description",
+     "text": "A collection of concept art from Pixar's Monsters, Inc. One of my favo",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2025-favorite-things.html",
+     "line": 306,
+     "tag": "p",
+     "classes": "description",
+     "text": "Apple's AirPods 4 with Active Noise Cancellation. My goto pair of earb",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2025-favorite-things.html",
+     "line": 315,
+     "tag": "p",
+     "classes": "description",
+     "text": "Toasted oat streusel & a brambleberry jam layered throughout vanilla i",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2025-favorite-things.html",
+     "line": 324,
+     "tag": "p",
+     "classes": "description",
+     "text": "A show about tech\u2019s biggest hits, misses, & the stories behind them.",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2025-favorite-things.html",
+     "line": 333,
+     "tag": "p",
+     "classes": "description",
+     "text": "Engineering meets problem-solving to build things that shouldn\u2019t exist",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2025-favorite-things.html",
+     "line": 342,
+     "tag": "p",
+     "classes": "description",
+     "text": "A docuseries about Wrexham FC starring Rob McElhenney & Ryan Reynolds.",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2025-favorite-things.html",
+     "line": 351,
+     "tag": "p",
+     "classes": "description",
+     "text": "A mediterranean fast-casual restaurant serving up delicious kebabs and",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/2025-favorite-things.html",
+     "line": 360,
+     "tag": "p",
+     "classes": "description",
+     "text": "A short telephoto lens where subjects pop and backgrounds vanish.",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/career-ladders.html",
+     "line": 306,
+     "tag": "p",
+     "classes": "description",
+     "text": "Career framework inspiration from the world's best companies.",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/career-ladders.html",
+     "line": 315,
+     "tag": "p",
+     "classes": "description",
+     "text": "How the Figma Design organization thinks about performance at each lev",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/career-ladders.html",
+     "line": 324,
+     "tag": "p",
+     "classes": "description",
+     "text": "A guide to Trunk Club's team, roles, expectations, and values",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/career-ladders.html",
+     "line": 333,
+     "tag": "p",
+     "classes": "description",
+     "text": "Intercom's guide to product design roles and responsibilities",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/career-ladders.html",
+     "line": 342,
+     "tag": "p",
+     "classes": "description",
+     "text": "At GitLab, product designers collaborate closely with product managers",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/career-ladders.html",
+     "line": 351,
+     "tag": "p",
+     "classes": "description",
+     "text": "A sample of career ladders I use for my organization, open sourced for",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/career-ladders.html",
+     "line": 360,
+     "tag": "p",
+     "classes": "description",
+     "text": "A public collection of BuzzFeed Design career documentation.",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/chicago-eateries.html",
+     "line": 306,
+     "tag": "p",
+     "classes": "description",
+     "text": "Modern American with so many lovely dishes. Definitely get the Chickpe",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/chicago-eateries.html",
+     "line": 315,
+     "tag": "p",
+     "classes": "description",
+     "text": "Ema is a Mediterranean restaurant in River North. At the core of the m",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/chicago-eateries.html",
+     "line": 324,
+     "tag": "p",
+     "classes": "description",
+     "text": "A diner-style bar and restaurant with a passion for eggs, Au Cheval el",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/chicago-eateries.html",
+     "line": 333,
+     "tag": "p",
+     "classes": "description",
+     "text": "Modern twist on the classic comfort foods.",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/chicago-eateries.html",
+     "line": 342,
+     "tag": "p",
+     "classes": "description",
+     "text": "The curated menu focuses on staples of backyard BBQ, including brisket",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/chicago-eateries.html",
+     "line": 351,
+     "tag": "p",
+     "classes": "description",
+     "text": "Creative Chinese fare features hand-pulled noodles, house-made dumplin",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/chicago-eateries.html",
+     "line": 360,
+     "tag": "p",
+     "classes": "description",
+     "text": "Hip spot for Baja-style seafood with a focus on live-fire cooking.",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/conferences.html",
+     "line": 306,
+     "tag": "p",
+     "classes": "description",
+     "text": "From in-depth conferences to lively podcast discussions, our events ca",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/conferences.html",
+     "line": 315,
+     "tag": "p",
+     "classes": "description",
+     "text": "Up to 90% of product features still fail to deliver their expected val",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/conferences.html",
+     "line": 324,
+     "tag": "p",
+     "classes": "description",
+     "text": "The IA Conference is the leading gathering for academics and practitio",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/conferences.html",
+     "line": 333,
+     "tag": "p",
+     "classes": "description",
+     "text": "Config is Figma's annual design conference for people who build produc",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/conferences.html",
+     "line": 342,
+     "tag": "p",
+     "classes": "description",
+     "text": "The premier conference & exhibition on computer graphics and interacti",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/cost-bad-ux.html",
+     "line": 306,
+     "tag": "p",
+     "classes": "description",
+     "text": "Stakeholders often ask: \u201cHow much does it cost to do this? It sounds e",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/cost-bad-ux.html",
+     "line": 315,
+     "tag": "p",
+     "classes": "description",
+     "text": "Will we always make the same errors in building things? The $900 milli",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/cost-bad-ux.html",
+     "line": 324,
+     "tag": "p",
+     "classes": "description",
+     "text": "Sonos is delaying two hardware releases because of the app\u2019s problems.",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/edu-deals.html",
+     "line": 306,
+     "tag": "p",
+     "classes": "description",
+     "text": "Sketch is a complete design platform. With a native Mac app for design",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/edu-deals.html",
+     "line": 315,
+     "tag": "p",
+     "classes": "description",
+     "text": "Figma and FigJam are design and collaboration software used by profess",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/edu-deals.html",
+     "line": 324,
+     "tag": "p",
+     "classes": "description",
+     "text": "A commercial 3D computer graphics and computer-aided design (CAD) appl",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/edu-deals.html",
+     "line": 333,
+     "tag": "p",
+     "classes": "description",
+     "text": "Creator Studio is a subscription bundle of five industry-leading apps ",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/edu-deals.html",
+     "line": 342,
+     "tag": "p",
+     "classes": "description",
+     "text": "Eligible institutions can sign up for Office 365 Education for the cla",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    },
+    {
+     "page": "resources/collection/edu-deals.html",
+     "line": 351,
+     "tag": "p",
+     "classes": "description",
+     "text": "Learn to ship software like a pro. There's no substitute for hands-on ",
+     "src": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+     }
+    }
+   ],
+   "sources": [
+    [
+     {
+      "prop": "font-family",
+      "value": "\"Lato\",sans-serif",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/body-sm"
+     },
+     {
+      "prop": "font-size",
+      "value": "1rem",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/body-sm"
+     },
+     {
+      "prop": "font-weight",
+      "value": "400",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/body-sm"
+     },
+     {
+      "prop": "line-height",
+      "value": "1.6",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/body-sm"
      }
     ]
    ]
@@ -2117,7 +2952,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|10.0|700|normal|16.0|.3em|uppercase",
-     "card": "C7",
+     "card": "C6",
      "widths": [
       "small",
       "medium",
@@ -2908,28 +3743,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow"
      },
      {
       "prop": "font-size",
       "value": ".625rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow"
      },
      {
       "prop": "letter-spacing",
       "value": ".3em",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow"
      },
      {
@@ -2943,835 +3778,8 @@ const DATA = {
       "prop": "text-transform",
       "value": "uppercase",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow"
-     }
-    ]
-   ]
-  },
-  {
-   "id": "484b373f7e",
-   "count": 456,
-   "renders": [
-    {
-     "family": "Lato",
-     "size": 16.0,
-     "weight": "400",
-     "style": "normal",
-     "line_height": 25.6,
-     "letter_spacing": "normal",
-     "text_transform": "none",
-     "size_unresolved": false,
-     "on_scale": true,
-     "style_id": "Lato|16.0|400|normal|25.6|normal|none",
-     "card": "C3",
-     "widths": [
-      "small",
-      "medium",
-      "large",
-      "xlarge",
-      "xxlarge"
-     ],
-     "label": "small\u2013xxlarge"
-    }
-   ],
-   "responsive": false,
-   "entries": {
-    "product/body-sm": 2280
-   },
-   "entry": "product/body-sm",
-   "register": "product",
-   "pages": [
-    "bowlingtable.html",
-    "colab.html",
-    "enviromental-conditions.html",
-    "fashion.html",
-    "resources.html",
-    "resources/collection/2023-favorite-things.html",
-    "resources/collection/2024-favorite-things.html",
-    "resources/collection/2025-favorite-things.html",
-    "resources/collection/career-ladders.html",
-    "resources/collection/chicago-eateries.html",
-    "resources/collection/conferences.html",
-    "resources/collection/cost-bad-ux.html",
-    "resources/collection/edu-deals.html",
-    "resources/collection/how-the-internet-works.html",
-    "resources/collection/job-hunting.html",
-    "resources/collection/my-tech-stack.html",
-    "resources/collection/new-to-dev.html",
-    "resources/collection/new-to-ux.html",
-    "resources/collection/pittsburgh-eateries.html",
-    "resources/collection/shared-architecture-apple-pixar.html",
-    "resources/collection/tech-go-tos.html",
-    "resources/collection/vancouver-eateries.html",
-    "safar-splash.html",
-    "watson.html"
-   ],
-   "page_count": 24,
-   "tags": [
-    "p"
-   ],
-   "classes": [
-    "description"
-   ],
-   "samples": [
-    "This photo took many hours to shot and even longer to edit due to all the perspective distortion coming out of the camer",
-    "This is by fair my favorite detail of the table because it shows the construction from the original use of this slab, a ",
-    "Future me here, Looks like there was quite a bit opportunity on this ideas, as so many tools have launched a similar fea",
-    "To the keen eye you may recognize the leaf icon that I am using for the branding of this project, its from Wall-E! You m",
-    "This project took quite a bit of computing power often times more them we had available. We regularly crashed several of"
-   ],
-   "uses": [
-    {
-     "page": "bowlingtable.html",
-     "line": 292,
-     "tag": "p",
-     "classes": null,
-     "text": "This photo took many hours to shot and even longer to edit due to all ",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "bowlingtable.html",
-     "line": 307,
-     "tag": "p",
-     "classes": null,
-     "text": "This is by fair my favorite detail of the table because it shows the c",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "colab.html",
-     "line": 293,
-     "tag": "p",
-     "classes": null,
-     "text": "Future me here, Looks like there was quite a bit opportunity on this i",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "enviromental-conditions.html",
-     "line": 329,
-     "tag": "p",
-     "classes": null,
-     "text": "To the keen eye you may recognize the leaf icon that I am using for th",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "fashion.html",
-     "line": 473,
-     "tag": "p",
-     "classes": null,
-     "text": "This project took quite a bit of computing power often times more them",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2023-favorite-things.html",
-     "line": 306,
-     "tag": "p",
-     "classes": "description",
-     "text": "A 5000mAh capacity MagSafe compatible battery pack.",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2023-favorite-things.html",
-     "line": 315,
-     "tag": "p",
-     "classes": "description",
-     "text": "HUGE* If True is an optimistic show about using science and technology",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2023-favorite-things.html",
-     "line": 324,
-     "tag": "p",
-     "classes": "description",
-     "text": "Procreate Dreams is an award-winning animation app, packed with powerf",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2023-favorite-things.html",
-     "line": 333,
-     "tag": "p",
-     "classes": "description",
-     "text": "The official Wikipedia iOS app. Particularly enjoy the \"Picture of the",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2023-favorite-things.html",
-     "line": 342,
-     "tag": "p",
-     "classes": "description",
-     "text": "Stephen Wilkes\u2019s extraordinary panoramas depict famous landmarks from ",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2024-favorite-things.html",
-     "line": 306,
-     "tag": "p",
-     "classes": "description",
-     "text": "The Bic Cristal you know and love with a premium twist.",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2024-favorite-things.html",
-     "line": 315,
-     "tag": "p",
-     "classes": "description",
-     "text": "Sweet and delicious, these dried strawberries make a great snack!",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2024-favorite-things.html",
-     "line": 324,
-     "tag": "p",
-     "classes": "description",
-     "text": "'We play games where the world is our board.' - Think Amazing Race, bu",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2024-favorite-things.html",
-     "line": 333,
-     "tag": "p",
-     "classes": "description",
-     "text": "Supercharge Apple Shortcuts with a whole lot more actions!",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2024-favorite-things.html",
-     "line": 342,
-     "tag": "p",
-     "classes": "description",
-     "text": "A series following an aspiring chemist in a world that insists women b",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2024-favorite-things.html",
-     "line": 351,
-     "tag": "p",
-     "classes": "description",
-     "text": "A classic bolt action pen with an upcycled twist.",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2024-favorite-things.html",
-     "line": 360,
-     "tag": "p",
-     "classes": "description",
-     "text": "A collection of concept art from Pixar's Monsters, Inc. One of my favo",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2025-favorite-things.html",
-     "line": 306,
-     "tag": "p",
-     "classes": "description",
-     "text": "Apple's AirPods 4 with Active Noise Cancellation. My goto pair of earb",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2025-favorite-things.html",
-     "line": 315,
-     "tag": "p",
-     "classes": "description",
-     "text": "Toasted oat streusel & a brambleberry jam layered throughout vanilla i",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2025-favorite-things.html",
-     "line": 324,
-     "tag": "p",
-     "classes": "description",
-     "text": "A show about tech\u2019s biggest hits, misses, & the stories behind them.",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2025-favorite-things.html",
-     "line": 333,
-     "tag": "p",
-     "classes": "description",
-     "text": "Engineering meets problem-solving to build things that shouldn\u2019t exist",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2025-favorite-things.html",
-     "line": 342,
-     "tag": "p",
-     "classes": "description",
-     "text": "A docuseries about Wrexham FC starring Rob McElhenney & Ryan Reynolds.",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2025-favorite-things.html",
-     "line": 351,
-     "tag": "p",
-     "classes": "description",
-     "text": "A mediterranean fast-casual restaurant serving up delicious kebabs and",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/2025-favorite-things.html",
-     "line": 360,
-     "tag": "p",
-     "classes": "description",
-     "text": "A short telephoto lens where subjects pop and backgrounds vanish.",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/career-ladders.html",
-     "line": 306,
-     "tag": "p",
-     "classes": "description",
-     "text": "Career framework inspiration from the world's best companies.",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/career-ladders.html",
-     "line": 315,
-     "tag": "p",
-     "classes": "description",
-     "text": "How the Figma Design organization thinks about performance at each lev",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/career-ladders.html",
-     "line": 324,
-     "tag": "p",
-     "classes": "description",
-     "text": "A guide to Trunk Club's team, roles, expectations, and values",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/career-ladders.html",
-     "line": 333,
-     "tag": "p",
-     "classes": "description",
-     "text": "Intercom's guide to product design roles and responsibilities",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/career-ladders.html",
-     "line": 342,
-     "tag": "p",
-     "classes": "description",
-     "text": "At GitLab, product designers collaborate closely with product managers",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/career-ladders.html",
-     "line": 351,
-     "tag": "p",
-     "classes": "description",
-     "text": "A sample of career ladders I use for my organization, open sourced for",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/career-ladders.html",
-     "line": 360,
-     "tag": "p",
-     "classes": "description",
-     "text": "A public collection of BuzzFeed Design career documentation.",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/chicago-eateries.html",
-     "line": 306,
-     "tag": "p",
-     "classes": "description",
-     "text": "Modern American with so many lovely dishes. Definitely get the Chickpe",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/chicago-eateries.html",
-     "line": 315,
-     "tag": "p",
-     "classes": "description",
-     "text": "Ema is a Mediterranean restaurant in River North. At the core of the m",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/chicago-eateries.html",
-     "line": 324,
-     "tag": "p",
-     "classes": "description",
-     "text": "A diner-style bar and restaurant with a passion for eggs, Au Cheval el",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/chicago-eateries.html",
-     "line": 333,
-     "tag": "p",
-     "classes": "description",
-     "text": "Modern twist on the classic comfort foods.",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/chicago-eateries.html",
-     "line": 342,
-     "tag": "p",
-     "classes": "description",
-     "text": "The curated menu focuses on staples of backyard BBQ, including brisket",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/chicago-eateries.html",
-     "line": 351,
-     "tag": "p",
-     "classes": "description",
-     "text": "Creative Chinese fare features hand-pulled noodles, house-made dumplin",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/chicago-eateries.html",
-     "line": 360,
-     "tag": "p",
-     "classes": "description",
-     "text": "Hip spot for Baja-style seafood with a focus on live-fire cooking.",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/conferences.html",
-     "line": 306,
-     "tag": "p",
-     "classes": "description",
-     "text": "From in-depth conferences to lively podcast discussions, our events ca",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/conferences.html",
-     "line": 315,
-     "tag": "p",
-     "classes": "description",
-     "text": "Up to 90% of product features still fail to deliver their expected val",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/conferences.html",
-     "line": 324,
-     "tag": "p",
-     "classes": "description",
-     "text": "The IA Conference is the leading gathering for academics and practitio",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/conferences.html",
-     "line": 333,
-     "tag": "p",
-     "classes": "description",
-     "text": "Config is Figma's annual design conference for people who build produc",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/conferences.html",
-     "line": 342,
-     "tag": "p",
-     "classes": "description",
-     "text": "The premier conference & exhibition on computer graphics and interacti",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/cost-bad-ux.html",
-     "line": 306,
-     "tag": "p",
-     "classes": "description",
-     "text": "Stakeholders often ask: \u201cHow much does it cost to do this? It sounds e",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/cost-bad-ux.html",
-     "line": 315,
-     "tag": "p",
-     "classes": "description",
-     "text": "Will we always make the same errors in building things? The $900 milli",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/cost-bad-ux.html",
-     "line": 324,
-     "tag": "p",
-     "classes": "description",
-     "text": "Sonos is delaying two hardware releases because of the app\u2019s problems.",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/edu-deals.html",
-     "line": 306,
-     "tag": "p",
-     "classes": "description",
-     "text": "Sketch is a complete design platform. With a native Mac app for design",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/edu-deals.html",
-     "line": 315,
-     "tag": "p",
-     "classes": "description",
-     "text": "Figma and FigJam are design and collaboration software used by profess",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/edu-deals.html",
-     "line": 324,
-     "tag": "p",
-     "classes": "description",
-     "text": "A commercial 3D computer graphics and computer-aided design (CAD) appl",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/edu-deals.html",
-     "line": 333,
-     "tag": "p",
-     "classes": "description",
-     "text": "Creator Studio is a subscription bundle of five industry-leading apps ",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/edu-deals.html",
-     "line": 342,
-     "tag": "p",
-     "classes": "description",
-     "text": "Eligible institutions can sign up for Office 365 Education for the cla",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/edu-deals.html",
-     "line": 351,
-     "tag": "p",
-     "classes": "description",
-     "text": "Learn to ship software like a pro. There's no substitute for hands-on ",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/edu-deals.html",
-     "line": 360,
-     "tag": "p",
-     "classes": "description",
-     "text": "Students, boost your Webflow knowledge with a free annual CMS site pla",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/edu-deals.html",
-     "line": 369,
-     "tag": "p",
-     "classes": "description",
-     "text": "Free Screen & Video Recorder for Education. Loom offers qualified educ",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/how-the-internet-works.html",
-     "line": 306,
-     "tag": "p",
-     "classes": "description",
-     "text": "What is the internet actually made of? And, how does it work? Answerin",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/how-the-internet-works.html",
-     "line": 315,
-     "tag": "p",
-     "classes": "description",
-     "text": "We visit Denmark and talk to a marine maintenance manager to learn mor",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/how-the-internet-works.html",
-     "line": 324,
-     "tag": "p",
-     "classes": "description",
-     "text": "One day, a bus severed the cable that provided internet to Daniel Here",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/how-the-internet-works.html",
-     "line": 333,
-     "tag": "p",
-     "classes": "description",
-     "text": "The internet allows us to see videos, photos, and news from anywhere i",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/how-the-internet-works.html",
-     "line": 342,
-     "tag": "p",
-     "classes": "description",
-     "text": "Your internet isn't just underwater. It's also covered in Vaseline.",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "resources/collection/how-the-internet-works.html",
-     "line": 351,
-     "tag": "p",
-     "classes": "description",
-     "text": "We've heard some strange rumblings about 7 keys that can shut down the",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    }
-   ],
-   "sources": [
-    [
-     {
-      "prop": "font-family",
-      "value": "\"Lato\",sans-serif",
-      "file": "_sass/variables.scss",
-      "line": 473,
-      "via": "product/body-sm"
-     },
-     {
-      "prop": "font-size",
-      "value": "1rem",
-      "file": "_sass/variables.scss",
-      "line": 473,
-      "via": "product/body-sm"
-     },
-     {
-      "prop": "font-weight",
-      "value": "400",
-      "file": "_sass/variables.scss",
-      "line": 473,
-      "via": "product/body-sm"
-     },
-     {
-      "prop": "line-height",
-      "value": "1.6",
-      "file": "_sass/variables.scss",
-      "line": 473,
-      "via": "product/body-sm"
      }
     ]
    ]
@@ -3791,7 +3799,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|20.0|700|normal|30.0|normal|none",
-     "card": "C5",
+     "card": "C4",
      "widths": [
       "small",
       "medium",
@@ -4592,21 +4600,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/nav-link"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/nav-link"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/nav-link"
      },
      {
@@ -4634,7 +4642,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|700|normal|25.6|normal|none",
-     "card": "C8",
+     "card": "C7",
      "widths": [
       "small",
       "medium",
@@ -5439,21 +5447,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/meta"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/meta"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/meta"
      },
      {
@@ -5469,21 +5477,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/meta"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/meta"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/meta"
      },
      {
@@ -5497,7 +5505,7 @@ const DATA = {
    ]
   },
   {
-   "id": "35523cd3c8",
+   "id": "e1619b1051",
    "count": 449,
    "renders": [
     {
@@ -5505,13 +5513,13 @@ const DATA = {
      "size": 20.0,
      "weight": "700",
      "style": "normal",
-     "line_height": 32.0,
+     "line_height": 28.0,
      "letter_spacing": "normal",
      "text_transform": "none",
      "size_unresolved": false,
      "on_scale": true,
-     "style_id": "Lato|20.0|700|normal|32.0|normal|none",
-     "card": "C4",
+     "style_id": "Lato|20.0|700|normal|28.0|normal|none",
+     "card": "C8",
      "widths": [
       "small",
       "medium",
@@ -6290,28 +6298,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body-strong"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body-strong"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body-strong"
      },
      {
       "prop": "line-height",
-      "value": "1.6",
+      "value": "1.4",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body-strong"
      }
     ]
@@ -7153,21 +7161,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -7183,21 +7191,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -7213,21 +7221,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -7243,21 +7251,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -7285,7 +7293,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|20.0|700|normal|32.0|normal|none",
-     "card": "C4",
+     "card": "C10",
      "widths": [
       "medium",
       "large",
@@ -7305,7 +7313,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|24.0|900|normal|38.4|normal|none",
-     "card": "C10",
+     "card": "C11",
      "widths": [
       "small"
      ],
@@ -8102,28 +8110,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/footer-title"
      },
      {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/footer-title"
      },
      {
       "prop": "font-weight",
       "value": "900",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/footer-title"
      },
      {
       "prop": "line-height",
       "value": "1.6",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/footer-title"
      }
     ],
@@ -8132,28 +8140,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/footer-title"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/footer-title"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/footer-title"
      },
      {
       "prop": "line-height",
       "value": "1.6",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/footer-title"
      }
     ]
@@ -8174,7 +8182,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|20.0|700|normal|30.0|normal|none",
-     "card": "C5",
+     "card": "C4",
      "widths": [
       "medium",
       "large",
@@ -8194,7 +8202,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|16.0|700|normal|19.2|normal|none",
-     "card": "C11",
+     "card": "C12",
      "widths": [
       "small"
      ],
@@ -8992,28 +9000,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/nav-link-sm"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/nav-link-sm"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/nav-link-sm"
      },
      {
       "prop": "line-height",
       "value": "1.2",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/nav-link-sm"
      }
     ],
@@ -9022,21 +9030,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/nav-link"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/nav-link"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/nav-link"
      },
      {
@@ -9084,7 +9092,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|400|normal|24.0|normal|none",
-     "card": "C12",
+     "card": "C13",
      "widths": [
       "small"
      ],
@@ -9887,21 +9895,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -9917,21 +9925,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -9959,7 +9967,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|700|normal|16.0|normal|none",
-     "card": "C13",
+     "card": "C14",
      "widths": [
       "small",
       "medium",
@@ -10763,28 +10771,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/control"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/control"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/control"
      },
      {
       "prop": "line-height",
       "value": "1",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/control"
      },
      {
@@ -10812,7 +10820,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|50.0|700|normal|70.0|normal|none",
-     "card": "C17",
+     "card": "C18",
      "widths": [
       "medium",
       "large",
@@ -10832,7 +10840,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|40.0|700|normal|normal|normal|none",
-     "card": "C14",
+     "card": "C15",
      "widths": [
       "small"
      ],
@@ -11621,14 +11629,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      },
      {
       "prop": "font-size",
       "value": "2.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      },
      {
@@ -11642,14 +11650,14 @@ const DATA = {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      },
      {
       "prop": "line-height",
       "value": "normal",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      }
     ],
@@ -11658,14 +11666,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      },
      {
       "prop": "font-size",
       "value": "3.125rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      },
      {
@@ -11679,7 +11687,7 @@ const DATA = {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      },
      {
@@ -11843,14 +11851,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      },
      {
       "prop": "font-size",
       "value": "2.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      },
      {
@@ -11864,14 +11872,14 @@ const DATA = {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      },
      {
       "prop": "line-height",
       "value": "normal",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      }
     ],
@@ -11880,14 +11888,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      },
      {
       "prop": "font-size",
       "value": "3.125rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      },
      {
@@ -11901,7 +11909,7 @@ const DATA = {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      },
      {
@@ -11929,7 +11937,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|20.0|700|normal|24.0|normal|none",
-     "card": "C18",
+     "card": "C19",
      "widths": [
       "small",
       "medium",
@@ -12730,28 +12738,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/snackbar-title"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/snackbar-title"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/snackbar-title"
      },
      {
       "prop": "line-height",
       "value": "1.2",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/snackbar-title"
      }
     ]
@@ -12772,7 +12780,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|400|normal|19.2|normal|none",
-     "card": "C16",
+     "card": "C17",
      "widths": [
       "small",
       "medium",
@@ -13573,28 +13581,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/snackbar-link"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/snackbar-link"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/snackbar-link"
      },
      {
       "prop": "line-height",
       "value": "1.2",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/snackbar-link"
      }
     ]
@@ -13615,7 +13623,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|32.0|700|normal|41.6|normal|none",
-     "card": "C20",
+     "card": "C21",
      "widths": [
       "small",
       "medium",
@@ -14412,7 +14420,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body-sm-strong"
      },
      {
@@ -14426,14 +14434,14 @@ const DATA = {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body-sm-strong"
      },
      {
       "prop": "line-height",
       "value": "1.3",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body-sm-strong"
      }
     ]
@@ -14454,7 +14462,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|700|normal|20.8|normal|none",
-     "card": "C19",
+     "card": "C20",
      "widths": [
       "small",
       "medium",
@@ -15253,28 +15261,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body-sm-strong"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body-sm-strong"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body-sm-strong"
      },
      {
       "prop": "line-height",
       "value": "1.3",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body-sm-strong"
      }
     ]
@@ -15295,7 +15303,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|700|normal|24.0|normal|none",
-     "card": "C15",
+     "card": "C16",
      "widths": [
       "small",
       "medium",
@@ -16096,21 +16104,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/meta"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/meta"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/meta"
      },
      {
@@ -16138,7 +16146,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|32.0|700|normal|32.0|normal|none",
-     "card": "C22",
+     "card": "C23",
      "widths": [
       "medium",
       "large",
@@ -16158,7 +16166,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|24.0|700|normal|24.0|normal|none",
-     "card": "C21",
+     "card": "C22",
      "widths": [
       "small"
      ],
@@ -16920,28 +16928,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/tile-title"
      },
      {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/tile-title"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/tile-title"
      },
      {
       "prop": "line-height",
       "value": "1",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/tile-title"
      }
     ],
@@ -16950,28 +16958,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/tile-title"
      },
      {
       "prop": "font-size",
       "value": "2rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/tile-title"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/tile-title"
      },
      {
       "prop": "line-height",
       "value": "1",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/tile-title"
      }
     ]
@@ -16992,7 +17000,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|60.0|700|normal|54.0|normal|none",
-     "card": "C24",
+     "card": "C25",
      "widths": [
       "medium",
       "large",
@@ -17012,7 +17020,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Zilla Slab|48.0|700|normal|43.2|normal|none",
-     "card": "C23",
+     "card": "C24",
      "widths": [
       "small"
      ],
@@ -17810,14 +17818,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/page-title"
      },
      {
       "prop": "font-size",
       "value": "3rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/page-title"
      },
      {
@@ -17831,14 +17839,14 @@ const DATA = {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/page-title"
      },
      {
       "prop": "line-height",
       "value": ".9",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/page-title"
      }
     ],
@@ -17847,14 +17855,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/page-title"
      },
      {
       "prop": "font-size",
       "value": "3.75rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/page-title"
      },
      {
@@ -17868,14 +17876,14 @@ const DATA = {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/page-title"
      },
      {
       "prop": "line-height",
       "value": ".9",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/page-title"
      }
     ]
@@ -17896,7 +17904,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|32.0|400|normal|51.2|normal|none",
-     "card": "C26",
+     "card": "C27",
      "widths": [
       "medium",
       "large",
@@ -17916,7 +17924,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Zilla Slab|25.6|400|normal|40.96|normal|none",
-     "card": "C25",
+     "card": "C26",
      "widths": [
       "small"
      ],
@@ -18713,21 +18721,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/date-stamp"
      },
      {
       "prop": "font-size",
       "value": "1.6rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/date-stamp"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/date-stamp"
      },
      {
@@ -18743,21 +18751,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/date-stamp"
      },
      {
       "prop": "font-size",
       "value": "2rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/date-stamp"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/date-stamp"
      },
      {
@@ -18785,7 +18793,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|20.0|400|normal|28.0|normal|none",
-     "card": "C28",
+     "card": "C29",
      "widths": [
       "medium",
       "large",
@@ -18805,7 +18813,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|400|normal|22.4|normal|none",
-     "card": "C27",
+     "card": "C28",
      "widths": [
       "small"
      ],
@@ -19507,28 +19515,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      },
      {
       "prop": "line-height",
       "value": "1.4",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      }
     ],
@@ -19537,28 +19545,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      },
      {
       "prop": "line-height",
       "value": "1.4",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      }
     ],
@@ -19567,28 +19575,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      },
      {
       "prop": "line-height",
       "value": "1.4",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      }
     ],
@@ -19597,28 +19605,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      },
      {
       "prop": "line-height",
       "value": "1.4",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-detail"
      }
     ],
@@ -19627,28 +19635,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/speaking.scss",
-      "line": 236,
+      "line": 230,
       "via": null
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/speaking.scss",
-      "line": 234,
+      "line": 228,
       "via": "$lato-regular"
      },
      {
       "prop": "line-height",
       "value": "1.4",
       "file": "_sass/speaking.scss",
-      "line": 226,
+      "line": 220,
       "via": null
      }
     ],
@@ -19657,28 +19665,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/speaking.scss",
-      "line": 234,
+      "line": 228,
       "via": "$lato-regular"
      },
      {
       "prop": "line-height",
       "value": "1.4",
       "file": "_sass/speaking.scss",
-      "line": 226,
+      "line": 220,
       "via": null
      }
     ]
@@ -19699,7 +19707,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|20.0|900|normal|28.0|normal|none",
-     "card": "C30",
+     "card": "C31",
      "widths": [
       "medium",
       "large",
@@ -19719,7 +19727,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|900|normal|22.4|normal|none",
-     "card": "C29",
+     "card": "C30",
      "widths": [
       "small"
      ],
@@ -20347,14 +20355,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-title"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-title"
      },
      {
@@ -20368,7 +20376,7 @@ const DATA = {
       "prop": "font-weight",
       "value": "900",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-title"
      },
      {
@@ -20384,14 +20392,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-title"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-title"
      },
      {
@@ -20405,7 +20413,7 @@ const DATA = {
       "prop": "font-weight",
       "value": "900",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-title"
      },
      {
@@ -20421,14 +20429,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/about.scss",
-      "line": 557,
+      "line": 550,
       "via": "$lato"
      },
      {
       "prop": "font-size",
       "value": "1em",
       "file": "_sass/about.scss",
-      "line": 558,
+      "line": 551,
       "via": null
      },
      {
@@ -20442,7 +20450,7 @@ const DATA = {
       "prop": "font-weight",
       "value": "900",
       "file": "_sass/about.scss",
-      "line": 559,
+      "line": 552,
       "via": "$lato-black"
      },
      {
@@ -20470,7 +20478,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|20.0|300|italic|32.0|normal|none",
-     "card": "C32",
+     "card": "C33",
      "widths": [
       "medium",
       "large",
@@ -20490,7 +20498,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|300|italic|25.6|normal|none",
-     "card": "C31",
+     "card": "C32",
      "widths": [
       "small"
      ],
@@ -20912,28 +20920,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-date"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-date"
      },
      {
       "prop": "font-style",
       "value": "italic",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-date"
      },
      {
       "prop": "font-weight",
       "value": "300",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-date"
      },
      {
@@ -20949,28 +20957,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-date"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-date"
      },
      {
       "prop": "font-style",
       "value": "italic",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-date"
      },
      {
       "prop": "font-weight",
       "value": "300",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-date"
      },
      {
@@ -20998,7 +21006,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|40.0|700|italic|64.0|normal|none",
-     "card": "C34",
+     "card": "C35",
      "widths": [
       "medium",
       "large",
@@ -21018,7 +21026,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|32.0|700|italic|51.2|normal|none",
-     "card": "C33",
+     "card": "C34",
      "widths": [
       "small"
      ],
@@ -21318,28 +21326,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-md"
      },
      {
       "prop": "font-size",
       "value": "2rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-md"
      },
      {
       "prop": "font-style",
       "value": "italic",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-md"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-md"
      },
      {
@@ -21355,28 +21363,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-md"
      },
      {
       "prop": "font-size",
       "value": "2.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-md"
      },
      {
       "prop": "font-style",
       "value": "italic",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-md"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-md"
      },
      {
@@ -21424,7 +21432,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|19.2|400|normal|30.72|normal|none",
-     "card": "C35",
+     "card": "C36",
      "widths": [
       "small"
      ],
@@ -21723,21 +21731,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-size",
       "value": "1.2rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -21753,21 +21761,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -21783,21 +21791,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-size",
       "value": "1.2rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -21813,21 +21821,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -21843,21 +21851,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-size",
       "value": "1.2rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -21873,21 +21881,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -21915,7 +21923,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|12.0|700|normal|19.2|.3em|uppercase",
-     "card": "C37",
+     "card": "C38",
      "widths": [
       "medium",
       "large",
@@ -21935,7 +21943,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|14.0|700|normal|22.4|.3em|uppercase",
-     "card": "C36",
+     "card": "C37",
      "widths": [
       "small"
      ],
@@ -22226,28 +22234,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow-lg"
      },
      {
       "prop": "font-size",
       "value": ".875rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow-lg"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow-lg"
      },
      {
       "prop": "letter-spacing",
       "value": ".3em",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow-lg"
      },
      {
@@ -22261,7 +22269,7 @@ const DATA = {
       "prop": "text-transform",
       "value": "uppercase",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow-lg"
      }
     ],
@@ -22270,28 +22278,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow-lg"
      },
      {
       "prop": "font-size",
       "value": ".75rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow-lg"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow-lg"
      },
      {
       "prop": "letter-spacing",
       "value": ".3em",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow-lg"
      },
      {
@@ -22305,7 +22313,7 @@ const DATA = {
       "prop": "text-transform",
       "value": "uppercase",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow-lg"
      }
     ]
@@ -22326,7 +22334,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|30.0|700|normal|42.0|normal|none",
-     "card": "C39",
+     "card": "C40",
      "widths": [
       "medium",
       "large",
@@ -22346,7 +22354,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|24.0|700|normal|normal|normal|none",
-     "card": "C38",
+     "card": "C39",
      "widths": [
       "small"
      ],
@@ -22641,14 +22649,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
@@ -22669,7 +22677,7 @@ const DATA = {
       "prop": "line-height",
       "value": "normal",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      }
     ],
@@ -22678,14 +22686,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-size",
       "value": "1.875rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
@@ -22715,14 +22723,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
@@ -22743,7 +22751,7 @@ const DATA = {
       "prop": "line-height",
       "value": "normal",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      }
     ],
@@ -22752,14 +22760,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-size",
       "value": "1.875rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
@@ -22801,7 +22809,7 @@ const DATA = {
      "size_unresolved": true,
      "on_scale": true,
      "style_id": "Lato|20.0|400|normal|None|normal|none|?",
-     "card": "C41",
+     "card": "C42",
      "widths": [
       "medium",
       "large",
@@ -22821,7 +22829,7 @@ const DATA = {
      "size_unresolved": true,
      "on_scale": true,
      "style_id": "Lato|16.0|400|normal|None|normal|none|?",
-     "card": "C40",
+     "card": "C41",
      "widths": [
       "small"
      ],
@@ -23073,35 +23081,35 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-date"
      },
      {
       "prop": "font-size",
       "value": "calc(var(--date-font-scale)*1em)",
       "file": "_sass/about.scss",
-      "line": 436,
+      "line": 429,
       "via": "calc(var(--date-font-scale) * 1em)"
      },
      {
       "prop": "font-style",
       "value": "normal",
       "file": "_sass/about.scss",
-      "line": 431,
+      "line": 424,
       "via": null
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/about.scss",
-      "line": 430,
+      "line": 423,
       "via": "$lato-regular"
      },
      {
       "prop": "line-height",
       "value": "var(--date-line-height)",
       "file": "_sass/about.scss",
-      "line": 437,
+      "line": 430,
       "via": null
      }
     ]
@@ -23122,7 +23130,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|40.0|700|normal|normal|normal|none",
-     "card": "C14",
+     "card": "C15",
      "widths": [
       "small",
       "medium",
@@ -23693,28 +23701,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow-xl"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow-xl"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow-xl"
      },
      {
       "prop": "letter-spacing",
       "value": ".3em",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow-xl"
      },
      {
@@ -23728,7 +23736,7 @@ const DATA = {
       "prop": "text-transform",
       "value": "uppercase",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/eyebrow-xl"
      }
     ]
@@ -23749,7 +23757,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|700|normal|24.0|normal|none",
-     "card": "C15",
+     "card": "C16",
      "widths": [
       "medium",
       "large",
@@ -24025,7 +24033,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -24055,7 +24063,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -24345,14 +24353,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-org"
      },
      {
       "prop": "font-size",
       "value": "1.4rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-org"
      },
      {
@@ -24366,7 +24374,7 @@ const DATA = {
       "prop": "font-weight",
       "value": "900",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-org"
      },
      {
@@ -24382,14 +24390,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-org"
      },
      {
       "prop": "font-size",
       "value": "1.75rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-org"
      },
      {
@@ -24403,7 +24411,7 @@ const DATA = {
       "prop": "font-weight",
       "value": "900",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/item-org"
      },
      {
@@ -24606,28 +24614,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Caveat\",cursive",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/annotation"
      },
      {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/annotation"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/annotation"
      },
      {
       "prop": "line-height",
       "value": "1",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/annotation"
      }
     ]
@@ -24648,7 +24656,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|60.0|700|normal|60.0|normal|none",
-     "card": "C50",
+     "card": "C49",
      "widths": [
       "medium",
       "large",
@@ -24668,7 +24676,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|32.0|700|normal|32.0|normal|none",
-     "card": "C52",
+     "card": "C51",
      "widths": [
       "small"
      ],
@@ -24838,14 +24846,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/gallery-title"
      },
      {
       "prop": "font-size",
       "value": "2rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/gallery-title"
      },
      {
@@ -24859,14 +24867,14 @@ const DATA = {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/gallery-title"
      },
      {
       "prop": "line-height",
       "value": "1",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/gallery-title"
      }
     ],
@@ -24875,14 +24883,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/gallery-title"
      },
      {
       "prop": "font-size",
       "value": "3.75rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/gallery-title"
      },
      {
@@ -24896,15 +24904,357 @@ const DATA = {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/gallery-title"
      },
      {
       "prop": "line-height",
       "value": "1",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/gallery-title"
+     }
+    ]
+   ]
+  },
+  {
+   "id": "78eb2924f4",
+   "count": 10,
+   "renders": [
+    {
+     "family": "Zilla Slab",
+     "size": 70.0,
+     "weight": "700",
+     "style": "normal",
+     "line_height": "normal",
+     "letter_spacing": "normal",
+     "text_transform": "none",
+     "size_unresolved": false,
+     "on_scale": true,
+     "style_id": "Zilla Slab|70.0|700|normal|normal|normal|none",
+     "card": "C53",
+     "widths": [
+      "medium",
+      "large",
+      "xlarge",
+      "xxlarge"
+     ],
+     "label": "medium\u2013xxlarge"
+    },
+    {
+     "family": "Zilla Slab",
+     "size": 40.0,
+     "weight": "700",
+     "style": "normal",
+     "line_height": 40.0,
+     "letter_spacing": "normal",
+     "text_transform": "none",
+     "size_unresolved": false,
+     "on_scale": true,
+     "style_id": "Zilla Slab|40.0|700|normal|40.0|normal|none",
+     "card": "C52",
+     "widths": [
+      "small"
+     ],
+     "label": "small"
+    }
+   ],
+   "responsive": true,
+   "entries": {
+    "product/section-title-lg": 50
+   },
+   "entry": "product/section-title-lg",
+   "register": "product",
+   "pages": [
+    "about.html",
+    "index.html",
+    "speaking.html"
+   ],
+   "page_count": 3,
+   "tags": [
+    "a",
+    "h2"
+   ],
+   "classes": [
+    "cell",
+    "cell medium-shrink small-12"
+   ],
+   "samples": [
+    "Work Experience",
+    "Speaking Events",
+    "Year in Review",
+    "Photography",
+    "Education"
+   ],
+   "uses": [
+    {
+     "page": "about.html",
+     "line": 335,
+     "tag": "h2",
+     "classes": "cell medium-shrink small-12",
+     "text": "Work Experience",
+     "src": {
+      "small": 0,
+      "medium": 1,
+      "large": 1
+     }
+    },
+    {
+     "page": "about.html",
+     "line": 838,
+     "tag": "h2",
+     "classes": "cell medium-shrink small-12",
+     "text": "Education",
+     "src": {
+      "small": 0,
+      "medium": 1,
+      "large": 1
+     }
+    },
+    {
+     "page": "about.html",
+     "line": 862,
+     "tag": "h2",
+     "classes": "cell medium-shrink small-12",
+     "text": "Skills",
+     "src": {
+      "small": 0,
+      "medium": 1,
+      "large": 1
+     }
+    },
+    {
+     "page": "about.html",
+     "line": 886,
+     "tag": "h2",
+     "classes": "cell medium-shrink small-12",
+     "text": "Tools",
+     "src": {
+      "small": 0,
+      "medium": 1,
+      "large": 1
+     }
+    },
+    {
+     "page": "index.html",
+     "line": 297,
+     "tag": "a",
+     "classes": null,
+     "text": "Speaking",
+     "src": {
+      "small": 2,
+      "medium": 3,
+      "large": 3
+     }
+    },
+    {
+     "page": "index.html",
+     "line": 364,
+     "tag": "a",
+     "classes": null,
+     "text": "Projects",
+     "src": {
+      "small": 2,
+      "medium": 3,
+      "large": 3
+     }
+    },
+    {
+     "page": "index.html",
+     "line": 547,
+     "tag": "a",
+     "classes": null,
+     "text": "Photography",
+     "src": {
+      "small": 2,
+      "medium": 3,
+      "large": 3
+     }
+    },
+    {
+     "page": "index.html",
+     "line": 587,
+     "tag": "h2",
+     "classes": "cell",
+     "text": "Year in Review",
+     "src": {
+      "small": 0,
+      "medium": 1,
+      "large": 1
+     }
+    },
+    {
+     "page": "index.html",
+     "line": 781,
+     "tag": "a",
+     "classes": null,
+     "text": "Resources",
+     "src": {
+      "small": 2,
+      "medium": 3,
+      "large": 3
+     }
+    },
+    {
+     "page": "speaking.html",
+     "line": 296,
+     "tag": "h2",
+     "classes": "cell medium-shrink small-12",
+     "text": "Speaking Events",
+     "src": {
+      "small": 0,
+      "medium": 1,
+      "large": 1
+     }
+    }
+   ],
+   "sources": [
+    [
+     {
+      "prop": "font-family",
+      "value": "\"Zilla Slab\",serif",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
+     },
+     {
+      "prop": "font-size",
+      "value": "2.5rem",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
+     },
+     {
+      "prop": "font-style",
+      "value": "normal",
+      "file": "_sass/_type-reset.scss",
+      "line": 57,
+      "via": null
+     },
+     {
+      "prop": "font-weight",
+      "value": "700",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
+     },
+     {
+      "prop": "line-height",
+      "value": "1",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
+     }
+    ],
+    [
+     {
+      "prop": "font-family",
+      "value": "\"Zilla Slab\",serif",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
+     },
+     {
+      "prop": "font-size",
+      "value": "4.375rem",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
+     },
+     {
+      "prop": "font-style",
+      "value": "normal",
+      "file": "_sass/_type-reset.scss",
+      "line": 57,
+      "via": null
+     },
+     {
+      "prop": "font-weight",
+      "value": "700",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
+     },
+     {
+      "prop": "line-height",
+      "value": "normal",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
+     }
+    ],
+    [
+     {
+      "prop": "font-family",
+      "value": "\"Zilla Slab\",serif",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
+     },
+     {
+      "prop": "font-size",
+      "value": "2.5rem",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
+     },
+     {
+      "prop": "font-style",
+      "value": "normal",
+      "file": "_sass/_type-reset.scss",
+      "line": 57,
+      "via": null
+     },
+     {
+      "prop": "font-weight",
+      "value": "700",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
+     },
+     {
+      "prop": "line-height",
+      "value": "1",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
+     }
+    ],
+    [
+     {
+      "prop": "font-family",
+      "value": "\"Zilla Slab\",serif",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
+     },
+     {
+      "prop": "font-size",
+      "value": "4.375rem",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
+     },
+     {
+      "prop": "font-style",
+      "value": "normal",
+      "file": "_sass/_type-reset.scss",
+      "line": 57,
+      "via": null
+     },
+     {
+      "prop": "font-weight",
+      "value": "700",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
+     },
+     {
+      "prop": "line-height",
+      "value": "normal",
+      "file": "_sass/variables.scss",
+      "line": 479,
+      "via": "product/section-title-lg"
      }
     ]
    ]
@@ -24924,7 +25274,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|50.0|400|normal|80.0|normal|none",
-     "card": "C54",
+     "card": "C55",
      "widths": [
       "medium",
       "large",
@@ -24944,7 +25294,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|40.0|400|normal|64.0|normal|none",
-     "card": "C53",
+     "card": "C54",
      "widths": [
       "small"
      ],
@@ -25107,21 +25457,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
       "prop": "font-size",
       "value": "2.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
@@ -25137,21 +25487,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
       "prop": "font-size",
       "value": "3.125rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
@@ -25167,21 +25517,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
       "prop": "font-size",
       "value": "2.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
@@ -25197,21 +25547,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
       "prop": "font-size",
       "value": "3.125rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
@@ -25259,7 +25609,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|700|normal|24.0|normal|none",
-     "card": "C15",
+     "card": "C16",
      "widths": [
       "small"
      ],
@@ -25427,14 +25777,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -25457,14 +25807,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -25487,21 +25837,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/home.scss",
-      "line": 288,
+      "line": 282,
       "via": "$lato-bold"
      },
      {
@@ -25517,21 +25867,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/home.scss",
-      "line": 288,
+      "line": 282,
       "via": "$lato-bold"
      },
      {
@@ -25547,7 +25897,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -25577,14 +25927,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -25607,14 +25957,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -25637,14 +25987,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/speaking.scss",
-      "line": 248,
+      "line": 242,
       "via": null
      },
      {
@@ -25679,7 +26029,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|20.0|400|normal|24.0|normal|none",
-     "card": "C51",
+     "card": "C50",
      "widths": [
       "medium",
       "large",
@@ -25699,7 +26049,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|400|normal|19.2|normal|none",
-     "card": "C16",
+     "card": "C17",
      "widths": [
       "small"
      ],
@@ -25856,7 +26206,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -25870,7 +26220,7 @@ const DATA = {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -25886,28 +26236,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/home.scss",
-      "line": 498,
+      "line": 492,
       "via": null
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "line-height",
       "value": "1.2",
       "file": "_sass/home.scss",
-      "line": 492,
+      "line": 486,
       "via": null
      }
     ],
@@ -25916,28 +26266,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/home.scss",
-      "line": 493,
+      "line": 487,
       "via": null
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "line-height",
       "value": "1.2",
       "file": "_sass/home.scss",
-      "line": 492,
+      "line": 486,
       "via": null
      }
     ]
@@ -25958,7 +26308,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|30.0|700|normal|48.0|normal|none",
-     "card": "C55",
+     "card": "C57",
      "widths": [
       "medium",
       "large",
@@ -25978,7 +26328,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|24.0|700|normal|38.4|normal|none",
-     "card": "C42",
+     "card": "C56",
      "widths": [
       "small"
      ],
@@ -26137,14 +26487,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
@@ -26167,14 +26517,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-size",
       "value": "1.875rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
@@ -26197,14 +26547,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
@@ -26227,14 +26577,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-size",
       "value": "1.875rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
@@ -26269,7 +26619,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|25.0|700|normal|30.0|normal|none",
-     "card": "C56",
+     "card": "C58",
      "widths": [
       "medium",
       "large",
@@ -26289,7 +26639,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|20.0|700|normal|24.0|normal|none",
-     "card": "C18",
+     "card": "C19",
      "widths": [
       "small"
      ],
@@ -26454,7 +26804,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -26496,7 +26846,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|400|normal|19.2|normal|uppercase",
-     "card": "C58",
+     "card": "C60",
      "widths": [
       "medium",
       "large",
@@ -26516,7 +26866,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|12.0|400|normal|14.4|normal|uppercase",
-     "card": "C57",
+     "card": "C59",
      "widths": [
       "small"
      ],
@@ -26683,35 +27033,35 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/data-label"
      },
      {
       "prop": "font-size",
       "value": ".75rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/data-label"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/data-label"
      },
      {
       "prop": "line-height",
       "value": "1.2",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/data-label"
      },
      {
       "prop": "text-transform",
       "value": "uppercase",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/data-label"
      }
     ],
@@ -26720,35 +27070,35 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/data-label"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/data-label"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/data-label"
      },
      {
       "prop": "line-height",
       "value": "1.2",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/data-label"
      },
      {
       "prop": "text-transform",
       "value": "uppercase",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/data-label"
      }
     ]
@@ -26769,7 +27119,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Zilla Slab|36.0|700|normal|50.4|normal|none",
-     "card": "C60",
+     "card": "C62",
      "widths": [
       "medium",
       "large",
@@ -26789,7 +27139,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|20.0|700|normal|28.0|normal|none",
-     "card": "C59",
+     "card": "C61",
      "widths": [
       "small"
      ],
@@ -27203,7 +27553,7 @@ const DATA = {
    ]
   },
   {
-   "id": "1736a6ec67",
+   "id": "0a3f7b90ec",
    "count": 8,
    "renders": [
     {
@@ -27211,13 +27561,13 @@ const DATA = {
      "size": 24.0,
      "weight": "700",
      "style": "normal",
-     "line_height": 38.4,
+     "line_height": 33.6,
      "letter_spacing": "normal",
      "text_transform": "none",
      "size_unresolved": false,
      "on_scale": true,
-     "style_id": "Lato|24.0|700|normal|38.4|normal|none",
-     "card": "C42",
+     "style_id": "Lato|24.0|700|normal|33.6|normal|none",
+     "card": "C63",
      "widths": [
       "small",
       "medium",
@@ -27353,207 +27703,29 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body-strong"
      },
      {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/home.scss",
-      "line": 706,
+      "line": 694,
       "via": null
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body-strong"
      },
      {
       "prop": "line-height",
-      "value": "1.6",
+      "value": "1.4",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body-strong"
-     }
-    ]
-   ]
-  },
-  {
-   "id": "6546d30bef",
-   "count": 8,
-   "renders": [
-    {
-     "family": "Lato",
-     "size": 16.0,
-     "weight": "400",
-     "style": "normal",
-     "line_height": 20.8,
-     "letter_spacing": "normal",
-     "text_transform": "none",
-     "size_unresolved": false,
-     "on_scale": true,
-     "style_id": "Lato|16.0|400|normal|20.8|normal|none",
-     "card": "C49",
-     "widths": [
-      "small",
-      "medium",
-      "large",
-      "xlarge",
-      "xxlarge"
-     ],
-     "label": "small\u2013xxlarge"
-    }
-   ],
-   "responsive": false,
-   "entries": {},
-   "entry": null,
-   "register": null,
-   "pages": [
-    "index.html"
-   ],
-   "page_count": 1,
-   "tags": [
-    "p"
-   ],
-   "classes": [
-    "description"
-   ],
-   "samples": [
-    "CSS Playground is a collection of small, interactive tools designed to make working with CSS more fun and approachable. ",
-    "A series of principles and strategies that I have found to work well when building product. Whether in the discovery pha",
-    "This book is a guide to how we do product development at Basecamp. It\u2019s also a toolbox full of techniques that you can a",
-    "FlowingData explores how we use analysis and visualization to understand data and ourselves.",
-    "The designer of famed logos had a rich and important career in designing film titles, too."
-   ],
-   "uses": [
-    {
-     "page": "index.html",
-     "line": 795,
-     "tag": "p",
-     "classes": "description",
-     "text": "CSS Playground is a collection of small, interactive tools designed to",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "index.html",
-     "line": 806,
-     "tag": "p",
-     "classes": "description",
-     "text": "A series of principles and strategies that I have found to work well w",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "index.html",
-     "line": 815,
-     "tag": "p",
-     "classes": "description",
-     "text": "FlowingData explores how we use analysis and visualization to understa",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "index.html",
-     "line": 824,
-     "tag": "p",
-     "classes": "description",
-     "text": "This book is a guide to how we do product development at Basecamp. It\u2019",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "index.html",
-     "line": 833,
-     "tag": "p",
-     "classes": "description",
-     "text": "Get inspired and keep up with the latest web & mobile app UI design tr",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "index.html",
-     "line": 842,
-     "tag": "p",
-     "classes": "description",
-     "text": "The designer of famed logos had a rich and important career in designi",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "index.html",
-     "line": 851,
-     "tag": "p",
-     "classes": "description",
-     "text": "A searchable archive of typographic design, indexed by typeface, forma",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    },
-    {
-     "page": "index.html",
-     "line": 860,
-     "tag": "p",
-     "classes": "description",
-     "text": "Flexible, super charged, batch image processing for your Mac.",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 0
-     }
-    }
-   ],
-   "sources": [
-    [
-     {
-      "prop": "font-family",
-      "value": "\"Lato\",sans-serif",
-      "file": "_sass/variables.scss",
-      "line": 473,
-      "via": "product/body-sm"
-     },
-     {
-      "prop": "font-size",
-      "value": "1rem",
-      "file": "_sass/home.scss",
-      "line": 709,
-      "via": null
-     },
-     {
-      "prop": "font-weight",
-      "value": "400",
-      "file": "_sass/variables.scss",
-      "line": 473,
-      "via": "product/body-sm"
-     },
-     {
-      "prop": "line-height",
-      "value": "1.3rem",
-      "file": "_sass/home.scss",
-      "line": 710,
-      "via": null
      }
     ]
    ]
@@ -27573,7 +27745,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Zilla Slab|25.6|700|normal|35.84|normal|none",
-     "card": "C62",
+     "card": "C65",
      "widths": [
       "medium",
       "large",
@@ -27593,7 +27765,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Zilla Slab|25.6|700|normal|normal|normal|none",
-     "card": "C61",
+     "card": "C64",
      "widths": [
       "small"
      ],
@@ -27716,7 +27888,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      },
      {
@@ -27744,7 +27916,7 @@ const DATA = {
       "prop": "line-height",
       "value": "normal",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      }
     ],
@@ -27753,7 +27925,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/section-title"
      },
      {
@@ -27802,7 +27974,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|30.0|400|normal|48.0|normal|none",
-     "card": "C64",
+     "card": "C67",
      "widths": [
       "medium",
       "large",
@@ -27822,7 +27994,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|24.0|400|normal|38.4|normal|none",
-     "card": "C63",
+     "card": "C66",
      "widths": [
       "small"
      ],
@@ -27945,21 +28117,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -27975,21 +28147,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-size",
       "value": "1.875rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -28017,7 +28189,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|30.0|400|italic|48.0|normal|none",
-     "card": "C66",
+     "card": "C69",
      "widths": [
       "medium",
       "large",
@@ -28037,7 +28209,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|24.0|400|italic|38.4|normal|none",
-     "card": "C65",
+     "card": "C68",
      "widths": [
       "small"
      ],
@@ -28159,14 +28331,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
@@ -28180,7 +28352,7 @@ const DATA = {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -28196,14 +28368,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-size",
       "value": "1.875rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
@@ -28217,7 +28389,7 @@ const DATA = {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -28233,14 +28405,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
@@ -28270,14 +28442,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
       "prop": "font-size",
       "value": "1.875rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-sm"
      },
      {
@@ -28319,7 +28491,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Caveat|32.0|400|normal|32.0|normal|none",
-     "card": "C67",
+     "card": "C70",
      "widths": [
       "large",
       "xlarge",
@@ -28461,28 +28633,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Caveat\",cursive",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/annotation"
      },
      {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/annotation"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/annotation"
      },
      {
       "prop": "line-height",
       "value": "1",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/annotation"
      }
     ],
@@ -28491,28 +28663,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Caveat\",cursive",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/annotation"
      },
      {
       "prop": "font-size",
       "value": "2rem",
       "file": "_sass/home.scss",
-      "line": 679,
+      "line": 667,
       "via": null
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/annotation"
      },
      {
       "prop": "line-height",
       "value": "1",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/annotation"
      }
     ]
@@ -28533,7 +28705,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|50.0|400|normal|70.0|normal|none",
-     "card": "C69",
+     "card": "C72",
      "widths": [
       "medium",
       "large",
@@ -28553,7 +28725,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|40.0|400|normal|56.0|normal|none",
-     "card": "C68",
+     "card": "C71",
      "widths": [
       "small"
      ],
@@ -28710,7 +28882,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|30.0|700|normal|36.0|normal|none",
-     "card": "C72",
+     "card": "C75",
      "widths": [
       "medium",
       "large",
@@ -28730,7 +28902,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|24.0|700|normal|28.8|normal|none",
-     "card": "C71",
+     "card": "C74",
      "widths": [
       "small"
      ],
@@ -28838,7 +29010,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -28880,7 +29052,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Consolas|20.0|400|normal|32.0|normal|none",
-     "card": "C74",
+     "card": "C77",
      "widths": [
       "medium",
       "large",
@@ -28900,7 +29072,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Consolas|16.0|400|normal|25.6|normal|none",
-     "card": "C73",
+     "card": "C76",
      "widths": [
       "small"
      ],
@@ -29050,7 +29222,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|24.0|400|normal|28.8|normal|none",
-     "card": "C70",
+     "card": "C73",
      "widths": [
       "medium",
       "large",
@@ -29070,7 +29242,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|400|normal|20.8|normal|none",
-     "card": "C49",
+     "card": "C78",
      "widths": [
       "small"
      ],
@@ -29179,28 +29351,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1em",
       "file": "_sass/home.scss",
-      "line": 252,
+      "line": 246,
       "via": null
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "line-height",
       "value": "1.3",
       "file": "_sass/home.scss",
-      "line": 253,
+      "line": 247,
       "via": null
      }
     ],
@@ -29209,672 +29381,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/home.scss",
-      "line": 248,
+      "line": 242,
       "via": null
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "line-height",
       "value": "1.8rem",
       "file": "_sass/home.scss",
-      "line": 249,
-      "via": null
-     }
-    ]
-   ]
-  },
-  {
-   "id": "674d5f53cf",
-   "count": 5,
-   "renders": [
-    {
-     "family": "Zilla Slab",
-     "size": 70.0,
-     "weight": "700",
-     "style": "normal",
-     "line_height": 98.0,
-     "letter_spacing": "normal",
-     "text_transform": "none",
-     "size_unresolved": false,
-     "on_scale": true,
-     "style_id": "Zilla Slab|70.0|700|normal|98.0|normal|none",
-     "card": "C77",
-     "widths": [
-      "large",
-      "xlarge",
-      "xxlarge"
-     ],
-     "label": "large\u2013xxlarge"
-    },
-    {
-     "family": "Zilla Slab",
-     "size": 70.0,
-     "weight": "700",
-     "style": "normal",
-     "line_height": 70.0,
-     "letter_spacing": "normal",
-     "text_transform": "none",
-     "size_unresolved": false,
-     "on_scale": true,
-     "style_id": "Zilla Slab|70.0|700|normal|70.0|normal|none",
-     "card": "C76",
-     "widths": [
-      "medium"
-     ],
-     "label": "medium"
-    },
-    {
-     "family": "Zilla Slab",
-     "size": 56.0,
-     "weight": "700",
-     "style": "normal",
-     "line_height": 56.0,
-     "letter_spacing": "normal",
-     "text_transform": "none",
-     "size_unresolved": false,
-     "on_scale": false,
-     "style_id": "Zilla Slab|56.0|700|normal|56.0|normal|none",
-     "card": "C75",
-     "widths": [
-      "small"
-     ],
-     "label": "small"
-    }
-   ],
-   "responsive": true,
-   "entries": {},
-   "entry": null,
-   "register": null,
-   "pages": [
-    "about.html",
-    "speaking.html"
-   ],
-   "page_count": 2,
-   "tags": [
-    "h2"
-   ],
-   "classes": [
-    "cell medium-shrink small-12"
-   ],
-   "samples": [
-    "Work Experience",
-    "Education",
-    "Skills",
-    "Tools",
-    "Speaking Events"
-   ],
-   "uses": [
-    {
-     "page": "about.html",
-     "line": 335,
-     "tag": "h2",
-     "classes": "cell medium-shrink small-12",
-     "text": "Work Experience",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 1
-     }
-    },
-    {
-     "page": "about.html",
-     "line": 838,
-     "tag": "h2",
-     "classes": "cell medium-shrink small-12",
-     "text": "Education",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 1
-     }
-    },
-    {
-     "page": "about.html",
-     "line": 862,
-     "tag": "h2",
-     "classes": "cell medium-shrink small-12",
-     "text": "Skills",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 1
-     }
-    },
-    {
-     "page": "about.html",
-     "line": 886,
-     "tag": "h2",
-     "classes": "cell medium-shrink small-12",
-     "text": "Tools",
-     "src": {
-      "small": 0,
-      "medium": 0,
-      "large": 1
-     }
-    },
-    {
-     "page": "speaking.html",
-     "line": 296,
-     "tag": "h2",
-     "classes": "cell medium-shrink small-12",
-     "text": "Speaking Events",
-     "src": {
-      "small": 2,
-      "medium": 2,
-      "large": 3
-     }
-    }
-   ],
-   "sources": [
-    [
-     {
-      "prop": "font-family",
-      "value": "\"Zilla Slab\",serif",
-      "file": "_sass/design-system.scss",
-      "line": 21,
-      "via": "$zilla"
-     },
-     {
-      "prop": "font-size",
-      "value": "3.5em",
-      "file": "_sass/about.scss",
-      "line": 186,
-      "via": null
-     },
-     {
-      "prop": "font-style",
-      "value": "normal",
-      "file": "_sass/_type-reset.scss",
-      "line": 57,
-      "via": null
-     },
-     {
-      "prop": "font-weight",
-      "value": "700",
-      "file": "_sass/about.scss",
-      "line": 189,
-      "via": "$zilla-bold"
-     },
-     {
-      "prop": "line-height",
-      "value": "1em",
-      "file": "_sass/about.scss",
-      "line": 196,
-      "via": null
-     }
-    ],
-    [
-     {
-      "prop": "font-family",
-      "value": "\"Zilla Slab\",serif",
-      "file": "_sass/design-system.scss",
-      "line": 21,
-      "via": "$zilla"
-     },
-     {
-      "prop": "font-size",
-      "value": "3.5em",
-      "file": "_sass/about.scss",
-      "line": 186,
-      "via": null
-     },
-     {
-      "prop": "font-style",
-      "value": "normal",
-      "file": "_sass/_type-reset.scss",
-      "line": 57,
-      "via": null
-     },
-     {
-      "prop": "font-weight",
-      "value": "700",
-      "file": "_sass/about.scss",
-      "line": 189,
-      "via": "$zilla-bold"
-     },
-     {
-      "prop": "line-height",
-      "value": "1.4",
-      "file": "_sass/_type-reset.scss",
-      "line": 65,
-      "via": null
-     }
-    ],
-    [
-     {
-      "prop": "font-family",
-      "value": "\"Zilla Slab\",serif",
-      "file": "_sass/design-system.scss",
-      "line": 21,
-      "via": "$zilla"
-     },
-     {
-      "prop": "font-size",
-      "value": "3.5em",
-      "file": "_sass/design-system.scss",
-      "line": 29,
-      "via": null
-     },
-     {
-      "prop": "font-style",
-      "value": "normal",
-      "file": "_sass/_type-reset.scss",
-      "line": 57,
-      "via": null
-     },
-     {
-      "prop": "font-weight",
-      "value": "700",
-      "file": "_sass/speaking.scss",
-      "line": 30,
-      "via": "$zilla-bold"
-     },
-     {
-      "prop": "line-height",
-      "value": "1em",
-      "file": "_sass/speaking.scss",
-      "line": 36,
-      "via": null
-     }
-    ],
-    [
-     {
-      "prop": "font-family",
-      "value": "\"Zilla Slab\",serif",
-      "file": "_sass/design-system.scss",
-      "line": 21,
-      "via": "$zilla"
-     },
-     {
-      "prop": "font-size",
-      "value": "3.5em",
-      "file": "_sass/design-system.scss",
-      "line": 29,
-      "via": null
-     },
-     {
-      "prop": "font-style",
-      "value": "normal",
-      "file": "_sass/_type-reset.scss",
-      "line": 57,
-      "via": null
-     },
-     {
-      "prop": "font-weight",
-      "value": "700",
-      "file": "_sass/speaking.scss",
-      "line": 30,
-      "via": "$zilla-bold"
-     },
-     {
-      "prop": "line-height",
-      "value": "1.4",
-      "file": "_sass/_type-reset.scss",
-      "line": 65,
-      "via": null
-     }
-    ]
-   ]
-  },
-  {
-   "id": "78eb2924f4",
-   "count": 5,
-   "renders": [
-    {
-     "family": "Zilla Slab",
-     "size": 70.0,
-     "weight": "700",
-     "style": "normal",
-     "line_height": "normal",
-     "letter_spacing": "normal",
-     "text_transform": "none",
-     "size_unresolved": false,
-     "on_scale": true,
-     "style_id": "Zilla Slab|70.0|700|normal|normal|normal|none",
-     "card": "C79",
-     "widths": [
-      "medium",
-      "large",
-      "xlarge",
-      "xxlarge"
-     ],
-     "label": "medium\u2013xxlarge"
-    },
-    {
-     "family": "Zilla Slab",
-     "size": 40.0,
-     "weight": "700",
-     "style": "normal",
-     "line_height": 40.0,
-     "letter_spacing": "normal",
-     "text_transform": "none",
-     "size_unresolved": false,
-     "on_scale": true,
-     "style_id": "Zilla Slab|40.0|700|normal|40.0|normal|none",
-     "card": "C78",
-     "widths": [
-      "small"
-     ],
-     "label": "small"
-    }
-   ],
-   "responsive": true,
-   "entries": {},
-   "entry": null,
-   "register": null,
-   "pages": [
-    "index.html"
-   ],
-   "page_count": 1,
-   "tags": [
-    "a",
-    "h2"
-   ],
-   "classes": [
-    "cell"
-   ],
-   "samples": [
-    "Speaking",
-    "Projects",
-    "Photography",
-    "Year in Review",
-    "Resources"
-   ],
-   "uses": [
-    {
-     "page": "index.html",
-     "line": 297,
-     "tag": "a",
-     "classes": null,
-     "text": "Speaking",
-     "src": {
-      "small": 0,
-      "medium": 1,
-      "large": 1
-     }
-    },
-    {
-     "page": "index.html",
-     "line": 364,
-     "tag": "a",
-     "classes": null,
-     "text": "Projects",
-     "src": {
-      "small": 0,
-      "medium": 1,
-      "large": 1
-     }
-    },
-    {
-     "page": "index.html",
-     "line": 547,
-     "tag": "a",
-     "classes": null,
-     "text": "Photography",
-     "src": {
-      "small": 2,
-      "medium": 3,
-      "large": 3
-     }
-    },
-    {
-     "page": "index.html",
-     "line": 587,
-     "tag": "h2",
-     "classes": "cell",
-     "text": "Year in Review",
-     "src": {
-      "small": 4,
-      "medium": 5,
-      "large": 5
-     }
-    },
-    {
-     "page": "index.html",
-     "line": 781,
-     "tag": "a",
-     "classes": null,
-     "text": "Resources",
-     "src": {
-      "small": 0,
-      "medium": 1,
-      "large": 1
-     }
-    }
-   ],
-   "sources": [
-    [
-     {
-      "prop": "font-family",
-      "value": "\"Zilla Slab\",serif",
-      "file": "_sass/design-system.scss",
-      "line": 21,
-      "via": "$zilla"
-     },
-     {
-      "prop": "font-size",
-      "value": "2.5em",
-      "file": "_sass/home.scss",
-      "line": 242,
-      "via": null
-     },
-     {
-      "prop": "font-style",
-      "value": "normal",
-      "file": "_sass/_type-reset.scss",
-      "line": 57,
-      "via": null
-     },
-     {
-      "prop": "font-weight",
-      "value": "700",
-      "file": "_sass/home.scss",
-      "line": 221,
-      "via": "$zilla-bold"
-     },
-     {
-      "prop": "line-height",
-      "value": "1",
-      "file": "_sass/home.scss",
-      "line": 226,
-      "via": null
-     }
-    ],
-    [
-     {
-      "prop": "font-family",
-      "value": "\"Zilla Slab\",serif",
-      "file": "_sass/design-system.scss",
-      "line": 21,
-      "via": "$zilla"
-     },
-     {
-      "prop": "font-size",
-      "value": "3.5em",
-      "file": "_sass/design-system.scss",
-      "line": 29,
-      "via": null
-     },
-     {
-      "prop": "font-style",
-      "value": "normal",
-      "file": "_sass/_type-reset.scss",
-      "line": 57,
-      "via": null
-     },
-     {
-      "prop": "font-weight",
-      "value": "700",
-      "file": "_sass/home.scss",
-      "line": 221,
-      "via": "$zilla-bold"
-     },
-     {
-      "prop": "line-height",
-      "value": "normal",
-      "file": "_sass/home.scss",
-      "line": 223,
-      "via": null
-     }
-    ],
-    [
-     {
-      "prop": "font-family",
-      "value": "\"Zilla Slab\",serif",
-      "file": "_sass/design-system.scss",
-      "line": 21,
-      "via": "$zilla"
-     },
-     {
-      "prop": "font-size",
-      "value": "2.5em",
-      "file": "_sass/home.scss",
-      "line": 242,
-      "via": null
-     },
-     {
-      "prop": "font-style",
-      "value": "normal",
-      "file": "_sass/_type-reset.scss",
-      "line": 57,
-      "via": null
-     },
-     {
-      "prop": "font-weight",
-      "value": "700",
-      "file": "_sass/home.scss",
-      "line": 508,
-      "via": "$zilla-bold"
-     },
-     {
-      "prop": "line-height",
-      "value": "1",
-      "file": "_sass/home.scss",
-      "line": 510,
-      "via": null
-     }
-    ],
-    [
-     {
-      "prop": "font-family",
-      "value": "\"Zilla Slab\",serif",
-      "file": "_sass/design-system.scss",
-      "line": 21,
-      "via": "$zilla"
-     },
-     {
-      "prop": "font-size",
-      "value": "3.5em",
-      "file": "_sass/design-system.scss",
-      "line": 29,
-      "via": null
-     },
-     {
-      "prop": "font-style",
-      "value": "normal",
-      "file": "_sass/_type-reset.scss",
-      "line": 57,
-      "via": null
-     },
-     {
-      "prop": "font-weight",
-      "value": "700",
-      "file": "_sass/home.scss",
-      "line": 508,
-      "via": "$zilla-bold"
-     },
-     {
-      "prop": "line-height",
-      "value": "normal",
-      "file": "_sass/home.scss",
-      "line": 223,
-      "via": null
-     }
-    ],
-    [
-     {
-      "prop": "font-family",
-      "value": "\"Zilla Slab\",serif",
-      "file": "_sass/design-system.scss",
-      "line": 21,
-      "via": "$zilla"
-     },
-     {
-      "prop": "font-size",
-      "value": "2.5em",
-      "file": "_sass/home.scss",
-      "line": 242,
-      "via": null
-     },
-     {
-      "prop": "font-style",
-      "value": "normal",
-      "file": "_sass/_type-reset.scss",
-      "line": 57,
-      "via": null
-     },
-     {
-      "prop": "font-weight",
-      "value": "700",
-      "file": "_sass/home.scss",
-      "line": 221,
-      "via": "$zilla-bold"
-     },
-     {
-      "prop": "line-height",
-      "value": "1",
-      "file": "_sass/home.scss",
-      "line": 226,
-      "via": null
-     }
-    ],
-    [
-     {
-      "prop": "font-family",
-      "value": "\"Zilla Slab\",serif",
-      "file": "_sass/design-system.scss",
-      "line": 21,
-      "via": "$zilla"
-     },
-     {
-      "prop": "font-size",
-      "value": "3.5em",
-      "file": "_sass/design-system.scss",
-      "line": 29,
-      "via": null
-     },
-     {
-      "prop": "font-style",
-      "value": "normal",
-      "file": "_sass/_type-reset.scss",
-      "line": 57,
-      "via": null
-     },
-     {
-      "prop": "font-weight",
-      "value": "700",
-      "file": "_sass/home.scss",
-      "line": 221,
-      "via": "$zilla-bold"
-     },
-     {
-      "prop": "line-height",
-      "value": "normal",
-      "file": "_sass/home.scss",
-      "line": 223,
+      "line": 243,
       "via": null
      }
     ]
@@ -29895,7 +29423,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|24.0|700|normal|24.0|normal|none",
-     "card": "C21",
+     "card": "C22",
      "widths": [
       "small",
       "medium",
@@ -30125,7 +29653,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -30167,7 +29695,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|32.0|700|normal|35.2|normal|none",
-     "card": "C81",
+     "card": "C80",
      "widths": [
       "medium",
       "large",
@@ -30187,7 +29715,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|24.0|700|normal|26.4|normal|none",
-     "card": "C80",
+     "card": "C79",
      "widths": [
       "small"
      ],
@@ -30275,7 +29803,7 @@ const DATA = {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/home.scss",
-      "line": 485,
+      "line": 479,
       "via": null
      },
      {
@@ -30289,14 +29817,14 @@ const DATA = {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/home.scss",
-      "line": 479,
+      "line": 473,
       "via": "$zilla-bold"
      },
      {
       "prop": "line-height",
       "value": "1.1",
       "file": "_sass/home.scss",
-      "line": 486,
+      "line": 480,
       "via": null
      }
     ],
@@ -30312,7 +29840,7 @@ const DATA = {
       "prop": "font-size",
       "value": "2rem",
       "file": "_sass/home.scss",
-      "line": 478,
+      "line": 472,
       "via": null
      },
      {
@@ -30326,14 +29854,14 @@ const DATA = {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/home.scss",
-      "line": 479,
+      "line": 473,
       "via": "$zilla-bold"
      },
      {
       "prop": "line-height",
       "value": "1.1",
       "file": "_sass/home.scss",
-      "line": 482,
+      "line": 476,
       "via": null
      }
     ]
@@ -30354,7 +29882,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Zilla Slab|30.0|400|normal|42.0|normal|none",
-     "card": "C83",
+     "card": "C82",
      "widths": [
       "medium",
       "large",
@@ -30374,7 +29902,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|24.0|400|normal|33.6|normal|none",
-     "card": "C82",
+     "card": "C81",
      "widths": [
       "small"
      ],
@@ -30491,7 +30019,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|20.0|700|normal|20.0|normal|none",
-     "card": "C86",
+     "card": "C85",
      "widths": [
       "medium",
       "large",
@@ -30511,7 +30039,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|16.0|700|normal|16.0|normal|none",
-     "card": "C85",
+     "card": "C84",
      "widths": [
       "small"
      ],
@@ -30581,28 +30109,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/home.scss",
-      "line": 550,
+      "line": 538,
       "via": "$zilla"
      },
      {
       "prop": "font-size",
       "value": "1rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/home.scss",
-      "line": 551,
+      "line": 539,
       "via": "$zilla-bold"
      },
      {
       "prop": "line-height",
       "value": "1",
       "file": "_sass/home.scss",
-      "line": 561,
+      "line": 549,
       "via": null
      }
     ],
@@ -30611,28 +30139,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/home.scss",
-      "line": 550,
+      "line": 538,
       "via": "$zilla"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/home.scss",
-      "line": 551,
+      "line": 539,
       "via": "$zilla-bold"
      },
      {
       "prop": "line-height",
       "value": "1",
       "file": "_sass/home.scss",
-      "line": 561,
+      "line": 549,
       "via": null
      }
     ]
@@ -30653,7 +30181,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|50.0|700|normal|80.0|normal|none",
-     "card": "C88",
+     "card": "C87",
      "widths": [
       "medium",
       "large",
@@ -30673,7 +30201,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|40.0|700|normal|64.0|normal|none",
-     "card": "C87",
+     "card": "C86",
      "widths": [
       "small"
      ],
@@ -30743,14 +30271,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
       "prop": "font-size",
       "value": "2.5rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
@@ -30773,14 +30301,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
       "prop": "font-size",
       "value": "3.125rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/callout-lg"
      },
      {
@@ -30815,7 +30343,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|30.0|900|normal|36.0|normal|none",
-     "card": "C90",
+     "card": "C89",
      "widths": [
       "medium",
       "large",
@@ -30835,7 +30363,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|24.0|900|normal|28.8|normal|none",
-     "card": "C89",
+     "card": "C88",
      "widths": [
       "small"
      ],
@@ -30903,14 +30431,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/speaking.scss",
-      "line": 190,
+      "line": 184,
       "via": "$lato"
      },
      {
       "prop": "font-size",
       "value": "1.5em",
       "file": "_sass/speaking.scss",
-      "line": 191,
+      "line": 185,
       "via": null
      },
      {
@@ -30924,14 +30452,14 @@ const DATA = {
       "prop": "font-weight",
       "value": "900",
       "file": "_sass/speaking.scss",
-      "line": 192,
+      "line": 186,
       "via": "$lato-black"
      },
      {
       "prop": "line-height",
       "value": "1.2",
       "file": "_sass/speaking.scss",
-      "line": 195,
+      "line": 189,
       "via": null
      }
     ]
@@ -30952,7 +30480,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|20.0|400|normal|24.0|normal|none",
-     "card": "C51",
+     "card": "C50",
      "widths": [
       "medium",
       "large",
@@ -30972,7 +30500,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|19.2|400|normal|23.04|normal|none",
-     "card": "C91",
+     "card": "C90",
      "widths": [
       "small"
      ],
@@ -31031,21 +30559,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-size",
       "value": "1.2rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -31061,21 +30589,21 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -31103,7 +30631,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|60.0|700|normal|60.0|normal|none",
-     "card": "C50",
+     "card": "C49",
      "widths": [
       "medium",
       "large",
@@ -31123,7 +30651,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|48.0|700|normal|48.0|normal|none",
-     "card": "C92",
+     "card": "C91",
      "widths": [
       "small"
      ],
@@ -31178,7 +30706,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -31220,7 +30748,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|30.0|400|normal|36.0|normal|none",
-     "card": "C84",
+     "card": "C83",
      "widths": [
       "medium",
       "large",
@@ -31240,7 +30768,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|400|normal|19.2|normal|none",
-     "card": "C16",
+     "card": "C17",
      "widths": [
       "small"
      ],
@@ -31296,7 +30824,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -31310,7 +30838,7 @@ const DATA = {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -31326,7 +30854,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -31340,7 +30868,7 @@ const DATA = {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -31356,7 +30884,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -31370,7 +30898,7 @@ const DATA = {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -31386,7 +30914,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -31400,7 +30928,7 @@ const DATA = {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -31428,7 +30956,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Zilla Slab|36.0|500|normal|50.4|normal|none",
-     "card": "C94",
+     "card": "C93",
      "widths": [
       "medium",
       "large",
@@ -31448,7 +30976,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|32.0|500|normal|44.8|normal|none",
-     "card": "C93",
+     "card": "C92",
      "widths": [
       "small"
      ],
@@ -31578,7 +31106,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Zilla Slab|48.0|700|normal|43.2|normal|none",
-     "card": "C23",
+     "card": "C24",
      "widths": [
       "medium",
       "large",
@@ -31598,7 +31126,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Zilla Slab|38.4|700|normal|34.56|normal|none",
-     "card": "C95",
+     "card": "C94",
      "widths": [
       "small"
      ],
@@ -31642,7 +31170,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Zilla Slab\",serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/page-title"
      },
      {
@@ -31663,14 +31191,14 @@ const DATA = {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/page-title"
      },
      {
       "prop": "line-height",
       "value": ".9",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/page-title"
      }
     ]
@@ -31691,7 +31219,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|20.0|700|normal|32.0|normal|none",
-     "card": "C4",
+     "card": "C10",
      "widths": [
       "medium",
       "large",
@@ -31711,7 +31239,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|19.2|700|normal|30.72|normal|none",
-     "card": "C96",
+     "card": "C95",
      "widths": [
       "small"
      ],
@@ -31757,14 +31285,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-size",
       "value": "1.2rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
@@ -31787,14 +31315,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/bio-text"
      },
      {
@@ -31829,7 +31357,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|90.0|900|normal|90.0|normal|none",
-     "card": "C98",
+     "card": "C97",
      "widths": [
       "medium",
       "large",
@@ -31849,7 +31377,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|72.0|900|normal|72.0|normal|none",
-     "card": "C97",
+     "card": "C96",
      "widths": [
       "small"
      ],
@@ -31891,7 +31419,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -31933,7 +31461,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|30.0|400|normal|36.0|normal|none",
-     "card": "C84",
+     "card": "C83",
      "widths": [
       "medium",
       "large",
@@ -31953,7 +31481,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|24.0|400|normal|28.8|normal|none",
-     "card": "C70",
+     "card": "C73",
      "widths": [
       "small"
      ],
@@ -31997,7 +31525,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -32011,7 +31539,7 @@ const DATA = {
       "prop": "font-weight",
       "value": "400",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -32039,7 +31567,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Zilla Slab|36.0|700|normal|54.0|normal|none",
-     "card": "C99",
+     "card": "C98",
      "widths": [
       "medium",
       "large",
@@ -32059,7 +31587,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Zilla Slab|20.0|700|normal|30.0|normal|none",
-     "card": "C5",
+     "card": "C4",
      "widths": [
       "small"
      ],
@@ -32175,7 +31703,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|24.0|700|normal|28.8|normal|none",
-     "card": "C71",
+     "card": "C74",
      "widths": [
       "medium",
       "large",
@@ -32195,7 +31723,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": true,
      "style_id": "Lato|16.0|700|normal|20.8|normal|none",
-     "card": "C19",
+     "card": "C20",
      "widths": [
       "small"
      ],
@@ -32237,28 +31765,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1em",
       "file": "_sass/home.scss",
-      "line": 252,
+      "line": 246,
       "via": null
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/home.scss",
-      "line": 258,
+      "line": 252,
       "via": "$lato-bold"
      },
      {
       "prop": "line-height",
       "value": "1.3",
       "file": "_sass/home.scss",
-      "line": 253,
+      "line": 247,
       "via": null
      }
     ],
@@ -32267,28 +31795,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1.5rem",
       "file": "_sass/home.scss",
-      "line": 248,
+      "line": 242,
       "via": null
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/home.scss",
-      "line": 258,
+      "line": 252,
       "via": "$lato-bold"
      },
      {
       "prop": "line-height",
       "value": "1.8rem",
       "file": "_sass/home.scss",
-      "line": 249,
+      "line": 243,
       "via": null
      }
     ]
@@ -32375,7 +31903,7 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -32405,14 +31933,14 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1.25rem",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
@@ -32447,7 +31975,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|25.0|700|normal|35.0|normal|none",
-     "card": "C101",
+     "card": "C100",
      "widths": [
       "medium",
       "large",
@@ -32467,7 +31995,7 @@ const DATA = {
      "size_unresolved": false,
      "on_scale": false,
      "style_id": "Lato|19.2|700|normal|26.88|normal|none",
-     "card": "C100",
+     "card": "C99",
      "widths": [
       "small"
      ],
@@ -32511,28 +32039,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1em",
       "file": "_sass/speaking.scss",
-      "line": 230,
+      "line": 224,
       "via": null
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/speaking.scss",
-      "line": 217,
+      "line": 211,
       "via": "$lato-bold"
      },
      {
       "prop": "line-height",
       "value": "1.4",
       "file": "_sass/speaking.scss",
-      "line": 226,
+      "line": 220,
       "via": null
      }
     ],
@@ -32541,28 +32069,28 @@ const DATA = {
       "prop": "font-family",
       "value": "\"Lato\",sans-serif",
       "file": "_sass/variables.scss",
-      "line": 473,
+      "line": 479,
       "via": "product/body"
      },
      {
       "prop": "font-size",
       "value": "1.25em",
       "file": "_sass/speaking.scss",
-      "line": 228,
+      "line": 222,
       "via": null
      },
      {
       "prop": "font-weight",
       "value": "700",
       "file": "_sass/speaking.scss",
-      "line": 217,
+      "line": 211,
       "via": "$lato-bold"
      },
      {
       "prop": "line-height",
       "value": "1.4",
       "file": "_sass/speaking.scss",
-      "line": 226,
+      "line": 220,
       "via": null
      }
     ]
@@ -32583,10 +32111,15 @@ const short = f => String(f || "").replace(/^_sass\//, "").replace(/^css\//, "")
    size shown is the base -- the widest band -- matching the value in ink
    beside it. */
 const SPECIMEN = "AaBb";
-const famStack = f => f === "Zilla Slab" ? '"Zilla Slab",serif'
-  : f === "Caveat" ? '"Caveat",cursive'
-  : f === "Consolas" ? '"JetBrains Mono",monospace'
-  : '"Lato",sans-serif';
+/* Single quotes inside the stack, because this is interpolated into a
+   double-quoted `style` attribute: a family written `"Zilla Slab"` closes the
+   attribute at its own first quote, and the browser drops everything after it.
+   That silently cost the specimens their family, weight, slant, tracking and
+   case -- only `font-size` survived, being first in the string. */
+const famStack = f => f === "Zilla Slab" ? "'Zilla Slab',serif"
+  : f === "Caveat" ? "'Caveat',cursive"
+  : f === "Consolas" ? "'JetBrains Mono',monospace"
+  : "'Lato',sans-serif";
 
 /* Your own note about where an unmapped row should end up. Keyed by the card
    id, which is derived from the values it renders -- so if the type changes,
@@ -32604,7 +32137,7 @@ function setTag(id, reg){
 /* `band` is which width's declarations the occurrence list expands onto. Kept
    across selections rather than reset per card, so you can hold it on `small`
    and walk down the list looking at what each one does there. */
-const state = { filter: "all", sort: "count", sel: null, band: null };
+const state = { filter: "all", sort: "count", group: "none", sel: null, band: null };
 
 /* One axis separates the two: does this repeat, or does it happen once? The
    examples are the useful half -- they let a row be decided without going back
@@ -32743,24 +32276,41 @@ function drawBar(){
     `<span class="sep"></span><span class="lbl">Sort</span>` +
     [["count", "most used"], ["size", "largest"]].map(([k, label]) =>
       `<button class="chip" data-s="${k}" aria-pressed="${state.sort === k}">${
+        label}</button>`).join("") +
+    `<span class="sep"></span><span class="lbl">Group</span>` +
+    [["none", "none"], ["family", "font"]].map(([k, label]) =>
+      `<button class="chip" data-g="${k}" aria-pressed="${state.group === k}">${
         label}</button>`).join("");
   document.querySelectorAll("#bar [data-f]").forEach(b =>
     b.onclick = () => { state.filter = b.dataset.f; draw(); });
   document.querySelectorAll("#bar [data-s]").forEach(b =>
     b.onclick = () => { state.sort = b.dataset.s; draw(); });
+  document.querySelectorAll("#bar [data-g]").forEach(b =>
+    b.onclick = () => { state.group = b.dataset.g; draw(); });
 }
 
 /* What the list is showing right now, filter and sort applied. Shared with the
    opening selection so "the first row" means the same thing in both places. */
 const visible = () => CARDS.filter(matches).slice().sort(SORTS[state.sort]);
 
-function drawRows(){
-  const host = document.getElementById("rows");
-  const list = visible();
-  if (!list.length) { host.innerHTML = `<p class="note">Nothing under this filter.</p>`; return; }
-  host.innerHTML = list.map(c => {
-    const r = c.renders[0];
-    return `<button class="row" data-id="${c.id}"
+/* Grouping keeps whatever sort is on: the groups appear in the order their
+   first row does, so `most used` puts the family carrying the most type first
+   and `largest` leads with whichever family owns the biggest style. Sorting the
+   groups separately would make the two controls argue. */
+function groupRows(list){
+  if (state.group === "none") return [["", list]];
+  const groups = new Map();
+  list.forEach(function (c) {
+    const k = c.renders[0].family;
+    if (!groups.has(k)) groups.set(k, []);
+    groups.get(k).push(c);
+  });
+  return [...groups.entries()];
+}
+
+function rowHtml(c){
+  const r = c.renders[0];
+  return `<button class="row" data-id="${c.id}"
         aria-pressed="${state.sel === c.id}">
       <span class="spec" style="font-size:${r.size}px;
         font-family:${famStack(r.family)};font-weight:${r.weight};
@@ -32781,6 +32331,21 @@ function drawRows(){
       </span>
       <span class="count">${c.count.toLocaleString()}<small>elements</small></span>
     </button>`;
+}
+
+function drawRows(){
+  const host = document.getElementById("rows");
+  const list = visible();
+  if (!list.length) { host.innerHTML = `<p class="note">Nothing under this filter.</p>`; return; }
+  host.innerHTML = groupRows(list).map(function (pair) {
+    const name = pair[0], cards = pair[1];
+    const els = cards.reduce(function (n, c) { return n + c.count; }, 0);
+    const head = name
+      ? `<div class="grouphead"><span style="font-family:${famStack(name)}">${
+          esc(name)}</span><span class="n">${cards.length} row${
+          cards.length === 1 ? "" : "s"} &middot; ${els.toLocaleString()} elements</span></div>`
+      : "";
+    return head + cards.map(rowHtml).join("");
   }).join("");
   host.querySelectorAll(".row").forEach(b =>
     b.onclick = () => { state.sel = state.sel === b.dataset.id ? null : b.dataset.id; draw(); });
