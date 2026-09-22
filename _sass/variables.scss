@@ -317,11 +317,16 @@ $product-type: (
   nav-link:      (family: $zilla, size: 1.25rem,    font-weight: $zilla-bold),                        // 20px
   nav-link-sm:   (family: $zilla, size: 1rem,       font-weight: $zilla-bold,   line-height: 1.2),    // 16px
   menu-link:     (family: $zilla, size: 1.875rem,   font-weight: $zilla-bold),                        // 30px
-  // The fourth nav, in the footer, and the only one set in Lato -- it reads as
-  // a list of links rather than as chrome. It steps up on small, where the
-  // footer is the touch target the header nav has already become.
+  // The footer's own pair, both in Lato: a fourth nav that reads as a list of
+  // links rather than as chrome, and the heading over each column. Both step
+  // up on small, where the footer is the touch target the header has become.
+  // Above small they are `body` and `body-strong` exactly -- which is allowed
+  // because the audit reads an entry's name off the include, not off what it
+  // renders.
   footer-link:   (family: $lato,  size: 1.25rem,    font-weight: $lato-regular,                       // 20px
                   at: (small only: (size: 1.5rem))),                                                  // 24px
+  footer-title:  (family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.6,     // 20px
+                  at: (small only: (size: 1.5rem, font-weight: $lato-black))),                        // 24px
   // Two jobs that share the `.thumbnail-text` class and nothing else: the
   // caption that fades in over a portfolio thumbnail, and the heading naming a
   // collection on the photography index, which unsets the overlay entirely.

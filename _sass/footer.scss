@@ -13,18 +13,10 @@ footer{
     .nav-section{
       margin-inline-end: 3rem;
       .section-title{
-        @include type-style(product, body-strong);
+        @include type-style(product, footer-title);
         padding: 0;
         margin: 0;
         margin-bottom: 1rem;
-        // The footer scales up for touch, like the nav beside it. Not a map
-        // entry: an entry matching body-strong above small would be
-        // indistinguishable from it, and the atlas would lose the name on all
-        // 720 body-strong elements to put one on these 270.
-        @include breakpoint(small only) {
-          font-size: 1.5rem;
-          font-weight: $lato-black;
-        }
       }
     }
     .metadata{
