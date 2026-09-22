@@ -199,10 +199,35 @@
      section. The fill is enough to set it apart. */
   .act{margin-top:14px;padding:12px 14px;border-radius:9px;
     background:var(--surface-2)}
-  .act h4{margin:0 0 2px;font-family:"Zilla Slab",serif;font-size:15px;font-weight:700}
-  .act p{margin:0 0 9px;font-size:12.5px;color:var(--ink-muted)}
-  .act .chip{font-size:12.5px;padding:4px 11px}
-  .tagbtns{display:flex;gap:6px;flex-wrap:wrap}
+  .act-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .act h4{margin:0;font-family:"Zilla Slab",serif;font-size:15px;font-weight:700}
+  .act p{margin:2px 0 9px;font-size:12.5px;color:var(--ink-muted)}
+  /* Clearing is an undo, not a third register, so it is a quiet text button on
+     the question rather than a card beside the two real answers. It is only
+     rendered once something is chosen. */
+  .linkbtn{background:none;border:0;padding:0;font:inherit;font-size:12.5px;
+    font-weight:700;color:var(--ink-muted);cursor:pointer}
+  .linkbtn:hover{color:var(--ink)}
+  .linkbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  /* The description sits inside the target, so the whole card is the control
+     rather than a circle you have to hit. */
+  .radios{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .radio{display:flex;gap:8px;align-items:flex-start;text-align:left;font:inherit;
+    color:inherit;cursor:pointer;background:var(--surface);border-radius:8px;
+    border:1px solid var(--rule-strong);padding:8px 10px}
+  .radio:hover{border-color:var(--ink-faint)}
+  .radio:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .radio .dot{flex:0 0 auto;width:16px;height:16px;border-radius:50%;margin-top:1px;
+    background:var(--surface);border:1px solid var(--rule-strong)}
+  .radio b{display:block;font-size:12.5px;font-weight:700;line-height:1.3}
+  .radio i{display:block;font-style:normal;font-size:11.5px;line-height:1.35;
+    color:var(--ink-muted);margin-top:2px}
+  /* Three signals, not colour alone: the ring fills, the card takes the accent
+     border and tint, and the label changes colour. */
+  .radio[aria-checked="true"]{border-color:var(--accent);
+    background:color-mix(in srgb,var(--accent) 8%,var(--surface))}
+  .radio[aria-checked="true"] b{color:var(--accent-deep)}
+  .radio[aria-checked="true"] .dot{border:5px solid var(--accent)}
   .note{font-size:12px;color:var(--ink-faint);margin:8px 0 0}
 </style>
 
@@ -255,6 +280,16 @@ function setTag(id, reg){
    across selections rather than reset per card, so you can hold it on `small`
    and walk down the list looking at what each one does there. */
 const state = { filter: "all", sort: "count", sel: null, band: null };
+
+/* One axis separates the two: does this repeat, or does it happen once? The
+   examples are the useful half -- they let a row be decided without going back
+   to the definition. */
+const REGISTERS = [
+  { key: "product", label: "Product",
+    blurb: "Reused across pages \u2014 body, titles, nav." },
+  { key: "expressive", label: "Expressive",
+    blurb: "A one-off moment \u2014 a hero line, a numeral." }
+];
 
 /* ---- the three bands -----------------------------------------------------
    Every row shows all three, small on the left, so a column can be read down
@@ -547,13 +582,19 @@ function drawPanel(){
       renders one at some widths and the other where it is hidden.</p>` : ""}
     ${entries.length ? "" : `
       <div class="act">
-        <h4>Where should this land?</h4>
+        <div class="act-head">
+          <h4>Where should this land?</h4>
+          ${TAGS[c.id]
+            ? `<button class="linkbtn" data-tag="">Clear</button>` : ""}
+        </div>
         <p>No map entry decides this style. Tag the register it belongs in.</p>
-        <div class="tagbtns">
-          ${["product", "expressive", ""].map(reg =>
-            `<button class="chip" data-tag="${reg}"
-               aria-pressed="${(TAGS[c.id] || "") === reg}">${
-               reg || "clear"}</button>`).join("")}
+        <div class="radios" role="radiogroup" aria-label="Register">
+          ${REGISTERS.map(reg =>
+            `<button class="radio" role="radio" data-tag="${reg.key}"
+               aria-checked="${TAGS[c.id] === reg.key}">
+               <span class="dot"></span>
+               <span><b>${esc(reg.label)}</b><i>${esc(reg.blurb)}</i></span>
+             </button>`).join("")}
         </div>
       </div>`}
 
@@ -573,8 +614,15 @@ function drawPanel(){
       </div>
       ${usesHtml(c)}
     </div>`;
+  /* Clicking the chosen one again clears it, the way a radio in a form does
+     not but a single-choice toggle should. `Clear` carries the same empty
+     value, so both routes are one handler. */
   host.querySelectorAll("[data-tag]").forEach(b =>
-    b.onclick = () => { setTag(c.id, b.dataset.tag); draw(); });
+    b.onclick = () => {
+      const next = b.dataset.tag === TAGS[c.id] ? "" : b.dataset.tag;
+      setTag(c.id, next);
+      draw();
+    });
   host.querySelectorAll("[data-band]").forEach(b =>
     b.onclick = () => { state.band = b.dataset.band; drawPanel(); });
 }
