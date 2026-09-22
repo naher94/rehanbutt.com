@@ -301,6 +301,12 @@ $product-type: (
                   at: (small only: (size: 3rem))),                                                    // 48px
   section-title: (family: $zilla, size: 3.125rem,   font-weight: $zilla-bold,                         // 50px
                   at: (small only: (size: 2.5rem, line-height: normal))),                             // 40px
+  // The home page's section headings, which are the page's structure rather
+  // than a heading inside it -- the same job as `section-title` a rank up.
+  // Both land on 40px at small; what separates them there is the leading, so
+  // this one states its own at both widths rather than inheriting either.
+  section-title-lg:(family: $zilla, size: 4.375rem,  font-weight: $zilla-bold,  line-height: normal,   // 70px
+                  at: (small only: (size: 2.5rem, line-height: 1))),                                  // 40px
   body:          (family: $lato,  size: 1.25rem,    font-weight: $lato-regular,                       // 20px, inherits 1.5
                   at: (small only: (size: 1rem))),                                                    // 16px, == the root
   body-strong:   (family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.6),    // 20px
