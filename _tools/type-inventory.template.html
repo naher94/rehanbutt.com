@@ -34,9 +34,8 @@
     font-family:"Lato",-apple-system,BlinkMacSystemFont,sans-serif;
     font-size:16px; line-height:1.55; margin:0; padding:0 24px 72px;
   }
-  h1{font-family:"Zilla Slab",serif;font-size:34px;margin:28px 0 4px;font-weight:700}
-  .lede{color:var(--ink-muted);max-width:74ch;margin:0 0 18px}
-  .lede code{font-family:"JetBrains Mono",monospace;font-size:12.5px;
+  h1{font-family:"Zilla Slab",serif;font-size:34px;margin:28px 0 18px;font-weight:700}
+  code{font-family:"JetBrains Mono",monospace;font-size:12.5px;
     background:var(--surface-2);padding:1px 5px;border-radius:4px}
 
   /* ---- totals ------------------------------------------------------- */
@@ -63,7 +62,8 @@
 
   /* ---- rows --------------------------------------------------------- */
   .rows{display:flex;flex-direction:column;gap:6px}
-  .row{display:grid;grid-template-columns:minmax(120px,210px) minmax(0,1fr) auto;
+  .row{display:grid;
+    grid-template-columns:minmax(120px,210px) minmax(190px,1fr) 208px auto;
     gap:16px;align-items:center;width:100%;text-align:left;
     background:var(--surface);border:1px solid var(--rule);border-radius:10px;
     padding:12px 16px;cursor:pointer;color:inherit;font:inherit}
@@ -72,15 +72,35 @@
     box-shadow:0 0 0 1px var(--accent) inset}
   .spec{white-space:nowrap;overflow:hidden;line-height:1.15;color:var(--ink)}
   .meta{min-width:0}
-  .sizes{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:500}
-  .sizes .at{color:var(--ink-faint);font-weight:400}
-  .sizes .unread{color:var(--flag-med)}
+  .bps{display:flex;gap:15px;margin-bottom:3px}
+  .bp{display:flex;flex-direction:column;line-height:1.15;min-width:44px}
+  .bp i{font-style:normal;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-faint)}
+  .bp b{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:500}
+  /* Carried, not decided: the same value the wider band renders, greyed so the
+     eye lands on the widths where something was actually chosen. */
+  .bp b.carried{color:var(--ink-faint);font-weight:400}
+  .bp b.unread{color:var(--flag-med)}
   .sub{font-size:12.5px;color:var(--ink-muted);white-space:nowrap;
     overflow:hidden;text-overflow:ellipsis}
   .count{font-family:"JetBrains Mono",monospace;font-size:15px;text-align:right}
   .count small{display:block;font-size:10px;letter-spacing:.08em;
     text-transform:uppercase;color:var(--ink-faint)}
-  .tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+  .tags{display:flex;gap:5px;flex-wrap:wrap}
+  /* Its own column of fixed width, so every entry name starts at the same x
+     and the column can be read down the list. Right-aligning it, or letting
+     the column size to its content, puts each name wherever its neighbours
+     happen to end. In the panel they stack under the heading, where there is
+     no list to line up with. */
+  .row .tags{justify-content:flex-start}
+  /* Narrow enough that a fixed badge column would eat the bands: drop the
+     badges to their own line under the numbers rather than overlapping them. */
+  @media (max-width:980px){
+    .row{grid-template-columns:minmax(90px,150px) minmax(0,1fr) auto;row-gap:8px}
+    .row .spec, .row .meta, .row .count{grid-row:1}
+    .row .tags{grid-row:2;grid-column:2 / -1}
+  }
+  .panel .tags{margin-top:5px}
   .badge{font-family:"JetBrains Mono",monospace;font-size:10.5px;border-radius:5px;
     padding:2px 7px;white-space:nowrap}
   .b-product{background:color-mix(in srgb,var(--accent) 20%,transparent);color:var(--accent-deep)}
@@ -110,6 +130,7 @@
     color:var(--ink-muted);border-bottom:0;padding:4px 12px 4px 0}
   .rt td{font-family:"JetBrains Mono",monospace;font-size:12px;
     padding:4px 10px 4px 0;white-space:nowrap}
+  .rt tr.carried td, .rt tr.carried th{color:var(--ink-faint)}
   .srcline{font-size:12px;margin-bottom:6px;font-family:"JetBrains Mono",monospace}
   .srcline b{font-weight:500}
   .via{color:var(--ink-faint);font-weight:400}
@@ -131,9 +152,6 @@
 </style>
 
 <h1>Type Inventory</h1>
-<p class="lede">One row per distinct thing the site renders, <b>combined across every
-width</b> &mdash; a style that steps down on small is one row, not two. Sorted by how many
-elements wear it. Click a row for its atlas numbers, what wrote it, and where it lands.</p>
 
 <div class="totals" id="totals"></div>
 <div class="bar" id="bar"></div>
@@ -177,16 +195,39 @@ function setTag(id, reg){
 
 const state = { filter: "all", sel: null };
 
-/* ---- the size chain ------------------------------------------------------
-   Written widest-first, the way the stylesheet is: a desktop base with a
-   `small only` correction. `~` marks a size the audit could not read -- the
-   number beside it is the parent's, not the element's. */
-function chain(c){
-  return c.renders.map(r =>
-    `<span class="${r.size_unresolved ? "unread" : ""}">${
-      r.size_unresolved ? "~" : ""}${px(r.size)}</span>` +
-    (c.renders.length > 1 ? ` <span class="at">${esc(r.label)}</span>` : "")
-  ).join(' <span class="at">&rarr;</span> ');
+/* ---- the three bands -----------------------------------------------------
+   Every row shows all three, small on the left, so a column can be read down
+   the list instead of each row being parsed on its own. The site defines five
+   breakpoints but only three render type differently; the audit collapses the
+   other two rather than this file assuming which.
+
+   Judged right to left, because the stylesheet is desktop-first: `large` is
+   the decision, and a band is *carried* when it renders what the wider band
+   beside it renders. A carried value is greyed -- it is what the element looks
+   like there, not a choice made for that width. `~` marks a size the audit
+   could not read, where the number is the parent's rather than the element's.*/
+const BANDS = DATA.totals.distinct_breakpoints.map(b => b.name);
+
+function bandsOf(c){
+  const at = BANDS.map(b => c.renders.find(r => r.widths.includes(b)) || null);
+  return BANDS.map((b, i) => {
+    const r = at[i], wider = at[i + 1];
+    return {
+      name: b, render: r,
+      carried: !!(r && wider && r === wider),
+      last: i === BANDS.length - 1,
+    };
+  });
+}
+
+function bandsHtml(c){
+  return `<span class="bps">${bandsOf(c).map(s => {
+    const r = s.render;
+    const cls = [s.carried ? "carried" : "",
+                 r && r.size_unresolved ? "unread" : ""].filter(Boolean).join(" ");
+    return `<span class="bp"><i>${esc(s.name)}</i><b class="${cls}">${
+      r ? (r.size_unresolved ? "~" : "") + px(r.size) : "&mdash;"}</b></span>`;
+  }).join("")}</span>`;
 }
 
 function registerOf(c){
@@ -246,16 +287,16 @@ function drawRows(){
         font-style:${r.style};letter-spacing:${esc(r.letter_spacing)};
         text-transform:${esc(r.text_transform)}">${SPECIMEN}</span>
       <span class="meta">
-        <span class="sizes">${chain(c)}</span>
+        ${bandsHtml(c)}
         <span class="sub">${esc(r.family)} &middot; ${esc(r.weight)}${
           c.classes.length ? " &middot; " + esc(c.classes.slice(0, 2).join(", ")) : ""}</span>
-        <span class="tags">
-          <span class="badge ${reg.cls}">${esc(reg.txt)}</span>
-          ${c.renders.map(x => x.card
-            ? `<span class="badge b-cid">${esc(x.card)}</span>` : "").join("")}
-          ${c.renders.some(x => x.size_unresolved)
-            ? `<span class="badge b-warn">size not readable</span>` : ""}
-        </span>
+      </span>
+      <span class="tags">
+        <span class="badge ${reg.cls}">${esc(reg.txt)}</span>
+        ${c.renders.map(x => x.card
+          ? `<span class="badge b-cid">${esc(x.card)}</span>` : "").join("")}
+        ${c.renders.some(x => x.size_unresolved)
+          ? `<span class="badge b-warn">size not readable</span>` : ""}
       </span>
       <span class="count">${c.count.toLocaleString()}<small>elements</small></span>
     </button>`;
@@ -319,15 +360,18 @@ const COLS = [
     opt: true, set: x => x.style !== "normal" },
 ];
 
+/* One row per band, always all three, greyed where the value is carried from
+   the wider band -- the same reading the cards use, so the two do not describe
+   the same element in two different vocabularies. */
 function rendersTable(c){
   const cols = COLS.filter(col => !col.opt || c.renders.some(col.set));
-  const width = c.renders.length > 1;
   return `<table class="rt">
-    <thead><tr>${width ? "<th>Width</th>" : ""}${
+    <thead><tr><th>Width</th>${
       cols.map(col => `<th>${col.h}</th>`).join("")}</tr></thead>
-    <tbody>${c.renders.map(x => `<tr>${
-      width ? `<th scope="row">${esc(x.label)}</th>` : ""}${
-      cols.map(col => `<td>${esc(col.get(x))}</td>`).join("")}</tr>`).join("")}
+    <tbody>${bandsOf(c).map(s => `<tr class="${s.carried ? "carried" : ""}">
+      <th scope="row">${esc(s.name)}</th>${
+      cols.map(col => `<td>${s.render ? esc(col.get(s.render)) : "&mdash;"}</td>`)
+        .join("")}</tr>`).join("")}
     </tbody></table>`;
 }
 
