@@ -380,9 +380,13 @@ function drawBar(){
     b.onclick = () => { state.sort = b.dataset.s; draw(); });
 }
 
+/* What the list is showing right now, filter and sort applied. Shared with the
+   opening selection so "the first row" means the same thing in both places. */
+const visible = () => CARDS.filter(matches).slice().sort(SORTS[state.sort]);
+
 function drawRows(){
   const host = document.getElementById("rows");
-  const list = CARDS.filter(matches).slice().sort(SORTS[state.sort]);
+  const list = visible();
   if (!list.length) { host.innerHTML = `<p class="note">Nothing under this filter.</p>`; return; }
   host.innerHTML = list.map(c => {
     const r = c.renders[0];
@@ -543,8 +547,8 @@ function drawPanel(){
       renders one at some widths and the other where it is hidden.</p>` : ""}
     ${entries.length ? "" : `
       <div class="act">
-        <h4>Its size is written by hand</h4>
-        <p>Nothing in the stylesheet decides it. Where should it land?</p>
+        <h4>Where should this land?</h4>
+        <p>No map entry decides this style. Tag the register it belongs in.</p>
         <div class="tagbtns">
           ${["product", "expressive", ""].map(reg =>
             `<button class="chip" data-tag="${reg}"
@@ -577,6 +581,10 @@ function drawPanel(){
 
 function draw(){ drawBar(); drawRows(); drawPanel(); }
 drawTotals();
+/* Open on the first row rather than on an empty panel. The panel is a third of
+   the page, and `Pick a row.` is a worse thing to put there than the row the
+   sort has just argued is the most worth looking at. */
+state.sel = (visible()[0] || {}).id || null;
 draw();
 
 /* ---- the splitter --------------------------------------------------------
