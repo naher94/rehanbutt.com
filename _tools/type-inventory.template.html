@@ -304,6 +304,16 @@ const REGISTERS = [
    could not read, where the number is the parent's rather than the element's.*/
 const BANDS = DATA.totals.distinct_breakpoints.map(b => b.name);
 
+/* The atlas numbers, narrowest band first. `renders` itself stays widest-first
+   -- `renders[0]` is the base everywhere else: the specimen size, the heading,
+   the family and weight on a row -- so the badges sort a copy rather than the
+   array. Everything else on the page reads small to large, and the numbers
+   were the one thing running the other way. */
+const rendersSmallFirst = c => c.renders.slice().sort(function (a, b) {
+  return BANDS.findIndex(function (x) { return a.widths.includes(x); })
+       - BANDS.findIndex(function (x) { return b.widths.includes(x); });
+});
+
 function bandsOf(c){
   const at = BANDS.map(b => c.renders.find(r => r.widths.includes(b)) || null);
   return BANDS.map((b, i) => {
@@ -439,7 +449,7 @@ function drawRows(){
       <span class="tags">
         ${tagBadges(c).map(b =>
           `<span class="badge ${b.cls}">${esc(b.txt)}</span>`).join("")}
-        ${c.renders.map(x => x.card
+        ${rendersSmallFirst(c).map(x => x.card
           ? `<span class="badge b-cid">${esc(x.card)}</span>` : "").join("")}
         ${c.renders.some(x => x.size_unresolved)
           ? `<span class="badge b-warn">size not readable</span>` : ""}
@@ -574,7 +584,7 @@ function drawPanel(){
     <div class="tags">
       ${tagBadges(c).map(b =>
         `<span class="badge ${b.cls}">${esc(b.txt)}</span>`).join("")}
-      ${c.renders.map(x => x.card
+      ${rendersSmallFirst(c).map(x => x.card
         ? `<span class="badge b-cid">${esc(x.card)}${
             c.renders.length > 1 ? " &middot; " + esc(x.label) : ""}</span>` : "").join("")}
     </div>
