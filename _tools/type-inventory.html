@@ -57,8 +57,24 @@
     opacity:.65;margin-left:6px}
 
   /* ---- layout ------------------------------------------------------- */
-  .cols{display:grid;grid-template-columns:minmax(0,1fr) 430px;gap:22px;align-items:start}
-  @media (max-width:1100px){ .cols{grid-template-columns:minmax(0,1fr)} .panel{position:static} }
+  .cols{display:grid;grid-template-columns:minmax(0,1fr) 11px var(--panel-w,430px);
+    gap:11px;align-items:start}
+  /* The splitter. A hit area wide enough to grab with a hairline drawn down
+     the middle of it, rather than a 2px target you have to aim at. */
+  .grip{position:sticky;top:16px;height:calc(100vh - 32px);padding:0;border:0;
+    background:none;cursor:col-resize;touch-action:none}
+  .grip::before{content:"";display:block;width:2px;height:100%;margin:0 auto;
+    border-radius:2px;background:var(--rule)}
+  .grip:hover::before,.grip:focus-visible::before{background:var(--accent)}
+  .grip:focus-visible{outline:none}
+  /* Held on the body so the cursor does not flicker back to a text caret when
+     the pointer outruns the handle mid-drag. */
+  body.resizing{cursor:col-resize;user-select:none}
+  @media (max-width:1100px){
+    .cols{grid-template-columns:minmax(0,1fr)}
+    .grip{display:none}
+    .panel{position:static}
+  }
 
   /* ---- rows --------------------------------------------------------- */
   .rows{display:flex;flex-direction:column;gap:6px}
@@ -130,7 +146,11 @@
     color:var(--ink-muted);border-bottom:0;padding:4px 12px 4px 0}
   .rt td{font-family:"JetBrains Mono",monospace;font-size:12px;
     padding:4px 10px 4px 0;white-space:nowrap}
-  .rt tr.carried td, .rt tr.carried th{color:var(--ink-faint)}
+  .rt .carried{color:var(--ink-faint)}
+  /* What this width actually decides, against the wider one it corrects. */
+  .rt td.changed{color:var(--accent-deep);font-weight:500;
+    background:color-mix(in srgb,var(--accent) 12%,transparent);
+    border-radius:4px;padding-inline:6px}
   .srcline{font-size:12px;margin-bottom:6px;font-family:"JetBrains Mono",monospace}
   .srcline b{font-weight:500}
   .via{color:var(--ink-faint);font-weight:400}
@@ -158,6 +178,8 @@
 
 <div class="cols">
   <div class="rows" id="rows"></div>
+  <button class="grip" id="grip" role="separator" aria-orientation="vertical"
+          aria-label="Resize the detail pane — arrow keys, double-click to reset"></button>
   <div class="panel" id="panel"><p class="empty">Pick a row.</p></div>
 </div>
 
@@ -23424,18 +23446,34 @@ const COLS = [
     opt: true, set: x => x.style !== "normal" },
 ];
 
-/* One row per band, always all three, greyed where the value is carried from
-   the wider band -- the same reading the cards use, so the two do not describe
-   the same element in two different vocabularies. */
+/* One row per band, always all three -- the same reading the cards use, so the
+   two do not describe the same element in two different vocabularies.
+
+   Marked per cell rather than per row. A row that changes at all is rarely a
+   row where everything changed: the footer nav moves its size and its leading
+   on small and keeps its weight, and greying the row as a unit hides which of
+   the three was the decision. Each cell is compared with the same column in
+   the wider band -- `changed` where it differs, `carried` where it does not,
+   and plain at `large`, which is the base the others are corrections to. */
 function rendersTable(c){
   const cols = COLS.filter(col => !col.opt || c.renders.some(col.set));
+  const bands = bandsOf(c);
+  const cell = (s, i, col) => {
+    if (!s.render) return { cls: "carried", txt: "—" };
+    const txt = col.get(s.render);
+    const wider = bands[i + 1];
+    if (!wider || !wider.render) return { cls: "", txt };
+    return { cls: txt === col.get(wider.render) ? "carried" : "changed", txt };
+  };
   return `<table class="rt">
     <thead><tr><th>Width</th>${
       cols.map(col => `<th>${col.h}</th>`).join("")}</tr></thead>
-    <tbody>${bandsOf(c).map(s => `<tr class="${s.carried ? "carried" : ""}">
-      <th scope="row">${esc(s.name)}</th>${
-      cols.map(col => `<td>${s.render ? esc(col.get(s.render)) : "&mdash;"}</td>`)
-        .join("")}</tr>`).join("")}
+    <tbody>${bands.map((s, i) => {
+      const cells = cols.map(col => cell(s, i, col));
+      return `<tr><th scope="row" class="${
+        cells.every(x => x.cls === "carried") ? "carried" : ""}">${esc(s.name)}</th>${
+        cells.map(x => `<td class="${x.cls}">${esc(x.txt)}</td>`).join("")}</tr>`;
+    }).join("")}
     </tbody></table>`;
 }
 
@@ -23490,4 +23528,64 @@ function drawPanel(){
 function draw(){ drawBar(); drawRows(); drawPanel(); }
 drawTotals();
 draw();
+
+/* ---- the splitter --------------------------------------------------------
+   The panel holds a table, a declaration list and a page-by-page occurrence
+   list, and how much room each of those wants depends on what you are reading
+   rather than on anything this file can decide. Width is a CSS variable on the
+   grid, so nothing re-renders while dragging.
+
+   Persisted per viewer, and every access is wrapped: a `file://` page shares
+   one storage origin with every other local page, and in a private window the
+   accessor throws rather than returning null. */
+const PANEL_W = "rb-type-inventory-panel-w";
+const cols = document.querySelector(".cols");
+const grip = document.getElementById("grip");
+const MIN_W = 320;
+const clampW = w => Math.max(MIN_W, Math.min(w, Math.round(window.innerWidth * 0.6)));
+const curW = () =>
+  parseInt(getComputedStyle(cols).getPropertyValue("--panel-w"), 10) || 430;
+const setW = w => cols.style.setProperty("--panel-w", clampW(w) + "px");
+
+try {
+  const saved = parseInt(localStorage.getItem(PANEL_W), 10);
+  if (saved) setW(saved);
+} catch (e) {}
+
+function remember(){
+  try { localStorage.setItem(PANEL_W, String(curW())); } catch (e) {}
+}
+
+let dragging = false;
+grip.addEventListener("pointerdown", e => {
+  dragging = true;
+  grip.setPointerCapture(e.pointerId);
+  document.body.classList.add("resizing");
+  e.preventDefault();
+});
+grip.addEventListener("pointermove", e => {
+  if (dragging) setW(cols.getBoundingClientRect().right - e.clientX);
+});
+grip.addEventListener("pointerup", e => {
+  if (!dragging) return;
+  dragging = false;
+  grip.releasePointerCapture(e.pointerId);
+  document.body.classList.remove("resizing");
+  remember();
+});
+/* Left grows the panel, because that is the direction the handle moves. */
+grip.addEventListener("keydown", e => {
+  const step = e.shiftKey ? 48 : 16;
+  if (e.key === "ArrowLeft")  { setW(curW() + step); remember(); e.preventDefault(); }
+  if (e.key === "ArrowRight") { setW(curW() - step); remember(); e.preventDefault(); }
+});
+grip.addEventListener("dblclick", () => {
+  cols.style.removeProperty("--panel-w");
+  try { localStorage.removeItem(PANEL_W); } catch (e) {}
+});
+/* A width that was fine in a wide window can swallow the list in a narrow one,
+   so the clamp is re-applied rather than only enforced while dragging. */
+addEventListener("resize", () => {
+  if (cols.style.getPropertyValue("--panel-w")) setW(curW());
+});
 </script>
