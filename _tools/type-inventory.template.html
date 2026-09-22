@@ -141,8 +141,11 @@
   .b-tag{background:transparent;border:1px dashed var(--rule-strong);
     color:var(--ink-muted);padding:1px 6px}
   .b-cid{background:var(--surface-2);color:var(--ink-faint)}
-  /* Firmer than the atlas numbers beside it: this is the name that lasts. */
-  .b-rid{background:var(--surface-2);color:var(--ink-muted);font-weight:500}
+  /* Firmer than the atlas numbers beside it: this is the name that lasts.
+     Upper-cased in the string rather than with `text-transform`, so what you
+     read is what you can search the page or a URL for. */
+  .b-rid{background:var(--surface-2);color:var(--ink-muted);font-weight:500;
+    letter-spacing:.02em}
   .b-warn{background:color-mix(in srgb,var(--flag-med) 20%,transparent);color:var(--flag-med)}
 
   /* ---- panel -------------------------------------------------------- */
@@ -330,7 +333,7 @@ const BANDS = DATA.totals.distinct_breakpoints.map(b => b.name);
    a digest of what it renders at every width: stable across runs, and changing
    only when the row's type changes, at which point it genuinely is a new row.
    It is also what the URL carries as `sel`, so the badge and the link agree. */
-const rowId = c => "R\u00b7" + c.id.slice(0, 4);
+const rowId = c => "R" + c.id.slice(0, 4).toUpperCase();
 
 const rendersSmallFirst = c => c.renders.slice().sort(function (a, b) {
   return BANDS.findIndex(function (x) { return a.widths.includes(x); })
