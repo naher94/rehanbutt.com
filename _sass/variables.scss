@@ -381,6 +381,10 @@ $product-type: (
   // collection on the photography index, which unsets the overlay entirely.
   tile-title:    (family: $zilla, size: 2rem,       font-weight: $zilla-bold,   line-height: 1,       // 32px
                   at: (small only: (size: 1.5rem))),                                                  // 24px
+  // The name on each card of the easter eggs page. Off the scale at 30px, as
+  // transcribed from the 1.5em it was; the nearest step is 32px.
+  achievement-title:(family: $lato, size: 1.875rem, font-weight: $lato-bold,    line-height: 1.2,     // 30px
+                  at: (small only: (size: 1.5rem))),                                                  // 24px
   gallery-title: (family: $lato,  size: 3.75rem,    font-weight: $lato-bold,    line-height: 1,       // 60px
                   at: (small only: (size: 2rem))),                                                    // 32px
   // `control` and `meta` were one `ui` entry. Interface is a category, not a
@@ -429,8 +433,8 @@ $product-type: (
                   at: (small only: (size: 2rem))),                                                    // 32px
   // No font-weight: the class decides none, so its instances take 400 from the
   // page or 700 from the `p` rule in rehan.scss, and emitting a weight here
-  // would flatten ten bold pull-quotes to regular. Off the scale at 30px --
-  // the only entry in either map that is; the nearest step is 32px, and moving
+  // would flatten ten bold pull-quotes to regular. Off the scale at 30px, as
+  // `achievement-title` is; the nearest step is 32px, and moving
   // it is a design edit rather than a transcription, so it is recorded as-is.
   callout-sm:    (family: $lato,  size: 1.875rem,                                                     // 30px
                   at: (small only: (size: 1.5rem))),                                                  // 24px

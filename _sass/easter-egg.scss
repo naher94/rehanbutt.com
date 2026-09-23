@@ -160,9 +160,7 @@
       text-align: center;
     }
     .easter-egg-name{
-      font-size: 1.5em;
-      font-weight: $lato-bold;
-      line-height: 1.2;
+      @include type-style(product, achievement-title);
       margin-block-start: 1em;
     }
     .easter-egg-description{
