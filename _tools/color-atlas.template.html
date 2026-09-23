@@ -1,4 +1,5 @@
-<title>Colour Atlas</title>
+<meta charset="utf-8">
+<title>Color Atlas</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;700&family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;500&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <style>
@@ -40,59 +41,53 @@
   .wrap{max-width:none;margin:0}
   code,.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
 
-  header.top{padding:48px 0 22px;border-bottom:2px solid var(--ink);margin-bottom:26px}
-  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--accent-deep);margin:0 0 12px}
-  h1{font-family:"Zilla Slab",Georgia,serif;font-weight:700;
-    font-size:clamp(32px,4.6vw,48px);line-height:1.08;margin:0 0 12px;text-wrap:balance}
-  .standfirst{font-size:18px;color:var(--ink-muted);max-width:64ch;margin:0}
+  /* ---- header: the same bar as the Type Inventory --------------------- */
+  .top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+    column-gap:24px;margin:28px 0 18px}
+  h1{font-family:"Zilla Slab",serif;font-size:34px;margin:0;font-weight:700}
+  .tools{display:flex;gap:18px;font-size:11px;letter-spacing:.09em;text-transform:uppercase}
+  .tools a{color:var(--ink-muted);text-decoration:none}
+  .tools a:hover{color:var(--accent-deep)}
+  .tools a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
-  /* controls */
-  /* the view note explains the toggle, so it sits tight under the bar and
-     keeps its distance from the filters below */
-  .bar{display:flex;flex-wrap:wrap;gap:18px;align-items:center;
-    justify-content:space-between;margin-bottom:10px}
-  .segs{display:flex;gap:12px;flex-wrap:wrap}
-  .seg{display:inline-flex;border:1px solid var(--rule-strong);border-radius:3px;overflow:hidden}
-  .seg button[disabled]{opacity:.45;cursor:not-allowed}
-  .seg button{
-    font-family:"Lato",sans-serif;font-size:14px;font-weight:700;
-    padding:8px 16px;border:0;background:var(--surface);color:var(--ink-muted);cursor:pointer;
-  }
-  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
-  .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
-  .stats{display:flex;gap:22px;flex-wrap:wrap;font-family:"JetBrains Mono",monospace;
-    font-size:12.5px;color:var(--ink-muted)}
-  .stats b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+  /* ---- totals ------------------------------------------------------- */
+  .totals{display:flex;gap:26px;flex-wrap:wrap;padding:14px 0 16px;
+    border-block:1px solid var(--rule);margin-bottom:18px}
+  .tot b{display:block;font-family:"Zilla Slab",serif;font-size:26px;line-height:1.1;
+    font-variant-numeric:tabular-nums}
+  .tot span{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint)}
 
-  /* filters */
-  .filters{display:flex;flex-wrap:wrap;gap:12px 30px;margin:0 0 18px;
-    padding:14px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:3px}
-  .fgroup{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  .flabel{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--ink-muted)}
-  .chips{display:flex;gap:7px;flex-wrap:wrap}
+  /* ---- one bar: view, grouping and the three filters ----------------- */
+  /* the view note explains the toggle, so it sits tight under the bar */
+  .bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+  .bar .lbl{font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-faint);margin-right:2px}
+  .bar .sep{width:1px;align-self:stretch;background:var(--rule);margin:0 8px}
+  /* a label travels with its chips when the bar wraps */
+  .grp{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
   .chip{font-family:"Lato",sans-serif;font-size:13.5px;font-weight:700;
-    padding:5px 11px;border:1px solid var(--rule-strong);border-radius:2px;
-    background:var(--surface);color:var(--ink-faint);cursor:pointer;
-    display:inline-flex;align-items:center;gap:7px}
+    background:var(--surface);border:1px solid var(--rule-strong);color:var(--ink);
+    border-radius:999px;padding:5px 13px;cursor:pointer}
   .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+  .chip[disabled]{opacity:.45;cursor:not-allowed}
   .chip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-  .chip .n{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:400;
-    opacity:.7;font-variant-numeric:tabular-nums}
+  .chip .n{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:400;
+    opacity:.65;margin-left:6px}
+  .done{font-size:12px;color:var(--ink-faint)}
   .noresults{padding:40px 16px;text-align:center;color:var(--ink-faint);font-size:15px}
 
   /* review state: a checkbox in the panel, and its counterpart in the filters */
   .chip.clear{border-style:dashed;color:var(--ink-muted)}
   .chip.clear:hover{color:var(--flag-high);border-color:var(--flag-high)}
   .review{display:flex;align-items:center;gap:10px;width:100%;margin:14px 0 2px;
-    padding:10px 12px;border:1px solid var(--rule-strong);border-radius:3px;
+    padding:10px 12px;border:1px solid var(--rule-strong);border-radius:9px;
     background:var(--surface);color:var(--ink);cursor:pointer;
     font-family:"Lato",sans-serif;font-size:14px;font-weight:700;text-align:left}
   .review:hover{border-color:var(--accent-deep)}
   .review:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
   .review .box{width:16px;height:16px;border:1.5px solid var(--rule-strong);
-    border-radius:2px;flex:none;display:grid;place-items:center;
+    border-radius:4px;flex:none;display:grid;place-items:center;
     font-size:11px;line-height:1;color:transparent}
   .review[aria-pressed="true"]{background:color-mix(in srgb,var(--flag-ok) 12%,transparent);
     border-color:var(--flag-ok)}
@@ -103,12 +98,26 @@
 
   .viewnote{font-size:14.5px;color:var(--ink-muted);margin:0 0 20px;max-width:76ch}
 
-  /* layout */
-  .cols{display:grid;grid-template-columns:1fr 372px;gap:26px;align-items:start}
-  @media (max-width:1000px){.cols{grid-template-columns:1fr}}
+  /* ---- layout ------------------------------------------------------- */
+  .cols{display:grid;grid-template-columns:minmax(0,1fr) 11px var(--panel-w,372px);
+    gap:11px;align-items:start}
+  /* The splitter. A hit area wide enough to grab with a hairline drawn down
+     the middle of it, as on the Type Inventory. */
+  .grip{position:sticky;top:16px;height:calc(100vh - 32px);padding:0;border:0;
+    background:none;cursor:col-resize;touch-action:none}
+  .grip::before{content:"";display:block;width:2px;height:100%;margin:0 auto;
+    border-radius:2px;background:var(--rule)}
+  .grip:hover::before,.grip:focus-visible::before{background:var(--accent)}
+  .grip:focus-visible{outline:none}
+  body.resizing{cursor:col-resize;user-select:none}
+  @media (max-width:1100px){
+    .cols{grid-template-columns:minmax(0,1fr)}
+    .grip{display:none}
+    .panel{position:static}
+  }
 
-  /* One canvas: colours pack within their hue, hues pack against each other */
-  .canvas{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+  /* One canvas: colors pack within their hue, hues pack against each other */
+  .canvas{background:var(--surface);border:1px solid var(--rule);border-radius:10px;
     padding:14px;overflow-x:auto}
   .canvas svg{display:block;width:100%;height:auto}
   .famkey{display:flex;flex-wrap:wrap;gap:6px 18px;margin:12px 2px 0;
@@ -116,7 +125,7 @@
   .famkey b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
   .famkey i{width:9px;height:9px;border-radius:50%;display:inline-block;
     margin-right:6px;border:1px solid rgba(0,0,0,.25);vertical-align:-1px}
-  /* One ring for every swatch, so near-white colours stay visible. Origin is
+  /* One ring for every swatch, so near-white colors stay visible. Origin is
      reported in the detail panel rather than encoded in the ring — the ring is
      doing visibility work and can't carry a second meaning legibly. */
   circle.sw{cursor:pointer;transition:opacity .12s;
@@ -128,7 +137,7 @@
     pointer-events:all}
   circle.sw:hover{opacity:.75}
   circle.sw:focus-visible{outline:none;stroke:var(--accent-deep);stroke-width:3}
-  /* File names sit under their cluster. paint-order puts a background-coloured
+  /* File names sit under their cluster. paint-order puts a background-colored
      stroke behind the glyphs so a label stays readable where clusters crowd. */
   text.cluster-label{font-family:"JetBrains Mono",monospace;font-size:11px;
     fill:var(--ink);text-anchor:middle;pointer-events:none;
@@ -137,22 +146,22 @@
 
   /* Selection has to read on any fill — near-white, near-black, or a gradient —
      so it is drawn as a separate ring outside the swatch rather than a stroke
-     on it. A single stroke colour always loses to some fill; a halo does not. */
+     on it. A single stroke color always loses to some fill; a halo does not. */
   circle.sel-ring{fill:none;pointer-events:none;vector-effect:non-scaling-stroke}
   circle.sel-ring.halo{stroke:var(--surface);stroke-width:6}
   circle.sel-ring.line{stroke:var(--accent-deep);stroke-width:2.5}
   circle.sel-ring.dot{fill:var(--accent-deep);stroke:var(--surface);stroke-width:1.5}
 
   /* detail panel */
-  .panel{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
-    padding:18px 18px 22px;position:sticky;top:18px;max-height:calc(100vh - 36px);overflow-y:auto}
-  .panel .empty{color:var(--ink-faint);font-size:14.5px}
-  .pswatch{height:56px;border-radius:3px;border:1px solid rgba(0,0,0,.25);margin-bottom:12px}
+  .panel{background:var(--surface);border:1px solid var(--rule);border-radius:10px;
+    padding:16px 18px;position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto}
+  .panel .empty{color:var(--ink-faint);margin:0}
+  .pswatch{height:56px;border-radius:8px;border:1px solid rgba(0,0,0,.25);margin-bottom:12px}
   .pname{font-family:"JetBrains Mono",monospace;font-size:15px;font-weight:500;
     word-break:break-all;margin:0 0 4px}
-  .pmeta{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
-  .tag{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.07em;
-    text-transform:uppercase;padding:3px 8px;border-radius:2px;background:var(--chip);color:var(--ink-muted)}
+  .pmeta{display:flex;gap:5px;flex-wrap:wrap;margin:10px 0 4px}
+  .tag{font-family:"JetBrains Mono",monospace;font-size:10.5px;
+    padding:2px 7px;border-radius:5px;background:var(--chip);color:var(--ink-muted);white-space:nowrap}
   .tag.vendor{background:color-mix(in srgb,var(--flag-med) 18%,transparent);color:var(--flag-med)}
   .tag.derived{background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent-deep)}
   .tag.token{background:color-mix(in srgb,var(--flag-ok) 16%,transparent);color:var(--flag-ok)}
@@ -160,9 +169,9 @@
     font-family:"JetBrains Mono",monospace;font-size:12.5px}
   .pair dt{color:var(--ink-muted)}
   .pair dd{margin:0;word-break:break-all}
-  .panel h4{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--ink-muted);font-weight:500;
-    margin:18px 0 8px;padding-top:12px;border-top:1px solid var(--rule)}
+  .panel h4{font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:700;
+    margin:16px 0 7px;padding-top:12px;border-top:1px solid var(--rule)}
   .use{font-family:"JetBrains Mono",monospace;font-size:12px;padding:7px 0;
     border-bottom:1px solid var(--rule);line-height:1.45}
   .use:last-child{border-bottom:none}
@@ -174,14 +183,14 @@
   .more{font-size:12px;color:var(--ink-faint);font-family:"JetBrains Mono",monospace;padding-top:8px}
 
   .legend{margin:26px 0 0;padding-top:16px;border-top:1px solid var(--rule)}
-  .legend h3{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--ink-muted);font-weight:500;margin:0 0 12px}
+  .legend h3{font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:700;margin:0 0 12px}
   .origins{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:16px 26px;margin:0}
   .origins dt{font-family:"JetBrains Mono",monospace;font-size:12.5px;
     color:var(--ink);margin-bottom:3px}
   .origins dd{margin:0;font-size:14px;color:var(--ink-muted);line-height:1.45}
-  .origins code{background:var(--chip);padding:1px 4px;border-radius:2px;
+  .origins code{background:var(--chip);padding:1px 4px;border-radius:4px;
     font-size:12px;font-family:"JetBrains Mono",monospace}
   .sizenote{font-size:13.5px;color:var(--ink-faint);margin:16px 0 0}
   /* the origin line inside the detail panel */
@@ -193,10 +202,10 @@
     border:1px solid rgba(0,0,0,.25)}
 
   .drift{background:var(--surface);border:1px solid var(--rule);
-    border-left:4px solid var(--flag-med);border-radius:3px;padding:16px 18px;margin:26px 0 0}
-  .drift h3{font-family:"Lato",sans-serif;font-weight:900;font-size:16px;margin:0 0 6px}
+    border-left:4px solid var(--flag-med);border-radius:10px;padding:16px 18px;margin:26px 0 0}
+  .drift h3{font-family:"Zilla Slab",serif;font-weight:700;font-size:19px;margin:0 0 6px}
   .drift p{margin:0;font-size:15px;color:var(--ink-muted);max-width:70ch}
-  .drift code{background:var(--chip);padding:1.5px 5px;border-radius:2px;font-size:12.5px}
+  .drift code{background:var(--chip);padding:1.5px 5px;border-radius:4px;font-size:12.5px}
 
   footer{border-top:1px solid var(--rule);margin-top:44px;padding-top:18px;
     font-size:13px;color:var(--ink-faint);font-family:"JetBrains Mono",monospace;max-width:82ch;line-height:1.6}
@@ -205,46 +214,52 @@
 
 <div class="wrap">
   <header class="top">
-    <p class="eyebrow">Colour audit · rehanbutt.com</p>
-    <h1>Every colour the site uses, sized by how often</h1>
-    <p class="standfirst">Circles are scaled to usage count and clustered by hue. Gradients sit in the hue they read as. Click any one to see where it comes from and where it lands. Companion to the stylesheet drift report.</p>
+    <h1>Color Atlas</h1>
+    <nav class="tools" aria-label="Other tools">
+      <a href="type-inventory.html">Type Inventory</a>
+      <a href="css-atlas.html">CSS Atlas</a>
+    </nav>
   </header>
 
+  <div class="totals" id="totals"></div>
+
   <div class="bar">
-    <div class="segs">
-      <div class="seg" role="group" aria-label="View">
-        <button id="btn-authored" aria-pressed="true">As authored</button>
-        <button id="btn-rendered" aria-pressed="false">As rendered</button>
-      </div>
-      <div class="seg" role="group" aria-label="Group by">
-        <button id="btn-palette" aria-pressed="true">Group by palette</button>
-        <button id="btn-file" aria-pressed="false">Group by file</button>
-      </div>
-    </div>
-    <div class="stats" id="stats"></div>
+    <div class="grp"><span class="lbl">View</span>
+      <div class="chips" role="group" aria-label="View">
+        <button class="chip" id="btn-authored" aria-pressed="true">As authored</button>
+        <button class="chip" id="btn-rendered" aria-pressed="false">As rendered</button>
+      </div></div>
+    <span class="sep"></span>
+    <div class="grp"><span class="lbl">Group</span>
+      <div class="chips" role="group" aria-label="Group by">
+        <button class="chip" id="btn-palette" aria-pressed="true">palette</button>
+        <button class="chip" id="btn-file" aria-pressed="false">file</button>
+      </div></div>
+    <span class="sep"></span>
+    <div class="grp"><span class="lbl">Type</span><div class="chips" id="f-type"></div></div>
+    <span class="sep"></span>
+    <div class="grp"><span class="lbl">Source</span><div class="chips" id="f-cat"></div></div>
+    <span class="sep"></span>
+    <div class="grp"><span class="lbl">Reviewed</span><div class="chips" id="f-reviewed"></div></div>
   </div>
 
   <p class="viewnote" id="viewnote"></p>
-
-  <div class="filters">
-    <div class="fgroup"><span class="flabel">Type</span><div class="chips" id="f-type"></div></div>
-    <div class="fgroup"><span class="flabel">Source</span><div class="chips" id="f-cat"></div></div>
-    <div class="fgroup"><span class="flabel">Reviewed</span><div class="chips" id="f-reviewed"></div></div>
-  </div>
 
   <div class="cols">
     <div>
       <div class="canvas" id="canvas"></div>
       <div class="famkey" id="famkey"></div>
     </div>
-    <aside class="panel" id="panel"><p class="empty">Select a colour to see where it is defined and used.</p></aside>
+    <button class="grip" id="grip" role="separator" aria-orientation="vertical"
+            aria-label="Resize the detail pane — arrow keys, double-click to reset"></button>
+    <aside class="panel" id="panel"><p class="empty">Select a color to see where it is defined and used.</p></aside>
   </div>
 
   <div class="legend">
-    <h3>Where a colour comes from</h3>
+    <h3>Where a color comes from</h3>
     <dl class="origins" id="origins"></dl>
     <p class="sizenote">Circle area is proportional to usage count. Every swatch carries the same
-      25% black ring so near-white colours stay visible — origin is reported in the panel when you
+      25% black ring so near-white colors stay visible — origin is reported in the panel when you
       select one.</p>
   </div>
 
@@ -278,7 +293,7 @@
     token: {label:'design token',
       def:'Held in the <code>$semantic-colors</code> map and used through <code>semantic-color()</code>. It carries a light and a dark value, and changing it changes every use at once.'},
     authored: {label:'hand-written',
-      def:'Typed directly into <code>_sass/</code> or <code>css/</code> rather than going through a token. A colour you chose, with a file and line to edit — and the drift the system has not absorbed yet.'},
+      def:'Typed directly into <code>_sass/</code> or <code>css/</code> rather than going through a token. A color you chose, with a file and line to edit — and the drift the system has not absorbed yet.'},
     derived: {label:'Sass-derived',
       def:'Produced at build time from your palette by <code>mix()</code>, <code>rgba()</code> or <code>darken()</code>. It appears in no source file, which is why it has selectors but no source lines.'},
     vendor: {label:'vendor',
@@ -288,12 +303,12 @@
   const CAT_ORDER = ['token','authored','derived','vendor'];
 
   /* ------------------------------------------------------------------
-     Reviewed: colours you have checked off, remembered across sessions.
+     Reviewed: colors you have checked off, remembered across sessions.
 
      Kept in localStorage as { "<view>|<id>": "<signature>" }. Keyed by the
      entry id rather than by its value, so renaming nothing and changing a
-     token's colour are told apart -- and the signature is stored alongside so
-     a colour that has since changed can un-review itself. An audit tool must
+     token's color are told apart -- and the signature is stored alongside so
+     a color that has since changed can un-review itself. An audit tool must
      not hide the one thing that moved.
 
      Namespaced because browsers treat every file:// page as one storage
@@ -301,7 +316,7 @@
   ------------------------------------------------------------------ */
   const STORE = 'rehanbutt.color-atlas.reviewed';
 
-  // what "unchanged" means for a colour: tokens carry two values, one per theme
+  // what "unchanged" means for a color: tokens carry two values, one per theme
   const sig = d => d.kind === 'token' ? `${d.light}|${d.dark}` : String(d.display);
   const rkey = d => `${view}|${d.id}`;
 
@@ -316,7 +331,7 @@
     try { localStorage.setItem(STORE, JSON.stringify(reviewed)); } catch (e) {}
   }
 
-  // drop ticks whose colour has changed since, and forget entries the audit no
+  // drop ticks whose color has changed since, and forget entries the audit no
   // longer knows about at all
   function pruneReviewed(){
     const live = new Map();
@@ -343,14 +358,14 @@
   const filters = {
     type: new Set(['solid','gradient']),
     cat:  new Set(CAT_ORDER),
-    showReviewed: false        // ticking a colour takes it off the grid
+    showReviewed: false        // ticking a color takes it off the grid
   };
   const typeOf = d => d.kind === 'gradient' ? 'gradient' : 'solid';
   let groupBy = 'palette';
 
-  // Grouping by file changes the unit: a colour used in four files becomes four
+  // Grouping by file changes the unit: a color used in four files becomes four
   // nodes, each sized by its uses in that file. Grouping by palette keeps one
-  // node per colour, sized by its total. The two counts are different things.
+  // node per color, sized by its total. The two counts are different things.
   function nodes(){
     const vis = visible();
     if (groupBy === 'palette')
@@ -376,15 +391,15 @@
     const fileCount = new Set(items.flatMap(i => Object.keys(i.files||{}))).size;
     const byOrigin = {};
     items.forEach(i => byOrigin[i.origin] = (byOrigin[i.origin]||0)+1);
-    const parts = [
-      `<span><b>${items.length}</b> colours</span>`,
-      `<span><b>${uses}</b> uses</span>`,
-      `<span><b>${DATA.totals.tokens}</b> tokens</span>`
+    const rows = [
+      [items.length, 'colors'],
+      [uses.toLocaleString(), 'uses'],
+      [DATA.totals.tokens, 'tokens']
     ];
-    if (groupBy === 'file') parts.splice(2, 0, `<span><b>${fileCount}</b> files</span>`);
-    Object.keys(byOrigin).sort().forEach(o =>
-      parts.push(`<span><b>${byOrigin[o]}</b> ${o}</span>`));
-    document.getElementById('stats').innerHTML = parts.join('');
+    if (groupBy === 'file') rows.splice(2, 0, [fileCount, 'files']);
+    Object.keys(byOrigin).sort().forEach(o => rows.push([byOrigin[o], o]));
+    document.getElementById('totals').innerHTML = rows.map(([n, l]) =>
+      `<div class="tot"><b>${n}</b><span>${esc(l)}</span></div>`).join('');
 
   }
 
@@ -399,16 +414,16 @@
     items.forEach(d => { if (d.kind === 'gradient') d.fillId = `grad-${view}-${gi++}`; });
     if (!items.length){
       host.append('p').attr('class','noresults')
-        .text('No colours match these filters.');
+        .text('No colors match these filters.');
       d3.select('#famkey').html('');
       return;
     }
     const groups = d3.group(items, d => d._group);
     const maxCount = d3.max(items, d => d._count) || 1;
-    // area ∝ count, with a floor so single-use colours stay clickable
+    // area ∝ count, with a floor so single-use colors stay clickable
     const r = d3.scaleSqrt().domain([1, maxCount]).range([9, 52]);
 
-    // 1. pack each hue's colours into a cluster, positioned around its own origin
+    // 1. pack each hue's colors into a cluster, positioned around its own origin
     // palette clusters follow the spectrum; file clusters go biggest first
     const order = groupBy === 'palette'
       ? FAM_ORDER.filter(f => groups.has(f))
@@ -433,7 +448,7 @@
     const svg = host.append('svg')
       .attr('viewBox', `0 0 ${Math.ceil(W)} ${Math.ceil(H)}`)
       .attr('role','img')
-      .attr('aria-label', `${items.length} colours grouped into ${clusters.length} hue families`);
+      .attr('aria-label', `${items.length} colors grouped into ${clusters.length} hue families`);
 
     // SVG needs a paint server per gradient — a CSS gradient string won't fill
     const defs = svg.append('defs');
@@ -453,7 +468,7 @@
       c.nodes.forEach(n => { n._ax = c.x + n.x; n._ay = c.y + n.y; });
       root.append('g')
         .attr('transform', `translate(${c.x},${c.y})`)
-        .attr('aria-label', `${c.fam} colours`)
+        .attr('aria-label', `${c.fam} colors`)
         .selectAll('circle').data(c.nodes).join('circle')
           .attr('class', d => 'sw ' + (d.origin === 'authored' ? '' : d.origin))
           .attr('cx', d=>d.x).attr('cy', d=>d.y).attr('r', d=>d.r-2)
@@ -503,7 +518,7 @@
     layer.selectAll('*').remove();
     if (!selected) return;
 
-    // the same colour can appear in several file clusters, so ring them all
+    // the same color can appear in several file clusters, so ring them all
     const hits = [];
     d3.selectAll('circle.sw').each(function(d){ if (d.id === selected.id) hits.push(d); });
     hits.forEach(d => {
@@ -513,7 +528,7 @@
       layer.append('circle').attr('class','sel-ring line')
         .attr('cx', d._ax).attr('cy', d._ay).attr('r', rr);
     });
-    // The dot marks the one you actually clicked. In file mode the same colour
+    // The dot marks the one you actually clicked. In file mode the same color
     // is ringed in several clusters, so matching on identity alone would put a
     // dot on all of them and lose which was picked. Fall back to the first hit
     // only for the initial auto-selection, which has no click position.
@@ -610,8 +625,8 @@
     if (!keys.length){ el.style.display = 'none'; return; }
     const list = keys.map(k =>
       `<code>${esc(DATA.notation_drift[k].join('</code> and <code>'))}</code>`).join(', ');
-    el.innerHTML = `<h3>Same colour, written more than one way</h3>
-      <p>${list} — identical colours that every counting tool, including this one before it normalises, reads as separate values. Cheap to unify, and it shrinks the palette without changing a pixel.</p>`;
+    el.innerHTML = `<h3>Same color, written more than one way</h3>
+      <p>${list} — identical colors that every counting tool, including this one before it normalises, reads as separate values. Cheap to unify, and it shrinks the palette without changing a pixel.</p>`;
   }
 
   function foot(){
@@ -619,8 +634,8 @@
     const nc = (DATA.non_colour_tokens||[]).map(n=>`--color-${n}`).join(', ');
     document.getElementById('footer').innerHTML =
       `Static snapshot from ${t.source_files} source files and ${t.css_bytes.toLocaleString()} bytes of compiled CSS. ` +
-      `Regenerate with <code>python3 bin/color-audit.py</code>, then republish. ` +
-      (nc ? `Excluded: ${esc(nc)} — theme-varying tokens that hold filters, not colours.` : '');
+      `Regenerate with <code>python3 _tools/color-audit.py</code>, then republish. ` +
+      (nc ? `Excluded: ${esc(nc)} — theme-varying tokens that hold filters, not colors.` : '');
   }
 
   document.getElementById('btn-authored').addEventListener('click', ()=>setView('authored'));
@@ -631,7 +646,7 @@
   function clearPanel(){
     selected = null;
     document.getElementById('panel').innerHTML =
-      '<p class="empty">Select a colour to see where it is defined and used.</p>';
+      '<p class="empty">Select a color to see where it is defined and used.</p>';
   }
 
   function setGroup(g){
@@ -641,7 +656,7 @@
     clearPanel(); stats(); draw(); note();
   }
 
-  // Rendered colours used to carry selectors but no source files, so grouping
+  // Rendered colors used to carry selectors but no source files, so grouping
   // by file had nothing to group on. The audit now maps every compiled
   // declaration back through the Sass source map, so both views can do it.
   function syncGroupAvailability(){
@@ -654,10 +669,10 @@
 
   function note(){
     const v = view === 'authored'
-      ? 'What is written in _sass/ and css/. A colour held in a design token appears once under its token name, showing both theme values — so anything sitting here as a bare hex is a colour that escaped the system.'
-      : 'What the browser actually receives after Sass runs, flattened to literal values. Includes colours no source file contains, because mix() and rgba() produced them at build time. Each one is traced through the Sass source map back to the partial and line that produced it, so hand-written, derived and vendor mean the same thing here as they do on the authored side.';
+      ? 'What is written in _sass/ and css/. A color held in a design token appears once under its token name, showing both theme values — so anything sitting here as a bare hex is a color that escaped the system.'
+      : 'What the browser actually receives after Sass runs, flattened to literal values. Includes colors no source file contains, because mix() and rgba() produced them at build time. Each one is traced through the Sass source map back to the partial and line that produced it, so hand-written, derived and vendor mean the same thing here as they do on the authored side.';
     const g = groupBy === 'file'
-      ? ' Grouped by file, a colour used in several files appears once per file, sized by its uses there — so these circles count usages, not colours.'
+      ? ' Grouped by file, a color used in several files appears once per file, sized by its uses there — so these circles count usages, not colors.'
       : '';
     document.getElementById('viewnote').textContent = v + g;
   }
@@ -697,7 +712,7 @@
         b.setAttribute('aria-pressed', set.has(k));
         selected = null;
         document.getElementById('panel').innerHTML =
-          '<p class="empty">Select a colour to see where it is defined and used.</p>';
+          '<p class="empty">Select a color to see where it is defined and used.</p>';
         stats(); draw();
       }));
     };
@@ -717,7 +732,7 @@
          Show reviewed<span class="n">${n}</span></button>` +
       (n ? `<button class="chip clear" id="c-clearrev">Clear ${
              filters.showReviewed ? 'all' : 'all'}</button>` : '') +
-      `<span class="flabel" style="align-self:center">${n} of ${total} done</span>`;
+      `<span class="done">${n} of ${total} done</span>`;
 
     host.querySelector('#c-showrev').addEventListener('click', () => {
       filters.showReviewed = !filters.showReviewed;
@@ -725,7 +740,7 @@
     });
     const clear = host.querySelector('#c-clearrev');
     if (clear) clear.addEventListener('click', () => {
-      if (!confirm(`Clear all ${n} reviewed colours in the ${view} view?`)) return;
+      if (!confirm(`Clear all ${n} reviewed colors in the ${view} view?`)) return;
       DATA[view].forEach(d => delete reviewed[`${view}|${d.id}`]);
       saveReviewed();
       chips(); stats(); draw();
@@ -738,13 +753,56 @@
   if (staleCount) {
     const el = document.createElement('p');
     el.className = 'stale';
-    el.textContent = `${staleCount} colour${staleCount === 1 ? ' has' : 's have'} ` +
+    el.textContent = `${staleCount} color${staleCount === 1 ? ' has' : 's have'} ` +
       `changed value since you reviewed ${staleCount === 1 ? 'it' : 'them'}, ` +
       `so ${staleCount === 1 ? 'it is' : 'they are'} showing again.`;
     document.getElementById('viewnote').after(el);
   }
-  // open on the most-used colour so the page shows its own behaviour at rest
+  // open on the most-used color so the page shows its own behaviour at rest
   const first = nodes()[0];
   if (first) select(first);
+
+  /* The splitter, as on the Type Inventory: width is a CSS variable on the
+     grid, remembered per viewer under this page's own key. */
+  const PANEL_W = 'rb-color-atlas-panel-w';
+  const cols = document.querySelector('.cols');
+  const grip = document.getElementById('grip');
+  const clampW = w => Math.max(320, Math.min(w, Math.round(window.innerWidth * 0.6)));
+  const curW = () => parseInt(getComputedStyle(cols).getPropertyValue('--panel-w'), 10) || 372;
+  const setW = w => cols.style.setProperty('--panel-w', clampW(w) + 'px');
+  const remember = () => { try { localStorage.setItem(PANEL_W, String(curW())); } catch (e) {} };
+  try { const saved = parseInt(localStorage.getItem(PANEL_W), 10); if (saved) setW(saved); }
+  catch (e) {}
+
+  let dragging = false;
+  grip.addEventListener('pointerdown', e => {
+    dragging = true;
+    grip.setPointerCapture(e.pointerId);
+    document.body.classList.add('resizing');
+    e.preventDefault();
+  });
+  grip.addEventListener('pointermove', e => {
+    if (dragging) setW(cols.getBoundingClientRect().right - e.clientX);
+  });
+  grip.addEventListener('pointerup', e => {
+    if (!dragging) return;
+    dragging = false;
+    grip.releasePointerCapture(e.pointerId);
+    document.body.classList.remove('resizing');
+    remember();
+  });
+  // left grows the panel, because that is the direction the handle moves
+  grip.addEventListener('keydown', e => {
+    const step = e.shiftKey ? 48 : 16;
+    if (e.key === 'ArrowLeft')  { setW(curW() + step); remember(); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { setW(curW() - step); remember(); e.preventDefault(); }
+  });
+  grip.addEventListener('dblclick', () => {
+    cols.style.removeProperty('--panel-w');
+    try { localStorage.removeItem(PANEL_W); } catch (e) {}
+  });
+  addEventListener('resize', () => {
+    if (cols.style.getPropertyValue('--panel-w')) setW(curW());
+  });
 })();
 </script>
