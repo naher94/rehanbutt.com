@@ -90,12 +90,15 @@
       padding: 0.5em;
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
+      // Kept although the count below no longer reads from it: the share
+      // icons and the bar's padding are in em and resolve against it.
       font-weight: $lato-bold;
       font-size: 0.8em;
       @include breakpoint(small only) {
         font-size: 1.2em;
       }
       .count-label{
+        @include type-style(product, collection-count);
         padding-inline-start: 0.25em;
       }
       .share-item{

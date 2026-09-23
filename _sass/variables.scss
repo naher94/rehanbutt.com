@@ -299,7 +299,11 @@ $product-type: (
 
   page-title:    (family: $zilla, size: 3.75rem,    font-weight: $zilla-bold,   line-height: 0.9,     // 60px
                   at: (small only: (size: 3rem))),                                                    // 48px
-  section-title: (family: $zilla, size: 3.125rem,   font-weight: $zilla-bold,                         // 50px
+  // The line under the 404 page's title, and the only entry at Zilla medium.
+  // Barely smaller on small, as transcribed; leading from the heading reset.
+  page-subtitle: (family: $zilla, size: 2.25rem,    font-weight: $zilla-medium,                       // 36px
+                  at: (small only: (size: 2rem))),                                                    // 32px
+  section-title:(family: $zilla, size: 3.125rem,   font-weight: $zilla-bold,                         // 50px
                   at: (small only: (size: 2.5rem, line-height: normal))),                             // 40px
   // The home page's section headings, which are the page's structure rather
   // than a heading inside it -- the same job as `section-title` a rank up.
@@ -393,6 +397,10 @@ $product-type: (
   // on the home page. `body` set tight, since both are a line or two.
   card-description:(family: $lato, size: 1.25rem,  font-weight: $lato-regular, line-height: 1.2,     // 20px
                   at: (small only: (size: 1rem))),                                                    // 16px
+  // The "14 Resources" in a collection page's metadata bar. Steps up on small
+  // with the rest of the bar, and leaves its leading to the global 1.5.
+  collection-count:(family: $lato, size: 1rem,     font-weight: $lato-bold,                          // 16px
+                  at: (small only: (size: 1.2rem))),                                                  // 19.2px
   gallery-title: (family: $lato,  size: 3.75rem,    font-weight: $lato-bold,    line-height: 1,       // 60px
                   at: (small only: (size: 2rem))),                                                    // 32px
   // `control` and `meta` were one `ui` entry. Interface is a category, not a

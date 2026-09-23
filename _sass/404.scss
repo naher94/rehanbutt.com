@@ -7,11 +7,10 @@
 }
 
 .words-404 {
-  font-size: 1.8em;
+  @include type-style(product, page-subtitle);
   margin-bottom: 1em;
   @include breakpoint(small only) {
     text-align: center;
-    font-size: 2em;
     margin-bottom: 2em;
   }
 }
