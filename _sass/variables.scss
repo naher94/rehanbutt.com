@@ -400,6 +400,10 @@ $product-type: (
   // transcribed from the 1.5em it was; the nearest step is 32px.
   achievement-title:(family: $lato, size: 1.875rem, font-weight: $lato-bold,    line-height: 1.2,     // 30px
                   at: (small only: (size: 1.5rem))),                                                  // 24px
+  // A featured project's title on the home page. `tile-title` but for the
+  // leading: these run to two lines, where 1 would crowd them.
+  card-title:    (family: $zilla, size: 2rem,       font-weight: $zilla-bold,   line-height: 1.1,     // 32px
+                  at: (small only: (size: 1.5rem))),                                                  // 24px
   // The line under a card's title: an easter egg card, and a featured project
   // on the home page. `body` set tight, since both are a line or two.
   card-description:(family: $lato, size: 1.25rem,  font-weight: $lato-regular, line-height: 1.2,     // 20px
