@@ -102,9 +102,12 @@
           </button>
           {% comment %}Empty by design. Keeping the menu out of the popover
           leaves the list in normal flow, so it still pushes the page down,
-          while `popovertarget` supplies the button semantics, Esc and
-          light-dismiss that the checkbox it replaces never had.{% endcomment %}
-          <div id="mobile-menu-state" popover></div>
+          while `popovertarget` supplies the button semantics the checkbox it
+          replaces never had. Manual, not auto: auto's light-dismiss treats a tap
+          on a menu link as outside the popover and collapses the menu before
+          the click, which iOS then drops. app.js handles Esc and outside taps.
+          {% endcomment %}
+          <div id="mobile-menu-state" popover="manual"></div>
           <div class="mobile-navbar">
           {% comment %}`mobile-shortcut` is the position, not a flag, so this
           row orders itself. Sorting on `header-sort-order` instead would tie

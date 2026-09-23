@@ -265,6 +265,21 @@ function mobileMenu() {
   // the browser's own, so hardcoding one would leave it lying if this never ran.
   button.setAttribute("aria-expanded", "false");
 
+  // The popover is manual (see header.html), so Esc and outside taps are ours.
+  // Taps inside .menu-container are left alone so the links can navigate.
+  const container = button.closest(".menu-container");
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && state.matches(":popover-open")) {
+      state.hidePopover();
+      button.focus();
+    }
+  });
+  document.addEventListener("click", function (event) {
+    if (state.matches(":popover-open") && container && !container.contains(event.target)) {
+      state.hidePopover();
+    }
+  });
+
   state.addEventListener("toggle", function (event) {
     const isOpen = event.newState === "open";
     button.setAttribute("aria-expanded", isOpen);
