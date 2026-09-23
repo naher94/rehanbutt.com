@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Reachability Atlas</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@300;400;500;700&family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
@@ -39,52 +40,61 @@
   .wrap{max-width:none;margin:0}
   code,.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
 
-  header.top{padding:48px 0 22px;border-bottom:2px solid var(--ink);margin-bottom:26px}
-  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--accent-deep);margin:0 0 12px}
-  h1{font-family:"Zilla Slab",Georgia,serif;font-weight:700;
-    font-size:clamp(32px,4.6vw,48px);line-height:1.08;margin:0 0 12px;text-wrap:balance}
-  .standfirst{font-size:18px;color:var(--ink-muted);max-width:64ch;margin:0}
+  /* ---- header: the same bar as the Type Inventory --------------------- */
+  .top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+    column-gap:24px;margin:28px 0 18px}
+  h1{font-family:"Zilla Slab",serif;font-size:34px;margin:0;font-weight:700}
+  .tools{display:flex;gap:18px;font-size:11px;letter-spacing:.09em;text-transform:uppercase}
+  .tools a{color:var(--ink-muted);text-decoration:none}
+  .tools a:hover{color:var(--accent-deep)}
+  .tools a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
-  /* controls */
-  .bar{display:flex;flex-wrap:wrap;gap:18px;align-items:center;
-    justify-content:space-between;margin-bottom:10px}
-  .segs{display:flex;gap:12px;flex-wrap:wrap}
-  .seg{display:inline-flex;border:1px solid var(--rule-strong);border-radius:3px;overflow:hidden}
-  .seg button{
-    font-family:"Lato",sans-serif;font-size:14px;font-weight:700;
-    padding:8px 16px;border:0;background:var(--surface);color:var(--ink-muted);cursor:pointer;
-  }
-  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
-  .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
-  .stats{display:flex;gap:22px;flex-wrap:wrap;font-family:"JetBrains Mono",monospace;
-    font-size:12.5px;color:var(--ink-muted)}
-  .stats b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+  /* ---- totals ------------------------------------------------------- */
+  .totals{display:flex;gap:26px;flex-wrap:wrap;padding:14px 0 16px;
+    border-block:1px solid var(--rule);margin-bottom:18px}
+  .tot b{display:block;font-family:"Zilla Slab",serif;font-size:26px;line-height:1.1;
+    font-variant-numeric:tabular-nums}
+  .tot span{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint)}
+
+  /* ---- one bar: whose code, grouping and the verdict filter ---------- */
+  .bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  .bar .lbl{font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-faint);margin-right:2px}
+  .bar .sep{width:1px;align-self:stretch;background:var(--rule);margin:0 8px}
+  /* a label travels with its chips when the bar wraps */
+  .grp{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .chip{font-family:"Lato",sans-serif;font-size:13.5px;font-weight:700;
+    background:var(--surface);border:1px solid var(--rule-strong);color:var(--ink);
+    border-radius:999px;padding:5px 13px;cursor:pointer}
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+  .chip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .chip .n{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:400;
+    opacity:.65;margin-left:6px}
 
   .viewnote{font-size:14.5px;color:var(--ink-muted);margin:0 0 16px;max-width:78ch}
 
-  /* filters */
-  .filters{display:flex;flex-wrap:wrap;gap:12px 30px;margin:0 0 18px;
-    padding:14px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:3px}
-  .fgroup{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  .flabel{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--ink-muted)}
-  .chips{display:flex;gap:7px;flex-wrap:wrap}
-  .chip{font-family:"Lato",sans-serif;font-size:13.5px;font-weight:700;
-    padding:5px 11px;border:1px solid var(--rule-strong);border-radius:2px;
-    background:var(--surface);color:var(--ink-faint);cursor:pointer;
-    display:inline-flex;align-items:center;gap:7px}
-  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
-  .chip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-  .chip .n{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:400;
-    opacity:.7;font-variant-numeric:tabular-nums}
   .noresults{padding:40px 16px;text-align:center;color:var(--ink-faint);font-size:15px}
 
-  /* layout */
-  .cols{display:grid;grid-template-columns:1fr 372px;gap:26px;align-items:start}
-  @media (max-width:1000px){.cols{grid-template-columns:1fr}}
+  /* ---- layout ------------------------------------------------------- */
+  .cols{display:grid;grid-template-columns:minmax(0,1fr) 11px var(--panel-w,372px);
+    gap:11px;align-items:start}
+  /* The splitter. A hit area wide enough to grab with a hairline drawn down
+     the middle of it, as on the Type Inventory. */
+  .grip{position:sticky;top:16px;height:calc(100vh - 32px);padding:0;border:0;
+    background:none;cursor:col-resize;touch-action:none}
+  .grip::before{content:"";display:block;width:2px;height:100%;margin:0 auto;
+    border-radius:2px;background:var(--rule)}
+  .grip:hover::before,.grip:focus-visible::before{background:var(--accent)}
+  .grip:focus-visible{outline:none}
+  body.resizing{cursor:col-resize;user-select:none}
+  @media (max-width:1100px){
+    .cols{grid-template-columns:minmax(0,1fr)}
+    .grip{display:none}
+    .panel{position:static}
+  }
 
-  .sheet{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+  .sheet{background:var(--surface);border:1px solid var(--rule);border-radius:10px;
     overflow:hidden}
 
   .group{border-bottom:1px solid var(--rule)}
@@ -98,11 +108,11 @@
     color:var(--ink-muted);font-variant-numeric:tabular-nums}
 
   /* the headline: what share of the stylesheet is doing nothing */
-  .weigh{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+  .weigh{background:var(--surface);border:1px solid var(--rule);border-radius:10px;
     padding:16px 18px;margin:0 0 18px}
-  .weigh h2{margin:0 0 12px;font-family:"JetBrains Mono",monospace;font-weight:500;
-    font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted)}
-  .stack{display:flex;height:26px;border-radius:2px;overflow:hidden;
+  .weigh h2{margin:0 0 12px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:700}
+  .stack{display:flex;height:26px;border-radius:6px;overflow:hidden;
     border:1px solid var(--rule-strong)}
   .stack span{display:block}
   .stack .s-live{background:var(--surface-2)}
@@ -118,7 +128,7 @@
   /* how to read this: the verdicts, and what each one asks you to do */
   .guide{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 18px}
   @media (max-width:860px){.guide{grid-template-columns:1fr}}
-  .card{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+  .card{background:var(--surface);border:1px solid var(--rule);border-radius:10px;
     padding:14px 16px}
   .card h3{margin:0 0 8px;display:flex;align-items:center;gap:8px;
     font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:500;
@@ -132,13 +142,13 @@
   .lane{display:flex;flex-wrap:wrap;gap:14px;align-items:baseline;margin:0 0 14px}
   .lanenote{font-size:14px;color:var(--ink-muted);margin:0 0 18px;max-width:82ch;
     padding:12px 14px;background:var(--surface);border:1px solid var(--rule);
-    border-left:3px solid var(--accent-deep);border-radius:3px}
+    border-left:3px solid var(--accent-deep);border-radius:10px}
   .lanenote code{font-family:"JetBrains Mono",monospace;font-size:12.5px;
-    background:var(--chip);padding:1px 5px;border-radius:2px}
+    background:var(--chip);padding:1px 5px;border-radius:4px}
   .lanenote b{color:var(--ink)}
 
-  .allgone{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.06em;
-    text-transform:uppercase;padding:2px 7px;border-radius:2px;
+  .allgone{font-family:"JetBrains Mono",monospace;font-size:10.5px;
+    padding:2px 7px;border-radius:5px;
     background:color-mix(in srgb,var(--flag-high) 16%,transparent);color:var(--flag-high)}
 
   /* a rule row */
@@ -165,8 +175,8 @@
   .weight small{display:block;font-size:10px;font-weight:400;color:var(--ink-faint);
     letter-spacing:.06em;text-transform:uppercase}
 
-  .vtag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.06em;
-    text-transform:uppercase;padding:2px 7px;border-radius:2px;white-space:nowrap}
+  .vtag{font-family:"JetBrains Mono",monospace;font-size:10.5px;
+    padding:2px 7px;border-radius:5px;white-space:nowrap}
   .vtag.dead{background:color-mix(in srgb,var(--flag-high) 16%,transparent);color:var(--flag-high)}
   .vtag.bloat{background:color-mix(in srgb,var(--flag-med) 18%,transparent);color:var(--flag-med)}
   .vtag.script{background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent-deep)}
@@ -181,14 +191,14 @@
   .fbar .b-bloat{background:var(--flag-med)}
 
   /* detail panel */
-  .panel{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
-    padding:18px 18px 22px;position:sticky;top:18px;max-height:calc(100vh - 36px);overflow-y:auto}
-  .panel .empty{color:var(--ink-faint);font-size:14.5px}
+  .panel{background:var(--surface);border:1px solid var(--rule);border-radius:10px;
+    padding:16px 18px;position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto}
+  .panel .empty{color:var(--ink-faint);margin:0}
   .pname{font-family:"JetBrains Mono",monospace;font-size:15px;font-weight:500;
     margin:0 0 4px;word-break:break-word}
-  .pmeta{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
-  .tag{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.07em;
-    text-transform:uppercase;padding:3px 8px;border-radius:2px;background:var(--chip);color:var(--ink-muted)}
+  .pmeta{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 8px}
+  .tag{font-family:"JetBrains Mono",monospace;font-size:10.5px;
+    padding:2px 7px;border-radius:5px;background:var(--chip);color:var(--ink-muted);white-space:nowrap}
   .tag.vendor{background:color-mix(in srgb,var(--flag-med) 18%,transparent);color:var(--flag-med)}
   .tag.off{background:color-mix(in srgb,var(--flag-high) 16%,transparent);color:var(--flag-high)}
   .tag.on{background:color-mix(in srgb,var(--flag-ok) 16%,transparent);color:var(--flag-ok)}
@@ -196,9 +206,9 @@
     font-family:"JetBrains Mono",monospace;font-size:12.5px}
   .pair dt{color:var(--ink-muted)}
   .pair dd{margin:0;word-break:break-word}
-  .panel h4{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--ink-muted);font-weight:500;
-    margin:18px 0 8px;padding-top:12px;border-top:1px solid var(--rule)}
+  .panel h4{font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:700;
+    margin:16px 0 7px;padding-top:12px;border-top:1px solid var(--rule)}
   .use{font-family:"JetBrains Mono",monospace;font-size:12px;padding:7px 0;
     border-bottom:1px solid var(--rule);line-height:1.45;
     display:flex;justify-content:space-between;gap:10px}
@@ -224,38 +234,42 @@
 
 <div class="wrap">
   <header class="top">
-    <p class="eyebrow">rehanbutt.com &middot; design system</p>
     <h1>Reachability Atlas</h1>
-    <p class="standfirst">Every rule in the compiled stylesheet, against every built
-      page, answering one question: does anything match it? Rules rather than
-      selectors, because a rule is only deletable once its whole list is dead.</p>
+    <nav class="tools" aria-label="Other tools">
+      <a href="type-inventory.html">Type Inventory</a>
+      <a href="color-atlas.html">Color Atlas</a>
+    </nav>
   </header>
+
+  <div class="totals" id="totals"></div>
 
   <div class="weigh" id="weigh"></div>
 
   <div class="guide" id="guide"></div>
 
   <div class="bar">
-    <div class="segs">
-      <div class="seg" role="group" aria-label="Whose code">
-        <button id="l-authored" aria-pressed="true">Yours</button>
-        <button id="l-vendor" aria-pressed="false">Foundation</button>
-        <button id="l-all" aria-pressed="false">Everything</button>
-      </div>
-      <div class="seg" role="group" aria-label="Group by">
-        <button id="g-file" aria-pressed="true">By file</button>
-        <button id="g-verdict" aria-pressed="false">By verdict</button>
-      </div>
-    </div>
-    <div class="stats" id="stats"></div>
+    <div class="grp"><span class="lbl">Code</span>
+      <div class="chips" role="group" aria-label="Whose code">
+        <button class="chip" id="l-authored" aria-pressed="true">Yours</button>
+        <button class="chip" id="l-vendor" aria-pressed="false">Foundation</button>
+        <button class="chip" id="l-all" aria-pressed="false">Everything</button>
+      </div></div>
+    <span class="sep"></span>
+    <div class="grp"><span class="lbl">Group</span>
+      <div class="chips" role="group" aria-label="Group by">
+        <button class="chip" id="g-file" aria-pressed="true">file</button>
+        <button class="chip" id="g-verdict" aria-pressed="false">verdict</button>
+      </div></div>
+    <span class="sep"></span>
+    <div class="grp"><span class="lbl">Verdict</span><div class="chips" id="f-verdict"></div></div>
   </div>
 
   <p class="lanenote" id="lanenote"></p>
 
-  <div class="filters" id="filters"></div>
-
   <div class="cols">
     <div class="sheet" id="sheet"></div>
+    <button class="grip" id="grip" role="separator" aria-orientation="vertical"
+            aria-label="Resize the detail pane — arrow keys, double-click to reset"></button>
     <aside class="panel" id="panel"><p class="empty">Pick a rule to see its full selector list.</p></aside>
   </div>
 
@@ -343,38 +357,29 @@ function counts(fn, within = () => true){
 }
 
 function drawFilters(){
-  const box = document.getElementById("filters");
-  box.innerHTML = "";
-  for (const f of [{ key:"verdict", label:"Verdict", of:r=>r.verdict }]) {
-    // counted within the current lane, so the numbers match what is listed
-    const m = counts(f.of, r => state.lane === "all" || srcOf(r) === state.lane);
-    const keys = [...m.keys()].sort((a, b) => m.get(b) - m.get(a));
-    const g = document.createElement("div");
-    g.className = "fgroup";
-    g.innerHTML = `<span class="flabel">${f.label}</span>`;
-    const chips = document.createElement("div");
-    chips.className = "chips";
-    for (const k of keys) {
-      const on = state[f.key].size === 0 || state[f.key].has(k);
-      const b = document.createElement("button");
-      b.className = "chip";
-      b.type = "button";
-      b.setAttribute("aria-pressed", on ? "true" : "false");
-      b.innerHTML = `${esc(k)}<span class="n">${m.get(k).toLocaleString()}</span>`;
-      b.onclick = () => {
-        const set = state[f.key];
-        // an untouched group shows everything; the first click narrows to the
-        // rest, which is what "turn this one off" has to mean when nothing is
-        // explicitly selected
-        if (set.size === 0) keys.forEach(x => set.add(x));
-        set.has(k) ? set.delete(k) : set.add(k);
-        if (set.size === keys.length) set.clear();
-        draw();
-      };
-      chips.appendChild(b);
-    }
-    g.appendChild(chips);
-    box.appendChild(g);
+  const chips = document.getElementById("f-verdict");
+  chips.innerHTML = "";
+  const set = state.verdict;
+  // counted within the current lane, so the numbers match what is listed
+  const m = counts(r => r.verdict, r => state.lane === "all" || srcOf(r) === state.lane);
+  const keys = [...m.keys()].sort((a, b) => m.get(b) - m.get(a));
+  for (const k of keys) {
+    const on = set.size === 0 || set.has(k);
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.type = "button";
+    b.setAttribute("aria-pressed", on ? "true" : "false");
+    b.innerHTML = `${esc(k)}<span class="n">${m.get(k).toLocaleString()}</span>`;
+    b.onclick = () => {
+      // an untouched group shows everything; the first click narrows to the
+      // rest, which is what "turn this one off" has to mean when nothing is
+      // explicitly selected
+      if (set.size === 0) keys.forEach(x => set.add(x));
+      set.has(k) ? set.delete(k) : set.add(k);
+      if (set.size === keys.length) set.clear();
+      draw();
+    };
+    chips.appendChild(b);
   }
 }
 
@@ -516,11 +521,12 @@ function todo(r){
 /* --------------------------------------------------------------- chrome */
 function drawStats(){
   const rows = RULES.filter(pass);
-  document.getElementById("stats").innerHTML = `
-    <span><b>${rows.length}</b> rules listed</span>
-    <span><b>${bytes(sum(rows))}</b> recoverable</span>
-    <span><b>${T.rules.toLocaleString()}</b> rules on the site</span>
-    <span><b>${T.pages}</b> pages</span>`;
+  document.getElementById("totals").innerHTML = [
+    [rows.length, "rules listed"],
+    [bytes(sum(rows)), "recoverable"],
+    [T.rules.toLocaleString(), "rules on the site"],
+    [T.pages, "pages"]
+  ].map(([n, l]) => `<div class="tot"><b>${n}</b><span>${l}</span></div>`).join("");
   drawLaneNote();
   document.getElementById("foot").innerHTML =
     `Judged against ${T.pages} built pages. Anything the matcher could not evaluate ` +
@@ -607,4 +613,48 @@ document.getElementById("l-vendor").onclick   = () => setLane("vendor");
 document.getElementById("l-all").onclick      = () => setLane("all");
 
 draw();
+
+/* ---- the splitter, as on the Type Inventory -------------------------------
+   Width is a CSS variable on the grid, remembered per viewer under this
+   page's own key; every storage access is wrapped. */
+const PANEL_W = "rb-css-atlas-panel-w";
+const cols = document.querySelector(".cols");
+const grip = document.getElementById("grip");
+const clampW = w => Math.max(320, Math.min(w, Math.round(window.innerWidth * 0.6)));
+const curW = () => parseInt(getComputedStyle(cols).getPropertyValue("--panel-w"), 10) || 372;
+const setW = w => cols.style.setProperty("--panel-w", clampW(w) + "px");
+const remember = () => { try { localStorage.setItem(PANEL_W, String(curW())); } catch (e) {} };
+try { const saved = parseInt(localStorage.getItem(PANEL_W), 10); if (saved) setW(saved); }
+catch (e) {}
+
+let dragging = false;
+grip.addEventListener("pointerdown", e => {
+  dragging = true;
+  grip.setPointerCapture(e.pointerId);
+  document.body.classList.add("resizing");
+  e.preventDefault();
+});
+grip.addEventListener("pointermove", e => {
+  if (dragging) setW(cols.getBoundingClientRect().right - e.clientX);
+});
+grip.addEventListener("pointerup", e => {
+  if (!dragging) return;
+  dragging = false;
+  grip.releasePointerCapture(e.pointerId);
+  document.body.classList.remove("resizing");
+  remember();
+});
+// left grows the panel, because that is the direction the handle moves
+grip.addEventListener("keydown", e => {
+  const step = e.shiftKey ? 48 : 16;
+  if (e.key === "ArrowLeft")  { setW(curW() + step); remember(); e.preventDefault(); }
+  if (e.key === "ArrowRight") { setW(curW() - step); remember(); e.preventDefault(); }
+});
+grip.addEventListener("dblclick", () => {
+  cols.style.removeProperty("--panel-w");
+  try { localStorage.removeItem(PANEL_W); } catch (e) {}
+});
+addEventListener("resize", () => {
+  if (cols.style.getPropertyValue("--panel-w")) setW(curW());
+});
 </script>
