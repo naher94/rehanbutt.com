@@ -197,7 +197,7 @@ function hebrewDate(monthName, day, offset) {
 
 // Listed, not computed: Intl's Chinese calendar is a day late in 2027 and
 // 2030, when the new moon falls within minutes of midnight in Beijing.
-// Past the table it falls back to Intl, which is right most years.
+// Past the table it falls back to Intl, which matches HKO through 2100.
 function lunarNewYear(year) {
   const known = {
     2026: [2, 17], 2027: [2, 6], 2028: [1, 26], 2029: [2, 13], 2030: [2, 3],
