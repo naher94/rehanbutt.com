@@ -184,10 +184,12 @@ function nthWeekday(n, weekday, month) {
 }
 
 // A day in the Hebrew calendar, shifted by `offset` days. Month names are
-// Intl's English ones ("Tishri", "Kislev", "Nisan"...).
+// Intl's English ones ("Tishri", "Kislev", "Nisan"...). Leap years have no
+// plain "Adar", so "Adar" means Adar II there, where Purim is kept.
 function hebrewDate(monthName, day, offset) {
   return function (year) {
-    const date = findCalendarDate(year, "hebrew", monthName, day);
+    const date = findCalendarDate(year, "hebrew", monthName, day) ||
+      (monthName === "Adar" ? findCalendarDate(year, "hebrew", "Adar II", day) : null);
     if (date) { date.setDate(date.getDate() + (offset || 0)); }
     return date;
   };
@@ -268,10 +270,13 @@ function getHolidayString() {
 function getHappyDayString() {
   let holidayString = getHolidayString();
   
+  // The whole sentence is rewritten both ways: a holiday replaces the
+  // #data-day span, so the next midnight can't count on it still being there.
+  const sentence = document.getElementById("day-sentance");
   if (holidayString != undefined) {
-    document.getElementById("day-sentance").innerHTML = holidayString;
+    sentence.innerHTML = holidayString;
   } else {
-    document.getElementById("data-day").innerHTML = getDayName();
+    sentence.innerHTML = `Have a nice <span id="data-day">${getDayName()}</span>!`;
   }
   
   // Resubmit timeout for live date change

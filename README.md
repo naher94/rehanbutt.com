@@ -42,7 +42,7 @@ Jekyll also uses the `Liquid` language as its templating language. Here are a co
 
 #### Holiday Greetings
 
-The home page swaps "Have a nice Tuesday!" for a greeting on holidays. Every greeting lives in one list in `holidays()` in `js/app.js`. Add one line, in date order:
+The footer on every page swaps "Have a nice Tuesday!" for a greeting on holidays. Every greeting lives in one list in `holidays()` in `js/app.js`. Add one line, in date order:
 
 ```js
 { on: onDate(3, 14), text: "Happy Pi Day! 🥧" },
@@ -59,12 +59,13 @@ Rule | Use | Example
 
 * Months run 1–12; weekdays run 0 (Sunday) to 6 (Saturday).
 * Hebrew months are spelled the way the browser spells them: Tishri, Heshvan, Kislev, Tevet, Shevat, Adar, Adar I, Adar II, Nisan, Iyar, Sivan, Tamuz, Av, Elul.
+* Use `"Adar"` for holidays in Adar, such as Purim. Leap years have Adar I and Adar II instead, and `"Adar"` then means Adar II, where those holidays are kept.
 * `offset` is optional; use `-1` for holidays that start the evening before.
 * When two holidays land on the same day, the one higher in the list shows.
 * Not supported yet: "last Monday of May" type dates (Memorial Day) and other lunar calendars (Islamic, Hindu). Each needs a new rule beside the others.
 * Lunar New Year comes from a table of dates for 2026–2050, since the browser's Chinese calendar is a day off in some years. After 2050 it falls back to the browser.
 
-To preview a date, run this in the browser console on the home page (months count from 0 here, so `1` is February), then reload to go back to today:
+To preview a date, run this in the browser console on any page (months count from 0 here, so `1` is February), then reload to go back to today:
 
 ```js
 currentDate = () => new Date(2027, 1, 6); getHappyDayString()
