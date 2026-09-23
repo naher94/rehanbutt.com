@@ -251,15 +251,15 @@
 // change which ties they win.
 // ---------------------------------------------------------------------------
 .speaking-item{
-  i{
-    color: $signature-teal;
-  }
   a{
     color: inherit;
     h3{
       @include swipe-underline(semantic-color(text-bg),false);
     }
+    // Same size and spacing as the resource cards' link icon.
     .fa-link{
+      margin-left: 0.5rem;
+      font-size: .7em;
       transition: transform .3s;
     }
     &:hover{
