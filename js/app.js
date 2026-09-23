@@ -140,28 +140,87 @@ function dayNames() {
   return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 }
 
-// TODO: Very simple and needs to be reworked
-// Doesn't handle holidays that are the "third Thursday of every November" type
+// Every greeting, in one place. `on` takes a year and returns that year's date
+// (or null to skip it), so fixed and moving holidays are added the same way.
+// When two land on the same day, the one higher in the list shows.
 function holidays() {
-  return {
-    "1:1": "Happy New Year!",
-		"1:19": "Happy National Popcorn Day! 🍿",
-		"2:17": "Happy Lunar New Year!",
-		"2:14": "Happy Valentine's Day ❤️",
-		"2:15": "Happy National Hippo Day 🦛",
-    "2:23": "Happy 'Day I Wrote This Code' Day!",
-    "2:29": "Happy Leap Day!",
-		"4:13": "Happy Songkran! 🇹🇭",
-		"5:4": "May the 4th be with you!",
-		"7:14": "Happy World Orca Day!",
-		"7:22": "Happy Mango Day! 🥭",
-		"8:18": "Happy World Photography Day! 📷",
-		"10:31": "Happy Halloween! 🎃",
-		"11:26": "Happy Thanksgiving! 🦃",
-		"12:4": "Happy Hanukkah!",
-    "12:25": "Merry Christmas! 🎄",
-		"12:26": "Happy Kwanzaa!"
+  return [
+    { on: onDate(1, 1), text: "Happy New Year!" },
+    { on: onDate(1, 19), text: "Happy National Popcorn Day! 🍿" },
+    { on: onDate(2, 14), text: "Happy Valentine's Day ❤️" },
+    { on: onDate(2, 15), text: "Happy National Hippo Day 🦛" },
+    { on: lunarNewYear, text: "Happy Lunar New Year!" },
+    { on: onDate(2, 23), text: "Happy 'Day I Wrote This Code' Day!" },
+    { on: onDate(2, 29), text: "Happy Leap Day!" },
+    { on: onDate(4, 13), text: "Happy Songkran! 🇹🇭" },
+    { on: onDate(5, 4), text: "May the 4th be with you!" },
+    { on: onDate(7, 14), text: "Happy World Orca Day!" },
+    { on: onDate(7, 22), text: "Happy Mango Day! 🥭" },
+    { on: onDate(8, 18), text: "Happy World Photography Day! 📷" },
+    { on: onDate(10, 31), text: "Happy Halloween! 🎃" },
+    { on: nthWeekday(4, 4, 11), text: "Happy Thanksgiving! 🦃" },
+    // The evening before 25 Kislev, when the first candle is lit.
+    { on: hebrewDate("Kislev", 25, -1), text: "Happy Hanukkah!" },
+    { on: onDate(12, 25), text: "Merry Christmas! 🎄" },
+    { on: onDate(12, 26), text: "Happy Kwanzaa!" }
+  ];
+}
+
+// The same month and day every year. Null when the year doesn't have it, or
+// Feb 29 would roll over and greet Leap Day on Mar 1.
+function onDate(month, day) {
+  return function (year) {
+    const date = new Date(year, month - 1, day);
+    return date.getMonth() === month - 1 ? date : null;
+  };
+}
+
+// The nth `weekday` (0 = Sunday) of `month`, e.g. nthWeekday(4, 4, 11) is the
+// fourth Thursday of November.
+function nthWeekday(n, weekday, month) {
+  return function (year) {
+    const first = 1 + (weekday - new Date(year, month - 1, 1).getDay() + 7) % 7;
+    return new Date(year, month - 1, first + (n - 1) * 7);
+  };
+}
+
+// A day in the Hebrew calendar, shifted by `offset` days. Month names are
+// Intl's English ones ("Tishri", "Kislev", "Nisan"...).
+function hebrewDate(monthName, day, offset) {
+  return function (year) {
+    const date = findCalendarDate(year, "hebrew", monthName, day);
+    if (date) { date.setDate(date.getDate() + (offset || 0)); }
+    return date;
+  };
+}
+
+// Listed, not computed: Intl's Chinese calendar is a day late in 2027 and
+// 2030, when the new moon falls within minutes of midnight in Beijing.
+// Past the table it falls back to Intl, which is right most years.
+function lunarNewYear(year) {
+  const known = {
+    2026: [2, 17], 2027: [2, 6], 2028: [1, 26], 2029: [2, 13], 2030: [2, 3],
+    2031: [1, 23], 2032: [2, 11], 2033: [1, 31], 2034: [2, 19], 2035: [2, 8],
+    2036: [1, 28], 2037: [2, 15], 2038: [2, 4], 2039: [1, 24], 2040: [2, 12],
+    2041: [2, 1], 2042: [1, 22], 2043: [2, 10], 2044: [1, 30], 2045: [2, 17],
+    2046: [2, 6], 2047: [1, 26], 2048: [2, 14], 2049: [2, 2], 2050: [1, 23]
+  }[year];
+  return known ? new Date(year, known[0] - 1, known[1]) : findCalendarDate(year, "chinese", 1, 1);
+}
+
+// The date in `year` whose `calendar` month and day match, or null. Also null
+// when the browser lacks the calendar: Intl falls back to Gregorian rather
+// than throwing. Numeric months are compared as numbers, named ones by name.
+function findCalendarDate(year, calendar, month, day) {
+  const format = new Intl.DateTimeFormat("en-u-ca-" + calendar, { month: typeof month === "number" ? "numeric" : "long", day: "numeric" });
+  if (format.resolvedOptions().calendar !== calendar) { return null; }
+  // Noon, so a DST change can't push the date across midnight.
+  for (let d = new Date(year, 0, 1, 12); d.getFullYear() === year; d.setDate(d.getDate() + 1)) {
+    const parts = {};
+    format.formatToParts(d).forEach(function (p) { parts[p.type] = p.value; });
+    if (parts.month === String(month) && parts.day === String(day)) { return new Date(year, d.getMonth(), d.getDate()); }
   }
+  return null;
 }
 
 // Returns current date object
@@ -198,7 +257,12 @@ function millisecondsToNextDay() {
 
 // Returns the holiday (if any) exists for today's date
 function getHolidayString() {
-  return holidays()[`${getMonth()}:${getDate()}`];
+  const year = currentDate().getFullYear();
+  const today = holidays().find(function (holiday) {
+    const date = holiday.on(year);
+    return date && date.getMonth() + 1 === getMonth() && date.getDate() === getDate();
+  });
+  return today ? today.text : undefined;
 }
 
 // Updates happy day string based on a variety of parameters
