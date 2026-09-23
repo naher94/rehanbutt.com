@@ -20,6 +20,7 @@ footer{
       }
     }
     .metadata{
+      @include type-style(product, meta);
       margin-top: 2rem;
       @include breakpoint(small only){
         text-align: right;
@@ -55,7 +56,6 @@ footer{
         padding: 0;
         margin: 0;
       }
-      @include type-style(product, meta);
       .happy-copyright{
         p{
           display: inline;

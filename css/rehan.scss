@@ -178,6 +178,9 @@ article{
     h2{
       @include type-style(product, section-title);
     }
+    h3{
+      @include type-style(product, section-subtitle);
+    }
     .post-callout-small{
       span{
         &.byline{

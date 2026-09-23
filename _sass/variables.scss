@@ -305,6 +305,11 @@ $product-type: (
                   at: (small only: (size: 2rem))),                                                    // 32px
   section-title:(family: $zilla, size: 3.125rem,   font-weight: $zilla-bold,                         // 50px
                   at: (small only: (size: 2.5rem, line-height: normal))),                             // 40px
+  // A post's `###` heading: `section-title`'s size at regular weight, which
+  // was Foundation's default until this entry stated it. Leading from the
+  // heading reset.
+  section-subtitle:(family: $zilla, size: 3.125rem, font-weight: $zilla-regular,                      // 50px
+                  at: (small only: (size: 2.5rem))),                                                  // 40px
   // The home page's section headings, which are the page's structure rather
   // than a heading inside it -- the same job as `section-title` a rank up.
   // Both land on 40px at small; what separates them there is the leading, so
@@ -389,6 +394,8 @@ $product-type: (
   // collection on the photography index, which unsets the overlay entirely.
   tile-title:    (family: $zilla, size: 2rem,       font-weight: $zilla-bold,   line-height: 1,       // 32px
                   at: (small only: (size: 1.5rem))),                                                  // 24px
+  // The hero tile's title on a collection page, over `eyebrow-xl`.
+  tile-title-xl: (family: $zilla, size: 2.5rem,     font-weight: $zilla-bold,   line-height: normal), // 40px
   // The name on each card of the easter eggs page. Off the scale at 30px, as
   // transcribed from the 1.5em it was; the nearest step is 32px.
   achievement-title:(family: $lato, size: 1.875rem, font-weight: $lato-bold,    line-height: 1.2,     // 30px
