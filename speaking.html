@@ -52,9 +52,7 @@ footer-sort-order: 3
             <img class="brand-logo" src="/img/{{event.logo}}-logo.svg" alt="{{event.logo}} Logo">
           </div>
           <div class="text-wrapper cell medium-8">
-            {% if event.link %}
-            <a href="{{event.link}}" target="_blank" rel="noopener">
-            {% endif %}
+            {% capture event_content %}
               <div>
                 <h3>
                   {{event.title}}
@@ -72,8 +70,11 @@ footer-sort-order: 3
                 {% endif %}
               </p>
               <p class="description">{{event.description}}</p>
+            {% endcapture %}
             {% if event.link %}
-              </a>
+              {% include external-link.html link=event.link content=event_content %}
+            {% else %}
+              {{ event_content }}
             {% endif %}
           </div>
         </div>
@@ -96,9 +97,7 @@ footer-sort-order: 3
           <img class="brand-logo" src="/img/{{event.logo}}-logo.svg" alt="{{event.logo}} Logo">
         </div>
         {% endif %}
-        {% if event.link %}
-          <a href="{{event.link}}" target="_blank" rel="noopener">
-        {% endif %}
+        {% capture event_content %}
         <div>
           <h3>
             {{event.title}}
@@ -116,8 +115,11 @@ footer-sort-order: 3
           {% endif %}
         </p>
         <p class="description">{{event.description}}</p>
+        {% endcapture %}
         {% if event.link %}
-          </a>
+          {% include external-link.html link=event.link content=event_content %}
+        {% else %}
+          {{ event_content }}
         {% endif %}
       </div>
 
