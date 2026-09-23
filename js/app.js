@@ -266,17 +266,20 @@ function getHolidayString() {
   return today ? today.text : undefined;
 }
 
+// Saved at load so footer.html stays the only place the wording lives. A
+// holiday replaces the #data-day span; restoring this brings it back.
+const daySentence = document.getElementById("day-sentance");
+const defaultDaySentence = daySentence.innerHTML;
+
 // Updates happy day string based on a variety of parameters
 function getHappyDayString() {
   let holidayString = getHolidayString();
-  
-  // The whole sentence is rewritten both ways: a holiday replaces the
-  // #data-day span, so the next midnight can't count on it still being there.
-  const sentence = document.getElementById("day-sentance");
+
   if (holidayString != undefined) {
-    sentence.innerHTML = holidayString;
+    daySentence.innerHTML = holidayString;
   } else {
-    sentence.innerHTML = `Have a nice <span id="data-day">${getDayName()}</span>!`;
+    daySentence.innerHTML = defaultDaySentence;
+    document.getElementById("data-day").innerHTML = getDayName();
   }
   
   // Resubmit timeout for live date change
