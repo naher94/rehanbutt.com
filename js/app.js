@@ -140,8 +140,7 @@ function dayNames() {
   return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 }
 
-// Every greeting, in one place. `on` takes a year and returns that year's date
-// (or null to skip it), so fixed and moving holidays are added the same way.
+// Every greeting, in one place. How to add one: README → Holiday Greetings.
 // When two land on the same day, the one higher in the list shows.
 function holidays() {
   return [
