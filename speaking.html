@@ -58,9 +58,9 @@ footer-sort-order: 3
               <div>
                 <h3>
                   {{event.title}}
-                  {% if event.link %}
+                  {%- if event.link -%}
                     <i class="fas fa-link"></i>
-                  {% endif %}
+                  {%- endif %}
                 </h3>
                 {% if event_date > current_date %}
                   <span>Upcoming</span>

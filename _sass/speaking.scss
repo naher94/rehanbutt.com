@@ -84,6 +84,26 @@
         }
       }
     }
+    // Same link treatment as the list items below.
+    a{
+      color: semantic-color(text);
+      h3{
+        @include swipe-underline(semantic-color(text-bg),false);
+      }
+      .fa-link{
+        margin-left: 0.5rem;
+        font-size: .7em;
+        transition: transform .3s;
+      }
+      &:hover{
+        h3{
+          @include swipe-underline-hover(false);
+        }
+        .fa-link{
+          transform: rotate(360deg);
+        }
+      }
+    }
     &#ux-summit-2024{
       background: linear-gradient(180deg, rgba(121,0,255,0.1) 0%, rgba(255,0,141,0.1) 100%),
       radial-gradient(circle at 25% 100%, rgba(255, 249, 0, 0.1) 0%, rgba(255, 249, 0, 0) 100%),
@@ -96,24 +116,6 @@
         width: 10em;
         @include breakpoint(small only){
           width: 8em;
-        }
-      }
-      a{
-        color: semantic-color(text);
-        // TODO generalize this hover jazz to all hero cards
-        &:hover{
-          h3{
-            @include swipe-underline-hover(false);
-          }
-          .fa-link{
-            transform: rotate(360deg);
-          }
-        }
-        .fa-link{
-          transition: transform .3s;
-        }
-        h3{
-          @include swipe-underline(semantic-color(text-bg),false);
         }
       }
     }
