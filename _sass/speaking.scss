@@ -181,12 +181,9 @@
         text-wrap: pretty;
       }
       h3{
-        font-family: $lato;
-        font-size: 1.5em;
-        font-weight: $lato-black;
+        @include type-style(product, talk-title);
         padding: 0;
         margin-bottom: 0;
-        line-height: 1.2;
       }
       p{
         padding: 0;

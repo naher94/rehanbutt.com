@@ -83,8 +83,7 @@
           line-height: 1.2;
         }
         .country-name{
-          font-weight: $lato-bold;
-          font-size: 1.25em;
+          @include type-style(product, data-value);
         }
         .country-label{
           @include type-style(product, data-label);

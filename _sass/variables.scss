@@ -371,6 +371,10 @@ $product-type: (
                   at: (small only: (size: 1rem))),                                                    // 16px
   item-detail:   (family: $lato,  size: 1.25rem,    font-weight: $lato-regular, line-height: 1.4,     // 20px
                   at: (small only: (size: 1rem))),                                                    // 16px
+  // A talk's title on the speaking page, above its `item-date` and
+  // `item-detail`. Off the scale at 30px, as transcribed from the 1.5em it was.
+  talk-title:    (family: $lato,  size: 1.875rem,   font-weight: $lato-black,   line-height: 1.2,     // 30px
+                  at: (small only: (size: 1.5rem))),                                                  // 24px
   // The achievement toast, whose two lines are the only type on the site set
   // at 1.2 outside a nav. Both carry their own leading: the card is two lines
   // in a fixed box, and the global 1.5 would push it open.
@@ -385,6 +389,10 @@ $product-type: (
   // transcribed from the 1.5em it was; the nearest step is 32px.
   achievement-title:(family: $lato, size: 1.875rem, font-weight: $lato-bold,    line-height: 1.2,     // 30px
                   at: (small only: (size: 1.5rem))),                                                  // 24px
+  // The line under a card's title: an easter egg card, and a featured project
+  // on the home page. `body` set tight, since both are a line or two.
+  card-description:(family: $lato, size: 1.25rem,  font-weight: $lato-regular, line-height: 1.2,     // 20px
+                  at: (small only: (size: 1rem))),                                                    // 16px
   gallery-title: (family: $lato,  size: 3.75rem,    font-weight: $lato-bold,    line-height: 1,       // 60px
                   at: (small only: (size: 2rem))),                                                    // 32px
   // `control` and `meta` were one `ui` entry. Interface is a category, not a
@@ -413,6 +421,10 @@ $product-type: (
   data-label:    (family: $lato,  size: 1rem,       font-weight: $lato-regular, line-height: 1.2,     // 16px
                   text-transform: uppercase,
                   at: (small only: (size: 0.75rem))),                                                 // 12px
+  // The "Japan" that label names. Off the scale at 25px, as transcribed from
+  // the 1.25em it was; its leading also lives on that shared `p` rule.
+  data-value:    (family: $lato,  size: 1.5625rem,  font-weight: $lato-bold,    line-height: 1.2,     // 25px
+                  at: (small only: (size: 1.25rem))),                                                 // 20px
   // The handwritten note under a photo, a carousel slide and a year square --
   // the only place either map reaches for Caveat, and the only thing on the
   // site that uses it.
@@ -434,7 +446,7 @@ $product-type: (
   // No font-weight: the class decides none, so its instances take 400 from the
   // page or 700 from the `p` rule in rehan.scss, and emitting a weight here
   // would flatten ten bold pull-quotes to regular. Off the scale at 30px, as
-  // `achievement-title` is; the nearest step is 32px, and moving
+  // `achievement-title`, `talk-title` and `data-value` (25px) are; the nearest step is 32px, and moving
   // it is a design edit rather than a transcription, so it is recorded as-is.
   callout-sm:    (family: $lato,  size: 1.875rem,                                                     // 30px
                   at: (small only: (size: 1.5rem))),                                                  // 24px

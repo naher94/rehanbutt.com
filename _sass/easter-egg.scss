@@ -164,8 +164,7 @@
       margin-block-start: 1em;
     }
     .easter-egg-description{
-      font-size: 1em;
-      line-height: 1.2;
+      @include type-style(product, card-description);
       color: semantic-color(easter-egg-card-description);
     }
   }
