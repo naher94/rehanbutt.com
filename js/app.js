@@ -267,6 +267,7 @@ function getHolidayString() {
 // holiday replaces the #data-day span; restoring this brings it back.
 const daySentence = document.getElementById("day-sentance");
 const defaultDaySentence = daySentence.innerHTML;
+let nextDayTimer;
 
 // Updates happy day string based on a variety of parameters
 function getHappyDayString() {
@@ -279,8 +280,10 @@ function getHappyDayString() {
     document.getElementById("data-day").innerHTML = getDayName();
   }
   
-  // Resubmit timeout for live date change
-  setTimeout(getHappyDayString, millisecondsToNextDay());
+  // Resubmit timeout for live date change. Cleared first so previews from
+  // the console (README → Holiday Greetings) don't stack timers.
+  clearTimeout(nextDayTimer);
+  nextDayTimer = setTimeout(getHappyDayString, millisecondsToNextDay());
 }
 
 getHappyDayString();
