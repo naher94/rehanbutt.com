@@ -1,0 +1,167 @@
+// Base type for bare HTML tags.
+//
+// Replaces Foundation's `foundation-typography-base` and
+// `foundation-typography-helpers`, which emitted 93 declarations into the
+// stylesheet of which 36 ever won a cascade anywhere on the site. Everything
+// here is one of those 36, transcribed at the value it was already rendering,
+// plus the handful of rules under "markdown" below.
+//
+// Values are literals rather than Foundation's `$anchor-color` /
+// `$paragraph-lineheight` / `$header-lineheight` settings, so the numbers are
+// visible at the point of use and changing one is a local edit. The setting
+// each came from is named in a comment where it is not obvious.
+//
+// Three of these are inherited defaults rather than decisions anyone made, and
+// are marked DECIDE. They are unchanged here on purpose -- this file is a
+// transcription, and moving any of them is a separate, visible edit.
+
+// ---- reset ---------------------------------------------------------------
+// The load-bearing rule: 38,940 elements take their margin from it. Browser
+// default margins on every p, heading and list come back without it.
+div, dl, dt, dd,
+ul, ol, li,
+h1, h2, h3, h4, h5, h6,
+pre, form, p,
+blockquote,
+th, td {
+  margin: 0;
+  padding: 0;
+}
+
+// ---- text ----------------------------------------------------------------
+p {
+  margin-bottom: 1rem;
+  font-size: inherit;
+  line-height: 1.6;                 // $paragraph-lineheight
+  text-rendering: optimizeLegibility;
+}
+
+em, i {
+  font-style: italic;
+  line-height: inherit;
+}
+
+// `bold`, not `bolder`. normalize sets `bolder`, which resolves relative to the
+// parent; this pins it to 700. It is what makes the case-study pull-quotes
+// bold, which is why `callout-sm` in variables.scss declares no font-weight.
+strong, b {
+  font-weight: bold;
+  line-height: inherit;
+}
+
+// ---- headings ------------------------------------------------------------
+// No font-family: the site sets Zilla in design-system.scss, and Foundation's
+// Helvetica stack never once won. No font-size ladder either -- all five
+// breakpoints' worth of it was overridden on every heading the site renders.
+h1, h2, h3, h4, h5, h6 {
+  font-style: normal;
+  color: inherit;
+  text-rendering: optimizeLegibility;
+  margin-top: 0;
+  margin-bottom: .5rem;
+  font-weight: normal;              // DECIDE: h3/h4 render 400 only because
+                                    // Foundation's $header-font-weight is
+                                    // normal and nothing overrides them
+  line-height: 1.4;                 // DECIDE: $header-lineheight's default.
+                                    // 98px of leading on a 70px section title,
+                                    // and the reason one h2 reads as two
+                                    // separate styles across widths
+}
+
+// ---- links ---------------------------------------------------------------
+a {
+  line-height: inherit;
+  color: #1779ba;                   // DECIDE: Foundation's blue, and not in
+                                    // this site's palette. It is live on the
+                                    // skip link and the achievement link,
+                                    // which nothing else styles
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: #1468a0;                 // as above -- a darkened Foundation blue
+  }
+
+  img {
+    border: 0;
+  }
+}
+
+// ---- lists ---------------------------------------------------------------
+ul, ol, dl {
+  margin-bottom: 1rem;
+  list-style-position: outside;
+  line-height: 1.6;
+}
+
+li {
+  font-size: inherit;
+}
+
+ul {
+  margin-left: 1.25rem;
+  list-style-type: disc;
+}
+
+ol {
+  margin-left: 1.25rem;
+}
+
+ul ul, ul ol,
+ol ul, ol ol {
+  margin-left: 1.25rem;
+  margin-bottom: 0;
+}
+
+// ---- inline code ---------------------------------------------------------
+// The single live rule out of nine in Foundation's typography helpers. Six
+// inline spans on one page use it; `article.post code` in rehan.scss overrides
+// the border, radius, colour and background, so what survives from here is the
+// mono stack, the padding and the wrapping.
+code {
+  border: 1px solid #cacaca;
+  background-color: #e6e6e6;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+  font-weight: normal;
+  color: #0a0a0a;
+  display: inline;
+  max-width: 100%;
+  word-wrap: break-word;
+  padding: .125rem .3125rem .0625rem;
+}
+
+// ---- markdown ------------------------------------------------------------
+// None of these win anything today, because no built page carries the tags.
+// They are transcribed rather than dropped because Kramdown emits all of them
+// from ordinary markdown, and the reset above zeroes their margins: delete
+// these and the first post with a quote or a numbered list renders worse than
+// the browser default, having had the default removed.
+//
+// The values are Foundation's. Replacing them with chosen ones is the next
+// step, and a visible one, since nothing on the site can show the difference
+// until a post uses them.
+blockquote {
+  margin: 0 0 1rem;
+  padding: .5625rem 1.25rem 0 1.1875rem;
+  border-left: 1px solid #cacaca;
+}
+
+blockquote,
+blockquote p {
+  line-height: 1.6;
+  color: #8a8a8a;
+}
+
+dl dt {
+  margin-bottom: .3rem;
+  font-weight: bold;
+}
+
+figure {
+  margin: 0;
+}
+
+small {
+  font-size: 80%;
+}

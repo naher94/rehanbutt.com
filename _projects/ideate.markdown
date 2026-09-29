@@ -37,9 +37,11 @@ tags: digital branding
 <div class="image-container"><img src="../img/ideate/iterations.svg" alt="Logo Iterations"/></div>
 <div class="image-container"><img src="../img/ideate/iterations2.svg" alt="Logo Iterations"/></div>
 
-#### Some feedback from Ideate faculty "be less safe - the current iteration is very conventional. ideate should be weird, strange, quirky, dynamic, etc. more weird please."
-#### "I’d focus less on the word (ideate) and more on the significance or ideas behind it."
-#### "how do you show the intersection of art, design and technology through a simple iconic element or visual treatment"
+Some feedback from Ideate faculty "be less safe - the current iteration is very conventional. ideate should be weird, strange, quirky, dynamic, etc. more weird please."
+
+"I’d focus less on the word (ideate) and more on the significance or ideas behind it."
+
+"how do you show the intersection of art, design and technology through a simple iconic element or visual treatment"
 
 <div class="image-container"><img src="../img/ideate/iterations3.svg" alt="Logo Iterations"/></div>
 

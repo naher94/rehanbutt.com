@@ -1,26 +1,12 @@
 // Foundation for Sites
 // https://get.foundation
 // Licensed under MIT Open Source
-
-////
-/// @group typography
-////
-
-// Base typography styles (tags only)
-@import 'base';
-
-// Typography helper classes (classes only)
-@import 'helpers';
-
-// Text alignment classes
-@import 'alignment';
+//
+// Base typography (`base`), the helper classes (`helpers`) and the text
+// alignment classes (`alignment`) were removed: base and helpers are replaced
+// by _sass/_type-reset.scss, and alignment emitted only dead classes. Print is
+// what remains, and `foundation-typography` with it -- app.scss includes
+// `foundation-print-styles` directly.
 
 // Print styles
 @import 'print';
-
-@mixin foundation-typography {
-  @include foundation-typography-base;
-  @include foundation-typography-helpers;
-  @include foundation-text-alignment;
-  @include foundation-print-styles;
-}

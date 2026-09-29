@@ -13,13 +13,14 @@ footer{
     .nav-section{
       margin-inline-end: 3rem;
       .section-title{
+        @include type-style(product, footer-title);
         padding: 0;
         margin: 0;
-        font-weight: $lato-bold;
         margin-bottom: 1rem;
       }
     }
     .metadata{
+      @include type-style(product, meta);
       margin-top: 2rem;
       @include breakpoint(small only){
         text-align: right;
@@ -55,9 +56,6 @@ footer{
         padding: 0;
         margin: 0;
       }
-      font-family: $lato;
-      font-weight: $lato-bold;
-      font-size: 1rem;
       .happy-copyright{
         p{
           display: inline;
@@ -92,14 +90,8 @@ footer{
     }
     @include breakpoint(small only){
       font-size: 1.5em;
-      .nav{
-        font-size: 1.1em;
-      }
       .nav-section{
         margin-block-end: 2rem;
-        .section-title{
-          font-weight: $lato-black;
-        }
         .nav-wrap{
           margin-bottom: 0;
         }
@@ -110,8 +102,7 @@ footer{
       margin-left: -1rem;
     }
     .nav{
-      font-family: $lato;
-      font-weight: $lato-regular;
+      @include type-style(product, footer-link);
       color: inherit;
       padding: 0.5rem 1rem;
       &:hover, &:focus{

@@ -5,20 +5,31 @@
 
 // Global styles
 @include foundation-global-styles;
-@include foundation-typography;
+
+// Foundation's typography, minus the parts this site does not use.
+//
+// `foundation-typography-base` and `-helpers` are replaced by _type-reset.scss:
+// between them they emitted 93 declarations and 36 ever won a cascade, so the
+// file is those 36 transcribed at the values they already rendered. Imported
+// here, in the slot the includes occupied, so source order is unchanged.
+//
+// `-text-alignment` emitted the `.text-left` / `.text-center` family, dead on
+// all 90 pages, and is simply gone.
+//
+// `-print-styles` stays. Half of it is live, it cannot be separated from the
+// dead half, and its `*{color:#000}` reset is what stops a page printed from a
+// dark-mode browser coming out as white text on white paper.
+@import 'type-reset';
+@include foundation-print-styles;
 
 // Grids (choose one)
 @include foundation-xy-grid-classes;
 // @include foundation-flex-grid;
 
 // Generic components
-@include foundation-button;
-@include foundation-table;
 
 // Containers
 @include foundation-responsive-embed;
 
 // Helpers
-@include foundation-float-classes;
 @include foundation-flex-classes;
-@include foundation-visibility-classes;

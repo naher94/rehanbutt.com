@@ -7,6 +7,8 @@ $tile-radius-medium: 20px;
 $tile-radius-big: 30px;
 $pill-radius: 500px;
 $recessed-shadow: 0px 10px 33px -10px;
+$diffuse-shadow:  0px 0px 5px 0px;
+$glow-shadow:     0px 0px 30px 5px;
 
 // Colors
 $pure-white: #ffffff;
@@ -22,6 +24,29 @@ $github-purple: #6f42c1;
 $F500px-green: #34bf49;
 $codepen-yellow: #e0be28;
 $threads-orange: #ff5e38;
+
+////Gradients
+$rainbow-gradient: linear-gradient(90deg,
+  #00a2e2 0%,
+  #1bad6b 20%,
+  #fec609 40%,
+  #e92687 60%,
+  #6d358d 80%,
+  #00a2e2 100%
+);
+
+$consumer-reports-green: #05AE3C;
+$carnegie-mellon-red: #C41230;
+$processly-plum: #7C205E;
+$disney-animation-cream: #FFFBEC;
+$upmc-purple: #771B61;
+$duquesne-red: #BA0C2F;
+$yinzcam-amber: #FFAD2F;
+$nus-blue: #003D7C;
+$banyantree-green: #082B26;
+$shine-registry-rose: #BA3D54;
+$dzgnio-cyan: #00C9FF;
+$dzgnio-mint: #92FE9D;
 $signature-teal: #12abc4;
 $navy-black: #1f2937;
 //// [number indicates number of step removed from main]
@@ -87,6 +112,9 @@ $semantic-colors:(
     actionable-pill: $signature-teal,
     actionable-pill-hover: $signature-teal-d1,
     shadow: rgba($navy-black,0.75),
+    // Paired with $diffuse-shadow / $glow-shadow. Heavier in dark,
+    // where a 0.25 black all but vanishes against the page ground.
+    shadow-soft: rgba($navy-black,0.25),
     floating-card-bg: $pure-white,
     footer-bg: $navy-black-l9,
     footer-nav-hover: $navy-black-l8,
@@ -105,7 +133,11 @@ $semantic-colors:(
     resources-collection-card-bar: rgba($pure-white,0.6),
     film-credit-container-bg: $navy-black-l9,
     easter-egg-card-bg: #F9F9F9,
-    easter-egg-card-outline: rgba(#D2D4D7, 0.28),
+    easter-egg-card-outline: rgba($navy-black-l8, 0.28),
+    brand-logo-card-bg: #F9F9F9,
+    brand-logo-card-bg-hover: $navy-black-l9,
+    brand-logo-card-outline: rgba(#D2D4D7, 0.28),
+    work-role-row-hover-bg: rgba($navy-black, 0.04),
     easter-egg-card-description: $navy-black-l3,
     easter-egg-card-icon-bg: $navy-black-l8,
     about-easter-egg-checkbox-tooltip-bg: $navy-black,
@@ -125,6 +157,7 @@ $semantic-colors:(
     actionable-pill: $signature-teal-d1,
     actionable-pill-hover: $signature-teal-d2,
     shadow: rgba($navy-black-d9,0.75),
+    shadow-soft: rgba($navy-black-d9,0.45),
     floating-card-bg: $navy-black,
     footer-bg: $navy-black-d2,
     footer-nav-hover: $navy-black-l1,
@@ -144,6 +177,10 @@ $semantic-colors:(
     film-credit-container-bg: $navy-black,
     easter-egg-card-bg: $navy-black-d1,
     easter-egg-card-outline: $navy-black,
+    brand-logo-card-bg: $navy-black-d1,
+    brand-logo-card-bg-hover: $navy-black-l1,
+    brand-logo-card-outline: $navy-black,
+    work-role-row-hover-bg: rgba($pure-white, 0.07),
     easter-egg-card-description: $navy-black-l5,
     easter-egg-card-icon-bg: $navy-black-l2,
     about-easter-egg-checkbox-tooltip-bg: $navy-black,
@@ -176,8 +213,12 @@ $semantic-colors:(
 }
 
 // Animations
+// Duration and easing are split out so rules that transition specific
+// properties can stay in step with the `all` shorthands below
+$run-duration: 0.30s;
+$run-easing: ease-in-out;
 $sprint: all 0.20s ease-in-out;
-$run: all 0.30s ease-in-out;
+$run: all $run-duration $run-easing;
 $jog: all 0.50s ease-in-out;
 $tight-spring-curve: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 $tight-spring: all 0.3s $tight-spring-curve;
@@ -215,7 +256,10 @@ $zilla-bold: 700;
 @import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900i,900&display=swap');
 $lato: 'Lato', sans-serif;
 $lato-thin: 100;
+// `$lato-light-italic` is the Google Fonts spelling of the weight, not a CSS
+// one -- `font-weight: 300i` is invalid. `$lato-light` is the weight alone.
 $lato-light-italic: 300i;
+$lato-light: 300;
 $lato-regular: 400;
 $lato-bold: 700;
 $lato-bold-italic: 700i;
@@ -224,3 +268,309 @@ $lato-black: 900;
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 $caveat: 'Caveat', cursive;
 $caveat-regular: 400;
+
+//******* Type Styles
+// Two registers. `product` repeats across many pages, so it stays systematic;
+// `expressive` is a one-off and answers only to its own moment. Zilla names,
+// Lato reads -- product follows that, expressive is exempt. Why, and how to
+// place an ambiguous style, is in the README.
+//
+// Sizes are `rem` against the 16px root, never `em` -- an em resolves against
+// whichever parent it lands in, which is where most of this site's off-scale
+// type came from. `em` is still right for letter-spacing.
+//
+// Line-heights are unitless ratios, never lengths: a px leading re-leads every
+// child to that figure whatever its size. It is also optional -- omit it and
+// the style inherits, which here means 1.5 globally, 1.6 on paragraphs and
+// lists, 1.4 on headings.
+//
+// A style may also carry `at`: a map of Foundation breakpoint expressions to
+// the properties that change there. `size` stays the desktop value and `at`
+// holds the exceptions, which matches how the rest of the site is written --
+// a desktop base with `small only` corrections, not mobile-first. Keys are
+// unquoted (`small only`, never `'small only'`): Foundation reads the
+// direction keyword with `nth($val, 2)`, and quoting collapses the pair into
+// one string.
+//
+// Usage:  h2 { @include type-style(product, section-title); }
+
+$product-type: (
+  // ---- hierarchy: rank on the page, largest first --------------------------
+
+  page-title:    (family: $zilla, size: 3.75rem,    font-weight: $zilla-bold,   line-height: 0.9,     // 60px
+                  at: (small only: (size: 3rem))),                                                    // 48px
+  // The line under the 404 page's title, and the only entry at Zilla medium.
+  // Barely smaller on small, as transcribed; leading from the heading reset.
+  page-subtitle: (family: $zilla, size: 2.25rem,    font-weight: $zilla-medium,                       // 36px
+                  at: (small only: (size: 2rem))),                                                    // 32px
+  section-title:(family: $zilla, size: 3.125rem,   font-weight: $zilla-bold,                         // 50px
+                  at: (small only: (size: 2.5rem, line-height: normal))),                             // 40px
+  // A post's `###` heading: `section-title`'s size at regular weight, which
+  // was Foundation's default until this entry stated it. Leading from the
+  // heading reset.
+  section-subtitle:(family: $zilla, size: 3.125rem, font-weight: $zilla-regular,                      // 50px
+                  at: (small only: (size: 2.5rem))),                                                  // 40px
+  // The home page's section headings, which are the page's structure rather
+  // than a heading inside it -- the same job as `section-title` a rank up.
+  // Both land on 40px at small; what separates them there is the leading, so
+  // this one states its own at both widths rather than inheriting either.
+  section-title-lg:(family: $zilla, size: 4.375rem,  font-weight: $zilla-bold,  line-height: normal,   // 70px
+                  at: (small only: (size: 2.5rem, line-height: 1))),                                  // 40px
+  // The standfirst under each of those headings. Its leading is written as a
+  // ratio rather than the `1.8rem` the rule carried: a length would hand every
+  // link inside the paragraph a fixed 28.8px instead of one proportional to
+  // whatever it is set at. Same rendering today, different behaviour later.
+  section-intro: (family: $lato,  size: 1.5rem,     font-weight: $lato-regular, line-height: 1.2,     // 24px
+                  at: (small only: (size: 1rem, line-height: 1.3))),                                  // 16px
+  // A heading a rank under `section-title`: a collection tile's title on the
+  // resources index, and the `Behind the Scenes` heading inside a project page.
+  // One size at every width, and its own leading -- both instances are one or
+  // two words, where the heading reset's 1.4 opens a gap under a single line.
+  subsection-title:(family: $zilla, size: 1.5rem,    font-weight: $zilla-bold,   line-height: 1),      // 24px
+  body:          (family: $lato,  size: 1.25rem,    font-weight: $lato-regular,                       // 20px, inherits 1.5
+                  at: (small only: (size: 1rem))),                                                    // 16px, == the root
+  body-strong:   (family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.4),    // 20px
+  body-sm:       (family: $lato,  size: 1rem,       font-weight: $lato-regular, line-height: 1.6),    // 16px
+  body-sm-strong:(family: $lato,  size: 1rem,       font-weight: $lato-bold,    line-height: 1.3),    // 16px
+
+  // ---- component styles: named for the thing, not for a rank --------------
+  // Three navs, each with one real size, each hidden at the widths the other
+  // two cover: the bar below medium, the overlay above it, the compact pair
+  // beside the burger above it too. The value each resolves to where it is
+  // hidden renders nowhere -- and still shows up in the audit, which cannot
+  // see `display: none`.
+  // The bar and the overlay inherit their leading -- the navbar's 2.5em for
+  // vertical centring, the 1.6 a `ul` carries. The pair declares its own: it
+  // is centred with flex, so its links are boxes whose padding counts, and the
+  // global 1.5 would grow the header.
+  nav-link:      (family: $zilla, size: 1.25rem,    font-weight: $zilla-bold),                        // 20px
+  nav-link-sm:   (family: $zilla, size: 1rem,       font-weight: $zilla-bold,   line-height: 1.2),    // 16px
+  menu-link:     (family: $zilla, size: 1.875rem,   font-weight: $zilla-bold),                        // 30px
+  // The footer's own pair, both in Lato: a fourth nav that reads as a list of
+  // links rather than as chrome, and the heading over each column. Both step
+  // up on small, where the footer is the touch target the header has become.
+  // Above small they are `body` and `body-strong` exactly -- which is allowed
+  // because the audit reads an entry's name off the include, not off what it
+  // renders.
+  footer-link:   (family: $lato,  size: 1.25rem,    font-weight: $lato-regular,                       // 20px
+                  at: (small only: (size: 1.5rem))),                                                  // 24px
+  footer-title:  (family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.6,     // 20px
+                  at: (small only: (size: 1.5rem, font-weight: $lato-black))),                        // 24px
+  // The about page's opening paragraphs and the list under them. `body` with
+  // one difference: it steps *up* on small rather than down, because the bio is
+  // the page's first read and it is set against nothing else there. No weight
+  // of its own, so it keeps tracking whatever `body` is.
+  bio-text:      (family: $lato,  size: 1.25rem,                                                      // 20px
+                  at: (small only: (size: 1.2rem))),                                                  // 19.2px
+  // The three CV lists -- work, education, speaking -- which are the same two
+  // ranks wearing different heading levels. `item-org` is the organisation a
+  // group of items sits under; `item-title` is what was actually done, the
+  // role or the talk. Education names an organisation and so takes the first,
+  // though its markup calls it an h3 the way work-item calls the second one an
+  // h4. Both leave their leading to the heading reset's 1.4.
+  item-org:      (family: $lato,  size: 1.75rem,    font-weight: $lato-black,                         // 28px
+                  at: (small only: (size: 1.4rem))),                                                  // 22.4px
+  item-title:    (family: $lato,  size: 1.25rem,    font-weight: $lato-black,                         // 20px
+                  at: (small only: (size: 1rem))),                                                    // 16px
+  // The other two lines of the same item: the date range beside the title, and
+  // the paragraph under it. `item-date` is the only 300 on the site, and it
+  // leaves its leading to the `p` reset the way the headings leave theirs to
+  // the heading reset -- it is one line and never wraps.
+  item-date:     (family: $lato,  size: 1.25rem,    font-weight: $lato-light,   font-style: italic,   // 20px
+                  at: (small only: (size: 1rem))),                                                    // 16px
+  item-detail:   (family: $lato,  size: 1.25rem,    font-weight: $lato-regular, line-height: 1.4,     // 20px
+                  at: (small only: (size: 1rem))),                                                    // 16px
+  // A talk's title on the speaking page, above its `item-date` and
+  // `item-detail`. Off the scale at 30px, as transcribed from the 1.5em it was.
+  talk-title:    (family: $lato,  size: 1.875rem,   font-weight: $lato-black,   line-height: 1.2,     // 30px
+                  at: (small only: (size: 1.5rem))),                                                  // 24px
+  // The achievement toast, whose two lines are the only type on the site set
+  // at 1.2 outside a nav. Both carry their own leading: the card is two lines
+  // in a fixed box, and the global 1.5 would push it open.
+  snackbar-title:(family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.2),    // 20px
+  snackbar-link: (family: $lato,  size: 1rem,       font-weight: $lato-regular, line-height: 1.2),    // 16px
+  // Two jobs that share the `.thumbnail-text` class and nothing else: the
+  // caption that fades in over a portfolio thumbnail, and the heading naming a
+  // collection on the photography index, which unsets the overlay entirely.
+  tile-title:    (family: $zilla, size: 2rem,       font-weight: $zilla-bold,   line-height: 1,       // 32px
+                  at: (small only: (size: 1.5rem))),                                                  // 24px
+  // The hero tile's title on a collection page, over `eyebrow-xl`.
+  tile-title-xl: (family: $zilla, size: 2.5rem,     font-weight: $zilla-bold,   line-height: normal), // 40px
+  // The name on each card of the easter eggs page. Off the scale at 30px, as
+  // transcribed from the 1.5em it was; the nearest step is 32px.
+  achievement-title:(family: $lato, size: 1.875rem, font-weight: $lato-bold,    line-height: 1.2,     // 30px
+                  at: (small only: (size: 1.5rem))),                                                  // 24px
+  // A featured project's title on the home page. `tile-title` but for the
+  // leading: these run to two lines, where 1 would crowd them.
+  card-title:    (family: $zilla, size: 2rem,       font-weight: $zilla-bold,   line-height: 1.1,     // 32px
+                  at: (small only: (size: 1.5rem))),                                                  // 24px
+  // The line under a card's title: an easter egg card, and a featured project
+  // on the home page. `body` set tight, since both are a line or two.
+  card-description:(family: $lato, size: 1.25rem,  font-weight: $lato-regular, line-height: 1.2,     // 20px
+                  at: (small only: (size: 1rem))),                                                    // 16px
+  // The "14 Resources" in a collection page's metadata bar. Steps up on small
+  // with the rest of the bar, and leaves its leading to the global 1.5.
+  collection-count:(family: $lato, size: 1rem,     font-weight: $lato-bold,                          // 16px
+                  at: (small only: (size: 1.2rem))),                                                  // 19.2px
+  gallery-title: (family: $lato,  size: 3.75rem,    font-weight: $lato-bold,    line-height: 1,       // 60px
+                  at: (small only: (size: 2rem))),                                                    // 32px
+  // `control` and `meta` were one `ui` entry. Interface is a category, not a
+  // job, and it was covering two: a button label and the footer's chrome.
+  control:       (family: $lato,  size: 1rem,       font-weight: $lato-bold,    line-height: 1),      // 16px
+  meta:          (family: $lato,  size: 1rem,       font-weight: $lato-bold),                         // 16px
+  // The dateline under a post or case-study title, and the only Zilla the site
+  // sets at regular weight -- every other Zilla entry here is bold.
+  date-stamp:    (family: $zilla, size: 2rem,       font-weight: $zilla-regular,                      // 32px
+                  at: (small only: (size: 1.6rem))),                                                  // 25.6px
+  eyebrow:       (family: $lato,  size: 0.625rem,   font-weight: $lato-bold,                          // 10px
+                  letter-spacing: .3em, text-transform: uppercase),
+  // The same kicker on a collection card, sized against a 30px title rather
+  // than the 20px one `eyebrow` sits under. Bigger on small, where the tile
+  // scales up to keep the grid legible at one column.
+  eyebrow-lg:    (family: $lato,  size: 0.75rem,    font-weight: $lato-bold,                          // 12px
+                  letter-spacing: .3em, text-transform: uppercase,
+                  at: (small only: (size: 0.875rem))),                                                // 14px
+  // The hero tile on a collection page, whose title is 40px. One size at every
+  // width: the tile scales on small, but this was tuned to land back on 16px.
+  eyebrow-xl:    (family: $lato,  size: 1rem,       font-weight: $lato-bold,                          // 16px
+                  letter-spacing: .3em, text-transform: uppercase),
+  // Names what an adjacent value is -- "COUNTRY" under "Japan". Uppercase but
+  // deliberately untracked, so it is not an `eyebrow`. The leading is carried
+  // here on purpose: it lives on a shared `p` rule the class outranks.
+  data-label:    (family: $lato,  size: 1rem,       font-weight: $lato-regular, line-height: 1.2,     // 16px
+                  text-transform: uppercase,
+                  at: (small only: (size: 0.75rem))),                                                 // 12px
+  // The "Japan" that label names. Off the scale at 25px, as transcribed from
+  // the 1.25em it was; its leading also lives on that shared `p` rule.
+  data-value:    (family: $lato,  size: 1.5625rem,  font-weight: $lato-bold,    line-height: 1.2,     // 25px
+                  at: (small only: (size: 1.25rem))),                                                 // 20px
+  // The handwritten note under a photo, a carousel slide and a year square --
+  // the only place either map reaches for Caveat, and the only thing on the
+  // site that uses it.
+  annotation:    (family: $caveat, size: 1.5rem,   font-weight: $caveat-regular, line-height: 1),     // 24px
+
+  // Prose set apart from the body at three sizes: the case-study pull-quotes
+  // that mirror the three .post-callout-* classes, and -sm also carries the
+  // standfirst opening every collection page.
+  // All three share 1.3 leading; -md is the only italic in either map.
+  // `size` is the desktop value; `at` carries the small-breakpoint one, each
+  // about a fifth smaller (50/40/30 -> 40/32/24). The classes used to hold
+  // those as hand-written font-size overrides, which meant the mobile size
+  // was invisible from here and the audit could not name the token at 375px.
+  callout-lg:    (family: $lato,  size: 3.125rem,   font-weight: $lato-regular,                       // 50px
+                  at: (small only: (size: 2.5rem))),                                                  // 40px
+  callout-md:    (family: $lato,  size: 2.5rem,     font-weight: $lato-bold,                          // 40px
+                  font-style: italic,
+                  at: (small only: (size: 2rem))),                                                    // 32px
+  // No font-weight: the class decides none, so its instances take 400 from the
+  // page or 700 from the `p` rule in rehan.scss, and emitting a weight here
+  // would flatten ten bold pull-quotes to regular. Off the scale at 30px, as
+  // `achievement-title`, `talk-title` and `data-value` (25px) are; the nearest step is 32px, and moving
+  // it is a design edit rather than a transcription, so it is recorded as-is.
+  callout-sm:    (family: $lato,  size: 1.875rem,                                                     // 30px
+                  at: (small only: (size: 1.5rem))),                                                  // 24px
+);
+
+// Fewer, and it should stay that way: a style that turns up on a second page
+// has stopped being expressive and belongs in $product-type instead.
+$expressive-type: (
+  counter:       (family: $lato,  size: 5.625rem,   font-weight: $lato-black,   line-height: 1,       // 90px, the achievement numeral
+                  at: (small only: (size: 4.5rem))),                                                  // 72px
+  // The line the numeral sits in -- the `/6` beside it and the `Completed`
+  // under it. A rank down from the numeral and a weight lighter, so the count
+  // reads first and its frame second.
+  counter-label: (family: $lato,  size: 3.75rem,    font-weight: $lato-bold,    line-height: 1,       // 60px
+                  at: (small only: (size: 3rem))),                                                    // 48px
+  // The only value in either map not taken from current usage -- the slot for a
+  // hero line or a statement over an image, set tight because large type reads
+  // loose at settings that suit 16px.
+  statement:     (family: $zilla, size: 5.625rem,   font-weight: $zilla-bold,   line-height: 0.955,   // 90px
+                  letter-spacing: -0.01em),
+  // The home page's opening lines -- the only running prose on the site set in
+  // Zilla, and the only place a paragraph is the page's largest type. One page,
+  // which is what keeps it here rather than in $product-type. Its leading is a
+  // ratio where the rule carried `1.4em`, so the links and spans inside each
+  // line lead from their own size rather than from a fixed 50.4px.
+  intro:         (family: $zilla, size: 2.25rem,    font-weight: $zilla-bold,   line-height: 1.4,     // 36px
+                  at: (small only: (size: 1.25rem))),                                                 // 20px
+);
+
+$type-registers: (product: $product-type, expressive: $expressive-type);
+
+@function type-map($register) {
+  $map: map-get($type-registers, $register);
+  @if $map == null {
+    @error 'Unknown type register `#{$register}`. Known: #{map-keys($type-registers)}.';
+  }
+  @return $map;
+}
+
+@function type-value($register, $style-key, $prop) {
+  $style: map-get(type-map($register), $style-key);
+  @if $style == null {
+    @error 'Unknown #{$register} type style `#{$style-key}`. '
+         + 'Known: #{map-keys(type-map($register))}.';
+  }
+  @return map-get($style, $prop);
+}
+
+// The seven properties a style may set, in the order they are written. `family`
+// and `size` are named for the map rather than for CSS, so the pairing is what
+// translates them; the other five are already their own CSS names.
+$type-properties: (
+  family:         font-family,
+  size:           font-size,
+  font-weight:    font-weight,
+  line-height:    line-height,
+  letter-spacing: letter-spacing,
+  text-transform: text-transform,
+  font-style:     font-style,
+);
+
+// Optional properties are only written when the style defines them, so a rule
+// never carries `letter-spacing: normal` it did not ask for -- that would
+// override an inherited value rather than leave it alone. Shared with the `at`
+// blocks, which are the same thing with everything optional.
+@mixin type-declarations($style) {
+  @each $key, $prop in $type-properties {
+    $value: map-get($style, $key);
+    @if $value != null {
+      #{$prop}: $value;
+    }
+  }
+}
+
+// Emits the whole style, plus a media query per `at` entry.
+@mixin type-style($register, $style-key) {
+  $style: map-get(type-map($register), $style-key);
+  @if $style == null {
+    @error 'Unknown #{$register} type style `#{$style-key}`. '
+         + 'Known: #{map-keys(type-map($register))}.';
+  }
+  // Every property is optional to `type-declarations`, so a base style missing
+  // its family or size would emit a half-empty rule rather than fail. Asserted
+  // here instead: the `at` blocks are corrections and may hold either.
+  @each $required in (family, size) {
+    @if map-get($style, $required) == null {
+      @error '#{$register}/#{$style-key} has no `#{$required}`. '
+           + 'A base style must set both family and size.';
+    }
+  }
+  @include type-declarations($style);
+
+  $at: map-get($style, at);
+  @if $at != null {
+    @each $query, $overrides in $at {
+      // `small only` is a two-item list, so the name is its first item. A typo
+      // would otherwise reach Foundation as an unknown breakpoint and resolve
+      // to an always-true query rather than an error.
+      @if not map-has-key($breakpoints, nth($query, 1)) {
+        @error 'Unknown breakpoint `#{nth($query, 1)}` on '
+             + '#{$register}/#{$style-key}. Known: #{map-keys($breakpoints)}.';
+      }
+      @include breakpoint($query) {
+        @include type-declarations($overrides);
+      }
+    }
+  }
+}

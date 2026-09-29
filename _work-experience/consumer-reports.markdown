@@ -6,4 +6,5 @@ company: Consumer Reports
 description: "Worked with the UX team to redesign consumerreports.org with an emphasis on data visualization, better conveying complex data to the large user base."
 logo: cr
 sort-order: 13
+collapsed: true
 ---

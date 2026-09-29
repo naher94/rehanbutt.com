@@ -24,6 +24,7 @@ In [Version (V1.0)](https://github.com/naher94/jasper/releases/tag/V1.0) Jasper 
 
 ## Process
 
+{% comment %}//TODO Style this table{% endcomment %}
 {:#colorbot-table}
 | Effort/Priority | High   | Medium    | Low |
 | --------------- | ------ | -------   | --- |
@@ -41,7 +42,9 @@ In order to create a better bot experience, I wanted to make sure Jasper had som
 
 ### Jasper's Fun Phrases
 
-#### "Awesome sauce! Give me one second." "Coming right up!" "Enjoy your Inspiration!" "You there? Wonderful colors await you!" "Happy coloring! 🎨🎉" "I'm Jasper your friendly neighborhood color master"
+"Awesome sauce! Give me one second." "Coming right up!" "Enjoy your Inspiration!" "You there? Wonderful colors await you!" "Happy coloring! 🎨🎉" "I'm Jasper your friendly neighborhood color master"
+
+{% comment %}//TODO add the fun phrases as blocks{% endcomment %}
 
 <div class="small-12 medium-6 large-6 columns image-container" style="margin-top:20px;"><img src="../img/colorBot/workflowDiagram.png" alt="Workflow Diagram"/></div>
 

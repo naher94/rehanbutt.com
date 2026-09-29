@@ -1,0 +1,889 @@
+<meta charset="utf-8">
+<title>Type Inventory</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@300;400;500;700&family=Lato:wght@100;300;400;700;900&family=Caveat&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#F6F7F8; --surface:#FFFFFF; --surface-2:#EEF0F2;
+    --ink:#1F2937; --ink-muted:#626973; --ink-faint:#8B919B;
+    --rule:#DFE3E7; --rule-strong:#C6CCD3;
+    --accent:#12ABC4; --accent-deep:#0B7F92;
+    --flag-high:#BA3D54; --flag-med:#B4751C; --flag-ok:#2F7D5B;
+    --chip:#E7EAED;
+    --reg-product:#5A4FCF; --reg-expressive:#2F7D5B;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#151B24; --surface:#1C232D; --surface-2:#232B36;
+      --ink:#EDEFF2; --ink-muted:#A3AAB4; --ink-faint:#7C838D;
+      --rule:#2D3742; --rule-strong:#3D4854;
+      --accent:#3FC4DA; --accent-deep:#7FDCEB;
+      --flag-high:#E08196; --flag-med:#D9A85C; --flag-ok:#6BBF95;
+      --chip:#2A3441;
+      --reg-product:#9D93F2; --reg-expressive:#6BBF95;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#151B24; --surface:#1C232D; --surface-2:#232B36;
+    --ink:#EDEFF2; --ink-muted:#A3AAB4; --ink-faint:#7C838D;
+    --rule:#2D3742; --rule-strong:#3D4854;
+    --accent:#3FC4DA; --accent-deep:#7FDCEB;
+    --flag-high:#E08196; --flag-med:#D9A85C; --flag-ok:#6BBF95;
+    --chip:#2A3441;
+    --reg-product:#9D93F2; --reg-expressive:#6BBF95;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:"Lato",-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:16px; line-height:1.55; margin:0; padding:0 24px 72px;
+  }
+  .top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+    column-gap:24px;margin:28px 0 18px}
+  .top h1{margin:0}
+  .tools{display:flex;gap:18px;font-size:11px;letter-spacing:.09em;text-transform:uppercase}
+  .tools a{color:var(--ink-muted);text-decoration:none}
+  .tools a:hover{color:var(--accent-deep)}
+  .tools a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  h1{font-family:"Zilla Slab",serif;font-size:34px;margin:28px 0 18px;font-weight:700}
+  code{font-family:"JetBrains Mono",monospace;font-size:12.5px;
+    background:var(--surface-2);padding:1px 5px;border-radius:4px}
+
+  /* ---- totals ------------------------------------------------------- */
+  .totals{display:flex;gap:26px;flex-wrap:wrap;padding:14px 0 16px;
+    border-block:1px solid var(--rule);margin-bottom:18px}
+  .tot b{display:block;font-family:"Zilla Slab",serif;font-size:26px;line-height:1.1}
+  .tot span{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint)}
+
+  /* ---- filter ------------------------------------------------------- */
+  .bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+  .bar .lbl{font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-faint);margin-right:2px}
+  .bar .sep{width:1px;align-self:stretch;background:var(--rule);margin:0 8px}
+  .chip{font-family:"Lato",sans-serif;font-size:13.5px;font-weight:700;
+    background:var(--surface);border:1px solid var(--rule-strong);color:var(--ink);
+    border-radius:999px;padding:5px 13px;cursor:pointer}
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+  .chip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .chip .n{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:400;
+    opacity:.65;margin-left:6px}
+
+  /* ---- layout ------------------------------------------------------- */
+  .cols{display:grid;grid-template-columns:minmax(0,1fr) 11px var(--panel-w,430px);
+    gap:11px;align-items:start}
+  /* The splitter. A hit area wide enough to grab with a hairline drawn down
+     the middle of it, rather than a 2px target you have to aim at. */
+  .grip{position:sticky;top:16px;height:calc(100vh - 32px);padding:0;border:0;
+    background:none;cursor:col-resize;touch-action:none}
+  .grip::before{content:"";display:block;width:2px;height:100%;margin:0 auto;
+    border-radius:2px;background:var(--rule)}
+  .grip:hover::before,.grip:focus-visible::before{background:var(--accent)}
+  .grip:focus-visible{outline:none}
+  /* Held on the body so the cursor does not flicker back to a text caret when
+     the pointer outruns the handle mid-drag. */
+  body.resizing{cursor:col-resize;user-select:none}
+  @media (max-width:1100px){
+    .cols{grid-template-columns:minmax(0,1fr)}
+    .grip{display:none}
+    .panel{position:static}
+  }
+
+  /* ---- rows --------------------------------------------------------- */
+  .rows{display:flex;flex-direction:column;gap:6px}
+  /* The family name set in its own face, so the group header is itself a
+     specimen of what is under it. */
+  .grouphead{display:flex;align-items:baseline;justify-content:space-between;
+    gap:12px;padding:16px 4px 4px;font-size:19px;font-weight:700}
+  .grouphead:first-child{padding-top:2px}
+  .grouphead .n{font-family:"JetBrains Mono",monospace;font-size:11px;
+    font-weight:400;color:var(--ink-faint)}
+  .row{display:grid;
+    grid-template-columns:minmax(120px,270px) minmax(190px,1fr) 250px auto;
+    gap:16px;align-items:center;width:100%;text-align:left;
+    background:var(--surface);border:1px solid var(--rule);border-radius:10px;
+    padding:12px 16px;cursor:pointer;color:inherit;font:inherit}
+  .row:hover{border-color:var(--rule-strong)}
+  .row[aria-pressed="true"]{border-color:var(--accent);
+    box-shadow:0 0 0 1px var(--accent) inset}
+  .spec{white-space:nowrap;overflow:hidden;line-height:1.15;color:var(--ink)}
+  .meta{min-width:0}
+  .bps{display:flex;gap:15px;margin-bottom:3px}
+  .bp{display:flex;flex-direction:column;line-height:1.15;min-width:44px}
+  .bp i{font-style:normal;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-faint)}
+  .bp b{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:500}
+  /* Carried, not decided: the same value the wider band renders, greyed so the
+     eye lands on the widths where something was actually chosen. */
+  .bp b.carried{color:var(--ink-faint);font-weight:400}
+  .bp b.unread{color:var(--flag-med)}
+  .sub{font-size:12.5px;color:var(--ink-muted);white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis}
+  .count{font-family:"JetBrains Mono",monospace;font-size:15px;text-align:right}
+  .count small{display:block;font-size:10px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--ink-faint)}
+  .tags{display:flex;gap:5px;flex-wrap:wrap}
+  /* Its own column of fixed width, so every entry name starts at the same x
+     and the column can be read down the list. Right-aligning it, or letting
+     the column size to its content, puts each name wherever its neighbours
+     happen to end. In the panel they stack under the heading, where there is
+     no list to line up with. */
+  .row .tags{justify-content:flex-start}
+  /* Narrow enough that a fixed badge column would eat the bands: drop the
+     badges to their own line under the numbers rather than overlapping them. */
+  @media (max-width:980px){
+    .row{grid-template-columns:minmax(90px,150px) minmax(0,1fr) auto;row-gap:8px}
+    .row .spec, .row .meta, .row .count{grid-row:1}
+    .row .tags{grid-row:2;grid-column:2 / -1}
+  }
+  .panel .tags{margin-top:5px}
+  .badge{font-family:"JetBrains Mono",monospace;font-size:10.5px;border-radius:5px;
+    padding:2px 7px;white-space:nowrap}
+  /* The entry name is what you scan for down the list, so it keeps the accent.
+     The register beside it is a category rather than a name: a solid chip, so
+     the two never read as a pair of equal labels. */
+  .b-entry{background:color-mix(in srgb,var(--accent) 20%,transparent);color:var(--accent-deep)}
+  /* Registers get their own hues rather than borrowing from the UI: `--ink` is
+     the pressed-chip fill and the active segment, so a product badge in it read
+     as "selected" rather than as a category. */
+  .b-reg-product{background:var(--reg-product);color:var(--ground)}
+  .b-reg-expressive{background:var(--reg-expressive);color:var(--ground)}
+  .b-none{background:var(--chip);color:var(--ink-faint)}
+  /* Not read out of the code: either your note about where a style should
+     land, or the absence of any decision at all. The dashed border carries
+     that; a solid one would claim it as a fact. The 1px border is taken out of
+     the padding so it sits level with the filled badges beside it. */
+  .b-tag{background:transparent;border:1px dashed var(--rule-strong);
+    color:var(--ink-muted);padding:1px 6px}
+  .b-cid{background:var(--surface-2);color:var(--ink-faint)}
+  /* Firmer than the atlas numbers beside it: this is the name that lasts.
+     Upper-cased in the string rather than with `text-transform`, so what you
+     read is what you can search the page or a URL for. */
+  .b-rid{background:var(--surface-2);color:var(--ink-muted);font-weight:500;
+    letter-spacing:.02em}
+  /* A copy target, but the same box as every other badge: `.tags` is a flex row
+     at the default `stretch`, so one taller chip lifts all of them. The border
+     comes out of the padding, the way `.b-tag` does it. */
+  .b-rid.copyable{cursor:copy;padding:1px 6px;border:1px solid transparent}
+  .b-rid.copyable:hover{border-color:var(--rule-strong);color:var(--ink)}
+  .b-rid.copied{background:color-mix(in srgb,var(--accent) 20%,transparent);
+    color:var(--accent-deep);border-color:transparent}
+  .b-rid.copyfail{background:color-mix(in srgb,var(--flag-high) 18%,transparent);
+    color:var(--flag-high);border-color:transparent}
+  .b-warn{background:color-mix(in srgb,var(--flag-med) 20%,transparent);color:var(--flag-med)}
+
+  /* ---- panel -------------------------------------------------------- */
+  .panel{position:sticky;top:16px;background:var(--surface);border:1px solid var(--rule);
+    border-radius:10px;padding:16px 18px;max-height:calc(100vh - 32px);overflow:auto}
+  .panel h2{font-family:"Zilla Slab",serif;font-size:19px;margin:0 0 2px;font-weight:700}
+  .panel .empty{color:var(--ink-faint);margin:0}
+  .sec{margin-top:16px;padding-top:12px;border-top:1px solid var(--rule)}
+  .sec h3{font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-faint);margin:0 0 7px;font-weight:700}
+  .kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 12px;font-size:13px}
+  .kv dt{color:var(--ink-faint)}
+  .kv dd{margin:0;font-family:"JetBrains Mono",monospace;font-size:12.5px;
+    overflow-wrap:anywhere}
+  .rt{width:100%;border-collapse:collapse;font-size:12.5px;table-layout:auto}
+  /* Every cell carries the same inline padding, highlighted or not, so the
+     tint on a changed cell is inset around its value rather than displacing
+     it: a column has to read straight down whether or not a row is marked. */
+  .rt th{font-size:10px;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:700;text-align:left;padding:0 8px 4px;
+    border-bottom:1px solid var(--rule);white-space:nowrap}
+  .rt tbody th{font-size:11px;letter-spacing:0;text-transform:none;font-weight:400;
+    color:var(--ink-muted);border-bottom:0;padding:4px 12px 4px 0}
+  .rt td{font-family:"JetBrains Mono",monospace;font-size:12px;
+    padding:4px 8px;white-space:nowrap}
+  .rt th:first-child, .rt td:first-child{padding-left:0}
+  .rt .carried{color:var(--ink-faint)}
+  /* What this width actually decides, against the wider one it corrects. */
+  .rt td.changed{color:var(--accent-deep);font-weight:500;
+    background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:4px}
+  .srcline{font-size:12px;margin-bottom:6px;font-family:"JetBrains Mono",monospace}
+  .srcline b{font-weight:500}
+  .via{color:var(--ink-faint);font-weight:400}
+  .loc{color:var(--ink-faint);font-size:11px}
+  /* The control scopes the list under this heading, so it sits on the heading
+     rather than above the list. Wraps below it when the pane is dragged narrow
+     enough that the two would collide. */
+  .sechead{display:flex;align-items:center;justify-content:space-between;
+    gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .sechead h3{margin:0}
+  .seg{display:inline-flex;border:1px solid var(--rule-strong);border-radius:7px;
+    overflow:hidden}
+  .seg button{font-family:"Lato",sans-serif;font-size:12px;font-weight:700;
+    background:var(--surface);color:var(--ink-muted);border:0;
+    border-right:1px solid var(--rule-strong);padding:4px 11px;cursor:pointer}
+  .seg button:last-child{border-right:0}
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+  .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .uses{font-size:12.5px}
+  .uses details{margin-bottom:3px}
+  .uses summary{cursor:pointer;list-style:none;display:grid;
+    grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:3px 0;
+    border-bottom:1px dotted var(--rule)}
+  .uses summary::-webkit-details-marker{display:none}
+  .uses .txt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .uses .el{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--ink-faint);
+    white-space:nowrap}
+  .pagegrp{margin-bottom:9px}
+  .pagegrp > b{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;
+    color:var(--ink-muted);display:block;margin-bottom:2px}
+  /* The one thing on the panel that asks you to do something rather than
+     telling you something, so it is drawn as a card rather than as another
+     section. The fill is enough to set it apart. */
+  .act{margin-top:14px;padding:12px 14px;border-radius:9px;
+    background:var(--surface-2)}
+  .act-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .act h4{margin:0;font-family:"Zilla Slab",serif;font-size:15px;font-weight:700}
+  .act p{margin:2px 0 9px;font-size:12.5px;color:var(--ink-muted)}
+  /* Clearing is an undo, not a third register, so it is a quiet text button on
+     the question rather than a card beside the two real answers. It is only
+     rendered once something is chosen. */
+  .linkbtn{background:none;border:0;padding:0;font:inherit;font-size:12.5px;
+    font-weight:700;color:var(--ink-muted);cursor:pointer}
+  .linkbtn:hover{color:var(--ink)}
+  .linkbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  /* The description sits inside the target, so the whole card is the control
+     rather than a circle you have to hit. */
+  .radios{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .radio{display:flex;gap:8px;align-items:flex-start;text-align:left;font:inherit;
+    color:inherit;cursor:pointer;background:var(--surface);border-radius:8px;
+    border:1px solid var(--rule-strong);padding:8px 10px}
+  .radio:hover{border-color:var(--ink-faint)}
+  .radio:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .radio .dot{flex:0 0 auto;width:16px;height:16px;border-radius:50%;margin-top:1px;
+    background:var(--surface);border:1px solid var(--rule-strong)}
+  .radio b{display:block;font-size:12.5px;font-weight:700;line-height:1.3}
+  .radio i{display:block;font-style:normal;font-size:11.5px;line-height:1.35;
+    color:var(--ink-muted);margin-top:2px}
+  /* Three signals, not colour alone: the ring fills, the card takes the accent
+     border and tint, and the label changes colour. */
+  .radio[aria-checked="true"]{border-color:var(--accent);
+    background:color-mix(in srgb,var(--accent) 8%,var(--surface))}
+  .radio[aria-checked="true"] b{color:var(--accent-deep)}
+  .radio[aria-checked="true"] .dot{border:5px solid var(--accent)}
+  .note{font-size:12px;color:var(--ink-faint);margin:8px 0 0}
+</style>
+
+<header class="top">
+  <h1>Type Inventory</h1>
+  <nav class="tools" aria-label="Other tools">
+    <a href="color-atlas.html">Color Atlas</a>
+    <a href="css-atlas.html">CSS Atlas</a>
+  </nav>
+</header>
+
+<div class="totals" id="totals"></div>
+<div class="bar" id="bar"></div>
+
+<div class="cols">
+  <div class="rows" id="rows"></div>
+  <button class="grip" id="grip" role="separator" aria-orientation="vertical"
+          aria-label="Resize the detail pane — arrow keys, double-click to reset"></button>
+  <div class="panel" id="panel"><p class="empty">Pick a row.</p></div>
+</div>
+
+<script>
+const DATA = __DATA__;
+const CARDS = DATA.cards, T = DATA.totals;
+
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g,
+  c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+const px  = n => (Math.round(n * 100) / 100) + "px";
+const short = f => String(f || "").replace(/^_sass\//, "").replace(/^css\//, "");
+
+/* Drawn at its real size, uncapped: 11 of the 73 rows are over 40px, and a
+   capped specimen is a picture of the cap rather than of the type. Rows are
+   as tall as their specimen needs, which is what a specimen sheet is for. The
+   size shown is the base -- the widest band -- matching the value in ink
+   beside it. */
+const SPECIMEN = "AaBb";
+/* Single quotes inside the stack, because this is interpolated into a
+   double-quoted `style` attribute: a family written `"Zilla Slab"` closes the
+   attribute at its own first quote, and the browser drops everything after it.
+   That silently cost the specimens their family, weight, slant, tracking and
+   case -- only `font-size` survived, being first in the string. */
+const famStack = f => f === "Zilla Slab" ? "'Zilla Slab',serif"
+  : f === "Caveat" ? "'Caveat',cursive"
+  : f === "Consolas" ? "'JetBrains Mono',monospace"
+  : "'Lato',sans-serif";
+
+/* Your own note about where an unmapped row should end up. Keyed by the card
+   id, which is derived from the values it renders -- so if the type changes,
+   the id changes and the tag stops matching rather than quietly following a
+   value somewhere it was never meant to go. */
+const TAG_STORE = "rb-type-inventory-tags-v1";
+const loadTags = () => { try { return JSON.parse(localStorage.getItem(TAG_STORE) || "{}") || {}; }
+                         catch (e) { return {}; } };
+let TAGS = loadTags();
+function setTag(id, reg){
+  if (reg) TAGS[id] = reg; else delete TAGS[id];
+  try { localStorage.setItem(TAG_STORE, JSON.stringify(TAGS)); } catch (e) {}
+}
+
+/* `band` is which width's declarations the occurrence list expands onto. Kept
+   across selections rather than reset per card, so you can hold it on `small`
+   and walk down the list looking at what each one does there. */
+const state = { filter: "all", sort: "count", group: "none", sel: null, band: null };
+
+/* One axis separates the two: does this repeat, or does it happen once? The
+   examples are the useful half -- they let a row be decided without going back
+   to the definition. */
+const REGISTERS = [
+  { key: "product", label: "Product",
+    blurb: "Reused across pages \u2014 body, titles, nav." },
+  { key: "expressive", label: "Expressive",
+    blurb: "A one-off moment \u2014 a hero line, a numeral." }
+];
+
+/* ---- the three bands -----------------------------------------------------
+   Every row shows all three, small on the left, so a column can be read down
+   the list instead of each row being parsed on its own. The site defines five
+   breakpoints but only three render type differently; the audit collapses the
+   other two rather than this file assuming which.
+
+   Judged right to left, because the stylesheet is desktop-first: `large` is
+   the decision, and a band is *carried* when it renders what the wider band
+   beside it renders. A carried value is greyed -- it is what the element looks
+   like there, not a choice made for that width. `~` marks a size the audit
+   could not read, where the number is the parent's rather than the element's.*/
+const BANDS = DATA.totals.distinct_breakpoints.map(b => b.name);
+
+/* The atlas numbers, narrowest band first. `renders` itself stays widest-first
+   -- `renders[0]` is the base everywhere else: the specimen size, the heading,
+   the family and weight on a row -- so the badges sort a copy rather than the
+   array. Everything else on the page reads small to large, and the numbers
+   were the one thing running the other way. */
+/* A row's own name, as opposed to its position. The atlas numbers beside it
+   are assigned by rank -- sorted by element count -- so any change in counts
+   renumbers everything below it, and `C42` means a different row after the
+   next audit run. This is the first four characters of the row's id, which is
+   a digest of what it renders at every width: stable across runs, and changing
+   only when the row's type changes, at which point it genuinely is a new row.
+   It is also what the URL carries as `sel`, so the badge and the link agree. */
+const rowId = c => "R" + c.id.slice(0, 4).toUpperCase();
+
+/* Opened off the filesystem, these pages often have no async clipboard at all,
+   and even where they do the write rejects unless the document has focus. So
+   the selection-based copy is a real fallback rather than an afterthought, and
+   the async attempt is *awaited* -- returning true the moment `writeText` is
+   called would make the badge say COPIED for a promise that went on to reject.
+   -> Promise<boolean>, resolved with whether anything actually reached the
+   clipboard. */
+function copySelection(s){
+  try {
+    const ta = document.createElement("textarea");
+    ta.value = s;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.top = "-1000px";
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    return ok;
+  } catch (e) { return false; }
+}
+
+function copyText(s){
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    return navigator.clipboard.writeText(s).then(
+      function () { return true; },
+      function () { return copySelection(s); }
+    );
+  }
+  return Promise.resolve(copySelection(s));
+}
+
+const rendersSmallFirst = c => c.renders.slice().sort(function (a, b) {
+  return BANDS.findIndex(function (x) { return a.widths.includes(x); })
+       - BANDS.findIndex(function (x) { return b.widths.includes(x); });
+});
+
+function bandsOf(c){
+  const at = BANDS.map(b => c.renders.find(r => r.widths.includes(b)) || null);
+  return BANDS.map((b, i) => {
+    const r = at[i], wider = at[i + 1];
+    return {
+      name: b, render: r,
+      carried: !!(r && wider && r === wider),
+      last: i === BANDS.length - 1,
+    };
+  });
+}
+
+function bandsHtml(c){
+  return `<span class="bps">${bandsOf(c).map(s => {
+    const r = s.render;
+    const cls = [s.carried ? "carried" : "",
+                 r && r.size_unresolved ? "unread" : ""].filter(Boolean).join(" ");
+    return `<span class="bp"><i>${esc(s.name)}</i><b class="${cls}">${
+      r ? (r.size_unresolved ? "~" : "") + px(r.size) : "&mdash;"}</b></span>`;
+  }).join("")}</span>`;
+}
+
+/* One badge for the state -- `product`, `expressive` or `unmapped` -- in two
+   styles that say where the answer came from. Solid is read out of the code:
+   the stylesheet includes an entry and the audit resolved it. Dashed is yours,
+   chosen in the panel, and so is a proposal rather than a finding; an unmapped
+   row with no tag is dashed too, because "nothing has decided this yet" is the
+   same kind of statement. A tagged row does not also say `unmapped` -- one
+   badge answers the question, and two answered it twice.
+
+   The entry name follows as its own badge, in the accent, because the name is
+   data rather than a category. */
+function tagBadges(c){
+  const out = [];
+  const entries = Object.keys(c.entries);
+  const regs = [...new Set(entries.map(e => e.split("/")[0]))];
+  const tag = TAGS[c.id];
+
+  if (regs.length === 1) out.push({ cls: "b-reg-" + regs[0], txt: regs[0] });
+  else if (regs.length > 1) out.push({ cls: "b-none", txt: regs.join(" + ") });
+  else out.push({ cls: "b-tag", txt: tag || "unmapped" });
+
+  if (entries.length === 1) out.push({ cls: "b-entry", txt: entries[0].split("/")[1] });
+  else if (entries.length > 1)
+    out.push({ cls: "b-entry", txt: entries.map(e => e.split("/")[1]).join(" · ") });
+
+  return out;
+}
+
+/* The register a card belongs to, however it got there: read out of the code
+   first, then your own tag. The filter has to agree with the badge -- a row
+   that says `expressive` and does not appear under `expressive` is the tool
+   contradicting itself -- so tagging a row moves it out of `unmapped` and into
+   the register you gave it, and the counts move with it. */
+const effReg = c => c.register || TAGS[c.id] || null;
+
+const matches = c => state.filter === "all" ? true
+  : state.filter === "unmapped" ? !effReg(c)
+  : effReg(c) === state.filter;
+
+function drawTotals(){
+  const el = document.getElementById("totals");
+  const rows = [
+    [T.cards, "rows"],
+    [T.elements.toLocaleString(), "elements"],
+    [T.responsive_cards, "rows vary by width"],
+    [T.mapped.toLocaleString(), "elements mapped"],
+    [T.unmapped.toLocaleString(), "elements unmapped"],
+    [T.pages, "pages"],
+  ];
+  if (T.unresolved_elements) rows.push([T.unresolved_elements, "size not readable"]);
+  el.innerHTML = rows.map(([n, l]) =>
+    `<div class="tot"><b>${n}</b><span>${l}</span></div>`).join("");
+}
+
+/* Size sorts on the base -- the widest band -- rather than on the largest of a
+   card's renderings. A style that is 70px on desktop and 40px on a phone is a
+   70px style with a correction, and sorting it among the 40s would put it
+   where nobody would look for it. Count breaks ties, so equal sizes still
+   arrive heaviest first. */
+const baseSize = c => {
+  const base = c.renders.find(r => r.widths.includes(BANDS[BANDS.length - 1]));
+  return (base || c.renders[0]).size;
+};
+const SORTS = {
+  count: (a, b) => b.count - a.count,
+  size:  (a, b) => baseSize(b) - baseSize(a) || b.count - a.count,
+};
+
+function drawBar(){
+  const counts = {
+    all: CARDS.length,
+    product: CARDS.filter(c => effReg(c) === "product").length,
+    expressive: CARDS.filter(c => effReg(c) === "expressive").length,
+    unmapped: CARDS.filter(c => !effReg(c)).length,
+  };
+  document.getElementById("bar").innerHTML =
+    `<span class="lbl">Register</span>` +
+    ["all", "product", "expressive", "unmapped"].map(k =>
+      `<button class="chip" data-f="${k}" aria-pressed="${state.filter === k}">${
+        k === "all" ? "Everything" : k}<span class="n">${counts[k]}</span></button>`).join("") +
+    `<span class="sep"></span><span class="lbl">Sort</span>` +
+    [["count", "most used"], ["size", "largest"]].map(([k, label]) =>
+      `<button class="chip" data-s="${k}" aria-pressed="${state.sort === k}">${
+        label}</button>`).join("") +
+    `<span class="sep"></span><span class="lbl">Group</span>` +
+    [["none", "none"], ["family", "font"]].map(([k, label]) =>
+      `<button class="chip" data-g="${k}" aria-pressed="${state.group === k}">${
+        label}</button>`).join("");
+  document.querySelectorAll("#bar [data-f]").forEach(b =>
+    b.onclick = () => { state.filter = b.dataset.f; draw(); });
+  document.querySelectorAll("#bar [data-s]").forEach(b =>
+    b.onclick = () => { state.sort = b.dataset.s; draw(); });
+  document.querySelectorAll("#bar [data-g]").forEach(b =>
+    b.onclick = () => { state.group = b.dataset.g; draw(); });
+}
+
+/* What the list is showing right now, filter and sort applied. Shared with the
+   opening selection so "the first row" means the same thing in both places. */
+const visible = () => CARDS.filter(matches).slice().sort(SORTS[state.sort]);
+
+/* Grouping keeps whatever sort is on: the groups appear in the order their
+   first row does, so `most used` puts the family carrying the most type first
+   and `largest` leads with whichever family owns the biggest style. Sorting the
+   groups separately would make the two controls argue. */
+function groupRows(list){
+  if (state.group === "none") return [["", list]];
+  const groups = new Map();
+  list.forEach(function (c) {
+    const k = c.renders[0].family;
+    if (!groups.has(k)) groups.set(k, []);
+    groups.get(k).push(c);
+  });
+  return [...groups.entries()];
+}
+
+function rowHtml(c){
+  const r = c.renders[0];
+  return `<button class="row" data-id="${c.id}"
+        aria-pressed="${state.sel === c.id}">
+      <span class="spec" style="font-size:${r.size}px;
+        font-family:${famStack(r.family)};font-weight:${r.weight};
+        font-style:${r.style};letter-spacing:${esc(r.letter_spacing)};
+        text-transform:${esc(r.text_transform)}">${SPECIMEN}</span>
+      <span class="meta">
+        ${bandsHtml(c)}
+        <span class="sub">${esc(r.family)} &middot; ${esc(r.weight)}${
+          c.classes.length ? " &middot; " + esc(c.classes.slice(0, 2).join(", ")) : ""}</span>
+      </span>
+      <span class="tags">
+        ${tagBadges(c).map(b =>
+          `<span class="badge ${b.cls}">${esc(b.txt)}</span>`).join("")}
+        <span class="badge b-rid copyable" data-rid="${esc(rowId(c))}"
+          title="Copy ${esc(rowId(c))}">${esc(rowId(c))}</span>
+        ${rendersSmallFirst(c).map(x => x.card
+          ? `<span class="badge b-cid">${esc(x.card)}</span>` : "").join("")}
+        ${c.renders.some(x => x.size_unresolved)
+          ? `<span class="badge b-warn">size not readable</span>` : ""}
+      </span>
+      <span class="count">${c.count.toLocaleString()}<small>elements</small></span>
+    </button>`;
+}
+
+function drawRows(){
+  const host = document.getElementById("rows");
+  const list = visible();
+  if (!list.length) { host.innerHTML = `<p class="note">Nothing under this filter.</p>`; return; }
+  host.innerHTML = groupRows(list).map(function (pair) {
+    const name = pair[0], cards = pair[1];
+    const els = cards.reduce(function (n, c) { return n + c.count; }, 0);
+    const head = name
+      ? `<div class="grouphead"><span style="font-family:${famStack(name)}">${
+          esc(name)}</span><span class="n">${cards.length} row${
+          cards.length === 1 ? "" : "s"} &middot; ${els.toLocaleString()} elements</span></div>`
+      : "";
+    return head + cards.map(rowHtml).join("");
+  }).join("");
+  host.querySelectorAll(".row").forEach(b =>
+    b.onclick = () => { state.sel = state.sel === b.dataset.id ? null : b.dataset.id; draw(); });
+  /* The badge sits inside the row's button, so the copy has to stop the click
+     reaching it -- otherwise copying an id would also open or close the row.
+     Feedback is written straight onto the element rather than through `draw`,
+     which would rebuild the list and throw the message away. */
+  host.querySelectorAll(".b-rid").forEach(function (b) {
+    b.onclick = function (e) {
+      e.stopPropagation();
+      const was = b.dataset.rid;
+      copyText(was).then(function (ok) {
+        b.textContent = ok ? "COPIED" : "COPY FAILED";
+        b.classList.add(ok ? "copied" : "copyfail");
+        setTimeout(function () {
+          b.textContent = was;
+          b.classList.remove("copied", "copyfail");
+        }, 900);
+      });
+    };
+  });
+}
+
+/* Occurrences grouped by page, with the declarations that produced them folded
+   underneath. The list is capped per card and says so, so a truncated list
+   never reads as the whole picture. */
+/* Which widths this card's occurrences actually resolve through different
+   rules at. A card whose declarations are the same everywhere gets no control:
+   three buttons that all show the same thing are three ways to learn nothing.*/
+function srcBands(c){
+  const bands = BANDS.filter(b => c.uses.some(u => u.src[b] !== undefined));
+  const distinct = new Set();
+  c.uses.forEach(u => distinct.add(bands.map(b => u.src[b]).join("/")));
+  const varies = bands.some(b =>
+    c.uses.some(u => u.src[b] !== u.src[bands[bands.length - 1]]));
+  return varies ? bands : [];
+}
+
+function bandPicker(c){
+  const bands = srcBands(c);
+  if (!bands.length) return "";
+  const sel = bands.includes(state.band) ? state.band : bands[bands.length - 1];
+  return `<div class="seg" role="group" aria-label="Declarations at width">${
+    bands.map(b => `<button data-band="${b}" aria-pressed="${b === sel}">${
+      esc(b)}</button>`).join("")}</div>`;
+}
+
+function usesHtml(c){
+  const bands = srcBands(c);
+  const band = bands.length && bands.includes(state.band)
+    ? state.band : (bands[bands.length - 1] || BANDS[BANDS.length - 1]);
+  const byPage = new Map();
+  c.uses.forEach(u => {
+    if (!byPage.has(u.page)) byPage.set(u.page, []);
+    byPage.get(u.page).push(u);
+  });
+  const groups = [...byPage.entries()].map(([page, us]) =>
+    `<div class="pagegrp"><b>${esc(page)}</b>${us.map(u => {
+      const sig = esc(u.tag) + (u.classes ? "." + esc(u.classes).split(" ").join(".") : "");
+      const idx = u.src[band] !== undefined ? u.src[band]
+                : u.src[BANDS[BANDS.length - 1]];
+      const src = (c.sources || [])[idx] || [];
+      const head = `<span class="txt">${esc(u.text) ||
+          `<span style="color:var(--ink-faint)">(no text)</span>`}</span>
+        <span class="el">:${u.line} ${sig}</span>`;
+      if (!src.length) return `<div class="uses">${head}</div>`;
+      return `<details><summary>${head}</summary>${src.map(d =>
+        `<div class="srcline">${esc(d.prop)}: <b>${esc(d.value)}</b>${
+          d.via ? ` <span class="via">(${esc(d.via)})</span>` : ""}<br>
+        <span class="loc">${esc(short(d.file))}${d.line ? ":" + d.line : ""}</span></div>`
+      ).join("")}</details>`;
+    }).join("")}</div>`).join("");
+  const capped = c.count > c.uses.length;
+  return `<div class="uses">${groups}</div>` + (capped
+    ? `<p class="note">Showing ${c.uses.length} of ${c.count.toLocaleString()} &mdash;
+       a sample, enough to go and look.</p>` : "");
+}
+
+/* ---- renders as ----------------------------------------------------------
+   Column headed rather than slash-packed: `10px / 700 / 16px ls:.3em uppercase`
+   reads as one string until you already know the order, and a row with two
+   renderings makes you parse it twice.
+
+   The optional four are columns only when something in this card sets them, so
+   a plain body style shows three columns rather than seven of mostly nothing.
+   An em dash is a property this rendering leaves alone -- inherited, not set
+   to the default, which is a difference the map's entries lean on. */
+const COLS = [
+  { k: "size",            h: "Size",     get: x => (x.size_unresolved ? "~" : "") + px(x.size) },
+  { k: "weight",          h: "Weight",   get: x => x.weight },
+  { k: "line_height",     h: "Leading",  get: x => x.line_height == null ? "—"
+                                                 : x.line_height === "normal" ? "normal"
+                                                 : px(x.line_height),
+    opt: true, set: x => x.line_height != null && x.line_height !== "normal" },
+  { k: "letter_spacing",  h: "Tracking", get: x => x.letter_spacing === "normal"
+                                                 ? "—" : x.letter_spacing,
+    opt: true, set: x => x.letter_spacing !== "normal" },
+  { k: "text_transform",  h: "Case",     get: x => x.text_transform === "none"
+                                                 ? "—" : x.text_transform,
+    opt: true, set: x => x.text_transform !== "none" },
+  { k: "style",           h: "Slant",    get: x => x.style === "normal" ? "—" : x.style,
+    opt: true, set: x => x.style !== "normal" },
+];
+
+/* One row per band, always all three -- the same reading the cards use, so the
+   two do not describe the same element in two different vocabularies.
+
+   Marked per cell rather than per row. A row that changes at all is rarely a
+   row where everything changed: the footer nav moves its size and its leading
+   on small and keeps its weight, and greying the row as a unit hides which of
+   the three was the decision. Each cell is compared with the same column in
+   the wider band -- `changed` where it differs, `carried` where it does not,
+   and plain at `large`, which is the base the others are corrections to. */
+function rendersTable(c){
+  const cols = COLS.filter(col => !col.opt || c.renders.some(col.set));
+  const bands = bandsOf(c);
+  const cell = (s, i, col) => {
+    if (!s.render) return { cls: "carried", txt: "—" };
+    const txt = col.get(s.render);
+    const wider = bands[i + 1];
+    if (!wider || !wider.render) return { cls: "", txt };
+    return { cls: txt === col.get(wider.render) ? "carried" : "changed", txt };
+  };
+  return `<table class="rt">
+    <thead><tr><th>Width</th>${
+      cols.map(col => `<th>${col.h}</th>`).join("")}</tr></thead>
+    <tbody>${bands.map((s, i) => {
+      const cells = cols.map(col => cell(s, i, col));
+      return `<tr><th scope="row" class="${
+        cells.every(x => x.cls === "carried") ? "carried" : ""}">${esc(s.name)}</th>${
+        cells.map(x => `<td class="${x.cls}">${esc(x.txt)}</td>`).join("")}</tr>`;
+    }).join("")}
+    </tbody></table>`;
+}
+
+function drawPanel(){
+  const host = document.getElementById("panel");
+  const c = CARDS.find(x => x.id === state.sel);
+  if (!c) { host.innerHTML = `<p class="empty">Pick a row.</p>`; return; }
+  const r = c.renders[0];
+  const entries = Object.keys(c.entries);
+  host.innerHTML = `
+    <h2>${esc(r.family)} ${px(r.size)} / ${esc(r.weight)}</h2>
+    <div class="tags">
+      ${tagBadges(c).map(b =>
+        `<span class="badge ${b.cls}">${esc(b.txt)}</span>`).join("")}
+      <span class="badge b-rid">${esc(rowId(c))}</span>
+      ${rendersSmallFirst(c).map(x => x.card
+        ? `<span class="badge b-cid">${esc(x.card)}${
+            c.renders.length > 1 ? " &middot; " + esc(x.label) : ""}</span>` : "").join("")}
+    </div>
+    ${entries.length > 1 ? `<p class="note">Two entries reach this row &mdash; it
+      renders one at some widths and the other where it is hidden.</p>` : ""}
+    ${entries.length ? "" : `
+      <div class="act">
+        <div class="act-head">
+          <h4>Where should this land?</h4>
+          ${TAGS[c.id]
+            ? `<button class="linkbtn" data-tag="">Clear</button>` : ""}
+        </div>
+        <p>No map entry decides this style. Tag the register it belongs in.</p>
+        <div class="radios" role="radiogroup" aria-label="Register">
+          ${REGISTERS.map(reg =>
+            `<button class="radio" role="radio" data-tag="${reg.key}"
+               aria-checked="${TAGS[c.id] === reg.key}">
+               <span class="dot"></span>
+               <span><b>${esc(reg.label)}</b><i>${esc(reg.blurb)}</i></span>
+             </button>`).join("")}
+        </div>
+      </div>`}
+
+    <div class="sec">
+      <h3>Renders as</h3>
+      ${rendersTable(c)}
+      ${c.renders.some(x => x.size_unresolved) ? `<p class="note">A
+        <code>calc()</code> or <code>var()</code> the audit cannot evaluate: the size
+        shown is the parent's, not this element's. Measure it in a browser before
+        acting on it.</p>` : ""}
+    </div>
+
+    <div class="sec">
+      <div class="sechead">
+        <h3>Where it lands &middot; ${c.page_count} page${c.page_count === 1 ? "" : "s"}</h3>
+        ${bandPicker(c)}
+      </div>
+      ${usesHtml(c)}
+    </div>`;
+  /* Clicking the chosen one again clears it, the way a radio in a form does
+     not but a single-choice toggle should. `Clear` carries the same empty
+     value, so both routes are one handler. */
+  host.querySelectorAll("[data-tag]").forEach(b =>
+    b.onclick = () => {
+      const next = b.dataset.tag === TAGS[c.id] ? "" : b.dataset.tag;
+      setTag(c.id, next);
+      draw();
+    });
+  host.querySelectorAll("[data-band]").forEach(b =>
+    b.onclick = () => { state.band = b.dataset.band; drawPanel(); });
+}
+
+/* ---- the url ------------------------------------------------------------
+   Filter, sort, grouping and the open row live in the hash, so a refresh lands
+   where you left off and a link carries the view with it -- `#filter=unmapped
+   &sort=size` is a sentence about what you were looking at.
+
+   Defaults are omitted rather than written out, so an untouched page keeps a
+   clean URL and only what you changed shows up.
+
+   `replaceState` rather than `push`: a filter is a view of one page, not a
+   place, and pushing would bury the way back under every chip you pressed. */
+const VALID = {
+  filter: ["all", "product", "expressive", "unmapped"],
+  sort: ["count", "size"],
+  group: ["none", "family"]
+};
+const DEFAULTS = { filter: "all", sort: "count", group: "none" };
+
+function readUrl(){
+  const p = new URLSearchParams(location.hash.replace(/^#/, ""));
+  Object.keys(VALID).forEach(function (k) {
+    const v = p.get(k);
+    if (VALID[k].indexOf(v) !== -1) state[k] = v;
+  });
+  const sel = p.get("sel");
+  /* A card id is derived from what it renders, so an id from an older run
+     stops matching rather than opening the wrong row. Falling back to the
+     first row is the same answer as arriving with no selection at all. */
+  state.sel = CARDS.some(function (c) { return c.id === sel; }) ? sel : null;
+}
+
+function writeUrl(){
+  const p = new URLSearchParams();
+  Object.keys(DEFAULTS).forEach(function (k) {
+    if (state[k] !== DEFAULTS[k]) p.set(k, state[k]);
+  });
+  if (state.sel) p.set("sel", state.sel);
+  const q = p.toString();
+  const url = location.pathname + location.search + (q ? "#" + q : "#");
+  try { history.replaceState(null, "", url); } catch (e) { location.hash = q; }
+}
+
+function draw(){ drawBar(); drawRows(); drawPanel(); writeUrl(); }
+
+drawTotals();
+readUrl();
+/* Open on the first row rather than on an empty panel. The panel is a third of
+   the page, and `Pick a row.` is a worse thing to put there than the row the
+   sort has just argued is the most worth looking at. */
+if (!state.sel) state.sel = (visible()[0] || {}).id || null;
+draw();
+
+/* ---- the splitter --------------------------------------------------------
+   The panel holds a table, a declaration list and a page-by-page occurrence
+   list, and how much room each of those wants depends on what you are reading
+   rather than on anything this file can decide. Width is a CSS variable on the
+   grid, so nothing re-renders while dragging.
+
+   Persisted per viewer, and every access is wrapped: a `file://` page shares
+   one storage origin with every other local page, and in a private window the
+   accessor throws rather than returning null. */
+const PANEL_W = "rb-type-inventory-panel-w";
+const cols = document.querySelector(".cols");
+const grip = document.getElementById("grip");
+const MIN_W = 320;
+const clampW = w => Math.max(MIN_W, Math.min(w, Math.round(window.innerWidth * 0.6)));
+const curW = () =>
+  parseInt(getComputedStyle(cols).getPropertyValue("--panel-w"), 10) || 430;
+const setW = w => cols.style.setProperty("--panel-w", clampW(w) + "px");
+
+try {
+  const saved = parseInt(localStorage.getItem(PANEL_W), 10);
+  if (saved) setW(saved);
+} catch (e) {}
+
+function remember(){
+  try { localStorage.setItem(PANEL_W, String(curW())); } catch (e) {}
+}
+
+let dragging = false;
+grip.addEventListener("pointerdown", e => {
+  dragging = true;
+  grip.setPointerCapture(e.pointerId);
+  document.body.classList.add("resizing");
+  e.preventDefault();
+});
+grip.addEventListener("pointermove", e => {
+  if (dragging) setW(cols.getBoundingClientRect().right - e.clientX);
+});
+grip.addEventListener("pointerup", e => {
+  if (!dragging) return;
+  dragging = false;
+  grip.releasePointerCapture(e.pointerId);
+  document.body.classList.remove("resizing");
+  remember();
+});
+/* Left grows the panel, because that is the direction the handle moves. */
+grip.addEventListener("keydown", e => {
+  const step = e.shiftKey ? 48 : 16;
+  if (e.key === "ArrowLeft")  { setW(curW() + step); remember(); e.preventDefault(); }
+  if (e.key === "ArrowRight") { setW(curW() - step); remember(); e.preventDefault(); }
+});
+grip.addEventListener("dblclick", () => {
+  cols.style.removeProperty("--panel-w");
+  try { localStorage.removeItem(PANEL_W); } catch (e) {}
+});
+/* A width that was fine in a wide window can swallow the list in a narrow one,
+   so the clamp is re-applied rather than only enforced while dragging. */
+addEventListener("resize", () => {
+  if (cols.style.getPropertyValue("--panel-w")) setW(curW());
+});
+</script>

@@ -24,15 +24,9 @@
     margin-top: 4em;
     margin-bottom: 1rem;
     h2{
-      font-size: 3.5em;
-      font-weight: $lato-black;
-      font-family: $lato;
+      @include type-style(product, section-title-lg);
       @include breakpoint(small only) {
-        line-height: 1em;
         padding: 0;
-      }
-      @include breakpoint(medium down) {
-        line-height: 1em;
       }
     }
     .divider{
@@ -43,15 +37,10 @@
       margin-left: 1rem;
       @include breakpoint(small only) {
         margin-left: 0;
+        height: 0.3rem;
       }
     }
   }
-  // ////////////////////////////////////////////////////////
-  // ////////////////////////////////////////////////////////
-  // some speaking events related styling lives in about.scss
-  // ////////////////////////////////////////////////////////
-  // ////////////////////////////////////////////////////////
-  
   .speaking-events{
     margin-top: 0;
     .speaking-item{
@@ -65,8 +54,8 @@
   }
   .speaking-item-hero{
     border-radius: $tile-radius-medium;
-    background-color: aquamarine;
-    box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(45deg, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%);
+    box-shadow: inset 0 0 0 3px rgba($pure-black, 0.05);
     overflow: hidden;
     margin-block: 2em;
     // in the case there are multiple heroes next to one another then reduce the space between then
@@ -95,6 +84,26 @@
         }
       }
     }
+    // Same link treatment as the list items below.
+    a{
+      color: semantic-color(text);
+      h3{
+        @include swipe-underline(semantic-color(text-bg),false);
+      }
+      .fa-link{
+        margin-left: 0.5rem;
+        font-size: .7em;
+        transition: transform .3s;
+      }
+      &:hover{
+        h3{
+          @include swipe-underline-hover(false);
+        }
+        .fa-link{
+          transform: rotate(360deg);
+        }
+      }
+    }
     &#ux-summit-2024{
       background: linear-gradient(180deg, rgba(121,0,255,0.1) 0%, rgba(255,0,141,0.1) 100%),
       radial-gradient(circle at 25% 100%, rgba(255, 249, 0, 0.1) 0%, rgba(255, 249, 0, 0) 100%),
@@ -109,24 +118,6 @@
           width: 8em;
         }
       }
-      a{
-        color: semantic-color(text);
-        // TODO generalize this hover jazz to all hero cards
-        &:hover{
-          h3{
-            @include swipe-underline-hover(false);
-          }
-          .fa-link{
-            transform: rotate(360deg);
-          }
-        }
-        .fa-link{
-          transition: transform .3s;
-        }
-        h3{
-          @include swipe-underline(semantic-color(text-bg),false);
-        }
-      }
     }
     &#design-summit-2025{
       background: linear-gradient(180deg, rgba(121,0,255,0.1) 0%, rgba(255,0,141,0.1) 100%),
@@ -138,7 +129,7 @@
       img{
         height: 13em;
         border-radius: $tile-radius-medium;
-        box-shadow: 0px 0px 30px 5px rgba(0,0,0,0.2);
+        box-shadow: $glow-shadow semantic-color(shadow-soft);
         transition: $run;
         &.top-square-img{
           rotate: -5deg;
@@ -192,12 +183,9 @@
         text-wrap: pretty;
       }
       h3{
-        font-family: $lato;
-        font-size: 1.5em;
-        font-weight: $lato-black;
+        @include type-style(product, talk-title);
         padding: 0;
         margin-bottom: 0;
-        line-height: 1.2;
       }
       p{
         padding: 0;
@@ -205,16 +193,10 @@
         margin-top: -0.25em;
       }
       .date{
-        font-family: $lato;
-        font-size: 1em;
-        font-weight: 300;
-        font-style: italic;
+        @include type-style(product, item-date);
       }
       .description{
-        font-family: $lato;
-        font-size: 1em;
-        font-weight: $lato-regular;
-        line-height: 1.2em;
+        @include type-style(product, item-detail);
         text-wrap: pretty;
       }
     }
@@ -261,4 +243,139 @@
       }
     }
   }
+}
+
+// ---------------------------------------------------------------------------
+// The event list. These rules lived in about.scss, where nothing on the about
+// page ever matched them -- every `.speaking-item` on the site is on this page.
+// They stay outside `.speaking-page` above so the compiled selectors are the
+// ones they always were: scoping them here would add a class to every one and
+// change which ties they win.
+// ---------------------------------------------------------------------------
+.speaking-item{
+  a{
+    color: inherit;
+    h3{
+      @include swipe-underline(semantic-color(text-bg),false);
+    }
+    // Same size and spacing as the resource cards' link icon.
+    .fa-link{
+      margin-left: 0.5rem;
+      font-size: .7em;
+      transition: transform .3s;
+    }
+    &:hover{
+      .date, .description, h3{
+        transition: $run;
+      }
+      h3{
+        @include swipe-underline-hover(false);
+      }
+      .fa-link{
+        transform: rotate(360deg);
+      }
+    }
+  }
+}
+
+.future-event{
+  h3{
+    display: inline;
+  }
+  span{
+    color: $pure-white;
+    background-color: $signature-teal;
+    border-radius: $pill-radius;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7em;
+    font-weight: $lato-black;
+    margin-left: 0.5rem;
+    display: inline-block;
+    vertical-align: bottom;
+  }
+}
+
+// `.speaking-events` is the only one of the five section wrappers this ever
+// matched under; the other four are about-page sections.
+.speaking-events{
+  // A talk title is what was done, so it sits at the same rank as a work
+  // item's role -- which its markup spells h4 and this one spells h3.
+  .speaking-item{
+    h3{
+      @include type-style(product, item-title);
+      padding: 0;
+      margin-bottom: 0;
+    }
+  }
+
+// Speaking events keep the original faded watermark in the left gutter
+.speaking-item{
+  .brand-logo-container{
+    position: absolute;
+    opacity: 0.2;
+    margin-left: -4em;
+    transition: $run;
+    padding-top: 0.5em;
+    @include breakpoint(small only) {
+      display: none;
+    }
+    &#disney-animation{
+      margin-left: -11.5rem;
+      img{
+        height: 6em;
+      }
+    }
+    &#duquesne{
+      margin-left: -11.5em;
+      img{
+        height: 2.5em;
+      }
+    }
+    &#upmc{
+      margin-left: -15.5em;
+    }
+    &#processly{
+      margin-left: -4.2em;
+      img{
+        height: 3.3em;
+      }
+    }
+    &#dio{
+      margin-left: -5.6em;
+    }
+    &#cr{
+      margin-left: -6em;
+    }
+    &#ucla{
+      margin-left: -10.5em;
+    }
+    &#ces{
+      margin-left: -6.5em;
+    }
+    &#new-school{
+      margin-left: -6.5em;
+    }
+    &#ux-summit{
+      margin-left: -7em;
+      img{
+        height: 5em;
+      }
+    }
+    &#aia{
+      margin-left: -4em;
+    }
+    &#cmu{
+      margin-left: -6em;
+    }
+    &#nus{
+      margin-left: -8em;
+    }
+    &#yinzcam{
+      margin-left: -12em;
+    }
+  }
+  &:hover .brand-logo-container{
+    opacity: 1;
+  }
+}
 }

@@ -3,10 +3,10 @@
   .nav-container{
     background-color: {{page.hero-background-color}};
   }
-  .nav, .nav:hover{
+  .nav, .nav:hover, .nav:focus{
     color: {{page.hero-accent-color}};
   }
-  .nav:hover{
+  .nav:hover, .nav:focus{
     background-color: {{page.hero-accent-color | strip | append: "33"}};
   }
   .logo #rehan-logo-header g{
@@ -17,20 +17,38 @@
     background: {{page.hero-accent-color}};
   }
 
-  .menu-links a{
+  {% comment %}Selector repeated from _sass/header.scss at (0,3,0): a bare
+  `.burger-icon:focus-visible` would lose to it and leave the keyboard focus
+  ring white on a white hero. Pages that set no accent emit an empty value,
+  which is invalid and falls back to the white the stylesheet already has —
+  correct against the default teal bar.{% endcomment %}
+  .menu-container .burger-icon:focus-visible{
+    outline-color: {{page.hero-accent-color}};
+  }
+
+  {% comment %}States repeated to match _sass/header.scss: `.menu-links
+  a:visited` is (0,2,1) and would otherwise outrank a bare `.menu-links a`,
+  leaving already-visited links white instead of the accent.{% endcomment %}
+  .menu-links a,
+  .menu-links a:visited,
+  .menu-links a:active,
+  .menu-links a:focus,
+  .menu-links a:hover,
+  .menu-links a:visited:hover{
     color: {{page.hero-accent-color}};
   }
-  .menu-links a:hover{
+  .menu-links a:hover,
+  .menu-links a:visited:hover{
     background-color: {{page.hero-accent-color | strip | append: "33"}};
   }
   @media (prefers-color-scheme: dark) {
     .nav-container{
       background-color: {{page.hero-background-color-dark}};
     }
-    .nav, .nav:hover{
+    .nav, .nav:hover, .nav:focus{
       color: {{page.hero-accent-color-dark}};
     }
-    .nav:hover{
+    .nav:hover, .nav:focus{
       background-color: {{page.hero-accent-color-dark | strip | append: "33"}};
     }
     .logo #rehan-logo-header g{
@@ -41,10 +59,20 @@
       background: {{page.hero-accent-color-dark}};
     }
 
-    .menu-links a{
+    .menu-container .burger-icon:focus-visible{
+      outline-color: {{page.hero-accent-color-dark}};
+    }
+
+    .menu-links a,
+    .menu-links a:visited,
+    .menu-links a:active,
+    .menu-links a:focus,
+    .menu-links a:hover,
+    .menu-links a:visited:hover{
       color: {{page.hero-accent-color-dark}};
     }
-    .menu-links a:hover{
+    .menu-links a:hover,
+    .menu-links a:visited:hover{
       background-color: {{page.hero-accent-color-dark | strip | append: "33"}};
     }
 
@@ -56,22 +84,53 @@
 {% endif %}
   <nav class="nav-container">
     <div class="site-nav grid-x grid-container">
-      <div class="menu-container grid-x cell align-justify">
-        {% assign header_items = site.pages | where: "header-visibility", "show" | sort: "header-sort-order" %}
+      {% assign header_items = site.pages | where: "header-visibility", "show" | sort: "header-sort-order" %}
+      {% assign nav_items = header_items | where_exp: "item", "item.title" %}
+      {% comment %}`--nav-count` lives here rather than on .burger-container
+      because the expanding list is a sibling of it, not a child.{% endcomment %}
+      <div class="menu-container grid-x cell align-justify" style="--nav-count: {{ nav_items | size }}">
         <div class="burger-container">
-          <input class="burger-btn" type="checkbox" id="burger-btn"/>
-          <label class="burger-icon" for="burger-btn">
+          {% comment %}`aria-controls` names the list that actually expands,
+          since the popover below is an empty state machine and the relationship
+          `popovertarget` sets up points at nothing useful. `aria-expanded` is
+          deliberately NOT stated here — app.js adds it. An explicit one in the
+          markup would outrank the browser's own expanded state, so if app.js
+          ever fails to load it would sit on "false" while the menu is open.
+          {% endcomment %}
+          <button type="button" class="burger-icon" popovertarget="mobile-menu-state" aria-controls="menu-links" aria-label="Menu">
             <span class="nav-burger-icon"></span>
-          </label>
+          </button>
+          {% comment %}Empty by design. Keeping the menu out of the popover
+          leaves the list in normal flow, so it still pushes the page down,
+          while `popovertarget` supplies the button semantics the checkbox it
+          replaces never had. Manual, not auto: auto's light-dismiss treats a tap
+          on a menu link as outside the popover and collapses the menu before
+          the click, which iOS then drops. app.js handles Esc and outside taps.
+          {% endcomment %}
+          <div id="mobile-menu-state" popover="manual"></div>
           <div class="mobile-navbar">
-            <a class="nav" href="/portfolio" {% if page.url contains '/portfolio' %}aria-current="page"{% endif %}>Portfolio</a>
-            <a class="nav" href="/about" {% if page.url contains '/about' %}aria-current="page"{% endif %}>About</a>
+          {% comment %}`mobile-shortcut` is the position, not a flag, so this
+          row orders itself. Sorting on `header-sort-order` instead would tie
+          it to the full menu below, where these two sit apart and in the
+          other order.{% endcomment %}
+          {% assign shortcut_items = header_items | where_exp: "item", "item.mobile-shortcut" | sort: "mobile-shortcut" %}
+          {% for my_page in shortcut_items %}
+            <a class="nav" href="{{ my_page.url | prepend: site.baseurl }}" {% if page.url contains my_page.url %}aria-current="page"{% endif %}>{{ my_page.title }}</a>
+          {% endfor %}
           </div>
-          <ul class="menu-links">
-          {% for my_page in header_items %}
-            {% if my_page.title %}
-              <li class="nav-item-container"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}" {% if page.url == my_page.url %}aria-current="page"{% endif %}>{{ my_page.title }}</a></li>
-            {% endif %}
+        </div>
+
+        {% comment %}A sibling of .burger-container, not a child: inside it,
+        opening the menu grew the flex item the logo aligns against and
+        dragged the logo down the page with it. On its own flex line the list
+        still sits in normal flow and still pushes the page down, but the row
+        above it keeps the height of the burger alone. The wrapper is the grid
+        whose single row animates from 0fr to 1fr; the list is its only item.
+        {% endcomment %}
+        <div class="menu-links-wrap">
+          <ul class="menu-links" id="menu-links">
+          {% for my_page in nav_items %}
+            <li class="nav-item-container" style="--i: {{ forloop.index0 }}"><a class="nav" href="{{ my_page.url | prepend: site.baseurl }}" {% if page.url == my_page.url %}aria-current="page"{% endif %}>{{ my_page.title }}</a></li>
           {% endfor %}
           </ul>
         </div>

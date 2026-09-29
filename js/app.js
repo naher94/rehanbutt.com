@@ -140,28 +140,89 @@ function dayNames() {
   return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 }
 
-// TODO: Very simple and needs to be reworked
-// Doesn't handle holidays that are the "third Thursday of every November" type
+// Every greeting, in one place. How to add one: README → Holiday Greetings.
+// When two land on the same day, the one higher in the list shows.
 function holidays() {
-  return {
-    "1:1": "Happy New Year!",
-		"1:19": "Happy National Popcorn Day! 🍿",
-		"2:17": "Happy Lunar New Year!",
-		"2:14": "Happy Valentine's Day ❤️",
-		"2:15": "Happy National Hippo Day 🦛",
-    "2:23": "Happy 'Day I Wrote This Code' Day!",
-    "2:29": "Happy Leap Day!",
-		"4:13": "Happy Songkran! 🇹🇭",
-		"5:4": "May the 4th be with you!",
-		"7:14": "Happy World Orca Day!",
-		"7:22": "Happy Mango Day! 🥭",
-		"8:18": "Happy World Photography Day! 📷",
-		"10:31": "Happy Halloween! 🎃",
-		"11:26": "Happy Thanksgiving! 🦃",
-		"12:4": "Happy Hanukkah!",
-    "12:25": "Merry Christmas! 🎄",
-		"12:26": "Happy Kwanzaa!"
-  }
+  return [
+    { on: onDate(1, 1), text: "Happy New Year!" },
+    { on: onDate(1, 19), text: "Happy National Popcorn Day! 🍿" },
+    { on: onDate(2, 14), text: "Happy Valentine's Day! ❤️" },
+    { on: onDate(2, 15), text: "Happy National Hippo Day! 🦛" },
+    { on: lunarNewYear, text: "Happy Lunar New Year!" },
+    { on: onDate(2, 29), text: "Happy Leap Day!" },
+    { on: onDate(4, 13), text: "Happy Songkran! 🇹🇭" },
+    { on: onDate(5, 4), text: "May the 4th be with you!" },
+    // 6/26, after Experiment 626.
+    { on: onDate(6, 26), text: "Happy Stitch Day! 💙" },
+    { on: onDate(7, 14), text: "Happy World Orca Day!" },
+    { on: nthWeekday(3, 0, 7), text: "Happy National Ice Cream Day! 🍦" },
+    { on: onDate(7, 22), text: "Happy Mango Day! 🥭" },
+    { on: onDate(8, 18), text: "Happy World Photography Day! 📷" },
+    { on: onDate(10, 31), text: "Happy Halloween! 🎃" },
+    { on: nthWeekday(2, 4, 11), text: "Happy World Usability Day!" },
+    { on: nthWeekday(4, 4, 11), text: "Happy Thanksgiving! 🦃" },
+    // Above Hanukkah so it wins when the first candle falls on Dec 25 (2024).
+    { on: onDate(12, 25), text: "Merry Christmas! 🎄" },
+    // The evening before 25 Kislev, when the first candle is lit.
+    { on: hebrewDate("Kislev", 25, -1), text: "Happy Hanukkah!" },
+    { on: onDate(12, 26), text: "Happy Kwanzaa!" }
+  ];
+}
+
+// Each rule below returns a check: given a date, is the holiday on that day?
+
+// The same month and day every year. Feb 29 only matches in leap years.
+function onDate(month, day) {
+  return function (date) {
+    return date.getMonth() + 1 === month && date.getDate() === day;
+  };
+}
+
+// The nth `weekday` (0 = Sunday) of `month`, e.g. nthWeekday(4, 4, 11) is the
+// fourth Thursday of November.
+function nthWeekday(n, weekday, month) {
+  return function (date) {
+    return date.getMonth() + 1 === month && date.getDay() === weekday &&
+      Math.ceil(date.getDate() / 7) === n;
+  };
+}
+
+// A day in the Hebrew calendar, shifted by `offset` days. Month names are
+// Intl's English ones ("Tishri", "Kislev", "Nisan"...). Leap years have no
+// plain "Adar", so "Adar" means Adar II there, where Purim is kept.
+function hebrewDate(monthName, day, offset) {
+  return function (date) {
+    const shifted = new Date(date.getFullYear(), date.getMonth(), date.getDate() - (offset || 0));
+    const parts = calendarParts(shifted, "hebrew", "long");
+    return parts !== null && parts.day === String(day) &&
+      (parts.month === monthName || (monthName === "Adar" && parts.month === "Adar II"));
+  };
+}
+
+// Listed, not computed: Intl's Chinese calendar is a day off in 2027 and
+// 2030, when the new moon falls within minutes of midnight in Beijing.
+// Past the table it falls back to Intl, which matches HKO through 2100.
+function lunarNewYear(date) {
+  const known = {
+    2026: [2, 17], 2027: [2, 6], 2028: [1, 26], 2029: [2, 13], 2030: [2, 3],
+    2031: [1, 23], 2032: [2, 11], 2033: [1, 31], 2034: [2, 19], 2035: [2, 8],
+    2036: [1, 28], 2037: [2, 15], 2038: [2, 4], 2039: [1, 24], 2040: [2, 12],
+    2041: [2, 1], 2042: [1, 22], 2043: [2, 10], 2044: [1, 30], 2045: [2, 17],
+    2046: [2, 6], 2047: [1, 26], 2048: [2, 14], 2049: [2, 2], 2050: [1, 23]
+  }[date.getFullYear()];
+  if (known) { return onDate(known[0], known[1])(date); }
+  const parts = calendarParts(date, "chinese", "numeric");
+  return parts !== null && parts.month === "1" && parts.day === "1";
+}
+
+// `date`'s month and day in another calendar, or null when the browser lacks
+// it: Intl falls back to Gregorian rather than throwing.
+function calendarParts(date, calendar, monthStyle) {
+  const format = new Intl.DateTimeFormat("en-u-ca-" + calendar, { month: monthStyle, day: "numeric" });
+  if (format.resolvedOptions().calendar !== calendar) { return null; }
+  const parts = {};
+  format.formatToParts(date).forEach(function (p) { parts[p.type] = p.value; });
+  return parts;
 }
 
 // Returns current date object
@@ -198,21 +259,32 @@ function millisecondsToNextDay() {
 
 // Returns the holiday (if any) exists for today's date
 function getHolidayString() {
-  return holidays()[`${getMonth()}:${getDate()}`];
+  const date = currentDate();
+  const today = holidays().find(function (holiday) { return holiday.on(date); });
+  return today ? today.text : undefined;
 }
+
+// Saved at load so footer.html stays the only place the wording lives. A
+// holiday replaces the #data-day span; restoring this brings it back.
+const daySentence = document.getElementById("day-sentance");
+const defaultDaySentence = daySentence.innerHTML;
+let nextDayTimer;
 
 // Updates happy day string based on a variety of parameters
 function getHappyDayString() {
   let holidayString = getHolidayString();
-  
+
   if (holidayString != undefined) {
-    document.getElementById("day-sentance").innerHTML = holidayString;
+    daySentence.innerHTML = holidayString;
   } else {
+    daySentence.innerHTML = defaultDaySentence;
     document.getElementById("data-day").innerHTML = getDayName();
   }
   
-  // Resubmit timeout for live date change
-  setTimeout(getHappyDayString, millisecondsToNextDay());
+  // Resubmit timeout for live date change. Cleared first so previews from
+  // the console (README → Holiday Greetings) don't stack timers.
+  clearTimeout(nextDayTimer);
+  nextDayTimer = setTimeout(getHappyDayString, millisecondsToNextDay());
 }
 
 getHappyDayString();
@@ -250,3 +322,54 @@ function copyToClipboard(link,clickedItem) {
   return Promise.reject('The Clipboard API is not available.');
 }
 ///////////////////////////////////////////// End of Copy to Clipboard
+
+///////////////////////////////////////////// Start of Mobile Menu
+// The popover is an empty state machine, so the relationship `popovertarget`
+// wires up points at a div with nothing in it. `aria-controls` in the markup
+// names the list that actually expands; `aria-expanded` is kept in step here.
+function mobileMenu() {
+  const state = document.getElementById("mobile-menu-state");
+  const button = document.querySelector("[popovertarget='mobile-menu-state']");
+  const links = document.getElementById("menu-links");
+  if (!state || !button) { return; }
+
+  // Stated from here rather than the markup: an explicit aria-expanded outranks
+  // the browser's own, so hardcoding one would leave it lying if this never ran.
+  button.setAttribute("aria-expanded", "false");
+
+  // The popover is manual (see header.html), so Esc and outside taps are ours.
+  // Taps inside .menu-container are left alone so the links can navigate.
+  const container = button.closest(".menu-container");
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && state.matches(":popover-open")) {
+      state.hidePopover();
+      button.focus();
+    }
+  });
+  document.addEventListener("click", function (event) {
+    if (state.matches(":popover-open") && container && !container.contains(event.target)) {
+      state.hidePopover();
+    }
+  });
+
+  state.addEventListener("toggle", function (event) {
+    const isOpen = event.newState === "open";
+    button.setAttribute("aria-expanded", isOpen);
+    // The links sit outside the popover, so the browser won't hand focus back
+    // the way it would for content the popover actually holds.
+    if (!isOpen && links && links.contains(document.activeElement)) {
+      button.focus();
+    }
+    // Open only: the useful number is how often the menu gets reached for,
+    // which is what says whether the shortcut links are doing their job.
+    if (isOpen) {
+      gtag('event', 'Menu Open', {
+        'event_category': 'Header',
+        'event_label': 'Mobile Menu'
+      });
+    }
+  });
+}
+
+mobileMenu();
+///////////////////////////////////////////// End of Mobile Menu
