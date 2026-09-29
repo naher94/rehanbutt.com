@@ -474,7 +474,8 @@
       // Only where the reveal itself animates is it worth easing the gap above
       // the description, so the space and the text grow together. Without both
       // features the content pops open instantly and a lone easing gap lags it.
-      @supports selector(::details-content) and (interpolate-size: allow-keywords){
+      // Interpolated because Pages' Ruby Sass can't parse selector() in @supports.
+      @supports #{"selector(::details-content) and (interpolate-size: allow-keywords)"}{
         transition:
           background-color $run-duration $run-easing,
           box-shadow $run-duration $run-easing,
