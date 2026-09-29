@@ -399,7 +399,7 @@
     if (groupBy === 'file') rows.splice(2, 0, [fileCount, 'files']);
     Object.keys(byOrigin).sort().forEach(o => rows.push([byOrigin[o], o]));
     document.getElementById('totals').innerHTML = rows.map(([n, l]) =>
-      `<div class="tot"><b>${n}</b><span>${esc(l)}</span></div>`).join('');
+      `<div class="tot"><b>${esc(n)}</b><span>${esc(l)}</span></div>`).join('');
 
   }
 
@@ -554,7 +554,7 @@
     const cat = catOf(d);
     const o = CATEGORY[cat] || {label:cat, def:''};
     const tags = [
-      `<span class="tag ${cat === 'authored' ? '' : cat}">${esc(o.label)}</span>`,
+      `<span class="tag ${cat === 'authored' ? '' : esc(cat)}">${esc(o.label)}</span>`,
       `<span class="tag">${d.kind === 'gradient' ? 'gradient' : 'solid'}</span>`,
       `<span class="tag">${esc(d.family)}</span>`
     ];
@@ -567,14 +567,14 @@
       ? [...d.source].sort((a, b) => (b.file === here) - (a.file === here))
       : d.source;
 
-    let pairs = `<dt>uses</dt><dd>${d.count}${d._file ? ` · ${d._fileCount} in this file` : ''}</dd>`;
+    let pairs = `<dt>uses</dt><dd>${esc(d.count)}${d._file ? ` · ${esc(d._fileCount)} in this file` : ''}</dd>`;
     if (d._file) pairs += `<dt>file</dt><dd>${esc(d._file)}</dd>`;
     if (d.kind === 'token'){
       pairs += `<dt>light</dt><dd>${esc(d.light)}</dd><dt>dark</dt><dd>${esc(d.dark)}</dd>`;
     } else if (d.kind === 'gradient'){
       pairs += `<dt>stops</dt><dd>${d.stops.length}</dd>`;
       pairs += `<dt>packs in</dt><dd>${esc(d.family)}${d.anchor ? ', by its most saturated stop ' + esc(d.anchor) : ''}</dd>`;
-      if (d.unresolved) pairs += `<dt>varies</dt><dd>${d.unresolved} mixin parameter${d.unresolved===1?'':'s'}</dd>`;
+      if (d.unresolved) pairs += `<dt>varies</dt><dd>${esc(d.unresolved)} mixin parameter${d.unresolved===1?'':'s'}</dd>`;
     } else {
       pairs += `<dt>value</dt><dd>${esc(d.display)}</dd>`;
     }
@@ -602,7 +602,7 @@
       <h4>${view === 'authored' ? 'Authored in source' : 'Traced to source'} (${d.source.length})${
         here ? ` · ${hereCount} in ${esc(shortFile(here))}` : ''}</h4>
       ${usesList(srcList, s => `<div class="use${s.file === here ? ' here' : ''}">
-          <span class="loc">${esc(s.file)}:${s.line}</span>
+          <span class="loc">${esc(s.file)}:${esc(s.line)}</span>
           <span class="decl">${esc(s.decl)}</span></div>`)}
       <h4>Rendered selectors (${d.selectors.length})</h4>
       ${usesList(d.selectors, s => `<div class="use">
@@ -633,7 +633,7 @@
     const t = DATA.totals;
     const nc = (DATA.non_colour_tokens||[]).map(n=>`--color-${n}`).join(', ');
     document.getElementById('footer').innerHTML =
-      `Static snapshot from ${t.source_files} source files and ${t.css_bytes.toLocaleString()} bytes of compiled CSS. ` +
+      `Static snapshot from ${esc(t.source_files)} source files and ${esc(t.css_bytes.toLocaleString())} bytes of compiled CSS. ` +
       `Regenerate with <code>python3 _tools/color-audit.py</code>, then republish. ` +
       (nc ? `Excluded: ${esc(nc)} — theme-varying tokens that hold filters, not colors.` : '');
   }
