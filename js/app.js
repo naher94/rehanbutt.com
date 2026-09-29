@@ -149,7 +149,6 @@ function holidays() {
     { on: onDate(2, 14), text: "Happy Valentine's Day ❤️" },
     { on: onDate(2, 15), text: "Happy National Hippo Day 🦛" },
     { on: lunarNewYear, text: "Happy Lunar New Year!" },
-    { on: onDate(2, 23), text: "Happy 'Day I Wrote This Code' Day!" },
     { on: onDate(2, 29), text: "Happy Leap Day!" },
     { on: onDate(4, 13), text: "Happy Songkran! 🇹🇭" },
     { on: onDate(5, 4), text: "May the 4th be with you!" },
