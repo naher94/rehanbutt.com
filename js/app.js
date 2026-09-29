@@ -165,21 +165,21 @@ function holidays() {
   ];
 }
 
-// The same month and day every year. Null when the year doesn't have it, or
-// Feb 29 would roll over and greet Leap Day on Mar 1.
+// Each rule below returns a check: given a date, is the holiday on that day?
+
+// The same month and day every year. Feb 29 only matches in leap years.
 function onDate(month, day) {
-  return function (year) {
-    const date = new Date(year, month - 1, day);
-    return date.getMonth() === month - 1 ? date : null;
+  return function (date) {
+    return date.getMonth() + 1 === month && date.getDate() === day;
   };
 }
 
 // The nth `weekday` (0 = Sunday) of `month`, e.g. nthWeekday(4, 4, 11) is the
 // fourth Thursday of November.
 function nthWeekday(n, weekday, month) {
-  return function (year) {
-    const first = 1 + (weekday - new Date(year, month - 1, 1).getDay() + 7) % 7;
-    return new Date(year, month - 1, first + (n - 1) * 7);
+  return function (date) {
+    return date.getMonth() + 1 === month && date.getDay() === weekday &&
+      Math.ceil(date.getDate() / 7) === n;
   };
 }
 
@@ -187,41 +187,38 @@ function nthWeekday(n, weekday, month) {
 // Intl's English ones ("Tishri", "Kislev", "Nisan"...). Leap years have no
 // plain "Adar", so "Adar" means Adar II there, where Purim is kept.
 function hebrewDate(monthName, day, offset) {
-  return function (year) {
-    const date = findCalendarDate(year, "hebrew", monthName, day) ||
-      (monthName === "Adar" ? findCalendarDate(year, "hebrew", "Adar II", day) : null);
-    if (date) { date.setDate(date.getDate() + (offset || 0)); }
-    return date;
+  return function (date) {
+    const shifted = new Date(date.getFullYear(), date.getMonth(), date.getDate() - (offset || 0));
+    const parts = calendarParts(shifted, "hebrew", "long");
+    return parts !== null && parts.day === String(day) &&
+      (parts.month === monthName || (monthName === "Adar" && parts.month === "Adar II"));
   };
 }
 
-// Listed, not computed: Intl's Chinese calendar is a day late in 2027 and
+// Listed, not computed: Intl's Chinese calendar is a day off in 2027 and
 // 2030, when the new moon falls within minutes of midnight in Beijing.
 // Past the table it falls back to Intl, which matches HKO through 2100.
-function lunarNewYear(year) {
+function lunarNewYear(date) {
   const known = {
     2026: [2, 17], 2027: [2, 6], 2028: [1, 26], 2029: [2, 13], 2030: [2, 3],
     2031: [1, 23], 2032: [2, 11], 2033: [1, 31], 2034: [2, 19], 2035: [2, 8],
     2036: [1, 28], 2037: [2, 15], 2038: [2, 4], 2039: [1, 24], 2040: [2, 12],
     2041: [2, 1], 2042: [1, 22], 2043: [2, 10], 2044: [1, 30], 2045: [2, 17],
     2046: [2, 6], 2047: [1, 26], 2048: [2, 14], 2049: [2, 2], 2050: [1, 23]
-  }[year];
-  return known ? new Date(year, known[0] - 1, known[1]) : findCalendarDate(year, "chinese", 1, 1);
+  }[date.getFullYear()];
+  if (known) { return onDate(known[0], known[1])(date); }
+  const parts = calendarParts(date, "chinese", "numeric");
+  return parts !== null && parts.month === "1" && parts.day === "1";
 }
 
-// The date in `year` whose `calendar` month and day match, or null. Also null
-// when the browser lacks the calendar: Intl falls back to Gregorian rather
-// than throwing. Numeric months are compared as numbers, named ones by name.
-function findCalendarDate(year, calendar, month, day) {
-  const format = new Intl.DateTimeFormat("en-u-ca-" + calendar, { month: typeof month === "number" ? "numeric" : "long", day: "numeric" });
+// `date`'s month and day in another calendar, or null when the browser lacks
+// it: Intl falls back to Gregorian rather than throwing.
+function calendarParts(date, calendar, monthStyle) {
+  const format = new Intl.DateTimeFormat("en-u-ca-" + calendar, { month: monthStyle, day: "numeric" });
   if (format.resolvedOptions().calendar !== calendar) { return null; }
-  // Noon, so a DST change can't push the date across midnight.
-  for (let d = new Date(year, 0, 1, 12); d.getFullYear() === year; d.setDate(d.getDate() + 1)) {
-    const parts = {};
-    format.formatToParts(d).forEach(function (p) { parts[p.type] = p.value; });
-    if (parts.month === String(month) && parts.day === String(day)) { return new Date(year, d.getMonth(), d.getDate()); }
-  }
-  return null;
+  const parts = {};
+  format.formatToParts(date).forEach(function (p) { parts[p.type] = p.value; });
+  return parts;
 }
 
 // Returns current date object
@@ -258,11 +255,8 @@ function millisecondsToNextDay() {
 
 // Returns the holiday (if any) exists for today's date
 function getHolidayString() {
-  const year = currentDate().getFullYear();
-  const today = holidays().find(function (holiday) {
-    const date = holiday.on(year);
-    return date && date.getMonth() + 1 === getMonth() && date.getDate() === getDate();
-  });
+  const date = currentDate();
+  const today = holidays().find(function (holiday) { return holiday.on(date); });
   return today ? today.text : undefined;
 }
 
