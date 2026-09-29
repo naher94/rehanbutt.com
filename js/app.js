@@ -161,9 +161,10 @@ function holidays() {
     { on: onDate(10, 31), text: "Happy Halloween! 🎃" },
     { on: nthWeekday(2, 4, 11), text: "Happy World Usability Day!" },
     { on: nthWeekday(4, 4, 11), text: "Happy Thanksgiving! 🦃" },
+    // Above Hanukkah so it wins when the first candle falls on Dec 25 (2024).
+    { on: onDate(12, 25), text: "Merry Christmas! 🎄" },
     // The evening before 25 Kislev, when the first candle is lit.
     { on: hebrewDate("Kislev", 25, -1), text: "Happy Hanukkah!" },
-    { on: onDate(12, 25), text: "Merry Christmas! 🎄" },
     { on: onDate(12, 26), text: "Happy Kwanzaa!" }
   ];
 }
