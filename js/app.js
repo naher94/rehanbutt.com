@@ -159,6 +159,7 @@ function holidays() {
     { on: onDate(7, 22), text: "Happy Mango Day! 🥭" },
     { on: onDate(8, 18), text: "Happy World Photography Day! 📷" },
     { on: onDate(10, 31), text: "Happy Halloween! 🎃" },
+    { on: nthWeekday(2, 4, 11), text: "Happy World Usability Day!" },
     { on: nthWeekday(4, 4, 11), text: "Happy Thanksgiving! 🦃" },
     // The evening before 25 Kislev, when the first candle is lit.
     { on: hebrewDate("Kislev", 25, -1), text: "Happy Hanukkah!" },
