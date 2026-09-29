@@ -152,6 +152,8 @@ function holidays() {
     { on: onDate(2, 29), text: "Happy Leap Day!" },
     { on: onDate(4, 13), text: "Happy Songkran! 🇹🇭" },
     { on: onDate(5, 4), text: "May the 4th be with you!" },
+    // 6/26, after Experiment 626.
+    { on: onDate(6, 26), text: "Happy Stitch Day! 💙" },
     { on: onDate(7, 14), text: "Happy World Orca Day!" },
     { on: nthWeekday(3, 0, 7), text: "Happy National Ice Cream Day! 🍦" },
     { on: onDate(7, 22), text: "Happy Mango Day! 🥭" },
