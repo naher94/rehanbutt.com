@@ -452,12 +452,14 @@ function tagBadges(c){
 /* The register a card belongs to, however it got there: read out of the code
    first, then your own tag. The filter has to agree with the badge -- a row
    that says `expressive` and does not appear under `expressive` is the tool
-   contradicting itself -- so tagging a row moves it out of `unmapped` and into
-   the register you gave it, and the counts move with it. */
+   contradicting itself -- so a tagged row shows under the register you gave
+   it. It stays under `unmapped` too, because a tag is a proposal: the code
+   still has not decided it, and that list is the work left to do there. */
 const effReg = c => c.register || TAGS[c.id] || null;
+const unmapped = c => !c.register;
 
 const matches = c => state.filter === "all" ? true
-  : state.filter === "unmapped" ? !effReg(c)
+  : state.filter === "unmapped" ? unmapped(c)
   : effReg(c) === state.filter;
 
 function drawTotals(){
@@ -494,7 +496,7 @@ function drawBar(){
     all: CARDS.length,
     product: CARDS.filter(c => effReg(c) === "product").length,
     expressive: CARDS.filter(c => effReg(c) === "expressive").length,
-    unmapped: CARDS.filter(c => !effReg(c)).length,
+    unmapped: CARDS.filter(unmapped).length,
   };
   document.getElementById("bar").innerHTML =
     `<span class="lbl">Register</span>` +
