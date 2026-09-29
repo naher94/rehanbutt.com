@@ -1,4 +1,4 @@
-name: Link Checker
+name: Link Check
 
 on:
   repository_dispatch:
@@ -7,7 +7,7 @@ on:
     - cron: "0 9 1 * *"
 
 jobs:
-  linkChecker:
+  check-links:
     runs-on: ubuntu-latest
     permissions:
       issues: write # required for peter-evans/create-issue-from-file
@@ -30,7 +30,7 @@ jobs:
       - name: Build Jekyll site
         run: bundle exec jekyll build --trace
 
-      - name: Link Checker
+      - name: Check links
         id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
@@ -42,6 +42,6 @@ jobs:
         if: steps.lychee.outputs.exit_code != 0
         uses: peter-evans/create-issue-from-file@v6
         with:
-          title: Dead Links Found - Link Checker Report
+          title: Dead Links Found - Link Check Report
           content-filepath: ./lychee/out.md
           labels: bug, CI/CD
