@@ -1,0 +1,1078 @@
+---
+layout: default
+title: "Hat Lab"
+permalink: hat-lab
+header-visibility: hide
+sitemap: false
+---
+
+<!-- Scratch page for tuning the WDAS hat animation before it moves to the home intro. -->
+<style>
+  .hat-lab{ padding-block: 2rem 6rem; }
+  .hat-lab h2{ margin-top: 4rem; }
+  .hat-lab__layout{
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+  .hat-lab__versions{
+    position: sticky;
+    top: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+  }
+  .hat-lab__version{
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 0.6rem 0.8rem;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .hat-lab__version:hover{ border-color: rgba(128, 128, 128, 0.3); }
+  .hat-lab__version[aria-pressed="true"]{ border-color: currentColor; }
+  .hat-lab__version.is-playing{ border-color: #6bb1e2; background: rgba(107, 177, 226, 0.12); }
+  .hat-lab__version--cycle{ margin-bottom: 0.75rem; border-style: dashed; border-color: rgba(128, 128, 128, 0.4); }
+  .hat-lab__version strong{ display: block; }
+  .hat-lab__version span{ display: block; font-size: 0.85rem; line-height: 1.35; opacity: 0.7; margin-top: 0.2rem; }
+  @media (max-width: 40em){
+    .hat-lab__layout{ grid-template-columns: minmax(0, 1fr); }
+    .hat-lab__versions{ position: static; }
+  }
+
+  .wdas-hat{ overflow: visible; aspect-ratio: 173 / 138; }
+  .wdas-hat .wdas-hat__hat,
+  .wdas-hat .wdas-hat__wing-left,
+  .wdas-hat .wdas-hat__wing-right{
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+  }
+  .hat-lab__stage{
+    display: block;
+    margin: 8rem auto 2rem;
+    padding: 1rem;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+  .hat-lab__stage .wdas-hat{ display: block; width: min(320px, 60vw); height: auto; }
+  .hat-lab__controls{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
+  }
+  .hat-lab__controls button,
+  .hat-lab__controls select{
+    font: inherit;
+    color: inherit;
+    padding: 0.4rem 1rem;
+    border: 2px solid currentColor;
+    border-radius: 10px;
+    background: none;
+    cursor: pointer;
+  }
+  .hat-lab__controls select{ padding-block: 0.2rem; margin: 0 0 0 0.4rem; width: auto; height: auto; }
+  .hat-lab__controls label{ display: flex; align-items: center; gap: 0.4rem; margin: 0; font-size: 1rem; color: inherit; }
+  .hat-lab__controls input{ margin: 0; }
+  .hat-lab__note{ text-align: center; opacity: 0.7; }
+  .hat-lab__current{ text-align: center; margin: 1rem 0 0.5rem; font-weight: bold; }
+  .hat-lab .site-intro p{ font-size: 1.6rem; line-height: 1.4; }
+  /* Lifts the hat's effects above the words that follow it (V10's star arcs over them). */
+  .hat-inline{ cursor: pointer; position: relative; z-index: 1; }
+  .hat-inline .wdas-hat{ display: inline-block; height: 1.2em; width: auto; vertical-align: text-top; }
+</style>
+
+<section class="hat-lab cell">
+  <h1>Hat Lab</h1>
+
+  <div class="hat-lab__layout">
+    <nav class="hat-lab__versions" aria-label="Animation versions" data-versions></nav>
+
+    <div>
+      <p class="hat-lab__current" data-current></p>
+      <div class="hat-lab__controls">
+        <button type="button" data-play>Play</button>
+        <label><input type="checkbox" data-sound checked> Sound</label>
+        <label>Speed
+          <select data-speed>
+            <option value="0.25">0.25×</option>
+            <option value="0.5">0.5×</option>
+            <option value="1" selected>1×</option>
+          </select>
+        </label>
+        <label><input type="checkbox" data-loop> Loop</label>
+        <label><input type="checkbox" data-cursor> Cursor-aware</label>
+      </div>
+      <p class="hat-lab__note" data-reduced hidden>Reduce motion is on, so the hat only sparkles in place.</p>
+
+      <button type="button" class="hat-lab__stage" data-hat>{% include wdas-hat.svg %}</button>
+
+      <h2>In context</h2>
+      <div class="site-intro">
+        <p>- a devzgner, designer + developer, currently creating magic at <span class="hat-inline" data-hat>{% include wdas-hat.svg %}</span> Walt Disney Animation Studios. Click the hat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+  const state = { speed: 1, sound: true, loop: false, cursor: false, version: null };
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const ms = d => d / state.speed;
+  const wait = d => new Promise(r => setTimeout(r, ms(d)));
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+  const TAU = Math.PI * 2;
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+
+  // --- Sound: synthesized so the lab needs no audio files. Swap for real clips later.
+  let ctx, master, noiseBuf;
+  function unlockAudio() {
+    if (!ctx) {
+      ctx = new AudioContext();
+      master = ctx.createGain();
+      master.gain.value = 0.6;
+      master.connect(ctx.destination);
+      noiseBuf = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
+      const data = noiseBuf.getChannelData(0);
+      for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+    }
+    if (ctx.state === 'suspended') ctx.resume();
+  }
+  function envelope(t, peak, attack, release) {
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(peak, t + attack);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + attack + release);
+    return g;
+  }
+  function noise(t, dur) {
+    const src = ctx.createBufferSource();
+    src.buffer = noiseBuf;
+    src.start(t);
+    src.stop(t + dur);
+    return src;
+  }
+  const sfx = {
+    whoosh(dur, from, to, peak = 0.35) {
+      const t = ctx.currentTime;
+      const f = ctx.createBiquadFilter();
+      f.type = 'bandpass';
+      f.Q.value = 1.4;
+      f.frequency.setValueAtTime(from, t);
+      f.frequency.exponentialRampToValueAtTime(to, t + dur);
+      noise(t, dur).connect(f).connect(envelope(t, peak, dur * 0.45, dur * 0.55)).connect(master);
+    },
+    twinkle(dur) {
+      const notes = [1568, 2093, 1760, 2637, 2349, 3136, 2794];
+      const t0 = ctx.currentTime;
+      notes.forEach((hz, i) => {
+        const t = t0 + i * dur / notes.length;
+        const o = ctx.createOscillator();
+        o.frequency.value = hz;
+        o.connect(envelope(t, 0.12, 0.005, 0.25)).connect(master);
+        o.start(t);
+        o.stop(t + 0.3);
+      });
+    },
+    thud(peak = 0.9, from = 160) {
+      const t = ctx.currentTime;
+      const o = ctx.createOscillator();
+      o.frequency.setValueAtTime(from, t);
+      o.frequency.exponentialRampToValueAtTime(45, t + 0.2);
+      o.connect(envelope(t, peak, 0.004, 0.22)).connect(master);
+      o.start(t);
+      o.stop(t + 0.3);
+    },
+    poof() {
+      const t = ctx.currentTime;
+      const f = ctx.createBiquadFilter();
+      f.type = 'lowpass';
+      f.frequency.setValueAtTime(1400, t);
+      f.frequency.exponentialRampToValueAtTime(200, t + 0.4);
+      noise(t, 0.45).connect(f).connect(envelope(t, 0.3, 0.01, 0.4)).connect(master);
+    },
+    pop() {
+      const t = ctx.currentTime;
+      const o = ctx.createOscillator();
+      o.type = 'triangle';
+      o.frequency.setValueAtTime(300, t);
+      o.frequency.exponentialRampToValueAtTime(1400, t + 0.08);
+      o.connect(envelope(t, 0.4, 0.004, 0.12)).connect(master);
+      o.start(t);
+      o.stop(t + 0.2);
+    },
+    chime(notes = [1568, 2349], gap = 0.12, peak = 0.18) {
+      const t0 = ctx.currentTime;
+      notes.forEach((hz, i) => {
+        const t = t0 + i * gap;
+        const o = ctx.createOscillator();
+        o.frequency.value = hz;
+        o.connect(envelope(t, peak, 0.005, 0.6)).connect(master);
+        o.start(t);
+        o.stop(t + 0.7);
+      });
+    },
+    pad(dur) {
+      const t = ctx.currentTime;
+      [220, 277.2, 329.6].forEach(hz => {
+        const o = ctx.createOscillator();
+        o.type = 'triangle';
+        o.frequency.value = hz;
+        o.connect(envelope(t, 0.06, dur * 0.4, dur * 0.6)).connect(master);
+        o.start(t);
+        o.stop(t + dur + 0.05);
+      });
+    },
+    sneeze() {
+      const t = ctx.currentTime;
+      const f = ctx.createBiquadFilter();
+      f.type = 'bandpass';
+      f.frequency.value = 2200;
+      f.Q.value = 0.7;
+      noise(t, 0.2).connect(f).connect(envelope(t, 0.5, 0.008, 0.16)).connect(master);
+    },
+  };
+  function sound(name, ...args) {
+    if (!state.sound || !ctx || ctx.state !== 'running') return;
+    sfx[name](...args);
+  }
+  const secs = d => ms(d) / 1000;
+
+  // --- Motion helpers
+  const easeOut = t => 1 - (1 - t) ** 3;
+  const easeInOut = t => 0.5 - Math.cos(Math.PI * t) / 2;
+  const hop = t => 4 * t * (1 - t);
+
+  // A cone spinning on its axis reads as a horizontal flip; clamp so it never collapses to a line.
+  // rot turns around pivotY (px above the brim), so somersaults can pivot on the hat's middle.
+  function pose({ x = 0, y = 0, spin = 0, sx = 1, sy = 1, depth = 1, rot = 0, pivotY = 0 }) {
+    let c = Math.cos(spin);
+    c = (c < 0 ? -1 : 1) * Math.max(Math.abs(c), 0.22);
+    return {
+      transform: `translate(${x}px, ${y}px) translate(0px, ${pivotY}px) rotate(${rot}deg) ` +
+        `translate(0px, ${-pivotY}px) scale(${c * sx * depth}, ${sy * depth})`,
+    };
+  }
+  const sample = fn => Array.from({ length: 41 }, (_, i) => pose(fn(i / 40)));
+
+  function animateAll(els, keyframes, duration, easing = 'linear') {
+    const anims = els.map(el => el.animate(keyframes, { duration: ms(duration), easing, fill: 'both' }));
+    return { anims, done: Promise.all(anims.map(a => a.finished)) };
+  }
+  const move = (els, fn, duration) => animateAll(els, sample(fn), duration);
+
+  // Calls spawn with the hat's pose every `every` ms while anim runs; returns a stop function.
+  function trail(anim, fn, every, spawn) {
+    const total = anim.effect.getTiming().duration;
+    const id = setInterval(() => spawn(fn(Math.min((anim.currentTime || 0) / total, 1))), ms(every));
+    return () => clearInterval(id);
+  }
+
+  // Calls cb(t) every `every` ms until `duration` ms have passed.
+  function tick(duration, every, cb) {
+    const start = performance.now();
+    const id = setInterval(() => {
+      const t = (performance.now() - start) / ms(duration);
+      if (t >= 1) return clearInterval(id);
+      cb(t);
+    }, ms(every));
+  }
+
+  function particle(fx, el, keyframes, duration, easing = 'ease-out') {
+    fx.appendChild(el);
+    el.animate(keyframes, { duration: ms(duration), easing, fill: 'both' }).finished.then(() => el.remove());
+  }
+
+  const SPARK_COLORS = ['#f5b82e', '#ffd66b', '#ffd66b', '#6bb1e2'];
+  function starEl(fill = SPARK_COLORS[Math.floor(Math.random() * SPARK_COLORS.length)]) {
+    const el = document.createElementNS(SVG_NS, 'path');
+    el.setAttribute('d', 'M0-5C.8-.8.8-.8 5 0 .8.8.8.8 0 5-.8.8-.8.8-5 0-.8-.8-.8-.8 0-5z');
+    el.setAttribute('fill', fill);
+    return el;
+  }
+  // Particles are drawn in SVG units, so play() sets fx.dataset.scale to keep them legible when the
+  // hat is text-sized. Returns [size, travel] multipliers.
+  function fxScale(fx) {
+    const s = Number(fx.dataset.scale) || 1;
+    return [s, 1 + (s - 1) * 0.5];
+  }
+  function spark(fx, x, y, vx, vy, life = rand(550, 800)) {
+    const [s, v] = fxScale(fx);
+    vx *= v;
+    vy *= v;
+    particle(fx, starEl(), [
+      { transform: `translate(${x}px, ${y}px) scale(0) rotate(0deg)` },
+      { transform: `translate(${x + vx * 0.4}px, ${y + vy * 0.4}px) scale(${rand(0.7, 1.2) * s}) rotate(90deg)`, offset: 0.3 },
+      { transform: `translate(${x + vx}px, ${y + vy + 10 * v}px) scale(0) rotate(200deg)` },
+    ], life);
+  }
+  const trailSpark = (fx, x, y, side) => spark(fx, x, y, side * rand(8, 20), rand(-14, 2));
+  function burst(fx, x, y, count, speed) {
+    for (let i = 0; i < count; i++) {
+      const a = (i / count) * TAU + rand(-0.2, 0.2), v = speed * rand(0.7, 1.1);
+      spark(fx, x, y, Math.cos(a) * v, Math.sin(a) * v, rand(600, 850));
+    }
+  }
+  // A spark that follows fn(t) -> {x, y, s} for the whole duration, fading at both ends.
+  function followSpark(fx, fn, duration, el = starEl()) {
+    const [s] = fxScale(fx);
+    particle(fx, el, Array.from({ length: 61 }, (_, i) => {
+      const t = i / 60, p = fn(t);
+      return { transform: `translate(${p.x}px, ${p.y}px) scale(${p.s * s}) rotate(${t * 540}deg)`, opacity: Math.min(1, t * 8, (1 - t) * 8) };
+    }), duration, 'linear');
+  }
+
+  function dust(fx, x, y, side, size = 1) {
+    const [s, v] = fxScale(fx);
+    for (let i = 0; i < 3; i++) {
+      const el = document.createElementNS(SVG_NS, 'circle');
+      el.setAttribute('r', (rand(4.5, 7.5) * size * s).toFixed(1));
+      el.setAttribute('fill', '#d9cfbd');
+      const dx = side * rand(10, 24) * size * v, dy = rand(3, 10) * size * v;
+      setTimeout(() => particle(fx, el, [
+        { transform: `translate(${x}px, ${y}px) scale(0.3)`, opacity: 0.95 },
+        { transform: `translate(${x + dx}px, ${y - dy}px) scale(1.25)`, opacity: 0 },
+      ], rand(500, 700), 'cubic-bezier(.1,.7,.3,1)'), ms(i * 40));
+    }
+  }
+
+  // Shared touchdown: thud, dust both sides, wings flinch, hat squash-and-settle.
+  function land(k, { from = { sx: 0.94, sy: 1.12 }, duration = 380, soft = false } = {}) {
+    const s = soft ? 0.45 : 1;
+    k.sound('thud', soft ? 0.35 : 0.9);
+    if (!soft) k.sound('poof');
+    dust(k.fx, k.b.x + 4, k.brimY, -1, soft ? 0.6 : 1);
+    dust(k.fx, k.b.x + k.b.width - 4, k.brimY, 1, soft ? 0.6 : 1);
+    animateAll(k.wings, [
+      { transform: 'scale(1, 1)' },
+      { transform: `scale(${1 + 0.03 * s}, ${1 - 0.08 * s})`, offset: 0.25 },
+      { transform: 'scale(1, 1)' },
+    ], duration, 'ease-out');
+    return animateAll(k.hat, [
+      pose(from),
+      { ...pose({ sx: 1 + 0.2 * s, sy: 1 - 0.22 * s }), offset: 0.25 },
+      { ...pose({ sx: 1 - 0.05 * s, sy: 1 + 0.07 * s }), offset: 0.55 },
+      { ...pose({ sx: 1 + 0.02 * s, sy: 1 - 0.02 * s }), offset: 0.8 },
+      pose({}),
+    ], duration, 'ease-out').done;
+  }
+
+  // --- Versions
+  const VERSIONS = [
+    {
+      id: 'v1',
+      name: 'Spin lift',
+      blurb: 'The original sketch: squash, spin up, loop with trailing sparks, plop + dust.',
+      async run(k) {
+        const { hat, fx, b, brimX, brimY } = k;
+        const LIFT = 46, ORBIT_X = 30, ORBIT_Y = 7;
+        // Orbit front point is where the lift ends; the back of the loop sits higher and smaller.
+        const orbitAt = t => {
+          const a = TAU * easeInOut(t);
+          return { x: ORBIT_X * Math.sin(a), y: -LIFT - ORBIT_Y * (1 - Math.cos(a)), depth: 1 - 0.06 * (1 - Math.cos(a)) };
+        };
+
+        await animateAll(hat, [pose({}), pose({ sx: 1.08, sy: 0.88 })], 140, 'ease-out').done;
+
+        k.sound('whoosh', secs(520), 500, 2400);
+        await move(hat, t => {
+          const e = easeOut(t);
+          return { y: -LIFT * e, spin: TAU * e, sx: 1.08 - 0.08 * e, sy: 0.88 + 0.12 * e + 0.1 * Math.sin(Math.PI * t) };
+        }, 520).done;
+
+        k.sound('twinkle', secs(900));
+        const orbitPose = t => ({ ...orbitAt(t), spin: TAU + 2 * TAU * t });
+        const orbit = move(hat, orbitPose, 900);
+        let side = 1;
+        const stop = trail(orbit.anims[0], orbitPose, 55, p => {
+          side = -side;
+          trailSpark(fx, brimX + p.x + side * b.width * 0.42 * p.depth, brimY + p.y, side);
+        });
+        await orbit.done;
+        stop();
+
+        k.sound('whoosh', secs(300), 2200, 600, 0.2);
+        await move(hat, t => {
+          const e = t * t;
+          return { y: -LIFT * (1 - e), spin: 3 * TAU + TAU * easeOut(t), sx: 1 - 0.06 * e, sy: 1 + 0.12 * e };
+        }, 300).done;
+
+        await land(k);
+      },
+    },
+    {
+      id: 'v2',
+      name: 'Tornado',
+      blurb: 'Corkscrews up fast, pops a starburst at the top, drops and bounces twice.',
+      async run(k) {
+        const { hat, fx, b, brimX, brimY } = k;
+        const RISE = 70;
+
+        await move(hat, t => ({ sx: 1 + 0.1 * easeOut(t), sy: 1 - 0.14 * easeOut(t) }), 120).done;
+
+        k.sound('whoosh', secs(900), 300, 3500, 0.4);
+        const risePose = t => {
+          const settle = Math.min(t * 4, 1);
+          return {
+            x: 9 * Math.sin(4 * Math.PI * t) * Math.sin(Math.PI * t),
+            y: -RISE * easeInOut(t),
+            spin: 6 * Math.PI * t ** 1.6,
+            sx: 1.1 - 0.1 * settle,
+            sy: 0.86 + 0.14 * settle + 0.12 * Math.sin(Math.PI * t),
+          };
+        };
+        const rise = move(hat, risePose, 900);
+        let side = 1;
+        const stop = trail(rise.anims[0], risePose, 40, p => {
+          side = -side;
+          spark(fx, brimX + p.x + side * b.width * 0.42, brimY + p.y, side * rand(4, 12), rand(4, 16));
+        });
+        await rise.done;
+        stop();
+
+        k.sound('pop');
+        k.sound('twinkle', 0.35);
+        burst(fx, brimX, brimY - RISE - b.height * 0.5, 12, 26);
+        await move(hat, t => {
+          const p = Math.sin(Math.PI * t);
+          return { y: -RISE - 4 * p, sx: 1 + 0.12 * p, sy: 1 + 0.12 * p };
+        }, 200).done;
+
+        k.sound('whoosh', secs(320), 2400, 500, 0.2);
+        await move(hat, t => ({ y: -RISE * (1 - t * t), sx: 1 - 0.06 * t * t, sy: 1 + 0.14 * t * t }), 320).done;
+        await land(k, { from: { sx: 0.94, sy: 1.14 }, duration: 260 });
+
+        await move(hat, t => ({ y: -14 * hop(t), sx: 1 - 0.03 * hop(t), sy: 1 + 0.05 * hop(t) }), 280).done;
+        await land(k, { from: {}, soft: true });
+      },
+    },
+    {
+      id: 'v3',
+      name: 'Somersault',
+      blurb: 'Hops up and backflips at the peak with a ring of sparks, then wobbles like a top as it lands.',
+      async run(k) {
+        const { hat, fx, b, brimX, brimY } = k;
+        const JUMP = 58, pivotY = -b.height * 0.45;
+
+        await move(hat, t => ({ sx: 1 + 0.1 * easeOut(t), sy: 1 - 0.18 * easeOut(t) }), 180).done;
+
+        k.sound('whoosh', secs(380), 500, 2000, 0.3);
+        await move(hat, t => {
+          const e = easeOut(t);
+          return { y: -JUMP * e, rot: -25 * e, pivotY, sx: 1.1 - 0.1 * e, sy: 0.82 + 0.18 * e + 0.1 * Math.sin(Math.PI * t) };
+        }, 380).done;
+
+        k.sound('twinkle', secs(520));
+        setTimeout(() => burst(fx, brimX, brimY - JUMP - 6 + pivotY, 14, 28), ms(260));
+        await move(hat, t => ({ y: -JUMP - 6 * Math.sin(Math.PI * t), rot: -25 + 385 * easeInOut(t), pivotY }), 520).done;
+
+        k.sound('whoosh', secs(280), 2200, 600, 0.2);
+        await move(hat, t => ({ y: -JUMP * (1 - t * t), rot: 360, pivotY, sx: 1 - 0.06 * t * t, sy: 1 + 0.12 * t * t }), 280).done;
+        await land(k, { duration: 240 });
+
+        await move(hat, t => ({ rot: 11 * (1 - t) ** 2 * Math.sin(TAU * 2.5 * t) }), 700).done;
+      },
+    },
+    {
+      id: 'v4',
+      name: 'Float',
+      blurb: 'Two nervous hops, pops off like a cork, hovers while sparks circle it, then drifts down and plops.',
+      async run(k) {
+        const { hat, fx, b, brimX, brimY } = k;
+        const H = 54, HOVER = 1200, pivotY = -b.height * 0.5;
+
+        for (const h of [5, 8]) {
+          k.sound('thud', 0.2, 320);
+          await move(hat, t => ({ y: -h * hop(t), sx: 1 - 0.03 * hop(t), sy: 1 + 0.06 * hop(t) }), 170).done;
+        }
+
+        k.sound('pop');
+        for (let i = 0; i < 10; i++) {
+          spark(fx, brimX + rand(-0.3, 0.3) * b.width, brimY, rand(-12, 12), rand(-28, -14));
+        }
+        await move(hat, t => {
+          const p = Math.sin(Math.PI * t);
+          return { y: -H * easeOut(t), sx: 1 - 0.08 * p, sy: 1 + 0.15 * p };
+        }, 280).done;
+
+        k.sound('twinkle', secs(HOVER));
+        const hover = t => ({ y: -H + 4 * Math.sin(TAU * 1.5 * t), rot: 6 * Math.sin(TAU * t), pivotY });
+        const cy = brimY - b.height * 0.45;
+        for (let i = 0; i < 3; i++) {
+          followSpark(fx, t => {
+            const a = TAU * 1.75 * t + (i * TAU) / 3;
+            return { x: brimX + b.width * 0.75 * Math.cos(a), y: cy + hover(t).y + 9 * Math.sin(a), s: 0.75 + 0.35 * Math.sin(a) };
+          }, HOVER);
+        }
+        await move(hat, hover, HOVER).done;
+
+        await move(hat, t => ({ y: -H + (H - 10) * easeInOut(t) }), 520).done;
+        k.sound('whoosh', secs(140), 1800, 500, 0.15);
+        await move(hat, t => ({ y: -10 * (1 - t * t), sx: 1 - 0.04 * t, sy: 1 + 0.08 * t }), 140).done;
+        await land(k, { from: { sx: 0.96, sy: 1.08 } });
+      },
+    },
+    {
+      id: 'v5',
+      name: 'Magic trick',
+      blurb: 'Flips upside down like a magician’s hat, Pepper the panda pops out, ducks back in, and the hat lands.',
+      async run(k) {
+        const { hat, fx, fxBack, b, brimX, brimY } = k;
+        const LIFT = 44, pivotY = -b.height * 0.45;
+
+        await move(hat, t => ({ sx: 1 + 0.08 * easeOut(t), sy: 1 - 0.12 * easeOut(t) }), 120).done;
+        k.sound('whoosh', secs(400), 500, 2000, 0.3);
+        await move(hat, t => {
+          const e = easeOut(t);
+          return { y: -LIFT * e, sx: 1.08 - 0.08 * e, sy: 0.88 + 0.12 * e };
+        }, 400).done;
+
+        k.sound('whoosh', secs(380), 900, 1600, 0.2);
+        await move(hat, t => ({ y: -LIFT - 8 * easeOut(t), rot: 180 * easeInOut(t), pivotY }), 380).done;
+
+        // Upside down, the brim is on top; the panda sits behind the hat so the cone hides it until it pops.
+        const top = brimY - LIFT - 8 + 2 * pivotY;
+        const panda = document.createElementNS(SVG_NS, 'image');
+        panda.setAttribute('href', '/img/home/pepper-panda.svg');
+        Object.entries({ x: -20, y: -29.4, width: 40, height: 29.4 }).forEach(([key, v]) => panda.setAttribute(key, v));
+        fxBack.appendChild(panda);
+        k.sound('pop');
+        k.sound('twinkle', secs(500));
+        setTimeout(() => burst(fx, brimX, top - 14, 10, 22), ms(380));
+        await panda.animate([
+          { transform: `translate(${brimX}px, ${top + 32}px) scale(0.7)` },
+          { transform: `translate(${brimX}px, ${top - 6}px) scale(1.1) rotate(-6deg)`, offset: 0.35 },
+          { transform: `translate(${brimX}px, ${top - 2}px) scale(1) rotate(4deg)`, offset: 0.5 },
+          { transform: `translate(${brimX}px, ${top - 2}px) scale(1) rotate(-3deg)`, offset: 0.75 },
+          { transform: `translate(${brimX}px, ${top + 36}px) scale(0.7)` },
+        ], { duration: ms(1100), easing: 'ease-in-out', fill: 'both' }).finished;
+        panda.remove();
+
+        // Gulp
+        await move(hat, t => ({ y: -LIFT - 8, rot: 180, pivotY, sx: 1 + 0.1 * Math.sin(Math.PI * t), sy: 1 - 0.08 * Math.sin(Math.PI * t) }), 200).done;
+        k.sound('whoosh', secs(380), 1600, 900, 0.2);
+        await move(hat, t => ({ y: -LIFT - 8 + 8 * easeInOut(t), rot: 180 + 180 * easeInOut(t), pivotY }), 380).done;
+        k.sound('whoosh', secs(280), 2200, 600, 0.2);
+        await move(hat, t => ({ y: -LIFT * (1 - t * t), rot: 360, pivotY, sx: 1 - 0.06 * t * t, sy: 1 + 0.12 * t * t }), 280).done;
+        await land(k);
+      },
+    },
+    {
+      id: 'v6',
+      name: 'Brooms',
+      blurb: 'The hat taps down and wakes the wings, which march left-right like the Fantasia brooms, then everyone hops together.',
+      async run(k) {
+        const { hat, left, right, fx, b, brimY } = k;
+
+        await move(hat, t => ({ y: -20 * hop(t), sx: 1 - 0.03 * hop(t), sy: 1 + 0.06 * hop(t) }), 300).done;
+        await land(k, { from: {}, duration: 260 });
+
+        k.sound('twinkle', 0.45);
+        burst(fx, b.x - 10, brimY - 12, 6, 16);
+        burst(fx, b.x + b.width + 10, brimY - 12, 6, 16);
+        await wait(220);
+
+        for (const [els, dir] of [[left, -1], [right, 1], [left, -1], [right, 1]]) {
+          k.sound('thud', 0.3, dir < 0 ? 240 : 300);
+          move(hat, t => ({ y: -3 * hop(t), rot: dir * 5 * hop(t) }), 220);
+          await move(els, t => ({ y: -10 * hop(t), rot: dir * 6 * hop(t), sy: 1 + 0.05 * hop(t) }), 220).done;
+        }
+
+        k.sound('whoosh', secs(320), 600, 1800, 0.2);
+        move(left, t => ({ y: -14 * hop(t), rot: -4 * hop(t) }), 320);
+        move(right, t => ({ y: -14 * hop(t), rot: 4 * hop(t) }), 320);
+        await move(hat, t => ({ y: -24 * hop(t), sx: 1 - 0.04 * hop(t), sy: 1 + 0.08 * hop(t) }), 320).done;
+        await land(k, { from: {} });
+      },
+    },
+    {
+      id: 'v7',
+      name: 'Wand draw',
+      blurb: 'A wand spark swooshes in while the hat watches, draws a star overhead, and zaps the hat into a spin-hop.',
+      async run(k) {
+        const { hat, fx, b, brimX, brimY } = k;
+        const SWOOSH = 900, DRAW = 700, TOTAL = SWOOSH + DRAW, split = SWOOSH / TOTAL;
+        const [, v] = fxScale(fx);
+        const star = { x: brimX, y: brimY - b.height - 10 - 22 * v };
+        const starPts = Array.from({ length: 10 }, (_, i) => {
+          const a = -Math.PI / 2 + (i * Math.PI) / 5, r = (i % 2 ? 9 : 22) * v;
+          return { x: star.x + r * Math.cos(a), y: star.y + r * Math.sin(a) };
+        });
+        // Lower-left swoosh with a curl, ending on the star's top point.
+        const swoosh = t => {
+          const e = easeInOut(t);
+          return {
+            x: brimX - 70 + 70 * e + 18 * Math.sin(TAU * e) * (1 - e),
+            y: brimY - 20 - (b.height - 10 + 44 * v) * Math.sin((Math.PI / 2) * e) + 14 * Math.sin(TAU * 1.5 * e) * (1 - e),
+          };
+        };
+        const drawStar = t => {
+          const seg = t * 10, i = Math.min(Math.floor(seg), 9), f = seg - i;
+          const p = starPts[i], q = starPts[(i + 1) % 10];
+          return { x: p.x + (q.x - p.x) * f, y: p.y + (q.y - p.y) * f };
+        };
+        const wand = t => ({ ...(t < split ? swoosh(t / split) : drawStar((t - split) / (1 - split))), s: 1.4 });
+
+        followSpark(fx, wand, TOTAL, starEl('#fff3b0'));
+        tick(TOTAL, 28, t => {
+          const p = wand(t);
+          if (t < split) spark(fx, p.x, p.y, rand(-4, 4), rand(0, 8), rand(500, 700));
+          else spark(fx, p.x, p.y, rand(-2, 2), rand(-2, 2), rand(900, 1100));
+        });
+        k.sound('whoosh', secs(SWOOSH), 400, 2600, 0.25);
+        setTimeout(() => k.sound('twinkle', secs(DRAW)), ms(SWOOSH));
+        await move(hat, t => ({ rot: clamp((wand(t).x - brimX) * 0.35, -14, 14), y: -3 * Math.sin(Math.PI * t) }), TOTAL).done;
+
+        k.sound('pop');
+        burst(fx, star.x, star.y, 12, 24);
+        k.sound('whoosh', secs(380), 500, 2400, 0.3);
+        await move(hat, t => ({ y: -34 * easeOut(t), spin: TAU * easeOut(t), sy: 1 + 0.1 * Math.sin(Math.PI * t) }), 380).done;
+        await move(hat, t => ({ y: -34 * (1 - t * t), sx: 1 - 0.06 * t * t, sy: 1 + 0.12 * t * t }), 260).done;
+        await land(k);
+      },
+    },
+    {
+      id: 'v8',
+      name: 'Shy hat',
+      blurb: 'Peeks up, glances left and right, notices you, and ducks into a squash before settling. Short and low-key.',
+      async run(k) {
+        const { hat, fx, b, brimX, brimY } = k;
+        const peek = { y: -10, sy: 1.04 };
+
+        k.sound('whoosh', secs(450), 300, 700, 0.12);
+        await move(hat, t => ({ y: -10 * easeInOut(t), sy: 1 + 0.04 * easeInOut(t) }), 450).done;
+
+        k.sound('thud', 0.12, 700);
+        await move(hat, t => ({ ...peek, rot: -8 * easeInOut(t) }), 240).done;
+        await wait(280);
+        k.sound('thud', 0.12, 760);
+        await move(hat, t => ({ ...peek, rot: -8 + 16 * easeInOut(t) }), 320).done;
+        await wait(280);
+        await move(hat, t => ({ ...peek, rot: 8 * (1 - easeOut(t)) }), 160).done;
+
+        // Notices you
+        k.sound('pop');
+        spark(fx, brimX - 8, brimY - b.height - 12, -6, -10);
+        spark(fx, brimX + 8, brimY - b.height - 12, 6, -10);
+        await move(hat, t => ({ y: -10 - 6 * hop(t), sx: 1 - 0.06 * hop(t), sy: 1.04 + 0.08 * hop(t) }), 160).done;
+
+        k.sound('whoosh', secs(140), 1800, 400, 0.15);
+        await move(hat, t => {
+          const e = easeOut(t);
+          return { y: -10 * (1 - e), sx: 1 + 0.12 * e, sy: 1.04 - 0.34 * e };
+        }, 140).done;
+        await wait(420);
+
+        k.sound('thud', 0.2, 200);
+        await animateAll(hat, [
+          pose({ sx: 1.12, sy: 0.7 }),
+          { ...pose({ sx: 0.96, sy: 1.06 }), offset: 0.5 },
+          { ...pose({ sx: 1.01, sy: 0.98 }), offset: 0.8 },
+          pose({}),
+        ], 420, 'ease-out').done;
+      },
+    },
+    {
+      id: 'v9',
+      name: 'Stack of hats',
+      blurb: 'Lifts off to reveal a mini hat underneath that spins hello, then the big hat drops over it and swallows it.',
+      async run(k) {
+        const { root, hat, fx, fxBack, brimX, brimY } = k;
+        const LIFT = 52;
+
+        await move(hat, t => ({ sx: 1 + 0.08 * easeOut(t), sy: 1 - 0.12 * easeOut(t) }), 120).done;
+        k.sound('whoosh', secs(420), 500, 2200, 0.3);
+        await move(hat, t => {
+          const e = easeOut(t);
+          return { y: -LIFT * e, sx: 1.08 - 0.08 * e, sy: 0.88 + 0.12 * e + 0.08 * Math.sin(Math.PI * t) };
+        }, 420).done;
+
+        // Mini hat: a copy of the hat (outline + colors) that lives behind the big one.
+        const mini = document.createElementNS(SVG_NS, 'g');
+        mini.style.transformBox = 'fill-box';
+        mini.style.transformOrigin = '50% 100%';
+        root.querySelectorAll('.wdas-hat__hat path').forEach((path, i) => {
+          const copy = path.cloneNode();
+          if (i === 0) Object.entries({ fill: '#fff', stroke: '#fff', 'stroke-width': 10 }).forEach(([key, v]) => copy.setAttribute(key, v));
+          mini.appendChild(copy);
+        });
+        fxBack.appendChild(mini);
+
+        k.sound('pop');
+        k.sound('twinkle', secs(500));
+        burst(fx, brimX, brimY - 20, 8, 18);
+        move(hat, t => ({ y: -LIFT - 3 * Math.sin(TAU * t) }), 860);
+        await mini.animate([
+          { transform: 'scale(0)' },
+          { transform: 'scale(0.72)', offset: 0.6 },
+          { transform: 'scale(0.6)' },
+        ], { duration: ms(360), easing: 'ease-out', fill: 'both' }).finished;
+        await mini.animate(sample(t => ({ y: -6 * hop(t), spin: TAU * easeInOut(t), sx: 0.6, sy: 0.6 })), { duration: ms(500), fill: 'both' }).finished;
+
+        k.sound('whoosh', secs(300), 2200, 600, 0.2);
+        await move(hat, t => ({ y: -LIFT * (1 - t * t), sx: 1 - 0.06 * t * t, sy: 1 + 0.12 * t * t }), 300).done;
+        mini.remove();
+        burst(fx, brimX, brimY - 16, 8, 16);
+        await land(k);
+      },
+    },
+    {
+      id: 'v10',
+      name: 'Wishing star',
+      blurb: 'The hat fires a star off its tip that arcs over the text beside it, leaving a trail of glitter.',
+      async run(k) {
+        const { root, hat, fx, b, brimX, brimY } = k;
+        const FLY = 1100;
+        // Land the star up to 420px to the right, measured on screen so it clears the neighboring text.
+        const svgRect = root.querySelector('svg').getBoundingClientRect();
+        const box = (root.closest('p') || root.parentElement).getBoundingClientRect();
+        const toLocal = (x, y) => new DOMPoint(x, y).matrixTransform(fx.getScreenCTM().inverse());
+        const end = toLocal(svgRect.right + clamp(box.right - svgRect.right, 120, 420), svgRect.top + svgRect.height * 0.55);
+        const apex = { x: brimX, y: b.y };
+        // Cap the arc at ~1.8 hat-heights (138 = viewBox height) so inline it skims the line instead of climbing into the text above.
+        const H = Math.min((end.x - apex.x) * 0.35, 138 * 1.8);
+        const path = t => {
+          const e = 1 - (1 - t) ** 2;
+          return { x: apex.x + (end.x - apex.x) * e, y: apex.y + (end.y - apex.y) * e - H * Math.sin(Math.PI * e) };
+        };
+
+        await move(hat, t => ({ sx: 1 + 0.06 * easeOut(t), sy: 1 - 0.1 * easeOut(t) }), 140).done;
+
+        k.sound('whoosh', secs(FLY), 800, 3000, 0.22);
+        k.sound('twinkle', secs(FLY));
+        burst(fx, apex.x, apex.y, 6, 12);
+        followSpark(fx, t => ({ ...path(t), s: 1.6 }), FLY, starEl('#fff3b0'));
+        tick(FLY, 22, t => {
+          const p = path(t);
+          spark(fx, p.x + rand(-2, 2), p.y + rand(-2, 2), rand(-3, 3), rand(0, 6), rand(900, 1300));
+        });
+        setTimeout(() => {
+          burst(fx, end.x, end.y, 10, 18);
+          k.sound('chime');
+        }, ms(FLY));
+
+        await move(hat, t => ({ y: -8 * hop(t), sx: 1.06 - 0.06 * t - 0.04 * hop(t), sy: 0.9 + 0.1 * t + 0.08 * hop(t) }), 260).done;
+        await move(hat, t => ({ rot: 10 * Math.sin(Math.PI * t) }), FLY + 140).done;
+      },
+    },
+    {
+      id: 'v11',
+      name: 'Too much magic',
+      blurb: 'The hat starts growing and sparking out of control, sneezes a big poof, snaps back to size, and looks sheepish.',
+      async run(k) {
+        const { hat, fx, b, brimX, brimY } = k;
+        const GROW = 1000, PEAK = 1.55;
+
+        k.sound('twinkle', secs(GROW));
+        k.sound('whoosh', secs(GROW), 300, 3000, 0.3);
+        // Spark rate ramps up with the size.
+        tick(GROW + 300, 35, t => {
+          if (Math.random() > 0.3 + t) return;
+          const g = 1 + (PEAK - 1) * Math.min(t * 1.3, 1) ** 2, a = rand(0, TAU), v = rand(10, 26);
+          spark(fx, brimX + rand(-0.45, 0.45) * b.width * g, brimY - rand(0.1, 0.9) * b.height * g, Math.cos(a) * v, Math.sin(a) * v);
+        });
+        await move(hat, t => {
+          const g = 1 + (PEAK - 1) * t * t;
+          return { sx: g, sy: g, rot: 7 * t * Math.sin(TAU * 5 * t), x: 2 * t * Math.sin(TAU * 7 * t) };
+        }, GROW).done;
+        await move(hat, t => ({ sx: PEAK, sy: PEAK, rot: 4 * Math.sin(TAU * 6 * t), x: 3 * Math.sin(TAU * 9 * t) }), 300).done;
+
+        // Ah-
+        k.sound('whoosh', secs(220), 300, 700, 0.15);
+        await move(hat, t => {
+          const e = easeOut(t);
+          return { sx: PEAK - 0.1 * e, sy: PEAK + 0.15 * e, rot: -10 * e };
+        }, 220).done;
+
+        // -choo!
+        k.sound('sneeze');
+        k.sound('poof');
+        burst(fx, brimX, brimY - b.height * 0.9, 14, 30);
+        for (const [dx, side] of [[-0.5, -1], [0.5, 1], [-0.25, -1], [0.25, 1]]) {
+          dust(fx, brimX + dx * b.width, brimY - b.height * 0.5, side, 1.3);
+        }
+        await animateAll(hat, [
+          pose({ sx: PEAK - 0.1, sy: PEAK + 0.15, rot: -10 }),
+          { ...pose({ sx: 0.82, sy: 0.8, rot: 12 }), offset: 0.35 },
+          { ...pose({ sx: 1.06, sy: 1.05, rot: -4 }), offset: 0.65 },
+          pose({}),
+        ], 380, 'ease-out').done;
+
+        // Sheepish droop
+        await wait(150);
+        await move(hat, t => {
+          const p = Math.sin(Math.PI * t);
+          return { rot: -5 * p, x: -1.5 * p, sy: 1 - 0.04 * p };
+        }, 700).done;
+      },
+    },
+    {
+      id: 'v12',
+      name: 'Hat tip',
+      blurb: 'A polite greeting: the hat lifts, tips to one side with a chime while the wings bow, then settles.',
+      async run(k) {
+        const { hat, wings, fx, b, brimX, brimY } = k;
+        const LIFT = 14, TILT = 20, pivotY = -b.height * 0.5;
+        // In, hold, out
+        const tip = t => (t < 0.35 ? easeInOut(t / 0.35) : t < 0.65 ? 1 : 1 - easeInOut((t - 0.65) / 0.35));
+
+        k.sound('whoosh', secs(260), 400, 1200, 0.12);
+        await move(hat, t => ({ y: -LIFT * easeOut(t), sy: 1 + 0.05 * Math.sin(Math.PI * t) }), 260).done;
+
+        setTimeout(() => {
+          k.sound('chime');
+          const a = (TILT * Math.PI) / 180, arm = -pivotY;
+          const x = brimX + arm * Math.sin(a), y = brimY - LIFT + 4 + pivotY - arm * Math.cos(a);
+          spark(fx, x, y, 10, -8);
+          spark(fx, x, y, 4, -14);
+        }, ms(300));
+        move(wings, t => ({ y: 2 * tip(t), sy: 1 - 0.04 * tip(t) }), 900);
+        await move(hat, t => ({ y: -LIFT + 4 * tip(t), rot: TILT * tip(t), pivotY }), 900).done;
+
+        await move(hat, t => ({ y: -LIFT * (1 - easeInOut(t)) }), 300).done;
+        await land(k, { from: {}, soft: true });
+      },
+    },
+    {
+      id: 'v13',
+      name: 'Night falls',
+      blurb: 'The sky darkens around the building, the moon glows, stars twinkle in while the hat dozes, then it perks up at dawn.',
+      async run(k) {
+        const { hat, fx, b, brimX, brimY } = k;
+        const DUSK = 700, NIGHT = 1600, DAWN = 600, TOTAL = DUSK + NIGHT + DAWN;
+        const [s] = fxScale(fx);
+        const cx = brimX, cy = brimY - b.height * 0.5;
+        // Easing per keyframe so dusk and dawn each ease on their own.
+        const nightKeys = (on, off = 0) => [
+          { opacity: off, easing: 'ease-in-out' },
+          { opacity: on, offset: DUSK / TOTAL },
+          { opacity: on, offset: (DUSK + NIGHT) / TOTAL, easing: 'ease-in-out' },
+          { opacity: off },
+        ];
+
+        // Sky: a soft-edged radial glow behind the whole building (unique id, since the page has two hats).
+        const skyId = `wdas-night-${Math.random().toString(36).slice(2)}`;
+        const sky = document.createElementNS(SVG_NS, 'g');
+        sky.setAttribute('class', 'wdas-hat__sky');
+        sky.innerHTML = `<defs><radialGradient id="${skyId}">
+            <stop offset="0.5" stop-color="#1f2b4d"/>
+            <stop offset="0.75" stop-color="#1f2b4d" stop-opacity="0.6"/>
+            <stop offset="1" stop-color="#1f2b4d" stop-opacity="0"/>
+          </radialGradient></defs>
+          <ellipse cx="${cx}" cy="${cy}" rx="150" ry="115" fill="url(#${skyId})"/>`;
+        fx.parentNode.prepend(sky);
+        sky.animate(nightKeys(1), { duration: ms(TOTAL), fill: 'both' });
+
+        // Moon glows warm, with a soft halo over it.
+        const moon = hat[hat.length - 1].firstElementChild;
+        const mb = moon.getBBox();
+        const moonAnim = moon.animate([
+          { fill: '#ffffff' },
+          { fill: '#ffe680', offset: DUSK / TOTAL },
+          { fill: '#ffe680', offset: (DUSK + NIGHT) / TOTAL },
+          { fill: '#ffffff' },
+        ], { duration: ms(TOTAL), fill: 'both' });
+        for (const [r, opacity] of [[mb.width * 0.9, 0.3], [mb.width * 1.4, 0.14]]) {
+          const glow = document.createElementNS(SVG_NS, 'circle');
+          Object.entries({ cx: mb.x + mb.width / 2, cy: mb.y + mb.height / 2, r, fill: '#fff3b0' }).forEach(([key, v]) => glow.setAttribute(key, v));
+          particle(fx, glow, nightKeys(opacity), TOTAL, 'linear');
+        }
+
+        // Stars twinkle in around the building.
+        for (let i = 0; i < 8; i++) {
+          const x = cx + rand(-100, 100), y = cy - rand(20, 95), size = rand(0.6, 1.1) * s;
+          setTimeout(() => {
+            k.sound('chime', [rand(2000, 3200)], 0, 0.06);
+            particle(fx, starEl('#fff3b0'), [
+              { transform: `translate(${x}px, ${y}px) scale(0)`, opacity: 0 },
+              { transform: `translate(${x}px, ${y}px) scale(${size})`, opacity: 1, offset: 0.2 },
+              { transform: `translate(${x}px, ${y}px) scale(${size * 0.6})`, opacity: 0.4, offset: 0.5 },
+              { transform: `translate(${x}px, ${y}px) scale(${size})`, opacity: 1, offset: 0.75 },
+              { transform: `translate(${x}px, ${y}px) scale(0)`, opacity: 0 },
+            ], NIGHT + DAWN - rand(200, 500), 'ease-in-out');
+          }, ms(DUSK * 0.6 + rand(0, NIGHT * 0.4)));
+        }
+
+        k.sound('pad', secs(TOTAL - DAWN));
+        // Dozes through the night...
+        await move(hat, t => ({ rot: -5 * Math.sin(Math.PI * t), sy: 1 + 0.02 * Math.sin(TAU * 2 * t) }), TOTAL - DAWN).done;
+        // ...and perks up at dawn.
+        k.sound('chime', [1568, 2093, 2637], 0.08);
+        await move(hat, t => ({ y: -10 * hop(t), sx: 1 - 0.03 * hop(t), sy: 1 + 0.06 * hop(t) }), 300).done;
+        await land(k, { from: {}, soft: true });
+        await moonAnim.finished;
+        moonAnim.cancel();
+      },
+    },
+  ];
+
+  async function sparkleInPlace(k) {
+    k.sound('twinkle', 0.5);
+    for (let i = 0; i < 8; i++) {
+      trailSpark(k.fx, k.b.x + rand(0, k.b.width), k.b.y + rand(0, k.b.height * 0.6), i % 2 ? 1 : -1);
+      await wait(60);
+    }
+  }
+
+  // silent: skip sounds for this run, so two hats playing together don't double up.
+  async function play(root, version, { silent = false } = {}) {
+    if (root.dataset.playing) return;
+    root.dataset.playing = 'true';
+    const hat = [...root.querySelectorAll('.wdas-hat__hat')];
+    const b = hat[0].getBBox();
+    const left = [...root.querySelectorAll('.wdas-hat__wing-left')];
+    const right = [...root.querySelectorAll('.wdas-hat__wing-right')];
+    const k = {
+      root,
+      hat,
+      left,
+      right,
+      wings: [...left, ...right],
+      fx: root.querySelector('.wdas-hat__fx'),
+      fxBack: root.querySelector('.wdas-hat__fx-back'),
+      b,
+      brimX: b.x + b.width / 2,
+      brimY: b.y + b.height,
+      sound: silent ? () => {} : sound,
+    };
+    // 138 = viewBox height, so this keeps sparks at least ~5px on screen (and a touch bigger on the stage).
+    k.fx.dataset.scale = Math.max(1.3, 138 / root.querySelector('svg').getBoundingClientRect().height);
+    try {
+      await (reduceMotion.matches ? sparkleInPlace(k) : version.run(k));
+    } finally {
+      [...k.hat, ...k.wings].forEach(el => el.getAnimations().forEach(a => a.cancel()));
+      k.fxBack.replaceChildren();
+      root.querySelectorAll('.wdas-hat__sky').forEach(el => el.remove());
+      delete root.dataset.playing;
+      clearPlaying();
+    }
+    if (state.loop && root === stage) setTimeout(() => state.loop && trigger([stage]), ms(700));
+  }
+
+  // --- Cycle: each trigger plays the next version from a shuffled bag, so all of them
+  // play once before any repeats. Resets on page load.
+  const CYCLE = {
+    id: 'cycle',
+    name: 'Cycle',
+    blurb: 'Each click plays the next of V1, V2, V3, V4, V6, V7, shuffled so all six play before any repeats.',
+    pool: ['v1', 'v2', 'v3', 'v4', 'v6', 'v7'],
+  };
+  let bag = [], lastCycled = null;
+  function nextVersion() {
+    if (state.version !== CYCLE) return state.version;
+    if (!bag.length) {
+      bag = CYCLE.pool.map(id => VERSIONS.find(v => v.id === id));
+      for (let i = bag.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [bag[i], bag[j]] = [bag[j], bag[i]];
+      }
+      // Don't repeat across the seam between two rounds.
+      if (bag[0] === lastCycled) bag.push(bag.shift());
+    }
+    return (lastCycled = bag.shift());
+  }
+
+  const label = v => (v === CYCLE ? 'Cycle' : `${v.id.toUpperCase()} · ${v.name}`);
+  function showPlaying(version) {
+    if (state.version !== CYCLE) return;
+    current.textContent = `Cycle → ${label(version)}`;
+    nav.querySelectorAll('button').forEach(btn => btn.classList.toggle('is-playing', btn.dataset.id === version.id));
+  }
+  function clearPlaying() {
+    if (stage.dataset.playing || inline.dataset.playing) return;
+    nav.querySelectorAll('.is-playing').forEach(btn => btn.classList.remove('is-playing'));
+    if (state.version === CYCLE && lastCycled) current.textContent = `Cycle · last: ${label(lastCycled)}`;
+  }
+
+  // Picks the version once so every hat in `roots` plays the same one; only the first has sound.
+  function trigger(roots) {
+    if (roots.every(root => root.dataset.playing)) return;
+    unlockAudio();
+    const version = nextVersion();
+    showPlaying(version);
+    roots.forEach((root, i) => play(root, version, { silent: i > 0 }));
+  }
+
+  // --- Wiring
+  const stage = document.querySelector('.hat-lab__stage');
+  const inline = document.querySelector('.hat-inline');
+  const nav = document.querySelector('[data-versions]');
+  const current = document.querySelector('[data-current]');
+  document.querySelector('[data-reduced]').hidden = !reduceMotion.matches;
+
+  function select(version, autoplay) {
+    state.version = version;
+    current.textContent = label(version);
+    nav.querySelectorAll('button').forEach(btn => btn.setAttribute('aria-pressed', btn.dataset.id === version.id));
+    history.replaceState(null, '', `#${version.id}`);
+    if (autoplay) trigger([stage, inline]);
+  }
+  [CYCLE, ...VERSIONS].forEach(v => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `hat-lab__version${v === CYCLE ? ' hat-lab__version--cycle' : ''}`;
+    btn.dataset.id = v.id;
+    btn.innerHTML = `<strong>${v === CYCLE ? '↻ ' : ''}${label(v)}</strong><span>${v.blurb}</span>`;
+    btn.addEventListener('click', () => select(v, true));
+    nav.appendChild(btn);
+  });
+  select([CYCLE, ...VERSIONS].find(v => `#${v.id}` === location.hash) || VERSIONS[0], false);
+
+  stage.addEventListener('click', () => trigger([stage]));
+  document.querySelector('[data-play]').addEventListener('click', () => trigger([stage]));
+  inline.addEventListener('click', () => trigger([inline]));
+
+  document.querySelector('[data-sound]').addEventListener('change', e => { state.sound = e.target.checked; });
+  document.querySelector('[data-speed]').addEventListener('change', e => { state.speed = Number(e.target.value); });
+  document.querySelector('[data-loop]').addEventListener('change', e => {
+    state.loop = e.target.checked;
+    if (state.loop) trigger([stage]);
+  });
+
+  // --- Cursor-aware: the hat leans toward the pointer when it's near, and leans plus drifts
+  // toward it while playing. Uses the CSS rotate/translate properties, which stack on top of
+  // the WAAPI transform keyframes, so every version picks it up for free.
+  const pointer = { x: -1e4, y: -1e4 };
+  const leans = new Map();
+  addEventListener('pointermove', e => { pointer.x = e.clientX; pointer.y = e.clientY; });
+  function cursorFrame() {
+    if (!state.cursor) return;
+    for (const root of [stage, inline]) {
+      const r = root.querySelector('svg').getBoundingClientRect();
+      const size = Math.max(r.width, 160);
+      const dx = pointer.x - (r.left + r.width / 2), dy = pointer.y - (r.top + r.height / 2);
+      const playing = Boolean(root.dataset.playing);
+      const near = playing ? 1 : clamp(1 - Math.hypot(dx, dy) / (size * 2.5), 0, 1);
+      const nx = clamp(dx / (size * 1.2), -1, 1);
+      const target = { rot: nx * (playing ? 12 : 7) * near, x: playing ? nx * 10 : 0 };
+      const cur = leans.get(root) || { rot: 0, x: 0 };
+      cur.rot += (target.rot - cur.rot) * 0.12;
+      cur.x += (target.x - cur.x) * 0.12;
+      leans.set(root, cur);
+      root.querySelectorAll('.wdas-hat__hat').forEach(el => {
+        el.style.rotate = `${cur.rot}deg`;
+        el.style.translate = `${cur.x}px 0px`;
+      });
+    }
+    requestAnimationFrame(cursorFrame);
+  }
+  document.querySelector('[data-cursor]').addEventListener('change', e => {
+    state.cursor = e.target.checked;
+    if (state.cursor) return requestAnimationFrame(cursorFrame);
+    leans.clear();
+    document.querySelectorAll('.wdas-hat__hat').forEach(el => { el.style.rotate = ''; el.style.translate = ''; });
+  });
+})();
+</script>
