@@ -9,7 +9,8 @@ function isAchievementUnlocked() {
 		{ id: "code-snoop", key: "codeSnoopingEasterEgg", className: "code-snoop-unlocked" },
 		{ id: "paddington", key: "paddingtonEasterEgg", className: "paddington-unlocked" },
 		{ id: "to-dos", key: "todoChecklistEasterEgg", className: "todos-unlocked" },
-		{ id: "high-five", key: "highFiveEasterEgg", className: "high-five-unlocked" }
+		{ id: "high-five", key: "highFiveEasterEgg", className: "high-five-unlocked" },
+		{ id: "sorcerer’s-apprentice", key: "sorcerersApprenticeEasterEgg", className: "sorcerers-apprentice-unlocked" }
 	];
 
 	eggs.forEach(function(egg) {

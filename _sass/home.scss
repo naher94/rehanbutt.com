@@ -119,6 +119,43 @@ $home-section-vertical-spacing-mobile: 4rem;
       }
     }
   }
+  // Inline SVG (not an <img>) so js/wdas-hat.js can animate its parts; sits above
+  // the following words so the sparks draw over them. The button is an overlay
+  // rather than the SVG's parent because Safari clips a button's contents.
+  .wdas-hat-trigger{
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    vertical-align: text-top;
+    cursor: pointer;
+    .wdas-hat-trigger__button{
+      position: absolute;
+      inset: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 4px;
+      background: none;
+      cursor: pointer;
+    }
+    // Safari won't paint animated SVG content outside the SVG's own box, so the
+    // viewBox is padded to hold every trick, and negative margins
+    // give the padding back so the hat still lays out at 1.2em (138 viewBox units).
+    .wdas-hat{
+      $unit: 0.0086957em; // 1.2em / 138
+      display: block;
+      width: 413 * $unit;
+      height: 478 * $unit;
+      margin: (-220 * $unit) (-120 * $unit) (-120 * $unit);
+      overflow: visible;
+      pointer-events: none;
+    }
+    .wdas-hat__hat,
+    .wdas-hat__wing-left,
+    .wdas-hat__wing-right{
+      transform-box: fill-box;
+      transform-origin: 50% 100%;
+    }
+  }
   span{
     &#me{
       img{
