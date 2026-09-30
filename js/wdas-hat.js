@@ -479,8 +479,9 @@
       brimX: b.x + b.width / 2,
       brimY: b.y + b.height,
     };
-    // 138 = viewBox height, so particles stay at least ~5px on screen at text size.
-    k.fx.dataset.scale = Math.max(1.3, 138 / root.querySelector('svg').getBoundingClientRect().height);
+    // SVG units per screen px, so particles stay at least ~5px on screen at text size.
+    const svg = root.querySelector('svg');
+    k.fx.dataset.scale = Math.max(1.3, svg.viewBox.baseVal.height / svg.getBoundingClientRect().height);
     try {
       await nextVersion().run(k);
     } finally {

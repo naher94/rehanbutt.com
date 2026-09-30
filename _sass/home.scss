@@ -137,12 +137,17 @@ $home-section-vertical-spacing-mobile: 4rem;
       background: none;
       cursor: pointer;
     }
+    // Safari won't paint animated SVG content outside the SVG's own box, so the
+    // viewBox is padded (include pad=true) to hold every trick, and negative margins
+    // give the padding back so the hat still lays out at 1.2em (138 viewBox units).
     .wdas-hat{
+      $unit: 0.0086957em; // 1.2em / 138
       display: block;
-      height: 1.2em;
-      width: auto;
-      aspect-ratio: 173 / 138;
+      width: 413 * $unit;
+      height: 478 * $unit;
+      margin: (-220 * $unit) (-120 * $unit) (-120 * $unit);
       overflow: visible;
+      pointer-events: none;
     }
     .wdas-hat__hat,
     .wdas-hat__wing-left,
