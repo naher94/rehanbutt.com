@@ -6,7 +6,7 @@
  * all six play once before any repeats. Motion uses the Web Animations API;
  * sounds are synthesized with Web Audio, so there are no files to load.
  *
- * The SVG lives in _includes/wdas-hat.svg. Tricks were prototyped on /hat-lab.
+ * The SVG lives in _includes/wdas-hat.svg.
  */
 (function () {
   'use strict';
