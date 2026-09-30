@@ -123,8 +123,8 @@ function speedDemon(){
 // Speed is in screens per second so phones and big monitors trip at the same pace.
 // Only visitor-driven scrolling counts: anchor jumps and scroll restoration have no input.
 (function scrollSpeedometer() {
-	var SPEED_LIMIT = 8;     // screens per second, smoothed
-	var SUSTAIN = 250;       // ms over the limit before a ticket
+	var SPEED_LIMIT = 6;     // screens per second, smoothed; iOS flicks peak ~4 casual, 8–9 hard
+	var SUSTAIN = 150;       // ms over the limit; a flick decays fast, so a hard one only just holds this
 	var INPUT_WINDOW = 1000; // ms after input still counted, covers touch momentum
 
 	var lastInput = -Infinity;
@@ -132,7 +132,11 @@ function speedDemon(){
 	var speed = 0, overSince = null, ticketed = false;
 	var peak = 0, peakTimer; // TEMP calibration
 
-	function markInput() { lastInput = performance.now(); }
+	// Home/End are jumps, not sprints, even when the browser animates them.
+	function markInput(event) {
+		if (event.key === 'Home' || event.key === 'End') return;
+		lastInput = performance.now();
+	}
 	['wheel', 'touchstart', 'touchmove', 'touchend', 'keydown', 'mousedown'].forEach(function (type) {
 		window.addEventListener(type, markInput, { passive: true });
 	});
@@ -149,7 +153,7 @@ function speedDemon(){
 		}
 		if (dt <= 0) return;
 
-		// Smoothed so one fast frame (or a Home/End jump) can't write a ticket alone.
+		// Smoothed so one fast frame can't write a ticket alone.
 		var alpha = 1 - Math.exp(-dt / 100);
 		speed += alpha * ((dy / dt) * 1000 / window.innerHeight - speed);
 
