@@ -527,15 +527,81 @@ $type-properties: (
   font-style:     font-style,
 );
 
-// Optional properties are only written when the style defines them, so a rule
-// never carries `letter-spacing: normal` it did not ask for -- that would
-// override an inherited value rather than leave it alone. Shared with the `at`
-// blocks, which are the same thing with everything optional.
-@mixin type-declarations($style) {
-  @each $key, $prop in $type-properties {
+// Every value is read through a custom property, `--type-eyebrow-lg-size`, so
+// the entry's name survives into the compiled CSS and the audits read it off
+// the reference instead of inferring it from the value. Colours work the same
+// way through `semantic-color()`.
+@function type-var($style-key, $key) {
+  @return --type-#{$style-key}-#{$key};
+}
+
+@function type-queries() {
+  $queries: ();
+  @each $register, $map in $type-registers {
+    @each $style-key, $style in $map {
+      @each $query, $_ in map-get($style, at) or () {
+        // `small only` is a two-item list, so the name is its first item. A
+        // typo would otherwise reach Foundation as an unknown breakpoint and
+        // resolve to an always-true query rather than an error.
+        @if not map-has-key($breakpoints, nth($query, 1)) {
+          @error 'Unknown breakpoint `#{nth($query, 1)}` on '
+               + '#{$register}/#{$style-key}. Known: #{map-keys($breakpoints)}.';
+        }
+        @if not index($queries, $query) {
+          $queries: append($queries, $query, comma);
+        }
+      }
+    }
+  }
+  @return $queries;
+}
+
+// The values themselves, on :root. An `at` block redefines its entry's
+// properties inside the query; the rules referencing them change with it.
+@mixin type-custom-properties($style-key, $style) {
+  @each $key, $_ in $type-properties {
     $value: map-get($style, $key);
     @if $value != null {
-      #{$prop}: $value;
+      #{type-var($style-key, $key)}: #{inspect($value)};
+    }
+  }
+}
+
+:root {
+  $seen: ();
+  @each $register, $map in $type-registers {
+    @each $style-key, $style in $map {
+      // The name carries no register, so a key may appear in only one map.
+      @if index($seen, $style-key) {
+        @error 'Type style `#{$style-key}` is in more than one register.';
+      }
+      $seen: append($seen, $style-key);
+      @include type-custom-properties($style-key, $style);
+    }
+  }
+  @each $query in type-queries() {
+    @include breakpoint($query) {
+      @each $register, $map in $type-registers {
+        @each $style-key, $style in $map {
+          $overrides: map-get(map-get($style, at) or (), $query);
+          @if $overrides {
+            @include type-custom-properties($style-key, $overrides);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Optional properties are only written when the style defines them, so a rule
+// never carries `letter-spacing: normal` it did not ask for -- that would
+// override an inherited value rather than leave it alone. Nor a `var()` to a
+// property the entry leaves undefined: that still wins the cascade, then
+// computes to the parent's value over a rule like the heading reset's 1.4.
+@mixin type-declarations($style-key, $style) {
+  @each $key, $prop in $type-properties {
+    @if map-get($style, $key) != null {
+      #{$prop}: var(#{type-var($style-key, $key)});
     }
   }
 }
@@ -556,20 +622,19 @@ $type-properties: (
            + 'A base style must set both family and size.';
     }
   }
-  @include type-declarations($style);
+  @include type-declarations($style-key, $style);
 
   $at: map-get($style, at);
   @if $at != null {
+    // Breakpoint names are checked once, in `type-queries()`.
     @each $query, $overrides in $at {
-      // `small only` is a two-item list, so the name is its first item. A typo
-      // would otherwise reach Foundation as an unknown breakpoint and resolve
-      // to an always-true query rather than an error.
-      @if not map-has-key($breakpoints, nth($query, 1)) {
-        @error 'Unknown breakpoint `#{nth($query, 1)}` on '
-             + '#{$register}/#{$style-key}. Known: #{map-keys($breakpoints)}.';
-      }
-      @include breakpoint($query) {
-        @include type-declarations($overrides);
+      // A property the base already sets follows its redefined custom
+      // property; only one the base leaves out is declared here.
+      $added: map-remove($overrides, map-keys($style)...);
+      @if length($added) > 0 {
+        @include breakpoint($query) {
+          @include type-declarations($style-key, $added);
+        }
       }
     }
   }
