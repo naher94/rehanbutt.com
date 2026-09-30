@@ -3,7 +3,8 @@
  *
  * Clicking the inline hat plays one of six tricks: spin lift, tornado,
  * somersault, float, brooms, wand draw. Tricks come from a shuffled bag, so
- * all six play once before any repeats. Motion uses the Web Animations API;
+ * all six play once before any repeats; each full round unlocks the
+ * "Sorcerer’s Apprentice" easter egg. Motion uses the Web Animations API;
  * sounds are synthesized with Web Audio, so there are no files to load.
  *
  * The SVG lives in _includes/wdas-hat.svg.
@@ -461,6 +462,21 @@
     return (last = bag.shift());
   }
 
+  // ── Easter egg ──
+  // Every full round (all six tricks in one visit) unlocks "Sorcerer’s Apprentice".
+  // snackbar() and gtag() are globals from app.js and the analytics snippet.
+  let played = 0;
+  function unlockSorcerersApprentice() {
+    localStorage.setItem('sorcerersApprenticeEasterEgg', new Date().toISOString());
+    if (typeof gtag === 'function') {
+      gtag('event', 'Easter Eggs - Sorcerer’s Apprentice', {
+        'event_category': 'Special',
+        'event_label': 'Sorcerer’s Apprentice'
+      });
+    }
+    snackbar('Sorcerer’s Apprentice');
+  }
+
   // ── Play ──
   async function play(root) {
     if (root.dataset.playing) return;
@@ -484,6 +500,7 @@
     k.fx.dataset.scale = Math.max(1.3, svg.viewBox.baseVal.height / svg.getBoundingClientRect().height);
     try {
       await nextVersion().run(k);
+      if (++played % VERSIONS.length === 0) unlockSorcerersApprentice();
     } finally {
       [...k.hat, ...k.wings].forEach(el => el.getAnimations().forEach(a => a.cancel()));
       delete root.dataset.playing;
