@@ -151,7 +151,7 @@ function speedDemon(){
 			speed = 0; overSince = null; ticketed = false;
 			return;
 		}
-		if (dt <= 0) return;
+		if (dt <= 0 || !window.innerHeight) return;
 
 		// Smoothed so one fast frame can't write a ticket alone.
 		var alpha = 1 - Math.exp(-dt / 100);
