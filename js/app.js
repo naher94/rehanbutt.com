@@ -110,6 +110,73 @@ function highFive(){
 	snackbar("High Five");
 }
 
+function speedDemon(){
+	localStorage.setItem("speedDemonEasterEgg", new Date().toISOString());
+	gtag('event', 'Easter Eggs - Speed Demon', {
+		'event_category': 'Special',
+		'event_label': 'Speed Demon'
+	});
+	snackbar("Speed Demon");
+}
+
+///////////////////////////////////////////// Scroll Speedometer
+// Speed is in screens per second so phones and big monitors trip at the same pace.
+// Only visitor-driven scrolling counts: anchor jumps and scroll restoration have no input.
+(function scrollSpeedometer() {
+	var SPEED_LIMIT = 6;     // screens per second, smoothed; iOS flicks peak ~4 casual, 8–9 hard
+	var SUSTAIN = 150;       // ms over the limit; a flick decays fast, so a hard one only just holds this
+	var INPUT_WINDOW = 1000; // ms after input still counted, covers touch momentum
+
+	var lastInput = -Infinity;
+	var lastY = window.scrollY, lastTime = performance.now();
+	var speed = 0, overSince = null, ticketed = false;
+	var peak = 0, peakTimer; // TEMP calibration
+
+	// Home/End are jumps, not sprints, even when the browser animates them.
+	function markInput(event) {
+		if (event.key === 'Home' || event.key === 'End') return;
+		lastInput = performance.now();
+	}
+	['wheel', 'touchstart', 'touchmove', 'touchend', 'keydown', 'mousedown'].forEach(function (type) {
+		window.addEventListener(type, markInput, { passive: true });
+	});
+
+	window.addEventListener('scroll', function () {
+		var now = performance.now(), dt = now - lastTime;
+		var y = window.scrollY, dy = Math.abs(y - lastY);
+		lastY = y; lastTime = now;
+
+		// A pause or scroll nobody drove ends the sprint and re-arms the ticket.
+		if (dt > 100 || now - lastInput > INPUT_WINDOW) {
+			speed = 0; overSince = null; ticketed = false;
+			return;
+		}
+		if (dt <= 0 || !window.innerHeight) return;
+
+		// Smoothed so one fast frame can't write a ticket alone.
+		var alpha = 1 - Math.exp(-dt / 100);
+		speed += alpha * ((dy / dt) * 1000 / window.innerHeight - speed);
+
+		// TEMP calibration: remove before merging.
+		peak = Math.max(peak, speed);
+		clearTimeout(peakTimer);
+		peakTimer = setTimeout(function () {
+			if (peak > 1) console.log('[speedometer] peak ' + peak.toFixed(1) + ' screens/s');
+			peak = 0;
+		}, 300);
+
+		if (speed < SPEED_LIMIT) {
+			overSince = null; ticketed = false;
+		} else if (overSince === null) {
+			overSince = now;
+		} else if (!ticketed && now - overSince >= SUSTAIN) {
+			ticketed = true;
+			speedDemon();
+		}
+	}, { passive: true });
+})();
+///////////////////////////////////////////// End of Scroll Speedometer
+
 isEgg();
 isCodeSnoop();
 
