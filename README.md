@@ -320,9 +320,24 @@ Values match what the site already renders, with two exceptions:
 type-value($register, $style-key, $prop);     // reads one property
 ```
 
+Every value is emitted as a custom property reference, the way colours go
+through `semantic-color()`:
+
+```css
+:root       { --type-eyebrow-lg-size: 0.75rem; }
+.sub-header { font-size: var(--type-eyebrow-lg-size); }
+```
+
+The reference is the attribution — the audits read the entry's name off it
+rather than inferring it from the value, which failed whenever two entries
+rendered alike. The name carries no register, so a key may appear in only one
+map; the build fails if it doesn't.
+
 Optional properties (`letter-spacing`, `text-transform`, `font-style`) are
 emitted only when the style defines them, so a rule never carries a
-`letter-spacing: normal` that would override an inherited value.
+`letter-spacing: normal` that would override an inherited value. Nor a `var()`
+to a property the entry leaves out: that would still win the cascade, then
+compute to the parent's value over a rule like the heading reset's 1.4.
 
 `at` holds per-breakpoint exceptions, with `size` staying the desktop value —
 a desktop base with `small only` corrections, matching how the rest of the site
@@ -340,9 +355,10 @@ Two things to know about it:
 * **Moving an override into the map changes its specificity.** `page-title`'s
   48px lived on a bare `h1` selector, so two h1s ignored it — the 404 title and
   the about hero, both re-applying `page-title` at class specificity. From the
-  map the query is emitted inside each call site, so those two now shrink with
-  everything else. A mobile step meant for only some call sites wants its own
-  entry instead.
+  map the query redefines the entry's custom properties on `:root`, so every
+  call site shrinks with it, those two included. A property only the `at`
+  block sets is still declared at each call site, inside the query. A mobile
+  step meant for only some call sites wants its own entry instead.
 
 Unknown names fail the build, with the valid ones listed:
 
@@ -395,7 +411,7 @@ Colours can be checked off as you work through them. **Mark reviewed** in the de
 bundle exec jekyll build && python3 _tools/type-audit.py
 ```
 
-Each distinct combination of family, size, weight, style, line-height, tracking and case counts as one style. File attribution comes from the Sass source map (`_site/css/rehan.css.map`), so every style knows which partial wrote it.
+Each distinct combination of family, size, weight, style, line-height, tracking and case counts as one style. File attribution comes from the Sass source map (`_site/css/rehan.css.map`), so every style knows which partial wrote it. The map entry comes from the `var(--type-*)` reference itself, resolved against `:root` at each width.
 
 It writes these beside itself, all gitignored:
 

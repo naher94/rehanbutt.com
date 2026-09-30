@@ -373,6 +373,28 @@ def parse_rules(css, smap=None, props=None, keep_state=False):
     return rules
 
 
+def root_properties(css):
+    """{--name: value} declared on `:root`, later declarations winning.
+
+    Run on a stylesheet `strip_at_rules` has already flattened for one width,
+    so a redefinition inside a query that holds there is simply a later rule.
+    """
+    out = {}
+    for sel, decls, *_ in parse_rules(css):
+        if sel == ":root":
+            out.update((p, v) for p, v in decls.items() if p.startswith("--"))
+    return out
+
+
+VAR_REF = re.compile(r'^var\(\s*(--[\w-]+)\s*\)$')
+
+
+def var_name(value):
+    """`var(--x)` -> `--x`; None for anything else, including a fallback."""
+    m = VAR_REF.match((value or "").strip())
+    return m.group(1) if m else None
+
+
 COMPOUND = re.compile(r'^([a-zA-Z][\w-]*)?((?:[.#][\w-]+)*)')
 
 
