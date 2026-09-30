@@ -295,12 +295,28 @@
   }
 }
 
-// `.speaking-events` is the only one of the five section wrappers this ever
-// matched under; the other four are about-page sections.
+// The list rows. The spacing, `p` reset and date/description type mirror
+// about.scss's `.work-item, .education-item`.
 .speaking-events{
-  // A talk title is what was done, so it sits at the same rank as a work
-  // item's role -- which its markup spells h4 and this one spells h3.
   .speaking-item{
+    margin-top: 1rem;
+    padding-left: 0.5rem;
+    @include breakpoint(small only) {
+      padding-left: 0;
+    }
+    p{
+      padding: 0;
+      margin: 0;
+      margin-top: -0.25em;
+    }
+    .date{
+      @include type-style(product, item-date);
+    }
+    .description{
+      @include type-style(product, item-detail);
+    }
+    // A talk title is what was done, so it sits at the same rank as a work
+    // item's role -- which its markup spells h4 and this one spells h3.
     h3{
       @include type-style(product, item-title);
       padding: 0;
