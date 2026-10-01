@@ -5,4 +5,5 @@ link: https://medium.com/firm-narrative/want-a-better-pitch-watch-this-328b95c2f
 description: A good read to help position your next pitch for success.
 content-type: reading
 tags: [product development]
+date: 2020-08-30
 ---

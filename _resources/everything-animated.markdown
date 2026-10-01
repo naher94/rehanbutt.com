@@ -5,4 +5,5 @@ link: https://vimeo.com/channels/everythinganimated
 description: A channel for admirers of animation. Just sit back, relax and enjoy the greatest animation talent out there carefully handpicked for you!
 content-type: video
 tags: film animation
+date: 2020-08-30
 ---

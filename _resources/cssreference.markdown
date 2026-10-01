@@ -5,4 +5,5 @@ link: https://cssreference.io
 description: CSS Reference is a free visual guide to CSS. It features the most popular properties, and explains them with illustrated and animated examples.
 content-type: reference
 tags: [web dev]
+date: 2020-08-30
 ---

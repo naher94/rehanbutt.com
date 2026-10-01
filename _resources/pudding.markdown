@@ -5,4 +5,5 @@ link: https://pudding.cool
 description: We are a digital publication that explains ideas debated in culture with visual essays.
 content-type: reading
 tags: [data viz]
+date: 2020-08-30
 ---

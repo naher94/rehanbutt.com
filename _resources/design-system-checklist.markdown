@@ -5,4 +5,5 @@ link: https://designsystemchecklist.com
 description: An open-source checklist to help you plan, build and grow your design system.
 content-type: reference
 tags: [design systems]
+date: 2020-08-30
 ---

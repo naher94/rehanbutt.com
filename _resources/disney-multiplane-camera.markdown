@@ -5,4 +5,5 @@ link: https://www.youtube.com/watch?v=YdHTlUGN1zw&feature=emb_title
 description: Walt Disney explains his invention. Probably the most advanced tool ever made in the field of animation. (At least until the computer was made.)
 content-type: video
 tags: [animation]
+date: 2020-08-30
 ---

@@ -5,4 +5,5 @@ link: https://www.supremo.co.uk/typeterms/
 description: Type Terms. The animated typographic cheat sheet.
 content-type: interactive
 tags: typography
+date: 2020-08-30
 ---

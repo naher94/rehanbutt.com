@@ -5,4 +5,5 @@ link: https://www.theguardian.com/society/ng-interactive/2015/feb/05/-sp-watch-h
 description: If you take 10 communities and run a simulation, it’s easy to see why we need as many members of the ‘herd’ as possible to get vaccines – before it’s too late
 content-type: reading
 tags: [data viz]
+date: 2020-08-30
 ---

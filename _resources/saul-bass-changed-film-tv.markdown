@@ -5,4 +5,5 @@ link: https://www.wired.com/2016/10/design-legend-saul-bass-changed-film-tv-fore
 description: The designer of famed logos had a rich and important career in designing film titles, too.
 content-type: reading
 tags: [animation, film]
+date: 2020-08-30
 ---

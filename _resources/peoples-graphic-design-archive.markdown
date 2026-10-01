@@ -5,4 +5,5 @@ link: https://www.peoplesgdarchive.org
 description: "A virtual archive built by everyone, about everyone, for everyone."
 content-type: reference
 tags: [inspiration]
+date: 2021-01-30
 ---

@@ -5,4 +5,5 @@ link: https://lawsofux.com
 description: Laws of UX is a collection of principles that designers can consider when building user interfaces.
 content-type: reference
 tags: [research methods]
+date: 2020-08-30
 ---

@@ -5,4 +5,5 @@ link: https://informationisbeautiful.net
 description: "Data, information, knowledge: we distil it into beautiful, useful graphics & diagrams."
 content-type: publication
 tags: [data viz]
+date: 2020-08-30
 ---

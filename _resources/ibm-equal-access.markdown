@@ -4,5 +4,5 @@ link: https://chrome.google.com/webstore/detail/ibm-equal-access-accessib/lkcagb
 description: The IBM Equal Access Accessibility Checker is an open source tool for auditing your sites accessibility against IBM's accessibility rule engine.
 content-type: tool
 tags: [accessibility, tools]
-date: 29-04-2021
+date: 2021-04-29
 ---

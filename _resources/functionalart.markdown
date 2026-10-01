@@ -6,4 +6,5 @@ description: The Functional Art is an introduction to Information Graphics and V
 content-type: reading
 tags: [data viz]
 published: false
+date: 2020-08-30
 ---

@@ -5,4 +5,5 @@ link: https://jeffsum.oliverturner.cloud
 description: A little text placeholder generator of Jeff Goldblum awesomeness.
 content-type: tool
 tags: tools
+date: 2020-08-30
 ---

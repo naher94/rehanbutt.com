@@ -5,4 +5,5 @@ link: https://andvijaysays.com/2020/07/23/a-wish-list-of-three-for-ui-ux-for-the
 description: Don't forget about designing for the some times users.
 content-type: reading
 tags: [product development]
+date: 2020-08-30
 ---

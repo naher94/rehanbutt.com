@@ -6,4 +6,5 @@ description: Hundreds of fonts arranged using machine learning
 content-type: reference
 tags: typography
 published: false
+date: 2020-08-30
 ---

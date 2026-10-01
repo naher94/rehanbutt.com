@@ -5,4 +5,5 @@ link: https://www.theleagueofmoveabletype.com
 description: The League of Moveable Type is the first open-source font foundry, dedicated to helping you level up as a designer.
 content-type: tool
 tags: typography
+date: 2020-08-30
 ---

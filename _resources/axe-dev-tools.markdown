@@ -4,5 +4,5 @@ link: https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdopp
 description: Find and fix accessibility issues on your website by using the axe DevTools Chrome extension.
 content-type: tool
 tags: [accessibility, tools]
-date: 29-04-2021
+date: 2021-04-29
 ---
