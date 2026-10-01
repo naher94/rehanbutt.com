@@ -14,7 +14,7 @@ published: false
   <div class="image-container cell small-8 medium-6"><img src="../img/cameleon/logo.svg" alt="Cameleon Logo"/></div>
 </div>
 
-Check out the project on the <a target="_blank" href="http://naher94.github.io/cameleon"> splash page.</a>
+Check out the project on the {% include external-link.html link="http://naher94.github.io/cameleon" content=" splash page." %}
 
 ## Process
 
