@@ -22,6 +22,13 @@
         &.link{
           cursor: pointer;
           position: relative;
+          // A button is inline-block: cancel its padding's effect on the line,
+          // and use Lato's text height so the box matches the old span's.
+          margin-block: -0.25em;
+          line-height: 1.2;
+          .copied{
+            line-height: 1.5;
+          }
           &:hover{
             i{
               transition: $sprint;
@@ -74,6 +81,9 @@
       &.link{
         position: relative;
         cursor: pointer;
+        // A button centres its content when stretched; this keeps it at the top.
+        display: flex;
+        flex-direction: column;
         .copied{
           font-size: 1em;
           left: 20%;

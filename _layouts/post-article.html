@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+{%- assign page_link = page.url | prepend: site.url -%}
 <article class="post post-article" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
@@ -13,9 +14,7 @@ layout: default
         <a href="https://threads.net/intent/post?text=Check%20out%20this%20article%20by%20%40naher94!%20{{page.url | prepend: site.url}}" target="_blank" class="share-item threads">
           <i class="fa-brands fa-threads"></i>
         </a>
-        <span onclick="copyToClipboard('{{page.url | prepend: site.url}}', this)" class="share-item link">
-          <i class="fas fa-link"></i>
-        </span>
+        {% include copy-button.html text=page_link css-class="share-item link" label="Copy link" content="<i class='fas fa-link'></i>" %}
       </div>
     </div>
     <h1 itemprop="name headline">{{ page.title }}</h1>
@@ -34,9 +33,7 @@ layout: default
           <i class="fa-brands fa-threads"></i> Share on Threads
           <span class="visually-hidden">Opens a new window</span>
         </a>
-        <span onclick="copyToClipboard('{{page.url | prepend: site.url}}', this)" class="cta-button link cell medium-shrink">
-          <i class="fas fa-link"></i> Copy Link
-        </span>
+        {% include copy-button.html text=page_link css-class="cta-button link cell medium-shrink" content="<span><i class='fas fa-link'></i> Copy Link</span>" %}
       </div>
     </div>
   </div>
