@@ -370,23 +370,34 @@ updateSendItLabel();
 ///////////////////////////////////////////// End of Send It Easter Egg
 
 ///////////////////////////////////////////// Start of Copy to Clipboard
-function copyToClipboard(link,clickedItem) {
-	if (navigator && navigator.clipboard && navigator.clipboard.writeText){
-		var copyBadge = document.createElement("span");
-		copyBadge.classList.add("copied");
-		copyBadge.setAttribute("id", "copy-confirmation");
-		copyBadge.innerText = "Copied!";
-		clickedItem.appendChild(copyBadge);
-
-    navigator.clipboard.writeText(link);
-    requestAnimationFrame(function(){
-      requestAnimationFrame(function(){ copyBadge.classList.add('visible'); });
-    });
-    setTimeout(function(){ copyBadge.classList.remove('visible'); }, 1500);
-		setTimeout(function(){ copyBadge.remove(); }, 1900);
+// Without the Clipboard API (or with it denied), emails open in the mail app
+// and links are offered in a prompt to copy by hand.
+function copyToClipboard(text, clickedItem) {
+  function fallback() {
+    if (/^[^\s@:\/]+@[^\s@]+$/.test(text)) {
+      window.location.href = "mailto:" + text;
+    } else {
+      window.prompt("Copy this link:", text);
+    }
+  }
+  if (!navigator.clipboard || !navigator.clipboard.writeText) {
+    fallback();
     return;
-	}
-  return Promise.reject('The Clipboard API is not available.');
+  }
+  navigator.clipboard.writeText(text).then(function () {
+    // The live region goes in empty and gets its text a frame later, so
+    // screen readers see a change and announce it.
+    var copyBadge = document.createElement("span");
+    copyBadge.classList.add("copied");
+    copyBadge.setAttribute("role", "status");
+    clickedItem.appendChild(copyBadge);
+    requestAnimationFrame(function () {
+      copyBadge.innerText = "Copied!";
+      requestAnimationFrame(function () { copyBadge.classList.add("visible"); });
+    });
+    setTimeout(function () { copyBadge.classList.remove("visible"); }, 1500);
+    setTimeout(function () { copyBadge.remove(); }, 1900);
+  }, fallback);
 }
 ///////////////////////////////////////////// End of Copy to Clipboard
 

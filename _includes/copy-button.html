@@ -1,0 +1,1 @@
+<button type="button" class="copy-button{% if include.css-class %} {{ include.css-class }}{% endif %}"{% if include.label %} aria-label="{{ include.label }}"{% endif %} onclick="copyToClipboard('{{ include.text }}', this)">{{ include.content }}</button>

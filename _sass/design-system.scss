@@ -186,6 +186,20 @@ ul {
 }
 //******* End of A Tag Underline Expand Styling
 
+// Strips the browser button look so each copy-button.html keeps its own class's
+// styling. :where() keeps this at element weight so any class still wins.
+button:where(.copy-button){
+  appearance: none;
+  font: inherit;
+  text-align: inherit;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
 .copied{
   background-color: semantic-color(actionable-pill);
   box-shadow: $recessed-shadow semantic-color(shadow);

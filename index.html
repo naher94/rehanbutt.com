@@ -37,9 +37,7 @@ sort-order: 1
 
       <p class="section-description cell">I'm always eager for new opportunities to share insights and inspire conversations. Planning an event? Let's connect!</p>
       <div class="grid-x cta-container cell">
-        <div class="email-wrapper cta-button cell shrink" onclick="copyToClipboard('me@rehanbutt.com',this)">
-          <i class="fa-solid fa-envelope"></i> Email Me
-        </div>
+        {% include copy-button.html text="me@rehanbutt.com" css-class="email-wrapper cta-button cell shrink" content="<i class='fa-solid fa-envelope'></i> Email Me" %}
         {% include external-link.html css-class="cta-button cell shrink" link="https://www.linkedin.com/in/rehan-butt/" content="<i class='fa-brands fa-linkedin'></i> Message Me" %}
       </div>
     </div>
