@@ -1,6 +1,4 @@
-<a href="{{include.href}}"
-   {%- if include.external %} target="_blank" rel="noreferrer"{% endif %}
-   class="cell {{include.css-class}} resource-link">
+{%- capture card -%}
   <div class="resource">
     {%- if include.item.hero -%}
     <div class="resource-thumbnail">
@@ -33,4 +31,12 @@
     <p class="title">{{include.item.title}}<i class="fas fa-link"></i></p>
     <p class="description">{{include.item.description}}</p>
   </div>
+{%- endcapture -%}
+{%- assign card_class = "cell " | append: include.css-class | append: " resource-link" -%}
+{%- if include.external -%}
+{% include external-link.html css-class=card_class link=include.href content=card %}
+{%- else -%}
+<a href="{{include.href}}" class="{{card_class}}">
+  {{ card }}
 </a>
+{%- endif -%}
