@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Render a 1200x630 share image for each resource collection, after its page tile.
+"""Render a 1200x630 share image for each resource collection.
+
+The portrait tile art is shown whole on the right, over a blurred wash of
+itself, with the sub-header, title and resource count on the left.
 
 Run from the repo root: python3 scripts/generate-og-images.py
 Writes img/og/collection/{slug}.jpg. Needs Pillow and PyYAML.
@@ -16,13 +19,15 @@ OUT = ROOT / "img/og/collection"
 FONTS = Path(__file__).resolve().parent / "fonts"
 
 W, H = 1200, 630
-PAD = 64
+PAD = 56
+TILE_RADIUS = 24
 NAVY_BLACK = (0x1F, 0x29, 0x37)
 WHITE = (0xFF, 0xFF, 0xFF)
 
-title_font = ImageFont.truetype(str(FONTS / "ZillaSlab-Bold.ttf"), 88)
+title_font = ImageFont.truetype(str(FONTS / "ZillaSlab-Bold.ttf"), 72)
 eyebrow_font = ImageFont.truetype(str(FONTS / "Lato-Bold.ttf"), 26)
 count_font = ImageFont.truetype(str(FONTS / "Lato-Bold.ttf"), 30)
+TITLE_LEADING = 84
 
 
 def front_matter(path):
@@ -41,22 +46,11 @@ def is_light(rgb):
     return 0.299 * r + 0.587 * g + 0.114 * b > 140
 
 
-def cover_top(img):
-    # The tile's <img> is absolutely positioned at top/left, so crop from the top.
-    scale = max(W / img.width, H / img.height)
+def cover(img, w, h):
+    scale = max(w / img.width, h / img.height)
     img = img.resize((round(img.width * scale), round(img.height * scale)), Image.LANCZOS)
-    left = (img.width - W) // 2
-    return img.crop((left, 0, left + W, H))
-
-
-def scrim(base_rgb):
-    # Fades from 55% at the top to nothing by 60% of the height, behind the title.
-    mask = Image.new("L", (1, H))
-    for y in range(H):
-        mask.putpixel((0, y), round(140 * max(0.0, 1 - y / (H * 0.6))))
-    layer = Image.new("RGBA", (W, H), base_rgb + (0,))
-    layer.putalpha(mask.resize((W, H)))
-    return layer
+    left, top = (img.width - w) // 2, (img.height - h) // 2
+    return img.crop((left, top, left + w, top + h))
 
 
 def wrap(draw, text, font, width):
@@ -78,42 +72,57 @@ def tracked(draw, xy, text, font, fill, tracking):
         x += draw.textlength(ch, font=font) + tracking
 
 
+def layer():
+    return Image.new("RGBA", (W, H), (0, 0, 0, 0))
+
+
 def render(meta, out_path):
     text_rgb = hex_rgb(meta.get("text-color") or "#ffffff")
-    light_text = is_light(text_rgb)
-    shade = NAVY_BLACK if light_text else WHITE
+    shade = NAVY_BLACK if is_light(text_rgb) else WHITE
+    on_shade = NAVY_BLACK if shade == WHITE else WHITE
+    art = Image.open(TILES / meta["tile-image"]).convert("RGB")
 
-    canvas = cover_top(Image.open(TILES / meta["tile-image"]).convert("RGB")).convert("RGBA")
-    canvas = Image.alpha_composite(canvas, scrim(shade))
+    # Background: the art blurred to a wash, tinted toward the shade so
+    # text-color, picked for the art, still reads on it.
+    canvas = cover(art, W, H).filter(ImageFilter.GaussianBlur(40)).convert("RGBA")
+    canvas = Image.alpha_composite(canvas, Image.new("RGBA", (W, H), shade + (90,)))
 
-    # Metadata bar: frosted glass over the image, like the page's backdrop-filter.
-    bar_h = 76
-    bar_box = (PAD, H - PAD - bar_h, W - PAD, H - PAD)
-    bar_mask = Image.new("L", (W, H), 0)
-    ImageDraw.Draw(bar_mask).rounded_rectangle(bar_box, radius=14, fill=255)
-    canvas.paste(canvas.filter(ImageFilter.GaussianBlur(10)), mask=bar_mask)
-    bar = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    ImageDraw.Draw(bar).rounded_rectangle(bar_box, radius=14, fill=shade + (153,))
-    canvas = Image.alpha_composite(canvas, bar)
+    # The tile, uncropped and inset on the right, rounded like the page's card.
+    th = H - PAD * 2
+    tw = round(art.width * th / art.height)
+    tx = W - PAD - tw
+    shadow = layer()
+    ImageDraw.Draw(shadow).rounded_rectangle((tx, PAD + 8, tx + tw, PAD + th + 8),
+                                             radius=TILE_RADIUS, fill=(0, 0, 0, 90))
+    canvas = Image.alpha_composite(canvas, shadow.filter(ImageFilter.GaussianBlur(16)))
+    mask = Image.new("L", (tw, th), 0)
+    ImageDraw.Draw(mask).rounded_rectangle((0, 0, tw - 1, th - 1), radius=TILE_RADIUS, fill=255)
+    canvas.paste(art.resize((tw, th), Image.LANCZOS), (tx, PAD), mask)
 
-    draw = ImageDraw.Draw(canvas)
-    y = PAD - 10
-    for line in wrap(draw, meta["title"], title_font, W - PAD * 2)[:2]:
-        draw.text((PAD, y), line, font=title_font, fill=text_rgb)
-        y += 100
+    # Text block, vertically centred in the space left of the tile.
+    measure = ImageDraw.Draw(canvas)
+    lines = wrap(measure, meta["title"], title_font, tx - PAD * 2)[:3]
+    y = (H - (len(lines) * TITLE_LEADING + 60)) // 2 - 30
 
+    text = layer()
+    draw = ImageDraw.Draw(text)
     if meta.get("sub-header"):
-        eyebrow = text_rgb + (153,)  # the page sets it at 0.6 opacity
-        overlay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-        tracked(ImageDraw.Draw(overlay), (PAD, y + 14), str(meta["sub-header"]).upper(),
-                eyebrow_font, eyebrow, tracking=26 * 0.3)
-        canvas = Image.alpha_composite(canvas, overlay)
-        draw = ImageDraw.Draw(canvas)
+        tracked(draw, (PAD, y), str(meta["sub-header"]).upper(), eyebrow_font,
+                text_rgb + (170,), tracking=26 * 0.3)
+    y += 50
+    for line in lines:
+        draw.text((PAD, y), line, font=title_font, fill=text_rgb)
+        y += TITLE_LEADING
 
-    count = len(meta.get("resources") or [])
-    bar_text = NAVY_BLACK if shade == WHITE else WHITE
-    draw.text((PAD + 24, bar_box[1] + bar_h / 2), f"{count} Resources",
-              font=count_font, fill=bar_text, anchor="lm")
+    count = f"{len(meta.get('resources') or [])} Resources"
+    pill_w = draw.textlength(count, font=count_font) + 48
+    pill = layer()
+    ImageDraw.Draw(pill).rounded_rectangle((PAD, y + 24, PAD + pill_w, y + 84),
+                                           radius=14, fill=shade + (153,))
+    canvas = Image.alpha_composite(canvas, pill)
+    canvas = Image.alpha_composite(canvas, text)
+    ImageDraw.Draw(canvas).text((PAD + 24, y + 54), count, font=count_font,
+                                fill=on_shade, anchor="lm")
 
     canvas.convert("RGB").save(out_path, "JPEG", quality=85, optimize=True, progressive=True)
 
