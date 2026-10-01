@@ -118,6 +118,12 @@
         &.link{
           cursor: pointer;
           position: relative;
+          // A button is inline-block, so its padding would grow the line.
+          margin-block: -0.25em;
+          // The icon's line-height makes the box 0.125em taller at the top than the old span's.
+          .copied{
+            top: 0.125em;
+          }
           &:hover{
             i{
               transition: $sprint;

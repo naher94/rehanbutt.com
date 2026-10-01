@@ -59,9 +59,8 @@
           </div>
           <div class="cell small-12 medium-shrink social-sub-2">
             
-            {% include copy-button.html text="me@rehanbutt.com" css-class="social email-wrapper" label="Copy email address" content="<i class='fas fa-envelope fa-xs'></i>" %}
-
-            {% include external-link.html css-class="social" link="https://codepen.io/rehanbutt" content="<i class='fab fa-codepen fa-xs' title='codepen'></i>" %}
+            {%- comment -%} Kept touching: the gap after the envelope is the space that opens the CodePen link, at icon size. {%- endcomment %}
+            {% include copy-button.html text="me@rehanbutt.com" css-class="social email-wrapper" label="Copy email address" content="<i class='fas fa-envelope fa-xs'></i>" %}{% include external-link.html css-class="social" link="https://codepen.io/rehanbutt" content="<i class='fab fa-codepen fa-xs' title='codepen'></i>" %}
           
             {% include external-link.html css-class="social" link="https://instagram.com/naher94" content="<i class='fab fa-instagram fa-xs' title='instagram'></i>" %}
             

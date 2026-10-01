@@ -183,17 +183,21 @@ footer{
     position: relative;
     display: inline;
     cursor: pointer;
+    // Lato's text height, so the button's box matches the inline div it replaced.
+    line-height: 1.2;
     @include breakpoint(small only) {
       padding-right: 0;
     }
+    // The old div was a space (0.386em here) wider; the offsets add it back.
     .copied{
       font-size: 0.5em;
-      left: -20%;
+      line-height: 1.5;
+      left: calc(-20% - 0.077em);
       right: unset;
       font-weight: $lato-bold;
       @include breakpoint(small only) {
         left: unset;
-        right: -50%;
+        right: calc(-50% - 0.579em);
       }
     }
   }
