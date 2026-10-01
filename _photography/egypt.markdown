@@ -7,7 +7,7 @@ hero-image: "egypt-2024/egypt-hero.jpg"
 hero-image-alt: The Pyramids of Giza with a blue sky filled with clouds
 featured: true
 big-tile:
-date: 15-12-2024
+date: 2024-12-15
 hero-background-color: "#FFFFFF"
 hero-background-color-dark: "#161d27"
 hero-accent-color: "#1F2937"

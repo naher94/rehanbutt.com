@@ -7,7 +7,7 @@ hero-image: "jordan-2022/jordan-hero.jpg"
 hero-image-alt: The Treasury at Petra
 featured:
 big-tile: false
-date: 15-02-2022
+date: 2022-02-15
 hero-background-color: "#FFFFFF"
 hero-background-color-dark: "#161d27"
 hero-accent-color: "#1F2937"

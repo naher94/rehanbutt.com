@@ -7,7 +7,7 @@ hero-image: "doha/doha-hero.jpg"
 hero-image-alt: Katara Towers at night
 featured: false
 big-tile: false
-date: 15-12-2022
+date: 2022-12-15
 display-date: Spring, Winter 2022 & Winter 2023
 hero-background-color: "#FFFFFF"
 hero-background-color-dark: "#161d27"
