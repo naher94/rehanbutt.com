@@ -103,15 +103,17 @@ sort-order: 1
   {% if project.featured == true %}
   <div class="cell medium-6 feature-item">
     <div class="image-wrapper">
-      {% if project.external-link %}
-        <a class="" rel="noopener" href="{{ project.external-link | prepend: site.baseurl }}" target="_blank"><span class="visually-hidden">Opens a new window</span>
-      {% else %}
-        <a class="" href="{{ project.url | prepend: site.baseurl }}">
-      {% endif %}
+      {%- capture tile -%}
           <div class="thumbnail-container-featured">
             <img class="thumbnail-image-featured" src="img/thumbnails/{{ project.thumbnail | append: '-featured.jpg' }}" alt="{{ project.tile-name }} Tile">
           </div>
-      </a>
+      {%- endcapture %}
+      {% if project.external-link %}
+        {%- assign tile_link = project.external-link | prepend: site.baseurl %}
+        {% include external-link.html link=tile_link content=tile %}
+      {% else %}
+        <a class="" href="{{ project.url | prepend: site.baseurl }}">{{ tile }}</a>
+      {% endif %}
     </div>
     <div class="text-wrapper">
       <div class="featured-text">
@@ -165,7 +167,7 @@ sort-order: 1
 
   {%- for year in yir_order -%}
   <div class="cell small-6 medium-3">
-    <a href="https://{{ year.year | append: ".rehanbutt.com" }}" target="_blank" rel="noopener">
+    {%- capture year_card -%}
       <div class="year-container">
         <style>
           .year-square-{{year.year}} {
@@ -188,8 +190,9 @@ sort-order: 1
           {{year.year}} in review
         </div>
       </div>
-      <span class="visually-hidden">Opens a new window</span>
-    </a>
+    {%- endcapture %}
+    {%- assign year_link = "https://" | append: year.year | append: ".rehanbutt.com" %}
+    {% include external-link.html link=year_link content=year_card %}
   </div>
   {%- endfor -%}
 </section>
