@@ -146,12 +146,20 @@ def render(meta, out_path):
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
+    written = set()
     for path in sorted(COLLECTIONS.glob("*.markdown")):
         meta = front_matter(path)
         if meta.get("published") is False:
             continue
         render(meta, OUT / f"{path.stem}.jpg")
+        written.add(f"{path.stem}.jpg")
         print(f"wrote img/og/collection/{path.stem}.jpg")
+
+    # Drop images for collections that were renamed, removed or unpublished.
+    for stale in sorted(OUT.glob("*.jpg")):
+        if stale.name not in written:
+            stale.unlink()
+            print(f"removed img/og/collection/{stale.name}")
 
 
 if __name__ == "__main__":
