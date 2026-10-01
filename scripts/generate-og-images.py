@@ -21,6 +21,7 @@ FONTS = Path(__file__).resolve().parent / "fonts"
 W, H = 1200, 630
 PAD = 56
 TILE_RADIUS = 24
+ART_TOP_CROP = 0.2
 NAVY_BLACK = (0x1F, 0x29, 0x37)
 WHITE = (0xFF, 0xFF, 0xFF)
 
@@ -65,6 +66,20 @@ def wrap(draw, text, font, width):
     return lines + [line]
 
 
+def wrap_balanced(draw, text, font, width):
+    # CSS text-wrap: balance -- greedy's line count, with the narrowest
+    # width that still fits in it, so no word is left alone on a line.
+    count = len(wrap(draw, text, font, width))
+    lo, hi = 0, width
+    while hi - lo > 1:
+        mid = (lo + hi) // 2
+        if len(wrap(draw, text, font, mid)) <= count:
+            hi = mid
+        else:
+            lo = mid
+    return wrap(draw, text, font, hi)
+
+
 def tracked(draw, xy, text, font, fill, tracking):
     x, y = xy
     for ch in text:
@@ -81,6 +96,8 @@ def render(meta, out_path):
     shade = NAVY_BLACK if is_light(text_rgb) else WHITE
     on_shade = NAVY_BLACK if shade == WHITE else WHITE
     art = Image.open(TILES / meta["tile-image"]).convert("RGB")
+    # The top of each tile is left empty for the page's title; drop it here.
+    art = art.crop((0, round(art.height * ART_TOP_CROP), art.width, art.height))
 
     # Background: the art blurred to a wash, tinted toward the shade so
     # text-color, picked for the art, still reads on it.
@@ -101,7 +118,7 @@ def render(meta, out_path):
 
     # Text block, vertically centred in the space left of the tile.
     measure = ImageDraw.Draw(canvas)
-    lines = wrap(measure, meta["title"], title_font, tx - PAD * 2)[:3]
+    lines = wrap_balanced(measure, meta["title"], title_font, tx - PAD * 2)[:3]
     y = (H - (len(lines) * TITLE_LEADING + 60)) // 2 - 30
 
     text = layer()
