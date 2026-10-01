@@ -228,6 +228,52 @@ p, li, h3{
   }
 }
 
+// Pause control for looping demo videos (loop-video.html). The colors are fixed
+// rather than semantic: the button sits on video, not on the page ground.
+.loop-video{
+  position: relative;
+  video{
+    display: block;
+  }
+  .loop-video-toggle{
+    appearance: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background-color: rgba($navy-black, 0.75);
+    color: $pure-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: $sprint;
+    &:hover{
+      background-color: $navy-black;
+    }
+    // display:flex outranks the UA's [hidden] rule.
+    &[hidden]{
+      display: none;
+    }
+  }
+  .icon-play{
+    display: none;
+  }
+  &.is-paused{
+    .icon-pause{
+      display: none;
+    }
+    .icon-play{
+      display: inline;
+    }
+  }
+}
+
 @mixin swipe-underline($color,$inline-hover) {
   display: inline;
   background: linear-gradient($color, $color);

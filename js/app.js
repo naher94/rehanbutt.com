@@ -464,3 +464,40 @@ function mobileMenu() {
 
 mobileMenu();
 ///////////////////////////////////////////// End of Mobile Menu
+
+///////////////////////////////////////////// Start of Loop Videos
+// WCAG 2.2.2: anything looping past 5s needs a way to stop it. Under reduced
+// motion they start stopped. State follows the video's own events, so a
+// browser that blocks autoplay still shows Play rather than a stale Pause.
+function loopVideos() {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll(".loop-video").forEach(function (wrapper) {
+    const video = wrapper.querySelector("video");
+    const button = wrapper.querySelector(".loop-video-toggle");
+    if (!video || !button) { return; }
+
+    function sync() {
+      wrapper.classList.toggle("is-paused", video.paused);
+      button.setAttribute("aria-label", video.paused ? "Play animation" : "Pause animation");
+    }
+    video.addEventListener("play", sync);
+    video.addEventListener("pause", sync);
+    button.addEventListener("click", function () {
+      if (video.paused) {
+        video.play().catch(function () {});
+      } else {
+        video.pause();
+      }
+    });
+
+    if (reduceMotion) {
+      video.removeAttribute("autoplay");
+      video.pause();
+    }
+    sync();
+    button.hidden = false;
+  });
+}
+
+loopVideos();
+///////////////////////////////////////////// End of Loop Videos

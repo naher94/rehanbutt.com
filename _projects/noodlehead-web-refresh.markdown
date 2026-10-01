@@ -77,14 +77,10 @@ If you are in Pittsburgh and get a chance to go to Noodlehead I recommend the St
 
 <div class="grid-x grid-padding-x grid-margin-y">
   <div class="cell medium-6">
-    <video autoplay loop muted playsinline width="100%" title="Spice level slider fun - Medium">
-      <source src="../img/noodlehead/spice-level-medium.mp4" type="video/mp4">
-    </video>
+    {% include loop-video.html src="../img/noodlehead/spice-level-medium.mp4" title="Spice level slider fun - Medium" %}
   </div>
   <div class="cell medium-6">
-    <video autoplay loop muted playsinline width="100%" title="Spice level slider fun - Crazy Hot">
-      <source src="../img/noodlehead/spice-level-crazy-hot.mp4" type="video/mp4">
-    </video>
+    {% include loop-video.html src="../img/noodlehead/spice-level-crazy-hot.mp4" title="Spice level slider fun - Crazy Hot" %}
   </div>
 </div>
 

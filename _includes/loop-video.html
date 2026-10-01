@@ -1,0 +1,10 @@
+<div class="loop-video">
+  <video autoplay loop muted playsinline width="100%" title="{{ include.title }}">
+    <source src="{{ include.src }}" type="{{ include.type | default: 'video/mp4' }}">
+  </video>
+  {%- comment -%} Hidden until app.js wires it up, so it never shows as a dead control. {%- endcomment %}
+  <button type="button" class="loop-video-toggle" aria-label="Pause animation" hidden>
+    <span class="icon-pause"><i class="fas fa-pause" aria-hidden="true"></i></span>
+    <span class="icon-play"><i class="fas fa-play" aria-hidden="true"></i></span>
+  </button>
+</div>
