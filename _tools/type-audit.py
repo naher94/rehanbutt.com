@@ -40,8 +40,8 @@ import sys
 from collections import Counter, defaultdict
 
 from cascade import (CSS, DOM, HERE, ROOT, SITE, SKIP, SourceMap, compile_selector,
-                     is_vendor, matches, parse_rules, specificity,
-                     strip_at_rules)
+                     is_vendor, matches, parse_rules, root_properties,
+                     specificity, strip_at_rules, var_name)
 
 TYPE_PROPS = ("font-family", "font-size", "font-weight", "font-style",
               "line-height", "letter-spacing", "text-transform")
@@ -117,85 +117,14 @@ def balanced(text, open_at):
     raise ValueError("unbalanced `(` at %d in variables.scss" % open_at)
 
 
-def split_top_level(body):
-    """`body` split on the commas that are not inside a nested map."""
-    parts, depth, cur = [], 0, ""
-    for ch in body:
-        if ch == "(":
-            depth += 1
-        elif ch == ")":
-            depth -= 1
-        if ch == "," and depth == 0:
-            parts.append(cur)
-            cur = ""
-        else:
-            cur += ch
-    parts.append(cur)
-    return [p.strip() for p in parts if p.strip()]
+def type_entries():
+    """{key: register} for every entry in `$product-type` / `$expressive-type`.
 
-
-def type_style_map():
-    """`$product-type` / `$expressive-type` from variables.scss, as
-    {(register, key): [variant, ...]} -- each variant a {css-prop: value} the
-    entry can actually render.
-
-    Read rather than restated, for the same reason the breakpoints are. The
-    values are compared against compiled CSS, so they are normalised the way
-    the compiler writes them: `0.625rem` loses its leading zero, `$zilla`
-    resolves to its stack, weights to their numbers.
-
-    A property maps to the *set* of values the style can render, not one value:
-    an entry with `at: (small only: (size: 2.5rem))` is 50px on desktop and
-    40px on a phone, and both are that token. The audit resolves each page at
-    every breakpoint, so a single value would leave the token unidentifiable at
-    all but one width -- which is what used to happen to the three callouts.
+    Read rather than restated, for the same reason the breakpoints are.
+    Comments are stripped first: several carry unbalanced or comma-bearing
+    prose (`(50/40/30 -> 40/32/24)`) that the scanner would read as syntax.
     """
     text = (ROOT / "_sass" / "variables.scss").read_text()
-    families, weights = {}, {}
-    for m in re.finditer(r'^\$([-\w]+):\s*([^;]+);', text, re.M):
-        name, val = "$" + m.group(1), m.group(2).strip()
-        if val.startswith(("'", '"')):
-            families[name] = re.sub(r"'", '"', val)
-        elif val.isdigit():
-            weights[name] = val
-
-    def norm(v):
-        v = v.strip()
-        v = families.get(v, weights.get(v, v))
-        v = re.sub(r',\s+', ',', v)                # "Lato", sans -> "Lato",sans
-        v = re.sub(r'^0(\.\d)', r'\1', v)          # 0.625rem -> .625rem
-        return v.rstrip("0").rstrip(".") if re.fullmatch(r'\d+\.\d+', v) else v
-
-    def variants(body):
-        """One entry -> the list of styles it can actually render.
-
-        The base style, plus the base with each `at` block layered on. Kept as
-        whole variants rather than a set of values per property: an entry whose
-        `at` changes two properties would otherwise match any mix of them, and
-        `column-title` -- 20px/700 above small, 24px/900 below -- was matching a
-        20px/900 heading it never produces.
-        """
-        base, overrides = {}, []
-        for part in split_top_level(body):
-            key, _, value = part.partition(":")
-            key, value = key.strip(), value.strip()
-            if key == "at":
-                for query in split_top_level(balanced(value, value.index("("))):
-                    _, _, nested = query.partition(":")
-                    nested = nested.strip()
-                    over = {}
-                    for p2 in split_top_level(balanced(nested, nested.index("("))):
-                        k2, _, v2 = p2.partition(":")
-                        k2 = k2.strip()
-                        if k2 in TOKEN_PROPS:
-                            over[TOKEN_PROPS[k2]] = norm(v2.strip())
-                    overrides.append(over)
-            elif key in TOKEN_PROPS:
-                base[TOKEN_PROPS[key]] = norm(value)
-        return [base] + [dict(base, **o) for o in overrides]
-
-    # Comments are stripped first: several carry unbalanced or comma-bearing
-    # prose (`(50/40/30 -> 40/32/24)`) that the scanners would read as syntax.
     stripped = re.sub(r'//[^\n]*', '', text)
     out = {}
     for register in ("product", "expressive"):
@@ -204,273 +133,67 @@ def type_style_map():
             continue
         block = balanced(stripped, head.end() - 1)
         for m in re.finditer(r'^\s{2}([-\w]+):\s*\(', block, re.M):
-            out[(register, m.group(1))] = variants(balanced(block, m.end() - 1))
+            out[m.group(1)] = register
     return out
 
 
-_TYPE_STYLES = None
+_TYPE_VARS = None
 
 
-# The include that produced a rule, read from the call site rather than guessed
-# from what it rendered. Same rule as `declaring_line`: two candidates is a
-# guess, and a guess here invents an attribution.
-INCLUDE_LINE = re.compile(
-    r'@include\s+type-style\(\s*([-\w]+)\s*,\s*([-\w]+)\s*\)')
-
-# Sass maps an `&`-nested rule to the line its parent opens on, so the include
-# sits below the mapped line rather than on it -- four lines below for a `p`
-# with two classed children. Wide enough to reach it, and safe at that width
-# only because `renders_as` throws out the neighbours it also reaches.
-INCLUDE_SEARCH = 6
+def type_vars():
+    """{`--type-body-size`: `product/body`} -- the custom properties
+    `type-style()` reads every value through, one per entry and property."""
+    global _TYPE_VARS
+    if _TYPE_VARS is None:
+        _TYPE_VARS = {"--type-%s-%s" % (key, k): "%s/%s" % (register, key)
+                      for key, register in type_entries().items()
+                      for k in TOKEN_PROPS}
+    return _TYPE_VARS
 
 
-def renders_as(entry, decls):
-    """Whether `entry` can render what this rule declares.
+def compressed(value):
+    """A custom property keeps its value as written; a declaration is
+    compressed. Normalised so `0.3em` from :root compares equal to the `.3em`
+    the same value compiled to before it went through a custom property."""
+    v = re.sub(r',\s+', ',', value.strip())
+    return re.sub(r'(?<![\w.])0\.(\d)', r'.\1', v)
 
-    The window reaches the includes of nearby rules as well as this one's --
-    the snackbar's two lines sit four lines apart and each window holds both.
-    An entry that contradicts the rule it supposedly wrote did not write it:
-    `snackbar-title` is 20px/700 and the `.view` rule renders 16px/400.
 
-    Silence is not contradiction, so an entry that leaves a property to be
-    inherited still fits. A call site that overrides one of its own entry's
-    properties inline does not, and loses the name to `token_for` -- which is
-    the conservative direction: no name beats a wrong one.
+def resolve_tokens(decls, origin, roots):
+    """Each `var(--type-*)` replaced by its value at this width, and the entry
+    it names stamped on the declaration.
+
+    -> (decls, {prop: (file, line, entry-or-None)}). The reference is the
+    attribution, so nothing is matched back against the map. One to a
+    property :root leaves undefined computes to the parent's value, which the
+    walk already does with `inherit`.
     """
-    global _TYPE_STYLES
-    if _TYPE_STYLES is None:
-        _TYPE_STYLES = type_style_map()
-    key = tuple(entry.split("/", 1))
-    return any(all(variant.get(p, v) == v for p, v in decls.items())
-               for variant in _TYPE_STYLES.get(key, ()))
-
-
-def call_site_entry(smap, span, css, decls):
-    """`register/key` for the `type-style()` include that wrote this rule.
-
-    The source map credits a mixin-emitted declaration to the mixin body, so
-    every entry in both registers lands on the same line of variables.scss and
-    the name has to be recovered some other way. `token_for` recovers it by
-    matching rendered values back against the map, which cannot separate two
-    entries that render alike -- `footer-link` is `body` at every width above
-    small, and adding it took the name off all 1,496 `body` elements.
-
-    The rule's own span maps to the call site, which names the entry outright.
-    """
-    if not smap or not span:
-        return None
-    # Anchored on the selector's first character, not on the rule's span, which
-    # opens at whatever whitespace follows the previous `}`. A mapping is
-    # emitted for the selector; an offset before it resolves to the rule above,
-    # which put the `body` include on a `:root` media query 200 lines away.
-    text = css[span[0]:span[1]]
-    hit = smap.lookup(span[0] + len(text) - len(text.lstrip()))
-    if not hit:
-        return None
-    rel, line = hit
-    found = set()
-    for off in range(0, INCLUDE_SEARCH + 1):
-        m = INCLUDE_LINE.search(source_line(rel, line + off))
-        if m:
-            found.add("%s/%s" % (m.group(1), m.group(2)))
-    found = {e for e in found if renders_as(e, decls)}
-    return found.pop() if len(found) == 1 else None
-
-
-def name_origins(origin, entry):
-    """Stamp the entry onto the declarations the mixin emitted for this rule.
-
-    -> {prop: (file, line, entry-or-None)}. Only mixin-emitted declarations are
-    stamped: a literal beside an include in the same rule is the call site
-    overriding the entry, not part of it.
-    """
-    out = {}
-    for prop, src in origin.items():
+    out, named = dict(decls), {}
+    for prop, value in decls.items():
+        src = origin.get(prop)
         rel, line = src if src else (None, None)
-        named = entry if (entry and rel and from_mixin(rel, line, prop)) else None
-        out[prop] = (rel, line, named)
-    return out
+        ref = var_name(value)
+        entry = type_vars().get(ref)
+        if entry:
+            out[prop] = compressed(roots[ref]) if ref in roots else "inherit"
+        named[prop] = (rel, line, entry)
+    return out, named
 
 
-# The mixin emits its optional properties through a loop, as `#{$prop}: $value`,
-# so the source line names no property at all. Matching only `prop: map-get(...)`
-# missed every one of them and reported line-height, letter-spacing and
-# text-transform as hand-written literals.
-MIXIN_EMIT = re.compile(r'^#\{\$[-\w]+\}\s*:\s*\$[-\w]+\s*;?\s*$')
-
-
-def from_mixin(rel, line, prop):
-    """Whether this declaration was emitted by `type-style()` rather than written."""
-    text = source_line(rel, line).strip()
-    if MIXIN_EMIT.match(text):
-        return True
-    m = re.match(r'([-\w]+)\s*:\s*(.+?)\s*;?\s*$', text)
-    return bool(m and m.group(1) == prop and "map-get($style" in m.group(2))
-
-
-# Properties whose absence is visible: nothing declares `text-transform: none`,
-# so a style rendering one of these at its initial value was never touched by an
-# entry that sets it. `type-style` emits an entry's properties together.
-INITIAL = {"letter-spacing": "normal", "text-transform": "none",
-           "font-style": "normal"}
-
-
-def token_for(decls, rendered=None):
-    """Which map entry produced this style's mixin-emitted declarations.
-
-    The source map points at the mixin body -- `font-size: map-get($style,
-    size)` -- so the line says a token was used but not which one. Every
-    property the mixin emits for one element came from the same `$style`,
-    though, so intersecting the entries that match each value identifies it.
-    A single property is often ambiguous (`1rem` is both `body-sm` and `ui`);
-    the combination usually is not.
-
-    Only mixin-emitted declarations can name a token. A style aggregates the
-    declarations of every element that renders as it, so folding a literal
-    written somewhere else into that intersection would empty it and lose a
-    name that was right. Where the mixin's own properties leave two entries
-    standing, though, a literal can still rule one of them out -- see the
-    second pass.
-    """
-    global _TYPE_STYLES
-    if _TYPE_STYLES is None:
-        _TYPE_STYLES = type_style_map()
-
-    # The call site named it. Own declarations first: an element that includes
-    # an entry of its own is that entry, whatever it inherited. Everything
-    # below is the fallback for rules the source map could not place.
-    named = lambda own: {d[5] for d in decls
-                         if len(d) > 5 and d[5] and (d[4] or not own)}
-    if len(named(True)) == 1:
-        return named(True).pop()
-    if not named(True) and len(named(False)) == 1:
-        return named(False).pop()
-    def narrow(use_inherited, lenient=False):
-        """Entries with a variant consistent with every observed declaration.
-
-        Matched a whole variant at a time, not property by property: an entry
-        whose `at` changes two properties can otherwise be satisfied by a mix
-        of them that it never actually renders.
-
-        `use_inherited` decides whether values this element merely inherited
-        take part. They are credited to the mixin body of whichever ancestor's
-        include produced them, so they look identical to values emitted here.
-        """
-        obs, sized = [], False
-        for decl in decls:
-            prop, value, rel, line = decl[0], decl[1], decl[2], decl[3]
-            own = decl[4] if len(decl) > 4 else True
-            if (not own and not use_inherited) or not from_mixin(rel, line, prop):
-                continue
-            obs.append((prop, value, own))
-            sized = sized or prop == "font-size"
-        if not obs:
-            return None, False
-
-        def fits(variant):
-            # An entry that sets a property this style renders as initial is
-            # out: `eyebrow-xl` is `meta` plus tracking and uppercase, and
-            # without this it swallowed all 450 of meta's elements. An entry
-            # whose declaration merely lost to a literal is excluded by the
-            # value check below instead -- the literal is observed.
-            for prop, initial in INITIAL.items():
-                if (rendered and rendered.get(prop) == initial
-                        and variant.get(prop, initial) != initial):
-                    return False
-            for prop, value, own in obs:
-                if prop in variant:
-                    if variant[prop] != value:
-                        return False
-                # Silence is "inherit", so it is compatible with an inherited
-                # value but not with one the mixin emitted here.
-                elif not (lenient and not own):
-                    return False
-            return True
-
-        hits = {k: [v for v in variants if fits(v)]
-                for k, variants in _TYPE_STYLES.items()}
-        hits = {k: v for k, v in hits.items() if v}
-        return (hits or None), sized
-
-    # What the element declares for itself identifies it best. An entry silent
-    # on a property it inherits is still that entry, and matching the inherited
-    # value strictly threw the entry away: `callout-sm` declares no font-weight
-    # on purpose, and the 400 its pull-quotes inherit from `body` was enough to
-    # eliminate it.
-    hits, sized = narrow(False)
-    if not hits or len(hits) > 1:
-        # Nothing unique from the element's own declarations. Inherited values
-        # are weaker evidence -- they describe an ancestor -- but a value match
-        # is still the best answer available, and it is the reading every name
-        # in the atlas had before this.
-        wider, wider_sized = narrow(True)
-        if wider and (not hits or len(wider) < len(hits)):
-            hits, sized = wider, wider_sized
-    if not hits or len(hits) > 1:
-        # Last resort, and only for styles no stricter reading could name: an
-        # element that owns nothing, like a `span.byline` inside a pull-quote,
-        # has only inherited declarations, and a strict read of them eliminates
-        # the very entry it inherited from. Runs after the passes above, so it
-        # can add a name but never replace one.
-        loose, loose_sized = narrow(True, lenient=True)
-        if loose and len(loose) == 1:
-            hits, sized = loose, loose_sized
-
-    # `body` and `body-strong` are both Lato at 1.25rem, so an element that
-    # inherits its size from `body` and takes its weight from a rule of its own
-    # ends the first pass holding both. The weight is the thing that separates
-    # them and it is right there in the source -- it just cannot be the thing
-    # that *names* the token, only the thing that eliminates the other one.
-    #
-    # Gated on the mixin having supplied a size. Family alone leaves nine Lato
-    # entries standing, and narrowing that on a literal picks a name out of a
-    # crowd on one property: it read a 72px easter-egg numeral as `counter` for
-    # sharing weight 900, and a 24px heading as `callout-sm` for sharing 1.5rem.
-    # A size from the mixin means the set is already small and specific, and the
-    # literal is breaking a tie rather than choosing a winner.
-    #
-    # Eliminating is done on contradiction alone: an entry silent on a property
-    # stays in, because saying nothing is not the same as disagreeing. `body`
-    # declares no line-height, so it survives whatever leading the element
-    # inherits, while `body-strong`'s 700 cannot survive a rendered 400. A
-    # literal that contradicts every remaining candidate is ignored rather than
-    # allowed to empty the set -- that is the aggregation problem again, and an
-    # honest `type-style()` beats a wrong name.
-    # Whether the entry is this element's own include. If every mixin-emitted
-    # value was inherited the entry belongs to an ancestor, and a literal here
-    # is this element overriding it, not identifying it.
-    own_mixin = any(from_mixin(d[2], d[3], d[0]) and (d[4] if len(d) > 4 else True)
-                    for d in decls)
-    if sized and hits and len(hits) > 1:
-        for decl in decls:
-            prop, value, rel, line = decl[0], decl[1], decl[2], decl[3]
-            own = decl[4] if len(decl) > 4 else True
-            if from_mixin(rel, line, prop):
-                continue
-            # Leading is always admissible: entries are mostly silent on it, so
-            # the one it rules out is the one whose own declaration the element
-            # plainly is not using. Every other property has to be a literal the
-            # element owns, on an entry the element owns. Otherwise it is either
-            # the container's choice -- the home page photo captions take their
-            # size from `body` and their Zilla bold from the tile around them --
-            # or an override of an ancestor's entry, and eliminating on the
-            # value that was overridden picks whichever decoy still matches it:
-            # `・2025` inherits `body` and sets its own 700, which ruled `body`
-            # out and named it `meta`.
-            if prop != "line-height" and not (own and own_mixin):
-                continue
-            # Checked against the variants that already fit, not against the
-            # entry as a whole: reading the size off one variant and the weight
-            # off another names a style the entry never renders.
-            narrowed = {k: [v for v in vs if prop not in v or v[prop] == value]
-                        for k, vs in hits.items()}
-            narrowed = {k: v for k, v in narrowed.items() if v}
-            if narrowed:
-                hits = narrowed
-            if len(hits) == 1:
-                break
-
-    return "%s/%s" % sorted(hits)[0] if hits and len(hits) == 1 else None
+def compile_rules(raw, smap, width):
+    """The type rules that apply on a screen `width` wide, ready for
+    `style_page`. -> (rules, selectors skipped as unsupported)."""
+    css = strip_at_rules(raw, width=width)
+    roots = root_properties(css)
+    rules, skipped = [], 0
+    for sel, decls, order, origin, span in parse_rules(css, smap, TYPE_PROPS):
+        comps = compile_selector(sel)
+        if comps is None:
+            skipped += 1
+            continue
+        decls, origin = resolve_tokens(decls, origin, roots)
+        rules.append((comps, decls, order, specificity(comps), origin))
+    return rules, skipped
 
 
 # Returned when the source cannot be read, as distinct from read and found to
@@ -520,32 +243,25 @@ def declaring_line(rel, line, prop):
     return found[0] if len(found) == 1 else None
 
 
-def authored_as(rel, line, prop, value, token=None):
+def authored_as(rel, line, prop, value, entry=None):
     """What the declaration says in the source, when that is not the value.
 
     `font-weight: 900` in the output is `$lato-black` in the source, and the
     name is the useful half -- it says which decision produced the number.
+    A `var(--type-*)` reference names its map entry, which is returned as-is.
     Returns None for a plain literal, where the source adds nothing, and
     UNVERIFIED when the source line could not be identified at all.
     """
+    if entry:
+        return entry
     if not rel or not line:
         return UNVERIFIED
-    text = source_line(rel, line).strip()
-    if MIXIN_EMIT.match(text):
-        # An interpolated emit names no property, so the usual guard below
-        # cannot confirm it. `token_for` still has to match the value against
-        # the map to name an entry, so a wrong line degrades to `type-style()`
-        # rather than inventing an attribution.
-        return token or "type-style()"
     hit = declaring_line(rel, line, prop)
     if hit is None:
         return UNVERIFIED
     expr = hit[1]
     if expr == value:
         return None                       # written exactly as it renders
-    if "map-get($style" in expr:
-        # emitted by the mixin; name the entry when it can be identified
-        return token or "type-style()"
     return expr if ("$" in expr or "(" in expr) else None
 
 
@@ -794,12 +510,7 @@ class CascadeTree:
         redeciding.
         """
         def annotate(decls):
-            # a node's `sets` holds only what it declares itself, so every
-            # one of these is an own declaration
-            listed = [(p, v[0], v[1], v[2], True, v[3]) for p, v in decls.items()]
-            token = token_for(listed)
-            return {p: [v[0], v[1], v[2],
-                        authored_as(v[1], v[2], p, v[0], v[3] or token)]
+            return {p: [v[0], v[1], v[2], authored_as(v[1], v[2], p, v[0], v[3])]
                     for p, v in decls.items()}
 
         subtree = defaultdict(lambda: defaultdict(int))
@@ -989,16 +700,8 @@ def build(out_path, limit=None):
     breakpoints = project_breakpoints()
     compiled_sets, unsupported = {}, 0
     for name, width in breakpoints:
-        css = strip_at_rules(raw, width=width)
-        rules = []
-        for sel, decls, order, origin, span in parse_rules(css, smap, TYPE_PROPS):
-            comps = compile_selector(sel)
-            if comps is None:
-                unsupported += 1
-                continue
-            origin = name_origins(origin, call_site_entry(smap, span, css, decls))
-            rules.append((comps, decls, order, specificity(comps), origin))
-        compiled_sets[name] = rules
+        compiled_sets[name], skipped = compile_rules(raw, smap, width)
+        unsupported += skipped
     unsupported = unsupported // max(1, len(breakpoints))
 
     global WIDEST
@@ -1158,11 +861,6 @@ def build(out_path, limit=None):
     items = []
     for (family, size, weight, style, lh, spacing, transform,
          size_unresolved), e in styles.items():
-        # every mixin-emitted declaration on one element shares a `$style`, so
-        # the entry is identified once per style and reused for its properties
-        rendered = {"letter-spacing": spacing, "text-transform": transform,
-                    "font-style": style}
-        style_token = token_for(list(e["decls"]), rendered)
         items.append(dict(
             id=f"{family}|{size}|{weight}|{style}|{lh}|{spacing}|{transform}"
                + ("|?" if size_unresolved else ""),
@@ -1182,13 +880,12 @@ def build(out_path, limit=None):
             samples=e["samples"],
             uses=sorted(e["uses"], key=lambda u: (u["page"], u["line"])),
             sources=[[dict(prop=d[0], value=d[1], file=d[2], line=d[3],
-                           via=authored_as(d[2], d[3], d[0], d[1],
-                                           d[5] or token_for(list(key), rendered)))
+                           via=authored_as(d[2], d[3], d[0], d[1], d[5]))
                       for d in key]
                      for key, _ in sorted(e["srcsets"].items(),
                                           key=lambda kv: kv[1])],
             decls=[dict(prop=p, value=v, file=f, line=ln, count=c, own=own,
-                        via=authored_as(f, ln, p, v, entry or style_token))
+                        via=authored_as(f, ln, p, v, entry))
                    for (p, v, f, ln, own, entry), c in
                    sorted(e["decls"].items(), key=lambda kv: (kv[0][0], -kv[1]))],
             files=[dict(file=f, count=c)
@@ -1313,21 +1010,6 @@ def build(out_path, limit=None):
         for (entry, _v, _f, _l), n in inv["fs"].items():
             if entry:
                 entries[entry] += n
-        # Gated on the size itself coming from the mixin. `token_for` can name
-        # an entry from any mixin-emitted property, so a card whose family and
-        # weight come from `body-sm-strong` and whose size is a hand-written
-        # `2rem` would read as mapped -- and this view exists to answer which
-        # sizes are still decided by hand.
-        sized = any(f and from_mixin(f, l, "font-size")
-                    for (_e, _v, f, l) in inv["fs"])
-        if not entries and sized:
-            rendered = {"letter-spacing": renders[0]["letter_spacing"],
-                        "text-transform": renders[0]["text_transform"],
-                        "font-style": renders[0]["style"]}
-            for key in inv["srcsets"]:
-                tok = token_for(list(key), rendered)
-                if tok:
-                    entries[tok] += 1
         entries = dict(entries)
         # The register is the map's own word for the kind of type this is, and
         # a card reaches it through its entry. Silence where there is none: an
@@ -1350,9 +1032,7 @@ def build(out_path, limit=None):
                                if b in band_names})
                   for u in sorted(inv["uses"], key=lambda u: (u["page"], u["line"]))],
             sources=[[dict(prop=d[0], value=d[1], file=d[2], line=d[3],
-                           via=authored_as(d[2], d[3], d[0], d[1],
-                                           d[5] or (next(iter(entries), None)
-                                                    if len(entries) == 1 else None)))
+                           via=authored_as(d[2], d[3], d[0], d[1], d[5]))
                       for d in key]
                      for key, _ in sorted(inv["srcsets"].items(),
                                           key=lambda kv: kv[1])],
