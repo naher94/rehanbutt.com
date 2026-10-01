@@ -27,7 +27,7 @@ Interchange, a career event, was created as a way to help the graduate students 
   </div>
 </div>
 
-As this site was used by many students, I templated and created a style guide throughout the site for a uniform look and feel. Keeping in mind the need for a variety of content types and optional information fields such as personal websites and resumes on the profile pages. I built the site using Jekyll to template each page and to automate the connection of pages such as people and their projects and tagging people with their degree program. If you are curious to learn more feel free to <a target="_blank" href="https://github.com/naher94/interchange"> check out the code.</a>
+As this site was used by many students, I templated and created a style guide throughout the site for a uniform look and feel. Keeping in mind the need for a variety of content types and optional information fields such as personal websites and resumes on the profile pages. I built the site using Jekyll to template each page and to automate the connection of pages such as people and their projects and tagging people with their degree program. If you are curious to learn more feel free to {% include external-link.html link="https://github.com/naher94/interchange" content=" check out the code." %}
 
 <div class="grid-x grid-padding-x grid-padding-y">
   <div class="cell medium-6">
