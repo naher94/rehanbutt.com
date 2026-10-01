@@ -209,6 +209,7 @@ button:where(.copy-button){
   position: absolute;
   right: -50%;
   top: 0;
+  white-space: nowrap;
   opacity: 0;
   transform: scale(0.5) rotate(0deg);
   transition: opacity 0.4s $tight-spring-curve, transform 0.4s $tight-spring-curve;

@@ -370,12 +370,36 @@ updateSendItLabel();
 ///////////////////////////////////////////// End of Send It Easter Egg
 
 ///////////////////////////////////////////// Start of Copy to Clipboard
-// Without the Clipboard API (or with it denied), emails open in the mail app
-// and links are offered in a prompt to copy by hand.
+// Without the Clipboard API (or with it denied), emails are shown in the badge
+// for longer and links are offered in a prompt, to copy by hand.
 function copyToClipboard(text, clickedItem) {
+  function showBadge(message, holdMs, keepOnScreen) {
+    // The live region goes in empty and gets its text a frame later, so
+    // screen readers see a change and announce it.
+    var copyBadge = document.createElement("span");
+    copyBadge.classList.add("copied");
+    copyBadge.setAttribute("role", "status");
+    clickedItem.appendChild(copyBadge);
+    requestAnimationFrame(function () {
+      copyBadge.innerText = message;
+      if (keepOnScreen) {
+        // The 16px margin leaves room for the tilt the badge gets when visible.
+        var box = copyBadge.getBoundingClientRect();
+        var centre = box.left + box.width / 2;
+        var half = copyBadge.offsetWidth / 2;
+        var maxRight = document.documentElement.clientWidth - 16;
+        var shift = Math.max(16 - (centre - half), 0) + Math.min(maxRight - (centre + half), 0);
+        if (shift) { copyBadge.style.translate = shift + "px 0"; }
+      }
+      requestAnimationFrame(function () { copyBadge.classList.add("visible"); });
+    });
+    setTimeout(function () { copyBadge.classList.remove("visible"); }, holdMs);
+    setTimeout(function () { copyBadge.remove(); }, holdMs + 400);
+  }
   function fallback() {
     if (/^[^\s@:\/]+@[^\s@]+$/.test(text)) {
-      window.location.href = "mailto:" + text;
+      // Longer than "Copied!", so it is held for reading and kept on screen.
+      showBadge(text, 5000, true);
     } else {
       window.prompt("Copy this link:", text);
     }
@@ -385,18 +409,7 @@ function copyToClipboard(text, clickedItem) {
     return;
   }
   navigator.clipboard.writeText(text).then(function () {
-    // The live region goes in empty and gets its text a frame later, so
-    // screen readers see a change and announce it.
-    var copyBadge = document.createElement("span");
-    copyBadge.classList.add("copied");
-    copyBadge.setAttribute("role", "status");
-    clickedItem.appendChild(copyBadge);
-    requestAnimationFrame(function () {
-      copyBadge.innerText = "Copied!";
-      requestAnimationFrame(function () { copyBadge.classList.add("visible"); });
-    });
-    setTimeout(function () { copyBadge.classList.remove("visible"); }, 1500);
-    setTimeout(function () { copyBadge.remove(); }, 1900);
+    showBadge("Copied!", 1500);
   }, fallback);
 }
 ///////////////////////////////////////////// End of Copy to Clipboard
