@@ -330,6 +330,10 @@ $product-type: (
   // scale at 30px, as transcribed from the 1.5em it was; leading as a ratio.
   page-intro:    (family: $lato,  size: 1.875rem,   font-weight: $lato-regular, line-height: 1.2,     // 30px
                   at: (small only: (size: 1.5rem))),                                                  // 24px
+  // The resources page's opening paragraph: `page-intro` above small, but
+  // drops to 16px on small rather than 24px, as transcribed.
+  resources-intro:(family: $lato, size: 1.875rem,   font-weight: $lato-regular, line-height: 1.2,     // 30px
+                  at: (small only: (size: 1rem))),                                                    // 16px
   // A heading a rank under `section-title`: a collection tile's title on the
   // resources index, and the `Behind the Scenes` heading inside a project page.
   // One size at every width, and its own leading -- both instances are one or
