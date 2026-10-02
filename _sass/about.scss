@@ -28,7 +28,7 @@
         @include type-style(product, page-title);
         margin-bottom: 1rem;
         span{
-          font-size: 0.8em;
+          @include type-style(product, heading-emoji);
         }
       }
       p{
