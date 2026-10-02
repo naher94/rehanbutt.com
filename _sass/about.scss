@@ -327,12 +327,10 @@
     // Geometry the role row's nested corners are built from. Custom properties
     // rather than Sass so the pill below is driven by the same numbers the
     // radius is derived from, instead of merely agreeing with them by hand.
-    // ⬇︎ TUNE ME: the date pill's type and the air around it
-    --date-font-scale: 0.9;
-    --date-line-height: 1.6;
+    // The pill's type is tuned in `product/date-pill`; this is the air around it.
     --row-pad-block: 0.25em;
-    // A true pill's radius is half its own box, i.e. scale x leading / 2.
-    --date-pill-radius: calc(var(--date-font-scale) * var(--date-line-height) * 0.5em);
+    // A true pill's radius is half its own box, i.e. size x leading / 2.
+    --date-pill-radius: calc(var(--type-date-pill-size) * var(--type-date-pill-line-height) * 0.5);
     .film-credit-label{
       margin-block-start: 1em;
       margin-block-end: 0.5em;
@@ -419,15 +417,13 @@
     }
     .date{
       flex-shrink: 0;
-      // work-experience dates only, without touching speaking or education
-      font-weight: $lato-regular;
+      // work-experience dates only, without touching speaking or education.
+      // The container's radius reads the same entry, so the corners stay
+      // concentric whatever the pill is set at.
+      @include type-style(product, date-pill);
       font-style: normal;
       background-color: $navy-black-l9;
       border-radius: $pill-radius;
-      // Stated from the same vars the container's radius reads, so the pill
-      // can't silently change height and leave the corners non-concentric.
-      font-size: calc(var(--date-font-scale) * 1em);
-      line-height: var(--date-line-height);
       // padding: 0.1rem 1rem;
       padding: 0 0.75rem;
       margin-top: 0;

@@ -398,6 +398,10 @@ $product-type: (
   // the heading reset -- it is one line and never wraps.
   item-date:     (family: $lato,  size: 1.25rem,    font-weight: $lato-light,                       // 20px
                   at: (small only: (size: 1rem))),                                                    // 16px
+  // The date pill on a work-experience row -- regular where `item-date` is
+  // light. `em` so it scales with the row; the row's nested corner radius is
+  // derived from this size and leading, so tune the pill here.
+  date-pill:     (family: $lato,  size: 0.9em,      font-weight: $lato-regular, line-height: 1.6),    // 18px in a 20px row
   item-detail:   (family: $lato,  size: 1.25rem,    font-weight: $lato-regular, line-height: 1.4,     // 20px
                   at: (small only: (size: 1rem))),                                                    // 16px
   // A talk's title on the speaking page, above its `item-date` and
