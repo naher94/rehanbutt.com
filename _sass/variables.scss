@@ -434,6 +434,9 @@ $product-type: (
   // job, and it was covering two: a button label and the footer's chrome.
   control:       (family: $lato,  size: 1rem,       font-weight: $lato-bold,    line-height: 1),      // 16px
   meta:          (family: $lato,  size: 1rem,       font-weight: $lato-bold),                         // 16px
+  // The ‹ › on a project page's slideshow. `body-strong` but for the leading,
+  // which it leaves to the global 1.5; one size at every width.
+  slideshow-arrow:(family: $lato, size: 1.25rem,    font-weight: $lato-bold),                         // 20px
   // The dateline under a post or case-study title, and the only Zilla the site
   // sets at regular weight -- every other Zilla entry here is bold.
   date-stamp:    (family: $zilla, size: 2rem,       font-weight: $zilla-regular,                      // 32px
