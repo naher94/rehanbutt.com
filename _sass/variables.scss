@@ -384,6 +384,10 @@ $product-type: (
   // `item-detail`. Off the scale at 30px, as transcribed from the 1.5em it was.
   talk-title:    (family: $lato,  size: 1.875rem,   font-weight: $lato-black,   line-height: 1.2,     // 30px
                   at: (small only: (size: 1.5rem))),                                                  // 24px
+  // The headline of the CTA bar closing the speaking page. Off the scale at
+  // 25px, as transcribed from the 1.25em it was; 19.2px on small with the bar.
+  cta-title:     (family: $lato,  size: 1.5625rem,  font-weight: $lato-bold,    line-height: 1.4,     // 25px
+                  at: (small only: (size: 1.2rem))),                                                  // 19.2px
   // The achievement toast, whose two lines are the only type on the site set
   // at 1.2 outside a nav. Both carry their own leading: the card is two lines
   // in a fixed box, and the global 1.5 would push it open.

@@ -218,10 +218,7 @@
       padding: 0;
       line-height: 1.4;
       &.text-main{
-        font-size: 1.25em;
-        @include breakpoint(small only){
-          font-size: 1em;
-        }
+        @include type-style(product, cta-title);
       }
       &.text-secondary{
         font-weight: $lato-regular;
