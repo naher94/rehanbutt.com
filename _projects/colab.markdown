@@ -54,13 +54,13 @@ As part of this project I worked with Alex Du, Aparna Sridhar Murthy, Chris Bark
 
 Now that we have seen the product let's discuss the business side. Our target market is UI/UX designers and existing sketch users and through proxy data we know that the market is quite large. In the United States alone there are 261,000 graphic designers, 38,000 industrial designers, 74,600 art directions.* (*Bureau of Labor Statistics, U.S. Department of Labor, Occupational Outlook Handbook, 2016-17 Edition)
 
-#### Our research hypotheses are as follows:
+## Our research hypotheses are as follows:
 - The collaboration tools designers have access to are not solving the problem
 - Designers would be able to collaborate better if they could see real-time updates made by their fellow designers
 - Design teams would be able to collaborate better if multiple designers could edit the same file at the same time
 - Designers would benefit from a version control system
 
-#### Insights
+## Insights
 - 82.5% of designers collaborate with peers on their projects
   - Work is generally split by software or phase (wireframe, style guide)
 - Most commonly used tools
@@ -72,7 +72,7 @@ Now that we have seen the product let's discuss the business side. Our target ma
   - Simultaneous editing to maintain consistency
 - Need for enterprises and consumer level solutions
 
-#### Marketing & Sales Strategies
+## Marketing & Sales Strategies
 - Peer-to-peer
 - Advertizing
 - "Reference customer" companies

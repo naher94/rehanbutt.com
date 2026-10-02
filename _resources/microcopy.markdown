@@ -5,4 +5,5 @@ link: https://www.mobilespoon.net/2018/11/ux-writing-comprehensive-guide-for.htm
 description: "A must-have UX Writing resource: 40 rules for writing microcopy that looks stunning, from a UI design standpoint."
 content-type: reading
 tags: [writing]
+date: 2020-08-30
 ---

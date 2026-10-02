@@ -5,4 +5,5 @@ link: https://fontsinuse.com
 description: A searchable archive of typographic design, indexed by typeface, format, and topic.
 content-type: reference
 tags: typography
+date: 2020-08-30
 ---

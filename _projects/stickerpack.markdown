@@ -14,9 +14,9 @@ published: false
 
 A couple years ago I started creating a bunch of penguin illustrations, just because and ever since I have been creating illustrations and posting them to <a href="https://www.instagram.com/naher94/">Instagram</a> and my <a href="http://blog.rehanbutt.com">blog</a> such as the ones featured below. After creating this penguin identity one of my good friends suggested I create “penguin emoji” so people can use them since many people find them quite cute. Months past and I had some time to look into it leading me to iMessage Sticker Packs. And that’s how this happened, creating more and more penguins now joining you in your conversation. Enjoy!
 
-After creating the penguin sticker pack, I decided to expand the stickers of my friend's dog, Naara, who has a huge following on Instagram. Follow her <a target="_blank" href="https://www.instagram.com/naara.thehusky/">here.</a> Enjoy!
+After creating the penguin sticker pack, I decided to expand the stickers of my friend's dog, Naara, who has a huge following on Instagram. Follow her {% include external-link.html link="https://www.instagram.com/naara.thehusky/" content="here." %} Enjoy!
 
-Check out the <a target="_blank" href="http://penguin.rehanbutt.com">Penguin Stickers</a> and <a target="_blank" href="http://naara.rehanbutt.com"> Naara Stickers.</a>
+Check out the {% include external-link.html link="http://penguin.rehanbutt.com" content="Penguin Stickers" %} and {% include external-link.html link="http://naara.rehanbutt.com" content=" Naara Stickers." %}
 
 <div class="grid-x" style="padding:0px; margin:30px 0px 0px 0px;">
   <div class="small-6 medium-3 cell"><img src="../img/stickerPack/tube.png" alt="Penguin + Tube"/></div>

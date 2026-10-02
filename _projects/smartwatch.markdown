@@ -59,5 +59,5 @@ With this project I also decided to explore and learn a new Prototyping tool, Fr
 <img class="image-center" src="../img/smartWatch/animation.gif" alt="Day Light Animation" />
 </div>
 
-<!-- <iframe src="http://share.framerjs.com/2yscl0jpkesl/" style="width:100%; height:700px;"></iframe>
-<iframe src="http://share.framerjs.com/9vjqia996y8k/" style="width:100%; height:700px;"></iframe> -->
+<!-- <iframe src="http://share.framerjs.com/2yscl0jpkesl/" style="width:100%; height:700px;" title="Weoto Daylight Animation Prototype"></iframe>
+<iframe src="http://share.framerjs.com/9vjqia996y8k/" style="width:100%; height:700px;" title="Weoto Interactive Prototype"></iframe> -->

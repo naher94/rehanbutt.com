@@ -6,4 +6,5 @@ description: A open set of web development resources to help you develop better 
 content-type: my content
 tags: [web dev]
 published: false
+date: 2020-08-30
 ---

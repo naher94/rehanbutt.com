@@ -15,10 +15,10 @@ published: false
 </div>
 My main incentive for this project was to bring GitHub mobile. Reason being in order to let people check on their repositories when on the go. This is especially useful for organization repos. Say one of your team members has submitted a pull request, you would have a simple and easy way to view the changes, made comments or merge it back.
 
-Update from the future (2020 to be exact 😃) GitHub has released their <a rel="noopener" target="_blank" href="https://github.com/mobile/">own application</a> go check it out!
+Update from the future (2020 to be exact 😃) GitHub has released their {% include external-link.html link="https://github.com/mobile/" content="own application" %} go check it out!
 
 <div class="responsive-embed widescreen">
-  <iframe width="100%" src="https://www.youtube.com/embed/9pox7w3nB_s?rel=0" frameborder="0" allowfullscreen></iframe>
+  <iframe width="100%" src="https://www.youtube.com/embed/9pox7w3nB_s?rel=0" frameborder="0" allowfullscreen title="GitApp Promo Video"></iframe>
 </div>
 
 ## Process

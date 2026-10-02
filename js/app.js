@@ -370,23 +370,47 @@ updateSendItLabel();
 ///////////////////////////////////////////// End of Send It Easter Egg
 
 ///////////////////////////////////////////// Start of Copy to Clipboard
-function copyToClipboard(link,clickedItem) {
-	if (navigator && navigator.clipboard && navigator.clipboard.writeText){
-		var copyBadge = document.createElement("span");
-		copyBadge.classList.add("copied");
-		copyBadge.setAttribute("id", "copy-confirmation");
-		copyBadge.innerText = "Copied!";
-		clickedItem.appendChild(copyBadge);
-
-    navigator.clipboard.writeText(link);
-    requestAnimationFrame(function(){
-      requestAnimationFrame(function(){ copyBadge.classList.add('visible'); });
+// Without the Clipboard API (or with it denied), emails are shown in the badge
+// for longer and links are offered in a prompt, to copy by hand.
+function copyToClipboard(text, clickedItem) {
+  function showBadge(message, holdMs, keepOnScreen) {
+    // The live region goes in empty and gets its text a frame later, so
+    // screen readers see a change and announce it.
+    var copyBadge = document.createElement("span");
+    copyBadge.classList.add("copied");
+    copyBadge.setAttribute("role", "status");
+    clickedItem.appendChild(copyBadge);
+    requestAnimationFrame(function () {
+      copyBadge.innerText = message;
+      if (keepOnScreen) {
+        // The 16px margin leaves room for the tilt the badge gets when visible.
+        var box = copyBadge.getBoundingClientRect();
+        var centre = box.left + box.width / 2;
+        var half = copyBadge.offsetWidth / 2;
+        var maxRight = document.documentElement.clientWidth - 16;
+        var shift = Math.max(16 - (centre - half), 0) + Math.min(maxRight - (centre + half), 0);
+        if (shift) { copyBadge.style.translate = shift + "px 0"; }
+      }
+      requestAnimationFrame(function () { copyBadge.classList.add("visible"); });
     });
-    setTimeout(function(){ copyBadge.classList.remove('visible'); }, 1500);
-		setTimeout(function(){ copyBadge.remove(); }, 1900);
+    setTimeout(function () { copyBadge.classList.remove("visible"); }, holdMs);
+    setTimeout(function () { copyBadge.remove(); }, holdMs + 400);
+  }
+  function fallback() {
+    if (/^[^\s@:\/]+@[^\s@]+$/.test(text)) {
+      // Longer than "Copied!", so it is held for reading and kept on screen.
+      showBadge(text, 5000, true);
+    } else {
+      window.prompt("Copy this link:", text);
+    }
+  }
+  if (!navigator.clipboard || !navigator.clipboard.writeText) {
+    fallback();
     return;
-	}
-  return Promise.reject('The Clipboard API is not available.');
+  }
+  navigator.clipboard.writeText(text).then(function () {
+    showBadge("Copied!", 1500);
+  }, fallback);
 }
 ///////////////////////////////////////////// End of Copy to Clipboard
 
@@ -440,3 +464,40 @@ function mobileMenu() {
 
 mobileMenu();
 ///////////////////////////////////////////// End of Mobile Menu
+
+///////////////////////////////////////////// Start of Loop Videos
+// WCAG 2.2.2: anything looping past 5s needs a way to stop it. Under reduced
+// motion they start stopped. State follows the video's own events, so a
+// browser that blocks autoplay still shows Play rather than a stale Pause.
+function loopVideos() {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll(".loop-video").forEach(function (wrapper) {
+    const video = wrapper.querySelector("video");
+    const button = wrapper.querySelector(".loop-video-toggle");
+    if (!video || !button) { return; }
+
+    function sync() {
+      wrapper.classList.toggle("is-paused", video.paused);
+      button.setAttribute("aria-label", video.paused ? "Play animation" : "Pause animation");
+    }
+    video.addEventListener("play", sync);
+    video.addEventListener("pause", sync);
+    button.addEventListener("click", function () {
+      if (video.paused) {
+        video.play().catch(function () {});
+      } else {
+        video.pause();
+      }
+    });
+
+    if (reduceMotion) {
+      video.removeAttribute("autoplay");
+      video.pause();
+    }
+    sync();
+    button.hidden = false;
+  });
+}
+
+loopVideos();
+///////////////////////////////////////////// End of Loop Videos

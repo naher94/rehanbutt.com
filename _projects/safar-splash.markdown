@@ -30,14 +30,10 @@ With the new splash page for Safar TeleCare we wanted to extend the brand and sh
     <img src="../img/safar-splash/splash2.jpg" alt="Screenshot of the bottom half of the splash page">
   </div>
   <div class="cell medium-6">
-    <video autoplay loop muted playsinline width="100%" title="Connect button hover interaction with a fun gradient">
-      <source src="../img/safar-splash/connect-button-interaction.mov" type="video/mp4">
-    </video>
+    {% include loop-video.html src="../img/safar-splash/connect-button-interaction.mov" title="Connect button hover interaction with a fun gradient" %}
   </div>
   <div class="cell medium-6">
-    <video autoplay loop muted playsinline width="100%" title="Link hover animation with the underline circling the label">
-      <source src="../img/safar-splash/circle-hover-interaction.mov" type="video/mp4">
-    </video>
+    {% include loop-video.html src="../img/safar-splash/circle-hover-interaction.mov" title="Link hover animation with the underline circling the label" %}
   </div>
 </div>
 

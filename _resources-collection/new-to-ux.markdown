@@ -8,5 +8,5 @@ tile-image-alt: A illustration of a mobile software interfaces as wireframes on 
 text-color: "#ffffff"
 featured: true
 resources: [tony-fadell-design-ted,design-dictionary, bbc-global-experience-language, infuriating-truth-behind-elevator-buttons, designkit, design-gold, defining-design-generalists, laws-of-ux, methodofaction, refactor-ui, uxr, userinyerface, ten-usability-heuristics, wish-list-three-uiux-casual-user]
-date: 2023-04-9
+date: 2023-04-09
 ---

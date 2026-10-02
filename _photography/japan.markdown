@@ -7,7 +7,7 @@ hero-image: "japan/japan-hero.jpg"
 hero-image-alt: A Tori Gate surrounded by Sakura Trees
 featured: true
 big-tile: 
-date: 15-04-2025
+date: 2025-04-15
 hero-background-color: "#FFFFFF"
 hero-background-color-dark: "#161d27"
 hero-accent-color: "#1F2937"

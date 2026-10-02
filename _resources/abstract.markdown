@@ -5,4 +5,5 @@ link: https://www.netflix.com/title/80057883
 description: Step inside the minds of the most innovative designers in a variety of disciplines and learn how design impacts every aspect of life.
 content-type: video
 tags: film
+date: 2020-08-30
 ---

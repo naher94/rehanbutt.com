@@ -49,7 +49,7 @@ footer-sort-order: 2
               <span>work in the animation industry</span>
             </li>
           </ul>
-          <p>Curious what else I'm up to? Shoot me an <span onclick="copyToClipboard('me@rehanbutt.com',this)" class="email">email.</span>
+          <p>Curious what else I'm up to? Shoot me an {% include copy-button.html text="me@rehanbutt.com" css-class="email" content="email." %}
           </p>
         </section>
         <div class="cell grid-x small-5 large-12 profile-2 grid-padding-x grid-padding-y">

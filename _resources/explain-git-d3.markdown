@@ -5,4 +5,5 @@ link: http://onlywei.github.io/explain-git-with-d3/
 description: This website is designed to help you understand some basic git concepts visually.
 content-type: interactive
 tags: [web dev]
+date: 2020-08-30
 ---

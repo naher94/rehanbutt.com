@@ -7,7 +7,7 @@ hero-image: "sydney-2012/hero.jpg"
 hero-image-alt: Abstract close up of the sails of the Sydney Opera House
 featured: 
 big-tile:
-date: 15-12-2012
+date: 2012-12-15
 hero-background-color: "#FFFFFF"
 hero-background-color-dark: "#161d27"
 hero-accent-color: "#1F2937"

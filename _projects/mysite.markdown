@@ -20,7 +20,7 @@ If you are interested in looking at the old site its archived on the web at {% i
 {% include behind-the-scenes.html title="Behind the Scenes" description=bts-description-website %}
 
 
-The goal with this new site was to make sure it was fully responsive and make sure it was clean in both design and development, as my site has grown quite a bit since it was first launched. There were many technical improvements as well that were made and of course it continues to evolve, check out the transformation over on <a target="_blank" href="https://github.com/naher94/rehanbutt.com" rel="noreferrer">github</a>. With the refresh I also wanted to streamline <a href="/mybrand">my brand</a> explore that project after this one to see the full picture.
+The goal with this new site was to make sure it was fully responsive and make sure it was clean in both design and development, as my site has grown quite a bit since it was first launched. There were many technical improvements as well that were made and of course it continues to evolve, check out the transformation over on {% include external-link.html link="https://github.com/naher94/rehanbutt.com" content="github" %}. With the refresh I also wanted to streamline <a href="/mybrand">my brand</a> explore that project after this one to see the full picture.
 
 <div class="grid-x">
   <div class="cell">

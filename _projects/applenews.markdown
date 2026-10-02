@@ -3,7 +3,7 @@ layout: post
 title:  "Apple News for MacOS"
 tile-name: "Apple News macOS Redesign"
 thumbnail: "appleNews"
-date:   2016-10-9
+date:   2016-10-09
 tags: digital UI UX
 published: false
 ---

@@ -6,4 +6,5 @@ description: In praise of dials, toggles, buttons, and bulbs.
 content-type: blog
 tags: inspiration
 published: false
+date: 2021-02-19
 ---

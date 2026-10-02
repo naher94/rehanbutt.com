@@ -3,7 +3,7 @@ layout: post
 title:  "Motion Capture Wrapping Paper"
 tile-name: "Motion Capture Wrapping Paper"
 thumbnail: "mocappaper"
-date:   2016-12-2
+date:   2016-12-02
 tags: digital
 ---
 

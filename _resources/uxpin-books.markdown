@@ -5,4 +5,5 @@ link: https://www.uxpin.com/knowledge
 description: Thoughtful content on mobile & web prototyping, wireframing, mockups, usability testing, project management, design process & more.
 content-type: reading
 tags: [research methods]
+date: 2020-08-30
 ---

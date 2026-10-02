@@ -5,4 +5,5 @@ link: https://userinyerface.com
 description: User Inyerface - A worst-practice UI experiment
 content-type: interactive
 tags: games
+date: 2020-08-30
 ---

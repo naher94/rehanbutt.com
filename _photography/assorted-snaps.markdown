@@ -6,7 +6,7 @@ thumbnail-alt: Fishing boat with lush green river plants
 hero-image: "assorted/hero.jpg"
 hero-image-alt: Fishing boat with lush green river plants
 featured:
-date: 15-01-2014
+date: 2014-01-15
 
 hero-background-color: "#FFFFFF"
 hero-background-color-dark: "#161d27"

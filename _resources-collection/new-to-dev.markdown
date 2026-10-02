@@ -9,5 +9,5 @@ text-color: "#ffffff"
 featured: true
 tag: web dev
 resources: [cssvocabulary, explain-git-d3, cssreference, html-for-people, css-hard-to-master]
-date: 2023-04-9
+date: 2023-04-09
 ---

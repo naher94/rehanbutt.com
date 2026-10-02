@@ -5,4 +5,5 @@ link: https://brunobergher.com/writing/a-lightweight-branding-exercise-for-start
 description: A bottom-up, alignment-oriented approach
 content-type: reading
 tags: [branding]
+date: 2020-08-30
 ---

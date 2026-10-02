@@ -7,7 +7,7 @@ hero-image: "disneyland/disneyland-hero.jpg"
 hero-image-alt: Upclose photo of the Sleeping Beauty Castle at Disneyland
 featured: false
 big-tile: false
-date: 15-09-2024
+date: 2024-09-15
 hero-background-color: "#FFFFFF"
 hero-background-color-dark: "#161d27"
 hero-accent-color: "#1F2937"

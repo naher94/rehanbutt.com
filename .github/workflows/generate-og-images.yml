@@ -1,0 +1,50 @@
+name: Generate OG Images
+
+on:
+  pull_request:
+    branches: [gh-pages]
+    paths:
+      - "_resources-collection/**"
+      - "img/resources-collection/**"
+      - "scripts/generate-og-images.py"
+      - "scripts/fonts/**"
+  workflow_dispatch:
+
+concurrency:
+  group: og-images-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # commits the images back to the PR branch
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      # Pinned to the version used locally, so renders match.
+      - name: Install Dependencies
+        run: pip install pillow==11.3.0 pyyaml==6.0.3
+
+      - name: Generate images
+        run: python scripts/generate-og-images.py
+
+      - name: Commit images
+        run: |
+          git add img/og/collection
+          if git diff --cached --quiet; then
+            echo "Images already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Generate collection OG images"
+          git push

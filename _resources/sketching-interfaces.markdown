@@ -5,4 +5,5 @@ link: https://web.archive.org/web/20240422080353/https://airbnb.design/sketching
 description: The time required to test an idea should be zero. This was the very first sentence I wrote when considering the Airbnb design tools team vision.
 content-type: reading
 tags: [product development]
+date: 2020-08-30
 ---

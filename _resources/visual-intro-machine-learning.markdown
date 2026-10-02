@@ -5,4 +5,5 @@ link: https://r2d3.us/visual-intro-to-machine-learning-part-1/
 description: In machine learning, computers apply statistical learning techniques to automatically identify patterns in data. These techniques can be used to make highly accurate predictions.
 content-type: reading
 tags: [data viz, artificial intelligence]
+date: 2020-08-30
 ---
