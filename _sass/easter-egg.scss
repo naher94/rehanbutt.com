@@ -54,8 +54,7 @@
     }
   }
   .intro-description{
-    font-size: 1.5em;
-    line-height: 1.2em;
+    @include type-style(product, page-intro);
     padding: 0;
     margin: 1em .5em;
   }

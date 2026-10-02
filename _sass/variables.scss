@@ -322,6 +322,10 @@ $product-type: (
   // whatever it is set at. Same rendering today, different behaviour later.
   section-intro: (family: $lato,  size: 1.5rem,     font-weight: $lato-regular, line-height: 1.2,     // 24px
                   at: (small only: (size: 1rem, line-height: 1.3))),                                  // 16px
+  // The paragraph opening the easter eggs page, under its counter. Off the
+  // scale at 30px, as transcribed from the 1.5em it was; leading as a ratio.
+  page-intro:    (family: $lato,  size: 1.875rem,   font-weight: $lato-regular, line-height: 1.2,     // 30px
+                  at: (small only: (size: 1.5rem))),                                                  // 24px
   // A heading a rank under `section-title`: a collection tile's title on the
   // resources index, and the `Behind the Scenes` heading inside a project page.
   // One size at every width, and its own leading -- both instances are one or
