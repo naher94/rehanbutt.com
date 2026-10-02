@@ -269,6 +269,10 @@ $lato-black: 900;
 $caveat: 'Caveat', cursive;
 $caveat-regular: 400;
 
+// System fonts, nothing loaded -- the reset's stack for `code`.
+$mono: Consolas, 'Liberation Mono', Courier, monospace;
+$mono-regular: 400;
+
 //******* Type Styles
 // Two registers. `product` repeats across many pages, so it stays systematic;
 // `expressive` is a one-off and answers only to its own moment. Zilla names,
@@ -456,6 +460,9 @@ $product-type: (
   // the only place either map reaches for Caveat, and the only thing on the
   // site that uses it.
   annotation:    (family: $caveat, size: 1.5rem,   font-weight: $caveat-regular, line-height: 1),     // 24px
+  // Inline `code` in a post. The one `em` size in either map: it is set inside
+  // a run of text and should track it, and leaves its leading to the line.
+  inline-code:   (family: $mono,  size: 1em,        font-weight: $mono-regular),                      // = its text
 
   // Prose set apart from the body at three sizes: the case-study pull-quotes
   // that mirror the three .post-callout-* classes, and -sm also carries the

@@ -190,6 +190,7 @@ article{
       }
     }
     code{
+      @include type-style(product, inline-code);
       border: none;
       border-radius: 5px;
       color: semantic-color(text);
