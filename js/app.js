@@ -123,8 +123,10 @@ function speedDemon(){
 // Speed is in screens per second so phones and big monitors trip at the same pace.
 // Only visitor-driven scrolling counts: anchor jumps and scroll restoration have no input.
 (function scrollSpeedometer() {
-	var SPEED_LIMIT = 6;     // screens per second, smoothed; iOS flicks peak ~4 casual, 8–9 hard
-	var SUSTAIN = 150;       // ms over the limit; a flick decays fast, so a hard one only just holds this
+	// Trackpad and wheel momentum on desktop outrun touch flicks, so fine pointers get a stricter limit.
+	var desktop = window.matchMedia('(pointer: fine)').matches;
+	var SPEED_LIMIT = desktop ? 10 : 6;   // screens per second, smoothed; iOS flicks peak ~4 casual, 8–9 hard
+	var SUSTAIN = desktop ? 300 : 150;    // ms over the limit; a flick decays fast, so a hard one only just holds this
 	var INPUT_WINDOW = 1000; // ms after input still counted, covers touch momentum
 
 	var lastInput = -Infinity;
