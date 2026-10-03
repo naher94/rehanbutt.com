@@ -196,7 +196,7 @@
         @include type-style(product, item-date);
       }
       .description{
-        @include type-style(product, item-detail);
+        @include type-style(product, body);
         text-wrap: pretty;
       }
     }
@@ -310,7 +310,7 @@
       @include type-style(product, item-date);
     }
     .description{
-      @include type-style(product, item-detail);
+      @include type-style(product, body);
     }
     // A talk title is what was done, so it sits at the same rank as a work
     // item's role -- which its markup spells h4 and this one spells h3.

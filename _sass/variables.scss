@@ -428,12 +428,6 @@ $product-type: (
                   at: (small only: (size: 1.5rem))),                                                  // 24px
   footer-title:  (family: $lato,  size: 1.25rem,    font-weight: $lato-bold,    line-height: 1.6,     // 20px
                   at: (small only: (size: 1.5rem, font-weight: $lato-black))),                        // 24px
-  // The about page's opening paragraphs and the list under them. `body` with
-  // one difference: it steps *up* on small rather than down, because the bio is
-  // the page's first read and it is set against nothing else there. No weight
-  // of its own, so it keeps tracking whatever `body` is.
-  bio-text:      (family: $lato,  size: 1.25rem,                                                      // 20px
-                  at: (small only: (size: 1.2rem))),                                                  // 19.2px
   // The three CV lists -- work, education, speaking -- which are the same two
   // ranks wearing different heading levels. `item-org` is the organisation a
   // group of items sits under; `item-title` is what was actually done, the
@@ -444,20 +438,18 @@ $product-type: (
                   at: (small only: (size: 1.4rem))),                                                  // 22.4px
   item-title:    (family: $lato,  size: 1.25rem,    font-weight: $lato-black,                         // 20px
                   at: (small only: (size: 1rem))),                                                    // 16px
-  // The other two lines of the same item: the date range beside the title, and
-  // the paragraph under it. `item-date` is the only 300 on the site, and it
-  // leaves its leading to the `p` reset the way the headings leave theirs to
-  // the heading reset -- it is one line and never wraps.
+  // The date range beside an item's title -- the paragraph under it is plain
+  // `body`. `item-date` is the only 300 on the site, and it leaves its leading
+  // to the `p` reset the way the headings leave theirs to the heading reset --
+  // it is one line and never wraps.
   item-date:     (family: $lato,  size: 1.25rem,    font-weight: $lato-light,                       // 20px
                   at: (small only: (size: 1rem))),                                                    // 16px
   // The date pill on a work-experience row -- regular where `item-date` is
   // light. `em` so it scales with the row; the row's nested corner radius is
   // derived from this size and leading, so tune the pill here.
   date-pill:     (family: $lato,  size: 0.9em,      font-weight: $lato-regular, line-height: 1.6),    // 18px in a 20px row
-  item-detail:   (family: $lato,  size: 1.25rem,    font-weight: $lato-regular, line-height: 1.4,     // 20px
-                  at: (small only: (size: 1rem))),                                                    // 16px
   // A talk's title on the speaking page, above its `item-date` and
-  // `item-detail`. Off the scale at 30px, as transcribed from the 1.5em it was.
+  // description. Off the scale at 30px, as transcribed from the 1.5em it was.
   talk-title:    (family: $lato,  size: 1.875rem,   font-weight: $lato-black,   line-height: 1.2,     // 30px
                   at: (small only: (size: 1.5rem))),                                                  // 24px
   // The headline of the CTA bar closing the speaking page. Off the scale at
