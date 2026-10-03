@@ -339,7 +339,7 @@ $type-scale: (
 // Sizes are `rem` against the 16px root -- an em resolves against whichever
 // parent it lands in, which is where most of this site's off-scale type came
 // from. The exception is type set inside another style's line, which should
-// track it: `inline-code`, `heading-emoji`, `date-pill`. Those are `em`, and
+// track it: `inline-code`, `heading-emoji`. Those are `em`, and
 // relative rather than steps of $type-scale. `em` is also right for
 // letter-spacing.
 //
@@ -407,6 +407,16 @@ $product-type: (
     at:             (small only: (size: 2.5rem, line-height: 1)),  // 40px
   ),
 
+  // TODO TEMP: `section-title-lg` stepped down for the about page, so its
+  // headings sit under the 60px `page-title` rather than over it.
+  section-title-lg-next: (
+    family:         $zilla,
+    size:           type-step(5),  // 48px
+    font-weight:    $zilla-bold,
+    line-height:    normal,
+    at:             (small only: (size: type-step(4), line-height: 1)),  // 40px
+  ),
+
   // The standfirst under each of those headings. Its leading is written as a
   // ratio rather than the `1.8rem` the rule carried: a length would hand every
   // link inside the paragraph a fixed 28.8px instead of one proportional to
@@ -455,6 +465,23 @@ $product-type: (
     size:           type-step(1),  // 20px, inherits 1.5
     font-weight:    $lato-regular,
     at:             (small only: (size: type-step(0))),  // 16px, == the root
+  ),
+
+  // TODO TEMP: `body` at 1rem, starting with the about page. Rename to `body`
+  // once everything has moved over.
+  body-next: (
+    family:         $lato,
+    size:           type-step(0),  // 16px, inherits 1.5
+    font-weight:    $lato-regular,
+  ),
+
+  // TODO TEMP: `body-strong` at 1rem, alongside `body-next`. Black, not bold,
+  // to keep the weight the work-item titles had under `item-title`.
+  body-next-strong: (
+    family:         $lato,
+    size:           type-step(0),  // 16px
+    font-weight:    $lato-black,
+    line-height:    1.4,
   ),
 
   body-strong: (
@@ -541,6 +568,14 @@ $product-type: (
     at:             (small only: (size: 1.4rem)),  // 22.4px
   ),
 
+  // TODO TEMP: `item-org` on the scale, starting with the work-item company.
+  item-org-next: (
+    family:         $lato,
+    size:           type-step(2),  // 24px
+    font-weight:    $lato-black,
+    at:             (small only: (size: type-step(1))),  // 20px
+  ),
+
   item-title: (
     family:         $lato,
     size:           1.25rem,  // 20px
@@ -560,11 +595,11 @@ $product-type: (
   ),
 
   // The date pill on a work-experience row -- regular where `item-date` is
-  // light. `em` so it scales with the row; the row's nested corner radius is
-  // derived from this size and leading, so tune the pill here.
+  // light. The row's nested corner radius is derived from this size and
+  // leading, so tune the pill here.
   date-pill: (
     family:         $lato,
-    size:           0.9em,  // 18px in a 20px row
+    size:           0.9rem,  // 14.4px, beside a 16px `body-next-strong` title
     font-weight:    $lato-regular,
     line-height:    1.6,
   ),

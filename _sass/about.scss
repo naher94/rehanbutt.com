@@ -32,7 +32,7 @@
         }
       }
       p{
-        @include type-style(product, body);
+        @include type-style(product, body-next);
         padding: 0;
         margin: 0;
         margin-top: 1em;
@@ -43,7 +43,7 @@
       }
       ul{
         &.todos{
-          @include type-style(product, body);
+          @include type-style(product, body-next);
           padding: 0;
           list-style-type: none;
           .checkbox{
@@ -183,7 +183,7 @@
 .work-experience, .education, .skills, .tools{
   margin-top: 4em;
   h2{
-    @include type-style(product, section-title-lg);
+    @include type-style(product, section-title-lg-next);
     @include breakpoint(small only) {
       padding: 0;
     }
@@ -204,7 +204,7 @@
   // company does. Education is a work item without the role line.
   .education-item{
     h3{
-      @include type-style(product, item-org);
+      @include type-style(product, item-org-next);
       padding: 0;
       margin-bottom: 0;
     }
@@ -225,7 +225,7 @@
       @include type-style(product, item-date);
     }
     .description{
-      @include type-style(product, body);
+      @include type-style(product, body-next);
     }
   }
 
@@ -332,6 +332,7 @@
     // A true pill's radius is half its own box, i.e. size x leading / 2.
     --date-pill-radius: calc(var(--type-date-pill-size) * var(--type-date-pill-line-height) * 0.5);
     .film-credit-label{
+      @include type-style(product, body-next);
       margin-block-start: 1em;
       margin-block-end: 0.5em;
     }
@@ -353,13 +354,11 @@
       .text-container{
         margin-block-start: 0.25em;
         .film-name{
+          @include type-style(product, body-next);
           margin-top: 0;
           span{
             font-weight: $lato-bold;
           }
-        }
-        .credit-description{
-          margin-top: 0;
         }
       }
     }
@@ -392,13 +391,13 @@
     margin-block-start: 0;
   }
   h3{
-    @include type-style(product, item-org);
+    @include type-style(product, item-org-next);
     padding: 0;
     margin-bottom: 0;
     margin-block-start: 0;
   }
   h4{
-    @include type-style(product, item-title);
+    @include type-style(product, body-next-strong);
     padding: 0;
     margin-bottom: 0;
     margin-top: 0;
@@ -544,9 +543,7 @@
 
 .skills, .tools{
   h3{
-    font-family: $lato;
-    font-size: 1em;
-    font-weight: $lato-black;
+    @include type-style(product, body-next-strong);
     padding: 0;
     margin-top: -1.5rem;
     margin-bottom: 1rem;
@@ -560,6 +557,7 @@
     }
   }
   .skills-item{
+    @include type-style(product, body-next);
     display: inline-block;
     background-color: semantic-color(informational-pill);
     border-radius: $pill-radius;
