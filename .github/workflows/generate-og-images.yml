@@ -39,7 +39,7 @@ jobs:
 
       - name: Commit images
         run: |
-          git add img/og/collection
+          git add img/og/collection _data/og-images.yml
           if git diff --cached --quiet; then
             echo "Images already up to date."
             exit 0
