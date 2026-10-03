@@ -452,14 +452,14 @@ $product-type: (
 
   body: (
     family:         $lato,
-    size:           1.25rem,  // 20px, inherits 1.5
+    size:           type-step(1),  // 20px, inherits 1.5
     font-weight:    $lato-regular,
-    at:             (small only: (size: 1rem)),  // 16px, == the root
+    at:             (small only: (size: type-step(0))),  // 16px, == the root
   ),
 
   body-strong: (
     family:         $lato,
-    size:           1.25rem,  // 20px
+    size:           type-step(1),  // 20px
     font-weight:    $lato-bold,
     line-height:    1.4,
   ),
