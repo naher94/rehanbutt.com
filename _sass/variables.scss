@@ -1,3 +1,5 @@
+@use "sass:math";
+
 //******* Variables
 
 // Numbers
@@ -281,15 +283,65 @@ $emoji-fonts: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
 $lato-emoji: join(join('Lato', $emoji-fonts, comma), sans-serif, comma);
 $zilla-emoji: join(join('Zilla Slab', $emoji-fonts, comma), serif, comma);
 
+//******* Type Scale
+// Every size a type style may use. A 1.25 ratio from the 16px root, each step
+// rounded so it reads as a whole number: to an even px below 16 (an eighth of
+// a rem), to a multiple of 4px from 16 up (a quarter rem). Rounding moves no
+// step more than ~8%, so the ratio's even contrast survives it.
+//
+// Keyed by step from the root. Need a size? Take a step; need one that is not
+// here? Extend the ratio -- the check below holds the list to the rule.
+$type-scale-ratio: 1.25;
+$type-scale: (
+  -2: 0.625rem,   // 10px
+  -1: 0.75rem,    // 12px
+   0: 1rem,       // 16px  the root
+   1: 1.25rem,    // 20px
+   2: 1.5rem,     // 24px
+   3: 2rem,       // 32px
+   4: 2.5rem,     // 40px
+   5: 3rem,       // 48px
+   6: 3.75rem,    // 60px
+   7: 4.75rem,    // 76px
+   8: 6rem,       // 96px
+);
+
+@function type-step($step) {
+  $size: map-get($type-scale, $step);
+  @if $size == null {
+    @error 'No type step `#{$step}`. Known: #{map-keys($type-scale)}.';
+  }
+  @return $size;
+}
+
+// Recomputes each step from the rule and fails the build on a mismatch.
+// Worked in rem -- 4px is 0.25rem, 2px is 0.125rem.
+@each $step, $size in $type-scale {
+  // `@while`, not `@for`: `from 1 through 0` counts down, running twice.
+  $exact: 1;
+  $i: 0;
+  @while $i < abs($step) {
+    $exact: if($step > 0, $exact * $type-scale-ratio, math.div($exact, $type-scale-ratio));
+    $i: $i + 1;
+  }
+  $rounded: if($exact < 1, round($exact * 8) * 0.125, round($exact * 4) * 0.25) * 1rem;
+  @if $rounded != $size {
+    @error 'Type step #{$step} is #{$size}; the rule gives #{$rounded}.';
+  }
+}
+
 //******* Type Styles
 // Two registers. `product` repeats across many pages, so it stays systematic;
 // `expressive` is a one-off and answers only to its own moment. Zilla names,
 // Lato reads -- product follows that, expressive is exempt. Why, and how to
 // place an ambiguous style, is in the README.
 //
-// Sizes are `rem` against the 16px root, never `em` -- an em resolves against
-// whichever parent it lands in, which is where most of this site's off-scale
-// type came from. `em` is still right for letter-spacing.
+// Sizes are `rem` against the 16px root -- an em resolves against whichever
+// parent it lands in, which is where most of this site's off-scale type came
+// from. The exception is type set inside another style's line, which should
+// track it: `inline-code`, `heading-emoji`, `date-pill`. Those are `em`, and
+// relative rather than steps of $type-scale. `em` is also right for
+// letter-spacing.
 //
 // Line-heights are unitless ratios, never lengths: a px leading re-leads every
 // child to that figure whatever its size. It is also optional -- omit it and

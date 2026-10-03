@@ -50,13 +50,21 @@ INHERITED = set(TYPE_PROPS)          # all of these inherit in CSS
 
 ROOT_FONT_PX = 16.0                  # html default; the site never overrides it
 
-# The ramp the site actually works on, fitted to real usage rather than a
-# formula: these ten sizes cover 84% of the type on the site. Everything else
-# is reported off-scale, which is the point of the column — 37.5px alone
-# accounts for 546 elements and is worth seeing as a stray, not as a step.
-# Edit this when the scale is decided; the audit reports against it, it does
-# not define it.
-SCALE = (10.0, 12.0, 16.0, 20.0, 24.0, 32.0, 40.0, 50.0, 60.0, 70.0)
+def type_scale():
+    """The px of every step in `$type-scale`, read from variables.scss.
+
+    Read rather than restated, as the breakpoints are: the scale is decided
+    in the stylesheet now, and the audit reports against it.
+    """
+    text = (ROOT / "_sass" / "variables.scss").read_text()
+    m = re.search(r'\$type-scale:\s*\((.*?)\);', text, re.S)
+    if not m:
+        sys.exit("no `$type-scale` in variables.scss")
+    return tuple(sorted(float(v) * ROOT_FONT_PX for v in
+                        re.findall(r'^\s*-?\d+:\s*([\d.]+)rem', m.group(1), re.M)))
+
+
+SCALE = type_scale()
 
 # occurrences recorded per style. Enough to open a few and see the pattern;
 # the full count is always reported, so a truncated list never reads as total.
