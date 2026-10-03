@@ -182,7 +182,9 @@ def resolve_tokens(decls, origin, roots):
         rel, line = src if src else (None, None)
         ref = var_name(value)
         entry = type_vars().get(ref)
-        if entry:
+        # Resolved by the stylesheet's own :root, not by today's map: an older
+        # build compared by type-diff uses entries that have since been removed.
+        if entry or (ref and ref.startswith("--type-") and ref in roots):
             out[prop] = compressed(roots[ref]) if ref in roots else "inherit"
         named[prop] = (rel, line, entry)
     return out, named
