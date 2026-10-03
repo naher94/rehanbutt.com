@@ -51,8 +51,12 @@
     border-radius: $tile-radius-big;
     padding: 1em;
     font-weight: $lato-bold;
+    // Scales the bar's em spacing on small; the title's type is its own.
     @include breakpoint(small only) {
       font-size: 1.2em;
+    }
+    .count-label{
+      @include type-style(product, body-strong);
     }
     .share-buttons{
       column-gap: 0.5em;
