@@ -1,0 +1,46 @@
+// Cross-document view transitions. The header is its own layer so it stays
+// put and only crossfades its hero color while the page beneath it lifts.
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{
+    navigation: auto;
+  }
+
+  // Direct child only: pages like Resources have their own <header>, and a
+  // duplicate name makes the browser skip the transition entirely.
+  body > header{
+    view-transition-name: site-header;
+  }
+
+  // Set by the script in _includes/head.html when the old header was scrolled
+  // out of view: it then rises in with the rest of the page.
+  :root[data-header-offscreen] body > header{
+    view-transition-name: none;
+  }
+
+  @keyframes page-out{
+    to{
+      opacity: 0;
+      transform: translateY(-0.5rem);
+    }
+  }
+
+  @keyframes page-in{
+    from{
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+  }
+
+  ::view-transition-old(root){
+    animation: page-out 0.2s ease-in both;
+  }
+
+  ::view-transition-new(root){
+    animation: page-in 0.45s $tight-spring-curve 0.1s both;
+  }
+
+  ::view-transition-group(site-header){
+    animation-duration: $run-duration;
+    animation-timing-function: $run-easing;
+  }
+}
