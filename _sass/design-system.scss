@@ -41,24 +41,24 @@ h4{
   font-size: 1.5em;
 }
 
-p{
-  padding-left: 5em;
-  padding-right: 5em;
-  margin-top: 1.25em;
-  margin-bottom: 1.25em;
+// Side padding that sets the text column width; em, so it scales with the element's font size.
+@mixin content-inset {
+  padding-left: $content-inset;
+  padding-right: $content-inset;
   @include breakpoint(small only) {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    padding-left: $content-inset-small;
+    padding-right: $content-inset-small;
   }
 }
 
+p{
+  @include content-inset;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
 ul {
-  padding-left: 5em;
-  padding-right: 5em;
-  @include breakpoint(small only) {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
+  @include content-inset;
 }
 
 .content-wrapper{

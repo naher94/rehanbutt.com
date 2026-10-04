@@ -166,10 +166,16 @@ video{
   }
 }
 
+// Same inset as body `p` so the title lines up with the text below it.
 .post-header-hero{
+  @include content-inset;
   margin-top: 1em;
   @include breakpoint(small only) {
     margin-top: 0.5em;
+  }
+  .post-meta{
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
