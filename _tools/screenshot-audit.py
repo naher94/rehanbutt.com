@@ -72,6 +72,7 @@ try {
 let s = 42;
 Math.random = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296);
 """
+STYLED = "[...document.styleSheets].some(s => (s.href || '').endsWith('/css/rehan.css') && s.cssRules.length > 0)"
 BLOCKED = re.compile(r"google-analytics\.com|googletagmanager\.com|doubleclick\.net")
 
 
@@ -94,17 +95,27 @@ class SiteHandler(http.server.SimpleHTTPRequestHandler):
 
     def translate_path(self, path):
         p = pathlib.Path(super().translate_path(path))
-        if not p.exists() and p.with_name(p.name + ".html").exists():
-            return str(p.with_name(p.name + ".html"))
+        page = p.with_name(p.name + ".html")
+        # /photography is photography.html even though a photography/ folder of
+        # gallery pages sits beside it; only a folder with its own index wins.
+        if page.exists() and not (p / "index.html").exists():
+            return str(page)
         return str(p)
 
     def log_message(self, *args):
         pass
 
 
+class SiteServer(http.server.ThreadingHTTPServer):
+    # The default backlog of 5 drops connections when several browsers start at
+    # once, and a dropped stylesheet shoots the page unstyled.
+    request_queue_size = 128
+    daemon_threads = True
+
+
 def serve_site():
     handler = functools.partial(SiteHandler, directory=str(SITE))
-    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    server = SiteServer(("127.0.0.1", 0), handler)
     threading.Thread(target=server.serve_forever, daemon=True).start()
     return server, f"http://127.0.0.1:{server.server_port}"
 
@@ -185,7 +196,13 @@ def _shoot(job):
     page = _worker["contexts"][size].new_page()
     entry = {"path": path, "slug": slug(path), "size": size}
     try:
-        res = page.goto(_worker["base"] + path, wait_until="load", timeout=60000)
+        # A page whose stylesheet didn't arrive is reloaded rather than shot.
+        for attempt in range(3):
+            res = page.goto(_worker["base"] + path, wait_until="load", timeout=60000)
+            if page.evaluate(STYLED):
+                break
+        else:
+            raise RuntimeError("rehan.css didn't load after 3 tries")
         settle(page)
         entry["status"] = res.status if res else None
         entry["height"] = shoot_full(page, _worker["folder"] / size / f"{slug(path)}.png")
