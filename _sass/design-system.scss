@@ -41,7 +41,7 @@ h4{
   font-size: 1.5em;
 }
 
-// Side padding that sets the text column width; em, so it scales with the element's font size.
+// Side padding that sets the text column width; rem, so it holds regardless of the element's font size.
 @mixin content-inset {
   padding-left: $content-inset;
   padding-right: $content-inset;
