@@ -153,13 +153,6 @@ video{
   padding-inline: 0.25em;
 }
 
-.thumbnail-tile {
-  margin-bottom: 1.5em;
-  @include scaffold.breakpoint(md, down){
-    margin-bottom: 1em;
-  }
-}
-
 .flag {
   position: absolute;
   font-size: 0.8em;

@@ -102,9 +102,6 @@ Through my lens, I explored the many facets of Doha, Qatar, where towering skysc
       <img src="/img/photography/doha/sand-tracks.jpg" alt="Tracks left by a vehicle on sandy terrain in Doha, with soft pastel hues of the sky blending into the desert landscape.">
     </div>
   </div>
-</div>
-
-<div class="scaffold-grid">
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
     <div class="force-flex-mobile" style="display: flex; flex: calc(935/1400);">
       <img src="/img/photography/doha/landcruiser-sand.jpg" alt="Land Cruiser parked on sandy terrain in Doha, with a person preparing equipment at the back of the vehicle, surrounded by tire tracks and soft desert hills in the background.">

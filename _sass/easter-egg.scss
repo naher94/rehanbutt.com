@@ -28,6 +28,8 @@
       padding-block: 1em;
       @include scaffold.breakpoint(md, down) {
         text-align: center;
+        // The count reads first on a phone, above the card art.
+        order: -1;
       }
       p{
         @include type-style(expressive, counter-label);

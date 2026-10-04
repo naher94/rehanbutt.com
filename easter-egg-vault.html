@@ -12,15 +12,17 @@ footer-sort-order: 4
 
 <section class="easter-egg-vault-container scaffold-container scaffold-grid-span-full">
   <h1>Achievements</h1>
-  <div class="progress-card scaffold-grid centered-column">
-    <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">
-      <img src="/img/achievement-card.png" alt="Achievement Card" class="lightmode-flip">
-      <img src="/img/achievement-card-dark.png" alt="Achievement Card" class="darkmode-flip">
-    </div>
-    <div class="text-container scaffold-grid-span-full md:scaffold-grid-span-half scaffold-flex scaffold-flex-col scaffold-justify-center">
-      <div>
-        <p><span id="easter-egg-unlocked-value">0</span>/{{site.easter-eggs | size}}</p>
-        <p>Completed</p>
+  <div class="progress-card">
+    <div class="scaffold-grid centered-column">
+      <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">
+        <img src="/img/achievement-card.png" alt="Achievement Card" class="lightmode-flip">
+        <img src="/img/achievement-card-dark.png" alt="Achievement Card" class="darkmode-flip">
+      </div>
+      <div class="text-container scaffold-grid-span-full md:scaffold-grid-span-half scaffold-flex scaffold-flex-col scaffold-justify-center">
+        <div>
+          <p><span id="easter-egg-unlocked-value">0</span>/{{site.easter-eggs | size}}</p>
+          <p>Completed</p>
+        </div>
       </div>
     </div>
   </div>

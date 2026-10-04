@@ -1,10 +1,6 @@
 @use 'scaffold/mixins' as scaffold;
 
 .photoset-tile{
-  margin-bottom: 1.5em;
-  @include scaffold.breakpoint(md, down) {
-    margin-bottom: 1em;
-  }
   .thumbnail-container{
     overflow: hidden;
     .text-container{
@@ -42,6 +38,8 @@
   }
 }
 .map-container{
+  // The gallery grid below is a sibling, so its gap doesn't reach up to here.
+  margin-bottom: var(--scaffold-gap);
   background-color: rgba($signature-teal, 0.25);
   position: relative;
   overflow: hidden;
