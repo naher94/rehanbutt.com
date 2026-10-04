@@ -230,8 +230,10 @@ def build(out):
         sys.exit(f"no captures in {SHOTS.relative_to(ROOT)} — run without --no-capture first")
     versions.sort(key=lambda v: v["date"])
 
-    # Pages come from the newest capture, in sitemap order.
-    paths = list(dict.fromkeys(e["path"] for e in versions[-1]["entries"]))
+    # Every page any capture has, in the order of the fullest one: an --only
+    # capture shouldn't shrink the viewer to its few pages.
+    fullest = max(versions, key=lambda v: len(v["entries"]))
+    paths = list(dict.fromkeys(e["path"] for v in [fullest, *versions] for e in v["entries"]))
     layouts = project_layouts()
     projects = [p for p in paths if p in layouts]
     photos = [p for p in paths if p.startswith("/photography/")]
