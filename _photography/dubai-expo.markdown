@@ -33,6 +33,7 @@ I invite you to experience this extraordinary event that united the world with a
     <img src="/img/photography/dubai-expo/marrocco-pavilion.jpg" alt="Shot of the Morocco pavilion looking up through the atrium">
   </div>
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div class="force-flex-mobile" style="display: flex; flex: calc(1000/667);">
       <img src="/img/photography/dubai-expo/white-slats.jpg" alt="Abstract curved white slats">
     </div>

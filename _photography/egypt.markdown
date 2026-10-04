@@ -26,6 +26,7 @@ During the winter of 2024, I had the incredible opportunity to visit Egypt, a co
 
 <div class="scaffold-grid">
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div class="force-flex-mobile" style="display: flex; flex: calc(1400/2097);">
       <img src="/img/photography/egypt-2024/pyramids-camels.jpg" alt="Caravan of camels in front of the Pyramids of Giza">
     </div>
@@ -46,6 +47,7 @@ During the winter of 2024, I had the incredible opportunity to visit Egypt, a co
     <img src="/img/photography/egypt-2024/bags.jpg" alt="A wall of souvenir bags">
   </div>
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div class="force-flex-mobile" style="display: flex; flex: calc(1400/935);">
       <img src="/img/photography/egypt-2024/boat-sales.jpg" alt="Salesmen selling clothing off their floating store">
     </div>

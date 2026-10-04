@@ -41,6 +41,7 @@ During my trip to Abu Dhabi I had the chance to visit Sheikh Zayed Grand Mosque,
     <img src="/img/photography/abu-dhabi-2023/louve-contrast.jpg" alt="Louve roof detailing contrasted against the white stone walls">
   </div>
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div class="force-flex-mobile" style="display: flex; flex: calc(935/1400);">
       <img src="/img/photography/abu-dhabi-2023/louve-color-pond.jpg" alt="Color Prism at the Louve">
     </div>
@@ -52,6 +53,7 @@ During my trip to Abu Dhabi I had the chance to visit Sheikh Zayed Grand Mosque,
     <img src="/img/photography/abu-dhabi-2023/louve-sunset.jpg" alt="Under the Louve canopy at sunset">
   </div>
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div class="force-flex-mobile" style="display: flex; flex: calc(935/1400);">
       <img src="/img/photography/abu-dhabi-2023/louve-exterior.jpg" alt="The Louve seen from the outside, water contrasting with the white stone and the canopy structure">
     </div>
@@ -63,6 +65,7 @@ During my trip to Abu Dhabi I had the chance to visit Sheikh Zayed Grand Mosque,
     <img src="/img/photography/abu-dhabi-2023/columns-inside.jpg" alt="Column pathway at Sheikh Zayed Grand Mosque">
   </div>
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div class="force-flex-mobile" style="display: flex; flex: calc(1/1);">
       <img src="/img/photography/abu-dhabi-2023/w-building.jpg" alt="Yas Island W LED Canopy">
     </div>

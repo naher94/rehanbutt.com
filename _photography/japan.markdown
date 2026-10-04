@@ -86,6 +86,7 @@ Spring 2025 took me to Japan during sakura season. From Tokyo to Kyoto, Nara, an
     <img src="/img/photography/japan/umbrellas.jpg" alt="A crowd of umbrellas on a rainy day">
   </div>
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div class="force-flex-mobile" style="display: flex; flex: calc(934/1400);">
       <img src="/img/photography/japan/train-fuji.jpg" alt="Bullet train with Mount Fuji in the background">
     </div>

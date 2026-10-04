@@ -19,6 +19,7 @@ hero-accent-color-dark: "#FFFFFF"
     <img src="/img/photography/assorted/kidinatub.jpg" alt="A kid in a tub rowing down the river" style="width: 100%;">
   </div>
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div style="display: flex; flex: calc(504/768);">
       <img src="/img/photography/assorted/boating.jpg" alt="Boating on Inle Lake, Myanmar" style="width: 100%;">
     </div>
@@ -32,6 +33,7 @@ hero-accent-color-dark: "#FFFFFF"
 </div>
 <div class="scaffold-grid">
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div style="display: flex; flex: calc(509/768);">
       <img src="/img/photography/assorted/monkshave.jpg" alt="A monk having a shave" style="width: 100%;">
     </div>
@@ -42,6 +44,7 @@ hero-accent-color-dark: "#FFFFFF"
 </div>
 <div class="scaffold-grid">
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div style="display: flex; flex: calc(494/768);">
       <img src="/img/photography/assorted/thedock.jpg" alt="Wooden boat dock" style="width: 100%;">
     </div>

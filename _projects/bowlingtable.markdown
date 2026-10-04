@@ -54,11 +54,14 @@ This project started as a need for a dining table, but quickly turned into almos
 A quick render I did to make sure the proportions all looked good and worked well when actually sitting at the table. For example, making sure not to have a seat right in front of a leg and determining the appropriate height for comfort of the table top.
 
 <div class="scaffold-grid">
-  <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
-    <img src="../img/bowlingtable/precut.jpeg" alt="The slab of bowling lane from the beginning of the project">
-  </div>
-  <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
-    <img src="../img/bowlingtable/undersidefinished.jpg" alt="Underside of the table in a nearly completed state">
+  <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
+    <div class="force-flex-mobile" style="display: flex; flex: calc(3683/2757);">
+      <img src="../img/bowlingtable/precut.jpeg" alt="The slab of bowling lane from the beginning of the project">
+    </div>
+    <div class="force-flex-mobile" style="display: flex; flex: calc(2589/2757);">
+      <img src="../img/bowlingtable/undersidefinished.jpg" alt="Underside of the table in a nearly completed state">
+    </div>
   </div>
   <p class="scaffold-grid-span-full">Some in-process photos, the first a photo taken towards the very beginning of the project sanding down the surface and filling any cracks or holes. The second, an almost complete look at the underside of the table top with added supports to due to the construction of bowling lanes and a little signature! 😃</p>
 </div>

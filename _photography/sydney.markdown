@@ -90,6 +90,7 @@ I had the amazing opportunity to welcome the New Year 2013 in Sydney and witness
     <img src="/img/photography/sydney-2012/building-round-corner.jpg" alt="Curved facade of a parisian style residential building">
   </div>
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div class="force-flex-mobile" style="display: flex; flex: calc(935/1400);">
       <img src="/img/photography/sydney-2012/sail-closeup.jpg" alt="Upclose photo of a Sydney Opera House sail showcasing the several colors of the tiles">
     </div>

@@ -45,6 +45,7 @@ Through my lens, I explored the many facets of Doha, Qatar, where towering skysc
     <img src="/img/photography/doha/camel-racing-start.jpg" alt="Close-up of a camel's face peeking through a fabric and metal barrier, wearing a green harness.">
   </div>
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div class="force-flex-mobile" style="display: flex; flex: calc(935/1400);">
       <img src="/img/photography/doha/camel-guy.jpg" alt="Man walking with a camel adorned in colorful blankets on a road lined with streetlights in Doha.">
     </div>
@@ -95,6 +96,7 @@ Through my lens, I explored the many facets of Doha, Qatar, where towering skysc
     <img src="/img/photography/doha/car-dunes.jpg" alt="4x4 vehicle driving along the crest of a sand dune in Doha, with soft evening light and textured sandy slopes in the foreground.">
   </div>
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div class="force-flex-mobile" style="display: flex; flex: calc(1400/1400);">
       <img src="/img/photography/doha/dune-buggy.jpg" alt="Dune buggy driving across sandy slopes in Doha, leaving intricate tire tracks on the textured desert surface under soft daylight.">
     </div>
@@ -103,6 +105,7 @@ Through my lens, I explored the many facets of Doha, Qatar, where towering skysc
     </div>
   </div>
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div class="force-flex-mobile" style="display: flex; flex: calc(935/1400);">
       <img src="/img/photography/doha/landcruiser-sand.jpg" alt="Land Cruiser parked on sandy terrain in Doha, with a person preparing equipment at the back of the vehicle, surrounded by tire tracks and soft desert hills in the background.">
     </div>

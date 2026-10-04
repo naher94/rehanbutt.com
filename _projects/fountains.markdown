@@ -7,19 +7,21 @@ date:   2011-05-01
 tags: fabrication
 ---
 
-<div class="scaffold-grid">
-  <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
+<div class="scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
+  {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
+  <div class="force-flex-mobile" style="display: flex; flex: calc(729/768);">
     <img src="../img/fountains/orange1.jpg" alt="Orange glass fountain">
   </div>
-  <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
+  <div class="force-flex-mobile" style="display: flex; flex: calc(1024/682);">
     <img src="../img/fountains/orange2.jpg" alt="Orange glass fountain seen from above">
   </div>
 </div>
-<div class="scaffold-grid" style="margin-top: 2em;">
-  <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
+<div class="scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap" style="margin-top: 2em;">
+  {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
+  <div class="force-flex-mobile" style="display: flex; flex: calc(1024/681);">
     <img src="../img/fountains/blue1.jpg" alt="Blue ceramic fountain detail shot">
   </div>
-  <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
+  <div class="force-flex-mobile" style="display: flex; flex: calc(655/768);">
     <img src="../img/fountains/blue2.jpg" alt="Blue ceramic fountain">
   </div>
 </div>

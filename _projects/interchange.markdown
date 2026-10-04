@@ -37,6 +37,7 @@ As this site was used by many students, I templated and created a style guide th
     <img src="../img/interchange/crossover.jpg" alt="Wayfinding Stickers">
   </div>
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div style="display: flex; flex: calc(1050/1400);">
       <img src="../img/interchange/stairs.jpg" alt="Wayfinding stickers on the stairs">
     </div>

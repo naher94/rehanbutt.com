@@ -64,6 +64,7 @@ Had the opportunity to visit Dubai twice, 10 years apart. First in 2012 then 202
     <img src="/img/photography/dubai/twist.jpg" alt="Twisted building">
   </div>
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
+    {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div class="force-flex-mobile" style="display: flex; flex: calc(927/1400);">
       <img src="/img/photography/dubai/burj-khalifa-detail.jpg" alt="Black & white upclose of the Burj Khalifa">
     </div>
