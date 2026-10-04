@@ -9,6 +9,7 @@ switchable by version, and notes pinned onto the screenshots.
     python3 _tools/screenshot-audit.py                  # capture HEAD, then the data and the page
     python3 _tools/screenshot-audit.py --only /photography/   # recapture just those paths
     python3 _tools/screenshot-audit.py --no-capture     # rebuild the data and the page only
+    python3 _tools/screenshot-audit.py --workers 1      # one page at a time, if parallel runs get flaky
 
 Outputs, all beside this script:
     screenshots/versions/<sha>/   one folder per capture: desktop/, mobile/, manifest.json
@@ -30,6 +31,10 @@ shuffles repeat between captures, and analytics blocked. The page is scrolled
 top to bottom so lazy and scroll-triggered content loads, then shot in 4000px
 slices that are joined into one image: a single full-page capture repeats or
 truncates past Chromium's ~16k px texture limit, and several pages are taller.
+
+Most of that is waiting, so pages are shot by several workers at once, each its
+own process with its own browser: about 12 minutes one at a time on this site,
+a fraction of that with the default 4.
 
 Notes, hidden pages and view settings live in the viewer's browser storage, not
 in these files. Export notes from the viewer before moving or deleting it.
@@ -67,6 +72,7 @@ try {
 let s = 42;
 Math.random = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296);
 """
+STYLED = "[...document.styleSheets].some(s => (s.href || '').endsWith('/css/rehan.css') && s.cssRules.length > 0)"
 BLOCKED = re.compile(r"google-analytics\.com|googletagmanager\.com|doubleclick\.net")
 
 
@@ -89,17 +95,27 @@ class SiteHandler(http.server.SimpleHTTPRequestHandler):
 
     def translate_path(self, path):
         p = pathlib.Path(super().translate_path(path))
-        if not p.exists() and p.with_name(p.name + ".html").exists():
-            return str(p.with_name(p.name + ".html"))
+        page = p.with_name(p.name + ".html")
+        # /photography is photography.html even though a photography/ folder of
+        # gallery pages sits beside it; only a folder with its own index wins.
+        if page.exists() and not (p / "index.html").exists():
+            return str(page)
         return str(p)
 
     def log_message(self, *args):
         pass
 
 
+class SiteServer(http.server.ThreadingHTTPServer):
+    # The default backlog of 5 drops connections when several browsers start at
+    # once, and a dropped stylesheet shoots the page unstyled.
+    request_queue_size = 128
+    daemon_threads = True
+
+
 def serve_site():
     handler = functools.partial(SiteHandler, directory=str(SITE))
-    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    server = SiteServer(("127.0.0.1", 0), handler)
     threading.Thread(target=server.serve_forever, daemon=True).start()
     return server, f"http://127.0.0.1:{server.server_port}"
 
@@ -108,22 +124,28 @@ def settle(page):
     """Load everything a reader would see by the time they reached the bottom."""
     page.evaluate("document.querySelectorAll('img[loading=\"lazy\"]').forEach(i => i.loading = 'eager')")
     vh = page.viewport_size["height"]
-    y = 0
-    for _ in range(400):
-        if y > page.evaluate("document.scrollingElement.scrollHeight"):
+    height = lambda: page.evaluate("document.scrollingElement.scrollHeight")
+    # Images without set dimensions grow the page as they arrive, so one pass can
+    # measure a page that is still loading (it cut four photo pages in half when
+    # several browsers started at once). Repeat until a pass leaves the height alone.
+    for _ in range(5):
+        before = height()
+        y = 0
+        while y <= height() and y < 400 * vh:
+            page.evaluate(f"window.scrollTo(0, {y})")
+            page.wait_for_timeout(120)
+            y += vh
+        try:
+            page.wait_for_load_state("networkidle", timeout=20000)
+        except Exception:
+            pass
+        page.evaluate("""async () => {
+          await document.fonts.ready;
+          await Promise.all([...document.images].filter(i => !i.complete).map(i =>
+            new Promise(r => { i.onload = i.onerror = r; setTimeout(r, 10000); })));
+        }""")
+        if height() == before:
             break
-        page.evaluate(f"window.scrollTo(0, {y})")
-        page.wait_for_timeout(120)
-        y += vh
-    try:
-        page.wait_for_load_state("networkidle", timeout=20000)
-    except Exception:
-        pass
-    page.evaluate("""async () => {
-      await document.fonts.ready;
-      await Promise.all([...document.images].filter(i => !i.complete).map(i =>
-        new Promise(r => { i.onload = i.onerror = r; setTimeout(r, 10000); })));
-    }""")
     page.evaluate("window.scrollTo(0, 0)")
     page.wait_for_timeout(1500)
     page.evaluate("document.getAnimations().forEach(a => { try { a.finish(); } catch (e) {} })")
@@ -149,9 +171,52 @@ def shoot_full(page, out):
     return height
 
 
-def capture(sha, branch, only):
+# Each worker process keeps one browser and one context per size for its whole
+# life. Playwright's sync API can't be shared across threads, hence processes.
+_worker = {}
+
+
+def _start_worker(base, folder):
+    from multiprocessing.util import Finalize
+    from playwright.sync_api import sync_playwright
+    pw = sync_playwright().start()
+    browser = pw.chromium.launch()
+    contexts = {}
+    for size, options in SIZES.items():
+        ctx = browser.new_context(**options, color_scheme="light")
+        ctx.add_init_script(INIT_SCRIPT)
+        ctx.route(BLOCKED, lambda route: route.abort())
+        contexts[size] = ctx
+    _worker.update(base=base, folder=folder, contexts=contexts)
+    Finalize(None, lambda: (browser.close(), pw.stop()), exitpriority=10)
+
+
+def _shoot(job):
+    size, path = job
+    page = _worker["contexts"][size].new_page()
+    entry = {"path": path, "slug": slug(path), "size": size}
     try:
-        from playwright.sync_api import sync_playwright
+        # A page whose stylesheet didn't arrive is reloaded rather than shot.
+        for attempt in range(3):
+            res = page.goto(_worker["base"] + path, wait_until="load", timeout=60000)
+            if page.evaluate(STYLED):
+                break
+        else:
+            raise RuntimeError("rehan.css didn't load after 3 tries")
+        settle(page)
+        entry["status"] = res.status if res else None
+        entry["height"] = shoot_full(page, _worker["folder"] / size / f"{slug(path)}.png")
+        entry["konami"] = page.evaluate("localStorage.getItem('eggKey') === 'true'")
+    except Exception as e:
+        entry["error"] = str(e)
+    finally:
+        page.close()
+    return entry
+
+
+def capture(sha, branch, only, workers):
+    try:
+        import playwright  # noqa: F401
         import PIL  # noqa: F401
     except ImportError:
         sys.exit("capture needs Playwright and Pillow:\n"
@@ -168,31 +233,26 @@ def capture(sha, branch, only):
     previous = json.loads(manifest_path.read_text()) if only and manifest_path.exists() else {}
     entries = {(e["slug"], e["size"]): e for e in previous.get("entries", [])}
 
+    jobs = [(size, path) for size in SIZES for path in paths]
+    workers = max(1, min(workers, len(jobs)))
+    started = datetime.now(timezone.utc)
     server, base = serve_site()
     try:
-        with sync_playwright() as pw:
-            browser = pw.chromium.launch()
-            for size, options in SIZES.items():
-                ctx = browser.new_context(**options, color_scheme="light")
-                ctx.add_init_script(INIT_SCRIPT)
-                ctx.route(BLOCKED, lambda route: route.abort())
-                for path in paths:
-                    page = ctx.new_page()
-                    entry = {"path": path, "slug": slug(path), "size": size}
-                    try:
-                        res = page.goto(base + path, wait_until="load", timeout=60000)
-                        settle(page)
-                        entry["status"] = res.status if res else None
-                        entry["height"] = shoot_full(page, folder / size / f"{slug(path)}.png")
-                        entry["konami"] = page.evaluate("localStorage.getItem('eggKey') === 'true'")
-                        print(f"{size:7} {path}  {entry['height']}px")
-                    except Exception as e:
-                        entry["error"] = str(e)
-                        print(f"{size:7} {path}  FAILED: {e}")
-                    entries[(entry["slug"], size)] = entry
-                    page.close()
-                ctx.close()
-            browser.close()
+        if workers == 1:
+            _start_worker(base, folder)
+            results = map(_shoot, jobs)
+            pool = None
+        else:
+            import multiprocessing
+            pool = multiprocessing.get_context("spawn").Pool(workers, _start_worker, (base, folder))
+            results = pool.imap_unordered(_shoot, jobs)
+        for n, entry in enumerate(results, 1):
+            entries[(entry["slug"], entry["size"])] = entry
+            result = f"{entry['height']}px" if "height" in entry else f"FAILED: {entry.get('error')}"
+            print(f"[{n:>3}/{len(jobs)}] {entry['size']:7} {entry['path']}  {result}", flush=True)
+        if pool:
+            pool.close()
+            pool.join()
     finally:
         server.shutdown()
 
@@ -201,7 +261,9 @@ def capture(sha, branch, only):
     folder.mkdir(parents=True, exist_ok=True)
     manifest_path.write_text(json.dumps(manifest, indent=1))
     failed = [e for e in manifest["entries"] if e.get("error") or e.get("status") != 200 or not e.get("konami")]
-    print(f"\ncaptured {len(paths)} pages × {len(SIZES)} sizes into {folder.relative_to(ROOT)}")
+    minutes = (datetime.now(timezone.utc) - started).total_seconds() / 60
+    print(f"\ncaptured {len(paths)} pages × {len(SIZES)} sizes into {folder.relative_to(ROOT)}"
+          f" in {minutes:.1f} min with {workers} worker{'s' if workers > 1 else ''}")
     if failed:
         print(f"check these: {', '.join(e['size'] + ' ' + e['path'] for e in failed)}")
 
@@ -223,7 +285,11 @@ def build(out):
     for mf in SHOTS.glob("*/manifest.json"):
         manifest = json.loads(mf.read_text())
         sha = mf.parent.name
-        subject, date = git("log", "-1", "--format=%s%x1f%cI", sha).split("\x1f")
+        try:
+            subject, date = git("log", "-1", "--format=%s%x1f%cI", sha).split("\x1f")
+        except subprocess.CalledProcessError:  # a --sha label that isn't a commit
+            subject, date = f"{sha} (not a commit)", manifest.get("captured") or ""
+
         versions.append({"sha": sha, "branch": manifest.get("branch"), "subject": subject, "date": date,
                          "entries": manifest["entries"]})
     if not versions:
@@ -292,13 +358,15 @@ if __name__ == "__main__":
     ap.add_argument("--no-html", action="store_true")
     ap.add_argument("--only", help="only capture paths containing this text")
     ap.add_argument("--sha", help="label the capture with this commit instead of HEAD")
+    ap.add_argument("--workers", type=int, default=4,
+                    help="pages shot at once, each in its own browser (default 4; 1 = one at a time)")
     args = ap.parse_args()
 
     if not args.no_capture:
         sha = args.sha or git("rev-parse", "--short", "HEAD")
         if not args.sha and git("status", "--porcelain", "--untracked-files=no"):
             print(f"note: uncommitted changes are in this capture; it is still labelled {sha}\n")
-        capture(sha, git("rev-parse", "--abbrev-ref", "HEAD"), args.only)
+        capture(sha, git("rev-parse", "--abbrev-ref", "HEAD"), args.only, args.workers)
 
     d = build(pathlib.Path(args.out))
     print(f"versions            : {', '.join(v['sha'] for v in d['versions'])}")
