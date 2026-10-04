@@ -166,10 +166,16 @@ video{
   }
 }
 
+// Same inset as body `p` so the title lines up with the text below it.
 .post-header-hero{
+  @include content-inset;
   margin-top: 1em;
   @include breakpoint(small only) {
     margin-top: 0.5em;
+  }
+  .post-meta{
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
@@ -190,6 +196,7 @@ article{
       }
     }
     code{
+      @include type-style(product, inline-code);
       border: none;
       border-radius: 5px;
       color: semantic-color(text);
@@ -302,12 +309,7 @@ article{
     .icon{
       align-items: center;
       p{
-        // Sizes the 🎬 glyph, which renders in the system emoji font -- the
-        // family and weight it inherits from `body-sm-strong` above never
-        // reach it. A literal rather than a map entry: the map records type
-        // decisions, and an entry here would put a Lato specimen in the atlas
-        // for something that is not set in Lato.
-        font-size: 2rem;
+        @include type-style(product, banner-emoji);
         margin-right: 1rem;
       }
     }

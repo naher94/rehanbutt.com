@@ -331,6 +331,20 @@ def split_decls(body):
     return out
 
 
+# `font: inherit` also resets line-height, which is how the copy button's
+# `line-height: 1` from the button reset loses -- read only as `font`, it did not.
+FONT_LONGHANDS = ("font-family", "font-size", "font-weight", "font-style",
+                  "line-height")
+
+
+def expand_font(prop, value):
+    """The properties a declaration sets. Only the keyword form of `font` is
+    expanded -- it is the only one the site writes -- anything else is itself."""
+    if prop == "font" and value.lower() in ("inherit", "initial", "unset"):
+        return FONT_LONGHANDS
+    return (prop,)
+
+
 def parse_rules(css, smap=None, props=None, keep_state=False):
     """Parse the stylesheet into rules.
 
@@ -354,9 +368,10 @@ def parse_rules(css, smap=None, props=None, keep_state=False):
                 continue
             pr, _, v = d.partition(":")
             pr = pr.strip().lower()
-            if props is None or pr in props:
-                decls[pr] = v.strip()
-                origin[pr] = smap.lookup(base + start) if smap else None
+            for lp in expand_font(pr, v.strip()):
+                if props is None or lp in props:
+                    decls[lp] = v.strip()
+                    origin[lp] = smap.lookup(base + start) if smap else None
         if props is not None and not decls:
             continue
         span = (m.start(), m.end())
@@ -399,7 +414,16 @@ COMPOUND = re.compile(r'^([a-zA-Z][\w-]*)?((?:[.#][\w-]+)*)')
 
 
 def parse_compound(part):
-    """'div.foo#bar' -> ('div', {'foo'}, 'bar'). Unsupported bits -> None."""
+    """'div.foo#bar' -> ('div', {'foo'}, 'bar', set()). Unsupported bits -> None.
+
+    The last item is the classes inside `:where()`: required to match, but
+    worth nothing in specificity. Dropped like any pseudo, `button:where(.x)`
+    matched every button on the site.
+    """
+    free = set()
+    for inner in re.findall(r':where\(([^)]*)\)', part):
+        if re.fullmatch(r'(?:\.[\w-]+)+', inner.strip()):
+            free |= set(re.findall(r'\.([\w-]+)', inner))
     part = re.sub(r':(?!:)[\w-]+(\([^)]*\))?', '', part)   # drop :pseudo
     part = re.sub(r'\[[^\]]*\]', '', part)                 # drop [attr]
     if not part:
@@ -413,7 +437,7 @@ def parse_compound(part):
         (classes.add(tok[1:]) if tok[0] == "." else None)
         if tok[0] == "#":
             ident = tok[1:]
-    return (tag, classes, ident)
+    return (tag, classes, ident, free)
 
 
 def compile_selector(sel):
@@ -431,10 +455,10 @@ def compile_selector(sel):
 
 
 def matches_compound(node, comp):
-    tag, classes, ident = comp
+    tag, classes, ident, free = comp
     if tag != "*" and node.tag != tag:
         return False
-    if classes and not classes <= node.classes:
+    if (classes or free) and not (classes | free) <= node.classes:
         return False
     if ident and node.id != ident:
         return False
@@ -461,7 +485,7 @@ def matches(node, compounds):
 
 def specificity(compounds):
     a = b = c = 0
-    for tag, classes, ident in compounds:
+    for tag, classes, ident, _free in compounds:
         if ident:
             a += 1
         b += len(classes)
