@@ -1,10 +1,12 @@
+@use 'scaffold/mixins' as scaffold;
+
 .resource-header{
   h1{
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       margin-left: 0.5rem;
       margin-right: 0.5rem;
     }
-    @include breakpoint(medium down) {
+    @include scaffold.breakpoint(lg, down) {
       margin-left: 0.5rem;
       margin-right: 0.5rem;
     }
@@ -23,7 +25,7 @@
     display: inline;
     font-weight: $zilla-bold;
     flex-wrap: wrap;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       line-height: normal;
       padding-left: 0;
       padding-right: 0;
@@ -31,7 +33,7 @@
   }
 }
 .featured-collections{
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     margin-bottom: 2rem;
   }
 }
@@ -46,7 +48,7 @@
     transition: $sprint;
     position: relative;
     overflow: hidden;
-    @include breakpoint(medium up) {
+    @include scaffold.breakpoint(md) {
       position: sticky;
       top: 1em;
     }
@@ -55,7 +57,7 @@
       margin: 0;
     }
     .text-container{
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         font-size: 1.25em;
       }
       .title{
@@ -87,7 +89,7 @@
       // icons and the bar's padding are in em and resolve against it.
       font-weight: $lato-bold;
       font-size: 0.8em;
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         font-size: 1.2em;
       }
       .count-label{
@@ -142,7 +144,7 @@
         a{
           @include link-expand;
         }
-        @include breakpoint(small only) {
+        @include scaffold.breakpoint(md, down) {
           padding-left: 0;
           padding-right: 0;
         }
@@ -174,7 +176,7 @@
     transition: $sprint;
     position: relative;
     overflow: hidden;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       font-size: 1.5em;
     }
     p{
@@ -204,7 +206,7 @@
 
 h1{
   &.resource-collections{
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       padding-left: 1rem;
       padding-right: 1rem;
     }
@@ -245,7 +247,7 @@ h1{
 
 .tag-group{
   margin-bottom: 6rem;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     margin-bottom: 3rem;
   }
   .section-header{
@@ -260,7 +262,7 @@ h1{
     color: semantic-color(text);
     display: inline;
     flex-wrap: wrap;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       padding-left: 0;
       padding-right: 0;
     }
@@ -270,9 +272,10 @@ h1{
     border-radius: $pill-radius;
     content: '';
     height: 0.35rem;
-    margin-left: 1rem;
-    @include breakpoint(small only) {
-      margin-left: 0;
+    // Its own line below md; beside the heading, filling the rest, above.
+    flex-basis: 100%;
+    @include scaffold.breakpoint(md) {
+      flex: 1;
     }
   }
 }
@@ -288,14 +291,12 @@ h1{
 }
 
 .inline-collection-tile{
-  .small-2half{
-    width: 20%;
-  }
   img{
+    width: 20%;
     border-radius: $tile-radius;
   }
   .text-content{
-    margin-inline-start: 0.5em;
+    flex: 1;
   }
   p{
     padding: 0;

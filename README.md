@@ -2,7 +2,7 @@
 
 You have found the `readme` for the [rehanbutt.com](https://rehanbutt.com) codebase. Feel free to explore the code and see how my site is built.
 
-I use [Jekyll](https://jekyllrb.com) as my static site templating engine and [Foundation for Site](https://get.foundation/sites.html) as my CSS and JS framework. Current using Version 6.6.3
+I use [Jekyll](https://jekyllrb.com) as my static site templating engine and [Scaffold CSS](https://scaffoldcss.rehanbutt.com) for layout. Scaffold is copied untouched into `_sass/scaffold/`; to update it, copy that folder over from [naher94/scaffoldcss](https://github.com/naher94/scaffoldcss). The site deploys through the GitHub Actions workflow in `.github/workflows/deploy.yml`.
 
 Curious how the site has evolved over time? Check out the [releases](https://github.com/naher94/rehanbutt.com/releases) over the years. Pretty fun to time travel! Like my own personal [waybackmachine](http://web.archive.org). 😉
 
@@ -86,9 +86,8 @@ currentDate = () => new Date(2027, 1, 6); getHappyDayString()
 
 #### General
 
-* Foundation Grid XY reference for centering and other special properties: 
-  - https://get.foundation/sites/docs/flexbox-utilities.html
-  - https://zurb.com/university/lessons/176
+* Scaffold reference for grid spans, flex helpers and breakpoints: https://scaffoldcss.rehanbutt.com/docs
+  - Scaffold has no offsets. For a centered column use `.centered-column` (two-thirds from `md`) or `.centered-column-half`, defined in `css/rehan.scss`.
 
 * Internal links using custom collections `<a href="{% link _projects/file.markdown %}">click here</a>`
 * To fix a whitespace issue when using a Jekyll includes remove the `-` on either end of the tag. `{% include external-link.html  %}` instead of `{%- include external-link.html  -%}`
@@ -340,18 +339,18 @@ to a property the entry leaves out: that would still win the cascade, then
 compute to the parent's value over a rule like the heading reset's 1.4.
 
 `at` holds per-breakpoint exceptions, with `size` staying the desktop value —
-a desktop base with `small only` corrections, matching how the rest of the site
+a desktop base with `md down` corrections, matching how the rest of the site
 is written rather than mobile-first:
 
 ```scss
 callout-lg: (family: $lato, size: 3.125rem, font-weight: $lato-regular, line-height: 1.3,
-             at: (small only: (size: 2.5rem))),
+             at: (md down: (size: 2.5rem))),
 ```
 
 Two things to know about it:
 
-* **Keys are unquoted.** Foundation reads the direction keyword as the second
-  item of a list, so `'small only'` collapses to one string and loses it.
+* **Keys are unquoted.** Each key is spread into `scaffold.breakpoint()` as size
+  and direction, so `'md down'` collapses to one string and loses it.
 * **Moving an override into the map changes its specificity.** `page-title`'s
   48px lived on a bare `h1` selector, so two h1s ignored it — the 404 title and
   the about hero, both re-applying `page-title` at class specificity. From the

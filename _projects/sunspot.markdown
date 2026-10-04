@@ -9,7 +9,7 @@ tags: fabrication physical computing
 
 <div class="image-container"><img src="../img/sunSpot/hero.jpeg" alt="Sun Spot in Use" /></div>
 
-<div class="responsive-embed widescreen">
+<div class="video-embed">
   <iframe src="https://player.vimeo.com/video/148396535" width="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen title="Sunspot Product Explainer"></iframe>
 </div>
 

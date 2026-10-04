@@ -15,10 +15,10 @@ footer-sort-order: 2
 ---
 
 <div class="about-intro">
-  <div class="grid-container about-bio">
-    <div class="grid-x cell bio-wrapper">
-      <div class="small-12 large-8 cell grid-x">
-        <section class="bio cell">
+  <div class="about-bio scaffold-container">
+    <div class="bio-wrapper scaffold-grid">
+      <div class="scaffold-grid scaffold-grid-span-full lg:scaffold-grid-span-two-thirds">
+        <section class="bio scaffold-grid-span-full">
           <h1>Hi! I'm Rehan <span class="wave" onclick="highFive()">👋</span></h1>
           <p>I am a <span class="rainbow">devzgner</span> currently based in Los Angeles California, USA creating <span class="magic">magic</span> & filmmaking tools at Walt Disney Animation Studios, where I lead design across a broad range of tools used by artists and filmmakers. I am naturally curious and tend to think in systems, always drawn to understanding how products, people, and technology come together.</p>
           <p>Previously, I led design for the technology group at UPMC Enterprises, part of the University of Pittsburgh Medical Center. My work spanned care delivery platforms, research study tools, and a suite of imaging applications for the radiology field in collaboration with GE Healthcare.</p>
@@ -52,11 +52,11 @@ footer-sort-order: 2
           <p>Curious what else I'm up to? Shoot me an {% include copy-button.html text="me@rehanbutt.com" css-class="email" content="email." %}
           </p>
         </section>
-        <div class="cell grid-x small-5 large-12 profile-2 grid-padding-x grid-padding-y">
-          <div class="cell large-6">
+        <div class="profile-2 scaffold-grid scaffold-grid-span-half lg:scaffold-grid-span-full">
+          <div class="scaffold-grid-span-full lg:scaffold-grid-span-half">
             <img src="/img/rehan-profile2.jpg" alt="Photo of Rehan Butt">
           </div>
-          <div class="cell large-6">
+          <div class="scaffold-grid-span-full lg:scaffold-grid-span-half">
             <img src="/img/rehan-profile3.jpg" alt="Photo of Rehan Butt laughing">
           </div>
         </div>
@@ -68,12 +68,12 @@ footer-sort-order: 2
   </div>
 </div>
 
-<div class="grid-container grid-x">
-  <div class="small-12 large-8 large-offset-4 cell">
+<div class="scaffold-container scaffold-grid">
+  <div class="about-details scaffold-grid-span-full">
   <section class="work-experience" id="work-experience">
-    <div class="cell grid-x align-middle">
-      <h2 class="cell small-12 medium-shrink">Work Experience</h2>
-      <div class="cell small-12 medium-auto divider"></div>
+    <div class="scaffold-flex scaffold-items-center">
+      <h2>Work Experience</h2>
+      <div class="divider"></div>
     </div>
     {% assign work_order = site.work-experience | sort: 'sort-order' %}
     {% assign work_prev = "hello" %}
@@ -98,18 +98,18 @@ footer-sort-order: 2
         {% if work.collapsed %}
           <details class="description-details">
             <summary>
-              <div class="title-date grid-x align-justify">
-                <h4 class="cell shrink">{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
-                <p class="date cell shrink">{{work.date-start | date: "%b '%y"}}・{{work.date-end | date: "%b '%y"}}</p>
+              <div class="title-date scaffold-flex scaffold-justify-between">
+                <h4>{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
+                <p class="date">{{work.date-start | date: "%b '%y"}}・{{work.date-end | date: "%b '%y"}}</p>
               </div>
             </summary>
             <p class="description">{{work.description}}</p>
           </details>
         {% else %}
-          <div class="title-date grid-x align-justify">
-            <h4 class="cell shrink">{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
+          <div class="title-date scaffold-flex scaffold-justify-between">
+            <h4>{{work.role}}{% if work.group %}・{{work.group}}{% endif %}</h4>
             <!-- what happens when the date is present? -->
-            <p class="date cell shrink">{{work.date-start | date: "%b '%y"}}・{{work.date-end | date: "%b '%y"}}</p>
+            <p class="date">{{work.date-start | date: "%b '%y"}}・{{work.date-end | date: "%b '%y"}}</p>
           </div>
           <p class="description">{{work.description}}</p>
         {% endif %}
@@ -121,9 +121,9 @@ footer-sort-order: 2
     {% endfor %}
   </section>
   <section class="education" id="education">
-    <div class="cell grid-x align-middle">
-      <h2 class="cell small-12 medium-shrink">Education</h2>
-      <div class="cell small-12 medium-auto divider"></div>
+    <div class="scaffold-flex scaffold-items-center">
+      <h2>Education</h2>
+      <div class="divider"></div>
     </div>
     <div class="education-item">
       <div class="brand-logo-container" id="cmu" role="img" aria-label="Carnegie Mellon University logo">
@@ -145,9 +145,9 @@ footer-sort-order: 2
     </div>
   </section>
   <section class="skills" id="skills">
-    <div class="cell grid-x align-middle">
-      <h2 class="cell small-12 medium-shrink">Skills</h2>
-      <div class="cell small-12 medium-auto divider"></div>
+    <div class="scaffold-flex scaffold-items-center">
+      <h2>Skills</h2>
+      <div class="divider"></div>
     </div>
     <h3>Some of the things I do well</h3>
     <div class="skills-container">
@@ -169,9 +169,9 @@ footer-sort-order: 2
     </div>
   </section>
   <section class="tools" id="tools">
-    <div class="cell grid-x align-middle">
-      <h2 class="cell small-12 medium-shrink">Tools</h2>
-      <div class="cell small-12 medium-auto divider"></div>
+    <div class="scaffold-flex scaffold-items-center">
+      <h2>Tools</h2>
+      <div class="divider"></div>
     </div>
     <h3>Some of the toolsets I am quite familiar with</h3>
     <div class="skills-container">

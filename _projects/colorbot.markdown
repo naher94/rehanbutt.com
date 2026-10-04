@@ -46,9 +46,9 @@ In order to create a better bot experience, I wanted to make sure Jasper had som
 
 {% comment %}//TODO add the fun phrases as blocks{% endcomment %}
 
-<div class="small-12 medium-6 large-6 columns image-container" style="margin-top:20px;"><img src="../img/colorBot/workflowDiagram.png" alt="Workflow Diagram"/></div>
+<div class="columns image-container" style="margin-top:20px;"><img src="../img/colorBot/workflowDiagram.png" alt="Workflow Diagram"/></div>
 
-<div class="small-12 medium-6 large-6 columns image-container" style="margin-top:20px; margin-bottom:50px;"><img src="../img/colorBot/workflowDiagramUpdated.png" alt="Workflow Diagram Updated"/></div>
+<div class="columns image-container" style="margin-top:20px; margin-bottom:50px;"><img src="../img/colorBot/workflowDiagramUpdated.png" alt="Workflow Diagram Updated"/></div>
 
 <div class="image-container" style="margin-top:20px; margin-bottom:50px;"><img src="../img/colorBot/workflowDiagramFinal.png" alt="Workflow Diagram Final"/></div>
 

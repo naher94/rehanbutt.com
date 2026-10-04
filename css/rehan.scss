@@ -1,7 +1,9 @@
 ---
   # Front matter comment to ensure Jekyll properly reads file.
 ---
-@charset "utf-8";
+// Scaffold CSS (https://scaffoldcss.rehanbutt.com), copied untouched into
+// _sass/scaffold/ from naher94/scaffoldcss@93d3bdb. Update by re-copying.
+@use 'scaffold/scaffold';
 @import 'app';
 // Rouge syntax highlighting theme for Jekyll highlight tags / fenced code. Nothing on the site renders a `.highlight` block at the moment
 @import 'monokai.css';
@@ -75,6 +77,24 @@ video{
   }
 }
 
+// A centred column, full width below md. Scaffold has no offsets, so a span
+// can't be centred in its grid; these use the same two-thirds and half.
+.centered-column,
+.centered-column-half{
+  width: 100%;
+  margin-inline: auto;
+}
+.centered-column{
+  @include scaffold.breakpoint(md) {
+    max-width: calc(100% * 2 / 3);
+  }
+}
+.centered-column-half{
+  @include scaffold.breakpoint(md) {
+    max-width: 50%;
+  }
+}
+
 .image-container {
   margin-top: 1.25em;
   margin-bottom: 1.25em;
@@ -87,7 +107,7 @@ video{
 
 //Use for photos that have inline styles of multiple aspect ratios in 1 row
 .force-flex-mobile{
-  @include breakpoint(small only){
+  @include scaffold.breakpoint(md, down){
     flex: 0 0 auto !important;
   }
 }
@@ -135,7 +155,7 @@ video{
 
 .thumbnail-tile {
   margin-bottom: 1.5em;
-  @include breakpoint(small only){
+  @include scaffold.breakpoint(md, down){
     margin-bottom: 1em;
   }
 }
@@ -150,7 +170,7 @@ video{
   background-color: $signature-teal;
   color: $pure-white;
   border-radius: $pill-radius;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     right: -0.5rem;
     top: -0.5rem;
   }
@@ -160,7 +180,7 @@ video{
 
 //******* Post/Article Styles
 .post-header{
-  @include breakpoint(large down) {
+  @include scaffold.breakpoint(xl, down) {
     padding-left: 0.5em;
     padding-right: 0.5em;
   }
@@ -170,7 +190,7 @@ video{
 .post-header-hero{
   @include content-inset;
   margin-top: 1em;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     margin-top: 0.5em;
   }
   .post-meta{
@@ -210,7 +230,7 @@ article{
   height: 100%;
   margin-left: .9375rem;
   margin-right: .9375rem;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     margin-left: .625rem;
     margin-right: .625rem;
   }
@@ -264,7 +284,7 @@ article{
     h2{
       @include type-style(product, subsection-title);
       margin: 0;
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         padding-inline: 0;
       }
     }
@@ -276,7 +296,7 @@ article{
       padding-left: 0;
       padding-right: 0;
     }
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       margin-top: -3rem;
     }
   }
@@ -301,6 +321,20 @@ article{
     padding: 1rem;
     box-shadow: $recessed-shadow semantic-color(shadow);
     align-items: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    @include scaffold.breakpoint(md) {
+      width: calc(100% * 2 / 3);
+    }
+    @include scaffold.breakpoint(lg) {
+      width: 50%;
+    }
+    @include scaffold.breakpoint(md, down) {
+      flex-wrap: wrap;
+    }
+    .banner-text{
+      flex: 1;
+    }
     p{
       @include type-style(product, body-sm-strong);
       padding: 0;
@@ -328,7 +362,8 @@ article{
       background-color: $signature-teal;
       margin: 0;
       margin-left: 0.5rem;
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
+        flex-basis: 100%;
         margin-left: 0;
         margin-top: 0.5rem;
       }
@@ -430,11 +465,11 @@ article{
     &:hover{
       transform: rotate(-5deg) scale(1.1);
     }
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       left: 1rem;
     }
   }
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     width: 6rem;
   }
 }

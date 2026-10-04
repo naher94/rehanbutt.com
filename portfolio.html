@@ -12,12 +12,12 @@ footer-section: main
 footer-sort-order: 4
 ---
 
-<h1 class="visually-hidden">Projects</h1>
+<h1 class="visually-hidden scaffold-grid-span-full">Projects</h1>
 
 {% assign project_order = site.projects | sort: 'date' | reverse %}
 
 {% for project in project_order %}
-  <div class="small-6 medium-4 cell thumbnail-tile">
+  <div class="thumbnail-tile scaffold-grid-span-half md:scaffold-grid-span-third">
     {%- capture tile -%}
         <div class="thumbnail-container">
           <img class="thumbnail-image" src="img/thumbnails/{{ project.thumbnail | append: '.png' }}" alt="{{ project.tile-name }} Tile">

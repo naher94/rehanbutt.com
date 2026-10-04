@@ -7,8 +7,8 @@ date:   2015-12-01
 tags: iOS App
 ---
 
-<div class="grid-x grid-padding-y">
-  <div class="cell">
+<div>
+  <div>
     <img src="../img/carnegieHere/hero.jpg" alt="Hero image of the project showcasing the branding and 2 main screen of the application">
   </div>
 </div>

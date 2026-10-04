@@ -32,7 +32,7 @@
     <p class="description">{{include.item.description}}</p>
   </div>
 {%- endcapture -%}
-{%- assign card_class = "cell " | append: include.css-class | append: " resource-link" -%}
+{%- assign card_class = include.css-class | append: " resource-link" -%}
 {%- if include.external -%}
 {% include external-link.html css-class=card_class link=include.href content=card %}
 {%- else -%}

@@ -3,15 +3,15 @@ layout: default
 ---
 {%- assign page_link = page.url | prepend: site.url -%}
 {%- assign threads_link = "https://threads.net/intent/post?text=Check%20out%20this%20article%20by%20%40naher94!%20" | append: page_link -%}
-<article class="post post-article" itemscope itemtype="http://schema.org/BlogPosting">
+<article class="post post-article scaffold-grid-span-full" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
     <img class="article-hero" src="/img/posts/{{page.hero}}" alt="{{page.hero-alt}}">
-    <div class="grid-x align-justify align-middle">
-      <div class="cell shrink">
+    <div class="scaffold-flex scaffold-justify-between scaffold-items-center">
+      <div>
         <p class="date-stamp">{{ page.date| date: "%B %e, %Y" }}</p>
       </div>
-      <div class="cell shrink social-share">
+      <div class="social-share">
         {% include external-link.html css-class="share-item threads" link=threads_link content="<i class='fa-brands fa-threads'></i><span class='visually-hidden'>Share on Threads</span>" %}
         {% include copy-button.html text=page_link css-class="share-item link" label="Copy link" content="<i class='fas fa-link'></i>" %}
       </div>
@@ -24,12 +24,12 @@ layout: default
     {{ content }}
   </div>
 
-  <div class="grid-x align-center share-bar-wrapper">
-    <div class="cell share-bar grid-x align-justify align-middle">
-      <div class="cell small-12 medium-auto count-label">{{page.title}}</div>
-      <div class="cell small-12 medium-shrink share-buttons grid-x">
-        {% include external-link.html css-class="cta-button cell medium-shrink" link=threads_link content="<i class='fa-brands fa-threads'></i> Share on Threads" %}
-        {% include copy-button.html text=page_link css-class="cta-button link cell medium-shrink" content="<span><i class='fas fa-link'></i> Copy Link</span>" %}
+  <div class="share-bar-wrapper">
+    <div class="share-bar scaffold-flex scaffold-flex-col md:scaffold-flex scaffold-justify-between">
+      <div class="count-label">{{page.title}}</div>
+      <div class="share-buttons scaffold-flex">
+        {% include external-link.html css-class="cta-button" link=threads_link content="<i class='fa-brands fa-threads'></i> Share on Threads" %}
+        {% include copy-button.html text=page_link css-class="cta-button link" content="<span><i class='fas fa-link'></i> Copy Link</span>" %}
       </div>
     </div>
   </div>

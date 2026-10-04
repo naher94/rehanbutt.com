@@ -1,3 +1,5 @@
+@use 'scaffold/mixins' as scaffold;
+
 .post-article{
   .post-header{
     .article-hero{
@@ -51,12 +53,15 @@
     border-radius: $tile-radius-big;
     padding: 1em;
     font-weight: $lato-bold;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       font-size: 1.2em;
+    }
+    @include scaffold.breakpoint(md) {
+      align-items: center;
     }
     .share-buttons{
       column-gap: 0.5em;
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         margin-top: 0.75em;
         > .cta-button {
           flex: 1;
@@ -64,7 +69,7 @@
       }
     }
     .cta-button{
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         font-size: 1rem;
         padding: 0.4rem 0.75rem;
       }
@@ -98,7 +103,7 @@
 .product-principles-strategies{
   p{
     margin: 0;
-    @include breakpoint(medium up) {
+    @include scaffold.breakpoint(md) {
       padding: 0;
     }
   }
