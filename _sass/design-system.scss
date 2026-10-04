@@ -82,6 +82,9 @@ ul {
   .hero-image{
     img{
       border-radius: $tile-radius-big $tile-radius-big 0 0;
+      @include breakpoint(small only) {
+        border-radius: $tile-radius-medium $tile-radius-medium 0 0;
+      }
     }
   }
 }
