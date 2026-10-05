@@ -60,9 +60,7 @@
       align-items: center;
     }
     .share-buttons{
-      column-gap: 0.5em;
       @include scaffold.breakpoint(md, down) {
-        margin-top: 0.75em;
         > .cta-button {
           flex: 1;
         }
