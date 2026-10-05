@@ -471,6 +471,10 @@ article{
 .teal-container{ //used in My Brand project
   background-color: $signature-teal;
   padding: 12rem 0;
+  // The logo goes full width on a phone; keep teal around it.
+  @include scaffold.breakpoint(md, down){
+    padding: 6rem 2rem;
+  }
 }
 
 .nyc-questions{
