@@ -30,8 +30,6 @@ hero-accent-color-dark: "#FFFFFF"
       <img src="/img/photography/assorted/greenboat.jpg" alt="River boat harvesting the floating gardens" style="width: 100%;">
     </div>
   </div>
-</div>
-<div class="scaffold-grid">
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-nowrap">
     {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div style="display: flex; flex: calc(509/768);">
@@ -41,8 +39,6 @@ hero-accent-color-dark: "#FFFFFF"
       <img src="/img/photography/assorted/twoboats.jpg" alt="2 long river boats in Myanmar" style="width: 100%;">
     </div>
   </div>
-</div>
-<div class="scaffold-grid">
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-nowrap">
     {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div style="display: flex; flex: calc(494/768);">
