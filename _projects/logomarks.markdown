@@ -118,9 +118,6 @@ Choosing a font was the next step. I wanted to use a sans serif font as the logo
   <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
     <img src="../img/logomark/ag-lockup-main-black.jpg" alt="YA Logomark Lockup with Name: Black">
   </div>
-</div>
-
-<div class="scaffold-grid">
   <div class="scaffold-grid-span-full">
     <img src="../img/logomark/ag-sketches.jpg" alt="AG Logomark Sketches">
   </div>
@@ -147,9 +144,6 @@ Here I was playing with the corner details deciding whether the corners should b
   <div class="scaffold-grid-span-half">
     <img src="../img/logomark/dnl-lockup-main-black.jpg" alt="DNL Logomark Lockup with Name: Black">
   </div>
-</div>
-
-<div class="scaffold-grid">
   <div class="scaffold-grid-span-full">
     <img src="../img/logomark/dl-sketches.jpg" alt="DNL Logomark Sketches">
   </div>
