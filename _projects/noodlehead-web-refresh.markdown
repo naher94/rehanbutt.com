@@ -34,9 +34,6 @@ If you are in Pittsburgh and get a chance to go to Noodlehead I recommend the St
   <div class="scaffold-grid-span-full">
     <img src="../img/noodlehead/footer-detail.jpg" alt="Footer detail of the website">
   </div>
-</div>
-
-<div class="scaffold-grid">
   <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">
     <img src="../img/noodlehead/noodles-bottle.jpg" alt="Noodle soup with a cold drink">
   </div>
@@ -73,9 +70,6 @@ If you are in Pittsburgh and get a chance to go to Noodlehead I recommend the St
   <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">
     <img src="../img/noodlehead/fire-illustration.jpg" alt="Cute fire illustration">
   </div>
-</div>
-
-<div class="scaffold-grid">
   <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
     {% include loop-video.html src="../img/noodlehead/spice-level-medium.mp4" title="Spice level slider fun - Medium" %}
   </div>
