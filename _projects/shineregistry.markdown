@@ -79,10 +79,6 @@ The biggest architectural change we made was separating the idea of a registry o
   <div class="scaffold-grid-span-full">
     <img src="../img/shineregistry/registry-user-profile.jpg" alt="Shine Registry's Business & User Profile Pages">
   </div>
-</div>
-
-
-<div class="scaffold-grid">
   <div class="scaffold-grid-span-full">
     <img src="../img/shineregistry/review-history.jpg" alt="Shine Registry's Design Evolution">
   </div>
