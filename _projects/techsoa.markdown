@@ -16,7 +16,7 @@ The goal with tech.soa was to pull all the resources from around the department 
 <div class="image-container"><img src="../img/techsoa/pageProcess.png" alt="Home Page Versions"/></div>
 <div class="image-container"><img src="../img/techsoa/tile-iterations.svg" alt="Tile Iterations"/></div>
 <div class="scaffold-grid">
-  <div class="scaffold-grid-span-full md:scaffold-grid-span-third"><img src="../img/techsoa/interactionTitlesTags.gif" alt="Hover Interaction For Titles & Tags"/></div>
-  <div class="scaffold-grid-span-full md:scaffold-grid-span-third"><img src="../img/techsoa/interactionTile.gif" alt="Hover Interaction for Tiles"/></div>
-  <div class="scaffold-grid-span-full md:scaffold-grid-span-third"><img src="../img/techsoa/interactionLinks.gif" alt="Hover Interaction for Inline Link"/></div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-third">{% include loop-video.html src="../img/techsoa/interactionTitlesTags.mp4" title="Hover Interaction For Titles & Tags" natural=true %}</div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-third">{% include loop-video.html src="../img/techsoa/interactionTile.mp4" title="Hover Interaction for Tiles" natural=true %}</div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-third">{% include loop-video.html src="../img/techsoa/interactionLinks.mp4" title="Hover Interaction for Inline Link" natural=true %}</div>
 </div>

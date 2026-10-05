@@ -14,16 +14,16 @@ tags: digital, illustration
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/cross-functional.jpg" alt="Pepper Panda + Team" /></div>
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/problem.jpg" alt="Pepper Panda solving problems" /></div>
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/bus.png" alt="Penguin + London Bus" /></div>
-    <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/popcorncat.gif" alt="Catto + Popcorn" /></div>
+    <div class="scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/illustrations/popcorncat.mp4" title="Catto + Popcorn" natural=true %}</div>
 </div>
 
 <p class="post-callout-large">Check out my {% include external-link.html link="https://instagram.com/naher94" content="Instagram" %} page for even more illustrations!</p>
 
 <div class="scaffold-grid">
     <div class="scaffold-grid-span-full"><img src="../img/illustrations/panda-hero.jpg" alt="Pepper Panda excited" /></div>
-    <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/nycity.gif" alt="nycity Lettering" /></div>
-    <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/laugh.gif" alt="Laugh Lettering" /></div>
-    <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/stingray.gif" alt="Stingray Drawing" /></div>
+    <div class="scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/illustrations/nycity.mp4" title="nycity Lettering" natural=true %}</div>
+    <div class="scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/illustrations/laugh.mp4" title="Laugh Lettering" natural=true %}</div>
+    <div class="scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/illustrations/stingray.mp4" title="Stingray Drawing" natural=true %}</div>
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/giraffe.png" alt="Giraffe Drawing" /></div>
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/lollipop.jpg" alt="Penguin + Lollipop" /></div>
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/tube.png" alt="Penguin + London Tube" /></div>
@@ -35,7 +35,7 @@ tags: digital, illustration
     <!-- <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/newYear2016.png" alt="Penguin + New Year" /></div> -->
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/bb8.png" alt="Penguin + BB-8" /></div>
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/amazon.jpg" alt="Penguin + Amazon" /></div>
-    <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/chipscat.gif" alt="Catto + Chips" /></div>
+    <div class="scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/illustrations/chipscat.mp4" title="Catto + Chips" natural=true %}</div>
 
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/licorice.jpg" alt="Penguin + Licorice" /></div>
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/plant.jpg" alt="Penguin + Plant" /></div>

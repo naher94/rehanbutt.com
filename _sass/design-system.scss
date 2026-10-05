@@ -240,6 +240,16 @@ p, li, h3{
   video{
     display: block;
   }
+  // `natural=true`: the clip's own size, capped at its container, as the GIFs
+  // these replaced were. The wrapper hugs the video so the button stays on it.
+  &.loop-video-natural{
+    width: fit-content;
+    max-width: 100%;
+    video{
+      max-width: 100%;
+      height: auto;
+    }
+  }
   .loop-video-toggle{
     appearance: none;
     border: 0;
