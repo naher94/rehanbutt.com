@@ -50,24 +50,18 @@ tags: digital, illustration
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/ram.jpg" alt="RAM" /></div>
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/basilKisses.png" alt="St. Basil Kisses" /></div>
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/grilledCheese.jpg" alt="Grilled Cheese" /></div>
-</div>
-<div class="scaffold-grid">
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
       <img src="../img/illustrations/kiteMrBond.png" alt="Kite Dancing in a Hurricane Mr. Bond" />
     </div>
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
       <p class="post-callout-large">"You're a kite dancing in a hurricane Mr. Bond"</p>
     </div>
-</div>
-<div class="scaffold-grid">
-    <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">
+    <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
       <img src="../img/illustrations/followingFollowing.jpg" alt="Map that Leads to You" />
     </div>
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
       <p class="post-callout-large">"The map that leads to you... Following, following, following to you"</p>
     </div>
-</div>
-<div class="scaffold-grid">
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/badBlood.jpg" alt="Bad Blood: Taylor Swift" /></div>
     <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/illustrations/karat.png" alt="karat" /></div>
     <!-- <div class="scaffold-grid-span-full lg:scaffold-grid-span-half"><img src="../img/illustrations/BB8Stylize.png" alt="BB8 Stylize" /></div> -->
