@@ -61,8 +61,6 @@
       }
     }
     .detail-footer{
-      // The flag's own margin spaces it from the name.
-      --scaffold-gap: 0;
       background-color: rgba($pure-white, 0.8);
       color: semantic-color(text-on-light-bg-always);
       -webkit-backdrop-filter: blur(10px);
@@ -71,11 +69,11 @@
       margin-top: 0.5em;
       padding: 1em;
       .flag-wrapper{
-        margin-right: 1em;
         border-radius: 5px;
         overflow: hidden;
         @include scaffold.breakpoint(md, down) {
           margin-right: 0.5em;
+          //TODO do we need this?
           // A sixth of the bar, the size it was on Foundation's small-2.
           flex: 0 0 calc(100% / 6);
         }
