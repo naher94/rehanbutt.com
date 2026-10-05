@@ -337,7 +337,7 @@ article{
       align-items: center;
       p{
         @include type-style(product, banner-emoji);
-        margin-right: 1rem;
+        // margin-right: 1rem;
       }
     }
     button{
@@ -354,11 +354,11 @@ article{
       border-radius: $tile-radius;
       background-color: $signature-teal;
       margin: 0;
-      margin-left: 0.5rem;
+      // margin-left: 0.5rem;
       @include scaffold.breakpoint(md, down) {
         flex-basis: 100%;
         margin-left: 0;
-        margin-top: 0.5rem;
+        // margin-top: 0.5rem;
       }
       &:hover{
         background-color: $signature-teal-d1;
