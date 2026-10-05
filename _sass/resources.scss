@@ -217,6 +217,10 @@
 .tag-section{
   margin-bottom: 4rem;
   margin-top: 2rem;
+  @include scaffold.breakpoint(md, down) {
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }
   h2{
     font-size: 2.5em;
   }
