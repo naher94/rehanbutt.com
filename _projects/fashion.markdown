@@ -47,9 +47,6 @@ This concept is directly linked to the idea of clothing being a shell of the hum
       <iframe width="100%" src="https://www.youtube.com/embed/SeDGiYwXBiM" frameborder="0" allowfullscreen title="Fashion Show"></iframe>
     </div>
   </div>
-</div>
-
-<div class="scaffold-grid">
   <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
     <img src="../img/fashion/kira.jpg" alt="Kira on the catwalk">
   </div>
@@ -189,10 +186,7 @@ Lots of iteration as we pushed the tolerances of our tools, from the fidelity of
   <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
     <img src="../img/fashion/fitting2.jpg" alt="Clothes fitting with Kendra">
   </div>
-</div>
-
-<div>
-  <div>
+  <div class="scaffold-grid-span-full">
     <img src="../img/fashion/sketch-comp.jpg" alt="Outfit and 3D print component sketches">
   </div>
 </div>
