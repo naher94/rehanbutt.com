@@ -7,43 +7,42 @@ date:   2015-12-01
 tags: iOS App
 ---
 
-<div>
-  <div>
+<div class="scaffold-grid">
+  <div class="scaffold-grid-span-full">
     <img src="../img/carnegieHere/hero.jpg" alt="Hero image of the project showcasing the branding and 2 main screen of the application">
   </div>
-</div>
+  <div class="slideshow-container scaffold-grid-span-full">
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation1.png" alt="Slide 1" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation2.png" alt="Slide 2" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation3.png" alt="Slide 3" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation4.png" alt="Slide 4" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation5.png" alt="Slide 5" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation6.png" alt="Slide 6" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation7.png" alt="Slide 7" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation8.png" alt="Slide 8" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation9.png" alt="Slide 9" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation10.png" alt="Slide 10" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation11.png" alt="Slide 11" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation12.png" alt="Slide 12" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation13.png" alt="Slide 13" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation14.png" alt="Slide 14" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation15.png" alt="Slide 15" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation16.png" alt="Slide 16" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation17.png" alt="Slide 17" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation18.png" alt="Slide 18" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation19.png" alt="Slide 19" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation20.png" alt="Slide 20" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation21.png" alt="Slide 21" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation22.png" alt="Slide 22" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation23.png" alt="Slide 23" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation24.png" alt="Slide 24" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation25.png" alt="Slide 25" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation26.png" alt="Slide 26" /> </div>
+    <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation27.png" alt="Slide 27" /> </div>
 
-<div class="slideshow-container">
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation1.png" alt="Slide 1" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation2.png" alt="Slide 2" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation3.png" alt="Slide 3" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation4.png" alt="Slide 4" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation5.png" alt="Slide 5" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation6.png" alt="Slide 6" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation7.png" alt="Slide 7" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation8.png" alt="Slide 8" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation9.png" alt="Slide 9" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation10.png" alt="Slide 10" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation11.png" alt="Slide 11" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation12.png" alt="Slide 12" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation13.png" alt="Slide 13" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation14.png" alt="Slide 14" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation15.png" alt="Slide 15" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation16.png" alt="Slide 16" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation17.png" alt="Slide 17" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation18.png" alt="Slide 18" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation19.png" alt="Slide 19" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation20.png" alt="Slide 20" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation21.png" alt="Slide 21" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation22.png" alt="Slide 22" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation23.png" alt="Slide 23" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation24.png" alt="Slide 24" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation25.png" alt="Slide 25" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation26.png" alt="Slide 26" /> </div>
-  <div class="gallery-asset fade"> <img src="../img/carnegieHere/CarnegieHEREPresentation27.png" alt="Slide 27" /> </div>
-
-  <a class="prev" onclick="plusSlides(-1)"><div class="arrow">&#10094;</div></a>
-  <a class="next" onclick="plusSlides(1)"><div class="arrow">&#10095;</div></a>
+    <a class="prev" onclick="plusSlides(-1)"><div class="arrow">&#10094;</div></a>
+    <a class="next" onclick="plusSlides(1)"><div class="arrow">&#10095;</div></a>
+  </div>
 </div>
 
 The slide deck we presented showing what we came up with.

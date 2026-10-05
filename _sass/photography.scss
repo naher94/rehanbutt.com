@@ -61,6 +61,8 @@
       }
     }
     .detail-footer{
+      // The flag's own margin spaces it from the name.
+      --scaffold-gap: 0;
       background-color: rgba($pure-white, 0.8);
       color: semantic-color(text-on-light-bg-always);
       -webkit-backdrop-filter: blur(10px);
@@ -74,6 +76,8 @@
         overflow: hidden;
         @include scaffold.breakpoint(md, down) {
           margin-right: 0.5em;
+          // A sixth of the bar, the size it was on Foundation's small-2.
+          flex: 0 0 calc(100% / 6);
         }
       }
       .text-wrapper{
@@ -96,6 +100,8 @@
     left: 0;
     right: 0;
     bottom: 0;
+    // Spans the box at any container width, not just the SVGs' drawn 1190px.
+    width: 100%;
     @include scaffold.breakpoint(md, down) {
       scale: 3;
       left: -72%;
