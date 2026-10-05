@@ -13,7 +13,6 @@ footer{
       padding-right: 2rem;
     }
     .nav-section{
-      margin-inline-end: 3rem;
       .section-title{
         @include type-style(product, footer-title);
         padding: 0;
@@ -76,27 +75,22 @@ footer{
     }
   }
   .site-pages{
+    // Spaces the nav sections both ways, whichever side they align to.
+    --scaffold-gap: 3rem;
     padding-left: 0;
     padding-right: 0;
     @include scaffold.breakpoint(lg, down){
       text-align: right;
       justify-content: flex-end;
       margin-bottom: 3rem;
-      .nav-section{
-        margin-inline-start: 3rem;
-        margin-inline-end: 0rem;
-      }
       .nav-wrap{
         margin-right: -1rem;
       }
     }
     @include scaffold.breakpoint(md, down){
       font-size: 1.5em;
-      .nav-section{
-        margin-block-end: 2rem;
-        .nav-wrap{
-          margin-bottom: 0;
-        }
+      .nav-section .nav-wrap{
+        margin-bottom: 0;
       }
     }
     .nav-wrap{
