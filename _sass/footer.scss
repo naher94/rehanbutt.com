@@ -129,7 +129,6 @@ footer{
     }
   }
   @include scaffold.breakpoint(md, down) {
-    margin-top: 0.5em;
     padding-bottom: 4rem;
   }
 }
