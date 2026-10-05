@@ -22,9 +22,6 @@ This past year the Masters of Tangible Interaction Design (MTID) program came ba
   <div class="scaffold-grid-span-full">
     <img src="../img/tid/tid-hoodie.jpg" alt="TiD branded hoodie">
   </div>
-</div>
-
-<div class="scaffold-grid">
   <div class="scaffold-grid-span-full">
     <img src="../img/tid/logomark-sketches.jpg" alt="Logomark Sketches">
   </div>
