@@ -204,15 +204,6 @@
   }
 }
 
-h1{
-  &.resource-collections{
-    @include scaffold.breakpoint(md, down) {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-  }
-}
-
 .tag-section{
   margin-bottom: 4rem;
   margin-top: 2rem;
