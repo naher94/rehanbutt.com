@@ -559,11 +559,6 @@
       margin-top: -2rem;
     }
   }
-  .divider{
-    @include scaffold.breakpoint(md, down){
-      margin-top: 1rem;
-    }
-  }
   .skills-item{
     display: inline-block;
     background-color: semantic-color(informational-pill);
