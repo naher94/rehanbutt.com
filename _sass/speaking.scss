@@ -172,16 +172,13 @@
       }
     }
     .main-content{
+      // Spaces the logo from the text, beside it or above it.
+      --scaffold-gap: 2em;
       padding: 1em;
       .brand-logo{
         width: 5em;
-        margin-inline-end: 2em;
         @media (prefers-color-scheme: dark) {
           filter: contrast(800%) invert(100%);
-        }
-        @include scaffold.breakpoint(md, down){
-          margin-inline-end: 0;
-          margin-block-end: 2em;
         }
       }
       div:has(> h3) {
