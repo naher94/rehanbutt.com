@@ -324,7 +324,6 @@ p, li, h3{
   &:first-child {
     background-color: semantic-color(button-fill);
     color: semantic-color(text-inverted);
-    margin-right: 0.5em;
     &:hover {
       background-color: semantic-color(speaking-button-primary-fill-hover);
       border-color: semantic-color(speaking-button-primary-border-hover);
