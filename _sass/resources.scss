@@ -41,7 +41,15 @@
 }
 
 .resources-collection{
+  // More air between the tile and the list beside it; rows keep Scaffold's gap.
+  // From md only: below it they stack, and twelve wide gaps outgrow a phone.
+  @include scaffold.breakpoint(md) {
+    --scaffold-col-gap: var(--scaffold-gap-lg);
+  }
   .tile{
+    // One column: the content fills the card. Twelve would leave the gaps
+    // wider than a narrow card and push the content off its edge.
+    --scaffold-cols: minmax(0, 1fr);
     border-radius: $tile-radius-big;
     padding: 1.5em;
     color: semantic-color(text);
