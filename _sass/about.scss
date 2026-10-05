@@ -183,6 +183,16 @@
 }
 
 .work-experience, .education, .skills, .tools{
+  // Heading and divider: on a phone the divider wraps under the heading,
+  // so the row closes up to Scaffold's small gap.
+  div:has(> .divider){
+    @include scaffold.breakpoint(md, down){
+      --scaffold-gap: var(--scaffold-gap-sm);
+      h2{
+        margin-bottom: 0;
+      }
+    }
+  }
   margin-top: 4em;
   h2{
     @include type-style(product, section-title-lg);
@@ -548,15 +558,26 @@
 }
 
 .skills, .tools{
+  // The subtitle sits in the heading row. Above md it wraps under the heading
+  // and tucks up to it; below md the divider moves after it.
   h3{
+    flex-basis: 100%;
     font-family: $lato;
     font-size: 1em;
     font-weight: $lato-black;
     padding: 0;
-    margin-top: -1.5rem;
+    // Its old -1.5rem tuck, less the row gap it now sits under.
+    margin-top: calc(-1.5rem - var(--scaffold-gap));
     margin-bottom: 1rem;
     @include scaffold.breakpoint(md, down){
-      margin-top: -2rem;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+  .divider{
+    @include scaffold.breakpoint(md, down){
+      order: 1;
+      margin-bottom: 1rem;
     }
   }
   .skills-item{

@@ -23,6 +23,16 @@
     }
   }
   .speaking-events-intro{
+    // Heading and divider: on a phone the divider wraps under the heading,
+    // so the row closes up to Scaffold's small gap.
+    div:has(> .divider){
+      @include scaffold.breakpoint(md, down){
+        --scaffold-gap: var(--scaffold-gap-sm);
+        h2{
+          margin-bottom: 0;
+        }
+      }
+    }
     margin-top: 4em;
     margin-bottom: 1rem;
     h2{

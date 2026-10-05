@@ -237,6 +237,16 @@
 }
 
 .tag-group{
+  // Heading and divider: on a phone the divider wraps under the heading,
+  // so the row closes up to Scaffold's small gap.
+  div:has(> .divider){
+    @include scaffold.breakpoint(md, down){
+      --scaffold-gap: var(--scaffold-gap-sm);
+      h2{
+        margin-bottom: 0;
+      }
+    }
+  }
   margin-bottom: 6rem;
   @include scaffold.breakpoint(md, down) {
     margin-bottom: 3rem;
@@ -267,6 +277,10 @@
     flex-basis: 100%;
     @include scaffold.breakpoint(md) {
       flex: 1;
+    }
+    // Matches the about and speaking dividers on a phone.
+    @include scaffold.breakpoint(md, down) {
+      height: 0.3rem;
     }
   }
 }
