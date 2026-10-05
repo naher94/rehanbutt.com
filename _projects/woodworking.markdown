@@ -34,13 +34,10 @@ Once you explore through these pieces, check out the <a href="/bowlingtable">rec
 </div>
 Blue light 2021
 
-<div>
-  <div>
+<div class="scaffold-grid">
+  <div class="scaffold-grid-span-full">
     <img src="../img/woodworking/stonehero.jpg" alt="Wood & Stone hero shot">
   </div>
-</div>
-
-<div class="scaffold-grid">
   <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
     <img src="../img/woodworking/stonedetail1.jpg" alt="Wood & Stone: stone and texture detail shot">
   </div>
