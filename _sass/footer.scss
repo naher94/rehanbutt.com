@@ -45,12 +45,10 @@ footer{
         }
       }
       .ship-it{
-        margin-left: 0.5rem;
         visibility: hidden;
         display: inline;
         @include scaffold.breakpoint(md, down){
           order: 1;
-          margin-right: 0.5rem;
         }
       }
       p{
