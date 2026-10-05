@@ -244,7 +244,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 .home-section-header{
   margin-bottom: 3rem;
   @include scaffold.breakpoint(md, down){
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     // Scaffold's small step: the heading sits closer to its description on a phone.
     --scaffold-gap: var(--scaffold-gap-sm);
   }
@@ -459,12 +459,16 @@ $home-section-vertical-spacing-mobile: 4rem;
 
 // --- Projects Section ---
 .featured-projects{
-  .feature-item{
-    margin-bottom: 3rem;
+  // Rows of cards spaced by their grid's gap; columns keep Scaffold's.
+  .feature-grid{
+    --scaffold-row-gap: 3rem;
     @include scaffold.breakpoint(md, down){
-      margin-bottom: 2rem;
+      --scaffold-row-gap: 2rem;
     }
-    &:nth-child(even){
+  }
+  .feature-item{
+    // The first card, now that the header isn't a sibling.
+    &:nth-child(odd){
       .image-wrapper{
         .thumbnail-container-featured{
           &:hover{

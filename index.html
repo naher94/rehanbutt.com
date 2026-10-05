@@ -93,12 +93,13 @@ sort-order: 1
 
 {% assign project_order = site.projects | sort: 'date' | reverse %}
 
-<section class="projects-container featured-projects scaffold-grid scaffold-grid-span-full scaffold-items-start">
-  <div class="home-section-header scaffold-grid scaffold-grid-span-full">
+<section class="projects-container featured-projects scaffold-flex scaffold-flex-col scaffold-grid-span-full">
+  <div class="home-section-header scaffold-grid">
     <h2 class="scaffold-grid-span-full"><a href="/portfolio">Projects <span class="arrow-animation"><i class="fas fa-arrow-right first"></i><i class="fas fa-angle-right second"></i></span></a></h2>
     <p class="section-description scaffold-grid-span-full md:scaffold-grid-span-two-thirds">A collection of work spanning product design, development, and creative exploration.</p>
   </div>
 
+  <div class="feature-grid scaffold-grid scaffold-items-start">
 {% for project in project_order %}
   {% if project.featured == true %}
   <div class="feature-item scaffold-grid-span-full md:scaffold-grid-span-half">
@@ -124,6 +125,7 @@ sort-order: 1
   </div>
   {% endif %}
 {% endfor %}
+  </div>
 </section>
 
 {%- assign photos_order = site.photography | sort: 'date' | reverse -%}
