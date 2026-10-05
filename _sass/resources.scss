@@ -32,9 +32,11 @@
     }
   }
 }
+// The tag groups' rhythm, so the first one below sits as far off as the rest.
 .featured-collections{
+  margin-block: 4rem;
   @include scaffold.breakpoint(md, down) {
-    margin-bottom: 2rem;
+    margin-block: 2rem;
   }
 }
 
