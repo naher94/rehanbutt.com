@@ -50,10 +50,10 @@ The overall user flow of the application
 
 
 <div class="scaffold-grid" style="margin-top:30px">
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/cavs-ar/tv.gif" alt="TV shot"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/cavs-ar/fridge.gif" alt="Fridge Shot"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/cavs-ar/fire.gif" alt="Firebal Shot"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/cavs-ar/brickhouse.gif" alt="Achievement Unlocked Shot"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/cavs-ar/tv.mp4" title="TV shot" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/cavs-ar/fridge.mp4" title="Fridge Shot" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/cavs-ar/fire.mp4" title="Firebal Shot" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/cavs-ar/brickhouse.mp4" title="Achievement Unlocked Shot" natural=true %}</div>
 </div>
 A couple of the many interactions and animations that were designed. Point increase counter, target recognition interface, fire ball for long streaks and an achievement animation.
 

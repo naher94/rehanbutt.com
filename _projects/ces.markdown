@@ -48,10 +48,10 @@ Several screens from the current app.
 <div class="image-container"><img src="../img/ces/inspiration.png" alt="App Inspirations"/></div>
 
 <div class="scaffold-grid">
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/ces/inspo1.gif" alt="Animation Inspiration"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/ces/inspo2.gif" alt="Animation Inspiration"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/ces/inspo3.gif" alt="Animation Inspiration"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/ces/inspo4.gif" alt="Animation Inspiration"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/ces/inspo1.mp4" title="Animation Inspiration" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/ces/inspo2.mp4" title="Animation Inspiration" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/ces/inspo3.mp4" title="Animation Inspiration" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/ces/inspo4.mp4" title="Animation Inspiration" natural=true %}</div>
 </div>
 
 Some interaction and static interfaces, that I used as inspiration. Looking at things like ease of use, hierarchy and legibility to name a few.

@@ -36,8 +36,8 @@ A lot of my time in the world of radiology involved deeply understanding the med
 The basic radiology workflow involves 4 main steps, acquisition, image quality check, reading and treatment, as depicted in the diagram above. The tools I worked on aided in the later 3 steps, a worklist management tool and diagnostic viewer for use in image quality checks and for reading of the images by the radiologist, as well as a lighter weight viewer for use by some radiologists and other image centric clinical teams.
 
 <div class="scaffold-grid">
-  <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/radiology/adobe-voice-demo.gif" alt="Adobe Voice Control Demo" /></div>
-  <div class="scaffold-grid-span-full md:scaffold-grid-span-half"><img src="../img/radiology/oblivion-console.gif" alt="Oblivion Movie Console Interaction" /></div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/radiology/adobe-voice-demo.mp4" title="Adobe Voice Control Demo" natural=true %}</div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/radiology/oblivion-console.mp4" title="Oblivion Movie Console Interaction" natural=true %}</div>
 </div>
 
 I have always been a fan of looking to other industries and even science fiction for inspiration, this project was no exception. One of the main tools you quicky learn a radiologist uses all the time is a Dictaphone for generating reports, but for most radiologists voice commands end there, which is sad to see based on how conformable and efficient it is for their workflows. You also quickly notice massive multi-monitor setups at all their workstation. As such I pulled an Adobe voice demo and a command center scene from Oblivion 2013 as inspiration to explore these 2 areas.

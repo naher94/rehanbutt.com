@@ -36,9 +36,9 @@ Several logo iterations looking at shape, scale, placement, weight and intensity
 <div class="image-container"><img src="../img/tid/brandInspiration.png" alt="Branding Inspiration"/></div>
 
 <div class="scaffold-grid">
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-third"><img src="../img/tid/animate1.gif" alt="Animation Inspiration"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-third"><img src="../img/tid/animate2.gif" alt="Animation Inspiration"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-third"><img src="../img/tid/animate4.gif" alt="Animation Inspiration"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-third">{% include loop-video.html src="../img/tid/animate1.mp4" title="Animation Inspiration" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-third">{% include loop-video.html src="../img/tid/animate2.mp4" title="Animation Inspiration" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-third">{% include loop-video.html src="../img/tid/animate4.mp4" title="Animation Inspiration" natural=true %}</div>
   <!-- <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/tid/animate3.gif" alt="Animation Inspiration"/></div> -->
 </div>
 <!-- <div class="image-container" style="margin-top:50px;"><img src="../img/tid/logoIterations.svg" alt="Logo Iterations"/></div> -->

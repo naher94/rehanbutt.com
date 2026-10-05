@@ -19,4 +19,4 @@ I decided to build 2 game modes sandbox and relation. Sandbox is a rapid-fire mo
 
 <div class="image-container"><img src="../img/tagAssociation/gameModes.png" alt="GameModes"/></div>
 <div class="image-container"><img src="../img/tagAssociation/sandboxMode.png" alt="Sandbox Mode"/></div>
-<div class="image-container"><img src="../img/tagAssociation/sandboxAnimated.gif" alt="Sandbox Mode Animation" class="image-center"/></div>
+<div class="image-container">{% include loop-video.html src="../img/tagAssociation/sandboxAnimated.mp4" title="Sandbox Mode Animation" natural=true css-class="image-center" %}</div>

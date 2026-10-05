@@ -20,10 +20,10 @@ I’m a big fan of color and creating fun names for them. As such I started QULR
 I wanted a better way to hold my colors. Collecting Post-its, swatch books and just writing down color values was not a great solution.
 
 <div class="scaffold-grid">
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/qulr/inspo1.gif" alt="Animation Inspiration"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/qulr/inspo2.gif" alt="Animation Inspiration"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/qulr/inspo3.gif" alt="Animation Inspiration"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/qulr/inspo4.gif" alt="Animation Inspiration"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/qulr/inspo1.mp4" title="Animation Inspiration" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/qulr/inspo2.mp4" title="Animation Inspiration" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/qulr/inspo3.mp4" title="Animation Inspiration" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/qulr/inspo4.mp4" title="Animation Inspiration" natural=true %}</div>
 </div>
 
 <div class="scaffold-grid">

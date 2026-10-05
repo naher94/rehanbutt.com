@@ -25,10 +25,10 @@ As part of this project we were given a Grasshopper script in order to pull the 
     <img src="../img/mocapPaper/patternZoomed.png" alt="The Pattern Zommed In"/>
   </div>
   <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
-    <img src="../img/mocapPaper/wanding.gif" alt="Wanding"/>
+    {% include loop-video.html src="../img/mocapPaper/wanding.mp4" title="Wanding" natural=true %}
   </div>
   <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
-    <img src="../img/mocapPaper/wanding2.gif" alt="Wanding Output"/>
+    {% include loop-video.html src="../img/mocapPaper/wanding2.mp4" title="Wanding Output" natural=true %}
   </div>
   <div class="scaffold-grid-span-full">
     <img src="../img/mocapPaper/rhino.png" alt="Rhino Screenshot"/>

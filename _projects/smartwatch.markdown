@@ -56,7 +56,7 @@ This was one of the final interfaces I designed trying out what I had newly lear
 With this project I also decided to explore and learn a new Prototyping tool, FramerJS, bringing my coding background into the foreground. In the couple of hours I used the tool I came up with what you see below. The first is an animation demo of what one of the screens would look like ~~and the second is a interactive use of the applications sliding functionality between the different interfaces as well as the launch of the application.~~ (Framer Online Share has been deprecated so you will just have to take my word that it was pretty neato! 😛)
 
 <div class="image-container">
-<img class="image-center" src="../img/smartWatch/animation.gif" alt="Day Light Animation" />
+{% include loop-video.html src="../img/smartWatch/animation.mp4" title="Day Light Animation" natural=true css-class="image-center" %}
 </div>
 
 <!-- <iframe src="http://share.framerjs.com/2yscl0jpkesl/" style="width:100%; height:700px;" title="Weoto Daylight Animation Prototype"></iframe>

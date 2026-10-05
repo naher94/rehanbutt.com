@@ -1,5 +1,5 @@
-<div class="loop-video">
-  <video autoplay loop muted playsinline width="100%" title="{{ include.title }}">
+<div class="loop-video{% if include.natural %} loop-video-natural{% endif %}{% if include.css-class %} {{ include.css-class }}{% endif %}"{% if include.style %} style="{{ include.style }}"{% endif %}>
+  <video autoplay loop muted playsinline{% unless include.natural %} width="100%"{% endunless %} title="{{ include.title }}">
     <source src="{{ include.src }}" type="{{ include.type | default: 'video/mp4' }}">
   </video>
   {%- comment -%} Hidden until app.js wires it up, so it never shows as a dead control. {%- endcomment %}

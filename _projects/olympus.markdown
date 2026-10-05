@@ -25,12 +25,12 @@ The first step in rebranding was to audit the existing brand. Looking at colors,
 
 
 <div class="scaffold-grid">
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/olympus/inspo1.gif" alt="Animation Inspiration"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/olympus/inspo2.gif" alt="Animation Inspiration"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/olympus/inspo3.gif" alt="Animation Inspiration"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/olympus/inspo4.gif" alt="Animation Inspiration"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/olympus/inspo5.gif" alt="Animation Inspiration"/></div>
-  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/olympus/inspo6.gif" alt="Animation Inspiration"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/olympus/inspo1.mp4" title="Animation Inspiration" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/olympus/inspo2.mp4" title="Animation Inspiration" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/olympus/inspo3.mp4" title="Animation Inspiration" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/olympus/inspo4.mp4" title="Animation Inspiration" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/olympus/inspo5.mp4" title="Animation Inspiration" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/olympus/inspo6.mp4" title="Animation Inspiration" natural=true %}</div>
 </div>
 <div class="image-container"><img src="../img/olympus/rhino.png" alt="CAD Process"/></div>
 
