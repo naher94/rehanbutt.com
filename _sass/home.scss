@@ -245,13 +245,12 @@ $home-section-vertical-spacing-mobile: 4rem;
   margin-bottom: 3rem;
   @include scaffold.breakpoint(md, down){
     margin-bottom: 2rem;
+    // Scaffold's small step: the heading sits closer to its description on a phone.
+    --scaffold-gap: var(--scaffold-gap-sm);
   }
   h2{
     @include type-style(product, section-title-lg);
     margin-bottom: 0;
-    @include scaffold.breakpoint(md, down){
-      margin-bottom: 0.25em;
-    }
   }
 }
 
