@@ -713,7 +713,6 @@ $home-section-vertical-spacing-mobile: 4rem;
     }
   }
   .resource-link{
-    margin-bottom: 1rem;
     // The same pair the resources page renders, through the same two entries.
     .title{
       @include type-style(product, body-strong);
