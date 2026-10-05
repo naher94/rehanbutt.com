@@ -339,6 +339,10 @@ $home-section-vertical-spacing-mobile: 4rem;
     }
   }
   .image-section{
+    // Room for the tilted tiles, which otherwise reach the screen edge.
+    @include scaffold.breakpoint(md, down){
+      padding-inline: 0.5rem;
+    }
     .speaking-image-container{
       background-color: $pure-white;
       border-radius: $tile-radius-medium;
