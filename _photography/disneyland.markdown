@@ -16,15 +16,14 @@ hero-accent-color-dark: "#FFFFFF"
 
 “To all who come to this happy place: Welcome. Disneyland is your land. Here age relives fond memories of the past—and here youth may savor the challenge and promise of the future. Disneyland is dedicated to the ideals, the dreams and the hard facts that have created America—with the hope that it will be a source of joy and inspiration to all the world.” -Walt Disney
 
-{% include photo-map.html 
-  worldmap-file="disneyland/worldmap-california.svg"
-  mapdetail-file="disneyland/mapdetail-california.svg"
-  flag-file="united-states.svg"
-  country-name="United States"
-  country-name-alt-text="the United States" 
-%}
-
 <div class="scaffold-grid">
+  {% include photo-map.html 
+    worldmap-file="disneyland/worldmap-california.svg"
+    mapdetail-file="disneyland/mapdetail-california.svg"
+    flag-file="united-states.svg"
+    country-name="United States"
+    country-name-alt-text="the United States" 
+  %}
   <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
     <img src="/img/photography/disneyland/halloween-balloon.jpg" alt="Balloon guy selling Halloween themed balloons">
   </div>

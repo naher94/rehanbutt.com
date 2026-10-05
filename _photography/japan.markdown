@@ -16,15 +16,14 @@ hero-accent-color-dark: "#FFFFFF"
 
 Spring 2025 took me to Japan during sakura season. From Tokyo to Kyoto, Nara, and Osaka, here are a few favorite captures from an unforgettable journey.
 
-{% include photo-map.html 
-  worldmap-file="japan/worldmap-japan.svg"
-  mapdetail-file="japan/mapdetail-japan.svg"
-  flag-file="japan.svg"
-  country-name="Japan"
-  country-name-alt-text="Japan" 
-%}
-
 <div class="scaffold-grid">
+  {% include photo-map.html 
+    worldmap-file="japan/worldmap-japan.svg"
+    mapdetail-file="japan/mapdetail-japan.svg"
+    flag-file="japan.svg"
+    country-name="Japan"
+    country-name-alt-text="Japan" 
+  %}
   <div class="scaffold-grid-span-full">
     <img src="/img/photography/japan/national-art-center.jpg" alt="Interior of the National Art Center in Tokyo">
   </div>

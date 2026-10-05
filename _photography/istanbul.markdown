@@ -16,15 +16,14 @@ hero-accent-color-dark: "#FFFFFF"
 
 During the winter of 2023, I visited the city of Istanbul. While there I visited many sites and made friends with several street cats. Enjoy some of my favorite shots from my trip.
 
-{% include photo-map.html 
-  worldmap-file="istanbul-2023/worldmap-turkey.svg"
-  mapdetail-file="istanbul-2023/mapdetail-turkey.svg"
-  flag-file="turkey.svg"
-  country-name="Turkey"
-  country-name-alt-text="Turkey" 
-%}
-
 <div class="scaffold-grid">
+  {% include photo-map.html 
+    worldmap-file="istanbul-2023/worldmap-turkey.svg"
+    mapdetail-file="istanbul-2023/mapdetail-turkey.svg"
+    flag-file="turkey.svg"
+    country-name="Turkey"
+    country-name-alt-text="Turkey" 
+  %}
   <div class="scaffold-grid-span-full">
     <img src="/img/photography/istanbul-2023/doner.jpg" alt="Panoramic shot of a shop keeper slicing Doner Kebab in the street">
   </div>

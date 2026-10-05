@@ -16,15 +16,14 @@ hero-accent-color-dark: "#FFFFFF"
 
 During my trip to Abu Dhabi I had the chance to visit Sheikh Zayed Grand Mosque, Yas Island & the Louvre as well as several other site. Enjoy some of my favorite photos from my trip.
 
-{% include photo-map.html 
-  worldmap-file="abu-dhabi-2023/worldmap-abu-dhabi.svg"
-  mapdetail-file="abu-dhabi-2023/mapdetail-abu-dhabi.svg"
-  flag-file="uae.svg"
-  country-name="United Arab Emirates"
-  country-name-alt-text="the United Arab Emirates" 
-%}
-
 <div class="scaffold-grid">
+  {% include photo-map.html 
+    worldmap-file="abu-dhabi-2023/worldmap-abu-dhabi.svg"
+    mapdetail-file="abu-dhabi-2023/mapdetail-abu-dhabi.svg"
+    flag-file="uae.svg"
+    country-name="United Arab Emirates"
+    country-name-alt-text="the United Arab Emirates" 
+  %}
   <div class="scaffold-grid-span-full">
     <img src="/img/photography/abu-dhabi-2023/mosque.jpg" alt="Sheikh Zayed Grand Mosque in full">
   </div>

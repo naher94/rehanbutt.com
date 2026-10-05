@@ -20,15 +20,14 @@ Now, the World Expo has evolved to emphasize the celebration of global culture. 
 
 I invite you to experience this extraordinary event that united the world with a shared vision of a brighter, interconnected future. Join me on my photographic journey of Dubai Expo 2020.
 
-{% include photo-map.html 
-  worldmap-file="dubai/worldmap-dubai.svg"
-  mapdetail-file="dubai/mapdetail-dubai.svg"
-  flag-file="uae.svg"
-  country-name="United Arab Emirates"
-  country-name-alt-text="the United Arab Emirates" 
-%}
-
 <div class="scaffold-grid">
+  {% include photo-map.html 
+    worldmap-file="dubai/worldmap-dubai.svg"
+    mapdetail-file="dubai/mapdetail-dubai.svg"
+    flag-file="uae.svg"
+    country-name="United Arab Emirates"
+    country-name-alt-text="the United Arab Emirates" 
+  %}
   <div class="scaffold-grid-span-full">
     <img src="/img/photography/dubai-expo/marrocco-pavilion.jpg" alt="Shot of the Morocco pavilion looking up through the atrium">
   </div>

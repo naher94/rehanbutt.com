@@ -17,15 +17,14 @@ hero-accent-color-dark: "#FFFFFF"
 
 Through my lens, I explored the many facets of Doha, Qatar, where towering skyscrapers meet vast, sunlit dunes, and the pulse of the city gives way to the stillness of the desert. This collection is a glimpse into my journey. I hope you enjoy these favorite shots from my travels.
 
-{% include photo-map.html 
-  worldmap-file="doha/worldmap-doha.svg"
-  mapdetail-file="doha/mapdetail-doha.svg"
-  flag-file="qatar.svg"
-  country-name="Qatar"
-  country-name-alt-text="Qatar" 
-%}
-
 <div class="scaffold-grid">
+  {% include photo-map.html 
+    worldmap-file="doha/worldmap-doha.svg"
+    mapdetail-file="doha/mapdetail-doha.svg"
+    flag-file="qatar.svg"
+    country-name="Qatar"
+    country-name-alt-text="Qatar" 
+  %}
   <div class="scaffold-grid-span-full">
     <img src="/img/photography/doha/cruise-terminal.jpg" alt="Architectural detail of a the cruise terminal in Doha with illuminated arched patterns at night.">
   </div>

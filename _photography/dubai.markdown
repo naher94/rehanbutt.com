@@ -17,16 +17,15 @@ hero-accent-color-dark: "#FFFFFF"
 
 Had the opportunity to visit Dubai twice, 10 years apart. First in 2012 then 2022 when I attended the <a href="{% link _photography/dubai-expo.markdown %}">World Expo</a>. Enjoy some of my favorite shots from my trip exploring architecture and culture.
 
-{% include photo-map.html 
-  worldmap-file="dubai-expo/worldmap-dubai.svg"
-  mapdetail-file="dubai-expo/mapdetail-dubai.svg"
-  flag-file="uae.svg"
-  country-name="United Arab Emirates"
-  country-name-alt-text="the United Arab Emirates" 
-%}
-
 <!-- TODO add future museum elevator??? -->
 <div class="scaffold-grid">
+  {% include photo-map.html 
+    worldmap-file="dubai-expo/worldmap-dubai.svg"
+    mapdetail-file="dubai-expo/mapdetail-dubai.svg"
+    flag-file="uae.svg"
+    country-name="United Arab Emirates"
+    country-name-alt-text="the United Arab Emirates" 
+  %}
   <div class="scaffold-grid-span-full">
     <img src="/img/photography/dubai/burj-al-arab-atrium-gold.jpg" alt="Atrium of the Burj al Arab with the gold arches">
   </div>

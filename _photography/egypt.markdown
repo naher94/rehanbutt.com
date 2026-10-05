@@ -16,15 +16,14 @@ hero-accent-color-dark: "#FFFFFF"
 
 During the winter of 2024, I had the incredible opportunity to visit Egypt, a country rich in history, culture, and breathtaking landscapes. My journey took me through several cities, each offering its own unique charm and fascinating sites. From the awe-inspiring pyramids of Giza to the ancient temples of Luxor and the vibrant markets of Cairo, every stop was filled with unforgettable moments. I explored the serene waters of the Nile, wandered through centuries-old ruins, and immersed myself in the local culture and cuisine. Here are some of my favorite shots from this unforgettable adventure—capturing the essence of Egypt through my lens.
 
-{% include photo-map.html 
-  worldmap-file="egypt-2024/worldmap-egypt.svg"
-  mapdetail-file="egypt-2024/mapdetail-egypt.svg"
-  flag-file="egypt.svg"
-  country-name="Egypt"
-  country-name-alt-text="Egypt" 
-%}
-
 <div class="scaffold-grid">
+  {% include photo-map.html 
+    worldmap-file="egypt-2024/worldmap-egypt.svg"
+    mapdetail-file="egypt-2024/mapdetail-egypt.svg"
+    flag-file="egypt.svg"
+    country-name="Egypt"
+    country-name-alt-text="Egypt" 
+  %}
   <div class="scaffold-grid-span-full scaffold-flex scaffold-flex-col md:scaffold-flex md:scaffold-flex-nowrap">
     {%- comment -%} Should be .scaffold-flex-intrinsic with --aspect-ratio: Scaffold documents it but its Sass doesn't ship it yet. {%- endcomment -%}
     <div class="force-flex-mobile" style="display: flex; flex: calc(1400/2097);">

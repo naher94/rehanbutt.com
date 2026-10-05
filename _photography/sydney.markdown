@@ -19,15 +19,14 @@ Sydney is home to one of my favorite pieces of architecture, the Sydney Opera Ho
 Jørn Utzon’s design for the Sydney Opera House, as we know it today, might never have been chosen if not for Eero Saarinen. As a member of the selection committee, Saarinen played a crucial role in its selection. He advocated for Utzon’s design for two key reasons. First, he was unimpressed with the shortlisted entries. Second, his recent work on New York City’s TWA Terminal at John F. Kennedy International Airport gave him confidence that the Opera House’s bold, sail-like shells could be constructed. While others on the committee doubted its feasibility, Saarinen believed otherwise—having already pioneered a similar wing-shaped concrete roof on the TWA Terminal.
 
 Though no precise record exists of how the winning design was ultimately chosen, this account is widely shared. If you’re curious to learn more about the Sydney Opera House, check out the {% include external-link.html link="https://www.sydneyoperahouse.com/our-story/jorn-utzon" content="full story" %}.
-{% include photo-map.html 
-  worldmap-file="sydney-2012/worldmap-aus.svg"
-  mapdetail-file="sydney-2012/mapdetail-sydney.svg"
-  flag-file="australia.svg"
-  country-name="Australia"
-  country-name-alt-text="Australia" 
-%}
-
 <div class="scaffold-grid">
+  {% include photo-map.html 
+    worldmap-file="sydney-2012/worldmap-aus.svg"
+    mapdetail-file="sydney-2012/mapdetail-sydney.svg"
+    flag-file="australia.svg"
+    country-name="Australia"
+    country-name-alt-text="Australia" 
+  %}
   <div class="scaffold-grid-span-full">
     <img src="/img/photography/sydney-2012/opera-house-night.jpg" alt="Long exposure shot of the Sydney Opera House at night">
   </div>

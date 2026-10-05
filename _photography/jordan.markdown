@@ -16,15 +16,14 @@ hero-accent-color-dark: "#FFFFFF"
 
 During the winter of 2022, I went on a trip around Jordan exploring many of the sites. From the legendary city of Petra to the golden dunes of Wadi Rum, exploring these ancient landmarks was quite a sight. Enjoy some of my favorite shots from my trip. 
 
-{% include photo-map.html 
-  worldmap-file="jordan-2022/worldmap-jordan.svg"
-  mapdetail-file="jordan-2022/mapdetail-jordan.svg"
-  flag-file="jordan.svg"
-  country-name="Jordan"
-  country-name-alt-text="Jordan" 
-%}
-
 <div class="scaffold-grid">
+  {% include photo-map.html 
+    worldmap-file="jordan-2022/worldmap-jordan.svg"
+    mapdetail-file="jordan-2022/mapdetail-jordan.svg"
+    flag-file="jordan.svg"
+    country-name="Jordan"
+    country-name-alt-text="Jordan" 
+  %}
   <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
     <img src="/img/photography/jordan-2022/camel-treasury.jpg" alt="Camels sitting in the foreground of the Treasury building at Petra">
   </div>
