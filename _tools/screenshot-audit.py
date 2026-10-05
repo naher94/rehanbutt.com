@@ -10,6 +10,7 @@ switchable by version, and notes pinned onto the screenshots.
     python3 _tools/screenshot-audit.py --only /photography/   # recapture just those paths
     python3 _tools/screenshot-audit.py --no-capture     # rebuild the data and the page only
     python3 _tools/screenshot-audit.py --workers 1      # one page at a time, if parallel runs get flaky
+    python3 _tools/screenshot-audit.py --no-capture --sha 37f13b9 --name "Before Scaffold"   # name a version
 
 Outputs, all beside this script:
     screenshots/versions/<sha>/   one folder per capture: desktop/, mobile/, manifest.json
@@ -214,7 +215,7 @@ def _shoot(job):
     return entry
 
 
-def capture(sha, branch, only, workers):
+def capture(sha, branch, only, workers, name=None):
     try:
         import playwright  # noqa: F401
         import PIL  # noqa: F401
@@ -230,7 +231,8 @@ def capture(sha, branch, only, workers):
     folder = SHOTS / sha
     manifest_path = folder / "manifest.json"
     # --only updates its pages inside an existing capture instead of replacing it.
-    previous = json.loads(manifest_path.read_text()) if only and manifest_path.exists() else {}
+    existing = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+    previous = existing if only else {}
     entries = {(e["slug"], e["size"]): e for e in previous.get("entries", [])}
 
     jobs = [(size, path) for size in SIZES for path in paths]
@@ -258,6 +260,9 @@ def capture(sha, branch, only, workers):
 
     manifest = {"sha": sha, "branch": branch, "captured": datetime.now(timezone.utc).isoformat(),
                 "entries": list(entries.values())}
+    # A recapture keeps the version's name unless a new one is given.
+    if name or existing.get("name"):
+        manifest["name"] = name or existing["name"]
     folder.mkdir(parents=True, exist_ok=True)
     manifest_path.write_text(json.dumps(manifest, indent=1))
     failed = [e for e in manifest["entries"] if e.get("error") or e.get("status") != 200 or not e.get("konami")]
@@ -291,10 +296,13 @@ def build(out):
             subject, date = f"{sha} (not a commit)", manifest.get("captured") or ""
 
         versions.append({"sha": sha, "branch": manifest.get("branch"), "subject": subject, "date": date,
+                         "name": manifest.get("name"), "captured": manifest.get("captured"),
                          "entries": manifest["entries"]})
     if not versions:
         sys.exit(f"no captures in {SHOTS.relative_to(ROOT)} — run without --no-capture first")
-    versions.sort(key=lambda v: v["date"])
+    # In capture order, so "latest" is the newest capture rather than the newest commit.
+    # Older manifests have no capture time; they fall back to the commit date.
+    versions.sort(key=lambda v: datetime.fromisoformat(v["captured"] or v["date"]).astimezone(timezone.utc))
 
     # Every page any capture has, in the order of the fullest one: an --only
     # capture shouldn't shrink the viewer to its few pages.
@@ -313,7 +321,7 @@ def build(out):
     data = {
         "generated": datetime.now(timezone.utc).isoformat(),
         "image_root": SHOTS.relative_to(HERE).as_posix(),
-        "versions": [{k: v[k] for k in ("sha", "branch", "subject", "date")} for v in versions],
+        "versions": [{k: v[k] for k in ("sha", "branch", "subject", "date", "name")} for v in versions],
         "heights": {v["sha"]: {f"{e['slug']}|{e['size']}": e.get("height") for e in v["entries"] if "height" in e}
                     for v in versions},
         "pages": [{"path": p, "slug": slug(p)} for p in paths],
@@ -358,6 +366,8 @@ if __name__ == "__main__":
     ap.add_argument("--no-html", action="store_true")
     ap.add_argument("--only", help="only capture paths containing this text")
     ap.add_argument("--sha", help="label the capture with this commit instead of HEAD")
+    ap.add_argument("--name", help="a friendly name for the version, shown in the menu and toast. "
+                                   "With --no-capture it renames an existing capture (--sha, or HEAD)")
     ap.add_argument("--workers", type=int, default=4,
                     help="pages shot at once, each in its own browser (default 4; 1 = one at a time)")
     args = ap.parse_args()
@@ -366,7 +376,14 @@ if __name__ == "__main__":
         sha = args.sha or git("rev-parse", "--short", "HEAD")
         if not args.sha and git("status", "--porcelain", "--untracked-files=no"):
             print(f"note: uncommitted changes are in this capture; it is still labelled {sha}\n")
-        capture(sha, git("rev-parse", "--abbrev-ref", "HEAD"), args.only, args.workers)
+        capture(sha, git("rev-parse", "--abbrev-ref", "HEAD"), args.only, args.workers, args.name)
+    elif args.name:
+        mf = SHOTS / (args.sha or git("rev-parse", "--short", "HEAD")) / "manifest.json"
+        if not mf.exists():
+            sys.exit(f"no capture at {mf.parent.relative_to(ROOT)} to name")
+        manifest = json.loads(mf.read_text())
+        manifest["name"] = args.name
+        mf.write_text(json.dumps(manifest, indent=1))
 
     d = build(pathlib.Path(args.out))
     print(f"versions            : {', '.join(v['sha'] for v in d['versions'])}")

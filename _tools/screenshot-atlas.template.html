@@ -535,10 +535,12 @@ document.getElementById('notes-md').addEventListener('click', () => {
 const verBtn = document.getElementById('ver-btn'), verList = document.getElementById('ver-list');
 function fmtDate(iso) { return new Date(iso).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }); }
 function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+// A version's own name when it has one (--name), else its commit subject.
+const vTitle = v => v.name || v.subject;
 function renderVersionMenu() {
   const count = sha => notes.filter(n => isOpenOn(n, sha)).length;
   const latest = VERSIONS[VERSIONS.length - 1].sha, cur = VERSIONS.find(x => x.sha === VER);
-  document.getElementById('vb-subj').textContent = cur.subject;
+  document.getElementById('vb-subj').textContent = vTitle(cur);
   document.getElementById('ver-btn').title = cur.subject + ' (' + VER + ')';
   document.getElementById('ver-count').textContent = count(VER) || '';
   document.getElementById('ver-list').innerHTML = VERSIONS.slice().reverse().map(v => {
@@ -546,7 +548,7 @@ function renderVersionMenu() {
     return '<li role="option" tabindex="-1" data-sha="' + v.sha + '" aria-selected="' + (v.sha === VER) + '">' +
       '<span class="vo-top"><code>' + v.sha + '</code>' + (v.sha === latest ? '<span class="vo-tag">latest</span>' : '') +
       '<span class="ncount" title="Notes on this version">' + (c || '') + '</span></span>' +
-      '<span class="vo-subj">' + esc(v.subject) + '</span><span class="vo-date">' + fmtDate(v.date) + '</span></li>';
+      '<span class="vo-subj" title="' + esc(v.subject).replace(/"/g, '&quot;') + '">' + esc(vTitle(v)) + '</span><span class="vo-date">' + fmtDate(v.date) + '</span></li>';
   }).join('');
 }
 function placeVerMenu() {
@@ -613,8 +615,9 @@ const verToast = document.getElementById('ver-toast');
 let toastTimer;
 function toastVersion() {
   const info = VERSIONS.find(x => x.sha === VER);
-  verToast.textContent = VER;
-  if (info.branch) verToast.insertAdjacentHTML('beforeend', '<span></span>'), verToast.lastChild.textContent = info.branch;
+  verToast.textContent = info.name || VER;
+  const sub = info.name ? VER : info.branch;
+  if (sub) verToast.insertAdjacentHTML('beforeend', '<span></span>'), verToast.lastChild.textContent = sub;
   verToast.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => verToast.classList.remove('show'), 1200);
