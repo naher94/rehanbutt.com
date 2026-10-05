@@ -14,12 +14,11 @@ tags: web Dzgn.IO
 
 ## Process
 
-<div class="image-container">
-  <img src="../img/nyc/cmu-entities.jpg" alt="Other CMU Programs" />
-  <img src="../img/nyc/cornell.jpg" alt="Cornell Campuses" />
-
-  <img src="../img/nyc/uc-schools1.jpg" alt="UC Schools Part 1" />
-  <img src="../img/nyc/uc-schools2.jpg" alt="UC schools Part 2" />
+<div class="scaffold-grid">
+  <img class="scaffold-grid-span-full" src="../img/nyc/cmu-entities.jpg" alt="Other CMU Programs" />
+  <img class="scaffold-grid-span-full" src="../img/nyc/cornell.jpg" alt="Cornell Campuses" />
+  <img class="scaffold-grid-span-full" src="../img/nyc/uc-schools1.jpg" alt="UC Schools Part 1" />
+  <img class="scaffold-grid-span-full" src="../img/nyc/uc-schools2.jpg" alt="UC schools Part 2" />
 </div>
 
 
@@ -39,17 +38,17 @@ When starting this project we looked into other Carnegie Mellon campuses as well
 
 </div>
 
-<div class="image-container">
-<img src="../img/nyc/brandSketches.png" alt="Brand Sketches" />
-<img src="../img/nyc/branding-process.jpg" alt="Branding Process" />
-<img src="../img/nyc/color-iterations.jpg" alt="Color Iteration"/>
-<img src="../img/nyc/persona.jpg" alt="Persona" />
-<img src="../img/nyc/persona2.jpg" alt="Persona" />
-<img src="../img/nyc/program-chart.jpg" alt="Program Chart" />
-<img src="../img/nyc/originalSiteBreakdown.png" alt="Original Site Breakdown" />
-<img src="../img/nyc/siteBreakdownDetail.png" alt="Site Breakdown Detail" />
-<img src="../img/nyc/bannerIterations.png" alt="Banner Iterations" />
-<img src="../img/nyc/iterations.png" alt="Page Iterations" />
+<div class="scaffold-grid">
+  <img class="scaffold-grid-span-full" src="../img/nyc/brandSketches.png" alt="Brand Sketches" />
+  <img class="scaffold-grid-span-full" src="../img/nyc/branding-process.jpg" alt="Branding Process" />
+  <img class="scaffold-grid-span-full" src="../img/nyc/color-iterations.jpg" alt="Color Iteration"/>
+  <img class="scaffold-grid-span-full" src="../img/nyc/persona.jpg" alt="Persona" />
+  <img class="scaffold-grid-span-full" src="../img/nyc/persona2.jpg" alt="Persona" />
+  <img class="scaffold-grid-span-full" src="../img/nyc/program-chart.jpg" alt="Program Chart" />
+  <img class="scaffold-grid-span-full" src="../img/nyc/originalSiteBreakdown.png" alt="Original Site Breakdown" />
+  <img class="scaffold-grid-span-full" src="../img/nyc/siteBreakdownDetail.png" alt="Site Breakdown Detail" />
+  <img class="scaffold-grid-span-full" src="../img/nyc/bannerIterations.png" alt="Banner Iterations" />
+  <img class="scaffold-grid-span-full" src="../img/nyc/iterations.png" alt="Page Iterations" />
 </div>
 
 <div class="image-container"><img src="../img/nyc/slack.png" alt="Slack" /></div>
