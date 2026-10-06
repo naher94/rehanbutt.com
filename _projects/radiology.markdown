@@ -96,8 +96,8 @@ A really interesting consultation workflow between 2 radiologists. First the rad
 </div>
 Not coming from a medical background going deep into medical journal was key! 🔑 It helped us better understand the clinical context and allowed us to have better conversation with our clinical teams, understanding their needs.
 
-<div>
-  <div class="centered-column" style="margin-top: 4em;"><img src="../img/radiology/z-layers-concept.svg" alt="Z-Index Ordering Concept Layers" /></div>
+<div class="scaffold-grid">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-two-thirds centered-column" style="margin-top: 4em;"><img src="../img/radiology/z-layers-concept.svg" alt="Z-Index Ordering Concept Layers" /></div>
 </div>
 
 This is some juicy stuff, get ready! Let’s talk a bit about 3D imaging, it was awesome to flex some of my 3D knowledge on this work. You might be wondering, this looks just like a static image nothing 3D here, well MRI scans have dozens if not hundreds of images in a single stack allowing your radiologist to scan through your body to get a better understanding, zooming, panning, scrolling and rotating around the model. Leading to this diagram that speaks to the way we had to layer data that way as the radiologists manipulated the images annotations, controls and meta data acted as it should.
