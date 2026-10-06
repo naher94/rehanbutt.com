@@ -150,7 +150,7 @@ footer-sort-order: 2
       <div class="divider"></div>
       <h3>Some of the things I do well</h3>
     </div>
-    <div class="skills-container">
+    <div class="skills-container scaffold-flex">
       <div class="skills-item">Design Thinking</div>
       <div class="skills-item">Systems Design</div>
       <div class="skills-item">Product Management</div>
@@ -174,7 +174,7 @@ footer-sort-order: 2
       <div class="divider"></div>
       <h3>Some of the toolsets I am quite familiar with</h3>
     </div>
-    <div class="skills-container">
+    <div class="skills-container scaffold-flex">
       <div class="skills-item">Figma</div>
       <div class="skills-item">Sketch</div>
       <div class="skills-item">Photoshop</div>
