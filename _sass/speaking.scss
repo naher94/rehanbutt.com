@@ -319,7 +319,6 @@
 .speaking-events{
   .speaking-item{
     margin-top: 1rem;
-    padding-left: 0.5rem;
     @include scaffold.breakpoint(md, down) {
       padding-left: 0;
     }
