@@ -1,20 +1,9 @@
 @use 'scaffold/mixins' as scaffold;
 
 .resource-header{
-  h1{
-    @include scaffold.breakpoint(md, down) {
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
-    }
-    @include scaffold.breakpoint(lg, down) {
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
-    }
-  }
   p{
     @include type-style(product, resources-intro);
     padding: 0;
-    margin: 0.5em;
   }
 }
 
@@ -216,9 +205,7 @@
 
 .tag-section{
   margin-bottom: 4rem;
-  margin-top: 2rem;
   @include scaffold.breakpoint(md, down) {
-    margin-top: 0;
     margin-bottom: 2rem;
   }
   h2{
