@@ -6,8 +6,8 @@ thumbnail: "tid"
 date:   2017-01-25
 tags: Branding
 ---
-<div>
-  <div class="image-container centered-column">
+<div class="scaffold-grid">
+  <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-two-thirds centered-column">
     <img src="../img/tid/logo.png" alt="Final Logo" class="image-center"/>
   </div>
 </div>
