@@ -39,7 +39,7 @@ The goal with this new site was to make sure it was fully responsive and make su
 ## Process
 
 <div class="scaffold-grid">
-  <div class="scaffold-grid-span-full centered-column">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-two-thirds centered-column">
     <img src="../img/mySite/siteLogo.svg" alt="Update Rehan Logo"/>
   </div>
   <div class="scaffold-grid-span-full">
@@ -54,8 +54,8 @@ The goal with this new site was to make sure it was fully responsive and make su
 </div>
 During the development process I needed to recreate many of the assets including the thumbnails to match the new specifications and to match the column width on all screen sizes.
 
-<div>
-  <div class="centered-column">
+<div class="scaffold-grid">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-two-thirds centered-column">
       <img src="../img/mySite/mobile.png" alt="Mobile Site"/>
   </div>
 </div>

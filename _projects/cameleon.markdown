@@ -10,8 +10,8 @@ published: false
 
 <!--branding process-->
 <!--process not already on splash page-->
-<div>
-  <div class="image-container centered-column-half"><img src="../img/cameleon/logo.svg" alt="Cameleon Logo"/></div>
+<div class="scaffold-grid">
+  <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half centered-column-half"><img src="../img/cameleon/logo.svg" alt="Cameleon Logo"/></div>
 </div>
 
 Check out the project on the {% include external-link.html link="http://naher94.github.io/cameleon" content=" splash page." %}
