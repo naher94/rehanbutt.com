@@ -78,8 +78,9 @@ video{
 }
 
 // Centres a Scaffold span from md by ending it on a grid line, which keeps the
-// span's width. Pair with md:scaffold-grid-span-two-thirds / -half. Scaffold has
-// no start or offset classes yet (scaffoldcss#37).
+// span's width. Pair with md:scaffold-grid-span-two-thirds / -half.
+// TODO: Scaffold can't set a span's start yet (scaffoldcss#37). When it can,
+// swap these for md:scaffold-grid-start-3 / -4 and delete both classes.
 .centered-column{
   @include scaffold.breakpoint(md) {
     grid-column-end: -3;
