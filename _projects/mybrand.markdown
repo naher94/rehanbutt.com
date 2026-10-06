@@ -7,8 +7,8 @@ date:   2014-12-12
 tags: branding
 ---
 
-<div class="teal-container">
-  <div class="centered-column-half">
+<div class="teal-container scaffold-grid">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half centered-column-half">
     <img src="../img/mybrand/mylogo.svg" alt="My new logo" style="filter: none;">
   </div>
 </div>
