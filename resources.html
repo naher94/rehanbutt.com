@@ -20,7 +20,7 @@ footer-sort-order: 2
 {% assign alltags = allresources | map: "tags" | uniq | sort %}
 <section class="tag-section scaffold-grid-span-full">
   <h2 class="visually-hidden">Categories</h2>
-  <div class="tags-container">
+  <div class="tags-container scaffold-flex">
     {% for tag in alltags %}
       <a href="#{{tag | replace: " ", "-"}}">
         <div class="tag">

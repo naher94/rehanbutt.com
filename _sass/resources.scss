@@ -212,14 +212,16 @@
     font-size: 2.5em;
   }
   .tags-container{
+    // Same spacing as the about page's skill pills: Scaffold's small step down,
+    // tighter across. Scaffold's flex has no column-only gap.
+    --scaffold-gap: var(--scaffold-gap-sm);
+    column-gap: 0.25rem;
     .tag{
       @include type-style(product, control);
       padding: .5rem 1rem;
-      margin-bottom: 0.25rem;
       background-color: semantic-color(actionable-pill);
       color: $pure-white;
       border-radius: $pill-radius;
-      display: inline-block;
       &:hover{
         background-color: semantic-color(actionable-pill-hover);
       }
