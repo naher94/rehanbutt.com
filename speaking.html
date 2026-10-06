@@ -11,8 +11,8 @@ footer-section: main
 footer-sort-order: 3
 ---
 
-<div class="speaking-page scaffold-grid-span-full">
-    <div class="speaking-intro centered-column">
+<div class="speaking-page scaffold-grid scaffold-grid-span-full">
+    <div class="speaking-intro scaffold-grid-span-full md:scaffold-grid-span-two-thirds">
       <h1>Speaking</h1>
       <p>I've had the privilege of speaking at various events on design, development, and product, sharing my knowledge and experiences with others. Whether at schools or conferences, I'm passionate about discussing design and technology.</p>
       <p>I'm always eager for new opportunities to share insights and inspire conversations. Planning an event? Let's connect!</p>
@@ -22,7 +22,7 @@ footer-sort-order: 3
       </div>
     </div>
     
-    <section class="speaking-events-intro centered-column" id="speaking-events">
+    <section class="speaking-events-intro scaffold-grid-span-full md:scaffold-grid-span-two-thirds" id="speaking-events">
       <div class="scaffold-flex scaffold-items-center">
         <h2>Speaking Events</h2>
         <div class="divider"></div>
@@ -40,7 +40,7 @@ footer-sort-order: 3
     {% assign next_event = event_order[next_index] %}
 
     {%- if event.featured == true -%}
-      <div class="speaking-item-hero" id="{{event.featured-id}}">
+      <div class="speaking-item-hero scaffold-grid-span-full" id="{{event.featured-id}}">
         <div class="top-images">
           <img class="top-square-img" src="../img/speaking-events/{{event.featured-id}}/{{event.image-top-square}}" alt="{{event.image-top-square-alt}}">
           <img class="top-img" src="../img/speaking-events/{{event.featured-id}}/{{event.image-top}}" alt="{{event.image-top-alt}}">
@@ -86,7 +86,7 @@ footer-sort-order: 3
         (either the first event overall, or the previous event is featured)
       {%- endcomment -%}
       {%- if forloop.first or prev_event.featured == true -%}
-        <section class="speaking-events centered-column">
+        <section class="speaking-events scaffold-grid-span-full md:scaffold-grid-span-two-thirds">
       {%- endif -%}
 
       <div class="speaking-item {% if event_date > current_date %}future-event{% endif %}">
@@ -131,7 +131,7 @@ footer-sort-order: 3
     {%- endif -%}
     {% endfor %}
 
-    <section class="cta-bar-wrapper">
+    <section class="cta-bar-wrapper scaffold-grid-span-full">
       <div class="cta-bar scaffold-flex scaffold-flex-col md:scaffold-flex scaffold-justify-between">
         <div class="text-area">
           <p class="text-main">Looks like you're a fan of speaking events. So am I!</p>

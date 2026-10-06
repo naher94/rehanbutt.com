@@ -1,6 +1,15 @@
 @use 'scaffold/mixins' as scaffold;
 
 .speaking-page{
+  // The grid sets the columns only; the sections keep their own vertical spacing.
+  --scaffold-row-gap: 0;
+  // Centres the two-thirds spans (columns 3–10): ending on line 11 keeps
+  // Scaffold's span. Scaffold has no offsets yet (#1262).
+  .speaking-intro, .speaking-events-intro, .speaking-events{
+    @include scaffold.breakpoint(md) {
+      grid-column-end: -3;
+    }
+  }
   .speaking-intro{
     p{
       padding: 0;
