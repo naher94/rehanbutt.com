@@ -69,11 +69,13 @@
       .flag-wrapper{
         border-radius: 5px;
         overflow: hidden;
-        @include scaffold.breakpoint(md, down) {
-          margin-right: 0.5em;
-          //TODO do we need this?
-          // A sixth of the bar, the size it was on Foundation's small-2.
-          flex: 0 0 calc(100% / 6);
+        img{
+          display: block;
+          // As tall as the two lines beside it (name + label at 1.2 leading).
+          @include scaffold.breakpoint(md, down) {
+            height: calc((var(--type-data-value-size) + var(--type-data-label-size)) * 1.2);
+            width: auto;
+          }
         }
       }
       .text-wrapper{
