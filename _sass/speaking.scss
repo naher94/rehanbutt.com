@@ -204,6 +204,7 @@
         text-wrap: pretty;
       }
       // Below the logo on its own line, then two-thirds of the row beside it.
+      //TODO replace with ScaffoldCSS thing not magic number
       .text-wrapper{
         flex-basis: 100%;
         @include scaffold.breakpoint(md) {
