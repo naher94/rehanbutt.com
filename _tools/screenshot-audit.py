@@ -315,9 +315,9 @@ def diff_page(old_png, new_png, out_png):
     new, new_h = _rows(new_png)
     if old.shape[1] != new.shape[1]:
         # A different capture width can't be compared row for row.
-        return {"changed": 1.0, "delta": new.shape[0] - old.shape[0], "regions": [[0, new.shape[0]]]}
+        return {"changed": 1.0, "delta": new.shape[0] - old.shape[0], "regions": [[0, new.shape[0]]], "height": new.shape[0]}
     if old_h == new_h:  # most pages: nothing to match
-        return {"changed": 0, "delta": 0, "regions": []}
+        return {"changed": 0, "delta": 0, "regions": [], "height": new.shape[0]}
     regions = []
 
     def mark(a, b):
@@ -343,14 +343,17 @@ def diff_page(old_png, new_png, out_png):
             a, b = (j1, j2) if j2 > j1 else (max(j1 - 2, 0), min(j1 + 2, new.shape[0]))
             mark(a, b)
     rows = sum(b - a for a, b in regions)
-    result = {"changed": round(rows / new.shape[0], 5), "delta": new.shape[0] - old.shape[0], "regions": regions}
+    result = {"changed": round(rows / new.shape[0], 5), "delta": new.shape[0] - old.shape[0], "regions": regions, "height": new.shape[0]}
     if regions:
         shade = new.astype("float32")
         for a, b in regions:
             shade[a:b] = shade[a:b] * 0.6 + np.array([255, 40, 70], dtype="float32") * 0.4
             shade[a:b, :6] = [255, 40, 70]
         out_png.parent.mkdir(parents=True, exist_ok=True)
-        Image.fromarray(shade.clip(0, 255).astype("uint8")).save(out_png.with_suffix(".jpg"), quality=70)
+        img = Image.fromarray(shade.clip(0, 255).astype("uint8"))
+        if img.height > 60000:  # JPEG tops out at 65500px; this is only a thumbnail
+            img = img.resize((img.width // 2, img.height // 2))
+        img.save(out_png.with_suffix(".jpg"), quality=70)
     return result
 
 
@@ -371,7 +374,6 @@ def diff_versions(base, head):
     for n, (slug_, size) in enumerate(shared, 1):
         r = diff_page(SHOTS / base / size / f"{slug_}.png", SHOTS / head / size / f"{slug_}.png",
                       out / size / slug_)
-        r["height"] = new[(slug_, size)]["height"]
         pages.setdefault(slug_, {"slug": slug_, "path": new[(slug_, size)]["path"]})[size] = r
         print(f"[{n:>3}/{len(shared)}] {size:7} {new[(slug_, size)]['path']}  {r['changed']:.1%}", flush=True)
     data = {
