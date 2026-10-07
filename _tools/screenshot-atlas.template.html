@@ -11,7 +11,7 @@ kbd{font:11px ui-monospace,monospace;border:1px solid #d4d4d8;border-bottom-widt
 #keys{border:0;border-radius:10px;padding:20px 24px;box-shadow:0 20px 60px rgba(0,0,0,.25);font-size:13px;min-width:320px} #keys::backdrop{background:rgba(0,0,0,.3)}
 #keys h3{margin:0 0 12px;font-size:15px} #keys table{border-collapse:collapse;width:100%} #keys td{padding:4px 0} #keys td:first-child{white-space:nowrap;padding-right:16px}
 /* Mobile / desktop view: hiding one side collapses the card to the other side at its current size. */
-/* Tablet is hidden unless picked (Tablet or All); the default pair stays mobile + desktop. */
+/* Tablet shows only when picked (Tablet or All). */
 main .t{display:none} .view-tablet main .t,.view-all main .t{display:block}
 .view-mobile main .d,.view-mobile main .t,.view-desktop main .m,.view-desktop main .t,.view-tablet main .m,.view-tablet main .d{display:none}
 .view-mobile .card{width:calc(var(--card) * .3)} .view-desktop .card{width:calc(var(--card) * .7 - 8px)}
@@ -84,7 +84,7 @@ a{color:inherit}
 .ver{display:grid;grid-template-columns:minmax(0,1fr);gap:3px;margin:10px 0 6px;font-size:11px;color:#666} .vmenu{position:relative;min-width:0}
 #ver-btn{width:100%;box-sizing:border-box;min-width:0;display:flex;align-items:center;gap:6px;font:inherit;font-size:12px;color:#18181b;background:#fff;border:1px solid #d4d4d8;border-radius:6px;padding:5px 8px;cursor:pointer;text-align:left}
 #ver-btn:hover,#ver-btn[aria-expanded=true]{border-color:#6d28d9} #ver-btn svg{flex:none;color:#888}
-#vb-subj{flex:1 1 0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#vb-latest{flex:none} #vb-latest[hidden]{display:none} #vb-subj{flex:1 1 0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vmenu code{font:600 11px ui-monospace,monospace;color:#18181b}
 /* Fixed, so the open list isn't clipped by the rail's scroll area and can be wider than it. */
 #ver-list{position:fixed;z-index:60;width:320px;box-sizing:border-box;overflow-y:auto;list-style:none;margin:0;padding:4px;background:#fff;border:1px solid #e4e4e7;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
@@ -111,12 +111,16 @@ a{color:inherit}
 .note-resolve{display:flex;align-items:center;gap:3px;font:inherit;font-size:11px;font-weight:600;border:1px solid #d4d4d8;border-radius:5px;background:#fff;color:#3f3f46;padding:2px 7px 2px 5px;cursor:pointer}
 .note-resolve:hover{border-color:#16a34a;color:#16a34a} .note-resolve.on{background:#f0fdf4;border-color:#86efac;color:#15803d}
 /* Diff overlay: the rows that changed since the base capture, boxed on the newer one. */
-.dmark{position:absolute;left:0;right:0;z-index:1;pointer-events:none;background:rgba(255,40,70,.16);border-top:2px solid rgba(255,40,70,.85);border-bottom:2px solid rgba(255,40,70,.85);box-sizing:border-box;min-height:4px} .diff-off .dmark,.diff-off .dchg{display:none}
-.dchg{flex:none;width:7px;height:7px;border-radius:50%;background:#e11d48;margin:0 4px}
+.dmark{position:absolute;left:0;right:0;z-index:1;pointer-events:none;background:rgba(249,115,22,.16);border-top:2px solid rgba(249,115,22,.85);border-bottom:2px solid rgba(249,115,22,.85);box-sizing:border-box;min-height:4px} .diff-off .dmark,.diff-off .dchg{display:none}
+.dchg{flex:none;width:7px;height:7px;border-radius:50%;background:#f97316;margin:0 4px}
 /* Compare to: always in the rail. Linked, it follows the flip pair; unlinked, it is pinned to one version whatever is on screen. */
 .cmp{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;font-size:11px;color:#666} .cmp-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.cmp-title{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .cmp-title b{font-weight:600;color:#18181b}
-.cmp-show{flex:none;display:flex;align-items:center;gap:4px;cursor:pointer}
+.cmp-title{min-width:0;display:flex;align-items:center;gap:5px;white-space:nowrap;font-size:12px} .cmp-pre{flex:none} .cmp-title b{min-width:0;font-weight:600;color:#18181b;overflow:hidden;text-overflow:ellipsis}
+.cmp-badge{flex:none;font-size:11px;line-height:16px;font-weight:600;border-radius:8px;padding:0 7px;background:#ffedd5;color:#c2410c} .cmp-badge.none{background:#f4f4f5;color:#71717a} .cmp-badge[hidden]{display:none} .cmp-title b{font-weight:600;color:#18181b}
+.cmp-show{flex:none;display:flex;align-items:center;gap:6px;cursor:pointer} .cmp-show kbd{border:0;border-radius:4px;background:#f2f2f2;padding:2px 5px;font-size:11px;line-height:15px}
+.cmp-show input{appearance:none;-webkit-appearance:none;position:relative;flex:none;width:28px;height:16px;margin:0;border-radius:8px;background:#d4d4d8;cursor:pointer;transition:background .15s} .cmp-show input:checked{background:#6d28d9}
+.cmp-show input::after{content:'';position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#fff;transition:transform .15s} .cmp-show input:checked::after{transform:translateX(12px)}
+.cmp-show input:focus-visible{outline:2px solid #6d28d9;outline-offset:2px}
 .cmp-row{display:flex;align-items:center;gap:5px;color:#71717a} .cmp-ico{display:inline-flex;flex:none} .cmp-ico:empty{display:none}
 #cmp-link{font:inherit;font-size:11px;font-weight:600;border:0;background:none;padding:0;cursor:pointer;color:#6d28d9;margin-left:2px} #cmp-link:hover{text-decoration:underline}
 .cmp select{font:inherit;font-size:12px;color:#18181b;padding:4px 6px;border:1px solid #d4d4d8;border-radius:6px;background:#fff;width:100%;min-width:0;text-overflow:ellipsis} .cmp select[hidden]{display:none}
@@ -135,15 +139,15 @@ aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px
 #split-menu{position:absolute;right:0;top:calc(100% + 6px);z-index:70;min-width:100%;box-sizing:border-box;display:grid;padding:4px;background:#fff;border:1px solid #e4e4e7;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
 #split-menu[hidden]{display:none}
 #split-menu button{border:0;border-radius:5px;padding:6px 8px;text-align:left;white-space:nowrap;font-size:12px} #split-menu button:hover,#split-menu button:focus-visible{background:#f4f4f5;color:#6d28d9}</style></head><body>
-<aside><div class="rail"><div class="rail-head"><div class="rail-title"><strong>Screenshot audit</strong><span class="rail-tools"><button type="button" id="keys-open" aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button><button type="button" id="review-toggle" aria-pressed="false" aria-label="Notes" title="Notes (R)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></button></span></div><div class="ver"><span id="ver-label">Version</span><div class="vmenu"><button type="button" id="ver-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ver-label ver-btn"><span id="vb-subj"></span><span class="ncount" id="ver-count" title="Notes on this version"></span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><ul id="ver-list" role="listbox" aria-labelledby="ver-label" hidden></ul></div></div></div>
+<aside><div class="rail"><div class="rail-head"><div class="rail-title"><strong>Screenshot audit</strong><span class="rail-tools"><button type="button" id="keys-open" aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button><button type="button" id="review-toggle" aria-pressed="false" aria-label="Notes" title="Notes (R)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></button></span></div><div class="ver"><span id="ver-label">Version</span><div class="vmenu"><button type="button" id="ver-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ver-label ver-btn"><span id="vb-subj"></span><span class="vo-tag" id="vb-latest" hidden>latest</span><span class="ncount" id="ver-count" title="Notes on this version"></span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><ul id="ver-list" role="listbox" aria-labelledby="ver-label" hidden></ul></div></div></div>
 <div class="meta"><span id="ver-branch"></span> @ <span id="ver-sha"></span> · <span id="ver-date"></span><br>light · Konami on · <span id="page-total"></span> pages</div>
 <div class="hiddenbar"><span id="hidden-count"></span> <button id="show-all" type="button" hidden>Show all</button></div>
 <h4><a href="#" style="text-decoration:none">Groups</a></h4><div id="tree-groups"></div>
 <h4><a href="#all-head" style="text-decoration:none">All pages</a></h4><div id="tree-all"></div></div>
 <div class="rail-foot">
-<div class="cmp" id="diff-bar"><div class="cmp-head"><span class="cmp-title">Comparing to <b id="cmp-name"></b></span><label class="cmp-show" title="Dots in the rail and boxes on the screenshots (C)"><input type="checkbox" id="diff-toggle" checked> Show</label></div><div class="cmp-row"><span class="cmp-ico" id="cmp-ico" aria-hidden="true"></span><span id="cmp-state"></span><button type="button" id="cmp-link"></button></div><select id="cmp-base" aria-label="Compare to version" hidden></select><div class="cmp-info" id="diff-info"></div></div>
+<div class="cmp" id="diff-bar"><div class="cmp-head"><span class="cmp-title"><span class="cmp-pre">Comparing to</span><b id="cmp-name"></b><span class="cmp-badge" id="cmp-badge" hidden></span></span><label class="cmp-show" title="Show changes: dots in the rail and boxes on the screenshots (C)"><kbd>C</kbd><input type="checkbox" id="diff-toggle" aria-label="Show changes" checked></label></div><div class="cmp-row"><span class="cmp-ico" id="cmp-ico" aria-hidden="true"></span><span id="cmp-state"></span><button type="button" id="cmp-link"></button></div><select id="cmp-base" aria-label="Compare to version" hidden></select><div class="cmp-info" id="diff-info"></div></div>
 <label class="zoom">Row size <input id="zoom" type="range" min="50" max="300" step="10" value="100"> <output id="zoom-val">100%</output></label>
-<div class="seg" role="group" aria-label="Show"><button type="button" data-view="both">Both</button><button type="button" data-view="mobile">Mobile<small data-w="mobile"></small></button><button type="button" data-view="tablet">Tablet<small data-w="tablet"></small></button><button type="button" data-view="desktop">Desktop<small data-w="desktop"></small></button><button type="button" data-view="all">All</button></div>
+<div class="seg" role="group" aria-label="Show"><button type="button" data-view="mobile">Mobile<small data-w="mobile"></small></button><button type="button" data-view="tablet">Tablet<small data-w="tablet"></small></button><button type="button" data-view="desktop">Desktop<small data-w="desktop"></small></button><button type="button" data-view="all">All</button></div>
 </div>
 <div class="rail-resize" role="separator" aria-orientation="vertical" aria-label="Resize sidebar" aria-valuemin="200" aria-valuemax="520" tabindex="0" title="Drag to resize · double-click to reset"></div></aside>
 <div id="review" role="complementary" aria-label="Notes"><header><strong>Notes<span class="ncount" id="rv-count" title="Open notes on this version"></span></strong><button type="button" class="rv-x" id="rv-close" title="Close (R)" aria-label="Close notes">×</button></header>
@@ -155,7 +159,7 @@ aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px
 <tr><td><kbd>Shift</kbd> + <kbd>J</kbd> <kbd>K</kbd></td><td>Previous / next section</td></tr>
 <tr><td><kbd>H</kbd></td><td>Hide current page, move to next</td></tr>
 <tr><td><kbd>U</kbd></td><td>Undo last hide</td></tr>
-<tr><td><kbd>1</kbd>–<kbd>5</kbd></td><td>Both / mobile / tablet / desktop / all</td></tr>
+<tr><td><kbd>1</kbd>–<kbd>4</kbd></td><td>Mobile / tablet / desktop / all</td></tr>
 <tr><td><kbd>-</kbd> <kbd>=</kbd></td><td>Row size smaller / bigger</td></tr>
 <tr><td><kbd>0</kbd></td><td>Row size 100%</td></tr>
 <tr><td><kbd>V</kbd> / <kbd>Shift</kbd> + <kbd>V</kbd></td><td>Next / previous version</td></tr>
@@ -186,7 +190,7 @@ const DATA = __DATA__;
   const card = (slug, i) => '<div class="card" id="g' + i + '-' + slug + '" data-slug="' + slug + '"><div class="cap"><a href="#' + slug + '">' + esc(bySlug[slug].path) + '</a></div><div class="duo">' +
     shot(slug, 'mobile', 'm') + shot(slug, 'tablet', 't') + shot(slug, 'desktop', 'd') + '</div></div>';
   const groups = DATA.groups.map((g, i) => '<section class="group" id="group-' + i + '"><h2><a href="#group-' + i + '">' + esc(g.name) + '</a> <span><span class="gcount">' + g.pages.length +
-    '</span> pages · mobile + desktop (tablet on request)</span><span class="ncount" title="Open notes in this group"></span></h2><div class="row">' + g.pages.map(s => card(s, i)).join('') + '</div></section>').join('');
+    '</span> pages</span><span class="ncount" title="Open notes in this group"></span></h2><div class="row">' + g.pages.map(s => card(s, i)).join('') + '</div></section>').join('');
   const h = (slug, size) => (DATA.heights[latest] || {})[slug + '|' + size] ?? '?';
   const pairs = DATA.categories.flatMap(c => c.pages).map(slug => '<section id="' + slug + '" data-slug="' + slug + '"><h2><a href="#' + slug + '">' + esc(bySlug[slug].path) + '</a></h2>' +
     '<div class="pair"><figure class="m"><figcaption>Mobile 390 · <span class="ht" data-k="' + slug + '|mobile">' + h(slug, 'mobile') + '</span>px</figcaption>' + shot(slug, 'mobile') + '</figure>' +
@@ -353,7 +357,7 @@ function setZoom(pct) {
 zoom.addEventListener('input', () => keepPlace(() => setZoom(+zoom.value)));
 try { const z = +localStorage.getItem('audit-zoom'); if (z) setZoom(z); } catch (e) {}
 document.querySelectorAll('.seg small[data-w]').forEach(s => { const w = (DATA.sizes || {})[s.dataset.w]; if (w) s.textContent = w + 'px'; });
-// Both / mobile / desktop.
+// Mobile / tablet / desktop / all.
 const viewButtons = [...document.querySelectorAll('.seg button')];
 function setView(v) {
   document.body.classList.toggle('view-mobile', v === 'mobile');
@@ -364,8 +368,9 @@ function setView(v) {
   try { localStorage.setItem('audit-view', v); } catch (e) {}
 }
 viewButtons.forEach(b => b.addEventListener('click', () => keepPlace(() => setView(b.dataset.view))));
-let savedView = 'both';
-try { savedView = localStorage.getItem('audit-view') || 'both'; } catch (e) {}
+let savedView = 'all';
+try { savedView = localStorage.getItem('audit-view') || 'all'; } catch (e) {}
+if (!viewButtons.some(b => b.dataset.view === savedView)) savedView = 'all';
 setView(savedView);
 // Keyboard shortcuts.
 const keys = document.getElementById('keys');
@@ -404,7 +409,7 @@ addEventListener('keydown', e => {
     go(next);
   }
   else if (k === 'u') { const s = undo.pop(); if (s) { hidden.delete(s); apply(); go(document.querySelector('main [data-slug="' + s + '"]:not([hidden])')); } }
-  else if ('12345'.includes(k) && k) keepPlace(() => setView(['both', 'mobile', 'tablet', 'desktop', 'all'][k - 1]));
+  else if ('1234'.includes(k) && k) keepPlace(() => setView(['mobile', 'tablet', 'desktop', 'all'][k - 1]));
   else if (k === '-' || k === '_') keepPlace(() => setZoom(+zoom.value - 10));
   else if (k === '=' || k === '+') keepPlace(() => setZoom(+zoom.value + 10));
   else if (k === '0') keepPlace(() => setZoom(100));
@@ -630,6 +635,7 @@ function renderVersionMenu() {
   const count = sha => notes.filter(n => isOpenOn(n, sha)).length;
   const latest = VERSIONS[VERSIONS.length - 1].sha, cur = VERSIONS.find(x => x.sha === VER);
   document.getElementById('vb-subj').textContent = vTitle(cur);
+  document.getElementById('vb-latest').hidden = VER !== latest;
   document.getElementById('ver-btn').title = cur.subject + ' (' + VER + ')';
   document.getElementById('ver-count').textContent = count(VER) || '';
   const partner = flipPartner();
@@ -771,12 +777,15 @@ function renderDiff() {
   shots.forEach(s => s.querySelectorAll('.dmark').forEach(m => m.remove()));
   aside.querySelectorAll('.dchg').forEach(m => m.remove());
   fillCompare();
-  const info = document.getElementById('diff-info'), d = activeDiff();
+  const info = document.getElementById('diff-info'), badge = document.getElementById('cmp-badge'), d = activeDiff();
+  badge.hidden = true; info.textContent = '';
   if (!compareBase) { info.textContent = 'Only one version captured.'; return; }
   if (compareBase === VER) { info.textContent = 'This is the version you are comparing to.'; return; }
   if (!d) { info.innerHTML = 'Not compared yet. Run <code>screenshot-audit.py --diffs</code>.'; return; }
   const n = new Set(Object.keys(d.pages).map(k => k.split('|')[0])).size;
-  info.textContent = n ? n + ' page' + (n === 1 ? '' : 's') + ' changed' : 'No pages changed';
+  badge.hidden = false; badge.classList.toggle('none', !n);
+  badge.textContent = n || '0';
+  badge.title = n ? n + ' page' + (n === 1 ? '' : 's') + ' changed' : 'No pages changed';
   // A dot beside each changed page in the rail, and on a branch that has one inside.
   const dot = tip => { const e = document.createElement('span'); e.className = 'dchg'; e.title = tip; return e; };
   const pct = slug => Math.max(...['mobile', 'tablet', 'desktop'].map(z => (d.pages[slug + '|' + z] || { changed: 0 }).changed));
