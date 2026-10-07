@@ -357,7 +357,8 @@ $home-section-vertical-spacing-mobile: 4rem;
       padding-bottom: 0.5rem;
       margin-bottom: 1rem;
       &.config-headshot{
-        width: 16rem;
+        // Never wider than the column: at tablet widths it is narrower than 20rem.
+        width: min(16rem, 100%);
         rotate: -6deg;
         position: relative;
         z-index: 2;
@@ -367,7 +368,7 @@ $home-section-vertical-spacing-mobile: 4rem;
         }
       }
       &.config-disney-history{
-        width: 20rem;
+        width: min(20rem, 100%);
         rotate: 5deg;
         margin-block-start: -4rem;
       }
