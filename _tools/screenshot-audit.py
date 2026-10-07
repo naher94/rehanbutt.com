@@ -68,6 +68,11 @@ TEMPLATE = HERE / "screenshot-atlas.template.html"
 DIFFS = HERE / "screenshots" / "diffs"
 DIFF_TEMPLATE = HERE / "screenshot-diff.template.html"
 CHUNK = 4000
+# A row counts as changed only if some pixel moved by more than this on any color channel (of 255).
+# Chromium rounds the same page a level or two differently between runs; that is not a change.
+DIFF_TOLERANCE = 8
+# Bump when the comparison changes, so cached comparisons are redone.
+DIFF_ALGO = 2
 SIZES = {
     "desktop": dict(viewport={"width": 1440, "height": 900}, device_scale_factor=1),
     "mobile": dict(viewport={"width": 390, "height": 844}, device_scale_factor=2,
@@ -334,9 +339,9 @@ def diff_page(old_png, new_png, out_png, overlay=True):
     if old.shape == new.shape:
         # Same height: nothing moved, so rows are compared in place. Sequence
         # matching is only worth its cost when something grew or shrank.
-        diff_rows = np.flatnonzero((old != new).any(axis=(1, 2)))
-        for y in diff_rows:
-            mark(int(y), int(y) + 1)
+        for y in (y for y in range(new.shape[0]) if old_h[y] != new_h[y]):
+            if np.abs(old[y].astype("int16") - new[y].astype("int16")).max() > DIFF_TOLERANCE:
+                mark(y, y + 1)
     else:
         # autojunk drops rows that repeat constantly (blank margins), which keeps
         # the match from going quadratic on 50k-row pages.
@@ -384,7 +389,7 @@ def diff_versions(base, head, write_page=True, quiet=False):
         if not quiet:
             print(f"[{n:>3}/{len(shared)}] {size:7} {new[(slug_, size)]['path']}  {r['changed']:.1%}", flush=True)
     data = {
-        "base": base, "head": head, "base_captured": manifests[base].get("captured"),
+        "algo": DIFF_ALGO, "base": base, "head": head, "base_captured": manifests[base].get("captured"),
         "head_captured": manifests[head].get("captured"), "image_root": SHOTS.relative_to(HERE).as_posix(),
         "diff_root": out.relative_to(HERE).as_posix(),
         "names": {s: manifests[s].get("name") for s in manifests},
@@ -429,7 +434,8 @@ def ensure_diffs():
             fresh = False
             if f.exists():
                 d = json.loads(f.read_text())
-                fresh = d.get("base_captured") == captured[b] and d.get("head_captured") == captured[h]
+                fresh = (d.get("base_captured") == captured[b] and d.get("head_captured") == captured[h]
+                         and d.get("algo") == DIFF_ALGO)
             if not fresh:
                 todo.append((b, h))
     for i, (b, h) in enumerate(todo, 1):
