@@ -82,9 +82,9 @@
       &.link{
         position: relative;
         cursor: pointer;
-        // A button centres its content when stretched; this keeps it at the top.
         display: flex;
         flex-direction: column;
+        justify-content: center;
         .copied{
           font-size: 1em;
           left: 20%;
