@@ -348,6 +348,13 @@ $home-section-vertical-spacing-mobile: 4rem;
     // Room for the tilted tiles, which otherwise reach the screen edge.
     @include scaffold.breakpoint(md, down){
       padding-inline: 0.5rem;
+      // One centered stack: the headshot over the Disney card, which tucks up under it.
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      > div{
+        justify-content: center;
+      }
     }
     .speaking-image-container{
       background-color: $pure-white;
