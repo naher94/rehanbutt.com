@@ -177,7 +177,14 @@ def settle(page):
     }""")
     page.evaluate("window.scrollTo(0, 0)")
     page.wait_for_timeout(1500)
-    page.evaluate("document.getAnimations().forEach(a => { try { a.finish(); } catch (e) {} })")
+    # finish() throws on an animation that never ends (the rainbow gradient, the waving hand), which then
+    # keeps playing and lands on a different frame every capture. Park those on their first frame instead.
+    page.evaluate("""document.getAnimations().forEach(a => {
+      try {
+        const timing = a.effect && a.effect.getComputedTiming();
+        if (timing && timing.endTime === Infinity) { a.pause(); a.currentTime = 0; } else { a.finish(); }
+      } catch (e) {}
+    })""")
     page.wait_for_timeout(300)
 
 
