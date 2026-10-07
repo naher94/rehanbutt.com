@@ -6,8 +6,7 @@ body{font:14px/1.4 system-ui;margin:0;background:#f4f4f5;color:#18181b}
 aside{position:fixed;z-index:30;top:0;left:0;bottom:0;width:var(--rail);display:flex;flex-direction:column;background:#fff;border-right:1px solid #ddd;box-sizing:border-box;font-size:13px}
 .rail{flex:1;overflow-y:auto;padding:16px 12px} .rail-foot{flex:none;border-top:1px solid #e4e4e7;padding:12px 12px 14px;display:grid;gap:10px}
 .seg{display:flex;border:1px solid #d4d4d8;border-radius:6px;overflow:hidden} .seg button{flex:1;font:inherit;font-size:12px;border:0;background:#fff;padding:5px 0;cursor:pointer;color:#3f3f46}
-.seg button+button{border-left:1px solid #d4d4d8} .seg button small{display:block;font-size:10px;line-height:1.2;opacity:.65;font-variant-numeric:tabular-nums} .seg button small:empty{display:none} .seg button[aria-pressed=true]{background:#0e7490;color:#fff}
-.keys-hint{font:inherit;font-size:11px;color:#888;border:0;background:none;padding:0;cursor:pointer;text-align:left} .keys-hint:hover{color:#0e7490}
+.seg button+button{border-left:1px solid #d4d4d8} .seg button small{display:block;font-size:10px;line-height:1.2;opacity:.65;font-variant-numeric:tabular-nums} .seg button small:empty{display:none} .seg button[aria-pressed=true]{background:#6d28d9;color:#fff}
 kbd{font:11px ui-monospace,monospace;border:1px solid #d4d4d8;border-bottom-width:2px;border-radius:4px;padding:1px 5px;background:#fafafa;color:#3f3f46}
 #keys{border:0;border-radius:10px;padding:20px 24px;box-shadow:0 20px 60px rgba(0,0,0,.25);font-size:13px;min-width:320px} #keys::backdrop{background:rgba(0,0,0,.3)}
 #keys h3{margin:0 0 12px;font-size:15px} #keys table{border-collapse:collapse;width:100%} #keys td{padding:4px 0} #keys td:first-child{white-space:nowrap;padding-right:16px}
@@ -19,9 +18,34 @@ main .t{display:none} .view-tablet main .t,.view-all main .t{display:block}
 .view-tablet .card{width:calc(var(--card) * .6)} .view-all .card{width:calc(var(--card) * 1.9)}
 .t{flex:none;width:400px} .duo .t{width:calc(var(--card) * .55)}
 main{margin-left:var(--rail);min-width:0}
+/* Review rail: the notes as a list, beside the left rail. Opens and closes; main makes room. */
+:root{--rail2:300px}
+#review{display:none;position:fixed;z-index:29;top:0;bottom:0;left:var(--rail);width:var(--rail2);flex-direction:column;background:#fafafa;border-right:1px solid #ddd;box-sizing:border-box;font-size:13px}
+body.review-open #review{display:flex} body.review-open main{margin-left:calc(var(--rail) + var(--rail2))}
+#review header{flex:none;display:flex;align-items:center;gap:8px;padding:12px 12px 8px} #review header strong{flex:1} /* The rule under the header block makes it plain the list scrolls beneath it. */
+#review .rv-tools{flex:none;display:flex;align-items:center;gap:10px;padding:0 12px 10px;font-size:11px;color:#666;border-bottom:1px solid #d4d4d8} #review .rv-tools label{display:flex;align-items:center;gap:4px;cursor:pointer;white-space:nowrap} #review .rv-tools .split{flex:1;min-width:84px}
+#review .rv-x{border:0;background:none;cursor:pointer;color:#71717a;padding:2px 6px;border-radius:4px;font-size:16px;line-height:1} #review .rv-x:hover{background:#e4e4e7;color:#18181b}
+/* minmax(0, 1fr): the column stays the rail's width instead of growing to fit a long word. */
+#rv-list{flex:1;overflow-x:hidden;overflow-y:auto;padding:8px 8px 16px;display:grid;grid-template-columns:minmax(0,1fr);gap:8px;align-content:start}
+.rv-item{display:flex;flex-direction:column;gap:6px;min-width:0;box-sizing:border-box;background:#fff;border:1px solid #e4e4e7;border-radius:8px;padding:8px;cursor:pointer}
+.rv-item:hover{border-color:#6d28d9} .rv-item.done .rv-meta,.rv-item.done .rv-text,.rv-item.done .rv-thumb{opacity:.55} .rv-item.done .rv-text{text-decoration:line-through}
+.rv-meta{display:flex;gap:6px;align-items:baseline;font-size:11px;color:#666;min-width:0} .rv-meta b{font-weight:600;color:#be123c} .rv-meta span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rv-meta em{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#a1a1aa}
+.rv-text{margin:0;color:#18181b;line-height:18px;overflow-wrap:anywhere}
+.rv-thumb{position:relative;height:84px;border-radius:5px;border:1px solid #e4e4e7;background-color:#f4f4f5;background-repeat:no-repeat;overflow:hidden}
+.rv-thumb::after{content:'';position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;border:2px solid #fff;background:rgba(225,29,72,.85);box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.rv-resolve{font:inherit;font-size:11px;line-height:1;font-weight:600;height:20px;width:100%;border-radius:3px;border:1px solid #6d28d9;background:#6d28d9;color:#fff;cursor:pointer;padding:0} .rv-resolve:hover{background:#5b21b6;border-color:#5b21b6}
+.rv-item.done .rv-resolve{background:#fff;color:#6d28d9} .rv-item.done .rv-resolve:hover{background:#ede9fe}
+.rv-empty{padding:16px 12px;color:#888;font-size:12px}
+/* Review toggle sits at the right of the rail's title row. */
+.rail-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:-2px 0 0}
+/* Same quiet grey as the review panel's close button; the pressed state is a darker fill, not an accent. */
+.rail-tools{display:flex;align-items:center;gap:2px}
+#keys-open,#review-toggle{display:inline-flex;align-items:center;gap:5px;font:inherit;font-size:11px;font-weight:600;line-height:1;border:0;border-radius:4px;background:none;padding:4px 6px;cursor:pointer;color:#71717a} #keys-open svg,#review-toggle svg{flex:none;display:block}
+#keys-open:hover,#keys-open:focus-visible,#review-toggle:hover,#review-toggle:focus-visible,#review-toggle[aria-pressed=true]{background:#e4e4e7;color:#18181b}
 .rail-resize{position:absolute;top:0;bottom:0;right:-4px;width:8px;cursor:col-resize;z-index:2;touch-action:none}
 .rail-resize::after{content:'';position:absolute;top:0;bottom:0;left:3px;width:2px;background:transparent;transition:background .15s}
-.rail-resize:hover::after,.rail-resize:focus-visible::after,.resizing .rail-resize::after{background:#0e7490} .rail-resize:focus{outline:none}
+.rail-resize:hover::after,.rail-resize:focus-visible::after,.resizing .rail-resize::after{background:#6d28d9} .rail-resize:focus{outline:none}
 .resizing,.resizing *{cursor:col-resize !important;user-select:none}
 aside .meta{font-size:11px;color:#666;margin:2px 0 14px} aside h4{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#888;margin:16px 4px 6px}
 aside summary{cursor:pointer;padding:3px 4px;border-radius:4px;font-weight:600} aside summary span{font-weight:400;color:#999;font-size:11px}
@@ -30,13 +54,15 @@ aside li a{display:block;padding:2px 6px;border-radius:4px;text-decoration:none;
 aside summary a{text-decoration:none}
 aside li{display:flex;align-items:center} aside li a{flex:1;min-width:0}
 aside summary{display:flex;align-items:center;gap:4px} aside summary::before{content:'▸';width:10px;font-size:10px;color:#888} aside details[open]>summary::before{content:'▾'}
-aside summary::-webkit-details-marker{display:none} aside summary{list-style:none} aside summary .eye{margin-left:auto}
+aside summary::-webkit-details-marker{display:none} aside summary{list-style:none} aside summary{padding-right:0} aside summary .eye{margin-left:-4px}
+/* Section headers: the title and its page count stay left; the flag, change dot and note badge sit at the right edge, in line with the page rows below. */
+aside summary .bcount{order:1;margin-right:auto} aside summary .ungrouped{order:2} aside summary .dchg{order:3} aside summary .ncount{order:4} aside summary .eye{order:5}
 .eye{flex:none;border:0;background:none;padding:2px 4px;border-radius:4px;color:#a1a1aa;cursor:pointer;line-height:0;opacity:0}
 aside li:hover .eye,aside summary:hover .eye,.off>.eye,.eye:focus-visible{opacity:1} .eye:hover{color:#18181b;background:#e4e4e7}
 aside .off>a,aside summary.off{color:#a1a1aa;text-decoration:line-through} aside summary.some>.eye{opacity:1}
-.hiddenbar{font-size:11px;color:#666;min-height:16px;margin:-8px 0 8px} .zoom{display:flex;align-items:center;gap:6px;font-size:11px;color:#666} .zoom input{flex:1;min-width:0;accent-color:#0e7490} .zoom output{width:34px;text-align:right;font-variant-numeric:tabular-nums}
-#show-all{font:inherit;border:0;background:none;color:#0e7490;cursor:pointer;padding:0;text-decoration:underline}
-aside a:hover,aside summary:hover{background:#f4f4f5} aside a.active{background:#e0f2f7;color:#0e7490} aside summary.active{color:#0e7490}
+.hiddenbar{font-size:11px;color:#666;min-height:16px;margin:-8px 0 8px} .zoom{display:flex;align-items:center;gap:6px;font-size:11px;color:#666} .zoom input{flex:1;min-width:0;accent-color:#6d28d9} .zoom output{width:34px;text-align:right;font-variant-numeric:tabular-nums}
+#show-all{font:inherit;border:0;background:none;color:#6d28d9;cursor:pointer;padding:0;text-decoration:underline}
+aside a:hover,aside summary:hover{background:#f4f4f5} aside a.active{background:#ede9fe;color:#6d28d9} aside summary.active{color:#6d28d9}
 section{padding:0 24px 16px;border-top:1px solid #ddd} h2{font-size:15px;margin:0 0 8px}
 /* Section titles stick to the top of the main area while their section is in view. */
 section>h2{position:sticky;top:0;z-index:5;background:#f4f4f5;margin:0 -24px 8px;padding:12px 24px 8px;border-bottom:1px solid transparent}
@@ -47,7 +73,7 @@ a{color:inherit}
 .group h2 span{font-weight:400;color:#666;font-size:12px}
 .row{display:flex;gap:28px;align-items:flex-start;overflow-x:auto;margin:0 -24px;padding:0 24px 12px}
 /* Rows bleed to both edges of the main column; the side padding is the gap at either end of the scroll. */
-:root{--card:430px} .card{flex:none;width:var(--card);scroll-margin:56px 24px 0} .card:target .duo{outline:2px solid #0e7490;outline-offset:4px}
+:root{--card:430px} .card{flex:none;width:var(--card);scroll-margin:56px 24px 0} .card:target .duo{outline:2px solid #6d28d9;outline-offset:4px}
 .cap{font-size:12px;color:#666;margin-bottom:4px;display:flex;align-items:center;gap:4px}
 .cap a{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0} section[data-slug] h2{display:flex;align-items:center;gap:6px}
 .card:hover .cap .eye,section[data-slug]:hover h2 .eye{opacity:1}
@@ -56,29 +82,29 @@ a{color:inherit}
 /* minmax(0, 1fr) and min-width: 0 let the button shrink to the rail instead of growing to fit its text. */
 .ver{display:grid;grid-template-columns:minmax(0,1fr);gap:3px;margin:10px 0 6px;font-size:11px;color:#666} .vmenu{position:relative;min-width:0}
 #ver-btn{width:100%;box-sizing:border-box;min-width:0;display:flex;align-items:center;gap:6px;font:inherit;font-size:12px;color:#18181b;background:#fff;border:1px solid #d4d4d8;border-radius:6px;padding:5px 8px;cursor:pointer;text-align:left}
-#ver-btn:hover,#ver-btn[aria-expanded=true]{border-color:#0e7490} #ver-btn svg{flex:none;color:#888}
+#ver-btn:hover,#ver-btn[aria-expanded=true]{border-color:#6d28d9} #ver-btn svg{flex:none;color:#888}
 #vb-subj{flex:1 1 0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vmenu code{font:600 11px ui-monospace,monospace;color:#18181b}
 /* Fixed, so the open list isn't clipped by the rail's scroll area and can be wider than it. */
 #ver-list{position:fixed;z-index:60;width:320px;box-sizing:border-box;overflow-y:auto;list-style:none;margin:0;padding:4px;background:#fff;border:1px solid #e4e4e7;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
 #ver-list li{display:grid;gap:1px;padding:7px 8px;border-radius:6px;cursor:pointer;outline:none} #ver-list li:hover,#ver-list li:focus{background:#f4f4f5}
-#ver-list li[aria-selected=true]{background:#e0f2f7} #ver-list li[aria-selected=true] code{color:#0e7490}
-.vo-top{display:flex;align-items:center;gap:6px} .vo-top .ncount{margin-left:auto} .vo-tag{font-size:10px;font-weight:600;color:#0e7490;background:#e0f2f7;border-radius:8px;padding:0 6px}
+#ver-list li[aria-selected=true]{background:#ede9fe} #ver-list li[aria-selected=true] code{color:#6d28d9}
+.vo-top{display:flex;align-items:center;gap:6px} .vo-top .ncount{margin-left:auto} .vo-tag{font-size:10px;font-weight:600;color:#6d28d9;background:#ede9fe;border-radius:8px;padding:0 6px}
 .vo-subj{font-size:12px;color:#3f3f46;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .vo-date{font-size:11px;color:#a1a1aa} .ver select{font:inherit;font-size:12px;color:#18181b;padding:4px 6px;border:1px solid #d4d4d8;border-radius:6px;background:#fff;width:100%}
 .shot.missing{min-height:120px;background:repeating-linear-gradient(45deg,#fafafa 0 8px,#f4f4f5 8px 16px);border:1px dashed #d4d4d8} .shot.missing img{display:none}
 .shot.missing::after{content:'Not in this version';position:absolute;inset:0;display:grid;place-items:center;font-size:11px;color:#888}
 /* Notes */
 .shot{position:relative;cursor:crosshair} .pins-off .shot{cursor:default}
 .expand{position:absolute;top:6px;right:6px;z-index:3;opacity:0;background:rgba(255,255,255,.95);border-radius:6px;padding:5px;line-height:0;color:#18181b;box-shadow:0 1px 3px rgba(0,0,0,.25);cursor:pointer}
-.shot:hover .expand,.expand:focus-visible{opacity:1} .expand:hover{background:#fff;color:#0e7490}
+.shot:hover .expand,.expand:focus-visible{opacity:1} .expand:hover{background:#fff;color:#6d28d9}
 .pin{position:absolute;z-index:2;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;border:2px solid #fff;padding:0;background:#e11d48;color:#fff;font:600 10px/16px system-ui;box-shadow:0 1px 4px rgba(0,0,0,.45);cursor:pointer}
-.pin:hover{transform:translate(-50%,-50%) scale(1.15)} .pin.open{background:#9f1239;transform:translate(-50%,-50%) scale(1.25)} .pins-off .pin{display:none}
+.pin{font-size:9px;letter-spacing:-.02em} .pin:hover{transform:translate(-50%,-50%) scale(1.15)} .pin.open{background:#9f1239;transform:translate(-50%,-50%) scale(1.25)} .pins-off .pin{display:none}
 #ver-toast{position:fixed;top:16px;left:50%;z-index:60;transform:translate(-50%,-8px);opacity:0;pointer-events:none;background:#111;color:#fff;border-radius:999px;padding:8px 16px;font:600 14px/1.2 system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.3);transition:opacity .15s,transform .15s;white-space:nowrap}
 #ver-toast.show{opacity:1;transform:translate(-50%,0)}
 #ver-toast span{font-weight:400;opacity:.7;margin-left:8px}
 #note-pop{position:fixed;z-index:50;width:260px;background:#fff;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.25);padding:10px;box-sizing:border-box}
 #note-pop .note-head{display:flex;align-items:center;gap:6px;font-size:11px;color:#666;margin-bottom:6px} #note-pop .note-title{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#note-pop textarea{width:100%;box-sizing:border-box;min-height:84px;resize:vertical;font:13px/1.4 system-ui;border:1px solid #d4d4d8;border-radius:6px;padding:6px 8px;outline-color:#0e7490}
+#note-pop textarea{width:100%;box-sizing:border-box;min-height:84px;resize:vertical;font:13px/1.4 system-ui;border:1px solid #d4d4d8;border-radius:6px;padding:6px 8px;outline-color:#6d28d9}
 #note-pop .note-foot{font-size:10px;color:#a1a1aa;margin-top:4px}
 .note-resolve{display:flex;align-items:center;gap:3px;font:inherit;font-size:11px;font-weight:600;border:1px solid #d4d4d8;border-radius:5px;background:#fff;color:#3f3f46;padding:2px 7px 2px 5px;cursor:pointer}
 .note-resolve:hover{border-color:#16a34a;color:#16a34a} .note-resolve.on{background:#f0fdf4;border-color:#86efac;color:#15803d}
@@ -92,22 +118,29 @@ aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px
 .ungrouped{flex:none;display:inline-flex;color:#d97706;margin-left:4px;line-height:0} aside details[open]>summary .ungrouped{display:none}
 .ncount{flex:none;font-size:10px;font-weight:600;background:#ffe4e6;color:#be123c;border-radius:8px;padding:0 6px;margin-left:4px} .ncount:empty{display:none}
 .notes-bar{display:flex;align-items:center;gap:8px;font-size:11px;color:#666} .notes-bar label{display:flex;align-items:center;gap:4px;cursor:pointer} .notes-bar label:first-of-type{margin-left:auto}
-.notes-actions{display:flex;gap:6px} .notes-actions button{flex:1;font:inherit;font-size:11px;border:1px solid #d4d4d8;border-radius:6px;background:#fff;padding:4px 0;cursor:pointer;color:#3f3f46} .notes-actions button:hover{border-color:#0e7490;color:#0e7490}</style></head><body>
-<aside><div class="rail"><strong>Screenshot audit</strong><div class="ver"><span id="ver-label">Version</span><div class="vmenu"><button type="button" id="ver-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ver-label ver-btn"><span id="vb-subj"></span><span class="ncount" id="ver-count" title="Notes on this version"></span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><ul id="ver-list" role="listbox" aria-labelledby="ver-label" hidden></ul></div></div>
+/* Split button: Export is the action, the caret opens Import and Checklist. The menu opens downward from the Notes panel's tools row. */
+.split{position:relative;display:flex}
+.split button{font:inherit;font-size:11px;border:1px solid #d4d4d8;background:#fff;padding:4px 0;cursor:pointer;color:#3f3f46}
+.split button:hover,.split button:focus-visible,.split #split-more[aria-expanded=true]{border-color:#6d28d9;color:#6d28d9;position:relative;z-index:1}
+#notes-export{flex:1;border-radius:6px 0 0 6px} #split-more{flex:none;width:30px;border-left:0;border-radius:0 6px 6px 0;display:grid;place-items:center;padding:0}
+#split-menu{position:absolute;right:0;top:calc(100% + 6px);z-index:70;min-width:100%;box-sizing:border-box;display:grid;padding:4px;background:#fff;border:1px solid #e4e4e7;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+#split-menu[hidden]{display:none}
+#split-menu button{border:0;border-radius:5px;padding:6px 8px;text-align:left;white-space:nowrap;font-size:12px} #split-menu button:hover,#split-menu button:focus-visible{background:#f4f4f5;color:#6d28d9}</style></head><body>
+<aside><div class="rail"><div class="rail-title"><strong>Screenshot audit</strong><span class="rail-tools"><button type="button" id="keys-open" aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button><button type="button" id="review-toggle" aria-pressed="false" aria-label="Notes" title="Notes (R)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></button></span></div><div class="ver"><span id="ver-label">Version</span><div class="vmenu"><button type="button" id="ver-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ver-label ver-btn"><span id="vb-subj"></span><span class="ncount" id="ver-count" title="Notes on this version"></span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><ul id="ver-list" role="listbox" aria-labelledby="ver-label" hidden></ul></div></div>
 <div class="meta"><span id="ver-branch"></span> @ <span id="ver-sha"></span> · <span id="ver-date"></span><br>light · Konami on · <span id="page-total"></span> pages</div>
 <div class="hiddenbar"><span id="hidden-count"></span> <button id="show-all" type="button" hidden>Show all</button></div>
 <h4><a href="#" style="text-decoration:none">Groups</a></h4><div id="tree-groups"></div>
 <h4><a href="#all-head" style="text-decoration:none">All pages</a></h4><div id="tree-all"></div></div>
 <div class="rail-foot">
-<div class="notes-bar"><strong>Notes</strong> <span id="notes-total"></span><label><input type="checkbox" id="pins-toggle" checked> Pins</label><label title="Show resolved notes, faded"><input type="checkbox" id="resolved-toggle"> Resolved</label></div>
-<div class="notes-actions"><button type="button" id="notes-export" title="Download notes as JSON">Export</button><button type="button" id="notes-import" title="Load notes from a JSON export">Import</button><button type="button" id="notes-md" title="Download notes as a Markdown checklist">Checklist</button></div>
-<input type="file" id="notes-file" accept=".json,application/json" hidden>
 <div class="notes-bar" id="diff-bar" hidden><strong>Changes</strong> <span id="diff-info"></span><label title="Dots in the rail and boxes on the screenshots (D)"><input type="checkbox" id="diff-toggle" checked> Show</label></div>
-<div class="seg" role="group" aria-label="Show"><button type="button" data-view="both">Both</button><button type="button" data-view="mobile">Mobile<small data-w="mobile"></small></button><button type="button" data-view="tablet">Tablet<small data-w="tablet"></small></button><button type="button" data-view="desktop">Desktop<small data-w="desktop"></small></button><button type="button" data-view="all">All</button></div>
 <label class="zoom">Row size <input id="zoom" type="range" min="50" max="300" step="10" value="100"> <output id="zoom-val">100%</output></label>
-<button class="keys-hint" type="button" id="keys-open">Keyboard shortcuts <kbd>?</kbd></button>
+<div class="seg" role="group" aria-label="Show"><button type="button" data-view="both">Both</button><button type="button" data-view="mobile">Mobile<small data-w="mobile"></small></button><button type="button" data-view="tablet">Tablet<small data-w="tablet"></small></button><button type="button" data-view="desktop">Desktop<small data-w="desktop"></small></button><button type="button" data-view="all">All</button></div>
 </div>
 <div class="rail-resize" role="separator" aria-orientation="vertical" aria-label="Resize sidebar" aria-valuemin="200" aria-valuemax="520" tabindex="0" title="Drag to resize · double-click to reset"></div></aside>
+<div id="review" role="complementary" aria-label="Notes"><header><strong>Notes<span class="ncount" id="rv-count" title="Open notes on this version"></span></strong><button type="button" class="rv-x" id="rv-close" title="Close (R)" aria-label="Close notes">×</button></header>
+<div class="rv-tools"><label><input type="checkbox" id="pins-toggle" checked> Pins</label><label title="Show resolved notes, faded"><input type="checkbox" id="resolved-toggle"> Resolved</label><div class="split"><button type="button" id="notes-export" title="Download notes as JSON">Export</button><button type="button" id="split-more" aria-haspopup="menu" aria-expanded="false" aria-controls="split-menu" aria-label="More note actions" title="Import, Checklist"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+<div id="split-menu" role="menu" aria-label="More note actions" hidden><button type="button" role="menuitem" id="notes-import" title="Load notes from a JSON export">Import notes…</button><button type="button" role="menuitem" id="notes-md" title="Download notes as a Markdown checklist">Download checklist</button></div></div><input type="file" id="notes-file" accept=".json,application/json" hidden></div>
+<div id="rv-list"></div></div>
 <dialog id="keys"><h3>Keyboard shortcuts</h3><table>
 <tr><td><kbd>J</kbd> <kbd>K</kbd></td><td>Previous / next page</td></tr>
 <tr><td><kbd>Shift</kbd> + <kbd>J</kbd> <kbd>K</kbd></td><td>Previous / next section</td></tr>
@@ -119,6 +152,7 @@ aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px
 <tr><td><kbd>V</kbd> / <kbd>Shift</kbd> + <kbd>V</kbd></td><td>Next / previous version</td></tr>
 <tr><td><kbd>F</kbd></td><td>Flip back to the last version viewed</td></tr>
 <tr><td><kbd>N</kbd></td><td>Show / hide note pins</td></tr>
+<tr><td><kbd>R</kbd></td><td>Open / close the notes panel</td></tr>
 <tr><td><kbd>D</kbd></td><td>Show / hide changed rows (vs the version before)</td></tr>
 <tr><td>Click a screenshot</td><td>Drop a note</td></tr>
 <tr><td><kbd>?</kbd></td><td>Show this list</td></tr>
@@ -365,6 +399,7 @@ addEventListener('keydown', e => {
   else if (k === '=' || k === '+') keepPlace(() => setZoom(+zoom.value + 10));
   else if (k === '0') keepPlace(() => setZoom(100));
   else if (k === 'n') setPins(!pinsOn);
+  else if (k === 'r') setReview(!reviewOn);
   else if (k === 'd') setDiff(!diffOn);
   else if (k === 'v' || k === 'V') stepVersion(k === 'v' ? 1 : -1);
   else if (k === 'f') flipVersion();
@@ -382,6 +417,18 @@ try { notes = JSON.parse(localStorage.getItem('audit-notes') || '[]'); } catch (
 // Notes from before versions existed were all made on the first capture.
 notes.forEach(n => n.version = n.version || VERSIONS[0].sha);
 const saveNotes = () => { try { localStorage.setItem('audit-notes', JSON.stringify(notes)); } catch (e) {} };
+// Every note has a permanent number (R01, R02, ...), so "R12" means one note across versions and exports.
+// Older notes get theirs in the order they were made; an import that reuses a taken number gets the next free one.
+const noteNum = n => 'R' + String(n.num).padStart(2, '0');
+function ensureNums() {
+  const taken = new Set();
+  let next = Math.max(0, ...notes.map(n => +n.num || 0)) + 1;
+  [...notes].sort((a, b) => (a.created || '').localeCompare(b.created || '')).forEach(n => {
+    if (!n.num || taken.has(+n.num)) n.num = next++;
+    taken.add(+n.num);
+  });
+}
+ensureNums(); saveNotes();
 const shots = [...document.querySelectorAll('.shot')];
 const pop = document.getElementById('note-pop'), popText = pop.querySelector('textarea'), popTitle = pop.querySelector('.note-title');
 let openNote = null, openShot = null, seq = 0;
@@ -399,7 +446,7 @@ function renderPins(page, size) {
     list.forEach((n, i) => {
       const p = document.createElement('button');
       p.type = 'button'; p.className = 'pin' + (n === openNote ? ' open' : '') + (isResolvedOn(n, VER) ? ' resolved' : '');
-      p.textContent = i + 1; p.title = n.text || 'Empty note'; p.dataset.id = n.id;
+      p.textContent = n.num; p.title = noteNum(n) + ': ' + (n.text || 'Empty note'); p.dataset.id = n.id;
       p.style.left = n.x * 100 + '%'; p.style.top = n.y * 100 + '%';
       s.append(p);
     });
@@ -419,8 +466,7 @@ function renderCounts() {
   aside.querySelectorAll('details').forEach(d => d.querySelector('summary .ncount').textContent = sum([...d.querySelectorAll('li a')].map(idOf)) || '');
   document.querySelectorAll('section.group').forEach(g => g.querySelector('h2 > .ncount').textContent = sum([...g.querySelectorAll('.card')].map(c => c.dataset.slug)) || '');
   const total = notes.filter(n => isOpenOn(n, VER)).length;
-  document.getElementById('notes-total').textContent = total || '';
-  renderVersionMenu();
+  renderVersionMenu(); renderReview();
 }
 function placePop() {
   const pin = openShot && openShot.querySelector('.pin[data-id="' + openNote.id + '"]');
@@ -434,8 +480,7 @@ function placePop() {
 function openN(n, shot) {
   if (openNote && openNote !== n) closeN();
   openNote = n; openShot = shot;
-  const i = notesFor(n.page, n.size).indexOf(n) + 1;
-  popTitle.textContent = 'Note ' + i + ' · ' + PATHS[n.page] + ' · ' + n.size;
+  popTitle.textContent = noteNum(n) + ' · ' + PATHS[n.page] + ' · ' + n.size;
   pop.querySelector('.note-foot').textContent = (n.version !== VER ? 'Carried over from ' + n.version + ' · ' : '') + 'Esc or click away to close';
   const resolved = isResolvedOn(n, VER);
   resolveBtn.classList.toggle('on', resolved);
@@ -453,8 +498,8 @@ function closeN() {
   saveNotes(); renderPins(n.page, n.size); renderCounts();
 }
 popText.addEventListener('input', () => {
-  openNote.text = popText.value; saveNotes();
-  shots.forEach(s => s.querySelectorAll('.pin[data-id="' + openNote.id + '"]').forEach(p => p.title = openNote.text));
+  openNote.text = popText.value; saveNotes(); renderReview();
+  shots.forEach(s => s.querySelectorAll('.pin[data-id="' + openNote.id + '"]').forEach(p => p.title = noteNum(openNote) + ': ' + openNote.text));
 });
 popText.addEventListener('keydown', e => { if (e.key === 'Escape' || e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); closeN(); } });
 pop.querySelector('.note-del').addEventListener('click', () => { openNote.text = ''; closeN(); });
@@ -479,7 +524,8 @@ document.querySelector('main').addEventListener('click', e => {
   if (openNote) { closeN(); return; }
   const r = shot.querySelector('img').getBoundingClientRect();
   const n = { id: Date.now().toString(36) + '-' + (seq++), version: VER, page: shot.dataset.page, size: shot.dataset.size,
-    x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height, text: '', created: new Date().toISOString() };
+    x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height, text: '', created: new Date().toISOString(),
+    num: Math.max(0, ...notes.map(x => +x.num || 0)) + 1 };
   notes.push(n); openN(n, shot);
 });
 document.addEventListener('mousedown', e => {
@@ -498,7 +544,7 @@ function setPins(on) {
 pinsToggle.addEventListener('change', () => setPins(pinsToggle.checked));
 const resolvedToggle = document.getElementById('resolved-toggle');
 resolvedToggle.addEventListener('change', () => {
-  showResolved = resolvedToggle.checked; closeN(); renderAllPins();
+  showResolved = resolvedToggle.checked; closeN(); renderAllPins(); renderReview();
   try { localStorage.setItem('audit-resolved', showResolved ? '1' : '0'); } catch (e) {}
 });
 try { showResolved = resolvedToggle.checked = localStorage.getItem('audit-resolved') === '1'; } catch (e) {}
@@ -516,6 +562,24 @@ document.getElementById('notes-export').addEventListener('click', () => {
   // Exports every version's notes; each note carries its version.
   download('audit-notes-' + stamp() + '.json', JSON.stringify({ exported: new Date().toISOString(), versions: VERSIONS.map(v => v.sha), notes }, null, 2), 'application/json');
 });
+// Split button: the caret opens Import and Checklist above it. Esc, an outside click, or picking an item closes it.
+const splitMore = document.getElementById('split-more'), splitMenu = document.getElementById('split-menu');
+function setSplit(open, focus) {
+  splitMenu.hidden = !open; splitMore.setAttribute('aria-expanded', open);
+  if (open && focus) splitMenu.querySelector('button').focus();
+}
+splitMore.addEventListener('click', () => setSplit(splitMenu.hidden, true));
+splitMenu.addEventListener('click', () => setSplit(false));
+document.addEventListener('mousedown', e => { if (!splitMenu.hidden && !e.target.closest('.split')) setSplit(false); });
+document.querySelector('.split').addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !splitMenu.hidden) { e.stopPropagation(); setSplit(false); splitMore.focus(); return; }
+  const items = [...splitMenu.querySelectorAll('button')], i = items.indexOf(document.activeElement);
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (splitMenu.hidden) { setSplit(true, true); return; }
+    items[(i + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length].focus();
+  }
+});
 const fileIn = document.getElementById('notes-file');
 document.getElementById('notes-import').addEventListener('click', () => fileIn.click());
 fileIn.addEventListener('change', async () => {
@@ -531,7 +595,7 @@ fileIn.addEventListener('change', async () => {
   const byId = new Map(notes.map(n => [n.id, n]));
   incoming.forEach(n => byId.set(n.id, n));
   notes = [...byId.values()];
-  saveNotes(); renderAllPins(); renderCounts();
+  ensureNums(); saveNotes(); renderAllPins(); renderCounts();
   alert('Imported ' + incoming.length + ' note' + (incoming.length === 1 ? '' : 's') + '.');
 });
 document.getElementById('notes-md').addEventListener('click', () => {
@@ -540,7 +604,7 @@ document.getElementById('notes-md').addEventListener('click', () => {
   Object.keys(PATHS).forEach(page => {
     const lines = ['mobile', 'tablet', 'desktop'].flatMap(size => notes
       .filter(n => n.page === page && n.size === size && (isOpenOn(n, VER) || n.resolvedIn === VER))
-      .map((n, i) => '- [' + (n.resolvedIn === VER ? 'x' : ' ') + '] ' + size + ' #' + (i + 1) + ': ' + n.text.trim().replace(/\n+/g, ' ') + (n.version !== VER ? ' (from ' + n.version + ')' : '')));
+      .map(n => '- [' + (n.resolvedIn === VER ? 'x' : ' ') + '] **' + noteNum(n) + '** ' + size + ': ' + n.text.trim().replace(/\n+/g, ' ') + (n.version !== VER ? ' (from ' + n.version + ')' : '')));
     if (lines.length) md += '\n## ' + PATHS[page] + '\n\n' + lines.join('\n') + '\n';
   });
   download('audit-checklist-' + VER + '-' + stamp() + '.md', md, 'text/markdown');
@@ -600,6 +664,61 @@ document.addEventListener('mousedown', e => { if (!verList.hidden && !e.target.c
 addEventListener('resize', () => { if (!verList.hidden) placeVerMenu(); });
 // The list is fixed to the button's spot, so scrolling the rail away from it closes it.
 document.querySelector('.rail').addEventListener('scroll', () => { if (!verList.hidden) closeVerMenu(false); });
+// Review rail: every note open on this version (and those resolved on it) as a list, with a crop at the pin,
+// a resolve checkbox, and a click that jumps to the pin.
+const rvEsc = x => String(x).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+let reviewOn = false;
+const reviewEl = document.getElementById('review'), rvList = document.getElementById('rv-list'), rvToggle = document.getElementById('review-toggle');
+// The Resolved checkbox in the Notes bar governs the list too: off hides resolved notes here as well as their pins.
+const rvVisible = n => isOpenOn(n, VER) || (showResolved && isResolvedOn(n, VER));
+const rvOrder = n => DATA.pages.findIndex(p => p.slug === n.page) * 10 + ['mobile', 'tablet', 'desktop'].indexOf(n.size);
+function renderReview() {
+  const list = notes.filter(n => n.text.trim() && rvVisible(n)).sort((a, b) => rvOrder(a) - rvOrder(b) || (a.created || '').localeCompare(b.created || ''));
+  const open = list.filter(n => !isResolvedOn(n, VER)).length;
+  document.getElementById('rv-count').textContent = open || '';
+  if (!reviewOn) return;
+  rvList.innerHTML = list.length ? list.map(n => {
+    const done = isResolvedOn(n, VER), w = DATA.sizes[n.size], h = (HEIGHTS[VER] || {})[n.page + '|' + n.size];
+    const bgW = { mobile: 390, tablet: 520, desktop: 1000 }[n.size], bgH = h ? bgW * h / w : 0;
+    const crop = bgH ? 'background-image:url(' + DATA.image_root + '/' + VER + '/' + n.size + '/' + n.page + '.png);background-size:' + bgW + 'px ' + bgH + 'px;' +
+      'background-position:calc(50% + ' + (bgW / 2 - n.x * bgW) + 'px) calc(50% + ' + (bgH / 2 - n.y * bgH) + 'px)' : '';
+    return '<div class="rv-item' + (done ? ' done' : '') + '" data-id="' + n.id + '">' +
+      '<div class="rv-meta"><b>' + noteNum(n) + '</b><span>' + rvEsc(PATHS[n.page]) + '</span><em>' + n.size + '</em></div>' +
+      '<p class="rv-text">' + rvEsc(n.text.trim()) + '</p>' +
+      (crop ? '<div class="rv-thumb" style="' + crop + '"></div>' : '') +
+      '<button type="button" class="rv-resolve" title="' + (done ? 'Resolved in ' + rvEsc(n.resolvedIn) : 'Resolve on ' + VER) + '">' + (done ? 'Reopen' : 'Mark as Resolved') + '</button></div>';
+  }).join('') : '<div class="rv-empty">No notes on this version yet. Click a screenshot to add one.</div>';
+}
+rvList.addEventListener('click', e => {
+  const item = e.target.closest('.rv-item'); if (!item) return;
+  const n = notes.find(x => x.id === item.dataset.id); if (!n) return;
+  if (e.target.closest('.rv-resolve')) {
+    if (isResolvedOn(n, VER)) delete n.resolvedIn; else { n.resolvedIn = VER; n.resolvedAt = new Date().toISOString(); }
+    saveNotes(); renderAllPins(); renderCounts(); return;
+  }
+  // The size has to be showing for its pin to be on screen.
+  const hiddenNow = n.size === 'tablet' ? !/view-(tablet|all)/.test(document.body.className)
+    : document.body.classList.contains('view-' + (n.size === 'mobile' ? 'desktop' : 'mobile')) || /view-tablet/.test(document.body.className);
+  if (hiddenNow) setView(n.size);
+  const shot = [...document.querySelectorAll('main section[data-slug="' + n.page + '"] .shot')].find(s => s.dataset.size === n.size);
+  if (!shot) return;
+  closeN();
+  const pin = shot.querySelector('.pin[data-id="' + n.id + '"]');
+  (pin || shot).scrollIntoView({ block: 'center', inline: 'nearest' });
+  setTimeout(() => openN(n, shot), 60);
+});
+function setReview(on) {
+  reviewOn = on;
+  document.body.classList.toggle('review-open', on);
+  rvToggle.setAttribute('aria-pressed', on);
+  if (on) renderReview();
+  if (openNote) placePop();
+  try { localStorage.setItem('audit-review', on ? '1' : '0'); } catch (e) {}
+}
+rvToggle.addEventListener('click', () => setReview(!reviewOn));
+document.getElementById('rv-close').addEventListener('click', () => setReview(false));
+try { if (localStorage.getItem('audit-review') === '1') setReview(true); } catch (e) {}
+
 // Changed rows: the diff whose newer side is the version on screen. With several, the one against the version just before it.
 let diffOn = true;
 const diffToggle = document.getElementById('diff-toggle'), diffBar = document.getElementById('diff-bar');
@@ -687,6 +806,7 @@ document.addEventListener('error', e => { if (e.target.tagName === 'IMG') e.targ
 let savedVer = null;
 try { savedVer = localStorage.getItem('audit-version'); } catch (e) {}
 setVersion(VERSIONS.some(x => x.sha === savedVer) ? savedVer : VER);
+
 // Resizable rail: drag the right edge (or arrow keys on it); double-click resets. Remembered per browser.
 const RAIL_MIN = 200, RAIL_MAX = 520, RAIL_DEFAULT = 260;
 const grip = document.querySelector('.rail-resize');

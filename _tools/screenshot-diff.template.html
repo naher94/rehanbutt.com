@@ -4,9 +4,9 @@ body{font:14px/1.4 system-ui;margin:0;background:#f4f4f5;color:#18181b}
 header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #ddd;padding:12px 24px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px}
 header h1{font-size:15px;margin:0} code{font:600 12px ui-monospace,monospace}
 .sub{font-size:12px;color:#666} label{font-size:12px;color:#3f3f46;display:flex;align-items:center;gap:6px}
-input[type=range]{accent-color:#0e7490;width:140px} output{font-variant-numeric:tabular-nums;width:44px}
+input[type=range]{accent-color:#6d28d9;width:140px} output{font-variant-numeric:tabular-nums;width:44px}
 .seg{display:flex;border:1px solid #d4d4d8;border-radius:6px;overflow:hidden} .seg button{font:inherit;font-size:12px;border:0;background:#fff;padding:4px 10px;cursor:pointer;color:#3f3f46}
-.seg button+button{border-left:1px solid #d4d4d8} .seg button[aria-pressed=true]{background:#0e7490;color:#fff}
+.seg button+button{border-left:1px solid #d4d4d8} .seg button[aria-pressed=true]{background:#6d28d9;color:#fff}
 main{padding:16px 24px 48px;display:grid;gap:16px}
 .page{background:#fff;border:1px solid #e4e4e7;border-radius:8px;padding:12px 14px}
 .page h2{font-size:14px;margin:0 0 8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap} .page h2 a{text-decoration:none}
@@ -22,7 +22,7 @@ details{margin:0 24px;font-size:12px;color:#52525b}
 #cmp{position:fixed;inset:0;z-index:50;background:#18181b;display:none;flex-direction:column}
 #cmp.open{display:flex}
 #bar{display:flex;align-items:center;gap:14px;padding:8px 16px;background:#27272a;color:#fff;font-size:12px;flex-wrap:wrap}
-#bar .seg{border-color:#52525b} #bar .seg button{background:#27272a;color:#e4e4e7} #bar .seg button[aria-pressed=true]{background:#0e7490}
+#bar .seg{border-color:#52525b} #bar .seg button{background:#27272a;color:#e4e4e7} #bar .seg button[aria-pressed=true]{background:#6d28d9}
 #bar button.x{margin-left:auto;font:inherit;background:none;border:1px solid #52525b;color:#fff;border-radius:6px;padding:4px 10px;cursor:pointer}
 #bar kbd{font:11px ui-monospace,monospace;border:1px solid #52525b;border-radius:4px;padding:0 5px}
 #scroll{flex:1;overflow:auto;display:grid;place-items:start center;padding:16px}
@@ -30,8 +30,8 @@ details{margin:0 24px;font-size:12px;color:#52525b}
 #stage img{display:block;width:100%}
 #stage .top{position:absolute;left:0;top:0;width:100%}
 #stage.slide .top{clip-path:inset(0 0 0 var(--split,50%))}
-#handle{position:absolute;top:0;bottom:0;width:3px;margin-left:-1px;background:#0e7490;cursor:ew-resize;display:none;z-index:3}
-#handle::after{content:'';position:absolute;top:50vh;left:-9px;width:21px;height:21px;border-radius:50%;background:#0e7490;border:2px solid #fff}
+#handle{position:absolute;top:0;bottom:0;width:3px;margin-left:-1px;background:#6d28d9;cursor:ew-resize;display:none;z-index:3}
+#handle::after{content:'';position:absolute;top:50vh;left:-9px;width:21px;height:21px;border-radius:50%;background:#6d28d9;border:2px solid #fff}
 #stage.slide #handle{display:block}
 .mark{position:absolute;left:0;right:0;background:rgba(255,40,70,.12);border-top:2px solid rgba(255,40,70,.8);border-bottom:2px solid rgba(255,40,70,.8);pointer-events:none;z-index:2}
 </style></head><body>
