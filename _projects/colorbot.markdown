@@ -24,7 +24,6 @@ In [Version (V1.0)](https://github.com/naher94/jasper/releases/tag/V1.0) Jasper 
 
 ## Process
 
-{% comment %}//TODO Style this table{% endcomment %}
 {:#colorbot-table}
 | Effort/Priority | High   | Medium    | Low |
 | --------------- | ------ | -------   | --- |

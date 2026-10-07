@@ -479,20 +479,50 @@ article{
   }
 }
 
-@media (prefers-color-scheme: dark){
-  #colorbot-table{
-    thead{
-      background: $navy-black-d5;
-      color: semantic-color(text);
-      border: 1px solid $navy-black-l1;
-    }
-    tbody{
-      background-color: $navy-black-d3; //same as page background
-      border: 1px solid $navy-black-l1;
-      tr:nth-child(even){
-        background-color: $navy-black-d1;
-      }
-    }
+// TODO This is the only table on the site, so the styling is scoped to
+// #colorbot-table. If another page ever needs a table, lift this into a shared
+// `table` style and drop the id. Only semantic colors are used, so light and
+// dark both follow the tokens.
+#colorbot-table{
+  --table-line: color-mix(in srgb, #{semantic-color(text)} 18%, transparent);
+  // A block box so a table wider than the screen scrolls inside its own
+  // rounded border instead of pushing the page sideways.
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 2rem 0;
+  border: 1px solid var(--table-line);
+  border-radius: $tile-radius;
+  font-size: 0.9em;
+  line-height: 1.4;
+  // Without this each cell draws its own border with a gap around it, which
+  // reads as lines drawn around the lines.
+  border-collapse: collapse;
+  border-spacing: 0;
+  th, td{
+    min-width: 11em;
+    padding: 0.75em 1em;
+    vertical-align: top;
+    text-align: left;
+    border-bottom: 1px solid var(--table-line);
+  }
+  thead th{
+    background-color: semantic-color(article-share-bar-bg);
+    color: semantic-color(text);
+    font-weight: $lato-bold;
+  }
+  // Effort labels (Low / Medium / High) read as the row headers.
+  tbody td:first-child{
+    min-width: 7em;
+    background-color: semantic-color(article-share-bar-bg);
+    color: semantic-color(text);
+  }
+  tbody tr:last-child td{
+    border-bottom: 0;
+  }
+  th + th,
+  td + td{
+    border-left: 1px solid var(--table-line);
   }
 }
 //******* End of Project Specific Styling
