@@ -13,7 +13,8 @@
       font-family: $lato;
       padding: 2em;
       padding-top: 4em;
-      @include scaffold.breakpoint(md, down) {
+      // Two tiles a row at tablet widths are about as wide as one on a phone, so they take its padding.
+      @include scaffold.breakpoint(lg, down) {
         padding: 1em;
         padding-top: 3em;
       }
