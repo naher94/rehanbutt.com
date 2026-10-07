@@ -11,11 +11,15 @@ switchable by version, and notes pinned onto the screenshots.
     python3 _tools/screenshot-audit.py --no-capture     # rebuild the data and the page only
     python3 _tools/screenshot-audit.py --workers 1      # one page at a time, if parallel runs get flaky
     python3 _tools/screenshot-audit.py --no-capture --sha 37f13b9 --name "Before Scaffold"   # name a version
+    python3 _tools/screenshot-audit.py --diff 3e2102f                         # diff every page against HEAD
+    python3 _tools/screenshot-audit.py --diff 3e2102f e2e1364                 # or any two captures
 
 Outputs, all beside this script:
     screenshots/versions/<sha>/   one folder per capture: desktop/, mobile/, manifest.json
     screenshot-audit.json         the dataset
     screenshot-atlas.html         the viewer
+    screenshots/diffs/<a>..<b>/   with --diff: changed-region overlays for each page that differs
+    screenshot-diff.html          with --diff: changed pages ranked by how much moved
 
 Captures are named for the commit the site was built from, so build first:
     bundle exec jekyll build && python3 _tools/screenshot-audit.py
@@ -53,10 +57,14 @@ import sys
 import threading
 from datetime import datetime, timezone
 
-from cascade import HERE, ROOT, SITE
+from cascade import HERE, ROOT, SITE as DEFAULT_SITE
+
+SITE = DEFAULT_SITE  # --site points this at another build
 
 SHOTS = HERE / "screenshots" / "versions"
 TEMPLATE = HERE / "screenshot-atlas.template.html"
+DIFFS = HERE / "screenshots" / "diffs"
+DIFF_TEMPLATE = HERE / "screenshot-diff.template.html"
 CHUNK = 4000
 SIZES = {
     "desktop": dict(viewport={"width": 1440, "height": 900}, device_scale_factor=1),
@@ -147,6 +155,16 @@ def settle(page):
         }""")
         if height() == before:
             break
+    # Looping videos would otherwise land on a different frame every capture and
+    # read as a change in every diff; park each on its first frame.
+    page.evaluate("""async () => {
+      await Promise.all([...document.querySelectorAll('video')].map(v => new Promise(done => {
+        v.autoplay = false; v.loop = false; v.pause();
+        if (v.readyState < 1 || v.currentTime === 0) return done();
+        v.onseeked = done; v.currentTime = 0;
+        setTimeout(done, 3000);
+      })));
+    }""")
     page.evaluate("window.scrollTo(0, 0)")
     page.wait_for_timeout(1500)
     page.evaluate("document.getAnimations().forEach(a => { try { a.finish(); } catch (e) {} })")
@@ -273,6 +291,108 @@ def capture(sha, branch, only, workers, name=None):
         print(f"check these: {', '.join(e['size'] + ' ' + e['path'] for e in failed)}")
 
 
+def _rows(path):
+    """The image as an array plus one hash per pixel row."""
+    import numpy as np
+    from PIL import Image
+    arr = np.asarray(Image.open(path).convert("RGB"))
+    return arr, [hash(r.tobytes()) for r in arr]
+
+
+def diff_page(old_png, new_png, out_png):
+    """Compare two tall screenshots row by row.
+
+    Rows are matched as sequences, not by position, so a section that grows by
+    20px reads as 20 inserted rows rather than everything below it changing.
+    Returns the changed share of the new page, the shift in height and the
+    changed row ranges in new-page pixels; writes the new page with those
+    ranges tinted red when anything changed.
+    """
+    import difflib
+    import numpy as np
+    from PIL import Image
+    old, old_h = _rows(old_png)
+    new, new_h = _rows(new_png)
+    if old.shape[1] != new.shape[1]:
+        # A different capture width can't be compared row for row.
+        return {"changed": 1.0, "delta": new.shape[0] - old.shape[0], "regions": [[0, new.shape[0]]]}
+    if old_h == new_h:  # most pages: nothing to match
+        return {"changed": 0, "delta": 0, "regions": []}
+    regions = []
+
+    def mark(a, b):
+        if regions and a - regions[-1][1] < 24:  # merge neighbours into one region
+            regions[-1][1] = b
+        else:
+            regions.append([a, b])
+
+    if old.shape == new.shape:
+        # Same height: nothing moved, so rows are compared in place. Sequence
+        # matching is only worth its cost when something grew or shrank.
+        diff_rows = np.flatnonzero((old != new).any(axis=(1, 2)))
+        for y in diff_rows:
+            mark(int(y), int(y) + 1)
+    else:
+        # autojunk drops rows that repeat constantly (blank margins), which keeps
+        # the match from going quadratic on 50k-row pages.
+        sm = difflib.SequenceMatcher(None, old_h, new_h, autojunk=True)
+        for tag, i1, i2, j1, j2 in sm.get_opcodes():
+            if tag == "equal":
+                continue
+            # Deleted rows leave no trace in the new page; mark the seam so it shows.
+            a, b = (j1, j2) if j2 > j1 else (max(j1 - 2, 0), min(j1 + 2, new.shape[0]))
+            mark(a, b)
+    rows = sum(b - a for a, b in regions)
+    result = {"changed": round(rows / new.shape[0], 5), "delta": new.shape[0] - old.shape[0], "regions": regions}
+    if regions:
+        shade = new.astype("float32")
+        for a, b in regions:
+            shade[a:b] = shade[a:b] * 0.6 + np.array([255, 40, 70], dtype="float32") * 0.4
+            shade[a:b, :6] = [255, 40, 70]
+        out_png.parent.mkdir(parents=True, exist_ok=True)
+        Image.fromarray(shade.clip(0, 255).astype("uint8")).save(out_png.with_suffix(".jpg"), quality=70)
+    return result
+
+
+def diff_versions(base, head):
+    """Diff every page the two captures share, and write the ranked viewer."""
+    manifests = {}
+    for sha in (base, head):
+        mf = SHOTS / sha / "manifest.json"
+        if not mf.exists():
+            sys.exit(f"no capture at {mf.parent.relative_to(ROOT)} to diff")
+        manifests[sha] = json.loads(mf.read_text())
+    key = lambda e: (e["slug"], e["size"])
+    old = {key(e): e for e in manifests[base]["entries"] if "height" in e}
+    new = {key(e): e for e in manifests[head]["entries"] if "height" in e}
+    out = DIFFS / f"{base}..{head}"
+    pages = {}
+    shared = [k for k in new if k in old]
+    for n, (slug_, size) in enumerate(shared, 1):
+        r = diff_page(SHOTS / base / size / f"{slug_}.png", SHOTS / head / size / f"{slug_}.png",
+                      out / size / slug_)
+        r["height"] = new[(slug_, size)]["height"]
+        pages.setdefault(slug_, {"slug": slug_, "path": new[(slug_, size)]["path"]})[size] = r
+        print(f"[{n:>3}/{len(shared)}] {size:7} {new[(slug_, size)]['path']}  {r['changed']:.1%}", flush=True)
+    data = {
+        "base": base, "head": head, "image_root": SHOTS.relative_to(HERE).as_posix(),
+        "diff_root": out.relative_to(HERE).as_posix(),
+        "names": {s: manifests[s].get("name") for s in manifests},
+        "pages": sorted(pages.values(),
+                        key=lambda p: -max(p.get("desktop", {}).get("changed", 0), p.get("mobile", {}).get("changed", 0))),
+        "only_old": sorted({old[k]["path"] for k in old if k not in new}),
+        "only_new": sorted({new[k]["path"] for k in new if k not in old}),
+    }
+    (out / "diff.json").parent.mkdir(parents=True, exist_ok=True)
+    (out / "diff.json").write_text(json.dumps(data, indent=1))
+    changed = [p for p in data["pages"] if any(p.get(s, {}).get("changed") for s in SIZES)]
+    print(f"\n{len(changed)} of {len(data['pages'])} pages changed between {base} and {head}")
+    page = HERE / "screenshot-diff.html"
+    if DIFF_TEMPLATE.exists():
+        page.write_text(DIFF_TEMPLATE.read_text().replace("__DATA__", json.dumps(data).replace("</script>", "<\\/script>")))
+        print(f"wrote {page}")
+
+
 def project_layouts():
     layouts = {}
     for f in (ROOT / "_projects").iterdir():
@@ -282,6 +402,17 @@ def project_layouts():
         m = re.search(r"^layout:\s*(\S+)", front, re.M)
         layouts["/" + f.stem] = m and m.group(1)
     return layouts
+
+
+def load_diffs():
+    """Changed rows per page for each diffed pair, for the atlas to overlay on the newer capture."""
+    diffs = {}
+    for f in DIFFS.glob("*/diff.json"):
+        d = json.loads(f.read_text())
+        pages = {f"{p['slug']}|{s}": {k: p[s][k] for k in ("changed", "delta", "regions", "height")}
+                 for p in d["pages"] for s in SIZES if p.get(s, {}).get("changed")}
+        diffs[f.parent.name] = {"base": d["base"], "head": d["head"], "pages": pages}
+    return diffs
 
 
 def build(out):
@@ -342,6 +473,7 @@ def build(out):
             section("Resource collections", collections, "/resources/collection/"),
         ],
     }
+    data["diffs"] = load_diffs()
     out.write_text(json.dumps(data, indent=1))
     return data
 
@@ -368,9 +500,19 @@ if __name__ == "__main__":
     ap.add_argument("--sha", help="label the capture with this commit instead of HEAD")
     ap.add_argument("--name", help="a friendly name for the version, shown in the menu and toast. "
                                    "With --no-capture it renames an existing capture (--sha, or HEAD)")
+    ap.add_argument("--diff", nargs="+", metavar=("BASE", "HEAD"),
+                    help="diff every page between two captures (HEAD defaults to the current commit) and write "
+                         "screenshot-diff.html")
+    ap.add_argument("--site", help="capture this built site folder instead of _site (to shoot an older commit's build)")
     ap.add_argument("--workers", type=int, default=4,
                     help="pages shot at once, each in its own browser (default 4; 1 = one at a time)")
     args = ap.parse_args()
+
+    if args.site:
+        SITE = pathlib.Path(args.site).resolve()
+    if args.diff:
+        diff_versions(args.diff[0], args.diff[1] if len(args.diff) > 1 else git("rev-parse", "--short", "HEAD"))
+        sys.exit(0)
 
     if not args.no_capture:
         sha = args.sha or git("rev-parse", "--short", "HEAD")

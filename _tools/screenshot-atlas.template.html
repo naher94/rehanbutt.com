@@ -78,6 +78,10 @@ a{color:inherit}
 #note-pop .note-foot{font-size:10px;color:#a1a1aa;margin-top:4px}
 .note-resolve{display:flex;align-items:center;gap:3px;font:inherit;font-size:11px;font-weight:600;border:1px solid #d4d4d8;border-radius:5px;background:#fff;color:#3f3f46;padding:2px 7px 2px 5px;cursor:pointer}
 .note-resolve:hover{border-color:#16a34a;color:#16a34a} .note-resolve.on{background:#f0fdf4;border-color:#86efac;color:#15803d}
+/* Diff overlay: the rows that changed since the base capture, boxed on the newer one. */
+.dmark{position:absolute;left:0;right:0;z-index:1;pointer-events:none;background:rgba(255,40,70,.16);border-top:2px solid rgba(255,40,70,.85);border-bottom:2px solid rgba(255,40,70,.85);box-sizing:border-box;min-height:4px} .diff-off .dmark,.diff-off .dchg{display:none}
+.dchg{flex:none;width:7px;height:7px;border-radius:50%;background:#e11d48;margin:0 4px}
+#diff-bar[hidden]{display:none}
 .pin.resolved{background:#a1a1aa;opacity:.75}
 .note-del{border:0;background:none;color:#a1a1aa;cursor:pointer;padding:3px;border-radius:4px;line-height:0} .note-del:hover{color:#e11d48;background:#fff1f2}
 aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px;margin-left:8px;vertical-align:2px}
@@ -94,6 +98,7 @@ aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px
 <div class="notes-bar"><strong>Notes</strong> <span id="notes-total"></span><label><input type="checkbox" id="pins-toggle" checked> Pins</label><label title="Show resolved notes, faded"><input type="checkbox" id="resolved-toggle"> Resolved</label></div>
 <div class="notes-actions"><button type="button" id="notes-export" title="Download notes as JSON">Export</button><button type="button" id="notes-import" title="Load notes from a JSON export">Import</button><button type="button" id="notes-md" title="Download notes as a Markdown checklist">Checklist</button></div>
 <input type="file" id="notes-file" accept=".json,application/json" hidden>
+<div class="notes-bar" id="diff-bar" hidden><strong>Changes</strong> <span id="diff-info"></span><label title="Dots in the rail and boxes on the screenshots (D)"><input type="checkbox" id="diff-toggle" checked> Show</label></div>
 <div class="seg" role="group" aria-label="Show"><button type="button" data-view="both">Both</button><button type="button" data-view="mobile">Mobile</button><button type="button" data-view="desktop">Desktop</button></div>
 <label class="zoom">Row size <input id="zoom" type="range" min="50" max="300" step="10" value="100"> <output id="zoom-val">100%</output></label>
 <button class="keys-hint" type="button" id="keys-open">Keyboard shortcuts <kbd>?</kbd></button>
@@ -110,6 +115,7 @@ aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px
 <tr><td><kbd>V</kbd> / <kbd>Shift</kbd> + <kbd>V</kbd></td><td>Next / previous version</td></tr>
 <tr><td><kbd>F</kbd></td><td>Flip back to the last version viewed</td></tr>
 <tr><td><kbd>N</kbd></td><td>Show / hide note pins</td></tr>
+<tr><td><kbd>D</kbd></td><td>Show / hide changed rows (vs the version before)</td></tr>
 <tr><td>Click a screenshot</td><td>Drop a note</td></tr>
 <tr><td><kbd>?</kbd></td><td>Show this list</td></tr>
 </table></dialog>
@@ -351,6 +357,7 @@ addEventListener('keydown', e => {
   else if (k === '=' || k === '+') keepPlace(() => setZoom(+zoom.value + 10));
   else if (k === '0') keepPlace(() => setZoom(100));
   else if (k === 'n') setPins(!pinsOn);
+  else if (k === 'd') setDiff(!diffOn);
   else if (k === 'v' || k === 'V') stepVersion(k === 'v' ? 1 : -1);
   else if (k === 'f') flipVersion();
   else if (k === '?') keys.open ? keys.close() : keys.showModal();
@@ -585,6 +592,47 @@ document.addEventListener('mousedown', e => { if (!verList.hidden && !e.target.c
 addEventListener('resize', () => { if (!verList.hidden) placeVerMenu(); });
 // The list is fixed to the button's spot, so scrolling the rail away from it closes it.
 document.querySelector('.rail').addEventListener('scroll', () => { if (!verList.hidden) closeVerMenu(false); });
+// Changed rows: the diff whose newer side is the version on screen. With several, the one against the version just before it.
+let diffOn = true;
+const diffToggle = document.getElementById('diff-toggle'), diffBar = document.getElementById('diff-bar');
+function activeDiff() {
+  const all = Object.values(DATA.diffs || {}).filter(d => d.head === VER);
+  const before = VERSIONS[vIdx(VER) - 1];
+  return all.find(d => before && d.base === before.sha) || all[0];
+}
+function renderDiff() {
+  shots.forEach(s => s.querySelectorAll('.dmark').forEach(m => m.remove()));
+  aside.querySelectorAll('.dchg').forEach(m => m.remove());
+  const d = activeDiff();
+  diffBar.hidden = !d;
+  if (!d) return;
+  const n = new Set(Object.keys(d.pages).map(k => k.split('|')[0])).size;
+  document.getElementById('diff-info').textContent = 'vs ' + d.base + ' · ' + n + ' pages';
+  // A dot beside each changed page in the rail, and on a branch that has one inside.
+  const dot = tip => { const e = document.createElement('span'); e.className = 'dchg'; e.title = tip; return e; };
+  const pct = slug => Math.max(...['mobile', 'desktop'].map(z => (d.pages[slug + '|' + z] || { changed: 0 }).changed));
+  items.forEach(a => { const c = pct(idOf(a)); if (c) a.after(dot('Changed since ' + d.base + ': ' + (c * 100).toFixed(1) + '% of the page')); });
+  aside.querySelectorAll('details').forEach(det => {
+    const k = [...det.querySelectorAll('li a')].filter(a => pct(idOf(a))).length;
+    if (k) det.querySelector('summary').insertBefore(dot(k + ' changed since ' + d.base), det.querySelector('summary .eye'));
+  });
+  shots.forEach(s => {
+    const r = d.pages[s.dataset.page + '|' + s.dataset.size];
+    if (!r) return;
+    r.regions.forEach(([a, b]) => {
+      const m = document.createElement('div'); m.className = 'dmark';
+      m.style.top = a / r.height * 100 + '%'; m.style.height = (b - a) / r.height * 100 + '%';
+      s.append(m);
+    });
+  });
+}
+function setDiff(on) {
+  diffOn = on; diffToggle.checked = on;
+  document.body.classList.toggle('diff-off', !on);
+  try { localStorage.setItem('audit-diff', on ? '1' : '0'); } catch (e) {}
+}
+diffToggle.addEventListener('change', () => setDiff(diffToggle.checked));
+try { if (localStorage.getItem('audit-diff') === '0') setDiff(false); } catch (e) {}
 let PREV_VER = null;
 function setVersion(v) {
   closeN();
@@ -601,7 +649,7 @@ function setVersion(v) {
   document.getElementById('ver-branch').textContent = info.branch || 'unknown branch';
   document.getElementById('ver-date').textContent = fmtDate(info.date);
   document.title = 'Screenshot audit · ' + v;
-  renderAllPins(); renderCounts();
+  renderAllPins(); renderCounts(); renderDiff();
   try { localStorage.setItem('audit-version', v); } catch (e) {}
 }
 // Before/after: toggles with whichever version was on screen last. Pick the pair from the menu once, then F.
