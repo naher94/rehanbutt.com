@@ -42,6 +42,14 @@ $home-section-vertical-spacing-mobile: 4rem;
     }
     a{
       color: inherit;
+      // The global `p a:visited:hover` (link-expand) is more specific than
+      // `color: inherit` and turned visited links white on hover.
+      &:visited,
+      &:hover,
+      &:visited:hover,
+      &:focus{
+        color: inherit;
+      }
       text-decoration: underline dotted 4px;
       text-decoration-color: rgba($navy-black, 0.5); //TODO update with semantic-color
       @include scaffold.breakpoint(md, down){
