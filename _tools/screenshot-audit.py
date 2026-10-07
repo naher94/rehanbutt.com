@@ -479,6 +479,7 @@ def build(out):
             section("Resource collections", collections, "/resources/collection/"),
         ],
     }
+    data["sizes"] = {name: opts["viewport"]["width"] for name, opts in SIZES.items()}
     data["diffs"] = load_diffs()
     out.write_text(json.dumps(data, indent=1))
     return data
