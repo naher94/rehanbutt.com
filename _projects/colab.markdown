@@ -7,8 +7,8 @@ date:   2016-03-01
 tags: digital app
 ---
 
-<div class="grid-x">
-  <div class="cell">
+<div>
+  <div>
     <img src="../img/colab/colabhero.png" alt="CoLab Logo and Hero Shot"/>
   </div>
 </div>
@@ -19,35 +19,35 @@ Design is inherently collaborative. Existing tools such as Photoshop and Sketch 
 
 We Look to solve this problem with our new product CoLab. CoLab is a plugin that enables real-time collaboration and version control in Sketch, a popular tool among designers, and makes it convenient for them to design with their teams anytime, anywhere.
 
-<div class="responsive-embed widescreen">
+<div class="video-embed">
   <iframe width="100%" src="https://www.youtube.com/embed/w0ZcpQ547Gg?rel=0" frameborder="0" allowfullscreen title="CoLab Product Introduction"></iframe>
 </div>
 
 As part of this project I worked with Alex Du, Aparna Sridhar Murthy, Chris Barker, Rishikesh Yardi.
 
-<div class="grid-x grid-margin-y">
-  <div class="cell">
+<div class="scaffold-grid">
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/screenshots-markup.jpg" alt="Screenshots"/>
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/presentation/presentation24.png" alt="Interface Overview" style="width:100%">
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/presentation/presentation25.png" alt="Version History Viewing" style="width:100%">
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/presentation/presentation26.png" alt="Reverting Changes" style="width:100%">
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/presentation/presentation27.png" alt="Live Updates" style="width:100%">
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/presentation/presentation28.png" alt="Working Offline" style="width:100%">
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/workflow-sketches.jpg" alt="Sketches of workflow pain">
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/data-structure.svg" alt="Data Implementation"/>
   </div>
 </div>
@@ -89,29 +89,29 @@ Now that we have seen the product let's discuss the business side. Our target ma
   - Discounts
   - Trial periods
 
-<div class="grid-x grid-margin-y">
-  <div class="cell">
+<div class="scaffold-grid">
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/stats.svg" alt="Statistics"/>
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/competitiveAnalysis.png" alt="Competitive Analysis"/>
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/presentation/presentation8.png" alt="Feature overlap" style="width:100%">
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/growth-costs.jpg" alt="growth and long term costs">
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/presentation/presentation15.png" alt="Startup Costs" style="width:100%">
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/presentation/presentation17.png" alt="Sketch API availability" style="width:100%">
   </div>
-  <div>
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/hypothesis.jpg" alt="Hypothesis">
   </div>
-  <div class="cell">
+  <div class="scaffold-grid-span-full">
     <img src="../img/colab/rev-costs.jpg" alt="Revenues & Costs">
   </div>
 </div>

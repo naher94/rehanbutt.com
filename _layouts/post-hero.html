@@ -25,27 +25,23 @@ hero-accent-color-dark: {{hero-accent-color-dark}}
     </div>
     {% endif %}
 
-    <div class="grid-container grid-x hero-image">
-      <div class="cell">
-        <img src="../img/{{ page.hero-image }}" alt="{{ page.hero-image-alt }}">
-      </div>
+    <div class="hero-image scaffold-container">
+      <img src="../img/{{ page.hero-image }}" alt="{{ page.hero-image-alt }}">
     </div>
   </div>
 
-<div class="grid-container">
-  <div class="grid-x grid-margin-x"> <!-- TODO does this grid margin x need to be here? messing with child use of grid-margin-x -->
-    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+<div class="scaffold-container">
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-      <header class="post-header post-header-hero">
-        <p class="date-stamp">{{ page.date| date: "%B %Y" }}</p>
-        <h1 itemprop="name headline">{{ page.title }}</h1>
-        <p class="post-meta">{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
-      </header>
+    <header class="post-header post-header-hero">
+      <p class="date-stamp">{{ page.date| date: "%B %Y" }}</p>
+      <h1 itemprop="name headline">{{ page.title }}</h1>
+      <p class="post-meta">{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
+    </header>
 
-      <div class="post-content" itemprop="articleBody">
-        {{ content }}
-      </div>
+    <div class="post-content" itemprop="articleBody">
+      {{ content }}
+    </div>
 
-    </article>
-  </div>
+  </article>
 </div>

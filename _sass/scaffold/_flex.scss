@@ -1,0 +1,75 @@
+// =============================================================================
+// Scaffold CSS — Flex
+// Utility classes for .scaffold-flex, direction, alignment, and self alignment.
+// Responsive variants generated for direction classes across all breakpoints.
+// Alignment classes work in both flex and grid contexts.
+// =============================================================================
+
+@use 'sass:map';
+@use 'variables' as vars;
+@use 'mixins' as scaffold;
+
+
+// Flex container
+// -----------------------------------------------------------------------------
+.scaffold-flex        { @include scaffold.flex(); }
+.scaffold-flex-col    { flex-direction: column; }
+.scaffold-flex-nowrap { flex-wrap: nowrap; }
+
+
+// Responsive flex direction variants
+// Generated for flex, flex-col, and flex-nowrap × every breakpoint.
+// e.g. md:scaffold-flex-col applies at md and above.
+// -----------------------------------------------------------------------------
+$flex-classes: (
+  'flex':        (flex-direction: row, flex-wrap: wrap, display: flex),
+  'flex-col':    (flex-direction: column),
+  'flex-nowrap': (flex-wrap: nowrap),
+);
+
+@each $bp, $value in vars.$breakpoints {
+  @include scaffold.breakpoint($bp) {
+    .#{$bp}\:scaffold-flex {
+      @include scaffold.flex();
+    }
+
+    .#{$bp}\:scaffold-flex-col {
+      flex-direction: column;
+    }
+
+    .#{$bp}\:scaffold-flex-nowrap {
+      flex-wrap: nowrap;
+    }
+  }
+}
+
+
+// Align items
+// Sets alignment on the container's cross axis.
+// Works in both flex and grid contexts.
+// -----------------------------------------------------------------------------
+.scaffold-items-start   { align-items: flex-start; }
+.scaffold-items-center  { align-items: center; }
+.scaffold-items-end     { align-items: flex-end; }
+.scaffold-items-stretch { align-items: stretch; }
+
+
+// Justify content
+// Sets alignment on the container's main axis.
+// Works in both flex and grid contexts.
+// -----------------------------------------------------------------------------
+.scaffold-justify-start   { justify-content: flex-start; }
+.scaffold-justify-center  { justify-content: center; }
+.scaffold-justify-end     { justify-content: flex-end; }
+.scaffold-justify-between { justify-content: space-between; }
+.scaffold-justify-around  { justify-content: space-around; }
+
+
+// Align self
+// Overrides alignment for individual children.
+// Works in both flex and grid contexts.
+// -----------------------------------------------------------------------------
+.scaffold-self-start   { align-self: flex-start; }
+.scaffold-self-center  { align-self: center; }
+.scaffold-self-end     { align-self: flex-end; }
+.scaffold-self-stretch { align-self: stretch; }

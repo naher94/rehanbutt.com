@@ -1,7 +1,9 @@
+@use 'scaffold/mixins' as scaffold;
+
 //******* 404 Styling
 .title-404 {
   @include type-style(product, page-title);
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     text-align: center;
   }
 }
@@ -9,7 +11,7 @@
 .words-404 {
   @include type-style(product, page-subtitle);
   margin-bottom: 1em;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     text-align: center;
     margin-bottom: 2em;
   }
@@ -23,7 +25,7 @@
   background-image: url(../img/giraffe.svg);
   background-repeat: no-repeat;
   background-position: 50% 50px;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     height: 200px;
     background-position: 50% 20px;
   }

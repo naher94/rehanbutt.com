@@ -1,3 +1,5 @@
+@use 'scaffold/mixins' as scaffold;
+
 // Design System
 // `product/body` declares no line-height, which is what makes the whole style
 // safe to apply here: the root inherits the global unitless 1.5 and passes it
@@ -28,7 +30,7 @@ h1{
 h2{
   font-size: 3.5em;
   font-weight: $zilla-medium;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
@@ -45,7 +47,7 @@ h4{
 @mixin content-inset {
   padding-left: $content-inset;
   padding-right: $content-inset;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     padding-left: $content-inset-small;
     padding-right: $content-inset-small;
   }
@@ -63,7 +65,7 @@ ul {
 
 .content-wrapper{
   padding-top: 3em;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     padding-top: 1em;
   }
 }
@@ -82,7 +84,7 @@ ul {
   .hero-image{
     img{
       border-radius: $tile-radius-big $tile-radius-big 0 0;
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         border-radius: $tile-radius-medium $tile-radius-medium 0 0;
       }
     }
@@ -97,7 +99,7 @@ ul {
     position: absolute;
     padding-left: 2em;
     padding-right: 2em;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       padding-left: 0.5em;
       padding-right: 0.5em;
     }
@@ -136,7 +138,7 @@ ul {
   padding-left: 2.5em;
   padding-right: 2.5em;
   @include type-style(product, callout-md);
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     padding-left: 0.25em;
     padding-right: 0.25em;
   }
@@ -238,6 +240,16 @@ p, li, h3{
   video{
     display: block;
   }
+  // `natural=true`: the clip's own size, capped at its container, as the GIFs
+  // these replaced were. The wrapper hugs the video so the button stays on it.
+  &.loop-video-natural{
+    width: fit-content;
+    max-width: 100%;
+    video{
+      max-width: 100%;
+      height: auto;
+    }
+  }
   .loop-video-toggle{
     appearance: none;
     border: 0;
@@ -322,7 +334,6 @@ p, li, h3{
   &:first-child {
     background-color: semantic-color(button-fill);
     color: semantic-color(text-inverted);
-    margin-right: 0.5em;
     &:hover {
       background-color: semantic-color(speaking-button-primary-fill-hover);
       border-color: semantic-color(speaking-button-primary-border-hover);

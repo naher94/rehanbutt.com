@@ -1,3 +1,5 @@
+@use 'scaffold/mixins' as scaffold;
+
 //******* Header Styling
 
 // Half of `.nav-burger-icon`'s height. The two bars are placed symmetrically
@@ -20,7 +22,7 @@ $burger-bar-offset: 2.5px;
   #rehan-logo-header{
     height: 50px;
     transition: $sprint;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       // Free to shrink now the logo centres against the burger row instead of
       // sitting flush with its top, where any height but ~40px looked off.
       height: 32px;
@@ -57,7 +59,7 @@ $burger-bar-offset: 2.5px;
   visibility: visible;
   opacity: 1;
   transition: opacity var(--item-duration) $run-easing;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     display: flex;
     align-items: center;
     .nav{
@@ -69,7 +71,7 @@ $burger-bar-offset: 2.5px;
 
 .navbar{
   color: inherit;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     display: none;
   }
 }
@@ -79,6 +81,9 @@ $burger-bar-offset: 2.5px;
   // align-items works per line, so this centres the logo against the burger
   // row only and the open menu can't reach it.
   align-items: center;
+  // No Scaffold gap: the closed list still takes a flex line, and a row gap
+  // would open space under the burger row.
+  --scaffold-gap: 0;
   // ⬇︎ TUNE ME: the stagger's two dials, plus the burger's own
   --stagger-step: 50ms;
   --item-duration: 0.2s;
@@ -120,7 +125,7 @@ $burger-bar-offset: 2.5px;
       outline: 2px solid $pure-white;
       outline-offset: 4px;
     }
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       display: block;
     }
   }
@@ -129,7 +134,7 @@ $burger-bar-offset: 2.5px;
 .burger-container{
   float: left;
   display: none;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     // flow-root, not block: the burger and the shortcuts are the only
     // children left and both float, so nothing would give this height. The
     // list's `clear: both` used to do that job before it moved out.
@@ -171,7 +176,7 @@ $burger-bar-offset: 2.5px;
   display: none;
   grid-template-rows: 0fr;
   transition: grid-template-rows var(--open-duration) $run-easing;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     display: grid;
     // Its own full-width flex line, below the burger row. `order` keeps the
     // source order — burger, shortcuts, then these links — which is the order
@@ -290,7 +295,7 @@ $burger-bar-offset: 2.5px;
     transition-delay: calc(var(--i) * var(--stagger-step));
   }
   .mobile-navbar{
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       // Faded rather than dropped, so the bar changes on the same clock as the
       // list. visibility trails the fade to keep them off the tab order once
       // they're invisible, and snaps back on open so they can fade in again.

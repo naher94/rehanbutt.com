@@ -292,17 +292,16 @@ def provenance(via):
 
 
 def project_breakpoints():
-    """Foundation's `$breakpoints`, read from _settings.scss.
+    """Scaffold's `$breakpoints`, read from _sass/scaffold/_variables.scss.
 
-    Read rather than restated so the audit cannot drift from the project. The
-    `small: 0` entry is sampled at a real phone width -- resolving at 0 would
-    be a viewport no device has.
+    Read rather than restated so the audit cannot drift from the project.
+    Scaffold has no zero entry, so a phone width is sampled below them.
     """
-    text = (ROOT / "_sass" / "_settings.scss").read_text()
-    m = re.search(r'\$breakpoints\s*:\s*\((.*?)\);', text, re.S)
+    text = (ROOT / "_sass" / "scaffold" / "_variables.scss").read_text()
+    m = re.search(r'\$breakpoints\s*:\s*\((.*?)\)', text, re.S)
     if not m:
-        return [("large", 1024.0)]
-    out = []
+        return [("lg", 1024.0)]
+    out = [("base", 375.0)]
     for name, value, unit in re.findall(r'([\w-]+)\s*:\s*([\d.]+)(px|em|rem)?', m.group(1)):
         px = float(value) * (1.0 if (unit or "px") == "px" else 16.0)
         out.append((name, 375.0 if px == 0 else px))

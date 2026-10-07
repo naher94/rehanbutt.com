@@ -18,11 +18,11 @@ After creating the penguin sticker pack, I decided to expand the stickers of my 
 
 Check out the {% include external-link.html link="http://penguin.rehanbutt.com" content="Penguin Stickers" %} and {% include external-link.html link="http://naara.rehanbutt.com" content=" Naara Stickers." %}
 
-<div class="grid-x" style="padding:0px; margin:30px 0px 0px 0px;">
-  <div class="small-6 medium-3 cell"><img src="../img/stickerPack/tube.png" alt="Penguin + Tube"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/stickerPack/bb8.png" alt="Penguin + BB-8"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/stickerPack/heart.png" alt="Penguin + Heart"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/stickerPack/lights.png" alt="Penguin + Lights"/></div>
+<div class="scaffold-grid" style="padding:0px; margin:30px 0px 0px 0px;">
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/stickerPack/tube.png" alt="Penguin + Tube"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/stickerPack/bb8.png" alt="Penguin + BB-8"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/stickerPack/heart.png" alt="Penguin + Heart"/></div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter"><img src="../img/stickerPack/lights.png" alt="Penguin + Lights"/></div>
 </div>
 
 ## Process

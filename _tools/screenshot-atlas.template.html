@@ -69,6 +69,9 @@ a{color:inherit}
 .shot:hover .expand,.expand:focus-visible{opacity:1} .expand:hover{background:#fff;color:#0e7490}
 .pin{position:absolute;z-index:2;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;border:2px solid #fff;padding:0;background:#e11d48;color:#fff;font:600 10px/16px system-ui;box-shadow:0 1px 4px rgba(0,0,0,.45);cursor:pointer}
 .pin:hover{transform:translate(-50%,-50%) scale(1.15)} .pin.open{background:#9f1239;transform:translate(-50%,-50%) scale(1.25)} .pins-off .pin{display:none}
+#ver-toast{position:fixed;top:16px;left:50%;z-index:60;transform:translate(-50%,-8px);opacity:0;pointer-events:none;background:#111;color:#fff;border-radius:999px;padding:8px 16px;font:600 14px/1.2 system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.3);transition:opacity .15s,transform .15s;white-space:nowrap}
+#ver-toast.show{opacity:1;transform:translate(-50%,0)}
+#ver-toast span{font-weight:400;opacity:.7;margin-left:8px}
 #note-pop{position:fixed;z-index:50;width:260px;background:#fff;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.25);padding:10px;box-sizing:border-box}
 #note-pop .note-head{display:flex;align-items:center;gap:6px;font-size:11px;color:#666;margin-bottom:6px} #note-pop .note-title{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #note-pop textarea{width:100%;box-sizing:border-box;min-height:84px;resize:vertical;font:13px/1.4 system-ui;border:1px solid #d4d4d8;border-radius:6px;padding:6px 8px;outline-color:#0e7490}
@@ -105,10 +108,12 @@ aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px
 <tr><td><kbd>-</kbd> <kbd>=</kbd></td><td>Row size smaller / bigger</td></tr>
 <tr><td><kbd>0</kbd></td><td>Row size 100%</td></tr>
 <tr><td><kbd>V</kbd> / <kbd>Shift</kbd> + <kbd>V</kbd></td><td>Next / previous version</td></tr>
+<tr><td><kbd>F</kbd></td><td>Flip back to the last version viewed</td></tr>
 <tr><td><kbd>N</kbd></td><td>Show / hide note pins</td></tr>
 <tr><td>Click a screenshot</td><td>Drop a note</td></tr>
 <tr><td><kbd>?</kbd></td><td>Show this list</td></tr>
 </table></dialog>
+<div id="ver-toast" role="status" aria-live="polite"></div>
 <div id="note-pop" hidden><div class="note-head"><span class="note-title"></span><button type="button" class="note-resolve"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Resolve</span></button><button type="button" class="note-del" title="Delete note"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button></div>
 <textarea placeholder="Type a note…"></textarea><div class="note-foot">Esc or click away to close</div></div>
 <main></main>
@@ -347,6 +352,7 @@ addEventListener('keydown', e => {
   else if (k === '0') keepPlace(() => setZoom(100));
   else if (k === 'n') setPins(!pinsOn);
   else if (k === 'v' || k === 'V') stepVersion(k === 'v' ? 1 : -1);
+  else if (k === 'f') flipVersion();
   else if (k === '?') keys.open ? keys.close() : keys.showModal();
   else return;
   e.preventDefault();
@@ -529,10 +535,12 @@ document.getElementById('notes-md').addEventListener('click', () => {
 const verBtn = document.getElementById('ver-btn'), verList = document.getElementById('ver-list');
 function fmtDate(iso) { return new Date(iso).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }); }
 function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+// A version's own name when it has one (--name), else its commit subject.
+const vTitle = v => v.name || v.subject;
 function renderVersionMenu() {
   const count = sha => notes.filter(n => isOpenOn(n, sha)).length;
   const latest = VERSIONS[VERSIONS.length - 1].sha, cur = VERSIONS.find(x => x.sha === VER);
-  document.getElementById('vb-subj').textContent = cur.subject;
+  document.getElementById('vb-subj').textContent = vTitle(cur);
   document.getElementById('ver-btn').title = cur.subject + ' (' + VER + ')';
   document.getElementById('ver-count').textContent = count(VER) || '';
   document.getElementById('ver-list').innerHTML = VERSIONS.slice().reverse().map(v => {
@@ -540,7 +548,7 @@ function renderVersionMenu() {
     return '<li role="option" tabindex="-1" data-sha="' + v.sha + '" aria-selected="' + (v.sha === VER) + '">' +
       '<span class="vo-top"><code>' + v.sha + '</code>' + (v.sha === latest ? '<span class="vo-tag">latest</span>' : '') +
       '<span class="ncount" title="Notes on this version">' + (c || '') + '</span></span>' +
-      '<span class="vo-subj">' + esc(v.subject) + '</span><span class="vo-date">' + fmtDate(v.date) + '</span></li>';
+      '<span class="vo-subj" title="' + esc(v.subject).replace(/"/g, '&quot;') + '">' + esc(vTitle(v)) + '</span><span class="vo-date">' + fmtDate(v.date) + '</span></li>';
   }).join('');
 }
 function placeVerMenu() {
@@ -577,8 +585,10 @@ document.addEventListener('mousedown', e => { if (!verList.hidden && !e.target.c
 addEventListener('resize', () => { if (!verList.hidden) placeVerMenu(); });
 // The list is fixed to the button's spot, so scrolling the rail away from it closes it.
 document.querySelector('.rail').addEventListener('scroll', () => { if (!verList.hidden) closeVerMenu(false); });
+let PREV_VER = null;
 function setVersion(v) {
   closeN();
+  if (v !== VER) PREV_VER = VER;
   VER = v;
   const info = VERSIONS.find(x => x.sha === v);
   shots.forEach(s => {
@@ -593,6 +603,24 @@ function setVersion(v) {
   document.title = 'Screenshot audit · ' + v;
   renderAllPins(); renderCounts();
   try { localStorage.setItem('audit-version', v); } catch (e) {}
+}
+// Before/after: toggles with whichever version was on screen last. Pick the pair from the menu once, then F.
+function flipVersion() {
+  if (PREV_VER && PREV_VER !== VER) keepPlace(() => setVersion(PREV_VER));
+  else stepVersion(-1);
+  toastVersion();
+}
+// Names the version just switched to, top centre, so the rail needn't be checked.
+const verToast = document.getElementById('ver-toast');
+let toastTimer;
+function toastVersion() {
+  const info = VERSIONS.find(x => x.sha === VER);
+  verToast.textContent = info.name || VER;
+  const sub = info.name ? VER : info.branch;
+  if (sub) verToast.insertAdjacentHTML('beforeend', '<span></span>'), verToast.lastChild.textContent = sub;
+  verToast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => verToast.classList.remove('show'), 1200);
 }
 function stepVersion(dir) {
   const i = VERSIONS.findIndex(x => x.sha === VER);
