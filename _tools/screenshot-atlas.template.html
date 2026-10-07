@@ -111,7 +111,10 @@ a{color:inherit}
 /* Diff overlay: the rows that changed since the base capture, boxed on the newer one. */
 .dmark{position:absolute;left:0;right:0;z-index:1;pointer-events:none;background:rgba(255,40,70,.16);border-top:2px solid rgba(255,40,70,.85);border-bottom:2px solid rgba(255,40,70,.85);box-sizing:border-box;min-height:4px} .diff-off .dmark,.diff-off .dchg{display:none}
 .dchg{flex:none;width:7px;height:7px;border-radius:50%;background:#e11d48;margin:0 4px}
-#diff-bar[hidden]{display:none}
+/* Compare to: always in the rail; the dropdown picks the version to measure the one on screen against. */
+.cmp{display:grid;gap:4px;font-size:11px;color:#666} .cmp-head{display:flex;align-items:center;justify-content:space-between} .cmp-show{display:flex;align-items:center;gap:4px;cursor:pointer}
+.cmp select{font:inherit;font-size:12px;color:#18181b;padding:4px 6px;border:1px solid #d4d4d8;border-radius:6px;background:#fff;width:100%;min-width:0;text-overflow:ellipsis} .cmp select:disabled{color:#a1a1aa}
+.cmp-info{min-height:14px} .cmp-info code{font:11px ui-monospace,monospace}
 .pin.resolved{background:#a1a1aa;opacity:.75}
 .note-del{border:0;background:none;color:#a1a1aa;cursor:pointer;padding:3px;border-radius:4px;line-height:0} .note-del:hover{color:#e11d48;background:#fff1f2}
 aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px;margin-left:8px;vertical-align:2px}
@@ -132,7 +135,7 @@ aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px
 <h4><a href="#" style="text-decoration:none">Groups</a></h4><div id="tree-groups"></div>
 <h4><a href="#all-head" style="text-decoration:none">All pages</a></h4><div id="tree-all"></div></div>
 <div class="rail-foot">
-<div class="notes-bar" id="diff-bar" hidden><strong>Changes</strong> <span id="diff-info"></span><label title="Dots in the rail and boxes on the screenshots (D)"><input type="checkbox" id="diff-toggle" checked> Show</label></div>
+<div class="cmp" id="diff-bar"><div class="cmp-head"><label for="cmp-base">Compare to</label><label class="cmp-show" title="Dots in the rail and boxes on the screenshots (C)"><input type="checkbox" id="diff-toggle" checked> Show</label></div><select id="cmp-base" aria-label="Compare to version"></select><div class="cmp-info" id="diff-info"></div></div>
 <label class="zoom">Row size <input id="zoom" type="range" min="50" max="300" step="10" value="100"> <output id="zoom-val">100%</output></label>
 <div class="seg" role="group" aria-label="Show"><button type="button" data-view="both">Both</button><button type="button" data-view="mobile">Mobile<small data-w="mobile"></small></button><button type="button" data-view="tablet">Tablet<small data-w="tablet"></small></button><button type="button" data-view="desktop">Desktop<small data-w="desktop"></small></button><button type="button" data-view="all">All</button></div>
 </div>
@@ -153,7 +156,7 @@ aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px
 <tr><td><kbd>F</kbd></td><td>Flip back to the last version viewed</td></tr>
 <tr><td><kbd>N</kbd></td><td>Show / hide note pins</td></tr>
 <tr><td><kbd>R</kbd></td><td>Open / close the notes panel</td></tr>
-<tr><td><kbd>D</kbd></td><td>Show / hide changed rows (vs the version before)</td></tr>
+<tr><td><kbd>C</kbd></td><td>Show / hide changes (against the Compare to version)</td></tr>
 <tr><td>Click a screenshot</td><td>Drop a note</td></tr>
 <tr><td><kbd>?</kbd></td><td>Show this list</td></tr>
 </table></dialog>
@@ -377,7 +380,8 @@ const go = el => { if (!el) return; if (location.hash === '#' + el.id) el.scroll
 const undo = [];
 addEventListener('keydown', e => {
   if (e.metaKey || e.ctrlKey || e.altKey || keys.open && e.key !== '?') return;
-  if (e.target.matches('input:not([type=range]), textarea')) return;
+  // Typing fields keep their keys; a checkbox that was just clicked (Show, Pins) shouldn't swallow the shortcuts.
+  if (e.target.matches('input:not([type=range]):not([type=checkbox]), textarea')) return;
   const k = e.key;
   if (k === 'j' || k === 'k') go(step('main [data-slug]', k === 'k' ? 1 : -1));
   else if (k === 'J' || k === 'K') {
@@ -400,7 +404,7 @@ addEventListener('keydown', e => {
   else if (k === '0') keepPlace(() => setZoom(100));
   else if (k === 'n') setPins(!pinsOn);
   else if (k === 'r') setReview(!reviewOn);
-  else if (k === 'd') setDiff(!diffOn);
+  else if (k === 'c') setDiff(!diffOn);
   else if (k === 'v' || k === 'V') stepVersion(k === 'v' ? 1 : -1);
   else if (k === 'f') flipVersion();
   else if (k === '?') keys.open ? keys.close() : keys.showModal();
@@ -719,22 +723,30 @@ rvToggle.addEventListener('click', () => setReview(!reviewOn));
 document.getElementById('rv-close').addEventListener('click', () => setReview(false));
 try { if (localStorage.getItem('audit-review') === '1') setReview(true); } catch (e) {}
 
-// Changed rows: the diff whose newer side is the version on screen. With several, the one against the version just before it.
-let diffOn = true;
-const diffToggle = document.getElementById('diff-toggle'), diffBar = document.getElementById('diff-bar');
-function activeDiff() {
-  const all = Object.values(DATA.diffs || {}).filter(d => d.head === VER);
+// Compare to: the version on screen against any other capture. The comparisons are prepared by the script
+// (every ordered pair), so picking a version here only looks one up. The dropdown starts on the version just before.
+let diffOn = true, compareBase = null;
+try { compareBase = localStorage.getItem('audit-compare'); } catch (e) {}
+const diffToggle = document.getElementById('diff-toggle'), cmpSel = document.getElementById('cmp-base');
+const diffEsc = x => String(x).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+function fillCompare() {
+  const others = VERSIONS.filter(v => v.sha !== VER).reverse();
   const before = VERSIONS[vIdx(VER) - 1];
-  return all.find(d => before && d.base === before.sha) || all[0];
+  if (!others.some(v => v.sha === compareBase)) compareBase = before ? before.sha : others[0] && others[0].sha;
+  cmpSel.innerHTML = others.map(v => '<option value="' + v.sha + '">' + v.sha + ' · ' + diffEsc(v.name || v.subject || v.branch || '') + '</option>').join('');
+  cmpSel.disabled = !others.length;
+  if (compareBase) cmpSel.value = compareBase;
 }
+function activeDiff() { return compareBase && (DATA.diffs || {})[compareBase + '..' + VER]; }
 function renderDiff() {
   shots.forEach(s => s.querySelectorAll('.dmark').forEach(m => m.remove()));
   aside.querySelectorAll('.dchg').forEach(m => m.remove());
-  const d = activeDiff();
-  diffBar.hidden = !d;
-  if (!d) return;
+  fillCompare();
+  const info = document.getElementById('diff-info'), d = activeDiff();
+  if (!compareBase) { info.textContent = 'Only one version captured.'; return; }
+  if (!d) { info.innerHTML = 'Not compared yet. Run <code>screenshot-audit.py --diffs</code>.'; return; }
   const n = new Set(Object.keys(d.pages).map(k => k.split('|')[0])).size;
-  document.getElementById('diff-info').textContent = 'vs ' + d.base + ' · ' + n + ' pages';
+  info.textContent = n ? n + ' page' + (n === 1 ? '' : 's') + ' changed' : 'No pages changed';
   // A dot beside each changed page in the rail, and on a branch that has one inside.
   const dot = tip => { const e = document.createElement('span'); e.className = 'dchg'; e.title = tip; return e; };
   const pct = slug => Math.max(...['mobile', 'tablet', 'desktop'].map(z => (d.pages[slug + '|' + z] || { changed: 0 }).changed));
@@ -753,6 +765,11 @@ function renderDiff() {
     });
   });
 }
+cmpSel.addEventListener('change', () => {
+  compareBase = cmpSel.value;
+  try { localStorage.setItem('audit-compare', compareBase); } catch (e) {}
+  renderDiff();
+});
 function setDiff(on) {
   diffOn = on; diffToggle.checked = on;
   document.body.classList.toggle('diff-off', !on);

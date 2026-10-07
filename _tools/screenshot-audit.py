@@ -12,6 +12,7 @@ switchable by version, and notes pinned onto the screenshots.
     python3 _tools/screenshot-audit.py --sizes tablet   # add just one size to HEAD's capture
     python3 _tools/screenshot-audit.py --workers 1      # one page at a time, if parallel runs get flaky
     python3 _tools/screenshot-audit.py --no-capture --sha 37f13b9 --name "Before Scaffold"   # name a version
+    python3 _tools/screenshot-audit.py --diffs                      # prepare the atlas's Compare to data (a capture does this too)
     python3 _tools/screenshot-audit.py --diff 3e2102f                         # diff every page against HEAD
     python3 _tools/screenshot-audit.py --diff 3e2102f e2e1364                 # or any two captures
 
@@ -303,7 +304,7 @@ def _rows(path):
     return arr, [hash(r.tobytes()) for r in arr]
 
 
-def diff_page(old_png, new_png, out_png):
+def diff_page(old_png, new_png, out_png, overlay=True):
     """Compare two tall screenshots row by row.
 
     Rows are matched as sequences, not by position, so a section that grows by
@@ -348,7 +349,7 @@ def diff_page(old_png, new_png, out_png):
             mark(a, b)
     rows = sum(b - a for a, b in regions)
     result = {"changed": round(rows / new.shape[0], 5), "delta": new.shape[0] - old.shape[0], "regions": regions, "height": new.shape[0]}
-    if regions:
+    if regions and overlay:
         shade = new.astype("float32")
         for a, b in regions:
             shade[a:b] = shade[a:b] * 0.6 + np.array([255, 40, 70], dtype="float32") * 0.4
@@ -361,8 +362,9 @@ def diff_page(old_png, new_png, out_png):
     return result
 
 
-def diff_versions(base, head):
-    """Diff every page the two captures share, and write the ranked viewer."""
+def diff_versions(base, head, write_page=True, quiet=False):
+    """Diff every page the two captures share. The standalone viewer and its overlay thumbnails
+    are written for a hand-run --diff; the atlas only needs the changed rows."""
     manifests = {}
     for sha in (base, head):
         mf = SHOTS / sha / "manifest.json"
@@ -377,11 +379,13 @@ def diff_versions(base, head):
     shared = [k for k in new if k in old]
     for n, (slug_, size) in enumerate(shared, 1):
         r = diff_page(SHOTS / base / size / f"{slug_}.png", SHOTS / head / size / f"{slug_}.png",
-                      out / size / slug_)
+                      out / size / slug_, overlay=write_page)
         pages.setdefault(slug_, {"slug": slug_, "path": new[(slug_, size)]["path"]})[size] = r
-        print(f"[{n:>3}/{len(shared)}] {size:7} {new[(slug_, size)]['path']}  {r['changed']:.1%}", flush=True)
+        if not quiet:
+            print(f"[{n:>3}/{len(shared)}] {size:7} {new[(slug_, size)]['path']}  {r['changed']:.1%}", flush=True)
     data = {
-        "base": base, "head": head, "image_root": SHOTS.relative_to(HERE).as_posix(),
+        "base": base, "head": head, "base_captured": manifests[base].get("captured"),
+        "head_captured": manifests[head].get("captured"), "image_root": SHOTS.relative_to(HERE).as_posix(),
         "diff_root": out.relative_to(HERE).as_posix(),
         "names": {s: manifests[s].get("name") for s in manifests},
         "pages": sorted(pages.values(),
@@ -392,9 +396,9 @@ def diff_versions(base, head):
     (out / "diff.json").parent.mkdir(parents=True, exist_ok=True)
     (out / "diff.json").write_text(json.dumps(data, indent=1))
     changed = [p for p in data["pages"] if any(p.get(s, {}).get("changed") for s in SIZES)]
-    print(f"\n{len(changed)} of {len(data['pages'])} pages changed between {base} and {head}")
+    print(f"{'' if quiet else chr(10)}{len(changed)} of {len(data['pages'])} pages changed between {base} and {head}")
     page = HERE / "screenshot-diff.html"
-    if DIFF_TEMPLATE.exists():
+    if write_page and DIFF_TEMPLATE.exists():
         page.write_text(DIFF_TEMPLATE.read_text().replace("__DATA__", json.dumps(data).replace("</script>", "<\\/script>")))
         print(f"wrote {page}")
 
@@ -410,11 +414,38 @@ def project_layouts():
     return layouts
 
 
+def ensure_diffs():
+    """A comparison for every ordered pair of captures, so the atlas can always offer Compare to.
+    A pair is redone only when either capture has been retaken since."""
+    captured = {}
+    for mf in SHOTS.glob("*/manifest.json"):
+        captured[mf.parent.name] = json.loads(mf.read_text()).get("captured")
+    todo = []
+    for b in captured:
+        for h in captured:
+            if b == h:
+                continue
+            f = DIFFS / f"{b}..{h}" / "diff.json"
+            fresh = False
+            if f.exists():
+                d = json.loads(f.read_text())
+                fresh = d.get("base_captured") == captured[b] and d.get("head_captured") == captured[h]
+            if not fresh:
+                todo.append((b, h))
+    for i, (b, h) in enumerate(todo, 1):
+        print(f"comparing {b} -> {h} ({i}/{len(todo)}): ", end="", flush=True)
+        diff_versions(b, h, write_page=False, quiet=True)
+    if not todo:
+        print("comparisons are up to date")
+
+
 def load_diffs():
     """Changed rows per page for each diffed pair, for the atlas to overlay on the newer capture."""
     diffs = {}
     for f in DIFFS.glob("*/diff.json"):
         d = json.loads(f.read_text())
+        if not ((SHOTS / d["base"] / "manifest.json").exists() and (SHOTS / d["head"] / "manifest.json").exists()):
+            continue
         pages = {f"{p['slug']}|{s}": {k: p[s][k] for k in ("changed", "delta", "regions", "height")}
                  for p in d["pages"] for s in SIZES if p.get(s, {}).get("changed")}
         diffs[f.parent.name] = {"base": d["base"], "head": d["head"], "pages": pages}
@@ -510,12 +541,16 @@ if __name__ == "__main__":
     ap.add_argument("--diff", nargs="+", metavar=("BASE", "HEAD"),
                     help="diff every page between two captures (HEAD defaults to the current commit) and write "
                          "screenshot-diff.html")
+    ap.add_argument("--diffs", action="store_true", help="prepare any missing Compare to comparisons, without capturing")
+    ap.add_argument("--no-diffs", action="store_true", help="after a capture, skip preparing the comparisons")
     ap.add_argument("--sizes", help="only capture these sizes, comma separated (e.g. tablet), "
                                     "adding them to the existing capture")
     ap.add_argument("--site", help="capture this built site folder instead of _site (to shoot an older commit's build)")
     ap.add_argument("--workers", type=int, default=4,
                     help="pages shot at once, each in its own browser (default 4; 1 = one at a time)")
     args = ap.parse_args()
+    if args.diffs:
+        args.no_capture = True
 
     if args.site:
         SITE = pathlib.Path(args.site).resolve()
@@ -538,6 +573,9 @@ if __name__ == "__main__":
         manifest = json.loads(mf.read_text())
         manifest["name"] = args.name
         mf.write_text(json.dumps(manifest, indent=1))
+
+    if args.diffs or (not args.no_capture and not args.no_diffs):
+        ensure_diffs()
 
     d = build(pathlib.Path(args.out))
     print(f"versions            : {', '.join(v['sha'] for v in d['versions'])}")
