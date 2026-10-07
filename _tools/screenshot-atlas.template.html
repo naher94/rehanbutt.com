@@ -38,6 +38,7 @@ body.review-open #review{display:flex} body.review-open main{margin-left:calc(va
 .rv-item.done .rv-resolve{background:#fff;color:#6d28d9} .rv-item.done .rv-resolve:hover{background:#ede9fe}
 .rv-empty{padding:16px 12px;color:#888;font-size:12px}
 /* Review toggle sits at the right of the rail's title row. */
+.rail-head{position:sticky;top:-16px;z-index:3;margin:-16px -12px 8px;padding:16px 12px 6px;background:#fff;border-bottom:1px solid #e4e4e7}
 .rail-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:-2px 0 0}
 /* Same quiet grey as the review panel's close button; the pressed state is a darker fill, not an accent. */
 .rail-tools{display:flex;align-items:center;gap:2px}
@@ -89,6 +90,7 @@ a{color:inherit}
 #ver-list{position:fixed;z-index:60;width:320px;box-sizing:border-box;overflow-y:auto;list-style:none;margin:0;padding:4px;background:#fff;border:1px solid #e4e4e7;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
 #ver-list li{display:grid;gap:1px;padding:7px 8px;border-radius:6px;cursor:pointer;outline:none} #ver-list li:hover,#ver-list li:focus{background:#f4f4f5}
 #ver-list li[aria-selected=true]{background:#ede9fe} #ver-list li[aria-selected=true] code{color:#6d28d9}
+.vo-flip{flex:none;display:inline-flex;align-items:center;color:#6d28d9} .vo-top .vo-flip{margin-left:auto} .vo-top .vo-flip + .ncount{margin-left:0}
 .vo-top{display:flex;align-items:center;gap:6px} .vo-top .ncount{margin-left:auto} .vo-tag{font-size:10px;font-weight:600;color:#6d28d9;background:#ede9fe;border-radius:8px;padding:0 6px}
 .vo-subj{font-size:12px;color:#3f3f46;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .vo-date{font-size:11px;color:#a1a1aa} .ver select{font:inherit;font-size:12px;color:#18181b;padding:4px 6px;border:1px solid #d4d4d8;border-radius:6px;background:#fff;width:100%}
 .shot.missing{min-height:120px;background:repeating-linear-gradient(45deg,#fafafa 0 8px,#f4f4f5 8px 16px);border:1px dashed #d4d4d8} .shot.missing img{display:none}
@@ -111,9 +113,13 @@ a{color:inherit}
 /* Diff overlay: the rows that changed since the base capture, boxed on the newer one. */
 .dmark{position:absolute;left:0;right:0;z-index:1;pointer-events:none;background:rgba(255,40,70,.16);border-top:2px solid rgba(255,40,70,.85);border-bottom:2px solid rgba(255,40,70,.85);box-sizing:border-box;min-height:4px} .diff-off .dmark,.diff-off .dchg{display:none}
 .dchg{flex:none;width:7px;height:7px;border-radius:50%;background:#e11d48;margin:0 4px}
-/* Compare to: always in the rail; the dropdown picks the version to measure the one on screen against. */
-.cmp{display:grid;gap:4px;font-size:11px;color:#666} .cmp-head{display:flex;align-items:center;justify-content:space-between} .cmp-show{display:flex;align-items:center;gap:4px;cursor:pointer}
-.cmp select{font:inherit;font-size:12px;color:#18181b;padding:4px 6px;border:1px solid #d4d4d8;border-radius:6px;background:#fff;width:100%;min-width:0;text-overflow:ellipsis} .cmp select:disabled{color:#a1a1aa}
+/* Compare to: always in the rail. Linked, it follows the flip pair; unlinked, it is pinned to one version whatever is on screen. */
+.cmp{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;font-size:11px;color:#666} .cmp-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cmp-title{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .cmp-title b{font-weight:600;color:#18181b}
+.cmp-show{flex:none;display:flex;align-items:center;gap:4px;cursor:pointer}
+.cmp-row{display:flex;align-items:center;gap:5px;color:#71717a} .cmp-ico{display:inline-flex;flex:none} .cmp-ico:empty{display:none}
+#cmp-link{font:inherit;font-size:11px;font-weight:600;border:0;background:none;padding:0;cursor:pointer;color:#6d28d9;margin-left:2px} #cmp-link:hover{text-decoration:underline}
+.cmp select{font:inherit;font-size:12px;color:#18181b;padding:4px 6px;border:1px solid #d4d4d8;border-radius:6px;background:#fff;width:100%;min-width:0;text-overflow:ellipsis} .cmp select[hidden]{display:none}
 .cmp-info{min-height:14px} .cmp-info code{font:11px ui-monospace,monospace}
 .pin.resolved{background:#a1a1aa;opacity:.75}
 .note-del{border:0;background:none;color:#a1a1aa;cursor:pointer;padding:3px;border-radius:4px;line-height:0} .note-del:hover{color:#e11d48;background:#fff1f2}
@@ -129,13 +135,13 @@ aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px
 #split-menu{position:absolute;right:0;top:calc(100% + 6px);z-index:70;min-width:100%;box-sizing:border-box;display:grid;padding:4px;background:#fff;border:1px solid #e4e4e7;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
 #split-menu[hidden]{display:none}
 #split-menu button{border:0;border-radius:5px;padding:6px 8px;text-align:left;white-space:nowrap;font-size:12px} #split-menu button:hover,#split-menu button:focus-visible{background:#f4f4f5;color:#6d28d9}</style></head><body>
-<aside><div class="rail"><div class="rail-title"><strong>Screenshot audit</strong><span class="rail-tools"><button type="button" id="keys-open" aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button><button type="button" id="review-toggle" aria-pressed="false" aria-label="Notes" title="Notes (R)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></button></span></div><div class="ver"><span id="ver-label">Version</span><div class="vmenu"><button type="button" id="ver-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ver-label ver-btn"><span id="vb-subj"></span><span class="ncount" id="ver-count" title="Notes on this version"></span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><ul id="ver-list" role="listbox" aria-labelledby="ver-label" hidden></ul></div></div>
+<aside><div class="rail"><div class="rail-head"><div class="rail-title"><strong>Screenshot audit</strong><span class="rail-tools"><button type="button" id="keys-open" aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button><button type="button" id="review-toggle" aria-pressed="false" aria-label="Notes" title="Notes (R)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></button></span></div><div class="ver"><span id="ver-label">Version</span><div class="vmenu"><button type="button" id="ver-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ver-label ver-btn"><span id="vb-subj"></span><span class="ncount" id="ver-count" title="Notes on this version"></span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><ul id="ver-list" role="listbox" aria-labelledby="ver-label" hidden></ul></div></div></div>
 <div class="meta"><span id="ver-branch"></span> @ <span id="ver-sha"></span> · <span id="ver-date"></span><br>light · Konami on · <span id="page-total"></span> pages</div>
 <div class="hiddenbar"><span id="hidden-count"></span> <button id="show-all" type="button" hidden>Show all</button></div>
 <h4><a href="#" style="text-decoration:none">Groups</a></h4><div id="tree-groups"></div>
 <h4><a href="#all-head" style="text-decoration:none">All pages</a></h4><div id="tree-all"></div></div>
 <div class="rail-foot">
-<div class="cmp" id="diff-bar"><div class="cmp-head"><label for="cmp-base">Compare to</label><label class="cmp-show" title="Dots in the rail and boxes on the screenshots (C)"><input type="checkbox" id="diff-toggle" checked> Show</label></div><select id="cmp-base" aria-label="Compare to version"></select><div class="cmp-info" id="diff-info"></div></div>
+<div class="cmp" id="diff-bar"><div class="cmp-head"><span class="cmp-title">Comparing to <b id="cmp-name"></b></span><label class="cmp-show" title="Dots in the rail and boxes on the screenshots (C)"><input type="checkbox" id="diff-toggle" checked> Show</label></div><div class="cmp-row"><span class="cmp-ico" id="cmp-ico" aria-hidden="true"></span><span id="cmp-state"></span><button type="button" id="cmp-link"></button></div><select id="cmp-base" aria-label="Compare to version" hidden></select><div class="cmp-info" id="diff-info"></div></div>
 <label class="zoom">Row size <input id="zoom" type="range" min="50" max="300" step="10" value="100"> <output id="zoom-val">100%</output></label>
 <div class="seg" role="group" aria-label="Show"><button type="button" data-view="both">Both</button><button type="button" data-view="mobile">Mobile<small data-w="mobile"></small></button><button type="button" data-view="tablet">Tablet<small data-w="tablet"></small></button><button type="button" data-view="desktop">Desktop<small data-w="desktop"></small></button><button type="button" data-view="all">All</button></div>
 </div>
@@ -626,10 +632,12 @@ function renderVersionMenu() {
   document.getElementById('vb-subj').textContent = vTitle(cur);
   document.getElementById('ver-btn').title = cur.subject + ' (' + VER + ')';
   document.getElementById('ver-count').textContent = count(VER) || '';
+  const partner = flipPartner();
   document.getElementById('ver-list').innerHTML = VERSIONS.slice().reverse().map(v => {
     const c = count(v.sha);
     return '<li role="option" tabindex="-1" data-sha="' + v.sha + '" aria-selected="' + (v.sha === VER) + '">' +
       '<span class="vo-top"><code>' + v.sha + '</code>' + (v.sha === latest ? '<span class="vo-tag">latest</span>' : '') +
+      (partner && (v.sha === VER || v.sha === partner) ? '<span class="vo-flip" title="Flip pair: F switches between ' + VER + ' and ' + partner + '">' + FLIP_ICON + '</span>' : '') +
       '<span class="ncount" title="Notes on this version">' + (c || '') + '</span></span>' +
       '<span class="vo-subj" title="' + esc(v.subject).replace(/"/g, '&quot;') + '">' + esc(vTitle(v)) + '</span><span class="vo-date">' + fmtDate(v.date) + '</span></li>';
   }).join('');
@@ -723,27 +731,49 @@ rvToggle.addEventListener('click', () => setReview(!reviewOn));
 document.getElementById('rv-close').addEventListener('click', () => setReview(false));
 try { if (localStorage.getItem('audit-review') === '1') setReview(true); } catch (e) {}
 
-// Compare to: the version on screen against any other capture. The comparisons are prepared by the script
-// (every ordered pair), so picking a version here only looks one up. The dropdown starts on the version just before.
-let diffOn = true, compareBase = null;
-try { compareBase = localStorage.getItem('audit-compare'); } catch (e) {}
-const diffToggle = document.getElementById('diff-toggle'), cmpSel = document.getElementById('cmp-base');
-const diffEsc = x => String(x).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
-function fillCompare() {
-  const others = VERSIONS.filter(v => v.sha !== VER).reverse();
-  const before = VERSIONS[vIdx(VER) - 1];
-  if (!others.some(v => v.sha === compareBase)) compareBase = before ? before.sha : others[0] && others[0].sha;
-  cmpSel.innerHTML = others.map(v => '<option value="' + v.sha + '">' + v.sha + ' · ' + diffEsc(v.name || v.subject || v.branch || '') + '</option>').join('');
-  cmpSel.disabled = !others.length;
-  if (compareBase) cmpSel.value = compareBase;
+// The flip pair: the version on screen and the one F switches to (the version you came from, else the one before).
+const FLIP_ICON = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3L4 7l4 4"/><path d="M4 7h16"/><path d="M16 21l4-4-4-4"/><path d="M20 17H4"/></svg>';
+function flipPartner() {
+  const n = VERSIONS.length;
+  if (n < 2) return null;
+  if (typeof PREV_VER === 'string' && PREV_VER !== VER && VERSIONS.some(v => v.sha === PREV_VER)) return PREV_VER;
+  return VERSIONS[(vIdx(VER) - 1 + n) % n].sha;
 }
-function activeDiff() { return compareBase && (DATA.diffs || {})[compareBase + '..' + VER]; }
+// Compare to: the version on screen against any other capture. The comparisons are prepared by the script
+// (every ordered pair), so picking a version here only looks one up. "Auto" is the default: it follows the flip pair,
+// the version you came from (F flips back to it), or the version just before when you haven't switched yet.
+let diffOn = true, compareChoice = 'auto', compareBase = null;
+try { compareChoice = localStorage.getItem('audit-compare') || 'auto'; } catch (e) {}
+const diffToggle = document.getElementById('diff-toggle'), cmpSel = document.getElementById('cmp-base');
+const cmpLink = document.getElementById('cmp-link'), cmpIco = document.getElementById('cmp-ico'), cmpState = document.getElementById('cmp-state');
+const diffEsc = x => String(x).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+const LINK_ICON = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
+const UNLINK_ICON = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18.84 12.25 1.72-1.71a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="m5.17 11.75-1.71 1.71a5 5 0 0 0 7.07 7.07l1.71-1.71"/><path d="M8 2v3M2 8h3M16 19v3M19 16h3"/></svg>';
+// Linked ('auto'): follows the flip pair. Pinned (a version's sha): stays on that version whatever is viewed, even the
+// version itself, which then has nothing to compare with.
+function fillCompare() {
+  const auto = flipPartner(), pinned = VERSIONS.some(v => v.sha === compareChoice);
+  compareBase = pinned ? compareChoice : auto;
+  const base = VERSIONS.find(v => v.sha === compareBase);
+  document.getElementById('cmp-name').textContent = base ? vTitle(base) : '';
+  document.getElementById('cmp-name').title = base ? base.sha + (base.subject ? ' · ' + base.subject : '') : '';
+  cmpIco.innerHTML = base ? (pinned ? UNLINK_ICON : LINK_ICON) : '';
+  cmpState.textContent = !base ? '' : pinned ? 'Pinned.' : 'Following the flip pair.';
+  cmpLink.hidden = !base;
+  cmpLink.textContent = pinned ? 'Re-link' : 'Unlink';
+  cmpLink.title = pinned ? 'Go back to following the flip pair' : 'Pin a version to compare against, whatever is on screen';
+  cmpSel.hidden = !pinned;
+  cmpSel.innerHTML = VERSIONS.slice().reverse().map(v => '<option value="' + v.sha + '">' + v.sha + (v.sha === VER ? ' (viewing)' : '') + ' · ' + diffEsc(vTitle(v) || v.branch || '') + '</option>').join('');
+  if (pinned) cmpSel.value = compareBase;
+}
+function activeDiff() { return compareBase && compareBase !== VER && (DATA.diffs || {})[compareBase + '..' + VER]; }
 function renderDiff() {
   shots.forEach(s => s.querySelectorAll('.dmark').forEach(m => m.remove()));
   aside.querySelectorAll('.dchg').forEach(m => m.remove());
   fillCompare();
   const info = document.getElementById('diff-info'), d = activeDiff();
   if (!compareBase) { info.textContent = 'Only one version captured.'; return; }
+  if (compareBase === VER) { info.textContent = 'This is the version you are comparing to.'; return; }
   if (!d) { info.innerHTML = 'Not compared yet. Run <code>screenshot-audit.py --diffs</code>.'; return; }
   const n = new Set(Object.keys(d.pages).map(k => k.split('|')[0])).size;
   info.textContent = n ? n + ' page' + (n === 1 ? '' : 's') + ' changed' : 'No pages changed';
@@ -765,11 +795,13 @@ function renderDiff() {
     });
   });
 }
-cmpSel.addEventListener('change', () => {
-  compareBase = cmpSel.value;
-  try { localStorage.setItem('audit-compare', compareBase); } catch (e) {}
+function setCompareChoice(v) {
+  compareChoice = v;
+  try { localStorage.setItem('audit-compare', compareChoice); } catch (e) {}
   renderDiff();
-});
+}
+cmpSel.addEventListener('change', () => setCompareChoice(cmpSel.value));
+cmpLink.addEventListener('click', () => setCompareChoice(VERSIONS.some(v => v.sha === compareChoice) ? 'auto' : compareBase));
 function setDiff(on) {
   diffOn = on; diffToggle.checked = on;
   document.body.classList.toggle('diff-off', !on);
