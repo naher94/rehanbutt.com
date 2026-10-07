@@ -2,20 +2,21 @@
 """
 Screenshot audit for rehanbutt.com.
 
-Captures every page in the sitemap, full height, at mobile and desktop widths,
+Captures every page in the sitemap, full height, at mobile, tablet and desktop widths,
 and builds a viewer for reviewing them: pages grouped by layout, captures
 switchable by version, and notes pinned onto the screenshots.
 
     python3 _tools/screenshot-audit.py                  # capture HEAD, then the data and the page
     python3 _tools/screenshot-audit.py --only /photography/   # recapture just those paths
     python3 _tools/screenshot-audit.py --no-capture     # rebuild the data and the page only
+    python3 _tools/screenshot-audit.py --sizes tablet   # add just one size to HEAD's capture
     python3 _tools/screenshot-audit.py --workers 1      # one page at a time, if parallel runs get flaky
     python3 _tools/screenshot-audit.py --no-capture --sha 37f13b9 --name "Before Scaffold"   # name a version
     python3 _tools/screenshot-audit.py --diff 3e2102f                         # diff every page against HEAD
     python3 _tools/screenshot-audit.py --diff 3e2102f e2e1364                 # or any two captures
 
 Outputs, all beside this script:
-    screenshots/versions/<sha>/   one folder per capture: desktop/, mobile/, manifest.json
+    screenshots/versions/<sha>/   one folder per capture: desktop/, tablet/, mobile/, manifest.json
     screenshot-audit.json         the dataset
     screenshot-atlas.html         the viewer
     screenshots/diffs/<a>..<b>/   with --diff: changed-region overlays for each page that differs
@@ -29,7 +30,7 @@ One-time setup, as capture needs a browser:
 
 How a page is shot
 ------------------
-Desktop is 1440 wide at 1x; mobile is 390 wide at 2x with touch, so mobile-only
+Desktop is 1440 wide at 1x; tablet is 820 wide and mobile 390 wide, both at 2x with touch, so touch-only
 script behaves as it would on a phone. Each page loads with the Konami easter
 egg already unlocked (it adds elements to every page), Math.random seeded so
 shuffles repeat between captures, and analytics blocked. The page is scrolled
@@ -69,6 +70,9 @@ CHUNK = 4000
 SIZES = {
     "desktop": dict(viewport={"width": 1440, "height": 900}, device_scale_factor=1),
     "mobile": dict(viewport={"width": 390, "height": 844}, device_scale_factor=2,
+                   is_mobile=True, has_touch=True),
+    # iPad Air portrait; sits in the md band (768-1023), where layouts change.
+    "tablet": dict(viewport={"width": 820, "height": 1180}, device_scale_factor=2,
                    is_mobile=True, has_touch=True),
 }
 # Runs before any page script: unlock Konami the way the site remembers it, and
@@ -233,7 +237,7 @@ def _shoot(job):
     return entry
 
 
-def capture(sha, branch, only, workers, name=None):
+def capture(sha, branch, only, workers, name=None, sizes=None):
     try:
         import playwright  # noqa: F401
         import PIL  # noqa: F401
@@ -248,12 +252,12 @@ def capture(sha, branch, only, workers, name=None):
         paths = [p for p in paths if only in p]
     folder = SHOTS / sha
     manifest_path = folder / "manifest.json"
-    # --only updates its pages inside an existing capture instead of replacing it.
+    # --only and --sizes update their share of an existing capture instead of replacing it.
     existing = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
-    previous = existing if only else {}
+    previous = existing if only or sizes else {}
     entries = {(e["slug"], e["size"]): e for e in previous.get("entries", [])}
 
-    jobs = [(size, path) for size in SIZES for path in paths]
+    jobs = [(size, path) for size in (sizes or SIZES) for path in paths]
     workers = max(1, min(workers, len(jobs)))
     started = datetime.now(timezone.utc)
     server, base = serve_site()
@@ -285,7 +289,7 @@ def capture(sha, branch, only, workers, name=None):
     manifest_path.write_text(json.dumps(manifest, indent=1))
     failed = [e for e in manifest["entries"] if e.get("error") or e.get("status") != 200 or not e.get("konami")]
     minutes = (datetime.now(timezone.utc) - started).total_seconds() / 60
-    print(f"\ncaptured {len(paths)} pages × {len(SIZES)} sizes into {folder.relative_to(ROOT)}"
+    print(f"\ncaptured {len(paths)} pages × {len(sizes or SIZES)} sizes into {folder.relative_to(ROOT)}"
           f" in {minutes:.1f} min with {workers} worker{'s' if workers > 1 else ''}")
     if failed:
         print(f"check these: {', '.join(e['size'] + ' ' + e['path'] for e in failed)}")
@@ -381,7 +385,7 @@ def diff_versions(base, head):
         "diff_root": out.relative_to(HERE).as_posix(),
         "names": {s: manifests[s].get("name") for s in manifests},
         "pages": sorted(pages.values(),
-                        key=lambda p: -max(p.get("desktop", {}).get("changed", 0), p.get("mobile", {}).get("changed", 0))),
+                        key=lambda p: -max(p.get(s, {}).get("changed", 0) for s in SIZES)),
         "only_old": sorted({old[k]["path"] for k in old if k not in new}),
         "only_new": sorted({new[k]["path"] for k in new if k not in old}),
     }
@@ -505,6 +509,8 @@ if __name__ == "__main__":
     ap.add_argument("--diff", nargs="+", metavar=("BASE", "HEAD"),
                     help="diff every page between two captures (HEAD defaults to the current commit) and write "
                          "screenshot-diff.html")
+    ap.add_argument("--sizes", help="only capture these sizes, comma separated (e.g. tablet), "
+                                    "adding them to the existing capture")
     ap.add_argument("--site", help="capture this built site folder instead of _site (to shoot an older commit's build)")
     ap.add_argument("--workers", type=int, default=4,
                     help="pages shot at once, each in its own browser (default 4; 1 = one at a time)")
@@ -520,7 +526,10 @@ if __name__ == "__main__":
         sha = args.sha or git("rev-parse", "--short", "HEAD")
         if not args.sha and git("status", "--porcelain", "--untracked-files=no"):
             print(f"note: uncommitted changes are in this capture; it is still labelled {sha}\n")
-        capture(sha, git("rev-parse", "--abbrev-ref", "HEAD"), args.only, args.workers, args.name)
+        sizes = args.sizes.split(",") if args.sizes else None
+        if sizes and any(s not in SIZES for s in sizes):
+            sys.exit(f"--sizes takes {', '.join(SIZES)}")
+        capture(sha, git("rev-parse", "--abbrev-ref", "HEAD"), args.only, args.workers, args.name, sizes)
     elif args.name:
         mf = SHOTS / (args.sha or git("rev-parse", "--short", "HEAD")) / "manifest.json"
         if not mf.exists():

@@ -12,8 +12,12 @@ kbd{font:11px ui-monospace,monospace;border:1px solid #d4d4d8;border-bottom-widt
 #keys{border:0;border-radius:10px;padding:20px 24px;box-shadow:0 20px 60px rgba(0,0,0,.25);font-size:13px;min-width:320px} #keys::backdrop{background:rgba(0,0,0,.3)}
 #keys h3{margin:0 0 12px;font-size:15px} #keys table{border-collapse:collapse;width:100%} #keys td{padding:4px 0} #keys td:first-child{white-space:nowrap;padding-right:16px}
 /* Mobile / desktop view: hiding one side collapses the card to the other side at its current size. */
-.view-mobile main .d,.view-desktop main .m{display:none}
+/* Tablet is hidden unless picked (Tablet or All); the default pair stays mobile + desktop. */
+main .t{display:none} .view-tablet main .t,.view-all main .t{display:block}
+.view-mobile main .d,.view-mobile main .t,.view-desktop main .m,.view-desktop main .t,.view-tablet main .m,.view-tablet main .d{display:none}
 .view-mobile .card{width:calc(var(--card) * .3)} .view-desktop .card{width:calc(var(--card) * .7 - 8px)}
+.view-tablet .card{width:calc(var(--card) * .6)} .view-all .card{width:calc(var(--card) * 1.9)}
+.t{flex:none;width:400px} .duo .t{width:calc(var(--card) * .55)}
 main{margin-left:var(--rail);min-width:0}
 .rail-resize{position:absolute;top:0;bottom:0;right:-4px;width:8px;cursor:col-resize;z-index:2;touch-action:none}
 .rail-resize::after{content:'';position:absolute;top:0;bottom:0;left:3px;width:2px;background:transparent;transition:background .15s}
@@ -99,7 +103,7 @@ aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px
 <div class="notes-actions"><button type="button" id="notes-export" title="Download notes as JSON">Export</button><button type="button" id="notes-import" title="Load notes from a JSON export">Import</button><button type="button" id="notes-md" title="Download notes as a Markdown checklist">Checklist</button></div>
 <input type="file" id="notes-file" accept=".json,application/json" hidden>
 <div class="notes-bar" id="diff-bar" hidden><strong>Changes</strong> <span id="diff-info"></span><label title="Dots in the rail and boxes on the screenshots (D)"><input type="checkbox" id="diff-toggle" checked> Show</label></div>
-<div class="seg" role="group" aria-label="Show"><button type="button" data-view="both">Both</button><button type="button" data-view="mobile">Mobile</button><button type="button" data-view="desktop">Desktop</button></div>
+<div class="seg" role="group" aria-label="Show"><button type="button" data-view="both">Both</button><button type="button" data-view="mobile">Mobile</button><button type="button" data-view="tablet">Tablet</button><button type="button" data-view="desktop">Desktop</button><button type="button" data-view="all">All</button></div>
 <label class="zoom">Row size <input id="zoom" type="range" min="50" max="300" step="10" value="100"> <output id="zoom-val">100%</output></label>
 <button class="keys-hint" type="button" id="keys-open">Keyboard shortcuts <kbd>?</kbd></button>
 </div>
@@ -109,7 +113,7 @@ aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px
 <tr><td><kbd>Shift</kbd> + <kbd>J</kbd> <kbd>K</kbd></td><td>Previous / next section</td></tr>
 <tr><td><kbd>H</kbd></td><td>Hide current page, move to next</td></tr>
 <tr><td><kbd>U</kbd></td><td>Undo last hide</td></tr>
-<tr><td><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd></td><td>Both / mobile / desktop</td></tr>
+<tr><td><kbd>1</kbd>–<kbd>5</kbd></td><td>Both / mobile / tablet / desktop / all</td></tr>
 <tr><td><kbd>-</kbd> <kbd>=</kbd></td><td>Row size smaller / bigger</td></tr>
 <tr><td><kbd>0</kbd></td><td>Row size 100%</td></tr>
 <tr><td><kbd>V</kbd> / <kbd>Shift</kbd> + <kbd>V</kbd></td><td>Next / previous version</td></tr>
@@ -137,12 +141,13 @@ const DATA = __DATA__;
   const shot = (slug, size, cls = '') => '<div class="shot ' + cls + '" data-page="' + slug + '" data-size="' + size + '"><img loading="lazy" src="' + src(size, slug) + '" alt="">' +
     '<a class="expand" href="' + src(size, slug) + '" target="_blank" title="Open full size">' + EXPAND + '</a></div>';
   const card = (slug, i) => '<div class="card" id="g' + i + '-' + slug + '" data-slug="' + slug + '"><div class="cap"><a href="#' + slug + '">' + esc(bySlug[slug].path) + '</a></div><div class="duo">' +
-    shot(slug, 'mobile', 'm') + shot(slug, 'desktop', 'd') + '</div></div>';
+    shot(slug, 'mobile', 'm') + shot(slug, 'tablet', 't') + shot(slug, 'desktop', 'd') + '</div></div>';
   const groups = DATA.groups.map((g, i) => '<section class="group" id="group-' + i + '"><h2><a href="#group-' + i + '">' + esc(g.name) + '</a> <span><span class="gcount">' + g.pages.length +
-    '</span> pages · mobile + desktop</span><span class="ncount" title="Open notes in this group"></span></h2><div class="row">' + g.pages.map(s => card(s, i)).join('') + '</div></section>').join('');
+    '</span> pages · mobile + desktop (tablet on request)</span><span class="ncount" title="Open notes in this group"></span></h2><div class="row">' + g.pages.map(s => card(s, i)).join('') + '</div></section>').join('');
   const h = (slug, size) => (DATA.heights[latest] || {})[slug + '|' + size] ?? '?';
   const pairs = DATA.categories.flatMap(c => c.pages).map(slug => '<section id="' + slug + '" data-slug="' + slug + '"><h2><a href="#' + slug + '">' + esc(bySlug[slug].path) + '</a></h2>' +
     '<div class="pair"><figure class="m"><figcaption>Mobile 390 · <span class="ht" data-k="' + slug + '|mobile">' + h(slug, 'mobile') + '</span>px</figcaption>' + shot(slug, 'mobile') + '</figure>' +
+    '<figure class="t"><figcaption>Tablet 820 · <span class="ht" data-k="' + slug + '|tablet">' + h(slug, 'tablet') + '</span>px</figcaption>' + shot(slug, 'tablet') + '</figure>' +
     '<figure class="d"><figcaption>Desktop 1440 · <span class="ht" data-k="' + slug + '|desktop">' + h(slug, 'desktop') + '</span>px</figcaption>' + shot(slug, 'desktop') + '</figure></div></section>').join('');
   document.querySelector('main').innerHTML = groups + '<h2 id="all-head">All pages</h2>' + pairs;
   // Rail tree. Pages in All pages that aren't in any group row are flagged; a collapsed branch shows the flag too.
@@ -309,6 +314,8 @@ const viewButtons = [...document.querySelectorAll('.seg button')];
 function setView(v) {
   document.body.classList.toggle('view-mobile', v === 'mobile');
   document.body.classList.toggle('view-desktop', v === 'desktop');
+  document.body.classList.toggle('view-tablet', v === 'tablet');
+  document.body.classList.toggle('view-all', v === 'all');
   viewButtons.forEach(b => b.setAttribute('aria-pressed', b.dataset.view === v));
   try { localStorage.setItem('audit-view', v); } catch (e) {}
 }
@@ -352,7 +359,7 @@ addEventListener('keydown', e => {
     go(next);
   }
   else if (k === 'u') { const s = undo.pop(); if (s) { hidden.delete(s); apply(); go(document.querySelector('main [data-slug="' + s + '"]:not([hidden])')); } }
-  else if (k === '1' || k === '2' || k === '3') keepPlace(() => setView(['both', 'mobile', 'desktop'][k - 1]));
+  else if ('12345'.includes(k) && k) keepPlace(() => setView(['both', 'mobile', 'tablet', 'desktop', 'all'][k - 1]));
   else if (k === '-' || k === '_') keepPlace(() => setZoom(+zoom.value - 10));
   else if (k === '=' || k === '+') keepPlace(() => setZoom(+zoom.value + 10));
   else if (k === '0') keepPlace(() => setZoom(100));
@@ -530,7 +537,7 @@ document.getElementById('notes-md').addEventListener('click', () => {
   closeN();
   let md = '# Screenshot audit notes\n\ndevelopment @ ' + VER + ' · exported ' + stamp() + '\n';
   Object.keys(PATHS).forEach(page => {
-    const lines = ['mobile', 'desktop'].flatMap(size => notes
+    const lines = ['mobile', 'tablet', 'desktop'].flatMap(size => notes
       .filter(n => n.page === page && n.size === size && (isOpenOn(n, VER) || n.resolvedIn === VER))
       .map((n, i) => '- [' + (n.resolvedIn === VER ? 'x' : ' ') + '] ' + size + ' #' + (i + 1) + ': ' + n.text.trim().replace(/\n+/g, ' ') + (n.version !== VER ? ' (from ' + n.version + ')' : '')));
     if (lines.length) md += '\n## ' + PATHS[page] + '\n\n' + lines.join('\n') + '\n';
@@ -610,7 +617,7 @@ function renderDiff() {
   document.getElementById('diff-info').textContent = 'vs ' + d.base + ' · ' + n + ' pages';
   // A dot beside each changed page in the rail, and on a branch that has one inside.
   const dot = tip => { const e = document.createElement('span'); e.className = 'dchg'; e.title = tip; return e; };
-  const pct = slug => Math.max(...['mobile', 'desktop'].map(z => (d.pages[slug + '|' + z] || { changed: 0 }).changed));
+  const pct = slug => Math.max(...['mobile', 'tablet', 'desktop'].map(z => (d.pages[slug + '|' + z] || { changed: 0 }).changed));
   items.forEach(a => { const c = pct(idOf(a)); if (c) a.after(dot('Changed since ' + d.base + ': ' + (c * 100).toFixed(1) + '% of the page')); });
   aside.querySelectorAll('details').forEach(det => {
     const k = [...det.querySelectorAll('li a')].filter(a => pct(idOf(a))).length;

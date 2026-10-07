@@ -13,7 +13,7 @@ main{padding:16px 24px 48px;display:grid;gap:16px}
 .badge{font-size:11px;font-weight:600;border-radius:8px;padding:1px 8px;background:#ffe4e6;color:#be123c} .badge.shift{background:#fef3c7;color:#b45309} .badge.dim{background:#f4f4f5;color:#71717a}
 .shots{display:flex;gap:16px;align-items:flex-start;overflow-x:auto}
 .shot{flex:none;cursor:zoom-in;border:1px solid #d4d4d8;background:#f4f4f5;max-height:520px;overflow:hidden;position:relative}
-.shot.m{width:150px} .shot.d{width:520px} .shot img{width:100%;display:block}
+.shot.m{width:150px} .shot.t{width:230px} .shot.d{width:520px} .shot img{width:100%;display:block}
 .shot figcaption{position:absolute;left:0;top:0;background:rgba(255,255,255,.92);font-size:11px;padding:1px 6px;border-bottom-right-radius:6px}
 .empty{padding:40px;text-align:center;color:#666}
 .note{font-size:12px;color:#666;margin:0 24px 8px}
@@ -37,7 +37,7 @@ details{margin:0 24px;font-size:12px;color:#52525b}
 </style></head><body>
 <header><h1>Screenshot diff</h1><span class="sub"><code id="base"></code> → <code id="head"></code> · <span id="summary"></span></span>
 <label>Hide below <input id="min" type="range" min="0" max="20" step="0.5" value="0"><output id="min-val">0%</output></label>
-<div class="seg" id="sizes" role="group" aria-label="Show"><button type="button" data-v="both" aria-pressed="true">Both</button><button type="button" data-v="mobile">Mobile</button><button type="button" data-v="desktop">Desktop</button></div></header>
+<div class="seg" id="sizes" role="group" aria-label="Show"><button type="button" data-v="both" aria-pressed="true">Both</button><button type="button" data-v="mobile">Mobile</button><button type="button" data-v="tablet">Tablet</button><button type="button" data-v="desktop">Desktop</button></div></header>
 <div id="extras"></div>
 <main id="list"></main>
 <div id="cmp"><div id="bar"><strong id="cmp-title"></strong>
@@ -55,9 +55,9 @@ const over = (size, slug) => DATA.diff_root + '/' + size + '/' + slug + '.jpg';
 const pct = r => r.changed >= 0.1 ? Math.round(r.changed * 100) + '%' : (r.changed * 100).toFixed(1) + '%';
 let view = 'both', min = 0;
 function render() {
-  const sizes = view === 'both' ? ['mobile', 'desktop'] : [view];
+  const sizes = view === 'both' ? ['mobile', 'tablet', 'desktop'] : [view];
   const shown = DATA.pages.filter(p => sizes.some(s => p[s] && p[s].changed > 0 && p[s].changed * 100 >= min));
-  const total = DATA.pages.filter(p => ['mobile', 'desktop'].some(s => p[s] && p[s].changed > 0)).length;
+  const total = DATA.pages.filter(p => ['mobile', 'tablet', 'desktop'].some(s => p[s] && p[s].changed > 0)).length;
   $('summary').textContent = total + ' of ' + DATA.pages.length + ' pages changed' + (shown.length < total ? ' · showing ' + shown.length : '');
   $('list').innerHTML = shown.length ? shown.map(p => {
     const badges = sizes.filter(s => p[s] && p[s].changed > 0).map(s => {
@@ -86,7 +86,7 @@ function open(slug, size) {
   $('cmp-title').textContent = p.path + ' · ' + size;
   const { o, n } = flickEls();
   o.src = orig(DATA.base, size, slug); n.src = orig(DATA.head, size, slug);
-  const stage = $('stage'); stage.style.width = (size === 'mobile' ? 390 : 1100) + 'px';
+  const stage = $('stage'); stage.style.width = ({ mobile: 390, tablet: 820, desktop: 1100 }[size]) + 'px';
   stage.querySelectorAll('.mark').forEach(m => m.remove());
   n.onload = () => {
     const scale = n.clientWidth / n.naturalWidth;
