@@ -523,6 +523,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 .photography-container{
   .photo-row{
     margin-top: 1em;
+    padding-inline: 2rem;
     // Room for the tilted tiles, which otherwise reach the screen edge.
     @include scaffold.breakpoint(md, down){
       padding-inline: 0.5rem;
