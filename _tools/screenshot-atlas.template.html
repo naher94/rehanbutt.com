@@ -27,15 +27,17 @@ body.review-open #review{display:flex} body.review-open main{margin-left:calc(va
 #review .rv-x{border:0;background:none;cursor:pointer;color:#71717a;padding:2px 6px;border-radius:4px;font-size:16px;line-height:1} #review .rv-x:hover{background:#e4e4e7;color:#18181b}
 /* minmax(0, 1fr): the column stays the rail's width instead of growing to fit a long word. */
 #rv-list{flex:1;overflow-x:hidden;overflow-y:auto;padding:8px 8px 16px;display:grid;grid-template-columns:minmax(0,1fr);gap:8px;align-content:start}
-.rv-item{display:flex;flex-direction:column;gap:6px;min-width:0;box-sizing:border-box;background:#fff;border:1px solid #e4e4e7;border-radius:8px;padding:8px;cursor:pointer}
+.rv-item{position:relative;display:flex;flex-direction:column;gap:6px;min-width:0;box-sizing:border-box;background:#fff;border:1px solid #e4e4e7;border-radius:8px;padding:8px;cursor:pointer}
 .rv-item:hover{border-color:#6d28d9} .rv-item.done .rv-meta,.rv-item.done .rv-text,.rv-item.done .rv-thumb{opacity:.55} .rv-item.done .rv-text{text-decoration:line-through}
-.rv-meta{display:flex;gap:6px;align-items:baseline;font-size:11px;color:#666;min-width:0} .rv-meta b{font-weight:600;color:#be123c} .rv-meta span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rv-meta em{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#a1a1aa}
+.rv-meta{display:flex;gap:6px;align-items:baseline;font-size:11px;color:#666;min-width:0;padding-right:26px} .rv-meta b{font-weight:600;color:#be123c} .rv-meta span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rv-text{margin:0;color:#18181b;line-height:18px;overflow-wrap:anywhere}
 .rv-thumb{position:relative;height:84px;border-radius:5px;border:1px solid #e4e4e7;background-color:#f4f4f5;background-repeat:no-repeat;overflow:hidden}
+.rv-badge{position:absolute;left:6px;bottom:6px;font-size:10px;line-height:14px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:#71717a;background:rgba(255,255,255,.85);border-radius:4px;padding:0 5px;z-index:1}
+.rv-thumb.nocrop::after{display:none}
 .rv-thumb::after{content:'';position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;border:2px solid #fff;background:rgba(225,29,72,.85);box-shadow:0 1px 3px rgba(0,0,0,.4)}
-.rv-resolve{font:inherit;font-size:11px;line-height:1;font-weight:600;height:20px;width:100%;border-radius:3px;border:1px solid #6d28d9;background:#6d28d9;color:#fff;cursor:pointer;padding:0} .rv-resolve:hover{background:#5b21b6;border-color:#5b21b6}
-.rv-item.done .rv-resolve{background:#fff;color:#6d28d9} .rv-item.done .rv-resolve:hover{background:#ede9fe}
+.rv-resolve{position:absolute;top:8px;right:8px;display:flex;align-items:center;justify-content:center;width:20px;height:20px;padding:0;border-radius:3px;border:1px solid #6d28d9;background:#fff;color:#6d28d9;cursor:pointer;opacity:0;transition:opacity .12s}
+.rv-item:hover .rv-resolve,.rv-resolve:focus-visible,.rv-item.done .rv-resolve{opacity:1} .rv-resolve:hover{background:#ede9fe} .rv-resolve:focus-visible{outline:2px solid #6d28d9;outline-offset:2px}
+.rv-item.done .rv-resolve{background:rgba(109,40,217,.1)}
 .rv-empty{padding:16px 12px;color:#888;font-size:12px}
 /* Review toggle sits at the right of the rail's title row. */
 .rail-head{position:sticky;top:-16px;z-index:3;margin:-16px -12px 8px;padding:16px 12px 6px;background:#fff;border-bottom:1px solid #e4e4e7}
@@ -695,16 +697,17 @@ function renderReview() {
   const open = list.filter(n => !isResolvedOn(n, VER)).length;
   document.getElementById('rv-count').textContent = open || '';
   if (!reviewOn) return;
+  const CHECK_ICON = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
   rvList.innerHTML = list.length ? list.map(n => {
     const done = isResolvedOn(n, VER), w = DATA.sizes[n.size], h = (HEIGHTS[VER] || {})[n.page + '|' + n.size];
     const bgW = { mobile: 390, tablet: 520, desktop: 1000 }[n.size], bgH = h ? bgW * h / w : 0;
     const crop = bgH ? 'background-image:url(' + DATA.image_root + '/' + VER + '/' + n.size + '/' + n.page + '.png);background-size:' + bgW + 'px ' + bgH + 'px;' +
       'background-position:calc(50% + ' + (bgW / 2 - n.x * bgW) + 'px) calc(50% + ' + (bgH / 2 - n.y * bgH) + 'px)' : '';
     return '<div class="rv-item' + (done ? ' done' : '') + '" data-id="' + n.id + '">' +
-      '<div class="rv-meta"><b>' + noteNum(n) + '</b><span>' + rvEsc(PATHS[n.page]) + '</span><em>' + n.size + '</em></div>' +
+      '<div class="rv-meta"><b>' + noteNum(n) + '</b><span>' + rvEsc(PATHS[n.page]) + '</span></div>' +
       '<p class="rv-text">' + rvEsc(n.text.trim()) + '</p>' +
-      (crop ? '<div class="rv-thumb" style="' + crop + '"></div>' : '') +
-      '<button type="button" class="rv-resolve" title="' + (done ? 'Resolved in ' + rvEsc(n.resolvedIn) : 'Resolve on ' + VER) + '">' + (done ? 'Reopen' : 'Mark as Resolved') + '</button></div>';
+      '<div class="rv-thumb' + (crop ? '' : ' nocrop') + '" style="' + crop + '"><span class="rv-badge">' + n.size + '</span></div>' +
+      '<button type="button" class="rv-resolve" aria-label="' + (done ? 'Reopen' : 'Mark as resolved') + '" title="' + (done ? 'Resolved in ' + rvEsc(n.resolvedIn) + '. Reopen it.' : 'Mark as resolved on ' + VER) + '">' + CHECK_ICON + '</button></div>';
   }).join('') : '<div class="rv-empty">No notes on this version yet. Click a screenshot to add one.</div>';
 }
 rvList.addEventListener('click', e => {
