@@ -18,45 +18,41 @@ hero-accent-color-dark: {{hero-accent-color-dark}}
 </style>
 
 <div class="hero hero-photography">
-  <div class="grid-container grid-x hero-image">
-    <div class="cell">
-      <img src="/img/photography/{{ page.hero-image }}" alt="{{ page.hero-image-alt }}">
-    </div>
+  <div class="hero-image scaffold-container">
+    <img src="/img/photography/{{ page.hero-image }}" alt="{{ page.hero-image-alt }}">
   </div>
 </div>
 
-<div class="grid-container">
-  <div class="grid-x">
-    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+<div class="scaffold-container">
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-      <header class="post-header post-header-hero">
-        <p class="date-stamp">
-          {% if page.display-date %}
-              {{page.display-date}}
-            {% else %}
-              {% assign photo-month = page.date| date: "%m" | plus:0 %}
-              {% if photo-month >= 3 and photo-month < 6 %}
-                Spring
-              {% elsif photo-month >= 6 and photo-month < 9 %}
-                Summer
-              {% elsif photo-month >= 9 and photo-month < 12 %}
-                Fall
-              {% elsif photo-month >= 12 %}
-                Winter
-              {% elsif photo-month < 3 %}
-                Winter
-              {% endif %}
-              {{ page.date| date: "%Y" }}
+    <header class="post-header post-header-hero">
+      <p class="date-stamp">
+        {% if page.display-date %}
+            {{page.display-date}}
+          {% else %}
+            {% assign photo-month = page.date| date: "%m" | plus:0 %}
+            {% if photo-month >= 3 and photo-month < 6 %}
+              Spring
+            {% elsif photo-month >= 6 and photo-month < 9 %}
+              Summer
+            {% elsif photo-month >= 9 and photo-month < 12 %}
+              Fall
+            {% elsif photo-month >= 12 %}
+              Winter
+            {% elsif photo-month < 3 %}
+              Winter
             {% endif %}
-        </p>
-        <h1 itemprop="name headline">{{ page.title }}</h1>
-        <p class="post-meta">{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
-      </header>
+            {{ page.date| date: "%Y" }}
+          {% endif %}
+      </p>
+      <h1 itemprop="name headline">{{ page.title }}</h1>
+      <p class="post-meta">{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
+    </header>
 
-      <div class="post-content" itemprop="articleBody">
-        {{ content }}
-      </div>
+    <div class="post-content" itemprop="articleBody">
+      {{ content }}
+    </div>
 
-    </article>
-  </div>
+  </article>
 </div>

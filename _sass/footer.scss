@@ -1,3 +1,5 @@
+@use 'scaffold/mixins' as scaffold;
+
 //******* Footer Styling
 footer{
   margin-top: 2rem;
@@ -6,12 +8,11 @@ footer{
   padding-bottom: 2rem;
   .footer-content{
     padding-top: 2rem;
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       padding-left: 2rem;
       padding-right: 2rem;
     }
     .nav-section{
-      margin-inline-end: 3rem;
       .section-title{
         @include type-style(product, footer-title);
         padding: 0;
@@ -22,7 +23,7 @@ footer{
     .metadata{
       @include type-style(product, meta);
       margin-top: 2rem;
-      @include breakpoint(small only){
+      @include scaffold.breakpoint(md, down){
         text-align: right;
       }
       div{
@@ -30,7 +31,7 @@ footer{
       }
       a{
         color: inherit;
-        @include breakpoint (small only){
+        @include scaffold.breakpoint(md, down){
           order: 2;
         }
         &:hover{
@@ -44,12 +45,10 @@ footer{
         }
       }
       .ship-it{
-        margin-left: 0.5rem;
         visibility: hidden;
         display: inline;
-        @include breakpoint (small only){
+        @include scaffold.breakpoint(md, down){
           order: 1;
-          margin-right: 0.5rem;
         }
       }
       p{
@@ -59,14 +58,14 @@ footer{
       .happy-copyright{
         p{
           display: inline;
-          @include breakpoint(small only){
+          @include scaffold.breakpoint(md, down){
             display: block;
           }
         }
         .middle-dot{
           margin-left: 0.5em;
           margin-right: 0.5em;
-          @include breakpoint(small only){
+          @include scaffold.breakpoint(md, down){
             display: none;
           }
         }
@@ -74,27 +73,22 @@ footer{
     }
   }
   .site-pages{
+    // Spaces the nav sections both ways, whichever side they align to.
+    --scaffold-gap: 3rem;
     padding-left: 0;
     padding-right: 0;
-    @include breakpoint(medium down){
+    @include scaffold.breakpoint(lg, down){
       text-align: right;
       justify-content: flex-end;
       margin-bottom: 3rem;
-      .nav-section{
-        margin-inline-start: 3rem;
-        margin-inline-end: 0rem;
-      }
       .nav-wrap{
         margin-right: -1rem;
       }
     }
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       font-size: 1.5em;
-      .nav-section{
-        margin-block-end: 2rem;
-        .nav-wrap{
-          margin-bottom: 0;
-        }
+      .nav-section .nav-wrap{
+        margin-bottom: 0;
       }
     }
     .nav-wrap{
@@ -122,7 +116,7 @@ footer{
         }
       }
     }
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       .social-sub-1{
         margin-top: 1rem;
         margin-bottom: -1rem;
@@ -134,8 +128,7 @@ footer{
       }
     }
   }
-  @include breakpoint(small only) {
-    margin-top: 0.5em;
+  @include scaffold.breakpoint(md, down) {
     padding-bottom: 4rem;
   }
 }
@@ -145,7 +138,7 @@ footer{
   padding-right: 0.5em;
   font-size: 2em;
   color: inherit;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     font-size: 3em;
     padding-left: 0.25rem;
     padding-right: 0.25rem;
@@ -181,11 +174,11 @@ footer{
   }
   &.email-wrapper{
     position: relative;
-    display: inline;
+    display: inline-block;
     cursor: pointer;
     // Lato's text height, so the button's box matches the inline div it replaced.
     line-height: 1.2;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       padding-right: 0;
     }
     // The old div was a space (0.386em here) wider; the offsets add it back.
@@ -195,7 +188,7 @@ footer{
       left: calc(-20% - 0.077em);
       right: unset;
       font-weight: $lato-bold;
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         left: unset;
         right: calc(-50% - 0.579em);
       }

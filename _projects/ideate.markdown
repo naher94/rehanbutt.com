@@ -6,8 +6,8 @@ thumbnail: "ideate"
 date:   2016-03-01
 tags: digital branding
 ---
-<div class="grid-x align-center">
-  <div class="image-container cell small-8 large-6"><img src="../img/ideate/logo.svg" alt="Final Logo" class="image-center" style="margin-bottom: 4rem;"/></div>
+<div class="scaffold-grid">
+  <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half centered-column-half"><img src="../img/ideate/logo.svg" alt="Final Logo" class="image-center" style="margin-bottom: 4rem;"/></div>
 </div>
 
 <div class="slideshow-container" style="margin-bottom:50px">

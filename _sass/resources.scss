@@ -1,18 +1,9 @@
+@use 'scaffold/mixins' as scaffold;
+
 .resource-header{
-  h1{
-    @include breakpoint(small only) {
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
-    }
-    @include breakpoint(medium down) {
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
-    }
-  }
   p{
     @include type-style(product, resources-intro);
     padding: 0;
-    margin: 0.5em;
   }
 }
 
@@ -23,21 +14,31 @@
     display: inline;
     font-weight: $zilla-bold;
     flex-wrap: wrap;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       line-height: normal;
       padding-left: 0;
       padding-right: 0;
     }
   }
 }
+// The tag groups' rhythm, so the first one below sits as far off as the rest.
 .featured-collections{
-  @include breakpoint(small only) {
-    margin-bottom: 2rem;
+  margin-block: 4rem;
+  @include scaffold.breakpoint(md, down) {
+    margin-block: 2rem;
   }
 }
 
 .resources-collection{
+  // More air between the tile and the list beside it; rows keep Scaffold's gap.
+  // From md only: below it they stack, and twelve wide gaps outgrow a phone.
+  @include scaffold.breakpoint(md) {
+    --scaffold-col-gap: var(--scaffold-gap-lg);
+  }
   .tile{
+    // One column: the content fills the card. Twelve would leave the gaps
+    // wider than a narrow card and push the content off its edge.
+    --scaffold-cols: minmax(0, 1fr);
     border-radius: $tile-radius-big;
     padding: 1.5em;
     color: semantic-color(text);
@@ -46,7 +47,7 @@
     transition: $sprint;
     position: relative;
     overflow: hidden;
-    @include breakpoint(medium up) {
+    @include scaffold.breakpoint(md) {
       position: sticky;
       top: 1em;
     }
@@ -55,7 +56,7 @@
       margin: 0;
     }
     .text-container{
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         font-size: 1.25em;
       }
       .title{
@@ -87,7 +88,7 @@
       // icons and the bar's padding are in em and resolve against it.
       font-weight: $lato-bold;
       font-size: 0.8em;
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         font-size: 1.2em;
       }
       .count-label{
@@ -142,7 +143,7 @@
         a{
           @include link-expand;
         }
-        @include breakpoint(small only) {
+        @include scaffold.breakpoint(md, down) {
           padding-left: 0;
           padding-right: 0;
         }
@@ -174,7 +175,7 @@
     transition: $sprint;
     position: relative;
     overflow: hidden;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       font-size: 1.5em;
     }
     p{
@@ -202,30 +203,25 @@
   }
 }
 
-h1{
-  &.resource-collections{
-    @include breakpoint(small only) {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-  }
-}
-
 .tag-section{
   margin-bottom: 4rem;
-  margin-top: 2rem;
+  @include scaffold.breakpoint(md, down) {
+    margin-bottom: 2rem;
+  }
   h2{
     font-size: 2.5em;
   }
   .tags-container{
+    // Same spacing as the about page's skill pills: Scaffold's small step down,
+    // tighter across. Scaffold's flex has no column-only gap.
+    --scaffold-gap: var(--scaffold-gap-sm);
+    column-gap: 0.25rem;
     .tag{
       @include type-style(product, control);
       padding: .5rem 1rem;
-      margin-bottom: 0.25rem;
       background-color: semantic-color(actionable-pill);
       color: $pure-white;
       border-radius: $pill-radius;
-      display: inline-block;
       &:hover{
         background-color: semantic-color(actionable-pill-hover);
       }
@@ -244,8 +240,18 @@ h1{
 }
 
 .tag-group{
+  // Heading and divider: on a phone the divider wraps under the heading,
+  // so the row closes up to Scaffold's small gap.
+  div:has(> .divider){
+    @include scaffold.breakpoint(md, down){
+      --scaffold-gap: var(--scaffold-gap-sm);
+      h2{
+        margin-bottom: 0;
+      }
+    }
+  }
   margin-bottom: 6rem;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     margin-bottom: 3rem;
   }
   .section-header{
@@ -260,7 +266,7 @@ h1{
     color: semantic-color(text);
     display: inline;
     flex-wrap: wrap;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       padding-left: 0;
       padding-right: 0;
     }
@@ -270,9 +276,14 @@ h1{
     border-radius: $pill-radius;
     content: '';
     height: 0.35rem;
-    margin-left: 1rem;
-    @include breakpoint(small only) {
-      margin-left: 0;
+    // Its own line below md; beside the heading, filling the rest, above.
+    flex-basis: 100%;
+    @include scaffold.breakpoint(md) {
+      flex: 1;
+    }
+    // Matches the about and speaking dividers on a phone.
+    @include scaffold.breakpoint(md, down) {
+      height: 0.3rem;
     }
   }
 }
@@ -288,14 +299,12 @@ h1{
 }
 
 .inline-collection-tile{
-  .small-2half{
-    width: 20%;
-  }
   img{
+    width: 20%;
     border-radius: $tile-radius;
   }
   .text-content{
-    margin-inline-start: 0.5em;
+    flex: 1;
   }
   p{
     padding: 0;
@@ -312,7 +321,6 @@ h1{
 }
 
 .resource-link{
-  margin-bottom: 1em;
   color: inherit;
   &:hover{
     color: inherit;

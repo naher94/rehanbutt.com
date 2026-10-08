@@ -13,10 +13,10 @@ With this project, I wanted to explore how imagery could contribute to the inspi
 
 I decided to build 2 game modes sandbox and relation. Sandbox is a rapid-fire mode where a image is presented at random and your goal is to guess a tag associated to the image as fast as possible. This game mode is also endless. Relation’s objective is for the user to see if they can identify the connection between 2 images again based on the creators tags.
 
-<div class="responsive-embed widescreen">
+<div class="video-embed">
   <iframe width="100%" src="https://www.youtube.com/embed/aIOqotPks-8" frameborder="0" allowfullscreen title="Tag Association Product Intro"></iframe>
 </div>
 
 <div class="image-container"><img src="../img/tagAssociation/gameModes.png" alt="GameModes"/></div>
 <div class="image-container"><img src="../img/tagAssociation/sandboxMode.png" alt="Sandbox Mode"/></div>
-<div class="image-container"><img src="../img/tagAssociation/sandboxAnimated.gif" alt="Sandbox Mode Animation" class="image-center"/></div>
+<div class="image-container">{% include loop-video.html src="../img/tagAssociation/sandboxAnimated.mp4" title="Sandbox Mode Animation" natural=true css-class="image-center" %}</div>

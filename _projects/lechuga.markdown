@@ -25,19 +25,19 @@ tags: web
 <div class="image-container"><img src="../img/lechuga/inspiration1.png" alt="Mobile Food Ordering Inspiration"/></div>
 <div class="image-container"><img src="../img/lechuga/inspiration2.png" alt="Mobile Food Ordering Inspiration"/></div>
 
-<div class="grid-x grid-padding-x grid-margin-y">
-  <div class="medium-4 cell"><img src="../img/lechuga/tileheart.gif" alt="Interaction Prototype"/></div>
-  <div class="medium-4 cell"><img src="../img/lechuga/tileexpand.gif" alt="Interaction Prototype"/></div>
-  <div class="medium-4 cell"><img src="../img/lechuga/tilegreen.gif" alt="Interaction Prototype"/></div>
+<div class="scaffold-grid">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-third">{% include loop-video.html src="../img/lechuga/tileheart.mp4" title="Interaction Prototype" natural=true %}</div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-third">{% include loop-video.html src="../img/lechuga/tileexpand.mp4" title="Interaction Prototype" natural=true %}</div>
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-third">{% include loop-video.html src="../img/lechuga/tilegreen.mp4" title="Interaction Prototype" natural=true %}</div>
 </div>
 <div class="image-container"><img src="../img/lechuga/framerplay.png" alt="Framer Coding"/></div>
 <div class="image-container"><img src="../img/lechuga/framerdesign.png" alt="Framer Design"/></div>
 
-<div class="grid-x grid-padding-x grid-margin-y">
-  <div class="small-6 medium-3 cell"><img src="../img/lechuga/reorderscroll.gif" alt="Interaction Prototype"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/lechuga/itemselect.gif" alt="Interaction Prototype"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/lechuga/addtobag.gif" alt="Interaction Prototype"/></div>
-  <div class="small-6 medium-3 cell"><img src="../img/lechuga/mangoexpand.gif" alt="Interaction Prototype"/></div>
+<div class="scaffold-grid">
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/lechuga/reorderscroll.mp4" title="Interaction Prototype" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/lechuga/itemselect.mp4" title="Interaction Prototype" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/lechuga/addtobag.mp4" title="Interaction Prototype" natural=true %}</div>
+  <div class="scaffold-grid-span-half md:scaffold-grid-span-quarter">{% include loop-video.html src="../img/lechuga/mangoexpand.mp4" title="Interaction Prototype" natural=true %}</div>
 </div>
 
 <div class="image-container"><img src="../img/lechuga/orderpayiterations.png" alt="Order & Pay Card Iterations"/></div>

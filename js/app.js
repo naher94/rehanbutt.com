@@ -49,22 +49,22 @@ function setBTS(){
   // Create our stylesheet
   var elements = document.getElementsByClassName("behind-the-scenes-container");
   for (var i = 0; i < elements.length; i++) {
-    elements[i].classList.add("force-flex");
+    elements[i].classList.add("is-shown");
   }
 
   var eggBanner = document.getElementById("egg-banner");
-  eggBanner.classList.add("force-flex");
+  eggBanner.classList.add("is-shown");
 }
 
 function unsetBTS(){
   //This function should remove or update the above CSS of display to NONE
   var elements = document.getElementsByClassName("behind-the-scenes-container");
   for (var i = 0; i < elements.length; i++) {
-    elements[i].classList.remove("force-flex");
+    elements[i].classList.remove("is-shown");
   }
 
   var eggBanner = document.getElementById("egg-banner");
-  eggBanner.classList.remove("force-flex");
+  eggBanner.classList.remove("is-shown");
 
   isEggVisable = false;
   localStorage.setItem("eggKey", isEggVisable);

@@ -1,3 +1,5 @@
+@use 'scaffold/mixins' as scaffold;
+
 // Home page styles, extracted from css/rehan.scss.
 // Every selector here appears on index.html and nowhere else. The entry
 // stylesheet imports this exactly where the block used to sit, so the
@@ -11,7 +13,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 
 @mixin home-section-base {
   margin-bottom: $home-section-vertical-spacing;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     margin-bottom: $home-section-vertical-spacing-mobile;
   }
 }
@@ -20,7 +22,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 .site-intro{
   margin-bottom: 8rem;
   margin-top: 3rem;
-  @include breakpoint(small only){
+  @include scaffold.breakpoint(md, down){
     margin-top: 1rem;
     margin-bottom: 5rem;
   }
@@ -40,9 +42,17 @@ $home-section-vertical-spacing-mobile: 4rem;
     }
     a{
       color: inherit;
+      // The global `p a:visited:hover` (link-expand) is more specific than
+      // `color: inherit` and turned visited links white on hover.
+      &:visited,
+      &:hover,
+      &:visited:hover,
+      &:focus{
+        color: inherit;
+      }
       text-decoration: underline dotted 4px;
       text-decoration-color: rgba($navy-black, 0.5); //TODO update with semantic-color
-      @include breakpoint(small only){
+      @include scaffold.breakpoint(md, down){
         text-decoration: underline dotted 2px;
         text-decoration-color: rgba($navy-black, 0.5); //TODO update with semantic-color
       }
@@ -58,7 +68,7 @@ $home-section-vertical-spacing-mobile: 4rem;
     position: relative;
     text-decoration: underline dotted 4px;
     text-decoration-color: rgba($navy-black, 0.5); //TODO update with semantic-color
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       text-decoration: underline dotted 2px;
       text-decoration-color: rgba($navy-black, 0.5); //TODO update with semantic-color
     }
@@ -114,7 +124,7 @@ $home-section-vertical-spacing-mobile: 4rem;
     transition: $sprint;
     &#upmc, &#config-fig{
       border-radius: 7px;
-      @include breakpoint(small only){
+      @include scaffold.breakpoint(md, down){
         border-radius: 5px;
       }
     }
@@ -164,7 +174,7 @@ $home-section-vertical-spacing-mobile: 4rem;
         rotate: -3deg;
         border-radius: 6px;
         box-shadow: $diffuse-shadow semantic-color(shadow-soft);
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           border-radius: 4px;
         }
       }
@@ -241,15 +251,14 @@ $home-section-vertical-spacing-mobile: 4rem;
 // --- Home Page Section Header (shared) ---
 .home-section-header{
   margin-bottom: 3rem;
-  @include breakpoint(small only){
-    margin-bottom: 2rem;
+  @include scaffold.breakpoint(md, down){
+    margin-bottom: 1rem;
+    // Scaffold's small step: the heading sits closer to its description on a phone.
+    --scaffold-gap: var(--scaffold-gap-sm);
   }
   h2{
     @include type-style(product, section-title-lg);
     margin-bottom: 0;
-    @include breakpoint(small only){
-      margin-bottom: 0.25em;
-    }
   }
 }
 
@@ -287,7 +296,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 .speaking-container{
   // TODO remove the bottom spacing for the header section
   .home-section-header{
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       justify-content: center;
     }
   }
@@ -315,7 +324,6 @@ $home-section-vertical-spacing-mobile: 4rem;
     &:first-child{
       background-color: semantic-color(button-fill);
       color: semantic-color(text-inverted);
-      margin-right: 0.5em;
       &:hover{
         background-color: semantic-color(speaking-button-primary-fill-hover);
         border-color: semantic-color(speaking-button-primary-border-hover);
@@ -323,20 +331,31 @@ $home-section-vertical-spacing-mobile: 4rem;
     }
     &.email-wrapper{
       position: relative;
-      display: inline;
+      display: inline-block;
       cursor: pointer;
       .copied{
         font-size: 1em;
         left: 20%;
         right: unset;
         font-weight: $lato-bold;
-        @include breakpoint(small only) {
+        @include scaffold.breakpoint(md, down) {
           left: 40%;
         }
       }
     }
   }
   .image-section{
+    // Room for the tilted tiles, which otherwise reach the screen edge.
+    @include scaffold.breakpoint(md, down){
+      padding-inline: 0.5rem;
+      // One centered stack: the headshot over the Disney card, which tucks up under it.
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      > div{
+        justify-content: center;
+      }
+    }
     .speaking-image-container{
       background-color: $pure-white;
       border-radius: $tile-radius-medium;
@@ -345,17 +364,18 @@ $home-section-vertical-spacing-mobile: 4rem;
       padding-bottom: 0.5rem;
       margin-bottom: 1rem;
       &.config-headshot{
-        width: 16rem;
+        // Never wider than the column: at tablet widths it is narrower than 20rem.
+        width: min(16rem, 100%);
         rotate: -6deg;
         position: relative;
         z-index: 2;
         margin-block-start: -9rem;
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           margin-block-start: 2rem;
         }
       }
       &.config-disney-history{
-        width: 20rem;
+        width: min(20rem, 100%);
         rotate: 5deg;
         margin-block-start: -4rem;
       }
@@ -455,12 +475,16 @@ $home-section-vertical-spacing-mobile: 4rem;
 
 // --- Projects Section ---
 .featured-projects{
-  .feature-item{
-    margin-bottom: 3rem;
-    @include breakpoint(small only){
-      margin-bottom: 2rem;
+  // Rows of cards spaced by their grid's gap; columns keep Scaffold's.
+  .feature-grid{
+    --scaffold-row-gap: 3rem;
+    @include scaffold.breakpoint(md, down){
+      --scaffold-row-gap: 2rem;
     }
-    &:nth-child(even){
+  }
+  .feature-item{
+    // The first card, now that the header isn't a sibling.
+    &:nth-child(odd){
       .image-wrapper{
         .thumbnail-container-featured{
           &:hover{
@@ -470,7 +494,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       }
     }
     .text-wrapper{
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         margin-top: 1rem;
       }
     }
@@ -496,7 +520,7 @@ $home-section-vertical-spacing-mobile: 4rem;
         margin-bottom: 0;
         text-wrap: pretty;
         margin-block-end: 0.25em;
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           padding-left: 0;
           padding-right: 0;
         }
@@ -515,6 +539,11 @@ $home-section-vertical-spacing-mobile: 4rem;
 .photography-container{
   .photo-row{
     margin-top: 1em;
+    padding-inline: 2rem;
+    // Room for the tilted tiles, which otherwise reach the screen edge.
+    @include scaffold.breakpoint(md, down){
+      padding-inline: 0.5rem;
+    }
   }
   .photo-wrapper{
     &:has(.photo-tile:hover){
@@ -524,13 +553,13 @@ $home-section-vertical-spacing-mobile: 4rem;
       scale: 1.1;
       transition: $run;
       margin-bottom: 3em;
-      @include breakpoint(small only){
+      @include scaffold.breakpoint(md, down){
         scale: 1;
         margin-bottom: 0;
       }
       &:hover{
         scale: 1.2;
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           scale: 1.05;
         }
         margin-bottom: 0;
@@ -569,7 +598,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       .photo-tile{
         rotate: -5deg;
         margin-top: 3em;
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           margin-top: 0;
         }
         &:hover{
@@ -581,7 +610,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       .photo-tile{
         rotate: 5deg;
         margin-bottom: 3em;
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           margin-bottom: 0;
         }
         &:hover{
@@ -594,7 +623,7 @@ $home-section-vertical-spacing-mobile: 4rem;
 
 // --- Year in Review Section ---
 .year-in-review-container{
-  @include breakpoint(small only){
+  @include scaffold.breakpoint(md, down){
     padding-bottom: 2rem;
   }
   .year-container{
@@ -603,7 +632,6 @@ $home-section-vertical-spacing-mobile: 4rem;
     box-shadow: $recessed-shadow semantic-color(shadow);
     padding: 0.5em;
     padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
     transition: $tight-spring;
     &:hover{
       transform: rotate(4deg) scale(1.05);
@@ -652,12 +680,12 @@ $home-section-vertical-spacing-mobile: 4rem;
         top: 7%;
         margin: auto;
         left: -7%;
-        @include breakpoint(medium only){
+        @include scaffold.breakpoint(md) { @include scaffold.breakpoint(lg, down){
           font-size: 7rem;
           top: 4%;
           left: -12%;
-        }
-        @include breakpoint(small only){
+        }}
+        @include scaffold.breakpoint(md, down){
           font-size: 4.5rem;
           top: 8%;
           left: -7%;
@@ -678,7 +706,7 @@ $home-section-vertical-spacing-mobile: 4rem;
       padding-top: 0.25rem;
       color: semantic-color(text-on-light-bg-always);
       // Bigger only where the year squares have the room.
-      @include breakpoint(large up){
+      @include scaffold.breakpoint(lg){
         font-size: 2rem;
       }
     }
@@ -698,13 +726,12 @@ $home-section-vertical-spacing-mobile: 4rem;
     background-color: rgba($navy-black, 0.1);
     margin-top: 2rem;
     margin-bottom: 3rem;
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       margin-top: 1rem;
       margin-bottom: 1.5rem;
     }
   }
   .resource-link{
-    margin-bottom: 1rem;
     // The same pair the resources page renders, through the same two entries.
     .title{
       @include type-style(product, body-strong);

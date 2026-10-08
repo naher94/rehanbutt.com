@@ -1,22 +1,24 @@
+@use 'scaffold/mixins' as scaffold;
+
 //******* About Page Styling
 .about-intro{
   position: relative;
   overflow-x: hidden;
   margin-top: 2rem;
   .about-bio{
-    @include breakpoint(medium down){
+    @include scaffold.breakpoint(lg, down){
       display: flex;
       flex-flow: row wrap;
     }
   }
   .bio-wrapper{
-    @include breakpoint(medium down){
+    @include scaffold.breakpoint(lg, down){
       order: 2;
     }
     .bio {
       margin-top: 6rem;
       margin-bottom: 3rem;
-      @include breakpoint(medium down){
+      @include scaffold.breakpoint(lg, down){
         order: 3;
         margin-top: 2rem;
       }
@@ -78,7 +80,7 @@
               }
             }
           }
-          @include breakpoint(small only) {
+          @include scaffold.breakpoint(md, down) {
             margin-left: 0.25rem;
           }
           li{
@@ -135,12 +137,12 @@
       img{
         border-radius: $tile-radius;
       }
-      @include breakpoint(medium down){
+      @include scaffold.breakpoint(lg, down){
         margin-top: -20rem;
         z-index: 4;
         order: 1;
       }
-      @include breakpoint(small only){
+      @include scaffold.breakpoint(md, down){
         margin-top: -10rem;
         z-index: 4;
       }
@@ -151,7 +153,7 @@
     img{
       border-radius: $tile-radius;
     }
-    @include breakpoint(large){
+    @include scaffold.breakpoint(lg){
       right: -5rem;
       top: 0;
       z-index: -1;
@@ -162,7 +164,7 @@
     @media screen and (min-width: 100em){
       left: 50vw;
     }
-    @include breakpoint(medium down){
+    @include scaffold.breakpoint(lg, down){
       position: relative;
       flex: 0 0 auto;
       min-height: 0px;
@@ -171,20 +173,30 @@
       z-index: 1;
       order: 1;
     }
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       margin-left: 5rem;
     }
-    @include breakpoint(medium only){
+    @include scaffold.breakpoint(md) { @include scaffold.breakpoint(lg, down){
       margin-left: 8rem;
-    }
+    }}
   }
 }
 
 .work-experience, .education, .skills, .tools{
+  // Heading and divider: on a phone the divider wraps under the heading,
+  // so the row closes up to Scaffold's small gap.
+  div:has(> .divider){
+    @include scaffold.breakpoint(md, down){
+      --scaffold-gap: var(--scaffold-gap-sm);
+      h2{
+        margin-bottom: 0;
+      }
+    }
+  }
   margin-top: 4em;
   h2{
     @include type-style(product, section-title-lg);
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       padding: 0;
     }
   }
@@ -193,9 +205,12 @@
     border-radius: $pill-radius;
     content: '';
     height: 0.5rem;
-    margin-left: 1rem;
-    @include breakpoint(small only) {
-      margin-left: 0;
+    // Its own line below md; beside the heading, filling the rest, above.
+    flex-basis: 100%;
+    @include scaffold.breakpoint(md) {
+      flex: 1;
+    }
+    @include scaffold.breakpoint(md, down) {
       height: 0.3rem;
     }
   }
@@ -212,10 +227,6 @@
 
   .work-item, .education-item{
     margin-top: 1rem;
-    padding-left: 0.5rem;
-    @include breakpoint(small only) {
-      padding-left: 0;
-    }
     p{
       padding: 0;
       margin: 0;
@@ -342,7 +353,7 @@
       // Phones stay at 3 up whatever the width; above that the column count is
       // derived from a target poster width, so more films reflow on their own.
       grid-template-columns: repeat(3, 1fr);
-      @include breakpoint(medium up) {
+      @include scaffold.breakpoint(md) {
         grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
         max-width: 44rem;
       }
@@ -485,7 +496,7 @@
         // overflow. Not at small: the row already sits 2px off the edge there,
         // so the bleed reads as the fill running off the screen.
         // ⬇︎ TUNE ME: how far the highlight reaches past the role
-        @include breakpoint(medium up) {
+        @include scaffold.breakpoint(md) {
           box-shadow: -0.25em 0 0 semantic-color(work-role-row-hover-bg);
         }
       }
@@ -539,34 +550,42 @@
 }
 
 .skills-container{
+  // Scaffold's small step. TODO: use scaffold-gap-sm in the markup once Scaffold
+  // emits its gap classes after .scaffold-flex; today .scaffold-flex overrides them.
+  --scaffold-gap: var(--scaffold-gap-sm);
+  // Tighter across than down. Scaffold's flex has no column-only gap.
+  column-gap: 0.25rem;
   margin-bottom: 1em;
 }
 
 .skills, .tools{
+  // The subtitle sits in the heading row. Above md it wraps under the heading
+  // and tucks up to it; below md the divider moves after it.
   h3{
+    flex-basis: 100%;
     font-family: $lato;
     font-size: 1em;
     font-weight: $lato-black;
     padding: 0;
-    margin-top: -1.5rem;
+    // Its old -1.5rem tuck, less the row gap it now sits under.
+    margin-top: calc(-1.5rem - var(--scaffold-gap));
     margin-bottom: 1rem;
-    @include breakpoint(small only){
-      margin-top: -2rem;
+    @include scaffold.breakpoint(md, down){
+      margin-top: 0;
+      margin-bottom: 0;
     }
   }
   .divider{
-    @include breakpoint(small only){
-      margin-top: 1rem;
+    @include scaffold.breakpoint(md, down){
+      order: 1;
+      margin-bottom: 1rem;
     }
   }
   .skills-item{
-    display: inline-block;
     background-color: semantic-color(informational-pill);
     border-radius: $pill-radius;
     color: $pure-white;
     padding: 0.2em 0.6em 0.2em 0.6em;
-    margin-right: 0.1em;
-    margin-bottom: 0.4em;
   }
 }
 
@@ -605,3 +624,10 @@ span.wave {
   100% { transform: rotate(  0.0deg) }
 }
 //******* End of About Page Styling
+
+// The right two-thirds from lg. Scaffold has no offsets, so the start line is set here.
+.about-details{
+  @include scaffold.breakpoint(lg) {
+    grid-column: 5 / -1;
+  }
+}

@@ -1,0 +1,902 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Screenshot Atlas</title><style>
+body{font:14px/1.4 system-ui;margin:0;background:#f4f4f5;color:#18181b}
+/* Above the main area's sticky headers, so menus opening out of the rail aren't painted over. */
+:root{--rail:260px}
+aside{position:fixed;z-index:30;top:0;left:0;bottom:0;width:var(--rail);display:flex;flex-direction:column;background:#fff;border-right:1px solid #ddd;box-sizing:border-box;font-size:13px}
+.rail{flex:1;overflow-y:auto;padding:16px 12px} .rail-foot{flex:none;border-top:1px solid #e4e4e7;padding:12px 12px 14px;display:grid;gap:10px}
+.seg{display:flex;border:1px solid #d4d4d8;border-radius:6px;overflow:hidden} .seg button{flex:1;font:inherit;font-size:12px;border:0;background:#fff;padding:5px 0;cursor:pointer;color:#3f3f46}
+.seg button+button{border-left:1px solid #d4d4d8} .seg button small{display:block;font-size:10px;line-height:1.2;opacity:.65;font-variant-numeric:tabular-nums} .seg button small:empty{display:none} .seg button[aria-pressed=true]{background:#6d28d9;color:#fff}
+kbd{font:11px ui-monospace,monospace;border:1px solid #d4d4d8;border-bottom-width:2px;border-radius:4px;padding:1px 5px;background:#fafafa;color:#3f3f46}
+#keys{border:0;border-radius:10px;padding:20px 24px;box-shadow:0 20px 60px rgba(0,0,0,.25);font-size:13px;min-width:320px} #keys::backdrop{background:rgba(0,0,0,.3)}
+#keys h3{margin:0 0 12px;font-size:15px} #keys table{border-collapse:collapse;width:100%} #keys td{padding:4px 0} #keys td:first-child{white-space:nowrap;padding-right:16px}
+/* Mobile / desktop view: hiding one side collapses the card to the other side at its current size. */
+/* Tablet shows only when picked (Tablet or All). */
+main .t{display:none} .view-tablet main .t,.view-all main .t{display:block}
+.view-mobile main .d,.view-mobile main .t,.view-desktop main .m,.view-desktop main .t,.view-tablet main .m,.view-tablet main .d{display:none}
+.view-mobile .card{width:calc(var(--card) * .3)} .view-desktop .card{width:calc(var(--card) * .7 - 8px)}
+.view-tablet .card{width:calc(var(--card) * .6)} .view-all .card{width:calc(var(--card) * 1.9)}
+.t{flex:none;width:400px} .duo .t{width:calc(var(--card) * .55)}
+main{margin-left:var(--rail);min-width:0}
+/* Review rail: the notes as a list, beside the left rail. Opens and closes; main makes room. */
+:root{--rail2:300px}
+#review{display:none;position:fixed;z-index:29;top:0;bottom:0;left:var(--rail);width:var(--rail2);flex-direction:column;background:#fafafa;border-right:1px solid #ddd;box-sizing:border-box;font-size:13px}
+body.review-open #review{display:flex} body.review-open main{margin-left:calc(var(--rail) + var(--rail2))}
+#review header{flex:none;display:flex;align-items:center;gap:8px;padding:12px 12px 8px} #review header strong{flex:1} /* The rule under the header block makes it plain the list scrolls beneath it. */
+#review .rv-tools{flex:none;display:flex;align-items:center;gap:10px;padding:0 12px 10px;font-size:11px;color:#666;border-bottom:1px solid #d4d4d8} #review .rv-tools label{display:flex;align-items:center;gap:4px;cursor:pointer;white-space:nowrap} #review .rv-tools .split{flex:1;min-width:84px}
+#review .rv-x{border:0;background:none;cursor:pointer;color:#71717a;padding:2px 6px;border-radius:4px;font-size:16px;line-height:1} #review .rv-x:hover{background:#e4e4e7;color:#18181b}
+/* minmax(0, 1fr): the column stays the rail's width instead of growing to fit a long word. */
+#rv-list{flex:1;overflow-x:hidden;overflow-y:auto;padding:8px 8px 16px;display:grid;grid-template-columns:minmax(0,1fr);gap:8px;align-content:start}
+.rv-item{position:relative;display:flex;flex-direction:column;gap:6px;min-width:0;box-sizing:border-box;background:#fff;border:1px solid #e4e4e7;border-radius:8px;padding:8px;cursor:pointer}
+.rv-item:hover{border-color:#6d28d9} .rv-item.done .rv-meta,.rv-item.done .rv-text,.rv-item.done .rv-thumb{opacity:.55} .rv-item.done .rv-text{text-decoration:line-through}
+.rv-meta{display:flex;gap:6px;align-items:baseline;font-size:11px;color:#666;min-width:0;padding-right:26px} .rv-meta b{font-weight:600;color:#be123c} .rv-meta span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rv-text{margin:0;color:#18181b;line-height:18px;overflow-wrap:anywhere}
+.rv-thumb{position:relative;height:84px;border-radius:5px;border:1px solid #e4e4e7;background-color:#f4f4f5;background-repeat:no-repeat;overflow:hidden}
+.rv-badge{position:absolute;left:6px;bottom:6px;font-size:10px;line-height:14px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:#71717a;background:rgba(255,255,255,.85);border-radius:4px;padding:0 5px;z-index:1}
+.rv-thumb.nocrop::after{display:none}
+.rv-thumb::after{content:'';position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;border:2px solid #fff;background:rgba(225,29,72,.85);box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.rv-resolve{position:absolute;top:8px;right:8px;display:flex;align-items:center;justify-content:center;width:20px;height:20px;padding:0;border-radius:3px;border:1px solid #6d28d9;background:#fff;color:#6d28d9;cursor:pointer;opacity:0;transition:opacity .12s}
+.rv-item:hover .rv-resolve,.rv-resolve:focus-visible,.rv-item.done .rv-resolve{opacity:1} .rv-resolve:hover{background:#ede9fe} .rv-resolve:focus-visible{outline:2px solid #6d28d9;outline-offset:2px}
+.rv-item.done .rv-resolve{background:rgba(109,40,217,.1)}
+.rv-empty{padding:16px 12px;color:#888;font-size:12px}
+/* Review toggle sits at the right of the rail's title row. */
+.rail-head{position:sticky;top:-16px;z-index:3;margin:-16px -12px 8px;padding:16px 12px 6px;background:#fff;border-bottom:1px solid #e4e4e7}
+.rail-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:-2px 0 0}
+/* Same quiet grey as the review panel's close button; the pressed state is a darker fill, not an accent. */
+.rail-tools{display:flex;align-items:center;gap:2px}
+#keys-open,#review-toggle{display:inline-flex;align-items:center;gap:5px;font:inherit;font-size:11px;font-weight:600;line-height:1;border:0;border-radius:4px;background:none;padding:4px 6px;cursor:pointer;color:#71717a} #keys-open svg,#review-toggle svg{flex:none;display:block}
+#keys-open:hover,#keys-open:focus-visible,#review-toggle:hover,#review-toggle:focus-visible,#review-toggle[aria-pressed=true]{background:#e4e4e7;color:#18181b}
+.rail-resize{position:absolute;top:0;bottom:0;right:-4px;width:8px;cursor:col-resize;z-index:2;touch-action:none}
+.rail-resize::after{content:'';position:absolute;top:0;bottom:0;left:3px;width:2px;background:transparent;transition:background .15s}
+.rail-resize:hover::after,.rail-resize:focus-visible::after,.resizing .rail-resize::after{background:#6d28d9} .rail-resize:focus{outline:none}
+.resizing,.resizing *{cursor:col-resize !important;user-select:none}
+aside .meta{font-size:11px;color:#666;margin:2px 0 14px} aside h4{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#888;margin:16px 4px 6px}
+aside summary{cursor:pointer;padding:3px 4px;border-radius:4px;font-weight:600} aside summary span{font-weight:400;color:#999;font-size:11px}
+aside ul{list-style:none;margin:0 0 4px;padding:0 0 0 14px;border-left:1px solid #e4e4e7;margin-left:9px}
+aside li a{display:block;padding:2px 6px;border-radius:4px;text-decoration:none;color:#3f3f46;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+aside summary a{text-decoration:none}
+aside li{display:flex;align-items:center} aside li a{flex:1;min-width:0}
+aside summary{display:flex;align-items:center;gap:4px} aside summary::before{content:'▸';width:10px;font-size:10px;color:#888} aside details[open]>summary::before{content:'▾'}
+aside summary::-webkit-details-marker{display:none} aside summary{list-style:none} aside summary{padding-right:0} aside summary .eye{margin-left:-4px}
+/* Section headers: the title and its page count stay left; the flag, change dot and note badge sit at the right edge, in line with the page rows below. */
+aside summary .bcount{order:1;margin-right:auto} aside summary .ungrouped{order:2} aside summary .dchg{order:3} aside summary .ncount{order:4} aside summary .eye{order:5}
+.eye{flex:none;border:0;background:none;padding:2px 4px;border-radius:4px;color:#a1a1aa;cursor:pointer;line-height:0;opacity:0}
+aside li:hover .eye,aside summary:hover .eye,.off>.eye,.eye:focus-visible{opacity:1} .eye:hover{color:#18181b;background:#e4e4e7}
+aside .off>a,aside summary.off{color:#a1a1aa;text-decoration:line-through} aside summary.some>.eye{opacity:1}
+.hiddenbar{font-size:11px;color:#666;min-height:16px;margin:-8px 0 8px} .zoom{display:flex;align-items:center;gap:6px;font-size:11px;color:#666} .zoom input{flex:1;min-width:0;accent-color:#6d28d9} .zoom output{width:34px;text-align:right;font-variant-numeric:tabular-nums}
+#show-all{font:inherit;border:0;background:none;color:#6d28d9;cursor:pointer;padding:0;text-decoration:underline}
+aside a:hover,aside summary:hover{background:#f4f4f5} aside a.active{background:#ede9fe;color:#6d28d9} aside summary.active{color:#6d28d9}
+section{padding:0 24px 16px;border-top:1px solid #ddd} h2{font-size:15px;margin:0 0 8px}
+/* Section titles stick to the top of the main area while their section is in view. */
+section>h2{position:sticky;top:0;z-index:5;background:#f4f4f5;margin:0 -24px 8px;padding:12px 24px 8px;border-bottom:1px solid transparent}
+section>h2.stuck{border-bottom-color:#d4d4d8}
+.pair{display:flex;gap:24px;align-items:flex-start} figure{margin:0} figcaption{font-size:12px;color:#666;margin-bottom:4px}
+.m{width:260px;flex:none} .d{flex:1;max-width:900px} img{width:100%;display:block;border:1px solid #ccc;background:#fff}
+a{color:inherit}
+.group h2 span{font-weight:400;color:#666;font-size:12px}
+.row{display:flex;gap:28px;align-items:flex-start;overflow-x:auto;margin:0 -24px;padding:0 24px 12px}
+/* Rows bleed to both edges of the main column; the side padding is the gap at either end of the scroll. */
+:root{--card:430px} .card{flex:none;width:var(--card);scroll-margin:56px 24px 0} .card:target .duo{outline:2px solid #6d28d9;outline-offset:4px}
+.cap{font-size:12px;color:#666;margin-bottom:4px;display:flex;align-items:center;gap:4px}
+.cap a{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0} section[data-slug] h2{display:flex;align-items:center;gap:6px}
+.card:hover .cap .eye,section[data-slug]:hover h2 .eye{opacity:1}
+.duo{display:flex;gap:8px;align-items:flex-start} .duo .m{flex:none;width:calc(var(--card) * .3)} .duo .d{flex:1}
+#all-head{padding:16px 24px;margin:0;border-top:1px solid #ddd}
+/* minmax(0, 1fr) and min-width: 0 let the button shrink to the rail instead of growing to fit its text. */
+.ver{display:grid;grid-template-columns:minmax(0,1fr);gap:3px;margin:10px 0 6px;font-size:11px;color:#666} .vmenu{position:relative;min-width:0}
+#ver-btn{width:100%;box-sizing:border-box;min-width:0;display:flex;align-items:center;gap:6px;font:inherit;font-size:12px;color:#18181b;background:#fff;border:1px solid #d4d4d8;border-radius:6px;padding:5px 8px;cursor:pointer;text-align:left}
+#ver-btn:hover,#ver-btn[aria-expanded=true]{border-color:#6d28d9} #ver-btn svg{flex:none;color:#888}
+#vb-latest{flex:none} #vb-latest[hidden]{display:none} #vb-subj{flex:1 1 0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vmenu code{font:600 11px ui-monospace,monospace;color:#18181b}
+/* Fixed, so the open list isn't clipped by the rail's scroll area and can be wider than it. */
+#ver-list{position:fixed;z-index:60;width:320px;box-sizing:border-box;overflow-y:auto;list-style:none;margin:0;padding:4px;background:#fff;border:1px solid #e4e4e7;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+#ver-list li{display:grid;gap:1px;padding:7px 8px;border-radius:6px;cursor:pointer;outline:none} #ver-list li:hover,#ver-list li:focus{background:#f4f4f5}
+#ver-list li[aria-selected=true]{background:#ede9fe} #ver-list li[aria-selected=true] code{color:#6d28d9}
+.vo-flip{flex:none;display:inline-flex;align-items:center;color:#6d28d9} .vo-top .vo-flip{margin-left:auto} .vo-top .vo-flip + .ncount{margin-left:0}
+.vo-top{display:flex;align-items:center;gap:6px} .vo-top .ncount{margin-left:auto} .vo-tag{font-size:10px;font-weight:600;color:#6d28d9;background:#ede9fe;border-radius:8px;padding:0 6px}
+.vo-subj{font-size:12px;color:#3f3f46;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .vo-date{font-size:11px;color:#a1a1aa} .ver select{font:inherit;font-size:12px;color:#18181b;padding:4px 6px;border:1px solid #d4d4d8;border-radius:6px;background:#fff;width:100%}
+.shot.missing{min-height:120px;background:repeating-linear-gradient(45deg,#fafafa 0 8px,#f4f4f5 8px 16px);border:1px dashed #d4d4d8} .shot.missing img{display:none}
+.shot.missing::after{content:'Not in this version';position:absolute;inset:0;display:grid;place-items:center;font-size:11px;color:#888}
+/* Notes */
+.shot{position:relative;cursor:crosshair} .pins-off .shot{cursor:default}
+.expand{position:absolute;top:6px;right:6px;z-index:3;opacity:0;background:rgba(255,255,255,.95);border-radius:6px;padding:5px;line-height:0;color:#18181b;box-shadow:0 1px 3px rgba(0,0,0,.25);cursor:pointer}
+.shot:hover .expand,.expand:focus-visible{opacity:1} .expand:hover{background:#fff;color:#6d28d9}
+.pin{position:absolute;z-index:2;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;border:2px solid #fff;padding:0;background:#e11d48;color:#fff;font:600 10px/16px system-ui;box-shadow:0 1px 4px rgba(0,0,0,.45);cursor:pointer}
+.pin{font-size:9px;letter-spacing:-.02em} .pin:hover{transform:translate(-50%,-50%) scale(1.15)} .pin.open{background:#9f1239;transform:translate(-50%,-50%) scale(1.25)} .pins-off .pin{display:none}
+#ver-toast{position:fixed;top:16px;left:50%;z-index:60;transform:translate(-50%,-8px);opacity:0;pointer-events:none;background:#111;color:#fff;border-radius:999px;padding:8px 16px;font:600 14px/1.2 system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.3);transition:opacity .15s,transform .15s;white-space:nowrap}
+#ver-toast.show{opacity:1;transform:translate(-50%,0)}
+#ver-toast span{font-weight:400;opacity:.7;margin-left:8px}
+#note-pop{position:fixed;z-index:50;width:260px;background:#fff;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.25);padding:10px;box-sizing:border-box}
+#note-pop .note-head{display:flex;align-items:center;gap:6px;font-size:11px;color:#666;margin-bottom:6px} #note-pop .note-title{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#note-pop textarea{width:100%;box-sizing:border-box;min-height:84px;resize:vertical;font:13px/1.4 system-ui;border:1px solid #d4d4d8;border-radius:6px;padding:6px 8px;outline-color:#6d28d9}
+#note-pop .note-foot{font-size:10px;color:#a1a1aa;margin-top:4px}
+.note-resolve{display:flex;align-items:center;gap:3px;font:inherit;font-size:11px;font-weight:600;border:1px solid #d4d4d8;border-radius:5px;background:#fff;color:#3f3f46;padding:2px 7px 2px 5px;cursor:pointer}
+.note-resolve:hover{border-color:#16a34a;color:#16a34a} .note-resolve.on{background:#f0fdf4;border-color:#86efac;color:#15803d}
+/* Diff overlay: the rows that changed since the base capture, boxed on the newer one. */
+.dmark{position:absolute;left:0;right:0;z-index:1;pointer-events:none;background:rgba(249,115,22,.16);border-top:2px solid rgba(249,115,22,.85);border-bottom:2px solid rgba(249,115,22,.85);box-sizing:border-box;min-height:4px} .diff-off .dmark,.diff-off .dchg{display:none}
+.dchg{flex:none;width:7px;height:7px;border-radius:50%;background:#f97316;margin:0 4px}
+/* Compare to: always in the rail. Linked, it follows the flip pair; unlinked, it is pinned to one version whatever is on screen. */
+.cmp{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;font-size:11px;color:#666} .cmp-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cmp-title{min-width:0;display:flex;align-items:center;gap:5px;white-space:nowrap;font-size:12px} .cmp-pre{flex:none} .cmp-title b{min-width:0;font-weight:600;color:#18181b;overflow:hidden;text-overflow:ellipsis}
+.cmp-badge{flex:none;font-size:11px;line-height:16px;font-weight:600;border-radius:8px;padding:0 7px;background:#ffedd5;color:#c2410c} .cmp-badge.none{background:#f4f4f5;color:#71717a} .cmp-badge[hidden]{display:none} .cmp-title b{font-weight:600;color:#18181b}
+.cmp-show{flex:none;display:flex;align-items:center;gap:6px;cursor:pointer} .cmp-show kbd{border:0;border-radius:4px;background:#f2f2f2;padding:2px 5px;font-size:11px;line-height:15px}
+.cmp-show input{appearance:none;-webkit-appearance:none;position:relative;flex:none;width:28px;height:16px;margin:0;border-radius:8px;background:#d4d4d8;cursor:pointer;transition:background .15s} .cmp-show input:checked{background:#6d28d9}
+.cmp-show input::after{content:'';position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#fff;transition:transform .15s} .cmp-show input:checked::after{transform:translateX(12px)}
+.cmp-show input:focus-visible{outline:2px solid #6d28d9;outline-offset:2px}
+.cmp-row{display:flex;align-items:center;gap:5px;color:#71717a} .cmp-ico{display:inline-flex;flex:none} .cmp-ico:empty{display:none}
+#cmp-link{font:inherit;font-size:11px;font-weight:600;border:0;background:none;padding:0;cursor:pointer;color:#6d28d9;margin-left:2px} #cmp-link:hover{text-decoration:underline}
+.cmp select{font:inherit;font-size:12px;color:#18181b;padding:4px 6px;border:1px solid #d4d4d8;border-radius:6px;background:#fff;width:100%;min-width:0;text-overflow:ellipsis} .cmp select[hidden]{display:none}
+.cmp-info{min-height:14px} .cmp-info code{font:11px ui-monospace,monospace}
+.pin.resolved{background:#a1a1aa;opacity:.75}
+.note-del{border:0;background:none;color:#a1a1aa;cursor:pointer;padding:3px;border-radius:4px;line-height:0} .note-del:hover{color:#e11d48;background:#fff1f2}
+aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px;margin-left:8px;vertical-align:2px}
+.ungrouped{flex:none;display:inline-flex;color:#d97706;margin-left:4px;line-height:0} aside details[open]>summary .ungrouped{display:none}
+.ncount{flex:none;font-size:10px;font-weight:600;background:#ffe4e6;color:#be123c;border-radius:8px;padding:0 6px;margin-left:4px} .ncount:empty{display:none}
+.notes-bar{display:flex;align-items:center;gap:8px;font-size:11px;color:#666} .notes-bar label{display:flex;align-items:center;gap:4px;cursor:pointer} .notes-bar label:first-of-type{margin-left:auto}
+/* Split button: Export is the action, the caret opens Import and Checklist. The menu opens downward from the Notes panel's tools row. */
+.split{position:relative;display:flex}
+.split button{font:inherit;font-size:11px;border:1px solid #d4d4d8;background:#fff;padding:4px 0;cursor:pointer;color:#3f3f46}
+.split button:hover,.split button:focus-visible,.split #split-more[aria-expanded=true]{border-color:#6d28d9;color:#6d28d9;position:relative;z-index:1}
+#notes-export{flex:1;border-radius:6px 0 0 6px} #split-more{flex:none;width:30px;border-left:0;border-radius:0 6px 6px 0;display:grid;place-items:center;padding:0}
+#split-menu{position:absolute;right:0;top:calc(100% + 6px);z-index:70;min-width:100%;box-sizing:border-box;display:grid;padding:4px;background:#fff;border:1px solid #e4e4e7;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+#split-menu[hidden]{display:none}
+#split-menu button{border:0;border-radius:5px;padding:6px 8px;text-align:left;white-space:nowrap;font-size:12px} #split-menu button:hover,#split-menu button:focus-visible{background:#f4f4f5;color:#6d28d9}</style></head><body>
+<aside><div class="rail"><div class="rail-head"><div class="rail-title"><strong>Screenshot audit</strong><span class="rail-tools"><button type="button" id="keys-open" aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button><button type="button" id="review-toggle" aria-pressed="false" aria-label="Notes" title="Notes (R)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></button></span></div><div class="ver"><span id="ver-label">Version</span><div class="vmenu"><button type="button" id="ver-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ver-label ver-btn"><span id="vb-subj"></span><span class="vo-tag" id="vb-latest" hidden>latest</span><span class="ncount" id="ver-count" title="Notes on this version"></span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><ul id="ver-list" role="listbox" aria-labelledby="ver-label" hidden></ul></div></div></div>
+<div class="meta"><span id="ver-branch"></span> @ <span id="ver-sha"></span> · <span id="ver-date"></span><br>light · Konami on · <span id="page-total"></span> pages</div>
+<div class="hiddenbar"><span id="hidden-count"></span> <button id="show-all" type="button" hidden>Show all</button></div>
+<h4><a href="#" style="text-decoration:none">Groups</a></h4><div id="tree-groups"></div>
+<h4><a href="#all-head" style="text-decoration:none">All pages</a></h4><div id="tree-all"></div></div>
+<div class="rail-foot">
+<div class="cmp" id="diff-bar"><div class="cmp-head"><span class="cmp-title"><span class="cmp-pre">Comparing to</span><b id="cmp-name"></b><span class="cmp-badge" id="cmp-badge" hidden></span></span><label class="cmp-show" title="Show changes: dots in the rail and boxes on the screenshots (C)"><kbd>C</kbd><input type="checkbox" id="diff-toggle" aria-label="Show changes" checked></label></div><div class="cmp-row"><span class="cmp-ico" id="cmp-ico" aria-hidden="true"></span><span id="cmp-state"></span><button type="button" id="cmp-link"></button></div><select id="cmp-base" aria-label="Compare to version" hidden></select><div class="cmp-info" id="diff-info"></div></div>
+<label class="zoom">Row size <input id="zoom" type="range" min="50" max="300" step="10" value="100"> <output id="zoom-val">100%</output></label>
+<div class="seg" role="group" aria-label="Show"><button type="button" data-view="mobile">Mobile<small data-w="mobile"></small></button><button type="button" data-view="tablet">Tablet<small data-w="tablet"></small></button><button type="button" data-view="desktop">Desktop<small data-w="desktop"></small></button><button type="button" data-view="all">All</button></div>
+</div>
+<div class="rail-resize" role="separator" aria-orientation="vertical" aria-label="Resize sidebar" aria-valuemin="200" aria-valuemax="520" tabindex="0" title="Drag to resize · double-click to reset"></div></aside>
+<div id="review" role="complementary" aria-label="Notes"><header><strong>Notes<span class="ncount" id="rv-count" title="Open notes on this version"></span></strong><button type="button" class="rv-x" id="rv-close" title="Close (R)" aria-label="Close notes">×</button></header>
+<div class="rv-tools"><label><input type="checkbox" id="pins-toggle" checked> Pins</label><label title="Show resolved notes, faded"><input type="checkbox" id="resolved-toggle"> Resolved</label><div class="split"><button type="button" id="notes-export" title="Download notes as JSON">Export</button><button type="button" id="split-more" aria-haspopup="menu" aria-expanded="false" aria-controls="split-menu" aria-label="More note actions" title="Import, Checklist"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+<div id="split-menu" role="menu" aria-label="More note actions" hidden><button type="button" role="menuitem" id="notes-import" title="Load notes from a JSON export">Import notes…</button><button type="button" role="menuitem" id="notes-md" title="Download notes as a Markdown checklist">Download checklist</button></div></div><input type="file" id="notes-file" accept=".json,application/json" hidden></div>
+<div id="rv-list"></div></div>
+<dialog id="keys"><h3>Keyboard shortcuts</h3><table>
+<tr><td><kbd>J</kbd> <kbd>K</kbd></td><td>Previous / next page</td></tr>
+<tr><td><kbd>Shift</kbd> + <kbd>J</kbd> <kbd>K</kbd></td><td>Previous / next section</td></tr>
+<tr><td><kbd>H</kbd></td><td>Hide current page, move to next</td></tr>
+<tr><td><kbd>U</kbd></td><td>Undo last hide</td></tr>
+<tr><td><kbd>1</kbd>–<kbd>4</kbd></td><td>Mobile / tablet / desktop / all</td></tr>
+<tr><td><kbd>-</kbd> <kbd>=</kbd></td><td>Row size smaller / bigger</td></tr>
+<tr><td><kbd>0</kbd></td><td>Row size 100%</td></tr>
+<tr><td><kbd>V</kbd> / <kbd>Shift</kbd> + <kbd>V</kbd></td><td>Next / previous version</td></tr>
+<tr><td><kbd>F</kbd></td><td>Flip back to the last version viewed</td></tr>
+<tr><td><kbd>N</kbd></td><td>Show / hide note pins</td></tr>
+<tr><td><kbd>R</kbd></td><td>Open / close the notes panel</td></tr>
+<tr><td><kbd>C</kbd></td><td>Show / hide changes (against the Compare to version)</td></tr>
+<tr><td>Click a screenshot</td><td>Drop a note</td></tr>
+<tr><td><kbd>?</kbd></td><td>Show this list</td></tr>
+</table></dialog>
+<div id="ver-toast" role="status" aria-live="polite"></div>
+<div id="note-pop" hidden><div class="note-head"><span class="note-title"></span><button type="button" class="note-resolve"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Resolve</span></button><button type="button" class="note-del" title="Delete note"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button></div>
+<textarea placeholder="Type a note…"></textarea><div class="note-foot">Esc or click away to close</div></div>
+<main></main>
+<script>
+const DATA = __DATA__;
+// Render: group rows, the per-page pairs and the rail tree, all from DATA. Everything below works on this DOM.
+(() => {
+  const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+  const latest = DATA.versions[DATA.versions.length - 1].sha;
+  const bySlug = Object.fromEntries(DATA.pages.map(p => [p.slug, p]));
+  const EXPAND = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>';
+  const UNGROUPED = '<span class="ungrouped" title="Not in any group"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"><rect x="3" y="3" width="18" height="18" rx="4"/></svg></span>';
+  const src = (size, slug) => DATA.image_root + '/' + latest + '/' + size + '/' + slug + '.png';
+  // A screenshot you can drop notes on; the corner icon opens the full-size PNG.
+  const shot = (slug, size, cls = '') => '<div class="shot ' + cls + '" data-page="' + slug + '" data-size="' + size + '"><img loading="lazy" src="' + src(size, slug) + '" alt="">' +
+    '<a class="expand" href="' + src(size, slug) + '" target="_blank" title="Open full size">' + EXPAND + '</a></div>';
+  const card = (slug, i) => '<div class="card" id="g' + i + '-' + slug + '" data-slug="' + slug + '"><div class="cap"><a href="#' + slug + '">' + esc(bySlug[slug].path) + '</a></div><div class="duo">' +
+    shot(slug, 'mobile', 'm') + shot(slug, 'tablet', 't') + shot(slug, 'desktop', 'd') + '</div></div>';
+  const groups = DATA.groups.map((g, i) => '<section class="group" id="group-' + i + '"><h2><a href="#group-' + i + '">' + esc(g.name) + '</a> <span><span class="gcount">' + g.pages.length +
+    '</span> pages</span><span class="ncount" title="Open notes in this group"></span></h2><div class="row">' + g.pages.map(s => card(s, i)).join('') + '</div></section>').join('');
+  const h = (slug, size) => (DATA.heights[latest] || {})[slug + '|' + size] ?? '?';
+  const pairs = DATA.categories.flatMap(c => c.pages).map(slug => '<section id="' + slug + '" data-slug="' + slug + '"><h2><a href="#' + slug + '">' + esc(bySlug[slug].path) + '</a></h2>' +
+    '<div class="pair"><figure class="m"><figcaption>Mobile 390 · <span class="ht" data-k="' + slug + '|mobile">' + h(slug, 'mobile') + '</span>px</figcaption>' + shot(slug, 'mobile') + '</figure>' +
+    '<figure class="t"><figcaption>Tablet 820 · <span class="ht" data-k="' + slug + '|tablet">' + h(slug, 'tablet') + '</span>px</figcaption>' + shot(slug, 'tablet') + '</figure>' +
+    '<figure class="d"><figcaption>Desktop 1440 · <span class="ht" data-k="' + slug + '|desktop">' + h(slug, 'desktop') + '</span>px</figcaption>' + shot(slug, 'desktop') + '</figure></div></section>').join('');
+  document.querySelector('main').innerHTML = groups + '<h2 id="all-head">All pages</h2>' + pairs;
+  // Rail tree. Pages in All pages that aren't in any group row are flagged; a collapsed branch shows the flag too.
+  const grouped = new Set(DATA.groups.flatMap(g => g.pages));
+  const label = (slug, prefix) => {
+    const path = bySlug[slug].path;
+    if (path === '/') return 'home';
+    return esc((prefix && path.startsWith(prefix) ? path.slice(prefix.length) : path).replace(/^\/|\/$/g, '') || '/');
+  };
+  const branch = (title, href, items) => {
+    const head = href ? '<a href="#' + href + '">' + esc(title) + '</a>' : esc(title);
+    const flag = items.some(it => it.flag) ? UNGROUPED : '';
+    return '<details><summary>' + head + ' <span class="bcount">' + items.length + '</span><span class="ncount" title="Open notes in this branch"></span>' + flag + '</summary><ul>' +
+      items.map(it => '<li><a href="#' + it.href + '">' + it.label + '</a>' + (it.flag ? UNGROUPED : '') + '</li>').join('') + '</ul></details>';
+  };
+  document.getElementById('tree-groups').outerHTML = DATA.groups.map((g, i) =>
+    branch(g.name, 'group-' + i, g.pages.map(s => ({ label: label(s, g.prefix), href: 'g' + i + '-' + s, flag: false })))).join('');
+  document.getElementById('tree-all').outerHTML = DATA.categories.map(c =>
+    branch(c.name, null, c.pages.map(s => ({ label: label(s, c.prefix), href: s, flag: !grouped.has(s) })))).join('');
+  document.getElementById('page-total').textContent = DATA.pages.length;
+})();
+// Scroll-spy: highlight the section (and, inside a group row, the card) in view.
+const aside = document.querySelector('aside');
+const sections = [...document.querySelectorAll('main section')];
+const link = id => aside.querySelector('a[href="#' + id + '"]');
+let current = null;
+function currentId() {
+  const line = innerHeight * 0.3;
+  const shown = sections.filter(s => !s.hidden);
+  if (!shown.length) return null;
+  let sec = shown[0];
+  for (const s of shown) { if (s.getBoundingClientRect().top <= line) sec = s; else break; }
+  if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) sec = shown[shown.length - 1];
+  if (!sec.classList.contains('group')) return sec.id;
+  const row = sec.querySelector('.row'), rr = row.getBoundingClientRect();
+  // A card jumped to (rail click or J/K) wins while it is still on screen.
+  const target = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
+  if (target && target.parentElement === row && !target.hidden) {
+    const t = target.getBoundingClientRect();
+    if (t.right > rr.left && t.left < rr.right) return target.id;
+  }
+  // Otherwise the first card whose right half is past the row's left edge.
+  const left = rr.left;
+  const card = [...row.children].filter(c => !c.hidden).find(c => { const r = c.getBoundingClientRect(); return r.left + r.width / 2 >= left; });
+  return card ? card.id : sec.id;
+}
+function spy() {
+  const id = currentId();
+  if (id === current) return;
+  current = id;
+  aside.querySelectorAll('.active').forEach(a => a.classList.remove('active'));
+  aside.querySelectorAll('details[data-auto]').forEach(d => { d.open = false; delete d.dataset.auto; });
+  const a = link(id);
+  if (!a) return;
+  a.classList.add('active');
+  const d = a.closest('details');
+  if (!d.open) { d.open = true; d.dataset.auto = ''; }
+  const sum = d.querySelector('summary');
+  sum.classList.add('active');
+  // Keep the active item visible in the rail without moving the page.
+  const rail = aside.querySelector('.rail'), r = a.getBoundingClientRect(), ar = rail.getBoundingClientRect();
+  if (r.top < ar.top + 40 || r.bottom > ar.bottom - 40) rail.scrollTop += r.top - ar.top - ar.height / 3;
+}
+// A title is pinned once its section's top has scrolled above the viewport.
+function stick() {
+  for (const s of sections) {
+    const r = s.getBoundingClientRect();
+    s.firstElementChild.classList.toggle('stuck', r.top < 0 && r.bottom > 1);
+  }
+}
+let ticking = false;
+const queue = () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; stick(); spy(); if (openNote) placePop(); }); } };
+addEventListener('scroll', queue, {passive: true});
+document.querySelectorAll('.row').forEach(r => r.addEventListener('scroll', queue, {passive: true}));
+addEventListener('hashchange', () => { current = null; queue(); });
+// Lazy images change section heights as they arrive.
+document.addEventListener('load', queue, true);
+// A manually opened branch should stay open.
+aside.querySelectorAll('summary').forEach(s => s.addEventListener('click', () => delete s.parentElement.dataset.auto));
+// Eye toggles: hide/show items (or whole branches). Remembered per browser.
+const EYE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+const EYE_OFF = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.9 17.9A10.1 10.1 0 0 1 12 19c-7 0-11-7-11-7a18.5 18.5 0 0 1 5.1-5.9M9.9 5.2A9.1 9.1 0 0 1 12 5c7 0 11 7 11 7a18.5 18.5 0 0 1-2.2 3.2M14.1 14.1a3 3 0 1 1-4.2-4.2"/><path d="M1 1l22 22"/></svg>';
+let hidden = new Set();
+// Hidden state is per page (slug), so hiding a page hides its row card and its big pair.
+const slugOf = id => id.replace(/^g\d+-/, '');
+try { hidden = new Set(JSON.parse(localStorage.getItem('audit-hidden') || '[]').map(slugOf)); } catch (e) {}
+const save = () => { try { localStorage.setItem('audit-hidden', JSON.stringify([...hidden])); } catch (e) {} };
+const items = [...aside.querySelectorAll('li a')];
+const idOf = a => slugOf(a.getAttribute('href').slice(1));
+function eyeButton(onClick) {
+  const b = document.createElement('button');
+  b.className = 'eye'; b.type = 'button';
+  b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); onClick(); });
+  return b;
+}
+items.forEach(a => a.parentElement.append(eyeButton(() => {
+  const id = idOf(a); hidden.has(id) ? hidden.delete(id) : hidden.add(id); apply();
+})));
+aside.querySelectorAll('details').forEach(d => d.querySelector('summary').append(eyeButton(() => {
+  const ids = [...d.querySelectorAll('li a')].map(idOf);
+  const allHidden = ids.every(id => hidden.has(id));
+  ids.forEach(id => allHidden ? hidden.delete(id) : hidden.add(id)); apply();
+})));
+function apply() {
+  items.forEach(a => {
+    const id = idOf(a), off = hidden.has(id), b = a.parentElement.querySelector('.eye');
+    a.parentElement.classList.toggle('off', off);
+    b.innerHTML = off ? EYE_OFF : EYE; b.title = off ? 'Show' : 'Hide';
+  });
+  document.querySelectorAll('main [data-slug]').forEach(el => el.hidden = hidden.has(el.dataset.slug));
+  // Group headers read "shown / total" while any of their pages are hidden.
+  document.querySelectorAll('section.group').forEach(g => {
+    const cards = g.querySelectorAll('.card'), shown = [...cards].filter(c => !c.hidden).length;
+    g.querySelector('.gcount').textContent = shown < cards.length ? shown + ' / ' + cards.length : cards.length;
+  });
+  aside.querySelectorAll('details').forEach(d => {
+    const lis = [...d.querySelectorAll('li')];
+    const all = lis.every(l => l.classList.contains('off')), some = lis.some(l => l.classList.contains('off'));
+    const s = d.querySelector('summary'), b = s.querySelector('.eye');
+    s.classList.toggle('off', all); s.classList.toggle('some', some && !all);
+    const shown = lis.filter(l => !l.classList.contains('off')).length;
+    s.querySelector('.bcount').textContent = shown < lis.length ? shown + ' / ' + lis.length : lis.length;
+    b.innerHTML = all ? EYE_OFF : EYE; b.title = all ? 'Show all' : 'Hide all';
+    // A group row with every card hidden disappears entirely.
+    const g = s.querySelector('a[href^="#group-"]');
+    if (g) document.querySelector(g.getAttribute('href')).hidden = all;
+  });
+  document.getElementById('hidden-count').textContent = hidden.size ? hidden.size + ' hidden' : '';
+  document.getElementById('show-all').hidden = !hidden.size;
+  save(); current = null; queue();
+}
+// Same eye on each screenshot label (row cards and the big pairs).
+document.querySelectorAll('main [data-slug]').forEach(el => {
+  const label = el.querySelector('.cap, h2'), slug = el.dataset.slug;
+  const b = eyeButton(() => { hidden.add(slug); apply(); });
+  b.innerHTML = EYE; b.title = 'Hide';
+  label.append(b);
+});
+document.getElementById('show-all').addEventListener('click', () => { hidden.clear(); apply(); });
+// Row size: scales the cards in the group rows, keeping the card in view where it was.
+const zoom = document.getElementById('zoom'), zoomVal = document.getElementById('zoom-val');
+// Run a layout change while keeping the current item at the same spot on screen.
+// Rail resizes pass horizontal = false: rows move with the main area, so only the vertical spot is kept.
+function keepPlace(change, horizontal = true) {
+  const el = current && document.getElementById(current);
+  const before = el && el.getBoundingClientRect();
+  change();
+  if (!before) return;
+  const after = el.getBoundingClientRect();
+  scrollBy(0, after.top - before.top);
+  const row = horizontal && el.closest('.row');
+  if (row) row.scrollLeft += after.left - before.left;
+}
+function setZoom(pct) {
+  pct = Math.min(300, Math.max(50, pct));
+  document.documentElement.style.setProperty('--card', (430 * pct / 100) + 'px');
+  zoom.value = pct; zoomVal.textContent = pct + '%';
+  try { localStorage.setItem('audit-zoom', pct); } catch (e) {}
+}
+zoom.addEventListener('input', () => keepPlace(() => setZoom(+zoom.value)));
+try { const z = +localStorage.getItem('audit-zoom'); if (z) setZoom(z); } catch (e) {}
+document.querySelectorAll('.seg small[data-w]').forEach(s => { const w = (DATA.sizes || {})[s.dataset.w]; if (w) s.textContent = w + 'px'; });
+// Mobile / tablet / desktop / all.
+const viewButtons = [...document.querySelectorAll('.seg button')];
+function setView(v) {
+  document.body.classList.toggle('view-mobile', v === 'mobile');
+  document.body.classList.toggle('view-desktop', v === 'desktop');
+  document.body.classList.toggle('view-tablet', v === 'tablet');
+  document.body.classList.toggle('view-all', v === 'all');
+  viewButtons.forEach(b => b.setAttribute('aria-pressed', b.dataset.view === v));
+  try { localStorage.setItem('audit-view', v); } catch (e) {}
+}
+viewButtons.forEach(b => b.addEventListener('click', () => keepPlace(() => setView(b.dataset.view))));
+let savedView = 'all';
+try { savedView = localStorage.getItem('audit-view') || 'all'; } catch (e) {}
+if (!viewButtons.some(b => b.dataset.view === savedView)) savedView = 'all';
+setView(savedView);
+// Keyboard shortcuts.
+const keys = document.getElementById('keys');
+document.getElementById('keys-open').addEventListener('click', () => keys.showModal());
+keys.addEventListener('click', e => { if (e.target === keys) keys.close(); });
+const visible = sel => [...document.querySelectorAll(sel)].filter(el => el.offsetParent !== null);
+// The item after (dir 1) or before (dir -1) the current one, in page order.
+function step(sel, dir) {
+  const list = visible(sel), here = current && document.getElementById(current);
+  if (!here) return list[dir > 0 ? 0 : list.length - 1];
+  const i = list.indexOf(here);
+  if (i >= 0) return list[i + dir];
+  // Current is a container (e.g. a group): first/last item after/before it.
+  const after = el => here.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING;
+  return dir > 0 ? list.find(el => after(el) && !here.contains(el)) : list.filter(el => !after(el) && !here.contains(el)).pop();
+}
+const go = el => { if (!el) return; if (location.hash === '#' + el.id) el.scrollIntoView(); else location.hash = el.id; };
+const undo = [];
+addEventListener('keydown', e => {
+  if (e.metaKey || e.ctrlKey || e.altKey || keys.open && e.key !== '?') return;
+  // Typing fields keep their keys; a checkbox that was just clicked (Show, Pins) shouldn't swallow the shortcuts.
+  if (e.target.matches('input:not([type=range]):not([type=checkbox]), textarea')) return;
+  const k = e.key;
+  if (k === 'j' || k === 'k') go(step('main [data-slug]', k === 'k' ? 1 : -1));
+  else if (k === 'J' || k === 'K') {
+    // Step from the section the current item is in, not the item itself.
+    const sec = current && document.getElementById(current)?.closest('section');
+    if (sec) current = sec.id;
+    go(step('main section', k === 'K' ? 1 : -1));
+  }
+  else if (k === 'h') {
+    const here = current && document.getElementById(current);
+    if (!here || !here.dataset.slug) return;
+    const next = step('main [data-slug]', 1) || step('main [data-slug]', -1);
+    undo.push(here.dataset.slug); hidden.add(here.dataset.slug); apply();
+    go(next);
+  }
+  else if (k === 'u') { const s = undo.pop(); if (s) { hidden.delete(s); apply(); go(document.querySelector('main [data-slug="' + s + '"]:not([hidden])')); } }
+  else if ('1234'.includes(k) && k) keepPlace(() => setView(['mobile', 'tablet', 'desktop', 'all'][k - 1]));
+  else if (k === '-' || k === '_') keepPlace(() => setZoom(+zoom.value - 10));
+  else if (k === '=' || k === '+') keepPlace(() => setZoom(+zoom.value + 10));
+  else if (k === '0') keepPlace(() => setZoom(100));
+  else if (k === 'n') setPins(!pinsOn);
+  else if (k === 'r') setReview(!reviewOn);
+  else if (k === 'c') setDiff(!diffOn);
+  else if (k === 'v' || k === 'V') stepVersion(k === 'v' ? 1 : -1);
+  else if (k === 'f') flipVersion();
+  else if (k === '?') keys.open ? keys.close() : keys.showModal();
+  else return;
+  e.preventDefault();
+});
+// Notes: pins on screenshots, stored as a fraction of the image so they stay put through zoom and view changes.
+// The same screenshot shows in its group row and its big pair; both get the same pins.
+const PATHS = Object.fromEntries(DATA.pages.map(p => [p.slug, p.path]));
+const VERSIONS = DATA.versions, HEIGHTS = DATA.heights;
+let VER = VERSIONS[VERSIONS.length - 1].sha;
+let notes = [];
+try { notes = JSON.parse(localStorage.getItem('audit-notes') || '[]'); } catch (e) {}
+// Notes from before versions existed were all made on the first capture.
+notes.forEach(n => n.version = n.version || VERSIONS[0].sha);
+const saveNotes = () => { try { localStorage.setItem('audit-notes', JSON.stringify(notes)); } catch (e) {} };
+// Every note has a permanent number (R01, R02, ...), so "R12" means one note across versions and exports.
+// Older notes get theirs in the order they were made; an import that reuses a taken number gets the next free one.
+const noteNum = n => 'R' + String(n.num).padStart(2, '0');
+function ensureNums() {
+  const taken = new Set();
+  let next = Math.max(0, ...notes.map(n => +n.num || 0)) + 1;
+  [...notes].sort((a, b) => (a.created || '').localeCompare(b.created || '')).forEach(n => {
+    if (!n.num || taken.has(+n.num)) n.num = next++;
+    taken.add(+n.num);
+  });
+}
+ensureNums(); saveNotes();
+const shots = [...document.querySelectorAll('.shot')];
+const pop = document.getElementById('note-pop'), popText = pop.querySelector('textarea'), popTitle = pop.querySelector('.note-title');
+let openNote = null, openShot = null, seq = 0;
+// A note lives from the version it was made on through every later version, until it's resolved.
+// Resolving records the version, so the note stays visible on the versions before it.
+const vIdx = sha => VERSIONS.findIndex(v => v.sha === sha);
+const isOpenOn = (n, v) => vIdx(n.version) <= vIdx(v) && (!n.resolvedIn || vIdx(v) < vIdx(n.resolvedIn));
+const isResolvedOn = (n, v) => !!n.resolvedIn && vIdx(n.resolvedIn) <= vIdx(v) && vIdx(n.version) <= vIdx(v);
+let showResolved = false;
+const notesFor = (page, size) => notes.filter(n => n.page === page && n.size === size && (isOpenOn(n, VER) || showResolved && isResolvedOn(n, VER)));
+function renderPins(page, size) {
+  const list = notesFor(page, size);
+  shots.filter(s => s.dataset.page === page && s.dataset.size === size).forEach(s => {
+    s.querySelectorAll('.pin').forEach(p => p.remove());
+    list.forEach((n, i) => {
+      const p = document.createElement('button');
+      p.type = 'button'; p.className = 'pin' + (n === openNote ? ' open' : '') + (isResolvedOn(n, VER) ? ' resolved' : '');
+      p.textContent = n.num; p.title = noteNum(n) + ': ' + (n.text || 'Empty note'); p.dataset.id = n.id;
+      p.style.left = n.x * 100 + '%'; p.style.top = n.y * 100 + '%';
+      s.append(p);
+    });
+  });
+}
+function renderAllPins() {
+  new Set(shots.map(s => s.dataset.page + '|' + s.dataset.size)).forEach(k => renderPins(...k.split('|')));
+}
+// Note counts beside each page in the rail, plus the total in the footer.
+items.forEach(a => { const c = document.createElement('span'); c.className = 'ncount'; a.after(c); });
+function renderCounts() {
+  const by = {};
+  notes.filter(n => isOpenOn(n, VER)).forEach(n => by[n.page] = (by[n.page] || 0) + 1);
+  items.forEach(a => a.nextElementSibling.textContent = by[idOf(a)] || '');
+  // Branch titles in the rail and group row headers total their pages' notes.
+  const sum = slugs => slugs.reduce((t, slug) => t + (by[slug] || 0), 0);
+  aside.querySelectorAll('details').forEach(d => d.querySelector('summary .ncount').textContent = sum([...d.querySelectorAll('li a')].map(idOf)) || '');
+  document.querySelectorAll('section.group').forEach(g => g.querySelector('h2 > .ncount').textContent = sum([...g.querySelectorAll('.card')].map(c => c.dataset.slug)) || '');
+  const total = notes.filter(n => isOpenOn(n, VER)).length;
+  renderVersionMenu(); renderReview();
+}
+function placePop() {
+  const pin = openShot && openShot.querySelector('.pin[data-id="' + openNote.id + '"]');
+  if (!pin) return;
+  const r = pin.getBoundingClientRect(), w = pop.offsetWidth, h = pop.offsetHeight;
+  let left = r.right + 8, top = r.top - 10;
+  if (left + w > innerWidth - 8) left = r.left - w - 8;
+  pop.style.left = Math.max(8, left) + 'px';
+  pop.style.top = Math.min(Math.max(8, top), innerHeight - h - 8) + 'px';
+}
+function openN(n, shot) {
+  if (openNote && openNote !== n) closeN();
+  openNote = n; openShot = shot;
+  popTitle.textContent = noteNum(n) + ' · ' + PATHS[n.page] + ' · ' + n.size;
+  pop.querySelector('.note-foot').textContent = (n.version !== VER ? 'Carried over from ' + n.version + ' · ' : '') + 'Esc or click away to close';
+  const resolved = isResolvedOn(n, VER);
+  resolveBtn.classList.toggle('on', resolved);
+  resolveBtn.lastChild.textContent = resolved ? 'Reopen' : 'Resolve';
+  resolveBtn.title = resolved ? 'Resolved in ' + n.resolvedIn + '. Reopen it.' : 'Resolve: hides it on this version and later ones';
+  popText.value = n.text;
+  pop.hidden = false;
+  renderPins(n.page, n.size); placePop(); popText.focus();
+}
+function closeN() {
+  if (!openNote) return;
+  const n = openNote;
+  openNote = openShot = null; pop.hidden = true;
+  if (!n.text.trim()) notes = notes.filter(x => x !== n);
+  saveNotes(); renderPins(n.page, n.size); renderCounts();
+}
+popText.addEventListener('input', () => {
+  openNote.text = popText.value; saveNotes(); renderReview();
+  shots.forEach(s => s.querySelectorAll('.pin[data-id="' + openNote.id + '"]').forEach(p => p.title = noteNum(openNote) + ': ' + openNote.text));
+});
+popText.addEventListener('keydown', e => { if (e.key === 'Escape' || e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); closeN(); } });
+pop.querySelector('.note-del').addEventListener('click', () => { openNote.text = ''; closeN(); });
+const resolveBtn = pop.querySelector('.note-resolve');
+resolveBtn.addEventListener('click', () => {
+  const n = openNote;
+  if (isResolvedOn(n, VER)) delete n.resolvedIn;
+  else { n.resolvedIn = VER; n.resolvedAt = new Date().toISOString(); }
+  closeN();
+});
+document.querySelector('main').addEventListener('click', e => {
+  if (e.target.closest('.expand')) return;
+  const pin = e.target.closest('.pin');
+  if (pin) {
+    const n = notes.find(x => x.id === pin.dataset.id);
+    n === openNote ? closeN() : openN(n, pin.closest('.shot'));
+    return;
+  }
+  const shot = e.target.closest('.shot');
+  if (!shot || !pinsOn) return;
+  // With a note open, a click elsewhere only closes it.
+  if (openNote) { closeN(); return; }
+  const r = shot.querySelector('img').getBoundingClientRect();
+  const n = { id: Date.now().toString(36) + '-' + (seq++), version: VER, page: shot.dataset.page, size: shot.dataset.size,
+    x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height, text: '', created: new Date().toISOString(),
+    num: Math.max(0, ...notes.map(x => +x.num || 0)) + 1 };
+  notes.push(n); openN(n, shot);
+});
+document.addEventListener('mousedown', e => {
+  if (openNote && !pop.contains(e.target) && !e.target.closest('main .shot')) closeN();
+});
+addEventListener('resize', () => openNote && placePop());
+// Show / hide pins.
+let pinsOn = true;
+const pinsToggle = document.getElementById('pins-toggle');
+function setPins(on) {
+  pinsOn = on; pinsToggle.checked = on;
+  document.body.classList.toggle('pins-off', !on);
+  if (!on) closeN();
+  try { localStorage.setItem('audit-pins', on ? '1' : '0'); } catch (e) {}
+}
+pinsToggle.addEventListener('change', () => setPins(pinsToggle.checked));
+const resolvedToggle = document.getElementById('resolved-toggle');
+resolvedToggle.addEventListener('change', () => {
+  showResolved = resolvedToggle.checked; closeN(); renderAllPins(); renderReview();
+  try { localStorage.setItem('audit-resolved', showResolved ? '1' : '0'); } catch (e) {}
+});
+try { showResolved = resolvedToggle.checked = localStorage.getItem('audit-resolved') === '1'; } catch (e) {}
+try { if (localStorage.getItem('audit-pins') === '0') setPins(false); } catch (e) {}
+// Export / import / checklist.
+function download(name, text, type) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([text], { type }));
+  a.download = name; document.body.append(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+const stamp = () => new Date().toISOString().slice(0, 10);
+document.getElementById('notes-export').addEventListener('click', () => {
+  closeN();
+  // Exports every version's notes; each note carries its version.
+  download('audit-notes-' + stamp() + '.json', JSON.stringify({ exported: new Date().toISOString(), versions: VERSIONS.map(v => v.sha), notes }, null, 2), 'application/json');
+});
+// Split button: the caret opens Import and Checklist above it. Esc, an outside click, or picking an item closes it.
+const splitMore = document.getElementById('split-more'), splitMenu = document.getElementById('split-menu');
+function setSplit(open, focus) {
+  splitMenu.hidden = !open; splitMore.setAttribute('aria-expanded', open);
+  if (open && focus) splitMenu.querySelector('button').focus();
+}
+splitMore.addEventListener('click', () => setSplit(splitMenu.hidden, true));
+splitMenu.addEventListener('click', () => setSplit(false));
+document.addEventListener('mousedown', e => { if (!splitMenu.hidden && !e.target.closest('.split')) setSplit(false); });
+document.querySelector('.split').addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !splitMenu.hidden) { e.stopPropagation(); setSplit(false); splitMore.focus(); return; }
+  const items = [...splitMenu.querySelectorAll('button')], i = items.indexOf(document.activeElement);
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (splitMenu.hidden) { setSplit(true, true); return; }
+    items[(i + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length].focus();
+  }
+});
+const fileIn = document.getElementById('notes-file');
+document.getElementById('notes-import').addEventListener('click', () => fileIn.click());
+fileIn.addEventListener('change', async () => {
+  const file = fileIn.files[0]; fileIn.value = '';
+  if (!file) return;
+  let data;
+  try { data = JSON.parse(await file.text()); } catch (e) { alert('That file is not valid JSON.'); return; }
+  const incoming = (Array.isArray(data) ? data : data.notes || []).filter(n => n && n.id && PATHS[n.page] && n.size);
+  // Older exports have no per-note version; they belong to the capture they were exported from.
+  incoming.forEach(n => n.version = n.version || data.capture || VERSIONS[0].sha);
+  // Merge by id: an imported note replaces the local copy.
+  closeN();
+  const byId = new Map(notes.map(n => [n.id, n]));
+  incoming.forEach(n => byId.set(n.id, n));
+  notes = [...byId.values()];
+  ensureNums(); saveNotes(); renderAllPins(); renderCounts();
+  alert('Imported ' + incoming.length + ' note' + (incoming.length === 1 ? '' : 's') + '.');
+});
+document.getElementById('notes-md').addEventListener('click', () => {
+  closeN();
+  let md = '# Screenshot audit notes\n\ndevelopment @ ' + VER + ' · exported ' + stamp() + '\n';
+  Object.keys(PATHS).forEach(page => {
+    const lines = ['mobile', 'tablet', 'desktop'].flatMap(size => notes
+      .filter(n => n.page === page && n.size === size && (isOpenOn(n, VER) || n.resolvedIn === VER))
+      .map(n => '- [' + (n.resolvedIn === VER ? 'x' : ' ') + '] **' + noteNum(n) + '** ' + size + ': ' + n.text.trim().replace(/\n+/g, ' ') + (n.version !== VER ? ' (from ' + n.version + ')' : '')));
+    if (lines.length) md += '\n## ' + PATHS[page] + '\n\n' + lines.join('\n') + '\n';
+  });
+  download('audit-checklist-' + VER + '-' + stamp() + '.md', md, 'text/markdown');
+});
+// Version menu: swaps every screenshot to another capture, in place.
+// A custom listbox rather than a <select>, so each version can carry its note badge.
+const verBtn = document.getElementById('ver-btn'), verList = document.getElementById('ver-list');
+function fmtDate(iso) { return new Date(iso).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }); }
+function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+// A version's own name when it has one (--name), else its commit subject.
+const vTitle = v => v.name || v.subject;
+function renderVersionMenu() {
+  const count = sha => notes.filter(n => isOpenOn(n, sha)).length;
+  const latest = VERSIONS[VERSIONS.length - 1].sha, cur = VERSIONS.find(x => x.sha === VER);
+  document.getElementById('vb-subj').textContent = vTitle(cur);
+  document.getElementById('vb-latest').hidden = VER !== latest;
+  document.getElementById('ver-btn').title = cur.subject + ' (' + VER + ')';
+  document.getElementById('ver-count').textContent = count(VER) || '';
+  const partner = flipPartner();
+  document.getElementById('ver-list').innerHTML = VERSIONS.slice().reverse().map(v => {
+    const c = count(v.sha);
+    return '<li role="option" tabindex="-1" data-sha="' + v.sha + '" aria-selected="' + (v.sha === VER) + '">' +
+      '<span class="vo-top"><code>' + v.sha + '</code>' + (v.sha === latest ? '<span class="vo-tag">latest</span>' : '') +
+      (partner && (v.sha === VER || v.sha === partner) ? '<span class="vo-flip" title="Flip pair: F switches between ' + VER + ' and ' + partner + '">' + FLIP_ICON + '</span>' : '') +
+      '<span class="ncount" title="Notes on this version">' + (c || '') + '</span></span>' +
+      '<span class="vo-subj" title="' + esc(v.subject).replace(/"/g, '&quot;') + '">' + esc(vTitle(v)) + '</span><span class="vo-date">' + fmtDate(v.date) + '</span></li>';
+  }).join('');
+}
+function placeVerMenu() {
+  const r = verBtn.getBoundingClientRect();
+  verList.style.left = r.left + 'px';
+  verList.style.top = r.bottom + 4 + 'px';
+  verList.style.width = Math.min(Math.max(r.width, 320), innerWidth - r.left - 8) + 'px';
+  verList.style.maxHeight = innerHeight - r.bottom - 16 + 'px';
+}
+function openVerMenu() {
+  verList.hidden = false; verBtn.setAttribute('aria-expanded', 'true');
+  placeVerMenu();
+  (verList.querySelector('[aria-selected=true]') || verList.firstElementChild).focus();
+}
+function closeVerMenu(refocus) {
+  verList.hidden = true; verBtn.setAttribute('aria-expanded', 'false');
+  if (refocus) verBtn.focus(); else verBtn.blur();
+}
+function pickVersion(sha) { closeVerMenu(false); if (sha !== VER) keepPlace(() => setVersion(sha)); }
+verBtn.addEventListener('click', () => verList.hidden ? openVerMenu() : closeVerMenu(true));
+verList.addEventListener('click', e => { const li = e.target.closest('li'); if (li) pickVersion(li.dataset.sha); });
+// Arrow keys move, Enter picks, Esc closes; keys stay out of the page shortcuts while the menu is open.
+verList.addEventListener('keydown', e => {
+  const li = document.activeElement.closest('li');
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') (e.key === 'ArrowDown' ? li?.nextElementSibling : li?.previousElementSibling)?.focus();
+  else if (e.key === 'Home' || e.key === 'End') (e.key === 'Home' ? verList.firstElementChild : verList.lastElementChild).focus();
+  else if (e.key === 'Enter' || e.key === ' ') li && pickVersion(li.dataset.sha);
+  else if (e.key === 'Escape' || e.key === 'Tab') closeVerMenu(e.key === 'Escape');
+  else return;
+  e.preventDefault();
+});
+verList.addEventListener('keydown', e => e.stopPropagation());
+document.addEventListener('mousedown', e => { if (!verList.hidden && !e.target.closest('.vmenu')) closeVerMenu(false); });
+addEventListener('resize', () => { if (!verList.hidden) placeVerMenu(); });
+// The list is fixed to the button's spot, so scrolling the rail away from it closes it.
+document.querySelector('.rail').addEventListener('scroll', () => { if (!verList.hidden) closeVerMenu(false); });
+// Review rail: every note open on this version (and those resolved on it) as a list, with a crop at the pin,
+// a resolve checkbox, and a click that jumps to the pin.
+const rvEsc = x => String(x).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+let reviewOn = false;
+const reviewEl = document.getElementById('review'), rvList = document.getElementById('rv-list'), rvToggle = document.getElementById('review-toggle');
+// The Resolved checkbox in the Notes bar governs the list too: off hides resolved notes here as well as their pins.
+const rvVisible = n => isOpenOn(n, VER) || (showResolved && isResolvedOn(n, VER));
+const rvOrder = n => DATA.pages.findIndex(p => p.slug === n.page) * 10 + ['mobile', 'tablet', 'desktop'].indexOf(n.size);
+function renderReview() {
+  const list = notes.filter(n => n.text.trim() && rvVisible(n)).sort((a, b) => rvOrder(a) - rvOrder(b) || (a.created || '').localeCompare(b.created || ''));
+  const open = list.filter(n => !isResolvedOn(n, VER)).length;
+  document.getElementById('rv-count').textContent = open || '';
+  if (!reviewOn) return;
+  const CHECK_ICON = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
+  rvList.innerHTML = list.length ? list.map(n => {
+    const done = isResolvedOn(n, VER), w = DATA.sizes[n.size], h = (HEIGHTS[VER] || {})[n.page + '|' + n.size];
+    const bgW = { mobile: 390, tablet: 520, desktop: 1000 }[n.size], bgH = h ? bgW * h / w : 0;
+    const crop = bgH ? 'background-image:url(' + DATA.image_root + '/' + VER + '/' + n.size + '/' + n.page + '.png);background-size:' + bgW + 'px ' + bgH + 'px;' +
+      'background-position:calc(50% + ' + (bgW / 2 - n.x * bgW) + 'px) calc(50% + ' + (bgH / 2 - n.y * bgH) + 'px)' : '';
+    return '<div class="rv-item' + (done ? ' done' : '') + '" data-id="' + n.id + '">' +
+      '<div class="rv-meta"><b>' + noteNum(n) + '</b><span>' + rvEsc(PATHS[n.page]) + '</span></div>' +
+      '<p class="rv-text">' + rvEsc(n.text.trim()) + '</p>' +
+      '<div class="rv-thumb' + (crop ? '' : ' nocrop') + '" style="' + crop + '"><span class="rv-badge">' + n.size + '</span></div>' +
+      '<button type="button" class="rv-resolve" aria-label="' + (done ? 'Reopen' : 'Mark as resolved') + '" title="' + (done ? 'Resolved in ' + rvEsc(n.resolvedIn) + '. Reopen it.' : 'Mark as resolved on ' + VER) + '">' + CHECK_ICON + '</button></div>';
+  }).join('') : '<div class="rv-empty">No notes on this version yet. Click a screenshot to add one.</div>';
+}
+rvList.addEventListener('click', e => {
+  const item = e.target.closest('.rv-item'); if (!item) return;
+  const n = notes.find(x => x.id === item.dataset.id); if (!n) return;
+  if (e.target.closest('.rv-resolve')) {
+    if (isResolvedOn(n, VER)) delete n.resolvedIn; else { n.resolvedIn = VER; n.resolvedAt = new Date().toISOString(); }
+    saveNotes(); renderAllPins(); renderCounts(); return;
+  }
+  // The size has to be showing for its pin to be on screen.
+  const hiddenNow = n.size === 'tablet' ? !/view-(tablet|all)/.test(document.body.className)
+    : document.body.classList.contains('view-' + (n.size === 'mobile' ? 'desktop' : 'mobile')) || /view-tablet/.test(document.body.className);
+  if (hiddenNow) setView(n.size);
+  const shot = [...document.querySelectorAll('main section[data-slug="' + n.page + '"] .shot')].find(s => s.dataset.size === n.size);
+  if (!shot) return;
+  closeN();
+  const pin = shot.querySelector('.pin[data-id="' + n.id + '"]');
+  (pin || shot).scrollIntoView({ block: 'center', inline: 'nearest' });
+  setTimeout(() => openN(n, shot), 60);
+});
+function setReview(on) {
+  reviewOn = on;
+  document.body.classList.toggle('review-open', on);
+  rvToggle.setAttribute('aria-pressed', on);
+  if (on) renderReview();
+  if (openNote) placePop();
+  try { localStorage.setItem('audit-review', on ? '1' : '0'); } catch (e) {}
+}
+rvToggle.addEventListener('click', () => setReview(!reviewOn));
+document.getElementById('rv-close').addEventListener('click', () => setReview(false));
+try { if (localStorage.getItem('audit-review') === '1') setReview(true); } catch (e) {}
+
+// The flip pair: the version on screen and the one F switches to (the version you came from, else the one before).
+const FLIP_ICON = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3L4 7l4 4"/><path d="M4 7h16"/><path d="M16 21l4-4-4-4"/><path d="M20 17H4"/></svg>';
+function flipPartner() {
+  const n = VERSIONS.length;
+  if (n < 2) return null;
+  if (typeof PREV_VER === 'string' && PREV_VER !== VER && VERSIONS.some(v => v.sha === PREV_VER)) return PREV_VER;
+  return VERSIONS[(vIdx(VER) - 1 + n) % n].sha;
+}
+// Compare to: the version on screen against any other capture. The comparisons are prepared by the script
+// (every ordered pair), so picking a version here only looks one up. "Auto" is the default: it follows the flip pair,
+// the version you came from (F flips back to it), or the version just before when you haven't switched yet.
+let diffOn = true, compareChoice = 'auto', compareBase = null;
+try { compareChoice = localStorage.getItem('audit-compare') || 'auto'; } catch (e) {}
+const diffToggle = document.getElementById('diff-toggle'), cmpSel = document.getElementById('cmp-base');
+const cmpLink = document.getElementById('cmp-link'), cmpIco = document.getElementById('cmp-ico'), cmpState = document.getElementById('cmp-state');
+const diffEsc = x => String(x).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+const LINK_ICON = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
+const UNLINK_ICON = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18.84 12.25 1.72-1.71a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="m5.17 11.75-1.71 1.71a5 5 0 0 0 7.07 7.07l1.71-1.71"/><path d="M8 2v3M2 8h3M16 19v3M19 16h3"/></svg>';
+// Linked ('auto'): follows the flip pair. Pinned (a version's sha): stays on that version whatever is viewed, even the
+// version itself, which then has nothing to compare with.
+function fillCompare() {
+  const auto = flipPartner(), pinned = VERSIONS.some(v => v.sha === compareChoice);
+  compareBase = pinned ? compareChoice : auto;
+  const base = VERSIONS.find(v => v.sha === compareBase);
+  document.getElementById('cmp-name').textContent = base ? vTitle(base) : '';
+  document.getElementById('cmp-name').title = base ? base.sha + (base.subject ? ' · ' + base.subject : '') : '';
+  cmpIco.innerHTML = base ? (pinned ? UNLINK_ICON : LINK_ICON) : '';
+  cmpState.textContent = !base ? '' : pinned ? 'Pinned.' : 'Following the flip pair.';
+  cmpLink.hidden = !base;
+  cmpLink.textContent = pinned ? 'Re-link' : 'Unlink';
+  cmpLink.title = pinned ? 'Go back to following the flip pair' : 'Pin a version to compare against, whatever is on screen';
+  cmpSel.hidden = !pinned;
+  cmpSel.innerHTML = VERSIONS.slice().reverse().map(v => '<option value="' + v.sha + '">' + v.sha + (v.sha === VER ? ' (viewing)' : '') + ' · ' + diffEsc(vTitle(v) || v.branch || '') + '</option>').join('');
+  if (pinned) cmpSel.value = compareBase;
+}
+function activeDiff() { return compareBase && compareBase !== VER && (DATA.diffs || {})[compareBase + '..' + VER]; }
+function renderDiff() {
+  shots.forEach(s => s.querySelectorAll('.dmark').forEach(m => m.remove()));
+  aside.querySelectorAll('.dchg').forEach(m => m.remove());
+  fillCompare();
+  const info = document.getElementById('diff-info'), badge = document.getElementById('cmp-badge'), d = activeDiff();
+  badge.hidden = true; info.textContent = '';
+  if (!compareBase) { info.textContent = 'Only one version captured.'; return; }
+  if (compareBase === VER) { info.textContent = 'This is the version you are comparing to.'; return; }
+  if (!d) { info.innerHTML = 'Not compared yet. Run <code>screenshot-audit.py --diffs</code>.'; return; }
+  const n = new Set(Object.keys(d.pages).map(k => k.split('|')[0])).size;
+  badge.hidden = false; badge.classList.toggle('none', !n);
+  badge.textContent = n || '0';
+  badge.title = n ? n + ' page' + (n === 1 ? '' : 's') + ' changed' : 'No pages changed';
+  // A dot beside each changed page in the rail, and on a branch that has one inside.
+  const dot = tip => { const e = document.createElement('span'); e.className = 'dchg'; e.title = tip; return e; };
+  const pct = slug => Math.max(...['mobile', 'tablet', 'desktop'].map(z => (d.pages[slug + '|' + z] || { changed: 0 }).changed));
+  items.forEach(a => { const c = pct(idOf(a)); if (c) a.after(dot('Changed since ' + d.base + ': ' + (c * 100).toFixed(1) + '% of the page')); });
+  aside.querySelectorAll('details').forEach(det => {
+    const k = [...det.querySelectorAll('li a')].filter(a => pct(idOf(a))).length;
+    if (k) det.querySelector('summary').insertBefore(dot(k + ' changed since ' + d.base), det.querySelector('summary .eye'));
+  });
+  shots.forEach(s => {
+    const r = d.pages[s.dataset.page + '|' + s.dataset.size];
+    if (!r) return;
+    r.regions.forEach(([a, b]) => {
+      const m = document.createElement('div'); m.className = 'dmark';
+      m.style.top = a / r.height * 100 + '%'; m.style.height = (b - a) / r.height * 100 + '%';
+      s.append(m);
+    });
+  });
+}
+function setCompareChoice(v) {
+  compareChoice = v;
+  try { localStorage.setItem('audit-compare', compareChoice); } catch (e) {}
+  renderDiff();
+}
+cmpSel.addEventListener('change', () => setCompareChoice(cmpSel.value));
+cmpLink.addEventListener('click', () => setCompareChoice(VERSIONS.some(v => v.sha === compareChoice) ? 'auto' : compareBase));
+function setDiff(on) {
+  diffOn = on; diffToggle.checked = on;
+  document.body.classList.toggle('diff-off', !on);
+  try { localStorage.setItem('audit-diff', on ? '1' : '0'); } catch (e) {}
+}
+diffToggle.addEventListener('change', () => setDiff(diffToggle.checked));
+try { if (localStorage.getItem('audit-diff') === '0') setDiff(false); } catch (e) {}
+let PREV_VER = null;
+function setVersion(v) {
+  closeN();
+  if (v !== VER) PREV_VER = VER;
+  VER = v;
+  const info = VERSIONS.find(x => x.sha === v);
+  shots.forEach(s => {
+    const src = DATA.image_root + '/' + v + '/' + s.dataset.size + '/' + s.dataset.page + '.png';
+    s.classList.remove('missing');
+    s.querySelector('img').src = src; s.querySelector('.expand').href = src;
+  });
+  document.querySelectorAll('.ht').forEach(el => el.textContent = (HEIGHTS[v] || {})[el.dataset.k] ?? '?');
+  document.getElementById('ver-sha').textContent = v;
+  document.getElementById('ver-branch').textContent = info.branch || 'unknown branch';
+  document.getElementById('ver-date').textContent = fmtDate(info.date);
+  document.title = 'Screenshot audit · ' + v;
+  renderAllPins(); renderCounts(); renderDiff();
+  try { localStorage.setItem('audit-version', v); } catch (e) {}
+}
+// Before/after: toggles with whichever version was on screen last. Pick the pair from the menu once, then F.
+function flipVersion() {
+  if (PREV_VER && PREV_VER !== VER) keepPlace(() => setVersion(PREV_VER));
+  else stepVersion(-1);
+  toastVersion();
+}
+// Names the version just switched to, top centre, so the rail needn't be checked.
+const verToast = document.getElementById('ver-toast');
+let toastTimer;
+function toastVersion() {
+  const info = VERSIONS.find(x => x.sha === VER);
+  verToast.textContent = info.name || VER;
+  const sub = info.name ? VER : info.branch;
+  if (sub) verToast.insertAdjacentHTML('beforeend', '<span></span>'), verToast.lastChild.textContent = sub;
+  verToast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => verToast.classList.remove('show'), 1200);
+}
+function stepVersion(dir) {
+  const i = VERSIONS.findIndex(x => x.sha === VER);
+  keepPlace(() => setVersion(VERSIONS[(i + dir + VERSIONS.length) % VERSIONS.length].sha));
+}
+// A page that didn't exist in a capture shows a placeholder instead of a broken image.
+document.addEventListener('error', e => { if (e.target.tagName === 'IMG') e.target.closest('.shot')?.classList.add('missing'); }, true);
+let savedVer = null;
+try { savedVer = localStorage.getItem('audit-version'); } catch (e) {}
+setVersion(VERSIONS.some(x => x.sha === savedVer) ? savedVer : VER);
+
+// Resizable rail: drag the right edge (or arrow keys on it); double-click resets. Remembered per browser.
+const RAIL_MIN = 200, RAIL_MAX = 520, RAIL_DEFAULT = 260;
+const grip = document.querySelector('.rail-resize');
+function setRail(w, keep) {
+  w = Math.round(Math.min(RAIL_MAX, Math.max(RAIL_MIN, w)));
+  const run = () => document.documentElement.style.setProperty('--rail', w + 'px');
+  keep ? keepPlace(run, false) : run();
+  grip.setAttribute('aria-valuenow', w);
+  if (!verList.hidden) placeVerMenu();
+  if (openNote) placePop();
+  try { localStorage.setItem('audit-rail', w); } catch (e) {}
+}
+grip.addEventListener('pointerdown', e => {
+  e.preventDefault(); grip.setPointerCapture(e.pointerId);
+  document.body.classList.add('resizing');
+  let frame = 0;
+  const move = ev => { cancelAnimationFrame(frame); frame = requestAnimationFrame(() => setRail(ev.clientX, true)); };
+  const up = () => { document.body.classList.remove('resizing'); grip.removeEventListener('pointermove', move); grip.removeEventListener('pointerup', up); grip.removeEventListener('pointercancel', up); };
+  grip.addEventListener('pointermove', move); grip.addEventListener('pointerup', up); grip.addEventListener('pointercancel', up);
+});
+grip.addEventListener('dblclick', () => setRail(RAIL_DEFAULT, true));
+grip.addEventListener('keydown', e => {
+  const w = aside.getBoundingClientRect().width, step = e.shiftKey ? 40 : 10;
+  if (e.key === 'ArrowLeft') setRail(w - step, true);
+  else if (e.key === 'ArrowRight') setRail(w + step, true);
+  else return;
+  e.preventDefault(); e.stopPropagation();
+});
+try { const w = +localStorage.getItem('audit-rail'); setRail(w || RAIL_DEFAULT, false); } catch (e) { setRail(RAIL_DEFAULT, false); }
+apply();
+spy();
+</script></body></html>

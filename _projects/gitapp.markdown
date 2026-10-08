@@ -8,8 +8,8 @@ tags: iOS App
 published: false
 ---
 
-<div class="grid-x">
-  <div class="cell">
+<div>
+  <div>
   <img src="../img/gitApp/gitapphero.png" alt="Git App Hero Image"/>
   </div>
 </div>
@@ -17,7 +17,7 @@ My main incentive for this project was to bring GitHub mobile. Reason being in o
 
 Update from the future (2020 to be exact 😃) GitHub has released their {% include external-link.html link="https://github.com/mobile/" content="own application" %} go check it out!
 
-<div class="responsive-embed widescreen">
+<div class="video-embed">
   <iframe width="100%" src="https://www.youtube.com/embed/9pox7w3nB_s?rel=0" frameborder="0" allowfullscreen title="GitApp Promo Video"></iframe>
 </div>
 

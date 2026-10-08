@@ -1,7 +1,9 @@
 ---
   # Front matter comment to ensure Jekyll properly reads file.
 ---
-@charset "utf-8";
+// Scaffold CSS (https://scaffoldcss.rehanbutt.com), copied untouched into
+// _sass/scaffold/ from naher94/scaffoldcss@93d3bdb. Update by re-copying.
+@use 'scaffold/scaffold';
 @import 'app';
 // Rouge syntax highlighting theme for Jekyll highlight tags / fenced code. Nothing on the site renders a `.highlight` block at the moment
 @import 'monokai.css';
@@ -75,6 +77,21 @@ video{
   }
 }
 
+// Centres a Scaffold span from md by ending it on a grid line, which keeps the
+// span's width. Pair with md:scaffold-grid-span-two-thirds / -half.
+// TODO: Scaffold can't set a span's start yet (scaffoldcss#37). When it can,
+// swap these for md:scaffold-grid-start-3 / -4 and delete both classes.
+.centered-column{
+  @include scaffold.breakpoint(md) {
+    grid-column-end: -3;
+  }
+}
+.centered-column-half{
+  @include scaffold.breakpoint(md) {
+    grid-column-end: -4;
+  }
+}
+
 .image-container {
   margin-top: 1.25em;
   margin-bottom: 1.25em;
@@ -87,7 +104,7 @@ video{
 
 //Use for photos that have inline styles of multiple aspect ratios in 1 row
 .force-flex-mobile{
-  @include breakpoint(small only){
+  @include scaffold.breakpoint(md, down){
     flex: 0 0 auto !important;
   }
 }
@@ -133,13 +150,6 @@ video{
   padding-inline: 0.25em;
 }
 
-.thumbnail-tile {
-  margin-bottom: 1.5em;
-  @include breakpoint(small only){
-    margin-bottom: 1em;
-  }
-}
-
 .flag {
   position: absolute;
   font-size: 0.8em;
@@ -150,7 +160,7 @@ video{
   background-color: $signature-teal;
   color: $pure-white;
   border-radius: $pill-radius;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     right: -0.5rem;
     top: -0.5rem;
   }
@@ -159,18 +169,11 @@ video{
 
 
 //******* Post/Article Styles
-.post-header{
-  @include breakpoint(large down) {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-}
-
 // Same inset as body `p` so the title lines up with the text below it.
 .post-header-hero{
   @include content-inset;
   margin-top: 1em;
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     margin-top: 0.5em;
   }
   .post-meta{
@@ -208,12 +211,6 @@ article{
 .quote-color-block{
   background-color: #EAF8EC;
   height: 100%;
-  margin-left: .9375rem;
-  margin-right: .9375rem;
-  @include breakpoint(small only) {
-    margin-left: .625rem;
-    margin-right: .625rem;
-  }
   .post-callout-small{
     margin: 0;
     padding: 2rem;
@@ -253,7 +250,9 @@ article{
 
 //******* Easter Egg Styling
 .behind-the-scenes-container{
-  display: none; //Show on Konami Code Entry
+  &:not(.is-shown){
+    display: none; // Shown on Konami Code entry
+  }
   .behind-the-scenes{
     border-radius: $tile-radius-medium;
     background-color: semantic-color(floating-card-bg);
@@ -264,7 +263,7 @@ article{
     h2{
       @include type-style(product, subsection-title);
       margin: 0;
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         padding-inline: 0;
       }
     }
@@ -276,7 +275,7 @@ article{
       padding-left: 0;
       padding-right: 0;
     }
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       margin-top: -3rem;
     }
   }
@@ -289,18 +288,34 @@ article{
 }
 
 .easter-egg-banner-container{
-  display: none; // Handled with JS on Konami Entry
   position: fixed;
   bottom: 2rem;
   left: 0;
   right: 0;
   z-index: 100;
+  &:not(.is-shown){
+    display: none; // Shown on Konami Code entry
+  }
   .easter-egg-banner{
     border-radius: $tile-radius-medium;
     background-color: semantic-color(floating-card-bg);
     padding: 1rem;
     box-shadow: $recessed-shadow semantic-color(shadow);
     align-items: center;
+    flex-wrap: nowrap;
+    // Centred two-thirds, then half: ending on a line keeps Scaffold's span.
+    @include scaffold.breakpoint(md) {
+      grid-column-end: -3;
+    }
+    @include scaffold.breakpoint(lg) {
+      grid-column-end: -4;
+    }
+    @include scaffold.breakpoint(md, down) {
+      flex-wrap: wrap;
+    }
+    .banner-text{
+      flex: 1;
+    }
     p{
       @include type-style(product, body-sm-strong);
       padding: 0;
@@ -310,7 +325,7 @@ article{
       align-items: center;
       p{
         @include type-style(product, banner-emoji);
-        margin-right: 1rem;
+        // margin-right: 1rem;
       }
     }
     button{
@@ -327,10 +342,11 @@ article{
       border-radius: $tile-radius;
       background-color: $signature-teal;
       margin: 0;
-      margin-left: 0.5rem;
-      @include breakpoint(small only) {
+      // margin-left: 0.5rem;
+      @include scaffold.breakpoint(md, down) {
+        flex-basis: 100%;
         margin-left: 0;
-        margin-top: 0.5rem;
+        // margin-top: 0.5rem;
       }
       &:hover{
         background-color: $signature-teal-d1;
@@ -430,18 +446,15 @@ article{
     &:hover{
       transform: rotate(-5deg) scale(1.1);
     }
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       left: 1rem;
     }
   }
-  @include breakpoint(small only) {
+  @include scaffold.breakpoint(md, down) {
     width: 6rem;
   }
 }
 
-.force-flex{
-  display: flex !important;
-}
 //******* End of Easter Egg Styling
 
 
@@ -449,6 +462,10 @@ article{
 .teal-container{ //used in My Brand project
   background-color: $signature-teal;
   padding: 12rem 0;
+  // The logo goes full width on a phone; keep teal around it.
+  @include scaffold.breakpoint(md, down){
+    padding: 6rem 2rem;
+  }
 }
 
 .nyc-questions{
@@ -462,20 +479,50 @@ article{
   }
 }
 
-@media (prefers-color-scheme: dark){
-  #colorbot-table{
-    thead{
-      background: $navy-black-d5;
-      color: semantic-color(text);
-      border: 1px solid $navy-black-l1;
-    }
-    tbody{
-      background-color: $navy-black-d3; //same as page background
-      border: 1px solid $navy-black-l1;
-      tr:nth-child(even){
-        background-color: $navy-black-d1;
-      }
-    }
+// TODO This is the only table on the site, so the styling is scoped to
+// #colorbot-table. If another page ever needs a table, lift this into a shared
+// `table` style and drop the id. Only semantic colors are used, so light and
+// dark both follow the tokens.
+#colorbot-table{
+  --table-line: color-mix(in srgb, #{semantic-color(text)} 18%, transparent);
+  // A block box so a table wider than the screen scrolls inside its own
+  // rounded border instead of pushing the page sideways.
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 2rem 0;
+  border: 1px solid var(--table-line);
+  border-radius: $tile-radius;
+  font-size: 0.9em;
+  line-height: 1.4;
+  // Without this each cell draws its own border with a gap around it, which
+  // reads as lines drawn around the lines.
+  border-collapse: collapse;
+  border-spacing: 0;
+  th, td{
+    min-width: 11em;
+    padding: 0.75em 1em;
+    vertical-align: top;
+    text-align: left;
+    border-bottom: 1px solid var(--table-line);
+  }
+  thead th{
+    background-color: semantic-color(article-share-bar-bg);
+    color: semantic-color(text);
+    font-weight: $lato-bold;
+  }
+  // Effort labels (Low / Medium / High) read as the row headers.
+  tbody td:first-child{
+    min-width: 7em;
+    background-color: semantic-color(article-share-bar-bg);
+    color: semantic-color(text);
+  }
+  tbody tr:last-child td{
+    border-bottom: 0;
+  }
+  th + th,
+  td + td{
+    border-left: 1px solid var(--table-line);
   }
 }
 //******* End of Project Specific Styling

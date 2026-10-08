@@ -1,8 +1,6 @@
+@use 'scaffold/mixins' as scaffold;
+
 .photoset-tile{
-  margin-bottom: 1.5em;
-  @include breakpoint(small only) {
-    margin-bottom: 1em;
-  }
   .thumbnail-container{
     overflow: hidden;
     .text-container{
@@ -15,7 +13,8 @@
       font-family: $lato;
       padding: 2em;
       padding-top: 4em;
-      @include breakpoint(small only) {
+      // Two tiles a row at tablet widths are about as wide as one on a phone, so they take its padding.
+      @include scaffold.breakpoint(lg, down) {
         padding: 1em;
         padding-top: 3em;
       }
@@ -46,7 +45,7 @@
   .detail{
     padding: 2em;
     padding-left: 4em;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       padding: 2em;
       padding-bottom: 14em;
     }
@@ -56,7 +55,7 @@
       backdrop-filter: blur(10px);
       border-radius: $tile-radius;
       padding: 2em;
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         padding: 1em;
       }
     }
@@ -69,11 +68,15 @@
       margin-top: 0.5em;
       padding: 1em;
       .flag-wrapper{
-        margin-right: 1em;
         border-radius: 5px;
         overflow: hidden;
-        @include breakpoint(small only) {
-          margin-right: 0.5em;
+        img{
+          display: block;
+          // As tall as the two lines beside it (name + label at 1.2 leading).
+          @include scaffold.breakpoint(md, down) {
+            height: calc((var(--type-data-value-size) + var(--type-data-label-size)) * 1.2);
+            width: auto;
+          }
         }
       }
       .text-wrapper{
@@ -96,7 +99,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    @include breakpoint(small only) {
+    // Spans the box at any container width, not just the SVGs' drawn 1190px.
+    width: 100%;
+    @include scaffold.breakpoint(md, down) {
       scale: 3;
       left: -72%;
       bottom: 2em;

@@ -1,4 +1,15 @@
+@use 'scaffold/mixins' as scaffold;
+
 .speaking-page{
+  // The grid sets the columns only; the sections keep their own vertical spacing.
+  --scaffold-row-gap: 0;
+  // Centres the two-thirds spans (columns 3–10): ending on line 11 keeps
+  // Scaffold's span. Scaffold has no offsets yet (#1262).
+  .speaking-intro, .speaking-events-intro, .speaking-events{
+    @include scaffold.breakpoint(md) {
+      grid-column-end: -3;
+    }
+  }
   .speaking-intro{
     p{
       padding: 0;
@@ -7,25 +18,35 @@
   .cta-button{
     &.email-wrapper{
       position: relative;
-      display: inline;
+      display: inline-block;
       cursor: pointer;
       .copied{
         font-size: 1em;
         left: 20%;
         right: unset;
         font-weight: $lato-bold;
-        @include breakpoint(small only) {
+        @include scaffold.breakpoint(md, down) {
           left: 40%;
         }
       }
     }
   }
   .speaking-events-intro{
+    // Heading and divider: on a phone the divider wraps under the heading,
+    // so the row closes up to Scaffold's small gap.
+    div:has(> .divider){
+      @include scaffold.breakpoint(md, down){
+        --scaffold-gap: var(--scaffold-gap-sm);
+        h2{
+          margin-bottom: 0;
+        }
+      }
+    }
     margin-top: 4em;
     margin-bottom: 1rem;
     h2{
       @include type-style(product, section-title-lg);
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         padding: 0;
       }
     }
@@ -34,9 +55,12 @@
       border-radius: $pill-radius;
       content: '';
       height: 0.5rem;
-      margin-left: 1rem;
-      @include breakpoint(small only) {
-        margin-left: 0;
+      // Its own line below md; beside the heading, filling the rest, above.
+      flex-basis: 100%;
+      @include scaffold.breakpoint(md) {
+        flex: 1;
+      }
+      @include scaffold.breakpoint(md, down) {
         height: 0.3rem;
       }
     }
@@ -62,7 +86,7 @@
     & + .speaking-item-hero {
       margin-block-start: 0;
     }
-    @include breakpoint(small only){
+    @include scaffold.breakpoint(md, down){
       margin-block-start: 2em;
     }
     &:hover{
@@ -114,7 +138,7 @@
       background: linear-gradient(45deg, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%);
       .brand-logo{
         width: 10em;
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           width: 8em;
         }
       }
@@ -135,7 +159,7 @@
           rotate: -5deg;
           translate: 4em -1em;
           transform-origin: top left;
-          @include breakpoint(small only){
+          @include scaffold.breakpoint(md, down){
             translate: -1em 2em;
           }
         }
@@ -143,44 +167,49 @@
           rotate: 10deg;
           transform-origin: top right;
           translate: 29em 0.5em;
-          @include breakpoint(small only){
+          @include scaffold.breakpoint(md, down){
             translate: 6em 0.5em;
           }
-          @include breakpoint(medium only){
+          @include scaffold.breakpoint(md) { @include scaffold.breakpoint(lg, down){
             translate: 20em -1em;
-          }
+          }}
         }
         &.bottom-img{
           rotate: 7deg;
           height: 15em;
           translate: 8em 3.5em;
           transform-origin: bottom right;
-          @include breakpoint(small only){
+          @include scaffold.breakpoint(md, down){
             height: 9em;
             translate: 2em 2em;
           }
         }
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           height: 7em;
           border-radius: $tile-radius;
         }
       }
     }
     .main-content{
+      // Spaces the logo from the text, beside it or above it.
+      --scaffold-gap: 2em;
       padding: 1em;
       .brand-logo{
         width: 5em;
-        margin-inline-end: 2em;
         @media (prefers-color-scheme: dark) {
           filter: contrast(800%) invert(100%);
-        }
-        @include breakpoint(small only){
-          margin-inline-end: 0;
-          margin-block-end: 2em;
         }
       }
       div:has(> h3) {
         text-wrap: pretty;
+      }
+      // Below the logo on its own line, then two-thirds of the row beside it.
+      //TODO replace with ScaffoldCSS thing not magic number
+      .text-wrapper{
+        flex-basis: 100%;
+        @include scaffold.breakpoint(md) {
+          flex-basis: calc(100% * 2 / 3);
+        }
       }
       h3{
         @include type-style(product, talk-title);
@@ -209,7 +238,7 @@
     padding: 1em;
     font-weight: $lato-bold;
     margin-block-start: 2em;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       font-size: 1.2em;
       margin-block-end: 1em;
     }
@@ -222,19 +251,13 @@
       }
       &.text-secondary{
         font-weight: $lato-regular;
-        @include breakpoint(small only){
+        @include scaffold.breakpoint(md, down){
           font-size: 1rem;
         }
       }
     }
-    .text-area{
-      @include breakpoint(small only){
-        margin-block-end: 0.75em;
-      }
-    }
     .cta-button{
-      margin-right: 0;
-      @include breakpoint(small only){
+      @include scaffold.breakpoint(md, down){
         font-size: 1rem;
         padding: 0.4rem 0.75rem;
       }
@@ -297,8 +320,7 @@
 .speaking-events{
   .speaking-item{
     margin-top: 1rem;
-    padding-left: 0.5rem;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       padding-left: 0;
     }
     p{
@@ -329,7 +351,7 @@
     margin-left: -4em;
     transition: $run;
     padding-top: 0.5em;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       display: none;
     }
     &#disney-animation{

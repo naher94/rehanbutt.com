@@ -1,3 +1,5 @@
+@use 'scaffold/mixins' as scaffold;
+
 .post-article{
   .post-header{
     .article-hero{
@@ -40,8 +42,6 @@
     }
   }
   .share-bar-wrapper{
-    padding-right: 0.625rem;
-    padding-left: 0.625rem;
     margin-top: 1em;
   }
   .share-bar{
@@ -51,20 +51,21 @@
     border-radius: $tile-radius-big;
     padding: 1em;
     font-weight: $lato-bold;
-    @include breakpoint(small only) {
+    @include scaffold.breakpoint(md, down) {
       font-size: 1.2em;
     }
+    @include scaffold.breakpoint(md) {
+      align-items: center;
+    }
     .share-buttons{
-      column-gap: 0.5em;
-      @include breakpoint(small only) {
-        margin-top: 0.75em;
+      @include scaffold.breakpoint(md, down) {
         > .cta-button {
           flex: 1;
         }
       }
     }
     .cta-button{
-      @include breakpoint(small only) {
+      @include scaffold.breakpoint(md, down) {
         font-size: 1rem;
         padding: 0.4rem 0.75rem;
       }
@@ -81,9 +82,9 @@
       &.link{
         position: relative;
         cursor: pointer;
-        // A button centres its content when stretched; this keeps it at the top.
         display: flex;
         flex-direction: column;
+        justify-content: center;
         .copied{
           font-size: 1em;
           left: 20%;
@@ -98,7 +99,7 @@
 .product-principles-strategies{
   p{
     margin: 0;
-    @include breakpoint(medium up) {
+    @include scaffold.breakpoint(md) {
       padding: 0;
     }
   }
