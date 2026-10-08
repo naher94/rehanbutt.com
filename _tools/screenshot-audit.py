@@ -90,6 +90,17 @@ try {
 } catch (e) {}
 let s = 42;
 Math.random = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296);
+// The footer greets with the weekday and the site has date-based themes, so the real date flags every page
+// the day after a capture. Start the clock at a fixed, ordinary Wednesday; it still ticks.
+const RealDate = Date, START = new RealDate(2026, 5, 10, 12).getTime(), T0 = performance.now();
+const clock = () => START + (performance.now() - T0);
+function FixedDate(...a) {
+  if (!new.target) return new RealDate(clock()).toString();
+  return Reflect.construct(RealDate, a.length ? a : [clock()], new.target);
+}
+FixedDate.prototype = RealDate.prototype;
+FixedDate.now = clock; FixedDate.parse = RealDate.parse; FixedDate.UTC = RealDate.UTC;
+Date = FixedDate;
 """
 STYLED = "[...document.styleSheets].some(s => (s.href || '').endsWith('/css/rehan.css') && s.cssRules.length > 0)"
 BLOCKED = re.compile(r"google-analytics\.com|googletagmanager\.com|doubleclick\.net")
