@@ -1,0 +1,34 @@
+<!doctype html><meta charset="utf-8"><title>MorphSVG lab</title>
+<script src="vendor/gsap.min.js"></script><script src="vendor/MorphSVGPlugin.min.js"></script>
+<style>body{margin:0;background:#fff;font:12px/1 monospace;color:#1f2937} .r{display:flex;align-items:center;gap:12px;height:96px;border-bottom:1px solid #eee} .r b{width:210px;padding-left:8px} svg{width:560px;height:96px;overflow:visible} path{fill:#1f2937}</style>
+<div id="o"></div>
+<script>
+gsap.registerPlugin(MorphSVGPlugin);
+const P=+(new URLSearchParams(location.search).get('p')||.5);
+const CFG=[
+ ['default (map size, linear)',{}],
+ ['map: position',{map:'position'}],
+ ['map: complexity',{map:'complexity'}],
+ ['type: rotational',{type:'rotational'}],
+ ['rotational + position',{type:'rotational',map:'position'}],
+ ['rotational + complexity',{type:'rotational',map:'complexity'}],
+];
+fetch('glyphs.json',{cache:'no-store'}).then(r=>r.json()).then(({heading})=>{
+  const add=(name,opt,pairMode)=>{
+    const row=document.createElement('div'); row.className='r'; row.innerHTML=`<b>${name}</b><svg viewBox="0 -110 560 110"></svg>`; o.append(row);
+    const svg=row.querySelector('svg');
+    heading.forEach(g=>{ const list=pairMode?g.pairs:[{a:g.a,b:g.b}]; list.forEach(c=>{ const p=document.createElementNS('http://www.w3.org/2000/svg','path'); p.setAttribute('d',c.a); if(c.hole) p.style.fill='#fff'; svg.append(p);
+      gsap.to(p,{duration:1,ease:'none',paused:true,morphSVG:{shape:c.b,...opt}}).progress(P); }); });
+  };
+  CFG.forEach(([n,o])=>add(n,o,false));
+  // polygon resample: sample both outlines at N evenly spaced points, align start points, tween point by point
+  (()=>{ const row=document.createElement('div'); row.className='r'; row.innerHTML='<b>polygon resample N=300</b><svg viewBox="0 -110 560 110"></svg>'; o.append(row); const svg=row.querySelector('svg'), N=300, NS='http://www.w3.org/2000/svg';
+    const sample=d=>{ const q=document.createElementNS(NS,'path'); q.setAttribute('d',d); const L=q.getTotalLength(); return Array.from({length:N},(_,i)=>{ const pt=q.getPointAtLength(L*i/N); return [pt.x,pt.y]; }); };
+    heading.forEach(g=>g.pairs.forEach(c=>{ const A=sample(c.a), B0=sample(c.b); let best=0,bd=1e18; for(let s=0;s<N;s+=2){ let dd=0; for(let i=0;i<N;i+=6){ const q=B0[(i+s)%N],r=A[i]; dd+=(q[0]-r[0])**2+(q[1]-r[1])**2; } if(dd<bd){bd=dd;best=s;} }
+      const B=B0.map((_,i)=>B0[(i+best)%N]), p=document.createElementNS(NS,'path'); if(c.hole) p.style.fill='#fff'; svg.append(p);
+      const e=P; p.setAttribute('d',A.map((a,i)=>(i?'L':'M')+(a[0]+(B[i][0]-a[0])*e).toFixed(1)+' '+(a[1]+(B[i][1]-a[1])*e).toFixed(1)).join('')+'Z'); })); })();
+  add('PER-CONTOUR pairs, default',{},true);
+  add('PER-CONTOUR pairs, position',{map:'position'},true);
+  add('PER-CONTOUR pairs, complexity',{map:'complexity'},true);
+});
+</script>

@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Disney role: sequence</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,900&family=JetBrains+Mono:wght@500&display=swap">
+<script src="vendor/gsap.min.js"></script>
+<style>
+  :root { --ink:#1f2937; --teal:#12abc4; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; background:#111; overflow:hidden; font-family:Lato,sans-serif; }
+  #fit { position:absolute; width:1920px; height:1080px; transform-origin:0 0; }
+  #stage { position:absolute; inset:0; overflow:hidden; background-color:#dcdde1;
+    background-image:linear-gradient(#cfd1d6 1px,transparent 1px),linear-gradient(90deg,#cfd1d6 1px,transparent 1px); background-size:48px 48px; }
+  /* camera is fixed for now: 1.3x on the role, centred at world (330, 215) */
+  #cam { position:absolute; left:0; top:0; transform-origin:0 0; transform:translate(531px,260.5px) scale(1.3); }
+  #panel { position:absolute; left:-240px; top:-200px; width:1180px; height:1000px; background:#fff; border-radius:28px;
+    box-shadow:0 30px 80px rgba(20,24,40,.18), 0 0 0 1px rgba(20,24,40,.06); }
+  .a { position:absolute; color:var(--ink); white-space:nowrap; }
+  #heading { position:absolute; left:0; top:0; overflow:visible; }
+  #heading path { fill:var(--ink); }
+  #divider { background:var(--teal); border-radius:500px; left:575px; top:-73px; width:210px; height:8px; }
+  #tile { left:13px; top:0; width:60px; height:2px; border-radius:1px; background:#9aa1ab; opacity:0; box-shadow:inset 0 0 0 1px rgba(31,41,55,.08); }
+  #mark { left:13px; top:0; width:60px; height:60px; display:flex; align-items:center; justify-content:center; opacity:0; }
+  #mark svg { width:40px; height:auto; fill:var(--ink); }
+  #wordmark { left:-171px; top:10px; width:167px; height:120px; }
+  #wordmark img { width:100%; height:100%; display:block; }
+  .poster { left:13px; width:60px; height:88px; border-radius:5px; overflow:hidden; }
+  .poster img { width:100%; height:100%; object-fit:cover; display:block; }
+  #ui { position:fixed; left:50%; bottom:14px; transform:translateX(-50%); display:flex; flex-direction:column; gap:8px; align-items:center;
+    background:rgba(20,22,30,.86); color:#fff; padding:10px 14px; border-radius:18px; font:500 12px/1 "JetBrains Mono",monospace; z-index:9; }
+  #ui .row { display:flex; gap:8px; align-items:center; justify-content:center; }
+  #ui button { all:unset; cursor:pointer; padding:6px 11px; border-radius:99px; background:#2c3040; color:#fff; }
+  #ui button.on { background:#4f6bff; }
+  #ui input[type=range] { width:480px; }
+  #tracks { position:relative; width:480px; cursor:pointer; }
+  #tracks .seg, #tracks .tw { position:absolute; border-radius:4px; overflow:hidden; white-space:nowrap; color:#fff; font:500 10px/18px "JetBrains Mono",monospace; padding:0 6px; }
+  #tracks .seg { height:18px; }
+  #tracks .seg:hover { filter:brightness(1.2); }
+  #tracks .tw { height:11px; font-size:9px; line-height:11px; padding:0 4px; opacity:.85; pointer-events:none; }
+  #tracks .row0 { position:relative; height:18px; }
+  #playhead { position:absolute; top:-3px; bottom:-3px; width:2px; margin-left:-1px; background:#ff5a5f; border-radius:1px; pointer-events:none; z-index:2; }
+  body.clean #ui { display:none; }
+</style>
+</head>
+<body>
+<div id="fit"><div id="stage"><div id="cam">
+  <div id="panel"></div>
+
+  <!-- V9 role, world coordinates are relative to the role's top-left -->
+  <svg id="heading" width="1" height="1"></svg>
+  <div id="divider" class="a"></div>
+  <div id="tile" class="a"></div>
+  <div id="mark" class="a">MARK_SVG</div>
+  <div id="wordmark" class="a"><img src="v9-disney-wordmark.svg" alt=""></div>
+  <div class="a col" style="left:13px;top:0;font:italic 900 28px/39px Lato">Walt Disney Animation Studios</div>
+  <div class="a col" style="left:13px;top:39px;font:900 20px/28px Lato">Senior Product Designer</div>
+  <div class="a col" style="left:13px;top:62px;font:italic 300 20px/32px Lato">August 2022・Present</div>
+  <div class="a col" style="left:13px;top:89px;width:772px;white-space:normal;font:400 20px/24px Lato">As part of the technology department, I lead the design of a wide range of tools used by artists and filmmakers. I collaborate closely with both artists and engineers to translate cutting-edge computer graphics technology into intuitive, artist-centric tools. As a design generalist, I’m involved throughout the entire product lifecycle, from concept and development to launch and ongoing refinement, while advocating for best practices in user experience across the Studio.</div>
+  <div id="films"></div>
+</div></div></div>
+
+<div id="ui">
+  <div class="row"><input id="scrub" type="range" min="0" max="1" step="0.001" value="0"><span id="clock">0.00s</span></div>
+  <div id="tracks"><div id="playhead"></div></div>
+  <div class="row"><button id="play">pause</button><button id="loop" class="on">loop</button><button id="full">full</button><button id="detail" class="on">tweens</button></div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+// V9 film rows
+[['zootopia2','Zootopia 2',2025,243],['moana2','Moana 2',2024,341],['wish','Wish',2023,440]].forEach(([slug,name,year,y]) => {
+  $('films').insertAdjacentHTML('beforeend', `
+    <div class="a col poster" style="top:${y}px"><img src="${slug}-poster.jpg" alt=""></div>
+    <div class="a col" style="left:83px;top:${y+14}px;font:900 20px/32px Lato">${name}<b style="font-weight:700">・${year}</b></div>
+    <div class="a col" style="left:83px;top:${y+42}px;font:400 20px/24px Lato">Credited under Technology - Engineering Services</div>`);
+});
+
+let tl, DUR, lo = 0, hi = 0, t = 0, playing = true, loop = true;
+
+fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(({ heading }) => {
+  // One <path> per letter. Before and after the morph it draws the font's own curves; in between it tweens 300 matched points
+  // per contour (see extract-glyphs.js).
+  const svg = $('heading'), NS = 'http://www.w3.org/2000/svg';
+  const paths = heading.map(g => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', g.a); svg.append(p); return p; });
+  const MORPH = 1.4, STAGGER = 0.03, ease = gsap.parseEase('power3.inOut'), H = { time: 0 };
+  const poly = (g, e) => g.pairs.map(({ a, b }) => { let d = ''; for (let i = 0; i < a.length; i += 2) d += (i ? 'L' : 'M') + (a[i] + (b[i] - a[i]) * e).toFixed(1) + ' ' + (a[i + 1] + (b[i + 1] - a[i + 1]) * e).toFixed(1); return d + 'Z'; }).join('');
+  const drawHeading = () => heading.forEach((g, i) => { const p = Math.max(0, Math.min(1, (H.time - i * STAGGER) / MORPH));
+    paths[i].setAttribute('d', p <= 0 ? g.a : p >= 1 ? g.b : poly(g, ease(p))); });
+
+  tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.inOut' }, onUpdate: drawHeading });
+  tl.addLabel('v9', 0);
+  // Each step is a nested timeline, placed on the master at a label. Times inside a step are relative to its own start.
+  const header = gsap.timeline({ data: 'header', defaults: { ease: 'power3.inOut' } });
+  header.to(H, { data: 'letters', time: MORPH + STAGGER * (heading.length - 1), duration: MORPH + STAGGER * (heading.length - 1), ease: 'none' }, 0);
+  // the divider is the next link in the letters' chain: same stagger step, same duration, same ease
+  header.to('#divider', { data: 'teal line', duration: MORPH, left: 546, top: -66, width: 269 }, STAGGER * heading.length);
+  tl.addLabel('header', 0.9).add(header, 'header');
+
+  // Step 2: the logo box. It fades in as a thin line above the company name, then grows into the card while the whole column
+  // slides down in lockstep with it (box height + the 10px gap = how far the column travels).
+  const logo = gsap.timeline({ data: 'logo', defaults: { ease: 'power3.inOut' } });
+  logo.to('#tile', { data: 'line in', opacity: 1, duration: 0.35, ease: 'power1.out' }, 0);
+  logo.to('#tile', { data: 'box grows', height: 60, borderRadius: 10, backgroundColor: '#fffbec', duration: 1.0 }, 0.55);
+  logo.to('.col', { data: 'column slides', y: 70, duration: 1.0 }, 0.55);
+  logo.to('#wordmark', { data: 'wordmark out', opacity: 0, duration: 0.45, ease: 'power1.out' }, 0.7);
+  logo.to('#mark', { data: 'mark in', opacity: 1, duration: 0.3, ease: 'power1.out' }, 1.2);
+  logo.fromTo('#mark svg', { scale: 0.6 }, { data: 'mark pop', scale: 1, duration: 0.5, ease: 'back.out(2.2)' }, 1.2);
+  tl.addLabel('logo', '>+=0.25').add(logo, 'logo');
+
+  tl.addLabel('end', tl.duration() + 0.6);   // hold on the finished header
+  tl.to({}, { duration: 0.001 }, 'end');
+  DUR = tl.duration();
+  setRange(0, DUR);
+  buildTracks();
+  gsap.ticker.add(tick);
+});
+
+function setRange(a, b) { lo = a; hi = b; }
+// Timeline strip: each nested timeline is a coloured block (click to loop it); its tweens sit underneath ("tweens" toggles them).
+const COLORS = ['#4f6bff', '#12abc4', '#e5833a', '#9b5de5', '#2fa36b'];
+function buildTracks() {
+  const box = $('tracks'), pct = v => (v / DUR * 100) + '%';
+  const row = document.createElement('div'); row.className = 'row0'; box.append(row);
+  const steps = tl.getChildren(false, false, true).filter(c => c.data);
+  const tweenRows = [];
+  steps.forEach((st, i) => {
+    const start = st.startTime(), color = COLORS[i % COLORS.length];
+    const seg = document.createElement('div'); seg.className = 'seg'; seg.textContent = st.data; seg.style.cssText = `left:${pct(start)};width:${pct(st.duration())};background:${color}`;
+    seg.title = `${st.data}: ${start.toFixed(2)}s to ${(start + st.duration()).toFixed(2)}s`;
+    seg.onclick = e => { e.stopPropagation(); setRange(start, start + st.duration()); t = start; playing = true; $('play').textContent = 'pause'; };
+    row.append(seg);
+    // stack the step's tweens in as few lanes as possible
+    const lanes = [];
+    st.getChildren(false, true, false).forEach(c => {
+      const a = start + c.startTime(), b = a + c.duration(); let lane = lanes.findIndex(end => end <= a + 1e-6); if (lane < 0) { lane = lanes.length; lanes.push(0); } lanes[lane] = b;
+      const tw = document.createElement('div'); tw.className = 'tw'; tw.textContent = c.data || ''; tw.dataset.lane = lane;
+      tw.style.cssText = `left:${pct(a)};width:${pct(b - a)};background:${color}`; tw.title = `${c.data || 'tween'}: ${a.toFixed(2)}s, ${c.duration().toFixed(2)}s long`; tweenRows.push({ tw, lane, i }); box.append(tw);
+    });
+  });
+  // tween lanes sit below the segment row; all steps share the same lanes since they don't overlap in time
+  const total = tweenRows.reduce((m, r) => Math.max(m, r.lane + 1), 0);
+  tweenRows.forEach(r => { r.tw.style.top = (22 + r.lane * 13) + 'px'; });
+  box.style.height = (22 + total * 13) + 'px'; box.dataset.full = box.style.height;
+  box.onclick = e => { const r = box.getBoundingClientRect(); playing = false; $('play').textContent = 'play'; t = Math.max(0, Math.min(DUR, (e.clientX - r.left) / r.width * DUR)); };
+  $('detail').onclick = () => { const on = $('detail').classList.toggle('on'); box.querySelectorAll('.tw').forEach(n => n.style.display = on ? '' : 'none'); box.style.height = on ? box.dataset.full : '18px'; };
+  $('full').onclick = () => setRange(0, DUR);
+}
+let last = performance.now();
+function tick() {
+  const now = performance.now(), dt = Math.min((now - last) / 1000, .1); last = now;
+  fit();
+  if (playing) { t += dt; if (t >= hi + (hi >= DUR ? .6 : 0)) { if (loop) t = lo; else { t = hi; playing = false; $('play').textContent = 'play'; } } }
+  t = Math.max(0, Math.min(t, DUR)); tl.time(t, false);
+  $('scrub').value = t / DUR; $('clock').textContent = t.toFixed(2) + 's'; $('playhead').style.left = (t / DUR * 100) + '%';
+}
+$('play').onclick = () => { playing = !playing; $('play').textContent = playing ? 'pause' : 'play'; };
+$('loop').onclick = () => { loop = !loop; $('loop').classList.toggle('on', loop); };
+$('scrub').oninput = e => { playing = false; $('play').textContent = 'play'; t = e.target.value * DUR; };
+addEventListener('keydown', e => {
+  if (e.code === 'Space') { e.preventDefault(); $('play').click(); }
+  else if (e.key === 'l') $('loop').click();
+  else if (e.key === 'ArrowLeft') { playing = false; t = Math.max(0, t - 1 / 30); }
+  else if (e.key === 'ArrowRight') { playing = false; t = Math.min(DUR, t + 1 / 30); }
+});
+function fit() { const s = Math.min(innerWidth / 1920, innerHeight / 1080), f = $('fit'); f.style.transform = `scale(${s})`; f.style.left = (innerWidth - 1920 * s) / 2 + 'px'; f.style.top = (innerHeight - 1080 * s) / 2 + 'px'; }
+if (new URLSearchParams(location.search).has('clean')) document.body.classList.add('clean');
+window.seek = v => { playing = false; t = v; fit(); tl.time(v, false); };   // frame access for export
+fit();
+</script>
+</body>
+</html>
