@@ -119,19 +119,19 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   // Step 2: the logo box. It fades in as a thin line above the company name, then grows into the card while the whole column
   // slides down in lockstep with it (box height + the 10px gap = how far the column travels).
   const logo = gsap.timeline({ data: 'logo', defaults: { ease: 'power3.inOut' } });
-  logo.to('#tile', { data: 'line in', opacity: 1, duration: 0.35, ease: 'power1.out' }, 0);
-  logo.to('#tile', { data: 'box grows', height: 60, borderRadius: 10, backgroundColor: '#fffbec', duration: 1.0 }, 0.55);
-  logo.to('.col', { data: 'column slides', y: 70, duration: 1.0 }, 0.55);
-  logo.to('#wordmark', { data: 'wordmark out', opacity: 0, duration: 0.45, ease: 'power1.out' }, 0.7);
-  logo.to('#mark', { data: 'mark in', opacity: 1, duration: 0.3, ease: 'power1.out' }, 1.2);
-  logo.fromTo('#mark svg', { scale: 0.6 }, { data: 'mark pop', scale: 1, duration: 0.5, ease: 'back.out(2.2)' }, 1.2);
+  logo.to('#tile', { data: 'line in', opacity: 1, duration: 0.3, ease: 'power1.out' }, 0);
+  logo.to('#tile', { data: 'box grows', height: 60, borderRadius: 10, backgroundColor: '#fffbec', duration: 1.0 }, 0.3);
+  logo.to('.col', { data: 'column slides', y: 70, duration: 1.0 }, 0.3);
+  logo.to('#wordmark', { data: 'wordmark out', opacity: 0, duration: 0.45, ease: 'power1.out' }, 0.45);
+  logo.to('#mark', { data: 'mark in', opacity: 1, duration: 0.3, ease: 'power1.out' }, 0.95);
+  logo.fromTo('#mark svg', { scale: 0.6 }, { data: 'mark pop', scale: 1, duration: 0.5, ease: 'back.out(2.2)' }, 0.95);
   tl.addLabel('logo', 2.3).add(logo, 'logo');   // starts while the header's last letters are still settling; every later step chains off this
 
 
   // Step 3: the company name. Black Italic straightens into Black, letter by letter, at the same stagger as the heading.
   const titleStep = gsap.timeline({ data: 'title', defaults: { ease: 'power3.inOut' } });
   titleStep.to(T.state, { data: 'letters', time: T.total, duration: T.total, ease: 'none' }, 0);
-  tl.addLabel('title', '>+=0.1').add(titleStep, 'title');
+  tl.addLabel('title', 3.6).add(titleStep, 'title');   // overlaps the very end of the logo step; the date and description chain off it
 
 
   // Step 4: the date. (1) the whole V9 line slides right as one rigid piece, at one speed. "22 · Present" reaches its resting place and
@@ -191,11 +191,16 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   $('descMode').textContent = 'description: ' + (DESC_MODE === 'leading' ? 'leading only' : 'reflow');
   $('descMode').onclick = () => { const q = new URLSearchParams(location.search); q.set('desc', DESC_MODE === 'leading' ? 'reflow' : 'leading'); location.search = q.toString(); };
   if (DESC_MODE === 'leading') {
-    // The cheat: no re-wrapping. The paragraph keeps its V9 line breaks and only the leading opens up (24 -> 32px), which makes the block
-    // 48px taller, and the whole posters section is pushed down by exactly that much, in lockstep.
+    // The cheat: no re-wrapping. The paragraph keeps its V9 line breaks and only the leading opens up (24 -> 32px): each line drops by
+    // 4 + 8 x (its row) px, so the block ends 48px taller. Rather than one uniform change, the lines open as a soft cascade, top to
+    // bottom, each with a gentle spring, and the posters section follows the last line down so the gap to it never changes.
+    const desc = $('desc'), words = (() => { desc.innerHTML = desc.textContent.trim().split(/\s+/).map(w => `<span class="w">${w}</span>`).join(' '); return [...desc.querySelectorAll('.w')]; })();
+    const tops = [...new Set(words.map(w => w.offsetTop))].sort((a, b) => a - b); words.forEach(w => { w.line = tops.indexOf(w.offsetTop); });
+    const Ld = { time: 0 }, LD = 0.6, LS = 0.04, last = tops.length - 1, spring = gsap.parseEase('back.out(1.4)');
+    applyDesc = () => words.forEach(w => { const e = spring(Math.max(0, Math.min(1, (Ld.time - w.line * LS) / LD))); w.style.transform = e === 0 ? '' : `translateY(${(4 + 8 * w.line) * e}px)`; });
     const descStep = gsap.timeline({ data: 'description', defaults: { ease: 'power3.inOut' } });
-    descStep.to('#desc', { data: 'leading 24 > 32', lineHeight: '32px', duration: 0.9 }, 0);
-    descStep.to('#films .below', { data: 'posters pushed down', y: '+=48', duration: 0.9 }, 0);
+    descStep.to(Ld, { data: 'lines open, top to bottom', time: LD + LS * last, duration: LD + LS * last, ease: 'none' }, 0);
+    descStep.to('#films .below', { data: 'posters follow the last line', y: '+=48', duration: LD, ease: 'back.out(1.4)' }, LS * last);
     tl.addLabel('description', '>+=0.1').add(descStep, 'description');
   } else {
   // Reflow: same words, same type; only the measure (772 -> 816px wide) and the leading (24 -> 32px) change, so the
