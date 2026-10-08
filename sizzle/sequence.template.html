@@ -34,13 +34,18 @@
   #ui button { all:unset; cursor:pointer; padding:6px 11px; border-radius:99px; background:#2c3040; color:#fff; }
   #ui button.on { background:#4f6bff; }
   #ui input[type=range] { width:480px; }
-  #tracks { position:relative; width:480px; cursor:pointer; }
+  #tracks { position:relative; width:560px; cursor:ew-resize; touch-action:none; user-select:none; }
+  #ruler { position:relative; height:12px; border-bottom:1px solid #3a3f52; }
+  #ruler i { position:absolute; top:0; width:1px; height:5px; background:#6b7288; }
+  #ruler i.s { height:11px; } #ruler b { position:absolute; top:-1px; margin-left:3px; font:500 9px/11px "JetBrains Mono",monospace; color:#8a91a8; }
+  #band { position:absolute; top:12px; bottom:0; background:rgba(79,107,255,.16); border-left:1px solid #4f6bff; border-right:1px solid #4f6bff; pointer-events:none; }
   #tracks .seg, #tracks .tw { position:absolute; border-radius:4px; overflow:hidden; white-space:nowrap; color:#fff; font:500 10px/18px "JetBrains Mono",monospace; padding:0 6px; }
   #tracks .seg { height:18px; }
   #tracks .seg:hover { filter:brightness(1.2); }
   #tracks .tw { height:11px; font-size:9px; line-height:11px; padding:0 4px; opacity:.85; pointer-events:none; }
-  #tracks .row0 { position:relative; height:18px; }
-  #playhead { position:absolute; top:-3px; bottom:-3px; width:2px; margin-left:-1px; background:#ff5a5f; border-radius:1px; pointer-events:none; z-index:2; }
+  #tracks .row0 { position:relative; height:18px; margin-top:4px; }
+  #playhead { position:absolute; top:0; bottom:-3px; width:2px; margin-left:-1px; background:#ff5a5f; pointer-events:none; z-index:2; }
+  #playhead::before { content:''; position:absolute; top:-1px; left:-5px; border:6px solid transparent; border-top:8px solid #ff5a5f; border-bottom:0; }
   body.clean #ui { display:none; }
 </style>
 </head>
@@ -62,9 +67,8 @@
 </div></div></div>
 
 <div id="ui">
-  <div class="row"><input id="scrub" type="range" min="0" max="1" step="0.001" value="0"><span id="clock">0.00s</span></div>
-  <div id="tracks"><div id="playhead"></div></div>
-  <div class="row"><button id="play">pause</button><button id="loop" class="on">loop</button><button id="full">full</button><button id="detail" class="on">tweens</button></div>
+  <div id="tracks"><div id="ruler"></div><div id="band"></div><div id="playhead"></div></div>
+  <div class="row"><button id="play">pause</button><button id="loop" class="on">loop</button><button id="full">full</button><button id="detail" class="on">tweens</button><span id="clock">0.00s</span></div>
 </div>
 
 <script>
@@ -118,11 +122,13 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(({ heading 
   gsap.ticker.add(tick);
 });
 
-function setRange(a, b) { lo = a; hi = b; }
+function setRange(a, b) { lo = a; hi = b; const band = $('band'); if (band && DUR) { band.style.left = (a / DUR * 100) + '%'; band.style.width = ((b - a) / DUR * 100) + '%'; } }
 // Timeline strip: each nested timeline is a coloured block (click to loop it); its tweens sit underneath ("tweens" toggles them).
 const COLORS = ['#4f6bff', '#12abc4', '#e5833a', '#9b5de5', '#2fa36b'];
 function buildTracks() {
   const box = $('tracks'), pct = v => (v / DUR * 100) + '%';
+  const ruler = $('ruler'); for (let sec = 0; sec <= DUR; sec += 0.5) { const whole = Number.isInteger(sec);
+    ruler.insertAdjacentHTML('beforeend', `<i class="${whole ? 's' : ''}" style="left:${pct(sec)}"></i>${whole ? `<b style="left:${pct(sec)}">${sec}s</b>` : ''}`); }
   const row = document.createElement('div'); row.className = 'row0'; box.append(row);
   const steps = tl.getChildren(false, false, true).filter(c => c.data);
   const tweenRows = [];
@@ -130,7 +136,7 @@ function buildTracks() {
     const start = st.startTime(), color = COLORS[i % COLORS.length];
     const seg = document.createElement('div'); seg.className = 'seg'; seg.textContent = st.data; seg.style.cssText = `left:${pct(start)};width:${pct(st.duration())};background:${color}`;
     seg.title = `${st.data}: ${start.toFixed(2)}s to ${(start + st.duration()).toFixed(2)}s`;
-    seg.onclick = e => { e.stopPropagation(); setRange(start, start + st.duration()); t = start; playing = true; $('play').textContent = 'pause'; };
+    seg.onclick = () => { setRange(start, start + st.duration()); t = start; playing = true; $('play').textContent = 'pause'; };
     row.append(seg);
     // stack the step's tweens in as few lanes as possible
     const lanes = [];
@@ -142,10 +148,15 @@ function buildTracks() {
   });
   // tween lanes sit below the segment row; all steps share the same lanes since they don't overlap in time
   const total = tweenRows.reduce((m, r) => Math.max(m, r.lane + 1), 0);
-  tweenRows.forEach(r => { r.tw.style.top = (22 + r.lane * 13) + 'px'; });
-  box.style.height = (22 + total * 13) + 'px'; box.dataset.full = box.style.height;
-  box.onclick = e => { const r = box.getBoundingClientRect(); playing = false; $('play').textContent = 'play'; t = Math.max(0, Math.min(DUR, (e.clientX - r.left) / r.width * DUR)); };
-  $('detail').onclick = () => { const on = $('detail').classList.toggle('on'); box.querySelectorAll('.tw').forEach(n => n.style.display = on ? '' : 'none'); box.style.height = on ? box.dataset.full : '18px'; };
+  tweenRows.forEach(r => { r.tw.style.top = (12 + 4 + 22 + r.lane * 13) + 'px'; });
+  box.style.height = (12 + 4 + 22 + total * 13) + 'px'; box.dataset.full = box.style.height;
+  // the strip is the scrubber: drag anywhere to scrub; a plain click on a block loops that block, on empty space it seeks
+  const timeAt = e => { const r = box.getBoundingClientRect(); return Math.max(0, Math.min(DUR, (e.clientX - r.left) / r.width * DUR)); };
+  let down = null;
+  box.onpointerdown = e => { box.setPointerCapture(e.pointerId); down = { x: e.clientX, moved: false, seg: e.target.closest('.seg') }; };
+  box.onpointermove = e => { if (!down) return; if (Math.abs(e.clientX - down.x) > 3) down.moved = true; if (down.moved) { playing = false; $('play').textContent = 'play'; t = timeAt(e); } };
+  box.onpointerup = e => { if (!down) return; if (!down.moved) { if (down.seg) down.seg.onclick(e); else { playing = false; $('play').textContent = 'play'; t = timeAt(e); } } down = null; };
+  $('detail').onclick = () => { const on = $('detail').classList.toggle('on'); box.querySelectorAll('.tw').forEach(n => n.style.display = on ? '' : 'none'); box.style.height = on ? box.dataset.full : (12 + 4 + 18) + 'px'; };
   $('full').onclick = () => setRange(0, DUR);
 }
 let last = performance.now();
@@ -154,11 +165,10 @@ function tick() {
   fit();
   if (playing) { t += dt; if (t >= hi + (hi >= DUR ? .6 : 0)) { if (loop) t = lo; else { t = hi; playing = false; $('play').textContent = 'play'; } } }
   t = Math.max(0, Math.min(t, DUR)); tl.time(t, false);
-  $('scrub').value = t / DUR; $('clock').textContent = t.toFixed(2) + 's'; $('playhead').style.left = (t / DUR * 100) + '%';
+  $('clock').textContent = t.toFixed(2) + 's'; $('playhead').style.left = (t / DUR * 100) + '%';
 }
 $('play').onclick = () => { playing = !playing; $('play').textContent = playing ? 'pause' : 'play'; };
 $('loop').onclick = () => { loop = !loop; $('loop').classList.toggle('on', loop); };
-$('scrub').oninput = e => { playing = false; $('play').textContent = 'play'; t = e.target.value * DUR; };
 addEventListener('keydown', e => {
   if (e.code === 'Space') { e.preventDefault(); $('play').click(); }
   else if (e.key === 'l') $('loop').click();
