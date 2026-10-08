@@ -98,7 +98,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(({ heading,
     const draw = () => glyphs.forEach((g, i) => { const p = Math.max(0, Math.min(1, (state.time - i * stagger) / morph)); paths[i].setAttribute('d', p <= 0 ? g.a : p >= 1 ? g.b : poly(g, ease(p))); });
     return { state, total, draw, count: glyphs.length, morph, stagger };
   }
-  const H = vectorText($('heading'), heading, 1.4, 0.03), T = vectorText($('title'), title, 1.0, 0.03), D = vectorText($('dateMorph'), date, 1.0, 0.03);
+  const H = vectorText($('heading'), heading, 1.4, 0.03), T = vectorText($('title'), title, 1.0, 0.03), D = vectorText($('dateMorph'), date, 0.8, 0);   // no stagger: the content below shoves the whole date, every letter at once
   // The date's first half is a set of loose letters in the V9 face (dateDrop); its second half is the type morph (dateMorph).
   const mkPath = d => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); return p; };
   const dropEls = dateDrop.glyphs.map(g => { const p = mkPath(g.d); $('dateDrop').append(p); return { ...g, p }; });
@@ -135,7 +135,8 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(({ heading,
   // Step 4: the date. (1) the whole V9 line slides right as one rigid piece, at one speed. "22 · Present" reaches its resting place and
   // stops dead - it's the wall - while "August 20" carries straight on, so the letters between "Aug" and the wall get squished flat
   // against it, rightmost first (0, 2, t, s, u). An apostrophe drops in where the 0 was and "Aug" ends up snug against the "22".
-  // (2) the date and everything below it slide up 16px; (3) the type changes (Light Italic -> Regular); (4) the pill fades in.
+  // (2) the date and everything below it slide up 16px while the date carries on a bit further and its type changes (Light Italic ->
+  // Regular), landing on the title's row in the same motion; (3) the pill fades in.
   const dateStep = gsap.timeline({ data: 'date', defaults: { ease: 'power3.inOut' } });
   const S = { s: 0 }, T_L = 1.7, eL = gsap.parseEase('power1.out'), dxR = dateMeta.dx, dxL = dateMeta.dx + dateDrop.shift;   // s = distance the loose text has travelled
   const wall0 = dropEls.find(g => g.role === 'keep').p.getBBox().x;                                       // left edge of the "22"
@@ -157,8 +158,10 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(({ heading,
   let tWall = 0; while (tWall < T_L && dxL * eL(tWall / T_L) < dxR) tWall += 0.005;                       // when the wall is reached
   gsap.set(apos, { x: dxR });
   dateStep.fromTo(apos, { y: -28, opacity: 0 }, { data: 'apostrophe drops in', y: 0, opacity: 1, duration: 0.45, ease: 'bounce.out' }, tWall);
-  dateStep.to('.below', { data: 'slide up', y: '-=' + -dateMeta.dy, duration: 0.8 }, T_L + 0.15);
-  dateStep.to(D.state, { data: 'type changes', time: D.total, duration: D.total, ease: 'none' }, '>+=0.1');
+  // One motion: the bottom content slides up 16px and stops; the date, which rides up with it, carries on a further 7px as its type
+  // changes, as if the content below were pushing it, and lands on the title's row. Same start, same curve, same length; every letter moves together.
+  dateStep.to('.below', { data: 'slide up', y: '-=' + -dateMeta.dy, duration: D.total }, T_L + 0.15);
+  dateStep.to(D.state, { data: 'date: type changes + lands', time: D.total, duration: D.total, ease: 'none' }, T_L + 0.15);
   dateStep.to('#pill', { data: 'pill fades in', opacity: 1, duration: 0.5, ease: 'power1.out' }, '>+=0.05');
   tl.addLabel('date', '>+=0.1').add(dateStep, 'date');
 
