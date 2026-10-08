@@ -19,7 +19,8 @@
     box-shadow:0 30px 80px rgba(20,24,40,.18), 0 0 0 1px rgba(20,24,40,.06); }
   .a { position:absolute; color:var(--ink); white-space:nowrap; }
   #heading { position:absolute; left:0; top:0; overflow:visible; }
-  #heading path { fill:var(--ink); }
+  #heading path, #title path, #date path { fill:var(--ink); }
+  #pill { left:652px; top:39px; width:164px; height:29px; border-radius:14.5px; background:#e9eaeb; opacity:0; }   /* final V10 box; it only fades in */
   #divider { background:var(--teal); border-radius:500px; left:575px; top:-73px; width:210px; height:8px; }
   #tile { left:13px; top:0; width:60px; height:2px; border-radius:1px; background:#9aa1ab; opacity:0; box-shadow:inset 0 0 0 1px rgba(31,41,55,.08); }
   #mark { left:13px; top:0; width:60px; height:60px; display:flex; align-items:center; justify-content:center; opacity:0; }
@@ -28,13 +29,13 @@
   #wordmark img { width:100%; height:100%; display:block; }
   .poster { left:13px; width:60px; height:88px; border-radius:5px; overflow:hidden; }
   .poster img { width:100%; height:100%; object-fit:cover; display:block; }
-  #ui { position:fixed; left:50%; bottom:14px; transform:translateX(-50%); display:flex; flex-direction:column; gap:8px; align-items:center;
-    background:rgba(20,22,30,.86); color:#fff; padding:10px 14px; border-radius:18px; font:500 12px/1 "JetBrains Mono",monospace; z-index:9; }
-  #ui .row { display:flex; gap:8px; align-items:center; justify-content:center; }
+  #ui { position:fixed; left:0; right:0; bottom:0; display:flex; flex-direction:column; gap:8px; align-items:stretch; 
+    background:#14161e; color:#fff; padding:10px 20px 12px; border-radius:14px 14px 0 0; font:500 12px/1 "JetBrains Mono",monospace; z-index:9; }
+  #ui .row { display:flex; gap:8px; align-items:center; justify-content:flex-start; }
   #ui button { all:unset; cursor:pointer; padding:6px 11px; border-radius:99px; background:#2c3040; color:#fff; }
   #ui button.on { background:#4f6bff; }
   #ui input[type=range] { width:480px; }
-  #tracks { position:relative; width:560px; cursor:ew-resize; touch-action:none; user-select:none; }
+  #tracks { position:relative; width:100%; cursor:ew-resize; touch-action:none; user-select:none; }
   #ruler { position:relative; height:12px; border-bottom:1px solid #3a3f52; }
   #ruler i { position:absolute; top:0; width:1px; height:5px; background:#6b7288; }
   #ruler i.s { height:11px; } #ruler b { position:absolute; top:-1px; margin-left:3px; font:500 9px/11px "JetBrains Mono",monospace; color:#8a91a8; }
@@ -59,10 +60,11 @@
   <div id="tile" class="a"></div>
   <div id="mark" class="a">MARK_SVG</div>
   <div id="wordmark" class="a"><img src="v9-disney-wordmark.svg" alt=""></div>
-  <div class="a col" style="left:13px;top:0;font:italic 900 28px/39px Lato">Walt Disney Animation Studios</div>
+  <svg id="title" class="col" width="1" height="1" style="position:absolute;left:0;top:0;overflow:visible"></svg>
   <div class="a col" style="left:13px;top:39px;font:900 20px/28px Lato">Senior Product Designer</div>
-  <div class="a col" style="left:13px;top:62px;font:italic 300 20px/32px Lato">August 2022・Present</div>
-  <div class="a col" style="left:13px;top:89px;width:772px;white-space:normal;font:400 20px/24px Lato">As part of the technology department, I lead the design of a wide range of tools used by artists and filmmakers. I collaborate closely with both artists and engineers to translate cutting-edge computer graphics technology into intuitive, artist-centric tools. As a design generalist, I’m involved throughout the entire product lifecycle, from concept and development to launch and ongoing refinement, while advocating for best practices in user experience across the Studio.</div>
+  <div id="pill" class="a col"></div>
+  <svg id="date" class="col below" width="1" height="1" style="position:absolute;left:0;top:0;overflow:visible"><g id="dateDrop"></g><g id="dateMorph" style="display:none"></g></svg>
+  <div class="a col below" style="left:13px;top:89px;width:772px;white-space:normal;font:400 20px/24px Lato">As part of the technology department, I lead the design of a wide range of tools used by artists and filmmakers. I collaborate closely with both artists and engineers to translate cutting-edge computer graphics technology into intuitive, artist-centric tools. As a design generalist, I’m involved throughout the entire product lifecycle, from concept and development to launch and ongoing refinement, while advocating for best practices in user experience across the Studio.</div>
   <div id="films"></div>
 </div></div></div>
 
@@ -77,30 +79,39 @@ const $ = id => document.getElementById(id);
 // V9 film rows
 [['zootopia2','Zootopia 2',2025,243],['moana2','Moana 2',2024,341],['wish','Wish',2023,440]].forEach(([slug,name,year,y]) => {
   $('films').insertAdjacentHTML('beforeend', `
-    <div class="a col poster" style="top:${y}px"><img src="${slug}-poster.jpg" alt=""></div>
-    <div class="a col" style="left:83px;top:${y+14}px;font:900 20px/32px Lato">${name}<b style="font-weight:700">・${year}</b></div>
-    <div class="a col" style="left:83px;top:${y+42}px;font:400 20px/24px Lato">Credited under Technology - Engineering Services</div>`);
+    <div class="a col below poster" style="top:${y}px"><img src="${slug}-poster.jpg" alt=""></div>
+    <div class="a col below" style="left:83px;top:${y+14}px;font:900 20px/32px Lato">${name}<b style="font-weight:700">・${year}</b></div>
+    <div class="a col below" style="left:83px;top:${y+42}px;font:400 20px/24px Lato">Credited under Technology - Engineering Services</div>`);
 });
 
+let applyDate = () => {};
 let tl, DUR, lo = 0, hi = 0, t = 0, playing = true, loop = true;
 
-fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(({ heading }) => {
-  // One <path> per letter. Before and after the morph it draws the font's own curves; in between it tweens 300 matched points
-  // per contour (see extract-glyphs.js).
-  const svg = $('heading'), NS = 'http://www.w3.org/2000/svg';
-  const paths = heading.map(g => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', g.a); svg.append(p); return p; });
-  const MORPH = 1.4, STAGGER = 0.03, ease = gsap.parseEase('power3.inOut'), H = { time: 0 };
+fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(({ heading, title, date, dateMeta, dateDrop }) => {
+  // Type is drawn as outlines, one <path> per letter. Before and after its morph a letter draws the font's own curves; in between it
+  // tweens 300 matched points per contour (see extract-glyphs.js). Returns the step's length and a draw() for the master's onUpdate.
+  const NS = 'http://www.w3.org/2000/svg', ease = gsap.parseEase('power3.inOut');
   const poly = (g, e) => g.pairs.map(({ a, b }) => { let d = ''; for (let i = 0; i < a.length; i += 2) d += (i ? 'L' : 'M') + (a[i] + (b[i] - a[i]) * e).toFixed(1) + ' ' + (a[i + 1] + (b[i + 1] - a[i + 1]) * e).toFixed(1); return d + 'Z'; }).join('');
-  const drawHeading = () => heading.forEach((g, i) => { const p = Math.max(0, Math.min(1, (H.time - i * STAGGER) / MORPH));
-    paths[i].setAttribute('d', p <= 0 ? g.a : p >= 1 ? g.b : poly(g, ease(p))); });
+  function vectorText(svg, glyphs, morph, stagger) {
+    const paths = glyphs.map(g => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', g.a); svg.append(p); return p; });
+    const state = { time: 0 }, total = morph + stagger * (glyphs.length - 1);
+    const draw = () => glyphs.forEach((g, i) => { const p = Math.max(0, Math.min(1, (state.time - i * stagger) / morph)); paths[i].setAttribute('d', p <= 0 ? g.a : p >= 1 ? g.b : poly(g, ease(p))); });
+    return { state, total, draw, count: glyphs.length, morph, stagger };
+  }
+  const H = vectorText($('heading'), heading, 1.4, 0.03), T = vectorText($('title'), title, 1.0, 0.03), D = vectorText($('dateMorph'), date, 1.0, 0.03);
+  // The date's first half is a set of loose letters in the V9 face (dateDrop); its second half is the type morph (dateMorph).
+  const mkPath = d => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); return p; };
+  const dropEls = dateDrop.glyphs.map(g => { const p = mkPath(g.d); $('dateDrop').append(p); return { ...g, p }; });
+  const apos = mkPath(dateDrop.apos); $('dateDrop').append(apos);
+  const swapDate = () => { const morphing = D.state.time > 0; $('dateDrop').style.display = morphing ? 'none' : ''; $('dateMorph').style.display = morphing ? '' : 'none'; };
 
-  tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.inOut' }, onUpdate: drawHeading });
+  tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.inOut' }, onUpdate: () => { H.draw(); T.draw(); D.draw(); swapDate(); applyDate(); } });
   tl.addLabel('v9', 0);
   // Each step is a nested timeline, placed on the master at a label. Times inside a step are relative to its own start.
   const header = gsap.timeline({ data: 'header', defaults: { ease: 'power3.inOut' } });
-  header.to(H, { data: 'letters', time: MORPH + STAGGER * (heading.length - 1), duration: MORPH + STAGGER * (heading.length - 1), ease: 'none' }, 0);
+  header.to(H.state, { data: 'letters', time: H.total, duration: H.total, ease: 'none' }, 0);
   // the divider is the next link in the letters' chain: same stagger step, same duration, same ease
-  header.to('#divider', { data: 'teal line', duration: MORPH, left: 546, top: -66, width: 269 }, STAGGER * heading.length);
+  header.to('#divider', { data: 'teal line', duration: H.morph, left: 546, top: -66, width: 269 }, H.stagger * H.count);
   tl.addLabel('header', 0.9).add(header, 'header');
 
   // Step 2: the logo box. It fades in as a thin line above the company name, then grows into the card while the whole column
@@ -113,6 +124,43 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(({ heading 
   logo.to('#mark', { data: 'mark in', opacity: 1, duration: 0.3, ease: 'power1.out' }, 1.2);
   logo.fromTo('#mark svg', { scale: 0.6 }, { data: 'mark pop', scale: 1, duration: 0.5, ease: 'back.out(2.2)' }, 1.2);
   tl.addLabel('logo', '>+=0.25').add(logo, 'logo');
+
+
+  // Step 3: the company name. Black Italic straightens into Black, letter by letter, at the same stagger as the heading.
+  const titleStep = gsap.timeline({ data: 'title', defaults: { ease: 'power3.inOut' } });
+  titleStep.to(T.state, { data: 'letters', time: T.total, duration: T.total, ease: 'none' }, 0);
+  tl.addLabel('title', '>+=0.1').add(titleStep, 'title');
+
+
+  // Step 4: the date. (1) the whole V9 line slides right as one rigid piece, at one speed. "22 · Present" reaches its resting place and
+  // stops dead - it's the wall - while "August 20" carries straight on, so the letters between "Aug" and the wall get squished flat
+  // against it, rightmost first (0, 2, t, s, u). An apostrophe drops in where the 0 was and "Aug" ends up snug against the "22".
+  // (2) the date and everything below it slide up 16px; (3) the type changes (Light Italic -> Regular); (4) the pill fades in.
+  const dateStep = gsap.timeline({ data: 'date', defaults: { ease: 'power3.inOut' } });
+  const S = { s: 0 }, T_L = 1.7, eL = gsap.parseEase('power1.out'), dxR = dateMeta.dx, dxL = dateMeta.dx + dateDrop.shift;   // s = distance the loose text has travelled
+  const wall0 = dropEls.find(g => g.role === 'keep').p.getBBox().x;                                       // left edge of the "22"
+  dropEls.forEach(g => { const b = g.p.getBBox(); g.gap = wall0 - (b.x + b.width); g.w = b.width; });   // gap: letter's right edge to the wall
+  // The line only travels `shift` further, a touch less than the distance from "Aug" to the wall (the apostrophe needs a slot), so the
+  // squish schedule is scaled to fit: the last letter is just gone as "Aug" settles.
+  const toWall = wall0 - Math.max(...dropEls.filter(g => g.role === 'shift').map(g => { const b = g.p.getBBox(); return b.x + b.width; })), fit = dateDrop.shift / toWall;
+  applyDate = () => dropEls.forEach(g => {
+    const s = S.s;
+    if (g.role === 'keep') gsap.set(g.p, { x: Math.min(s, dxR) });                                        // the wall stops at its resting place
+    else if (g.role === 'shift') gsap.set(g.p, { x: s });                                                 // Aug just keeps going
+    else {                                                                                                // a loose letter: squished once it meets the wall
+      const u = Math.max(0, Math.min(1, (s - dxR - g.gap * fit) / (g.w * fit)));
+      if (u <= 0) gsap.set(g.p, { x: s, scaleX: 1, scaleY: 1, opacity: 1, transformOrigin: '100% 50%' });
+      else gsap.set(g.p, { x: dxR + g.gap, scaleX: 1 - u, scaleY: 1 + 0.14 * Math.sin(Math.PI * u), opacity: u >= 1 ? 0 : 1, transformOrigin: '100% 50%' });
+    }
+  });
+  dateStep.to(S, { data: 'slide: wall stops, Aug 20 squishes in', s: dxL, duration: T_L, ease: eL }, 0);
+  let tWall = 0; while (tWall < T_L && dxL * eL(tWall / T_L) < dxR) tWall += 0.005;                       // when the wall is reached
+  gsap.set(apos, { x: dxR });
+  dateStep.fromTo(apos, { y: -28, opacity: 0 }, { data: 'apostrophe drops in', y: 0, opacity: 1, duration: 0.45, ease: 'bounce.out' }, tWall);
+  dateStep.to('.below', { data: 'slide up', y: '-=' + -dateMeta.dy, duration: 0.8 }, T_L + 0.15);
+  dateStep.to(D.state, { data: 'type changes', time: D.total, duration: D.total, ease: 'none' }, '>+=0.1');
+  dateStep.to('#pill', { data: 'pill fades in', opacity: 1, duration: 0.5, ease: 'power1.out' }, '>+=0.05');
+  tl.addLabel('date', '>+=0.1').add(dateStep, 'date');
 
   tl.addLabel('end', tl.duration() + 0.6);   // hold on the finished header
   tl.to({}, { duration: 0.001 }, 'end');
@@ -175,7 +223,8 @@ addEventListener('keydown', e => {
   else if (e.key === 'ArrowLeft') { playing = false; t = Math.max(0, t - 1 / 30); }
   else if (e.key === 'ArrowRight') { playing = false; t = Math.min(DUR, t + 1 / 30); }
 });
-function fit() { const s = Math.min(innerWidth / 1920, innerHeight / 1080), f = $('fit'); f.style.transform = `scale(${s})`; f.style.left = (innerWidth - 1920 * s) / 2 + 'px'; f.style.top = (innerHeight - 1080 * s) / 2 + 'px'; }
+// the stage fits above the full-width timeline (the whole window when the controls are hidden with ?clean)
+function fit() { const ui = $('ui'), room = innerHeight - (document.body.classList.contains('clean') ? 0 : ui.offsetHeight), s = Math.min(innerWidth / 1920, room / 1080), f = $('fit'); f.style.transform = `scale(${s})`; f.style.left = (innerWidth - 1920 * s) / 2 + 'px'; f.style.top = (room - 1080 * s) / 2 + 'px'; }
 if (new URLSearchParams(location.search).has('clean')) document.body.classList.add('clean');
 window.seek = v => { playing = false; t = v; fit(); tl.time(v, false); };   // frame access for export
 fit();

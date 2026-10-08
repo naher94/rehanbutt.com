@@ -45,13 +45,46 @@ const align = (A, B) => { let best = 0, bd = Infinity; for (let s = 0; s < N; s+
 const flat = P => P.flatMap(p => [n2(p[0]), n2(p[1])]);
 const collapse = P => { const x = P.reduce((s, p) => s + p[0], 0) / N, y = P.reduce((s, p) => s + p[1], 0) / N; return P.map(() => [x, y]); };
 
-const lato = load('Lato-Black.ttf'), zilla = load('ZillaSlab-Bold.ttf'), TEXT = 'Work Experience';
-const A = glyphs(lato, TEXT, 5, baseline(lato, 70, -122, 98), 70), B = glyphs(zilla, TEXT, 0, baseline(zilla, 70, -108, 84), 70);
-const heading = A.map((ga, i) => { const gb = B[i], pairs = [];
-  for (let k = 0; k < Math.max(ga.subs.length, gb.subs.length); k++) { const a = ga.subs[k], b = gb.subs[k];
-    const pa = a && resample(fine(a.cmds)), pb = b && resample(fine(b.cmds));
-    if (a && b) pairs.push({ a: flat(pa), b: flat(align(pa, Math.sign(a.area) === Math.sign(b.area) ? pb : [...pb].reverse())) });
-    else if (a) pairs.push({ a: flat(pa), b: flat(collapse(pa)) }); else pairs.push({ a: flat(collapse(pb)), b: flat(pb) }); }
-  return { ch: ga.ch, pairs, a: ga.subs.map(s => toD(s.cmds)).join(''), b: gb.subs.map(s => toD(s.cmds)).join('') }; }).filter(g => g.pairs.length);
-fs.writeFileSync(__dirname + '/glyphs.json', JSON.stringify({ heading }));
-console.log('wrote glyphs.json:', heading.length, 'glyphs,', heading.reduce((s, g) => s + g.pairs.length, 0), 'contour pairs, N =', N);
+const advance = (f, t, sz) => { let w = 0, prev = null; for (const ch of t) { const g = f.charToGlyph(ch); if (prev) w += f.getKerningValue(prev, g) * sz / f.unitsPerEm; w += g.advanceWidth * sz / f.unitsPerEm; prev = g; } return w; };
+function lcs(x, y) { const n = x.length, m = y.length, D = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+  for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--) D[i][j] = x[i] === y[j] ? D[i + 1][j + 1] + 1 : Math.max(D[i + 1][j], D[i][j + 1]);
+  const out = []; let i = 0, j = 0;
+  while (i < n || j < m) { if (i < n && j < m && x[i] === y[j]) out.push([i++, j++]); else if (j >= m || (i < n && D[i + 1][j] >= D[i][j + 1])) out.push([i++, -1]); else out.push([-1, j++]); }
+  return out; }
+// Morph one line of type into another. Letters are matched by character (so "August 2022" -> "Aug '22" keeps the shared letters,
+// extra letters shrink away and new ones grow in). a, b = { text, font, size, x, top, lh }; x may be a function of the line's width.
+function morph(a, b) {
+  const bx = typeof b.x === 'function' ? b.x(advance(b.font, b.text, b.size)) : b.x;
+  const A = glyphs(a.font, a.text, a.x, baseline(a.font, a.size, a.top, a.lh), a.size), B = glyphs(b.font, b.text, bx, baseline(b.font, b.size, b.top, b.lh), b.size);
+  const out = [];
+  lcs([...a.text], [...b.text]).forEach(([i, j]) => { const ga = i >= 0 ? A[i] : { subs: [], ch: ' ' }, gb = j >= 0 ? B[j] : { subs: [], ch: ' ' }, pairs = [];
+    for (let k = 0; k < Math.max(ga.subs.length, gb.subs.length); k++) { const sa = ga.subs[k], sb = gb.subs[k];
+      const pa = sa && resample(fine(sa.cmds)), pb = sb && resample(fine(sb.cmds));
+      if (sa && sb) pairs.push({ a: flat(pa), b: flat(align(pa, Math.sign(sa.area) === Math.sign(sb.area) ? pb : [...pb].reverse())) });
+      else if (sa) pairs.push({ a: flat(pa), b: flat(collapse(pa)) }); else pairs.push({ a: flat(collapse(pb)), b: flat(pb) }); }
+    if (pairs.length) out.push({ ch: ga.ch, pairs, a: ga.subs.map(s => toD(s.cmds)).join(''), b: gb.subs.map(s => toD(s.cmds)).join('') }); });
+  return out;
+}
+const F = n => load(n);
+const black = F('Lato-Black.ttf'), blackItalic = F('Lato-BlackItalic.ttf'), zilla = F('ZillaSlab-Bold.ttf'), regular = F('Lato-Regular.ttf'), lightItalic = F('Lato-LightItalic.ttf');
+const DATE_A = 'August 2022 \u00B7 Present', DATE_B = "Aug '22 \u00B7 Present";
+const DATE = { dx: +(804 - (13 + advance(lightItalic, DATE_A, 20))).toFixed(2), dy: -16 };
+const DATE_W_A = advance(lightItalic, DATE_A, 20), DATE_C_X = 13 + DATE_W_A - advance(lightItalic, DATE_B, 20);   // B line right-aligned under A
+const gd = g => g.subs.map(c => toD(c.cmds)).join('');
+const AG = glyphs(lightItalic, DATE_A, 13, baseline(lightItalic, 20, 62, 32), 20), CG = glyphs(lightItalic, DATE_B, DATE_C_X, baseline(lightItalic, 20, 62, 32), 20);
+const DROP = [3, 4, 5, 7, 8];                      // u s t 2 0 of "August 2022"
+const dateDrop = { shift: +(DATE_C_X - 13).toFixed(2), glyphs: AG.map((g, i) => ({ ch: g.ch, i, role: DROP.includes(i) ? 'drop' : (i < 3 || i === 6 ? 'shift' : 'keep'), d: gd(g) })).filter(g => g.d), apos: gd(CG[4]) };
+const out = {
+  // "Work Experience": Lato Black (V9) -> Zilla Slab Bold (V10)
+  heading: morph({ text: 'Work Experience', font: black, size: 70, x: 5, top: -122, lh: 98 }, { text: 'Work Experience', font: zilla, size: 70, x: 0, top: -108, lh: 84 }),
+  // company name: Lato Black Italic -> Lato Black. All of these step positions are "before the column slides down 70px"
+  title: morph({ text: 'Walt Disney Animation Studios', font: blackItalic, size: 28, x: 13, top: 0, lh: 39 }, { text: 'Walt Disney Animation Studios', font: black, size: 28, x: 13, top: 0, lh: 39 }),
+  // date. The V9 line first slides right until its right edge meets the pill's inner edge (x 804). Letters we don't need then drop out,
+  // an apostrophe drops in, and "Aug" closes up to the "22" - all still in the V9 face (see dateDrop). Only then does the type change
+  // (this morph: the same line, Light Italic 20 -> Regular 18 centred in the pill). The morph layer is drawn already shifted right by dx; its local y is shifted by dy (the slide up).
+  date: morph({ text: DATE_B, font: lightItalic, size: 20, x: DATE_C_X + DATE.dx, top: 62, lh: 32 }, { text: DATE_B, font: regular, size: 18, x: w => 652 + (164 - w) / 2, top: 39 - DATE.dy, lh: 29 }),
+  dateDrop,
+  dateMeta: DATE,
+};
+fs.writeFileSync(__dirname + '/glyphs.json', JSON.stringify(out));
+console.log('wrote glyphs.json:', Object.entries(out).filter(([, v]) => Array.isArray(v)).map(([k, v]) => k + ' ' + v.length + ' glyphs / ' + v.reduce((s, g) => s + g.pairs.length, 0) + ' contours').join(', '), '(N =', N + ')');
