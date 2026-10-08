@@ -174,7 +174,7 @@ footer{
   }
   &.email-wrapper{
     position: relative;
-    display: inline;
+    display: inline-block;
     cursor: pointer;
     // Lato's text height, so the button's box matches the inline div it replaced.
     line-height: 1.2;

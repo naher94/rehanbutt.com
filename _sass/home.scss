@@ -331,7 +331,7 @@ $home-section-vertical-spacing-mobile: 4rem;
     }
     &.email-wrapper{
       position: relative;
-      display: inline;
+      display: inline-block;
       cursor: pointer;
       .copied{
         font-size: 1em;
