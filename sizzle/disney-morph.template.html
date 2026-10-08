@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Disney role: V9 to V10 morph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,900&family=Zilla+Slab:wght@700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+  :root { --ink:#1f2937; --teal:#12abc4; --blue:#4f6bff; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; background:#111; overflow:hidden; font-family:Lato,sans-serif; }
+  #fit { position:absolute; left:0; top:0; width:1920px; height:1080px; transform-origin:0 0; }
+  #stage { position:absolute; inset:0; overflow:hidden; background-color:#dcdde1;
+    background-image:linear-gradient(#cfd1d6 1px,transparent 1px),linear-gradient(90deg,#cfd1d6 1px,transparent 1px);
+    background-size:48px 48px; }
+  #cam { position:absolute; left:0; top:0; transform-origin:0 0; }
+  #panel { position:absolute; left:-240px; top:-200px; width:1180px; height:1000px; background:#fff;
+    border-radius:28px; box-shadow:0 30px 80px rgba(20,24,40,.18), 0 0 0 1px rgba(20,24,40,.06); }
+  .a { position:absolute; color:var(--ink); white-space:nowrap; line-height:1; }
+  .a .l { position:absolute; left:0; top:0; width:100%; }
+  .wrap { white-space:normal; }
+  #wordmark img { width:100%; height:100%; display:block; }
+  #tile { background:#fffbec; box-shadow:inset 0 0 0 1px rgba(31,41,55,.08); }
+  #mark { display:flex; align-items:center; justify-content:center; }
+  #mark svg { width:40px; height:auto; fill:var(--ink); }
+  .poster img { width:100%; height:100%; object-fit:cover; display:block; }
+  .poster { overflow:hidden; }
+  #ov { position:absolute; left:0; top:0; overflow:visible; pointer-events:none; }
+  #ui { position:fixed; left:50%; bottom:14px; transform:translateX(-50%); display:flex; flex-direction:column; gap:8px; align-items:stretch;
+    background:rgba(20,22,30,.82); color:#fff; padding:8px 14px; border-radius:999px; font:500 12px/1 "JetBrains Mono",monospace; z-index:9; }
+  #ui .row { display:flex; gap:10px; align-items:center; justify-content:center; }
+  #ui button.on { background:#4f6bff; }
+  #ui input[type=number] { width:62px; background:#2c3040; color:#fff; border:0; border-radius:6px; padding:4px 6px; font:inherit; }
+  #track { position:relative; width:560px; }
+  #range { position:absolute; left:0; top:50%; height:6px; margin-top:-3px; background:#4f6bff; opacity:.55; border-radius:3px; pointer-events:none; }
+  #ui input[type=range] { position:relative; width:100%; background:transparent; }
+  #ui button { all:unset; cursor:pointer; padding:4px 10px; border-radius:99px; background:#2c3040; }
+  
+  body.clean #ui { display:none; }
+</style>
+</head>
+<body>
+<div id="fit"><div id="stage"><div id="cam">
+  <div id="panel"></div>
+
+  <div id="heading" class="a" style="font-size:70px"><span class="l" id="hA" style="font:900 70px/98px Lato">Work Experience</span><span class="l" id="hB" style="font:700 70px/84px 'Zilla Slab'">Work Experience</span></div>
+  <div id="divider" class="a" style="background:var(--teal);border-radius:500px"></div>
+
+  <div id="wordmark" class="a"><img src="v9-disney-wordmark.svg" alt=""></div>
+  <div id="tile" class="a"></div>
+  <div id="mark" class="a">MARK_SVG</div>
+
+  <div id="h3" class="a"><span class="l" id="h3A" style="font:italic 900 28px/39px Lato">Walt Disney Animation Studios</span><span class="l" id="h3B" style="font:900 28px/39px Lato">Walt Disney Animation Studios</span></div>
+  <div id="h4" class="a" style="font:900 20px/28px Lato">Senior Product Designer</div>
+
+  <div id="pill" class="a" style="background:#e9eaeb"></div>
+  <div id="date" class="a"><span class="l" id="dA" style="font:italic 300 20px/32px Lato">August 2022・Present</span><span class="l" id="dB" style="font:400 18px/29px Lato;text-align:center">Aug '22・Present</span></div>
+
+  <div id="desc" class="a wrap" style="font:400 20px Lato">As part of the technology department, I lead the design of a wide range of tools used by artists and filmmakers. I collaborate closely with both artists and engineers to translate cutting-edge computer graphics technology into intuitive, artist-centric tools. As a design generalist, I’m involved throughout the entire product lifecycle, from concept and development to launch and ongoing refinement, while advocating for best practices in user experience across the Studio.</div>
+
+  <div id="label" class="a" style="font:400 20px/32px Lato">Credited Projects</div>
+
+  <div id="posters"></div>
+  <svg id="ov" width="1" height="1"></svg>
+</div></div></div>
+
+<div id="ui">
+  <div class="row"><div id="track"><div id="range"></div><input id="scrub" type="range" min="0" max="1" step="0.001" value="0"></div><span id="clock">0.00s</span></div>
+  <div class="row"><button id="play">pause</button><button id="loop" class="on">loop</button>
+    in <input id="tin" type="number" step="0.1" value="0"><button id="setin" title="I">[ set</button>
+    out <input id="tout" type="number" step="0.1" value="0"><button id="setout" title="O">set ]</button><button id="full">full</button></div>
+  <div class="row" id="chips"></div>
+</div>
+
+<script>
+(() => {
+const DUR = 16.4;
+const FILMS = [['zootopia2','Zootopia 2',2025],['moana2','Moana 2',2024],['wish','Wish',2023]];
+
+// cubic-bezier easing (same curve as $tight-spring-curve)
+const bez = (x1,y1,x2,y2) => t => {
+  if (t<=0) return 0; if (t>=1) return 1;
+  let lo=0, hi=1, u=t;
+  for (let i=0;i<24;i++){ u=(lo+hi)/2; const x=3*(1-u)*(1-u)*u*x1+3*(1-u)*u*u*x2+u*u*u; x<t?lo=u:hi=u; }
+  return 3*(1-u)*(1-u)*u*y1+3*(1-u)*u*u*y2+u*u*u;
+};
+const spring = bez(.175,.885,.32,1.275), smooth = bez(.4,0,.2,1);
+const clamp01 = v => Math.max(0,Math.min(1,v));
+const lerp = (a,b,e) => a+(b-a)*e;
+const ss = (a,b,v) => { const t=clamp01((v-a)/(b-a)); return t*t*(3-2*t); };
+const $ = id => document.getElementById(id);
+
+// ---- build posters + captions
+const posters = $('posters'); const items = [];
+FILMS.forEach(([slug,name,year],i) => {
+  const p = document.createElement('div'); p.className='a poster'; p.innerHTML=`<img src="${slug}-poster.jpg" alt="">`;
+  const c = document.createElement('div'); c.className='a';
+  c.innerHTML=`<span class="l" style="font:900 20px/32px Lato">${name}<b style="font-weight:700">・${year}</b></span><span class="l" style="font:400 20px/32px Lato">${name}</span><span class="l" style="font:700 20px/32px Lato;opacity:0">${name}</span>`;
+  const d = document.createElement('div'); d.className='a'; d.style.font='400 20px/24px Lato'; d.textContent='Credited under Technology - Engineering Services';
+  posters.append(p,c,d);
+  items.push({p,c,d,i, ya:[243,341,440][i]});
+});
+
+// ---- spec: [from, to] per property, applied between win[0]..win[1]
+const set = (n,o) => { const s=n.style;
+  if('x' in o) s.left=o.x+'px'; if('y' in o) s.top=o.y+'px'; if('w' in o) s.width=o.w+'px'; if('h' in o) s.height=o.h+'px';
+  if('r' in o) s.borderRadius=o.r+'px'; if('op' in o) s.opacity=o.op; if('ls' in o) s.letterSpacing=o.ls+'em';
+  if('lh' in o) s.lineHeight=o.lh+'px'; if('sc' in o) s.transform=`scale(${o.sc})`; };
+const mix = (A,B,e) => { const o={}; for (const k in A) o[k]=lerp(A[k],B[k],e); return o; };
+
+const M = [];      // morphers: {win, ease, from, to, apply(o,p), ov?}
+const add = m => (M.push(m), m);
+
+add({id:'heading', win:[12.7,13.6], ease:spring, from:{x:5,y:-122,w:560,h:98}, to:{x:0,y:-108,w:540,h:84},
+  apply(o,p,e){ set($('heading'),o); $('hA').style.opacity=1-ss(.25,.55,p); $('hB').style.opacity=ss(.3,.6,p); $('hA').style.letterSpacing=lerp(0,.04,ss(0,.5,p))+'em'; $('hB').style.letterSpacing=lerp(.04,0,ss(.5,1,p))+'em'; },
+  ov:{label:(o,p)=>`type  Lato 900 → Zilla Slab 700`}});
+add({id:'divider', win:[12.8,13.7], ease:spring, from:{x:575,y:-73,w:210,h:8}, to:{x:546,y:-66,w:269,h:8}, apply:(o)=>set($('divider'),o), ov:{label:(o)=>`w ${Math.round(o.w)}`}});
+
+add({id:'wordmark', win:[9.2,10.3], ease:smooth, from:{x:-171,y:10,w:167,h:120,op:1}, to:{x:10,y:15,w:40,h:29,op:0},
+  apply(o,p){ set($('wordmark'),o); $('wordmark').style.opacity=1-ss(.35,.7,p); },
+  ov:{label:(o,p)=>`scale ${(o.w/167*100).toFixed(0)}%`}});
+add({id:'tile', win:[9.6,10.5], ease:spring, from:{x:0,y:0,w:60,h:60,r:30,sc:.35,op:0}, to:{x:0,y:0,w:60,h:60,r:10,sc:1,op:1},
+  apply(o,p){ set($('tile'),o); $('tile').style.opacity=ss(0,.35,p); $('mark').style.opacity=ss(.35,.8,p); set($('mark'),{x:0,y:0,w:60,h:60,sc:lerp(.5,1,Math.min(1,p))}); },
+  ov:{label:(o)=>`radius ${o.r.toFixed(1)}`, rounded:true}});
+
+add({id:'h3', win:[9.4,10.5], ease:spring, from:{x:13,y:0,w:560,h:39,ls:.05}, to:{x:0,y:70,w:560,h:39,ls:0},
+  apply(o,p){ set($('h3'),o); $('h3A').style.opacity=1-ss(.2,.5,p); $('h3B').style.opacity=ss(.25,.55,p); $('h3').style.letterSpacing=o.ls+'em'; $('h3').firstChild.style.letterSpacing='inherit'; },
+  ov:{label:(o)=>`tracking ${(o.ls*1000).toFixed(0)}`}});
+add({id:'h4', win:[9.5,10.6], ease:spring, from:{x:13,y:39,w:300,h:28}, to:{x:0,y:109,w:300,h:28}, apply:(o)=>set($('h4'),o), ov:{label:(o)=>`y ${Math.round(o.y)}`}});
+
+add({id:'date', win:[9.9,11.0], ease:spring, from:{x:13,y:62,w:172,h:32,r:0}, to:{x:652,y:109,w:164,h:29,r:14.5},
+  apply(o,p){ set($('date'),{x:o.x,y:o.y,w:o.w,h:o.h});
+    const pill=$('pill'); set(pill,{x:o.x,y:o.y,w:o.w,h:o.h,r:o.r}); pill.style.opacity=ss(.15,.6,p);
+    $('dA').style.opacity=1-ss(.2,.45,p); $('dB').style.opacity=ss(.3,.6,p); },
+  ov:{label:(o)=>`radius ${o.r.toFixed(1)}`, rounded:true}});
+
+add({id:'desc', win:[11.0,12.1], ease:smooth, from:{x:13,y:89,w:772,h:144,lh:24}, to:{x:0,y:143,w:816,h:160,lh:32},
+  apply:(o)=>{ set($('desc'),o); }, ov:{label:(o)=>`leading ${o.lh.toFixed(1)}  w ${Math.round(o.w)}`}});
+
+add({id:'label', win:[7.9,8.8], ease:spring, from:{x:0,y:335,w:300,h:32,op:0,ls:.18}, to:{x:0,y:323,w:300,h:32,op:1,ls:0},
+  apply(o,p){ set($('label'),o); $('label').style.opacity=ss(0,.5,p); }, ov:{label:(o)=>`tracking ${(o.ls*1000).toFixed(0)}`}});
+
+const WT=2.2;   // Wish starts first, staged: credit fades > poster slides > caption slides > weight drops + dot fades > radius grows
+items.forEach(it => {
+  const i=it.i;
+  if(i===2){
+    const [L9,L4,L7]=it.c.children, dot=L9.querySelector('b');
+    add({id:'wish-credit', win:[WT,WT+.5], ease:smooth, from:{op:1}, to:{op:0}, apply:(o)=>{ it.d.style.left='83px'; it.d.style.top=(it.ya+42)+'px'; it.d.style.opacity=o.op; }});
+    // squash & stretch: anticipation squat > stretch along the travel direction (from the ease's own velocity) > impact squash that rings out
+    const DX=275, DY=-75, DL=Math.hypot(DX,DY), dir=[DX/DL,DY/DL], ang=Math.atan2(DY,DX)*180/Math.PI;
+    add({id:'wish-poster', win:[WT+.3,WT+2.3], ease:t=>t, from:{x:13,y:it.ya,w:60,h:88}, to:{x:288,y:365,w:128,h:192},
+      apply:(o,p)=>{
+        const tau=p*2.0, u=clamp01((tau-.3)/1.1), e=spring(u);
+        Object.assign(o, mix({x:13,y:it.ya,w:60,h:88},{x:288,y:365,w:128,h:192},e));
+        let tf='';
+        if(tau<.3){                                   // anticipation: squat and pull back
+          const a=smooth(tau/.3); const pull=-10*a;
+          tf=`translate(${dir[0]*pull}px,${dir[1]*pull}px) scale(${1+.1*a},${1-.14*a})`; it.p.style.transformOrigin='50% 100%';
+        } else if(u<1){                               // travel: stretch along motion, squash across
+          const v=(spring(Math.min(1,u+.01))-spring(Math.max(0,u-.01)))/.02, vn=Math.max(-1,Math.min(1,v/2.2));
+          const lead=tau<.42? 1-ss(.3,.42,tau):0;      // blend out of the squat
+          const sx=1+.24*vn+ .1*lead, sy=1-.15*vn-.14*lead;
+          tf=`rotate(${ang}deg) scale(${sx},${sy}) rotate(${-ang}deg)`; it.p.style.transformOrigin='50% 50%';
+        } else {                                      // impact: squash, then ring out
+          const ts=tau-1.4, q=.16*ss(0,.07,ts)*Math.exp(-7*ts)*Math.cos(ts*Math.PI*5); it.p.style.transformOrigin='50% 100%';
+          tf=`scale(${1+q*.8},${1-q})`;
+        }
+        it.p.style.transform=tf;
+        it.p.style.left=o.x+'px'; it.p.style.top=o.y+'px'; it.p.style.width=o.w+'px'; it.p.style.height=o.h+'px';
+      },
+      ov:{label:(o)=>`x ${Math.round(o.x)}  y ${Math.round(o.y)}  ${Math.round(o.w)}×${Math.round(o.h)}   squash & stretch`}});
+    add({id:'wish-caption', win:[WT+1.5,WT+2.5], ease:spring, from:{x:83,y:it.ya+14,w:200,h:32}, to:{x:288,y:562,w:200,h:32},
+      apply:(o)=>{ set(it.c,o); L4.style.opacity=0; L7.style.opacity=0; L9.style.opacity=1; },
+      ov:{label:(o)=>`x ${Math.round(o.x)}  y ${Math.round(o.y)}`}});
+    add({id:'wish-weight', win:[WT+2.6,WT+3.3], ease:smooth, from:{wt:900}, to:{wt:400},
+      apply:(o,p)=>{ L9.style.opacity=1-ss(.05,.5,p); L7.style.opacity=ss(.05,.4,p)*(1-ss(.5,.85,p)); L4.style.opacity=ss(.45,.9,p); },
+      ov:{label:(o)=>`weight ${Math.round(o.wt/100)*100}   ・2023 → 0`}});
+    add({id:'wish-radius', win:[WT+3.4,WT+4.1], ease:spring, from:{x:288,y:365,w:128,h:192,r:5}, to:{x:288,y:365,w:128,h:192,r:10},
+      apply:(o)=>set(it.p,{r:o.r}), ov:{label:(o)=>`radius ${o.r.toFixed(1)}`, rounded:true}});
+    return;
+  }
+  const t0=WT+4.3+(1-i)*.5+.0;
+  add({id:'poster'+i, win:[t0,t0+1.2], ease:spring, from:{x:13,y:it.ya,w:60,h:88,r:5}, to:{x:i*144,y:365,w:128,h:192,r:10},
+    apply:(o)=>set(it.p,o), ov:{label:(o)=>`radius ${o.r.toFixed(1)}  ${Math.round(o.w)}×${Math.round(o.h)}`, rounded:true}});
+  add({id:'cap'+i, win:[t0+.1,t0+1.3], ease:spring, from:{x:83,y:it.ya+14,w:420,h:32}, to:{x:i*144,y:562,w:128,h:32},
+    apply(o,p){ set(it.c,o); const [a,b]=it.c.children; a.style.opacity=1-ss(.3,.6,p); b.style.opacity=ss(.35,.65,p); }});
+  add({id:'desc'+i, win:[t0,t0+.7], ease:smooth, from:{x:83,y:it.ya+42,op:1}, to:{x:83,y:it.ya+54,op:0},
+    apply(o,p){ set(it.d,{x:o.x,y:o.y}); it.d.style.opacity=1-ss(0,.7,p); }});
+});
+
+// ---- overlay (blue vector-editor marks, only while an element moves)
+const NS='http://www.w3.org/2000/svg', ov=$('ov'), cam=$('cam');
+let CAMS=1.3;
+const ovs = M.filter(m=>m.ov).map(m=>{
+  const g=document.createElementNS(NS,'g'); g.style.opacity=0;
+  const r=document.createElementNS(NS,'rect'); r.setAttribute('fill','rgba(79,107,255,.06)'); r.setAttribute('stroke','#4f6bff'); r.setAttribute('vector-effect','non-scaling-stroke'); r.setAttribute('stroke-width','1.5');
+  const hs=[...Array(4)].map(()=>{const h=document.createElementNS(NS,'rect'); h.setAttribute('fill','#fff'); h.setAttribute('stroke','#4f6bff'); h.setAttribute('vector-effect','non-scaling-stroke'); h.setAttribute('stroke-width','1.5'); return h;});
+  const dot=document.createElementNS(NS,'circle'); dot.setAttribute('fill','#4f6bff');
+  const tag=document.createElementNS(NS,'g'); const tr=document.createElementNS(NS,'rect'); tr.setAttribute('fill','#4f6bff');
+  const tt=document.createElementNS(NS,'text'); tt.setAttribute('fill','#fff'); tt.setAttribute('font-family','JetBrains Mono, monospace'); tt.setAttribute('font-weight','500');
+  tag.append(tr,tt); g.append(r,...hs,dot,tag); ov.append(g);
+  return {m,g,r,hs,dot,tr,tt};
+});
+
+function render(t){
+  // camera: one focus per section (t, scale, cx, cy)
+  const K=[[0,1.3,330,215],[1,1.3,330,215],[2,2.5,222,430],[8.6,2.5,222,430],[9.2,1.7,330,75],[10.6,1.7,330,75],[11,1.9,400,200],[12.3,1.9,400,200],[12.7,1.8,410,-65],[13.8,1.8,410,-65],[14.8,1.3,380,245],[99,1.3,380,245]];
+  let i=0; while(K[i+1][0]<t) i++;
+  const e=smooth(clamp01((t-K[i][0])/(K[i+1][0]-K[i][0]))), a=K[i], b=K[i+1];
+  CAMS=lerp(a[1],b[1],e); const cx=lerp(a[2],b[2],e), cy=lerp(a[3],b[3],e);
+  cam.style.transform=`translate(${960-cx*CAMS}px,${540-cy*CAMS}px) scale(${CAMS})`;
+  const s=1/CAMS;
+  M.forEach(m=>{ const p=clamp01((t-m.win[0])/(m.win[1]-m.win[0])); m.p=p; m.cur=mix(m.from,m.to,m.ease(p)); m.apply(m.cur,p); });
+  ovs.forEach(o=>{
+    const {m}=o, c=m.cur, [a,b]=m.win;
+    const op=Math.min(ss(a-.25,a,t), 1-ss(b+.15,b+.65,t));
+    o.g.style.opacity=op.toFixed(3); if(op<=0.001) return;
+    const x=c.x??0,y=c.y??0,w=c.w??0,h=c.h??0,r=c.r??0;
+    o.r.setAttribute('x',x);o.r.setAttribute('y',y);o.r.setAttribute('width',w);o.r.setAttribute('height',h);
+    o.r.setAttribute('rx',Math.min(r,h/2,w/2));
+    const hz=7*s, pts=[[x,y],[x+w,y],[x,y+h],[x+w,y+h]];
+    o.hs.forEach((hh,i)=>{hh.setAttribute('x',pts[i][0]-hz/2);hh.setAttribute('y',pts[i][1]-hz/2);hh.setAttribute('width',hz);hh.setAttribute('height',hz);});
+    if(m.ov.rounded){ o.dot.setAttribute('r',4*s); o.dot.setAttribute('cx',x+Math.min(r,h/2,w/2)); o.dot.setAttribute('cy',y); o.dot.style.display=''; } else o.dot.style.display='none';
+    const fs=12*s; o.tt.setAttribute('font-size',fs); o.tt.textContent=m.ov.label(c,m.p);
+    const tw=o.tt.textContent.length*fs*.62+14*s, th=fs+10*s;
+    o.tr.setAttribute('width',tw);o.tr.setAttribute('height',th);o.tr.setAttribute('rx',4*s);
+    o.tr.setAttribute('x',x);o.tr.setAttribute('y',y-th-8*s); o.tt.setAttribute('x',x+7*s); o.tt.setAttribute('y',y-th-8*s+th*.7);
+  });
+  $('scrub').value=t/DUR; $('clock').textContent=t.toFixed(2)+'s';
+}
+
+// ---- playback (with loopable sub-range)
+const SECTIONS=[['full',0,DUR],['wish',1.8,6.8],['moana',6.3,8.0],['zootopia',6.8,8.6],['label',7.8,9.0],['header',8.8,11.2],['description',10.8,12.6],['heading',12.4,14.0],['pull-back',13.8,DUR]];
+let t=0, playing=true, loop=true, last=performance.now(), lo=0, hi=DUR;
+const qs=new URLSearchParams(location.search);
+if(qs.has('clean')) document.body.classList.add('clean');
+const numIn=$('tin'), numOut=$('tout');
+function setRange(a,b){ lo=Math.max(0,Math.min(a,DUR)); hi=Math.max(lo+.1,Math.min(b,DUR)); numIn.value=lo.toFixed(2); numOut.value=hi.toFixed(2);
+  $('range').style.left=(lo/DUR*100)+'%'; $('range').style.width=((hi-lo)/DUR*100)+'%';
+  [...$('chips').children].forEach(c=>c.classList.toggle('on', +c.dataset.a===lo && +c.dataset.b===hi)); }
+SECTIONS.forEach(([n,a,b])=>{ const c=document.createElement('button'); c.textContent=n; c.dataset.a=a; c.dataset.b=b;
+  c.onclick=()=>{ setRange(a,b); t=a; playing=true; $('play').textContent='pause'; }; $('chips').append(c); });
+if(qs.has('in')||qs.has('out')) setRange(+(qs.get('in')||0), +(qs.get('out')||DUR)); else setRange(0,DUR);
+function tick(now){ fit(); const dt=Math.min((now-last)/1000,.1); last=now;
+  if(playing){ t+=dt; const end = hi>=DUR ? DUR+.8 : hi;
+    if(t>=end){ if(loop) t=lo; else { t=Math.min(hi,DUR); playing=false; $('play').textContent='play'; } } }
+  render(Math.min(t,DUR)); requestAnimationFrame(tick); }
+$('play').onclick=()=>{ if(!playing && t>=hi) t=lo; playing=!playing; $('play').textContent=playing?'pause':'play'; };
+$('loop').onclick=()=>{ loop=!loop; $('loop').classList.toggle('on',loop); };
+$('scrub').oninput=e=>{ playing=false; $('play').textContent='play'; t=e.target.value*DUR; };
+$('setin').onclick=()=>setRange(Math.min(t,hi-.1),hi);
+$('setout').onclick=()=>setRange(lo,Math.max(t,lo+.1));
+numIn.onchange=()=>setRange(+numIn.value,hi); numOut.onchange=()=>setRange(lo,+numOut.value);
+$('full').onclick=()=>setRange(0,DUR);
+addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT'&&e.target.type==='number') return;
+  if(e.code==='Space'){ e.preventDefault(); $('play').click(); }
+  else if(e.key==='i') $('setin').click(); else if(e.key==='o') $('setout').click(); else if(e.key==='l') $('loop').click();
+  else if(e.key==='ArrowLeft'){ playing=false; t=Math.max(0,t-1/30); $('play').textContent='play'; }
+  else if(e.key==='ArrowRight'){ playing=false; t=Math.min(DUR,t+1/30); $('play').textContent='play'; } });
+function fit(){ const s=Math.min(innerWidth/1920,innerHeight/1080); const f=$('fit'); f.style.transform=`scale(${s})`; f.style.left=(innerWidth-1920*s)/2+'px'; f.style.top=(innerHeight-1080*s)/2+'px'; }
+addEventListener('resize',fit); fit();
+window.seek=v=>{ playing=false; t=v; fit(); render(v); };  // deterministic frame access for export
+window.DUR=DUR;
+requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
