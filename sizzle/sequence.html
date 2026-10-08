@@ -20,6 +20,7 @@
   .a { position:absolute; color:var(--ink); white-space:nowrap; }
   #heading { position:absolute; left:0; top:0; overflow:visible; }
   #heading path, #title path, #date path { fill:var(--ink); }
+  #desc .w { display:inline-block; }
   #pill { left:652px; top:39px; width:164px; height:29px; border-radius:14.5px; background:#e9eaeb; opacity:0; }   /* final V10 box; it only fades in */
   #divider { background:var(--teal); border-radius:500px; left:575px; top:-73px; width:210px; height:8px; }
   #tile { left:13px; top:0; width:60px; height:2px; border-radius:1px; background:#9aa1ab; opacity:0; box-shadow:inset 0 0 0 1px rgba(31,41,55,.08); }
@@ -64,13 +65,13 @@
   <div class="a col" style="left:13px;top:39px;font:900 20px/28px Lato">Senior Product Designer</div>
   <div id="pill" class="a col"></div>
   <svg id="date" class="col below" width="1" height="1" style="position:absolute;left:0;top:0;overflow:visible"><g id="dateDrop"></g><g id="dateMorph" style="display:none"></g></svg>
-  <div class="a col below" style="left:13px;top:89px;width:772px;white-space:normal;font:400 20px/24px Lato">As part of the technology department, I lead the design of a wide range of tools used by artists and filmmakers. I collaborate closely with both artists and engineers to translate cutting-edge computer graphics technology into intuitive, artist-centric tools. As a design generalist, I’m involved throughout the entire product lifecycle, from concept and development to launch and ongoing refinement, while advocating for best practices in user experience across the Studio.</div>
+  <div id="desc" class="a col below" style="left:13px;top:89px;width:772px;white-space:normal;font:400 20px/24px Lato">As part of the technology department, I lead the design of a wide range of tools used by artists and filmmakers. I collaborate closely with both artists and engineers to translate cutting-edge computer graphics technology into intuitive, artist-centric tools. As a design generalist, I’m involved throughout the entire product lifecycle, from concept and development to launch and ongoing refinement, while advocating for best practices in user experience across the Studio.</div>
   <div id="films"></div>
 </div></div></div>
 
 <div id="ui">
   <div id="tracks"><div id="ruler"></div><div id="band"></div><div id="playhead"></div></div>
-  <div class="row"><button id="play">pause</button><button id="loop" class="on">loop</button><button id="full">full</button><button id="detail" class="on">tweens</button><span id="clock">0.00s</span></div>
+  <div class="row"><button id="play">pause</button><button id="loop" class="on">loop</button><button id="full">full</button><button id="detail" class="on">tweens</button><button id="descMode" title="switch how the description step works (reloads)"></button><span id="clock">0.00s</span></div>
 </div>
 
 <script>
@@ -84,10 +85,11 @@ const $ = id => document.getElementById(id);
     <div class="a col below" style="left:83px;top:${y+42}px;font:400 20px/24px Lato">Credited under Technology - Engineering Services</div>`);
 });
 
-let applyDate = () => {};
+let applyDate = () => {}, applyDesc = () => {};
 let tl, DUR, lo = 0, hi = 0, t = 0, playing = true, loop = true;
 
-fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(({ heading, title, date, dateMeta, dateDrop }) => {
+fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ heading, title, date, dateMeta, dateDrop }) => {
+  await document.fonts.ready;   // the description is measured below, so the fonts must be in
   // Type is drawn as outlines, one <path> per letter. Before and after its morph a letter draws the font's own curves; in between it
   // tweens 300 matched points per contour (see extract-glyphs.js). Returns the step's length and a draw() for the master's onUpdate.
   const NS = 'http://www.w3.org/2000/svg', ease = gsap.parseEase('power3.inOut');
@@ -105,7 +107,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(({ heading,
   const apos = mkPath(dateDrop.apos); $('dateDrop').append(apos);
   const swapDate = () => { const morphing = D.state.time > 0; $('dateDrop').style.display = morphing ? 'none' : ''; $('dateMorph').style.display = morphing ? '' : 'none'; };
 
-  tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.inOut' }, onUpdate: () => { H.draw(); T.draw(); D.draw(); swapDate(); applyDate(); } });
+  tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.inOut' }, onUpdate: () => { H.draw(); T.draw(); D.draw(); swapDate(); applyDate(); applyDesc(); } });
   tl.addLabel('v9', 0);
   // Each step is a nested timeline, placed on the master at a label. Times inside a step are relative to its own start.
   const header = gsap.timeline({ data: 'header', defaults: { ease: 'power3.inOut' } });
@@ -123,7 +125,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(({ heading,
   logo.to('#wordmark', { data: 'wordmark out', opacity: 0, duration: 0.45, ease: 'power1.out' }, 0.7);
   logo.to('#mark', { data: 'mark in', opacity: 1, duration: 0.3, ease: 'power1.out' }, 1.2);
   logo.fromTo('#mark svg', { scale: 0.6 }, { data: 'mark pop', scale: 1, duration: 0.5, ease: 'back.out(2.2)' }, 1.2);
-  tl.addLabel('logo', '>+=0.25').add(logo, 'logo');
+  tl.addLabel('logo', 2.3).add(logo, 'logo');   // starts while the header's last letters are still settling; every later step chains off this
 
 
   // Step 3: the company name. Black Italic straightens into Black, letter by letter, at the same stagger as the heading.
@@ -144,16 +146,33 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(({ heading,
   // The line only travels `shift` further, a touch less than the distance from "Aug" to the wall (the apostrophe needs a slot), so the
   // squish schedule is scaled to fit: the last letter is just gone as "Aug" settles.
   const toWall = wall0 - Math.max(...dropEls.filter(g => g.role === 'shift').map(g => { const b = g.p.getBBox(); return b.x + b.width; })), fit = dateDrop.shift / toWall;
-  applyDate = () => dropEls.forEach(g => {
-    const s = S.s;
-    if (g.role === 'keep') gsap.set(g.p, { x: Math.min(s, dxR) });                                        // the wall stops at its resting place
-    else if (g.role === 'shift') gsap.set(g.p, { x: s });                                                 // Aug just keeps going
-    else {                                                                                                // a loose letter: squished once it meets the wall
-      const u = Math.max(0, Math.min(1, (s - dxR - g.gap * fit) / (g.w * fit)));
-      if (u <= 0) gsap.set(g.p, { x: s, scaleX: 1, scaleY: 1, opacity: 1, transformOrigin: '100% 50%' });
-      else gsap.set(g.p, { x: dxR + g.gap, scaleX: 1 - u, scaleY: 1 + 0.14 * Math.sin(Math.PI * u), opacity: u >= 1 ? 0 : 1, transformOrigin: '100% 50%' });
-    }
-  });
+  // Squash and stretch. Slide right: every letter stretches along the motion in proportion to the line's speed (the closed form of
+  // power1.out's velocity), the wall letters take a squashing hit when they stop. Slide up: the whole date stretches vertically with
+  // the speed of its ease and squashes, then rings out, as it lands.
+  const sm = (a, b, v) => { const x = Math.max(0, Math.min(1, (v - a) / (b - a))); return x * x * (3 - 2 * x); };
+  const eIO = gsap.parseEase('power3.inOut'), Land = { sq: 0 }, SX = 0.26, SY = 0.12;
+  const upOrigin = `${652 + 164 / 2} ${39 + 16 + 29 / 2}`;                                                // centre of the date's final line, in its own space
+  applyDate = () => {
+    const s = S.s, vn = Math.sqrt(Math.max(0, 1 - s / dxL)), stretch = vn * sm(0, 0.1, 1 - vn);          // 0 at rest, ~1 at full speed
+    const sx = 1 + SX * stretch, sy = 1 - 0.6 * SX * stretch;
+    // the wall bounces: it stops, recoils up to ~10px back toward the left, and settles (a smaller second bounce), all as a function of how
+    // far the loose text has pushed on since the wall stopped (r); the envelope makes it land exactly on the resting place
+    const r = s - dxR, env = 1 - sm(28, dateDrop.shift, r), off = r > 0 ? -15 * Math.exp(-r / 16) * Math.abs(Math.sin(r * Math.PI / 14)) * env : 0;
+    gsap.set(apos, { x: dxR + off });
+    dropEls.forEach(g => {
+      if (g.role === 'keep') {
+        if (s < dxR) gsap.set(g.p, { x: s, scaleX: sx, scaleY: sy });
+        else { const k = Math.exp(-r / 14) * sm(0, 2, r) * env; gsap.set(g.p, { x: dxR + off, scaleX: 1 - 0.1 * k, scaleY: 1 + 0.07 * k }); }   // the wall takes the hit
+      } else if (g.role === 'shift') gsap.set(g.p, { x: s, scaleX: sx, scaleY: sy });                                                    // Aug just keeps going
+      else {                                                                                                                              // a loose letter: stretched, then squished once it meets the wall
+        const u = Math.max(0, Math.min(1, (s - dxR - g.gap * fit) / (g.w * fit)));
+        if (u <= 0) gsap.set(g.p, { x: s, scaleX: sx, scaleY: sy, opacity: 1, transformOrigin: '100% 50%' });
+        else gsap.set(g.p, { x: dxR + g.gap + off, scaleX: 1 - u, scaleY: 1 + 0.14 * Math.sin(Math.PI * u), opacity: u >= 1 ? 0 : 1, transformOrigin: '100% 50%' });
+      }
+    });
+    const p = Math.max(0, Math.min(1, D.state.time / D.total)), v = (eIO(Math.min(1, p + 0.03)) - eIO(Math.max(0, p - 0.03))) / 0.06 / 3;   // 0..1 across the slide up
+    gsap.set('#dateMorph', { svgOrigin: upOrigin, scaleY: 1 + SY * v - 0.09 * Land.sq, scaleX: 1 - 0.07 * v + 0.06 * Land.sq });
+  };
   dateStep.to(S, { data: 'slide: wall stops, Aug 20 squishes in', s: dxL, duration: T_L, ease: eL }, 0);
   let tWall = 0; while (tWall < T_L && dxL * eL(tWall / T_L) < dxR) tWall += 0.005;                       // when the wall is reached
   gsap.set(apos, { x: dxR });
@@ -162,8 +181,40 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(({ heading,
   // changes, as if the content below were pushing it, and lands on the title's row. Same start, same curve, same length; every letter moves together.
   dateStep.to('.below', { data: 'slide up', y: '-=' + -dateMeta.dy, duration: D.total }, T_L + 0.15);
   dateStep.to(D.state, { data: 'date: type changes + lands', time: D.total, duration: D.total, ease: 'none' }, T_L + 0.15);
-  dateStep.to('#pill', { data: 'pill fades in', opacity: 1, duration: 0.5, ease: 'power1.out' }, '>+=0.05');
+  dateStep.to(Land, { data: 'lands: squash', sq: 1, duration: 0.55, ease: p => p <= 0 ? 0 : Math.exp(-6 * p) * Math.cos(p * Math.PI * 3) }, T_L + 0.15 + D.total);
+  dateStep.to('#pill', { data: 'pill fades in', opacity: 1, duration: 0.5, ease: 'power1.out' }, T_L + 0.15 + D.total + 0.05);   // right after it lands, while the squash rings out
   tl.addLabel('date', '>+=0.1').add(dateStep, 'date');
+
+
+  // Step 5: the description, two ways (button in the controls, or ?desc=reflow / ?desc=leading).
+  const DESC_MODE = new URLSearchParams(location.search).get('desc') === 'leading' ? 'leading' : 'reflow';
+  $('descMode').textContent = 'description: ' + (DESC_MODE === 'leading' ? 'leading only' : 'reflow');
+  $('descMode').onclick = () => { const q = new URLSearchParams(location.search); q.set('desc', DESC_MODE === 'leading' ? 'reflow' : 'leading'); location.search = q.toString(); };
+  if (DESC_MODE === 'leading') {
+    // The cheat: no re-wrapping. The paragraph keeps its V9 line breaks and only the leading opens up (24 -> 32px), which makes the block
+    // 48px taller, and the whole posters section is pushed down by exactly that much, in lockstep.
+    const descStep = gsap.timeline({ data: 'description', defaults: { ease: 'power3.inOut' } });
+    descStep.to('#desc', { data: 'leading 24 > 32', lineHeight: '32px', duration: 0.9 }, 0);
+    descStep.to('#films .below', { data: 'posters pushed down', y: '+=48', duration: 0.9 }, 0);
+    tl.addLabel('description', '>+=0.1').add(descStep, 'description');
+  } else {
+  // Reflow: same words, same type; only the measure (772 -> 816px wide) and the leading (24 -> 32px) change, so the
+  // lines re-break. Every word glides from where it sat to where it lands (the layout is measured both ways up front, then each
+  // word is offset back to its old spot and eased to zero), in reading order.
+  const desc = $('desc'), words = (() => { desc.innerHTML = desc.textContent.trim().split(/\s+/).map(w => `<span class="w">${w}</span>`).join(' '); return [...desc.querySelectorAll('.w')]; })();
+  const zoom = desc.getBoundingClientRect().width / desc.offsetWidth;
+  const measure = () => { const c = desc.getBoundingClientRect(); return words.map(w => { const r = w.getBoundingClientRect(); return { x: (r.left - c.left) / zoom, y: (r.top - c.top) / zoom }; }); };
+  const V9 = { width: '772px', lineHeight: '24px', textWrap: 'wrap' }, V10 = { width: '816px', lineHeight: '32px', textWrap: 'pretty' };
+  Object.assign(desc.style, V9); const P9 = measure(); Object.assign(desc.style, V10); const P10 = measure(); Object.assign(desc.style, V9);
+  const Dsc = { time: 0 }, DW = 0.8, DSTAG = 0.012, descTotal = DW + DSTAG * (words.length - 1); let wasV10 = false;
+  applyDesc = () => {
+    const v10 = Dsc.time > 0; if (v10 !== wasV10) { Object.assign(desc.style, v10 ? V10 : V9); wasV10 = v10; }
+    words.forEach((w, i) => { const e = ease(Math.max(0, Math.min(1, (Dsc.time - i * DSTAG) / DW))); w.style.transform = e >= 1 || !v10 ? '' : `translate(${(P9[i].x - P10[i].x) * (1 - e)}px,${(P9[i].y - P10[i].y) * (1 - e)}px)`; });
+  };
+  const descStep = gsap.timeline({ data: 'description', defaults: { ease: 'power3.inOut' } });
+  descStep.to(Dsc, { data: 'words reflow', time: descTotal, duration: descTotal, ease: 'none' }, 0);
+  tl.addLabel('description', '>+=0.1').add(descStep, 'description');
+  }
 
   tl.addLabel('end', tl.duration() + 0.6);   // hold on the finished header
   tl.to({}, { duration: 0.001 }, 'end');
