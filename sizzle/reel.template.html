@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Disney role: reel</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,900&family=JetBrains+Mono:wght@500&display=swap">
+<script src="vendor/gsap.min.js"></script>
+<style>
+  :root { --ink:#1f2937; --teal:#12abc4; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; background:#111; overflow:hidden; font-family:Lato,sans-serif; }
+  #fit { position:absolute; width:1920px; height:1080px; transform-origin:0 0; }
+  #stage { position:absolute; inset:0; overflow:hidden; background:#fff; }   /* one continuous white canvas: no grid, no separate page panel */
+  /* camera is fixed for now: 1.3x on the role, centred at world (330, 265): 50px lower than before, so there is more room under the posters
+     and less above the heading, with the 16:9 frame unchanged */
+  #cam { position:absolute; left:0; top:0; transform-origin:0 0; transform:translate(531px,195.5px) scale(1.3); }
+  #panel { display:none; }
+  .a { position:absolute; color:var(--ink); white-space:nowrap; }
+  #heading { position:absolute; left:0; top:0; overflow:visible; }
+  #heading path, #title path, #date path, #films path { fill:var(--ink); }
+  #desc .w { display:inline-block; }
+  #films .poster { z-index:2; }   /* posters pass over the captions they leave behind */
+  #pill { left:652px; top:39px; width:164px; height:29px; border-radius:14.5px; background:#e9eaeb; opacity:0; }   /* final V10 box; it only fades in */
+  #divider { background:var(--teal); border-radius:500px; left:575px; top:-73px; width:210px; height:8px; }
+  #ring { left:13px; top:0; width:60px; height:60px; border-radius:10px; border:2px solid #12abc4; opacity:0; pointer-events:none; }
+  #tile { left:13px; top:0; width:60px; height:2px; border-radius:1px; background:#9aa1ab; opacity:0; box-shadow:inset 0 0 0 1px rgba(31,41,55,.08); }
+  #mark { left:13px; top:0; width:60px; height:60px; display:flex; align-items:center; justify-content:center; opacity:0; }
+  #mark svg { width:40px; height:auto; fill:var(--ink); }
+  #wordmark { left:-171px; top:10px; width:167px; height:120px; }
+  #wordmark img { width:100%; height:100%; display:block; }
+  .poster { left:13px; width:60px; height:88px; border-radius:5px; overflow:hidden; }
+  .poster img { width:100%; height:100%; object-fit:cover; display:block; }
+  #ui { position:fixed; left:0; right:0; bottom:0; display:flex; flex-direction:column; gap:8px; align-items:stretch; 
+    background:#14161e; color:#fff; padding:10px 20px 12px; border-radius:14px 14px 0 0; font:500 12px/1 "JetBrains Mono",monospace; z-index:9; }
+  #ui .row { display:flex; gap:8px; align-items:center; justify-content:flex-start; }
+  #ui button { all:unset; cursor:pointer; display:inline-flex; align-items:center; padding:6px 13px; border-radius:14px; background:#2c3040; color:#fff; }
+  #ui .ctl { align-items:stretch; flex-wrap:wrap; row-gap:8px; }          /* every control in the row is as tall as the two-line loop range cell; the row wraps on narrow windows */
+  #ui .ctl > #clock { align-self:center; margin-left:4px; }
+  #ui button.on { background:#4f6bff; }
+  /* the shortcut, drawn as a little keycap after the label (a data-key attribute, so changing the label text never touches it) */
+  #ui button[data-key]::after { content:attr(data-key); display:inline-block; margin-left:8px; min-width:14px; padding:1px 5px 0; box-sizing:border-box; text-align:center;
+    font:500 10px/14px "JetBrains Mono",monospace; color:#c9cfe4; background:#1b1e2b; border:1px solid #4a506a; border-bottom-width:2px; border-radius:4px; }
+  #ui button.on[data-key]::after { background:#3a54d6; border-color:#8ea0ff; color:#fff; }
+  #ui input[type=range] { width:480px; }
+  #tracks { position:relative; width:100%; cursor:ew-resize; touch-action:none; user-select:none; }
+  #ruler { position:relative; height:12px; border-bottom:1px solid #3a3f52; }
+  #ruler i { position:absolute; top:0; width:1px; height:5px; background:#6b7288; }
+  #ruler i.s { height:11px; } #ruler b { position:absolute; top:-1px; margin-left:3px; font:500 9px/11px "JetBrains Mono",monospace; color:#8a91a8; }
+  .hd { position:absolute; top:0; width:10px; height:15px; margin-left:-5px; background:#4f6bff; cursor:ew-resize; z-index:4; border-radius:3px 3px 0 0; }
+  #hin { clip-path:polygon(0 0,100% 0,100% 60%,50% 100%,0 60%); } #hout { clip-path:polygon(0 0,100% 0,100% 60%,50% 100%,0 60%); }
+  /* in / out / clear are one connected control, tinted like the loop band and flags in the strip above, with the range readout at its end */
+  #ui .grp { display:inline-flex; align-items:stretch; border-radius:14px; overflow:hidden; background:#2c3040; }
+  /* two-line cell: the label on top, the range values underneath; the buttons stretch to the same double height */
+  #ui .grp .rng { display:flex; flex-direction:column; justify-content:center; gap:3px; min-width:96px; padding:6px 14px 6px 14px; border-right:1px solid #3d4258; }
+  #ui .grp .rng b { font-weight:500; font-size:9px; line-height:10px; letter-spacing:.07em; text-transform:uppercase; color:#8a91a8; }
+  #rangeTxt, #speedTxt { font-size:12px; line-height:14px; color:#dfe5ff; white-space:nowrap; }
+  #ui .grp button.act { background:#454b66; }   /* the speed that is currently selected */
+  #rangeTxt.dim { color:#6f7692; }
+  #ui .grp button { display:flex; align-items:center; border-radius:0; background:transparent; }
+  #ui .grp button:hover { background:#3a3f55; }
+  #ui .grp button + button { border-left:1px solid #3d4258; }
+  #band { position:absolute; top:12px; bottom:0; background:rgba(79,107,255,.16); border-left:1px solid #4f6bff; border-right:1px solid #4f6bff; pointer-events:none; }
+  #tracks .seg, #tracks .tw { position:absolute; border-radius:4px; overflow:hidden; white-space:nowrap; color:#fff; font:500 10px/18px "JetBrains Mono",monospace; padding:0 6px; }
+  #tracks .seg { height:18px; }
+  #tracks .seg:hover { filter:brightness(1.2); }
+  #tracks .tw { height:11px; font-size:9px; line-height:11px; padding:0 4px; opacity:.85; pointer-events:none; }
+  #tracks .row0 { position:relative; height:18px; margin-top:4px; }
+  #tracks .rowcam { margin-top:3px; }
+  #tracks .camchip { position:absolute; left:0; top:0; height:18px; padding:0 22px 0 8px; z-index:3; border-radius:4px; background:#232738; box-shadow:inset 0 0 0 1px #3d4258; color:#8a91a8; font:500 10px/18px "JetBrains Mono",monospace; }
+  #tracks .camblk { background:#4b5370; color:#dfe5ff; }
+  #playhead { position:absolute; top:0; bottom:-3px; width:2px; margin-left:-1px; background:#ff5a5f; pointer-events:none; z-index:2; }
+  #playhead::before { content:''; position:absolute; top:-1px; left:-5px; border:6px solid transparent; border-top:8px solid #ff5a5f; border-bottom:0; }
+  #tracks .seg.hasver { padding-right:40px; text-overflow:ellipsis; }
+  #tracks .ver { position:absolute; right:3px; top:2px; height:14px; padding:0 4px; display:flex; align-items:center; gap:2px; background:rgba(0,0,0,.28); border-radius:4px; color:#fff; cursor:pointer; }
+  #tracks .ver:hover, #tracks .ver.open { background:rgba(0,0,0,.5); }
+  #tracks .ver svg { display:block; }
+  #vermenu { position:fixed; z-index:30; min-width:160px; background:#1d2030; border:1px solid #3a3f52; border-radius:10px; padding:4px; box-shadow:0 10px 30px rgba(0,0,0,.5); font:500 11px/1 "JetBrains Mono",monospace; color:#fff; }
+  #vermenu .t { padding:6px 10px 4px; color:#8a91a8; font-size:9px; letter-spacing:.06em; text-transform:uppercase; }
+  #vermenu button { all:unset; display:flex; align-items:center; gap:8px; width:calc(100% - 20px); padding:7px 10px; border-radius:6px; cursor:pointer; }
+  #vermenu button:hover { background:#2c3040; }
+  #vermenu button i { width:10px; font-style:normal; color:#4f6bff; }
+  body.clean #ui { display:none; }
+</style>
+</head>
+<body>
+<div id="fit"><div id="stage"><div id="cam">
+  <div id="panel"></div>
+
+  <!-- V9 role, world coordinates are relative to the role's top-left -->
+  <svg id="heading" width="1" height="1"></svg>
+  <div id="divider" class="a"></div>
+  <div id="tile" class="a"></div>
+  <div id="ring" class="a"></div>
+  <div id="mark" class="a">MARK_SVG</div>
+  <div id="wordmark" class="a"><img src="v9-disney-wordmark.svg" alt=""></div>
+  <svg id="title" class="col" width="1" height="1" style="position:absolute;left:0;top:0;overflow:visible"></svg>
+  <div class="a col" style="left:13px;top:39px;font:900 20px/28px Lato">Senior Product Designer</div>
+  <div id="pill" class="a col"></div>
+  <svg id="date" class="col below" width="1" height="1" style="position:absolute;left:0;top:0;overflow:visible"><g id="dateDrop"></g><g id="dateMorph" style="display:none"></g></svg>
+  <div id="desc" class="a col below" style="left:13px;top:89px;width:772px;white-space:normal;font:400 20px/24px Lato">As part of the technology department, I lead the design of a wide range of tools used by artists and filmmakers. I collaborate closely with both artists and engineers to translate cutting-edge computer graphics technology into intuitive, artist-centric tools. As a design generalist, I’m involved throughout the entire product lifecycle, from concept and development to launch and ongoing refinement, while advocating for best practices in user experience across the Studio.</div>
+  <div id="films"></div>
+  <div id="label" class="a" style="left:13px;top:323px;font:400 20px/32px Lato;opacity:0">Credited Projects</div>
+</div></div></div>
+
+<div id="ui">
+  <div id="tracks"><div id="ruler"></div><div id="band"></div><div id="hin" class="hd" title="loop in (drag, or press I at the playhead)"></div><div id="hout" class="hd" title="loop out (drag, or press O at the playhead)"></div><div id="playhead"></div></div>
+  <div class="row ctl"><button id="play" data-key="space">pause</button><button id="restart" data-key="R" title="restart from the start of the loop range, or the very start">restart</button><button id="loop" class="on" data-key="L">loop</button><span class="grp"><span class="rng"><b>loop range</b><span id="rangeTxt" class="dim">full timeline</span></span><button id="setIn" data-key="I" title="set loop in at the playhead">in</button><button id="setOut" data-key="O" title="set loop out at the playhead">out</button><button id="full" data-key="X" title="clear the loop range">clear</button></span><span class="grp"><span class="rng"><b>speed</b><span id="speedTxt">1×</span></span><button id="spd1" class="act" data-speed="1" data-key="1" title="normal speed">1×</button><button id="spd2" data-speed="0.5" data-key="2" title="half speed">½×</button><button id="spd3" data-speed="0.25" data-key="3" title="quarter speed">¼×</button></span><button id="detail" class="on" title="show or hide the individual animations inside each step">details</button><span id="clock">0.00s</span></div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+// V9 film rows: poster, caption (vector type, filled in below) and the "Credited under..." line
+const FILMS = [['zootopia2', 'Zootopia 2', 2025, 243], ['moana2', 'Moana 2', 2024, 341], ['wish', 'Wish', 2023, 440]];
+FILMS.forEach(([slug, name, year, y], i) => {
+  $('films').insertAdjacentHTML('beforeend', `
+    <div id="poster${i}" class="a col below poster" style="top:${y}px"><img src="${slug}-poster.jpg" alt=""></div>
+    <svg id="cap${i}" class="col below" width="1" height="1" style="position:absolute;left:0;top:0;overflow:visible"></svg>
+    <div id="cred${i}" class="a col below" style="left:83px;top:${y + 42}px;font:400 20px/24px Lato">Credited under Technology - Engineering Services</div>`);
+});
+const bez = (x1, y1, x2, y2) => t => { if (t <= 0) return 0; if (t >= 1) return 1; let lo = 0, hi = 1, u = t;
+  for (let i = 0; i < 24; i++) { u = (lo + hi) / 2; const x = 3 * (1 - u) * (1 - u) * u * x1 + 3 * (1 - u) * u * u * x2 + u * u * u; x < t ? lo = u : hi = u; }
+  return 3 * (1 - u) * (1 - u) * u * y1 + 3 * (1 - u) * u * u * y2 + u * u * u; };
+
+let applyDate = () => {}, applyDesc = () => {}, applyPush = () => {}, applyPosters = () => {}, applyCam = () => {}, pushNow = () => 0;
+let earlyHost = null, earlyAt = 0;   // where Zootopia's poster picks up the description's push (set by the leading / merged versions)
+let tl, DUR, lo = 0, hi = 0, t = 0, playing = true, loop = true, speed = 1;
+
+fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ heading, title, date, dateMeta, dateDrop, captions }) => {
+  await document.fonts.ready;   // the description is measured below, so the fonts must be in
+  // Type is drawn as outlines, one <path> per letter. Before and after its morph a letter draws the font's own curves; in between it
+  // tweens 300 matched points per contour (see extract-glyphs.js). Returns the step's length and a draw() for the master's onUpdate.
+  const NS = 'http://www.w3.org/2000/svg', ease = gsap.parseEase('power3.inOut');
+  const poly = (g, e) => g.pairs.map(({ a, b }) => { let d = ''; for (let i = 0; i < a.length; i += 2) d += (i ? 'L' : 'M') + (a[i] + (b[i] - a[i]) * e).toFixed(1) + ' ' + (a[i + 1] + (b[i + 1] - a[i + 1]) * e).toFixed(1); return d + 'Z'; }).join('');
+  function vectorText(svg, glyphs, morph, stagger) {
+    const paths = glyphs.map(g => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', g.a); svg.append(p); return p; });
+    const state = { time: 0 }, total = morph + stagger * (glyphs.length - 1);
+    const draw = () => glyphs.forEach((g, i) => { const p = Math.max(0, Math.min(1, (state.time - i * stagger) / morph)); paths[i].setAttribute('d', p <= 0 ? g.a : p >= 1 ? g.b : poly(g, ease(p))); });
+    return { state, total, draw, paths, count: glyphs.length, morph, stagger };
+  }
+  const H = vectorText($('heading'), heading, 0.9, 0.02), T = vectorText($('title'), title, 1.0, 0.03), D = vectorText($('dateMorph'), date, 0.8, 0), CT = captions.map((g, i) => vectorText($('cap' + i), g, 1.1, 0));   // 1.1s: the title weight drop (Black to Regular)   // no stagger: the content below shoves the whole date, every letter at once
+  // The date's first half is a set of loose letters in the V9 face (dateDrop); its second half is the type morph (dateMorph).
+  const mkPath = d => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); return p; };
+  const dropEls = dateDrop.glyphs.map(g => { const p = mkPath(g.d); $('dateDrop').append(p); return { ...g, p }; });
+  const apos = mkPath(dateDrop.apos); $('dateDrop').append(apos);
+  const swapDate = () => { const morphing = D.state.time > 0; $('dateDrop').style.display = morphing ? 'none' : ''; $('dateMorph').style.display = morphing ? '' : 'none'; };
+
+  tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.inOut' }, onUpdate: () => { H.draw(); T.draw(); D.draw(); swapDate(); applyDate(); applyDesc(); applyPush(); CT.forEach(c => c.draw()); applyPosters(); applyCam(); } });
+  tl.addLabel('v9', 0);
+  // Each step is a nested timeline, placed on the master at a label. Times inside a step are relative to its own start.
+  const header = gsap.timeline({ data: 'header', defaults: { ease: 'power3.inOut' } });
+  header.to(H.state, { data: 'letters', time: H.total, duration: H.total, ease: 'none' }, 0);
+  // the divider is the next link in the letters' chain: same stagger step, same duration, same ease
+  header.to('#divider', { data: 'teal line', duration: H.morph, left: 546, top: -66, width: 269 }, H.stagger * H.count);
+  tl.addLabel('header', 0.9).add(header, 'header');
+
+  // Step 2: the logo box. It fades in as a thin line above the company name, then grows into the card while the whole column
+  // slides down in lockstep with it (box height + the 10px gap = how far the column travels).
+  const logo = gsap.timeline({ data: 'logo', defaults: { ease: 'power3.inOut' } });
+  const K = 0.8;   // the logo step runs 25% faster: every time and duration in it is x0.8 (the real durations, so the strip stays accurate)
+  logo.to('#tile', { data: 'line in', opacity: 1, duration: 0.3 * K, ease: 'power1.out' }, 0);
+  logo.to('#tile', { data: 'box grows', height: 60, borderRadius: 10, backgroundColor: '#fffbec', duration: 1.0 * K }, 0.3 * K);
+  logo.to('.col', { data: 'column slides', y: 70, duration: 1.0 * K }, 0.3 * K);
+  // secondary action: a soft ring ripples out from the box as it lands
+  logo.set('#ring', { opacity: 0.55, scale: 1 }, 1.3 * K - 0.05).to('#ring', { data: 'landing ripple', opacity: 0, scale: 1.8, duration: 0.6, ease: 'power2.out' }, 1.3 * K - 0.05);
+  logo.to('#wordmark', { data: 'wordmark out', opacity: 0, duration: 0.45 * K, ease: 'power1.out' }, 0.45 * K);
+  logo.to('#mark', { data: 'mark in', opacity: 1, duration: 0.3 * K, ease: 'power1.out' }, 0.95 * K);
+  logo.fromTo('#mark svg', { scale: 0.6 }, { data: 'mark pop', scale: 1, duration: 0.5 * K, ease: 'back.out(2.2)' }, 0.95 * K);
+  // The first half is stacked like the second half: each step starts while the one before is still running, keyed off the step's start
+  // (not its end). logo 0.3s into the header > title +0.44 (as the box grows) > date +0.55 (while the title straightens) > description 1.5s into the date.
+  tl.addLabel('logo', 'header+=0.3').add(logo, 'logo');   // starts while the heading is still mid-morph; everything after it is keyed off it
+
+
+  // Step 3: the company name. Black Italic straightens into Black, letter by letter, at the same stagger as the heading.
+  const titleStep = gsap.timeline({ data: 'title', defaults: { ease: 'power3.inOut' } });
+  titleStep.to(T.state, { data: 'letters', time: T.total, duration: T.total, ease: 'none' }, 0);
+  tl.addLabel('title', 'logo+=0.44').add(titleStep, 'title');   // straightens while the box grows and the column slides down
+
+
+  // Step 4: the date. (1) the whole V9 line slides right as one rigid piece, at one speed. "22 · Present" reaches its resting place and
+  // stops dead - it's the wall - while "August 20" carries straight on, so the letters between "Aug" and the wall get squished flat
+  // against it, rightmost first (0, 2, t, s, u). An apostrophe drops in where the 0 was and "Aug" ends up snug against the "22".
+  // (2) the date and everything below it slide up 16px while the date carries on a bit further and its type changes (Light Italic ->
+  // Regular), landing on the title's row in the same motion; (3) the pill fades in.
+  const dateStep = gsap.timeline({ data: 'date', defaults: { ease: 'power3.inOut' } });
+  const S = { s: 0 }, T_L = 1.2, eL = gsap.parseEase('power1.out'), dxR = dateMeta.dx, dxL = dateMeta.dx + dateDrop.shift;   // s = distance the loose text has travelled
+  const wall0 = dropEls.find(g => g.role === 'keep').p.getBBox().x;                                       // left edge of the "22"
+  dropEls.forEach(g => { const b = g.p.getBBox(); g.gap = wall0 - (b.x + b.width); g.w = b.width; });   // gap: letter's right edge to the wall
+  // The line only travels `shift` further, a touch less than the distance from "Aug" to the wall (the apostrophe needs a slot), so the
+  // squish schedule is scaled to fit: the last letter is just gone as "Aug" settles.
+  const toWall = wall0 - Math.max(...dropEls.filter(g => g.role === 'shift').map(g => { const b = g.p.getBBox(); return b.x + b.width; })), fit = dateDrop.shift / toWall;
+  // Squash and stretch. Slide right: every letter stretches along the motion in proportion to the line's speed (the closed form of
+  // power1.out's velocity), the wall letters take a squashing hit when they stop. Slide up: the whole date stretches vertically with
+  // the speed of its ease and squashes, then rings out, as it lands.
+  const sm = (a, b, v) => { const x = Math.max(0, Math.min(1, (v - a) / (b - a))); return x * x * (3 - 2 * x); };
+  const eIO = gsap.parseEase('power3.inOut'), Land = { sq: 0 }, SX = 0.26, SY = 0.12;
+  const upOrigin = `${652 + 164 / 2} ${39 + 16 + 29 / 2}`;                                                // centre of the date's final line, in its own space
+  applyDate = () => {
+    const s = S.s, vn = Math.sqrt(Math.max(0, 1 - s / dxL)), stretch = vn * sm(0, 0.1, 1 - vn);          // 0 at rest, ~1 at full speed
+    const sx = 1 + SX * stretch, sy = 1 - 0.6 * SX * stretch;
+    // the wall bounces: it stops, recoils up to ~10px back toward the left, and settles (a smaller second bounce), all as a function of how
+    // far the loose text has pushed on since the wall stopped (r); the envelope makes it land exactly on the resting place
+    const r = s - dxR, env = 1 - sm(28, dateDrop.shift, r), off = r > 0 ? -15 * Math.exp(-r / 16) * Math.abs(Math.sin(r * Math.PI / 14)) * env : 0;
+    gsap.set(apos, { x: dxR + off });
+    dropEls.forEach(g => {
+      if (g.role === 'keep') {
+        if (s < dxR) gsap.set(g.p, { x: s, scaleX: sx, scaleY: sy });
+        else { const k = Math.exp(-r / 14) * sm(0, 2, r) * env; gsap.set(g.p, { x: dxR + off, scaleX: 1 - 0.1 * k, scaleY: 1 + 0.07 * k }); }   // the wall takes the hit
+      } else if (g.role === 'shift') gsap.set(g.p, { x: s, scaleX: sx, scaleY: sy });                                                    // Aug just keeps going
+      else {                                                                                                                              // a loose letter: stretched, then squished once it meets the wall
+        const u = Math.max(0, Math.min(1, (s - dxR - g.gap * fit) / (g.w * fit)));
+        if (u <= 0) gsap.set(g.p, { x: s, scaleX: sx, scaleY: sy, opacity: 1, transformOrigin: '100% 50%' });
+        else gsap.set(g.p, { x: dxR + g.gap + off, scaleX: 1 - u, scaleY: 1 + 0.14 * Math.sin(Math.PI * u), opacity: u >= 1 ? 0 : 1, transformOrigin: '100% 50%' });
+      }
+    });
+    const p = Math.max(0, Math.min(1, D.state.time / D.total)), v = (eIO(Math.min(1, p + 0.03)) - eIO(Math.max(0, p - 0.03))) / 0.06 / 3;   // 0..1 across the slide up
+    gsap.set('#dateMorph', { svgOrigin: upOrigin, scaleY: 1 + SY * v - 0.09 * Land.sq, scaleX: 1 - 0.07 * v + 0.06 * Land.sq });
+  };
+  // A short lead-in comes first: the step starts, the camera zooms in on the date (0.45s), and only then do the letters start to slide, so the
+  // camera is already there when they move. Everything in the date step after this is shifted by LEAD.
+  const LEAD = 0.65, BEAT = 0.3, BEAT2 = 0.25;   // the reel's beats are a little tighter than the working draft's (0.85 / 0.4 / 0.35)
+  // BEAT: a pause after the crash, before the camera zooms back out. BEAT2: a pause after the zoom out, before the slide up
+  dateStep.to(S, { data: 'slide: wall stops, Aug 20 squishes in', s: dxL, duration: T_L, ease: eL }, LEAD);
+  let tWall = 0; while (tWall < T_L && dxL * eL(tWall / T_L) < dxR) tWall += 0.005;                       // when the wall is reached
+  gsap.set(apos, { x: dxR });
+  dateStep.fromTo(apos, { y: -28, opacity: 0 }, { data: 'apostrophe drops in', y: 0, opacity: 1, duration: 0.45, ease: 'bounce.out' }, LEAD + tWall);
+  // One motion: the bottom content slides up 16px and stops; the date, which rides up with it, carries on a further 7px as its type
+  // changes, as if the content below were pushing it, and lands on the title's row. Same start, same curve, same length; every letter moves together.
+  // A short hold sits between the letters crashing (the slide ends at T_L) and the slide up, so the crash plays out in full and the camera has
+  // room to zoom back out before anything else starts moving. Everything from the slide up onwards (and the description) is shifted by it.
+  const UP = LEAD + T_L + BEAT + 0.45 + BEAT2;   // after the lead-in, the slide, the first beat, the camera's zoom out (0.45s) and the second beat
+  dateStep.to('.below', { data: 'slide up', y: '-=' + -dateMeta.dy, duration: D.total }, UP);
+  dateStep.to(D.state, { data: 'date: type changes + lands', time: D.total, duration: D.total, ease: 'none' }, UP);
+  dateStep.to(Land, { data: 'lands: squash', sq: 1, duration: 0.55, ease: p => p <= 0 ? 0 : Math.exp(-6 * p) * Math.cos(p * Math.PI * 3) }, UP + D.total);
+  dateStep.to('#pill', { data: 'pill fades in', opacity: 1, duration: 0.5, ease: 'power1.out' }, UP + D.total + 0.05);   // right after it lands, while the squash rings out
+  tl.addLabel('date', 'title+=0.55').add(dateStep, 'date');   // its first half (slide right, drops) only moves letters sideways, so it can run under the title morph; its slide up comes after the logo's column slide has finished
+
+
+  // Step 5: the description, two ways (pick from the menu on its block in the timeline, or ?desc=reflow / ?desc=leading).
+  const DESC_MODE = ['leading', 'merged'].includes(new URLSearchParams(location.search).get('desc')) ? new URLSearchParams(location.search).get('desc') : 'leading';   // the reel's defaults: leading-only description, refined camera
+  // the version picker lives on the description block in the timeline strip (see buildTracks); choosing reloads with ?desc=
+  // (in the merged version there is no description step of its own, so the picker moves onto the date block)
+  window.STEP_VERSIONS = { [DESC_MODE === 'merged' ? 'date' : 'description']: { title: 'description', param: 'desc', current: DESC_MODE, options: [['reflow', 'Reflow'], ['leading', 'Leading only'], ['merged', 'Leading with date slide-up']] } };
+  if (DESC_MODE === 'leading' || DESC_MODE === 'merged') {
+    // The cheat: no re-wrapping. The paragraph keeps its V9 line breaks and only the leading opens up (24 -> 32px): each line drops by
+    // 4 + 8 x (its row) px, so the block ends 48px taller. Rather than one uniform change, the lines open as a soft cascade, top to
+    // bottom, each with a gentle spring, and the posters section follows the last line down so the gap to it never changes.
+    const desc = $('desc'), words = (() => { desc.innerHTML = desc.textContent.trim().split(/\s+/).map(w => `<span class="w">${w}</span>`).join(' '); return [...desc.querySelectorAll('.w')]; })();
+    const tops = [...new Set(words.map(w => w.offsetTop))].sort((a, b) => a - b); words.forEach(w => { w.line = tops.indexOf(w.offsetTop); });
+    const Ld = { time: 0 }, LD = 0.6, LS = 0.04, last = tops.length - 1, spring = gsap.parseEase('back.out(1.4)');
+    applyDesc = () => words.forEach(w => { const e = spring(Math.max(0, Math.min(1, (Ld.time - w.line * LS) / LD))); w.style.transform = e === 0 ? '' : `translateY(${(4 + 8 * w.line) * e}px)`; });
+    if (DESC_MODE === 'leading') {
+      const descStep = gsap.timeline({ data: 'description', defaults: { ease: 'power3.inOut' } });
+      descStep.to(Ld, { data: 'lines open, top to bottom', time: LD + LS * last, duration: LD + LS * last, ease: 'none' }, 0);
+      descStep.to('#films .below:not(.poster):not(svg)', { data: 'posters section follows the last line', y: '+=48', duration: LD, ease: 'back.out(1.4)' }, LS * last);   // (the posters and captions travel on their own, see the posters step; this just carries the credit lines)
+      earlyHost = descStep; earlyAt = LS * last;
+      tl.addLabel('description', 'date+=' + (UP + 0.15)).add(descStep, 'description');   // 0.15s after the date's slide up begins, as before
+    } else {
+      // Merged: no step of its own. The leading cascade runs inside the date's slide up, in parallel with it (and with the date's type
+      // change), so those lines are being pushed up 16px while they open. The posters get the same push; it uses the independent CSS
+      // `translate` property so it composes with the slide-up's transform instead of fighting it.
+      const films = [...document.querySelectorAll('#films .below')].filter(f => !/^(poster[012]|cap[012])$/.test(f.id)), Push = { v: 0 }, at = UP;
+      applyPush = () => films.forEach(f => { f.style.translate = Push.v ? `0 ${Push.v}px` : ''; });
+      pushNow = () => Push.v;   // the posters step adds its own pull-back translate on top of this, so it needs to know it
+      dateStep.to(Ld, { data: 'lines open (with the slide up)', time: LD + LS * last, duration: LD + LS * last, ease: 'none' }, at);
+      dateStep.to(Push, { data: 'posters pushed (spring)', v: 48, duration: LD, ease: 'back.out(1.4)' }, at + LS * last);
+      earlyHost = dateStep; earlyAt = at + LS * last;
+    }
+  } else {
+  // Reflow: same words, same type; only the measure (772 -> 816px wide) and the leading (24 -> 32px) change, so the
+  // lines re-break. Every word glides from where it sat to where it lands (the layout is measured both ways up front, then each
+  // word is offset back to its old spot and eased to zero), in reading order.
+  const desc = $('desc'), words = (() => { desc.innerHTML = desc.textContent.trim().split(/\s+/).map(w => `<span class="w">${w}</span>`).join(' '); return [...desc.querySelectorAll('.w')]; })();
+  const zoom = desc.getBoundingClientRect().width / desc.offsetWidth;
+  const measure = () => { const c = desc.getBoundingClientRect(); return words.map(w => { const r = w.getBoundingClientRect(); return { x: (r.left - c.left) / zoom, y: (r.top - c.top) / zoom }; }); };
+  const V9 = { width: '772px', lineHeight: '24px', textWrap: 'wrap' }, V10 = { width: '816px', lineHeight: '32px', textWrap: 'pretty' };
+  Object.assign(desc.style, V9); const P9 = measure(); Object.assign(desc.style, V10); const P10 = measure(); Object.assign(desc.style, V9);
+  const Dsc = { time: 0 }, DW = 0.8, DSTAG = 0.012, descTotal = DW + DSTAG * (words.length - 1); let wasV10 = false;
+  applyDesc = () => {
+    const v10 = Dsc.time > 0; if (v10 !== wasV10) { Object.assign(desc.style, v10 ? V10 : V9); wasV10 = v10; }
+    words.forEach((w, i) => { const e = ease(Math.max(0, Math.min(1, (Dsc.time - i * DSTAG) / DW))); w.style.transform = e >= 1 || !v10 ? '' : `translate(${(P9[i].x - P10[i].x) * (1 - e)}px,${(P9[i].y - P10[i].y) * (1 - e)}px)`; });
+  };
+  const descStep = gsap.timeline({ data: 'description', defaults: { ease: 'power3.inOut' } });
+  descStep.to(Dsc, { data: 'words reflow', time: descTotal, duration: descTotal, ease: 'none' }, 0);
+  tl.addLabel('description', 'date+=' + (UP + 0.15)).add(descStep, 'description');   // 0.15s after the date's slide up begins, as before
+  }
+
+
+  // Step 6: the posters section, film by film (Wish, then Moana, then Zootopia, half a second apart). Each film:
+  //  1. its "Credited under..." line fades out;  2. the poster squats, then springs to its place in the row, growing as it goes, with
+  //  squash and stretch (radius unchanged);  3. its caption springs to sit under the poster;  4. "·2025" shrinks away while the name
+  //  drops from Black to Regular;  5. the corners grow from 5 to 10.  Finally "Credited Projects" tracks in above the row.
+  const extra = DESC_MODE === 'reflow' ? 0 : 32, pushT = DESC_MODE === 'merged' ? 48 : 0, Y0 = 54 + (DESC_MODE === 'leading' ? 48 : 0);   // where the rows are now, and room for the taller paragraph
+  // Two versions of this step (picker on its block, or ?posters=staggered / ?posters=together): one film at a time with the full squash and
+  // stretch, or all three films at once with the squash and stretch cut to 40%.
+  const POSTERS_MODE = new URLSearchParams(location.search).get('posters') === 'together' ? 'together' : 'staggered', SQ = POSTERS_MODE === 'together' ? 0.4 : 1;
+  window.STEP_VERSIONS.posters = { title: 'posters', param: 'posters', current: POSTERS_MODE, options: [['staggered', 'One at a time, full squish'], ['together', 'All together, softer squish']] };
+  const posterTop = 365 + extra, capTop = posterTop + 197, springB = bez(0.175, 0.885, 0.32, 1.275), glide = gsap.parseEase('power3.out'),   // poster movement: fast start, smooth stop, no overshoot (no spring)
+    eSm = gsap.parseEase('power3.inOut');
+  $('label').style.top = (323 + extra) + 'px';
+  // With the push (leading / merged versions) the posters aren't just pushed down: each carries on in the same motion, growing into the row,
+  // and its caption slides under it at the same time on the same curve.
+  const EARLY = DESC_MODE !== 'reflow' && earlyHost;
+  const F = FILMS.map(() => ({ cf: 0, yf: 0, sl: 0, cs: 0, rd: 0, early: 0, dirty: false }));
+  const setT = (st, dx, dy, pushed = true) => { const p = pushed ? pushNow() : 0; st.translate = dx || dy || p ? `${dx}px ${dy + p}px` : ''; };   // keeps the date-slide push (merged version) under any pull-back
+  applyPosters = () => FILMS.forEach(([, , , ya], i) => {
+    const f = F[i], P = $('poster' + i), C = $('cap' + i), cred = $('cred' + i);
+    cred.style.opacity = 1 - f.cf;
+    CT[i].paths.slice(-(1 + String(FILMS[i][2]).length)).forEach(p => { p.style.opacity = 1 - f.yf; });   // the "·2025" at the end of the caption (fades with the push when there is one)
+    // With the push, every poster and caption travels on its own (neither is pushed with the section), starting from wherever the column's
+    // slide up has got to (the paragraph shares it). A caption uses exactly its poster's progress, so they move as one.
+    const ownP = EARLY, deskY = ownP ? +gsap.getProperty($('desc'), 'y') : Y0;
+    const B0 = deskY, pT = ownP ? 0 : pushT, pushed = !ownP;
+    const moving = f.sl > 0 || f.rd > 0 || f.early > 0;
+    if (!moving) { if (f.dirty) { gsap.set(P, { x: 0, y: B0, width: 60, height: 88, borderRadius: 5 }); gsap.set(C, { x: 0, y: B0 }); P.style.scale = ''; setT(P.style, 0, 0, pushed); f.dirty = false; } return; }
+    f.dirty = true;
+    const tx = 144 * i, ty = posterTop - ya - pT, tau = f.sl * 2.0, u = Math.max(0, Math.min(1, (tau - 0.3) / 1.1)), e = glide(u);
+    const ee = ownP ? glide(f.early) : e;   // early: one smooth glide, no squat (it is being pushed along)
+    gsap.set(P, { x: tx * ee, y: B0 + (ty - B0) * ee, width: 60 + 68 * ee, height: 88 + 104 * ee, borderRadius: 5 + 5 * springB(f.rd) });
+    // squash and stretch: squat and pull back, stretch along the travel, squash and ring out on landing
+    const L = Math.hypot(tx, ty - B0) || 1, ax = Math.abs(tx) / L, ay = Math.abs(ty - B0) / L, st = P.style;
+    if (f.sl <= 0) { st.scale = ''; setT(st, 0, 0, pushed); }
+    else if (tau < 0.3) { const a = eSm(tau / 0.3), pull = -10 * SQ * a; st.transformOrigin = '50% 100%'; setT(st, tx / L * pull, (ty - B0) / L * pull, pushed); st.scale = `${1 + 0.1 * SQ * a} ${1 - 0.14 * SQ * a}`; }
+    else if (u < 1) { const v = Math.max(-1, Math.min(1, (glide(Math.min(1, u + 0.01)) - glide(Math.max(0, u - 0.01))) / 0.02 / 3)), lead = tau < 0.42 ? 1 - Math.max(0, (tau - 0.3) / 0.12) : 0;
+      st.transformOrigin = '50% 50%'; setT(st, 0, 0, pushed); st.scale = `${1 + SQ * (0.24 * v * ax - 0.15 * v * ay + 0.1 * lead)} ${1 + SQ * (0.24 * v * ay - 0.15 * v * ax - 0.14 * lead)}`; }
+    else { const ts = tau - 1.4, q = 0.16 * SQ * Math.min(1, ts / 0.07) * Math.exp(-7 * ts) * Math.cos(ts * Math.PI * 5); st.transformOrigin = '50% 100%'; setT(st, 0, 0, pushed); st.scale = `${1 + q * 0.8} ${1 - q}`; }
+    gsap.set(C, { x: (144 * i - 70) * ee, y: B0 + ((capTop - (ya + 14) - pT) - B0) * ee });   // the caption slides under its poster on the poster's own curve
+  });
+  const postersStep = gsap.timeline({ data: 'posters', defaults: { ease: 'none' } });
+  // The weight change happens as each caption slides into place (same start), and the corners grow right after it finishes. With the push
+  // everything happens inside the push's own block; otherwise in this step.
+  const host = EARLY ? earlyHost : postersStep, lastT0 = 2 * (POSTERS_MODE === 'together' ? 0 : 0.5);
+  // "Credited Projects" comes out from behind the paragraph: it starts 40px higher with everything above its final top edge clipped away,
+  // and slides down into place while fading in, so it appears to emerge from under the text above it.
+  const labelFrom = { opacity: 0, y: -40, clipPath: 'inset(40px 0px 0px 0px)' }, labelTo = { opacity: 1, y: 0, clipPath: 'inset(0px 0px 0px 0px)', duration: 0.6, ease: 'power2.out' };
+  [2, 1, 0].forEach((i, k) => {
+    const t0 = k * (POSTERS_MODE === 'together' ? 0 : 0.5), name = FILMS[i][1].split(' ')[0], f = F[i];
+    const land = EARLY ? earlyAt : t0 + 0.6;   // when the caption starts to slide (reflow: after the poster's squat)
+    if (!EARLY) postersStep.to(f, { data: name + ': credit fades', cf: 1, duration: 0.5, ease: 'power2.out' }, t0);   // (with the push, they fade during the slide down instead)
+    if (!EARLY) postersStep.to(f, { data: name + ': poster slides to place', sl: 1, duration: 2.0 }, t0 + 0.3);   // (with the push, the posters are already home)
+    host.to(CT[i].state, { data: i === 2 || EARLY && i === 0 ? 'titles: weight changes as they slide in' : undefined, time: CT[i].total, duration: CT[i].total }, land);
+    host.to(f, { data: i === 2 || EARLY && i === 0 ? 'corners grow' : undefined, rd: 1, duration: 0.7 }, land + CT[i].total + 0.1);   // right after the weight change has finished
+  });
+  if (EARLY) {   // during the slide down: every "Credited under..." line fades out, the posters slide into the row with their captions, "Credited Projects" fades in
+    F.forEach((f, i) => earlyHost.to(f, { data: i === 0 ? 'credit lines + years fade (during the slide down)' : undefined, cf: 1, yf: 1, duration: 0.5, ease: 'power2.out' }, earlyAt));
+    // reel: the three films leave 0.05s apart (a hair of overlap instead of a single block), each lifting off the page as it travels:
+    // a soft shadow blooms while it moves and fades away as it lands (depth as a secondary action)
+    const lift = 'drop-shadow(0px 14px 16px rgba(20,30,50,0.28))', rest = 'drop-shadow(0px 0px 0px rgba(20,30,50,0))';
+    F.forEach((f, i) => {
+      const P = $('poster' + i), t0 = earlyAt + 0.05 * i; gsap.set(P, { filter: rest });
+      earlyHost.to(f, { data: i === 0 ? 'posters + captions slide into the row (0.05s apart)' : undefined, early: 1, duration: 0.9, ease: 'none' }, t0);
+      earlyHost.to(P, { data: i === 0 ? 'posters lift (shadow blooms, then fades)' : undefined, filter: lift, duration: 0.3, ease: 'power2.out' }, t0);
+      earlyHost.to(P, { filter: rest, duration: 0.6, ease: 'power2.inOut' }, t0 + 0.35);
+    });
+    earlyHost.fromTo('#label', labelFrom, { data: 'Credited Projects slides out from behind the paragraph', ...labelTo }, earlyAt);
+  } else {
+    postersStep.fromTo('#label', labelFrom, { data: 'Credited Projects slides out from behind the paragraph', ...labelTo }, lastT0 + 2.3);
+    tl.addLabel('posters', '>+=0.1').add(postersStep, 'posters');
+  }
+
+  // The camera, two ways (picker on the camera chip under the steps, or ?cam=fixed / ?cam=follow). CAM is the camera's centre in page
+  // coordinates and its zoom; the fixed frame is 1.3x on (330, 265). "Follows the motion" eases the same camera between a few framings:
+  // in on the heading, down with the logo and the column, across to the right with the date, then back out to the finished frame for the posters.
+  const CAMV = ['follow', 'followdate', 'refined'].includes(new URLSearchParams(location.search).get('cam')) ? new URLSearchParams(location.search).get('cam') : 'refined', CAM = { s: 1.3, cx: 330, cy: 265 }, camEl = $('cam');
+  window.STEP_VERSIONS.camera = { title: 'camera', param: 'cam', current: CAMV, options: [['fixed', 'Fixed frame'], ['follow', 'Follows the motion'], ['followdate', 'Follows the motion + the date'], ['refined', 'Refined: one continuous path']] };
+  applyCam = () => { const s = CAM.lz !== undefined ? Math.exp(CAM.lz) : CAM.s;   // the refined camera animates log-zoom (lz), so a zoom feels the same speed at any scale
+    camEl.style.transform = `translate(${960 - CAM.cx * s}px,${540 - CAM.cy * s}px) scale(${s})`; };
+  const camera = gsap.timeline({ data: 'camera', defaults: { ease: 'power2.inOut' } }), at = n => tl.labels[n];
+  if (CAMV === 'refined') {
+    // REFINED: the same story as "follows the motion + the date", re-cut with motion-design principles:
+    //  - one continuous path: the camera never reverses (no drop-then-climb U-turn), and the whole finish is ONE coupled move, so pan and zoom
+    //    share a single curve instead of two moves that fight or queue up
+    //  - cameras have mass: every move eases in AND out (no hard fast starts); only the date pan uses an ease-out, to match the letters it tracks
+    //  - zoom is animated in log space (lz = ln scale), so each zoom step is perceived as the same speed whether it is 1.3x or 2.3x
+    //  - moves are motivated and few: in on the heading, with the box, in on the date, out again, one long glide to the finished frame
+    //  - anticipation and follow-through: the camera starts moving a beat before the action it frames and finishes after it has settled
+    //  - modest zoom ratios (max 2.3x, not 2.6x) keep the action readable and leave margin for the letters' stretch and bounce
+    CAM.lz = Math.log(CAM.s);
+    const Z = Math.log, dStart = at('date');
+    camera.to(CAM, { data: 'slow drift in (never a dead frame)', lz: Z(1.33), duration: 0.6, ease: 'sine.inOut' }, 0);   // reel: the opening hold is alive
+    const movesAt = EARLY ? earlyHost.startTime() + earlyAt - 0.2 : at('posters') + 0.6;   // when the description's lines start to open
+    camera.to(CAM, { data: 'eases in on the heading', lz: Z(1.7), cx: 330, cy: 40, duration: 0.84, ease: 'power2.inOut' }, at('logo') - 0.6);                 // starts before the morph, ends as the box begins to grow
+    camera.to(CAM, { data: 'drops with the box + column', cy: 140, duration: 1.0 * K, ease: 'power3.inOut' }, at('logo') + 0.3 * K);                         // same start, length and curve as the box
+    camera.to(CAM, { data: 'eases in on the date', lz: Z(2.3), duration: 0.7, ease: 'power2.inOut' }, dStart + 0.05);                                           // arrives during the lead-in, before the letters move
+    camera.to(CAM, { data: 'follows the date', cx: 560, duration: T_L, ease: 'power1.out' }, dStart + LEAD);                                                    // the letters' own curve and length
+    camera.to(CAM, { data: 'eases back out', lz: Z(1.7), cx: 330, duration: 0.6, ease: 'power2.inOut' }, dStart + LEAD + T_L + BEAT);                         // after the crash and the beat
+    // the finish is one glide in two parts: the slide all the way down with the description, posters and titles at the same zoom (the posters' own
+    // 'power3.out'), and the zoom out that picks up towards its end and flows into the final resting place. They overlap: the zoom out starts
+    // 0.66s in (6.25s here) while the slide is only just settling, and from then on it carries the camera (zoom and height) the rest of the way.
+    const slideDur = EARLY ? 1.1 : 1.4, cyBottom = 326 + extra;
+    camera.to(CAM, { data: 'down with the description + posters + titles', cy: cyBottom, duration: slideDur, ease: 'power3.out' }, movesAt);
+    camera.to(CAM, { data: 'zoom out, flowing into the final frame', lz: Z(1.3), cy: 265, duration: 1.0, ease: 'power2.inOut' }, movesAt + 0.66);
+  } else if (CAMV !== 'fixed') {
+    camera.to(CAM, { data: 'in on the heading', s: 1.75, cx: 330, cy: 35, duration: 0.7 + 0.3 * K }, at('logo') - 0.7);   // ends just as the box starts to grow
+    // the camera drops with the box and the column: same start, same length, same ease as 'box grows' / 'column slides'
+    camera.to(CAM, { data: 'down with the logo + column (same rate as the box)', s: 1.75, cx: 330, cy: 140, duration: 1.0 * K, ease: 'power3.inOut' }, at('logo') + 0.3 * K);
+    // "follows the motion": no pan for the date; it holds the zoomed-in framing (the date's slide stays inside it). "...+ the date": the camera
+    // zooms in further and pans right with the date's slide (the same length and curve as the slide, so it tracks it), then zooms back out to the
+    // base zoom as the date slides up. Either way it then drops with the description's lines opening and the posters sliding into the row,
+    // easing out to the finished, zoomed-out frame as the posters settle.
+    const movesAt = EARLY ? earlyHost.startTime() + earlyAt - 0.2 : at('posters') + 0.6;   // when the lines start to open (or, in reflow, when the posters start to move)
+    if (CAMV === 'followdate') {
+      const dStart = at('date');
+      camera.to(CAM, { data: 'follows the date to the right', cx: 580, duration: T_L, ease: 'power1.out' }, dStart + LEAD);       // the date's own slide curve, length and start
+      camera.to(CAM, { data: 'zooms in on the date', s: 2.6, duration: 0.6, ease: 'power3.out' }, dStart);   // arrives with a beat to spare before the letters move (the lead-in is 0.85s)
+      // The zoom back out waits until the letters have finished crashing into one another (the slide, and its wall bounce, end at T_L) and is
+      // done before the date's slide up and the slide down begin (the hold in the date step is exactly its length), so one move runs at a time.
+      camera.to(CAM, { data: 'zooms back out (after the crash)', s: 1.75, cx: 330, duration: 0.45, ease: 'power2.inOut' }, dStart + LEAD + T_L + BEAT);
+    }
+    // Slide all the way down at the same zoom, far enough that the posters and the film titles (the bottom of the page) are in frame, and only
+    // then zoom out to the finished frame. The slide runs first (cy only) and the zoom out (s and cy) takes over where it ends, so they never overlap.
+    const slideDur = EARLY ? 1.1 : 1.4, cyBottom = 326 + extra;   // at 1.75x the view is 616 units tall, so this puts the captions' bottom edge about 40 units from the bottom of the frame
+    camera.to(CAM, { data: 'down with the description + posters + titles', cy: cyBottom, duration: slideDur, ease: 'power3.out' }, movesAt);
+    camera.to(CAM, { data: 'zoom out to the full frame', s: 1.3, cy: 265, duration: 0.9, ease: 'power2.inOut' }, movesAt + slideDur);
+  } else camera.to({}, { data: 'fixed frame', duration: tl.duration() }, 0);   // one block across the whole timeline
+  tl.add(camera, 0);
+
+  tl.addLabel('end', tl.duration() + 1.4);   // reel: hold on the finished frame long enough to read it   // hold on the finished header
+  tl.to({}, { duration: 0.001 }, 'end');
+  DUR = tl.duration();
+  setRange(0, DUR);
+  buildTracks();
+  // after a live reload (dev-server.js) land back where you were: same time, same play/pause, same loop range
+  try { if (sessionStorage.getItem('liveReload') === '1') { sessionStorage.removeItem('liveReload'); const st = JSON.parse(sessionStorage.getItem('seqState') || 'null');
+    if (st) { setSpeed(st.speed || 1); t = Math.min(st.t, DUR); playing = st.playing; loop = st.loop; setRange(Math.min(st.lo, DUR), Math.min(st.hi, DUR)); $('play').textContent = playing ? 'pause' : 'play'; $('loop').classList.toggle('on', loop); } } } catch (e) {}
+  gsap.ticker.add(tick);
+});
+
+function setRange(a, b) {
+  if (!isFinite(a) || !isFinite(b)) return;
+  lo = Math.max(0, Math.min(a, DUR)); hi = Math.max(lo + 0.05, Math.min(b, DUR));
+  const band = $('band'); if (!band || !DUR) return;
+  band.style.left = (lo / DUR * 100) + '%'; band.style.width = ((hi - lo) / DUR * 100) + '%';
+  $('hin').style.left = (lo / DUR * 100) + '%'; $('hout').style.left = (hi / DUR * 100) + '%';
+  const full = lo <= 0 && hi >= DUR, r = $('rangeTxt'); r.textContent = full ? 'full timeline' : `${lo.toFixed(2)}s – ${hi.toFixed(2)}s`; r.classList.toggle('dim', full);
+}
+// Timeline strip: each nested timeline is a coloured block (click to loop it); its tweens sit underneath ("tweens" toggles them).
+// Version picker: a small icon + chevron on a step's block opens a menu of the step's versions. Picking one reloads with ?param=value.
+function addVersionPicker(seg, name, cfg) {
+  seg.classList.add('hasver');
+  const btn = document.createElement('span'); btn.className = 'ver'; btn.title = (cfg.title || name) + ' version';
+  btn.innerHTML = '<svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><rect x="1" y="3.5" width="7" height="7" rx="1.2"/><path d="M4 1.5h5.5a1 1 0 0 1 1 1V8"/></svg><svg width="8" height="8" viewBox="0 0 8 8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 3 4 5.5 6.5 3"/></svg>';
+  const close = () => { const m = $('vermenu'); if (m) m.remove(); btn.classList.remove('open'); document.removeEventListener('pointerdown', away, true); };
+  const away = e => { if (!e.target.closest('#vermenu') && !e.target.closest('.ver')) close(); };
+  btn.onclick = e => {
+    e.stopPropagation(); if ($('vermenu')) { close(); return; }
+    const m = document.createElement('div'); m.id = 'vermenu';
+    m.innerHTML = `<div class="t">${cfg.title || name} version</div>` + cfg.options.map(([v, label]) => `<button data-v="${v}"><i>${v === cfg.current ? '✓' : ''}</i>${label}</button>`).join('');
+    document.body.append(m);
+    const r = btn.getBoundingClientRect(); m.style.left = Math.max(8, Math.min(innerWidth - m.offsetWidth - 8, r.right - m.offsetWidth)) + 'px'; m.style.bottom = (innerHeight - r.top + 8) + 'px';
+    btn.classList.add('open'); document.addEventListener('pointerdown', away, true);
+    m.querySelectorAll('button').forEach(b => b.onclick = () => { if (b.dataset.v === cfg.current) return close(); const q = new URLSearchParams(location.search); q.set(cfg.param, b.dataset.v); location.search = q.toString(); });
+  };
+  addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  seg.append(btn);
+}
+const COLORS = ['#4f6bff', '#12abc4', '#e5833a', '#9b5de5', '#2fa36b'];
+function buildTracks() {
+  const box = $('tracks'), pct = v => (v / DUR * 100) + '%';
+  const ruler = $('ruler'); for (let sec = 0; sec <= DUR; sec += 0.5) { const whole = Number.isInteger(sec);
+    ruler.insertAdjacentHTML('beforeend', `<i class="${whole ? 's' : ''}" style="left:${pct(sec)}"></i>${whole ? `<b style="left:${pct(sec)}">${sec}s</b>` : ''}`); }
+  const row = document.createElement('div'); row.className = 'row0'; box.append(row);
+  const camRow = document.createElement('div'); camRow.className = 'row0 rowcam'; box.append(camRow);   // the camera gets its own lane under the steps
+  const all = tl.getChildren(false, false, true).filter(c => c.data), steps = all.filter(c => c.data !== 'camera'), camStep = all.find(c => c.data === 'camera');
+  const allTweens = [];
+  steps.forEach((st, i) => {
+    const start = st.startTime(), color = COLORS[i % COLORS.length];
+    const seg = document.createElement('div'); seg.className = 'seg'; seg.textContent = st.data; seg.style.cssText = `left:${pct(start)};width:${pct(st.duration())};background:${color}`;
+    seg.title = `${st.data}: ${start.toFixed(2)}s to ${(start + st.duration()).toFixed(2)}s`;
+    seg.onclick = () => { setRange(start, start + st.duration()); t = start; playing = true; $('play').textContent = 'pause'; };
+    row.append(seg);
+    const cfg = (window.STEP_VERSIONS || {})[st.data]; if (cfg) addVersionPicker(seg, st.data, cfg);
+    st.getChildren(false, true, false).forEach(c => allTweens.push({ a: start + c.startTime(), b: start + c.startTime() + c.duration(), c, color }));
+  });
+  if (camStep) {   // camera lane: a chip with the version picker, and one block per camera move
+    const chip = document.createElement('div'); chip.className = 'camchip'; chip.textContent = 'camera'; camRow.append(chip);
+    camStep.getChildren(false, true, false).forEach(c => { const a = camStep.startTime() + c.startTime(), blk = document.createElement('div'); blk.className = 'seg camblk'; blk.textContent = c.data || '';
+      blk.style.cssText = `left:${pct(a)};width:${pct(c.duration())}`; blk.title = `${c.data}: ${a.toFixed(2)}s, ${c.duration().toFixed(2)}s long`; camRow.append(blk); });
+    const cfg = (window.STEP_VERSIONS || {}).camera; if (cfg) addVersionPicker(chip, 'camera', cfg);
+  }
+  // the steps' animations share lanes across the whole strip (steps overlap in time now), each in the first lane that is free
+  const lanes = [], tweenRows = []; allTweens.sort((x, y) => x.a - y.a).forEach(({ a, b, c, color }) => {
+    let lane = lanes.findIndex(end => end <= a + 1e-6); if (lane < 0) { lane = lanes.length; lanes.push(0); } lanes[lane] = b;
+    const tw = document.createElement('div'); tw.className = 'tw'; tw.textContent = c.data || ''; tw.dataset.lane = lane;
+    tw.style.cssText = `left:${pct(a)};width:${pct(b - a)};background:${color}`; tw.title = `${c.data || 'tween'}: ${a.toFixed(2)}s, ${c.duration().toFixed(2)}s long`; tweenRows.push({ tw, lane }); box.append(tw); });
+  const laneTop = 12 + 4 + 18 + 3 + 18 + 4, total = lanes.length;   // ruler, steps row, camera row, gap
+  tweenRows.forEach(r => { r.tw.style.top = (laneTop + r.lane * 13) + 'px'; });
+  box.style.height = (laneTop + total * 13) + 'px'; box.dataset.full = box.style.height;
+  // the strip is the scrubber: drag anywhere to scrub; a plain click on a block loops that block, on empty space it seeks
+  const timeAt = e => { const r = box.getBoundingClientRect(); return Math.max(0, Math.min(DUR, (e.clientX - r.left) / r.width * DUR)); };
+  let down = null;
+  box.onpointerdown = e => { if (e.target.closest('.ver') || e.target.closest('.hd')) return; box.setPointerCapture(e.pointerId); down = { x: e.clientX, moved: false, seg: e.target.closest('.seg') }; };
+  box.onpointermove = e => { if (!down) return; if (Math.abs(e.clientX - down.x) > 3) down.moved = true; if (down.moved) { playing = false; $('play').textContent = 'play'; t = timeAt(e); } };
+  box.onpointerup = e => { if (!down) return; if (!down.moved) { if (down.seg) down.seg.onclick(e); else { playing = false; $('play').textContent = 'play'; t = timeAt(e); } } down = null; };
+  // loop in / out handles: drag the little flags at the ends of the shaded band
+  ['hin', 'hout'].forEach(id => { const h = $(id); let drag = false;
+    h.onpointerdown = e => { e.stopPropagation(); h.setPointerCapture(e.pointerId); drag = true; };
+    h.onpointermove = e => { if (!drag) return; const tt = timeAt(e); id === 'hin' ? setRange(Math.min(tt, hi - 0.05), hi) : setRange(lo, Math.max(tt, lo + 0.05)); };
+    h.onpointerup = () => { drag = false; }; });
+  $('detail').onclick = () => { const on = $('detail').classList.toggle('on'); box.querySelectorAll('.tw').forEach(n => n.style.display = on ? '' : 'none'); box.style.height = on ? box.dataset.full : (12 + 4 + 18 + 3 + 18) + 'px'; };
+  $('full').onclick = () => setRange(0, DUR);
+}
+let last = performance.now();
+function tick() {
+  const now = performance.now(), dt = Math.min((now - last) / 1000, .1); last = now;
+  fit();
+  // wrap (or stop) when the playhead reaches the out point. DUR already includes the short hold on the finished frame, and t is clamped
+  // to DUR just below, so the old "hi + 0.6" test could never be met on the full range, which is why the loop never looped
+  if (playing) { t += dt * speed; if (t >= hi) { if (loop) t = lo; else { t = hi; playing = false; $('play').textContent = 'play'; } } }
+  t = Math.max(0, Math.min(t, DUR)); tl.time(t, false);
+  try { sessionStorage.setItem('seqState', JSON.stringify({ t, playing, loop, lo, hi, speed })); } catch (e) {}
+  $('clock').textContent = t.toFixed(2) + 's'; $('playhead').style.left = (t / DUR * 100) + '%';
+}
+$('play').onclick = () => { if (!playing && (t < lo || t >= hi)) t = lo; playing = !playing; $('play').textContent = playing ? 'pause' : 'play'; };
+$('loop').onclick = () => { loop = !loop; $('loop').classList.toggle('on', loop); };
+// playback speed: 1x, half, quarter (keys 1 2 3). It only scales how fast the playhead advances, so scrubbing and the loop range are unaffected.
+function setSpeed(v) { speed = v; $('speedTxt').textContent = { 1: '1×', 0.5: '½×', 0.25: '¼×' }[v] || v + '×'; ['spd1', 'spd2', 'spd3'].forEach(id => $(id).classList.toggle('act', +$(id).dataset.speed === v)); }
+['spd1', 'spd2', 'spd3'].forEach(id => { $(id).onclick = () => setSpeed(+$(id).dataset.speed); });
+$('restart').onclick = () => { t = lo; playing = true; $('play').textContent = 'pause'; };   // back to the start of the loop range (the very start when there is none) and play
+$('setIn').onclick = () => setRange(Math.min(t, hi - 0.05), hi);
+$('setOut').onclick = () => setRange(lo, Math.max(t, lo + 0.05));
+addEventListener('keydown', e => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;   // leave browser shortcuts alone (Cmd/Ctrl+R reloads the page)
+  if (e.code === 'Space') { e.preventDefault(); $('play').click(); }
+  else if (e.key === 'l') $('loop').click();
+  else if (e.key === 'i') $('setIn').click();
+  else if (e.key === 'o') $('setOut').click();
+  else if (e.key === 'x') $('full').click();
+  else if (e.key === 'r') $('restart').click();
+  else if (e.key === '1') $('spd1').click();
+  else if (e.key === '2') $('spd2').click();
+  else if (e.key === '3') $('spd3').click();
+  else if (e.key === 'ArrowLeft') { playing = false; t = Math.max(0, t - 1 / 30); }
+  else if (e.key === 'ArrowRight') { playing = false; t = Math.min(DUR, t + 1 / 30); }
+});
+// the stage fits above the full-width timeline (the whole window when the controls are hidden with ?clean)
+function fit() { const ui = $('ui'), room = innerHeight - (document.body.classList.contains('clean') ? 0 : ui.offsetHeight), s = Math.min(innerWidth / 1920, room / 1080), f = $('fit'); f.style.transform = `scale(${s})`; f.style.left = (innerWidth - 1920 * s) / 2 + 'px'; f.style.top = (room - 1080 * s) / 2 + 'px'; }
+if (new URLSearchParams(location.search).has('clean')) document.body.classList.add('clean');
+window.seek = v => { playing = false; t = v; fit(); tl.time(v, false); };   // frame access for export
+fit();
+</script>
+</body>
+</html>
