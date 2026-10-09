@@ -11,12 +11,11 @@
   * { box-sizing:border-box; }
   html,body { margin:0; height:100%; background:#111; overflow:hidden; font-family:Lato,sans-serif; }
   #fit { position:absolute; width:1920px; height:1080px; transform-origin:0 0; }
-  #stage { position:absolute; inset:0; overflow:hidden; background-color:#dcdde1;
-    background-image:linear-gradient(#cfd1d6 1px,transparent 1px),linear-gradient(90deg,#cfd1d6 1px,transparent 1px); background-size:48px 48px; }
-  /* camera is fixed for now: 1.3x on the role, centred at world (330, 215) */
-  #cam { position:absolute; left:0; top:0; transform-origin:0 0; transform:translate(531px,260.5px) scale(1.3); }
-  #panel { position:absolute; left:-240px; top:-200px; width:1180px; height:1000px; background:#fff; border-radius:28px;
-    box-shadow:0 30px 80px rgba(20,24,40,.18), 0 0 0 1px rgba(20,24,40,.06); }
+  #stage { position:absolute; inset:0; overflow:hidden; background:#fff; }   /* one continuous white canvas: no grid, no separate page panel */
+  /* camera is fixed for now: 1.3x on the role, centred at world (330, 265): 50px lower than before, so there is more room under the posters
+     and less above the heading, with the 16:9 frame unchanged */
+  #cam { position:absolute; left:0; top:0; transform-origin:0 0; transform:translate(531px,195.5px) scale(1.3); }
+  #panel { display:none; }
   .a { position:absolute; color:var(--ink); white-space:nowrap; }
   #heading { position:absolute; left:0; top:0; overflow:visible; }
   #heading path, #title path, #date path, #films path { fill:var(--ink); }
@@ -65,6 +64,9 @@
   #tracks .seg:hover { filter:brightness(1.2); }
   #tracks .tw { height:11px; font-size:9px; line-height:11px; padding:0 4px; opacity:.85; pointer-events:none; }
   #tracks .row0 { position:relative; height:18px; margin-top:4px; }
+  #tracks .rowcam { margin-top:3px; }
+  #tracks .camchip { position:absolute; left:0; top:0; height:18px; padding:0 22px 0 8px; z-index:3; border-radius:4px; background:#232738; box-shadow:inset 0 0 0 1px #3d4258; color:#8a91a8; font:500 10px/18px "JetBrains Mono",monospace; }
+  #tracks .camblk { background:#4b5370; color:#dfe5ff; }
   #playhead { position:absolute; top:0; bottom:-3px; width:2px; margin-left:-1px; background:#ff5a5f; pointer-events:none; z-index:2; }
   #playhead::before { content:''; position:absolute; top:-1px; left:-5px; border:6px solid transparent; border-top:8px solid #ff5a5f; border-bottom:0; }
   #tracks .seg.hasver { padding-right:40px; text-overflow:ellipsis; }
@@ -118,7 +120,7 @@ const bez = (x1, y1, x2, y2) => t => { if (t <= 0) return 0; if (t >= 1) return 
   for (let i = 0; i < 24; i++) { u = (lo + hi) / 2; const x = 3 * (1 - u) * (1 - u) * u * x1 + 3 * (1 - u) * u * u * x2 + u * u * u; x < t ? lo = u : hi = u; }
   return 3 * (1 - u) * (1 - u) * u * y1 + 3 * (1 - u) * u * u * y2 + u * u * u; };
 
-let applyDate = () => {}, applyDesc = () => {}, applyPush = () => {}, applyPosters = () => {}, pushNow = () => 0;
+let applyDate = () => {}, applyDesc = () => {}, applyPush = () => {}, applyPosters = () => {}, applyCam = () => {}, pushNow = () => 0;
 let earlyHost = null, earlyAt = 0;   // where Zootopia's poster picks up the description's push (set by the leading / merged versions)
 let tl, DUR, lo = 0, hi = 0, t = 0, playing = true, loop = true;
 
@@ -141,7 +143,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   const apos = mkPath(dateDrop.apos); $('dateDrop').append(apos);
   const swapDate = () => { const morphing = D.state.time > 0; $('dateDrop').style.display = morphing ? 'none' : ''; $('dateMorph').style.display = morphing ? '' : 'none'; };
 
-  tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.inOut' }, onUpdate: () => { H.draw(); T.draw(); D.draw(); swapDate(); applyDate(); applyDesc(); applyPush(); CT.forEach(c => c.draw()); applyPosters(); } });
+  tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.inOut' }, onUpdate: () => { H.draw(); T.draw(); D.draw(); swapDate(); applyDate(); applyDesc(); applyPush(); CT.forEach(c => c.draw()); applyPosters(); applyCam(); } });
   tl.addLabel('v9', 0);
   // Each step is a nested timeline, placed on the master at a label. Times inside a step are relative to its own start.
   const header = gsap.timeline({ data: 'header', defaults: { ease: 'power3.inOut' } });
@@ -337,6 +339,28 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
     tl.addLabel('posters', '>+=0.1').add(postersStep, 'posters');
   }
 
+  // The camera, two ways (picker on the camera chip under the steps, or ?cam=fixed / ?cam=follow). CAM is the camera's centre in page
+  // coordinates and its zoom; the fixed frame is 1.3x on (330, 265). "Follows the motion" eases the same camera between a few framings:
+  // in on the heading, down with the logo and the column, across to the right with the date, then back out to the finished frame for the posters.
+  const CAMV = new URLSearchParams(location.search).get('cam') === 'follow' ? 'follow' : 'fixed', CAM = { s: 1.3, cx: 330, cy: 265 }, camEl = $('cam');
+  window.STEP_VERSIONS.camera = { title: 'camera', param: 'cam', current: CAMV, options: [['fixed', 'Fixed frame'], ['follow', 'Follows the motion']] };
+  applyCam = () => { camEl.style.transform = `translate(${960 - CAM.cx * CAM.s}px,${540 - CAM.cy * CAM.s}px) scale(${CAM.s})`; };
+  const camera = gsap.timeline({ data: 'camera', defaults: { ease: 'power2.inOut' } }), at = n => tl.labels[n];
+  if (CAMV === 'follow') {
+    camera.to(CAM, { data: 'in on the heading', s: 1.75, cx: 330, cy: 35, duration: 0.7 + 0.3 * K }, at('logo') - 0.7);   // ends just as the box starts to grow
+    // the camera drops with the box and the column: same start, same length, same ease as 'box grows' / 'column slides'
+    camera.to(CAM, { data: 'down with the logo + column (same rate as the box)', s: 1.75, cx: 330, cy: 140, duration: 1.0 * K, ease: 'power3.inOut' }, at('logo') + 0.3 * K);
+    // no pan for the date: it holds the zoomed-in framing (the date's slide stays inside it). Then it drops again with the description's lines
+    // opening and the posters sliding into the row, easing out to the finished, zoomed-out frame as the posters settle.
+    const movesAt = EARLY ? earlyHost.startTime() + earlyAt - 0.2 : at('posters') + 0.6;   // when the lines start to open (or, in reflow, when the posters start to move)
+    // Slide all the way down at the same zoom, far enough that the posters and the film titles (the bottom of the page) are in frame, and only
+    // then zoom out to the finished frame. The slide runs first (cy only) and the zoom out (s and cy) takes over where it ends, so they never overlap.
+    const slideDur = EARLY ? 1.1 : 1.4, cyBottom = 326 + extra;   // at 1.75x the view is 616 units tall, so this puts the captions' bottom edge about 40 units from the bottom of the frame
+    camera.to(CAM, { data: 'down with the description + posters + titles', cy: cyBottom, duration: slideDur, ease: 'power3.out' }, movesAt);
+    camera.to(CAM, { data: 'zoom out to the full frame', s: 1.3, cy: 265, duration: 0.9, ease: 'power2.inOut' }, movesAt + slideDur);
+  } else camera.to({}, { data: 'fixed frame', duration: tl.duration() }, 0);   // one block across the whole timeline
+  tl.add(camera, 0);
+
   tl.addLabel('end', tl.duration() + 0.6);   // hold on the finished header
   tl.to({}, { duration: 0.001 }, 'end');
   DUR = tl.duration();
@@ -382,8 +406,9 @@ function buildTracks() {
   const ruler = $('ruler'); for (let sec = 0; sec <= DUR; sec += 0.5) { const whole = Number.isInteger(sec);
     ruler.insertAdjacentHTML('beforeend', `<i class="${whole ? 's' : ''}" style="left:${pct(sec)}"></i>${whole ? `<b style="left:${pct(sec)}">${sec}s</b>` : ''}`); }
   const row = document.createElement('div'); row.className = 'row0'; box.append(row);
-  const steps = tl.getChildren(false, false, true).filter(c => c.data);
-  const tweenRows = [];
+  const camRow = document.createElement('div'); camRow.className = 'row0 rowcam'; box.append(camRow);   // the camera gets its own lane under the steps
+  const all = tl.getChildren(false, false, true).filter(c => c.data), steps = all.filter(c => c.data !== 'camera'), camStep = all.find(c => c.data === 'camera');
+  const allTweens = [];
   steps.forEach((st, i) => {
     const start = st.startTime(), color = COLORS[i % COLORS.length];
     const seg = document.createElement('div'); seg.className = 'seg'; seg.textContent = st.data; seg.style.cssText = `left:${pct(start)};width:${pct(st.duration())};background:${color}`;
@@ -391,18 +416,22 @@ function buildTracks() {
     seg.onclick = () => { setRange(start, start + st.duration()); t = start; playing = true; $('play').textContent = 'pause'; };
     row.append(seg);
     const cfg = (window.STEP_VERSIONS || {})[st.data]; if (cfg) addVersionPicker(seg, st.data, cfg);
-    // stack the step's tweens in as few lanes as possible
-    const lanes = [];
-    st.getChildren(false, true, false).forEach(c => {
-      const a = start + c.startTime(), b = a + c.duration(); let lane = lanes.findIndex(end => end <= a + 1e-6); if (lane < 0) { lane = lanes.length; lanes.push(0); } lanes[lane] = b;
-      const tw = document.createElement('div'); tw.className = 'tw'; tw.textContent = c.data || ''; tw.dataset.lane = lane;
-      tw.style.cssText = `left:${pct(a)};width:${pct(b - a)};background:${color}`; tw.title = `${c.data || 'tween'}: ${a.toFixed(2)}s, ${c.duration().toFixed(2)}s long`; tweenRows.push({ tw, lane, i }); box.append(tw);
-    });
+    st.getChildren(false, true, false).forEach(c => allTweens.push({ a: start + c.startTime(), b: start + c.startTime() + c.duration(), c, color }));
   });
-  // tween lanes sit below the segment row; all steps share the same lanes since they don't overlap in time
-  const total = tweenRows.reduce((m, r) => Math.max(m, r.lane + 1), 0);
-  tweenRows.forEach(r => { r.tw.style.top = (12 + 4 + 22 + r.lane * 13) + 'px'; });
-  box.style.height = (12 + 4 + 22 + total * 13) + 'px'; box.dataset.full = box.style.height;
+  if (camStep) {   // camera lane: a chip with the version picker, and one block per camera move
+    const chip = document.createElement('div'); chip.className = 'camchip'; chip.textContent = 'camera'; camRow.append(chip);
+    camStep.getChildren(false, true, false).forEach(c => { const a = camStep.startTime() + c.startTime(), blk = document.createElement('div'); blk.className = 'seg camblk'; blk.textContent = c.data || '';
+      blk.style.cssText = `left:${pct(a)};width:${pct(c.duration())}`; blk.title = `${c.data}: ${a.toFixed(2)}s, ${c.duration().toFixed(2)}s long`; camRow.append(blk); });
+    const cfg = (window.STEP_VERSIONS || {}).camera; if (cfg) addVersionPicker(chip, 'camera', cfg);
+  }
+  // the steps' animations share lanes across the whole strip (steps overlap in time now), each in the first lane that is free
+  const lanes = [], tweenRows = []; allTweens.sort((x, y) => x.a - y.a).forEach(({ a, b, c, color }) => {
+    let lane = lanes.findIndex(end => end <= a + 1e-6); if (lane < 0) { lane = lanes.length; lanes.push(0); } lanes[lane] = b;
+    const tw = document.createElement('div'); tw.className = 'tw'; tw.textContent = c.data || ''; tw.dataset.lane = lane;
+    tw.style.cssText = `left:${pct(a)};width:${pct(b - a)};background:${color}`; tw.title = `${c.data || 'tween'}: ${a.toFixed(2)}s, ${c.duration().toFixed(2)}s long`; tweenRows.push({ tw, lane }); box.append(tw); });
+  const laneTop = 12 + 4 + 18 + 3 + 18 + 4, total = lanes.length;   // ruler, steps row, camera row, gap
+  tweenRows.forEach(r => { r.tw.style.top = (laneTop + r.lane * 13) + 'px'; });
+  box.style.height = (laneTop + total * 13) + 'px'; box.dataset.full = box.style.height;
   // the strip is the scrubber: drag anywhere to scrub; a plain click on a block loops that block, on empty space it seeks
   const timeAt = e => { const r = box.getBoundingClientRect(); return Math.max(0, Math.min(DUR, (e.clientX - r.left) / r.width * DUR)); };
   let down = null;
@@ -414,7 +443,7 @@ function buildTracks() {
     h.onpointerdown = e => { e.stopPropagation(); h.setPointerCapture(e.pointerId); drag = true; };
     h.onpointermove = e => { if (!drag) return; const tt = timeAt(e); id === 'hin' ? setRange(Math.min(tt, hi - 0.05), hi) : setRange(lo, Math.max(tt, lo + 0.05)); };
     h.onpointerup = () => { drag = false; }; });
-  $('detail').onclick = () => { const on = $('detail').classList.toggle('on'); box.querySelectorAll('.tw').forEach(n => n.style.display = on ? '' : 'none'); box.style.height = on ? box.dataset.full : (12 + 4 + 18) + 'px'; };
+  $('detail').onclick = () => { const on = $('detail').classList.toggle('on'); box.querySelectorAll('.tw').forEach(n => n.style.display = on ? '' : 'none'); box.style.height = on ? box.dataset.full : (12 + 4 + 18 + 3 + 18) + 'px'; };
   $('full').onclick = () => setRange(0, DUR);
 }
 let last = performance.now();
