@@ -29,16 +29,23 @@ http.createServer((req, res) => {
 }).listen(PORT, () => console.log(`sizzle dev server: http://localhost:${PORT}/sequence.html  (live reload + auto-build)`));
 
 // ---- watch
-let timer = null, building = false, quietUntil = 0; const pending = new Set();
-const run = (cmd, args, label) => new Promise(done => { building = true; execFile(cmd, args, { cwd: ROOT }, (err, out, errout) => { building = false; quietUntil = Date.now() + 500; if (err) console.error(label + ' failed:\n' + (errout || err.message)); done(!err); }); });
-fs.watch(ROOT, { recursive: true }, (_, name) => {
-  if (!name || building || Date.now() < quietUntil || /(^|\/)(\.|node_modules)/.test(name)) return;
-  pending.add(name); clearTimeout(timer);
-  timer = setTimeout(async () => {
-    const files = [...pending]; pending.clear();
-    let ok = true;
+// Files the build writes itself are ignored (otherwise a build would trigger another one); every other change is queued, so edits that
+// land while a build is running are picked up by the next pass instead of being dropped.
+let timer = null, busy = false, again = false; const pending = new Set();
+const GENERATED = /^(sequence|variants|disney-morph)\.html$|^glyphs\.json$/, TMP = /\.tmp\.|~$|\.swp$/;
+const run = (cmd, args, label) => new Promise(done => execFile(cmd, args, { cwd: ROOT }, (err, out, errout) => { if (err) console.error(label + ' failed:\n' + (errout || err.message)); done(!err); }));
+async function flush() {
+  if (busy) { again = true; return; }
+  busy = true;
+  do {
+    again = false; const files = [...pending]; pending.clear(); let ok = true;
     if (files.some(f => f === 'extract-glyphs.js')) ok = await run('node', ['extract-glyphs.js'], 'extract-glyphs');
     if (ok && files.some(f => /\.template\.html$/.test(f))) ok = await run('python3', ['build.py'], 'build');
-    if (ok) reload(files.join(', '));
-  }, 150);
+    if (ok && files.length && !again) reload(files.join(', '));
+  } while (again);
+  busy = false;
+}
+fs.watch(ROOT, { recursive: true }, (_, name) => {
+  if (!name || GENERATED.test(name) || TMP.test(name) || /(^|\/)(\.|node_modules)/.test(name)) return;
+  pending.add(name); clearTimeout(timer); timer = setTimeout(flush, 150);
 });

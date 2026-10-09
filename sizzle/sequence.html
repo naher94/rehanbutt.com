@@ -34,8 +34,14 @@
   #ui { position:fixed; left:0; right:0; bottom:0; display:flex; flex-direction:column; gap:8px; align-items:stretch; 
     background:#14161e; color:#fff; padding:10px 20px 12px; border-radius:14px 14px 0 0; font:500 12px/1 "JetBrains Mono",monospace; z-index:9; }
   #ui .row { display:flex; gap:8px; align-items:center; justify-content:flex-start; }
-  #ui button { all:unset; cursor:pointer; padding:6px 11px; border-radius:99px; background:#2c3040; color:#fff; }
+  #ui button { all:unset; cursor:pointer; display:inline-flex; align-items:center; padding:6px 13px; border-radius:14px; background:#2c3040; color:#fff; }
+  #ui .ctl { align-items:stretch; }          /* every control in the row is as tall as the two-line loop range cell */
+  #ui .ctl > #clock { align-self:center; margin-left:4px; }
   #ui button.on { background:#4f6bff; }
+  /* the shortcut, drawn as a little keycap after the label (a data-key attribute, so changing the label text never touches it) */
+  #ui button[data-key]::after { content:attr(data-key); display:inline-block; margin-left:8px; min-width:14px; padding:1px 5px 0; box-sizing:border-box; text-align:center;
+    font:500 10px/14px "JetBrains Mono",monospace; color:#c9cfe4; background:#1b1e2b; border:1px solid #4a506a; border-bottom-width:2px; border-radius:4px; }
+  #ui button.on[data-key]::after { background:#3a54d6; border-color:#8ea0ff; color:#fff; }
   #ui input[type=range] { width:480px; }
   #tracks { position:relative; width:100%; cursor:ew-resize; touch-action:none; user-select:none; }
   #ruler { position:relative; height:12px; border-bottom:1px solid #3a3f52; }
@@ -43,7 +49,16 @@
   #ruler i.s { height:11px; } #ruler b { position:absolute; top:-1px; margin-left:3px; font:500 9px/11px "JetBrains Mono",monospace; color:#8a91a8; }
   .hd { position:absolute; top:0; width:10px; height:15px; margin-left:-5px; background:#4f6bff; cursor:ew-resize; z-index:4; border-radius:3px 3px 0 0; }
   #hin { clip-path:polygon(0 0,100% 0,100% 60%,50% 100%,0 60%); } #hout { clip-path:polygon(0 0,100% 0,100% 60%,50% 100%,0 60%); }
-  #rangeTxt { color:#8a91a8; font-size:11px; margin-left:6px; }
+  /* in / out / clear are one connected control, tinted like the loop band and flags in the strip above, with the range readout at its end */
+  #ui .grp { display:inline-flex; align-items:stretch; border-radius:14px; overflow:hidden; background:#2c3040; }
+  /* two-line cell: the label on top, the range values underneath; the buttons stretch to the same double height */
+  #ui .grp .rng { display:flex; flex-direction:column; justify-content:center; gap:3px; min-width:96px; padding:6px 14px 6px 14px; border-right:1px solid #3d4258; }
+  #ui .grp .rng b { font-weight:500; font-size:9px; line-height:10px; letter-spacing:.07em; text-transform:uppercase; color:#8a91a8; }
+  #rangeTxt { font-size:12px; line-height:14px; color:#dfe5ff; white-space:nowrap; }
+  #rangeTxt.dim { color:#6f7692; }
+  #ui .grp button { display:flex; align-items:center; border-radius:0; background:transparent; }
+  #ui .grp button:hover { background:#3a3f55; }
+  #ui .grp button + button { border-left:1px solid #3d4258; }
   #band { position:absolute; top:12px; bottom:0; background:rgba(79,107,255,.16); border-left:1px solid #4f6bff; border-right:1px solid #4f6bff; pointer-events:none; }
   #tracks .seg, #tracks .tw { position:absolute; border-radius:4px; overflow:hidden; white-space:nowrap; color:#fff; font:500 10px/18px "JetBrains Mono",monospace; padding:0 6px; }
   #tracks .seg { height:18px; }
@@ -85,7 +100,7 @@
 
 <div id="ui">
   <div id="tracks"><div id="ruler"></div><div id="band"></div><div id="hin" class="hd" title="loop in (drag, or press I at the playhead)"></div><div id="hout" class="hd" title="loop out (drag, or press O at the playhead)"></div><div id="playhead"></div></div>
-  <div class="row"><button id="play">pause</button><button id="loop" class="on">loop</button><button id="setIn" title="set loop in at the playhead (I)">in</button><button id="setOut" title="set loop out at the playhead (O)">out</button><button id="full" title="clear the loop range (X)">clear</button><button id="detail" class="on">tweens</button><span id="clock">0.00s</span><span id="rangeTxt"></span></div>
+  <div class="row ctl"><button id="play" data-key="space">pause</button><button id="restart" data-key="R" title="restart from the start of the loop range, or the very start">restart</button><button id="loop" class="on" data-key="L">loop</button><span class="grp"><span class="rng"><b>loop range</b><span id="rangeTxt" class="dim">full timeline</span></span><button id="setIn" data-key="I" title="set loop in at the playhead">in</button><button id="setOut" data-key="O" title="set loop out at the playhead">out</button><button id="full" data-key="X" title="clear the loop range">clear</button></span><button id="detail" class="on" title="show or hide the individual animations inside each step">details</button><span id="clock">0.00s</span></div>
 </div>
 
 <script>
@@ -119,7 +134,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
     const draw = () => glyphs.forEach((g, i) => { const p = Math.max(0, Math.min(1, (state.time - i * stagger) / morph)); paths[i].setAttribute('d', p <= 0 ? g.a : p >= 1 ? g.b : poly(g, ease(p))); });
     return { state, total, draw, paths, count: glyphs.length, morph, stagger };
   }
-  const H = vectorText($('heading'), heading, 1.4, 0.03), T = vectorText($('title'), title, 1.0, 0.03), D = vectorText($('dateMorph'), date, 0.8, 0), CT = captions.map((g, i) => vectorText($('cap' + i), g, 0.7, 0));   // no stagger: the content below shoves the whole date, every letter at once
+  const H = vectorText($('heading'), heading, 0.9, 0.02), T = vectorText($('title'), title, 1.0, 0.03), D = vectorText($('dateMorph'), date, 0.8, 0), CT = captions.map((g, i) => vectorText($('cap' + i), g, 1.1, 0));   // 1.1s: the title weight drop (Black to Regular)   // no stagger: the content below shoves the whole date, every letter at once
   // The date's first half is a set of loose letters in the V9 face (dateDrop); its second half is the type morph (dateMorph).
   const mkPath = d => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); return p; };
   const dropEls = dateDrop.glyphs.map(g => { const p = mkPath(g.d); $('dateDrop').append(p); return { ...g, p }; });
@@ -138,19 +153,22 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   // Step 2: the logo box. It fades in as a thin line above the company name, then grows into the card while the whole column
   // slides down in lockstep with it (box height + the 10px gap = how far the column travels).
   const logo = gsap.timeline({ data: 'logo', defaults: { ease: 'power3.inOut' } });
-  logo.to('#tile', { data: 'line in', opacity: 1, duration: 0.3, ease: 'power1.out' }, 0);
-  logo.to('#tile', { data: 'box grows', height: 60, borderRadius: 10, backgroundColor: '#fffbec', duration: 1.0 }, 0.3);
-  logo.to('.col', { data: 'column slides', y: 70, duration: 1.0 }, 0.3);
-  logo.to('#wordmark', { data: 'wordmark out', opacity: 0, duration: 0.45, ease: 'power1.out' }, 0.45);
-  logo.to('#mark', { data: 'mark in', opacity: 1, duration: 0.3, ease: 'power1.out' }, 0.95);
-  logo.fromTo('#mark svg', { scale: 0.6 }, { data: 'mark pop', scale: 1, duration: 0.5, ease: 'back.out(2.2)' }, 0.95);
-  tl.addLabel('logo', 2.3).add(logo, 'logo');   // starts while the header's last letters are still settling; every later step chains off this
+  const K = 0.8;   // the logo step runs 25% faster: every time and duration in it is x0.8 (the real durations, so the strip stays accurate)
+  logo.to('#tile', { data: 'line in', opacity: 1, duration: 0.3 * K, ease: 'power1.out' }, 0);
+  logo.to('#tile', { data: 'box grows', height: 60, borderRadius: 10, backgroundColor: '#fffbec', duration: 1.0 * K }, 0.3 * K);
+  logo.to('.col', { data: 'column slides', y: 70, duration: 1.0 * K }, 0.3 * K);
+  logo.to('#wordmark', { data: 'wordmark out', opacity: 0, duration: 0.45 * K, ease: 'power1.out' }, 0.45 * K);
+  logo.to('#mark', { data: 'mark in', opacity: 1, duration: 0.3 * K, ease: 'power1.out' }, 0.95 * K);
+  logo.fromTo('#mark svg', { scale: 0.6 }, { data: 'mark pop', scale: 1, duration: 0.5 * K, ease: 'back.out(2.2)' }, 0.95 * K);
+  // The first half is stacked like the second half: each step starts while the one before is still running, keyed off the step's start
+  // (not its end). logo 0.3s into the header > title +0.44 (as the box grows) > date +0.55 (while the title straightens) > description 1.5s into the date.
+  tl.addLabel('logo', 'header+=0.3').add(logo, 'logo');   // starts while the heading is still mid-morph; everything after it is keyed off it
 
 
   // Step 3: the company name. Black Italic straightens into Black, letter by letter, at the same stagger as the heading.
   const titleStep = gsap.timeline({ data: 'title', defaults: { ease: 'power3.inOut' } });
   titleStep.to(T.state, { data: 'letters', time: T.total, duration: T.total, ease: 'none' }, 0);
-  tl.addLabel('title', 3.6).add(titleStep, 'title');   // overlaps the very end of the logo step; the date and description chain off it
+  tl.addLabel('title', 'logo+=0.44').add(titleStep, 'title');   // straightens while the box grows and the column slides down
 
 
   // Step 4: the date. (1) the whole V9 line slides right as one rigid piece, at one speed. "22 · Present" reaches its resting place and
@@ -159,7 +177,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   // (2) the date and everything below it slide up 16px while the date carries on a bit further and its type changes (Light Italic ->
   // Regular), landing on the title's row in the same motion; (3) the pill fades in.
   const dateStep = gsap.timeline({ data: 'date', defaults: { ease: 'power3.inOut' } });
-  const S = { s: 0 }, T_L = 1.7, eL = gsap.parseEase('power1.out'), dxR = dateMeta.dx, dxL = dateMeta.dx + dateDrop.shift;   // s = distance the loose text has travelled
+  const S = { s: 0 }, T_L = 1.2, eL = gsap.parseEase('power1.out'), dxR = dateMeta.dx, dxL = dateMeta.dx + dateDrop.shift;   // s = distance the loose text has travelled
   const wall0 = dropEls.find(g => g.role === 'keep').p.getBBox().x;                                       // left edge of the "22"
   dropEls.forEach(g => { const b = g.p.getBBox(); g.gap = wall0 - (b.x + b.width); g.w = b.width; });   // gap: letter's right edge to the wall
   // The line only travels `shift` further, a touch less than the distance from "Aug" to the wall (the apostrophe needs a slot), so the
@@ -202,7 +220,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   dateStep.to(D.state, { data: 'date: type changes + lands', time: D.total, duration: D.total, ease: 'none' }, T_L + 0.15);
   dateStep.to(Land, { data: 'lands: squash', sq: 1, duration: 0.55, ease: p => p <= 0 ? 0 : Math.exp(-6 * p) * Math.cos(p * Math.PI * 3) }, T_L + 0.15 + D.total);
   dateStep.to('#pill', { data: 'pill fades in', opacity: 1, duration: 0.5, ease: 'power1.out' }, T_L + 0.15 + D.total + 0.05);   // right after it lands, while the squash rings out
-  tl.addLabel('date', '>+=0.1').add(dateStep, 'date');
+  tl.addLabel('date', 'title+=0.55').add(dateStep, 'date');   // its first half (slide right, drops) only moves letters sideways, so it can run under the title morph; its slide up comes after the logo's column slide has finished
 
 
   // Step 5: the description, two ways (pick from the menu on its block in the timeline, or ?desc=reflow / ?desc=leading).
@@ -223,7 +241,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
       descStep.to(Ld, { data: 'lines open, top to bottom', time: LD + LS * last, duration: LD + LS * last, ease: 'none' }, 0);
       descStep.to('#films .below:not(.poster):not(svg)', { data: 'posters section follows the last line', y: '+=48', duration: LD, ease: 'back.out(1.4)' }, LS * last);   // (the posters and captions travel on their own, see the posters step; this just carries the credit lines)
       earlyHost = descStep; earlyAt = LS * last;
-      tl.addLabel('description', '>+=0.1').add(descStep, 'description');
+      tl.addLabel('description', 'date+=1.5').add(descStep, 'description');   // while the date's slide up is still under way, as in the merged version
     } else {
       // Merged: no step of its own. The leading cascade runs inside the date's slide up, in parallel with it (and with the date's type
       // change), so those lines are being pushed up 16px while they open. The posters get the same push; it uses the independent CSS
@@ -251,7 +269,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   };
   const descStep = gsap.timeline({ data: 'description', defaults: { ease: 'power3.inOut' } });
   descStep.to(Dsc, { data: 'words reflow', time: descTotal, duration: descTotal, ease: 'none' }, 0);
-  tl.addLabel('description', '>+=0.1').add(descStep, 'description');
+  tl.addLabel('description', 'date+=1.5').add(descStep, 'description');   // while the date's slide up is still under way
   }
 
 
@@ -296,19 +314,19 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
     gsap.set(C, { x: (144 * i - 70) * ee, y: B0 + ((capTop - (ya + 14) - pT) - B0) * ee });   // the caption slides under its poster on the poster's own curve
   });
   const postersStep = gsap.timeline({ data: 'posters', defaults: { ease: 'none' } });
-  // The weight change starts the moment each caption has landed (a touch before its slide has fully stopped, since the glide eases out
-  // slowly), and the corners grow right after it. With the push everything happens inside the push's own block; otherwise in this step.
+  // The weight change happens as each caption slides into place (same start), and the corners grow right after it finishes. With the push
+  // everything happens inside the push's own block; otherwise in this step.
   const host = EARLY ? earlyHost : postersStep, lastT0 = 2 * (POSTERS_MODE === 'together' ? 0 : 0.5);
   // "Credited Projects" comes out from behind the paragraph: it starts 40px higher with everything above its final top edge clipped away,
   // and slides down into place while fading in, so it appears to emerge from under the text above it.
   const labelFrom = { opacity: 0, y: -40, clipPath: 'inset(40px 0px 0px 0px)' }, labelTo = { opacity: 1, y: 0, clipPath: 'inset(0px 0px 0px 0px)', duration: 0.6, ease: 'power2.out' };
   [2, 1, 0].forEach((i, k) => {
     const t0 = k * (POSTERS_MODE === 'together' ? 0 : 0.5), name = FILMS[i][1].split(' ')[0], f = F[i];
-    const land = EARLY ? earlyAt + 0.7 : t0 + 1.4;   // when the caption lands
+    const land = EARLY ? earlyAt : t0 + 0.6;   // when the caption starts to slide (reflow: after the poster's squat)
     if (!EARLY) postersStep.to(f, { data: name + ': credit fades', cf: 1, duration: 0.5, ease: 'power2.out' }, t0);   // (with the push, they fade during the slide down instead)
     if (!EARLY) postersStep.to(f, { data: name + ': poster slides to place', sl: 1, duration: 2.0 }, t0 + 0.3);   // (with the push, the posters are already home)
-    host.to(CT[i].state, { data: i === 2 || EARLY && i === 0 ? 'titles: weight drops on landing' : undefined, time: CT[i].total, duration: CT[i].total }, land);
-    host.to(f, { data: i === 2 || EARLY && i === 0 ? 'corners grow' : undefined, rd: 1, duration: 0.7 }, land + 0.8);
+    host.to(CT[i].state, { data: i === 2 || EARLY && i === 0 ? 'titles: weight changes as they slide in' : undefined, time: CT[i].total, duration: CT[i].total }, land);
+    host.to(f, { data: i === 2 || EARLY && i === 0 ? 'corners grow' : undefined, rd: 1, duration: 0.7 }, land + CT[i].total + 0.1);   // right after the weight change has finished
   });
   if (EARLY) {   // during the slide down: every "Credited under..." line fades out, the posters slide into the row with their captions, "Credited Projects" fades in
     F.forEach((f, i) => earlyHost.to(f, { data: i === 0 ? 'credit lines + years fade (during the slide down)' : undefined, cf: 1, yf: 1, duration: 0.5, ease: 'power2.out' }, earlyAt));
@@ -336,7 +354,7 @@ function setRange(a, b) {
   const band = $('band'); if (!band || !DUR) return;
   band.style.left = (lo / DUR * 100) + '%'; band.style.width = ((hi - lo) / DUR * 100) + '%';
   $('hin').style.left = (lo / DUR * 100) + '%'; $('hout').style.left = (hi / DUR * 100) + '%';
-  const full = lo <= 0 && hi >= DUR; $('rangeTxt').textContent = full ? '' : `loop ${lo.toFixed(2)}s - ${hi.toFixed(2)}s`;
+  const full = lo <= 0 && hi >= DUR, r = $('rangeTxt'); r.textContent = full ? 'full timeline' : `${lo.toFixed(2)}s – ${hi.toFixed(2)}s`; r.classList.toggle('dim', full);
 }
 // Timeline strip: each nested timeline is a coloured block (click to loop it); its tweens sit underneath ("tweens" toggles them).
 // Version picker: a small icon + chevron on a step's block opens a menu of the step's versions. Picking one reloads with ?param=value.
@@ -412,14 +430,17 @@ function tick() {
 }
 $('play').onclick = () => { if (!playing && (t < lo || t >= hi)) t = lo; playing = !playing; $('play').textContent = playing ? 'pause' : 'play'; };
 $('loop').onclick = () => { loop = !loop; $('loop').classList.toggle('on', loop); };
+$('restart').onclick = () => { t = lo; playing = true; $('play').textContent = 'pause'; };   // back to the start of the loop range (the very start when there is none) and play
 $('setIn').onclick = () => setRange(Math.min(t, hi - 0.05), hi);
 $('setOut').onclick = () => setRange(lo, Math.max(t, lo + 0.05));
 addEventListener('keydown', e => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;   // leave browser shortcuts alone (Cmd/Ctrl+R reloads the page)
   if (e.code === 'Space') { e.preventDefault(); $('play').click(); }
   else if (e.key === 'l') $('loop').click();
   else if (e.key === 'i') $('setIn').click();
   else if (e.key === 'o') $('setOut').click();
   else if (e.key === 'x') $('full').click();
+  else if (e.key === 'r') $('restart').click();
   else if (e.key === 'ArrowLeft') { playing = false; t = Math.max(0, t - 1 / 30); }
   else if (e.key === 'ArrowRight') { playing = false; t = Math.min(DUR, t + 1 / 30); }
 });
