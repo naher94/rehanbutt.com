@@ -349,11 +349,35 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   // The camera, two ways (picker on the camera chip under the steps, or ?cam=fixed / ?cam=follow). CAM is the camera's centre in page
   // coordinates and its zoom; the fixed frame is 1.3x on (330, 265). "Follows the motion" eases the same camera between a few framings:
   // in on the heading, down with the logo and the column, across to the right with the date, then back out to the finished frame for the posters.
-  const CAMV = ['follow', 'followdate'].includes(new URLSearchParams(location.search).get('cam')) ? new URLSearchParams(location.search).get('cam') : 'fixed', CAM = { s: 1.3, cx: 330, cy: 265 }, camEl = $('cam');
-  window.STEP_VERSIONS.camera = { title: 'camera', param: 'cam', current: CAMV, options: [['fixed', 'Fixed frame'], ['follow', 'Follows the motion'], ['followdate', 'Follows the motion + the date']] };
-  applyCam = () => { camEl.style.transform = `translate(${960 - CAM.cx * CAM.s}px,${540 - CAM.cy * CAM.s}px) scale(${CAM.s})`; };
+  const CAMV = ['follow', 'followdate', 'refined'].includes(new URLSearchParams(location.search).get('cam')) ? new URLSearchParams(location.search).get('cam') : 'fixed', CAM = { s: 1.3, cx: 330, cy: 265 }, camEl = $('cam');
+  window.STEP_VERSIONS.camera = { title: 'camera', param: 'cam', current: CAMV, options: [['fixed', 'Fixed frame'], ['follow', 'Follows the motion'], ['followdate', 'Follows the motion + the date'], ['refined', 'Refined: one continuous path']] };
+  applyCam = () => { const s = CAM.lz !== undefined ? Math.exp(CAM.lz) : CAM.s;   // the refined camera animates log-zoom (lz), so a zoom feels the same speed at any scale
+    camEl.style.transform = `translate(${960 - CAM.cx * s}px,${540 - CAM.cy * s}px) scale(${s})`; };
   const camera = gsap.timeline({ data: 'camera', defaults: { ease: 'power2.inOut' } }), at = n => tl.labels[n];
-  if (CAMV !== 'fixed') {
+  if (CAMV === 'refined') {
+    // REFINED: the same story as "follows the motion + the date", re-cut with motion-design principles:
+    //  - one continuous path: the camera never reverses (no drop-then-climb U-turn), and the whole finish is ONE coupled move, so pan and zoom
+    //    share a single curve instead of two moves that fight or queue up
+    //  - cameras have mass: every move eases in AND out (no hard fast starts); only the date pan uses an ease-out, to match the letters it tracks
+    //  - zoom is animated in log space (lz = ln scale), so each zoom step is perceived as the same speed whether it is 1.3x or 2.3x
+    //  - moves are motivated and few: in on the heading, with the box, in on the date, out again, one long glide to the finished frame
+    //  - anticipation and follow-through: the camera starts moving a beat before the action it frames and finishes after it has settled
+    //  - modest zoom ratios (max 2.3x, not 2.6x) keep the action readable and leave margin for the letters' stretch and bounce
+    CAM.lz = Math.log(CAM.s);
+    const Z = Math.log, dStart = at('date');
+    const movesAt = EARLY ? earlyHost.startTime() + earlyAt - 0.2 : at('posters') + 0.6;   // when the description's lines start to open
+    camera.to(CAM, { data: 'eases in on the heading', lz: Z(1.7), cx: 330, cy: 40, duration: 0.84, ease: 'power2.inOut' }, at('logo') - 0.6);                 // starts before the morph, ends as the box begins to grow
+    camera.to(CAM, { data: 'drops with the box + column', cy: 140, duration: 1.0 * K, ease: 'power3.inOut' }, at('logo') + 0.3 * K);                         // same start, length and curve as the box
+    camera.to(CAM, { data: 'eases in on the date', lz: Z(2.3), duration: 0.7, ease: 'power2.inOut' }, dStart + 0.05);                                           // arrives during the lead-in, before the letters move
+    camera.to(CAM, { data: 'follows the date', cx: 560, duration: T_L, ease: 'power1.out' }, dStart + LEAD);                                                    // the letters' own curve and length
+    camera.to(CAM, { data: 'eases back out', lz: Z(1.7), cx: 330, duration: 0.6, ease: 'power2.inOut' }, dStart + LEAD + T_L + BEAT);                         // after the crash and the beat
+    // the finish is one glide in two parts: the slide all the way down with the description, posters and titles at the same zoom (the posters' own
+    // 'power3.out'), and the zoom out that picks up towards its end and flows into the final resting place. They overlap: the zoom out starts
+    // 0.66s in (6.25s here) while the slide is only just settling, and from then on it carries the camera (zoom and height) the rest of the way.
+    const slideDur = EARLY ? 1.1 : 1.4, cyBottom = 326 + extra;
+    camera.to(CAM, { data: 'down with the description + posters + titles', cy: cyBottom, duration: slideDur, ease: 'power3.out' }, movesAt);
+    camera.to(CAM, { data: 'zoom out, flowing into the final frame', lz: Z(1.3), cy: 265, duration: 1.0, ease: 'power2.inOut' }, movesAt + 0.66);
+  } else if (CAMV !== 'fixed') {
     camera.to(CAM, { data: 'in on the heading', s: 1.75, cx: 330, cy: 35, duration: 0.7 + 0.3 * K }, at('logo') - 0.7);   // ends just as the box starts to grow
     // the camera drops with the box and the column: same start, same length, same ease as 'box grows' / 'column slides'
     camera.to(CAM, { data: 'down with the logo + column (same rate as the box)', s: 1.75, cx: 330, cy: 140, duration: 1.0 * K, ease: 'power3.inOut' }, at('logo') + 0.3 * K);
