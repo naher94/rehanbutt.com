@@ -34,7 +34,7 @@
     background:#14161e; color:#fff; padding:10px 20px 12px; border-radius:14px 14px 0 0; font:500 12px/1 "JetBrains Mono",monospace; z-index:9; }
   #ui .row { display:flex; gap:8px; align-items:center; justify-content:flex-start; }
   #ui button { all:unset; cursor:pointer; display:inline-flex; align-items:center; padding:6px 13px; border-radius:14px; background:#2c3040; color:#fff; }
-  #ui .ctl { align-items:stretch; }          /* every control in the row is as tall as the two-line loop range cell */
+  #ui .ctl { align-items:stretch; flex-wrap:wrap; row-gap:8px; }          /* every control in the row is as tall as the two-line loop range cell; the row wraps on narrow windows */
   #ui .ctl > #clock { align-self:center; margin-left:4px; }
   #ui button.on { background:#4f6bff; }
   /* the shortcut, drawn as a little keycap after the label (a data-key attribute, so changing the label text never touches it) */
@@ -53,7 +53,8 @@
   /* two-line cell: the label on top, the range values underneath; the buttons stretch to the same double height */
   #ui .grp .rng { display:flex; flex-direction:column; justify-content:center; gap:3px; min-width:96px; padding:6px 14px 6px 14px; border-right:1px solid #3d4258; }
   #ui .grp .rng b { font-weight:500; font-size:9px; line-height:10px; letter-spacing:.07em; text-transform:uppercase; color:#8a91a8; }
-  #rangeTxt { font-size:12px; line-height:14px; color:#dfe5ff; white-space:nowrap; }
+  #rangeTxt, #speedTxt { font-size:12px; line-height:14px; color:#dfe5ff; white-space:nowrap; }
+  #ui .grp button.act { background:#454b66; }   /* the speed that is currently selected */
   #rangeTxt.dim { color:#6f7692; }
   #ui .grp button { display:flex; align-items:center; border-radius:0; background:transparent; }
   #ui .grp button:hover { background:#3a3f55; }
@@ -102,7 +103,7 @@
 
 <div id="ui">
   <div id="tracks"><div id="ruler"></div><div id="band"></div><div id="hin" class="hd" title="loop in (drag, or press I at the playhead)"></div><div id="hout" class="hd" title="loop out (drag, or press O at the playhead)"></div><div id="playhead"></div></div>
-  <div class="row ctl"><button id="play" data-key="space">pause</button><button id="restart" data-key="R" title="restart from the start of the loop range, or the very start">restart</button><button id="loop" class="on" data-key="L">loop</button><span class="grp"><span class="rng"><b>loop range</b><span id="rangeTxt" class="dim">full timeline</span></span><button id="setIn" data-key="I" title="set loop in at the playhead">in</button><button id="setOut" data-key="O" title="set loop out at the playhead">out</button><button id="full" data-key="X" title="clear the loop range">clear</button></span><button id="detail" class="on" title="show or hide the individual animations inside each step">details</button><span id="clock">0.00s</span></div>
+  <div class="row ctl"><button id="play" data-key="space">pause</button><button id="restart" data-key="R" title="restart from the start of the loop range, or the very start">restart</button><button id="loop" class="on" data-key="L">loop</button><span class="grp"><span class="rng"><b>loop range</b><span id="rangeTxt" class="dim">full timeline</span></span><button id="setIn" data-key="I" title="set loop in at the playhead">in</button><button id="setOut" data-key="O" title="set loop out at the playhead">out</button><button id="full" data-key="X" title="clear the loop range">clear</button></span><span class="grp"><span class="rng"><b>speed</b><span id="speedTxt">1×</span></span><button id="spd1" class="act" data-speed="1" data-key="1" title="normal speed">1×</button><button id="spd2" data-speed="0.5" data-key="2" title="half speed">½×</button><button id="spd3" data-speed="0.25" data-key="3" title="quarter speed">¼×</button></span><button id="detail" class="on" title="show or hide the individual animations inside each step">details</button><span id="clock">0.00s</span></div>
 </div>
 
 <script>
@@ -122,7 +123,7 @@ const bez = (x1, y1, x2, y2) => t => { if (t <= 0) return 0; if (t >= 1) return 
 
 let applyDate = () => {}, applyDesc = () => {}, applyPush = () => {}, applyPosters = () => {}, applyCam = () => {}, pushNow = () => 0;
 let earlyHost = null, earlyAt = 0;   // where Zootopia's poster picks up the description's push (set by the leading / merged versions)
-let tl, DUR, lo = 0, hi = 0, t = 0, playing = true, loop = true;
+let tl, DUR, lo = 0, hi = 0, t = 0, playing = true, loop = true, speed = 1;
 
 fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ heading, title, date, dateMeta, dateDrop, captions }) => {
   await document.fonts.ready;   // the description is measured below, so the fonts must be in
@@ -212,16 +213,22 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
     const p = Math.max(0, Math.min(1, D.state.time / D.total)), v = (eIO(Math.min(1, p + 0.03)) - eIO(Math.max(0, p - 0.03))) / 0.06 / 3;   // 0..1 across the slide up
     gsap.set('#dateMorph', { svgOrigin: upOrigin, scaleY: 1 + SY * v - 0.09 * Land.sq, scaleX: 1 - 0.07 * v + 0.06 * Land.sq });
   };
-  dateStep.to(S, { data: 'slide: wall stops, Aug 20 squishes in', s: dxL, duration: T_L, ease: eL }, 0);
+  // A short lead-in comes first: the step starts, the camera zooms in on the date (0.45s), and only then do the letters start to slide, so the
+  // camera is already there when they move. Everything in the date step after this is shifted by LEAD.
+  const LEAD = 0.85, BEAT = 0.4, BEAT2 = 0.35;   // BEAT: a pause after the crash, before the camera zooms back out. BEAT2: a pause after the zoom out, before the slide up
+  dateStep.to(S, { data: 'slide: wall stops, Aug 20 squishes in', s: dxL, duration: T_L, ease: eL }, LEAD);
   let tWall = 0; while (tWall < T_L && dxL * eL(tWall / T_L) < dxR) tWall += 0.005;                       // when the wall is reached
   gsap.set(apos, { x: dxR });
-  dateStep.fromTo(apos, { y: -28, opacity: 0 }, { data: 'apostrophe drops in', y: 0, opacity: 1, duration: 0.45, ease: 'bounce.out' }, tWall);
+  dateStep.fromTo(apos, { y: -28, opacity: 0 }, { data: 'apostrophe drops in', y: 0, opacity: 1, duration: 0.45, ease: 'bounce.out' }, LEAD + tWall);
   // One motion: the bottom content slides up 16px and stops; the date, which rides up with it, carries on a further 7px as its type
   // changes, as if the content below were pushing it, and lands on the title's row. Same start, same curve, same length; every letter moves together.
-  dateStep.to('.below', { data: 'slide up', y: '-=' + -dateMeta.dy, duration: D.total }, T_L + 0.15);
-  dateStep.to(D.state, { data: 'date: type changes + lands', time: D.total, duration: D.total, ease: 'none' }, T_L + 0.15);
-  dateStep.to(Land, { data: 'lands: squash', sq: 1, duration: 0.55, ease: p => p <= 0 ? 0 : Math.exp(-6 * p) * Math.cos(p * Math.PI * 3) }, T_L + 0.15 + D.total);
-  dateStep.to('#pill', { data: 'pill fades in', opacity: 1, duration: 0.5, ease: 'power1.out' }, T_L + 0.15 + D.total + 0.05);   // right after it lands, while the squash rings out
+  // A short hold sits between the letters crashing (the slide ends at T_L) and the slide up, so the crash plays out in full and the camera has
+  // room to zoom back out before anything else starts moving. Everything from the slide up onwards (and the description) is shifted by it.
+  const UP = LEAD + T_L + BEAT + 0.45 + BEAT2;   // after the lead-in, the slide, the first beat, the camera's zoom out (0.45s) and the second beat
+  dateStep.to('.below', { data: 'slide up', y: '-=' + -dateMeta.dy, duration: D.total }, UP);
+  dateStep.to(D.state, { data: 'date: type changes + lands', time: D.total, duration: D.total, ease: 'none' }, UP);
+  dateStep.to(Land, { data: 'lands: squash', sq: 1, duration: 0.55, ease: p => p <= 0 ? 0 : Math.exp(-6 * p) * Math.cos(p * Math.PI * 3) }, UP + D.total);
+  dateStep.to('#pill', { data: 'pill fades in', opacity: 1, duration: 0.5, ease: 'power1.out' }, UP + D.total + 0.05);   // right after it lands, while the squash rings out
   tl.addLabel('date', 'title+=0.55').add(dateStep, 'date');   // its first half (slide right, drops) only moves letters sideways, so it can run under the title morph; its slide up comes after the logo's column slide has finished
 
 
@@ -243,12 +250,12 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
       descStep.to(Ld, { data: 'lines open, top to bottom', time: LD + LS * last, duration: LD + LS * last, ease: 'none' }, 0);
       descStep.to('#films .below:not(.poster):not(svg)', { data: 'posters section follows the last line', y: '+=48', duration: LD, ease: 'back.out(1.4)' }, LS * last);   // (the posters and captions travel on their own, see the posters step; this just carries the credit lines)
       earlyHost = descStep; earlyAt = LS * last;
-      tl.addLabel('description', 'date+=1.5').add(descStep, 'description');   // while the date's slide up is still under way, as in the merged version
+      tl.addLabel('description', 'date+=' + (UP + 0.15)).add(descStep, 'description');   // 0.15s after the date's slide up begins, as before
     } else {
       // Merged: no step of its own. The leading cascade runs inside the date's slide up, in parallel with it (and with the date's type
       // change), so those lines are being pushed up 16px while they open. The posters get the same push; it uses the independent CSS
       // `translate` property so it composes with the slide-up's transform instead of fighting it.
-      const films = [...document.querySelectorAll('#films .below')].filter(f => !/^(poster[012]|cap[012])$/.test(f.id)), Push = { v: 0 }, at = T_L + 0.15;
+      const films = [...document.querySelectorAll('#films .below')].filter(f => !/^(poster[012]|cap[012])$/.test(f.id)), Push = { v: 0 }, at = UP;
       applyPush = () => films.forEach(f => { f.style.translate = Push.v ? `0 ${Push.v}px` : ''; });
       pushNow = () => Push.v;   // the posters step adds its own pull-back translate on top of this, so it needs to know it
       dateStep.to(Ld, { data: 'lines open (with the slide up)', time: LD + LS * last, duration: LD + LS * last, ease: 'none' }, at);
@@ -271,7 +278,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   };
   const descStep = gsap.timeline({ data: 'description', defaults: { ease: 'power3.inOut' } });
   descStep.to(Dsc, { data: 'words reflow', time: descTotal, duration: descTotal, ease: 'none' }, 0);
-  tl.addLabel('description', 'date+=1.5').add(descStep, 'description');   // while the date's slide up is still under way
+  tl.addLabel('description', 'date+=' + (UP + 0.15)).add(descStep, 'description');   // 0.15s after the date's slide up begins, as before
   }
 
 
@@ -342,17 +349,27 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   // The camera, two ways (picker on the camera chip under the steps, or ?cam=fixed / ?cam=follow). CAM is the camera's centre in page
   // coordinates and its zoom; the fixed frame is 1.3x on (330, 265). "Follows the motion" eases the same camera between a few framings:
   // in on the heading, down with the logo and the column, across to the right with the date, then back out to the finished frame for the posters.
-  const CAMV = new URLSearchParams(location.search).get('cam') === 'follow' ? 'follow' : 'fixed', CAM = { s: 1.3, cx: 330, cy: 265 }, camEl = $('cam');
-  window.STEP_VERSIONS.camera = { title: 'camera', param: 'cam', current: CAMV, options: [['fixed', 'Fixed frame'], ['follow', 'Follows the motion']] };
+  const CAMV = ['follow', 'followdate'].includes(new URLSearchParams(location.search).get('cam')) ? new URLSearchParams(location.search).get('cam') : 'fixed', CAM = { s: 1.3, cx: 330, cy: 265 }, camEl = $('cam');
+  window.STEP_VERSIONS.camera = { title: 'camera', param: 'cam', current: CAMV, options: [['fixed', 'Fixed frame'], ['follow', 'Follows the motion'], ['followdate', 'Follows the motion + the date']] };
   applyCam = () => { camEl.style.transform = `translate(${960 - CAM.cx * CAM.s}px,${540 - CAM.cy * CAM.s}px) scale(${CAM.s})`; };
   const camera = gsap.timeline({ data: 'camera', defaults: { ease: 'power2.inOut' } }), at = n => tl.labels[n];
-  if (CAMV === 'follow') {
+  if (CAMV !== 'fixed') {
     camera.to(CAM, { data: 'in on the heading', s: 1.75, cx: 330, cy: 35, duration: 0.7 + 0.3 * K }, at('logo') - 0.7);   // ends just as the box starts to grow
     // the camera drops with the box and the column: same start, same length, same ease as 'box grows' / 'column slides'
     camera.to(CAM, { data: 'down with the logo + column (same rate as the box)', s: 1.75, cx: 330, cy: 140, duration: 1.0 * K, ease: 'power3.inOut' }, at('logo') + 0.3 * K);
-    // no pan for the date: it holds the zoomed-in framing (the date's slide stays inside it). Then it drops again with the description's lines
-    // opening and the posters sliding into the row, easing out to the finished, zoomed-out frame as the posters settle.
+    // "follows the motion": no pan for the date; it holds the zoomed-in framing (the date's slide stays inside it). "...+ the date": the camera
+    // zooms in further and pans right with the date's slide (the same length and curve as the slide, so it tracks it), then zooms back out to the
+    // base zoom as the date slides up. Either way it then drops with the description's lines opening and the posters sliding into the row,
+    // easing out to the finished, zoomed-out frame as the posters settle.
     const movesAt = EARLY ? earlyHost.startTime() + earlyAt - 0.2 : at('posters') + 0.6;   // when the lines start to open (or, in reflow, when the posters start to move)
+    if (CAMV === 'followdate') {
+      const dStart = at('date');
+      camera.to(CAM, { data: 'follows the date to the right', cx: 580, duration: T_L, ease: 'power1.out' }, dStart + LEAD);       // the date's own slide curve, length and start
+      camera.to(CAM, { data: 'zooms in on the date', s: 2.6, duration: 0.6, ease: 'power3.out' }, dStart);   // arrives with a beat to spare before the letters move (the lead-in is 0.85s)
+      // The zoom back out waits until the letters have finished crashing into one another (the slide, and its wall bounce, end at T_L) and is
+      // done before the date's slide up and the slide down begin (the hold in the date step is exactly its length), so one move runs at a time.
+      camera.to(CAM, { data: 'zooms back out (after the crash)', s: 1.75, cx: 330, duration: 0.45, ease: 'power2.inOut' }, dStart + LEAD + T_L + BEAT);
+    }
     // Slide all the way down at the same zoom, far enough that the posters and the film titles (the bottom of the page) are in frame, and only
     // then zoom out to the finished frame. The slide runs first (cy only) and the zoom out (s and cy) takes over where it ends, so they never overlap.
     const slideDur = EARLY ? 1.1 : 1.4, cyBottom = 326 + extra;   // at 1.75x the view is 616 units tall, so this puts the captions' bottom edge about 40 units from the bottom of the frame
@@ -368,7 +385,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   buildTracks();
   // after a live reload (dev-server.js) land back where you were: same time, same play/pause, same loop range
   try { if (sessionStorage.getItem('liveReload') === '1') { sessionStorage.removeItem('liveReload'); const st = JSON.parse(sessionStorage.getItem('seqState') || 'null');
-    if (st) { t = Math.min(st.t, DUR); playing = st.playing; loop = st.loop; setRange(Math.min(st.lo, DUR), Math.min(st.hi, DUR)); $('play').textContent = playing ? 'pause' : 'play'; $('loop').classList.toggle('on', loop); } } } catch (e) {}
+    if (st) { setSpeed(st.speed || 1); t = Math.min(st.t, DUR); playing = st.playing; loop = st.loop; setRange(Math.min(st.lo, DUR), Math.min(st.hi, DUR)); $('play').textContent = playing ? 'pause' : 'play'; $('loop').classList.toggle('on', loop); } } } catch (e) {}
   gsap.ticker.add(tick);
 });
 
@@ -452,13 +469,16 @@ function tick() {
   fit();
   // wrap (or stop) when the playhead reaches the out point. DUR already includes the short hold on the finished frame, and t is clamped
   // to DUR just below, so the old "hi + 0.6" test could never be met on the full range, which is why the loop never looped
-  if (playing) { t += dt; if (t >= hi) { if (loop) t = lo; else { t = hi; playing = false; $('play').textContent = 'play'; } } }
+  if (playing) { t += dt * speed; if (t >= hi) { if (loop) t = lo; else { t = hi; playing = false; $('play').textContent = 'play'; } } }
   t = Math.max(0, Math.min(t, DUR)); tl.time(t, false);
-  try { sessionStorage.setItem('seqState', JSON.stringify({ t, playing, loop, lo, hi })); } catch (e) {}
+  try { sessionStorage.setItem('seqState', JSON.stringify({ t, playing, loop, lo, hi, speed })); } catch (e) {}
   $('clock').textContent = t.toFixed(2) + 's'; $('playhead').style.left = (t / DUR * 100) + '%';
 }
 $('play').onclick = () => { if (!playing && (t < lo || t >= hi)) t = lo; playing = !playing; $('play').textContent = playing ? 'pause' : 'play'; };
 $('loop').onclick = () => { loop = !loop; $('loop').classList.toggle('on', loop); };
+// playback speed: 1x, half, quarter (keys 1 2 3). It only scales how fast the playhead advances, so scrubbing and the loop range are unaffected.
+function setSpeed(v) { speed = v; $('speedTxt').textContent = { 1: '1×', 0.5: '½×', 0.25: '¼×' }[v] || v + '×'; ['spd1', 'spd2', 'spd3'].forEach(id => $(id).classList.toggle('act', +$(id).dataset.speed === v)); }
+['spd1', 'spd2', 'spd3'].forEach(id => { $(id).onclick = () => setSpeed(+$(id).dataset.speed); });
 $('restart').onclick = () => { t = lo; playing = true; $('play').textContent = 'pause'; };   // back to the start of the loop range (the very start when there is none) and play
 $('setIn').onclick = () => setRange(Math.min(t, hi - 0.05), hi);
 $('setOut').onclick = () => setRange(lo, Math.max(t, lo + 0.05));
@@ -470,6 +490,9 @@ addEventListener('keydown', e => {
   else if (e.key === 'o') $('setOut').click();
   else if (e.key === 'x') $('full').click();
   else if (e.key === 'r') $('restart').click();
+  else if (e.key === '1') $('spd1').click();
+  else if (e.key === '2') $('spd2').click();
+  else if (e.key === '3') $('spd3').click();
   else if (e.key === 'ArrowLeft') { playing = false; t = Math.max(0, t - 1 / 30); }
   else if (e.key === 'ArrowRight') { playing = false; t = Math.min(DUR, t + 1 / 30); }
 });
