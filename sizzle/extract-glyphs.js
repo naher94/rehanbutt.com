@@ -27,12 +27,12 @@ function reverse(cmds) { // reverse a closed contour's direction
 const toD = cmds => cmds.map(c => c.type + [c.x1, c.y1, c.x2, c.y2, c.x, c.y].filter(v => v !== undefined).map(n2).join(' ')).join('') + 'Z';
 const tiny = pts => { const x = pts.reduce((s, p) => s + p[0], 0) / pts.length, y = pts.reduce((s, p) => s + p[1], 0) / pts.length; return `M${n2(x)} ${n2(y)}L${n2(x + .01)} ${n2(y)}L${n2(x)} ${n2(y + .01)}Z`; };
 
-function glyphs(font, text, x, y, size) {
-  const out = []; let prev = null;
-  for (const ch of text) { const g = font.charToGlyph(ch);
-    if (prev) x += font.getKerningValue(prev, g) * size / font.unitsPerEm;
+function glyphs(fontOrFn, text, x, y, size) {   // fontOrFn: a font, or (charIndex) => font for lines that mix weights
+  const out = []; let prev = null, prevFont = null, i = 0;
+  for (const ch of text) { const font = typeof fontOrFn === 'function' ? fontOrFn(i++) : fontOrFn, g = font.charToGlyph(ch);
+    if (prev && prevFont === font) x += font.getKerningValue(prev, g) * size / font.unitsPerEm;
     out.push({ ch, subs: ch === ' ' ? [] : subpaths(font.getPath(ch, x, y, size)).map(cmds => { const pts = points(cmds); return { cmds, pts, area: area(pts) }; }).sort((p, q) => Math.abs(q.area) - Math.abs(p.area)) });
-    x += g.advanceWidth * size / font.unitsPerEm; prev = g; }
+    x += g.advanceWidth * size / font.unitsPerEm; prev = g; prevFont = font; }
   return out; }
 
 const N = 300;
@@ -55,7 +55,8 @@ function lcs(x, y) { const n = x.length, m = y.length, D = Array.from({ length: 
 // extra letters shrink away and new ones grow in). a, b = { text, font, size, x, top, lh }; x may be a function of the line's width.
 function morph(a, b) {
   const bx = typeof b.x === 'function' ? b.x(advance(b.font, b.text, b.size)) : b.x;
-  const A = glyphs(a.font, a.text, a.x, baseline(a.font, a.size, a.top, a.lh), a.size), B = glyphs(b.font, b.text, bx, baseline(b.font, b.size, b.top, b.lh), b.size);
+  const fa = typeof a.font === 'function' ? a.font(0) : a.font;   // baseline metrics come from the line's first font
+  const A = glyphs(a.font, a.text, a.x, baseline(fa, a.size, a.top, a.lh), a.size), B = glyphs(b.font, b.text, bx, baseline(b.font, b.size, b.top, b.lh), b.size);
   const out = [];
   lcs([...a.text], [...b.text]).forEach(([i, j]) => { const ga = i >= 0 ? A[i] : { subs: [], ch: ' ' }, gb = j >= 0 ? B[j] : { subs: [], ch: ' ' }, pairs = [];
     for (let k = 0; k < Math.max(ga.subs.length, gb.subs.length); k++) { const sa = ga.subs[k], sb = gb.subs[k];
@@ -66,7 +67,7 @@ function morph(a, b) {
   return out;
 }
 const F = n => load(n);
-const black = F('Lato-Black.ttf'), blackItalic = F('Lato-BlackItalic.ttf'), zilla = F('ZillaSlab-Bold.ttf'), regular = F('Lato-Regular.ttf'), lightItalic = F('Lato-LightItalic.ttf');
+const black = F('Lato-Black.ttf'), blackItalic = F('Lato-BlackItalic.ttf'), zilla = F('ZillaSlab-Bold.ttf'), regular = F('Lato-Regular.ttf'), bold = F('Lato-Bold.ttf'), lightItalic = F('Lato-LightItalic.ttf');
 const DATE_A = 'August 2022 \u00B7 Present', DATE_B = "Aug '22 \u00B7 Present";
 const DATE = { dx: +(804 - (13 + advance(lightItalic, DATE_A, 20))).toFixed(2), dy: -16 };
 const DATE_W_A = advance(lightItalic, DATE_A, 20), DATE_C_X = 13 + DATE_W_A - advance(lightItalic, DATE_B, 20);   // B line right-aligned under A
@@ -85,6 +86,10 @@ const out = {
   date: morph({ text: DATE_B, font: lightItalic, size: 20, x: DATE_C_X + DATE.dx, top: 62, lh: 32 }, { text: DATE_B, font: regular, size: 18, x: w => 652 + (164 - w) / 2, top: 39 - DATE.dy, lh: 29 }),
   dateDrop,
   dateMeta: DATE,
+  // poster captions: "Zootopia 2 · 2025" (Black name + Bold year) -> "Zootopia 2" (Regular), in the caption's own local space (x 83, top = row + 14)
+  captions: [['Zootopia 2', 2025, 243], ['Moana 2', 2024, 341], ['Wish', 2023, 440]].map(([name, year, ya]) => morph(
+    { text: name + '\u00B7' + year, font: i => i < name.length ? black : bold, size: 20, x: 83, top: ya + 14, lh: 32 },
+    { text: name, font: regular, size: 20, x: 83, top: ya + 14, lh: 32 })),
 };
 fs.writeFileSync(__dirname + '/glyphs.json', JSON.stringify(out));
-console.log('wrote glyphs.json:', Object.entries(out).filter(([, v]) => Array.isArray(v)).map(([k, v]) => k + ' ' + v.length + ' glyphs / ' + v.reduce((s, g) => s + g.pairs.length, 0) + ' contours').join(', '), '(N =', N + ')');
+console.log('wrote glyphs.json:', Object.entries(out).filter(([, v]) => Array.isArray(v) && v.length && v[0].pairs).map(([k, v]) => k + ' ' + v.length + ' glyphs / ' + v.reduce((s, g) => s + g.pairs.length, 0) + ' contours').join(', '), '(N =', N + ')');
