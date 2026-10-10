@@ -189,6 +189,14 @@ $home-section-vertical-spacing-mobile: 4rem;
           rotate: -5deg;
         }
       }
+      // Pressed: settles back towards rest on a quicker curve than the hover
+      &:active{
+        img{
+          scale: 1;
+          rotate: -2.5deg;
+          transition-duration: 0.12s;
+        }
+      }
     }
     &#photography{
       position: relative;
@@ -196,6 +204,19 @@ $home-section-vertical-spacing-mobile: 4rem;
       &:hover{
         img{
           $img-scale: 1.6;
+          &:first-of-type{
+            transform: scale($img-scale) rotate(14deg) translate(0.1em, -0.3em);
+          }
+          &:last-of-type{
+            transform: scale($img-scale) rotate(-10deg) translate(-0.2em, 0.4em);
+          }
+        }
+      }
+      // Pressed: the photos keep their angles and ease back from the hover's 1.6x, on a quicker curve
+      &:active{
+        img{
+          $img-scale: 1.4;
+          transition-duration: 0.12s;
           &:first-of-type{
             transform: scale($img-scale) rotate(14deg) translate(0.1em, -0.3em);
           }
