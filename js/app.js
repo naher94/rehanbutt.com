@@ -119,6 +119,31 @@ function speedDemon(){
 	snackbar("Speed Demon");
 }
 
+function nightOwl(){
+	localStorage.setItem("nightOwlEasterEgg", new Date().toISOString());
+	gtag('event', 'Easter Eggs - Night Owl', {
+		'event_category': 'Special',
+		'event_label': 'Night Owl'
+	});
+	snackbar("Night Owl");
+}
+
+///////////////////////////////////////////// Night Owl
+// Unlocks on the first real interaction between 2 and 4am local time, so a tab left open overnight doesn't count.
+(function nightOwlWatcher() {
+	var types = ['pointerdown', 'keydown', 'wheel', 'touchstart'];
+	function onInteract() {
+		var hour = new Date().getHours();
+		if (hour < 2 || hour >= 4) return;
+		types.forEach(function (type) { window.removeEventListener(type, onInteract); });
+		nightOwl();
+	}
+	types.forEach(function (type) {
+		window.addEventListener(type, onInteract, { passive: true });
+	});
+})();
+///////////////////////////////////////////// End of Night Owl
+
 ///////////////////////////////////////////// Scroll Speedometer
 // Speed is in screens per second so phones and big monitors trip at the same pace.
 // Only visitor-driven scrolling counts: anchor jumps and scroll restoration have no input.
