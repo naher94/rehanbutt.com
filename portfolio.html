@@ -24,11 +24,13 @@ footer-sort-order: 4
           <span class="progressive-blur" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
           <span class="thumbnail-caption">
             <span class="thumbnail-text">{{ project.tile-name }}</span>
+            {%- comment -%} Tag pills are off until the project tags are cleaned up. Remove the comment tags to bring them back.
             {%- if project.tags.size > 0 %}
             <span class="thumbnail-tags">
               {%- for tag in project.tags %}<span class="thumbnail-tag">{{ tag }}</span>{% endfor -%}
             </span>
             {%- endif %}
+            {%- endcomment -%}
           </span>
           {% if project.flag %}
           <span class="flag">{{ project.flag }}</span>
