@@ -5,7 +5,7 @@ tile-name: "3D Digital Art"
 thumbnail: "3d-art"
 flag:
 date: 2022-01-12
-tags: art blender 3d
+tags: [art, 3D, blender]
 ---
 
 <div class="scaffold-grid">
