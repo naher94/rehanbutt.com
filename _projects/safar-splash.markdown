@@ -12,7 +12,7 @@ hero-accent-color-dark: "#FFFFFF"
 hero-image: "safar-splash/safar-hero.png"
 hero-image-alt: "Splash page screenshot of the safar website"
 hero-background: "safar-splash/safar-hero-bg.png"
-tags: ui branding marketing
+tags: web branding marketing
 ---
 
 {:.post-callout-medium}
