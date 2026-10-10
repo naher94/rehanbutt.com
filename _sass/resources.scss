@@ -172,7 +172,7 @@
     color: semantic-color(text);
     background-color: $navy-black;
     aspect-ratio: 3/4;
-    transition: $sprint;
+    transition: $tight-spring;   // the same spring as the home page's year tiles
     position: relative;
     overflow: hidden;
     @include scaffold.breakpoint(md, down) {
