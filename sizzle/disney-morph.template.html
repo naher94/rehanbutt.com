@@ -38,9 +38,11 @@
   #ui button { all:unset; cursor:pointer; padding:4px 10px; border-radius:99px; background:#2c3040; }
   
   body.clean #ui { display:none; }
+  #ver { font:500 12px "JetBrains Mono",monospace; padding:6px 10px; border-radius:14px; border:0; background:#2c3040; color:#fff; cursor:pointer; }
 </style>
 </head>
 <body>
+<select id="ver" aria-label="Version" onchange="location.href=this.value" style="position:fixed;top:10px;right:10px;z-index:50"><option value="reel.html">Reel (latest)</option><option value="sequence.html">Sequence (working draft)</option><option value="disney-morph.html" selected>V9 → V10 morph</option><option value="variants.html">Nine takes</option></select>
 <div id="fit"><div id="stage"><div id="cam">
   <div id="panel"></div>
 
