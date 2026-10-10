@@ -24,16 +24,12 @@
   }
 }
 
-// The same few pixels read as more movement on a small tile than a large one, so the hover scales with the tile's own width (not the viewport): a half-width tile, or a full-width one on a phone, gets the full lift; the full-width desktop tiles move about half as much. The steps reuse Scaffold's sm and lg widths as sizes of the tile, not of the viewport.
+// The same few pixels read as more movement on a small tile than a large one, so the big full-width tiles lift a little less. It follows the tile's own width, not the viewport, and borrows Scaffold's lg width as that size.
 .photoset-tile{
   container-type: inline-size;
   .thumbnail-container{
     --tile-lift: 6px;
     --tile-scale: 1.02;
-    @container (min-width: #{map.get(scaffold-vars.$breakpoints, sm)}){
-      --tile-lift: 4px;
-      --tile-scale: 1.02;
-    }
     @container (min-width: #{map.get(scaffold-vars.$breakpoints, lg)}){
       --tile-lift: 4px;
       --tile-scale: 1.01;
