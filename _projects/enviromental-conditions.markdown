@@ -14,7 +14,7 @@ hero-image-alt: "Environmental Conditions selector in the Figma UI"
 hero-background: "environmental-conditions/enviro-hero-background.svg"
 featured: true
 tile-description: Exploring how design tools bring real world conditions into the design process
-tags: digital UI UX tools
+tags: [UI, UX, design tools]
 published: true
 ---
 
