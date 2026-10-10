@@ -11,7 +11,8 @@ function isAchievementUnlocked() {
 		{ id: "to-dos", key: "todoChecklistEasterEgg", className: "todos-unlocked" },
 		{ id: "high-five", key: "highFiveEasterEgg", className: "high-five-unlocked" },
 		{ id: "sorcerer’s-apprentice", key: "sorcerersApprenticeEasterEgg", className: "sorcerers-apprentice-unlocked" },
-		{ id: "speed-demon", key: "speedDemonEasterEgg", className: "speed-demon-unlocked" }
+		{ id: "speed-demon", key: "speedDemonEasterEgg", className: "speed-demon-unlocked" },
+		{ id: "night-owl", key: "nightOwlEasterEgg", className: "night-owl-unlocked" }
 	];
 
 	eggs.forEach(function(egg) {
