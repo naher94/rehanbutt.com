@@ -195,6 +195,12 @@
       transform: rotate(4deg) scale(1.05);
       box-shadow: $recessed-shadow semantic-color(shadow);
     }
+    // Pressed: the tilt stays, the scale gives back and the shadow tightens, on a quicker curve than the hover
+    &:active{
+      transform: rotate(2deg) scale(1);
+      box-shadow: 0 4px 12px -4px semantic-color(shadow);
+      transition-duration: 0.12s;
+    }
     img{
       position: absolute;
       top: 0;
