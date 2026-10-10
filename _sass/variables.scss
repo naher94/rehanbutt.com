@@ -720,7 +720,7 @@ $product-type: (
     family:         $zilla,
     size:           2rem,  // 32px
     font-weight:    $zilla-regular,
-    at:             (md down: (size: 1.6rem)),  // 25.6px
+    at:             (md down: (size: 1.6rem, line-height: 1.2)),  // 25.6px
   ),
 
   eyebrow: (
