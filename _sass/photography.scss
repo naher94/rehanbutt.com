@@ -2,9 +2,7 @@
 @use 'scaffold/mixins' as scaffold;
 @use 'scaffold/variables' as scaffold-vars;
 
-// The caption gradient's midpoint alpha, registered so it can be transitioned (a gradient itself
-// can't be). Its resting value of 0.5 is where a plain 1 → 0 gradient already sits at its middle,
-// so the resting look is unchanged; hover raises it to deepen the scrim behind the text.
+// The caption gradient's midpoint alpha, registered so it can be transitioned (a gradient itself can't be). Its resting value of 0.5 is where a plain 1 → 0 gradient already sits at its middle, so the resting look is unchanged; hover raises it to deepen the scrim behind the text.
 @property --scrim-mid{
   syntax: '<number>';
   inherits: false;
