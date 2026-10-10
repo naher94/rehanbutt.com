@@ -23,7 +23,6 @@
   #films .poster { z-index:2; }   /* posters pass over the captions they leave behind */
   #pill { left:652px; top:39px; width:164px; height:29px; border-radius:14.5px; background:#e9eaeb; opacity:0; }   /* final V10 box; it only fades in */
   #divider { background:var(--teal); border-radius:500px; left:575px; top:-73px; width:210px; height:8px; }
-  #ring { left:13px; top:0; width:60px; height:60px; border-radius:10px; border:2px solid #12abc4; opacity:0; pointer-events:none; }
   #tile { left:13px; top:0; width:60px; height:2px; border-radius:1px; background:#9aa1ab; opacity:0; box-shadow:inset 0 0 0 1px rgba(31,41,55,.08); }
   #mark { left:13px; top:0; width:60px; height:60px; display:flex; align-items:center; justify-content:center; opacity:0; }
   #mark svg { width:40px; height:auto; fill:var(--ink); }
@@ -92,7 +91,6 @@
   <svg id="heading" width="1" height="1"></svg>
   <div id="divider" class="a"></div>
   <div id="tile" class="a"></div>
-  <div id="ring" class="a"></div>
   <div id="mark" class="a">MARK_SVG</div>
   <div id="wordmark" class="a"><img src="v9-disney-wordmark.svg" alt=""></div>
   <svg id="title" class="col" width="1" height="1" style="position:absolute;left:0;top:0;overflow:visible"></svg>
@@ -106,7 +104,7 @@
 
 <div id="ui">
   <div id="tracks"><div id="ruler"></div><div id="band"></div><div id="hin" class="hd" title="loop in (drag, or press I at the playhead)"></div><div id="hout" class="hd" title="loop out (drag, or press O at the playhead)"></div><div id="playhead"></div></div>
-  <div class="row ctl"><select id="ver" aria-label="Version" onchange="location.href=this.value"><option value="reel.html" selected>Reel (latest)</option><option value="sequence.html">Sequence (working draft)</option><option value="disney-morph.html">V9 → V10 morph</option><option value="variants.html">Nine takes</option></select><button id="play" data-key="space">pause</button><button id="restart" data-key="R" title="restart from the start of the loop range, or the very start">restart</button><button id="loop" class="on" data-key="L">loop</button><span class="grp"><span class="rng"><b>loop range</b><span id="rangeTxt" class="dim">full timeline</span></span><button id="setIn" data-key="I" title="set loop in at the playhead">in</button><button id="setOut" data-key="O" title="set loop out at the playhead">out</button><button id="full" data-key="X" title="clear the loop range">clear</button></span><span class="grp"><span class="rng"><b>speed</b><span id="speedTxt">1×</span></span><button id="spd1" class="act" data-speed="1" data-key="1" title="normal speed">1×</button><button id="spd2" data-speed="0.5" data-key="2" title="half speed">½×</button><button id="spd3" data-speed="0.25" data-key="3" title="quarter speed">¼×</button></span><button id="detail" class="on" title="show or hide the individual animations inside each step">details</button><span id="clock">0.00s</span></div>
+  <div class="row ctl"><select id="ver" aria-label="Version" onchange="location.href=this.value"><option value="reel2.html">Reel 2 (new)</option><option value="reel.html" selected>Reel</option><option value="sequence.html">Sequence (working draft)</option><option value="disney-morph.html">V9 → V10 morph</option><option value="variants.html">Nine takes</option></select><button id="play" data-key="space">pause</button><button id="restart" data-key="R" title="restart from the start of the loop range, or the very start">restart</button><button id="loop" class="on" data-key="L">loop</button><span class="grp"><span class="rng"><b>loop range</b><span id="rangeTxt" class="dim">full timeline</span></span><button id="setIn" data-key="I" title="set loop in at the playhead">in</button><button id="setOut" data-key="O" title="set loop out at the playhead">out</button><button id="full" data-key="X" title="clear the loop range">clear</button></span><span class="grp"><span class="rng"><b>speed</b><span id="speedTxt">1×</span></span><button id="spd1" class="act" data-speed="1" data-key="1" title="normal speed">1×</button><button id="spd2" data-speed="0.5" data-key="2" title="half speed">½×</button><button id="spd3" data-speed="0.25" data-key="3" title="quarter speed">¼×</button></span><button id="detail" class="on" title="show or hide the individual animations inside each step">details</button><span id="clock">0.00s</span></div>
 </div>
 
 <script>
@@ -163,8 +161,6 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   logo.to('#tile', { data: 'line in', opacity: 1, duration: 0.3 * K, ease: 'power1.out' }, 0);
   logo.to('#tile', { data: 'box grows', height: 60, borderRadius: 10, backgroundColor: '#fffbec', duration: 1.0 * K }, 0.3 * K);
   logo.to('.col', { data: 'column slides', y: 70, duration: 1.0 * K }, 0.3 * K);
-  // secondary action: a soft ring ripples out from the box as it lands
-  logo.set('#ring', { opacity: 0.55, scale: 1 }, 1.3 * K - 0.05).to('#ring', { data: 'landing ripple', opacity: 0, scale: 1.8, duration: 0.6, ease: 'power2.out' }, 1.3 * K - 0.05);
   logo.to('#wordmark', { data: 'wordmark out', opacity: 0, duration: 0.45 * K, ease: 'power1.out' }, 0.45 * K);
   logo.to('#mark', { data: 'mark in', opacity: 1, duration: 0.3 * K, ease: 'power1.out' }, 0.95 * K);
   logo.fromTo('#mark svg', { scale: 0.6 }, { data: 'mark pop', scale: 1, duration: 0.5 * K, ease: 'back.out(2.2)' }, 0.95 * K);
@@ -363,12 +359,19 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   // The camera, two ways (picker on the camera chip under the steps, or ?cam=fixed / ?cam=follow). CAM is the camera's centre in page
   // coordinates and its zoom; the fixed frame is 1.3x on (330, 265). "Follows the motion" eases the same camera between a few framings:
   // in on the heading, down with the logo and the column, across to the right with the date, then back out to the finished frame for the posters.
-  const CAMV = ['fixed', 'follow', 'followdate', 'refined'].includes(new URLSearchParams(location.search).get('cam')) ? new URLSearchParams(location.search).get('cam') : 'refined', CAM = { s: 1.3, cx: 330, cy: 265 }, camEl = $('cam');
-  window.STEP_VERSIONS.camera = { title: 'camera', param: 'cam', current: CAMV, options: [['fixed', 'Fixed frame'], ['follow', 'Follows the motion'], ['followdate', 'Follows the motion + the date'], ['refined', 'Refined: one continuous path']] };
+  const CAMV = ['fixed', 'push', 'follow', 'followdate', 'refined'].includes(new URLSearchParams(location.search).get('cam')) ? new URLSearchParams(location.search).get('cam') : 'refined', CAM = { s: 1.3, cx: 330, cy: 265 }, camEl = $('cam');
+  window.STEP_VERSIONS.camera = { title: 'camera', param: 'cam', current: CAMV, options: [['fixed', 'Fixed frame'], ['push', 'Fixed + one slow push-in'], ['follow', 'Follows the motion'], ['followdate', 'Follows the motion + the date'], ['refined', 'Refined: one continuous path']] };
   applyCam = () => { const s = CAM.lz !== undefined ? Math.exp(CAM.lz) : CAM.s;   // the refined camera animates log-zoom (lz), so a zoom feels the same speed at any scale
     camEl.style.transform = `translate(${960 - CAM.cx * s}px,${540 - CAM.cy * s}px) scale(${s})`; };
   const camera = gsap.timeline({ data: 'camera', defaults: { ease: 'power2.inOut' } }), at = n => tl.labels[n];
-  if (CAMV === 'refined') {
+  if (CAMV === 'push') {
+    // PUSH: the fixed frame plus one move. A slow dolly-in from the opening frame towards the heading (no cuts, no follow), then one glide
+    // back out to the fixed frame as the description and posters arrive, so the finished frame is identical to 'fixed'.
+    CAM.lz = Math.log(CAM.s);
+    const movesAt = EARLY ? earlyHost.startTime() + earlyAt - 0.2 : at('posters') + 0.6;
+    camera.to(CAM, { data: 'slow push in on the heading', lz: Math.log(1.55), cy: 150, duration: movesAt, ease: 'sine.inOut' }, 0);
+    camera.to(CAM, { data: 'glide back out to the fixed frame', lz: Math.log(1.3), cy: 265, duration: 1.4, ease: 'power2.inOut' }, movesAt);
+  } else if (CAMV === 'refined') {
     // REFINED: the same story as "follows the motion + the date", re-cut with motion-design principles:
     //  - one continuous path: the camera never reverses (no drop-then-climb U-turn), and the whole finish is ONE coupled move, so pan and zoom
     //    share a single curve instead of two moves that fight or queue up
@@ -392,7 +395,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
     const slideDur = EARLY ? 1.1 : 1.4, cyBottom = 326 + extra;
     camera.to(CAM, { data: 'down with the description + posters + titles', cy: cyBottom, duration: slideDur, ease: 'power3.out' }, movesAt);
     camera.to(CAM, { data: 'zoom out, flowing into the final frame', lz: Z(1.3), cy: 265, duration: 1.0, ease: 'power2.inOut' }, movesAt + 0.66);
-  } else if (CAMV !== 'fixed') {
+  } else if (CAMV !== 'fixed' && CAMV !== 'push') {
     camera.to(CAM, { data: 'in on the heading', s: 1.75, cx: 330, cy: 35, duration: 0.7 + 0.3 * K }, at('logo') - 0.7);   // ends just as the box starts to grow
     // the camera drops with the box and the column: same start, same length, same ease as 'box grows' / 'column slides'
     camera.to(CAM, { data: 'down with the logo + column (same rate as the box)', s: 1.75, cx: 330, cy: 140, duration: 1.0 * K, ease: 'power3.inOut' }, at('logo') + 0.3 * K);

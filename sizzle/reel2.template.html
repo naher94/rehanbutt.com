@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Disney role: sequence</title>
+<title>Disney role: reel 2</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,900&family=JetBrains+Mono:wght@500&display=swap">
 <script src="vendor/gsap.min.js"></script>
 <style>
@@ -104,7 +104,7 @@
 
 <div id="ui">
   <div id="tracks"><div id="ruler"></div><div id="band"></div><div id="hin" class="hd" title="loop in (drag, or press I at the playhead)"></div><div id="hout" class="hd" title="loop out (drag, or press O at the playhead)"></div><div id="playhead"></div></div>
-  <div class="row ctl"><select id="ver" aria-label="Version" onchange="location.href=this.value"><option value="reel2.html">Reel 2 (new)</option><option value="reel.html">Reel</option><option value="sequence.html" selected>Sequence (working draft)</option><option value="disney-morph.html">V9 → V10 morph</option><option value="variants.html">Nine takes</option></select><button id="play" data-key="space">pause</button><button id="restart" data-key="R" title="restart from the start of the loop range, or the very start">restart</button><button id="loop" class="on" data-key="L">loop</button><span class="grp"><span class="rng"><b>loop range</b><span id="rangeTxt" class="dim">full timeline</span></span><button id="setIn" data-key="I" title="set loop in at the playhead">in</button><button id="setOut" data-key="O" title="set loop out at the playhead">out</button><button id="full" data-key="X" title="clear the loop range">clear</button></span><span class="grp"><span class="rng"><b>speed</b><span id="speedTxt">1×</span></span><button id="spd1" class="act" data-speed="1" data-key="1" title="normal speed">1×</button><button id="spd2" data-speed="0.5" data-key="2" title="half speed">½×</button><button id="spd3" data-speed="0.25" data-key="3" title="quarter speed">¼×</button></span><button id="detail" class="on" title="show or hide the individual animations inside each step">details</button><span id="clock">0.00s</span></div>
+  <div class="row ctl"><select id="ver" aria-label="Version" onchange="location.href=this.value"><option value="reel2.html" selected>Reel 2 (new)</option><option value="reel.html">Reel</option><option value="sequence.html">Sequence (working draft)</option><option value="disney-morph.html">V9 → V10 morph</option><option value="variants.html">Nine takes</option></select><button id="play" data-key="space">pause</button><button id="restart" data-key="R" title="restart from the start of the loop range, or the very start">restart</button><button id="loop" class="on" data-key="L">loop</button><span class="grp"><span class="rng"><b>loop range</b><span id="rangeTxt" class="dim">full timeline</span></span><button id="setIn" data-key="I" title="set loop in at the playhead">in</button><button id="setOut" data-key="O" title="set loop out at the playhead">out</button><button id="full" data-key="X" title="clear the loop range">clear</button></span><span class="grp"><span class="rng"><b>speed</b><span id="speedTxt">1×</span></span><button id="spd1" class="act" data-speed="1" data-key="1" title="normal speed">1×</button><button id="spd2" data-speed="0.5" data-key="2" title="half speed">½×</button><button id="spd3" data-speed="0.25" data-key="3" title="quarter speed">¼×</button></span><button id="detail" class="on" title="show or hide the individual animations inside each step">details</button><span id="clock">0.00s</span></div>
 </div>
 
 <script>
@@ -216,7 +216,8 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   };
   // A short lead-in comes first: the step starts, the camera zooms in on the date (0.45s), and only then do the letters start to slide, so the
   // camera is already there when they move. Everything in the date step after this is shifted by LEAD.
-  const LEAD = 0.85, BEAT = 0.4, BEAT2 = 0.35;   // BEAT: a pause after the crash, before the camera zooms back out. BEAT2: a pause after the zoom out, before the slide up
+  const LEAD = 0.65, BEAT = 0.3, BEAT2 = 0.25;   // the reel's beats are a little tighter than the working draft's (0.85 / 0.4 / 0.35)
+  // BEAT: a pause after the crash, before the camera zooms back out. BEAT2: a pause after the zoom out, before the slide up
   dateStep.to(S, { data: 'slide: wall stops, Aug 20 squishes in', s: dxL, duration: T_L, ease: eL }, LEAD);
   let tWall = 0; while (tWall < T_L && dxL * eL(tWall / T_L) < dxR) tWall += 0.005;                       // when the wall is reached
   gsap.set(apos, { x: dxR });
@@ -234,7 +235,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
 
 
   // Step 5: the description, two ways (pick from the menu on its block in the timeline, or ?desc=reflow / ?desc=leading).
-  const DESC_MODE = ['leading', 'merged'].includes(new URLSearchParams(location.search).get('desc')) ? new URLSearchParams(location.search).get('desc') : 'reflow';
+  const DESC_MODE = ['leading', 'merged'].includes(new URLSearchParams(location.search).get('desc')) ? new URLSearchParams(location.search).get('desc') : 'leading';   // the reel's defaults: leading-only description, refined camera
   // the version picker lives on the description block in the timeline strip (see buildTracks); choosing reloads with ?desc=
   // (in the merged version there is no description step of its own, so the picker moves onto the date block)
   window.STEP_VERSIONS = { [DESC_MODE === 'merged' ? 'date' : 'description']: { title: 'description', param: 'desc', current: DESC_MODE, options: [['reflow', 'Reflow'], ['leading', 'Leading only'], ['merged', 'Leading with date slide-up']] } };
@@ -340,7 +341,15 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   });
   if (EARLY) {   // during the slide down: every "Credited under..." line fades out, the posters slide into the row with their captions, "Credited Projects" fades in
     F.forEach((f, i) => earlyHost.to(f, { data: i === 0 ? 'credit lines + years fade (during the slide down)' : undefined, cf: 1, yf: 1, duration: 0.5, ease: 'power2.out' }, earlyAt));
-    F.forEach((f, i) => earlyHost.to(f, { data: i === 0 ? 'posters + captions slide into the row (during the slide down)' : undefined, early: 1, duration: 0.9, ease: 'none' }, earlyAt));
+    // reel: the three films leave 0.05s apart (a hair of overlap instead of a single block), each lifting off the page as it travels:
+    // a soft shadow blooms while it moves and fades away as it lands (depth as a secondary action)
+    const lift = 'drop-shadow(0px 14px 16px rgba(20,30,50,0.28))', rest = 'drop-shadow(0px 0px 0px rgba(20,30,50,0))';
+    F.forEach((f, i) => {
+      const P = $('poster' + i), t0 = earlyAt + 0.05 * i; gsap.set(P, { filter: rest });
+      earlyHost.to(f, { data: i === 0 ? 'posters + captions slide into the row (0.05s apart)' : undefined, early: 1, duration: 0.9, ease: 'none' }, t0);
+      earlyHost.to(P, { data: i === 0 ? 'posters lift (shadow blooms, then fades)' : undefined, filter: lift, duration: 0.3, ease: 'power2.out' }, t0);
+      earlyHost.to(P, { filter: rest, duration: 0.6, ease: 'power2.inOut' }, t0 + 0.35);
+    });
     earlyHost.fromTo('#label', labelFrom, { data: 'Credited Projects slides out from behind the paragraph', ...labelTo }, earlyAt);
   } else {
     postersStep.fromTo('#label', labelFrom, { data: 'Credited Projects slides out from behind the paragraph', ...labelTo }, lastT0 + 2.3);
@@ -350,12 +359,19 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   // The camera, two ways (picker on the camera chip under the steps, or ?cam=fixed / ?cam=follow). CAM is the camera's centre in page
   // coordinates and its zoom; the fixed frame is 1.3x on (330, 265). "Follows the motion" eases the same camera between a few framings:
   // in on the heading, down with the logo and the column, across to the right with the date, then back out to the finished frame for the posters.
-  const CAMV = ['follow', 'followdate', 'refined'].includes(new URLSearchParams(location.search).get('cam')) ? new URLSearchParams(location.search).get('cam') : 'fixed', CAM = { s: 1.3, cx: 330, cy: 265 }, camEl = $('cam');
-  window.STEP_VERSIONS.camera = { title: 'camera', param: 'cam', current: CAMV, options: [['fixed', 'Fixed frame'], ['follow', 'Follows the motion'], ['followdate', 'Follows the motion + the date'], ['refined', 'Refined: one continuous path']] };
+  const CAMV = ['fixed', 'push', 'follow', 'followdate', 'refined'].includes(new URLSearchParams(location.search).get('cam')) ? new URLSearchParams(location.search).get('cam') : 'refined', CAM = { s: 1.3, cx: 330, cy: 265 }, camEl = $('cam');
+  window.STEP_VERSIONS.camera = { title: 'camera', param: 'cam', current: CAMV, options: [['fixed', 'Fixed frame'], ['push', 'Fixed + one slow push-in'], ['follow', 'Follows the motion'], ['followdate', 'Follows the motion + the date'], ['refined', 'Refined: one continuous path']] };
   applyCam = () => { const s = CAM.lz !== undefined ? Math.exp(CAM.lz) : CAM.s;   // the refined camera animates log-zoom (lz), so a zoom feels the same speed at any scale
     camEl.style.transform = `translate(${960 - CAM.cx * s}px,${540 - CAM.cy * s}px) scale(${s})`; };
   const camera = gsap.timeline({ data: 'camera', defaults: { ease: 'power2.inOut' } }), at = n => tl.labels[n];
-  if (CAMV === 'refined') {
+  if (CAMV === 'push') {
+    // PUSH: the fixed frame plus one move. A slow dolly-in from the opening frame towards the heading (no cuts, no follow), then one glide
+    // back out to the fixed frame as the description and posters arrive, so the finished frame is identical to 'fixed'.
+    CAM.lz = Math.log(CAM.s);
+    const movesAt = EARLY ? earlyHost.startTime() + earlyAt - 0.2 : at('posters') + 0.6;
+    camera.to(CAM, { data: 'slow push in on the heading', lz: Math.log(1.55), cy: 150, duration: movesAt, ease: 'sine.inOut' }, 0);
+    camera.to(CAM, { data: 'glide back out to the fixed frame', lz: Math.log(1.3), cy: 265, duration: 1.4, ease: 'power2.inOut' }, movesAt);
+  } else if (CAMV === 'refined') {
     // REFINED: the same story as "follows the motion + the date", re-cut with motion-design principles:
     //  - one continuous path: the camera never reverses (no drop-then-climb U-turn), and the whole finish is ONE coupled move, so pan and zoom
     //    share a single curve instead of two moves that fight or queue up
@@ -366,6 +382,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
     //  - modest zoom ratios (max 2.3x, not 2.6x) keep the action readable and leave margin for the letters' stretch and bounce
     CAM.lz = Math.log(CAM.s);
     const Z = Math.log, dStart = at('date');
+    camera.to(CAM, { data: 'slow drift in (never a dead frame)', lz: Z(1.33), duration: 0.6, ease: 'sine.inOut' }, 0);   // reel: the opening hold is alive
     const movesAt = EARLY ? earlyHost.startTime() + earlyAt - 0.2 : at('posters') + 0.6;   // when the description's lines start to open
     camera.to(CAM, { data: 'eases in on the heading', lz: Z(1.7), cx: 330, cy: 40, duration: 0.84, ease: 'power2.inOut' }, at('logo') - 0.6);                 // starts before the morph, ends as the box begins to grow
     camera.to(CAM, { data: 'drops with the box + column', cy: 140, duration: 1.0 * K, ease: 'power3.inOut' }, at('logo') + 0.3 * K);                         // same start, length and curve as the box
@@ -378,7 +395,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
     const slideDur = EARLY ? 1.1 : 1.4, cyBottom = 326 + extra;
     camera.to(CAM, { data: 'down with the description + posters + titles', cy: cyBottom, duration: slideDur, ease: 'power3.out' }, movesAt);
     camera.to(CAM, { data: 'zoom out, flowing into the final frame', lz: Z(1.3), cy: 265, duration: 1.0, ease: 'power2.inOut' }, movesAt + 0.66);
-  } else if (CAMV !== 'fixed') {
+  } else if (CAMV !== 'fixed' && CAMV !== 'push') {
     camera.to(CAM, { data: 'in on the heading', s: 1.75, cx: 330, cy: 35, duration: 0.7 + 0.3 * K }, at('logo') - 0.7);   // ends just as the box starts to grow
     // the camera drops with the box and the column: same start, same length, same ease as 'box grows' / 'column slides'
     camera.to(CAM, { data: 'down with the logo + column (same rate as the box)', s: 1.75, cx: 330, cy: 140, duration: 1.0 * K, ease: 'power3.inOut' }, at('logo') + 0.3 * K);
@@ -403,7 +420,7 @@ fetch('glyphs.json', { cache: 'no-store' }).then(r => r.json()).then(async ({ he
   } else camera.to({}, { data: 'fixed frame', duration: tl.duration() }, 0);   // one block across the whole timeline
   tl.add(camera, 0);
 
-  tl.addLabel('end', tl.duration() + 0.6);   // hold on the finished header
+  tl.addLabel('end', tl.duration() + 1.4);   // reel: hold on the finished frame long enough to read it   // hold on the finished header
   tl.to({}, { duration: 0.001 }, 'end');
   DUR = tl.duration();
   setRange(0, DUR);
