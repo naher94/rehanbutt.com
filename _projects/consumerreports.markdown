@@ -4,8 +4,7 @@ title:  "Consumer Reports"
 tile-name: "Consumer Reports Car Scores"
 thumbnail: "consumerReports"
 date:   2015-08-20
-tags: UI UX
-tile-tags: [UX, Data Viz]
+tags: [UX, Data Viz]
 ---
 
 <div>

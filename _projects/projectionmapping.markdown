@@ -4,7 +4,7 @@ title:  "Projection Mapping"
 tile-name: "Projection Mapping"
 thumbnail: "projection"
 date:   2012-11-01
-tags: programming
+tags: [Creative Coding, Animation]
 ---
 
 <div class="video-embed">
