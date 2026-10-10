@@ -4,8 +4,7 @@ title: "UI Interactions"
 tile-name: "UI Interactions"
 thumbnail: "interactions"
 date: 2018-03-20
-tags: interactions animations
-tile-tags: [Interactions, Animations]
+tags: [interactions, animation, motion]
 ---
 <div class="scaffold-grid">
   <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">
