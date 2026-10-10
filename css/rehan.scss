@@ -135,10 +135,131 @@ video{
   }
 }
 
+@mixin tile-lifted{
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 2px 4px rgba($navy-black, 0.12), 0 14px 28px -8px rgba($navy-black, 0.4);
+    &::after{ opacity: 1; }
+    .progressive-blur i{ opacity: 1; }
+    .thumbnail-image{ opacity: 1; }
+    .thumbnail-caption{
+      opacity: 1;
+      transform: none;
+      transition-delay: 0.04s;
+    }
+}
+// Progressive blur: four stacked backdrop blurs (1, 2, 4, 8px), each masked to its own band, so the
+// blur ramps up towards the bottom with no visible edge. Each layer fades in on its own because
+// opacity on a parent would flatten the backdrop its children blur.
+.progressive-blur{
+  position: absolute;
+  inset: 40% 0 0;
+  border-radius: 0 0 $tile-radius-medium $tile-radius-medium;
+  pointer-events: none;
+  // No overflow: hidden here: a rounded clip on the wrapper turns the top of the blur into a hard edge.
+  // Each layer rounds its own corners instead.
+  i{
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    &:nth-child(1){ backdrop-filter: blur(1px); mask-image: linear-gradient(to bottom, transparent 0%, $pure-black 25%, $pure-black 50%, transparent 75%); }
+    &:nth-child(2){ backdrop-filter: blur(2px); mask-image: linear-gradient(to bottom, transparent 25%, $pure-black 50%, $pure-black 75%, transparent 100%); }
+    &:nth-child(3){ backdrop-filter: blur(4px); mask-image: linear-gradient(to bottom, transparent 50%, $pure-black 75%, $pure-black 100%); }
+    &:nth-child(4){ backdrop-filter: blur(8px); mask-image: linear-gradient(to bottom, transparent 75%, $pure-black 100%); }
+  }
+}
+
+// Portfolio tiles only (the photography tiles share the classes above and keep that hover).
+// A lift rather than a grow, on a smooth ease-out with no overshoot (this grid is dense, so it
+// stays calm next to the home page's playful tilting cards); a layered shadow that reads as
+// height; a bottom scrim and progressive blur instead of dimming the whole image; the caption
+// rises in.
+.thumbnail-tile .thumbnail-container{
+  --lift-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  // The caption's distance from the tile's left and bottom edges
+  --tile-spacing: 1.5rem;
+  @include scaffold.breakpoint(md, down){
+    --tile-spacing: 1rem;
+  }
+  transition: transform 0.4s var(--lift-ease), box-shadow 0.4s var(--lift-ease);
+  &::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    // Eased rather than a straight two-stop ramp, which bends at its midpoint and shows as a band on flat colours
+    background: linear-gradient(0deg,
+      rgba($navy-black-d9, 0.8) 0%,
+      rgba($navy-black-d9, 0.62) 11%,
+      rgba($navy-black-d9, 0.42) 22%,
+      rgba($navy-black-d9, 0.24) 33%,
+      rgba($navy-black-d9, 0.1) 44%,
+      rgba($navy-black-d9, 0) 55%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s var(--lift-ease);
+  }
+  .thumbnail-image{
+    transition: opacity 0.4s var(--lift-ease);
+  }
+  // The title and its tags, anchored bottom-left so long titles wrap down the left edge. The tags
+  // come last in the markup, so a screen reader hears the name first, and sit above the title
+  // visually.
+  .thumbnail-caption{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: var(--tile-spacing);
+    padding-inline: var(--tile-spacing);
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 0.625rem;
+    opacity: 0;
+    transform: translateY(8px);
+    z-index: 1;
+    transition: opacity 0.3s var(--lift-ease), transform 0.4s var(--lift-ease);
+  }
+  .thumbnail-text{
+    position: static;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    opacity: 1;
+  }
+  .thumbnail-tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .thumbnail-tag{
+    @include type-style(product, control);
+    padding: 0.4rem 0.9rem;
+    background-color: $navy-black;
+    color: $pure-white;
+    border-radius: $pill-radius;
+  }
+  &:hover{ @include tile-lifted; }
+  @at-root .thumbnail-tile .post-link:focus-visible .thumbnail-container{ @include tile-lifted; }
+  &:active{
+    transform: translateY(-2px) scale(1.01);
+    transition-duration: 0.12s;
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  .thumbnail-tile .thumbnail-container{
+    &, &::after, .progressive-blur i, .thumbnail-caption{ transition-duration: 0.01s; transition-delay: 0s; }
+    &:hover, &:active{ transform: none; }
+    .thumbnail-caption{ transform: none; }
+  }
+  .thumbnail-tile .post-link:focus-visible .thumbnail-container{ transform: none; }
+}
+
 .thumbnail-text {
   @include type-style(product, tile-title);
   position: absolute;
-  bottom: 1rem;
+  bottom: var(--tile-spacing, 1.5rem);   // set on the portfolio tile above; the fallback is for any other .thumbnail-text
   margin: 0 auto;
   left: 0;
   right: 0;
