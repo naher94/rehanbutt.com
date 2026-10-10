@@ -189,6 +189,14 @@ $home-section-vertical-spacing-mobile: 4rem;
           rotate: -5deg;
         }
       }
+      // Pressed: settles back towards rest on a quicker curve than the hover
+      &:active{
+        img{
+          scale: 1;
+          rotate: -2.5deg;
+          transition-duration: 0.12s;
+        }
+      }
     }
     &#photography{
       position: relative;
@@ -196,6 +204,19 @@ $home-section-vertical-spacing-mobile: 4rem;
       &:hover{
         img{
           $img-scale: 1.6;
+          &:first-of-type{
+            transform: scale($img-scale) rotate(14deg) translate(0.1em, -0.3em);
+          }
+          &:last-of-type{
+            transform: scale($img-scale) rotate(-10deg) translate(-0.2em, 0.4em);
+          }
+        }
+      }
+      // Pressed: the photos keep their angles and ease back from the hover's 1.6x, on a quicker curve
+      &:active{
+        img{
+          $img-scale: 1.4;
+          transition-duration: 0.12s;
           &:first-of-type{
             transform: scale($img-scale) rotate(14deg) translate(0.1em, -0.3em);
           }
@@ -490,6 +511,9 @@ $home-section-vertical-spacing-mobile: 4rem;
           &:hover{
             transform: scale(1.02) rotate(-2deg);
           }
+          &:active{
+            transform: scale(1) rotate(-1deg);
+          }
         }
       }
     }
@@ -505,6 +529,12 @@ $home-section-vertical-spacing-mobile: 4rem;
       &:hover{
         transform: scale(1.02) rotate(2deg);
         box-shadow: $recessed-shadow semantic-color(shadow);
+      }
+      // Pressed: half the tilt, no scale, a tighter shadow, on a quicker curve than the hover
+      &:active{
+        transform: scale(1) rotate(1deg);
+        box-shadow: 0 4px 12px -4px semantic-color(shadow);
+        transition-duration: 0.12s;
       }
       .thumbnail-image-featured{
         border-radius: $tile-radius-big;
@@ -640,6 +670,12 @@ $home-section-vertical-spacing-mobile: 4rem;
           opacity: 0;
         }
       }
+    }
+    // Pressed: half the tilt, no scale, a tighter shadow, on a quicker curve than the hover
+    &:active{
+      transform: rotate(2deg) scale(1);
+      box-shadow: 0 4px 12px -4px semantic-color(shadow);
+      transition-duration: 0.12s;
     }
     .year-square{
       background-color: $navy-black;

@@ -1,14 +1,60 @@
+@use 'sass:map';
 @use 'scaffold/mixins' as scaffold;
+@use 'scaffold/variables' as scaffold-vars;
 
+// The caption gradient's midpoint alpha, registered so it can be transitioned (a gradient itself can't be). Its resting value of 0.5 is where a plain 1 → 0 gradient already sits at its middle, so the resting look is unchanged; hover raises it to deepen the scrim behind the text.
+@property --scrim-mid{
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0.5;
+}
+
+// Hover matches the portfolio tiles (a lift with a layered shadow, no overshoot), but the photo is never dimmed: it stays at full brightness, the caption block deepens and rises a few pixels. Photographs stay level, so there is no tilt here.
+@mixin photoset-lifted{
+  transform: translateY(calc(var(--tile-lift) * -1)) scale(var(--tile-scale));
+  box-shadow: 0 2px 4px rgba($navy-black, 0.12), 0 14px 28px -8px rgba($navy-black, 0.4);
+  .thumbnail-image{ opacity: 1; }
+  .text-container{ --scrim-mid: 0.62; }
+  // The title is also `.thumbnail-text`, whose shared hover rule sets `transition: all 0.3s ease-in-out`; restating it here keeps the title and the date on one curve.
+  .text-container > *{
+    transform: none;
+    transition: transform 0.4s var(--lift-ease);
+  }
+}
+
+// The same few pixels read as more movement on a small tile than a large one, so the big full-width tiles lift a little less. It follows the tile's own width, not the viewport, and borrows Scaffold's lg width as that size.
 .photoset-tile{
+  container-type: inline-size;
   .thumbnail-container{
+    --tile-lift: 6px;
+    --tile-scale: 1.02;
+    @container (min-width: #{map.get(scaffold-vars.$breakpoints, lg)}){
+      --tile-lift: 4px;
+      --tile-scale: 1.01;
+    }
+    --lift-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 0.4s var(--lift-ease), box-shadow 0.4s var(--lift-ease);
+    .thumbnail-image{
+      transition: opacity 0.4s var(--lift-ease);
+    }
+    .text-container > *{
+      display: block;
+      transform: translateY(5px);
+      transition: transform 0.4s var(--lift-ease);
+    }
+    &:hover{ @include photoset-lifted; }
+    &:active{
+      transform: translateY(calc(var(--tile-lift) * -0.35));
+      transition-duration: 0.12s;
+    }
     overflow: hidden;
     .text-container{
       position: absolute;
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(0deg, rgba($navy-black-d9,1) 0%, rgba($navy-black-d9,0) 100%);
+      background: linear-gradient(0deg, rgba($navy-black-d9,1) 0%, rgba($navy-black-d9, var(--scrim-mid)) 50%, rgba($navy-black-d9,0) 100%);
+      transition: --scrim-mid 0.4s var(--lift-ease);
       color: $pure-white;
       font-family: $lato;
       padding: 2em;
@@ -38,6 +84,10 @@
     }
   }
 }
+.photoset-tile .post-link:focus-visible .thumbnail-container{ 
+  @include photoset-lifted; 
+}
+
 .map-container{
   background-color: rgba($signature-teal, 0.25);
   position: relative;

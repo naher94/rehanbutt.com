@@ -1,10 +1,10 @@
 ---
 layout: post
 title:  "Consumer Reports"
-tile-name: "Consumer Reports UX Design"
+tile-name: "Consumer Reports Car Scores"
 thumbnail: "consumerReports"
 date:   2015-08-20
-tags: UI UX
+tags: [UX, Data Viz]
 ---
 
 <div>

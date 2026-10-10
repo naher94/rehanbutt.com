@@ -5,6 +5,7 @@ tile-name: "tech.soa Web Presence"
 thumbnail: "techsoa"
 date: 2017-08-23
 tags: web
+published: false
 ---
 
 <div class="image-container"><img src="../img/techsoa/techHero.png" alt="tech.soa Home Page"/></div>
