@@ -186,8 +186,10 @@ const DATA = __DATA__;
   const EXPAND = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>';
   const UNGROUPED = '<span class="ungrouped" title="Not in any group"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"><rect x="3" y="3" width="18" height="18" rx="4"/></svg></span>';
   const src = (size, slug) => DATA.image_root + '/' + latest + '/' + size + '/' + slug + '.png';
+  // Reserve each image's height from the captured size, so lazy loads don't shift the page after a jump.
+  const ratio = (ver, size, slug) => { const ht = (DATA.heights[ver] || {})[slug + '|' + size]; return ht ? ' style="aspect-ratio:' + DATA.sizes[size] + '/' + ht + '"' : ''; };
   // A screenshot you can drop notes on; the corner icon opens the full-size PNG.
-  const shot = (slug, size, cls = '') => '<div class="shot ' + cls + '" data-page="' + slug + '" data-size="' + size + '"><img loading="lazy" src="' + src(size, slug) + '" alt="">' +
+  const shot = (slug, size, cls = '') => '<div class="shot ' + cls + '" data-page="' + slug + '" data-size="' + size + '"><img loading="lazy" src="' + src(size, slug) + '" alt=""' + ratio(latest, size, slug) + '>' +
     '<a class="expand" href="' + src(size, slug) + '" target="_blank" title="Open full size">' + EXPAND + '</a></div>';
   const card = (slug, i) => '<div class="card" id="g' + i + '-' + slug + '" data-slug="' + slug + '"><div class="cap"><a href="#' + slug + '">' + esc(bySlug[slug].path) + '</a></div><div class="duo">' +
     shot(slug, 'mobile', 'm') + shot(slug, 'tablet', 't') + shot(slug, 'desktop', 'd') + '</div></div>';
@@ -847,7 +849,9 @@ function setVersion(v) {
   shots.forEach(s => {
     const src = DATA.image_root + '/' + v + '/' + s.dataset.size + '/' + s.dataset.page + '.png';
     s.classList.remove('missing');
-    s.querySelector('img').src = src; s.querySelector('.expand').href = src;
+    const img = s.querySelector('img'), ht = (HEIGHTS[v] || {})[s.dataset.page + '|' + s.dataset.size];
+    img.style.aspectRatio = ht ? DATA.sizes[s.dataset.size] + '/' + ht : '';
+    img.src = src; s.querySelector('.expand').href = src;
   });
   document.querySelectorAll('.ht').forEach(el => el.textContent = (HEIGHTS[v] || {})[el.dataset.k] ?? '?');
   document.getElementById('ver-sha').textContent = v;
