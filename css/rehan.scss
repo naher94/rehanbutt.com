@@ -598,6 +598,12 @@ article{
   h4{
     margin-top: 0.5em;
   }
+  .quote-color-block{
+    background-color: #F9EBF0;
+    @media (prefers-color-scheme: dark) {
+      background-color: rgba(#F9EBF0,0.2);
+    }
+  }
 }
 
 // TODO This is the only table on the site, so the styling is scoped to
