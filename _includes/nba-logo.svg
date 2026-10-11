@@ -1,8 +1,8 @@
 <svg class="nba-logo" viewBox="-20 -40 58 100" overflow="visible" role="img" aria-label="National Basketball Association Logo" xmlns="http://www.w3.org/2000/svg">
 <defs><clipPath id="nba-logo-clip"><path d="m0 0h18v42h-18z"/></clipPath></defs>
 <g class="nba-logo__hoop nba-logo__hoop--back" fill="none">
-<g class="nba-logo__halo" stroke="#fff" stroke-linejoin="round" stroke-linecap="round"><path class="nba-logo__halo-pole" fill="#fff" stroke-width="2"/><path class="nba-logo__halo-board" stroke-width="4"/></g>
-<path class="nba-logo__pole" fill="#72777f"/>
+<g class="nba-logo__halo" stroke="#fff" stroke-linejoin="round" stroke-linecap="round"><path class="nba-logo__halo-board" stroke-width="4"/></g>
+
 <path class="nba-logo__board" fill="#fff" stroke="#00438c" stroke-width="2"/>
 <path class="nba-logo__inner" stroke="#da1a32" stroke-width="1.875"/>
 <path class="nba-logo__net-back" stroke="#9aa5b5" stroke-width=".8"/>

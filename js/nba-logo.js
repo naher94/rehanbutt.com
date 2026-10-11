@@ -10,7 +10,7 @@
  * Web Audio.
  *
  * The SVG lives in _includes/nba-logo.svg. Everything is posed in SVG units;
- * the logo's bottom edge (y = 42) is the floor.
+ * the floor sits a little below the logo's bottom edge (y = 42).
  */
 (function () {
   'use strict';
@@ -22,7 +22,6 @@
   const wait = d => new Promise(r => setTimeout(r, d));
   const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
   const easeIn = t => t ** 3;
-  const easeOut = t => 1 - (1 - t) ** 3;
   const easeInOut = t => 0.5 - Math.cos(Math.PI * t) / 2;
   const easeOutBack = t => 1 + 2.2 * (t - 1) ** 3 + 1.2 * (t - 1) ** 2;
   const hop = t => 4 * t * (1 - t);
@@ -113,22 +112,11 @@
     },
     thud(peak = 0.7, from = 150) { sweep('sine', from, 50, 0.18, peak, 0.004); },
     pop() { sweep('triangle', 300, 1400, 0.1, 0.4, 0.004); },
-    // Ball on iron: two bright partials that die fast.
-    clank() {
-      sweep('triangle', 1900, 1500, 0.18, 0.35, 0.002);
-      sweep('sine', 2800, 2300, 0.12, 0.2, 0.002);
-    },
   };
-  // nba-playground.html sets window.nbaLogoDebug to log cues and record a silent timeline.
   function sound(name, ...args) {
-    const debug = window.nbaLogoDebug;
-    if (debug && debug.onSound) debug.onSound(name, args);
-    if ((debug && debug.mute) || !ctx || ctx.state !== 'running') return;
+    if (!ctx || ctx.state !== 'running') return;
     sfx[name](...args);
   }
-
-  // Lets nba-playground.html replay a recorded timeline's cues. Call from a click so audio can start.
-  window.nbaLogoSound = (name, ...args) => { unlockAudio(); sound(name, ...args); };
 
   // ── Logo and ball motion ──
   // Poses are written in SVG units and pivot around `o`, so squashes sit on the floor.
@@ -200,10 +188,8 @@
     });
   }
 
-  function renderHoop(k, { phi: fold, wob, op, jolt = 0 }) {
-    const phi = fold + jolt;
+  function renderHoop(k, { phi, wob, op }) {
     const P = (x, h, z = 0) => hoopPoint(x, h, z, phi);
-    k.pole.setAttribute('d', path([P(8.1, 0), P(9.9, 0), P(9.9, BOARD.bottom), P(8.1, BOARD.bottom)], true));
     k.board.setAttribute('d', path(roundRect(BOARD, 1.875).map(p => P(p[0], p[1])), true));
     k.inner.setAttribute('d', path(roundRect(INNER, 1.375).map(p => P(p[0], p[1])), true));
 
@@ -229,10 +215,8 @@
     k.netBack.setAttribute('d', back.join(''));
     k.rimFront.setAttribute('d', path(ring(RIM.h, RIM.r, 0, Math.PI, phi)));
     k.rimBack.setAttribute('d', path(ring(RIM.h, RIM.r, Math.PI, TAU, phi)));
-    // A white halo behind the pole and board keeps the hoop readable on dark backgrounds (not the rim or net).
-    [['pole', 'haloPole'], ['board', 'haloBoard']].forEach(([main, halo]) => {
-      k[halo].setAttribute('d', k[main].getAttribute('d'));
-    });
+    // A white halo behind the board keeps it readable on dark backgrounds (not the rim or net).
+    k.haloBoard.setAttribute('d', k.board.getAttribute('d'));
     k.hoop.forEach(el => { el.style.opacity = op; });
   }
 
@@ -313,18 +297,17 @@
   const A = B + RISE, S_END = A / B;
   const TS = 950;                                  // ms per unit of s
   const SHOT_MS = S_END * TS, APEX_MS = (A / (2 * B)) * TS;
-  // The ball's pose at s. A miss drifts right instead, to graze the rim's right end at s = 1.
-  const MISS_X = 11.5;
-  function shotPath(s, miss = false) {
+  // The ball's pose at s.
+  function shotPath(s) {
     const y = Y0 - A * s + B * s * s;
     const sc = Math.min(s, 1);
-    const lean = miss ? MISS_X * easeInOut(sc) : -3 * Math.sin(Math.PI * sc);
+    const lean = -3 * Math.sin(Math.PI * sc);
     const depth = s <= 1
       ? 1 - (1 - RIM_DEPTH) * Math.sin(Math.PI * s / 2)
       : RIM_DEPTH + (1 - RIM_DEPTH) * easeInOut(clamp((s - 1) / (S_END - 1), 0, 1));
     // Stretch along the direction of travel in proportion to speed; round and slightly squashed at the apex.
     let vx = 0;
-    if (s < 1) vx = miss ? MISS_X * (Math.PI / 2) * Math.sin(Math.PI * s) : -3 * Math.PI * Math.cos(Math.PI * s);
+    if (s < 1) vx = -3 * Math.PI * Math.cos(Math.PI * s);
     const vy = 2 * B * s - A;
     const speed = Math.min(1, Math.hypot(vx, vy) / A);
     const sy = 1 + (0.24 * speed - 0.08 * (1 - speed)) * Math.min(1, (S_END - s) / (0.08 * S_END));
@@ -335,14 +318,14 @@
   }
   const shot = t => shotPath(t * S_END);
 
-  function land(balls, { soft = false, duration = 280, x = 0 } = {}) {
+  function land(balls, { soft = false, duration = 280 } = {}) {
     const s = soft ? 0.4 : 1;
     sound('thud', soft ? 0.3 : 0.8, soft ? 200 : 150);
     return animateAll(balls, [
-      pose({ x, op: 1, offset: 0 }),
-      pose({ x, sx: 1 + 0.22 * s, sy: 1 - 0.22 * s, op: 1, offset: 0.25 }),
-      pose({ x, sx: 1 - 0.05 * s, sy: 1 + 0.07 * s, op: 1, offset: 0.6 }),
-      pose({ x, op: 1, offset: 1 }),
+      pose({ op: 1, offset: 0 }),
+      pose({ sx: 1 + 0.22 * s, sy: 1 - 0.22 * s, op: 1, offset: 0.25 }),
+      pose({ sx: 1 - 0.05 * s, sy: 1 + 0.07 * s, op: 1, offset: 0.6 }),
+      pose({ op: 1, offset: 1 }),
     ], duration, 'ease-out').done;
   }
 
@@ -396,67 +379,6 @@
     ], 560).done;
   }
 
-  // The ball in the logo's hand, for the pop variants: centre and radius in logo units.
-  const HAND = [14.3, 21.5], HAND_SCALE = 3.2 / (8.5 * BALL_SCALE);
-  // The ball's path between the hand (t = 0) and its spot on the floor (t = 1): a quick arc out toward you.
-  function handArc(t) {
-    const u = 1 - t, cx = HAND[0] + 3, cy = HAND[1] - 22;
-    return {
-      x: u * u * HAND[0] + 2 * u * t * cx + t * t * CENTER[0] - CENTER[0],
-      y: u * u * HAND[1] + 2 * u * t * cy + t * t * CENTER[1] - CENTER[1],
-    };
-  }
-
-  // The ball pops out of the logo's hand, grows as it comes toward you, and lands on the floor. Behind
-  // it the logo either fades away or, with squish, is pressed flat onto the floor.
-  async function popOut({ logo, balls }, squish = false) {
-    sound('pop');
-    const pressed = { sx: 1.6, sy: 0.3, y: FLOOR_DROP };
-    if (squish) {
-      animateAll(logo, [
-        lp({ op: 1 }),
-        lp({ sx: 0.96, sy: 1.04, op: 1, offset: 0.45, ease: 'ease-in' }),
-        lp({ ...pressed, op: 1, offset: 0.85 }),
-        lp({ ...pressed, op: 0, offset: 0.93 }),
-        lp({ ...pressed, op: 0 }),
-      ], 560);
-    } else {
-      animateAll(logo, [lp({ op: 1 }), lp({ op: 1, offset: 0.45 }), lp({ op: 0 })], 560);
-    }
-    await move(balls, t => {
-      const s = HAND_SCALE + (1 - HAND_SCALE) * easeOutBack(t);
-      const stretch = 1 + 0.15 * Math.sin(Math.PI * t);
-      return { ...handArc(t), sx: s / Math.sqrt(stretch), sy: s * stretch, op: 1 };
-    }, 560, CENTER, 40).done;
-    await land(balls);
-  }
-
-  // The reverse: the ball hops back up into its hand and disappears while the logo returns, fading in
-  // or, with squish, springing up out of the pressed pancake.
-  async function popBack({ logo, balls }, squish = false) {
-    const pressed = { sx: 1.6, sy: 0.3, y: FLOOR_DROP };
-    if (squish) {
-      animateAll(logo, [
-        lp({ ...pressed, op: 0 }),
-        lp({ ...pressed, op: 0, offset: 0.14 }),
-        lp({ ...pressed, op: 1, offset: 0.18, ease: 'ease-out' }),
-        lp({ sx: 0.9, sy: 1.22, y: FLOOR_DROP * 0.2, op: 1, offset: 0.45, ease: 'ease-in-out' }),
-        lp({ sx: 1.04, sy: 0.94, op: 1, offset: 0.65, ease: 'ease-in-out' }),
-        lp({ sx: 0.99, sy: 1.02, op: 1, offset: 0.82, ease: 'ease-in-out' }),
-        lp({ op: 1 }),
-      ], 700);
-    } else {
-      animateAll(logo, [lp({ op: 0 }), lp({ op: 0, offset: 0.3 }), lp({ op: 1 })], 560);
-    }
-    await move(balls, t => {
-      const s = 1 + (HAND_SCALE - 1) * easeInOut(t);
-      const stretch = 1 + 0.15 * Math.sin(Math.PI * t);
-      return { ...handArc(1 - t), sx: s / Math.sqrt(stretch), sy: s * stretch, op: t >= 1 ? 0 : 1 };
-    }, 560, CENTER, 40).done;
-    sound('pop');
-    if (squish) await wait(140);
-  }
-
   const crouch = ({ balls }) =>
     animateAll(balls, [pose({ op: 1 }), pose({ sx: 1.12, sy: 0.8, op: 1 })], 150, 'ease-out').done;
 
@@ -472,18 +394,13 @@
 
   // The hoop: swings up out of the floor toward you, and folds back down.
   function makeHoop(k) {
-    const state = { phi: Math.PI / 2, wob: 0, op: 0, jolt: 0 };
+    const state = { phi: Math.PI / 2, wob: 0, op: 0 };
     const draw = () => renderHoop(k, state);
     draw();
     return {
       // Elastic swing of the net: damped, starting by stretching down.
       wobble: (amp, duration) => drive(duration, t => {
         state.wob = Math.exp(-4 * t) * Math.sin(TAU * 3 * t) * amp;
-        draw();
-      }),
-      // A damped shake of the whole hoop, as if the rim were hit.
-      jolt: (amp, duration) => drive(duration, t => {
-        state.jolt = Math.exp(-5 * t) * Math.sin(TAU * 4 * t) * amp;
         draw();
       }),
       async unfold() {
@@ -523,190 +440,19 @@
     swap(front, back);
   }
 
-  // A dunk: the ball leaps past the rim, hangs for a beat, then is slammed down through the net,
-  // rattling the whole hoop.
-  async function dunk(k, hoop) {
-    const { balls, front, back } = k;
-    const apexY = VP[1] - 22;                       // ball centre, above the rim line
-    const rest = (y, depth, stretch = 1) => ({ y: y - Y0, sx: depth / Math.sqrt(stretch), sy: depth * stretch, op: 1 });
-    sound('whoosh', 0.45, 300, 1700, 0.2);
-    spin(k, 1, 520);
-    await move(balls, t => {
-      const e = easeOut(t);
-      return rest(Y0 + (apexY - Y0) * e, 1 - (1 - RIM_DEPTH) * e, 1 + 0.25 * (1 - t));
-    }, 520, CENTER, 40).done;
-    swap(back, front);
-    await move(balls, t => {
-      const p = Math.sin(Math.PI * t);
-      return rest(apexY - 1.5 * p, RIM_DEPTH, 1 - 0.07 * p);
-    }, 140, CENTER, 20).done;
-    sound('whoosh', 0.2, 1500, 400, 0.2);
-    setTimeout(() => {
-      sound('thud', 0.9, 120);
-      sound('clank');
-      hoop.jolt(0.1, 750);
-      hoop.wobble(0.5, 850);
-    }, 140);
-    await move(balls, t => {
-      const e = t ** 2.2;
-      return rest(apexY + (Y0 - apexY) * e, RIM_DEPTH + (1 - RIM_DEPTH) * easeInOut(clamp((t - 0.55) / 0.45, 0, 1)), 1 + 0.35 * t);
-    }, 230, CENTER, 40).done;
-    swap(front, back);
+  // The whole animation: the logo squishes into the ball, the hoop folds up, the ball shoots and
+  // swishes, bounces home, and the hoop folds away as the ball springs back into the logo.
+  async function run(k) {
+    const hoop = makeHoop(k);
+    await squishIn(k);
+    await hoop.unfold();
+    await wait(200);
+    await crouch(k);
+    await flight(k, hoop);
+    await bounceHome(k);
+    hoop.fold();
+    await squishOut(k);
   }
-
-  // A toss: straight up, spinning three times, and back down.
-  async function toss(k) {
-    const { balls } = k;
-    sound('whoosh', 0.5, 250, 1400, 0.2);
-    spin(k, 3, 1000);
-    await move(balls, t => {
-      const speed = Math.abs(1 - 2 * t);
-      const sy = 1 + 0.2 * speed - 0.07 * (1 - speed);
-      return { y: -62 * 4 * t * (1 - t), sx: 1 / Math.sqrt(sy), sy, op: 1 };
-    }, 1000, CENTER, 60).done;
-  }
-
-  // A miss: the ball clips the rim's right end, the hoop rattles, and it bounces off to the right.
-  async function miss(k, hoop) {
-    const { balls } = k;
-    sound('whoosh', 0.6, 300, 1500, 0.18);
-    spin(k, 3, TS + 750);
-    await move(balls, t => ({ ...shotPath(t, true), op: 1 }), TS, CENTER, 60).done;
-    sound('clank');
-    hoop.jolt(0.07, 650);
-    hoop.wobble(0.25, 700);
-    const hitX = CENTER[0] + MISS_X, restX = 26;
-    const vy0 = -70, g = (Y0 - VP[1]) - vy0;
-    await move(balls, t => ({
-      x: hitX - CENTER[0] + (restX - hitX) * t,
-      y: VP[1] - Y0 + vy0 * t + g * t * t,
-      sx: RIM_DEPTH + (1 - RIM_DEPTH) * easeInOut(t),
-      sy: RIM_DEPTH + (1 - RIM_DEPTH) * easeInOut(t),
-      op: 1,
-    }), 750, CENTER, 60).done;
-    const restDx = restX - CENTER[0];
-    await land(balls, { x: restDx });
-    for (const x of [restDx * 0.5, 0]) {
-      const from = x === 0 ? restDx * 0.5 : restDx;
-      await move(balls, t => ({ x: from + (x - from) * t, y: -9 * hop(t), op: 1 }), 260).done;
-      await land(balls, { soft: true, duration: 200, x });
-    }
-    await wait(150);
-  }
-
-  // ── Variants ──
-  // Each run(k) is a script of beats; k holds the logo, ball and hoop parts.
-  const VARIANTS = {
-    shot: {
-      label: 'Shot',
-      note: 'Squish into the ball, hoop folds up, one clean shot through the net.',
-      async run(k) {
-        const hoop = makeHoop(k);
-        await squishIn(k);
-        await hoop.unfold();
-        await wait(200);
-        await crouch(k);
-        await flight(k, hoop);
-        await bounceHome(k);
-        hoop.fold();
-        await squishOut(k);
-      },
-    },
-    pop: {
-      label: 'Pop from the hand',
-      note: 'The ball pops out of the logo\u2019s hand, the logo fades, and the shot plays. At the end the ball hops back into the hand and the logo returns.',
-      async run(k) {
-        const hoop = makeHoop(k);
-        await popOut(k);
-        await hoop.unfold();
-        await wait(200);
-        await crouch(k);
-        await flight(k, hoop);
-        await bounceHome(k);
-        hoop.fold();
-        await popBack(k);
-      },
-    },
-    popsquish: {
-      label: 'Pop and squish',
-      note: 'The ball pops out of the logo\u2019s hand, then the logo is pressed flat to make room for the shot. At the end the ball hops back into the hand as the logo springs back up.',
-      async run(k) {
-        const hoop = makeHoop(k);
-        await popOut(k, true);
-        await hoop.unfold();
-        await wait(200);
-        await crouch(k);
-        await flight(k, hoop);
-        await bounceHome(k);
-        hoop.fold();
-        await popBack(k, true);
-      },
-    },
-    clank: {
-      label: 'Clank, then swish',
-      note: 'The first shot rattles off the rim and bounces away. The ball hops back for a second try that drops in.',
-      async run(k) {
-        const hoop = makeHoop(k);
-        await squishIn(k);
-        await hoop.unfold();
-        await wait(200);
-        await crouch(k);
-        await miss(k, hoop);
-        await crouch(k);
-        await flight(k, hoop);
-        await bounceHome(k);
-        hoop.fold();
-        await squishOut(k);
-      },
-    },
-    dunk: {
-      label: 'Dunk',
-      note: 'The ball leaps past the rim, hangs for a beat, then is slammed down through the net. The whole hoop rattles.',
-      async run(k) {
-        const hoop = makeHoop(k);
-        await squishIn(k);
-        await hoop.unfold();
-        await wait(200);
-        await crouch(k);
-        await dunk(k, hoop);
-        await bounceHome(k);
-        hoop.fold();
-        await squishOut(k);
-      },
-    },
-    toss: {
-      label: 'Toss and spin',
-      note: 'No hoop. The ball is tossed straight up, spinning three times, and drops back to bounce home.',
-      async run(k) {
-        await squishIn(k);
-        await wait(80);
-        await crouch(k);
-        await toss(k);
-        await bounceHome(k);
-        await squishOut(k);
-      },
-    },
-    dribble: {
-      label: 'Dribble',
-      note: 'No hoop: the logo’s own move. The ball dribbles out to one side, crosses over, and comes home.',
-      async run(k) {
-        await squishIn(k);
-        await wait(80);
-        for (const [x0, x1, H] of [[0, 14, 22], [14, -14, 26], [-14, 0, 22]]) {
-          await move(k.balls, t => {
-            const speed = Math.abs(1 - 2 * t);
-            const contact = Math.max(0, 1 - Math.min(t, 1 - t) / 0.12);
-            const sy = 1 + 0.18 * speed * (1 - contact) - 0.22 * contact;
-            return { x: x0 + (x1 - x0) * t, y: -H * hop(t), sx: 1 / Math.sqrt(sy), sy, op: 1 };
-          }, 420).done;
-          sound('thud', 0.35, 190);
-        }
-        await wait(60);
-        await squishOut(k);
-      },
-    },
-  };
-  window.nbaLogoVariants = VARIANTS;
 
   async function play(root) {
     if (root.dataset.playing) return;
@@ -720,18 +466,16 @@
       front: q('.nba-logo__ball--front'),
       back: q('.nba-logo__ball--back'),
       hoop: q('.nba-logo__hoop'),
-      pole: one('.nba-logo__pole'),
       board: one('.nba-logo__board'),
       inner: one('.nba-logo__inner'),
       netBack: one('.nba-logo__net-back'),
       rimBack: one('.nba-logo__rim-back'),
       netFront: one('.nba-logo__net-front'),
       rimFront: one('.nba-logo__rim-front'),
-      haloPole: one('.nba-logo__halo-pole'),
       haloBoard: one('.nba-logo__halo-board'),
     };
     try {
-      await (VARIANTS[root.dataset.nbaVariant] || VARIANTS.shot).run(k);
+      await run(k);
     } finally {
       [...k.logo, ...k.balls].forEach(el => {
         el.getAnimations().forEach(a => a.cancel());
@@ -744,7 +488,7 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   triggers.forEach(trigger => trigger.addEventListener('click', () => {
-    if (reduceMotion.matches && !window.nbaLogoDebug) return;
+    if (reduceMotion.matches) return;
     unlockAudio();
     play(trigger);
   }));

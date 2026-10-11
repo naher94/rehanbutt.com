@@ -204,11 +204,6 @@ $home-section-vertical-spacing-mobile: 4rem;
     .nba-logo__ball--back{
       visibility: hidden;
     }
-    // The hoop floats: the pole it was drawn with stays out unless nba-playground.html turns it on.
-    .nba-logo__pole,
-    .nba-logo__halo-pole{
-      display: none;
-    }
   }
   span{
     &#me{
