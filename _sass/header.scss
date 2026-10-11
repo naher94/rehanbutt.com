@@ -27,6 +27,10 @@ $burger-bar-offset: 2.5px;
       // sitting flush with its top, where any height but ~40px looked off.
       height: 32px;
     }
+    // Tablet: the full bar and a 145px logo are wider than the header, so the logo drops to a second line.
+    @include scaffold.breakpoint(md) { @include scaffold.breakpoint(lg, down) {
+      height: 36px;
+    }}
     &:hover{
       transform: scale(1.1);
     }
@@ -74,6 +78,16 @@ $burger-bar-offset: 2.5px;
   @include scaffold.breakpoint(md, down) {
     display: none;
   }
+  // Tighter links on tablet, to leave the logo room on the same line.
+  @include scaffold.breakpoint(md) { @include scaffold.breakpoint(lg, down) {
+    .nav{
+      padding: 0.6em 0.5em;
+    }
+    .nav-home{
+      //padding: 0.7em 0.6em;
+      padding: .7em .75em;
+    }
+  }}
 }
 
 .menu-container{
