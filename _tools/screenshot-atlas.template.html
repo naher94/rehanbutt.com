@@ -477,7 +477,7 @@ items.forEach(a => { const c = document.createElement('span'); c.className = 'nc
 function renderCounts() {
   const by = {};
   notes.filter(n => isOpenOn(n, VER)).forEach(n => by[n.page] = (by[n.page] || 0) + 1);
-  items.forEach(a => a.nextElementSibling.textContent = by[idOf(a)] || '');
+  items.forEach(a => a.parentElement.querySelector('.ncount').textContent = by[idOf(a)] || '');
   // Branch titles in the rail and group row headers total their pages' notes.
   const sum = slugs => slugs.reduce((t, slug) => t + (by[slug] || 0), 0);
   aside.querySelectorAll('details').forEach(d => d.querySelector('summary .ncount').textContent = sum([...d.querySelectorAll('li a')].map(idOf)) || '');
