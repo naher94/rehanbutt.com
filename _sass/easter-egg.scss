@@ -67,7 +67,7 @@
     padding-block: 3em;
     @include easter-card();
 
-    @include scaffold.breakpoint(md, down) {
+    @include scaffold.breakpoint(lg, down) {
       padding-inline: 1em;
       padding-block: 2.5em;
     }

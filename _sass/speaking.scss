@@ -162,6 +162,9 @@
           @include scaffold.breakpoint(md, down){
             translate: -1em 2em;
           }
+          @include scaffold.breakpoint(md) { @include scaffold.breakpoint(lg, down){
+            translate: 1em -1em;
+          }}
         }
         &.top-img{
           rotate: 10deg;
@@ -171,7 +174,8 @@
             translate: 6em 0.5em;
           }
           @include scaffold.breakpoint(md) { @include scaffold.breakpoint(lg, down){
-            translate: 20em -1em;
+            // translate: 20em -1em;
+            translate: 10em -1em;
           }}
         }
         &.bottom-img{
@@ -207,7 +211,11 @@
       //TODO replace with ScaffoldCSS thing not magic number
       .text-wrapper{
         flex-basis: 100%;
-        @include scaffold.breakpoint(md) {
+        @include scaffold.breakpoint(md) { @include scaffold.breakpoint(lg, down){
+          flex-basis: calc(100% * 3 / 4);
+        }}
+
+        @include scaffold.breakpoint(lg) {
           flex-basis: calc(100% * 2 / 3);
         }
       }

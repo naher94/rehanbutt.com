@@ -175,7 +175,7 @@
     transition: $tight-spring;   // the same spring as the home page's year tiles
     position: relative;
     overflow: hidden;
-    @include scaffold.breakpoint(md, down) {
+    @include scaffold.breakpoint(lg, down) {
       padding: 1em;
     }
     p{
