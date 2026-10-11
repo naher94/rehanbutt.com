@@ -28,6 +28,8 @@ Captures are named for the commit the site was built from, so build first:
 
 One-time setup, as capture needs a browser:
     pip install playwright pillow && python3 -m playwright install chromium
+These are installed for the system Python, not Homebrew's, so run the script
+with /usr/bin/python3 if a bare python3 says capture needs Playwright and Pillow.
 
 How a page is shot
 ------------------
@@ -267,7 +269,8 @@ def capture(sha, branch, only, workers, name=None, sizes=None):
         import PIL  # noqa: F401
     except ImportError:
         sys.exit("capture needs Playwright and Pillow:\n"
-                 "    pip install playwright pillow && python3 -m playwright install chromium")
+                 "    pip install playwright pillow && python3 -m playwright install chromium\n"
+                 "or run with /usr/bin/python3, which has them already")
     if not (SITE / "sitemap.xml").exists():
         sys.exit("no _site/sitemap.xml — run `bundle exec jekyll build` first")
 
