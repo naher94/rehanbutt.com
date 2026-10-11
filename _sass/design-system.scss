@@ -129,20 +129,14 @@ ul {
 // rather than type and stays here.
 .post-callout-large{
   margin: 2rem 0;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  line-height: 1.4;
   @include type-style(product, callout-lg);
 }
 
 .post-callout-medium{
   margin: 2rem 0;
-  padding-left: 2.5em;
-  padding-right: 2.5em;
+  line-height: 1.4;
   @include type-style(product, callout-md);
-  @include scaffold.breakpoint(md, down) {
-    padding-left: 0.25em;
-    padding-right: 0.25em;
-  }
 }
 
 .post-callout-small{
