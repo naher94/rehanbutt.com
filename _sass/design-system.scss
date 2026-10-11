@@ -139,7 +139,7 @@ ul {
   @include type-style(product, callout-md);
 }
 
-.post-callout-small{
+.post-callout-small{ //TODO adjust small as well
   margin: 2rem 0;
   padding-left: 0.5em;
   padding-right: 0.5em;
