@@ -166,6 +166,50 @@ $home-section-vertical-spacing-mobile: 4rem;
       transform-origin: 50% 100%;
     }
   }
+  // Same inline-SVG-plus-overlay-button setup as the hat, for js/nba-logo.js. The hoop and ball
+  // sit at rest with opacity 0 (the script fades them in), and the viewBox pads the logo so the
+  // shot stays inside the SVG's box: 1.2em / 42 viewBox units.
+  .nba-logo-trigger{
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    vertical-align: text-top;
+    cursor: pointer;
+    .nba-logo-trigger__button{
+      position: absolute;
+      inset: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 4px;
+      background: none;
+      cursor: pointer;
+    }
+    .nba-logo{
+      $unit: 0.0285714em;
+      display: block;
+      width: 58 * $unit;
+      height: 100 * $unit;
+      margin: (-40 * $unit) (-20 * $unit) (-18 * $unit);
+      overflow: visible;
+      pointer-events: none;
+    }
+    .nba-logo__logo,
+    .nba-logo__ball{
+      transform-origin: 0 0;
+    }
+    .nba-logo__ball,
+    .nba-logo__hoop{
+      opacity: 0;
+    }
+    .nba-logo__ball--back{
+      visibility: hidden;
+    }
+    // The hoop floats: the pole it was drawn with stays out unless nba-playground.html turns it on.
+    .nba-logo__pole,
+    .nba-logo__halo-pole{
+      display: none;
+    }
+  }
   span{
     &#me{
       img{
