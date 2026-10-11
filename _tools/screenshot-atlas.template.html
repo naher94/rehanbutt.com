@@ -630,6 +630,7 @@ document.getElementById('notes-md').addEventListener('click', () => {
 // A custom listbox rather than a <select>, so each version can carry its note badge.
 const verBtn = document.getElementById('ver-btn'), verList = document.getElementById('ver-list');
 function fmtDate(iso) { return new Date(iso).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }); }
+function fmtTime(iso) { return new Date(iso).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }).replace(/\s+/g, '').toLowerCase(); }
 function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
 // A version's own name when it has one (--name), else its commit subject.
 const vTitle = v => v.name || v.subject;
@@ -647,7 +648,7 @@ function renderVersionMenu() {
       '<span class="vo-top"><code>' + v.sha + '</code>' + (v.sha === latest ? '<span class="vo-tag">latest</span>' : '') +
       (partner && (v.sha === VER || v.sha === partner) ? '<span class="vo-flip" title="Flip pair: F switches between ' + VER + ' and ' + partner + '">' + FLIP_ICON + '</span>' : '') +
       '<span class="ncount" title="Notes on this version">' + (c || '') + '</span></span>' +
-      '<span class="vo-subj" title="' + esc(v.subject).replace(/"/g, '&quot;') + '">' + esc(vTitle(v)) + '</span><span class="vo-date">' + fmtDate(v.date) + '</span></li>';
+      '<span class="vo-subj" title="' + esc(v.subject).replace(/"/g, '&quot;') + '">' + esc(vTitle(v)) + '</span><span class="vo-date">' + fmtDate(v.date) + ' · ' + fmtTime(v.date) + '</span></li>';
   }).join('');
 }
 function placeVerMenu() {
