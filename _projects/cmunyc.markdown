@@ -30,12 +30,29 @@ When starting this project we looked into other Carnegie Mellon campuses as well
 <div class="image-container"><img src="../img/nyc/nycInspiration.png" alt="NYC Inspiration" style="width:100%;" /></div>
 
 <div class="nyc-questions">
-  <p class="post-callout-large">Questions to Answer:</p>
-  <p class="post-callout-small">What are the public (emotional) associations of CMU?</p>
-  <p class="post-callout-small"> What is the NYC campus providing? What is its program structure? What will their students receive?</p>
-  <p class="post-callout-small">What kind of people does CMU want to attract to their NYC campus?</p>
-  <p class="post-callout-small">Should the NYC and PIT campuses have a different audience?</p>
-
+  <p class="post-callout-medium">Questions to Answer</p>
+  <div class="scaffold-grid">
+    <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
+      <div class="quote-color-block">
+        <p class="post-callout-small">What are the public (emotional) associations of CMU?</p>
+      </div>
+    </div>
+    <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
+      <div class="quote-color-block">
+        <p class="post-callout-small">What is the NYC campus providing? What is its program structure? What will their students receive?</p>
+      </div>
+    </div>
+    <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
+      <div class="quote-color-block">
+        <p class="post-callout-small">What kind of people does CMU want to attract to their NYC campus?</p>
+      </div>
+    </div>
+    <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
+      <div class="quote-color-block">
+        <p class="post-callout-small">Should the NYC and PIT campuses have a different audience?</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="scaffold-grid">
