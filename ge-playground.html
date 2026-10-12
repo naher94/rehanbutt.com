@@ -1,0 +1,402 @@
+---
+layout: default
+title: "GE Logo Playground"
+sitemap: false
+---
+<style>
+  .pg-controls{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2rem;
+    margin: 2rem 0 1rem;
+    font: 500 1rem/1.4 system-ui, sans-serif;
+  }
+  .pg-controls label{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .pg-controls button{
+    font: inherit;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    border: 1px solid currentColor;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+  }
+  .pg-note{
+    font: 0.9rem/1.4 system-ui, sans-serif;
+    opacity: 0.7;
+    margin: 0 0 1rem;
+  }
+  .pg-heading{
+    font: 600 0.8rem/1 system-ui, sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin: 3rem 0 0.5rem;
+  }
+  /* Large stage: the logo alone, so the details are easy to judge. */
+  .pg-stage{
+    display: flex;
+    justify-content: center;
+    padding: calc(var(--pg-size, 160px) * 1.1) 0 2rem;
+    border: 1px dashed rgba(128, 128, 128, 0.5);
+    border-radius: 8px;
+  }
+  .pg-stage .site-intro{
+    margin: 0;
+  }
+  .pg-stage .ge-logo-trigger{
+    font-size: var(--pg-size, 160px);
+    line-height: 1;
+  }
+  .pg-scrub{
+    margin-top: 1rem;
+    font: 500 0.95rem/1.4 system-ui, sans-serif;
+  }
+  .pg-scrub-row{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+  }
+  .pg-scrub button, .pg-scrub select{
+    font: inherit;
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+    border: 1px solid currentColor;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+  }
+  .pg-scrub button:disabled, .pg-scrub input:disabled{
+    opacity: 0.4;
+    cursor: default;
+  }
+  .pg-time{
+    font-variant-numeric: tabular-nums;
+    min-width: 13rem;
+  }
+  .pg-track{
+    position: relative;
+    margin-top: 0.75rem;
+  }
+  .pg-track input{
+    width: 100%;
+    margin: 0;
+  }
+  .pg-marks{
+    position: relative;
+    height: 3.2rem;
+  }
+  .pg-marks .pg-mark{
+    position: absolute;
+    top: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0 0 0 4px;
+    border: 0;
+    border-radius: 0;
+    border-left: 2px solid #da1a32;
+    background: none;
+    box-shadow: none;
+    color: inherit;
+    font: 0.75rem/1.2 system-ui, sans-serif;
+    text-align: left;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .pg-marks .pg-mark.row-1{ top: 1.1rem; }
+  .pg-marks .pg-mark.row-2{ top: 2.2rem; }
+  /* Boxes: red is the clickable logo box, blue is the padded SVG viewBox that holds the whole shot. */
+  .pg-boxes .ge-logo-trigger{
+    outline: 1px dashed #da1a32;
+  }
+  .pg-boxes .ge-logo{
+    outline: 1px dashed #1a6bda;
+    background: rgba(26, 107, 218, 0.05);
+  }
+</style>
+
+<div class="scaffold-grid-span-full">
+  <h1>GE logo playground</h1>
+  <p class="pg-note">Click either logo to play the scanner animation. Not linked from anywhere; the animation lives in <code>js/ge-logo.js</code> and <code>_includes/ge-logo.svg</code>.</p>
+
+  <div class="pg-controls">
+    <label>Animation <select id="pg-variant"></select></label>
+    <label>Size <input type="range" id="pg-size" min="40" max="320" value="160"> <output id="pg-size-out">160px</output></label>
+    <label><input type="checkbox" id="pg-boxes"> Show boxes</label>
+  </div>
+  <p class="pg-note" id="pg-variant-note"></p>
+  <p class="pg-note" id="pg-motion-note" hidden>Reduced motion is on for this device, so clicking does nothing. Turn it off to see the animation.</p>
+
+  <p class="pg-heading">Large</p>
+  <div class="pg-stage" id="pg-stage">
+    <section class="site-intro">
+      <span class="ge-logo-trigger" id="pg-large">{% include ge-logo.svg %}<button type="button" class="ge-logo-trigger__button" aria-label="Watch the GE logo turn into a CT scanner"></button></span>
+    </section>
+  </div>
+
+  <div class="pg-scrub">
+    <div class="pg-scrub-row">
+      <button type="button" id="pg-first" aria-label="Jump to start" disabled>⏮</button>
+      <button type="button" id="pg-prev" aria-label="Step back one frame" disabled>◀</button>
+      <button type="button" id="pg-play" data-label="Play" title="Plays the recorded timeline, with sound. Click again to pause." disabled>Play</button>
+      <button type="button" id="pg-next" aria-label="Step forward one frame" disabled>▶</button>
+      <button type="button" id="pg-last" aria-label="Jump to end" disabled>⏭</button>
+      <button type="button" id="pg-half" data-label="0.5×" title="Plays the recorded timeline at half speed (silent)" disabled>0.5×</button>
+      <button type="button" id="pg-quarter" data-label="0.25×" title="Plays the recorded timeline at quarter speed (silent)" disabled>0.25×</button>
+      <span class="pg-time" id="pg-time">Recording timeline…</span>
+    </div>
+    <div class="pg-track">
+      <input type="range" id="pg-range" min="0" max="0" value="0" step="1" disabled aria-label="Animation timeline">
+      <div class="pg-marks" id="pg-marks"></div>
+    </div>
+    <p class="pg-note">Scrubbing drives both logos on this page. Red ticks mark where each sound cue fires. Clicking a logo plays it live again.</p>
+  </div>
+
+  <p class="pg-heading">In context (as on the home page)</p>
+</div>
+
+<section class="site-intro scaffold-grid-span-full" id="pg-context">
+  <div>
+    <div>
+      <h1>Hi there! I'm <span id="me"><img src="/img/home/me-stage-small.jpg" alt="Rehan Butt speaking on stage at Figma's conference Config">Rehan</span></h1>
+      <p>- a <a href="https://devzgn.com" target="_blank" id="devzgn" class="rainbow">devzgner</a>, designer + developer, currently creating magic at <span class="wdas-hat-trigger">{% include wdas-hat.svg %}<button type="button" class="wdas-hat-trigger__button" aria-label="Play a magic trick with the Disney Animation hat"></button></span> Walt Disney Animation Studios. Previously worked with organizations like <img id="upmc" src="/img/home/upmce-logo.jpeg" alt="UPMC Enterprises Logo"> UPMC Enterprises, <span class="ge-logo-trigger">{% include ge-logo.svg %}<button type="button" class="ge-logo-trigger__button" aria-label="Watch the GE logo turn into a CT scanner"></button></span> GE Healthcare, the <img src="/img/home/nba.svg" alt="National Basketball Association Logo"> NBA & the <img src="/img/home/nfl.svg" alt="National Football League logo"> NFL building thoughtful consumer and enterprise experiences.</p>
+    </div>
+  </div>
+</section>
+
+<script src="/js/ge-logo.js" type="text/javascript"></script>
+<script src="/js/wdas-hat.js" type="text/javascript"></script>
+<script>
+  (function () {
+    const page = document.querySelector('.page-content') || document.body;
+    const stage = document.getElementById('pg-stage');
+    const size = document.getElementById('pg-size');
+    const out = document.getElementById('pg-size-out');
+    size.addEventListener('input', () => {
+      stage.style.setProperty('--pg-size', size.value + 'px');
+      out.textContent = size.value + 'px';
+    });
+    document.getElementById('pg-boxes').addEventListener('change', e => {
+      page.classList.toggle('pg-boxes', e.target.checked);
+    });
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.getElementById('pg-motion-note').hidden = false;
+    }
+  })();
+</script>
+<script>
+  (function () {
+    const TICK = 1000 / 120;
+    const large = document.getElementById('pg-large');
+    const roots = [...document.querySelectorAll('.ge-logo-trigger')];
+    const range = document.getElementById('pg-range');
+    const timeEl = document.getElementById('pg-time');
+    const marksEl = document.getElementById('pg-marks');
+    const controls = ['pg-first', 'pg-prev', 'pg-play', 'pg-next', 'pg-last', 'pg-half', 'pg-quarter'].map(id => document.getElementById(id));
+    let frames = [], sounds = [], last = 0;
+
+    // Everything the animation changes is tagged data-snap in the SVG. "css" elements are also
+    // driven by animations and inline styles (transform, opacity, visibility); all of them have
+    // the attributes the script sets each frame.
+    const ATTRS = ['transform', 'd', 'fill', 'stroke', 'stroke-width', 'r', 'cx', 'cy', 'opacity'];
+    const snapEls = root => [...root.querySelectorAll('[data-snap]')];
+    function snapshot(root) {
+      return snapEls(root).map(el => {
+        const snap = { attrs: ATTRS.map(a => el.getAttribute(a)) };
+        if (el.dataset.snap === 'css') {
+          const cs = getComputedStyle(el);
+          snap.css = [cs.transform, cs.opacity, cs.visibility];
+        }
+        return snap;
+      });
+    }
+    function apply(root, snaps) {
+      snapEls(root).forEach((el, i) => {
+        const s = snaps[i];
+        ATTRS.forEach((a, j) => { if (s.attrs[j] === null) el.removeAttribute(a); else el.setAttribute(a, s.attrs[j]); });
+        if (s.css) {
+          el.style.transform = s.css[0];
+          el.style.opacity = s.css[1];
+          el.style.visibility = s.css[2];
+        }
+      });
+    }
+    // The resting attributes, so clearing a scrub puts the page back exactly as it was.
+    const rest = new Map();
+    snapEls(document).forEach(el => rest.set(el, ATTRS.map(a => el.getAttribute(a))));
+    function clearScrub() {
+      rest.forEach((attrs, el) => {
+        ATTRS.forEach((a, j) => { if (attrs[j] === null) el.removeAttribute(a); else el.setAttribute(a, attrs[j]); });
+        if (el.dataset.snap === 'css') { el.style.transform = ''; el.style.opacity = ''; el.style.visibility = ''; }
+      });
+    }
+
+    // Plays the real animation on a virtual clock, one tick (1/120 s) at a time, and snapshots every tick.
+    async function record() {
+      const realST = window.setTimeout, realClear = window.clearTimeout, realRAF = window.requestAnimationFrame;
+      const realNow = performance.now.bind(performance), realAnimate = Element.prototype.animate;
+      let T = 0, tid = 1, raf = [];
+      const timers = [], regs = [], cues = [], out = [];
+      window.setTimeout = (fn, d = 0, ...args) => { timers.push({ t: T + d, fn, args, id: tid }); return tid++; };
+      window.clearTimeout = id => { const i = timers.findIndex(x => x.id === id); if (i >= 0) timers.splice(i, 1); };
+      window.requestAnimationFrame = fn => { raf.push(fn); return raf.length; };
+      performance.now = () => T;
+      Element.prototype.animate = function (kf, opts) {
+        const a = realAnimate.call(this, kf, Object.assign({}, opts));
+        a.pause();
+        a.currentTime = 0;
+        let res;
+        const p = new Promise(r => { res = r; });
+        Object.defineProperty(a, 'finished', { value: p });
+        regs.push({ a, start: T, dur: opts.duration, res, done: false });
+        return a;
+      };
+      window.geLogoDebug = { mute: true, onSound: (name, args) => cues.push({ name, args, t: T }) };
+      // A message round trip lets promise callbacks run without the clamping timers get in background tabs.
+      const flush = () => new Promise(r => {
+        const ch = new MessageChannel();
+        ch.port1.onmessage = () => r();
+        ch.port2.postMessage(0);
+      });
+      try {
+        out.push(snapshot(large));
+        large.querySelector('button').click();
+        await flush();
+        let tail = 0, steps = 0;
+        while (tail < 6 && steps < 3000) {
+          T += TICK;
+          steps++;
+          regs.forEach(r => {
+            if (r.done) return;
+            r.a.currentTime = Math.min(Math.max(T - r.start, 0), r.dur);
+            if (T - r.start >= r.dur) { r.done = true; r.res(); }
+          });
+          timers.filter(x => x.t <= T).sort((a, b) => a.t - b.t).forEach(x => { timers.splice(timers.indexOf(x), 1); x.fn(...x.args); });
+          const q = raf; raf = []; q.forEach(f => f(T));
+          await flush(); await flush();
+          out.push(snapshot(large));
+          if (!large.dataset.playing) tail++;
+        }
+      } finally {
+        window.setTimeout = realST; window.clearTimeout = realClear; window.requestAnimationFrame = realRAF;
+        performance.now = realNow; Element.prototype.animate = realAnimate;
+        window.geLogoDebug = undefined;
+      }
+      return { out, cues };
+    }
+
+    function fmt(i) {
+      return (i * TICK / 1000).toFixed(3) + ' s · frame ' + Math.round(i / 2) + ' @60';
+    }
+    function show(i) {
+      last = Math.max(0, Math.min(frames.length - 1, i));
+      range.value = last;
+      timeEl.textContent = fmt(last);
+      roots.forEach(root => apply(root, frames[last]));
+    }
+    const stepTicks = () => 2; // one screen frame at 60 fps
+
+    // Slow-motion playback of the recorded timeline (silent). Clicking the same button pauses.
+    let timer = 0, activeBtn = null;
+    function stop() {
+      cancelAnimationFrame(timer);
+      timer = 0;
+      if (activeBtn) activeBtn.textContent = activeBtn.dataset.label;
+      activeBtn = null;
+    }
+    function playRecorded(rate, btn) {
+      if (timer && activeBtn === btn) return stop();
+      stop();
+      if (last >= frames.length - 1) show(0);
+      activeBtn = btn;
+      btn.textContent = rate === 1 ? 'Pause' : 'Pause ' + btn.dataset.label;
+      const t0 = performance.now(), from = last;
+      // Full speed also plays the sound cues as the timeline passes them; slow motion stays silent.
+      let cue = sounds.findIndex(c => c.t >= from * TICK);
+      if (cue < 0) cue = sounds.length;
+      const tick = now => {
+        const i = from + Math.floor((now - t0) * rate / TICK);
+        show(i);
+        while (cue < sounds.length && sounds[cue].t <= i * TICK) {
+          if (rate === 1 && window.geLogoSound) window.geLogoSound(sounds[cue].name, ...(sounds[cue].args || []));
+          cue++;
+        }
+        if (i >= frames.length - 1) return stop();
+        timer = requestAnimationFrame(tick);
+      };
+      timer = requestAnimationFrame(tick);
+    }
+
+    function buildMarks() {
+      marksEl.textContent = '';
+      sounds.forEach((c, n) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'pg-mark row-' + (n % 3);
+        b.style.left = (c.t / TICK / (frames.length - 1) * 100) + '%';
+        b.textContent = c.name + ' ' + (c.t / 1000).toFixed(2) + 's';
+        b.addEventListener('click', () => { stop(); show(Math.round(c.t / TICK)); });
+        marksEl.appendChild(b);
+      });
+    }
+    function sizeRange() {
+      const s = stepTicks();
+      range.step = s;
+      range.max = Math.floor((frames.length - 1) / s) * s;
+    }
+
+    async function build() {
+      stop();
+      controls.concat(range).forEach(el => { el.disabled = true; });
+      timeEl.textContent = 'Recording timeline…';
+      clearScrub();
+      const rec = await record();
+      frames = rec.out;
+      sounds = rec.cues;
+      sizeRange();
+      buildMarks();
+      controls.concat(range).forEach(el => { el.disabled = false; });
+      show(0);
+    }
+
+    range.addEventListener('input', () => { stop(); show(Number(range.value)); });
+    document.getElementById('pg-first').addEventListener('click', () => { stop(); show(0); });
+    document.getElementById('pg-last').addEventListener('click', () => { stop(); show(frames.length - 1); });
+    document.getElementById('pg-prev').addEventListener('click', () => { stop(); show(last - stepTicks()); });
+    document.getElementById('pg-next').addEventListener('click', () => { stop(); show(last + stepTicks()); });
+    // Animation options come from the script; picking one re-records the timeline for it.
+    const variantSel = document.getElementById('pg-variant');
+    const variantNote = document.getElementById('pg-variant-note');
+    const variants = window.geLogoVariants || {};
+    Object.keys(variants).forEach(id => variantSel.add(new Option(variants[id].label, id)));
+    function setVariant() {
+      const id = variantSel.value;
+      roots.forEach(root => { root.dataset.geVariant = id; });
+      variantNote.textContent = variants[id] ? variants[id].note : '';
+    }
+    variantSel.addEventListener('change', () => { setVariant(); build(); });
+    setVariant();
+    document.getElementById('pg-half').addEventListener('click', e => playRecorded(0.5, e.currentTarget));
+    document.getElementById('pg-quarter').addEventListener('click', e => playRecorded(0.25, e.currentTarget));
+    document.getElementById('pg-play').addEventListener('click', e => playRecorded(1, e.currentTarget));
+    document.addEventListener('keydown', e => {
+      if (!frames.length || /^(input|select|textarea)$/i.test(e.target.tagName)) return;
+      if (e.key === 'ArrowLeft') { stop(); show(last - stepTicks()); }
+      if (e.key === 'ArrowRight') { stop(); show(last + stepTicks()); }
+    });
+    // Capture phase: a live click clears the scrubbed pose before the animation starts.
+    roots.forEach(root => root.addEventListener('click', () => {
+      if (root.dataset.playing || !frames.length) return;
+      stop();
+      clearScrub();
+    }, true));
+
+    window.addEventListener('load', () => setTimeout(build, 400));
+  })();
+</script>

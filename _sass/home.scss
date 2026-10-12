@@ -166,6 +166,33 @@ $home-section-vertical-spacing-mobile: 4rem;
       transform-origin: 50% 100%;
     }
   }
+  // Same inline-SVG-plus-overlay-button setup as the hat, for js/ge-logo.js. The viewBox pads the
+  // logo so the scanner's base and bed stay inside the SVG's box: 1.2em / 34 viewBox units.
+  .ge-logo-trigger{
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    vertical-align: text-top;
+    cursor: pointer;
+    .ge-logo-trigger__button{
+      position: absolute;
+      inset: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: none;
+      cursor: pointer;
+    }
+    .ge-logo{
+      $unit: 0.0352941em;
+      display: block;
+      width: 50 * $unit;
+      height: 60 * $unit;
+      margin: (-8 * $unit) (-8 * $unit) (-18 * $unit);
+      overflow: visible;
+      pointer-events: none;
+    }
+  }
   span{
     &#me{
       img{
