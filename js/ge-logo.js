@@ -41,7 +41,7 @@
     [3700, 'motor'], [4300, 'slide'], [4700, 'bleep'], [4750, 'whoosh', 0.7, 1800, 300, 0.2],
   ];
   // look is how the scanner ends up (each is a frame in Sketch): the bore and its housing ring, which
-  // of the two is on top, whether the bed has a pedestal, the status lights as [x, y, radius] (lightColor, and blink:
+  // of the two is on top, whether the bed has a pedestal, timing: when (as p) the base pops and the bed extends, the status lights as [x, y, radius] (lightColor, and blink:
   // 'full' for a bright on/off blink with a pop and a soft glow of glow x the light's radius), ringWidth: if set, the
   // purple outline is redrawn as a circle that thickens to that width as the bore opens, and ringColor
   // is the color it turns; slab is the color of the bed's front edge.
@@ -51,14 +51,14 @@
       note: 'The logo spins flat while the monogram shrinks into the middle and a bore opens. The base pops out from behind the ring, the bed slides out of the bore, the lights blink, then it all plays back in reverse.',
       fwd: 2600, hold: 900, rev: 2000, cues: CUES,
       look: { boreR: 8.4, housingR: 9.5, boreFill: 'url(#ge-logo-bore)', boreStroke: '#6b7180', boreStrokeWidth: 0.5, housing: '#d5d9e2', housingOnTop: false, pedestal: true,
-        lights: [[3.75, 16.25, 0.55], [5.25, 16.25, 0.55], [3.75, 17.75, 0.55], [5.25, 17.75, 0.55]], lightColor: '#35d07f', blink: false, glow: 0, ringWidth: 0, ringColor: PURPLE, slab: '#d5d9e2' },
+        lights: [[3.75, 16.25, 0.55], [5.25, 16.25, 0.55], [3.75, 17.75, 0.55], [5.25, 17.75, 0.55]], lightColor: '#35d07f', blink: false, glow: 0, timing: { base: [0.42, 0.62], bed: [0.62, 0.9] }, ringWidth: 0, ringColor: PURPLE, slab: '#d5d9e2' },
     },
     simple: {
       label: 'Spin into a CT scanner (simple)',
       note: 'The same, with a simpler end state: a flat dark bore with no ring around it, a single status light, a bed with no pedestal, and a purple outline that thickens and turns gray as the bore opens, so the ring, base and bed are all the same gray.',
       fwd: 2600, hold: 900, rev: 2000, cues: CUES.filter(c => c[1] !== 'thud'),
       look: { boreR: 9.9, housingR: 0, boreFill: '#2b2f38', boreStroke: 'none', boreStrokeWidth: 0, housing: '#9aa1ad', housingOnTop: true, pedestal: false,
-        lights: [[5.05, 17, 1.7]], lightColor: '#12b76a', blink: 'full', glow: 2.1, ringWidth: 2, ringColor: '#9aa1ad', slab: '#9aa1ad' },
+        lights: [[5.05, 17, 1.7]], lightColor: '#12b76a', blink: 'full', glow: 2.1, timing: { base: [0.42, 0.62], bed: [0.62, 0.9] }, ringWidth: 2, ringColor: '#9aa1ad', slab: '#9aa1ad' },
     },
   };
   // The simple scanner again, with the bed's top and front edge as a single shape.
@@ -67,6 +67,19 @@
     label: 'Spin into a CT scanner (simple, one-piece bed)',
     note: 'The simple scanner with the bed drawn as a single shape: the trapezoid and its front edge are one outline, so there is no seam between them.',
     look: { ...VARIANTS.simple.look, singleBed: true },
+  };
+  // The one-piece-bed scanner with the base and the bed moving at the same time, so the scanner
+  // comes together faster. The slide and motor sounds overlap.
+  VARIANTS.together = {
+    ...VARIANTS.simpleOne,
+    label: 'Spin into a CT scanner (base and bed together)',
+    note: 'The simple, one-piece-bed scanner where the base pops out from behind the ring while the bed slides out of the bore, both at once.',
+    cues: [
+      [0, 'whoosh', 0.8, 300, 1800, 0.22], [570, 'bleep'], [1170, 'slide'], [1220, 'motor'],
+      [2700, 'beep'], [2960, 'beep'], [3220, 'beep'],
+      [3800, 'slide'], [3850, 'motor'], [4700, 'bleep'], [4750, 'whoosh', 0.7, 1800, 300, 0.2],
+    ],
+    look: { ...VARIANTS.simpleOne.look, timing: { base: [0.45, 0.85], bed: [0.45, 0.85] } },
   };
   window.geLogoVariants = VARIANTS;
 
@@ -191,9 +204,10 @@
     const pulse = 1 + 0.035 * Math.sin(Math.PI * seg(p, 0.36, 0.5));
     // The base starts tucked up behind the gantry (narrow and high, so the face hides it) and pops
     // out downward, widening, with a little overshoot.
-    const baseY = -12 * (1 - easeOutBack(seg(p, 0.42, 0.62)));
-    const baseX = lerp(0.5, 1, easeOut(seg(p, 0.42, 0.62)));
-    const e = easeOut(seg(p, 0.62, 0.9));                 // how far the bed is out
+    const tb = look.timing.base;
+    const baseY = -12 * (1 - easeOutBack(seg(p, tb[0], tb[1])));
+    const baseX = lerp(0.5, 1, easeOut(seg(p, tb[0], tb[1])));
+    const e = easeOut(seg(p, look.timing.bed[0], look.timing.bed[1]));                 // how far the bed is out
     const pedestal = look.pedestal ? BED.pedestal * smooth(seg(p, 0.88, 0.98)) : 0;
 
     k.gantry.setAttribute('transform', `translate(${C} ${C}) scale(${pulse.toFixed(4)}) translate(${-C} ${-C})`);
