@@ -141,7 +141,7 @@
         const kh = easeOutBack(seg(p, 0, 0.18)), kw = easeOutBack(seg(p, 0.06, 0.24)), kt = easeOutBack(seg(p, 0.24, 0.36));
         const s = easeOutBack(seg(p, 0.55, 0.85)), op = p > 0.5;
         return { body: backBubble(kw, kt, kh), tail: 'M0 0', squash: Math.sin(Math.PI * seg(p, 0, 0.24)) * 0.04, word: seg(p, 0, 0.16),
-          bodyStroke: 5 * seg(p, 0.5, 0.55), bodyStrokeColor: '#fff',
+          bodyStroke: 5 * seg(p, 0.5, 0.55), bodyStrokeColor: '#fff', bodyHalo: true,
           dotsAt: { x: 33, y: 26, gap: 12, r: 4.5 }, ...typingDots(p, ms, 0.36, 0.46),
           front: { d: frontBubble(seg(p, 0.55, 0.85)), fill: '#771B61', stroke: 'none', sw: 0, op, behind: true, dx: -34 * (1 - s), dy: -38 * (1 - s) } };
       },
@@ -204,6 +204,61 @@
           steth: { op: p > 0.2, tube: seg(p, 0.2, 0.55), piece: seg(p, 0.5, 0.62), handset: seg(p, 0.55, 0.8), cord: seg(p, 0.72, 0.85), ring } };
       },
     },
+    phone: {
+      label: 'Phone visit',
+      note: 'The square narrows into a phone; its screen lights up, a heart pops onto it and signal waves ripple out of the top. The heart beats and the waves keep rippling before it plays back.',
+      fwd: 2200, hold: 1800, rev: 1500,
+      cues: [[0, 'pop'], [900, 'tick'], [1250, 'chirp'], [1550, 'ping'], [2300, 'beat'], [3050, 'beat'], [3800, 'chirp2'], [4500, 'pop2']],
+      draw(p, h, ms) {
+        const k = easeOutBack(seg(p, 0, 0.4)), sc = easeOutBack(seg(p, 0.4, 0.58)), hs = easeOutBack(seg(p, 0.55, 0.72)), wv = seg(p, 0.72, 0.9);
+        const beat = 1 + bump(h, 300, 0.3, 450) + bump(h, 1050, 0.3, 450);
+        const ripple = i => wv * Math.sin(Math.PI * (((ms / 1000 - i * 0.18) % 0.9 + 0.9) % 0.9) / 0.9);
+        return { body: rr(22 * k, 0, 100 - 44 * k, 100, lerp(R0, 12, k)), tail: 'M0 0', squash: Math.sin(Math.PI * seg(p, 0, 0.4)) * 0.05, word: seg(p, 0, 0.2),
+          phone: { screen: rr(28, 10, 44, 72, 6), screenScale: sc, beat: hs * beat, waves: [0, 1, 2].map(ripple), wavesOp: wv > 0 } };
+      },
+    },
+    textphone: {
+      label: 'Phone visit + two bubbles',
+      note: 'The square narrows into a phone and its screen lights up like a messaging app: a bubble pops onto it, typing dots bounce, a reply slides in from the right, and signal waves ripple out of the top.',
+      fwd: 3000, hold: 1500, rev: 1700,
+      cues: [[0, 'pop'], [1100, 'tick'], [1500, 'pop'], [1950, 'tick'], [2130, 'tick'], [2310, 'ping'], [3300, 'chirp'], [4700, 'pop2'], [5600, 'pop2']],
+      draw(p, h, ms) {
+        const k = easeOutBack(seg(p, 0, 0.35)), sc = easeOutBack(seg(p, 0.35, 0.5)), m1 = easeOutBack(seg(p, 0.5, 0.62));
+        const m2 = easeOutBack(seg(p, 0.75, 0.88)), wv = seg(p, 0.85, 1);
+        const ripple = i => wv * Math.sin(Math.PI * (((ms / 1000 - i * 0.18) % 0.9 + 0.9) % 0.9) / 0.9);
+        return { body: rr(22 * k, 0, 100 - 44 * k, 100, lerp(R0, 12, k)), tail: 'M0 0', squash: Math.sin(Math.PI * seg(p, 0, 0.35)) * 0.05, word: seg(p, 0, 0.18),
+          dotsAt: { x: 47, y: 32, gap: 7, r: 2.6 }, ...typingDots(p, ms, 0.62, 0.72), dotsY: [0, 1, 2].map(i => -2 * Math.max(0, Math.sin(Math.PI * 2 * (ms / 700 - i * 0.16)))),
+          phone: { screen: rr(28, 10, 44, 72, 6), screenScale: sc, beat: 0, waves: [0, 1, 2].map(ripple), wavesOp: wv > 0 },
+          chat: { m1, m2dx: (1 - m2) * 26, m2op: seg(p, 0.75, 0.8) } };
+      },
+    },
+    phones: {
+      label: 'Two phones',
+      note: 'The square narrows into a phone with typing dots on its screen. A second phone slides out from behind it, down and to the right, and a heart pops onto its screen. No signal waves.',
+      fwd: 2800, hold: 1200, rev: 1700,
+      cues: [[0, 'pop'], [840, 'tick'], [1250, 'tick'], [1430, 'tick'], [1610, 'tick'], [1540, 'pop'], [2300, 'ping'], [3000, 'beat'], [3600, 'beat'], [4255, 'pop2'], [5190, 'pop2']],
+      draw(p, h, ms) {
+        const k = easeOutBack(seg(p, 0, 0.3)), sc = easeOutBack(seg(p, 0.3, 0.42)), e = easeOutBack(seg(p, 0.55, 0.85)), hs = easeOutBack(seg(p, 0.82, 0.95));
+        const beat = 1 + bump(h, 200, 0.3, 450) + bump(h, 800, 0.3, 450);
+        return { body: rr(5 * k, 0, 100 - 50 * k, 100 - 16 * k, lerp(R0, 10, k)), tail: 'M0 0', squash: Math.sin(Math.PI * seg(p, 0, 0.3)) * 0.05, word: seg(p, 0, 0.16),
+          bodyStroke: 5 * seg(p, 0.5, 0.55), bodyStrokeColor: '#fff', bodyHalo: true,
+          dotsFill: '#771B61', dotsAt: { x: 30, y: 39, gap: 9, r: 3.4 }, ...typingDots(p, ms, 0.42, 0.52),
+          phone: { screen: rr(11, 8, 38, 62, 5.5), screenScale: sc, beat: 0, waves: [0, 0, 0], wavesOp: false },
+          phoneB: { op: p > 0.5, dx: -40 * (1 - e), dy: -16 * (1 - e), heart: hs * beat } };
+      },
+    },
+    heart: {
+      label: 'Heart and heartbeat',
+      note: 'The square pulses and a heart pops in over it, then a heartbeat line draws across the heart and it beats twice with the spike.',
+      fwd: 2200, hold: 1500, rev: 1500,
+      cues: [[0, 'pop'], [350, 'beat'], [1450, 'beat'], [1800, 'beat'], [3700, 'beat'], [4400, 'pop2']],
+      draw(p, h) {
+        const pop = easeOutBack(seg(p, 0.12, 0.38)), s0 = seg(p, 0.1, 0.34);
+        const beat = bump(h, 100, 0.12, 450) + bump(h, 800, 0.12, 450) + 0.1 * Math.sin(Math.PI * seg(p, 0, 0.12));
+        return { body: rr(0, 0, 100, 100, R0), tail: 'M0 0', word: seg(p, 0, 0.2), shapeOp: 1 - s0, shapeScale: 1 - 0.2 * s0 + 0.05 * Math.sin(Math.PI * seg(p, 0, 0.12)),
+          heartBig: { op: p > 0.12, scale: Math.max(0, pop) * (1 + beat) }, ecg: seg(p, 0.45, 0.85) };
+      },
+    },
     typing: {
       label: 'Typing indicator',
       note: 'Just the bubble and its typing dots, no reply.',
@@ -233,6 +288,10 @@
       torso: one('.upmc-logo__torso'), arm: one('.upmc-logo__arm'), steth: one('.upmc-logo__steth'),
       tube: one('.upmc-logo__tube'), piece: one('.upmc-logo__piece'), handset: one('.upmc-logo__handset'),
       cord: one('.upmc-logo__cord'), phone: one('.upmc-logo__phone'),
+      b: one('.upmc-logo__b'), bBody: one('.upmc-logo__b-body'), bScreen: one('.upmc-logo__b-screen'), bHeart: one('.upmc-logo__b-heart'),
+      mini1: one('.upmc-logo__mini1'), mini2: one('.upmc-logo__mini2'),
+      heart: one('.upmc-logo__heart'), screen: one('.upmc-logo__screen'), beat: one('.upmc-logo__beat'),
+      waves: one('.upmc-logo__waves'), wave: [...root.querySelectorAll('.upmc-logo__waves path')],
       root, r0: radius(root),
     };
   }
@@ -253,6 +312,7 @@
     k.body.setAttribute('fill-opacity', f(s.bodyFill === undefined ? 1 : s.bodyFill));
     k.body.setAttribute('stroke-width', f(s.bodyStroke || 0));
     k.body.setAttribute('stroke', s.bodyStrokeColor || '#771B61');
+    k.body.setAttribute('paint-order', s.bodyHalo ? 'stroke' : 'normal');
     const w = s.word;
     k.word.setAttribute('opacity', f(1 - w));
     k.word.setAttribute('transform', pivot(50, 50, 1 - 0.45 * w, 1 - 0.45 * w));
@@ -294,6 +354,36 @@
     if (pe) {
       k.person.setAttribute('transform', `translate(0 ${f(pe.ty)})`);
       k.arm.setAttribute('transform', `rotate(${f(pe.arm)} 34 68)`);
+    }
+    const hb = s.heartBig;
+    k.heart.setAttribute('opacity', hb && hb.op ? 1 : 0);
+    if (hb) k.heart.setAttribute('transform', pivot(50, 46, hb.scale, hb.scale));
+    const ph = s.phone;
+    k.screen.setAttribute('opacity', ph && ph.screenScale > 0 ? 1 : 0);
+    k.beat.setAttribute('opacity', ph && ph.beat > 0 ? 1 : 0);
+    k.waves.setAttribute('opacity', ph && ph.wavesOp ? 1 : 0);
+    if (ph) {
+      k.screen.setAttribute('d', ph.screen);
+      k.screen.setAttribute('transform', pivot(50, 46, ph.screenScale, ph.screenScale));
+      k.beat.setAttribute('transform', `translate(50 44) scale(${f(ph.beat)})`);
+      k.wave.forEach((el, i) => el.setAttribute('opacity', f(Math.max(0, ph.waves[i]))));
+    }
+    const ch = s.chat;
+    k.mini1.setAttribute('opacity', ch && ch.m1 > 0 ? 1 : 0);
+    k.mini2.setAttribute('opacity', ch ? f(ch.m2op) : 0);
+    if (ch) {
+      k.mini1.setAttribute('d', speech(32, 22, 30, 20, 7, { from: 36, to: 44, tx: 36, ty: 48 }));
+      k.mini1.setAttribute('transform', pivot(40, 44, ch.m1, ch.m1));
+      k.mini2.setAttribute('d', speech(38, 50, 30, 20, 7, { from: 56, to: 64, tx: 64, ty: 76 }));
+      k.mini2.setAttribute('transform', `translate(${f(ch.m2dx)} 0)`);
+    }
+    const pb = s.phoneB;
+    k.b.setAttribute('opacity', pb && pb.op ? 1 : 0);
+    if (pb) {
+      k.bBody.setAttribute('d', rr(45, 16, 50, 84, 10));
+      k.bScreen.setAttribute('d', rr(51, 24, 38, 62, 5.5));
+      k.bHeart.setAttribute('transform', `translate(70 55) scale(${f(1.15 * Math.max(0, pb.heart))})`);
+      k.b.setAttribute('transform', `translate(${f(pb.dx)} ${f(pb.dy)})`);
     }
     const st = s.steth;
     k.steth.setAttribute('opacity', st && st.op ? 1 : 0);
@@ -339,6 +429,7 @@
     chirp() { tone('sine', 700, 700, 0.1, 0.25); tone('sine', 1050, 1050, 0.14, 0.25, 0.11); },
     chirp2() { tone('sine', 1050, 1050, 0.1, 0.25); tone('sine', 700, 700, 0.14, 0.25, 0.11); },
     ring() { [0, 0.07, 0.14, 0.21].forEach(d => tone('sine', 1400, 1400, 0.05, 0.2, d)); },
+    beat() { tone('sine', 110, 55, 0.12, 0.5); tone('sine', 100, 50, 0.14, 0.4, 0.16); },
     beep() { tone('sine', 1000, 1000, 0.09, 0.25); },
   };
   function sound(name, ...args) {
