@@ -253,6 +253,40 @@ $home-section-vertical-spacing-mobile: 4rem;
       visibility: hidden;
     }
   }
+  // Same setup for js/nfl-logo.js. The animated football sits at rest with opacity 0 (the script
+  // shows it), and the viewBox pads the shield so the football's orbit stays inside the SVG's box:
+  // 1.2em / 44 viewBox units.
+  .nfl-logo-trigger{
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    vertical-align: text-top;
+    cursor: pointer;
+    .nfl-logo-trigger__button{
+      position: absolute;
+      inset: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 4px;
+      background: none;
+      cursor: pointer;
+    }
+    .nfl-logo{
+      $unit: 0.0272727em;
+      display: block;
+      width: 87 * $unit;
+      height: 98 * $unit;
+      margin: (-30 * $unit) (-28 * $unit) (-24 * $unit);
+      overflow: visible;
+      pointer-events: none;
+    }
+    .nfl-logo__shield{
+      transform-origin: 0 0;
+    }
+    .nfl-logo__ball{
+      opacity: 0;
+    }
+  }
   span{
     &#me{
       img{
