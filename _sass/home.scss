@@ -122,11 +122,32 @@ $home-section-vertical-spacing-mobile: 4rem;
     height: 1.2em;
     vertical-align: text-top;
     transition: $sprint;
-    &#upmc, &#config-fig{
+    &#config-fig{
       border-radius: 7px;
       @include scaffold.breakpoint(md, down){
         border-radius: 5px;
       }
+    }
+  }
+  // Inline SVG (the same file the About page uses) on a purple rounded square, sized and padded
+  // like the jpeg it replaced, so the mark can be animated later.
+  #upmc{
+    display: inline-block;
+    box-sizing: border-box;
+    width: 1.2em;
+    height: 1.2em;
+    padding: 0.09em;
+    vertical-align: text-top;
+    background-color: $upmc-purple;
+    border-radius: 7px;
+    @include scaffold.breakpoint(md, down){
+      border-radius: 5px;
+    }
+    .brand-logo{
+      display: block;
+      width: 100%;
+      height: 100%;
+      fill: $pure-white;
     }
   }
   // Inline SVG (not an <img>) so js/wdas-hat.js can animate its parts; sits above
@@ -191,6 +212,79 @@ $home-section-vertical-spacing-mobile: 4rem;
       margin: (-8 * $unit) (-8 * $unit) (-18 * $unit);
       overflow: visible;
       pointer-events: none;
+    }
+  }
+  // Same setup for js/nba-logo.js. The hoop and ball sit at rest with opacity 0 (the script fades
+  // them in), and the viewBox pads the logo so the shot stays inside the SVG's box: 1.2em / 42
+  // viewBox units.
+  .nba-logo-trigger{
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    vertical-align: text-top;
+    cursor: pointer;
+    .nba-logo-trigger__button{
+      position: absolute;
+      inset: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 4px;
+      background: none;
+      cursor: pointer;
+    }
+    .nba-logo{
+      $unit: 0.0285714em;
+      display: block;
+      width: 58 * $unit;
+      height: 100 * $unit;
+      margin: (-40 * $unit) (-20 * $unit) (-18 * $unit);
+      overflow: visible;
+      pointer-events: none;
+    }
+    .nba-logo__logo,
+    .nba-logo__ball{
+      transform-origin: 0 0;
+    }
+    .nba-logo__ball,
+    .nba-logo__hoop{
+      opacity: 0;
+    }
+    .nba-logo__ball--back{
+      visibility: hidden;
+    }
+  }
+  // Same setup for js/nfl-logo.js. The animated football sits at rest with opacity 0 (the script
+  // shows it), and the viewBox pads the shield so the football's orbit stays inside the SVG's box:
+  // 1.2em / 44 viewBox units.
+  .nfl-logo-trigger{
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    vertical-align: text-top;
+    cursor: pointer;
+    .nfl-logo-trigger__button{
+      position: absolute;
+      inset: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 4px;
+      background: none;
+      cursor: pointer;
+    }
+    .nfl-logo{
+      $unit: 0.0272727em;
+      display: block;
+      width: 87 * $unit;
+      height: 98 * $unit;
+      margin: (-30 * $unit) (-28 * $unit) (-24 * $unit);
+      overflow: visible;
+      pointer-events: none;
+    }
+    .nfl-logo__shield{
+      transform-origin: 0 0;
+    }
+    .nfl-logo__ball{
+      opacity: 0;
     }
   }
   span{
