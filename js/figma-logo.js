@@ -17,7 +17,7 @@
   const easeOutBack = t => (t <= 0 ? 0 : t >= 1 ? 1 : 1 + 2.2 * (t - 1) ** 3 + 1.2 * (t - 1) ** 2);
   const f = n => +n.toFixed(2);
 
-  const DEFAULT = 'draw';
+  const DEFAULT = 'collabdraw';
 
   // The black square's corner radius in SVG units. It is a fixed length in CSS (the button's border-radius,
   // 7px on desktop and 5px below), as it was on the static logo, so it depends on how big the logo is drawn.
@@ -368,6 +368,69 @@
             const sl = all.find(q => q.idx === i), release = sl.t0 + sl.d * 0.75;
             const sc = p < release ? 1 - easeInOut(seg(p, 0.01 + i * 0.008, 0.07 + i * 0.008)) : easeOutBack(seg(p, release, release + sl.d * 0.25));
             return pose(i, { scale: sc });
+          }),
+        };
+      },
+    },
+    collabdraw: {
+      label: 'Draw it, two cursors',
+      note: 'A mix of "Draw it" and "Two cursors": the mark vanishes and two collaborators redraw it at once. Yours (blue) draws red, copies red down to make purple, then draws green; the purple cursor draws orange, then blue.',
+      fwd: 3900, hold: 300, rev: 0,
+      cues: (() => {
+        const total = 3900, A = [[2, 0.1, 0.2], [1, 0.3, 0.2, true], [0, 0.5, 0.2]], B = [[3, 0.16, 0.22], [4, 0.4, 0.22]];
+        const list = [[0, 'pop2']];
+        [...A, ...B].forEach(([idx, t0, d, copy]) => {
+          list.push([Math.round((t0 + d * 0.3) * total), copy ? 'copy' : 'tick'], [Math.round((t0 + d * 0.75) * total), copy ? 'drop' : 'pop']);
+        });
+        list.push([4300, 'ping']);
+        return list.sort((x, y) => x[0] - y[0]);
+      })(),
+      draw(p) {
+        const SRC = 2, COPY = 1, GAP = PIECES[COPY].cy - PIECES[SRC].cy;
+        const S = i => [PIECES[i].cx - 4.35, PIECES[i].cy - 4.4];
+        const E = i => (i === COPY ? [PIECES[i].cx, PIECES[i].cy] : [PIECES[i].cx + 4.35, PIECES[i].cy + 4.4]);
+        const lerp2 = (a, b, m) => [lerp(a[0], b[0], m), lerp(a[1], b[1], m)];
+        const mk = (plan, start) => {
+          const last = plan[plan.length - 1], endT = last.t0 + last.d;
+          let pos, frame = null, press = 0;
+          if (p >= endT) pos = lerp2(E(last.idx), start, easeInOut(seg(p, endT, endT + 0.12)));
+          else {
+            let k = 0;
+            plan.forEach((sl, j) => { if (p >= sl.t0) k = j; });
+            const sl = plan[k], u = (p - sl.t0) / sl.d, prev = k ? E(plan[k - 1].idx) : start;
+            if (sl.idx === COPY) {
+              const grab = [PIECES[SRC].cx, PIECES[SRC].cy], drop = E(COPY);
+              const box = (dy, op) => ({ x0: PIECES[COPY].cx - 4.35, y0: PIECES[COPY].cy - 4.4 - dy, x1: PIECES[COPY].cx + 4.35, y1: PIECES[COPY].cy + 4.4 - dy, op });
+              if (u < 0.3) pos = lerp2(prev, grab, easeInOut(seg(u, k ? 0 : (0.04 - sl.t0) / sl.d, 0.3)));
+              else if (u < 0.75) { const d = easeInOut(seg(u, 0.3, 0.7)); pos = lerp2(grab, drop, d); frame = box(GAP * (1 - d), 1); press = 1; }
+              else { pos = drop; frame = box(0, 1 - seg(u, 0.75, 0.9)); }
+            } else {
+              const st = S(sl.idx), en = E(sl.idx);
+              if (u < 0.3) pos = lerp2(prev, st, easeInOut(seg(u, k ? 0 : (0.04 - sl.t0) / sl.d, 0.28)));
+              else if (u < 0.75) { pos = lerp2(st, en, easeInOut(seg(u, 0.3, 0.7))); frame = { x0: st[0], y0: st[1], x1: pos[0], y1: pos[1], op: 1 }; press = 1; }
+              else { pos = en; frame = { x0: st[0], y0: st[1], x1: en[0], y1: en[1], op: 1 - seg(u, 0.75, 0.9) }; }
+            }
+          }
+          // Fade by distance from the logo, so both cursors appear and leave at the same distance wherever they come from.
+          return { pos, frame, press, op: 1 - seg(Math.hypot(pos[0] - 18, pos[1] - 18), 36, 44) };
+        };
+        const planA = [{ idx: 2, t0: 0.1, d: 0.2 }, { idx: 1, t0: 0.3, d: 0.2 }, { idx: 0, t0: 0.5, d: 0.2 }];
+        const planB = [{ idx: 3, t0: 0.16, d: 0.22 }, { idx: 4, t0: 0.4, d: 0.22 }];
+        const A = mk(planA, [-15.2, -11]), B = mk(planB, [52.7, 45]);
+        const all = planA.concat(planB);
+        return {
+          cursor: { x: A.pos[0], y: A.pos[1], scale: 1 - 0.1 * A.press, op: A.op },
+          cursor2: { x: B.pos[0], y: B.pos[1], scale: 1 - 0.1 * B.press, op: B.op },
+          select: A.frame, select2: B.frame,
+          pieces: PIECES.map((pc, i) => {
+            const sl = all.find(q => q.idx === i), release = sl.t0 + sl.d * 0.75;
+            const early = 1 - easeInOut(seg(p, 0.01 + i * 0.008, 0.07 + i * 0.008));
+            if (i === COPY) {
+              const u = (p - sl.t0) / sl.d, d = easeInOut(seg(u, 0.3, 0.7));
+              if (p < sl.t0) return pose(i, { scale: early });
+              return pose(i, { scale: p < sl.t0 + sl.d * 0.3 ? 0 : 1, y: -GAP * (1 - d), fill: mix(PIECES[SRC].color, PIECES[COPY].color, seg(u, 0.62, 0.9)) });
+            }
+            return pose(i, { scale: p < release ? early : easeOutBack(seg(p, release, release + sl.d * 0.25)) });
           }),
         };
       },

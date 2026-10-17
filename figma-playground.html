@@ -163,7 +163,7 @@ sitemap: false
     const variantSel = $('pg-variant'), range = $('pg-range'), time = $('pg-time'), marks = $('pg-marks');
     Object.keys(U.variants).forEach(id => variantSel.add(new Option(U.variants[id].label, id)));
     
-    variantSel.value = 'draw';
+    variantSel.value = 'collabdraw';
     let speed = 1, raf = 0;
 
     const v = () => U.variants[variantSel.value];
