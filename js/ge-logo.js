@@ -28,6 +28,9 @@
   const C = 17;                                          // the logo's centre
   const PURPLE = '#6022a6', WHITE = '#ffffff', GRAY = '#9aa1ad';
   const RING = { from: 0.75, to: 2, outer: 16 };         // the outline thickens as the bore opens; its outer edge stays put
+  // The white outline around the gantry is about 1px at the size it sits in the intro: 1.43 units (1.2em is 34).
+  // Around the logo it is measured from the artwork's edge; around the scanner, from the ring, like the bed and base.
+  const HALO = { logo: 18.28, scanner: RING.outer + 1.43 };
   const BORE_R = 9.9;
   // The bed runs from the bore's lower edge out to a front edge, drawn as one shape with the top.
   const BED = { top: 25, w0: 4.21, reach: 14.12, spread: 8.79, front: 2.08 };
@@ -174,6 +177,7 @@
     k.ringLine.setAttribute('stroke-width', w.toFixed(3));
     k.ringLine.setAttribute('stroke', mix(PURPLE, GRAY, open));
     k.ringLine.setAttribute('r', (RING.outer - w / 2).toFixed(3));
+    k.halo.setAttribute('r', lerp(HALO.logo, HALO.scanner, open).toFixed(3));
     k.base.setAttribute('transform', `translate(${C} ${baseY.toFixed(2)}) scale(${baseX.toFixed(4)} 1) translate(${-C} 0)`);
 
     // The bed: a trapezoid from the bore's lower edge, widening as it comes toward you, with the front
@@ -233,6 +237,7 @@
       ringLine: one('.ge-logo__ring-line'),
       base: one('.ge-logo__base'),
       bedTop: one('.ge-logo__bed-top'),
+      halo: one('.ge-logo__halo'),
       haloBed: one('.ge-logo__halo-bed'),
       light: one('.ge-logo__light'),
       glow: one('.ge-logo__glow'),
