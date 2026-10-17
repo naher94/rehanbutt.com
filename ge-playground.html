@@ -375,6 +375,7 @@ sitemap: false
     const variantNote = document.getElementById('pg-variant-note');
     const variants = window.geLogoVariants || {};
     Object.keys(variants).forEach(id => variantSel.add(new Option(variants[id].label, id)));
+    if (window.geLogoDefaultVariant) variantSel.value = window.geLogoDefaultVariant;
     function setVariant() {
       const id = variantSel.value;
       roots.forEach(root => { root.dataset.geVariant = id; });

@@ -68,6 +68,14 @@
     note: 'The simple scanner with the bed drawn as a single shape: the trapezoid and its front edge are one outline, so there is no seam between them.',
     look: { ...VARIANTS.simple.look, singleBed: true },
   };
+  // The simple, one-piece-bed scanner with the status light in GE purple.
+  VARIANTS.purpleLight = {
+    ...VARIANTS.simpleOne,
+    label: 'Spin into a CT scanner (simple, one-piece bed, purple light)',
+    note: 'The simple, one-piece-bed scanner with the blinking light (and its glow) in GE purple instead of green.',
+    look: { ...VARIANTS.simpleOne.look, lightColor: PURPLE },
+  };
+
   // The one-piece-bed scanner with the base and the bed moving at the same time, so the scanner
   // comes together faster. The slide and motor sounds overlap.
   VARIANTS.together = {
@@ -81,7 +89,10 @@
     ],
     look: { ...VARIANTS.simpleOne.look, timing: { base: [0.45, 0.85], bed: [0.45, 0.85] } },
   };
+  // The one the home page plays (the playground starts on it too).
+  const DEFAULT_VARIANT = 'purpleLight';
   window.geLogoVariants = VARIANTS;
+  window.geLogoDefaultVariant = DEFAULT_VARIANT;
 
   // Calls fn(t) every frame for `duration` ms; resolves after fn(1).
   function drive(duration, fn) {
@@ -316,7 +327,7 @@
       glows: [...root.querySelectorAll('.ge-logo__glow')],
     };
     try {
-      await run(k, VARIANTS[root.dataset.geVariant] || VARIANTS.scanner);
+      await run(k, VARIANTS[root.dataset.geVariant] || VARIANTS[DEFAULT_VARIANT]);
     } finally {
       delete root.dataset.playing;
     }
