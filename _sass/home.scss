@@ -122,11 +122,32 @@ $home-section-vertical-spacing-mobile: 4rem;
     height: 1.2em;
     vertical-align: text-top;
     transition: $sprint;
-    &#upmc, &#config-fig{
+    &#config-fig{
       border-radius: 7px;
       @include scaffold.breakpoint(md, down){
         border-radius: 5px;
       }
+    }
+  }
+  // Inline SVG (the same file the About page uses) on a purple rounded square, sized and padded
+  // like the jpeg it replaced, so the mark can be animated later.
+  #upmc{
+    display: inline-block;
+    box-sizing: border-box;
+    width: 1.2em;
+    height: 1.2em;
+    padding: 0.09em;
+    vertical-align: text-top;
+    background-color: $upmc-purple;
+    border-radius: 7px;
+    @include scaffold.breakpoint(md, down){
+      border-radius: 5px;
+    }
+    .brand-logo{
+      display: block;
+      width: 100%;
+      height: 100%;
+      fill: $pure-white;
     }
   }
   // Inline SVG (not an <img>) so js/wdas-hat.js can animate its parts; sits above
