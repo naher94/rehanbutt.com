@@ -167,6 +167,7 @@ sitemap: false
     const refs = roots.map(r => U.refs(r));
     const variantSel = $('pg-variant'), range = $('pg-range'), time = $('pg-time'), marks = $('pg-marks');
     Object.keys(U.variants).forEach(id => variantSel.add(new Option(U.variants[id].label, id)));
+    variantSel.value = 'laptop3';
     let speed = 1, raf = 0;
 
     const v = () => U.variants[variantSel.value];

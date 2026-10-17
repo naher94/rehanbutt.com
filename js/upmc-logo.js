@@ -20,7 +20,16 @@
   const easeOutBack = t => (t <= 0 ? 0 : t >= 1 ? 1 : 1 + 2.2 * (t - 1) ** 3 + 1.2 * (t - 1) ** 2);
   const f = n => +n.toFixed(2);
 
-  const DEFAULT = 'chat';
+  const DEFAULT = 'laptop3';
+  const PURPLE = '#771B61', GRAY = '#9aa1ad', WHITE = '#ffffff';
+  const hex = c => [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16));
+  const mix = (c1, c2, k) => {
+    const a = hex(c1), b = hex(c2);
+    return '#' + a.map((v, i) => Math.round(v + (b[i] - v) * k).toString(16).padStart(2, '0')).join('');
+  };
+  const HALO = 4.8;
+  const ECG_D = 'M14 40H30L36 32L42 40H48L54 16L62 58L68 40H74L80 34L86 40';
+  const BASE_D = 'M8 74H92V78C92 83 88 87 83 87H17C12 87 8 83 8 78Z';
 
   // The square's corner radius in SVG units. It is a fixed length in CSS (the button's border-radius, 7px
   // on desktop and 5px below), as it was on the static logo, so it depends on how big the logo is drawn.
@@ -81,6 +90,18 @@
   // fwd: ms to the end state; hold: ms it pauses there; rev: ms back. cues are [ms, sound, ...args].
   // draw(p, h, ms) returns the state to render: p is 0 (the logo) to 1 (the end state) and h is the
   // time into the hold (null otherwise), so the way back is exactly the way in.
+  // The laptop with the Sketch stethoscope and big heartbeat. t is when each comes in, as [from, to] of p.
+  const DROP = 4;
+  const bigLaptop = (p, h, t) => {
+    const draw = seg(p, t.scope[0], t.scope[1]), e = easeOutBack(draw), k = easeOutBack(seg(p, 0.02, 0.3)), kf = seg(p, 0.1, 0.32), ks = seg(p, 0.08, 0.3), b = easeOutBack(seg(p, 0.3, 0.48));
+    const dy = bump(h, 200, 6, 350) + bump(h, 850, 6, 350), flash = bump(h, 200, 0.06, 350) + bump(h, 850, 0.06, 350);
+    return { body: rr(lerp(0, 9.5, k), lerp(0, 10 + DROP, k), lerp(100, 81, k), lerp(100, 54, k), lerp(R0, 7, k)), tail: 'M0 0', squash: 0, word: seg(p, 0, 0.15),
+      bodyFillColor: mix(PURPLE, WHITE, kf), bodyStroke: 7 * ks, bodyStrokeColor: GRAY, bodyHaloW: 7 * ks + HALO, ecg: seg(p, t.ecg[0], t.ecg[1]), ecgColor: '#771B61', ecgW: 4.5, ecgHaloW: 9.3,
+      ecgD: 'M49.92 46.49L63.12 46.49L68.07 39.89L73.01 46.49L77.97 46.49L82.92 26.69L89.52 61.34L94.47 46.49L99.41 46.49L104.37 41.54L109.32 46.49',
+      ecgScale: 1, ecgDy: dy + DROP,
+      laptop: { baseHalo: true, baseFill: GRAY, baseD: 'M-0.25 69.81H100.25V74.31C100.25 76.52 98.46 78.31 96.25 78.31H3.75C1.54 78.31 -0.25 76.52 -0.25 74.31Z',
+        baseOp: b > 0, baseTy: (1 - b) * 26 + DROP, draw, chest: easeOutBack(seg(p, 0.78, 0.9)), dy, glyph: { cx: 28.86, cy: 15.53, dx: -36 * (1 - e), dy: -36 * (1 - e), scale: 0.25 * (0.55 + 0.45 * e), rot: -8, op: seg(draw, 0, 0.25) } } };
+  };
   const typingDots = (p, ms, from, to) => ({
     dotsOp: seg(p, from, to),
     dotsY: [0, 1, 2].map(i => -5 * Math.max(0, Math.sin(Math.PI * 2 * (ms / 700 - i * 0.16)))),
@@ -247,6 +268,37 @@
           phoneB: { op: p > 0.5, dx: -40 * (1 - e), dy: -16 * (1 - e), heart: hs * beat } };
       },
     },
+    laptop: {
+      label: 'Laptop and stethoscope',
+      note: 'The square empties into a laptop screen frame and a base slides up under it. A stethoscope draws itself across the corner, its chestpiece pops on, then taps the screen twice as a heartbeat line flashes on it.',
+      fwd: 3000, hold: 1500, rev: 1700,
+      cues: [[0, 'pop'], [900, 'tick'], [1500, 'send'], [2330, 'ping'], [2700, 'beep'], [3250, 'beat'], [3900, 'beat'], [4600, 'pop2'], [5200, 'pop2'], [5800, 'pop2']],
+      draw(p, h) {
+        const k = easeOutBack(seg(p, 0.02, 0.3)), kf = seg(p, 0.1, 0.32), ks = seg(p, 0.08, 0.3), b = easeOutBack(seg(p, 0.3, 0.48));
+        const dy = bump(h, 200, 6, 350) + bump(h, 850, 6, 350), flash = bump(h, 200, 0.2, 350) + bump(h, 850, 0.2, 350);
+        return { body: rr(18 * k, 10 * k, 100 - 36 * k, 100 - 46 * k, lerp(R0, 6, k)), tail: 'M0 0', squash: 0, word: seg(p, 0, 0.15),
+          bodyFill: 1 - kf, bodyStroke: 7 * ks, ecg: seg(p, 0.88, 1), ecgColor: '#771B61', ecgScale: 0.45 * (1 + flash), ecgDy: 8,
+          laptop: { baseOp: b > 0, baseTy: (1 - b) * 26, draw: seg(p, 0.5, 0.8), chest: easeOutBack(seg(p, 0.78, 0.9)), dy } };
+      },
+    },
+    laptop2: {
+      label: 'Laptop and stethoscope, big heartbeat',
+      note: 'The laptop and stethoscope from the Sketch edit: a grey laptop with a white screen, and a big heartbeat line that crosses the frame with a white border around it. The stethoscope, tilted 8° counter-clockwise, slides and pops in from the top left. In the hold the stethoscope and the heartbeat line bounce together.',
+      fwd: 3000, hold: 1500, rev: 1700,
+      cues: [[0, 'pop'], [900, 'tick'], [1500, 'send'], [2330, 'ping'], [2700, 'beep'], [3250, 'beat'], [3900, 'beat'], [4600, 'pop2'], [5200, 'pop2'], [5800, 'pop2']],
+      draw(p, h) {
+        return bigLaptop(p, h, { scope: [0.5, 0.8], ecg: [0.88, 1] });
+      },
+    },
+    laptop3: {
+      label: 'Laptop, stethoscope and heartbeat together',
+      note: 'The same laptop, but the stethoscope and the heartbeat line come in at the same moment: the stethoscope slides and pops in from the top left while the line draws across the screen.',
+      fwd: 2400, hold: 1500, rev: 1500,
+      cues: [[0, 'pop'], [720, 'tick'], [1250, 'send'], [2040, 'ping'], [2600, 'beat'], [3250, 'beat'], [4125, 'pop2'], [4700, 'pop2'], [5200, 'pop2']],
+      draw(p, h) {
+        return bigLaptop(p, h, { scope: [0.52, 0.85], ecg: [0.52, 0.85] });
+      },
+    },
     heart: {
       label: 'Heart and heartbeat',
       note: 'The square pulses and a heart pops in over it, then a heartbeat line draws across the heart and it beats twice with the spike.',
@@ -288,6 +340,10 @@
       torso: one('.upmc-logo__torso'), arm: one('.upmc-logo__arm'), steth: one('.upmc-logo__steth'),
       tube: one('.upmc-logo__tube'), piece: one('.upmc-logo__piece'), handset: one('.upmc-logo__handset'),
       cord: one('.upmc-logo__cord'), phone: one('.upmc-logo__phone'),
+      bodyHalo: one('.upmc-logo__body-halo'), baseHalo: one('.upmc-logo__base-halo'),
+      glyph: one('.upmc-logo__glyph'), glyphClip: one('.upmc-logo__glyph-clip'),
+      ecgHalo: one('.upmc-logo__ecg-halo'), base: one('.upmc-logo__base'), scope: one('.upmc-logo__scope'), scopeHalo: one('.upmc-logo__scope-halo'),
+      scopeTube: one('.upmc-logo__scope-tube'), chest: one('.upmc-logo__scope-chest'),
       b: one('.upmc-logo__b'), bBody: one('.upmc-logo__b-body'), bScreen: one('.upmc-logo__b-screen'), bHeart: one('.upmc-logo__b-heart'),
       mini1: one('.upmc-logo__mini1'), mini2: one('.upmc-logo__mini2'),
       heart: one('.upmc-logo__heart'), screen: one('.upmc-logo__screen'), beat: one('.upmc-logo__beat'),
@@ -305,9 +361,13 @@
     R0 = k.r0;
     const s = v.draw(p, h, ms);
     k.body.setAttribute('d', s.body);
+    k.bodyHalo.setAttribute('d', s.body);
+    k.bodyHalo.setAttribute('stroke-width', f(s.bodyHaloW === undefined ? HALO : s.bodyHaloW));
+    k.body.setAttribute('fill', s.bodyFillColor || PURPLE);
     k.tail.setAttribute('d', s.tail);
     const q = s.squash || 0, sc = s.shapeScale || 1;
     k.shape.setAttribute('transform', pivot(50, 50, (1 + q) * sc, (1 - q) * sc));
+    k.bodyHalo.setAttribute('transform', pivot(50, 50, (1 + q) * sc, (1 - q) * sc));
     k.shape.setAttribute('opacity', f(s.shapeOp === undefined ? 1 : s.shapeOp));
     k.body.setAttribute('fill-opacity', f(s.bodyFill === undefined ? 1 : s.bodyFill));
     k.body.setAttribute('stroke-width', f(s.bodyStroke || 0));
@@ -329,6 +389,16 @@
     k.reply.setAttribute('transform', pivot(110, 44, s.replyScale || 0, s.replyScale || 0));
     k.ecg.setAttribute('opacity', s.ecg > 0 ? 1 : 0);
     k.ecg.setAttribute('stroke-dashoffset', f(1 - (s.ecg || 0)));
+    k.ecg.setAttribute('stroke', s.ecgColor || '#fff');
+    k.ecg.setAttribute('d', s.ecgD || ECG_D);
+    k.ecg.setAttribute('stroke-width', s.ecgW || 5);
+    const et = s.ecgScale ? `translate(0 ${s.ecgDy || 0}) ${pivot(...(s.ecgAt || [50, 37]), s.ecgScale, s.ecgScale)}` : '';
+    k.ecg.setAttribute('transform', et);
+    k.ecgHalo.setAttribute('opacity', s.ecg > 0 && s.ecgHaloW ? 1 : 0);
+    k.ecgHalo.setAttribute('d', s.ecgD || ECG_D);
+    k.ecgHalo.setAttribute('stroke-width', s.ecgHaloW || 0);
+    k.ecgHalo.setAttribute('stroke-dashoffset', f(1 - (s.ecg || 0)));
+    k.ecgHalo.setAttribute('transform', et);
     k.rec.setAttribute('opacity', f(s.rec || 0));
     if (s.recAt) { k.rec.setAttribute('cx', s.recAt[0]); k.rec.setAttribute('cy', s.recAt[1]); }
     const fr = s.front;
@@ -384,6 +454,28 @@
       k.bScreen.setAttribute('d', rr(51, 24, 38, 62, 5.5));
       k.bHeart.setAttribute('transform', `translate(70 55) scale(${f(1.15 * Math.max(0, pb.heart))})`);
       k.b.setAttribute('transform', `translate(${f(pb.dx)} ${f(pb.dy)})`);
+    }
+    const lp = s.laptop;
+    k.base.setAttribute('opacity', lp && lp.baseOp ? 1 : 0);
+    k.scope.setAttribute('opacity', lp && lp.draw > 0 && !lp.glyph ? 1 : 0);
+    k.glyph.setAttribute('opacity', lp && lp.glyph ? f(lp.glyph.op) : 0);
+    if (lp) {
+      k.base.setAttribute('d', lp.baseD || BASE_D);
+      k.baseHalo.setAttribute('d', lp.baseD || BASE_D);
+      k.baseHalo.setAttribute('opacity', lp.baseHalo && lp.baseOp ? 1 : 0);
+      k.baseHalo.setAttribute('transform', `translate(0 ${f(lp.baseTy)})`);
+      k.base.setAttribute('fill', lp.baseFill || PURPLE);
+      k.base.setAttribute('transform', `translate(0 ${f(lp.baseTy)})`);
+      k.scopeHalo.setAttribute('stroke-dashoffset', f(1 - lp.draw));
+      k.scopeTube.setAttribute('stroke-dashoffset', f(1 - lp.draw));
+      k.chest.setAttribute('opacity', lp.chest > 0 ? 1 : 0);
+      k.chest.setAttribute('transform', pivot(62, 8, Math.max(0, lp.chest), Math.max(0, lp.chest)));
+      k.scope.setAttribute('transform', `translate(${f(lp.dx || 0)} ${f(lp.dy)})`);
+      if (lp.glyph) {
+        const g = lp.glyph;
+        k.glyph.setAttribute('transform', `translate(${f(g.cx + g.dx)} ${f(g.cy + g.dy + lp.dy)}) scale(${f(g.scale)}) rotate(${g.rot}) translate(-103.22 -100.09)`);
+        k.glyphClip.setAttribute('width', 400);
+      }
     }
     const st = s.steth;
     k.steth.setAttribute('opacity', st && st.op ? 1 : 0);
