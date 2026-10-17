@@ -20,14 +20,14 @@
   const easeOutBack = t => (t <= 0 ? 0 : t >= 1 ? 1 : 1 + 2.2 * (t - 1) ** 3 + 1.2 * (t - 1) ** 2);
   const f = n => +n.toFixed(2);
 
-  const DEFAULT = 'laptop3';
+  const DEFAULT = 'laptop4';
   const PURPLE = '#771B61', GRAY = '#9aa1ad', WHITE = '#ffffff';
   const hex = c => [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16));
   const mix = (c1, c2, k) => {
     const a = hex(c1), b = hex(c2);
     return '#' + a.map((v, i) => Math.round(v + (b[i] - v) * k).toString(16).padStart(2, '0')).join('');
   };
-  const HALO = 4.8;
+  const HALO = 8.4;
   const ECG_D = 'M14 40H30L36 32L42 40H48L54 16L62 58L68 40H74L80 34L86 40';
   const BASE_D = 'M8 74H92V78C92 83 88 87 83 87H17C12 87 8 83 8 78Z';
 
@@ -79,6 +79,16 @@
   // The square becomes a wide frame (k), like a video window.
   const frame = k => rr(0, 18 * k, 100, 100 - 36 * k, R0 - (R0 - 12) * k);
 
+  // A smooth swell: eases up to amp a third of the way through, then eases back down, with no jump in speed at
+  // the start, the peak or the end. Overlapping swells add into one continuous curve.
+  const swell = (h, at, amp, dur) => {
+    if (h === null) return 0;
+    const u = (h - at) / dur;
+    if (u <= 0 || u >= 1) return 0;
+    const ss = x => x * x * (3 - 2 * x);
+    return amp * (u < 0.33 ? ss(u / 0.33) : 1 - ss((u - 0.33) / 0.67));
+  };
+
   // A short squash that dies away: amp at the start, 0 after dur ms.
   const bump = (h, at, amp, dur = 380) => {
     if (h === null) return 0;
@@ -90,17 +100,21 @@
   // fwd: ms to the end state; hold: ms it pauses there; rev: ms back. cues are [ms, sound, ...args].
   // draw(p, h, ms) returns the state to render: p is 0 (the logo) to 1 (the end state) and h is the
   // time into the hold (null otherwise), so the way back is exactly the way in.
-  // The laptop with the Sketch stethoscope and big heartbeat. t is when each comes in, as [from, to] of p.
+  // The laptop with the Sketch stethoscope and big heartbeat. t is when each comes in, as [from, to] of p, and
+  // whether they pulse (scale) in the hold instead of bouncing.
   const DROP = 4;
+  const BASE_GAP = 2.2;
   const bigLaptop = (p, h, t) => {
     const draw = seg(p, t.scope[0], t.scope[1]), e = easeOutBack(draw), k = easeOutBack(seg(p, 0.02, 0.3)), kf = seg(p, 0.1, 0.32), ks = seg(p, 0.08, 0.3), b = easeOutBack(seg(p, 0.3, 0.48));
-    const dy = bump(h, 200, 6, 350) + bump(h, 850, 6, 350), flash = bump(h, 200, 0.06, 350) + bump(h, 850, 0.06, 350);
+    const hop = bump(h, 200, 6, 350) + bump(h, 850, 6, 350);
+    const beat = swell(h, 200, 0.12, 480) + swell(h, 390, 0.07, 440) + swell(h, 850, 0.12, 480) + swell(h, 1040, 0.07, 440);
+    const dy = t.pulse ? 0 : hop, pulse = t.pulse ? 1 + beat : 1;
     return { body: rr(lerp(0, 9.5, k), lerp(0, 10 + DROP, k), lerp(100, 81, k), lerp(100, 54, k), lerp(R0, 7, k)), tail: 'M0 0', squash: 0, word: seg(p, 0, 0.15),
-      bodyFillColor: mix(PURPLE, WHITE, kf), bodyStroke: 7 * ks, bodyStrokeColor: GRAY, bodyHaloW: 7 * ks + HALO, ecg: seg(p, t.ecg[0], t.ecg[1]), ecgColor: '#771B61', ecgW: 4.5, ecgHaloW: 9.3,
+      bodyFillColor: mix(PURPLE, WHITE, kf), bodyStroke: 7 * ks, bodyStrokeColor: GRAY, bodyHaloW: 7 * ks + HALO, ecg: seg(p, t.ecg[0], t.ecg[1]), ecgColor: '#771B61', ecgW: 4.5, ecgHaloW: 12.9,
       ecgD: 'M49.92 46.49L63.12 46.49L68.07 39.89L73.01 46.49L77.97 46.49L82.92 26.69L89.52 61.34L94.47 46.49L99.41 46.49L104.37 41.54L109.32 46.49',
-      ecgScale: 1, ecgDy: dy + DROP,
+      ecgScale: pulse, ecgAt: [79.6, 44], ecgDy: dy + DROP,
       laptop: { baseHalo: true, baseFill: GRAY, baseD: 'M-0.25 69.81H100.25V74.31C100.25 76.52 98.46 78.31 96.25 78.31H3.75C1.54 78.31 -0.25 76.52 -0.25 74.31Z',
-        baseOp: b > 0, baseTy: (1 - b) * 26 + DROP, draw, chest: easeOutBack(seg(p, 0.78, 0.9)), dy, glyph: { cx: 28.86, cy: 15.53, dx: -36 * (1 - e), dy: -36 * (1 - e), scale: 0.25 * (0.55 + 0.45 * e), rot: -8, op: seg(draw, 0, 0.25) } } };
+        baseOp: b > 0, baseTy: (1 - b) * 26 + DROP + BASE_GAP, draw, chest: easeOutBack(seg(p, 0.78, 0.9)), dy, glyph: { cx: 28.86, cy: 15.53, dx: -36 * (1 - e), dy: -36 * (1 - e), scale: 0.25 * (0.55 + 0.45 * e) * pulse, rot: -8, op: seg(draw, 0, 0.25) } } };
   };
   const typingDots = (p, ms, from, to) => ({
     dotsOp: seg(p, from, to),
@@ -297,6 +311,15 @@
       cues: [[0, 'pop'], [720, 'tick'], [1250, 'send'], [2040, 'ping'], [2600, 'beat'], [3250, 'beat'], [4125, 'pop2'], [4700, 'pop2'], [5200, 'pop2']],
       draw(p, h) {
         return bigLaptop(p, h, { scope: [0.52, 0.85], ecg: [0.52, 0.85] });
+      },
+    },
+    laptop4: {
+      label: 'Laptop, stethoscope and heartbeat pulsing',
+      note: 'The same laptop and entrance, but in the hold the stethoscope and the heartbeat line pulse, scaling up and down in a lub-dub, instead of bouncing.',
+      fwd: 2400, hold: 1500, rev: 1500,
+      cues: [[0, 'pop'], [720, 'tick'], [1250, 'send'], [2040, 'ping'], [2600, 'beat'], [3250, 'beat'], [4125, 'pop2'], [4700, 'pop2'], [5200, 'pop2']],
+      draw(p, h) {
+        return bigLaptop(p, h, { scope: [0.52, 0.85], ecg: [0.52, 0.85], pulse: true });
       },
     },
     heart: {
