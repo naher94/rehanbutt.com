@@ -122,12 +122,6 @@ $home-section-vertical-spacing-mobile: 4rem;
     height: 1.2em;
     vertical-align: text-top;
     transition: $sprint;
-    &#config-fig{
-      border-radius: 7px;
-      @include scaffold.breakpoint(md, down){
-        border-radius: 5px;
-      }
-    }
   }
   // Same inline-SVG-plus-overlay-button setup as the hat, for js/upmc-logo.js. The purple square is
   // 1.2em / 100 viewBox units; the viewBox pads it so the stethoscope and heartbeat line stay inside
@@ -156,6 +150,36 @@ $home-section-vertical-spacing-mobile: 4rem;
       width: 134 * $unit;
       height: 136 * $unit;
       margin: (-28 * $unit) (-28 * $unit) (-8 * $unit) (-6 * $unit);
+      overflow: visible;
+      pointer-events: none;
+    }
+  }
+  // Same inline-SVG-plus-overlay-button setup as the hat, for js/figma-logo.js. The black square is
+  // 1.2em / 36 viewBox units; the viewBox pads it so the pieces can fly outside the square.
+  .figma-logo-trigger{
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    vertical-align: text-top;
+    cursor: pointer;
+    .figma-logo-trigger__button{
+      position: absolute;
+      inset: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 7px;
+      background: none;
+      cursor: pointer;
+      @include scaffold.breakpoint(md, down){
+        border-radius: 5px;
+      }
+    }
+    .figma-logo{
+      $unit: 0.0333333em;
+      display: block;
+      width: 60 * $unit;
+      height: 60 * $unit;
+      margin: (-12 * $unit);
       overflow: visible;
       pointer-events: none;
     }
