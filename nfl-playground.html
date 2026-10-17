@@ -375,6 +375,7 @@ sitemap: false
     const variantNote = document.getElementById('pg-variant-note');
     const variants = window.nflLogoVariants || {};
     Object.keys(variants).forEach(id => variantSel.add(new Option(variants[id].label, id)));
+    if (variants.halfSmooth) variantSel.value = 'halfSmooth';
     function setVariant() {
       const id = variantSel.value;
       roots.forEach(root => { root.dataset.nflVariant = id; });

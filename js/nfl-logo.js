@@ -581,7 +581,7 @@
       laces: q('.nfl-logo__laces'),
     };
     try {
-      await run(k, VARIANTS[root.dataset.nflVariant] || VARIANTS.full);
+      await run(k, VARIANTS[root.dataset.nflVariant] || VARIANTS.halfSmooth);
     } finally {
       [...k.shield, ...k.stars, ...k.goal].forEach(el => el.getAnimations().forEach(a => a.cancel()));
       [...k.balls, ...k.stamp].forEach(el => { el.style.opacity = ''; el.style.visibility = ''; });
