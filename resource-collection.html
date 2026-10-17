@@ -11,7 +11,7 @@ footer-other: false
 
 <section class="all-collections scaffold-grid scaffold-grid-span-full">
   {%- for collection-item in site.resources-collection -%}
-  <a href="{{collection-item.url | prepend: site.url}}" class="scaffold-grid-span-full md:scaffold-grid-span-quarter">
+  <a href="{{collection-item.url | prepend: site.url}}" class="scaffold-grid-span-half md:scaffold-grid-span-quarter">
     <div class="tile" style="color: {{collection-item.text-color}};">
       <img src="/img/resources-collection/{{collection-item.tile-image}}" alt="{{collection-item.tile-image-alt}}">
       <p class="title">{{collection-item.title}}</p>

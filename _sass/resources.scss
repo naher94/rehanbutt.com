@@ -167,16 +167,16 @@
 
 .featured-collections, .all-collections{
   .tile{
-    border-radius: $tile-radius;
-    padding: 1em;
+    border-radius: $tile-radius-medium;
+    padding: 1.5em;
     color: semantic-color(text);
     background-color: $navy-black;
     aspect-ratio: 3/4;
     transition: $tight-spring;   // the same spring as the home page's year tiles
     position: relative;
     overflow: hidden;
-    @include scaffold.breakpoint(md, down) {
-      font-size: 1.5em;
+    @include scaffold.breakpoint(lg, down) {
+      padding: 1em;
     }
     p{
       padding: 0;
@@ -185,15 +185,19 @@
     .title{
       @include type-style(product, tile-title);
       position: relative;
+      text-wrap: balance;
     }
     .sub-header{
       @include type-style(product, eyebrow-lg);
       opacity: 0.6;
       position: relative;
+      line-height: 1.4;
+      margin-block-start: 0.5em;
     }
     &:hover{
       transform: rotate(4deg) scale(1.05);
       box-shadow: $recessed-shadow semantic-color(shadow);
+      z-index: 2;
     }
     // Pressed: the tilt stays, the scale gives back and the shadow tightens, on a quicker curve than the hover
     &:active{

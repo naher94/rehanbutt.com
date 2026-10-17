@@ -122,11 +122,66 @@ $home-section-vertical-spacing-mobile: 4rem;
     height: 1.2em;
     vertical-align: text-top;
     transition: $sprint;
-    &#upmc, &#config-fig{
+  }
+  // Same inline-SVG-plus-overlay-button setup as the hat, for js/upmc-logo.js. The purple square is
+  // 1.2em / 100 viewBox units; the viewBox pads it so the stethoscope and heartbeat line stay inside
+  // the SVG's box.
+  .upmc-logo-trigger{
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    vertical-align: text-top;
+    cursor: pointer;
+    .upmc-logo-trigger__button{
+      position: absolute;
+      inset: 0;
+      padding: 0;
+      border: 0;
       border-radius: 7px;
+      background: none;
+      cursor: pointer;
       @include scaffold.breakpoint(md, down){
         border-radius: 5px;
       }
+    }
+    .upmc-logo{
+      $unit: 0.012em;
+      display: block;
+      width: 134 * $unit;
+      height: 136 * $unit;
+      margin: (-28 * $unit) (-28 * $unit) (-8 * $unit) (-6 * $unit);
+      overflow: visible;
+      pointer-events: none;
+    }
+  }
+  // Same inline-SVG-plus-overlay-button setup as the hat, for js/figma-logo.js. The black square is
+  // 1.2em / 36 viewBox units; the viewBox pads it so the pieces can fly outside the square.
+  .figma-logo-trigger{
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    vertical-align: text-top;
+    cursor: pointer;
+    .figma-logo-trigger__button{
+      position: absolute;
+      inset: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 7px;
+      background: none;
+      cursor: pointer;
+      @include scaffold.breakpoint(md, down){
+        border-radius: 5px;
+      }
+    }
+    .figma-logo{
+      $unit: 0.0333333em;
+      display: block;
+      width: 60 * $unit;
+      height: 60 * $unit;
+      margin: (-12 * $unit);
+      overflow: visible;
+      pointer-events: none;
     }
   }
   // Inline SVG (not an <img>) so js/wdas-hat.js can animate its parts; sits above
@@ -164,6 +219,106 @@ $home-section-vertical-spacing-mobile: 4rem;
     .wdas-hat__wing-right{
       transform-box: fill-box;
       transform-origin: 50% 100%;
+    }
+  }
+  // Same inline-SVG-plus-overlay-button setup as the hat, for js/ge-logo.js. The viewBox pads the
+  // logo so the scanner's base and bed stay inside the SVG's box: 1.2em / 34 viewBox units.
+  .ge-logo-trigger{
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    vertical-align: text-top;
+    cursor: pointer;
+    .ge-logo-trigger__button{
+      position: absolute;
+      inset: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: none;
+      cursor: pointer;
+    }
+    .ge-logo{
+      $unit: 0.0352941em;
+      display: block;
+      width: 50 * $unit;
+      height: 60 * $unit;
+      margin: (-8 * $unit) (-8 * $unit) (-18 * $unit);
+      overflow: visible;
+      pointer-events: none;
+    }
+  }
+  // Same setup for js/nba-logo.js. The hoop and ball sit at rest with opacity 0 (the script fades
+  // them in), and the viewBox pads the logo so the shot stays inside the SVG's box: 1.2em / 42
+  // viewBox units.
+  .nba-logo-trigger{
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    vertical-align: text-top;
+    cursor: pointer;
+    .nba-logo-trigger__button{
+      position: absolute;
+      inset: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 4px;
+      background: none;
+      cursor: pointer;
+    }
+    .nba-logo{
+      $unit: 0.0285714em;
+      display: block;
+      width: 58 * $unit;
+      height: 100 * $unit;
+      margin: (-40 * $unit) (-20 * $unit) (-18 * $unit);
+      overflow: visible;
+      pointer-events: none;
+    }
+    .nba-logo__logo,
+    .nba-logo__ball{
+      transform-origin: 0 0;
+    }
+    .nba-logo__ball,
+    .nba-logo__hoop{
+      opacity: 0;
+    }
+    .nba-logo__ball--back{
+      visibility: hidden;
+    }
+  }
+  // Same setup for js/nfl-logo.js. The animated football sits at rest with opacity 0 (the script
+  // shows it), and the viewBox pads the shield so the football's orbit stays inside the SVG's box:
+  // 1.2em / 44 viewBox units.
+  .nfl-logo-trigger{
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    vertical-align: text-top;
+    cursor: pointer;
+    .nfl-logo-trigger__button{
+      position: absolute;
+      inset: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 4px;
+      background: none;
+      cursor: pointer;
+    }
+    .nfl-logo{
+      $unit: 0.0272727em;
+      display: block;
+      width: 87 * $unit;
+      height: 98 * $unit;
+      margin: (-30 * $unit) (-28 * $unit) (-24 * $unit);
+      overflow: visible;
+      pointer-events: none;
+    }
+    .nfl-logo__shield{
+      transform-origin: 0 0;
+    }
+    .nfl-logo__ball{
+      opacity: 0;
     }
   }
   span{
@@ -244,26 +399,6 @@ $home-section-vertical-spacing-mobile: 4rem;
         &:last-of-type{
           transform: rotate(-5deg) translate(-0.1em, 0.2em);
         }
-      }
-    }
-  }
-  .config{
-    position: relative;
-    cursor: pointer;
-    .stage-photo{
-      position: absolute;
-      left: 50%;
-      bottom: 1.5em;
-      opacity: 0;
-      box-shadow: $diffuse-shadow semantic-color(shadow-soft);
-      transform-origin: 50% 100%;
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out;
-    }
-    &:hover{
-      .stage-photo{
-        opacity: 1;
-        transform: scale(5) rotate(5deg);
-        border-radius: 4px;
       }
     }
   }

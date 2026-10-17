@@ -56,7 +56,7 @@ footer-sort-order: 2
   </div>
   {%- for featured in site.resources-collection -%}
   {% if featured.featured == true %}
-    <a href="{{featured.url | prepend: site.url}}" class="scaffold-grid-span-full md:scaffold-grid-span-quarter">
+    <a href="{{featured.url | prepend: site.url}}" class="scaffold-grid-span-half md:scaffold-grid-span-quarter">
       <div class="tile" style="color: {{featured.text-color}};">
         <img src="../img/resources-collection/{{featured.tile-image}}" alt="{{featured.tile-image-alt}}">
         <p class="title">{{featured.title}}</p>

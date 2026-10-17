@@ -95,6 +95,9 @@
   .detail{
     padding: 2em;
     padding-left: 4em;
+    @include scaffold.breakpoint(md) { @include scaffold.breakpoint(lg, down) {
+      padding-left: 2em;
+    }}
     @include scaffold.breakpoint(md, down) {
       padding: 2em;
       padding-bottom: 14em;
@@ -156,5 +159,13 @@
       left: -72%;
       bottom: 2em;
     }
+    // Tablet: fill the box so the marker sits mid-height, not low under an empty band.
+    @include scaffold.breakpoint(md) { @include scaffold.breakpoint(lg, down) {
+      top: 0;
+      height: 100%;
+      object-fit: cover;
+      // The focus circle sits ~73.5% across every map; this lands it mid-way through the space right of the detail card.
+      object-position: 64% 50%;
+    }}
   }
 }
