@@ -330,6 +330,14 @@
   }
 }
 
+// Only collection pages cap thumbnails; other resource listings stay full width.
+.resources-collection .resource-thumbnail{
+  max-width: $resource-thumbnail-max-width;
+  @include scaffold.breakpoint(md, down) {
+    max-width: none;
+  }
+}
+
 .resource-link{
   color: inherit;
   &:hover{
@@ -345,10 +353,6 @@
   }
   .resource{
     .resource-thumbnail{
-      max-width: $resource-thumbnail-max-width;
-      @include scaffold.breakpoint(md, down) {
-        max-width: none;
-      }
       margin-bottom: 0.5em;
       border-radius: $tile-radius;
       overflow: hidden;
