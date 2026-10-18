@@ -14,6 +14,22 @@ tags: [interactions, animation, motion]
   <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/interactions/nfl.mp4" title="NFL Interaction" natural=true audio=true %}</div>
   <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/interactions/upmc.mp4" title="UPMC Interaction" natural=true audio=true %}</div>
   <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">
+    {% include loop-video.html src="../img/interactions/brambleberry.mp4" title="Brambleberry Crisp hover interaction" natural=true %}
+    <p class="video-caption">From the Favorite Things section of my {% include external-link.html link="https://2025.rehanbutt.com" content="2025 Year in Review" %}</p>
+  </div>
+  <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">
+    {% include loop-video.html src="../img/interactions/cd.mp4" title="Music CD hover interaction" natural=true %}
+    <p class="video-caption">From the Music section of my {% include external-link.html link="https://2025.rehanbutt.com" content="2025 Year in Review" %}</p>
+  </div>
+  <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">
+    {% include loop-video.html src="../img/interactions/moana-2.mp4" title="Moana 2 poster hover interaction" natural=true %}
+    <p class="video-caption">From the Film Credit section of my {% include external-link.html link="https://2024.rehanbutt.com" content="2024 Year in Review" %}</p>
+  </div>
+  <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">
+    {% include loop-video.html src="../img/interactions/record.mp4" title="Music record hover interaction" natural=true %}
+    <p class="video-caption">From the Music section of my {% include external-link.html link="https://2023.rehanbutt.com" content="2023 Year in Review" %}</p>
+  </div>
+  <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">
     {% include loop-video.html src="../img/interactions/tag-expand.mp4" title="Tag expanding out hover effect" natural=true %}
   </div>
   <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">

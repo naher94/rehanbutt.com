@@ -298,6 +298,11 @@ p, li, h3{
   }
 }
 
+// Source line under a clip, e.g. which Year in Review it came from.
+.video-caption{
+  padding: 0;
+}
+
 @mixin swipe-underline($color,$inline-hover) {
   display: inline;
   background: linear-gradient($color, $color);
