@@ -54,4 +54,4 @@ Rather than the bright blues common to dental brands, the palette stays in a sin
   </div>
 </div>
 
-Put to work, the identity carries through the details a patient touches and sees, from the toothbrush and branded caps to the sign in the office window.
+A few explorations of the identity in use: the icon embroidered on a cap, the icon and wordmark on a bamboo toothbrush and its box, and a stacked lockup for the office window.
