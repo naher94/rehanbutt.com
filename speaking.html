@@ -42,8 +42,8 @@ footer-sort-order: 3
     {%- if event.featured == true -%}
       <div class="speaking-item-hero scaffold-grid-span-full" id="{{event.featured-id}}">
         <div class="top-images">
-          <img class="top-square-img" src="../img/speaking-events/{{event.featured-id}}/{{event.image-top-square}}" alt="{{event.image-top-square-alt}}">
-          <img class="top-img" src="../img/speaking-events/{{event.featured-id}}/{{event.image-top}}" alt="{{event.image-top-alt}}">
+          <img class="top-square-img" src="/img/speaking-events/{{event.featured-id}}/{{event.image-top-square}}" alt="{{event.image-top-square-alt}}">
+          <img class="top-img" src="/img/speaking-events/{{event.featured-id}}/{{event.image-top}}" alt="{{event.image-top-alt}}">
         </div>
         <div class="main-content scaffold-flex scaffold-items-center scaffold-justify-center">
           <div class="logo-wrapper">
@@ -62,11 +62,7 @@ footer-sort-order: 3
                   <span>Upcoming</span>
                 {% endif %}
               </div>
-              <p class="date">{{event.date| date: "%B %Y" }}
-                {% if event.location %}
-                ・ {{event.location}}
-                {% endif %}
-              </p>
+              <p class="date">{{event.date| date: "%B %Y" }}{% if event.location %}・{{event.location}}{% endif %}</p>
               <p class="description">{{event.description}}</p>
             {% endcapture %}
             {% if event.link %}
@@ -77,7 +73,7 @@ footer-sort-order: 3
           </div>
         </div>
         <div class="bottom-images">
-          <img class="bottom-img" src="../img/speaking-events/{{event.featured-id}}/{{event.image-bottom}}" alt="{{event.image-bottom-alt}}">
+          <img class="bottom-img" src="/img/speaking-events/{{event.featured-id}}/{{event.image-bottom}}" alt="{{event.image-bottom-alt}}">
         </div>
       </div>
     {%- else -%}
@@ -90,11 +86,6 @@ footer-sort-order: 3
       {%- endif -%}
 
       <div class="speaking-item {% if event_date > current_date %}future-event{% endif %}">
-        {% if event.logo %}
-        <div class="brand-logo-container" id="{{event.logo}}">
-          <img class="brand-logo" src="/img/{{event.logo}}-logo.svg" alt="{{event.logo}} Logo">
-        </div>
-        {% endif %}
         {% capture event_content %}
         <div>
           <h3>
@@ -107,11 +98,7 @@ footer-sort-order: 3
             <span>Upcoming</span>
           {% endif %}
         </div>
-        <p class="date">{{event.date| date: "%B %Y" }}
-          {% if event.location %}
-          ・ {{event.location}}
-          {% endif %}
-        </p>
+        <p class="date">{{event.date| date: "%B %Y" }}{% if event.location %}・{{event.location}}{% endif %}</p>
         <p class="description">{{event.description}}</p>
         {% endcapture %}
         {% if event.link %}
