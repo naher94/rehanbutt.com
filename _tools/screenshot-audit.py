@@ -124,7 +124,11 @@ def slug(path):
 def sitemap_paths():
     xml = (SITE / "sitemap.xml").read_text()
     paths = [m or "/" for m in re.findall(r"<loc>https?://[^/<]+([^<]*)</loc>", xml)]
-    return [p for p in paths if not p.endswith(".pdf")]
+    paths = [p for p in paths if not p.endswith(".pdf")]
+    # jekyll-sitemap leaves the 404 page out; it is still a page to review.
+    if (SITE / "404.html").exists() and "/404/" not in paths:
+        paths.append("/404/")
+    return paths
 
 
 class SiteHandler(http.server.SimpleHTTPRequestHandler):
