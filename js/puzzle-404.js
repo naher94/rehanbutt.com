@@ -20,7 +20,14 @@
   var status = document.getElementById('puzzle-404-status');
   if (!board || !dataEl) return;
 
-  var photos = JSON.parse(dataEl.textContent);
+  // The data is built from our own front matter, but it is read back out of the DOM, so only same-site paths are trusted.
+  function isSitePath(path) {
+    return typeof path === 'string' && /^\/(?!\/)/.test(path);
+  }
+
+  var photos = JSON.parse(dataEl.textContent).filter(function (entry) {
+    return isSitePath(entry.url) && isSitePath(entry.image);
+  });
   if (!photos.length) return;
   var photo = photos[Math.floor(Math.random() * photos.length)];
   placeName.textContent = photo.title;
