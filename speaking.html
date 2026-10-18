@@ -62,11 +62,7 @@ footer-sort-order: 3
                   <span>Upcoming</span>
                 {% endif %}
               </div>
-              <p class="date">{{event.date| date: "%B %Y" }}
-                {% if event.location %}
-                ・ {{event.location}}
-                {% endif %}
-              </p>
+              <p class="date">{{event.date| date: "%B %Y" }}{% if event.location %}・{{event.location}}{% endif %}</p>
               <p class="description">{{event.description}}</p>
             {% endcapture %}
             {% if event.link %}
@@ -107,11 +103,7 @@ footer-sort-order: 3
             <span>Upcoming</span>
           {% endif %}
         </div>
-        <p class="date">{{event.date| date: "%B %Y" }}
-          {% if event.location %}
-          ・ {{event.location}}
-          {% endif %}
-        </p>
+        <p class="date">{{event.date| date: "%B %Y" }}{% if event.location %}・{{event.location}}{% endif %}</p>
         <p class="description">{{event.description}}</p>
         {% endcapture %}
         {% if event.link %}
