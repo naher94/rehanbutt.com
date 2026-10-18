@@ -531,6 +531,31 @@ function loopVideos() {
     if (reduceMotion) {
       video.removeAttribute("autoplay");
       video.pause();
+    } else if (wrapper.closest("[data-hover-play]")) {
+      // Rests on the first frame; plays on mouse hover or touch tap. The pause
+      // button still works for keyboard users.
+      video.removeAttribute("autoplay");
+      video.preload = "auto";
+      video.pause();
+      video.currentTime = 0;
+      // Loops while hovered; on leave it finishes the current pass, then rests.
+      wrapper.addEventListener("pointerenter", function (e) {
+        if (e.pointerType === "mouse") {
+          video.loop = true;
+          video.play().catch(function () {});
+        }
+      });
+      wrapper.addEventListener("pointerleave", function (e) {
+        if (e.pointerType === "mouse") { video.loop = false; }
+      });
+      video.addEventListener("ended", function () {
+        video.currentTime = 0;
+      });
+      wrapper.addEventListener("click", function (e) {
+        if (e.pointerType === "mouse" || button.contains(e.target)) { return; }
+        if (sound && sound.contains(e.target)) { return; }
+        if (video.paused) { video.play().catch(function () {}); } else { video.pause(); }
+      });
     }
     sync();
     button.hidden = false;

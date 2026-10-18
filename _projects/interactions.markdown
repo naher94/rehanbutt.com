@@ -6,7 +6,7 @@ thumbnail: "interactions"
 date: 2018-03-20
 tags: [interactions, animation, motion]
 ---
-<div class="scaffold-grid">
+<div class="scaffold-grid" data-hover-play>
   <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/interactions/figma.mp4" title="Figma Interaction" natural=true audio=true %}</div>
   <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/interactions/ge.mp4" title="GE Interaction" natural=true audio=true %}</div>
   <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/interactions/hat.mp4" title="Hat Interaction" natural=true audio=true %}</div>
@@ -48,7 +48,7 @@ tags: [interactions, animation, motion]
 <p class="post-callout-large">Looking for more? Head over to my 
 {% include external-link.html link="https://codepen.io/rehanbutt" content="Codepen" %} and explore even more interaction details!</p>
 
-<div class="scaffold-grid">
+<div class="scaffold-grid" data-hover-play>
   <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/interactions/checkoutbutton.mp4" title="Checkout Button Interaction" natural=true %}</div>
   <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/interactions/socialbutton.mp4" title="Social Action Button Interaction" natural=true %}</div>
   <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/interactions/letitsnow.mp4" title="Let It Snow Button Interaction" natural=true %}</div>
