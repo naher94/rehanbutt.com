@@ -169,7 +169,7 @@
         &.top-img{
           rotate: 10deg;
           transform-origin: top right;
-          translate: 29em 0.5em;
+          translate: 31em 0.5em;
           @include scaffold.breakpoint(md, down){
             translate: 6em 0.5em;
           }

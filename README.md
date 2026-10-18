@@ -97,6 +97,11 @@ Code Snippets are helpful in populating common sections such as a resource's fro
 #### External Links
 * External links should use the `external-link` component via `{{% include external-link.html %}}` which includes a non-visual tag noting it goes external for enhanced accessibility `<a target="_blank" href="https://rehanbutt.com/">Rehan Butt<span class="visually-hidden">Opens a new window</span></a>`
 
+#### Loop Videos
+* Short looping clips use `{% include loop-video.html src="../img/foo.mp4" title="Description" natural=true %}` (add `audio=true` for an unmute button). The pause/play button is wired up in `loopVideos()` in `js/app.js`.
+* **Hover to play:** put `data-hover-play` on a wrapping element (the two grids in `_projects/interactions.markdown` do) and every loop video inside rests on its first frame. A mouse hover plays it and loops while hovered; moving off lets the current pass finish, then it returns to the first frame. Touch taps toggle play/pause. Without the attribute, videos autoplay as usual.
+* Under `prefers-reduced-motion` every loop video starts paused, hover or not.
+
 #### 2D Array Hack
 In some cases using a 2D array is cleaner and easier than setting up a collection. Even though its not formally supported in Liquid it is possible with this hack.
 1. Create a string with 2 sets of unique dividing characters in the case below `,` and `|`
