@@ -128,6 +128,17 @@ function nightOwl(){
 	snackbar("Night Owl");
 }
 
+// Solving the 404 puzzle can happen any number of times: every solve is counted, but the unlock date and toast are for the first.
+function lostAndFound(){
+	gtag('event', 'Easter Eggs - Lost & Found', {
+		'event_category': 'Special',
+		'event_label': 'Lost & Found'
+	});
+	if (localStorage.getItem("lostAndFoundEasterEgg")) return;
+	localStorage.setItem("lostAndFoundEasterEgg", new Date().toISOString());
+	snackbar("Lost & Found");
+}
+
 ///////////////////////////////////////////// Night Owl
 // Unlocks on the first real interaction between 2 and 4am local time, so a tab left open overnight doesn't count.
 (function nightOwlWatcher() {

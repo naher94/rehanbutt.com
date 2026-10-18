@@ -94,6 +94,7 @@
     link.hidden = false;
     link.classList.add('is-revealed');
     status.textContent = 'Puzzle solved. Welcome to ' + photo.title + '.';
+    lostAndFound();
   }
 
   // The arrow shows which way a tile slides, so Up moves the tile below the gap.

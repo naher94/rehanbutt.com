@@ -8,6 +8,7 @@
 
 .words-404 {
   @include type-style(product, page-subtitle);
+  line-height: 1.4;
   padding: 0;
   margin-bottom: 1em;
 }
@@ -15,6 +16,7 @@
 .link-404 {
   @include type-style(product, page-subtitle);
   display: inline-block;
+  line-height: 1.4;
   font-weight: $zilla-bold;
   color: semantic-color(link);
   @include double-arrow-slide;
@@ -82,9 +84,9 @@
   }
 }
 
-// The gap sits as a faint slot until the puzzle is solved, then the missing piece fades in.
+// The gap shows the board through it, like the empty space in the physical game, until the puzzle is solved and the missing piece fades in.
 .puzzle-404-tile.is-missing {
-  background: rgba($pure-white, 0.1);
+  background: none;
   pointer-events: none;
   &::after {
     content: '';

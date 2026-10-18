@@ -172,6 +172,11 @@
         background-color: #5b5fc7; //TODO update color and semantic
       }
     }
+    &.lost-and-found-unlocked{
+      .icon-container{
+        background-color: $signature-teal;
+      }
+    }
     p{
       margin: 0;
       padding: 0;
