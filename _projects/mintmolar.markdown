@@ -19,9 +19,7 @@ published: true
 {:.post-callout-medium}
 A fresh, unhurried identity for a family dental practice
 
-Mint & Molar is a family dental practice in Frederick, Maryland, offering preventive, restorative, cosmetic and oral surgery care under one roof. With a new name but the same great care, the practice needed an identity that felt calm, approachable and distinctly its own, one that could welcome a whole household through the door.
-
-Don't forget to visit the live site at {% include external-link.html link="https://mintmolar.com" content="mintmolar.com" %}.
+A new name deserves a new look. Mint & Molar's promise is simple: no-pressure, family-first care explained in plain English. For this Frederick, Maryland dental practice, I created an identity that gives that promise a face, one as fresh, unhurried and easy to trust as the care itself. See it in action at {% include external-link.html link="https://mintmolar.com" content="mintmolar.com" %}.
 
 <!-- TODO: link to the Mint & Molar web design project once it's added -->
 
