@@ -86,11 +86,6 @@ footer-sort-order: 3
       {%- endif -%}
 
       <div class="speaking-item {% if event_date > current_date %}future-event{% endif %}">
-        {% if event.logo %}
-        <div class="brand-logo-container" id="{{event.logo}}">
-          <img class="brand-logo" src="/img/{{event.logo}}-logo.svg" alt="{{event.logo}} Logo">
-        </div>
-        {% endif %}
         {% capture event_content %}
         <div>
           <h3>
