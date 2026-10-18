@@ -7,6 +7,6 @@ tile-image: my-tech-stack.png
 tile-image-alt: A stylized illustration of a stack of computers and phones
 text-color: "#ffffff"
 featured:
-resources: [jekyll,foundation-framework,vscode,github,image-optim,figma,sketch,codepen]
+resources: [jekyll,scaffoldcss,vscode,github,image-optim,figma,sketch,codepen]
 date: 2023-01-16
 ---

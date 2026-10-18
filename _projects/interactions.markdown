@@ -7,6 +7,12 @@ date: 2018-03-20
 tags: [interactions, animation, motion]
 ---
 <div class="scaffold-grid">
+  <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/interactions/figma.mp4" title="Figma Interaction" natural=true audio=true %}</div>
+  <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/interactions/ge.mp4" title="GE Interaction" natural=true audio=true %}</div>
+  <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/interactions/hat.mp4" title="Hat Interaction" natural=true audio=true %}</div>
+  <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/interactions/nba.mp4" title="NBA Interaction" natural=true audio=true %}</div>
+  <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/interactions/nfl.mp4" title="NFL Interaction" natural=true audio=true %}</div>
+  <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">{% include loop-video.html src="../img/interactions/upmc.mp4" title="UPMC Interaction" natural=true audio=true %}</div>
   <div class="image-container scaffold-grid-span-full md:scaffold-grid-span-half">
     {% include loop-video.html src="../img/interactions/tag-expand.mp4" title="Tag expanding out hover effect" natural=true %}
   </div>

@@ -12,13 +12,14 @@ function isAchievementUnlocked() {
 		{ id: "high-five", key: "highFiveEasterEgg", className: "high-five-unlocked" },
 		{ id: "sorcerer’s-apprentice", key: "sorcerersApprenticeEasterEgg", className: "sorcerers-apprentice-unlocked" },
 		{ id: "speed-demon", key: "speedDemonEasterEgg", className: "speed-demon-unlocked" },
-		{ id: "night-owl", key: "nightOwlEasterEgg", className: "night-owl-unlocked" }
+		{ id: "night-owl", key: "nightOwlEasterEgg", className: "night-owl-unlocked" },
+		{ id: "lost-&-found", key: "lostAndFoundEasterEgg", className: "lost-and-found-unlocked" }
 	];
 
 	eggs.forEach(function(egg) {
 		const value = localStorage.getItem(egg.key);
 		if (value != null) {
-			const card = achievementContainer.querySelector("#" + egg.id);
+			const card = document.getElementById(egg.id);
 			card.classList.add(egg.className);
 			achievementUnlockCount++;
 

@@ -345,6 +345,10 @@
   }
   .resource{
     .resource-thumbnail{
+      max-width: $resource-thumbnail-max-width;
+      @include scaffold.breakpoint(md, down) {
+        max-width: none;
+      }
       margin-bottom: 0.5em;
       border-radius: $tile-radius;
       overflow: hidden;
