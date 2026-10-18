@@ -375,12 +375,13 @@ $product-type: (
   ),
 
   // The line under the 404 page's title, and the only entry at Zilla medium.
-  // Barely smaller on small, as transcribed; leading from the heading reset.
+  // A step down from the title on the scale at both widths, the way `page-title`
+  // is a step down on small; leading from the heading reset.
   page-subtitle: (
     family:         $zilla,
-    size:           2.25rem,  // 36px
+    size:           type-step(3),  // 32px
     font-weight:    $zilla-medium,
-    at:             (md down: (size: 2rem)),  // 32px
+    at:             (md down: (size: type-step(2))),  // 24px
   ),
 
   section-title: (
