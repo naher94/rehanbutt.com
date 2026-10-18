@@ -293,9 +293,6 @@
       transition: transform .3s;
     }
     &:hover{
-      .date, .description, h3{
-        transition: $run;
-      }
       h3{
         @include swipe-underline-hover(false);
       }
