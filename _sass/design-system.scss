@@ -245,7 +245,8 @@ p, li, h3{
       height: auto;
     }
   }
-  .loop-video-toggle{
+  .loop-video-toggle,
+  .loop-video-sound{
     appearance: none;
     border: 0;
     padding: 0;
@@ -271,8 +272,21 @@ p, li, h3{
       display: none;
     }
   }
-  .icon-play{
+  // Sits beside the pause button.
+  .loop-video-sound{
+    right: 3.75rem;
+  }
+  .icon-play,
+  .icon-unmuted{
     display: none;
+  }
+  &.is-unmuted{
+    .icon-muted{
+      display: none;
+    }
+    .icon-unmuted{
+      display: inline;
+    }
   }
   &.is-paused{
     .icon-pause{

@@ -523,6 +523,16 @@ function loopVideos() {
     }
     sync();
     button.hidden = false;
+
+    const sound = wrapper.querySelector(".loop-video-sound");
+    if (sound) {
+      sound.addEventListener("click", function () {
+        video.muted = !video.muted;
+        wrapper.classList.toggle("is-unmuted", !video.muted);
+        sound.setAttribute("aria-label", video.muted ? "Unmute" : "Mute");
+      });
+      sound.hidden = false;
+    }
   });
 }
 

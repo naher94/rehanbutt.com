@@ -7,4 +7,10 @@
     <span class="icon-pause"><i class="fas fa-pause" aria-hidden="true"></i></span>
     <span class="icon-play"><i class="fas fa-play" aria-hidden="true"></i></span>
   </button>
+  {%- if include.audio %}
+  <button type="button" class="loop-video-sound" aria-label="Unmute" hidden>
+    <span class="icon-muted"><i class="fas fa-volume-xmark" aria-hidden="true"></i></span>
+    <span class="icon-unmuted"><i class="fas fa-volume-high" aria-hidden="true"></i></span>
+  </button>
+  {%- endif %}
 </div>
