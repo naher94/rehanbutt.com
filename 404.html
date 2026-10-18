@@ -1,11 +1,23 @@
 ---
 layout: default
 ---
-<div class="scaffold-grid-span-full md:scaffold-grid-span-half">
-  <div class="image-center outerspace"></div>
-</div>
+{% comment %}Assorted Snaps is a grab bag, not a place, so it can't be "welcomed to".{% endcomment %}
+{% assign puzzle_sets = site.photography | where_exp: "set", "set.slug != 'assorted-snaps'" %}
 
-<div class="scaffold-grid-span-full md:scaffold-grid-span-half">
-  <h1 class="title-404">404</h1>
-  <h2 class="words-404">whoops seems like we have landed in outerspace</h2>
+<script type="application/json" id="puzzle-404-photos">
+[{% for set in puzzle_sets %}{"title": {{ set.title | jsonify }}, "url": {{ set.url | jsonify }}, "image": {{ set.hero-image | prepend: "/img/photography/" | jsonify }}, "alt": {{ set.hero-image-alt | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]
+</script>
+
+<div class="scaffold-grid scaffold-gap-lg scaffold-grid-span-full">
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half">
+    <h1 class="title-404">Oops</h1>
+    <p class="words-404">404. The page you wanted doesn’t exist, but this puzzle does! Slide the tiles back together to discover a new place!</p>
+    <a class="link-404" id="puzzle-404-link" href="/photography" hidden>Found it. Welcome to <span id="puzzle-404-place"></span>! <span class="arrow-animation" aria-hidden="true"><i class="fas fa-arrow-right first"></i><i class="fas fa-angle-right second"></i></span></a>
+    <noscript><a class="link-404" href="/photography">Explore my photography <span class="arrow-animation" aria-hidden="true"><i class="fas fa-arrow-right first"></i><i class="fas fa-angle-right second"></i></span></a></noscript>
+    <p class="visually-hidden" id="puzzle-404-status" role="status" aria-live="polite"></p>
+  </div>
+
+  <div class="scaffold-grid-span-full md:scaffold-grid-span-half puzzle-404-board-wrapper">
+    <div class="puzzle-404-board" id="puzzle-404-board" role="group" aria-label="Sliding tile puzzle. Use the arrow keys or select a tile next to the gap to move it." hidden></div>
+  </div>
 </div>
