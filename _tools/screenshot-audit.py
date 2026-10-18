@@ -10,6 +10,7 @@ switchable by version, and notes pinned onto the screenshots.
     python3 _tools/screenshot-audit.py --only /photography/   # recapture just those paths
     python3 _tools/screenshot-audit.py --no-capture     # rebuild the data and the page only
     python3 _tools/screenshot-audit.py --sizes tablet   # add just one size to HEAD's capture
+    python3 _tools/screenshot-audit.py --no-dark        # light only, for a quicker capture
     python3 _tools/screenshot-audit.py --workers 1      # one page at a time, if parallel runs get flaky
     python3 _tools/screenshot-audit.py --no-capture --sha 37f13b9 --name "Before Scaffold"   # name a version
     python3 _tools/screenshot-audit.py --diffs                      # prepare the atlas's Compare to data (a capture does this too)
@@ -17,7 +18,7 @@ switchable by version, and notes pinned onto the screenshots.
     python3 _tools/screenshot-audit.py --diff 3e2102f e2e1364                 # or any two captures
 
 Outputs, all beside this script:
-    screenshots/versions/<sha>/   one folder per capture: desktop/, tablet/, mobile/, manifest.json
+    screenshots/versions/<sha>/   one folder per capture: desktop/, tablet/, mobile/ and their -dark twins, manifest.json
     screenshot-audit.json         the dataset
     screenshot-atlas.html         the viewer
     screenshots/diffs/<a>..<b>/   with --diff: changed-region overlays for each page that differs
@@ -33,6 +34,8 @@ with /usr/bin/python3 if a bare python3 says capture needs Playwright and Pillow
 
 How a page is shot
 ------------------
+Every size is shot twice, with prefers-color-scheme light and dark (--no-dark skips the second);
+the dark shots are the sizes named "desktop-dark" and so on.
 Desktop is 1440 wide at 1x; tablet is 820 wide and mobile 390 wide, both at 2x with touch, so touch-only
 script behaves as it would on a phone. Each page loads with the Konami easter
 egg already unlocked (it adds elements to every page), Math.random seeded so
@@ -104,6 +107,8 @@ FixedDate.prototype = RealDate.prototype;
 FixedDate.now = clock; FixedDate.parse = RealDate.parse; FixedDate.UTC = RealDate.UTC;
 Date = FixedDate;
 """
+# Dark twins of every size, named "<size>-dark" in folders, manifests and the viewer's data.
+DARK = "-dark"
 STYLED = "[...document.styleSheets].some(s => (s.href || '').endsWith('/css/rehan.css') && s.cssRules.length > 0)"
 BLOCKED = re.compile(r"google-analytics\.com|googletagmanager\.com|doubleclick\.net")
 
@@ -232,10 +237,11 @@ def _start_worker(base, folder):
     browser = pw.chromium.launch()
     contexts = {}
     for size, options in SIZES.items():
-        ctx = browser.new_context(**options, color_scheme="light")
-        ctx.add_init_script(INIT_SCRIPT)
-        ctx.route(BLOCKED, lambda route: route.abort())
-        contexts[size] = ctx
+        for name, scheme in ((size, "light"), (size + DARK, "dark")):
+            ctx = browser.new_context(**options, color_scheme=scheme)
+            ctx.add_init_script(INIT_SCRIPT)
+            ctx.route(BLOCKED, lambda route: route.abort())
+            contexts[name] = ctx
     _worker.update(base=base, folder=folder, contexts=contexts)
     Finalize(None, lambda: (browser.close(), pw.stop()), exitpriority=10)
 
@@ -263,7 +269,7 @@ def _shoot(job):
     return entry
 
 
-def capture(sha, branch, only, workers, name=None, sizes=None):
+def capture(sha, branch, only, workers, name=None, sizes=None, dark=True):
     try:
         import playwright  # noqa: F401
         import PIL  # noqa: F401
@@ -284,7 +290,8 @@ def capture(sha, branch, only, workers, name=None, sizes=None):
     previous = existing if only or sizes else {}
     entries = {(e["slug"], e["size"]): e for e in previous.get("entries", [])}
 
-    jobs = [(size, path) for size in (sizes or SIZES) for path in paths]
+    shots = [n for size in (sizes or SIZES) for n in ((size, size + DARK) if dark else (size,))]
+    jobs = [(size, path) for size in shots for path in paths]
     workers = max(1, min(workers, len(jobs)))
     started = datetime.now(timezone.utc)
     server, base = serve_site()
@@ -316,7 +323,7 @@ def capture(sha, branch, only, workers, name=None, sizes=None):
     manifest_path.write_text(json.dumps(manifest, indent=1))
     failed = [e for e in manifest["entries"] if e.get("error") or e.get("status") != 200 or not e.get("konami")]
     minutes = (datetime.now(timezone.utc) - started).total_seconds() / 60
-    print(f"\ncaptured {len(paths)} pages × {len(sizes or SIZES)} sizes into {folder.relative_to(ROOT)}"
+    print(f"\ncaptured {len(paths)} pages × {len(shots)} sizes into {folder.relative_to(ROOT)}"
           f" in {minutes:.1f} min with {workers} worker{'s' if workers > 1 else ''}")
     if failed:
         print(f"check these: {', '.join(e['size'] + ' ' + e['path'] for e in failed)}")
@@ -392,14 +399,14 @@ def diff_versions(base, head, write_page=True, quiet=False):
     """Diff every page the two captures share. The standalone viewer and its overlay thumbnails
     are written for a hand-run --diff; the atlas only needs the changed rows."""
     manifests = {}
-    for sha in (base, head):
+    for sha in (base, head):  # comparisons are of the light captures
         mf = SHOTS / sha / "manifest.json"
         if not mf.exists():
             sys.exit(f"no capture at {mf.parent.relative_to(ROOT)} to diff")
         manifests[sha] = json.loads(mf.read_text())
     key = lambda e: (e["slug"], e["size"])
-    old = {key(e): e for e in manifests[base]["entries"] if "height" in e}
-    new = {key(e): e for e in manifests[head]["entries"] if "height" in e}
+    old = {key(e): e for e in manifests[base]["entries"] if "height" in e and e["size"] in SIZES}
+    new = {key(e): e for e in manifests[head]["entries"] if "height" in e and e["size"] in SIZES}
     out = DIFFS / f"{base}..{head}"
     pages = {}
     shared = [k for k in new if k in old]
@@ -537,7 +544,8 @@ def build(out):
             section("Resource collections", collections, "/resources/collection/"),
         ],
     }
-    data["sizes"] = {name: opts["viewport"]["width"] for name, opts in SIZES.items()}
+    data["sizes"] = {name + suffix: opts["viewport"]["width"] for name, opts in SIZES.items() for suffix in ("", DARK)}
+    data["dark"] = any(e["size"].endswith(DARK) and "height" in e for v in versions for e in v["entries"])
     data["diffs"] = load_diffs()
     out.write_text(json.dumps(data, indent=1))
     return data
@@ -572,6 +580,7 @@ if __name__ == "__main__":
     ap.add_argument("--no-diffs", action="store_true", help="after a capture, skip preparing the comparisons")
     ap.add_argument("--sizes", help="only capture these sizes, comma separated (e.g. tablet), "
                                     "adding them to the existing capture")
+    ap.add_argument("--no-dark", action="store_true", help="skip the dark mode captures")
     ap.add_argument("--site", help="capture this built site folder instead of _site (to shoot an older commit's build)")
     ap.add_argument("--workers", type=int, default=4,
                     help="pages shot at once, each in its own browser (default 4; 1 = one at a time)")
@@ -592,7 +601,7 @@ if __name__ == "__main__":
         sizes = args.sizes.split(",") if args.sizes else None
         if sizes and any(s not in SIZES for s in sizes):
             sys.exit(f"--sizes takes {', '.join(SIZES)}")
-        capture(sha, git("rev-parse", "--abbrev-ref", "HEAD"), args.only, args.workers, args.name, sizes)
+        capture(sha, git("rev-parse", "--abbrev-ref", "HEAD"), args.only, args.workers, args.name, sizes, not args.no_dark)
     elif args.name:
         mf = SHOTS / (args.sha or git("rev-parse", "--short", "HEAD")) / "manifest.json"
         if not mf.exists():

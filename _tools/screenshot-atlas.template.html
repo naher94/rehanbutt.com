@@ -142,13 +142,14 @@ aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px
 #split-menu[hidden]{display:none}
 #split-menu button{border:0;border-radius:5px;padding:6px 8px;text-align:left;white-space:nowrap;font-size:12px} #split-menu button:hover,#split-menu button:focus-visible{background:#f4f4f5;color:#6d28d9}</style></head><body>
 <aside><div class="rail"><div class="rail-head"><div class="rail-title"><strong>Screenshot audit</strong><span class="rail-tools"><button type="button" id="keys-open" aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button><button type="button" id="review-toggle" aria-pressed="false" aria-label="Notes" title="Notes (R)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></button></span></div><div class="ver"><span id="ver-label">Version</span><div class="vmenu"><button type="button" id="ver-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ver-label ver-btn"><span id="vb-subj"></span><span class="vo-tag" id="vb-latest" hidden>latest</span><span class="ncount" id="ver-count" title="Notes on this version"></span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><ul id="ver-list" role="listbox" aria-labelledby="ver-label" hidden></ul></div></div></div>
-<div class="meta"><span id="ver-branch"></span> @ <span id="ver-sha"></span> · <span id="ver-date"></span><br>light · Konami on · <span id="page-total"></span> pages</div>
+<div class="meta"><span id="ver-branch"></span> @ <span id="ver-sha"></span> · <span id="ver-date"></span><br><span id="scheme-label">light</span> · Konami on · <span id="page-total"></span> pages</div>
 <div class="hiddenbar"><span id="hidden-count"></span> <button id="show-all" type="button" hidden>Show all</button></div>
 <h4><a href="#" style="text-decoration:none">Groups</a></h4><div id="tree-groups"></div>
 <h4><a href="#all-head" style="text-decoration:none">All pages</a></h4><div id="tree-all"></div></div>
 <div class="rail-foot">
 <div class="cmp" id="diff-bar"><div class="cmp-head"><span class="cmp-title"><span class="cmp-pre">Comparing to</span><b id="cmp-name"></b><span class="cmp-badge" id="cmp-badge" hidden></span></span><label class="cmp-show" title="Show changes: dots in the rail and boxes on the screenshots (C)"><kbd>C</kbd><input type="checkbox" id="diff-toggle" aria-label="Show changes" checked></label></div><div class="cmp-row"><span class="cmp-ico" id="cmp-ico" aria-hidden="true"></span><span id="cmp-state"></span><button type="button" id="cmp-link"></button></div><select id="cmp-base" aria-label="Compare to version" hidden></select><div class="cmp-info" id="diff-info"></div></div>
 <label class="zoom">Row size <input id="zoom" type="range" min="50" max="300" step="10" value="100"> <output id="zoom-val">100%</output></label>
+<div class="seg" id="scheme" role="group" aria-label="Appearance" hidden><button type="button" data-scheme="light">Light</button><button type="button" data-scheme="dark">Dark</button></div>
 <div class="seg" role="group" aria-label="Show"><button type="button" data-view="mobile">Mobile<small data-w="mobile"></small></button><button type="button" data-view="tablet">Tablet<small data-w="tablet"></small></button><button type="button" data-view="desktop">Desktop<small data-w="desktop"></small></button><button type="button" data-view="all">All</button></div>
 </div>
 <div class="rail-resize" role="separator" aria-orientation="vertical" aria-label="Resize sidebar" aria-valuemin="200" aria-valuemax="520" tabindex="0" title="Drag to resize · double-click to reset"></div></aside>
@@ -178,6 +179,10 @@ aside summary .ncount{margin-left:2px} section.group h2 > .ncount{font-size:11px
 <main></main>
 <script>
 const DATA = __DATA__;
+// Light or dark captures: dark ones live under "<size>-dark". Saved between visits; light when a version has no dark shots.
+let DARK_ON = false;
+try { DARK_ON = !!DATA.dark && localStorage.getItem('audit-scheme') === 'dark'; } catch (e) {}
+const sz = size => size + (DARK_ON ? '-dark' : '');
 // Render: group rows, the per-page pairs and the rail tree, all from DATA. Everything below works on this DOM.
 (() => {
   const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
@@ -185,9 +190,9 @@ const DATA = __DATA__;
   const bySlug = Object.fromEntries(DATA.pages.map(p => [p.slug, p]));
   const EXPAND = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>';
   const UNGROUPED = '<span class="ungrouped" title="Not in any group"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"><rect x="3" y="3" width="18" height="18" rx="4"/></svg></span>';
-  const src = (size, slug) => DATA.image_root + '/' + latest + '/' + size + '/' + slug + '.png';
+  const src = (size, slug) => DATA.image_root + '/' + latest + '/' + sz(size) + '/' + slug + '.png';
   // Reserve each image's height from the captured size, so lazy loads don't shift the page after a jump.
-  const ratio = (ver, size, slug) => { const ht = (DATA.heights[ver] || {})[slug + '|' + size]; return ht ? ' style="aspect-ratio:' + DATA.sizes[size] + '/' + ht + '"' : ''; };
+  const ratio = (ver, size, slug) => { const ht = (DATA.heights[ver] || {})[slug + '|' + sz(size)]; return ht ? ' style="aspect-ratio:' + DATA.sizes[size] + '/' + ht + '"' : ''; };
   // A screenshot you can drop notes on; the corner icon opens the full-size PNG.
   const shot = (slug, size, cls = '') => '<div class="shot ' + cls + '" data-page="' + slug + '" data-size="' + size + '"><img loading="lazy" src="' + src(size, slug) + '" alt=""' + ratio(latest, size, slug) + '>' +
     '<a class="expand" href="' + src(size, slug) + '" target="_blank" title="Open full size">' + EXPAND + '</a></div>';
@@ -195,7 +200,7 @@ const DATA = __DATA__;
     shot(slug, 'mobile', 'm') + shot(slug, 'tablet', 't') + shot(slug, 'desktop', 'd') + '</div></div>';
   const groups = DATA.groups.map((g, i) => '<section class="group" id="group-' + i + '"><h2><a href="#group-' + i + '">' + esc(g.name) + '</a> <span><span class="gcount">' + g.pages.length +
     '</span> pages</span><span class="ncount" title="Open notes in this group"></span></h2><div class="row">' + g.pages.map(s => card(s, i)).join('') + '</div></section>').join('');
-  const h = (slug, size) => (DATA.heights[latest] || {})[slug + '|' + size] ?? '?';
+  const h = (slug, size) => (DATA.heights[latest] || {})[slug + '|' + sz(size)] ?? '?';
   const pairs = DATA.categories.flatMap(c => c.pages).map(slug => '<section id="' + slug + '" data-slug="' + slug + '"><h2><a href="#' + slug + '">' + esc(bySlug[slug].path) + '</a></h2>' +
     '<div class="pair"><figure class="m"><figcaption>Mobile 390 · <span class="ht" data-k="' + slug + '|mobile">' + h(slug, 'mobile') + '</span>px</figcaption>' + shot(slug, 'mobile') + '</figure>' +
     '<figure class="t"><figcaption>Tablet 820 · <span class="ht" data-k="' + slug + '|tablet">' + h(slug, 'tablet') + '</span>px</figcaption>' + shot(slug, 'tablet') + '</figure>' +
@@ -363,7 +368,7 @@ zoom.addEventListener('input', () => keepPlace(() => setZoom(+zoom.value)));
 try { const z = +localStorage.getItem('audit-zoom'); if (z) setZoom(z); } catch (e) {}
 document.querySelectorAll('.seg small[data-w]').forEach(s => { const w = (DATA.sizes || {})[s.dataset.w]; if (w) s.textContent = w + 'px'; });
 // Mobile / tablet / desktop / all.
-const viewButtons = [...document.querySelectorAll('.seg button')];
+const viewButtons = [...document.querySelectorAll('.seg button[data-view]')];
 function setView(v) {
   document.body.classList.toggle('view-mobile', v === 'mobile');
   document.body.classList.toggle('view-desktop', v === 'desktop');
@@ -706,9 +711,9 @@ function renderReview() {
   if (!reviewOn) return;
   const CHECK_ICON = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
   rvList.innerHTML = list.length ? list.map(n => {
-    const done = isResolvedOn(n, VER), w = DATA.sizes[n.size], h = (HEIGHTS[VER] || {})[n.page + '|' + n.size];
+    const done = isResolvedOn(n, VER), w = DATA.sizes[n.size], h = (HEIGHTS[VER] || {})[n.page + '|' + sz(n.size)];
     const bgW = { mobile: 390, tablet: 520, desktop: 1000 }[n.size], bgH = h ? bgW * h / w : 0;
-    const crop = bgH ? 'background-image:url(' + DATA.image_root + '/' + VER + '/' + n.size + '/' + n.page + '.png);background-size:' + bgW + 'px ' + bgH + 'px;' +
+    const crop = bgH ? 'background-image:url(' + DATA.image_root + '/' + VER + '/' + sz(n.size) + '/' + n.page + '.png);background-size:' + bgW + 'px ' + bgH + 'px;' +
       'background-position:calc(50% + ' + (bgW / 2 - n.x * bgW) + 'px) calc(50% + ' + (bgH / 2 - n.y * bgH) + 'px)' : '';
     return '<div class="rv-item' + (done ? ' done' : '') + '" data-id="' + n.id + '" data-page="' + n.page + '">' +
       '<div class="rv-meta"><b>' + noteNum(n) + '</b><span>' + rvEsc(PATHS[n.page]) + '</span></div>' +
@@ -847,19 +852,34 @@ function setVersion(v) {
   VER = v;
   const info = VERSIONS.find(x => x.sha === v);
   shots.forEach(s => {
-    const src = DATA.image_root + '/' + v + '/' + s.dataset.size + '/' + s.dataset.page + '.png';
+    const src = DATA.image_root + '/' + v + '/' + sz(s.dataset.size) + '/' + s.dataset.page + '.png';
     s.classList.remove('missing');
-    const img = s.querySelector('img'), ht = (HEIGHTS[v] || {})[s.dataset.page + '|' + s.dataset.size];
+    const img = s.querySelector('img'), ht = (HEIGHTS[v] || {})[s.dataset.page + '|' + sz(s.dataset.size)];
     img.style.aspectRatio = ht ? DATA.sizes[s.dataset.size] + '/' + ht : '';
     img.src = src; s.querySelector('.expand').href = src;
   });
-  document.querySelectorAll('.ht').forEach(el => el.textContent = (HEIGHTS[v] || {})[el.dataset.k] ?? '?');
+  document.querySelectorAll('.ht').forEach(el => el.textContent = (HEIGHTS[v] || {})[el.dataset.k + (DARK_ON ? '-dark' : '')] ?? '?');
   document.getElementById('ver-sha').textContent = v;
   document.getElementById('ver-branch').textContent = info.branch || 'unknown branch';
   document.getElementById('ver-date').textContent = fmtDate(info.date);
   document.title = 'Screenshot audit · ' + v;
   renderAllPins(); renderCounts(); renderDiff();
   try { localStorage.setItem('audit-version', v); } catch (e) {}
+}
+// Light / dark captures. Only offered when some version has dark shots; the rest of the page follows through sz().
+const schemeBar = document.getElementById('scheme');
+function setScheme(dark) {
+  DARK_ON = dark && !!DATA.dark;
+  schemeBar.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', (b.dataset.scheme === 'dark') === DARK_ON));
+  document.getElementById('scheme-label').textContent = DARK_ON ? 'dark' : 'light';
+  setVersion(VER); renderReview();
+  try { localStorage.setItem('audit-scheme', DARK_ON ? 'dark' : 'light'); } catch (e) {}
+}
+if (DATA.dark) {
+  schemeBar.hidden = false;
+  schemeBar.querySelectorAll('button').forEach(b => b.addEventListener('click', () => keepPlace(() => setScheme(b.dataset.scheme === 'dark'))));
+  schemeBar.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', (b.dataset.scheme === 'dark') === DARK_ON));
+  document.getElementById('scheme-label').textContent = DARK_ON ? 'dark' : 'light';
 }
 // Before/after: toggles with whichever version was on screen last. Pick the pair from the menu once, then F.
 function flipVersion() {
