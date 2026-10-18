@@ -350,75 +350,47 @@
       margin-bottom: 0;
     }
   }
+}
 
-// Speaking events keep the original faded watermark in the left gutter
+// Speaking events keep the original faded watermark in the left gutter. Each
+// logo's right edge sits a fixed gap from the row, so a logo's width doesn't
+// matter; only its height is set per logo.
 .speaking-item{
+  position: relative;
   .brand-logo-container{
     position: absolute;
+    right: 100%;
+    // Nothing is left of the row to size against, so the logo sizes itself.
+    width: max-content;
+    margin-right: 1.5rem;
     opacity: 0.2;
-    margin-left: -4em;
     transition: $run;
     padding-top: 0.5em;
     @include scaffold.breakpoint(md, down) {
       display: none;
     }
     &#disney-animation{
-      margin-left: -11.5rem;
       img{
         height: 6em;
       }
     }
     &#duquesne{
-      margin-left: -11.5em;
       img{
         height: 2.5em;
       }
     }
-    &#upmc{
-      margin-left: -15.5em;
-    }
     &#processly{
-      margin-left: -4.2em;
       img{
         height: 3.3em;
       }
     }
-    &#dio{
-      margin-left: -5.6em;
-    }
-    &#cr{
-      margin-left: -6em;
-    }
-    &#ucla{
-      margin-left: -10.5em;
-    }
-    &#ces{
-      margin-left: -6.5em;
-    }
-    &#new-school{
-      margin-left: -6.5em;
-    }
     &#ux-summit{
-      margin-left: -7em;
       img{
         height: 5em;
       }
-    }
-    &#aia{
-      margin-left: -4em;
-    }
-    &#cmu{
-      margin-left: -6em;
-    }
-    &#nus{
-      margin-left: -8em;
-    }
-    &#yinzcam{
-      margin-left: -12em;
     }
   }
   &:hover .brand-logo-container{
     opacity: 1;
   }
-}
 }
