@@ -555,6 +555,15 @@ $product-type: (
     at:             (md down: (size: 1rem)),  // 16px
   ),
 
+  // A talk's title in the speaking list: `item-title` a step up, since the
+  // row has no company heading above it the way a work-experience row does.
+  item-title-lg: (
+    family:         $lato,
+    size:           type-step(2),  // 24px
+    font-weight:    $lato-black,
+    at:             (md down: (size: 1.25rem)),  // 20px
+  ),
+
   // The date range beside an item's title -- the paragraph under it is plain
   // `body`. `item-date` is the only 300 on the site, and it leaves its leading
   // to the `p` reset the way the headings leave theirs to the heading reset --

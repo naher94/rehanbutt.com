@@ -72,7 +72,7 @@
         margin-top: 0;
       }
       .description{
-        text-wrap: pretty;
+        // text-wrap: pretty;
       }
     }
   }
@@ -231,6 +231,7 @@
       }
       .date{
         @include type-style(product, item-date);
+        font-weight: $lato-black;
       }
       .description{
         @include type-style(product, body);
@@ -324,7 +325,7 @@
 // about.scss's `.work-item, .education-item`.
 .speaking-events{
   .speaking-item{
-    margin-top: 1rem;
+    margin-top: 2rem;
     @include scaffold.breakpoint(md, down) {
       padding-left: 0;
     }
@@ -333,16 +334,36 @@
       margin: 0;
       margin-top: -0.25em;
     }
-    .date{
-      @include type-style(product, item-date);
+    // Location left, date pill right, under the title. A long location wraps
+    // rather than pushing the pill onto its own line.
+    .location-date{
+      flex-wrap: nowrap;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-block: 0 0.25em;
+      .location{
+        flex-shrink: 1;
+      }
+      .date{
+        flex-shrink: 0;
+        @include type-style(product, date-pill);
+        background-color: $navy-black-l9;
+        border-radius: $pill-radius;
+        padding: 0 0.75rem;
+        margin-top: 0;
+      }
     }
-    .description{
+    .location, .description{
       @include type-style(product, body);
+    }
+    .location{
+      margin-top: 0;
+      font-weight: $lato-black;
     }
     // A talk title is what was done, so it sits at the same rank as a work
     // item's role -- which its markup spells h4 and this one spells h3.
     h3{
-      @include type-style(product, item-title);
+      @include type-style(product, item-title-lg);
       padding: 0;
       margin-bottom: 0;
     }
