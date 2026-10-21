@@ -62,7 +62,7 @@ footer-sort-order: 3
                   <span>Upcoming</span>
                 {% endif %}
               </div>
-              <p class="date">{{event.date| date: "%B %Y" }}{% if event.location %}・{{event.location}}{% endif %}</p>
+              <p class="date">{% if event.location %}{{event.location}}・{% endif %}{{event.date| date: "%B %Y" }}</p>
               <p class="description">{{event.description}}</p>
             {% endcapture %}
             {% if event.link %}
@@ -121,7 +121,7 @@ footer-sort-order: 3
     {%- endif -%}
     {% endfor %}
 
-    <section class="cta-bar-wrapper scaffold-grid-span-full">
+    <section class="cta-bar-wrapper scaffold-grid-span-full md:scaffold-grid-span-two-thirds">
       <div class="cta-bar scaffold-flex scaffold-flex-col md:scaffold-flex scaffold-justify-between">
         <div class="text-area">
           <p class="text-main">Looks like you're a fan of speaking events. So am I!</p>
